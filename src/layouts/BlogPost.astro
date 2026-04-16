@@ -15,24 +15,21 @@ type Props = {
 const { title, description, pubDate, category } = Astro.props;
 const cat = CATEGORIES[category];
 const isAiCoding = category === 'ai-coding';
-const isBrief = category === 'backend-fullstack' || category === 'dev-news';
 
 function getProseClass() {
 	if (isAiCoding) return 'prose-ai-coding';
-	if (isBrief) return 'prose prose-brief';
-	return 'prose';
+	return 'prose-brief';
 }
 ---
 
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
-		{isAiCoding && <link rel="stylesheet" href="/styles/ai-coding-brief.css" />}
-		{isBrief && <link rel="stylesheet" href="/styles/brief-common.css" />}
+		<link rel="stylesheet" href="/styles/ai-coding-brief.css" />
 	</head>
 	<body>
 		<Header />
-		<main class:list={["mx-auto px-4 py-12", isAiCoding ? "max-w-5xl" : "max-w-4xl"]}>
+		<main class="mx-auto max-w-5xl px-4 py-12">
 			<article>
 				<div class="mb-8">
 					<a

@@ -1,5 +1,4 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
@@ -15,15 +14,17 @@ type Props = {
 
 const { title, description, pubDate, category } = Astro.props;
 const cat = CATEGORIES[category];
+const isAiCoding = category === 'ai-coding';
 ---
 
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
+		{isAiCoding && <link rel="stylesheet" href="/styles/ai-coding-brief.css" />}
 	</head>
 	<body>
 		<Header />
-		<main class="mx-auto max-w-3xl px-4 py-12">
+		<main class:list={["mx-auto px-4 py-12", isAiCoding ? "max-w-5xl" : "max-w-3xl"]}>
 			<article>
 				<div class="mb-8">
 					<a
@@ -32,13 +33,17 @@ const cat = CATEGORIES[category];
 					>
 						&larr; {cat.emoji} {cat.label}
 					</a>
-					<h1 class="text-2xl font-bold text-[var(--color-text)] leading-tight">{title}</h1>
-					<p class="text-[var(--color-text-muted)] mt-2">
-						<FormattedDate date={pubDate} />
-					</p>
-					<hr class="border-[var(--color-border)] mt-6" />
+					{!isAiCoding && (
+						<>
+							<h1 class="text-2xl font-bold text-[var(--color-text)] leading-tight">{title}</h1>
+							<p class="text-[var(--color-text-muted)] mt-2">
+								<FormattedDate date={pubDate} />
+							</p>
+							<hr class="border-[var(--color-border)] mt-6" />
+						</>
+					)}
 				</div>
-				<div class="prose">
+				<div class:list={[isAiCoding ? "prose-ai-coding" : "prose"]}>
 					<slot />
 				</div>
 			</article>

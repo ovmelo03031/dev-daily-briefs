@@ -2,9 +2,19 @@
 # Migration script: Import existing briefs into Astro content collections
 # Run once from the Blog project root
 
-BLOG_DIR="/Users/ovi/Data/Projects/Blog"
-DEVNEWS_DIR="/Users/ovi/Data/Schedule/DevNews"
-AI_DIR="/Users/ovi/Data/Schedule/AI"
+# Load paths from .env (create .env from .env.example if missing)
+if [ -f .env ]; then
+  source .env
+else
+  echo "ERROR: .env file not found. Copy .env.example to .env and set your paths."
+  exit 1
+fi
+
+# Validate required env vars
+if [ -z "$BLOG_DIR" ] || [ -z "$DEVNEWS_DIR" ] || [ -z "$AI_DIR" ]; then
+  echo "ERROR: BLOG_DIR, DEVNEWS_DIR, and AI_DIR must be set in .env"
+  exit 1
+fi
 
 echo "=== Migrating existing briefs ==="
 

@@ -1,9 +1,12 @@
 ---
-title: "⚙️ Backend & Fullstack Daily — 16 de Abril de 2026"
+title: "Backend & Fullstack Daily — April 16, 2026"
+title_es: "Backend & Fullstack Daily — 16 de Abril de 2026"
 description: "Daily backend and fullstack news digest for senior developers"
 pubDate: "2026-04-16"
 category: "backend-fullstack"
 ---
+
+<div class="lang-es">
 
 # ⚙️ Backend & Fullstack Daily — 16 de Abril de 2026
 
@@ -156,3 +159,161 @@ TS 7 es la reescritura en Go. En preview activo ahora dentro de VS 2026 Insiders
 ---
 
 *Generado automáticamente el 16-04-2026. Fuentes: búsquedas web en tiempo real.*
+
+</div>
+
+<div class="lang-en">
+
+# ⚙️ Backend & Fullstack Daily — April 16, 2026
+
+> Curated for senior TypeScript/Backend developers. Reading time: ~3 minutes.
+
+---
+
+## 🔥 Top Stories
+
+### 1. 🔴 [Axios supply chain compromise — CVE-2026-40175](https://www.elastic.co/security-labs/axios-one-rat-to-rule-them-all)
+**Pay attention — update NOW.** A compromised maintainer account published malicious versions of axios (1.14.1 `latest` and 0.30.4 `legacy`) containing a cross-platform Remote Access Trojan delivered via `postinstall`. Attributed on April 1st to **UNC1069, a North Korean threat actor**. The clean version is **`axios@1.15.0`** (published April 7th). If your CI is running on an internet-connected runner and you haven't updated, you have a serious problem.
+
+**Impact:** ~100M weekly downloads. Update to 1.15.0 immediately.
+
+### 2. 🔴 [Node.js — Critical CVEs patched (April 13)](https://nodejs.org/en/blog/vulnerability)
+Multiple CVEs in Node.js 20.x and 24.x: DoS via crafted `__proto__` header (CVE-2026-21710), V8 string hashing (CVE-2026-21717), nghttp2 DoS (CVE-2026-27135), and several in undici (WebSocket/DoS). The `__proto__` header injection is a real attack surface in any HTTP server that processes untrusted input.
+
+**Impact:** Update Node LTS now if you haven't done so this past week.
+
+### 3. 🟡 [AWS Interconnect Multicloud — GA on April 15](https://aws.amazon.com/blogs/aws/aws-interconnect-is-now-generally-available-with-a-new-option-to-simplify-last-mile-connectivity/)
+Direct private connectivity between your AWS VPC and VPCs in other cloud providers, without traversing the public internet. Launched first with Google Cloud across 5 region pairs (N. Virginia, Oregon, London, Frankfurt + California↔LA). Azure and OCI follow later in 2026. Traffic travels 100% over the AWS backbone + partner private network. That is real latency predictability.
+
+### 4. 🟡 [Cloudflare Dynamic Workers — Open Beta (April 13)](https://blog.cloudflare.com/dynamic-workers/)
+Allow a Worker to instantiate another Worker at runtime with dynamically generated code, each running in its own V8 isolate. **100x faster than containers** (millisecond startup, not seconds) and 10-100x more memory-efficient. The target use case: safely executing AI agent-generated code. Now available in open beta for paid Workers plans.
+
+### 5. 🟡 [TypeScript 7 — Native Preview in VS 2026 (Go rewrite, 10x faster)](https://developer.microsoft.com/blog/typescript-7-native-preview-in-visual-studio-2026)
+TS 7 is the Go rewrite. Now in active preview inside VS 2026 Insiders. Key breaking changes: **strict-by-default, ES5 target removed, AMD/UMD/SystemJS removed**. TS 6.0 (March 23) was the bridge release: the last JS-based version, with new defaults and deprecations that pave the way. Review your `tsconfig.json` before upgrading.
+
+---
+
+## Backend TypeScript & Runtimes
+
+### Node.js
+- 🔴 CVEs patched on April 13 — see Top Stories above. [Advisory](https://nodejs.org/en/blog/vulnerability)
+
+### Deno
+- 🟢 **Release (April 9):** Automatic CJS vs ESM detection in `deno eval`, signal support on Windows, fix for array-type OTEL attributes, V8→Rust string conversion optimizations, improved `fs.cpSync`. The most important note: **the LTS channel closes on April 30, 2026** — Deno is consolidating to a single release track. [Releases](https://github.com/denoland/deno/releases)
+
+### Bun
+- 🟢 **v1.3.11 (April 9):** 105 bugs fixed (307 community reactions), Linux binary -4 MB. Stability release, no new features. The volume of fixes indicates there are still edge cases biting in production. [Bun Blog](https://bun.com/blog)
+
+### TypeScript
+- 🟡 **TS 6.0 (March 23):** Last JS-based release. New compiler defaults that can silently break builds. Audit your `tsconfig.json`.
+- 🟡 **TS 7 Native Preview (active):** Go rewrite, 10x faster. Strong breaking changes. [TS 6.0](https://devblogs.microsoft.com/typescript/announcing-typescript-6-0/) | [TS 7 Preview](https://developer.microsoft.com/blog/typescript-7-native-preview-in-visual-studio-2026)
+
+---
+
+## Frameworks & Libraries
+
+### NestJS
+- 🟡 **v11.1.18** is the current stable. **v12.0.0 confirmed for Q3 2026**: full CJS→ESM migration across all packages, Rspack integration, Vitest + oxlint by default. The ESM migration will be a breaking change requiring updates to imports, Jest configs, and build pipelines. Start auditing now if you use NestJS in monorepos. [PR v12](https://github.com/nestjs/nest/pull/16391)
+
+### Fastify / Hono
+- 🔴 **Fastify v5.8.4:** Patch for CVE-2026-3635 (GHSA-444r-cwp2-x5xf) + stricter content-type parser (RFC 9110). Must-patch if you parse content-type from untrusted clients. [Releases](https://github.com/fastify/fastify/releases)
+- 🟢 **Hono v4.12.14 (April 13):** High-cadence releases. 1.8M weekly downloads. Default choice for edge + multi-runtime in 2026. [Releases](https://github.com/honojs/hono/releases)
+
+### tRPC
+- 🟢 **v11.16.0** (active). v12 on the roadmap with Zod 4 + TS 6 ecosystem integration. If you're on v10, migrate to v11 — native RSC support for Next.js 15 App Router is a real DX improvement. [Releases](https://github.com/trpc/trpc/releases)
+
+### ORMs
+- 🟡 **Prisma 7:** Rewritten from Rust to pure TypeScript → 3x faster queries, 9x faster cold starts. Works well on edge now. The old "Drizzle for edge, Prisma for Node" rule no longer applies. [Comparison](https://makerkit.dev/blog/tutorials/drizzle-vs-prisma)
+- 🟡 **Drizzle:** PlanetScale hired the entire core team (March 2026). Enterprise backing + full-time development + deep serverless MySQL integration. Bundle 85x smaller than Prisma. [Drizzle vs Prisma](https://www.bytebase.com/blog/drizzle-vs-prisma/)
+
+---
+
+## Databases & Data
+
+### PostgreSQL
+- 🟢 **PostgreSQL 19 feature freeze:** Feature freeze closed on April 8. Beta expected in May, final release September 2026. Aurora PostgreSQL 17.9/16.13 launched on April 6 with failover and startup improvements. [versionlog](https://versionlog.com/blog/postgresql-19-whats-coming-september-2026/)
+
+### Redis / Valkey
+- 🟢 **Valkey turns 2 (April 6):** Sustained development — it hasn't stalled like most forks. 90% compatible with Redis 7.2 at the command level. Valkey 7.2 supported until April 2027. The fork gained real traction. [redmonk](https://redmonk.com/sogrady/2026/04/06/valkey-at-two/)
+
+### Message Queues
+- 🟢 **BullMQ v5.73.3 (April 9):** Active high-cadence releases. OTel metrics and flow deduplication as recently highlighted features. [CHANGELOG](https://docs.bullmq.io/changelog)
+- 🟢 **Kafka 4.2.0** was the February release. No major release in April; next expected ~June. [Downloads](https://kafka.apache.org/community/downloads/)
+
+---
+
+## Cloud & DevOps
+
+### AWS
+- 🟡 **Interconnect Multicloud GA (April 15):** See Top Stories. Google Cloud first, Azure and OCI to follow. [Blog](https://aws.amazon.com/blogs/aws/aws-interconnect-is-now-generally-available-with-a-new-option-to-simplify-last-mile-connectivity/)
+- 🟡 **AWS DevOps Agent + Security Agent — GA (week of April 6):** DevOps Agent investigates incidents and reduces MTTR. Security Agent performs continuous context-aware pen testing within the development cycle. [Weekly roundup](https://aws.amazon.com/blogs/aws/aws-weekly-roundup-aws-devops-agent-security-agent-ga-product-lifecycle-updates-and-more-april-6-2026/)
+- 🟢 **AWS Agent Registry:** Registry with semantic + keyword search to locate existing agent capabilities before duplicating them. Available via Console, CLI, SDK, and as an MCP server.
+
+### Docker / Kubernetes
+- 🟡 **Kubernetes v1.36 — releasing April 22:** One week out. Highlights: deprecation of `externalIPs` in Service spec (removal in v1.43), **Ingress NGINX officially retired on March 24** (no more releases or security fixes). If you depend on Ingress NGINX, plan your migration NOW. [Sneak peek](https://kubernetes.io/blog/2026/03/30/kubernetes-v1-36-sneak-peek/)
+- 🟢 **containerd v2.3:** New 4-month cadence (April/August/December), synchronized with K8s.
+
+### Serverless & Edge
+- 🟡 **Cloudflare Dynamic Workers open beta (April 13):** See Top Stories. [Blog](https://blog.cloudflare.com/dynamic-workers/) | [InfoQ](https://www.infoq.com/news/2026/04/cloudflare-dynamic-workers-beta/)
+
+### CI/CD
+- 🟢 **GitHub Actions — Early April 2026 updates:** `entrypoint` and `command` override in service containers (highly requested), OIDC custom properties GA (more granular trust policies with cloud providers), Azure VNET failover in public preview for runners. [Changelog](https://github.blog/changelog/2026-04-02-github-actions-early-april-2026-updates/)
+
+---
+
+## 🏗️ Architecture & Best Practices
+
+### Observability — OpenTelemetry
+- 🟡 **Declarative Config reaches stable (April):** The OTel declarative configuration spec reached stable status. A single YAML file defines trace, metric, and log pipelines — point to it with `OTEL_CONFIG_FILE` and you're done. Historically this was a mess of env vars + SDK code + separate collector configs. The fourth signal — **continuous profiling** — entered release candidate in Q1 2026. OTel is the first open standard to unify all 4 pillars under a single SDK and wire protocol (OTLP). This is a major win for observability DX. [InfoQ](https://www.infoq.com/news/2026/04/opentelemetry-declarative-config/)
+
+### Security — Critical CVEs
+- 🔴 **CVE-2026-40175 (Axios):** See Top Stories. Update to 1.15.0. [StepSecurity](https://www.stepsecurity.io/blog/axios-compromised-on-npm-malicious-versions-drop-remote-access-trojan)
+- 🔴 **CVE-2026-28802 (Authlib):** JWT signature verification bypass in the most popular Python OAuth/OIDC library. CVSS 7.7. Malicious tokens accepted as valid. If you use Authlib in any Python backend, **patch it now**. [ARMO](https://www.armosec.io/blog/authlib-cve-2026-28802-jwt-signature-verification-bypass/)
+- 🟡 **CVE-2026-29000 (pac4j-jwt):** Authentication bypass in `JwtAuthenticator` for encrypted JWTs. [penligent.ai](https://www.penligent.ai/hackinglabs/pac4j-jwt-security-risks-cve-2026-29000-and-what-secure-jwt-validation-really-requires/)
+
+### Testing
+- 🟢 **Vitest continues gaining ground:** 20M downloads/week vs Jest's 30M. Vitest 4.x (October 2025) stabilized Browser Mode (real Chromium/Firefox/WebKit, not jsdom). In benchmarks with 50k tests: Vitest 38s vs Jest 214s. NestJS v12 will default to Vitest. If you haven't migrated yet, it's time to get moving. [DEV](https://dev.to/ottoaria/vitest-in-2026-the-testing-framework-that-makes-you-actually-want-to-write-tests-kap)
+
+---
+
+## Fullstack
+
+### Full-Stack Frameworks
+- 🟢 **Next.js 16.2.3 (mid-April):** Stability release — fix for ISR stale revalidation errors, HMR fix in manifest.ts, output asset deduplication, styled-jsx race condition fix. Nothing breaking, pure quality. Next.js 16 introduced DevTools MCP and `proxy.ts` replaces `middleware.ts`. Turbopack is the default for both dev and build since 16.0. [GitHub releases](https://github.com/vercel/next.js/releases)
+- 🟢 **SvelteKit 2.55:** Automatic type narrowing for page and layout params in `$app/types`. [criztec.com](https://criztec.com/next-js-16-2-3-sveltekit-2-55-prib/)
+
+### Auth
+- 🟡 **Auth landscape:** Lucia deprecated. **Better Auth** is the recommendation for new projects in 2026 — modern architecture, multi-framework support. Auth.js v5 remains solid for Next.js App Router if you're already using it. Clerk active and maintained (docs updated March 24). [lucia-auth deprecation](https://www.wisp.blog/blog/lucia-auth-is-dead-whats-next-for-auth)
+
+### Monorepos
+- 🟢 **Turborepo 2.9 (March 30):** Faster time-to-first-task, `turbo query` command stable, easier adoption in large repos. Core migrated to Rust. [Blog](https://turborepo.dev/blog/2-9)
+- 🟢 **Nx:** CI "affected file detection" — only runs tests on modified files. Core in the process of migrating to Rust (goal: eliminate Node.js runtime overhead). [nx.dev](https://nx.dev/changelog)
+
+---
+
+## 📌 Quick Links
+
+| Topic | URL |
+|-------|-----|
+| Axios compromise analysis | https://www.elastic.co/security-labs/axios-one-rat-to-rule-them-all |
+| Node.js vulnerability blog | https://nodejs.org/en/blog/vulnerability |
+| AWS Interconnect Multicloud GA | https://aws.amazon.com/blogs/aws/aws-interconnect-is-now-generally-available-with-a-new-option-to-simplify-last-mile-connectivity/ |
+| Cloudflare Dynamic Workers | https://blog.cloudflare.com/dynamic-workers/ |
+| TypeScript 6.0 | https://devblogs.microsoft.com/typescript/announcing-typescript-6-0/ |
+| TypeScript 7 native preview | https://developer.microsoft.com/blog/typescript-7-native-preview-in-visual-studio-2026 |
+| NestJS v12 PR | https://github.com/nestjs/nest/pull/16391 |
+| Kubernetes v1.36 sneak peek | https://kubernetes.io/blog/2026/03/30/kubernetes-v1-36-sneak-peek/ |
+| OTel Declarative Config | https://www.infoq.com/news/2026/04/opentelemetry-declarative-config/ |
+| Authlib CVE-2026-28802 | https://www.armosec.io/blog/authlib-cve-2026-28802-jwt-signature-verification-bypass/ |
+| Turborepo 2.9 | https://turborepo.dev/blog/2-9 |
+| GitHub Actions April 2026 | https://github.blog/changelog/2026-04-02-github-actions-early-april-2026-updates/ |
+| Prisma 7 vs Drizzle 2026 | https://makerkit.dev/blog/tutorials/drizzle-vs-prisma |
+| Valkey 2 years | https://redmonk.com/sogrady/2026/04/06/valkey-at-two/ |
+| BullMQ changelog | https://docs.bullmq.io/changelog |
+| Hono releases | https://github.com/honojs/hono/releases |
+
+---
+
+*Auto-generated on 2026-04-16. Sources: real-time web searches.*
+
+</div>

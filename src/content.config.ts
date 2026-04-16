@@ -4,6 +4,7 @@ import { z } from 'astro/zod';
 
 const briefSchema = z.object({
 	title: z.string(),
+	title_es: z.string().optional(),
 	description: z.string(),
 	pubDate: z.coerce.date(),
 	category: z.enum(['ai-coding', 'backend-fullstack', 'dev-news']),

@@ -1,0 +1,76 @@
+---
+// Language toggle button — EN/ES with localStorage persistence
+---
+
+<div class="lang-toggle" id="lang-toggle">
+	<button data-lang="es" class="lang-btn active" aria-label="Español">ES</button>
+	<button data-lang="en" class="lang-btn" aria-label="English">EN</button>
+</div>
+
+<style>
+	.lang-toggle {
+		display: inline-flex;
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: 8px;
+		overflow: hidden;
+	}
+
+	.lang-btn {
+		padding: 0.35rem 0.75rem;
+		font-size: 0.8rem;
+		font-weight: 600;
+		letter-spacing: 0.05em;
+		border: none;
+		background: transparent;
+		color: var(--color-text-muted);
+		cursor: pointer;
+		transition: all 0.15s;
+	}
+
+	.lang-btn:hover {
+		color: var(--color-text);
+		background: var(--color-surface-2);
+	}
+
+	.lang-btn.active {
+		background: var(--color-accent);
+		color: white;
+	}
+</style>
+
+<script>
+	function initLangToggle() {
+		const saved = localStorage.getItem('lang') || 'es';
+		setLang(saved);
+
+		document.querySelectorAll('.lang-btn').forEach(btn => {
+			btn.addEventListener('click', () => {
+				const lang = btn.getAttribute('data-lang');
+				if (lang) setLang(lang);
+			});
+		});
+	}
+
+	function setLang(lang: string) {
+		// Toggle content visibility — must use 'block' to override CSS .lang-en { display: none }
+		document.querySelectorAll('.lang-es').forEach(el => {
+			(el as HTMLElement).style.display = lang === 'es' ? 'block' : 'none';
+		});
+		document.querySelectorAll('.lang-en').forEach(el => {
+			(el as HTMLElement).style.display = lang === 'en' ? 'block' : 'none';
+		});
+
+		// Toggle button active state
+		document.querySelectorAll('.lang-btn').forEach(btn => {
+			btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+		});
+
+		// Persist
+		localStorage.setItem('lang', lang);
+	}
+
+	// Run on initial load and on Astro page transitions
+	initLangToggle();
+	document.addEventListener('astro:after-swap', initLangToggle);
+</script>

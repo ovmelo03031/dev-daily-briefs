@@ -1,0 +1,39 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from './FormattedDate.astro';
+import { CATEGORIES, type Category } from '../consts';
+
+interface Props {
+	posts: CollectionEntry<'ai-coding' | 'backend-fullstack' | 'dev-news'>[];
+	category: Category;
+}
+
+const { posts, category } = Astro.props;
+const cat = CATEGORIES[category];
+const sorted = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<section class="mx-auto max-w-3xl px-4 py-12">
+	<div class="mb-10">
+		<span class="text-4xl">{cat.emoji}</span>
+		<h1 class="text-3xl font-bold mt-2 text-[var(--color-text)]">{cat.label}</h1>
+		<p class="text-[var(--color-text-muted)] mt-1">{cat.description}</p>
+	</div>
+
+	<div class="space-y-3">
+		{sorted.map((post) => (
+			<a
+				href={`/${category}/${post.id}/`}
+				class="block rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4 no-underline transition-all hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-2)]"
+			>
+				<h3 class="text-base font-medium text-[var(--color-text)]">{post.data.title}</h3>
+				<p class="text-sm text-[var(--color-text-muted)] mt-1">
+					<FormattedDate date={post.data.pubDate} />
+				</p>
+			</a>
+		))}
+		{sorted.length === 0 && (
+			<p class="text-[var(--color-text-muted)] text-center py-12">No briefs yet. Check back tomorrow!</p>
+		)}
+	</div>
+</section>

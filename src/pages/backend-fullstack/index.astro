@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import CategoryList from '../../components/CategoryList.astro';
+import { CATEGORIES } from '../../consts';
+
+const posts = await getCollection('backend-fullstack');
+const cat = CATEGORIES['backend-fullstack'];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${cat.emoji} ${cat.label} — Dev Daily Briefs`} description={cat.description} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<CategoryList posts={posts} category="backend-fullstack" />
+		</main>
+		<Footer />
+	</body>
+</html>

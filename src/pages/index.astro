@@ -1,0 +1,82 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE, CATEGORIES, type Category } from '../consts';
+
+const allPosts = [
+	...(await getCollection('ai-coding')),
+	...(await getCollection('backend-fullstack')),
+	...(await getCollection('dev-news')),
+].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const latestPosts = allPosts.slice(0, 12);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main class="mx-auto max-w-5xl px-4 py-12">
+			<!-- Hero -->
+			<section class="text-center mb-16">
+				<h1 class="text-4xl font-bold mb-4 bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-blue)] to-[var(--color-cyan)] bg-clip-text text-transparent">
+					Dev Daily Briefs
+				</h1>
+				<p class="text-lg text-[var(--color-text-muted)] max-w-2xl mx-auto">
+					Curated daily digests for senior developers. AI tools, backend, and frontend news — delivered every morning.
+				</p>
+			</section>
+
+			<!-- Category Cards -->
+			<section class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16">
+				{Object.entries(CATEGORIES).map(([slug, cat]) => (
+					<a
+						href={`/${slug}`}
+						class="group rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 no-underline transition-all hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-2)]"
+					>
+						<span class="text-3xl">{cat.emoji}</span>
+						<h2 class="text-lg font-semibold text-[var(--color-text)] mt-2 group-hover:text-[var(--color-accent)]">
+							{cat.label}
+						</h2>
+						<p class="text-sm text-[var(--color-text-muted)] mt-1">{cat.description}</p>
+					</a>
+				))}
+			</section>
+
+			<!-- Latest Posts -->
+			<section>
+				<h2 class="text-2xl font-bold mb-6 text-[var(--color-text)]">Latest Briefs</h2>
+				<div class="space-y-3">
+					{latestPosts.map((post) => {
+						const cat = CATEGORIES[post.data.category as Category];
+						return (
+							<a
+								href={`/${post.data.category}/${post.id}/`}
+								class="flex items-center gap-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4 no-underline transition-all hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-2)]"
+							>
+								<span class="text-2xl shrink-0">{cat.emoji}</span>
+								<div class="min-w-0 flex-1">
+									<h3 class="text-base font-medium text-[var(--color-text)] truncate">
+										{post.data.title}
+									</h3>
+									<p class="text-sm text-[var(--color-text-muted)]">
+										<FormattedDate date={post.data.pubDate} />
+										<span class="mx-2">&middot;</span>
+										<span style={`color: ${cat.accent}`}>{cat.label}</span>
+									</p>
+								</div>
+							</a>
+						);
+					})}
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

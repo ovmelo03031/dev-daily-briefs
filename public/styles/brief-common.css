@@ -1,0 +1,198 @@
+/* Brief Common Styles — transforms standard markdown into styled cards */
+/* Applied to backend-fullstack and dev-news categories */
+
+.prose-brief {
+  max-width: 900px;
+}
+
+/* Remove default h1 (redundant with page title) */
+.prose-brief > h1:first-child {
+  display: none;
+}
+
+/* Section headers (## headings) as styled dividers */
+.prose-brief h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+  border-bottom: none;
+  padding: 0.75rem 1rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  background: var(--color-surface);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 0 8px 8px 0;
+}
+
+/* Top Stories gets special accent */
+.prose-brief h2:first-of-type {
+  border-left-color: var(--color-red);
+  background: linear-gradient(90deg, rgba(248, 113, 113, 0.08), var(--color-surface));
+}
+
+/* News items (### headings) as cards */
+.prose-brief h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-top: 1.25rem;
+  margin-bottom: 0.4rem;
+  padding: 0;
+}
+
+/* Links inside h3 are the headline links */
+.prose-brief h3 a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.prose-brief h3 a:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+/* Top Story numbered items — card style */
+.prose-brief h3:has(a) {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 1rem 1.25rem 0.5rem;
+  margin-top: 0.75rem;
+}
+
+/* Paragraphs after h3 cards (descriptions) */
+.prose-brief h3:has(a) + p,
+.prose-brief h3:has(a) + p + p {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  padding: 0 1.25rem 0.75rem;
+  margin-top: -1px;
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* Impact badge emoji styling */
+.prose-brief p strong {
+  color: var(--color-text);
+}
+
+/* Blockquotes — editorial commentary */
+.prose-brief blockquote {
+  border-left: 3px solid var(--color-accent);
+  background: linear-gradient(90deg, var(--color-accent-glow), transparent);
+  border-radius: 0 8px 8px 0;
+  padding: 0.75rem 1rem;
+  margin: 0.75rem 0 1rem;
+  font-size: 0.9rem;
+}
+
+.prose-brief blockquote p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* Lists — category items */
+.prose-brief ul, .prose-brief ol {
+  padding-left: 0;
+  list-style: none;
+}
+
+.prose-brief li {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.prose-brief li strong {
+  color: var(--color-text);
+}
+
+.prose-brief li a {
+  color: var(--color-blue);
+  font-size: 0.8rem;
+}
+
+/* HR as subtle section divider */
+.prose-brief hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 1.5rem 0;
+  opacity: 0.5;
+}
+
+/* Code inline */
+.prose-brief code {
+  background: var(--color-surface-2);
+  color: var(--color-cyan);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+/* Tables */
+.prose-brief table {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  margin: 1rem 0;
+}
+
+.prose-brief thead th {
+  background: var(--color-surface-2);
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.prose-brief tbody td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  border: none;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.prose-brief tbody tr:hover {
+  background: var(--color-surface-2);
+}
+
+/* Quick Links section */
+.prose-brief h2:last-of-type + p,
+.prose-brief h2:last-of-type + ul {
+  columns: 2;
+  column-gap: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .prose-brief h3:has(a) {
+    padding: 0.75rem 1rem 0.4rem;
+  }
+
+  .prose-brief h3:has(a) + p {
+    padding: 0 1rem 0.6rem;
+  }
+
+  .prose-brief h2:last-of-type + ul {
+    columns: 1;
+  }
+}

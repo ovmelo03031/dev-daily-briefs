@@ -15,16 +15,24 @@ type Props = {
 const { title, description, pubDate, category } = Astro.props;
 const cat = CATEGORIES[category];
 const isAiCoding = category === 'ai-coding';
+const isBrief = category === 'backend-fullstack' || category === 'dev-news';
+
+function getProseClass() {
+	if (isAiCoding) return 'prose-ai-coding';
+	if (isBrief) return 'prose prose-brief';
+	return 'prose';
+}
 ---
 
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
 		{isAiCoding && <link rel="stylesheet" href="/styles/ai-coding-brief.css" />}
+		{isBrief && <link rel="stylesheet" href="/styles/brief-common.css" />}
 	</head>
 	<body>
 		<Header />
-		<main class:list={["mx-auto px-4 py-12", isAiCoding ? "max-w-5xl" : "max-w-3xl"]}>
+		<main class:list={["mx-auto px-4 py-12", isAiCoding ? "max-w-5xl" : "max-w-4xl"]}>
 			<article>
 				<div class="mb-8">
 					<a
@@ -34,16 +42,12 @@ const isAiCoding = category === 'ai-coding';
 						&larr; {cat.emoji} {cat.label}
 					</a>
 					{!isAiCoding && (
-						<>
-							<h1 class="text-2xl font-bold text-[var(--color-text)] leading-tight">{title}</h1>
-							<p class="text-[var(--color-text-muted)] mt-2">
-								<FormattedDate date={pubDate} />
-							</p>
-							<hr class="border-[var(--color-border)] mt-6" />
-						</>
+						<p class="text-[var(--color-text-muted)] mt-2">
+							<FormattedDate date={pubDate} />
+						</p>
 					)}
 				</div>
-				<div class:list={[isAiCoding ? "prose-ai-coding" : "prose"]}>
+				<div class={getProseClass()}>
 					<slot />
 				</div>
 			</article>

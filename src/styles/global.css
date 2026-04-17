@@ -27,6 +27,21 @@ body {
 	color: var(--color-text);
 	line-height: 1.7;
 	margin: 0;
+	/* Sticky footer: flex column where main stretches to fill viewport so
+	   the footer never floats up on short pages. 100dvh handles mobile
+	   browser chrome (address bar) correctly; 100vh is the fallback. */
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	min-height: 100dvh;
+}
+
+body > main {
+	flex: 1 0 auto;
+}
+
+body > footer {
+	flex-shrink: 0;
 }
 
 @layer base {

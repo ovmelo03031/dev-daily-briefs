@@ -1,0 +1,348 @@
+---
+import { Icon } from 'astro-icon/components';
+import FormattedDate from './FormattedDate.astro';
+import type { Category } from '../consts';
+
+type Highlight = {
+	text: string;
+	text_es?: string;
+	text_fr?: string;
+	anchor: string;
+	icon?: string;
+};
+
+interface CategoryGroup {
+	slug: Category;
+	label: string;
+	accent: string;
+	icon: string;
+	briefId: string;
+	briefTitle: string;
+	briefPubDate: Date;
+	isToday: boolean;
+	highlights: Highlight[];
+}
+
+interface Props {
+	groups: CategoryGroup[];
+}
+
+const { groups } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+{groups.length > 0 && (
+	<section class="today-highlights" aria-label="Today's highlights">
+		<header class="today-header">
+			<span class="today-icon" aria-hidden="true">
+				<Icon name="lucide:sparkles" width={18} height={18} />
+			</span>
+			<div class="today-title-block">
+				<h2>
+					<span class="lang-es">Lo nuevo hoy</span>
+					<span class="lang-en">Today's Highlights</span>
+					<span class="lang-fr">Points forts du jour</span>
+				</h2>
+				<p class="today-sub">
+					<span class="lang-es">Los ítems más importantes de cada categoría — click para ir directo al detalle</span>
+					<span class="lang-en">The most important items from each category — click to jump straight to the details</span>
+					<span class="lang-fr">Les éléments les plus importants de chaque catégorie — cliquez pour accéder directement au détail</span>
+				</p>
+			</div>
+		</header>
+
+		<div class="today-groups">
+			{groups.map((g) => (
+				<article class="today-group" style={`--accent: ${g.accent}`}>
+					<div class="today-group-header">
+						<a
+							href={`${base}${g.slug}/${g.briefId}/`}
+							class="today-group-title"
+						>
+							<span class="today-group-icon" aria-hidden="true">
+								<Icon name={g.icon} width={16} height={16} />
+							</span>
+							<span class="today-group-label">{g.label}</span>
+						</a>
+						<span class="today-group-meta">
+							{!g.isToday && (
+								<span class="today-group-date">
+									<FormattedDate date={g.briefPubDate} />
+								</span>
+							)}
+							<a href={`${base}${g.slug}/${g.briefId}/`} class="today-group-link">
+								<span class="lang-es">Ver brief</span>
+								<span class="lang-en">See brief</span>
+								<span class="lang-fr">Voir le brief</span>
+								<Icon name="lucide:arrow-right" width={12} height={12} />
+							</a>
+						</span>
+					</div>
+
+					<ul class="today-chips">
+						{g.highlights.slice(0, 6).map((h) => (
+							<li>
+								<a
+									class="today-chip"
+									href={`${base}${g.slug}/${g.briefId}/#${h.anchor}`}
+								>
+									{h.icon && (
+										<span class="today-chip-icon" aria-hidden="true">
+											<Icon name={h.icon} width={16} height={16} />
+										</span>
+									)}
+									<span class="today-chip-text lang-es">{h.text_es ?? h.text}</span>
+									<span class="today-chip-text lang-en">{h.text}</span>
+									<span class="today-chip-text lang-fr">{h.text_fr ?? h.text}</span>
+									<Icon
+										name="lucide:arrow-right"
+										width={12}
+										height={12}
+										class="today-chip-arrow"
+										aria-hidden="true"
+									/>
+								</a>
+							</li>
+						))}
+					</ul>
+				</article>
+			))}
+		</div>
+	</section>
+)}
+
+<style>
+	.today-highlights {
+		margin: 0 0 2rem;
+		padding: 1rem 1.15rem;
+		background: linear-gradient(135deg, var(--color-surface), var(--color-surface-2));
+		border: 1px solid var(--color-border);
+		border-radius: 16px;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.today-highlights::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 3px;
+		background: linear-gradient(90deg, var(--color-accent), var(--color-cyan), #7c3aed);
+		border-radius: 16px 16px 0 0;
+	}
+
+	.today-header {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.6rem;
+		margin-bottom: 1rem;
+	}
+
+	.today-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 30px;
+		height: 30px;
+		border-radius: 8px;
+		background: var(--color-accent-glow);
+		color: var(--color-accent);
+		flex-shrink: 0;
+	}
+
+	.today-title-block h2 {
+		font-size: 1.05rem;
+		font-weight: 700;
+		margin: 0;
+		line-height: 1.2;
+		color: var(--color-text);
+	}
+
+	.today-sub {
+		font-size: 0.75rem;
+		color: var(--color-text-muted);
+		margin: 0.15rem 0 0;
+		line-height: 1.35;
+	}
+
+	.today-groups {
+		display: flex;
+		flex-direction: column;
+		gap: 0.85rem;
+	}
+
+	.today-group {
+		padding: 0.8rem 0.9rem;
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: 10px;
+		position: relative;
+	}
+
+	.today-group::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		width: 3px;
+		background: var(--accent);
+		border-radius: 10px 0 0 10px;
+	}
+
+	.today-group-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.6rem;
+		margin-bottom: 0.65rem;
+		flex-wrap: wrap;
+	}
+
+	.today-group-title {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-weight: 700;
+		font-size: 0.95rem;
+		color: var(--color-text);
+		text-decoration: none;
+	}
+
+	.today-group-title:hover {
+		color: var(--accent);
+		text-decoration: none;
+	}
+
+	.today-group-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 24px;
+		height: 24px;
+		border-radius: 6px;
+		background: var(--color-surface-2);
+		color: var(--accent);
+	}
+
+	.today-group-meta {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.65rem;
+		font-size: 0.75rem;
+		color: var(--color-text-muted);
+	}
+
+	.today-group-date {
+		font-variant-numeric: tabular-nums;
+	}
+
+	.today-group-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.25rem;
+		color: var(--color-text-muted);
+		text-decoration: none;
+		transition: color 0.15s;
+	}
+
+	.today-group-link:hover {
+		color: var(--accent);
+		text-decoration: none;
+	}
+
+	.today-chips {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 0.35rem;
+		align-items: stretch;
+	}
+
+	.today-chips li {
+		display: flex;
+	}
+
+	@media (min-width: 640px) {
+		.today-chips {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (min-width: 900px) {
+		.today-chips {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	.today-chip {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		width: 100%;
+		padding: 0.5rem 0.65rem;
+		background: var(--color-surface-2);
+		border: 1px solid var(--color-border);
+		border-radius: 8px;
+		font-size: 0.78rem;
+		line-height: 1.3;
+		color: var(--color-text);
+		text-decoration: none;
+		transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+	}
+
+	.today-chip:hover {
+		border-color: var(--accent);
+		background: var(--color-surface);
+		transform: translateY(-1px);
+		text-decoration: none;
+	}
+
+	.today-chip-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 20px;
+		height: 20px;
+		flex-shrink: 0;
+		color: var(--accent);
+	}
+
+	.today-chip-text {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.today-chip-arrow {
+		flex-shrink: 0;
+		color: var(--color-text-muted);
+		opacity: 0;
+		transform: translateX(-3px);
+		transition: all 0.15s ease;
+	}
+
+	.today-chip:hover .today-chip-arrow {
+		opacity: 1;
+		transform: translateX(0);
+		color: var(--accent);
+	}
+
+	@media (max-width: 600px) {
+		.today-highlights {
+			padding: 0.85rem 0.9rem;
+			border-radius: 12px;
+		}
+
+		.today-group {
+			padding: 0.7rem 0.8rem;
+		}
+
+		.today-group-header {
+			gap: 0.45rem;
+		}
+	}
+</style>

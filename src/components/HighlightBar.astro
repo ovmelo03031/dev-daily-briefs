@@ -4,6 +4,7 @@ import { Icon } from 'astro-icon/components';
 type Highlight = {
 	text: string;
 	text_es?: string;
+	text_fr?: string;
 	anchor: string;
 	icon?: string;
 };
@@ -24,8 +25,10 @@ if (!highlights || highlights.length === 0) return null;
 		<div class="highlight-heading">
 			<h2 class="lang-es">Lo nuevo hoy</h2>
 			<h2 class="lang-en">Today's highlights</h2>
+			<h2 class="lang-fr">Points forts du jour</h2>
 			<p class="highlight-sub lang-es">Click en cualquiera para ir al detalle</p>
 			<p class="highlight-sub lang-en">Click any item to jump to the full section</p>
+			<p class="highlight-sub lang-fr">Cliquez un élément pour aller à la section complète</p>
 		</div>
 	</header>
 
@@ -42,10 +45,13 @@ if (!highlights || highlights.length === 0) return null;
 							<Icon name={h.icon} width={18} height={18} />
 						</span>
 					)}
-					{h.text_es ? (
+					{(h.text_es || h.text_fr) ? (
 						<>
-							<span class="highlight-chip-text lang-es">{h.text_es}</span>
+							<span class="highlight-chip-text lang-es">{h.text_es ?? h.text}</span>
 							<span class="highlight-chip-text lang-en">{h.text}</span>
+							{h.text_fr && (
+								<span class="highlight-chip-text lang-fr">{h.text_fr}</span>
+							)}
 						</>
 					) : (
 						<span class="highlight-chip-text">{h.text}</span>
@@ -125,6 +131,11 @@ if (!highlights || highlights.length === 0) return null;
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: 0.5rem;
+		align-items: stretch;
+	}
+
+	.highlight-list li {
+		display: flex;
 	}
 
 	@media (min-width: 640px) {
@@ -143,6 +154,7 @@ if (!highlights || highlights.length === 0) return null;
 		display: flex;
 		align-items: center;
 		gap: 0.6rem;
+		width: 100%;
 		padding: 0.7rem 0.85rem;
 		background: var(--color-surface);
 		border: 1px solid var(--color-border);
@@ -194,9 +206,32 @@ if (!highlights || highlights.length === 0) return null;
 <script is:inline>
 	// Smart anchor scrolling: find the CURRENTLY VISIBLE target (briefs
 	// embed two copies for lang toggle), scroll with sticky-header offset,
-	// and play a brief highlight flash on the target for feedback.
+	// and play a brief highlight flash on the target for feedback. Also
+	// handles DEEP LINKS from outside the brief (home page chips, shared
+	// URLs with a hash) so the flash plays on arrival.
 	(function () {
 		var HEADER_OFFSET = 72;
+
+		function findVisibleTarget(slug) {
+			var targets = document.querySelectorAll('[data-anchor="' + slug + '"]');
+			for (var i = 0; i < targets.length; i++) {
+				if (targets[i].offsetParent !== null) return targets[i];
+			}
+			return null;
+		}
+
+		function flashAndScroll(slug, behavior) {
+			var target = findVisibleTarget(slug);
+			if (!target) return;
+			var top = target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+			window.scrollTo({ top: top, behavior: behavior || 'smooth' });
+			target.classList.remove('is-target-flash');
+			void target.offsetWidth;
+			target.classList.add('is-target-flash');
+			setTimeout(function () {
+				target.classList.remove('is-target-flash');
+			}, 1800);
+		}
 
 		document.addEventListener('click', function (e) {
 			var link = e.target && e.target.closest ? e.target.closest('a.highlight-chip[data-target]') : null;
@@ -206,32 +241,34 @@ if (!highlights || highlights.length === 0) return null;
 			if (!slug) return;
 
 			e.preventDefault();
-
-			// Find all elements marked with this anchor, pick the first visible
-			var targets = document.querySelectorAll('[data-anchor="' + slug + '"]');
-			var target = null;
-			for (var i = 0; i < targets.length; i++) {
-				if (targets[i].offsetParent !== null) {
-					target = targets[i];
-					break;
-				}
-			}
-			if (!target) return;
-
-			var top = target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
-			window.scrollTo({ top: top, behavior: 'smooth' });
-
-			// URL hash without re-scrolling
+			flashAndScroll(slug, 'smooth');
 			if (history.replaceState) history.replaceState(null, '', '#' + slug);
+		});
 
-			// Visual feedback: brief accent flash
-			target.classList.remove('is-target-flash');
-			// Force reflow so the animation restarts
-			void target.offsetWidth;
-			target.classList.add('is-target-flash');
-			setTimeout(function () {
-				target.classList.remove('is-target-flash');
-			}, 1800);
+		// Deep-link arrival: when landing on a brief URL that carries a hash,
+		// the browser has already jumped to the anchor but the flash hasn't
+		// played. We re-scroll with the sticky-header offset and trigger the
+		// flash for consistent feedback with in-page clicks.
+		function handleInitialHash() {
+			var hash = (location.hash || '').slice(1);
+			if (!hash) return;
+			// Wait a frame so layout + images settle, then scroll + flash
+			requestAnimationFrame(function () {
+				setTimeout(function () {
+					flashAndScroll(hash, 'smooth');
+				}, 60);
+			});
+		}
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', handleInitialHash);
+		} else {
+			handleInitialHash();
+		}
+
+		window.addEventListener('hashchange', function () {
+			var hash = (location.hash || '').slice(1);
+			if (hash) flashAndScroll(hash, 'smooth');
 		});
 	})();
 </script>

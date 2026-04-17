@@ -3,6 +3,7 @@
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig, fontProviders } from 'astro/config';
+import icon from 'astro-icon';
 
 import tailwindcss from '@tailwindcss/vite';
 
@@ -10,7 +11,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://ovmelo03031.github.io',
   base: '/dev-daily-briefs/',
-  integrations: [mdx(), sitemap()],
+  integrations: [mdx(), sitemap(), icon()],
 
   fonts: [
       {

@@ -86,6 +86,146 @@
   background: var(--color-surface-2);
   border-radius: 12px;
   flex-shrink: 0;
+  position: relative;
+}
+
+/* Hide the emoji fallback only inside known sections (where we render an SVG overlay) */
+.prose-ai-coding .tool-section:is(.claude, .openai, .gemini, .copilot, .vscode) .tool-icon,
+.prose-brief .tool-section:is(.top-stories, .runtimes, .frameworks, .databases, .cloud, .architecture, .fullstack, .security, .typescript, .css, .html, .react, .react-native, .js-frameworks, .build-tools, .dev-tools, .quick-links) .tool-icon {
+  font-size: 0;
+  line-height: 0;
+}
+
+/* Brand icon overlay for known tool-sections — hides the emoji fallback
+   and renders an SVG mask colored with the section accent. Works for .md
+   and .mdx briefs without touching their content. */
+.prose-ai-coding .tool-section:is(.claude, .openai, .gemini, .copilot, .vscode) .tool-icon::after,
+.prose-brief .tool-section:is(.top-stories, .runtimes, .frameworks, .databases, .cloud, .architecture, .fullstack, .security, .typescript, .css, .html, .react, .react-native, .js-frameworks, .build-tools, .dev-tools, .quick-links) .tool-icon::after {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  background-color: currentColor;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
+
+/* AI Coding — brand-colored icons */
+.prose-ai-coding .tool-section.claude { --brand: #f59e0b; }
+.prose-ai-coding .tool-section.openai { --brand: #34d399; }
+.prose-ai-coding .tool-section.gemini { --brand: #60a5fa; }
+.prose-ai-coding .tool-section.copilot { --brand: #a78bfa; }
+.prose-ai-coding .tool-section.vscode { --brand: #22d3ee; }
+
+.prose-ai-coding .tool-section.claude .tool-icon { color: var(--brand); }
+.prose-ai-coding .tool-section.openai .tool-icon { color: var(--brand); }
+.prose-ai-coding .tool-section.gemini .tool-icon { color: var(--brand); }
+.prose-ai-coding .tool-section.copilot .tool-icon { color: var(--brand); }
+.prose-ai-coding .tool-section.vscode .tool-icon { color: var(--brand); }
+
+.prose-ai-coding .tool-section.claude .tool-icon::after {
+  mask-image: url('../icons/simple-icons/anthropic.svg');
+  -webkit-mask-image: url('../icons/simple-icons/anthropic.svg');
+}
+.prose-ai-coding .tool-section.openai .tool-icon::after {
+  mask-image: url('../icons/simple-icons/openai.svg');
+  -webkit-mask-image: url('../icons/simple-icons/openai.svg');
+}
+.prose-ai-coding .tool-section.gemini .tool-icon::after {
+  mask-image: url('../icons/simple-icons/googlegemini.svg');
+  -webkit-mask-image: url('../icons/simple-icons/googlegemini.svg');
+}
+.prose-ai-coding .tool-section.copilot .tool-icon::after {
+  mask-image: url('../icons/simple-icons/githubcopilot.svg');
+  -webkit-mask-image: url('../icons/simple-icons/githubcopilot.svg');
+}
+.prose-ai-coding .tool-section.vscode .tool-icon::after {
+  mask-image: url('../icons/simple-icons/visualstudiocode.svg');
+  -webkit-mask-image: url('../icons/simple-icons/visualstudiocode.svg');
+}
+
+/* News briefs — abstract category icons (Lucide) */
+.prose-brief .tool-section.top-stories { --brand: #f87171; }
+.prose-brief .tool-section.runtimes { --brand: #34d399; }
+.prose-brief .tool-section.frameworks { --brand: #a78bfa; }
+.prose-brief .tool-section.databases { --brand: #60a5fa; }
+.prose-brief .tool-section.cloud { --brand: #fbbf24; }
+.prose-brief .tool-section.architecture { --brand: #22d3ee; }
+.prose-brief .tool-section.fullstack { --brand: #a78bfa; }
+.prose-brief .tool-section.security { --brand: #f87171; }
+.prose-brief .tool-section.typescript { --brand: #60a5fa; }
+.prose-brief .tool-section.css { --brand: #f9a8d4; }
+.prose-brief .tool-section.html { --brand: #fbbf24; }
+.prose-brief .tool-section.react { --brand: #22d3ee; }
+.prose-brief .tool-section.react-native { --brand: #a78bfa; }
+.prose-brief .tool-section.js-frameworks { --brand: #34d399; }
+.prose-brief .tool-section.build-tools { --brand: #f59e0b; }
+.prose-brief .tool-section.dev-tools { --brand: #a78bfa; }
+.prose-brief .tool-section.quick-links { --brand: #9ca3af; }
+
+.prose-brief .tool-section .tool-icon { color: var(--brand, var(--color-accent)); }
+
+.prose-brief .tool-section.top-stories .tool-icon::after {
+  mask-image: url('../icons/lucide/flame.svg');
+  -webkit-mask-image: url('../icons/lucide/flame.svg');
+}
+.prose-brief .tool-section.runtimes .tool-icon::after {
+  mask-image: url('../icons/lucide/terminal.svg');
+  -webkit-mask-image: url('../icons/lucide/terminal.svg');
+}
+.prose-brief .tool-section.frameworks .tool-icon::after,
+.prose-brief .tool-section.js-frameworks .tool-icon::after {
+  mask-image: url('../icons/lucide/blocks.svg');
+  -webkit-mask-image: url('../icons/lucide/blocks.svg');
+}
+.prose-brief .tool-section.databases .tool-icon::after {
+  mask-image: url('../icons/lucide/database.svg');
+  -webkit-mask-image: url('../icons/lucide/database.svg');
+}
+.prose-brief .tool-section.cloud .tool-icon::after {
+  mask-image: url('../icons/lucide/cloud.svg');
+  -webkit-mask-image: url('../icons/lucide/cloud.svg');
+}
+.prose-brief .tool-section.architecture .tool-icon::after {
+  mask-image: url('../icons/lucide/layers.svg');
+  -webkit-mask-image: url('../icons/lucide/layers.svg');
+}
+.prose-brief .tool-section.fullstack .tool-icon::after {
+  mask-image: url('../icons/lucide/server.svg');
+  -webkit-mask-image: url('../icons/lucide/server.svg');
+}
+.prose-brief .tool-section.security .tool-icon::after {
+  mask-image: url('../icons/lucide/shield.svg');
+  -webkit-mask-image: url('../icons/lucide/shield.svg');
+}
+.prose-brief .tool-section.typescript .tool-icon::after {
+  mask-image: url('../icons/simple-icons/typescript.svg');
+  -webkit-mask-image: url('../icons/simple-icons/typescript.svg');
+}
+.prose-brief .tool-section.css .tool-icon::after {
+  mask-image: url('../icons/simple-icons/css.svg');
+  -webkit-mask-image: url('../icons/simple-icons/css.svg');
+}
+.prose-brief .tool-section.html .tool-icon::after {
+  mask-image: url('../icons/simple-icons/html5.svg');
+  -webkit-mask-image: url('../icons/simple-icons/html5.svg');
+}
+.prose-brief .tool-section.react .tool-icon::after,
+.prose-brief .tool-section.react-native .tool-icon::after {
+  mask-image: url('../icons/simple-icons/react.svg');
+  -webkit-mask-image: url('../icons/simple-icons/react.svg');
+}
+.prose-brief .tool-section.build-tools .tool-icon::after,
+.prose-brief .tool-section.dev-tools .tool-icon::after {
+  mask-image: url('../icons/lucide/package.svg');
+  -webkit-mask-image: url('../icons/lucide/package.svg');
+}
+.prose-brief .tool-section.quick-links .tool-icon::after {
+  mask-image: url('../icons/lucide/link.svg');
+  -webkit-mask-image: url('../icons/lucide/link.svg');
 }
 
 .prose-ai-coding .tool-meta,
@@ -315,6 +455,36 @@
 .provider-zhipu { background: rgba(251,191,36,0.15); color: #fbbf24; }
 .provider-bytedance { background: rgba(52,211,153,0.15); color: #34d399; }
 .provider-minimax { background: rgba(244,114,182,0.15); color: #f9a8d4; }
+
+/* Provider badge icons — mini brand logo before the provider name */
+.provider-badge::before {
+  content: '';
+  display: inline-block;
+  width: 0.95em;
+  height: 0.95em;
+  background-color: currentColor;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+  vertical-align: -0.12em;
+  flex-shrink: 0;
+}
+
+.provider-anthropic::before { mask-image: url('../icons/simple-icons/anthropic.svg'); -webkit-mask-image: url('../icons/simple-icons/anthropic.svg'); }
+.provider-openai::before { mask-image: url('../icons/simple-icons/openai.svg'); -webkit-mask-image: url('../icons/simple-icons/openai.svg'); }
+.provider-google::before { mask-image: url('../icons/simple-icons/google.svg'); -webkit-mask-image: url('../icons/simple-icons/google.svg'); }
+.provider-meta::before { mask-image: url('../icons/simple-icons/meta.svg'); -webkit-mask-image: url('../icons/simple-icons/meta.svg'); }
+.provider-xai::before { mask-image: url('../icons/lucide/atom.svg'); -webkit-mask-image: url('../icons/lucide/atom.svg'); }
+.provider-mistral::before { mask-image: url('../icons/simple-icons/mistralai.svg'); -webkit-mask-image: url('../icons/simple-icons/mistralai.svg'); }
+.provider-alibaba::before { mask-image: url('../icons/simple-icons/alibabacloud.svg'); -webkit-mask-image: url('../icons/simple-icons/alibabacloud.svg'); }
+.provider-deepseek::before { mask-image: url('../icons/lucide/search.svg'); -webkit-mask-image: url('../icons/lucide/search.svg'); }
+.provider-moonshot::before { mask-image: url('../icons/lucide/moon.svg'); -webkit-mask-image: url('../icons/lucide/moon.svg'); }
+.provider-zhipu::before { mask-image: url('../icons/lucide/brain-circuit.svg'); -webkit-mask-image: url('../icons/lucide/brain-circuit.svg'); }
+.provider-bytedance::before { mask-image: url('../icons/simple-icons/bytedance.svg'); -webkit-mask-image: url('../icons/simple-icons/bytedance.svg'); }
+.provider-minimax::before { mask-image: url('../icons/simple-icons/minimax.svg'); -webkit-mask-image: url('../icons/simple-icons/minimax.svg'); }
 
 /* Weight & Tier Badges */
 .weight-badge {

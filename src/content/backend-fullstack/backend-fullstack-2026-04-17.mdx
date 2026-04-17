@@ -1,0 +1,575 @@
+---
+title: "Backend & Fullstack Daily — April 17, 2026"
+title_es: "Backend & Fullstack Daily — 17 de Abril de 2026"
+description: "Daily backend and fullstack news digest for senior developers"
+pubDate: "2026-04-17"
+category: "backend-fullstack"
+---
+
+<div class="lang-es">
+
+<div class="tool-section top-stories">
+<div class="tool-header">
+<div class="tool-icon">🔥</div>
+<div class="tool-meta">
+<h2>Top Stories</h2>
+<div class="subtitle">5 noticias más relevantes del día</div>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-breaking">Breaking</span>
+<div class="update-content">
+<h3>TypeScript 6.0: el último compilador en JS — strict ON por defecto</h3>
+<p>Microsoft lanzó TypeScript 6.0 el 23 de marzo de 2026. Es la ÚLTIMA versión basada en JavaScript. <code>strict</code> viene ON por defecto, <code>module: esnext</code>, AMD/UMD/outFile deprecados. Es el trampolín a TS 7.0 reescrito en Go — 10x más rápido. Si no migrás hoy, TS 7.0 te va a doler.</p>
+<a href="https://devblogs.microsoft.com/typescript/announcing-typescript-6-0/">devblogs.microsoft.com</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-breaking">Breaking</span>
+<div class="update-content">
+<h3>CVE-2026-29000: bypass crítico JWT en pac4j — CVSS 10.0</h3>
+<p>Con la clave RSA pública del servidor, cualquier atacante puede forjar JWTs y autenticarse como cualquier usuario. Afecta pac4j-jwt ≤ 6.0.3, 5.x &lt; 5.7.9, 4.x &lt; 4.5.9. Sonatype encontró 19 paquetes adicionales afectados. Ojo con este CVE — actualizá YA. Sin workaround, es un fix de código.</p>
+<a href="https://www.sonatype.com/blog/pac4j-cve-2026-29000-sonatype-finds-19-additional-packages">sonatype.com</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>Deno 2.6: <code>dx</code> es el nuevo <code>npx</code>, tsgo integrado y deno audit</h3>
+<p>Deno 2.6 introduce <code>dx</code> para ejecutar binarios npm/JSR, integra <code>tsgo</code> (type checker en Go, 2x más rápido), suma <code>deno audit</code> para CVEs, incluye <code>@types/node</code> por defecto, y sube V8 a 14.2. Esto es un golazo para la DX del ecosistema.</p>
+<a href="https://deno.com/blog/v2.6">deno.com</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>Cloudflare Containers en Public Beta: Docker en el edge global</h3>
+<p>Cualquier imagen Docker Linux x86-64 se despliega con <code>wrangler deploy</code> en 330+ ciudades. Integrado nativo con Workers. Todavía sin autoscaling automático, pero el potencial para reemplazar instancias EC2 pequeñas con latencia de edge es enorme.</p>
+<a href="https://blog.cloudflare.com/containers-are-available-in-public-beta-for-simple-global-and-programmable/">blog.cloudflare.com</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>Kafka 4.3.0 en feature freeze + patches 4.0.2 y 4.1.2</h3>
+<p>Feature freeze el 18 de marzo, code freeze programado para el 8 de abril. También salieron Kafka 4.0.2 (43 fixes, bloqueantes incluidos) y 4.1.2 (31 fixes). Si estás en Kafka 4.x en producción, chequeá los patches antes del fin de semana.</p>
+<a href="https://developers.redhat.com/blog/2026/04/03/kafka-monthly-digest-march-2026">Red Hat Developer</a>
+</div>
+</div>
+</div>
+
+<div class="tool-section runtimes">
+<div class="tool-header">
+<div class="tool-icon">⚡</div>
+<div class="tool-meta">
+<h2>Backend TypeScript & Runtimes</h2>
+<div class="subtitle">Node.js, Deno, Bun, TypeScript</div>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-breaking">Breaking</span>
+<div class="update-content">
+<h3>TypeScript 6.0 — strict ON, ES5 deprecado, TS 7.0 en Go viene</h3>
+<p>Además de los cambios de defaults, TS 6.0 trae soporte para Temporal API (stage 4), <code>RegExp.escape</code>, Map <code>getOrInsert</code>/<code>getOrInsertComputed</code>, y la flag <code>--stableTypeOrdering</code> para prepararse a TS 7.0. El compilador Go (<code>tsgo</code>) ya compila VS Code (1.5M líneas) en 8.7s vs 89s del JS. Locura cósmica.</p>
+<a href="https://devblogs.microsoft.com/typescript/announcing-typescript-6-0/">devblogs.microsoft.com</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>Deno 2.6: dx, tsgo, deno audit, BroadcastChannel estable</h3>
+<p><code>dx</code> descarga y ejecuta binarios de npm/JSR con permisos configurables. <code>tsgo</code> es el type checker experimental en Go integrado nativamente. <code>deno audit</code> checkea vulnerabilidades en el grafo de dependencias. <code>@types/node</code> incluido por defecto. BroadcastChannel API estable. Web streams transferibles entre workers.</p>
+<a href="https://deno.com/blog/v2.6">deno.com</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>Node.js 24: TypeScript nativo experimental con <code>--experimental-strip-types</code></h3>
+<p>Ejecutás <code>.ts</code> directamente sin build step previo. Node elimina los type annotations en runtime. No es un type checker — es conveniencia de ejecución. V8 actualizado. Si estás migrando a TypeScript nativo sin toolchain, Node 24 baja la fricción significativamente.</p>
+<a href="https://nodejs.org/en/blog">nodejs.org</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-minor">Minor</span>
+<div class="update-content">
+<h3>Bun 1.2: producción-ready, 2-4x más rápido en HTTP, bun install 6-9x más rápido</h3>
+<p>Bun llegó a 1.2 declarándose estable para producción. Benchmarks 2026: 2-4x más rápido que Node en HTTP serving y file I/O. Instalación de paquetes 6-9x más rápida que npm. Compatible con la mayoría del ecosistema. Vale evaluar si tenés proyectos nuevos o necesitás reducir costos de cómputo.</p>
+<a href="https://bun.com/">bun.com</a>
+</div>
+</div>
+</div>
+
+<div class="tool-section frameworks">
+<div class="tool-header">
+<div class="tool-icon">🧩</div>
+<div class="tool-meta">
+<h2>Frameworks & Libraries</h2>
+<div class="subtitle">NestJS, Fastify, Hono, tRPC, ORMs</div>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>Hono + Drizzle + Neon: el stack edge-first dominante en 2026</h3>
+<p>El combo se consolidó para APIs en Cloudflare Workers y edge. Drizzle conecta a Neon vía HTTP serverless driver — queries sin TCP, compatibles con Workers. Type safety end-to-end desde el schema de DB hasta el response HTTP. Si no estás usando esto para proyectos edge, ponete las pilas.</p>
+<a href="https://encore.dev/articles/hono-alternatives">encore.dev</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>NestJS + tRPC v11: subscripciones real-time con SSE y async generators</h3>
+<p>NestJS tRPC ahora soporta streaming real-time vía Server-Sent Events usando async generators en tRPC v11. Full type safety del servidor al cliente con streaming. Una alternativa liviana a WebSockets para casos unidireccionales como notificaciones o logs en tiempo real.</p>
+<a href="https://nestjs-trpc.io/">nestjs-trpc.io</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-minor">Minor</span>
+<div class="update-content">
+<h3>ORM landscape 2026: Prisma para teams, Drizzle para edge, TypeORM perdiendo</h3>
+<p>El consenso en 2026: Prisma gana en equipos que cambian el schema frecuentemente y necesitan consistencia. Drizzle gana en edge environments y cuando necesitás control total de las queries. TypeORM pierde tracción pero mantiene legacy importante. Elegí según el contexto, no por hype.</p>
+<a href="https://medium.com/@Nexumo_/prisma-or-typeorm-in-2026-the-nestjs-data-layer-call-ae47b5cfdd73">Medium</a>
+</div>
+</div>
+</div>
+
+<div class="tool-section databases">
+<div class="tool-header">
+<div class="tool-icon">🗄️</div>
+<div class="tool-meta">
+<h2>Databases & Data</h2>
+<div class="subtitle">PostgreSQL, Redis, MongoDB, Kafka</div>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>Kafka 4.3.0 feature freeze + patches 4.0.2 / 4.1.2</h3>
+<p>Feature freeze de Kafka 4.3.0 el 18 de marzo; code freeze programado para el 8 de abril; release en mayo. Kafka 4.0.2 cerró 43 issues incluyendo varios bloqueantes; 4.1.2 cerró 31. Si estás en Kafka 4.0.x o 4.1.x en producción, estos patches son mandatorios.</p>
+<a href="https://developers.redhat.com/blog/2026/04/03/kafka-monthly-digest-march-2026">Red Hat Developer</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-minor">Minor</span>
+<div class="update-content">
+<h3>MongoDB 8.0: hasta 45% más rápido en queries sobre large datasets</h3>
+<p>MongoDB 8.0 trajo mejoras sustanciales de performance en queries sobre datasets grandes. También avanzó en vector search nativo y multi-cloud con Atlas. Si ya estás en MongoDB y no actualizaste a 8.0, revisá las release notes — los gains de performance son reales.</p>
+<a href="https://calmops.com/database/mongodb/mongodb-trends-2025-2026/">calmops.com</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-minor">Minor</span>
+<div class="update-content">
+<h3>"It's 2026, Just Use Postgres" — sigue resonando en la comunidad</h3>
+<p>Tiger Data publicó un artículo que está generando debate: Postgres en 2026 hace JSONB, vector search (pgvector), full-text, queues (pgmq), y más. Antes de agregar Redis o MongoDB a tu stack, preguntate si la complejidad operacional vale la pena. La respuesta honesta, la mayoría de las veces, es no.</p>
+<a href="https://www.tigerdata.com/blog/its-2026-just-use-postgres">tigerdata.com</a>
+</div>
+</div>
+</div>
+
+<div class="tool-section cloud">
+<div class="tool-header">
+<div class="tool-icon">☁️</div>
+<div class="tool-meta">
+<h2>Cloud & DevOps</h2>
+<div class="subtitle">AWS, Docker, Kubernetes, Serverless</div>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>Cloudflare Containers: Docker en el edge, Public Beta abierto</h3>
+<p>Cualquier imagen Docker Linux x86-64 se despliega en la red global de Cloudflare con un <code>wrangler deploy</code>. Integración nativa con Workers. Límites de CPU/memoria/disco aumentados. Limitaciones actuales: sin autoscaling nativo, sin load balancing, storage efímero. Perfecto para workloads stateless que necesitan latencia global.</p>
+<a href="https://blog.cloudflare.com/containers-are-available-in-public-beta-for-simple-global-and-programmable/">blog.cloudflare.com</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-minor">Minor</span>
+<div class="update-content">
+<h3>Deno Deploy GA + Lambda SnapStart: el serverless TypeScript maduro</h3>
+<p>Deno Deploy salió GA para hosting edge production-ready. AWS Lambda con SnapStart hace el cold start casi irrelevante en Java. Para TypeScript serverless: Workers (edge, latencia global) vs Lambda (compute regional, ecosystem AWS). No hay una respuesta universal — elegí según el problema.</p>
+<a href="https://www.codercops.com/blog/cloud-native-microservices-serverless-containers-2026">codercops.com</a>
+</div>
+</div>
+</div>
+
+<div class="tool-section architecture">
+<div class="tool-header">
+<div class="tool-icon">🏗️</div>
+<div class="tool-meta">
+<h2>Architecture & Best Practices</h2>
+<div class="subtitle">Patterns, API design, security, performance — la sección más valiosa</div>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-breaking">Breaking</span>
+<div class="update-content">
+<h3>CVE-2026-29000 (CVSS 10.0) + CVE-2026-28802 + CVE-2026-27804 — JWT auth bypasses en producción</h3>
+<p>Tres CVEs activos que afectan JWT en diferentes stacks. pac4j-jwt (Java): bypass con clave pública RSA, CVSS 10.0. Authlib (Python): verificación de firma bypasseable en condiciones específicas. Parse Server (Node): account takeover completo vía algorithm confusion. Auditá tu grafo de dependencias HOY — si usás JWT, revisá tu librería de validación.</p>
+<a href="https://www.codeant.ai/security-research/pac4j-jwt-authentication-bypass-public-key">codeant.ai → CVE-2026-29000</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>DDD + CQRS + Hexagonal Architecture en TypeScript: el stack maduro en 2026</h3>
+<p>Hay ejemplos completos de producción con DDD + Hexagonal + CQRS + Event Sourcing en TypeScript/NestJS. El error más común sigue siendo: dividir en microservices con bounded contexts incorrectos y terminar con un distributed monolith. Regla de oro: identificá los bounded contexts ANTES de separar. CQRS te permite escalar reads y writes independientemente — úsalo cuando los patrones de acceso divergen, no como default.</p>
+<a href="https://dev.to/turalsuleymani/the-best-way-of-implementing-domain-driven-design-clean-architecture-and-cqrs-124p">dev.to</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>OpenTelemetry como estándar de facto de observabilidad distribuida</h3>
+<p>OTel es el estándar de la industria para tracing distribuido en 2026. Propaga trace IDs across service boundaries, se integra con Grafana, Datadog, y Honeycomb. Complementalo con structured logging (JSON) con correlation IDs, service names y timestamps. Si tu backend no tiene trazas distribuidas, estás operando a ciegas en producción.</p>
+<a href="https://www.turbodocx.com/blog/microservices-event-driven-architecture">turbodocx.com</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>tsgo integrado en Deno 2.6: la preview del futuro compilador de TS</h3>
+<p>Deno 2.6 integró <code>tsgo</code> como type checker experimental — el compilador en Go que alimentará TS 7.0. Ya reporta 2x de speedup en proyectos internos. Podés probarlo hoy en Deno activando el flag experimental. El futuro del type checking en TypeScript ya está acá, hermano.</p>
+<a href="https://deno.com/blog/v2.6">deno.com → Deno 2.6</a>
+</div>
+</div>
+</div>
+
+<div class="tool-section fullstack">
+<div class="tool-header">
+<div class="tool-icon">🔗</div>
+<div class="tool-meta">
+<h2>Fullstack</h2>
+<div class="subtitle">Monorepos, full-stack frameworks, auth</div>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>Monorepos 2026: Nx 15.2 y Turborepo 2.1 — ambos maduros, elegí según el contexto</h3>
+<p>Nx 15.2 mejoró el soporte para TypeScript/JS con mejor integración Next.js y SvelteKit. Turborepo 2.1 brilla en caching y ejecución paralela de tasks. Vitest + Turborepo = speedups enormes en CI. La recomendación en 2026: Turborepo si querés simplicidad y caching; Nx si necesitás orquestación compleja y tooling para proyectos enterprise.</p>
+<a href="https://dasroot.net/posts/2026/03/monorepo-management-nx-turborepo-best-practices/">dasroot.net</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-minor">Minor</span>
+<div class="update-content">
+<h3>better-auth ganando terreno como alternativa moderna a Auth.js</h3>
+<p>better-auth está creciendo en el ecosistema full-stack TypeScript como alternativa más flexible a Auth.js. Más control sobre el modelo de sesiones, mejor DX para casos de autenticación custom. Si empezás un proyecto nuevo y Auth.js te resulta restrictivo, vale la pena evaluarlo.</p>
+<a href="https://repos.ecosyste.ms/topics/better-auth">ecosyste.ms</a>
+</div>
+</div>
+</div>
+
+<div class="tool-section quick-links">
+<div class="tool-header">
+<div class="tool-icon">📌</div>
+<div class="tool-meta">
+<h2>Quick Links</h2>
+<div class="subtitle">Todas las fuentes del día</div>
+</div>
+</div>
+<div class="update-item">
+<div class="update-content">
+<p>
+<a href="https://devblogs.microsoft.com/typescript/announcing-typescript-6-0/">TypeScript 6.0 Official</a> ·
+<a href="https://deno.com/blog/v2.6">Deno 2.6 Blog</a> ·
+<a href="https://blog.cloudflare.com/containers-are-available-in-public-beta-for-simple-global-and-programmable/">Cloudflare Containers Beta</a> ·
+<a href="https://developers.redhat.com/blog/2026/04/03/kafka-monthly-digest-march-2026">Kafka Digest Mar 2026</a> ·
+<a href="https://www.sonatype.com/blog/pac4j-cve-2026-29000-sonatype-finds-19-additional-packages">CVE-2026-29000</a> ·
+<a href="https://www.armosec.io/blog/authlib-cve-2026-28802-jwt-signature-verification-bypass/">CVE-2026-28802</a> ·
+<a href="https://cvereports.com/reports/CVE-2026-27804">CVE-2026-27804</a> ·
+<a href="https://www.tigerdata.com/blog/its-2026-just-use-postgres">Just Use Postgres 2026</a> ·
+<a href="https://encore.dev/articles/hono-alternatives">Hono Alternatives</a> ·
+<a href="https://nestjs-trpc.io/">NestJS tRPC</a>
+</p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="lang-en">
+
+<div class="tool-section top-stories">
+<div class="tool-header">
+<div class="tool-icon">🔥</div>
+<div class="tool-meta">
+<h2>Top Stories</h2>
+<div class="subtitle">5 most impactful stories today</div>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-breaking">Breaking</span>
+<div class="update-content">
+<h3>TypeScript 6.0: The Last JavaScript-Based Compiler — strict ON by default</h3>
+<p>Microsoft shipped TypeScript 6.0 on March 23, 2026. This is the LAST version of the compiler written in JavaScript. <code>strict</code> is now ON by default, <code>module: esnext</code>, and AMD/UMD/outFile are deprecated. It's the bridge to TS 7.0 rewritten in Go — 10x faster. If you don't migrate now, TS 7.0 will be painful.</p>
+<a href="https://devblogs.microsoft.com/typescript/announcing-typescript-6-0/">devblogs.microsoft.com</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-breaking">Breaking</span>
+<div class="update-content">
+<h3>CVE-2026-29000: Critical JWT Auth Bypass in pac4j — CVSS 10.0</h3>
+<p>Using only the server's RSA public key, an attacker can forge JWTs and authenticate as any user. Affects pac4j-jwt ≤ 6.0.3, 5.x &lt; 5.7.9, 4.x &lt; 4.5.9. Sonatype found 19 additional affected packages. This is a CVSS 10.0 — patch immediately. No workaround exists; you need the code fix.</p>
+<a href="https://www.sonatype.com/blog/pac4j-cve-2026-29000-sonatype-finds-19-additional-packages">sonatype.com</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>Deno 2.6: <code>dx</code> is the new <code>npx</code>, tsgo integrated, and deno audit</h3>
+<p>Deno 2.6 introduces <code>dx</code> for running npm/JSR binaries, integrates <code>tsgo</code> (Go-based type checker, 2x faster), adds <code>deno audit</code> for CVE scanning, bundles <code>@types/node</code> by default, and upgrades V8 to 14.2. A fantastic DX win for the ecosystem.</p>
+<a href="https://deno.com/blog/v2.6">deno.com</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>Cloudflare Containers in Public Beta: Docker on the Global Edge</h3>
+<p>Any Linux x86-64 Docker image deploys to Cloudflare's global network with <code>wrangler deploy</code>. Native Workers integration. No automatic autoscaling yet, but the potential to replace small EC2 instances with edge latency is massive. Worth monitoring closely.</p>
+<a href="https://blog.cloudflare.com/containers-are-available-in-public-beta-for-simple-global-and-programmable/">blog.cloudflare.com</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>Kafka 4.3.0 Feature Freeze + 4.0.2 / 4.1.2 Patch Releases</h3>
+<p>Kafka 4.3.0 hit feature freeze March 18, code freeze April 8, release in May. Also released: Kafka 4.0.2 (43 fixes including blockers) and 4.1.2 (31 fixes). If you're running Kafka 4.x in production, these patches are mandatory.</p>
+<a href="https://developers.redhat.com/blog/2026/04/03/kafka-monthly-digest-march-2026">Red Hat Developer</a>
+</div>
+</div>
+</div>
+
+<div class="tool-section runtimes">
+<div class="tool-header">
+<div class="tool-icon">⚡</div>
+<div class="tool-meta">
+<h2>Backend TypeScript & Runtimes</h2>
+<div class="subtitle">Node.js, Deno, Bun, TypeScript</div>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-breaking">Breaking</span>
+<div class="update-content">
+<h3>TypeScript 6.0 — strict ON, ES5 deprecated, TS 7.0 in Go incoming</h3>
+<p>Beyond the defaults changes, TS 6.0 adds Temporal API support (stage 4), <code>RegExp.escape</code>, Map <code>getOrInsert</code>/<code>getOrInsertComputed</code>, and the <code>--stableTypeOrdering</code> flag to prepare for TS 7.0. The Go compiler (<code>tsgo</code>) compiles VS Code's 1.5M lines in 8.7s vs 89s for JS. That's a 10x speedup. Wild.</p>
+<a href="https://devblogs.microsoft.com/typescript/announcing-typescript-6-0/">devblogs.microsoft.com</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>Deno 2.6: dx, tsgo, deno audit, stable BroadcastChannel</h3>
+<p><code>dx</code> downloads and runs npm/JSR binaries with configurable permissions. <code>tsgo</code> is the experimental Go-based type checker natively integrated. <code>deno audit</code> checks vulnerabilities in your dependency graph. <code>@types/node</code> included by default. BroadcastChannel API stable. Web streams transferable between workers.</p>
+<a href="https://deno.com/blog/v2.6">deno.com</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>Node.js 24: Native TypeScript Support via <code>--experimental-strip-types</code></h3>
+<p>Run <code>.ts</code> files directly without a build step. Node strips type annotations at runtime — it's not a type checker, just execution convenience. V8 updated. If you're moving to TypeScript without a heavy toolchain, Node 24 significantly reduces the friction.</p>
+<a href="https://nodejs.org/en/blog">nodejs.org</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-minor">Minor</span>
+<div class="update-content">
+<h3>Bun 1.2: Production-Ready, 2-4x Faster HTTP, 6-9x Faster Install</h3>
+<p>Bun reached 1.2 declaring production stability. 2026 benchmarks: 2-4x faster than Node for HTTP serving and file I/O. Package installation 6-9x faster than npm. Compatible with most of the Node ecosystem. Worth evaluating for new projects or when you need to cut compute costs.</p>
+<a href="https://bun.com/">bun.com</a>
+</div>
+</div>
+</div>
+
+<div class="tool-section frameworks">
+<div class="tool-header">
+<div class="tool-icon">🧩</div>
+<div class="tool-meta">
+<h2>Frameworks & Libraries</h2>
+<div class="subtitle">NestJS, Fastify, Hono, tRPC, ORMs</div>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>Hono + Drizzle + Neon: The Dominant Edge-First Stack in 2026</h3>
+<p>This combination has consolidated as the go-to stack for APIs on Cloudflare Workers and edge runtimes. Drizzle connects to Neon via HTTP serverless driver — typed queries, no TCP, Workers-compatible. End-to-end type safety from the DB schema to the HTTP response. If you're not using this for edge projects, you're missing out.</p>
+<a href="https://encore.dev/articles/hono-alternatives">encore.dev</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>NestJS + tRPC v11: Real-Time Subscriptions via SSE and Async Generators</h3>
+<p>NestJS tRPC now supports real-time streaming via Server-Sent Events using async generators in tRPC v11. Full type safety from server to client with streaming. A lightweight alternative to WebSockets for unidirectional use cases like notifications or real-time logs.</p>
+<a href="https://nestjs-trpc.io/">nestjs-trpc.io</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-minor">Minor</span>
+<div class="update-content">
+<h3>ORM Landscape 2026: Prisma for Teams, Drizzle for Edge, TypeORM Losing Ground</h3>
+<p>2026 consensus: Prisma wins for teams with frequent schema changes and consistency needs. Drizzle wins for edge environments and maximum query control. TypeORM losing traction but still significant legacy. Pick based on context, not hype.</p>
+<a href="https://medium.com/@Nexumo_/prisma-or-typeorm-in-2026-the-nestjs-data-layer-call-ae47b5cfdd73">Medium</a>
+</div>
+</div>
+</div>
+
+<div class="tool-section databases">
+<div class="tool-header">
+<div class="tool-icon">🗄️</div>
+<div class="tool-meta">
+<h2>Databases & Data</h2>
+<div class="subtitle">PostgreSQL, Redis, MongoDB, Kafka</div>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>Kafka 4.3.0 Feature Freeze + Patches 4.0.2 / 4.1.2</h3>
+<p>Kafka 4.3.0 hit feature freeze March 18; code freeze April 8; release in May. Kafka 4.0.2 closed 43 issues including multiple blockers; 4.1.2 closed 31 issues. If you're running Kafka 4.0.x or 4.1.x in production, these patches are mandatory maintenance.</p>
+<a href="https://developers.redhat.com/blog/2026/04/03/kafka-monthly-digest-march-2026">Red Hat Developer</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-minor">Minor</span>
+<div class="update-content">
+<h3>MongoDB 8.0: Up to 45% Faster Queries on Large Datasets</h3>
+<p>MongoDB 8.0 delivered significant performance improvements on large dataset queries — up to 45% faster. Also advanced native vector search and multi-cloud deployments via Atlas. If you're on MongoDB and haven't upgraded to 8.0 yet, the performance gains are real and worth it.</p>
+<a href="https://calmops.com/database/mongodb/mongodb-trends-2025-2026/">calmops.com</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-minor">Minor</span>
+<div class="update-content">
+<h3>"It's 2026, Just Use Postgres" — Still the Community Consensus</h3>
+<p>Tiger Data's article is making rounds: in 2026, Postgres does JSONB, vector search (pgvector), full-text, queues (pgmq), and more. Before adding Redis or MongoDB to your stack, honestly ask if the operational complexity is worth it. Most of the time, the answer is no.</p>
+<a href="https://www.tigerdata.com/blog/its-2026-just-use-postgres">tigerdata.com</a>
+</div>
+</div>
+</div>
+
+<div class="tool-section cloud">
+<div class="tool-header">
+<div class="tool-icon">☁️</div>
+<div class="tool-meta">
+<h2>Cloud & DevOps</h2>
+<div class="subtitle">AWS, Docker, Kubernetes, Serverless</div>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>Cloudflare Containers: Docker on the Edge, Public Beta Open</h3>
+<p>Any Linux x86-64 Docker image deploys to Cloudflare's global network with a single <code>wrangler deploy</code>. Native Workers integration. Platform limits substantially increased for concurrent containers. Current limitations: no native autoscaling or load balancing, ephemeral storage. Best for stateless workloads needing global latency.</p>
+<a href="https://blog.cloudflare.com/containers-are-available-in-public-beta-for-simple-global-and-programmable/">blog.cloudflare.com</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-minor">Minor</span>
+<div class="update-content">
+<h3>Deno Deploy GA + Lambda SnapStart: Mature Serverless TypeScript</h3>
+<p>Deno Deploy is GA for production edge hosting. AWS Lambda with SnapStart makes cold starts nearly irrelevant for Java. For TypeScript serverless: Workers (edge, global latency) vs Lambda (regional compute, AWS ecosystem). No universal answer — choose based on your latency and ecosystem requirements.</p>
+<a href="https://www.codercops.com/blog/cloud-native-microservices-serverless-containers-2026">codercops.com</a>
+</div>
+</div>
+</div>
+
+<div class="tool-section architecture">
+<div class="tool-header">
+<div class="tool-icon">🏗️</div>
+<div class="tool-meta">
+<h2>Architecture & Best Practices</h2>
+<div class="subtitle">Patterns, API design, security, performance — the most valuable section</div>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-breaking">Breaking</span>
+<div class="update-content">
+<h3>CVE-2026-29000 + CVE-2026-28802 + CVE-2026-27804 — Active JWT Auth Bypasses</h3>
+<p>Three active CVEs affecting JWT in different stacks. pac4j-jwt (Java): RSA public key bypass, CVSS 10.0. Authlib (Python): signature verification bypassable under specific conditions. Parse Server (Node): full account takeover via algorithm confusion ('none' algorithm or key confusion). Audit your dependency graph now — if you use JWT, verify your validation library's patched version.</p>
+<a href="https://www.codeant.ai/security-research/pac4j-jwt-authentication-bypass-public-key">codeant.ai</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>DDD + CQRS + Hexagonal Architecture in TypeScript: Mature Pattern in 2026</h3>
+<p>Production examples of DDD + Hexagonal + CQRS + Event Sourcing in TypeScript/NestJS are now widely available. The most common mistake remains the same: splitting into microservices with wrong bounded context boundaries, creating distributed monoliths. Golden rule: identify bounded contexts BEFORE separating. Use CQRS when read and write access patterns diverge, not as a default.</p>
+<a href="https://dev.to/turalsuleymani/the-best-way-of-implementing-domain-driven-design-clean-architecture-and-cqrs-124p">dev.to</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>OpenTelemetry as the De Facto Standard for Distributed Observability</h3>
+<p>OTel is the industry standard for distributed tracing in 2026. It propagates trace IDs across service boundaries and integrates with Grafana, Datadog, and Honeycomb. Pair it with structured JSON logging (correlation IDs, service names, timestamps). If your backend has no distributed traces, you're flying blind in production.</p>
+<a href="https://www.turbodocx.com/blog/microservices-event-driven-architecture">turbodocx.com</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>tsgo in Deno 2.6: A Preview of the Future TypeScript Compiler</h3>
+<p>Deno 2.6 integrated <code>tsgo</code> as an experimental type checker — the Go-based compiler that will power TS 7.0. Already reporting 2x speedups in internal projects. You can try it today in Deno by enabling the experimental flag. The future of TypeScript type checking is here now.</p>
+<a href="https://deno.com/blog/v2.6">deno.com</a>
+</div>
+</div>
+</div>
+
+<div class="tool-section fullstack">
+<div class="tool-header">
+<div class="tool-icon">🔗</div>
+<div class="tool-meta">
+<h2>Fullstack</h2>
+<div class="subtitle">Monorepos, full-stack frameworks, auth</div>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-notable">Notable</span>
+<div class="update-content">
+<h3>Monorepos 2026: Nx 15.2 and Turborepo 2.1 — Both Mature, Choose by Context</h3>
+<p>Nx 15.2 improved TypeScript/JS support with better Next.js and SvelteKit integration. Turborepo 2.1 excels at caching and parallel task execution. Vitest + Turborepo delivers huge CI speedups. 2026 recommendation: Turborepo for simplicity and caching; Nx for complex orchestration and enterprise-scale projects.</p>
+<a href="https://dasroot.net/posts/2026/03/monorepo-management-nx-turborepo-best-practices/">dasroot.net</a>
+</div>
+</div>
+<div class="update-item">
+<span class="update-tag tag-minor">Minor</span>
+<div class="update-content">
+<h3>better-auth Gaining Traction as a Modern Alternative to Auth.js</h3>
+<p>better-auth is growing in the TypeScript full-stack ecosystem as a more flexible alternative to Auth.js. More control over session models and better DX for custom authentication cases. Worth evaluating for new projects where Auth.js feels too constraining.</p>
+<a href="https://repos.ecosyste.ms/topics/better-auth">ecosyste.ms</a>
+</div>
+</div>
+</div>
+
+<div class="tool-section quick-links">
+<div class="tool-header">
+<div class="tool-icon">📌</div>
+<div class="tool-meta">
+<h2>Quick Links</h2>
+<div class="subtitle">All sources from today's digest</div>
+</div>
+</div>
+<div class="update-item">
+<div class="update-content">
+<p>
+<a href="https://devblogs.microsoft.com/typescript/announcing-typescript-6-0/">TypeScript 6.0 Official</a> ·
+<a href="https://deno.com/blog/v2.6">Deno 2.6 Blog</a> ·
+<a href="https://blog.cloudflare.com/containers-are-available-in-public-beta-for-simple-global-and-programmable/">Cloudflare Containers Beta</a> ·
+<a href="https://developers.redhat.com/blog/2026/04/03/kafka-monthly-digest-march-2026">Kafka Digest Mar 2026</a> ·
+<a href="https://www.sonatype.com/blog/pac4j-cve-2026-29000-sonatype-finds-19-additional-packages">CVE-2026-29000</a> ·
+<a href="https://www.armosec.io/blog/authlib-cve-2026-28802-jwt-signature-verification-bypass/">CVE-2026-28802</a> ·
+<a href="https://cvereports.com/reports/CVE-2026-27804">CVE-2026-27804</a> ·
+<a href="https://www.tigerdata.com/blog/its-2026-just-use-postgres">Just Use Postgres 2026</a> ·
+<a href="https://encore.dev/articles/hono-alternatives">Hono Alternatives</a> ·
+<a href="https://nestjs-trpc.io/">NestJS tRPC</a>
+</p>
+</div>
+</div>
+</div>
+
+</div>

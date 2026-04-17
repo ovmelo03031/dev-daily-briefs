@@ -1,6 +1,38 @@
 /* Brief Card Styles — shared across all 3 categories */
 /* Scoped to .prose-ai-coding AND .prose-brief */
 
+/* Anchor targets leave room for the sticky header and play a soft
+   accent flash when scrolled to from a Highlight chip. */
+.prose-ai-coding [data-anchor],
+.prose-brief [data-anchor] {
+  scroll-margin-top: 80px;
+}
+
+.prose-ai-coding .is-target-flash,
+.prose-brief .is-target-flash {
+  animation: target-flash 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes target-flash {
+  0% {
+    box-shadow: 0 0 0 0 var(--color-accent), 0 0 0 0 var(--color-accent-glow);
+  }
+  25% {
+    box-shadow: 0 0 0 3px var(--color-accent), 0 0 32px 8px var(--color-accent-glow);
+  }
+  100% {
+    box-shadow: 0 0 0 0 var(--color-accent), 0 0 0 0 var(--color-accent-glow);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prose-ai-coding .is-target-flash,
+  .prose-brief .is-target-flash {
+    animation: none;
+  }
+}
+
+
 .prose-ai-coding, .prose-brief {
   max-width: 1100px;
 }

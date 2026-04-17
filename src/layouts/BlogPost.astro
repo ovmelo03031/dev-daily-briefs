@@ -4,16 +4,25 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import HighlightBar from '../components/HighlightBar.astro';
 import { CATEGORIES, type Category } from '../consts';
+
+type Highlight = {
+	text: string;
+	text_es?: string;
+	anchor: string;
+	icon?: string;
+};
 
 type Props = {
 	title: string;
 	description: string;
 	pubDate: Date;
 	category: Category;
+	highlights?: Highlight[];
 };
 
-const { title, description, pubDate, category } = Astro.props;
+const { title, description, pubDate, category, highlights } = Astro.props;
 const cat = CATEGORIES[category];
 const isAiCoding = category === 'ai-coding';
 
@@ -48,6 +57,7 @@ function getProseClass() {
 					)}
 				</div>
 				<div class={getProseClass()}>
+					{highlights && highlights.length > 0 && <HighlightBar highlights={highlights} />}
 					<slot />
 				</div>
 			</article>

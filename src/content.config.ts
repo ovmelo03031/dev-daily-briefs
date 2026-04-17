@@ -2,12 +2,20 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
+const highlightSchema = z.object({
+	text: z.string(),
+	text_es: z.string().optional(),
+	anchor: z.string(),
+	icon: z.string().optional(),
+});
+
 const briefSchema = z.object({
 	title: z.string(),
 	title_es: z.string().optional(),
 	description: z.string(),
 	pubDate: z.coerce.date(),
 	category: z.enum(['ai-coding', 'backend-fullstack', 'dev-news']),
+	highlights: z.array(highlightSchema).optional(),
 });
 
 const aiCoding = defineCollection({

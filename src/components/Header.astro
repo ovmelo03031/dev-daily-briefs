@@ -7,27 +7,29 @@ import logo from '../assets/brand/logo-wordmark.png';
 ---
 
 <header class="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-bg)]/95 backdrop-blur-sm">
-	<nav class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-		<a href={import.meta.env.BASE_URL} class="flex items-center no-underline hover:opacity-80 transition-opacity" aria-label={SITE_TITLE}>
-			<Image src={logo} alt={SITE_TITLE} height={40} densities={[1, 2]} loading="eager" />
+	<nav class="mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 py-3">
+		<a href={import.meta.env.BASE_URL} class="flex shrink-0 items-center no-underline hover:opacity-80 transition-opacity" aria-label={SITE_TITLE}>
+			<Image src={logo} alt={SITE_TITLE} height={36} densities={[1, 2]} loading="eager" class="h-8 w-auto sm:h-10" />
 		</a>
 		<div class="flex items-center gap-1">
 			{Object.entries(CATEGORIES).map(([slug, cat]) => (
 				<a
 					href={`${import.meta.env.BASE_URL}${slug}`}
-					class="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm text-[var(--color-text-muted)] hover:bg-[var(--color-surface)] hover:text-[var(--color-text)] no-underline transition-colors"
+					aria-label={cat.label}
+					title={cat.label}
+					class="inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-sm text-[var(--color-text-muted)] hover:bg-[var(--color-surface)] hover:text-[var(--color-text)] no-underline transition-colors sm:px-3"
 				>
 					<Icon
 						name={cat.icon}
-						width={14}
-						height={14}
-						class="hidden sm:inline-block"
+						width={18}
+						height={18}
+						class="sm:!h-[14px] sm:!w-[14px]"
 						style={`color: ${cat.accent}`}
 					/>
-					<span>{cat.label}</span>
+					<span class="hidden sm:inline">{cat.label}</span>
 				</a>
 			))}
-			<div class="ml-2 border-l border-[var(--color-border)] pl-2">
+			<div class="ml-1 border-l border-[var(--color-border)] pl-1 sm:ml-2 sm:pl-2">
 				<LangToggle />
 			</div>
 		</div>

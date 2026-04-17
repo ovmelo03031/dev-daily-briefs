@@ -1,12 +1,14 @@
 ---
+import { Image } from 'astro:assets';
 import { SITE_TITLE, CATEGORIES } from '../consts';
 import LangToggle from './LangToggle.astro';
+import logo from '../assets/brand/logo-wordmark.png';
 ---
 
 <header class="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-bg)]/95 backdrop-blur-sm">
 	<nav class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-		<a href={import.meta.env.BASE_URL} class="text-lg font-bold text-[var(--color-text)] hover:text-[var(--color-accent)] no-underline">
-			{SITE_TITLE}
+		<a href={import.meta.env.BASE_URL} class="flex items-center no-underline hover:opacity-80 transition-opacity" aria-label={SITE_TITLE}>
+			<Image src={logo} alt={SITE_TITLE} height={40} densities={[1, 2]} loading="eager" />
 		</a>
 		<div class="flex items-center gap-1">
 			{Object.entries(CATEGORIES).map(([slug, cat]) => (

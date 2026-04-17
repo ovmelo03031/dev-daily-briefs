@@ -103,4 +103,6 @@ Only the last **30 days** of briefs are kept on the site. Older briefs are remov
 
 ## License
 
-Personal project — content is automatically generated and summarized. All referenced sources (blog posts, changelogs, announcements) belong to their respective authors/companies.
+Code is released under the [MIT License](./LICENSE) — free to use, fork, and modify with attribution.
+
+Brief **content** is automatically generated and summarized from third-party sources. All referenced material (blog posts, changelogs, announcements, release notes) belongs to its respective authors and companies. Attribution links are included in every item.

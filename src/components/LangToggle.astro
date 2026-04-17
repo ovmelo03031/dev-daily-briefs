@@ -1,76 +1,293 @@
 ---
-// Language toggle button — EN/ES with localStorage persistence
+// Language dropdown — ES / EN / FR with localStorage persistence + graceful
+// fallback when the current page doesn't carry a translation for the picked
+// language (e.g. old briefs that predate FR will show EN content when FR
+// is selected).
+
+const LANGS = [
+	{ code: 'es', flag: '🇪🇸', label: 'Español' },
+	{ code: 'en', flag: '🇬🇧', label: 'English' },
+	{ code: 'fr', flag: '🇫🇷', label: 'Français' },
+];
 ---
 
-<div class="lang-toggle" id="lang-toggle">
-	<button data-lang="es" class="lang-btn active" aria-label="Español">ES</button>
-	<button data-lang="en" class="lang-btn" aria-label="English">EN</button>
-</div>
+<details class="lang-dropdown" id="lang-toggle">
+	<summary class="lang-summary" aria-label="Language">
+		<span class="lang-current" data-current-flag>🇪🇸</span>
+		<span class="lang-current-code" data-current-code>ES</span>
+		<svg class="lang-chevron" width="10" height="10" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+	</summary>
+	<ul class="lang-menu" role="listbox">
+		{LANGS.map((l) => (
+			<li role="option" aria-selected="false">
+				<button type="button" class="lang-option" data-lang={l.code}>
+					<span class="lang-option-flag" aria-hidden="true">{l.flag}</span>
+					<span class="lang-option-code">{l.code.toUpperCase()}</span>
+					<span class="lang-option-label">{l.label}</span>
+				</button>
+			</li>
+		))}
+	</ul>
+</details>
 
 <style>
-	.lang-toggle {
+	.lang-dropdown {
+		position: relative;
+		display: inline-block;
+	}
+
+	.lang-summary {
 		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		padding: 0.35rem 0.6rem 0.35rem 0.55rem;
 		background: var(--color-surface);
 		border: 1px solid var(--color-border);
 		border-radius: 8px;
-		overflow: hidden;
-	}
-
-	.lang-btn {
-		padding: 0.35rem 0.75rem;
 		font-size: 0.8rem;
 		font-weight: 600;
-		letter-spacing: 0.05em;
-		border: none;
-		background: transparent;
-		color: var(--color-text-muted);
+		color: var(--color-text);
 		cursor: pointer;
-		transition: all 0.15s;
+		user-select: none;
+		list-style: none;
+		transition: border-color 0.15s, background 0.15s;
 	}
 
-	.lang-btn:hover {
-		color: var(--color-text);
+	.lang-summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.lang-summary:hover {
+		border-color: var(--color-accent);
 		background: var(--color-surface-2);
 	}
 
-	.lang-btn.active {
-		background: var(--color-accent);
-		color: white;
+	.lang-current {
+		font-size: 0.95rem;
+		line-height: 1;
+	}
+
+	.lang-current-code {
+		letter-spacing: 0.06em;
+	}
+
+	.lang-chevron {
+		opacity: 0.7;
+		transition: transform 0.15s;
+	}
+
+	.lang-dropdown[open] .lang-chevron {
+		transform: rotate(180deg);
+	}
+
+	.lang-menu {
+		position: absolute;
+		top: calc(100% + 6px);
+		right: 0;
+		min-width: 160px;
+		padding: 0.25rem;
+		margin: 0;
+		list-style: none;
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: 10px;
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+		z-index: 100;
+	}
+
+	.lang-menu li {
+		margin: 0;
+		padding: 0;
+	}
+
+	.lang-option {
+		width: 100%;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.55rem;
+		padding: 0.45rem 0.6rem;
+		background: transparent;
+		border: none;
+		border-radius: 6px;
+		font-size: 0.8rem;
+		color: var(--color-text);
+		cursor: pointer;
+		text-align: left;
+		transition: background 0.12s;
+	}
+
+	.lang-option:hover,
+	.lang-option:focus-visible {
+		background: var(--color-surface-2);
+		outline: none;
+	}
+
+	.lang-option[aria-current="true"] {
+		background: var(--color-accent-glow);
+		color: var(--color-accent);
+	}
+
+	.lang-option-flag {
+		font-size: 1rem;
+		line-height: 1;
+	}
+
+	.lang-option-code {
+		font-weight: 700;
+		letter-spacing: 0.05em;
+		min-width: 1.5rem;
+	}
+
+	.lang-option-label {
+		color: var(--color-text-muted);
+		font-size: 0.75rem;
+	}
+
+	.lang-option[aria-current="true"] .lang-option-label {
+		color: var(--color-accent);
 	}
 </style>
 
 <script>
-	function initLangToggle() {
-		const saved = localStorage.getItem('lang') || 'es';
-		setLang(saved);
+	type LangCode = 'es' | 'en' | 'fr';
+	const SUPPORTED: LangCode[] = ['es', 'en', 'fr'];
+	const FLAGS: Record<LangCode, string> = { es: '🇪🇸', en: '🇬🇧', fr: '🇫🇷' };
 
-		document.querySelectorAll('.lang-btn').forEach(btn => {
-			btn.addEventListener('click', () => {
-				const lang = btn.getAttribute('data-lang');
-				if (lang) setLang(lang);
+	function isLang(v: string | null): v is LangCode {
+		return v === 'es' || v === 'en' || v === 'fr';
+	}
+
+	function getProse(): Element | null {
+		return document.querySelector('.prose-ai-coding, .prose-brief');
+	}
+
+	function detectAvailable(): Set<LangCode> {
+		// Availability is driven by BODY lang wrappers (direct children of the
+		// prose container), not by any .lang-* element. Otherwise the chip
+		// translations inside HighlightBar would falsely claim body support.
+		const found = new Set<LangCode>();
+		const prose = getProse();
+		if (!prose) {
+			// Non-brief pages (home, category list) — expose all langs in the
+			// dropdown so the user can set a preference for future brief visits.
+			return new Set(SUPPORTED);
+		}
+		for (const code of SUPPORTED) {
+			if (prose.querySelector(':scope > .lang-' + code)) found.add(code);
+		}
+		return found;
+	}
+
+	function applyLang(ui: LangCode, body: LangCode) {
+		// `ui` is what the user requested (drives chips, headings, etc.)
+		// `body` is what the body content will show (falls back when needed)
+		const prose = getProse();
+
+		// Body wrappers (direct children of prose) follow `body`
+		if (prose) {
+			for (const c of SUPPORTED) {
+				prose.querySelectorAll(':scope > .lang-' + c).forEach((el) => {
+					(el as HTMLElement).style.display = c === body ? 'block' : 'none';
+				});
+			}
+		}
+
+		// Non-body .lang-* elements (HighlightBar chips, headings, subtitles)
+		// follow the user-requested language. Use `display: revert` so each
+		// element returns to its UA default (inline for spans, block for
+		// divs/h2/p) rather than stay hidden by our default CSS rule.
+		document.querySelectorAll('.lang-es, .lang-en, .lang-fr').forEach((el) => {
+			// Skip the body wrappers that were just handled above
+			if (prose && el.parentElement === prose) return;
+			const elLang: LangCode = el.classList.contains('lang-fr')
+				? 'fr'
+				: el.classList.contains('lang-en')
+					? 'en'
+					: 'es';
+			(el as HTMLElement).style.display = elLang === ui ? 'revert' : 'none';
+		});
+
+		document.documentElement.setAttribute('data-lang', ui);
+		document.documentElement.setAttribute('data-body-lang', body);
+	}
+
+	function updateToggleUI(body: LangCode, requested: LangCode) {
+		// The summary button always shows what the USER picked, so clicks feel
+		// intentional. When the body falls back (e.g. FR requested but the
+		// brief has only EN+ES), the summary still reads the requested lang.
+		const flagEl = document.querySelector('[data-current-flag]');
+		const codeEl = document.querySelector('[data-current-code]');
+		if (flagEl) flagEl.textContent = FLAGS[requested];
+		if (codeEl) codeEl.textContent = requested.toUpperCase();
+
+		const dropdown = document.getElementById('lang-toggle');
+		if (dropdown) {
+			if (body !== requested) dropdown.setAttribute('data-fallback', body);
+			else dropdown.removeAttribute('data-fallback');
+		}
+
+		document.querySelectorAll('.lang-option').forEach((btn) => {
+			const code = btn.getAttribute('data-lang');
+			const isCurrent = code === requested;
+			btn.setAttribute('aria-current', isCurrent ? 'true' : 'false');
+			const li = btn.closest('li');
+			if (li) li.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
+		});
+	}
+
+	function resolveBody(requested: LangCode, available: Set<LangCode>): LangCode {
+		if (available.has(requested)) return requested;
+		if (available.has('en')) return 'en';
+		if (available.has('es')) return 'es';
+		return (available.values().next().value as LangCode) || 'es';
+	}
+
+	function initLangToggle() {
+		const available = detectAvailable();
+		const requestedRaw = localStorage.getItem('lang');
+		const requested: LangCode = isLang(requestedRaw) ? requestedRaw : 'es';
+		const body = resolveBody(requested, available);
+
+		applyLang(requested, body);
+		updateToggleUI(body, requested);
+
+		document.querySelectorAll('.lang-option').forEach((btn) => {
+			btn.addEventListener('click', (e) => {
+				e.preventDefault();
+				const code = btn.getAttribute('data-lang');
+				if (!isLang(code)) return;
+
+				// Persist the user's preference even when the current page can't show it
+				localStorage.setItem('lang', code);
+
+				const reAvailable = detectAvailable();
+				const target = resolveBody(code, reAvailable);
+
+				applyLang(code, target);
+				updateToggleUI(target, code);
+
+				const details = document.getElementById('lang-toggle');
+				if (details) details.removeAttribute('open');
 			});
 		});
+
+		// Click outside to close
+		document.addEventListener('click', (e) => {
+			const details = document.getElementById('lang-toggle');
+			if (!details) return;
+			if (!(e.target as Element).closest('#lang-toggle')) {
+				details.removeAttribute('open');
+			}
+		});
+
+		// Escape key closes the dropdown
+		document.addEventListener('keydown', (e) => {
+			if (e.key !== 'Escape') return;
+			const details = document.getElementById('lang-toggle');
+			if (details) details.removeAttribute('open');
+		});
 	}
 
-	function setLang(lang: string) {
-		// Toggle content visibility — must use 'block' to override CSS .lang-en { display: none }
-		document.querySelectorAll('.lang-es').forEach(el => {
-			(el as HTMLElement).style.display = lang === 'es' ? 'block' : 'none';
-		});
-		document.querySelectorAll('.lang-en').forEach(el => {
-			(el as HTMLElement).style.display = lang === 'en' ? 'block' : 'none';
-		});
-
-		// Toggle button active state
-		document.querySelectorAll('.lang-btn').forEach(btn => {
-			btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-		});
-
-		// Persist
-		localStorage.setItem('lang', lang);
-	}
-
-	// Run on initial load and on Astro page transitions
 	initLangToggle();
 	document.addEventListener('astro:after-swap', initLangToggle);
 </script>

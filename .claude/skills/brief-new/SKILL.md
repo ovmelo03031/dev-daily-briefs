@@ -39,12 +39,14 @@ The `ai-coding` briefs are `.md` because they use only standard HTML. `dev-news`
 ---
 title: "<English title, e.g. 'AI Coding Tools — Daily Brief | April 17, 2026'>"
 title_es: "<Spanish title, e.g. 'AI Coding Tools — Resumen Diario | 17 de Abril de 2026'>"
+title_fr: "<French title, e.g. 'AI Coding Tools — Résumé Quotidien | 17 Avril 2026'>"
 description: "<One-line description matching the category>"
 pubDate: "<YYYY-MM-DD>"
 category: "<ai-coding | backend-fullstack | dev-news>"
 highlights:
   - text: "<short English headline, max ~50 chars>"
     text_es: "<short Spanish headline, max ~50 chars>"
+    text_fr: "<short French headline, max ~50 chars>"
     anchor: "<kebab-case-slug>"
     icon: "<iconify-name>"
   # 4 to 7 highlights total
@@ -56,9 +58,9 @@ Description defaults per category:
 - `backend-fullstack`: "Daily backend and fullstack news digest for senior developers"
 - `dev-news`: "Daily developer news digest — frontend, TypeScript, React, and web platform"
 
-## Step 4 — Body layout (bilingual)
+## Step 4 — Body layout (trilingual)
 
-Wrap the ENTIRE body in two language divs. Spanish first, English second:
+Wrap the ENTIRE body in three language divs. Spanish first, English second, French third:
 
 ```markdown
 <div class="lang-es">
@@ -71,15 +73,22 @@ Wrap the ENTIRE body in two language divs. Spanish first, English second:
 <!-- Same structure, translated to English -->
 
 </div>
+<div class="lang-fr">
+
+<!-- Same structure, translated to French -->
+
+</div>
 ```
 
 ### Critical formatting rules
 
-- `<div class="lang-es">` and `<div class="lang-en">` MUST start at column 0
+- `<div class="lang-es">`, `<div class="lang-en">` and `<div class="lang-fr">` MUST start at column 0
 - ALL HTML tags MUST start at column 0 (NO indentation — 4 spaces = markdown code block)
 - NO blank lines between sibling HTML tags inside a tool-section
 - Blank line REQUIRED after the opening `<div class="lang-xx">` and before the closing `</div>`
-- Keep source URLs identical across languages — only translate visible text
+- Keep source URLs identical across all three languages — only translate visible text
+- **Three languages are mandatory for new briefs**. The HighlightBar and all chips rely on `text` (EN), `text_es` (ES) and `text_fr` (FR). If FR is missing, the toggle falls back to EN, but the user still expects native French support.
+- **French conventions**: formal technical French with natural imperatives/infinitives. Keep English technical terms that devs actually use untranslated (`React Server Components`, `runtime`, `edge`, `type checker`, `CVE`, etc.).
 
 ## Step 5 — HTML building blocks
 

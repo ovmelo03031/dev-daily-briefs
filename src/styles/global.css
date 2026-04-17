@@ -158,3 +158,39 @@ body {
 	white-space: nowrap;
 	border-width: 0;
 }
+
+/* ========== Scroll reveal animations ==========
+   IntersectionObserver-based approach: elements start at opacity 0 /
+   translated, and transition to their natural state when they enter the
+   viewport. Works in every browser, respects prefers-reduced-motion,
+   no flash-of-invisible-content on browsers without JS (see noscript
+   rule below). */
+:where(.reveal-up, .reveal-fade, .reveal-scale) {
+	opacity: 0;
+	transition-property: opacity, transform;
+	transition-duration: 700ms;
+	transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+	will-change: opacity, transform;
+}
+
+.reveal-up { transform: translateY(32px); }
+.reveal-scale { transform: scale(0.94); }
+
+:where(.reveal-up, .reveal-fade, .reveal-scale).is-visible {
+	opacity: 1;
+	transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	:where(.reveal-up, .reveal-fade, .reveal-scale) {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+}
+
+/* Users with JS disabled: show everything immediately to avoid blank page */
+html.no-js :where(.reveal-up, .reveal-fade, .reveal-scale) {
+	opacity: 1;
+	transform: none;
+}

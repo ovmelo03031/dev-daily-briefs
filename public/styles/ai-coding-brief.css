@@ -666,6 +666,62 @@
   background-color: var(--color-accent);
 }
 
+/* ========== Scroll reveal for brief blocks ==========
+   Applies the reveal-up behavior from global.css to brief elements
+   without requiring any .md/.mdx edits. Transitions in when the
+   IntersectionObserver in BaseHead adds .is-visible (done via a
+   MutationObserver pre-tag below) — but we already intercept these
+   elements from the ambient script by adding the class on load. */
+.prose-ai-coding .stat-card,
+.prose-brief .stat-card,
+.prose-ai-coding .tool-section,
+.prose-brief .tool-section,
+.prose-ai-coding .model-table-wrapper,
+.prose-ai-coding .trends,
+.prose-brief .trends {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.prose-ai-coding .stat-card.is-visible,
+.prose-brief .stat-card.is-visible,
+.prose-ai-coding .tool-section.is-visible,
+.prose-brief .tool-section.is-visible,
+.prose-ai-coding .model-table-wrapper.is-visible,
+.prose-ai-coding .trends.is-visible,
+.prose-brief .trends.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prose-ai-coding .stat-card,
+  .prose-brief .stat-card,
+  .prose-ai-coding .tool-section,
+  .prose-brief .tool-section,
+  .prose-ai-coding .model-table-wrapper,
+  .prose-ai-coding .trends,
+  .prose-brief .trends {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+html.no-js .prose-ai-coding .stat-card,
+html.no-js .prose-brief .stat-card,
+html.no-js .prose-ai-coding .tool-section,
+html.no-js .prose-brief .tool-section,
+html.no-js .prose-ai-coding .model-table-wrapper,
+html.no-js .prose-ai-coding .trends,
+html.no-js .prose-brief .trends {
+  opacity: 1;
+  transform: none;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .prose-ai-coding .tool-section,

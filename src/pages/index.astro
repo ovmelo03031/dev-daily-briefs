@@ -37,7 +37,7 @@ const latestPosts = allPosts.slice(0, 12);
 			<section class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16">
 				{Object.entries(CATEGORIES).map(([slug, cat]) => (
 					<a
-						href={`/${slug}`}
+						href={`${import.meta.env.BASE_URL}${slug}`}
 						class="group rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 no-underline transition-all hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-2)]"
 					>
 						<span class="text-3xl">{cat.emoji}</span>
@@ -57,7 +57,7 @@ const latestPosts = allPosts.slice(0, 12);
 						const cat = CATEGORIES[post.data.category as Category];
 						return (
 							<a
-								href={`/${post.data.category}/${post.id}/`}
+								href={`${import.meta.env.BASE_URL}${post.data.category}/${post.id}/`}
 								class="flex items-center gap-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4 no-underline transition-all hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-2)]"
 							>
 								<span class="text-2xl shrink-0">{cat.emoji}</span>

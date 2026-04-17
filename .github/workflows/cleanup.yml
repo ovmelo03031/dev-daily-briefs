@@ -1,0 +1,39 @@
+name: Cleanup old briefs
+
+on:
+  # 15:17 UTC ≈ 12:17 PM local (UTC-3) — after all daily briefs publish
+  schedule:
+    - cron: '17 15 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cleanup
+  cancel-in-progress: false
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run cleanup script
+        run: |
+          chmod +x scripts/cleanup-old-briefs.sh
+          ./scripts/cleanup-old-briefs.sh --days 30
+
+      - name: Commit and push changes
+        run: |
+          if [[ -z "$(git status --porcelain)" ]]; then
+            echo "No briefs older than 30 days — nothing to commit"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: cleanup briefs older than 30 days"
+          git push

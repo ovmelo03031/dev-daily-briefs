@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import type { CollectionEntry } from 'astro:content';
 import FormattedDate from './FormattedDate.astro';
 import { CATEGORIES, type Category } from '../consts';
@@ -11,29 +12,98 @@ interface Props {
 const { posts, category } = Astro.props;
 const cat = CATEGORIES[category];
 const sorted = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Group posts by year/month for a more scannable list
+type Group = { key: string; label: string; posts: typeof sorted };
+const groups: Group[] = [];
+const monthFmt = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' });
+for (const post of sorted) {
+	const key = monthFmt.format(post.data.pubDate);
+	const last = groups[groups.length - 1];
+	if (last && last.key === key) {
+		last.posts.push(post);
+	} else {
+		groups.push({ key, label: key, posts: [post] });
+	}
+}
 ---
 
 <section class="mx-auto max-w-3xl px-4 py-12">
+	<!-- Hero -->
 	<div class="mb-10">
-		<span class="text-4xl">{cat.emoji}</span>
-		<h1 class="text-3xl font-bold mt-2 text-[var(--color-text)]">{cat.label}</h1>
-		<p class="text-[var(--color-text-muted)] mt-1">{cat.description}</p>
+		<div class="flex items-start gap-4">
+			<span
+				class="inline-flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)]"
+				style={`color: ${cat.accent}`}
+			>
+				<Icon name={cat.icon} width={32} height={32} />
+			</span>
+			<div class="flex-1 min-w-0">
+				<h1 class="text-3xl font-bold text-[var(--color-text)] leading-tight">{cat.label}</h1>
+				<p class="text-[var(--color-text-muted)] mt-1">{cat.description}</p>
+				<div class="mt-3 flex items-center gap-2">
+					<span
+						class="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-0.5 text-xs font-medium text-[var(--color-text-muted)]"
+					>
+						<Icon name="lucide:newspaper" width={12} height={12} />
+						{sorted.length} {sorted.length === 1 ? 'brief' : 'briefs'}
+					</span>
+				</div>
+			</div>
+		</div>
 	</div>
 
-	<div class="space-y-3">
-		{sorted.map((post) => (
-			<a
-				href={`${import.meta.env.BASE_URL}${category}/${post.id}/`}
-				class="block rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4 no-underline transition-all hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-2)]"
+	<!-- Grouped list -->
+	{groups.map((group) => (
+		<div class="mb-8">
+			<h2
+				class="mb-3 text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]"
 			>
-				<h3 class="text-base font-medium text-[var(--color-text)]">{post.data.title}</h3>
-				<p class="text-sm text-[var(--color-text-muted)] mt-1">
-					<FormattedDate date={post.data.pubDate} />
-				</p>
-			</a>
-		))}
-		{sorted.length === 0 && (
-			<p class="text-[var(--color-text-muted)] text-center py-12">No briefs yet. Check back tomorrow!</p>
-		)}
-	</div>
+				{group.label}
+			</h2>
+			<div class="space-y-2">
+				{group.posts.map((post) => (
+					<a
+						href={`${import.meta.env.BASE_URL}${category}/${post.id}/`}
+						class="group flex items-center gap-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4 no-underline transition-all hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-2)]"
+					>
+						<span
+							class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[var(--color-surface-2)] transition-colors group-hover:bg-[var(--color-accent-glow)]"
+							style={`color: ${cat.accent}`}
+						>
+							<Icon name={cat.icon} width={16} height={16} />
+						</span>
+						<div class="min-w-0 flex-1">
+							<h3 class="text-base font-medium text-[var(--color-text)] truncate group-hover:text-[var(--color-accent)]">
+								{post.data.title}
+							</h3>
+							<p class="text-xs text-[var(--color-text-muted)] mt-0.5">
+								<FormattedDate date={post.data.pubDate} />
+							</p>
+						</div>
+						<Icon
+							name="lucide:arrow-right"
+							width={16}
+							height={16}
+							class="shrink-0 -translate-x-1 text-[var(--color-text-muted)] opacity-0 transition-all group-hover:translate-x-0 group-hover:text-[var(--color-accent)] group-hover:opacity-100"
+						/>
+					</a>
+				))}
+			</div>
+		</div>
+	))}
+
+	{sorted.length === 0 && (
+		<div
+			class="flex flex-col items-center justify-center rounded-xl border border-dashed border-[var(--color-border)] bg-[var(--color-surface)] py-16 text-center"
+		>
+			<Icon
+				name="lucide:newspaper"
+				width={32}
+				height={32}
+				class="text-[var(--color-text-muted)] opacity-50"
+			/>
+			<p class="mt-3 text-[var(--color-text-muted)]">No briefs yet. Check back tomorrow!</p>
+		</div>
+	)}
 </section>

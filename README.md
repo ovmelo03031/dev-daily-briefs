@@ -8,6 +8,10 @@ Automated daily digest of developer news, delivered every morning.
 
 **🌐 Live site:** [ovmelo03031.github.io/dev-daily-briefs](https://ovmelo03031.github.io/dev-daily-briefs/)
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-7c6aff.svg)](./LICENSE)
+[![Built with Astro](https://img.shields.io/badge/Built_with-Astro-22d3ee.svg)](https://astro.build/)
+[![Deployed on GitHub Pages](https://img.shields.io/badge/Deployed-GitHub_Pages-34d399.svg)](https://ovmelo03031.github.io/dev-daily-briefs/)
+
 </div>
 
 ---

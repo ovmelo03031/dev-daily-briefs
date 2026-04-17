@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
@@ -7,6 +8,7 @@ import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import TodayHighlights from '../components/TodayHighlights.astro';
 import { SITE_DESCRIPTION, SITE_TITLE, CATEGORIES, type Category } from '../consts';
+import logo from '../assets/brand/logo-wordmark.png';
 
 const allPosts = [
 	...(await getCollection('ai-coding')),
@@ -62,11 +64,21 @@ const latestPosts = allPosts.slice(0, 5);
 		<main class="mx-auto max-w-5xl px-4 py-12">
 			<!-- Hero -->
 			<section class="text-center mb-12">
-				<h1 class="text-4xl font-bold mb-4 bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-blue)] to-[var(--color-cyan)] bg-clip-text text-transparent">
-					Dev Daily Briefs
+				<h1 class="mx-auto mb-5 flex justify-center">
+					<span class="sr-only">{SITE_TITLE}</span>
+					<Image
+						src={logo}
+						alt=""
+						height={120}
+						densities={[1, 2]}
+						loading="eager"
+						class="h-20 w-auto sm:h-28"
+					/>
 				</h1>
 				<p class="text-lg text-[var(--color-text-muted)] max-w-2xl mx-auto">
-					Curated daily digests for senior developers. AI tools, backend, and frontend news — delivered every morning.
+					<span class="lang-es">Resúmenes diarios curados para desarrolladores senior. AI tools, backend y frontend news — cada mañana.</span>
+					<span class="lang-en">Curated daily digests for senior developers. AI tools, backend, and frontend news — delivered every morning.</span>
+					<span class="lang-fr">Résumés quotidiens pour développeurs seniors. AI tools, backend et frontend news — chaque matin.</span>
 				</p>
 			</section>
 

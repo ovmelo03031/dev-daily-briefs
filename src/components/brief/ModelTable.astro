@@ -1,0 +1,138 @@
+---
+import { pickLang, type I18nValue, type Lang } from './pickLang';
+
+interface Model {
+	date: string;
+	name: string;
+	provider: string;
+	provider_label?: string;
+	tier: 'splus' | 's' | 'aplus' | 'a' | 'bplus';
+	weight: 'open' | 'proprietary' | 'upcoming';
+	notes: I18nValue;
+	row_kind?: 'recent' | 'upcoming';
+}
+
+interface Props {
+	models: Model[];
+	lang: Lang;
+	anchor?: string;
+}
+
+const { models, lang, anchor = 'model-timeline' } = Astro.props;
+
+const HEADINGS: Record<Lang, { title: string; subtitle: string; date: string; model: string; provider: string; tier: string; type: string; notes: string }> = {
+	es: {
+		title: '🚀 Línea de Tiempo — Lanzamientos de Modelos',
+		subtitle: 'Todos los lanzamientos importantes de los últimos 7 días, los más recientes primero',
+		date: 'Fecha',
+		model: 'Modelo',
+		provider: 'Proveedor',
+		tier: 'Tier',
+		type: 'Tipo',
+		notes: 'Notas',
+	},
+	en: {
+		title: '🚀 Model Launches Timeline',
+		subtitle: 'All major model launches from the last 7 days, sorted newest first',
+		date: 'Date',
+		model: 'Model',
+		provider: 'Provider',
+		tier: 'Tier',
+		type: 'Type',
+		notes: 'Notes',
+	},
+	fr: {
+		title: '🚀 Chronologie des Lancements de Modèles',
+		subtitle: 'Tous les lancements majeurs des 7 derniers jours, les plus récents en premier',
+		date: 'Date',
+		model: 'Modèle',
+		provider: 'Fournisseur',
+		tier: 'Tier',
+		type: 'Type',
+		notes: 'Notes',
+	},
+};
+
+const WEIGHT_LABELS: Record<Lang, Record<Model['weight'], string>> = {
+	es: { open: 'Abierto', proprietary: 'Propietario', upcoming: 'Próximo' },
+	en: { open: 'Open', proprietary: 'Proprietary', upcoming: 'Upcoming' },
+	fr: { open: 'Ouvert', proprietary: 'Propriétaire', upcoming: 'À venir' },
+};
+
+const TIER_LEGEND: Record<Lang, Array<{ tier: Model['tier']; label: string }>> = {
+	es: [
+		{ tier: 'splus', label: 'Frontera' },
+		{ tier: 's', label: 'Mayor' },
+		{ tier: 'aplus', label: 'Destacado' },
+		{ tier: 'a', label: 'Sólido' },
+		{ tier: 'bplus', label: 'Incremental' },
+	],
+	en: [
+		{ tier: 'splus', label: 'Frontier' },
+		{ tier: 's', label: 'Major' },
+		{ tier: 'aplus', label: 'Notable' },
+		{ tier: 'a', label: 'Solid' },
+		{ tier: 'bplus', label: 'Incremental' },
+	],
+	fr: [
+		{ tier: 'splus', label: 'Frontière' },
+		{ tier: 's', label: 'Majeur' },
+		{ tier: 'aplus', label: 'Notable' },
+		{ tier: 'a', label: 'Solide' },
+		{ tier: 'bplus', label: 'Incrémental' },
+	],
+};
+
+const TIER_UPPER: Record<Model['tier'], string> = {
+	splus: 'S+',
+	s: 'S',
+	aplus: 'A+',
+	a: 'A',
+	bplus: 'B+',
+};
+
+const h = HEADINGS[lang];
+const weightT = WEIGHT_LABELS[lang];
+const legend = TIER_LEGEND[lang];
+---
+
+<div class="model-table-wrapper" data-anchor={anchor}>
+	<h2>{h.title}</h2>
+	<div class="subtitle-text">{h.subtitle}</div>
+	<table>
+		<thead>
+			<tr>
+				<th>{h.date}</th>
+				<th>{h.model}</th>
+				<th>{h.provider}</th>
+				<th>{h.tier}</th>
+				<th>{h.type}</th>
+				<th>{h.notes}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{models.map((m) => {
+				const rowClass = m.row_kind ?? (m.weight === 'upcoming' ? 'upcoming' : 'recent');
+				return (
+					<tr class={`${rowClass}-row`}>
+						<td>{m.date}</td>
+						<td><strong>{m.name}</strong></td>
+						<td>
+							<span class={`provider-badge provider-${m.provider}`}>
+								{m.provider_label ?? m.provider}
+							</span>
+						</td>
+						<td><span class={`tier tier-${m.tier}`}>{TIER_UPPER[m.tier]}</span></td>
+						<td><span class={`weight-badge weight-${m.weight}`}>{weightT[m.weight]}</span></td>
+						<td>{pickLang(m.notes, lang)}</td>
+					</tr>
+				);
+			})}
+		</tbody>
+	</table>
+	<div class="tier-legend">
+		{legend.map((l) => (
+			<span><strong class={`tier tier-${l.tier}`}>{TIER_UPPER[l.tier]}</strong> {l.label}</span>
+		))}
+	</div>
+</div>

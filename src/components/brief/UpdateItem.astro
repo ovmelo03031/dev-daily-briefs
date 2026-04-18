@@ -1,0 +1,43 @@
+---
+import { pickLang, type I18nValue, type Lang } from './pickLang';
+
+interface Update {
+	id?: string;
+	tag: 'feature' | 'fix' | 'model' | 'preview' | 'security' | 'update';
+	title: I18nValue;
+	body_html: I18nValue;
+	date?: string;
+	source?: { url: string; label?: string };
+}
+
+interface Props {
+	update: Update;
+	lang: Lang;
+}
+
+const { update, lang } = Astro.props;
+
+const TAG_LABELS: Record<Lang, Record<Update['tag'], string>> = {
+	es: { feature: 'Feature', fix: 'Fix', model: 'Modelo', preview: 'Preview', security: 'Seguridad', update: 'Update' },
+	en: { feature: 'Feature', fix: 'Fix', model: 'Model', preview: 'Preview', security: 'Security', update: 'Update' },
+	fr: { feature: 'Feature', fix: 'Fix', model: 'Modèle', preview: 'Aperçu', security: 'Sécurité', update: 'Update' },
+};
+
+const title = pickLang(update.title, lang);
+const body = pickLang(update.body_html, lang);
+const tagLabel = TAG_LABELS[lang][update.tag];
+---
+
+<div class="update-item" id={update.id}>
+	<span class={`update-tag tag-${update.tag}`}>{tagLabel}</span>
+	<div class="update-content">
+		<h3>{title}</h3>
+		<div set:html={body} />
+		{update.date && <div class="update-meta">{update.date}</div>}
+		{update.source && (
+			<a href={update.source.url} target="_blank" rel="noopener">
+				{update.source.label ?? update.source.url} →
+			</a>
+		)}
+	</div>
+</div>

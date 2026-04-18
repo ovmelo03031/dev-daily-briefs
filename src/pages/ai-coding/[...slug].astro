@@ -1,6 +1,8 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
+import BriefStructured from '../../components/brief/BriefStructured.astro';
+import { pickLang } from '../../components/brief/pickLang';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('ai-coding');
@@ -12,9 +14,60 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<'ai-coding'>;
 
 const post = Astro.props;
-const { Content } = await render(post);
+const { data } = post;
+
+// JSON briefs carry structured `tools`; markdown briefs don't.
+const isStructured = Array.isArray(data.tools) && data.tools.length > 0;
+
+// Normalize highlights: JSON briefs nest text as { es, en, fr }; the
+// layout + HighlightBar expect flat { text, text_es, text_fr }.
+const highlightsForLayout = (data.highlights ?? []).map((h) => {
+	if (typeof h.text === 'string') {
+		return {
+			text: h.text,
+			text_es: h.text_es,
+			text_fr: h.text_fr,
+			anchor: h.anchor,
+			icon: h.icon,
+		};
+	}
+	const t = h.text as { es?: string; en: string; fr?: string };
+	return {
+		text: t.en,
+		text_es: t.es,
+		text_fr: t.fr,
+		anchor: h.anchor,
+		icon: h.icon,
+	};
+});
+
+// Pick English for <title> / <meta description>. The UI toggle handles
+// body language separately.
+const title = pickLang(data.title, 'en') || (data.title_es ?? '');
+const description =
+	typeof data.description === 'string' ? data.description : pickLang(data.description, 'en');
+
+// For markdown briefs, render() gives us the <Content /> component.
+// For JSON briefs we skip that and render the structured components.
+const Content = isStructured ? null : (await render(post)).Content;
 ---
 
-<BlogPost {...post.data}>
-	<Content />
+<BlogPost
+	title={title}
+	description={description}
+	pubDate={data.pubDate}
+	category={data.category}
+	highlights={highlightsForLayout}
+>
+	{isStructured ? (
+		<BriefStructured
+			stats={data.stats}
+			tools={data.tools}
+			models={data.models}
+			modelTimelineAnchor={data.model_timeline_anchor}
+			notableTrends={data.notable_trends}
+		/>
+	) : (
+		Content && <Content />
+	)}
 </BlogPost>

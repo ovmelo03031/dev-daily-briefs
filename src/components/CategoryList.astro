@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import type { CollectionEntry } from 'astro:content';
 import FormattedDate from './FormattedDate.astro';
+import { pickLang } from './brief/pickLang';
 import { CATEGORIES, type Category } from '../consts';
 
 interface Props {
@@ -75,7 +76,7 @@ for (const post of sorted) {
 						</span>
 						<div class="min-w-0 flex-1">
 							<h3 class="text-base font-medium text-[var(--color-text)] truncate group-hover:text-[var(--color-accent)]">
-								{post.data.title}
+								{pickLang(post.data.title, 'en')}
 							</h3>
 							<p class="text-xs text-[var(--color-text-muted)] mt-0.5">
 								<FormattedDate date={post.data.pubDate} />

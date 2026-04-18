@@ -5,7 +5,7 @@ description: Generate a new Dev Daily Brief entry for an existing category (ai-c
 
 # Skill — `brief-new`
 
-Generates a single brief entry that plugs into the Dev Daily Briefs Astro site at `/Users/ovi/Data/Projects/Blog`.
+Generates a single brief entry (JSON) for the Dev Daily Briefs Astro site at `/Users/ovi/Data/Projects/Blog`. The site renders briefs via Astro components — **you emit pure data, the site composes the design**.
 
 ## When to invoke
 
@@ -19,227 +19,164 @@ User says things like:
 
 Before writing anything, you MUST know:
 
-1. **Category** — must be one of: `ai-coding`, `backend-fullstack`, `dev-news`. If the user doesn't specify, ASK.
-2. **Date** — default to today (`date +%Y-%m-%d`). If the user gives a date, use theirs.
-3. **Topics to cover** — if user didn't provide them, ASK (or run the category's daily-brief skill to fetch fresh content).
+1. **Category** — one of `ai-coding`, `backend-fullstack`, `dev-news`. If the user doesn't specify, ASK.
+2. **Date** — default to today (`date +%Y-%m-%d`). Use the user's date if provided.
+3. **Topics to cover** — if the user doesn't provide them, ASK or invoke the category's daily-brief skill to fetch fresh content.
 
-## Step 2 — File location and extension
+## Step 2 — File location
 
-| Category | Path | Extension |
-|----------|------|-----------|
-| `ai-coding` | `src/content/ai-coding/ai-coding-{YYYY-MM-DD}.md` | **`.md`** |
-| `backend-fullstack` | `src/content/backend-fullstack/backend-fullstack-{YYYY-MM-DD}.mdx` | **`.mdx`** |
-| `dev-news` | `src/content/dev-news/dev-news-{YYYY-MM-DD}.mdx` | **`.mdx`** |
+**All categories use `.json`.** Legacy `.md` / `.mdx` briefs continue to render but all new briefs are JSON.
 
-The `ai-coding` briefs are `.md` because they use only standard HTML. `dev-news` and `backend-fullstack` use `.mdx` because they may contain JSX components.
+| Category | Path |
+|----------|------|
+| `ai-coding` | `src/content/ai-coding/ai-coding-{YYYY-MM-DD}.json` |
+| `backend-fullstack` | `src/content/backend-fullstack/backend-fullstack-{YYYY-MM-DD}.json` |
+| `dev-news` | `src/content/dev-news/dev-news-{YYYY-MM-DD}.json` |
 
-## Step 3 — Frontmatter schema (MANDATORY)
+## Step 3 — Top-level schema
 
-```yaml
----
-title: "<English title, e.g. 'AI Coding Tools — Daily Brief | April 17, 2026'>"
-title_es: "<Spanish title, e.g. 'AI Coding Tools — Resumen Diario | 17 de Abril de 2026'>"
-title_fr: "<French title, e.g. 'AI Coding Tools — Résumé Quotidien | 17 Avril 2026'>"
-description: "<One-line description matching the category>"
-pubDate: "<YYYY-MM-DD>"
-category: "<ai-coding | backend-fullstack | dev-news>"
-highlights:
-  - text: "<short English headline, max ~50 chars>"
-    text_es: "<short Spanish headline, max ~50 chars>"
-    text_fr: "<short French headline, max ~50 chars>"
-    anchor: "<kebab-case-slug>"
-    icon: "<iconify-name>"
-  # 4 to 7 highlights total
----
+```json
+{
+  "title":       { "es": "<es>", "en": "<en>", "fr": "<fr>" },
+  "description": { "es": "<es>", "en": "<en>", "fr": "<fr>" },
+  "pubDate":     "YYYY-MM-DD",
+  "category":    "<ai-coding | backend-fullstack | dev-news>",
+  "highlights":  [ /* 4–7 entries */ ],
+  "tools":       [ /* see Tools per category */ ],
+  "notable_trends": [
+    { "es": "<es>", "en": "<en>", "fr": "<fr>" }
+  ]
+}
 ```
 
-Description defaults per category:
+Every i18n field accepts `string` OR `{ es?, en, fr? }`. **`en` is required**; `es` and `fr` fall back to `en` via the language toggle when missing. Always provide all three when feasible.
+
+**ai-coding only** also accepts top-level `stats`, `models`, `model_timeline_anchor` — see the ai-coding-daily-brief skill for those schemas.
+
+### Description defaults per category
+
 - `ai-coding`: "Daily digest of AI coding tools and model launches"
 - `backend-fullstack`: "Daily backend and fullstack news digest for senior developers"
 - `dev-news`: "Daily developer news digest — frontend, TypeScript, React, and web platform"
 
-## Step 4 — Body layout (trilingual)
+## Step 4 — Highlights (MANDATORY: 4–7 entries)
 
-Wrap the ENTIRE body in three language divs. Spanish first, English second, French third:
-
-```markdown
-<div class="lang-es">
-
-<!-- Spanish content using HTML with CSS classes. Stats-bar, tool-sections, highlights -->
-
-</div>
-<div class="lang-en">
-
-<!-- Same structure, translated to English -->
-
-</div>
-<div class="lang-fr">
-
-<!-- Same structure, translated to French -->
-
-</div>
+```json
+"highlights": [
+  {
+    "text":   { "es": "~50 chars", "en": "~50 chars", "fr": "~50 chars" },
+    "anchor": "kebab-case-slug",
+    "icon":   "simple-icons:<brand>"
+  }
+]
 ```
 
-### Critical formatting rules
+- `anchor`: **must match** a `tool.anchor` OR an `update.id` (OR `model_timeline_anchor` in ai-coding) elsewhere in the file. Deep-links from the home page and chips resolve by this slug.
+- `text`: max ~50 chars per language. Distilled teaser, not the full headline.
+- `icon`: Iconify name. See the full catalog in the category-specific daily-brief skill.
 
-- `<div class="lang-es">`, `<div class="lang-en">` and `<div class="lang-fr">` MUST start at column 0
-- ALL HTML tags MUST start at column 0 (NO indentation — 4 spaces = markdown code block)
-- NO blank lines between sibling HTML tags inside a tool-section
-- Blank line REQUIRED after the opening `<div class="lang-xx">` and before the closing `</div>`
-- Keep source URLs identical across all three languages — only translate visible text
-- **Three languages are mandatory for new briefs**. The HighlightBar and all chips rely on `text` (EN), `text_es` (ES) and `text_fr` (FR). If FR is missing, the toggle falls back to EN, but the user still expects native French support.
-- **French conventions**: formal technical French with natural imperatives/infinitives. Keep English technical terms that devs actually use untranslated (`React Server Components`, `runtime`, `edge`, `type checker`, `CVE`, etc.).
+**Priorities**: major releases, GA features, breaking changes, security CVEs, new product launches. Skip minor patches.
 
-## Step 5 — HTML building blocks
+## Step 5 — Tools per category
 
-### Stats bar (optional, `ai-coding` uses it)
+Every category organizes content under `tools[]`. Each tool maps to a rendered `tool-section` on the page.
 
-```html
-<div class="stats-bar">
-<div class="stat-card"><div class="stat-num">{N}</div><div class="stat-label">{Label}</div></div>
-<!-- 3 to 4 cards -->
-</div>
+### ai-coding — 5 core tools + adjacent launches
+
+Themes: `claude` | `openai` | `gemini` | `copilot` | `vscode`
+
+Always include all 5 core tools (Claude Code / OpenAI Codex / GPT / Gemini / GitHub Copilot) even if a tool has no updates that day (empty `updates` array is OK). Add extra tool entries for **adjacent vendor launches** (e.g. Claude Design, OpenAI Canvas) — reuse the closest vendor theme.
+
+### dev-news — per-category sections
+
+Themes: `top-stories` | `typescript` | `css` | `html` | `react` | `react-native` | `js-frameworks` | `build-tools` | `dev-tools` | `quick-links`
+
+### backend-fullstack — per-category sections
+
+Themes: `top-stories` | `runtimes` | `frameworks` | `databases` | `cloud` | `architecture` | `fullstack` | `security` | `quick-links`
+
+### Tool shape
+
+```json
+{
+  "id":         "claude-code",
+  "name":       "Claude Code",
+  "publisher":  "Anthropic",
+  "theme":      "claude",
+  "icon_emoji": "🤖",
+  "version":    "v2.1.114",
+  "anchor":     "claude-code",
+  "updates": [ /* see Update shape */ ]
+}
 ```
 
-### Tool section (the main block, repeats per topic)
+- `publisher`, `version`, `icon_emoji`, `anchor` — all optional.
+- If a highlight's `anchor` matches `tool.anchor`, the chip scrolls to the whole section. If it matches an `update.id`, it scrolls to that specific update.
 
-```html
-<div class="tool-section {section-class}" data-anchor="{slug}">
-<div class="tool-header">
-<div class="tool-icon">{emoji}</div>
-<div class="tool-meta">
-<h2>{Section title}</h2>
-<div class="publisher">{optional publisher}</div>
-<div class="subtitle">{optional subtitle}</div>
-</div>
-<span class="version-badge">{optional version}</span>
-</div>
-<div class="update-item">
-<span class="update-tag tag-{kind}">{Tag}</span>
-<div class="update-content">
-<h3>{Update headline}</h3>
-<p>{Description, 1–3 sentences}</p>
-<a href="{source-url}">{source label}</a>
-</div>
-</div>
-<!-- repeat update-item as many times as needed -->
-</div>
+### Update shape
+
+```json
+{
+  "id":    "optional-anchor-target",
+  "tag":   "feature",
+  "title": { "es": "<es>", "en": "<en>", "fr": "<fr>" },
+  "body_html": {
+    "es": "<p>Inline HTML: <strong>bold</strong>, <em>italic</em>, <code>code</code>.</p>",
+    "en": "<p>Inline HTML: <strong>bold</strong>, <em>italic</em>, <code>code</code>.</p>",
+    "fr": "<p>HTML inline : <strong>gras</strong>, <em>italique</em>, <code>code</code>.</p>"
+  },
+  "date":   "16 abr 2026",
+  "source": { "url": "https://...", "label": "anthropic.com" }
+}
 ```
 
-**IMPORTANT**: `data-anchor` MUST be present on tool-sections that are referenced by any entry in `highlights[].anchor`. Both the `lang-es` and `lang-en` copies carry the SAME anchor slug (the frontend selects the visible one).
+- `tag` is a free-form string mapped to CSS `.update-tag.tag-<value>`. Common values:
+  - **ai-coding**: `feature` | `fix` | `model` | `preview` | `security` | `update`
+  - **dev-news** / **backend-fullstack**: `breaking` | `notable` | `minor` | `patch` | `release` | `security` | `deprecation` | `ga` | `beta`
+- Labels are auto-translated per language. For a custom label, add `tag_label: { es, en, fr }`.
+- `body_html` allows simple inline HTML (`<p>`, `<strong>`, `<em>`, `<code>`, `<a>`). Keep it short (1–3 sentences).
 
-### Section classes per category
+## Step 6 — Notable Trends (close the brief)
 
-**ai-coding**: `claude` | `openai` | `gemini` | `copilot` | `vscode`
-
-**backend-fullstack**: `top-stories` | `runtimes` | `frameworks` | `databases` | `cloud` | `architecture` | `fullstack` | `security` | `quick-links`
-
-**dev-news**: `top-stories` | `typescript` | `css` | `html` | `react` | `react-native` | `js-frameworks` | `build-tools` | `dev-tools` | `quick-links`
-
-Any OTHER class can be added too — but you'll need to also add CSS for it in `public/styles/ai-coding-brief.css` (left-border accent + icon mapping). For one-off use, pick the closest existing class.
-
-### Update tag classes
-
-| Tag | Class | Meaning |
-|-----|-------|---------|
-| Breaking | `tag-breaking` | Major change, action required |
-| Notable | `tag-notable` | Significant but not urgent |
-| Feature | `tag-feature` | New functionality |
-| Fix | `tag-fix` | Bug fix |
-| Model | `tag-model` | New AI model |
-| Preview | `tag-preview` | Early/beta release |
-| Security | `tag-security` | CVE / security-relevant |
-| Update | `tag-update` | Minor iteration |
-| Release | `tag-release` | Version bump |
-| GA | `tag-ga` | General availability |
-| Beta | `tag-beta` | Beta release |
-| Deprecation | `tag-deprecation` | Feature retirement |
-| Patch | `tag-patch` | Patch release |
-| Minor | `tag-minor` | Small change |
-
-### Model launches table (ai-coding only)
-
-```html
-<div class="model-table-wrapper" data-anchor="model-timeline">
-<h2>&#x1F680; Model Launches Timeline</h2>
-<div class="subtitle-text">Major launches from the last 7 days, newest first</div>
-<table>
-<thead><tr><th>Date</th><th>Model</th><th>Provider</th><th>Tier</th><th>Type</th><th>Notes</th></tr></thead>
-<tbody>
-<tr class="recent-row">
-<td>{date}</td>
-<td><strong>{model}</strong></td>
-<td><span class="provider-badge provider-{slug}">{provider}</span></td>
-<td><span class="tier tier-{level}">{S+/S/A+/A/B+}</span></td>
-<td><span class="weight-badge weight-{type}">{Open/Proprietary/Upcoming}</span></td>
-<td>{benchmarks and notes}</td>
-</tr>
-</tbody>
-</table>
-<div class="tier-legend">
-<span><strong class="tier tier-splus">S+</strong> Frontier</span>
-<span><strong class="tier tier-s">S</strong> Major</span>
-<span><strong class="tier tier-aplus">A+</strong> Notable</span>
-<span><strong class="tier tier-a">A</strong> Solid</span>
-<span><strong class="tier tier-bplus">B+</strong> Incremental</span>
-</div>
-</div>
+```json
+"notable_trends": [
+  { "es": "<2–3 sentence synthesis>", "en": "<synthesis>", "fr": "<synthesis>" }
+]
 ```
 
-Provider slugs: `anthropic` | `openai` | `google` | `meta` | `xai` | `mistral` | `alibaba` | `deepseek` | `moonshot` | `zhipu` | `bytedance` | `minimax`. Use `recent-row` for shipped models, `upcoming-row` for rumored/expected.
-
-### Trends block (close the brief)
-
-```html
-<div class="trends">
-<h2>&#x1F4CA; Notable Trends</h2>
-<p>{2 to 4 sentence synthesis}</p>
-</div>
-```
-
-## Step 6 — Highlights (MANDATORY)
-
-Curate **4–7 highlights** of the day's most important items. Each must match a `data-anchor` on an actual tool-section / model-table in the body (both `lang-es` and `lang-en` copies).
-
-### Icon taxonomy
-
-- **Brand logos** (`simple-icons:*`): `anthropic`, `openai`, `google`, `googlegemini`, `githubcopilot`, `visualstudiocode`, `meta`, `mistralai`, `alibabacloud`, `bytedance`, `minimax`, `typescript`, `react`, `css`, `html5`, `tanstack`, `deno`, `bun`, `nodedotjs`, `vite`, `cloudflare`, `apachekafka`, `tailwindcss`, `docker`, `kubernetes`, `amazonwebservices`, `redis`, `postgresql`, `astro`, `nextdotjs`, `svelte`, `vuedotjs`, `angular`, `prisma`, `mongodb`, `github`, `x`.
-- **Lucide fallbacks** (`lucide:*`): `flame` (top stories), `rocket` (launches), `shield` (security), `atom` (xAI / unknown AI), `moon` (Moonshot), `brain-circuit` (Zhipu), `search` (DeepSeek), `terminal`, `blocks`, `database`, `cloud`, `layers`, `server`, `package`, `newspaper`, `sparkles`, `zap`.
-
-If you need an icon that's NOT in the extracted set (see `/Users/ovi/Data/Projects/Blog/public/icons/`), add it via:
-
-```bash
-node -e "const fs=require('fs');const p=require('/Users/ovi/Data/Projects/Blog/node_modules/@iconify-json/{pack}/icons.json');const i=p.icons['{name}'];fs.writeFileSync('/Users/ovi/Data/Projects/Blog/public/icons/{pack}/{name}.svg',\`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 \${i.width||p.width} \${i.height||p.height}'>\${i.body}</svg>\`);"
-```
+One or two paragraphs that tie together the day's items. Grounded — no speculation.
 
 ## Step 7 — Quality checklist
 
 Before writing the file, verify:
 
-- [ ] Frontmatter has `title`, `title_es`, `description`, `pubDate`, `category`, `highlights` (4–7 items)
-- [ ] Both `<div class="lang-es">` and `<div class="lang-en">` blocks present, start at column 0
-- [ ] All tool-sections referenced in `highlights[].anchor` have `data-anchor="<slug>"` in BOTH language copies
-- [ ] Every `update-item` has one `span.update-tag` AND one `div.update-content` with `h3`, `p`, and `a`
-- [ ] All source URLs are identical between languages
-- [ ] Each highlight text is ≤ 50 chars (scan-friendly)
-- [ ] No indentation inside `.lang-es` / `.lang-en` blocks
-- [ ] File extension matches category (`.md` for ai-coding, `.mdx` for others)
+- [ ] `en` is present on EVERY i18n field (`title`, `description`, each `highlight.text`, each `update.title`, each `update.body_html`, each `notable_trends[]`)
+- [ ] Every `highlight.anchor` matches a `tool.anchor`, an `update.id`, or `model_timeline_anchor` (for ai-coding)
+- [ ] Each update has a `source` with a valid URL OR a `date` (minimum provenance)
+- [ ] 4–7 highlights total, each text ≤ ~50 chars per language
+- [ ] No duplicate updates across tool-sections
+- [ ] For `es`, use Rioplatense Spanish (voseo: "ojo con esto", "es una locura")
+- [ ] For `fr`, use formal technical French; keep devops/tech loanwords devs actually use (`runtime`, `edge`, `React Server Components`, `type checker`, `prompt caching`)
 
 ## Step 8 — Publish
 
 ```bash
-cd /Users/ovi/Data/Projects/Blog && \
-  git add src/content/{category}/{category}-{YYYY-MM-DD}.{md,mdx} && \
-  git commit -m "brief: {category} {YYYY-MM-DD}" && \
-  git push
+cd /Users/ovi/Data/Projects/Blog
+git pull --rebase --autostash
+git add src/content/{category}/{category}-{YYYY-MM-DD}.json
+git commit -m "brief({category}): {YYYY-MM-DD}"
+git push
 ```
 
-If the user asks for a dry run, skip the push and show a diff instead.
+- Stage ONLY the brief file — never `git add -A`.
+- Do NOT run `astro build` — the `deploy.yml` GitHub Actions workflow builds and deploys on push.
+- If the user asks for a dry run, skip the commit/push and show the JSON diff instead.
 
 ## Reference
 
 - Zod schema: `src/content.config.ts`
 - Styles: `public/styles/ai-coding-brief.css`
 - Layout: `src/layouts/BlogPost.astro`
-- HighlightBar component: `src/components/HighlightBar.astro`
-- Example brief with highlights: `src/content/ai-coding/ai-coding-2026-04-17.md`
+- Renderer: `src/components/brief/BriefStructured.astro` + `StatsBar`, `ToolSection`, `UpdateItem`, `ModelTable`, `NotableTrends`
+- Example JSON brief: `src/content/ai-coding/ai-coding-2026-04-19.json`
+- Category-specific daily-brief skills (fetch logic + extended tables): `.claude/skills/{ai-coding,dev-news,backend-fullstack}-daily-brief/SKILL.md`

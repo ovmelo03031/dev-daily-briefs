@@ -95,159 +95,115 @@ Use Rioplatense Spanish for commentary (e.g., "Ojo con este CVE, actualizá YA",
 
 Save the output to /Users/ovi/Data/Schedule/DevNews/ as backend-fullstack-{YYYY-MM-DD}.md. Create the directory if it doesn't exist.
 
-## Blog Auto-Publish (Bilingual EN/ES — Card Format)
+## Blog Auto-Publish — JSON output (NEW format)
 
-After saving the main output, ALSO create a **bilingual blog-ready copy** using the HTML card format.
+The blog renders backend-fullstack briefs from **structured JSON data** via Astro components, NOT from hand-written HTML. Skill emits pure data, site composes design.
 
-Path: `/Users/ovi/Data/Projects/Blog/src/content/backend-fullstack/backend-fullstack-{YYYY-MM-DD}.mdx`
+Save to: `/Users/ovi/Data/Projects/Blog/src/content/backend-fullstack/backend-fullstack-{YYYY-MM-DD}.json`
 
-**IMPORTANT**: Use `.mdx` extension (not `.md`) — MDX is required for HTML inside markdown.
+> Legacy `.mdx` briefs still render — but all NEW briefs must be JSON.
 
-### File structure
+### Top-level schema
 
-```mdx
----
-title: "Backend & Fullstack Daily — {Month Day, Year}"
-title_es: "Backend & Fullstack Daily — {Day de Month de Year}"
-title_fr: "Backend & Fullstack Daily — {Day Month Year in French}"
-description: "Daily backend and fullstack news digest for senior developers"
-pubDate: "{YYYY-MM-DD}"
-category: "backend-fullstack"
----
-
-<div class="lang-es">
-
-<div class="tool-section top-stories">
-<div class="tool-header">
-<div class="tool-icon">🔥</div>
-<div class="tool-meta">
-<h2>Top Stories</h2>
-<div class="subtitle">{N} noticias más relevantes del día</div>
-</div>
-</div>
-<div class="update-item">
-<span class="update-tag tag-breaking">Breaking</span>
-<div class="update-content">
-<h3>{Headline}</h3>
-<p>{Description in Spanish with Rioplatense commentary}</p>
-<a href="{url}">{source}</a>
-</div>
-</div>
-</div>
-
-<div class="tool-section runtimes">
-<div class="tool-header">
-<div class="tool-icon">⚡</div>
-<div class="tool-meta">
-<h2>Backend TypeScript & Runtimes</h2>
-<div class="subtitle">Node.js, Deno, Bun, TypeScript</div>
-</div>
-</div>
-<div class="update-item">
-<span class="update-tag tag-notable">Notable</span>
-<div class="update-content">
-<h3>{Headline}</h3>
-<p>{Description}</p>
-<a href="{url}">{source}</a>
-</div>
-</div>
-</div>
-
-<!-- More sections as needed -->
-
-</div>
-
-<div class="lang-en">
-
-<!-- Same HTML structure, translated to English -->
-
-</div>
-
-<div class="lang-fr">
-
-<!-- Same HTML structure, translated to technical French. Keep English technical terms untranslated when they're the de-facto name (runtime, edge, container, scheduler, CVE, etc.). -->
-
-</div>
+```json
+{
+  "title":       { "es": "<es>", "en": "<en>", "fr": "<fr>" },
+  "description": { "es": "<es>", "en": "<en>", "fr": "<fr>" },
+  "pubDate":     "YYYY-MM-DD",
+  "category":    "backend-fullstack",
+  "highlights":  [ /* 4–7 entries, see below */ ],
+  "tools":       [ /* one entry per section, see below */ ],
+  "notable_trends": [
+    { "es": "<es>", "en": "<en>", "fr": "<fr>" }
+  ]
+}
 ```
 
-- **Three languages are mandatory**: `lang-es` (Rioplatense Spanish), `lang-en` (English), `lang-fr` (French). Same HTML shell, same data-anchor slugs, same source URLs — only visible text changes.
-- **French conventions**: formal technical French with natural imperatives/infinitives. Keep devops/backend loanwords untranslated.
+`stats`, `models`, and `model_timeline_anchor` are **not used** in backend-fullstack briefs. Omit those fields.
 
-### Available section classes and emojis
-| Section | Class | Emoji |
-|---------|-------|-------|
-| Top Stories | `top-stories` | 🔥 |
-| Backend TypeScript & Runtimes | `runtimes` | ⚡ |
-| Frameworks & Libraries | `frameworks` | 🧩 |
-| Databases & Data | `databases` | 🗄️ |
-| Cloud & DevOps | `cloud` | ☁️ |
-| Architecture & Best Practices | `architecture` | 🏗️ |
-| Fullstack | `fullstack` | 🔗 |
-| Security | `security` | 🔒 |
-| Quick Links | `quick-links` | 📌 |
+Every i18n field accepts either a **string** or `{ es?, en, fr? }`. `en` is required; `es` and `fr` fall back to `en` when missing.
 
-### Available impact tag classes
-| Impact | Class | Color |
-|--------|-------|-------|
-| 🔴 Breaking/Major | `tag-breaking` | Red |
-| 🟡 Notable | `tag-notable` | Yellow |
-| 🟢 Minor | `tag-minor` | Green |
-| Patch | `tag-patch` | Blue |
-| Release | `tag-release` | Purple |
-| Security | `tag-security` | Pink |
-| Deprecation | `tag-deprecation` | Orange |
-| GA | `tag-ga` | Green |
-| Beta | `tag-beta` | Yellow |
+### Highlights (MANDATORY: 4–7 entries)
 
-### Critical formatting rules
-- ALL HTML tags MUST start at column 0 (NO indentation — 4 spaces = code block in markdown)
-- NO blank lines between sibling HTML tags inside a tool-section
-- Blank line REQUIRED after opening `<div class="lang-xx">` and before closing `</div>`
-- Use `<code>` tags for inline code references
-- Keep all source URLs identical in both languages
-
-## Highlight Bar (MANDATORY)
-
-Before writing the brief body, curate **4–7 "highlights"** that represent the most important NEW things of the day — in a SHORT, SCANNABLE form (one headline per highlight, max ~50 chars). These render at the top of the brief as clickable chips that jump to the corresponding full section below.
-
-### Frontmatter addition
-
-Add a `highlights` array to the frontmatter. Each entry needs `text` (English), `text_es` (Spanish) AND `text_fr` (French):
-
-```yaml
-highlights:
-  - text: "<short English headline, max ~50 chars>"
-    text_es: "<short Spanish headline, max ~50 chars>"
-    text_fr: "<short French headline, max ~50 chars>"
-    anchor: "<kebab-case-slug>"
-    icon: "<iconify-name>"
+```json
+"highlights": [
+  {
+    "text":   { "es": "~50 chars", "en": "~50 chars", "fr": "~50 chars" },
+    "anchor": "cve-2026-29000",
+    "icon":   "lucide:shield"
+  }
+]
 ```
 
-### Anchor wiring
+- `anchor`: must match a `tool.anchor` OR an `update.id` elsewhere in the file.
+- `icon`: Iconify name. Brand logos (`simple-icons:*`): `typescript`, `deno`, `bun`, `nodedotjs`, `cloudflare`, `apachekafka`, `docker`, `kubernetes`, `amazonwebservices`, `redis`, `postgresql`, `mongodb`, `prisma`, `nextdotjs`, `astro`, `tanstack`, `github`. Lucide fallbacks (`lucide:*`): `flame` (top stories), `shield` (security CVE), `terminal` (runtimes), `blocks` (frameworks), `database`, `cloud`, `layers` (architecture), `server` (fullstack), `package`, `rocket`.
+- **Prioritize**: major releases, GA features, breaking changes, security CVEs (high CVSS), strategic shifts. Skip minor patches.
 
-For EACH highlight, add `data-anchor="<slug>"` to the corresponding `<div class="tool-section ...">` element in **BOTH** `lang-es` AND `lang-en` copies (same slug in both — the frontend picks the currently visible one).
+### Tools (one entry per category section)
 
-Example:
-
-```html
-<div class="tool-section runtimes" data-anchor="deno-26">
-  ...
-</div>
-<div class="tool-section security" data-anchor="cve-2026-29000">
-  ...
-</div>
+```json
+"tools": [
+  {
+    "id":         "security",
+    "name":       "Security",
+    "theme":      "security",
+    "icon_emoji": "🔒",
+    "anchor":     "cve-2026-29000",
+    "updates": [
+      {
+        "id":    "cve-2026-29000",
+        "tag":   "security",
+        "title": { "es": "<es>", "en": "<en>", "fr": "<fr>" },
+        "body_html": {
+          "es": "<p>Descripción con <strong>CVSS 10</strong> y <code>pac4j</code>.</p>",
+          "en": "<p>Description with <strong>CVSS 10</strong> and <code>pac4j</code>.</p>",
+          "fr": "<p>Description avec <strong>CVSS 10</strong> et <code>pac4j</code>.</p>"
+        },
+        "source": { "url": "https://...", "label": "nvd.nist.gov" }
+      }
+    ]
+  }
+]
 ```
 
-### Rules
+**Available `theme` values** (map to CSS classes `.tool-section.<theme>`):
 
-- **Anchor slug**: kebab-case, unique within the brief. Examples: `typescript-60`, `deno-26`, `cloudflare-containers`, `cve-2026-29000`, `kafka-43`, `postgres-18`.
-- **text / text_es**: ~50 chars MAX. A distilled teaser, NOT the full h3.
-  - Bad: `"CVE-2026-29000: bypass crítico JWT en pac4j — CVSS 10.0"`
-  - Good: `"CVE-2026-29000 pac4j JWT bypass (CVSS 10)"`
-- **icon**: Iconify name from the bundled packs:
-  - **Brand logos** (`simple-icons:*`): `typescript`, `deno`, `bun`, `nodedotjs`, `cloudflare`, `apachekafka`, `docker`, `kubernetes`, `amazonwebservices`, `redis`, `postgresql`, `mongodb`, `prisma`, `nextdotjs`, `astro`, `tanstack`, `github`.
-  - **Lucide fallbacks** (`lucide:*`): `flame` (top stories), `shield` (security CVE), `terminal` (runtimes), `blocks` (frameworks), `database`, `cloud`, `layers` (architecture), `server` (fullstack), `package`, `rocket`.
-- **4 minimum, 7 maximum** per brief. Prioritize: major releases, GA features, breaking changes, security CVEs (high CVSS), strategic shifts. Skip minor patches.
+| Section                       | `theme`       | `icon_emoji` |
+|-------------------------------|---------------|--------------|
+| Top Stories                   | `top-stories` | 🔥 |
+| Backend TypeScript & Runtimes | `runtimes`    | ⚡ |
+| Frameworks & Libraries        | `frameworks`  | 🧩 |
+| Databases & Data              | `databases`   | 🗄️ |
+| Cloud & DevOps                | `cloud`       | ☁️ |
+| Architecture & Best Practices | `architecture`| 🏗️ |
+| Fullstack                     | `fullstack`   | 🔗 |
+| Security                      | `security`    | 🔒 |
+| Quick Links                   | `quick-links` | 📌 |
+
+**Available `tag` values** (free-form; map to CSS `.update-tag.tag-<value>`):
+
+| Impact           | `tag`         |
+|------------------|---------------|
+| 🔴 Breaking/Major| `breaking`    |
+| 🟡 Notable       | `notable`     |
+| 🟢 Minor         | `minor`       |
+| Patch            | `patch`       |
+| Release          | `release`     |
+| Security         | `security`    |
+| Deprecation      | `deprecation` |
+| GA               | `ga`          |
+| Beta             | `beta`        |
+
+Labels are translated automatically per language. For a custom label, add `tag_label: { es, en, fr }` to the update.
+
+### Quality checks before saving
+
+- [ ] `en` is present on every i18n field
+- [ ] Each `highlights[].anchor` matches a `tool.anchor` or `update.id`
+- [ ] Every update has a `source` with a valid URL
+- [ ] Security CVEs get `tag: "security"` + `icon: "lucide:shield"` on the highlight
+- [ ] Use Rioplatense Spanish for `es` commentary (natural voseo)
+- [ ] Keep technical loanwords untranslated (`runtime`, `edge`, `container`, `scheduler`, `CVE`)
 
 ### Auto-publish (MANDATORY)
 
@@ -256,7 +212,7 @@ Example:
 ```bash
 cd /Users/ovi/Data/Projects/Blog
 git pull --rebase --autostash
-git add src/content/backend-fullstack/backend-fullstack-{YYYY-MM-DD}.mdx
+git add src/content/backend-fullstack/backend-fullstack-{YYYY-MM-DD}.json
 git commit -m "brief(backend-fullstack): {YYYY-MM-DD}"
 git push
 ```

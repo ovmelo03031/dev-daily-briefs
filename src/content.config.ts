@@ -19,11 +19,17 @@ const highlightSchema = z.object({
 	icon: z.string().optional(),
 });
 
-const updateTag = z.enum(['feature', 'fix', 'model', 'preview', 'security', 'update']);
-
 const updateSchema = z.object({
 	id: z.string().optional(),
-	tag: updateTag,
+	// Tag is a free-form string matching a CSS class `tag-<value>` defined in
+	// ai-coding-brief.css. Common values per category:
+	//   ai-coding:  feature | fix | model | preview | security | update
+	//   dev-news:   breaking | notable | minor | patch | release | security | deprecation | ga | beta
+	//   backend:    release | security | deprecation | breaking | notable | ga | beta | patch
+	tag: z.string(),
+	tag_label: z
+		.union([z.string(), z.object({ es: z.string().optional(), en: z.string(), fr: z.string().optional() })])
+		.optional(),
 	title: i18nString,
 	body_html: i18nString,
 	date: z.string().optional(),
@@ -88,12 +94,12 @@ const aiCoding = defineCollection({
 });
 
 const backendFullstack = defineCollection({
-	loader: glob({ base: './src/content/backend-fullstack', pattern: '**/*.{md,mdx}' }),
+	loader: glob({ base: './src/content/backend-fullstack', pattern: '**/*.{md,mdx,json}' }),
 	schema: briefSchema,
 });
 
 const devNews = defineCollection({
-	loader: glob({ base: './src/content/dev-news', pattern: '**/*.{md,mdx}' }),
+	loader: glob({ base: './src/content/dev-news', pattern: '**/*.{md,mdx,json}' }),
 	schema: briefSchema,
 });
 

@@ -3,7 +3,8 @@ import { pickLang, type I18nValue, type Lang } from './pickLang';
 
 interface Update {
 	id?: string;
-	tag: 'feature' | 'fix' | 'model' | 'preview' | 'security' | 'update';
+	tag: string;
+	tag_label?: I18nValue;
 	title: I18nValue;
 	body_html: I18nValue;
 	date?: string;
@@ -17,19 +18,73 @@ interface Props {
 
 const { update, lang } = Astro.props;
 
-const TAG_LABELS: Record<Lang, Record<Update['tag'], string>> = {
-	es: { feature: 'Feature', fix: 'Fix', model: 'Modelo', preview: 'Preview', security: 'Seguridad', update: 'Update' },
-	en: { feature: 'Feature', fix: 'Fix', model: 'Model', preview: 'Preview', security: 'Security', update: 'Update' },
-	fr: { feature: 'Feature', fix: 'Fix', model: 'Modèle', preview: 'Aperçu', security: 'Sécurité', update: 'Update' },
+// Known per-tag labels per language. Unknown tags fall back to a
+// Capitalize of the tag string (e.g. "notable" → "Notable").
+const TAG_LABELS: Record<Lang, Record<string, string>> = {
+	es: {
+		feature: 'Feature',
+		fix: 'Fix',
+		model: 'Modelo',
+		preview: 'Preview',
+		security: 'Seguridad',
+		update: 'Update',
+		breaking: 'Breaking',
+		notable: 'Destacado',
+		minor: 'Minor',
+		patch: 'Patch',
+		release: 'Release',
+		deprecation: 'Deprecación',
+		ga: 'GA',
+		beta: 'Beta',
+	},
+	en: {
+		feature: 'Feature',
+		fix: 'Fix',
+		model: 'Model',
+		preview: 'Preview',
+		security: 'Security',
+		update: 'Update',
+		breaking: 'Breaking',
+		notable: 'Notable',
+		minor: 'Minor',
+		patch: 'Patch',
+		release: 'Release',
+		deprecation: 'Deprecation',
+		ga: 'GA',
+		beta: 'Beta',
+	},
+	fr: {
+		feature: 'Feature',
+		fix: 'Fix',
+		model: 'Modèle',
+		preview: 'Aperçu',
+		security: 'Sécurité',
+		update: 'Update',
+		breaking: 'Breaking',
+		notable: 'Notable',
+		minor: 'Mineur',
+		patch: 'Patch',
+		release: 'Release',
+		deprecation: 'Dépréciation',
+		ga: 'GA',
+		beta: 'Bêta',
+	},
 };
+
+function capitalize(s: string): string {
+	return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+const resolvedLabel = update.tag_label
+	? pickLang(update.tag_label, lang)
+	: TAG_LABELS[lang][update.tag] ?? capitalize(update.tag);
 
 const title = pickLang(update.title, lang);
 const body = pickLang(update.body_html, lang);
-const tagLabel = TAG_LABELS[lang][update.tag];
 ---
 
 <div class="update-item" id={update.id}>
-	<span class={`update-tag tag-${update.tag}`}>{tagLabel}</span>
+	<span class={`update-tag tag-${update.tag}`}>{resolvedLabel}</span>
 	<div class="update-content">
 		<h3>{title}</h3>
 		<div set:html={body} />

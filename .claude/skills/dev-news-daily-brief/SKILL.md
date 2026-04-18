@@ -57,156 +57,118 @@ Use Rioplatense Spanish for any commentary or editorial notes (e.g., "Esto es EN
 
 Save the output to /Users/ovi/Data/Schedule/DevNews/ as dev-news-{YYYY-MM-DD}.md. Create the directory if it doesn't exist.
 
-## Blog Auto-Publish (Bilingual EN/ES — Card Format)
+## Blog Auto-Publish — JSON output (NEW format)
 
-After saving the main output, ALSO create a **bilingual blog-ready copy** using the HTML card format.
+The blog renders dev-news briefs from **structured JSON data** via Astro components, NOT from hand-written HTML. Skill emits pure data, site composes design.
 
-Path: `/Users/ovi/Data/Projects/Blog/src/content/dev-news/dev-news-{YYYY-MM-DD}.mdx`
+Save to: `/Users/ovi/Data/Projects/Blog/src/content/dev-news/dev-news-{YYYY-MM-DD}.json`
 
-**IMPORTANT**: Use `.mdx` extension (not `.md`) — MDX is required for HTML inside markdown.
+> Legacy `.mdx` briefs still render — but all NEW briefs must be JSON.
 
-### File structure
+### Top-level schema
 
-```mdx
----
-title: "Dev News Daily — {Month Day, Year}"
-title_es: "Dev News Daily — {Day de Month de Year}"
-title_fr: "Dev News Daily — {Day Month Year in French}"
-description: "Daily developer news digest — frontend, TypeScript, React, and web platform"
-pubDate: "{YYYY-MM-DD}"
-category: "dev-news"
----
-
-<div class="lang-es">
-
-<div class="tool-section top-stories">
-<div class="tool-header">
-<div class="tool-icon">🔥</div>
-<div class="tool-meta">
-<h2>Top Stories</h2>
-<div class="subtitle">{N} noticias más relevantes del día</div>
-</div>
-</div>
-<div class="update-item">
-<span class="update-tag tag-breaking">Breaking</span>
-<div class="update-content">
-<h3>{Headline}</h3>
-<p>{Description in Spanish with Rioplatense commentary}</p>
-<a href="{url}">{source}</a>
-</div>
-</div>
-</div>
-
-<div class="tool-section typescript">
-<div class="tool-header">
-<div class="tool-icon">🟦</div>
-<div class="tool-meta">
-<h2>TypeScript</h2>
-</div>
-</div>
-<div class="update-item">
-<span class="update-tag tag-notable">Notable</span>
-<div class="update-content">
-<h3>{Headline}</h3>
-<p>{Description}</p>
-<a href="{url}">{source}</a>
-</div>
-</div>
-</div>
-
-<!-- More sections as needed -->
-
-</div>
-
-<div class="lang-en">
-
-<!-- Same HTML structure, translated to English -->
-
-</div>
-
-<div class="lang-fr">
-
-<!-- Same HTML structure, translated to technical French. Keep English technical terms untranslated when they're the de-facto name (React Server Components, edge, runtime, type checker, etc.). -->
-
-</div>
+```json
+{
+  "title":       { "es": "<es>", "en": "<en>", "fr": "<fr>" },
+  "description": { "es": "<es>", "en": "<en>", "fr": "<fr>" },
+  "pubDate":     "YYYY-MM-DD",
+  "category":    "dev-news",
+  "highlights":  [ /* 4–7 entries, see below */ ],
+  "tools":       [ /* one entry per section, see below */ ],
+  "notable_trends": [
+    { "es": "<es>", "en": "<en>", "fr": "<fr>" }
+  ]
+}
 ```
 
-- **Three languages are mandatory**: `lang-es` (Spanish/Rioplatense), `lang-en` (English), `lang-fr` (French). Same HTML shell, same data-anchor slugs, same source URLs — only visible text changes.
-- **French conventions**: formal technical French with natural imperatives/infinitives. Keep the loanwords devs actually use.
+`stats`, `models`, and `model_timeline_anchor` are **not used** in dev-news briefs (no model launches). Omit those fields.
 
-### Available section classes and emojis
-| Section | Class | Emoji |
-|---------|-------|-------|
-| Top Stories | `top-stories` | 🔥 |
-| TypeScript | `typescript` | 🟦 |
-| CSS | `css` | 🎨 |
-| HTML / Web Platform | `html` | 🌐 |
-| React | `react` | ⚛️ |
-| React Native | `react-native` | 📱 |
-| JS Frameworks | `js-frameworks` | 🧩 |
-| Build Tools & Runtimes | `build-tools` | 🔧 |
-| Developer Tools | `dev-tools` | 🛠️ |
-| Quick Links | `quick-links` | 📌 |
+Every i18n field accepts either a **string** or `{ es?, en, fr? }`. `en` is required; `es` and `fr` are optional — missing language falls back to `en`.
 
-### Available impact tag classes
-| Impact | Class | Color |
-|--------|-------|-------|
-| 🔴 Breaking/Major | `tag-breaking` | Red |
-| 🟡 Notable | `tag-notable` | Yellow |
-| 🟢 Minor | `tag-minor` | Green |
-| Patch | `tag-patch` | Blue |
-| Release | `tag-release` | Purple |
-| Security | `tag-security` | Pink |
-| Deprecation | `tag-deprecation` | Orange |
-| GA | `tag-ga` | Green |
-| Beta | `tag-beta` | Yellow |
+### Highlights (MANDATORY: 4–7 entries)
 
-### Critical formatting rules
-- ALL HTML tags MUST start at column 0 (NO indentation — 4 spaces = code block in markdown)
-- NO blank lines between sibling HTML tags inside a tool-section
-- Blank line REQUIRED after opening `<div class="lang-xx">` and before closing `</div>`
-- Use `<code>` tags for inline code references
-- Keep all source URLs identical in both languages
-
-## Highlight Bar (MANDATORY)
-
-Before writing the brief body, curate **4–7 "highlights"** that represent the most important NEW things of the day — in a SHORT, SCANNABLE form (one headline per highlight, max ~50 chars). These render at the top of the brief as clickable chips that jump to the corresponding full section below.
-
-### Frontmatter addition
-
-Add a `highlights` array to the frontmatter. Each entry needs `text` (English), `text_es` (Spanish) AND `text_fr` (French):
-
-```yaml
-highlights:
-  - text: "<short English headline, max ~50 chars>"
-    text_es: "<short Spanish headline, max ~50 chars>"
-    text_fr: "<short French headline, max ~50 chars>"
-    anchor: "<kebab-case-slug>"
-    icon: "<iconify-name>"
+```json
+"highlights": [
+  {
+    "text":   { "es": "~50 chars", "en": "~50 chars", "fr": "~50 chars" },
+    "anchor": "typescript",
+    "icon":   "simple-icons:typescript"
+  }
+]
 ```
 
-### Anchor wiring
+- `anchor`: must match a `tool.anchor` OR an `update.id` elsewhere in the file.
+- `icon`: Iconify name. Brand logos (`simple-icons:*`): `typescript`, `react`, `css`, `html5`, `tanstack`, `deno`, `bun`, `nodedotjs`, `vite`, `astro`, `nextdotjs`, `svelte`, `vuedotjs`, `angular`, `tailwindcss`, `visualstudiocode`, `github`. Lucide fallbacks (`lucide:*`): `flame` (top stories), `blocks` (frameworks), `package` (build tools), `terminal` (runtimes), `code` (dev tools), `sparkles`, `zap`, `shield`.
+- **Prioritize**: major releases, GA features, breaking changes, new APIs reaching Baseline. Skip minor patches.
 
-For EACH highlight, add `data-anchor="<slug>"` to the corresponding `<div class="tool-section ...">` element in **BOTH** `lang-es` AND `lang-en` copies (same slug in both — the frontend picks the currently visible one).
+### Tools (one entry per category section)
 
-Example:
+Unlike ai-coding, dev-news sections map to **content categories** (top-stories, TypeScript, CSS, React, etc.) rather than specific products. Each tool entry is a section.
 
-```html
-<div class="tool-section typescript" data-anchor="typescript">
-  ...
-</div>
+```json
+"tools": [
+  {
+    "id":         "top-stories",
+    "name":       "Top Stories",
+    "theme":      "top-stories",
+    "icon_emoji": "🔥",
+    "anchor":     "top-stories",
+    "updates": [
+      {
+        "id":    "ts-6-release",
+        "tag":   "breaking",
+        "title": { "es": "<es>", "en": "<en>", "fr": "<fr>" },
+        "body_html": {
+          "es": "<p>Comentario Rioplatense con <strong>bold</strong> y <code>code</code>.</p>",
+          "en": "<p>Description with <strong>bold</strong> and <code>code</code>.</p>",
+          "fr": "<p>Description avec <strong>gras</strong> et <code>code</code>.</p>"
+        },
+        "source": { "url": "https://...", "label": "typescriptlang.org" }
+      }
+    ]
+  }
+]
 ```
 
-### Rules
+**Available `theme` values** (map to CSS classes `.tool-section.<theme>`):
 
-- **Anchor slug**: kebab-case, unique within the brief. Examples: `typescript`, `css`, `react`, `tanstack`, `vite`, `tailwind`, `web-platform`.
-- **text / text_es**: ~50 chars MAX. A distilled teaser, NOT the full h3.
-  - Bad: `"TypeScript 6.0 Release Notes — last version in pure JavaScript"`
-  - Good: `"TypeScript 6.0 — last JS-based release"`
-- **icon**: Iconify name from the bundled packs:
-  - **Brand logos** (`simple-icons:*`): `typescript`, `react`, `css`, `html5`, `tanstack`, `deno`, `bun`, `nodedotjs`, `vite`, `astro`, `nextdotjs`, `svelte`, `vuedotjs`, `angular`, `tailwindcss`, `visualstudiocode`, `github`.
-  - **Lucide fallbacks** (`lucide:*`): `flame` (top stories), `blocks` (frameworks), `package` (build tools), `terminal` (runtimes), `code` (dev tools), `sparkles`, `zap`, `shield`.
-- **4 minimum, 7 maximum** per brief. Prioritize: major releases, GA features, breaking changes, new APIs reaching Baseline. Skip minor patches.
+| Section               | `theme`        | `icon_emoji` |
+|-----------------------|----------------|--------------|
+| Top Stories           | `top-stories`  | 🔥 |
+| TypeScript            | `typescript`   | 🟦 |
+| CSS                   | `css`          | 🎨 |
+| HTML / Web Platform   | `html`         | 🌐 |
+| React                 | `react`        | ⚛️ |
+| React Native          | `react-native` | 📱 |
+| JS Frameworks         | `js-frameworks`| 🧩 |
+| Build Tools & Runtimes| `build-tools`  | 🔧 |
+| Developer Tools       | `dev-tools`    | 🛠️ |
+| Quick Links           | `quick-links`  | 📌 |
+
+**Available `tag` values** (free-form; map to CSS `.update-tag.tag-<value>`):
+
+| Impact           | `tag`         |
+|------------------|---------------|
+| 🔴 Breaking/Major| `breaking`    |
+| 🟡 Notable       | `notable`     |
+| 🟢 Minor         | `minor`       |
+| Patch            | `patch`       |
+| Release          | `release`     |
+| Security         | `security`    |
+| Deprecation      | `deprecation` |
+| GA               | `ga`          |
+| Beta             | `beta`        |
+
+Labels are translated automatically per language. If you need a custom label, add `tag_label: { es, en, fr }` to the update.
+
+### Quality checks before saving
+
+- [ ] `en` is present on every i18n field
+- [ ] Each `highlights[].anchor` matches a `tool.anchor` or `update.id`
+- [ ] Every update has a `source` with a valid URL
+- [ ] Skip minor patches — prioritize breaking/major/GA/security
+- [ ] Use Rioplatense Spanish for `es` commentary (natural "voseo", e.g. "ojo con esto", "es una locura")
+- [ ] Keep English loanwords devs actually use untranslated (`React Server Components`, `edge`, `runtime`, `type checker`, `prompt caching`)
 
 ### Auto-publish (MANDATORY)
 
@@ -215,7 +177,7 @@ Example:
 ```bash
 cd /Users/ovi/Data/Projects/Blog
 git pull --rebase --autostash
-git add src/content/dev-news/dev-news-{YYYY-MM-DD}.mdx
+git add src/content/dev-news/dev-news-{YYYY-MM-DD}.json
 git commit -m "brief(dev-news): {YYYY-MM-DD}"
 git push
 ```

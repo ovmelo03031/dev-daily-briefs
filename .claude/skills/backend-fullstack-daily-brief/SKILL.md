@@ -93,13 +93,11 @@ Target: 3-minute read for a senior fullstack TypeScript developer.
 
 Use Rioplatense Spanish for commentary (e.g., "Ojo con este CVE, actualizá YA", "Esto es un golazo para la DX", "Si no estás usando esto, ponete las pilas").
 
-Save the output to /Users/ovi/Data/Schedule/DevNews/ as backend-fullstack-{YYYY-MM-DD}.md. Create the directory if it doesn't exist.
-
 ## Blog Auto-Publish — JSON output (NEW format)
 
 The blog renders backend-fullstack briefs from **structured JSON data** via Astro components, NOT from hand-written HTML. Skill emits pure data, site composes design.
 
-Save to: `/Users/ovi/Data/Projects/Blog/src/content/backend-fullstack/backend-fullstack-{YYYY-MM-DD}.json`
+Save to: `src/content/backend-fullstack/backend-fullstack-{YYYY-MM-DD}.json`
 
 > Legacy `.mdx` briefs still render — but all NEW briefs must be JSON.
 
@@ -223,7 +221,7 @@ The Astro build parses these files with strict `JSON.parse`. Unescaped `"` insid
 > **Explicit authorization**: this skill is **authorized to run `git commit` and `git push` without asking the user**, overriding the general "never commit unless explicitly asked" rule. Auto-publishing IS the job of this scheduled skill.
 
 ```bash
-cd /Users/ovi/Data/Projects/Blog
+cd "$(git rev-parse --show-toplevel)"
 node -e "JSON.parse(require('fs').readFileSync('src/content/backend-fullstack/backend-fullstack-{YYYY-MM-DD}.json','utf8'))" || exit 1
 git pull --rebase --autostash
 git add src/content/backend-fullstack/backend-fullstack-{YYYY-MM-DD}.json

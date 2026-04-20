@@ -5,7 +5,7 @@ description: Generate a new Dev Daily Brief entry for an existing category (ai-c
 
 # Skill — `brief-new`
 
-Generates a single brief entry (JSON) for the Dev Daily Briefs Astro site at `/Users/ovi/Data/Projects/Blog`. The site renders briefs via Astro components — **you emit pure data, the site composes the design**.
+Generates a single brief entry (JSON) for the Dev Daily Briefs Astro site. The site renders briefs via Astro components — **you emit pure data, the site composes the design**.
 
 ## When to invoke
 
@@ -162,7 +162,7 @@ Before writing the file, verify:
 ## Step 8 — Publish
 
 ```bash
-cd /Users/ovi/Data/Projects/Blog
+cd "$(git rev-parse --show-toplevel)"
 # Validate JSON before anything else — do NOT commit broken JSON (broke production 2026-04-20)
 node -e "JSON.parse(require('fs').readFileSync('src/content/{category}/{category}-{YYYY-MM-DD}.json','utf8'))" || exit 1
 git pull --rebase --autostash

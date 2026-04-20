@@ -5,7 +5,7 @@ description: Scaffold a completely new category on the Dev Daily Briefs site —
 
 # Skill — `brief-category-new`
 
-Adds a brand-new daily-brief category to `/Users/ovi/Data/Projects/Blog`. This is a bigger change than adding a single brief — it touches multiple files. For adding ONE more entry to an existing category use `brief-new` instead.
+Adds a brand-new daily-brief category to the Dev Daily Briefs Astro site. This is a bigger change than adding a single brief — it touches multiple files. For adding ONE more entry to an existing category use `brief-new` instead.
 
 ## When to invoke
 
@@ -70,7 +70,7 @@ category: z.enum(['ai-coding', 'backend-fullstack', 'dev-news', '{slug}']),
 ### 2c. Create content directory
 
 ```bash
-mkdir -p /Users/ovi/Data/Projects/Blog/src/content/{slug}
+mkdir -p src/content/{slug}
 ```
 
 Leave it empty — the first brief goes in via the `brief-new` skill.
@@ -169,11 +169,11 @@ node -e "
 const fs=require('fs');
 const pack='lucide'; // or 'simple-icons'
 const name='smartphone'; // change
-const p=require('/Users/ovi/Data/Projects/Blog/node_modules/@iconify-json/\${pack}/icons.json');
+const p=require(\`\${process.cwd()}/node_modules/@iconify-json/\${pack}/icons.json\`);
 const i=p.icons[name];
 const w=i.width||p.width||24;
 const h=i.height||p.height||24;
-fs.writeFileSync(\`/Users/ovi/Data/Projects/Blog/public/icons/\${pack}/\${name}.svg\`,
+fs.writeFileSync(\`\${process.cwd()}/public/icons/\${pack}/\${name}.svg\`,
   \`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 \${w} \${h}'>\${i.body}</svg>\`);
 "
 ```
@@ -187,7 +187,7 @@ The nav iterates `Object.entries(CATEGORIES)` so the new category shows up autom
 Run the dev server and check:
 
 ```bash
-cd /Users/ovi/Data/Projects/Blog && pnpm dev
+pnpm dev
 ```
 
 - `http://localhost:4321/dev-daily-briefs/{slug}/` renders an empty hero with "No briefs yet" message
@@ -209,7 +209,7 @@ mcp__scheduled-tasks__create_scheduled_task:
 The prompt MUST include:
 - Web search queries for the topic
 - Filtering rules (newness, developer relevance, recency)
-- The same "Blog Auto-Publish" section as the existing tasks, with the path updated to `/Users/ovi/Data/Projects/Blog/src/content/{slug}/`
+- The same "Blog Auto-Publish" section as the existing tasks, with the path updated to `src/content/{slug}/`
 - The full "## Highlight Bar (MANDATORY)" block (copy from `~/.claude/scheduled-tasks/ai-coding-daily-brief/SKILL.md`)
 - An auto-commit + push step at the end
 
@@ -231,7 +231,7 @@ Or, if the user set up a scheduled task, just wait for the next cron fire.
 ## Step 6 — Commit
 
 ```bash
-cd /Users/ovi/Data/Projects/Blog && \
+cd "$(git rev-parse --show-toplevel)" && \
   git add src/consts.ts src/content.config.ts src/pages/{slug}/ public/styles/ai-coding-brief.css public/icons/ && \
   git commit -m "feat: add {slug} category scaffold" && \
   git push

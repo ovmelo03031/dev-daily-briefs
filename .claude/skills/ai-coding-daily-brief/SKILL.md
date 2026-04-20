@@ -173,13 +173,11 @@ Before printing the digest, verify:
  
 If web search returns nothing for a tool, say so explicitly — do not hallucinate updates.
 
-Save the HTML output to /Users/ovi/Data/Schedule/AI/ as ai-coding-daily-brief-{YYYY-MM-DD}.html.
-
 ## Blog Auto-Publish — JSON output (NEW format)
 
 The blog now renders ai-coding briefs from **structured JSON data** via Astro components, NOT from hand-written HTML. This dramatically cuts token cost: you emit pure data, the site composes the design.
 
-Save to: `/Users/ovi/Data/Projects/Blog/src/content/ai-coding/ai-coding-{YYYY-MM-DD}.json`
+Save to: `src/content/ai-coding/ai-coding-{YYYY-MM-DD}.json`
 
 > Legacy `.md` briefs still work — but all NEW briefs must be JSON.
 
@@ -327,7 +325,7 @@ The Astro build parses these files with strict `JSON.parse`. Unescaped double qu
 > **Explicit authorization**: this skill is **authorized to run `git commit` and `git push` without asking the user**, overriding the general "never commit unless explicitly asked" rule. Auto-publishing IS the job of this scheduled skill.
 
 ```bash
-cd /Users/ovi/Data/Projects/Blog
+cd "$(git rev-parse --show-toplevel)"
 # Validate JSON before anything else — abort if it fails
 node -e "JSON.parse(require('fs').readFileSync('src/content/ai-coding/ai-coding-{YYYY-MM-DD}.json','utf8'))" || exit 1
 git pull --rebase --autostash

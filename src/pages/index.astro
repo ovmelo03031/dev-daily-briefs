@@ -7,6 +7,7 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import TodayHighlights from '../components/TodayHighlights.astro';
+import { pickLang } from '../components/brief/pickLang';
 import { SITE_DESCRIPTION, SITE_TITLE, CATEGORIES, type Category } from '../consts';
 import logo from '../assets/brand/logo-wordmark-transparent.png';
 
@@ -30,6 +31,16 @@ function isSameDay(a: Date, b: Date) {
 const now = new Date();
 const cats: Category[] = ['ai-coding', 'backend-fullstack', 'dev-news'];
 
+// Normalize highlight text shape so TodayHighlights (expects flat text/text_es/text_fr)
+// works with both legacy MD briefs and new JSON briefs that use nested { es, en, fr }.
+function normalizeHighlight(h: (typeof allPosts)[number]['data']['highlights'] extends (infer U)[] | undefined ? U : never) {
+	if (typeof h.text === 'string') {
+		return { text: h.text, text_es: h.text_es, text_fr: h.text_fr, anchor: h.anchor, icon: h.icon };
+	}
+	const t = h.text as { es?: string; en: string; fr?: string };
+	return { text: t.en, text_es: t.es, text_fr: t.fr, anchor: h.anchor, icon: h.icon };
+}
+
 const highlightGroups = cats
 	.map((slug) => {
 		const latest = allPosts.find(
@@ -43,10 +54,10 @@ const highlightGroups = cats
 			accent: cat.accent,
 			icon: cat.icon,
 			briefId: latest.id,
-			briefTitle: latest.data.title,
+			briefTitle: pickLang(latest.data.title, 'en'),
 			briefPubDate: latest.data.pubDate,
 			isToday: isSameDay(latest.data.pubDate, now),
-			highlights: latest.data.highlights ?? [],
+			highlights: (latest.data.highlights ?? []).map(normalizeHighlight),
 		};
 	})
 	.filter((g): g is NonNullable<typeof g> => g !== null);
@@ -137,7 +148,7 @@ const latestPosts = allPosts.slice(0, 5);
 								</span>
 								<div class="min-w-0 flex-1">
 									<h3 class="text-sm font-medium text-[var(--color-text)] truncate group-hover:text-[var(--color-accent)]">
-										{post.data.title}
+										{pickLang(post.data.title, 'en')}
 									</h3>
 									<p class="text-xs text-[var(--color-text-muted)]">
 										<FormattedDate date={post.data.pubDate} />

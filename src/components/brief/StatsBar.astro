@@ -1,0 +1,54 @@
+---
+import type { Lang } from './pickLang';
+
+interface Stats {
+	tools_tracked?: number | string;
+	updates_found?: number | string;
+	models_cataloged?: number | string;
+	providers_covered?: number | string;
+}
+
+interface Props {
+	stats: Stats;
+	lang: Lang;
+}
+
+const { stats, lang } = Astro.props;
+
+const LABELS: Record<Lang, Record<string, string>> = {
+	es: {
+		tools_tracked: 'Herramientas Rastreadas',
+		updates_found: 'Actualizaciones',
+		models_cataloged: 'Modelos Catalogados',
+		providers_covered: 'Proveedores Cubiertos',
+	},
+	en: {
+		tools_tracked: 'Tools Tracked',
+		updates_found: 'Updates Found',
+		models_cataloged: 'Models Cataloged',
+		providers_covered: 'Providers Covered',
+	},
+	fr: {
+		tools_tracked: 'Outils Suivis',
+		updates_found: 'Mises à Jour',
+		models_cataloged: 'Modèles Catalogués',
+		providers_covered: 'Fournisseurs Couverts',
+	},
+};
+
+const t = LABELS[lang];
+const keys = ['tools_tracked', 'updates_found', 'models_cataloged', 'providers_covered'] as const;
+---
+
+<div class="stats-bar">
+	{keys.map((key) => {
+		const val = stats[key];
+		if (val === undefined || val === null || val === '') return null;
+		return (
+			<div class="stat-card">
+				<div class="stat-num">{val}</div>
+				<div class="stat-label">{t[key]}</div>
+			</div>
+		);
+	})}
+</div>

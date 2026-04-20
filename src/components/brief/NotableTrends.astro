@@ -1,0 +1,21 @@
+---
+import { pickLang, type I18nValue, type Lang } from './pickLang';
+
+interface Props {
+	trends: I18nValue[];
+	lang: Lang;
+}
+
+const { trends, lang } = Astro.props;
+
+const TITLES: Record<Lang, string> = {
+	es: '📊 Tendencias Destacadas',
+	en: '📊 Notable Trends',
+	fr: '📊 Tendances Notables',
+};
+---
+
+<div class="trends">
+	<h2>{TITLES[lang]}</h2>
+	{trends.map((t) => <p>{pickLang(t, lang)}</p>)}
+</div>

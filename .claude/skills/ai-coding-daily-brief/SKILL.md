@@ -74,18 +74,39 @@ Search queries (customize the date window as needed):
 - "AI model launches Claude GPT Gemini Llama new releases 2025 2026"
 ```
 
-#### 1c — Primary changelog URLs
- 
-For each tool, also fetch the primary release/changelog page directly when available:
- 
+#### 1c — Adjacent AI-dev-tool launches (company-level, 5 queries)
+
+The 5 "coding tools" above are intentionally narrow. But vendors routinely ship **new dev-adjacent products** — prototyping, design, agents, canvas-style workflows — that affect how developers work. These get missed by tool-specific queries. Always run a second sweep at the **company level**:
+
 ```
-Priority fetch URLs:
+- "Anthropic new product launch 2025 2026"       (e.g. Claude Design, Claude Artifacts, new Labs products)
+- "OpenAI new developer tool launch 2025 2026"   (e.g. Canvas, Operator, new agent runtimes)
+- "Google AI new developer product 2025 2026"    (e.g. AI Studio updates, Jules, new Gemini products)
+- "Microsoft GitHub AI developer product 2025 2026" (e.g. Copilot Workspace, Spark, new agent tools)
+- "AI coding IDE launch 2025 2026"                (new entrants: Cursor, Windsurf, Zed, etc.)
+```
+
+#### 1d — Primary fetch URLs
+
+For each tool AND each vendor, fetch the primary release/changelog page directly when available. **Corporate blogs are mandatory** — they catch new product launches (like Claude Design) that tool-specific release-notes pages miss.
+
+```
+Tool-specific release notes:
 - Claude Code:   https://docs.anthropic.com/en/release-notes/claude-code
-- OpenAI Codex:  https://github.com/openai/codex/releases  (and https://openai.com/blog)
+- OpenAI Codex:  https://github.com/openai/codex/releases
 - GPT models:    https://platform.openai.com/docs/models
 - Gemini:        https://cloud.google.com/gemini/docs/release-notes
 - Copilot:       https://github.blog/changelog/ (filter: copilot)
                  https://code.visualstudio.com/updates
+
+Corporate news / product launches (MANDATORY — catches adjacent launches):
+- Anthropic:     https://www.anthropic.com/news
+- OpenAI:        https://openai.com/blog
+- Google AI:     https://blog.google/technology/ai/
+- GitHub:        https://github.blog/
+- Microsoft Dev: https://devblogs.microsoft.com/
+
+Chinese labs:
 - Qwen:          https://qwenlm.github.io/blog/
 - DeepSeek:      https://api-docs.deepseek.com/updates
 - Kimi:          https://github.com/MoonshotAI/Kimi-K2
@@ -154,179 +175,145 @@ If web search returns nothing for a tool, say so explicitly — do not hallucina
 
 Save the HTML output to /Users/ovi/Data/Schedule/AI/ as ai-coding-daily-brief-{YYYY-MM-DD}.html.
 
-## Blog Auto-Publish
+## Blog Auto-Publish — JSON output (NEW format)
 
-After saving the HTML output, ALSO create a **styled Markdown version** for the blog.
-The blog uses Astro which renders raw HTML inside `.md` files natively.
+The blog now renders ai-coding briefs from **structured JSON data** via Astro components, NOT from hand-written HTML. This dramatically cuts token cost: you emit pure data, the site composes the design.
 
-Save to: `/Users/ovi/Data/Projects/Blog/src/content/ai-coding/ai-coding-{YYYY-MM-DD}.md`
+Save to: `/Users/ovi/Data/Projects/Blog/src/content/ai-coding/ai-coding-{YYYY-MM-DD}.json`
 
-### File structure
+> Legacy `.md` briefs still work — but all NEW briefs must be JSON.
 
-Start with frontmatter, then use HTML with CSS classes (the blog has styles for these classes):
+### Top-level schema
 
-```markdown
----
-title: "AI Coding Tools — Daily Brief | {Month Day, Year}"
-description: "Daily digest of AI coding tools and model launches"
-pubDate: "{YYYY-MM-DD}"
-category: "ai-coding"
----
-
-<div class="stats-bar">
-  <div class="stat-card"><div class="stat-num">{N}</div><div class="stat-label">Tools Tracked</div></div>
-  <div class="stat-card"><div class="stat-num">{N}+</div><div class="stat-label">Updates Found</div></div>
-  <div class="stat-card"><div class="stat-num">{N}</div><div class="stat-label">Models Cataloged</div></div>
-  <div class="stat-card"><div class="stat-num">{N}</div><div class="stat-label">Providers Covered</div></div>
-</div>
-
-<!-- For EACH tool, use this structure: -->
-<div class="tool-section claude"><!-- class: claude | openai | gemini | copilot | vscode -->
-  <div class="tool-header">
-    <div class="tool-icon">{emoji}</div>
-    <div class="tool-meta">
-      <h2>{Tool Name}</h2>
-      <div class="publisher">{Publisher}</div>
-    </div>
-    <span class="version-badge">{version}</span>
-  </div>
-
-  <div class="update-item">
-    <span class="update-tag tag-feature">Feature</span><!-- tag-feature | tag-fix | tag-model | tag-preview | tag-security | tag-update -->
-    <div class="update-content">
-      <h3>{Update Title}</h3>
-      <p>{Description}</p>
-      <a href="{url}">{source}</a>
-    </div>
-  </div>
-  <!-- repeat update-item for each update -->
-</div>
-
-<!-- Model Launches Table -->
-<div class="model-table-wrapper">
-  <h2>🚀 Model Launches Timeline</h2>
-  <div class="subtitle-text">All major model launches from the last 7 days, sorted newest first</div>
-  <table>
-    <thead>
-      <tr><th>Date</th><th>Model</th><th>Provider</th><th>Tier</th><th>Type</th><th>Notes</th></tr>
-    </thead>
-    <tbody>
-      <tr class="recent-row"><!-- or upcoming-row for rumored -->
-        <td>{date}</td>
-        <td><strong>{model name}</strong></td>
-        <td><span class="provider-badge provider-anthropic">{provider}</span></td><!-- provider-anthropic | provider-openai | provider-google | provider-meta | provider-xai | provider-mistral | provider-alibaba | provider-deepseek | provider-moonshot | provider-zhipu | provider-bytedance | provider-minimax -->
-        <td><span class="tier tier-splus">S+</span></td><!-- tier-splus | tier-s | tier-aplus | tier-a | tier-bplus -->
-        <td><span class="weight-badge weight-proprietary">Proprietary</span></td><!-- weight-open | weight-proprietary | weight-upcoming -->
-        <td>{description}</td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="tier-legend">
-    <span><strong class="tier tier-splus">S+</strong> Frontier</span>
-    <span><strong class="tier tier-s">S</strong> Major</span>
-    <span><strong class="tier tier-aplus">A+</strong> Notable</span>
-    <span><strong class="tier tier-a">A</strong> Solid</span>
-    <span><strong class="tier tier-bplus">B+</strong> Incremental</span>
-  </div>
-</div>
-
-<!-- Notable Trends at the end -->
-<div class="trends">
-  <h2>📊 Notable Trends</h2>
-  <p>{trend paragraph 1}</p>
-  <p>{trend paragraph 2}</p>
-</div>
+```json
+{
+  "title":       { "es": "<es>", "en": "<en>", "fr": "<fr>" },
+  "description": { "es": "<es>", "en": "<en>", "fr": "<fr>" },
+  "pubDate":     "YYYY-MM-DD",
+  "category":    "ai-coding",
+  "highlights":  [ /* 4–7 entries, see below */ ],
+  "stats":       { "tools_tracked": N, "updates_found": "N+", "models_cataloged": N, "providers_covered": N },
+  "tools":       [ /* see Tools section */ ],
+  "models":      [ /* see Models section */ ],
+  "model_timeline_anchor": "model-timeline",
+  "notable_trends": [
+    { "es": "<es>", "en": "<en>", "fr": "<fr>" },
+    { "es": "<es>", "en": "<en>", "fr": "<fr>" }
+  ]
+}
 ```
 
-### Bilingual: wrap everything in language divs
+Every i18n field accepts either a **string** (applies to all languages) or an object `{ es, en, fr }`. **`en` is required**, `es` and `fr` are optional — if missing, the UI toggle falls back to `en` automatically. Write all three whenever possible.
 
-The blog supports EN/ES toggle. Wrap the ENTIRE HTML content in language divs:
+### Highlights (MANDATORY: 4–7 entries)
 
-```markdown
----
-title: "AI Coding Tools — Daily Brief | {Month Day, Year}"
-title_es: "AI Coding Tools — Resumen Diario | {Day de Month de Year}"
-title_fr: "AI Coding Tools — Résumé Quotidien | {Day Month Year in French}"
-description: "Daily digest of AI coding tools and model launches"
-pubDate: "{YYYY-MM-DD}"
-category: "ai-coding"
----
+Distilled teasers shown as clickable chips at the top of the brief. Each chip deep-links to the matching `tool.anchor` / `update.id` / `model_timeline_anchor` below.
 
-<div class="lang-es">
-
-{Full Spanish version with HTML structure as described above}
-
-</div>
-<div class="lang-en">
-
-{Full English version — same HTML structure, translated to clean technical English. Keep all CSS classes, badges, table structure identical. Only translate text content.}
-
-</div>
-<div class="lang-fr">
-
-{Full French version — same HTML structure, translated to clean technical French. Keep all CSS classes, badges, table structure identical. Only translate text content.}
-
-</div>
+```json
+"highlights": [
+  {
+    "text":   { "es": "~50 chars", "en": "~50 chars", "fr": "~50 chars" },
+    "anchor": "claude-code",
+    "icon":   "simple-icons:anthropic"
+  }
+]
 ```
 
-- IMPORTANT: `<div class="lang-es">`, `<div class="lang-en">` and `<div class="lang-fr">` MUST start at column 0
-- ALL HTML inside MUST also start at column 0 (no indentation — 4 spaces = code block in markdown)
-- NO blank lines between sibling HTML tags inside a tool-section
-- Blank line REQUIRED after opening `<div class="lang-xx">` and before closing `</div>`
-- **All three languages are mandatory** going forward. Same HTML shell, same data-anchor slugs, same source URLs — only translate visible text.
-- **French conventions**: use formal technical French ("vous" is fine, but for a tech audience, dropping the pronoun and using imperative / infinitive is natural: "Cliquez...", "Installer...", etc.). Keep English technical terms untranslated when they're the de-facto name (e.g. `React Server Components`, `edge`, `runtime`, `prompt caching`, `type checker`).
+- `anchor`: kebab-case, must match a `tool.anchor` OR an `update.id` OR `model_timeline_anchor` elsewhere in the file.
+- `icon`: Iconify name. Brand logos (`simple-icons:*`): `anthropic`, `openai`, `google`, `googlegemini`, `githubcopilot`, `visualstudiocode`, `meta`, `mistralai`, `alibabacloud`, `bytedance`, `minimax`, `typescript`, `react`, `tanstack`, `deno`, `bun`, `nodedotjs`, `vite`, `cloudflare`, `tailwindcss`, `docker`, `kubernetes`, `amazonwebservices`, `redis`, `postgresql`, `astro`, `nextdotjs`, `svelte`, `vuedotjs`, `angular`, `prisma`, `mongodb`, `github`, `x`. Lucide fallbacks (`lucide:*`): `flame`, `rocket`, `shield`, `atom`, `moon` (Moonshot), `brain-circuit` (Zhipu), `search` (DeepSeek), `terminal`, `blocks`, `sparkles`, `zap`.
+- **Prioritize**: new model launches, GA features, major version bumps, security CVEs, breaking changes. Skip minor patches.
 
-## Highlight Bar (MANDATORY)
+### Tools (5 core + adjacent launches)
 
-Before writing the brief body, curate **4–7 "highlights"** that represent the most important NEW things of the day — in a SHORT, SCANNABLE form (one headline per highlight, max ~50 chars). These render at the top of the brief as clickable chips that jump to the corresponding full section below.
+**Core 5** (always present, even if empty): Claude Code, OpenAI Codex, GPT, Gemini, GitHub Copilot.
 
-### Frontmatter addition
+**Adjacent launches** (add as ADDITIONAL tool entries when relevant): whenever Anthropic / OpenAI / Google / Microsoft / GitHub ship a NEW DEV-ADJACENT product (prototyping, design, agents, canvas, workspace), add it as its own `tool` entry in the same array. This was specifically why the April 17 brief missed **Claude Design** — that launch did NOT fit any of the 5 core tools but deserved its own section. Reuse an existing theme that matches the vendor's brand:
 
-Add a `highlights` array to the frontmatter. Each entry needs `text` (English), `text_es` (Spanish) AND `text_fr` (French). All three languages share the same array:
+| Vendor      | Reuse theme | Example products |
+|-------------|-------------|-------------------|
+| Anthropic   | `claude`    | Claude Code, Claude Design, Claude Artifacts |
+| OpenAI      | `openai`    | Codex CLI, Canvas, Operator, Apps SDK |
+| Google      | `gemini`    | Gemini Code Assist, Jules, AI Studio |
+| GitHub      | `copilot`   | Copilot, Copilot Workspace, Spark |
+| Microsoft   | `vscode`    | VS Code, Edit, Dev Home |
 
-```yaml
-highlights:
-  - text: "<short English headline, max ~50 chars>"
-    text_es: "<short Spanish headline, max ~50 chars>"
-    text_fr: "<short French headline, max ~50 chars>"
-    anchor: "<kebab-case-slug>"
-    icon: "<iconify-name>"
+If a product is from a new vendor with no matching theme (e.g. Cursor, Windsurf, Zed), reuse `vscode` for IDE-style or `copilot` for agent/workspace-style until a dedicated theme is added to the CSS.
+
+Example `tools` array:
+
+```json
+"tools": [
+  {
+    "id":         "claude-code",
+    "name":       "Claude Code",
+    "publisher":  "Anthropic",
+    "theme":      "claude",
+    "icon_emoji": "🤖",
+    "version":    "v2.1.114",
+    "anchor":     "claude-code",
+    "updates": [
+      {
+        "id":    "claude-opus-47",
+        "tag":   "model",
+        "title": { "es": "<es>", "en": "<en>", "fr": "<fr>" },
+        "body_html": {
+          "es": "<p>Markup HTML inline permitido: <strong>bold</strong>, <em>italic</em>, <code>code</code>, enlaces manuales.</p>",
+          "en": "<p>Inline HTML allowed: <strong>bold</strong>, <em>italic</em>, <code>code</code>, manual links.</p>",
+          "fr": "<p>HTML inline autorisé : <strong>gras</strong>, <em>italique</em>, <code>code</code>, liens manuels.</p>"
+        },
+        "date":   "16 abr 2026",
+        "source": { "url": "https://...", "label": "anthropic.com" }
+      }
+    ]
+  }
+]
 ```
 
-### Anchor wiring
+- `theme`: one of `claude`, `openai`, `gemini`, `copilot`, `vscode`. Drives the accent gradient.
+- `tag`: one of `feature`, `fix`, `model`, `preview`, `security`, `update`. The component translates the label per language.
+- `body_html`: short HTML paragraph per language. Keep to inline elements (`<p>`, `<strong>`, `<em>`, `<code>`, `<a>`). The renderer trusts this content — never inject untrusted input.
+- `id`: optional. Add it only when a highlight chip needs to jump to a specific update. Otherwise the anchor is the `tool.anchor`.
 
-For EACH highlight, add `data-anchor="<slug>"` to the corresponding `<div class="tool-section ...">` or `<div class="model-table-wrapper">` element in **BOTH** `lang-es` AND `lang-en` copies (same slug in both — the frontend picks the currently visible one).
+### Models (Model Launches Timeline)
 
-Example:
-
-```html
-<div class="tool-section claude" data-anchor="claude-code">
-  ...
-</div>
-<div class="model-table-wrapper" data-anchor="model-timeline">
-  ...
-</div>
+```json
+"models": [
+  {
+    "date":           "2026-04-18",
+    "name":           "Claude Opus 4.7",
+    "provider":       "anthropic",
+    "provider_label": "Anthropic",
+    "tier":           "splus",
+    "weight":         "proprietary",
+    "notes":          { "es": "<es>", "en": "<en>", "fr": "<fr>" },
+    "row_kind":       "recent"
+  }
+]
 ```
 
-### Rules
+- `provider`: one of `anthropic`, `openai`, `google`, `meta`, `xai`, `mistral`, `alibaba`, `deepseek`, `moonshot`, `zhipu`, `bytedance`, `minimax`. Drives the badge color.
+- `tier`: one of `splus`, `s`, `aplus`, `a`, `bplus` (rendered as S+ / S / A+ / A / B+).
+- `weight`: one of `open` (open-weight), `proprietary`, `upcoming` (rumored / not yet released).
+- `row_kind`: optional. `recent` highlights the row; `upcoming` dims it. Defaults based on `weight`.
+- Sort chronologically, newest first. Upcoming/rumored rows at the bottom.
 
-- **Anchor slug**: kebab-case, unique within the brief. Examples: `claude-code`, `openai-codex`, `gpt-models`, `gemini-code-assist`, `github-copilot`, `model-timeline`.
-- **text / text_es**: ~50 chars MAX. A distilled teaser, NOT the full h3. Examples:
-  - Bad: `"Claude Opus 4.7 xhigh Available in Claude Code v2.1.111"`
-  - Good: `"Claude Opus 4.7 with xhigh effort level"`
-- **icon**: Iconify name from the bundled packs:
-  - **Brand logos** (`simple-icons:*`): `anthropic`, `openai`, `google`, `googlegemini`, `githubcopilot`, `visualstudiocode`, `meta`, `mistralai`, `alibabacloud`, `bytedance`, `minimax`, `typescript`, `react`, `css`, `html5`, `tanstack`, `deno`, `bun`, `nodedotjs`, `vite`, `cloudflare`, `apachekafka`, `tailwindcss`, `docker`, `kubernetes`, `amazonwebservices`, `redis`, `postgresql`, `astro`, `nextdotjs`, `svelte`, `vuedotjs`, `angular`, `prisma`, `mongodb`, `github`, `x`.
-  - **Lucide fallbacks** (`lucide:*`): `flame` (top stories), `rocket` (launches), `shield` (security), `atom` (xAI / unknown AI lab), `moon` (Moonshot), `brain-circuit` (Zhipu), `search` (DeepSeek), `terminal`, `blocks`, `database`, `cloud`, `layers`, `server`, `package`, `newspaper`, `sparkles`, `zap`.
-- **4 minimum, 7 maximum** per brief. Prioritize: new model launches, GA features, major version bumps, security CVEs, breaking changes. Skip minor patches.
+### Quality checks before saving
 
-### After saving the blog file, auto-publish (MANDATORY):
+- [ ] `en` is present on every i18n field
+- [ ] `highlights[].anchor` each matches a `tool.anchor`, an `update.id`, or `model_timeline_anchor`
+- [ ] Sources cited on every update (one `source` per update minimum, or a clear date)
+- [ ] No duplicates across tools (same release mentioned twice)
+- [ ] `notable_trends` has 1–3 short paragraphs grounded in the items actually found
+- [ ] If web search found nothing for a tool, the `tool.updates` array is empty (don't hallucinate — empty arrays are fine)
+
+### Auto-publish (MANDATORY)
 
 > **Explicit authorization**: this skill is **authorized to run `git commit` and `git push` without asking the user**, overriding the general "never commit unless explicitly asked" rule. Auto-publishing IS the job of this scheduled skill.
 
 ```bash
 cd /Users/ovi/Data/Projects/Blog
 git pull --rebase --autostash
-git add src/content/ai-coding/ai-coding-{YYYY-MM-DD}.md
+git add src/content/ai-coding/ai-coding-{YYYY-MM-DD}.json
 git commit -m "brief(ai-coding): {YYYY-MM-DD}"
 git push
 ```

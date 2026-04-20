@@ -1,0 +1,30 @@
+---
+import type { Lang } from './pickLang';
+import StatsBar from './StatsBar.astro';
+import ToolSection from './ToolSection.astro';
+import ModelTable from './ModelTable.astro';
+import NotableTrends from './NotableTrends.astro';
+
+interface Props {
+	stats?: Parameters<typeof StatsBar>[0]['stats'];
+	tools?: Array<Parameters<typeof ToolSection>[0]['tool']>;
+	models?: Array<Parameters<typeof ModelTable>[0]['models'][number]>;
+	modelTimelineAnchor?: string;
+	notableTrends?: Array<Parameters<typeof NotableTrends>[0]['trends'][number]>;
+}
+
+const { stats, tools, models, modelTimelineAnchor, notableTrends } = Astro.props;
+
+const LANGS: Lang[] = ['es', 'en', 'fr'];
+---
+
+{LANGS.map((lang) => (
+	<div class={`lang-${lang}`}>
+		{stats && <StatsBar stats={stats} lang={lang} />}
+		{tools && tools.map((tool) => <ToolSection tool={tool} lang={lang} />)}
+		{models && models.length > 0 && (
+			<ModelTable models={models} lang={lang} anchor={modelTimelineAnchor} />
+		)}
+		{notableTrends && notableTrends.length > 0 && <NotableTrends trends={notableTrends} lang={lang} />}
+	</div>
+))}

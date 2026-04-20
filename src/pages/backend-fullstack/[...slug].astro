@@ -1,6 +1,8 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
+import BriefStructured from '../../components/brief/BriefStructured.astro';
+import { normalizeBrief } from '../../components/brief/normalizeBrief';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('backend-fullstack');
@@ -12,9 +14,27 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<'backend-fullstack'>;
 
 const post = Astro.props;
-const { Content } = await render(post);
+const { data } = post;
+const { isStructured, title, description, highlightsForLayout } = normalizeBrief(data);
+const Content = isStructured ? null : (await render(post)).Content;
 ---
 
-<BlogPost {...post.data}>
-	<Content />
+<BlogPost
+	title={title}
+	description={description}
+	pubDate={data.pubDate}
+	category={data.category}
+	highlights={highlightsForLayout}
+>
+	{isStructured ? (
+		<BriefStructured
+			stats={data.stats}
+			tools={data.tools}
+			models={data.models}
+			modelTimelineAnchor={data.model_timeline_anchor}
+			notableTrends={data.notable_trends}
+		/>
+	) : (
+		Content && <Content />
+	)}
 </BlogPost>

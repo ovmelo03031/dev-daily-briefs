@@ -1,0 +1,35 @@
+---
+import type { Lang } from './pickLang';
+import UpdateItem from './UpdateItem.astro';
+
+interface Tool {
+	id: string;
+	name: string;
+	publisher?: string;
+	theme: string;
+	icon_emoji?: string;
+	version?: string;
+	anchor?: string;
+	updates: Array<Parameters<typeof UpdateItem>[0]['update']>;
+}
+
+interface Props {
+	tool: Tool;
+	lang: Lang;
+}
+
+const { tool, lang } = Astro.props;
+const anchor = tool.anchor ?? tool.id;
+---
+
+<div class={`tool-section ${tool.theme}`} data-anchor={anchor}>
+	<div class="tool-header">
+		{tool.icon_emoji && <div class="tool-icon">{tool.icon_emoji}</div>}
+		<div class="tool-meta">
+			<h2>{tool.name}</h2>
+			{tool.publisher && <div class="publisher">{tool.publisher}</div>}
+		</div>
+		{tool.version && <span class="version-badge">{tool.version}</span>}
+	</div>
+	{tool.updates.map((update) => <UpdateItem update={update} lang={lang} />)}
+</div>

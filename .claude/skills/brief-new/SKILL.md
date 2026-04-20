@@ -157,11 +157,14 @@ Before writing the file, verify:
 - [ ] No duplicate updates across tool-sections
 - [ ] For `es`, use Rioplatense Spanish (voseo: "ojo con esto", "es una locura")
 - [ ] For `fr`, use formal technical French; keep devops/tech loanwords devs actually use (`runtime`, `edge`, `React Server Components`, `type checker`, `prompt caching`)
+- [ ] **NO literal `"` inside any JSON string value.** Astro parses with strict `JSON.parse` — unescaped quotes break the build and fail `deploy.yml`. For quoted phrases use `«...»` (es/fr), `"..."` (en), `&quot;...&quot;`, or `\"...\"`. Use `\\` for literal backslashes.
 
 ## Step 8 — Publish
 
 ```bash
 cd /Users/ovi/Data/Projects/Blog
+# Validate JSON before anything else — do NOT commit broken JSON (broke production 2026-04-20)
+node -e "JSON.parse(require('fs').readFileSync('src/content/{category}/{category}-{YYYY-MM-DD}.json','utf8'))" || exit 1
 git pull --rebase --autostash
 git add src/content/{category}/{category}-{YYYY-MM-DD}.json
 git commit -m "brief({category}): {YYYY-MM-DD}"

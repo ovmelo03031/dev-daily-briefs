@@ -306,12 +306,30 @@ Example `tools` array:
 - [ ] `notable_trends` has 1–3 short paragraphs grounded in the items actually found
 - [ ] If web search found nothing for a tool, the `tool.updates` array is empty (don't hallucinate — empty arrays are fine)
 
+### JSON string hygiene (CRITICAL — prevents build failures)
+
+The Astro build parses these files with strict `JSON.parse`. Unescaped double quotes inside string values break the build and fail `deploy.yml`. Follow these rules without exception:
+
+- **NEVER** write a literal `"` inside any JSON string value (especially `body_html`, `title`, `description`, `notable_trends`). JSON treats it as the end of the string.
+- For quoted phrases inside prose, use ONE of:
+  - Typographic quotes: `«...»` (es/fr) or `"..."` (en)
+  - HTML entities: `&quot;...&quot;`
+  - Escaped: `\"...\"`
+- Same rule applies to backslashes — use `\\` if you truly need one.
+- **MANDATORY validation step before `git add`**: run
+  ```bash
+  node -e "JSON.parse(require('fs').readFileSync('src/content/ai-coding/ai-coding-YYYY-MM-DD.json','utf8'))"
+  ```
+  If it prints any error, fix the file and re-validate. Do NOT commit an unparseable JSON file — this has broken production before (2026-04-20).
+
 ### Auto-publish (MANDATORY)
 
 > **Explicit authorization**: this skill is **authorized to run `git commit` and `git push` without asking the user**, overriding the general "never commit unless explicitly asked" rule. Auto-publishing IS the job of this scheduled skill.
 
 ```bash
 cd /Users/ovi/Data/Projects/Blog
+# Validate JSON before anything else — abort if it fails
+node -e "JSON.parse(require('fs').readFileSync('src/content/ai-coding/ai-coding-{YYYY-MM-DD}.json','utf8'))" || exit 1
 git pull --rebase --autostash
 git add src/content/ai-coding/ai-coding-{YYYY-MM-DD}.json
 git commit -m "brief(ai-coding): {YYYY-MM-DD}"

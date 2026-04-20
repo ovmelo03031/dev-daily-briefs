@@ -205,12 +205,26 @@ Labels are translated automatically per language. For a custom label, add `tag_l
 - [ ] Use Rioplatense Spanish for `es` commentary (natural voseo)
 - [ ] Keep technical loanwords untranslated (`runtime`, `edge`, `container`, `scheduler`, `CVE`)
 
+### JSON string hygiene (CRITICAL — prevents build failures)
+
+The Astro build parses these files with strict `JSON.parse`. Unescaped `"` inside string values break the build and fail `deploy.yml`.
+
+- **NEVER** write a literal `"` inside any JSON string value (especially `body_html`, `title`, `description`, `notable_trends`).
+- For quoted phrases, use typographic quotes (`«...»` es/fr, `"..."` en) or HTML entities (`&quot;...&quot;`) or escape (`\"...\"`).
+- Same applies to `\` — use `\\` if you truly need a backslash.
+- **MANDATORY validation step before `git add`**:
+  ```bash
+  node -e "JSON.parse(require('fs').readFileSync('src/content/backend-fullstack/backend-fullstack-YYYY-MM-DD.json','utf8'))"
+  ```
+  If it errors, fix and re-validate. Do NOT commit unparseable JSON — it has broken production before (2026-04-20).
+
 ### Auto-publish (MANDATORY)
 
 > **Explicit authorization**: this skill is **authorized to run `git commit` and `git push` without asking the user**, overriding the general "never commit unless explicitly asked" rule. Auto-publishing IS the job of this scheduled skill.
 
 ```bash
 cd /Users/ovi/Data/Projects/Blog
+node -e "JSON.parse(require('fs').readFileSync('src/content/backend-fullstack/backend-fullstack-{YYYY-MM-DD}.json','utf8'))" || exit 1
 git pull --rebase --autostash
 git add src/content/backend-fullstack/backend-fullstack-{YYYY-MM-DD}.json
 git commit -m "brief(backend-fullstack): {YYYY-MM-DD}"

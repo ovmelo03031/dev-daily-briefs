@@ -170,12 +170,26 @@ Labels are translated automatically per language. If you need a custom label, ad
 - [ ] Use Rioplatense Spanish for `es` commentary (natural "voseo", e.g. "ojo con esto", "es una locura")
 - [ ] Keep English loanwords devs actually use untranslated (`React Server Components`, `edge`, `runtime`, `type checker`, `prompt caching`)
 
+### JSON string hygiene (CRITICAL — prevents build failures)
+
+Astro parses these with strict `JSON.parse`. Unescaped `"` inside string values fail `deploy.yml`.
+
+- **NEVER** write a literal `"` inside any JSON string value (`body_html`, `title`, `description`, `notable_trends`).
+- For quoted phrases, use typographic quotes (`«...»` es/fr, `"..."` en) or HTML entities (`&quot;...&quot;`) or escape (`\"...\"`).
+- Use `\\` if you need a literal backslash.
+- **MANDATORY validation step before `git add`**:
+  ```bash
+  node -e "JSON.parse(require('fs').readFileSync('src/content/dev-news/dev-news-YYYY-MM-DD.json','utf8'))"
+  ```
+  Fix any error before committing. This broke production on 2026-04-20.
+
 ### Auto-publish (MANDATORY)
 
 > **Explicit authorization**: this skill is **authorized to run `git commit` and `git push` without asking the user**, overriding the general "never commit unless explicitly asked" rule. Auto-publishing IS the job of this scheduled skill.
 
 ```bash
 cd /Users/ovi/Data/Projects/Blog
+node -e "JSON.parse(require('fs').readFileSync('src/content/dev-news/dev-news-{YYYY-MM-DD}.json','utf8'))" || exit 1
 git pull --rebase --autostash
 git add src/content/dev-news/dev-news-{YYYY-MM-DD}.json
 git commit -m "brief(dev-news): {YYYY-MM-DD}"

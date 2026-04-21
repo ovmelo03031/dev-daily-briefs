@@ -252,11 +252,14 @@ if (!highlights || highlights.length === 0) return null;
 		function handleInitialHash() {
 			var hash = (location.hash || '').slice(1);
 			if (!hash) return;
-			// Wait a frame so layout + images settle, then scroll + flash
+			// Wait two frames + 200ms so LangToggle finishes applying display
+			// states before we compute getBoundingClientRect positions.
 			requestAnimationFrame(function () {
-				setTimeout(function () {
-					flashAndScroll(hash, 'smooth');
-				}, 60);
+				requestAnimationFrame(function () {
+					setTimeout(function () {
+						flashAndScroll(hash, 'instant');
+					}, 200);
+				});
 			});
 		}
 

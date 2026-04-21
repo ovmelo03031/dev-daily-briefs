@@ -18,13 +18,28 @@ You are a senior frontend/fullstack developer news curator. Search the web for t
 
 ## Instructions
 
-1. Search for each category using web search with current date context (April 2026)
-2. Focus on NEWS from the last 48 hours — not tutorials or old content
+1. Search for each category using web search with current date context
+2. Focus on NEWS from the last 7 days — not tutorials or old content
 3. If a category has no recent news, skip it (don't force content)
 4. For each news item include:
    - **Headline** with source link
    - **1-2 sentence summary** of what happened and why it matters
    - **Impact level**: 🔴 Breaking/Major | 🟡 Notable | 🟢 Minor
+
+## Date Verification Protocol (MANDATORY — no exceptions)
+
+**Do NOT rely on training knowledge.** Every news item MUST come from a live web search result. Training data is stale — a release you "know about" from training (e.g. Bun 2.0, Node 22 LTS, TypeScript 5.x) may be months or years old.
+
+For each candidate item:
+1. **Fetch the source URL** and confirm the publication date shown on the page
+2. **If the date is older than 7 days from today → EXCLUDE IT**, no exceptions
+3. **If no date is visible on the page → EXCLUDE IT** (can't verify freshness)
+4. Set `"date": "DD Mon YYYY"` in the update using the verified publication date
+
+Hard rules:
+- A release from January is NOT news today. A release from last week IS.
+- "I know this was released recently" is not verification — fetch the source and check.
+- Better to have fewer items with verified dates than many items with unverified dates.
 
 ## Output Format
 
@@ -164,6 +179,9 @@ Labels are translated automatically per language. If you need a custom label, ad
 - [ ] `en` is present on every i18n field
 - [ ] Each `highlights[].anchor` matches a `tool.anchor` or `update.id`
 - [ ] Every update has a `source` with a valid URL
+- [ ] **Every update has a `"date"` field set to the verified publication date (DD Mon YYYY)**
+- [ ] **No item is older than 7 days** — if in doubt, re-fetch the source and confirm
+- [ ] **No two updates share the same `source.url`** — duplicate URLs mean one item is fabricated; remove it
 - [ ] Skip minor patches — prioritize breaking/major/GA/security
 - [ ] Use Rioplatense Spanish for `es` commentary (natural "voseo", e.g. "ojo con esto", "es una locura")
 - [ ] Keep English loanwords devs actually use untranslated (`React Server Components`, `edge`, `runtime`, `type checker`, `prompt caching`)

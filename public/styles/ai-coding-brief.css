@@ -35,6 +35,23 @@
 
 .prose-ai-coding, .prose-brief {
   max-width: 1100px;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Layout containment: prevent intrinsic min-content widths from block
+   children (tables, long content) from propagating up through the flex
+   column and expanding the layout viewport on mobile. Each of these
+   already has its own overflow strategy (tool-section: clip via
+   overflow:hidden; model-table-wrapper: scroll via overflow-x:auto). */
+.prose-ai-coding .tool-section,
+.prose-brief .tool-section,
+.prose-ai-coding .model-table-wrapper,
+.prose-ai-coding .trends,
+.prose-brief .trends,
+.prose-ai-coding .stats-bar,
+.prose-brief .stats-bar {
+  contain: inline-size;
 }
 
 /* Section headings */
@@ -669,7 +686,13 @@
 /* Inside the <p> flex container, fixed min-width so chips are balanced */
 .prose-brief .tool-section.quick-links .update-content > p > a {
   flex: 0 1 auto;
-  min-width: 180px;
+  min-width: 0;
+}
+
+@media (min-width: 480px) {
+  .prose-brief .tool-section.quick-links .update-content > p > a {
+    min-width: 180px;
+  }
 }
 
 @media (min-width: 640px) {
@@ -771,4 +794,15 @@ html.no-js .prose-brief .trends {
   .prose-brief thead th,
   .prose-brief tbody td { padding: 0.5rem; }
   .prose-brief .quick-links-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .prose-ai-coding .tool-section,
+  .prose-brief .tool-section { padding: 0.875rem 1rem; }
+  .prose-ai-coding .stats-bar,
+  .prose-brief .stats-bar { grid-template-columns: 1fr; }
+  .prose-brief .tool-section.quick-links .update-content > p > a { width: 100%; }
+  .prose-ai-coding img,
+  .prose-brief img { max-width: 100%; height: auto; }
+  pre, code { overflow-x: auto; max-width: 100%; word-break: break-all; }
 }

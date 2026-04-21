@@ -112,7 +112,20 @@ Chinese labs:
 - Kimi:          https://github.com/MoonshotAI/Kimi-K2
 ```
  
-### Step 2 — Extract and filter
+### Step 2 — Date Verification (MANDATORY — no exceptions)
+
+**Do NOT rely on training knowledge.** Every news item MUST come from a live web search or a fetched URL. Training data is stale — a release you "know about" (e.g. Claude Opus 4.5 from months ago) may be old news.
+
+For each candidate item:
+1. **Fetch the source URL** and confirm the publication date shown on the page
+2. **If the date is older than 7 days from today → EXCLUDE IT**, no exceptions
+3. **If no date is visible on the page → EXCLUDE IT** (can't verify freshness)
+4. Set `"date"` in the update to the verified publication date
+5. **No two updates may share the same `source.url`** — duplicate URLs mean one item is fabricated; remove it
+
+"I know this was released recently" is NOT verification — fetch the source and check.
+
+### Step 3 — Extract and filter
  
 For each tool, extract only items that are:
 - **New** (not previously known/announced)
@@ -167,10 +180,12 @@ claude "Run the ai-coding-daily-brief skill with --days 3 --tools claude,copilot
  
 Before printing the digest, verify:
 - [ ] At least one source URL is cited per tool section
-- [ ] No items older than the requested window
+- [ ] **Every update has a `"date"` field set to the verified publication date**
+- [ ] **No item is older than 7 days** — if in doubt, re-fetch the source and confirm
+- [ ] **No two updates share the same `source.url`** — duplicate URLs mean one item is fabricated; remove it
 - [ ] No duplicate items across sections
 - [ ] "Notable Trends" paragraph is present and grounded in the actual items found
- 
+
 If web search returns nothing for a tool, say so explicitly — do not hallucinate updates.
 
 ## Blog Auto-Publish — JSON output (NEW format)

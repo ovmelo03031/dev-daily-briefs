@@ -244,8 +244,15 @@ const LANGS = [
 
 	function initLangToggle() {
 		const available = detectAvailable();
-		const requestedRaw = localStorage.getItem('lang');
-		const requested: LangCode = isLang(requestedRaw) ? requestedRaw : 'es';
+		// Priority: localStorage > html[data-lang] (set pre-paint by BaseHead
+		// inline script from navigator.languages) > 'en' fallback.
+		const stored = localStorage.getItem('lang');
+		const attr = document.documentElement.getAttribute('data-lang');
+		const requested: LangCode = isLang(stored)
+			? stored
+			: isLang(attr)
+				? attr
+				: 'en';
 		const body = resolveBody(requested, available);
 
 		applyLang(requested, body);

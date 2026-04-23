@@ -5,7 +5,9 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import HighlightBar from '../components/HighlightBar.astro';
-import { CATEGORIES, type Category } from '../consts';
+import StructuredData from '../components/StructuredData.astro';
+import { CATEGORIES, SITE_TITLE, type Category } from '../consts';
+import { buildArticleSchema, buildBreadcrumbSchema } from '../utils/schema';
 
 type Highlight = {
 	text: string;
@@ -27,6 +29,20 @@ const { title, description, pubDate, category, highlights } = Astro.props;
 const cat = CATEGORIES[category];
 const isAiCoding = category === 'ai-coding';
 
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const homeUrl = Astro.site ? Astro.site.toString() : '/';
+const categoryUrl = Astro.site ? new URL(category, Astro.site).toString() : `/${category}`;
+
+const articleSchema = buildArticleSchema(
+	{ title, description, pubDate, category, url: canonical },
+	Astro.site,
+);
+const breadcrumbSchema = buildBreadcrumbSchema([
+	{ name: SITE_TITLE, url: homeUrl },
+	{ name: cat.label, url: categoryUrl },
+	{ name: title, url: canonical },
+]);
+
 function getProseClass() {
 	if (isAiCoding) return 'prose-ai-coding';
 	return 'prose-brief';
@@ -35,7 +51,16 @@ function getProseClass() {
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead
+			title={title}
+			description={description}
+			type="article"
+			article={{
+				publishedTime: pubDate.toISOString(),
+				section: cat.label,
+			}}
+		/>
+		<StructuredData schema={[articleSchema, breadcrumbSchema]} />
 		<link rel="stylesheet" href={`${import.meta.env.BASE_URL}styles/ai-coding-brief.css`} />
 	</head>
 	<body>

@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { pickLang, type I18nValue, type Lang } from './pickLang';
 
 interface Model {
@@ -22,7 +23,7 @@ const { models, lang, anchor = 'model-timeline' } = Astro.props;
 
 const HEADINGS: Record<Lang, { title: string; subtitle: string; date: string; model: string; provider: string; tier: string; type: string; notes: string }> = {
 	es: {
-		title: '🚀 Línea de Tiempo — Lanzamientos de Modelos',
+		title: 'Línea de Tiempo — Lanzamientos de Modelos',
 		subtitle: 'Todos los lanzamientos importantes de los últimos 7 días, los más recientes primero',
 		date: 'Fecha',
 		model: 'Modelo',
@@ -32,7 +33,7 @@ const HEADINGS: Record<Lang, { title: string; subtitle: string; date: string; mo
 		notes: 'Notas',
 	},
 	en: {
-		title: '🚀 Model Launches Timeline',
+		title: 'Model Launches Timeline',
 		subtitle: 'All major model launches from the last 7 days, sorted newest first',
 		date: 'Date',
 		model: 'Model',
@@ -42,7 +43,7 @@ const HEADINGS: Record<Lang, { title: string; subtitle: string; date: string; mo
 		notes: 'Notes',
 	},
 	fr: {
-		title: '🚀 Chronologie des Lancements de Modèles',
+		title: 'Chronologie des Lancements de Modèles',
 		subtitle: 'Tous les lancements majeurs des 7 derniers jours, les plus récents en premier',
 		date: 'Date',
 		model: 'Modèle',
@@ -97,7 +98,12 @@ const legend = TIER_LEGEND[lang];
 ---
 
 <div class="model-table-wrapper" data-anchor={anchor}>
-	<h2>{h.title}</h2>
+	<h2>
+		<span class="section-icon" aria-hidden="true">
+			<Icon name="lucide:rocket" width={28} height={28} />
+		</span>
+		<span>{h.title}</span>
+	</h2>
 	<div class="subtitle-text">{h.subtitle}</div>
 	<table>
 		<thead>
@@ -136,3 +142,22 @@ const legend = TIER_LEGEND[lang];
 		))}
 	</div>
 </div>
+
+<style>
+	.model-table-wrapper h2 {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.65rem;
+	}
+	.section-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 38px;
+		height: 38px;
+		border-radius: 10px;
+		background: var(--color-accent-glow);
+		color: var(--color-accent);
+		flex-shrink: 0;
+	}
+</style>

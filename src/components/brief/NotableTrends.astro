@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { pickLang, type I18nValue, type Lang } from './pickLang';
 
 interface Props {
@@ -9,13 +10,37 @@ interface Props {
 const { trends, lang } = Astro.props;
 
 const TITLES: Record<Lang, string> = {
-	es: '📊 Tendencias Destacadas',
-	en: '📊 Notable Trends',
-	fr: '📊 Tendances Notables',
+	es: 'Tendencias Destacadas',
+	en: 'Notable Trends',
+	fr: 'Tendances Notables',
 };
 ---
 
 <div class="trends">
-	<h2>{TITLES[lang]}</h2>
+	<h2>
+		<span class="section-icon" aria-hidden="true">
+			<Icon name="lucide:satellite-dish" width={28} height={28} />
+		</span>
+		<span>{TITLES[lang]}</span>
+	</h2>
 	{trends.map((t) => <p>{pickLang(t, lang)}</p>)}
 </div>
+
+<style>
+	.trends h2 {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.65rem;
+	}
+	.section-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 38px;
+		height: 38px;
+		border-radius: 10px;
+		background: var(--color-accent-glow);
+		color: var(--color-accent);
+		flex-shrink: 0;
+	}
+</style>

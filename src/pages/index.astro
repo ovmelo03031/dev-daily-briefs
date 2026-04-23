@@ -6,9 +6,11 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import StructuredData from '../components/StructuredData.astro';
 import TodayHighlights from '../components/TodayHighlights.astro';
 import { pickLang } from '../components/brief/pickLang';
 import { SITE_DESCRIPTION, SITE_TITLE, CATEGORIES, type Category } from '../consts';
+import { buildOrganizationSchema, buildWebSiteSchema } from '../utils/schema';
 import logo from '../assets/brand/logo-wordmark-transparent.png';
 
 const allPosts = [
@@ -63,12 +65,18 @@ const highlightGroups = cats
 	.filter((g): g is NonNullable<typeof g> => g !== null);
 
 const latestPosts = allPosts.slice(0, 5);
+
+const homeSchemas = [
+	buildWebSiteSchema(Astro.site),
+	buildOrganizationSchema(Astro.site),
+];
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<StructuredData schema={homeSchemas} />
 	</head>
 	<body>
 		<Header />

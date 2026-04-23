@@ -4,16 +4,25 @@ import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
 import CategoryList from '../../components/CategoryList.astro';
-import { CATEGORIES } from '../../consts';
+import StructuredData from '../../components/StructuredData.astro';
+import { CATEGORIES, SITE_TITLE } from '../../consts';
+import { buildBreadcrumbSchema } from '../../utils/schema';
 
 const posts = await getCollection('backend-fullstack');
 const cat = CATEGORIES['backend-fullstack'];
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const homeUrl = Astro.site ? Astro.site.toString() : '/';
+const breadcrumbSchema = buildBreadcrumbSchema([
+	{ name: SITE_TITLE, url: homeUrl },
+	{ name: cat.label, url: canonical },
+]);
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead title={`${cat.label} — Dev Daily Briefs`} description={cat.description} />
+		<StructuredData schema={breadcrumbSchema} />
 	</head>
 	<body>
 		<Header />

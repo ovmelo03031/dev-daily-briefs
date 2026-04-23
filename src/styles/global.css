@@ -160,12 +160,29 @@ body > footer {
 	border-radius: 8px;
 }
 
-/* Language toggle — default: show ES, hide EN + FR.
-   The LangToggle component flips these via inline styles at runtime
-   (and falls back to EN when a requested language isn't present on
-   the current page, e.g. older briefs that predate FR support). */
-.lang-en,
-.lang-fr {
+/* Language toggle — visibility is driven by html[data-lang], set by an
+   inline script in BaseHead before first paint (localStorage > browser
+   locale > 'en'). The LangToggle component still overrides via inline
+   styles when the user picks a language manually. */
+html[data-lang="es"] .lang-en,
+html[data-lang="es"] .lang-fr {
+	display: none;
+}
+
+html[data-lang="en"] .lang-es,
+html[data-lang="en"] .lang-fr {
+	display: none;
+}
+
+html[data-lang="fr"] .lang-es,
+html[data-lang="fr"] .lang-en {
+	display: none;
+}
+
+/* Fallback when the inline script didn't run (noscript or old browsers):
+   show English content only. */
+html:not([data-lang]) .lang-es,
+html:not([data-lang]) .lang-fr {
 	display: none;
 }
 

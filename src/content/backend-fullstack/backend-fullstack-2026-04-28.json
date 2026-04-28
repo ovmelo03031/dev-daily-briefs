@@ -1,0 +1,244 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily · 28 Abr 2026",
+    "en": "Backend & Fullstack Daily · 28 Apr 2026",
+    "fr": "Backend & Fullstack Daily · 28 Avr 2026"
+  },
+  "description": {
+    "es": "AWS Lambda monta buckets S3 como filesystem para cargas IA. Lambda durable functions llegan a 16 regiones más. Vitest 4.1.5 con fixes de cobertura y browser. Hono 4.12.14 con fix JWT PEM. Node.js 20 LTS llega al EOL en 2 días — migrá YA o pagá soporte extendido.",
+    "en": "AWS Lambda mounts S3 buckets as a filesystem for AI workloads. Lambda durable functions land in 16 more regions. Vitest 4.1.5 with coverage and browser fixes. Hono 4.12.14 with JWT PEM fix. Node.js 20 LTS hits EOL in 2 days — migrate NOW or pay for extended support.",
+    "fr": "AWS Lambda monte les buckets S3 comme filesystem pour charges IA. Lambda durable functions arrivent dans 16 régions de plus. Vitest 4.1.5 avec fixes coverage et browser. Hono 4.12.14 avec fix JWT PEM. Node.js 20 LTS atteint EOL dans 2 jours — migrez MAINTENANT ou payez le support étendu."
+  },
+  "pubDate": "2026-04-28",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Lambda S3 Files: monta buckets como filesystem POSIX",
+        "en": "Lambda S3 Files: mount buckets as POSIX filesystem",
+        "fr": "Lambda S3 Files: monte les buckets en filesystem POSIX"
+      },
+      "anchor": "lambda-s3-files",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": {
+        "es": "Node.js 20 EOL en 2 días — migrá a 22 LTS YA",
+        "en": "Node.js 20 EOL in 2 days — migrate to 22 LTS NOW",
+        "fr": "Node.js 20 EOL dans 2 jours — migrez vers 22 LTS MAINTENANT"
+      },
+      "anchor": "node20-final-countdown",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": {
+        "es": "Lambda durable functions llegan a 16 regiones nuevas",
+        "en": "Lambda durable functions land in 16 new regions",
+        "fr": "Lambda durable functions dans 16 nouvelles régions"
+      },
+      "anchor": "lambda-durable-regions",
+      "icon": "lucide:cloud"
+    },
+    {
+      "text": {
+        "es": "Vitest 4.1.5: fixes coverage Istanbul y browser projects",
+        "en": "Vitest 4.1.5: Istanbul coverage and browser project fixes",
+        "fr": "Vitest 4.1.5: fixes coverage Istanbul et projects browser"
+      },
+      "anchor": "vitest-4-1-5",
+      "icon": "lucide:blocks"
+    },
+    {
+      "text": {
+        "es": "Hono 4.12.14: soporte single-line PEM en middleware JWT",
+        "en": "Hono 4.12.14: single-line PEM support in JWT middleware",
+        "fr": "Hono 4.12.14: support PEM single-line dans middleware JWT"
+      },
+      "anchor": "hono-4-12-14",
+      "icon": "lucide:blocks"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "lambda-s3-files",
+      "updates": [
+        {
+          "id": "lambda-s3-files",
+          "tag": "breaking",
+          "date": "21 Apr 2026",
+          "title": {
+            "es": "AWS Lambda S3 Files: montá buckets S3 como filesystem POSIX y olvidate del límite de /tmp",
+            "en": "AWS Lambda S3 Files: mount S3 buckets as a POSIX filesystem, forget about the /tmp limit",
+            "fr": "AWS Lambda S3 Files: montez les buckets S3 en filesystem POSIX et oubliez la limite de /tmp"
+          },
+          "body_html": {
+            "es": "<p>AWS lanzó <strong>Lambda S3 Files</strong>: tus funciones ahora montan un bucket S3 como filesystem POSIX y leen/escriben con APIs estándar — sin <code>GetObject</code>, sin descargar a <code>/tmp</code>, sin pelearte con los 10 GB de ephemeral storage. Por debajo usa Amazon EFS y permite que <strong>varias Lambdas accedan al mismo workspace en paralelo</strong>, lo que mata la complejidad de sincronizar estado entre pasos. Caso de uso fuerte: <strong>pipelines de IA/ML</strong> donde un agente persiste memoria, baja modelos grandes una sola vez, y otra función reusa el mismo dataset sin code de bajada. Se integra con <code>durable functions</code> para checkpoints automáticos en flujos multi-step. Configurable desde consola, CLI, SDKs, CloudFormation y SAM. <strong>Sin cargo extra</strong> más allá del pricing estándar de Lambda + S3. Si venís peleando con <code>/tmp</code> y descargas repetidas en cada cold start, esto es un golazo para la DX.</p>",
+            "en": "<p>AWS shipped <strong>Lambda S3 Files</strong>: your functions now mount an S3 bucket as a POSIX filesystem and read/write through standard APIs — no <code>GetObject</code>, no downloading to <code>/tmp</code>, no fighting the 10 GB ephemeral storage cap. It uses Amazon EFS under the hood and lets <strong>multiple Lambdas hit the same workspace in parallel</strong>, which kills the complexity of syncing state across steps. Strong use case: <strong>AI/ML pipelines</strong> where an agent persists memory, downloads large models once, and another function reuses the same dataset without re-downloading. Integrates with <code>durable functions</code> for automatic checkpointing across multi-step flows. Configurable from console, CLI, SDKs, CloudFormation, and SAM. <strong>No extra charge</strong> beyond standard Lambda + S3 pricing. If you've been wrestling with <code>/tmp</code> and repeated downloads on every cold start, this is a DX win.</p>",
+            "fr": "<p>AWS a sorti <strong>Lambda S3 Files</strong>: vos fonctions montent maintenant un bucket S3 en filesystem POSIX et lisent/écrivent avec des APIs standard — sans <code>GetObject</code>, sans télécharger dans <code>/tmp</code>, sans bagarre avec la limite de 10 Go d'ephemeral storage. Sous le capot c'est Amazon EFS et <strong>plusieurs Lambdas accèdent au même workspace en parallèle</strong>, ce qui tue la complexité de synchroniser l'état entre étapes. Cas d'usage fort: <strong>pipelines IA/ML</strong> où un agent persiste sa mémoire, télécharge les gros modèles une seule fois, et une autre fonction réutilise le même dataset sans re-téléchargement. S'intègre avec les <code>durable functions</code> pour le checkpointing automatique. Configurable depuis console, CLI, SDKs, CloudFormation et SAM. <strong>Sans frais supplémentaires</strong> au-delà du pricing Lambda + S3 standard.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/04/aws-lambda-amazon-s3/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "node20-final-countdown",
+          "tag": "breaking",
+          "date": "27 Apr 2026",
+          "title": {
+            "es": "Node.js 20 LTS llega al EOL el 30 de abril — quedan 2 días para migrar a 22 LTS o pagar soporte extendido",
+            "en": "Node.js 20 LTS hits EOL on April 30 — 2 days left to migrate to 22 LTS or pay for extended support",
+            "fr": "Node.js 20 LTS atteint EOL le 30 avril — 2 jours pour migrer vers 22 LTS ou payer le support étendu"
+          },
+          "body_html": {
+            "es": "<p>El 30 de abril el proyecto Node.js deja de publicar parches para la línea <strong>20.x</strong>. Después de esa fecha, cualquier CVE nuevo que aparezca queda sin fix oficial — y el equipo solo parchea 22, 24 y superiores. <strong>AWS Lambda</strong> también deja de aplicar parches al runtime <code>nodejs20.x</code> a partir de ese día, y las funciones pierden elegibilidad de soporte técnico (siguen ejecutando, pero sin red de seguridad). Tres caminos: (1) migrar a <strong>Node 22 LTS</strong> — recomendado, soporte hasta abril 2027; (2) saltar a <strong>Node 24</strong> si necesitás features nuevas (Test Runner estable, <code>node:sqlite</code>, mejoras de performance); (3) pagar a <strong>HeroDevs NES</strong> por parches post-EOL en un registry privado si tenés legacy bloqueado. Si todavía tenés workloads productivos en 20.x, ponete las pilas — los CVEs de Node no esperan a tu sprint planning.</p>",
+            "en": "<p>On April 30 the Node.js project stops publishing patches for the <strong>20.x</strong> line. After that date, any new CVE goes unfixed — the team only patches 22, 24, and up. <strong>AWS Lambda</strong> also stops applying patches to the <code>nodejs20.x</code> runtime that day, and functions lose technical support eligibility (they keep executing, but without a safety net). Three paths: (1) migrate to <strong>Node 22 LTS</strong> — recommended, support through April 2027; (2) jump to <strong>Node 24</strong> if you want the new bits (stable Test Runner, <code>node:sqlite</code>, perf gains); (3) pay <strong>HeroDevs NES</strong> for post-EOL patches via a private registry if you have locked-in legacy. If you still have production workloads on 20.x, get moving — Node CVEs don't wait for your sprint planning.</p>",
+            "fr": "<p>Le 30 avril, le projet Node.js arrête de publier des patches pour la ligne <strong>20.x</strong>. Après cette date, tout nouveau CVE reste sans fix officiel — l'équipe ne patche que 22, 24 et au-delà. <strong>AWS Lambda</strong> arrête aussi d'appliquer les patches au runtime <code>nodejs20.x</code> ce jour-là, et les fonctions perdent l'éligibilité au support technique. Trois options: (1) migrer vers <strong>Node 22 LTS</strong> — recommandé, support jusqu'en avril 2027; (2) sauter vers <strong>Node 24</strong> pour les nouveautés (Test Runner stable, <code>node:sqlite</code>, gains de perf); (3) payer <strong>HeroDevs NES</strong> pour des patches post-EOL via un registry privé si vous avez du legacy bloqué.</p>"
+          },
+          "source": {
+            "url": "https://www.herodevs.com/blog-posts/node-js-20-goes-eol-how-to-stay-secure-without-a-full-migration",
+            "label": "herodevs.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "lambda-durable-regions",
+      "updates": [
+        {
+          "id": "lambda-durable-regions",
+          "tag": "notable",
+          "date": "22 Apr 2026",
+          "title": {
+            "es": "Lambda durable functions ahora en 16 regiones más — incluyendo São Paulo, Tokio, Londres y Tel Aviv",
+            "en": "Lambda durable functions now in 16 more regions — including São Paulo, Tokyo, London, and Tel Aviv",
+            "fr": "Lambda durable functions dans 16 nouvelles régions — São Paulo, Tokyo, Londres et Tel Aviv"
+          },
+          "body_html": {
+            "es": "<p>AWS expandió <strong>Lambda durable functions</strong> a 16 regiones nuevas: Cape Town, Hyderabad, Jakarta, Melbourne, Osaka, Seoul, Taipei, Canada Central, Calgary, London, Paris, Zurich, Tel Aviv, Mexico Central, São Paulo y N. California. Con esto, los flujos multi-step con state durable y reintentos automáticos llegan a la mayoría de regiones globales. Si tenés pipelines de orquestación serverless (Step Functions era el camino antes), durable functions es la opción nueva, más barata y con menos overhead.</p>",
+            "en": "<p>AWS expanded <strong>Lambda durable functions</strong> to 16 new regions: Cape Town, Hyderabad, Jakarta, Melbourne, Osaka, Seoul, Taipei, Canada Central, Calgary, London, Paris, Zurich, Tel Aviv, Mexico Central, São Paulo, and N. California. With this rollout, multi-step flows with durable state and automatic retries reach most global regions. If you run serverless orchestration pipelines (Step Functions used to be the path), durable functions is the newer option — cheaper and less overhead.</p>",
+            "fr": "<p>AWS a étendu <strong>Lambda durable functions</strong> à 16 nouvelles régions: Cape Town, Hyderabad, Jakarta, Melbourne, Osaka, Seoul, Taipei, Canada Central, Calgary, Londres, Paris, Zurich, Tel Aviv, Mexico Central, São Paulo et N. California. Les flux multi-étapes avec état durable et retries automatiques atteignent maintenant la plupart des régions mondiales.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/04/lambda-durable-functions-16-new-regions/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "lambda-kafka-provisioned",
+          "tag": "minor",
+          "date": "24 Apr 2026",
+          "title": {
+            "es": "Lambda Provisioned Mode para Kafka ESMs disponible en Taipei y GovCloud (US)",
+            "en": "Lambda Provisioned Mode for Kafka ESMs available in Taipei and GovCloud (US)",
+            "fr": "Lambda Provisioned Mode pour Kafka ESMs disponible à Taipei et GovCloud (US)"
+          },
+          "body_html": {
+            "es": "<p>El modo provisioned para event source mappings de Apache Kafka llega a Asia Pacific (Taipei), GovCloud US-East y US-West. Sirve para garantizar throughput estable cuando consumís de tópicos con tráfico alto y no querés que el escalado automático te trolee con latencia variable.</p>",
+            "en": "<p>Provisioned mode for Apache Kafka event source mappings lands in Asia Pacific (Taipei), GovCloud US-East, and US-West. Useful for guaranteeing stable throughput when consuming from high-traffic topics and you don't want autoscaling to bite you with latency variance.</p>",
+            "fr": "<p>Le mode provisioned pour les event source mappings Apache Kafka arrive à Asia Pacific (Taipei), GovCloud US-East et US-West. Utile pour garantir un débit stable sur les topics à fort trafic.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/04/aws-Lambda-provisioned-esm-region-expansion/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "vitest-4-1-5",
+      "updates": [
+        {
+          "id": "vitest-4-1-5",
+          "tag": "patch",
+          "date": "26 Apr 2026",
+          "title": {
+            "es": "Vitest 4.1.5: fixes de cobertura Istanbul, browser projects y soft assertions con diff",
+            "en": "Vitest 4.1.5: Istanbul coverage, browser project, and soft-assertion diff fixes",
+            "fr": "Vitest 4.1.5: fixes coverage Istanbul, projects browser et soft assertions avec diff"
+          },
+          "body_html": {
+            "es": "<p>Patch release con varios fixes que importan si usás browser mode o coverage Istanbul: la negación de proyectos ahora excluye correctamente las instancias browser, las soft assertions respetan la config de diff, los reportes de coverage devuelven mensajes claros si el directorio se borra durante el run, y la opción experimental <code>instrumenter</code> ya está disponible para Istanbul. También arreglaron syntax highlighting JSX/TSX en la UI y soporte de <code>MessagePort</code> en <code>postMessage</code> de web workers. Sin breaking changes — actualizá tranquilo.</p>",
+            "en": "<p>Patch release with fixes that matter if you use browser mode or Istanbul coverage: project negation now correctly excludes browser instances, soft assertions respect diff config, coverage reports give clear errors when the output directory is removed mid-run, and the experimental <code>instrumenter</code> option lands for Istanbul. Also fixes JSX/TSX syntax highlighting in the UI and <code>MessagePort</code> support in web worker <code>postMessage</code>. No breaking changes — bump it.</p>",
+            "fr": "<p>Release patch avec des fixes importants si vous utilisez le browser mode ou Istanbul coverage: la négation de projets exclut correctement les instances browser, les soft assertions respectent la config diff, les rapports de coverage donnent des erreurs claires si le répertoire est supprimé en cours de run, et l'option expérimentale <code>instrumenter</code> arrive pour Istanbul. Pas de breaking changes — bumpez tranquille.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vitest-dev/vitest/releases",
+            "label": "github.com"
+          }
+        },
+        {
+          "id": "hono-4-12-14",
+          "tag": "patch",
+          "date": "22 Apr 2026",
+          "title": {
+            "es": "Hono 4.12.14: middleware JWT acepta claves PEM en una sola línea",
+            "en": "Hono 4.12.14: JWT middleware now accepts single-line PEM keys",
+            "fr": "Hono 4.12.14: middleware JWT accepte les clés PEM single-line"
+          },
+          "body_html": {
+            "es": "<p>Pequeño fix pero útil si tenías que serializar tu llave PEM a una sola línea para meterla en una variable de entorno (típico en Cloudflare Workers, Vercel, AWS Lambda). Antes el middleware <code>jwt</code> rechazaba el formato; ahora lo parsea sin que tengas que reformatear con <code>\\n</code> escapados manualmente.</p>",
+            "en": "<p>Small but useful fix if you had to serialize your PEM key to a single line to fit it in an env var (typical on Cloudflare Workers, Vercel, AWS Lambda). The <code>jwt</code> middleware used to reject that format; now it parses it without you having to re-format with manually escaped <code>\\n</code>.</p>",
+            "fr": "<p>Petit fix utile si vous deviez sérialiser votre clé PEM en une seule ligne pour la stocker dans une variable d'environnement (typique sur Cloudflare Workers, Vercel, AWS Lambda). Le middleware <code>jwt</code> rejetait ce format; maintenant il le parse sans que vous ayez à reformater avec des <code>\\n</code> échappés.</p>"
+          },
+          "source": {
+            "url": "https://github.com/honojs/hono/releases",
+            "label": "github.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "node20-migration-playbook",
+      "updates": [
+        {
+          "id": "node20-migration-playbook",
+          "tag": "notable",
+          "date": "23 Apr 2026",
+          "title": {
+            "es": "Playbook de migración de Node.js 20 a 22 — checklist concreta para los próximos 2 días",
+            "en": "Node.js 20 → 22 migration playbook — concrete checklist for the next 2 days",
+            "fr": "Playbook de migration Node.js 20 → 22 — checklist concrète pour les 2 prochains jours"
+          },
+          "body_html": {
+            "es": "<p>Si todavía no migraste, este post de DEV.to tiene la checklist mínima: (1) bumpeá <code>engines.node</code> en <code>package.json</code> y los Dockerfiles base; (2) corré <code>npm ls</code> + <code>npm audit</code> y resolvé deprecations de la línea 20; (3) revisá uso de APIs deprecadas (<code>punycode</code>, <code>url.parse</code> legacy, <code>fs.F_OK</code>); (4) testeá con <code>NODE_OPTIONS=--throw-deprecation</code> en CI para cazar warnings que ahora son errores; (5) actualizá GitHub Actions runners y AWS Lambda runtime a <code>nodejs22.x</code>; (6) verificá compatibilidad de native modules (<code>better-sqlite3</code>, <code>argon2</code>, <code>sharp</code>) — algunos requieren <code>npm rebuild</code>. Node 22 trae además <code>require(esm)</code> estable, que te ahorra dual packages y configs raras de TypeScript.</p>",
+            "en": "<p>If you haven't migrated yet, this DEV.to post has the minimum checklist: (1) bump <code>engines.node</code> in <code>package.json</code> and base Dockerfiles; (2) run <code>npm ls</code> + <code>npm audit</code> and clear 20.x deprecations; (3) audit deprecated API usage (<code>punycode</code>, legacy <code>url.parse</code>, <code>fs.F_OK</code>); (4) test with <code>NODE_OPTIONS=--throw-deprecation</code> in CI to catch warnings now upgraded to errors; (5) update GitHub Actions runners and AWS Lambda runtime to <code>nodejs22.x</code>; (6) check native module compatibility (<code>better-sqlite3</code>, <code>argon2</code>, <code>sharp</code>) — some need an <code>npm rebuild</code>. Node 22 also brings stable <code>require(esm)</code>, which kills dual-package hacks and weird TypeScript configs.</p>",
+            "fr": "<p>Si vous n'avez pas encore migré, ce post DEV.to a la checklist minimale: (1) bumpez <code>engines.node</code> dans <code>package.json</code> et les Dockerfiles de base; (2) lancez <code>npm ls</code> + <code>npm audit</code> et réglez les deprecations 20.x; (3) auditez l'usage d'APIs dépréciées (<code>punycode</code>, <code>url.parse</code> legacy, <code>fs.F_OK</code>); (4) testez avec <code>NODE_OPTIONS=--throw-deprecation</code> en CI; (5) mettez à jour les GitHub Actions runners et le runtime AWS Lambda en <code>nodejs22.x</code>; (6) vérifiez la compatibilité des native modules. Node 22 apporte aussi <code>require(esm)</code> stable.</p>"
+          },
+          "source": {
+            "url": "https://dev.to/matheus_releaserun/nodejs-20-end-of-life-migration-playbook-for-april-30-2026-2onh",
+            "label": "dev.to"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "La ola de supply-chain attacks (Axios, Bitwarden, CanisterWorm) consolidó <code>minimumReleaseAge</code> y <code>preinstall</code> hooks deshabilitados como default razonable en pnpm/npm. Si seguís ejecutando scripts de install sin filtro, sos blanco fácil.",
+      "en": "The wave of supply-chain attacks (Axios, Bitwarden, CanisterWorm) made <code>minimumReleaseAge</code> and disabling <code>preinstall</code> hooks the new reasonable default in pnpm/npm. If you're still running install scripts unfiltered, you're an easy target.",
+      "fr": "La vague d'attaques supply-chain (Axios, Bitwarden, CanisterWorm) a rendu <code>minimumReleaseAge</code> et la désactivation des hooks <code>preinstall</code> un default raisonnable dans pnpm/npm. Si vous lancez encore les scripts d'install sans filtre, vous êtes une cible facile."
+    },
+    {
+      "es": "Lambda S3 Files + durable functions confirman el pivot de AWS hacia <em>serverless con state persistente</em>. Los pipelines de IA/ML que antes vivían en Step Functions o ECS pueden moverse a Lambda con menos plumbing.",
+      "en": "Lambda S3 Files + durable functions confirm AWS's pivot toward <em>serverless with persistent state</em>. AI/ML pipelines that used to live in Step Functions or ECS can now move to Lambda with less plumbing.",
+      "fr": "Lambda S3 Files + durable functions confirment le pivot d'AWS vers le <em>serverless avec état persistant</em>. Les pipelines IA/ML qui vivaient dans Step Functions ou ECS peuvent passer à Lambda avec moins de plumbing."
+    }
+  ]
+}

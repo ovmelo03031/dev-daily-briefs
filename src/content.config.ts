@@ -48,7 +48,7 @@ const toolSchema = z.object({
 	theme: z.string(),
 	icon_emoji: z.string().optional(),
 	icon: z.string().optional(),
-	version: z.string().optional(),
+	version: z.string().nullable().optional(),
 	anchor: z.string().optional(),
 	updates: z.array(updateSchema),
 });

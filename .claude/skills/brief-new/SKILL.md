@@ -110,7 +110,7 @@ Themes: `top-stories` | `runtimes` | `frameworks` | `databases` | `cloud` | `arc
 }
 ```
 
-- `publisher`, `version`, `icon_emoji`, `anchor` — all optional.
+- `publisher`, `version`, `icon_emoji`, `anchor` — all optional. **Omit the key entirely when missing — never emit `"version": null`** (Zod schema rejects `null`; use `undefined`/omit instead).
 - If a highlight's `anchor` matches `tool.anchor`, the chip scrolls to the whole section. If it matches an `update.id`, it scrolls to that specific update.
 
 ### Update shape

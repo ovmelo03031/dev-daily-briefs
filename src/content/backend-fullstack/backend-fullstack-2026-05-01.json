@@ -1,0 +1,202 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 1 mayo 2026",
+    "en": "Backend & Fullstack Daily — May 1, 2026",
+    "fr": "Backend & Fullstack Daily — 1 mai 2026"
+  },
+  "description": {
+    "es": "Cloudflare frena un bypass crítico de cPanel; GitHub publica su postmortem de scaling y migración a Go; Resource Tagging entra en beta pública.",
+    "en": "Cloudflare blocks a critical cPanel auth bypass; GitHub posts its scaling and Ruby-to-Go migration postmortem; Resource Tagging hits public beta.",
+    "fr": "Cloudflare bloque un bypass critique de cPanel; GitHub publie son postmortem de scaling; Resource Tagging passe en bêta publique."
+  },
+  "pubDate": "2026-05-01",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Cloudflare WAF: regla emergencia contra CVE crítica de cPanel",
+        "en": "Cloudflare WAF emergency rule for critical cPanel auth bypass",
+        "fr": "Cloudflare WAF: règle d'urgence pour la CVE critique cPanel"
+      },
+      "anchor": "cve-2026-41940",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "GitHub postmortem: carga agentic 30x y migración Ruby a Go",
+        "en": "GitHub postmortem: 30x agentic load, Ruby to Go migration",
+        "fr": "Postmortem GitHub: charge 30x, migration Ruby vers Go"
+      },
+      "anchor": "github-availability",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "Cloudflare Resource Tagging entra en beta pública",
+        "en": "Cloudflare Resource Tagging hits public beta",
+        "fr": "Cloudflare Resource Tagging passe en bêta publique"
+      },
+      "anchor": "cf-resource-tagging",
+      "icon": "simple-icons:cloudflare"
+    },
+    {
+      "text": {
+        "es": "Amazon MQ for RabbitMQ con métricas Prometheus nativas",
+        "en": "Amazon MQ for RabbitMQ ships native Prometheus metrics",
+        "fr": "Amazon MQ for RabbitMQ avec métriques Prometheus natives"
+      },
+      "anchor": "mq-rabbitmq-prometheus",
+      "icon": "lucide:server"
+    },
+    {
+      "text": {
+        "es": "RDS for MySQL: Innovation Release 9.6 en preview",
+        "en": "RDS for MySQL: Innovation Release 9.6 lands in preview",
+        "fr": "RDS pour MySQL: Innovation Release 9.6 en preview"
+      },
+      "anchor": "rds-mysql-9-6",
+      "icon": "lucide:database"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "cve-2026-41940",
+      "updates": [
+        {
+          "id": "cve-2026-41940",
+          "date": "30 Apr 2026",
+          "tag": "security",
+          "title": {
+            "es": "Cloudflare WAF: regla de emergencia bloquea CVE-2026-41940 en cPanel & WHM",
+            "en": "Cloudflare WAF emergency rule blocks CVE-2026-41940 in cPanel & WHM",
+            "fr": "Cloudflare WAF: règle d'urgence contre CVE-2026-41940 dans cPanel & WHM"
+          },
+          "body_html": {
+            "es": "<p>Cloudflare desplegó una regla gestionada de emergencia el 30 de abril para frenar la explotación de <strong>CVE-2026-41940</strong>, un bypass de autenticación crítico en cPanel &amp; WHM que permite a atacantes no autenticados saltar la validación de sesión y ganar acceso administrativo. La regla en el Managed Ruleset bloquea las requests maliciosas antes de tocar tu origin, pero <strong>parchá igual</strong>: el WAF es un escudo, no un fix. Si tenés cPanel expuesto, este es de los que te dejan sin servidor en una tarde, así que andá al vendor YA.</p>",
+            "en": "<p>Cloudflare shipped an emergency Managed Ruleset entry on April 30 to block exploitation of <strong>CVE-2026-41940</strong>, a critical auth bypass in cPanel &amp; WHM that lets unauthenticated attackers slip past session validation and reach admin functionality. The rule blocks malicious requests before they touch your origin, but <strong>patch upstream anyway</strong> — the WAF is a shield, not a fix. If cPanel is exposed anywhere in your stack, treat this as a same-day patch.</p>",
+            "fr": "<p>Cloudflare a déployé une règle managée d'urgence le 30 avril pour bloquer l'exploitation de <strong>CVE-2026-41940</strong>, un bypass d'authentification critique dans cPanel &amp; WHM permettant à des attaquants non authentifiés d'atteindre l'admin. La règle bloque avant l'origine, mais <strong>patchez aussi en amont</strong>: le WAF est un bouclier, pas un correctif.</p>"
+          },
+          "source": {
+            "url": "https://developers.cloudflare.com/changelog/post/2026-04-30-emergency-waf-release/",
+            "label": "developers.cloudflare.com"
+          }
+        },
+        {
+          "id": "github-availability",
+          "date": "28 Apr 2026",
+          "tag": "notable",
+          "title": {
+            "es": "GitHub publica postmortem: regresión en merge queue, Elasticsearch caído y migración a Go",
+            "en": "GitHub publishes availability postmortem: merge queue regression, Elasticsearch outage, Ruby-to-Go migration",
+            "fr": "Postmortem GitHub: régression merge queue, panne Elasticsearch, migration Ruby vers Go"
+          },
+          "body_html": {
+            "es": "<p>GitHub publicó su postmortem reconociendo que la carga agentic explotó: pasaron de planear <strong>10x a 30x de capacidad</strong> desde diciembre 2025. El 23 de abril una regresión en merge queue por la ruta de squash generó merges incorrectos en grupos con varios PRs, afectando <strong>658 repos y 2.092 PRs</strong> y revirtiendo cambios silenciosamente. Cuatro días después, un Elasticsearch tumbado &mdash;«probablemente por un botnet»&mdash; rompió la búsqueda en issues, PRs y projects. Plan de remediación denso: aislamiento de servicios críticos, webhooks fuera de MySQL, cache de auth rediseñado, migración a Azure acelerada y código performance-sensitive pasando de <code>Ruby</code> a <code>Go</code>. Si tu producto vive de GitHub, tu blast radius es el suyo. Lectura obligatoria de SRE.</p>",
+            "en": "<p>GitHub posted its postmortem owning a brutal stretch: agentic workloads forced a capacity plan jump from <strong>10x to 30x</strong> since December 2025. On April 23, a squash-path regression in merge queue produced incorrect merges in groups with multiple PRs, affecting <strong>658 repos and 2,092 PRs</strong> and silently reverting work. Four days later, an Elasticsearch subsystem cratered &mdash; likely a botnet attack &mdash; killing search across issues, PRs, and projects. Remediation list is dense: service isolation for critical systems, webhooks off MySQL, auth caching redesigned, accelerated Azure migration, and performance-sensitive code moving from <code>Ruby</code> to <code>Go</code>. Required SRE reading.</p>",
+            "fr": "<p>GitHub publie son postmortem: la charge agentique a explosé, plan capacitaire passé de <strong>10x à 30x</strong> depuis décembre 2025. Le 23 avril, une régression merge queue (squash) a produit de mauvais merges sur <strong>658 repos et 2 092 PRs</strong>, révertant silencieusement du travail. Quatre jours plus tard, Elasticsearch est tombé (probable botnet), cassant la recherche. Plan: isolation des services critiques, webhooks hors MySQL, refonte du cache d'auth, migration Azure accélérée, et code critique passant de <code>Ruby</code> à <code>Go</code>. Lecture SRE indispensable.</p>"
+          },
+          "source": {
+            "url": "https://github.blog/news-insights/company-news/an-update-on-github-availability/",
+            "label": "github.blog"
+          }
+        },
+        {
+          "id": "cf-resource-tagging",
+          "date": "27 Apr 2026",
+          "tag": "beta",
+          "title": {
+            "es": "Cloudflare Resource Tagging entra en beta pública",
+            "en": "Cloudflare Resource Tagging enters public beta",
+            "fr": "Cloudflare Resource Tagging entre en bêta publique"
+          },
+          "body_html": {
+            "es": "<p>Por fin: tags clave-valor a través de toda la cuenta de Cloudflare. Resource Tagging soporta zonas, custom hostnames, Tunnels, Workers scripts, D1, R2, KV, Durable Objects, Queues, Stream, Images, Access apps, Gateway rules y AI Gateways, entre otros. Filtros con AND/OR/negación &mdash;hasta 20 por query&mdash;, CRUD a nivel cuenta y zona, y Account Owned Tokens que sobreviven al usuario que los creó. Si manejás multi-tenant o necesitás chargeback por equipo, esto es el unlock de cost allocation que veníamos esperando. Limitación de beta: query sobre un recurso nunca taggeado devuelve 500 en lugar de 404, así que envolvé esos calls.</p>",
+            "en": "<p>Finally — key-value tagging across the whole Cloudflare account. Resource Tagging covers zones, custom hostnames, Tunnels, Workers scripts, D1, R2, KV, Durable Objects, Queues, Stream, Images, Access apps, Gateway rules and AI Gateways. AND/OR/negation filtering up to 20 filters per query, full CRUD at account and zone scope, and Account Owned Tokens that outlive the human who created them. If you run multi-tenant or need cost allocation, this is the chargeback unlock you have been waiting for. Beta caveat: querying tags for a never-tagged resource returns 500 instead of 404, so wrap those calls.</p>",
+            "fr": "<p>Enfin: tagging clé-valeur sur toute la stack Cloudflare. Resource Tagging couvre zones, hostnames, Tunnels, Workers scripts, D1, R2, KV, Durable Objects, Queues, Stream, Images, Access, Gateway, AI Gateways. Filtrage AND/OR/négation, jusqu'à 20 filtres par requête, CRUD account/zone, et tokens persistants au-delà de l'utilisateur. Idéal multi-tenant et chargeback. Bêta: une requête sur ressource jamais taguée renvoie 500 au lieu de 404.</p>"
+          },
+          "source": {
+            "url": "https://developers.cloudflare.com/changelog/post/2026-04-27-resource-tagging-public-beta/",
+            "label": "developers.cloudflare.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "mq-rabbitmq-prometheus",
+      "updates": [
+        {
+          "id": "mq-rabbitmq-prometheus",
+          "date": "30 Apr 2026",
+          "tag": "release",
+          "title": {
+            "es": "Amazon MQ for RabbitMQ ahora expone métricas Prometheus nativas",
+            "en": "Amazon MQ for RabbitMQ now ships native Prometheus metrics",
+            "fr": "Amazon MQ for RabbitMQ expose des métriques Prometheus natives"
+          },
+          "body_html": {
+            "es": "<p>Si corrés colas en RabbitMQ 4.2 sobre Amazon MQ, ya no hace falta sidecar exporter. El plugin de Prometheus viene <strong>habilitado por defecto</strong> en todos los brokers nuevos en todas las regiones donde Amazon MQ está disponible, exponiendo métricas de broker, colas y conexiones por endpoint compatible. Conectalo directo a Grafana o Amazon Managed Prometheus y olvidate de armar la métrica fina con CloudWatch. Para arquitecturas event-driven es el quality-of-life que se pedía a gritos.</p>",
+            "en": "<p>If you run queues on RabbitMQ 4.2 via Amazon MQ, the sidecar exporter is gone — the Prometheus plugin is <strong>enabled by default</strong> on every new 4.2 broker in every region where Amazon MQ is available, exposing broker, queue, and connection metrics on a Prometheus-compatible endpoint. Wire it straight into Grafana or Amazon Managed Prometheus and stop fighting CloudWatch for fine-grained queue health.</p>",
+            "fr": "<p>RabbitMQ 4.2 sur Amazon MQ expose désormais nativement les métriques Prometheus, plugin <strong>activé par défaut</strong> dans toutes les régions. Branchez Grafana ou Amazon Managed Prometheus et abandonnez le sidecar exporter.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/04/amazon-mq-rabbitmq-prometheus-metrics/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "rds-mysql-9-6",
+      "updates": [
+        {
+          "id": "rds-mysql-9-6",
+          "date": "29 Apr 2026",
+          "tag": "beta",
+          "title": {
+            "es": "Amazon RDS for MySQL suma Innovation Release 9.6 en Preview Environment",
+            "en": "Amazon RDS for MySQL adds MySQL 9.6 Innovation Release in Preview Environment",
+            "fr": "Amazon RDS pour MySQL ajoute la 9.6 Innovation Release en Preview Environment"
+          },
+          "body_html": {
+            "es": "<p>RDS for MySQL ya ofrece la <strong>community Innovation Release 9.6</strong> dentro del Preview Environment de RDS. Es el canal early-look para probar features nuevas de MySQL antes de que aterricen en una línea LTS &mdash;ideal para validar migraciones y benchmarks&mdash;, pero ojo: Preview no tiene SLA y la versión cambia rápido. Si tenés un upgrade desde 8.0 o 8.4 en el roadmap, este es tu sandbox para empezar a romper cosas controladamente, no un environment de producción.</p>",
+            "en": "<p>RDS for MySQL now offers the <strong>community Innovation Release 9.6</strong> inside the RDS Preview Environment. It is the early-look channel for upcoming MySQL features before they land on an LTS line — useful for migration validation and benchmarks, but Preview means no SLA and fast-moving versions. If a jump from 8.0 or 8.4 is on your roadmap, this is your sandbox, not your production target.</p>",
+            "fr": "<p>RDS pour MySQL propose la <strong>community Innovation Release 9.6</strong> dans le Preview Environment, canal early-look avant arrivée sur LTS. Idéal pour valider les migrations et benchmarks, mais attention: pas de SLA et versions changeantes. Sandbox de planification, pas environnement de production.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/04/amazon-rds-mysql-innovation/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El postmortem de GitHub confirma lo que se venía viendo: la carga agentic no es un blip, son 30x más capacidad planificada en cinco meses. Si tu plataforma sirve a humanos pero también a agents, replanificá presupuesto, capacidad y SRE.",
+      "en": "GitHub's postmortem confirms what was already visible: agentic workloads aren't a blip — capacity plans jumped 30x in five months. If your platform serves both humans and agents, rebudget your SRE roadmap.",
+      "fr": "Le postmortem GitHub confirme l'évidence: la charge agentique n'est pas un pic, mais un 30x sur cinq mois. Si votre plateforme sert humains et agents, revoyez budget, capacité et roadmap SRE."
+    },
+    {
+      "es": "Un WAF compra tiempo, no seguridad. La regla de Cloudflare contra CVE-2026-41940 te frena la explotación mientras parchás, no en lugar de parchar. Si cPanel está en algún rincón de tu stack, andá al vendor ya.",
+      "en": "WAFs buy time, not safety. Cloudflare's emergency rule for CVE-2026-41940 stops exploitation while you patch — not instead of patching. If cPanel runs anywhere in your stack, go upstream now.",
+      "fr": "Un WAF achète du temps, pas de la sécurité. La règle Cloudflare pour CVE-2026-41940 protège pendant que vous patchez. Si cPanel est dans votre stack, mettez à jour maintenant."
+    },
+    {
+      "es": "Observabilidad nativa por defecto: Amazon MQ con Prometheus integrado es parte de una tendencia más amplia &mdash;los managed services ya no quieren que armes tu sidecar, te dan el endpoint y te ahorran el YAML.",
+      "en": "Native observability is becoming the default: Amazon MQ shipping Prometheus by default is part of a broader move — managed services are dropping the sidecar dance and exposing endpoints directly.",
+      "fr": "L'observabilité native devient la norme: Amazon MQ avec Prometheus par défaut illustre un mouvement plus large — les services managés exposent directement les endpoints, fini le sidecar."
+    }
+  ]
+}

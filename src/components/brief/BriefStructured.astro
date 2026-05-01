@@ -21,7 +21,7 @@ const LANGS: Lang[] = ['es', 'en', 'fr'];
 {LANGS.map((lang) => (
 	<div class={`lang-${lang}`}>
 		{stats && <StatsBar stats={stats} lang={lang} />}
-		{tools && tools.map((tool) => <ToolSection tool={tool} lang={lang} />)}
+		{tools && tools.filter((tool) => tool.updates && tool.updates.length > 0).map((tool) => <ToolSection tool={tool} lang={lang} />)}
 		{models && models.length > 0 && (
 			<ModelTable models={models} lang={lang} anchor={modelTimelineAnchor} />
 		)}

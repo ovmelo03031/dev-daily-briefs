@@ -1,0 +1,32 @@
+---
+import { Icon } from 'astro-icon/components';
+import { CATEGORIES, type Category } from '../consts';
+
+interface Props {
+	category: Category;
+	width?: number;
+	height?: number;
+	class?: string;
+	style?: string;
+}
+
+const { category, width = 18, height = 18, class: className, style } = Astro.props;
+const cat = CATEGORIES[category] as (typeof CATEGORIES)[Category] & { image?: string };
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+const imgSrc = cat.image ? `${baseUrl}${cat.image}` : null;
+---
+
+{imgSrc ? (
+	<img
+		src={imgSrc}
+		alt=""
+		width={width}
+		height={height}
+		class={`${className ?? ''} rounded-full object-cover inline-block`.trim()}
+		style={`width:${width}px;height:${height}px;min-width:${width}px;flex-shrink:0;${style ?? ''}`}
+		loading="lazy"
+		decoding="async"
+	/>
+) : (
+	<Icon name={cat.icon} width={width} height={height} class={className} style={style} />
+)}

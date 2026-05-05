@@ -1,6 +1,6 @@
 ---
-import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
+import CategoryIcon from '../components/CategoryIcon.astro';
 import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
@@ -17,6 +17,7 @@ const allPosts = [
 	...(await getCollection('ai-coding')),
 	...(await getCollection('backend-fullstack')),
 	...(await getCollection('dev-news')),
+	...(await getCollection('gentleman-releases')),
 ].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 // Build grouped highlights for the homepage: latest brief per category that
@@ -31,7 +32,7 @@ function isSameDay(a: Date, b: Date) {
 }
 
 const now = new Date();
-const cats: Category[] = ['ai-coding', 'backend-fullstack', 'dev-news'];
+const cats: Category[] = ['ai-coding', 'backend-fullstack', 'dev-news', 'gentleman-releases'];
 
 // Normalize highlight text shape so TodayHighlights (expects flat text/text_es/text_fr)
 // works with both legacy MD briefs and new JSON briefs that use nested { es, en, fr }.
@@ -116,7 +117,7 @@ const homeSchemas = [
 								class="inline-flex h-5 w-5 items-center justify-center"
 								style={`color: ${cat.accent}`}
 							>
-								<Icon name={cat.icon} width={14} height={14} />
+								<CategoryIcon category={slug as Category} width={14} height={14} />
 							</span>
 							<span class="text-[var(--color-text)] group-hover:text-[var(--color-accent)]">
 								{cat.label}
@@ -152,7 +153,7 @@ const homeSchemas = [
 									class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-surface-2)]"
 									style={`color: ${cat.accent}`}
 								>
-									<Icon name={cat.icon} width={16} height={16} />
+									<CategoryIcon category={post.data.category as Category} width={16} height={16} />
 								</span>
 								<div class="min-w-0 flex-1">
 									<h3 class="text-sm font-medium text-[var(--color-text)] truncate group-hover:text-[var(--color-accent)]">

@@ -23,6 +23,14 @@ export const CATEGORIES = {
 		icon: 'lucide:code',
 		accent: '#7c3aed',
 	},
+	'gentleman-releases': {
+		label: 'Gentleman Releases',
+		description: 'Daily releases digest of Gentleman-Programming projects (engram, gentle-ai)',
+		emoji: '👨🏻',
+		icon: 'local:mustache',
+		image: '/icons/custom/gentleman-avatar.png',
+		accent: '#ec4899',
+	},
 } as const;
 
 export type Category = keyof typeof CATEGORIES;

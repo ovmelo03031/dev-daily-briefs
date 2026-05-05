@@ -1,8 +1,8 @@
 ---
-import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
-import { SITE_TITLE, CATEGORIES } from '../consts';
+import { SITE_TITLE, CATEGORIES, type Category } from '../consts';
 import LangToggle from './LangToggle.astro';
+import CategoryIcon from './CategoryIcon.astro';
 import logo from '../assets/brand/logo-wordmark-transparent.png';
 ---
 
@@ -19,8 +19,8 @@ import logo from '../assets/brand/logo-wordmark-transparent.png';
 					title={cat.label}
 					class="inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-sm text-[var(--color-text-muted)] hover:bg-[var(--color-surface)] hover:text-[var(--color-text)] no-underline transition-colors sm:px-3"
 				>
-					<Icon
-						name={cat.icon}
+					<CategoryIcon
+						category={slug as Category}
 						width={18}
 						height={18}
 						class="sm:!h-[14px] sm:!w-[14px]"

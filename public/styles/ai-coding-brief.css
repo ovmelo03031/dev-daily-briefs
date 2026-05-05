@@ -114,6 +114,10 @@
 .tool-section.build-tools::before { background: linear-gradient(90deg, #d97706, #f59e0b); }
 .tool-section.dev-tools::before { background: linear-gradient(90deg, #7c6aff, #a78bfa); }
 .tool-section.quick-links::before { background: linear-gradient(90deg, #6b7280, #9ca3af); }
+/* Gentleman Releases */
+.tool-section.releases-highlights::before { background: linear-gradient(90deg, #ec4899, #f472b6); }
+.tool-section.releases-engram::before { background: linear-gradient(90deg, #db2777, #ec4899); }
+.tool-section.releases-gentle-ai::before { background: linear-gradient(90deg, #be185d, #ec4899); }
 
 /* Section Header */
 .prose-ai-coding .tool-header,
@@ -147,7 +151,7 @@
 
 /* Hide the emoji fallback only inside known sections (where we render an SVG overlay) */
 .prose-ai-coding .tool-section:is(.claude, .openai, .gemini, .copilot, .vscode) .tool-icon,
-.prose-brief .tool-section:is(.top-stories, .runtimes, .frameworks, .databases, .cloud, .architecture, .fullstack, .security, .typescript, .css, .html, .react, .react-native, .js-frameworks, .build-tools, .dev-tools, .quick-links) .tool-icon {
+.prose-brief .tool-section:is(.top-stories, .runtimes, .frameworks, .databases, .cloud, .architecture, .fullstack, .security, .typescript, .css, .html, .react, .react-native, .js-frameworks, .build-tools, .dev-tools, .quick-links, .releases-highlights, .releases-engram, .releases-gentle-ai) .tool-icon {
   font-size: 0;
   line-height: 0;
 }
@@ -156,7 +160,7 @@
    and renders an SVG mask colored with the section accent. Works for .md
    and .mdx briefs without touching their content. */
 .prose-ai-coding .tool-section:is(.claude, .openai, .gemini, .copilot, .vscode) .tool-icon::after,
-.prose-brief .tool-section:is(.top-stories, .runtimes, .frameworks, .databases, .cloud, .architecture, .fullstack, .security, .typescript, .css, .html, .react, .react-native, .js-frameworks, .build-tools, .dev-tools, .quick-links) .tool-icon::after {
+.prose-brief .tool-section:is(.top-stories, .runtimes, .frameworks, .databases, .cloud, .architecture, .fullstack, .security, .typescript, .css, .html, .react, .react-native, .js-frameworks, .build-tools, .dev-tools, .quick-links, .releases-highlights, .releases-engram, .releases-gentle-ai) .tool-icon::after {
   content: '';
   position: absolute;
   inset: 10px;
@@ -282,6 +286,38 @@
 .prose-brief .tool-section.quick-links .tool-icon::after {
   mask-image: url('../icons/lucide/link.svg');
   -webkit-mask-image: url('../icons/lucide/link.svg');
+}
+
+/* Gentleman Releases — pink mustache theme */
+.prose-brief .tool-section.releases-highlights { --brand: #f472b6; }
+.prose-brief .tool-section.releases-engram { --brand: #ec4899; }
+.prose-brief .tool-section.releases-gentle-ai { --brand: #f472b6; }
+
+.prose-brief .tool-section.releases-highlights .tool-icon::after {
+  mask-image: url('../icons/custom/mustache.svg');
+  -webkit-mask-image: url('../icons/custom/mustache.svg');
+}
+.prose-brief .tool-section.releases-engram .tool-icon::after {
+  mask: none;
+  -webkit-mask: none;
+  background-color: transparent;
+  background-image: url('../icons/custom/engram-sticker.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  inset: 0;
+  border-radius: inherit;
+}
+.prose-brief .tool-section.releases-gentle-ai .tool-icon::after {
+  mask: none;
+  -webkit-mask: none;
+  background-color: transparent;
+  background-image: url('../icons/custom/gentle-ai-sticker.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  inset: 0;
+  border-radius: inherit;
 }
 
 .prose-ai-coding .tool-meta,

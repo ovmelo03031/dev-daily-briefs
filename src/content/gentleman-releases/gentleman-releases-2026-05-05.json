@@ -1,0 +1,181 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 05 may 2026",
+    "en": "Gentleman Releases — 05 May 2026",
+    "fr": "Gentleman Releases — 05 mai 2026"
+  },
+  "description": {
+    "es": "Releases del día en engram y gentle-ai: hardening cloud, recovery parity y docs",
+    "en": "Today's releases on engram and gentle-ai: cloud hardening, recovery parity and docs",
+    "fr": "Sorties du jour sur engram et gentle-ai : durcissement cloud, parité de récupération et docs"
+  },
+  "pubDate": "2026-05-05",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "engram v1.15.7 — fix de import legacy con sesiones huérfanas",
+        "en": "engram v1.15.7 — legacy import fix for orphan sessions",
+        "fr": "engram v1.15.7 — correctif import legacy avec sessions orphelines"
+      },
+      "anchor": "engram-v1-15-7",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "engram v1.15.6 — hardening de startup repair en Engram Cloud",
+        "en": "engram v1.15.6 — Engram Cloud startup repair hardening",
+        "fr": "engram v1.15.6 — durcissement du startup repair Engram Cloud"
+      },
+      "anchor": "engram-v1-15-6",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "engram v1.15.5 — recovery parity para mutation-backed state",
+        "en": "engram v1.15.5 — recovery parity for mutation-backed state",
+        "fr": "engram v1.15.5 — parité de récupération pour l'état mutation-backed"
+      },
+      "anchor": "engram-v1-15-5",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-ai v1.25.6 — guía multi-page del codebase + docs de agentes",
+        "en": "gentle-ai v1.25.6 — multi-page codebase guide + agent docs",
+        "fr": "gentle-ai v1.25.6 — guide multi-pages du codebase + docs agents"
+      },
+      "anchor": "gentle-ai-v1-25-6",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-ai v1.25.5 — chained PRs target parent + E2E timeouts",
+        "en": "gentle-ai v1.25.5 — chained PRs target parent + E2E timeouts",
+        "fr": "gentle-ai v1.25.5 — PRs chaînés ciblent le parent + timeouts E2E"
+      },
+      "anchor": "gentle-ai-v1-25-5",
+      "icon": "simple-icons:github"
+    }
+  ],
+  "tools": [
+    {
+      "id": "engram",
+      "name": "engram",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-engram",
+      "icon_emoji": "🧠",
+      "anchor": "engram",
+      "version": "v1.15.7",
+      "updates": [
+        {
+          "id": "engram-v1-15-7",
+          "tag": "fix",
+          "title": {
+            "es": "v1.15.7 — Fix de legacy local sync import con sesiones huérfanas",
+            "en": "v1.15.7 — Legacy local sync import fix with orphan sessions",
+            "fr": "v1.15.7 — Correctif import local sync legacy avec sessions orphelines"
+          },
+          "body_html": {
+            "es": "<p>Patch que resuelve el bug donde <code>engram sync --import</code> se trababa con dependencias huérfanas de prompts/observaciones en exports legacy de <code>.engram/chunks</code> mal formados — antes fallaba para siempre con un foreign key error.</p><p>Ahora el import escanea los chunks del manifest en busca de upserts reales de sesión antes de declarar la dependencia como faltante. Si la sesión no aparece ni en la DB local ni en ningún chunk, sintetiza un stub determinista marcado <code>(recovered-missing-session)</code>. El comportamiento dependency-safe entre chunks se mantiene: las sesiones reales siempre ganan sobre los stubs recuperados.</p>",
+            "en": "<p>Patch fixing the bug where <code>engram sync --import</code> stalled on orphan prompt/observation dependencies in malformed legacy <code>.engram/chunks</code> exports — previously failing forever with a foreign key error.</p><p>Now the import scans manifest chunks for real session upserts before declaring a dependency truly missing. If the session is absent from both the local DB and every chunk, it synthesizes a deterministic stub flagged <code>(recovered-missing-session)</code>. Cross-chunk dependency-safe behavior is preserved: real session chunks still win over recovered stubs.</p>",
+            "fr": "<p>Patch corrigeant le bug où <code>engram sync --import</code> bloquait sur des dépendances orphelines de prompts/observations dans des exports legacy <code>.engram/chunks</code> malformés — auparavant cela échouait pour toujours avec une erreur de foreign key.</p><p>L'import scanne maintenant les chunks du manifest pour de vrais upserts de session avant de déclarer une dépendance manquante. Si la session est absente de la DB locale et de tous les chunks, il synthétise un stub déterministe marqué <code>(recovered-missing-session)</code>. Le comportement dependency-safe entre chunks est préservé.</p>"
+          },
+          "date": "04 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v1.15.7",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        },
+        {
+          "id": "engram-v1-15-6",
+          "tag": "fix",
+          "title": {
+            "es": "v1.15.6 — Hardening de startup repair en Engram Cloud",
+            "en": "v1.15.6 — Engram Cloud startup repair hardening",
+            "fr": "v1.15.6 — Durcissement du startup repair Engram Cloud"
+          },
+          "body_html": {
+            "es": "<p>Patch que blinda el startup repair de Engram Cloud contra schemas productivos viejos y filas de mutation históricas inválidas. Antes <code>engram cloud serve</code> caía en restart loops durante la materialización automática de mutations.</p><p>Ahora los backfills de migración de chunks legacy solo referencian columnas legacy si existen en el schema activo, y la repair de materialización reporta <code>invalid_mutations</code> y saltea filas históricas inválidas en vez de fallar todo el repair. Validado en VPS de HostGator con health OK y dashboard 200.</p>",
+            "en": "<p>Patch hardening Engram Cloud startup repair against production schemas and historical invalid mutation rows. Previously <code>engram cloud serve</code> hit restart loops during automatic mutation materialization.</p><p>Legacy cloud chunk migration backfills now only reference legacy columns when they exist in the active schema, and mutation materialization repair reports <code>invalid_mutations</code> and skips invalid historical rows instead of failing the whole repair. Validated on the HostGator VPS with cloud health OK and dashboard HTTP 200.</p>",
+            "fr": "<p>Patch durcissant le startup repair d'Engram Cloud contre les schémas de production et les lignes de mutation historiques invalides. Auparavant <code>engram cloud serve</code> tombait en boucles de restart pendant la matérialisation automatique des mutations.</p><p>Les backfills de migration de chunks legacy ne référencent maintenant les colonnes legacy que si elles existent dans le schéma actif, et la repair de matérialisation rapporte <code>invalid_mutations</code> et saute les lignes invalides au lieu de tout faire échouer.</p>"
+          },
+          "date": "04 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v1.15.6",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        },
+        {
+          "id": "engram-v1-15-5",
+          "tag": "fix",
+          "title": {
+            "es": "v1.15.5 — Recovery parity para mutation-backed state",
+            "en": "v1.15.5 — Recovery parity for mutation-backed state",
+            "fr": "v1.15.5 — Parité de récupération pour l'état mutation-backed"
+          },
+          "body_html": {
+            "es": "<p>Patch que cierra el gap de recovery parity en cloud: estado actual mutation-backed que se veía en cloud/dashboard pero faltaba al recuperar desde chunks/manifest fresco. Ojo con esto si dependés de fresh recovery — antes te perdías sesiones, observaciones y prompts entrados por la mutation path.</p><p>Ahora los pushes de mutation aceptados también crean payloads compatibles en <code>cloud_chunks</code>, y <code>engram cloud serve</code> materializa al startup las mutation-only rows existentes para cada <code>ENGRAM_CLOUD_ALLOWED_PROJECTS</code>. También se agrega el comando explícito <code>engram cloud repair materialize-mutations --project &lt;project&gt; (--dry-run|--apply)</code> para verificación manual y re-runs.</p>",
+            "en": "<p>Patch closing the cloud recovery parity gap: mutation-backed current state visible in cloud/dashboard but missing from fresh chunk/manifest recovery. Watch this one if you rely on fresh recovery — before, you were losing sessions, observations and prompts that arrived through the mutation path.</p><p>Now accepted mutation pushes also create compatible payloads in <code>cloud_chunks</code>, and <code>engram cloud serve</code> materializes existing mutation-only rows at startup for each <code>ENGRAM_CLOUD_ALLOWED_PROJECTS</code> entry. Adds the explicit <code>engram cloud repair materialize-mutations --project &lt;project&gt; (--dry-run|--apply)</code> command for operator verification and re-runs.</p>",
+            "fr": "<p>Patch fermant le gap de parité de récupération cloud : l'état mutation-backed visible dans cloud/dashboard mais manquant lors de la récupération fraîche depuis chunks/manifest.</p><p>Les pushes de mutation acceptés créent maintenant aussi des payloads compatibles dans <code>cloud_chunks</code>, et <code>engram cloud serve</code> matérialise au startup les lignes mutation-only existantes pour chaque entrée <code>ENGRAM_CLOUD_ALLOWED_PROJECTS</code>. Ajoute la commande explicite <code>engram cloud repair materialize-mutations --project &lt;project&gt; (--dry-run|--apply)</code>.</p>"
+          },
+          "date": "04 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v1.15.5",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gentle-ai",
+      "name": "gentle-ai",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-gentle-ai",
+      "icon_emoji": "🤖",
+      "anchor": "gentle-ai",
+      "version": "v1.25.6",
+      "updates": [
+        {
+          "id": "gentle-ai-v1-25-6",
+          "tag": "fix",
+          "title": {
+            "es": "v1.25.6 — Guía multi-page del codebase + docs de agentes",
+            "en": "v1.25.6 — Multi-page codebase guide + agent docs",
+            "fr": "v1.25.6 — Guide multi-pages du codebase + docs agents"
+          },
+          "body_html": {
+            "es": "<p>Patch enfocado en docs: nueva guía definitiva en inglés del codebase para mantenedores y contributors en <code>docs/CODEBASE-GUIDE.md</code>, con páginas focalizadas bajo <code>docs/codebase/</code>.</p><p>También actualiza la documentación de agentes soportados (Kilo Code, Kimi Code, Kiro IDE, Cursor y comportamiento de overlay OpenCode/Kilo), alinea conteos, nombres, paths y flags readonly con los assets fuente, y suma <code>.engram/engram.db</code> y <code>.engram/cloud.json</code> al gitignore como runtime state local. Timeouts E2E extendidos para tolerar mirrors lentos en CI Linux.</p>",
+            "en": "<p>Docs-focused patch: new definitive English codebase guide for maintainers and contributors at <code>docs/CODEBASE-GUIDE.md</code>, with focused pages under <code>docs/codebase/</code>.</p><p>Also updates supported-agent documentation (Kilo Code, Kimi Code, Kiro IDE, Cursor and OpenCode/Kilo overlay behavior), aligns counts, names, paths and readonly flags with source assets, and adds <code>.engram/engram.db</code> and <code>.engram/cloud.json</code> to gitignore as local runtime state. E2E CI timeouts extended to tolerate slow Linux package mirrors.</p>",
+            "fr": "<p>Patch focalisé docs : nouveau guide de référence anglais du codebase pour les mainteneurs et contributeurs dans <code>docs/CODEBASE-GUIDE.md</code>, avec des pages dédiées sous <code>docs/codebase/</code>.</p><p>Met aussi à jour la documentation des agents supportés (Kilo Code, Kimi Code, Kiro IDE, Cursor et comportement overlay OpenCode/Kilo), aligne comptes, noms, chemins et flags readonly avec les assets source, et ajoute <code>.engram/engram.db</code> et <code>.engram/cloud.json</code> au gitignore.</p>"
+          },
+          "date": "04 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v1.25.6",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        },
+        {
+          "id": "gentle-ai-v1-25-5",
+          "tag": "fix",
+          "title": {
+            "es": "v1.25.5 — Chained PRs target parent + bounded E2E timeouts",
+            "en": "v1.25.5 — Chained PRs target parent + bounded E2E timeouts",
+            "fr": "v1.25.5 — PRs chaînés ciblent le parent + timeouts E2E bornés"
+          },
+          "body_html": {
+            "es": "<p>Patch que ajusta la guía de chained PRs para que los child PRs apunten al branch parent inmediato en vez del branch tracker, y refresca el lenguaje de SDD chain planning para que los review diffs queden focalizados y los child PRs nunca apunten directo a <code>main</code>.</p><p>También actualiza las expectativas del E2E skill bundle para el set ampliado de foundation skills, y agrega timeouts bornados al E2E para que el CI Docker no cuelgue indefinidamente sin diagnóstico. Verificado con 466 tests pasados, 0 fallos en Ubuntu/Arch/Fedora.</p>",
+            "en": "<p>Patch fixing chained PR guidance so child PRs target the immediate parent branch instead of the tracker branch, and refreshing SDD chain planning language so review diffs stay focused and child PRs never target <code>main</code> directly.</p><p>Also updates E2E skill bundle expectations for the expanded foundation skill set, and adds bounded E2E timeouts so Docker-based CI cannot hang indefinitely without diagnostics. Verified with 466 tests passed, 0 failures across Ubuntu/Arch/Fedora.</p>",
+            "fr": "<p>Patch ajustant la guidance des chained PRs pour que les child PRs ciblent la branche parent immédiate au lieu de la branche tracker, et rafraîchissant le langage du SDD chain planning pour que les diffs de review restent focalisés.</p><p>Met aussi à jour les attentes du E2E skill bundle pour le set foundation élargi, et ajoute des timeouts bornés au E2E pour que le CI Docker ne puisse pas rester bloqué indéfiniment. Vérifié avec 466 tests passés, 0 échecs sur Ubuntu/Arch/Fedora.</p>"
+          },
+          "date": "04 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v1.25.5",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

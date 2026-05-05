@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../../components/BaseHead.astro';
+import CategoryList from '../../../components/CategoryList.astro';
+import Footer from '../../../components/Footer.astro';
+import Header from '../../../components/Header.astro';
+import StructuredData from '../../../components/StructuredData.astro';
+import { CATEGORIES, SITE_TITLE, type Category, type LangCode } from '../../../consts';
+import { getCategoryDescription, getCategoryLabel } from '../../../utils/categoryCopy';
+import { LOCALIZED_LANG_CODES, localizePath } from '../../../utils/i18n';
+import { buildBreadcrumbSchema } from '../../../utils/schema';
+
+export async function getStaticPaths() {
+	const categoryKeys = Object.keys(CATEGORIES) as Category[];
+	return LOCALIZED_LANG_CODES.flatMap((lang) =>
+		categoryKeys.map((category) => ({
+			params: { lang, category },
+			props: { lang, category },
+		})),
+	);
+}
+
+const { lang, category } = Astro.props as { lang: LangCode; category: Category };
+const posts = await getCollection(category);
+const categoryLabel = getCategoryLabel(category, lang);
+const categoryDescription = getCategoryDescription(category, lang);
+const canonical = new URL(localizePath(Astro.url.pathname, lang), Astro.site);
+const homeUrl = Astro.site ? new URL(localizePath('/', lang), Astro.site).toString() : localizePath('/', lang);
+const breadcrumbSchema = buildBreadcrumbSchema([
+	{ name: SITE_TITLE, url: homeUrl },
+	{ name: categoryLabel, url: canonical },
+]);
+---
+
+<!doctype html>
+<html lang={lang} data-lang={lang}>
+	<head>
+		<BaseHead title={`${categoryLabel} — Dev Daily Briefs`} description={categoryDescription} lang={lang} />
+		<StructuredData schema={breadcrumbSchema} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<CategoryList posts={posts} category={category} lang={lang} />
+		</main>
+		<Footer />
+	</body>
+</html>

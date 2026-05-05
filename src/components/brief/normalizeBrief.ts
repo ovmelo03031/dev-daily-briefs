@@ -1,4 +1,5 @@
 import { pickLang, type I18nValue } from './pickLang';
+import { DEFAULT_LANG, type LangCode } from '../../consts';
 
 type FlatHighlight = {
 	text: string;
@@ -26,7 +27,7 @@ export function normalizeBrief<T extends {
 	description: I18nValue;
 	highlights?: RawHighlight[];
 	tools?: unknown[];
-}>(data: T) {
+}>(data: T, lang: LangCode = DEFAULT_LANG) {
 	const isStructured = Array.isArray(data.tools) && data.tools.length > 0;
 
 	const highlightsForLayout: FlatHighlight[] = (data.highlights ?? []).map((h) => {
@@ -49,8 +50,8 @@ export function normalizeBrief<T extends {
 		};
 	});
 
-	const title = pickLang(data.title, 'en');
-	const description = pickLang(data.description, 'en');
+	const title = pickLang(data.title, lang);
+	const description = pickLang(data.description, lang);
 
 	return { isStructured, title, description, highlightsForLayout };
 }

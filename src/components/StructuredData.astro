@@ -4,7 +4,10 @@ interface Props {
 }
 
 const { schema } = Astro.props;
-const json = JSON.stringify(schema);
+const json = JSON.stringify(Array.isArray(schema) ? {
+	'@context': 'https://schema.org',
+	'@graph': schema.map(({ '@context': _context, ...item }) => item),
+} : schema);
 ---
 
-<script type="application/ld+json" set:html={json} />
+<script is:inline type="application/ld+json" set:html={json} />

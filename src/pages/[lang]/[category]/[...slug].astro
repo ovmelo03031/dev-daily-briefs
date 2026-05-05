@@ -1,0 +1,52 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import BlogPost from '../../../layouts/BlogPost.astro';
+import BriefStructured from '../../../components/brief/BriefStructured.astro';
+import { normalizeBrief } from '../../../components/brief/normalizeBrief';
+import { CATEGORIES, type Category, type LangCode } from '../../../consts';
+import { LOCALIZED_LANG_CODES } from '../../../utils/i18n';
+
+type BriefEntry = CollectionEntry<'ai-coding' | 'backend-fullstack' | 'dev-news' | 'gentleman-releases'>;
+
+export async function getStaticPaths() {
+	const categoryKeys = Object.keys(CATEGORIES) as Category[];
+	const entries = await Promise.all(
+		categoryKeys.map(async (category) => ({ category, posts: await getCollection(category) })),
+	);
+
+	return LOCALIZED_LANG_CODES.flatMap((lang) =>
+		entries.flatMap(({ category, posts }) =>
+			posts.map((post) => ({
+				params: { lang, category, slug: post.id },
+				props: { lang, post },
+			})),
+		),
+	);
+}
+
+const { lang, post } = Astro.props as { lang: LangCode; post: BriefEntry };
+const { data } = post;
+const { isStructured, title, description, highlightsForLayout } = normalizeBrief(data, lang);
+const Content = isStructured ? null : (await render(post)).Content;
+---
+
+<BlogPost
+	title={title}
+	description={description}
+	pubDate={data.pubDate}
+	category={data.category}
+	highlights={highlightsForLayout}
+	lang={lang}
+>
+	{isStructured ? (
+		<BriefStructured
+			stats={data.stats}
+			tools={data.tools}
+			models={data.models}
+			modelTimelineAnchor={data.model_timeline_anchor}
+			notableTrends={data.notable_trends}
+		/>
+	) : (
+		Content && <Content />
+	)}
+</BlogPost>

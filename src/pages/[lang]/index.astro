@@ -1,20 +1,26 @@
 ---
 import { Image } from 'astro:assets';
-import CategoryIcon from '../components/CategoryIcon.astro';
 import { getCollection } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
-import StructuredData from '../components/StructuredData.astro';
-import TodayHighlights from '../components/TodayHighlights.astro';
-import { pickLang } from '../components/brief/pickLang';
-import { SITE_DESCRIPTION, SITE_TITLE, CATEGORIES, type Category } from '../consts';
-import { getCategoryLabel } from '../utils/categoryCopy';
-import { getHomeFaqs } from '../utils/homeFaqs';
-import { buildFaqPageSchema, buildOrganizationSchema, buildPersonSchema, buildWebSiteSchema } from '../utils/schema';
-import logo from '../assets/brand/logo-wordmark-transparent.png';
+import BaseHead from '../../components/BaseHead.astro';
+import CategoryIcon from '../../components/CategoryIcon.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Header from '../../components/Header.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import TodayHighlights from '../../components/TodayHighlights.astro';
+import { pickLang } from '../../components/brief/pickLang';
+import { CATEGORIES, SITE_DESCRIPTION, SITE_TITLE, type Category, type LangCode } from '../../consts';
+import logo from '../../assets/brand/logo-wordmark-transparent.png';
+import { getCategoryLabel } from '../../utils/categoryCopy';
+import { getHomeFaqs } from '../../utils/homeFaqs';
+import { LOCALIZED_LANG_CODES, localizePath } from '../../utils/i18n';
+import { buildFaqPageSchema, buildOrganizationSchema, buildPersonSchema, buildWebSiteSchema } from '../../utils/schema';
 
+export function getStaticPaths() {
+	return LOCALIZED_LANG_CODES.map((lang) => ({ params: { lang }, props: { lang } }));
+}
+
+const { lang } = Astro.props as { lang: LangCode };
 const allPosts = [
 	...(await getCollection('ai-coding')),
 	...(await getCollection('backend-fullstack')),
@@ -22,9 +28,6 @@ const allPosts = [
 	...(await getCollection('gentleman-releases')),
 ].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-// Build grouped highlights for the homepage: latest brief per category that
-// carries a non-empty `highlights` array. If the latest brief isn't from
-// today, we still surface it with its date tag.
 function isSameDay(a: Date, b: Date) {
 	return (
 		a.getFullYear() === b.getFullYear() &&
@@ -36,8 +39,6 @@ function isSameDay(a: Date, b: Date) {
 const now = new Date();
 const cats: Category[] = ['ai-coding', 'backend-fullstack', 'dev-news', 'gentleman-releases'];
 
-// Normalize highlight text shape so TodayHighlights (expects flat text/text_es/text_fr)
-// works with both legacy MD briefs and new JSON briefs that use nested { es, en, fr }.
 function normalizeHighlight(h: (typeof allPosts)[number]['data']['highlights'] extends (infer U)[] | undefined ? U : never) {
 	if (typeof h.text === 'string') {
 		return { text: h.text, text_es: h.text_es, text_fr: h.text_fr, anchor: h.anchor, icon: h.icon };
@@ -59,7 +60,7 @@ const highlightGroups = cats
 			accent: cat.accent,
 			icon: cat.icon,
 			briefId: latest.id,
-			briefTitle: pickLang(latest.data.title, 'en'),
+			briefTitle: pickLang(latest.data.title, lang),
 			briefPubDate: latest.data.pubDate,
 			isToday: isSameDay(latest.data.pubDate, now),
 			highlights: (latest.data.highlights ?? []).map(normalizeHighlight),
@@ -69,10 +70,10 @@ const highlightGroups = cats
 
 const latestPosts = allPosts.slice(0, 5);
 
-const faqs = getHomeFaqs('en');
+const faqs = getHomeFaqs(lang);
 
 const homeSchemas = [
-	buildWebSiteSchema(Astro.site, 'en'),
+	buildWebSiteSchema(Astro.site, lang),
 	buildOrganizationSchema(Astro.site),
 	buildPersonSchema(Astro.site),
 	buildFaqPageSchema(faqs),
@@ -80,26 +81,18 @@ const homeSchemas = [
 ---
 
 <!doctype html>
-<html lang="en" data-lang="en">
+<html lang={lang} data-lang={lang}>
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} lang="en" />
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} lang={lang} />
 		<StructuredData schema={homeSchemas} />
 	</head>
 	<body>
 		<Header />
 		<main class="mx-auto max-w-5xl px-4 py-12">
-			<!-- Hero -->
 			<section class="text-center mb-12">
 				<h1 class="mx-auto mb-5 flex justify-center">
 					<span class="sr-only">{SITE_TITLE}</span>
-					<Image
-						src={logo}
-						alt=""
-						height={120}
-						densities={[1, 2]}
-						loading="eager"
-						class="h-20 w-auto sm:h-28"
-					/>
+					<Image src={logo} alt="" height={120} densities={[1, 2]} loading="eager" class="h-20 w-auto sm:h-28" />
 				</h1>
 				<p class="text-lg text-[var(--color-text-muted)] max-w-2xl mx-auto">
 					<span class="lang-es">Resúmenes diarios curados para desarrolladores senior. AI tools, backend y frontend news — cada mañana.</span>
@@ -108,36 +101,21 @@ const homeSchemas = [
 				</p>
 			</section>
 
-			<!-- Today's Highlights — aggregated from latest brief per category -->
 			<TodayHighlights groups={highlightGroups} />
 
-			<!-- Compact category chips -->
 			<section class="mb-12">
 				<div class="flex flex-wrap gap-2">
-					{Object.entries(CATEGORIES).map(([slug, cat]) => {
-						const category = slug as Category;
-						const label = getCategoryLabel(category, 'en');
-						return (
-							<a
-								href={`${import.meta.env.BASE_URL}${slug}`}
-								class="group inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3.5 py-1.5 text-sm no-underline transition-all hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-2)]"
-							>
-								<span
-									class="inline-flex h-5 w-5 items-center justify-center"
-									style={`color: ${cat.accent}`}
-								>
-									<CategoryIcon category={category} width={14} height={14} />
-								</span>
-								<span class="text-[var(--color-text)] group-hover:text-[var(--color-accent)]">
-									{label}
-								</span>
-							</a>
-						);
-					})}
+					{Object.entries(CATEGORIES).map(([slug, cat]) => (
+						<a href={localizePath(`/${slug}/`, lang)} class="group inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3.5 py-1.5 text-sm no-underline transition-all hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-2)]">
+							<span class="inline-flex h-5 w-5 items-center justify-center" style={`color: ${cat.accent}`}>
+								<CategoryIcon category={slug as Category} width={14} height={14} />
+							</span>
+							<span class="text-[var(--color-text)] group-hover:text-[var(--color-accent)]">{getCategoryLabel(slug as Category, lang)}</span>
+						</a>
+					))}
 				</div>
 			</section>
 
-			<!-- Latest Briefs (archive entry point) -->
 			<section>
 				<div class="mb-4 flex items-baseline justify-between">
 					<h2 class="text-xl font-bold text-[var(--color-text)]">
@@ -155,24 +133,16 @@ const homeSchemas = [
 					{latestPosts.map((post) => {
 						const cat = CATEGORIES[post.data.category as Category];
 						return (
-							<a
-								href={`${import.meta.env.BASE_URL}${post.data.category}/${post.id}/`}
-								class="group flex items-center gap-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-3 no-underline transition-all hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-2)]"
-							>
-								<span
-									class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-surface-2)]"
-									style={`color: ${cat.accent}`}
-								>
+							<a href={localizePath(`/${post.data.category}/${post.id}/`, lang)} class="group flex items-center gap-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-3 no-underline transition-all hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-2)]">
+								<span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-surface-2)]" style={`color: ${cat.accent}`}>
 									<CategoryIcon category={post.data.category as Category} width={16} height={16} />
 								</span>
 								<div class="min-w-0 flex-1">
-									<h3 class="text-sm font-medium text-[var(--color-text)] truncate group-hover:text-[var(--color-accent)]">
-										{pickLang(post.data.title, 'en')}
-									</h3>
+									<h3 class="text-sm font-medium text-[var(--color-text)] truncate group-hover:text-[var(--color-accent)]">{pickLang(post.data.title, lang)}</h3>
 									<p class="text-xs text-[var(--color-text-muted)]">
-										<FormattedDate date={post.data.pubDate} />
+										<FormattedDate date={post.data.pubDate} lang={lang} />
 										<span class="mx-1.5">·</span>
-										<span style={`color: ${cat.accent}`}>{getCategoryLabel(post.data.category as Category, 'en')}</span>
+										<span style={`color: ${cat.accent}`}>{getCategoryLabel(post.data.category as Category, lang)}</span>
 									</p>
 								</div>
 							</a>
@@ -183,8 +153,16 @@ const homeSchemas = [
 
 			<section class="mt-14 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 sm:p-6">
 				<div class="mb-5">
-					<p class="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-accent)]">Search and AI</p>
-					<h2 class="mt-2 text-xl font-bold text-[var(--color-text)]">About Dev Daily Briefs</h2>
+					<p class="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-accent)]">
+						<span class="lang-es">Búsqueda e IA</span>
+						<span class="lang-en">Search and AI</span>
+						<span class="lang-fr">Recherche et IA</span>
+					</p>
+					<h2 class="mt-2 text-xl font-bold text-[var(--color-text)]">
+						<span class="lang-es">Sobre Dev Daily Briefs</span>
+						<span class="lang-en">About Dev Daily Briefs</span>
+						<span class="lang-fr">À propos de Dev Daily Briefs</span>
+					</h2>
 				</div>
 				<div class="grid gap-4 sm:grid-cols-2">
 					{faqs.map((faq, index) => (

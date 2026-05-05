@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
-import { SITE_TITLE } from '../consts';
+import { DEFAULT_LANG, LANGUAGES, SITE_AUTHOR, SITE_TITLE, type LangCode } from '../consts';
+import { getLocalizedUrl, localizePath, stripLangFromPath } from '../utils/i18n';
 import { Font } from 'astro:assets';
 
 interface ArticleMeta {
@@ -17,34 +18,27 @@ interface Props {
 	type?: 'website' | 'article';
 	image?: string;
 	article?: ArticleMeta;
+	lang?: LangCode;
+	alternates?: boolean;
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const { title, description, type = 'website', image, article } = Astro.props;
+const { title, description, type = 'website', image, article, lang = DEFAULT_LANG, alternates = true } = Astro.props;
+const canonicalURL = new URL(localizePath(Astro.url.pathname, lang), Astro.site);
+const alternatePath = stripLangFromPath(Astro.url.pathname);
 const ogImageURL = new URL(image ?? `${import.meta.env.BASE_URL}og-image.png`, Astro.site);
+const ogLocale = LANGUAGES[lang].ogLocale;
 ---
 
-<script is:inline>
+<script is:inline define:vars={{ routeLang: lang }}>
 	// Resolve initial UI language BEFORE first paint to avoid a flash of
-	// the wrong locale. Order: localStorage > navigator.languages > 'en'.
+	// the wrong locale. Localized routes win; unprefixed routes are English.
 	// Writes html[data-lang="es|en|fr"]; global.css keys its lang-*
 	// visibility rules off that attribute.
 	(function () {
 		try {
 			var supported = ['es', 'en', 'fr'];
-			var stored = null;
-			try { stored = localStorage.getItem('lang'); } catch (e) {}
-			var lang = supported.indexOf(stored) >= 0 ? stored : null;
-			if (!lang) {
-				var navList = navigator.languages && navigator.languages.length
-					? navigator.languages
-					: [navigator.language || 'en'];
-				for (var i = 0; i < navList.length; i++) {
-					var code = (navList[i] || '').toLowerCase().slice(0, 2);
-					if (supported.indexOf(code) >= 0) { lang = code; break; }
-				}
-			}
-			document.documentElement.setAttribute('data-lang', lang || 'en');
+			var lang = supported.indexOf(routeLang) >= 0 ? routeLang : 'en';
+			document.documentElement.setAttribute('data-lang', lang);
 		} catch (e) {
 			document.documentElement.setAttribute('data-lang', 'en');
 		}
@@ -65,17 +59,29 @@ const ogImageURL = new URL(image ?? `${import.meta.env.BASE_URL}og-image.png`, A
 <Font cssVariable="--font-atkinson" preload />
 
 <link rel="canonical" href={canonicalURL} />
+{alternates && (
+	<>
+		<link rel="alternate" hreflang="en" href={getLocalizedUrl(Astro.site, alternatePath, 'en')} />
+		<link rel="alternate" hreflang="es" href={getLocalizedUrl(Astro.site, alternatePath, 'es')} />
+		<link rel="alternate" hreflang="fr" href={getLocalizedUrl(Astro.site, alternatePath, 'fr')} />
+		<link rel="alternate" hreflang="x-default" href={getLocalizedUrl(Astro.site, alternatePath, DEFAULT_LANG)} />
+	</>
+)}
 
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
+<meta name="author" content={SITE_AUTHOR} />
+<meta name="robots" content="index,follow,max-image-preview:large" />
 
 <meta property="og:type" content={type} />
+<meta property="og:locale" content={ogLocale} />
 <meta property="og:site_name" content={SITE_TITLE} />
-<meta property="og:url" content={Astro.url} />
+<meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImageURL} />
+<meta property="og:image:alt" content={`${title} — ${SITE_TITLE}`} />
 
 {article && (
 	<>
@@ -87,11 +93,11 @@ const ogImageURL = new URL(image ?? `${import.meta.env.BASE_URL}og-image.png`, A
 	</>
 )}
 
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={ogImageURL} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalURL} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageURL} />
 
 <script is:inline>
 	// Scroll reveal: toggle .is-visible on reveal-* helper classes AND on

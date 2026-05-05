@@ -2,7 +2,7 @@ import type { CollectionEntry } from 'astro:content';
 import { pickLang } from '../components/brief/pickLang';
 import type { Category } from '../consts';
 
-type BriefEntry = CollectionEntry<'ai-coding' | 'backend-fullstack' | 'dev-news'>;
+type BriefEntry = CollectionEntry<'ai-coding' | 'backend-fullstack' | 'dev-news' | 'gentleman-releases'>;
 
 export function toRssItem(post: BriefEntry) {
 	const title = pickLang(post.data.title as never, 'en');

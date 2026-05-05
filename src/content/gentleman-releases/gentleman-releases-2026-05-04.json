@@ -1,0 +1,277 @@
+{
+  "title": {
+    "es": "Gentleman Releases — Semana del 27 abr al 4 may 2026",
+    "en": "Gentleman Releases — Week of Apr 27 to May 4, 2026",
+    "fr": "Gentleman Releases — Semaine du 27 avr au 4 mai 2026"
+  },
+  "description": {
+    "es": "Recap semanal de releases en engram y gentle-ai: minor bumps, hardening y fixes",
+    "en": "Weekly recap of releases on engram and gentle-ai: minor bumps, hardening and fixes",
+    "fr": "Récap hebdomadaire des sorties d'engram et gentle-ai : minor bumps, durcissement et corrections"
+  },
+  "pubDate": "2026-05-04",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "engram v1.15.0 — memory conflicts + doctor + Windows",
+        "en": "engram v1.15.0 — memory conflicts + doctor + Windows",
+        "fr": "engram v1.15.0 — conflits mémoire + doctor + Windows"
+      },
+      "anchor": "engram-v1-15-0",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-ai v1.25.0 — sustainable review + gentle-orchestrator",
+        "en": "gentle-ai v1.25.0 — sustainable review + gentle-orchestrator",
+        "fr": "gentle-ai v1.25.0 — sustainable review + gentle-orchestrator"
+      },
+      "anchor": "gentle-ai-v1-25-0",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "engram v1.15.3 — capture_prompt en mem_save",
+        "en": "engram v1.15.3 — capture_prompt added to mem_save",
+        "fr": "engram v1.15.3 — capture_prompt ajouté à mem_save"
+      },
+      "anchor": "engram-v1-15-3",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "engram v1.15.4 — hardening post Judgment Day review",
+        "en": "engram v1.15.4 — hardening after Judgment Day review",
+        "fr": "engram v1.15.4 — durcissement après revue Judgment Day"
+      },
+      "anchor": "engram-v1-15-4",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-ai v1.24.0 — community plugins en OpenCode",
+        "en": "gentle-ai v1.24.0 — community plugins for OpenCode",
+        "fr": "gentle-ai v1.24.0 — plugins communautaires OpenCode"
+      },
+      "anchor": "gentle-ai-v1-24-0",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-ai v1.25.4 — registra 4 skills faltantes en Go build",
+        "en": "gentle-ai v1.25.4 — registers 4 missing skills in Go build",
+        "fr": "gentle-ai v1.25.4 — enregistre 4 skills manquants dans le build Go"
+      },
+      "anchor": "gentle-ai-v1-25-4",
+      "icon": "simple-icons:github"
+    }
+  ],
+  "tools": [
+    {
+      "id": "engram",
+      "name": "engram",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-engram",
+      "icon_emoji": "💋",
+      "anchor": "engram",
+      "version": "v1.15.4",
+      "updates": [
+        {
+          "id": "engram-v1-15-4",
+          "tag": "fix",
+          "title": {
+            "es": "v1.15.4 — Hardening de mem_save y prompt capture",
+            "en": "v1.15.4 — mem_save and prompt capture hardening",
+            "fr": "v1.15.4 — Durcissement de mem_save et prompt capture"
+          },
+          "body_html": {
+            "es": "<p>Patch post Judgment Day review. <strong>Bug fixes</strong>: <code>mem_save</code> ahora trackea actividad contra el <code>session_id</code> resuelto; rutas de handler tolerantes a <code>SessionActivity</code> nil sin panics; fallas de prompt capture quedan best-effort y no rompen el save. <strong>Tests</strong>: regresiones para session_id explícito, nil-activity, fallas no fatales y dedupe sync. <strong>Docs</strong>: aclarado que solo <code>mem_save</code> y <code>mem_save_prompt</code> aceptan recovery override de proyecto ambiguo.</p>",
+            "en": "<p>Patch after Judgment Day review. <strong>Bug fixes</strong>: <code>mem_save</code> now tracks activity against the resolved <code>session_id</code>; handler paths are nil-safe for missing <code>SessionActivity</code>; prompt capture failures remain best-effort. <strong>Tests</strong>: regressions for explicit session_id, nil-activity, non-fatal capture, and dedupe sync. <strong>Docs</strong>: clarified that only <code>mem_save</code> and <code>mem_save_prompt</code> accept the ambiguous-project recovery override.</p>",
+            "fr": "<p>Patch après revue Judgment Day. <strong>Corrections</strong> : <code>mem_save</code> trace l'activité sur le <code>session_id</code> résolu ; les handlers tolèrent <code>SessionActivity</code> nil ; les échecs de prompt capture restent best-effort.</p>"
+          },
+          "date": "03 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v1.15.4",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        },
+        {
+          "id": "engram-v1-15-3",
+          "tag": "feature",
+          "title": {
+            "es": "v1.15.3 — capture_prompt en mem_save",
+            "en": "v1.15.3 — capture_prompt added to mem_save",
+            "fr": "v1.15.3 — capture_prompt ajouté à mem_save"
+          },
+          "body_html": {
+            "es": "<p>Nuevo flag <code>mem_save.capture_prompt</code> (default <code>true</code>): cuando el proceso MCP tiene contexto de prompt para el mismo proyecto/sesión, <code>mem_save</code> guarda el prompt junto a la observación. Pipelines automatizados pueden optar por <code>capture_prompt: false</code>. Es process-local — el mismo lifecycle MCP debe recibir el prompt antes de un <code>mem_save</code> posterior.</p>",
+            "en": "<p>New <code>mem_save.capture_prompt</code> boolean (defaults <code>true</code>): when the MCP process has prompt context for the same project/session, <code>mem_save</code> records that prompt alongside the observation. Automated pipelines can opt out with <code>capture_prompt: false</code>. Capture is process-local — the same MCP lifecycle must receive the prompt before a later <code>mem_save</code>.</p>",
+            "fr": "<p>Nouveau booléen <code>mem_save.capture_prompt</code> (par défaut <code>true</code>) : si le processus MCP a un contexte de prompt pour le même projet/session, <code>mem_save</code> enregistre ce prompt avec l'observation.</p>"
+          },
+          "date": "03 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v1.15.3",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        },
+        {
+          "id": "engram-v1-15-2",
+          "tag": "fix",
+          "title": {
+            "es": "v1.15.2 — Recovery seguro para escrituras con proyecto ambiguo",
+            "en": "v1.15.2 — Safe recovery for ambiguous-project writes",
+            "fr": "v1.15.2 — Récupération sûre pour écritures à projet ambigu"
+          },
+          "body_html": {
+            "es": "<p>Cuando MCP arranca desde un parent dir con múltiples repos, los agentes ahora pueden recuperar pidiendo al usuario que elija uno de los <code>available_projects</code> reportados. Validación estricta: solo acepta match exacto tras trim, evitando colisiones tipo <code>foo-bar</code> vs <code>foo--bar</code>.</p>",
+            "en": "<p>When MCP starts from an ambiguous parent dir with multiple repos, agents can now recover by asking the user to choose one of the reported <code>available_projects</code>. Strict validation: accepts only exact match after trimming, preventing collisions like <code>foo-bar</code> vs <code>foo--bar</code>.</p>",
+            "fr": "<p>Quand MCP démarre d'un parent dir ambigu, les agents peuvent récupérer en demandant à l'utilisateur de choisir un des <code>available_projects</code> rapportés.</p>"
+          },
+          "date": "03 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v1.15.2",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        },
+        {
+          "id": "engram-v1-15-0",
+          "tag": "feature",
+          "title": {
+            "es": "v1.15.0 — Conflict surfacing, doctor, dashboard fix, Windows hardening",
+            "en": "v1.15.0 — Conflict surfacing, doctor, dashboard fix, Windows hardening",
+            "fr": "v1.15.0 — Conflict surfacing, doctor, dashboard fix, Windows hardening"
+          },
+          "body_html": {
+            "es": "<p>Release de hardening — la más grande de la semana. <strong>Memory conflicts</strong>: nuevo workflow de audit y semantic judge para contradicciones, comandos <code>engram conflicts</code> (list/show/scan/stats/replay), MCP <code>mem_compare</code> y cloud sync de relaciones. <strong>Doctor</strong>: <code>engram doctor</code> read-only, MCP <code>mem_doctor</code>, y <code>engram doctor repair</code> con flags <code>--plan</code>/<code>--dry-run</code>/<code>--apply</code> + backup SQLite previo. <strong>Cloud dashboard</strong>: el contador Browser ahora refleja estado actual (no totales históricos), preservando chunks históricos para audit. <strong>Windows plugin</strong>: <code>UserPromptSubmit</code> hardened para Git Bash/MSYS2, fork-light safe mode, fallback PowerShell para entornos enterprise. <strong>Beta</strong>: setup Docker Compose aislado para testing comunitario.</p>",
+            "en": "<p>Hardening release — the biggest of the week. <strong>Memory conflicts</strong>: new audit and semantic judge workflows, <code>engram conflicts</code> commands (list/show/scan/stats/replay), MCP <code>mem_compare</code>, and cloud sync for relations. <strong>Doctor</strong>: read-only <code>engram doctor</code>, MCP <code>mem_doctor</code>, and <code>engram doctor repair</code> with explicit <code>--plan</code>/<code>--dry-run</code>/<code>--apply</code> modes + SQLite backup. <strong>Cloud dashboard</strong>: Browser counts now reflect current state (not historical totals), preserving chunks for audit. <strong>Windows plugin</strong>: hardened <code>UserPromptSubmit</code> for Git Bash/MSYS2, fork-light safe mode, PowerShell fallback for enterprise. <strong>Beta</strong>: isolated Docker Compose setup for community testing.</p>",
+            "fr": "<p>Release de durcissement — la plus grosse de la semaine. <strong>Conflits mémoire</strong> : nouveaux workflows audit et juge sémantique, commandes <code>engram conflicts</code>, MCP <code>mem_compare</code> et cloud sync. <strong>Doctor</strong> : <code>engram doctor</code> read-only, MCP <code>mem_doctor</code>, <code>engram doctor repair</code> avec modes <code>--plan</code>/<code>--dry-run</code>/<code>--apply</code>. <strong>Windows</strong> : durcissement Git Bash/MSYS2 et fallback PowerShell.</p>"
+          },
+          "date": "30 Apr 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v1.15.0",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        },
+        {
+          "id": "engram-v1-14-rollup",
+          "tag": "patch",
+          "title": {
+            "es": "v1.14.2 → v1.14.13 — Patches de cierre del ciclo 1.14",
+            "en": "v1.14.2 → v1.14.13 — Closing patches for the 1.14 cycle",
+            "fr": "v1.14.2 → v1.14.13 — Patches de clôture du cycle 1.14"
+          },
+          "body_html": {
+            "es": "<p><strong>12 patches</strong> entre 27 abr y 30 abr antes del bump a 1.15. Mayormente automáticos por <code>github-actions[bot]</code> — refinements del pipeline de release y hardening incremental antes del minor bump. Si te interesa el detalle por patch, revisá el changelog completo en GitHub.</p>",
+            "en": "<p><strong>12 patches</strong> between Apr 27 and Apr 30 before the 1.15 minor bump. Mostly automated <code>github-actions[bot]</code> publications — release pipeline refinements and incremental hardening leading up to the minor bump. See the full changelog on GitHub for per-patch detail.</p>",
+            "fr": "<p><strong>12 patches</strong> entre le 27 avril et le 30 avril avant le passage à 1.15. Principalement automatisés via <code>github-actions[bot]</code>.</p>"
+          },
+          "date": "27 Apr 2026 → 30 Apr 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases",
+            "label": "github.com/Gentleman-Programming/engram/releases"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gentle-ai",
+      "name": "gentle-ai",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-gentle-ai",
+      "icon_emoji": "🎩",
+      "anchor": "gentle-ai",
+      "version": "v1.25.4",
+      "updates": [
+        {
+          "id": "gentle-ai-v1-25-4",
+          "tag": "fix",
+          "title": {
+            "es": "v1.25.4 — Registra 4 skills faltantes en Go build",
+            "en": "v1.25.4 — Registers 4 missing skills in Go build",
+            "fr": "v1.25.4 — Enregistre 4 skills manquants dans le build Go"
+          },
+          "body_html": {
+            "es": "<p>Fix puntual: las skills <code>chained-pr</code>, <code>cognitive-doc-design</code>, <code>comment-writer</code> y <code>work-unit-commits</code> existían en <code>skills/</code> desde v1.25.0 pero faltaban en el Go skill registry/catalog/embedded assets, así que <code>gentle-ai install</code> y el TUI skill picker no las encontraban. Ahora están registradas con ID constants, catalog entries, preset registration y embedded SKILL.md.</p>",
+            "en": "<p>Targeted fix: skills <code>chained-pr</code>, <code>cognitive-doc-design</code>, <code>comment-writer</code>, and <code>work-unit-commits</code> existed in <code>skills/</code> since v1.25.0 but were missing from the Go skill registry, catalog, and embedded assets — so <code>gentle-ai install</code> and the TUI skill picker could not find them. Now registered with ID constants, catalog entries, preset registration, and embedded SKILL.md.</p>",
+            "fr": "<p>Correction ciblée : 4 skills présents dans <code>skills/</code> depuis v1.25.0 mais absents du registre Go sont maintenant enregistrés.</p>"
+          },
+          "date": "03 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v1.25.4",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        },
+        {
+          "id": "gentle-ai-v1-25-0",
+          "tag": "feature",
+          "title": {
+            "es": "v1.25.0 — Sustainable review workflow + rename a gentle-orchestrator",
+            "en": "v1.25.0 — Sustainable review workflow + rename to gentle-orchestrator",
+            "fr": "v1.25.0 — Workflow de review durable + renommage en gentle-orchestrator"
+          },
+          "body_html": {
+            "es": "<p>Minor bump con foco en review process. <strong>Sustainable review workflow</strong> para SDD changes, con planning de delivery strategy y review workload forecasting — los cambios grandes pueden planearse como single PR, chained PRs o phased delivery. <strong>Rename</strong>: el conductor canónico OpenCode SDD pasa de <code>sdd-orchestrator</code> a <code>gentle-orchestrator</code>, manteniendo migration support para configs legacy. <strong>PR size budget</strong>: nueva policy con override <code>size:exception</code> aplicable por maintainer para PRs aggregate o tracker. <strong>E2E</strong>: ahora usa shim local determinístico de Engram salvo que se opte explícitamente por live download testing.</p>",
+            "en": "<p>Minor bump focused on review process. <strong>Sustainable review workflow</strong> for SDD changes with delivery strategy planning and review workload forecasting — large changes can be planned as single PR, chained PRs, or phased delivery. <strong>Rename</strong>: the canonical OpenCode SDD conductor moves from <code>sdd-orchestrator</code> to <code>gentle-orchestrator</code>, preserving legacy migration support. <strong>PR size budget</strong>: new policy with maintainer-applied <code>size:exception</code> for aggregate or tracker PRs. <strong>E2E</strong>: now uses a deterministic local Engram shim unless live download testing is explicitly enabled.</p>",
+            "fr": "<p>Minor bump centré sur le processus de review. <strong>Workflow durable</strong> pour les changements SDD avec planification de stratégie de livraison. <strong>Renommage</strong> : le conducteur OpenCode SDD passe de <code>sdd-orchestrator</code> à <code>gentle-orchestrator</code>, en préservant la compatibilité legacy.</p>"
+          },
+          "date": "02 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v1.25.0",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        },
+        {
+          "id": "gentle-ai-v1-24-0",
+          "tag": "feature",
+          "title": {
+            "es": "v1.24.0 — Community plugins para OpenCode",
+            "en": "v1.24.0 — Community plugins for OpenCode",
+            "fr": "v1.24.0 — Plugins communautaires pour OpenCode"
+          },
+          "body_html": {
+            "es": "<p>Registro opcional de OpenCode Community Plugins para <code>sub-agent-statusline</code> y <code>sdd-engram-plugin</code>. Nuevo flow standalone de main menu para registrar community plugins sin correr el installer completo. <code>gentle-ai</code> escribe los plugins TUI seleccionados declarativamente a <code>~/.config/opencode/tui.json</code>; OpenCode los resuelve y carga al próximo start/reload. <code>gentle-ai update</code> detecta versiones de plugin una vez que OpenCode las materializa bajo <code>~/.config/opencode/node_modules</code>. Bonus: fix de upgrade/sync TUI pollution por backup diagnostics verbosos.</p>",
+            "en": "<p>Optional registration of OpenCode Community Plugins for <code>sub-agent-statusline</code> and <code>sdd-engram-plugin</code>. New standalone main menu flow to register community plugins without running the full installer. <code>gentle-ai</code> writes selected TUI plugins declaratively to <code>~/.config/opencode/tui.json</code>; OpenCode resolves and loads them on next start/reload. <code>gentle-ai update</code> detects plugin versions once OpenCode materializes them under <code>~/.config/opencode/node_modules</code>. Bonus: fixed upgrade/sync TUI pollution from verbose backup diagnostics.</p>",
+            "fr": "<p>Enregistrement optionnel des Community Plugins OpenCode. Nouveau flow standalone pour enregistrer des plugins sans lancer l'installeur complet.</p>"
+          },
+          "date": "27 Apr 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v1.24.0",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        },
+        {
+          "id": "gentle-ai-v1-24-rollup",
+          "tag": "patch",
+          "title": {
+            "es": "v1.24.1 → v1.24.3 + v1.25.1 → v1.25.3 — Patches de mantenimiento",
+            "en": "v1.24.1 → v1.24.3 + v1.25.1 → v1.25.3 — Maintenance patches",
+            "fr": "v1.24.1 → v1.24.3 + v1.25.1 → v1.25.3 — Patches de maintenance"
+          },
+          "body_html": {
+            "es": "<p><strong>6 patches</strong> entre 27 abr y 3 may, intercalados con los minor bumps 1.24.0 y 1.25.0. Mayormente automáticos por <code>github-actions[bot]</code>. Para detalle por patch, ver el listado completo en GitHub.</p>",
+            "en": "<p><strong>6 patches</strong> between Apr 27 and May 3, interleaved with the 1.24.0 and 1.25.0 minor bumps. Mostly automated <code>github-actions[bot]</code> publications. See the full release list on GitHub for per-patch detail.</p>",
+            "fr": "<p><strong>6 patches</strong> entre le 27 avril et le 3 mai, intercalés avec les minor bumps 1.24.0 et 1.25.0.</p>"
+          },
+          "date": "27 Apr 2026 → 03 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases",
+            "label": "github.com/Gentleman-Programming/gentle-ai/releases"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Semana intensa: 17 releases en engram + 9 en gentle-ai. Cadencia automatizada vía github-actions[bot] sugiere release-please o similar.",
+      "en": "Heavy week: 17 releases on engram + 9 on gentle-ai. Automated cadence via github-actions[bot] suggests release-please or similar.",
+      "fr": "Semaine chargée : 17 releases sur engram et 9 sur gentle-ai. Cadence automatisée via github-actions[bot] suggère release-please ou équivalent."
+    },
+    {
+      "es": "Foco común en hardening operacional: doctor diagnostics + Windows hardening en engram, sustainable review workflow en gentle-ai.",
+      "en": "Common focus on operational hardening: doctor diagnostics + Windows hardening on engram, sustainable review workflow on gentle-ai.",
+      "fr": "Focus commun sur le durcissement opérationnel : doctor diagnostics et Windows sur engram, review workflow sur gentle-ai."
+    }
+  ]
+}

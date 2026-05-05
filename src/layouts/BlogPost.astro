@@ -6,8 +6,10 @@ import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import HighlightBar from '../components/HighlightBar.astro';
 import StructuredData from '../components/StructuredData.astro';
-import { CATEGORIES, SITE_TITLE, type Category } from '../consts';
-import { buildArticleSchema, buildBreadcrumbSchema } from '../utils/schema';
+import { CATEGORIES, DEFAULT_LANG, SITE_TITLE, type Category, type LangCode } from '../consts';
+import { getCategoryLabel } from '../utils/categoryCopy';
+import { localizePath } from '../utils/i18n';
+import { buildArticleSchema, buildBreadcrumbSchema, buildPersonSchema } from '../utils/schema';
 
 type Highlight = {
 	text: string;
@@ -23,25 +25,30 @@ type Props = {
 	pubDate: Date;
 	category: Category;
 	highlights?: Highlight[];
+	lang?: LangCode;
 };
 
-const { title, description, pubDate, category, highlights } = Astro.props;
+const { title, description, pubDate, category, highlights, lang = DEFAULT_LANG } = Astro.props;
 const cat = CATEGORIES[category];
+const categoryLabel = getCategoryLabel(category, lang);
 const isAiCoding = category === 'ai-coding';
 
-const canonical = new URL(Astro.url.pathname, Astro.site);
-const homeUrl = Astro.site ? Astro.site.toString() : '/';
-const categoryUrl = Astro.site ? new URL(category, Astro.site).toString() : `/${category}`;
+const canonical = new URL(localizePath(Astro.url.pathname, lang), Astro.site);
+const homePath = localizePath('/', lang);
+const homeUrl = Astro.site ? new URL(homePath, Astro.site).toString() : homePath;
+const categoryPath = localizePath(`/${category}/`, lang);
+const categoryUrl = Astro.site ? new URL(categoryPath, Astro.site).toString() : categoryPath;
 
 const articleSchema = buildArticleSchema(
-	{ title, description, pubDate, category, url: canonical },
+	{ title, description, pubDate, category, url: canonical, lang },
 	Astro.site,
 );
 const breadcrumbSchema = buildBreadcrumbSchema([
 	{ name: SITE_TITLE, url: homeUrl },
-	{ name: cat.label, url: categoryUrl },
+	{ name: categoryLabel, url: categoryUrl },
 	{ name: title, url: canonical },
 ]);
+const authorSchema = buildPersonSchema(Astro.site);
 
 function getProseClass() {
 	if (isAiCoding) return 'prose-ai-coding';
@@ -49,18 +56,19 @@ function getProseClass() {
 }
 ---
 
-<html lang="en">
+<html lang={lang} data-lang={lang}>
 	<head>
 		<BaseHead
 			title={title}
 			description={description}
 			type="article"
+			lang={lang}
 			article={{
 				publishedTime: pubDate.toISOString(),
 				section: cat.label,
 			}}
 		/>
-		<StructuredData schema={[articleSchema, breadcrumbSchema]} />
+		<StructuredData schema={[articleSchema, breadcrumbSchema, authorSchema]} />
 		<link rel="stylesheet" href={`${import.meta.env.BASE_URL}styles/ai-coding-brief.css`} />
 	</head>
 	<body>
@@ -69,16 +77,16 @@ function getProseClass() {
 			<article>
 				<div class="mb-8">
 					<a
-						href={`${import.meta.env.BASE_URL}${category}`}
+						href={categoryPath}
 						class="inline-flex items-center gap-1.5 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] no-underline mb-2"
 					>
 						<span>&larr;</span>
 						<CategoryIcon category={category} width={14} height={14} style={`color: ${cat.accent}`} />
-						<span>{cat.label}</span>
+						<span>{categoryLabel}</span>
 					</a>
 					{!isAiCoding && (
 						<p class="text-[var(--color-text-muted)] text-sm">
-							<FormattedDate date={pubDate} />
+							<FormattedDate date={pubDate} lang={lang} />
 						</p>
 					)}
 				</div>

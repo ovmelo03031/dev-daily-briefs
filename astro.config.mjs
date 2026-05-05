@@ -11,6 +11,14 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://devbrief.dev',
   trailingSlash: 'ignore',
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'es', 'fr'],
+    routing: {
+      prefixDefaultLocale: false,
+      redirectToDefaultLocale: false,
+    },
+  },
   integrations: [mdx(), sitemap(), icon()],
 
   fonts: [

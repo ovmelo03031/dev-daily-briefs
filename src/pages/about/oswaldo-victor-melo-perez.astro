@@ -1,0 +1,46 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import { SITE_AUTHOR, SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { buildBreadcrumbSchema, buildPersonSchema } from '../../utils/schema';
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const homeUrl = Astro.site ? Astro.site.toString() : '/';
+const personSchema = buildPersonSchema(Astro.site);
+const breadcrumbSchema = buildBreadcrumbSchema([
+	{ name: SITE_TITLE, url: homeUrl },
+	{ name: SITE_AUTHOR, url: canonical },
+]);
+---
+
+<!doctype html>
+<html lang="en" data-lang="en">
+	<head>
+		<BaseHead
+			title={`${SITE_AUTHOR} — ${SITE_TITLE}`}
+			description={`${SITE_AUTHOR} curates ${SITE_TITLE}, ${SITE_DESCRIPTION.toLowerCase()}`}
+			lang="en"
+			alternates={false}
+		/>
+		<StructuredData schema={[personSchema, breadcrumbSchema]} />
+	</head>
+	<body>
+		<Header />
+		<main class="mx-auto max-w-3xl px-4 py-12">
+			<a href={import.meta.env.BASE_URL} class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] no-underline">&larr; Back to briefs</a>
+			<section class="mt-8 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-8">
+				<p class="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-accent)]">Publisher and curator</p>
+				<h1 class="mt-3 text-3xl font-bold text-[var(--color-text)]">{SITE_AUTHOR}</h1>
+				<p class="mt-4 text-base leading-7 text-[var(--color-text-muted)]">
+					{SITE_AUTHOR} curates Dev Daily Briefs for senior developers who need concise, source-linked updates across AI coding tools, backend engineering, frontend development, and selected open-source releases.
+				</p>
+				<p class="mt-4 text-base leading-7 text-[var(--color-text-muted)]">
+					The site is curated by AI and directed by humans: each brief is organized for fast reading, primary-source verification, RSS consumption, search indexing, and AI answer extraction.
+				</p>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

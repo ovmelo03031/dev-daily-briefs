@@ -1,30 +1,32 @@
 ---
-// Language dropdown — ES / EN / FR with localStorage persistence + graceful
-// fallback when the current page doesn't carry a translation for the picked
-// language (e.g. old briefs that predate FR will show EN content when FR
-// is selected).
+import { LANGUAGES } from '../consts';
+import { getLangFromPath, localizePath, stripLangFromPath } from '../utils/i18n';
 
-const LANGS = [
-	{ code: 'es', flag: '🇪🇸', label: 'Español' },
-	{ code: 'en', flag: '🇬🇧', label: 'English' },
-	{ code: 'fr', flag: '🇫🇷', label: 'Français' },
-];
+// Language dropdown — uses real localized URLs for SEO, while the script below
+// still handles body-language fallback for older briefs with partial content.
+const currentLang = getLangFromPath(Astro.url.pathname);
+const basePath = stripLangFromPath(Astro.url.pathname);
+const LANGS = Object.values(LANGUAGES).map((lang) => ({
+	...lang,
+	href: localizePath(basePath, lang.code),
+}));
+const current = LANGUAGES[currentLang];
 ---
 
 <details class="lang-dropdown" id="lang-toggle">
 	<summary class="lang-summary" aria-label="Language">
-		<span class="lang-current" data-current-flag>🇪🇸</span>
-		<span class="lang-current-code" data-current-code>ES</span>
+		<span class="lang-current" data-current-flag>{current.flag}</span>
+		<span class="lang-current-code" data-current-code>{current.code.toUpperCase()}</span>
 		<svg class="lang-chevron" width="10" height="10" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
 	</summary>
 	<ul class="lang-menu" role="listbox">
 		{LANGS.map((l) => (
-			<li role="option" aria-selected="false">
-				<button type="button" class="lang-option" data-lang={l.code}>
+			<li role="option" aria-selected={l.code === currentLang ? 'true' : 'false'}>
+				<a href={l.href} class="lang-option" data-lang={l.code} aria-current={l.code === currentLang ? 'true' : 'false'}>
 					<span class="lang-option-flag" aria-hidden="true">{l.flag}</span>
 					<span class="lang-option-code">{l.code.toUpperCase()}</span>
 					<span class="lang-option-label">{l.label}</span>
-				</button>
+				</a>
 			</li>
 		))}
 	</ul>
@@ -112,6 +114,7 @@ const LANGS = [
 		font-size: 0.8rem;
 		color: var(--color-text);
 		cursor: pointer;
+		text-decoration: none;
 		text-align: left;
 		transition: background 0.12s;
 	}
@@ -149,7 +152,8 @@ const LANGS = [
 </style>
 
 <script>
-	type LangCode = 'es' | 'en' | 'fr';
+	import { type LangCode } from '../consts';
+
 	const SUPPORTED: LangCode[] = ['es', 'en', 'fr'];
 	const FLAGS: Record<LangCode, string> = { es: '🇪🇸', en: '🇬🇧', fr: '🇫🇷' };
 
@@ -168,8 +172,7 @@ const LANGS = [
 		const found = new Set<LangCode>();
 		const prose = getProse();
 		if (!prose) {
-			// Non-brief pages (home, category list) — expose all langs in the
-			// dropdown so the user can set a preference for future brief visits.
+			// Non-brief pages (home, category list) expose every localized route.
 			return new Set(SUPPORTED);
 		}
 		for (const code of SUPPORTED) {
@@ -244,39 +247,15 @@ const LANGS = [
 
 	function initLangToggle() {
 		const available = detectAvailable();
-		// Priority: localStorage > html[data-lang] (set pre-paint by BaseHead
-		// inline script from navigator.languages) > 'en' fallback.
-		const stored = localStorage.getItem('lang');
+		// Priority: html[data-lang] from the current localized route > 'en'.
 		const attr = document.documentElement.getAttribute('data-lang');
-		const requested: LangCode = isLang(stored)
-			? stored
-			: isLang(attr)
+		const requested: LangCode = isLang(attr)
 				? attr
 				: 'en';
 		const body = resolveBody(requested, available);
 
 		applyLang(requested, body);
 		updateToggleUI(body, requested);
-
-		document.querySelectorAll('.lang-option').forEach((btn) => {
-			btn.addEventListener('click', (e) => {
-				e.preventDefault();
-				const code = btn.getAttribute('data-lang');
-				if (!isLang(code)) return;
-
-				// Persist the user's preference even when the current page can't show it
-				localStorage.setItem('lang', code);
-
-				const reAvailable = detectAvailable();
-				const target = resolveBody(code, reAvailable);
-
-				applyLang(code, target);
-				updateToggleUI(target, code);
-
-				const details = document.getElementById('lang-toggle');
-				if (details) details.removeAttribute('open');
-			});
-		});
 
 		// Click outside to close
 		document.addEventListener('click', (e) => {

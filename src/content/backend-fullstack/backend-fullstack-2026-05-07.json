@@ -1,0 +1,296 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 7 mayo 2026",
+    "en": "Backend & Fullstack Daily — May 7, 2026",
+    "fr": "Backend & Fullstack Daily — 7 mai 2026"
+  },
+  "description": {
+    "es": "El gusano Mini Shai-Hulud sigue infectando paquetes npm; Drizzle 1.0-rc.2 trae JIT mappers y migraciones más seguras; Vercel cierra el grifo a credenciales de Marketplace fuera de producción.",
+    "en": "Mini Shai-Hulud worm keeps poisoning npm packages; Drizzle 1.0-rc.2 lands JIT mappers and safer migrations; Vercel locks Marketplace credentials to production only.",
+    "fr": "Le ver Mini Shai-Hulud continue d'infecter les paquets npm; Drizzle 1.0-rc.2 introduit les JIT mappers et des migrations plus sûres; Vercel restreint les identifiants Marketplace à la production."
+  },
+  "pubDate": "2026-05-07",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Mini Shai-Hulud suma intercom-client y lightning a su botín",
+        "en": "Mini Shai-Hulud adds intercom-client and lightning to its haul",
+        "fr": "Mini Shai-Hulud ajoute intercom-client et lightning à son butin"
+      },
+      "anchor": "mini-shai-hulud-may",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Drizzle 1.0-rc.2: JIT mappers y detección de branches en migraciones",
+        "en": "Drizzle 1.0-rc.2: JIT mappers and migration branch detection",
+        "fr": "Drizzle 1.0-rc.2: JIT mappers et détection de branches de migration"
+      },
+      "anchor": "drizzle-1-rc2",
+      "icon": "simple-icons:postgresql"
+    },
+    {
+      "text": {
+        "es": "Vercel restringe credenciales de Marketplace a producción",
+        "en": "Vercel restricts Marketplace credentials to production",
+        "fr": "Vercel restreint les identifiants Marketplace à la production"
+      },
+      "anchor": "vercel-prod-creds",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "El comando vercel metrics expone Observability Plus al CLI",
+        "en": "vercel metrics command brings Observability Plus to the CLI",
+        "fr": "La commande vercel metrics expose Observability Plus au CLI"
+      },
+      "anchor": "vercel-cli-metrics",
+      "icon": "lucide:terminal"
+    },
+    {
+      "text": {
+        "es": "Vercel auto-agrega committers de Git a equipos Pro",
+        "en": "Vercel auto-adds Git committers to Pro teams",
+        "fr": "Vercel auto-ajoute les committers Git aux équipes Pro"
+      },
+      "anchor": "vercel-git-committers",
+      "icon": "simple-icons:github"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "mini-shai-hulud-may",
+      "updates": [
+        {
+          "id": "mini-shai-hulud-may",
+          "date": "01 May 2026",
+          "tag": "security",
+          "title": {
+            "es": "Mini Shai-Hulud sigue propagándose: intercom-client y lightning ahora en la lista",
+            "en": "Mini Shai-Hulud keeps spreading: intercom-client and lightning now on the list",
+            "fr": "Mini Shai-Hulud continue: intercom-client et lightning rejoignent la liste"
+          },
+          "body_html": {
+            "es": "<p>El gusano <strong>Mini Shai-Hulud</strong> &mdash; el mismo que el 29 de abril hundió a <code>mbt</code>, <code>@cap-js/sqlite</code>, <code>@cap-js/postgres</code> y <code>@cap-js/db-service</code> &mdash; ahora aparece dentro de <code>intercom-client@7.0.4</code>, <code>7.0.5</code> y <code>lightning@2.6.2-2.6.3</code> en PyPI. El payload se ejecuta en un <strong>preinstall script</strong> antes que cualquier código de aplicación: barre tokens de npm, GitHub, AWS, Azure, GCP, secretos de GitHub Actions desde <code>/proc/{pid}/mem</code>, JSON de service accounts de Kubernetes y Azure Key Vault. Después se autopropaga publicando paquetes con tu credencial. Loco, si tu CI hace <code>npm install</code> sin pinning ni overrides ni <code>--ignore-scripts</code>, ya estás en la película. Activá lockfile signing, audit-level=high y rotá secretos YA si tocaste estas versiones.</p>",
+            "en": "<p>The <strong>Mini Shai-Hulud</strong> worm &mdash; same one that nuked <code>mbt</code>, <code>@cap-js/sqlite</code>, <code>@cap-js/postgres</code> and <code>@cap-js/db-service</code> on April 29 &mdash; now lurks inside <code>intercom-client@7.0.4</code>, <code>7.0.5</code> and PyPI's <code>lightning@2.6.2-2.6.3</code>. Payload runs in a <strong>preinstall script</strong> before any app code: sweeps npm, GitHub, AWS, Azure, GCP tokens, reads GitHub Actions in-memory secrets via <code>/proc/{pid}/mem</code>, slurps Kubernetes service-account JSONs and Azure Key Vault. Then self-propagates by republishing packages with your credentials. If your CI does <code>npm install</code> without pinning, overrides, or <code>--ignore-scripts</code>, you're in the movie. Enable lockfile signing, set audit-level=high, and rotate secrets NOW if you pulled these versions.</p>",
+            "fr": "<p>Le ver <strong>Mini Shai-Hulud</strong> &mdash; celui qui a frappé <code>mbt</code>, <code>@cap-js/sqlite</code>, <code>@cap-js/postgres</code> et <code>@cap-js/db-service</code> le 29 avril &mdash; se cache désormais dans <code>intercom-client@7.0.4</code>, <code>7.0.5</code> et <code>lightning@2.6.2-2.6.3</code> sur PyPI. Le payload s'exécute dans un <strong>preinstall script</strong> avant tout code applicatif: il aspire les tokens npm, GitHub, AWS, Azure, GCP, lit les secrets GitHub Actions via <code>/proc/{pid}/mem</code>, et collecte les JSON service-account Kubernetes ainsi qu'Azure Key Vault. Puis il se propage en republiant des paquets avec vos identifiants. Activez la signature des lockfiles, audit-level=high et faites tourner vos secrets MAINTENANT si vous avez installé ces versions.</p>"
+          },
+          "source": {
+            "url": "https://www.theregister.com/security/2026/05/01/ongoing-supply-chain-attacks-worm-into-sap-npm-packages/5228837",
+            "label": "theregister.com"
+          }
+        },
+        {
+          "id": "drizzle-1-rc2",
+          "date": "05 May 2026",
+          "tag": "release",
+          "title": {
+            "es": "Drizzle ORM 1.0.0-rc.2: JIT mappers, codecs y detección de branches en migraciones",
+            "en": "Drizzle ORM 1.0.0-rc.2: JIT mappers, codecs, and migration branch detection",
+            "fr": "Drizzle ORM 1.0.0-rc.2: JIT mappers, codecs et détection de branches de migration"
+          },
+          "body_html": {
+            "es": "<p>Segundo release candidate de Drizzle hacia 1.0. La estrella sigue siendo el sistema <strong>JIT row mapper</strong>: compila la fase más cara del pipeline (mapear filas de DB a objetos JS) en runtime, dejando overhead de ORM cerca de <em>cero</em> &mdash; comparable a usar el driver crudo. RC.2 ajusta el <strong>codec system</strong> para PostgreSQL (deshabilita selectores de codec por defecto en columnas custom para evitar colisiones) y agrega chequeo de <em>branches abiertas</em> en historial de migraciones SQLite, así dejás de pisarte el merge entre features. Sumá soporte nativo para <code>Effect v4</code>, MSSQL y la API de casing reescrita (breaking change). Si estás en beta, planificá la migración antes del GA.</p>",
+            "en": "<p>Second Drizzle release candidate on the road to 1.0. Headliner is still the <strong>JIT row mapper</strong>: compiles the most expensive part of the pipeline (mapping DB rows to JS objects) at runtime, dropping ORM overhead to near <em>zero</em> &mdash; on par with hand-rolled driver code. RC.2 tightens the <strong>codec system</strong> for PostgreSQL (default codec selectors are off for custom columns to avoid collisions) and adds <em>open-branch detection</em> on SQLite migration history, so you stop blowing up merges across feature work. Plus native <code>Effect v4</code>, MSSQL support, and a reworked casing API (breaking). If you're on beta, plan the migration before GA.</p>",
+            "fr": "<p>Deuxième release candidate de Drizzle vers 1.0. La star reste le <strong>JIT row mapper</strong>: compile la phase la plus coûteuse du pipeline (le mapping ligne DB &rarr; objet JS) à l'exécution, ramenant l'overhead de l'ORM proche de <em>zéro</em>. RC.2 affine le <strong>codec system</strong> PostgreSQL (sélecteurs par défaut désactivés sur les colonnes custom) et détecte les <em>branches ouvertes</em> dans l'historique de migration SQLite. Support natif d'<code>Effect v4</code>, MSSQL et API de casing réécrite (breaking).</p>"
+          },
+          "source": {
+            "url": "https://github.com/drizzle-team/drizzle-orm/releases",
+            "label": "github.com"
+          }
+        },
+        {
+          "id": "vercel-prod-creds",
+          "date": "06 May 2026",
+          "tag": "notable",
+          "title": {
+            "es": "Vercel: credenciales de Marketplace ahora restringidas solo a producción",
+            "en": "Vercel locks Marketplace credentials to production-only access",
+            "fr": "Vercel restreint les identifiants Marketplace à la production"
+          },
+          "body_html": {
+            "es": "<p>Vercel agrega un toggle para restringir recursos de integraciones nativas (Postgres hospedado, Redis, providers AI, etc.) a <strong>solo producción</strong>. Cuando lo activás, esas credenciales se inyectan como <em>sensitive environment variables</em>: ilegibles desde el dashboard, ilegibles desde el CLI, e inaccesibles para preview/development. Es un parche directo a un patrón de leakage clásico: alguien clona el repo, levanta un preview con creds reales y termina spammeando tu Postgres prod. Si tenés equipos grandes con muchos previews, ponete las pilas y activalo en todas las integraciones sensibles.</p>",
+            "en": "<p>Vercel ships a toggle to restrict native integration resources (hosted Postgres, Redis, AI providers, etc.) to <strong>production only</strong>. With it on, those credentials are injected as <em>sensitive environment variables</em>: unreadable from dashboard, unreadable from CLI, and inaccessible to preview/development. It's a direct patch for a classic leakage pattern &mdash; someone clones the repo, spins a preview with real prod creds, and ends up spamming production Postgres. If you run big teams with many previews, flip this on for every sensitive integration.</p>",
+            "fr": "<p>Vercel ajoute un commutateur pour restreindre les ressources d'intégration natives (Postgres hébergé, Redis, providers AI, etc.) à la <strong>production uniquement</strong>. Une fois activé, ces identifiants sont injectés comme <em>variables d'environnement sensibles</em>: illisibles depuis le dashboard, illisibles depuis le CLI, et inaccessibles aux environnements preview/development. Activez-le sur toutes les intégrations sensibles.</p>"
+          },
+          "source": {
+            "url": "https://vercel.com/changelog/secure-marketplace-credentials-with-production-only-access",
+            "label": "vercel.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "drizzle-rc2-perf",
+      "updates": [
+        {
+          "id": "drizzle-rc2-perf",
+          "date": "30 Apr 2026",
+          "tag": "release",
+          "title": {
+            "es": "Drizzle 1.0.0-rc.1 introdujo el codec system y JIT mappers",
+            "en": "Drizzle 1.0.0-rc.1 introduced the codec system and JIT mappers",
+            "fr": "Drizzle 1.0.0-rc.1 a introduit le codec system et les JIT mappers"
+          },
+          "body_html": {
+            "es": "<p>El RC.1 sentó la base: <strong>codec system</strong> nuevo para PostgreSQL (mapeo de tipos extensible), <strong>Drizzle for LLM agents</strong> en preview (interfaz pensada para que un agente describa esquemas y arme queries seguras) y <strong>Effect v4</strong> integrado nativo. Para nosotros lo más jugoso es el preview de agentes: si estás armando un MCP o tool-use que toca DB, esto es la base que faltaba en TS. Mirá el changelog completo antes de migrar &mdash; el casing API rompe.</p>",
+            "en": "<p>RC.1 laid the groundwork: a new <strong>codec system</strong> for PostgreSQL (extensible type mapping), <strong>Drizzle for LLM agents</strong> in preview (an interface designed for an agent to describe schemas and build safe queries), and native <strong>Effect v4</strong> integration. The agent preview is the spicy bit: if you're building an MCP or tool-use surface that touches a DB, this fills a real gap in TS. Read the full changelog before migrating &mdash; the casing API breaks.</p>",
+            "fr": "<p>RC.1 pose les fondations: nouveau <strong>codec system</strong> PostgreSQL (mapping de types extensible), <strong>Drizzle for LLM agents</strong> en preview (interface conçue pour qu'un agent décrive les schémas et construise des requêtes sûres) et intégration native d'<strong>Effect v4</strong>. Lisez le changelog complet avant la migration &mdash; l'API de casing casse.</p>"
+          },
+          "source": {
+            "url": "https://orm.drizzle.team/docs/latest-releases",
+            "label": "orm.drizzle.team"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "vercel-cli-metrics",
+      "updates": [
+        {
+          "id": "vercel-cli-metrics",
+          "date": "05 May 2026",
+          "tag": "notable",
+          "title": {
+            "es": "Vercel CLI suma vercel metrics para Observability Plus",
+            "en": "Vercel CLI adds vercel metrics for Observability Plus",
+            "fr": "Le CLI Vercel ajoute vercel metrics pour Observability Plus"
+          },
+          "body_html": {
+            "es": "<p>Nuevo subcomando <code>vercel metrics</code>: query directo a Observability Plus desde la terminal, por team o por proyecto. La idea oficial es que <em>devs y agentes de coding</em> puedan analizar performance y debuggear sin abrir el dashboard. Para los que estamos cableando agentes de IA con acceso a métricas, esto es un golazo &mdash; expone el endpoint que ya consumía la UI, pero scriptable. Pipeline tipo &quot;agent observa p99, decide rollback&quot; ahora cabe en un script, no en una UI scraping.</p>",
+            "en": "<p>New <code>vercel metrics</code> subcommand: query Observability Plus directly from the terminal, by team or project. The official pitch is that <em>devs and coding agents</em> can analyze performance and debug without opening the dashboard. For folks wiring AI agents with metrics access, this is a real win &mdash; same endpoint the UI consumes, but scriptable. &quot;Agent watches p99, decides rollback&quot; pipelines now fit in a script, not UI scraping.</p>",
+            "fr": "<p>Nouvelle sous-commande <code>vercel metrics</code>: interroger Observability Plus directement depuis le terminal, par équipe ou par projet. L'argument officiel: <em>devs et agents de coding</em> peuvent analyser les performances et déboguer sans ouvrir le dashboard. Idéal pour câbler des agents IA avec accès aux métriques.</p>"
+          },
+          "source": {
+            "url": "https://vercel.com/changelog/vercel-metrics-in-cli",
+            "label": "vercel.com"
+          }
+        },
+        {
+          "id": "vercel-git-committers",
+          "date": "06 May 2026",
+          "tag": "minor",
+          "title": {
+            "es": "Vercel auto-agrega committers de Git en repos privados (equipos Pro)",
+            "en": "Vercel auto-adds Git committers from private repos (Pro teams)",
+            "fr": "Vercel auto-ajoute les committers Git de repos privés (équipes Pro)"
+          },
+          "body_html": {
+            "es": "<p>Equipos Pro pueden elegir cómo se suman los committers de Git al team: <strong>auto-aprobación</strong> o <strong>aprobación manual</strong>. Útil para reducir fricción en empresas con muchos colaboradores rotativos. Ojo: auto-add significa que cualquier nuevo commit en un repo privado puede crear membership; si tu compliance es estricto, dejá manual.</p>",
+            "en": "<p>Pro teams can pick how Git committers join the team: <strong>auto-approval</strong> or <strong>manual approval</strong>. Useful to cut friction at orgs with rotating collaborators. Heads up: auto-add means any new commit on a private repo can create membership &mdash; if compliance is tight, keep manual.</p>",
+            "fr": "<p>Les équipes Pro choisissent comment les committers Git rejoignent l'équipe: <strong>auto-approbation</strong> ou <strong>approbation manuelle</strong>. Si la conformité est stricte, laissez en manuel.</p>"
+          },
+          "source": {
+            "url": "https://vercel.com/changelog/auto-add-git-committers-to-your-team",
+            "label": "vercel.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "unit42-npm-landscape",
+      "updates": [
+        {
+          "id": "unit42-npm-landscape",
+          "date": "01 May 2026",
+          "tag": "security",
+          "title": {
+            "es": "Unit42 actualiza el panorama de ataques a npm: ya van 4 olas en 7 días",
+            "en": "Unit42 updates the npm threat landscape: 4 waves in 7 days",
+            "fr": "Unit42 met à jour le paysage des attaques npm: 4 vagues en 7 jours"
+          },
+          "body_html": {
+            "es": "<p>Palo Alto Networks (Unit42) reescribió su tracker de supply chain para reflejar la realidad de la última semana: <code>@bitwarden/cli@2026.4.0</code> impersonado el 22 de abril, los 4 paquetes SAP CAP el 29, y el wave de Mini Shai-Hulud en intercom-client + lightning del 30. La conclusión técnica del informe: las defensas <em>registry-side</em> ya no alcanzan. Si tu pipeline no tiene <strong>provenance attestation</strong> (npm publish &mdash;provenance), <strong>--ignore-scripts</strong> en CI, y un mirror filtrado, estás expuesto. Considerá pnpm o Bun para protecciones consumer-side adicionales.</p>",
+            "en": "<p>Palo Alto Networks (Unit42) rewrote its supply-chain tracker to reflect the past week: a <code>@bitwarden/cli@2026.4.0</code> typosquat on April 22, the 4 SAP CAP packages on April 29, and the Mini Shai-Hulud wave hitting intercom-client + lightning on April 30. The takeaway: <em>registry-side</em> defenses are no longer enough. Without <strong>provenance attestation</strong> (npm publish &mdash;provenance), <strong>--ignore-scripts</strong> in CI, and a filtered mirror, you're exposed. Consider pnpm or Bun for extra consumer-side protections.</p>",
+            "fr": "<p>Unit42 a réécrit son tracker supply-chain pour refléter la dernière semaine: <code>@bitwarden/cli@2026.4.0</code> typosquaté le 22 avril, les 4 paquets SAP CAP le 29, et la vague Mini Shai-Hulud sur intercom-client + lightning le 30. Sans <strong>provenance attestation</strong>, <strong>--ignore-scripts</strong> en CI et un miroir filtré, vous êtes exposé.</p>"
+          },
+          "source": {
+            "url": "https://unit42.paloaltonetworks.com/monitoring-npm-supply-chain-attacks/",
+            "label": "unit42.paloaltonetworks.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "quick-links",
+      "name": "Quick Links",
+      "theme": "quick-links",
+      "icon_emoji": "📌",
+      "anchor": "ql-vercel-changelog",
+      "updates": [
+        {
+          "id": "ql-vercel-changelog",
+          "date": "06 May 2026",
+          "tag": "minor",
+          "title": {
+            "es": "Vercel Changelog (semana del 5-7 mayo)",
+            "en": "Vercel Changelog (week of May 5-7)",
+            "fr": "Vercel Changelog (semaine du 5-7 mai)"
+          },
+          "body_html": {
+            "es": "<p>Tres entradas frescas en una semana &mdash; ritmo agresivo.</p>",
+            "en": "<p>Three fresh entries in one week &mdash; aggressive cadence.</p>",
+            "fr": "<p>Trois entrées en une semaine &mdash; cadence agressive.</p>"
+          },
+          "source": {
+            "url": "https://vercel.com/changelog",
+            "label": "vercel.com"
+          }
+        },
+        {
+          "id": "ql-drizzle-releases",
+          "date": "05 May 2026",
+          "tag": "minor",
+          "title": {
+            "es": "Drizzle ORM Releases en GitHub",
+            "en": "Drizzle ORM Releases on GitHub",
+            "fr": "Drizzle ORM Releases sur GitHub"
+          },
+          "body_html": {
+            "es": "<p>Sigue el road to 1.0 con rc.1 (30 abr) y rc.2 (5 may).</p>",
+            "en": "<p>Track the road to 1.0 with rc.1 (Apr 30) and rc.2 (May 5).</p>",
+            "fr": "<p>Suivre la route vers 1.0 avec rc.1 (30 avr) et rc.2 (5 mai).</p>"
+          },
+          "source": {
+            "url": "https://newreleases.io/project/github/drizzle-team/drizzle-orm/release/v1.0.0-rc.1",
+            "label": "newreleases.io"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Cuatro olas de ataques a npm en una semana. Si tu CI corre npm install sin --ignore-scripts ni provenance, estás jugando a la ruleta rusa.",
+      "en": "Four npm attack waves in one week. If your CI runs npm install without --ignore-scripts or provenance, you're playing Russian roulette.",
+      "fr": "Quatre vagues d'attaques npm en une semaine. Sans --ignore-scripts ni provenance dans votre CI, c'est la roulette russe."
+    },
+    {
+      "es": "Drizzle apuesta fuerte a JIT mappers y a una API para agentes LLM. La carrera ORM en TypeScript se gana en performance bruta y en superficie agentic, no en feature parity.",
+      "en": "Drizzle is betting hard on JIT mappers and an LLM-agent API. The TypeScript ORM race will be won on raw performance and agentic surface, not feature parity.",
+      "fr": "Drizzle mise sur les JIT mappers et une API pour agents LLM. La course ORM TypeScript se gagne sur la performance brute et la surface agentic."
+    },
+    {
+      "es": "Vercel sigue vendiendo el CLI como interfaz para humanos y agentes IA por igual. vercel metrics es la prueba: scriptable observability.",
+      "en": "Vercel keeps positioning the CLI as the interface for both humans and AI agents. vercel metrics is the proof: scriptable observability.",
+      "fr": "Vercel positionne le CLI comme interface à la fois pour les humains et les agents IA. vercel metrics est la preuve: observability scriptable."
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 07 May 2026",
+    "en": "Gentleman Releases — 07 May 2026",
+    "fr": "Gentleman Releases — 07 May 2026"
+  },
+  "description": {
+    "es": "Releases del día en proyectos de Gentleman-Programming",
+    "en": "Today's releases from Gentleman-Programming projects",
+    "fr": "Sorties du jour des projets Gentleman-Programming"
+  },
+  "pubDate": "2026-05-07",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "engram v1.15.9 — resolución estricta de proyecto en MCP `mem_save`",
+        "en": "engram v1.15.9 — strict MCP project resolution for `mem_save`",
+        "fr": "engram v1.15.9 — résolution stricte du projet MCP pour `mem_save`"
+      },
+      "anchor": "engram-v1-15-9",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-ai v1.26.2 — `gentle-ai upgrade` se auto-cura, retención de backups y unificación de SDD `{project}`",
+        "en": "gentle-ai v1.26.2 — self-healing upgrade, backup retention, and SDD `{project}` unification",
+        "fr": "gentle-ai v1.26.2 — upgrade auto-réparant, rétention des backups et unification SDD `{project}`"
+      },
+      "anchor": "gentle-ai-v1-26-2",
+      "icon": "simple-icons:github"
+    }
+  ],
+  "tools": [
+    {
+      "id": "engram",
+      "name": "engram",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-engram",
+      "icon_emoji": "🧠",
+      "anchor": "engram",
+      "version": "v1.15.9",
+      "updates": [
+        {
+          "id": "engram-v1-15-9",
+          "tag": "fix",
+          "title": {
+            "es": "v1.15.9 — Resolución estricta de proyecto en MCP",
+            "en": "v1.15.9 — Strict MCP project resolution",
+            "fr": "v1.15.9 — Résolution stricte du projet MCP"
+          },
+          "body_html": {
+            "es": "<p>Patch que blinda la resolución de proyecto en MCP. Ahora <code>mem_save(project=...)</code> sólo puede apuntar a un workspace cuando ese proyecto está respaldado por contexto conocido (store, sesión o config).</p><ul><li>Valida selecciones explícitas contra el contexto existente: corta los nombres tipeados mal o inventados que antes creaban buckets de memoria nuevos en silencio.</li><li>Falla fuerte ante proyectos desconocidos, mismatches de sesión, valores en blanco, recovery ambiguo y colisiones de normalización de nombres.</li><li><code>mem_update</code> ya no acepta retargets crudos de proyecto escondidos.</li><li>Detección monorepo-friendly de <code>.engram/config.json</code> para subproyectos independientes.</li><li>Docs de MCP, OpenSpec y descripciones de runtime alineadas al contrato actual de 19 tools.</li></ul><p>Si tenés un agente que pasaba <code>project</code> de forma laxa, ojo: ahora explota en lugar de fabricar memoria fantasma. Es un win.</p>",
+            "en": "<p>Patch that hardens MCP project resolution. <code>mem_save(project=...)</code> can now only target a workspace when that project is backed by known context (store, session, or config).</p><ul><li>Validates explicit selections against existing context: stops typoed or made-up project names from silently spawning new memory buckets.</li><li>Fails loudly on unknown projects, session mismatches, blank values, ambiguous recovery, and project-name normalization collisions.</li><li><code>mem_update</code> no longer accepts hidden raw project retargets.</li><li>Monorepo-friendly <code>.engram/config.json</code> detection for independent subprojects.</li><li>MCP docs, OpenSpec, and runtime tool descriptions aligned with the current 19-tool contract.</li></ul><p>If an agent of yours was passing <code>project</code> loosely, heads up: it now errors instead of fabricating phantom memory. That's the point.</p>",
+            "fr": "<p>Patch qui durcit la résolution de projet MCP. <code>mem_save(project=...)</code> ne peut désormais cibler un workspace que si ce projet est adossé à un contexte connu (store, session ou config).</p><ul><li>Valide les sélections explicites contre le contexte existant : empêche les noms tapés ou inventés de créer silencieusement de nouveaux buckets de mémoire.</li><li>Échoue bruyamment sur projets inconnus, sessions incohérentes, valeurs vides, récupération ambiguë et collisions de normalisation.</li><li><code>mem_update</code> n'accepte plus de retargets bruts cachés.</li><li>Détection monorepo de <code>.engram/config.json</code> pour sous-projets indépendants.</li><li>Docs MCP, OpenSpec et descriptions runtime alignées au contrat actuel de 19 outils.</li></ul><p>Si un agent passait <code>project</code> de manière laxe, attention : il échoue maintenant au lieu de fabriquer de la mémoire fantôme.</p>"
+          },
+          "date": "06 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v1.15.9",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gentle-ai",
+      "name": "gentle-ai",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-gentle-ai",
+      "icon_emoji": "🎩",
+      "anchor": "gentle-ai",
+      "version": "v1.26.2",
+      "updates": [
+        {
+          "id": "gentle-ai-v1-26-2",
+          "tag": "fix",
+          "title": {
+            "es": "v1.26.2 — Upgrade que se auto-cura, retención de backups y unificación SDD `{project}`",
+            "en": "v1.26.2 — Self-healing upgrade, backup retention, and SDD `{project}` unification",
+            "fr": "v1.26.2 — Upgrade auto-réparant, rétention des backups et unification SDD `{project}`"
+          },
+          "body_html": {
+            "es": "<p>Tres bugfixes que cierran roturas reales en flujos de upgrade y en la pipeline SDD.</p><ul><li><strong>Upgrade que se auto-cura cuando falta el homebrew tap.</strong> <code>gentle-ai upgrade</code> antes fallaba con <code>No available formula with the name «engram»</code> si el <code>Gentleman-Programming/homebrew-tap</code> se había perdido (untap, cambio de máquina, brew cleanup). Ahora el flujo re-tapea antes de cada <code>brew upgrade</code>, así que funciona en estado intacto y roto por igual. Reportado por @adrianmoris en Arch/Manjaro. (#455, #456)</li><li><strong>Los backups pre-upgrade ya no te llenan el disco.</strong> El executor de upgrade creaba snapshots en <code>~/.gentle-ai/backups/</code> pero nunca corría retención. Caso real: 24 backups, ~98 GB antes de detectarlo. Ahora la retención corre después de cada snapshot, igual que en install/sync. Hay además un flag nuevo <code>--no-backup</code> para correr una vez sin snapshot. Gracias a @ezequielmm por el fix y el repro. (#185, #398)</li><li><strong>La cadena SDD ya no se rompe por drift en el nombre del proyecto.</strong> <code>sdd-init</code> escribía artifacts en engram bajo <code>{project-name}</code> mientras el resto de fases SDD buscaba bajo <code>{project}</code>. Cuando el valor resuelto difería (carpeta vs git remote), el orchestrator perdía silenciosamente los links de proposal/spec/tasks. Ahora todas las variables del template están unificadas a <code>{project}</code>. Gracias a @x4barin por el diagnóstico quirúrgico. (#453, #454)</li></ul><p>Para enganchar: <code>brew upgrade gentle-ai</code>. Si <code>brew upgrade</code> te explota con <code>No available formula</code>, corré <code>brew tap Gentleman-Programming/homebrew-tap</code> y reintentá — el nuevo comportamiento de tap-on-upgrade previene ese caso a futuro.</p>",
+            "en": "<p>Three bug fixes closing real-world breakage on upgrade flows and SDD pipeline reliability.</p><ul><li><strong>Upgrade self-heals when the homebrew tap is missing.</strong> <code>gentle-ai upgrade</code> previously failed with <code>No available formula with the name «engram»</code> if the <code>Gentleman-Programming/homebrew-tap</code> was lost (untap, machine swap, brew cleanup). The upgrade flow now re-taps before every <code>brew upgrade</code>, so it works on intact and broken state alike. Reported by @adrianmoris on Arch/Manjaro. (#455, #456)</li><li><strong>Pre-upgrade backups no longer fill the disk.</strong> The upgrade executor was creating snapshots under <code>~/.gentle-ai/backups/</code> but never running retention. Real-world impact: 24 backups totaling ~98 GB before discovery. Retention now runs after every snapshot, mirroring install/sync. A new <code>--no-backup</code> flag is also available for users on tight disk space. Thanks to @ezequielmm for the fix and the detailed repro. (#185, #398)</li><li><strong>SDD phase chain no longer breaks on project name drift.</strong> <code>sdd-init</code> was writing artifacts to engram under <code>{project-name}</code> while every other SDD phase searched under <code>{project}</code>. When the resolved value differed (folder name vs git remote), the orchestrator silently lost its proposal/spec/tasks links. All template variables are now unified to <code>{project}</code>. Thanks to @x4barin for the surgical diagnosis. (#453, #454)</li></ul><p>Pick it up: <code>brew upgrade gentle-ai</code>. If <code>brew upgrade</code> errors with <code>No available formula</code>, run <code>brew tap Gentleman-Programming/homebrew-tap</code> once and retry — the new tap-on-upgrade behavior prevents that scenario going forward.</p>",
+            "fr": "<p>Trois correctifs qui ferment des cassures réelles sur les flux d'upgrade et la pipeline SDD.</p><ul><li><strong>L'upgrade s'auto-répare quand le tap homebrew manque.</strong> <code>gentle-ai upgrade</code> échouait avec <code>No available formula with the name «engram»</code> si <code>Gentleman-Programming/homebrew-tap</code> avait été perdu. Le flux re-tape désormais avant chaque <code>brew upgrade</code>. Signalé par @adrianmoris sur Arch/Manjaro. (#455, #456)</li><li><strong>Les backups pré-upgrade ne remplissent plus le disque.</strong> L'executor créait des snapshots sous <code>~/.gentle-ai/backups/</code> sans jamais lancer la rétention. Cas réel : 24 backups, ~98 Go. La rétention tourne maintenant après chaque snapshot, comme sur install/sync. Nouveau flag <code>--no-backup</code> pour skipper le snapshot ponctuellement. Merci à @ezequielmm. (#185, #398)</li><li><strong>La chaîne de phases SDD ne casse plus sur la dérive du nom de projet.</strong> <code>sdd-init</code> écrivait sous <code>{project-name}</code> alors que les autres phases cherchaient sous <code>{project}</code>. Toutes les variables sont unifiées à <code>{project}</code>. Merci à @x4barin. (#453, #454)</li></ul><p>Pour appliquer : <code>brew upgrade gentle-ai</code>. Si <code>brew upgrade</code> échoue avec <code>No available formula</code>, lancez <code>brew tap Gentleman-Programming/homebrew-tap</code> et réessayez.</p>"
+          },
+          "date": "06 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v1.26.2",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

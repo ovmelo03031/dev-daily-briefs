@@ -1,0 +1,570 @@
+{
+  "title": {
+    "es": "Informe diario de herramientas IA — 7 de mayo de 2026",
+    "en": "AI Coding Tools Daily Brief — May 7, 2026",
+    "fr": "Briefing quotidien des outils IA — 7 mai 2026"
+  },
+  "description": {
+    "es": "Actualizaciones verificadas de Claude Code, Codex CLI y GitHub Copilot, más el cronograma completo de lanzamientos de modelos globales para la semana del 1 al 7 de mayo.",
+    "en": "Verified updates across Claude Code, Codex CLI, and GitHub Copilot for the week of May 1–7, plus the full global model launches timeline.",
+    "fr": "Mises à jour vérifiées pour Claude Code, Codex CLI et GitHub Copilot du 1er au 7 mai, plus le calendrier complet des lancements de modèles mondiaux."
+  },
+  "pubDate": "2026-05-07",
+  "category": "ai-coding",
+  "highlights": [
+    {
+      "text": {
+        "es": "Claude Code 2.1.129: carga de plugins por URL",
+        "en": "Claude Code 2.1.129: plugin URL loading + MCP retry",
+        "fr": "Claude Code 2.1.129 : chargement de plugins par URL"
+      },
+      "anchor": "claude-code",
+      "icon": "simple-icons:anthropic"
+    },
+    {
+      "text": {
+        "es": "Multiagent Sessions de Claude en beta pública",
+        "en": "Claude Multiagent Sessions now in public beta",
+        "fr": "Sessions multiagents Claude en bêta publique"
+      },
+      "anchor": "claude-platform",
+      "icon": "simple-icons:anthropic"
+    },
+    {
+      "text": {
+        "es": "Límites de Claude duplicados + acuerdo SpaceX 220K GPUs",
+        "en": "Claude rate limits doubled + SpaceX 220K GPU deal",
+        "fr": "Limites Claude doublées + accord SpaceX 220K GPUs"
+      },
+      "anchor": "claude-platform",
+      "icon": "simple-icons:anthropic"
+    },
+    {
+      "text": {
+        "es": "Codex 0.128: workflows /goal persistentes + MultiAgentV2",
+        "en": "Codex 0.128: persisted /goal workflows + MultiAgentV2",
+        "fr": "Codex 0.128 : workflows /goal persistants + MultiAgentV2"
+      },
+      "anchor": "openai-codex",
+      "icon": "simple-icons:openai"
+    },
+    {
+      "text": {
+        "es": "Copilot: búsqueda semántica en repos + Chronicle",
+        "en": "Copilot: semantic search across repos + Chronicle",
+        "fr": "Copilot : recherche sémantique dans les repos + Chronicle"
+      },
+      "anchor": "github-copilot",
+      "icon": "simple-icons:githubcopilot"
+    },
+    {
+      "text": {
+        "es": "Cronograma: 10+ modelos lanzados en abril/mayo 2026",
+        "en": "Timeline: 10+ models launched in April/May 2026",
+        "fr": "Calendrier : 10+ modèles lancés en avril/mai 2026"
+      },
+      "anchor": "model-timeline",
+      "icon": "lucide:rocket"
+    }
+  ],
+  "stats": {
+    "tools_tracked": 5,
+    "updates_found": "16+",
+    "models_cataloged": 12,
+    "providers_covered": 10
+  },
+  "tools": [
+    {
+      "id": "claude-code",
+      "name": "Claude Code",
+      "publisher": "Anthropic",
+      "theme": "claude",
+      "icon_emoji": "🤖",
+      "version": "v2.1.131",
+      "anchor": "claude-code",
+      "updates": [
+        {
+          "id": "cc-plugin-url",
+          "tag": "feature",
+          "title": {
+            "es": "Carga de plugins por URL + auto-actualización de gestor de paquetes",
+            "en": "Plugin URL loading + package manager auto-update",
+            "fr": "Chargement de plugins par URL + mise à jour auto du gestionnaire"
+          },
+          "body_html": {
+            "es": "<p>v2.1.129 agrega el flag <code>--plugin-url &lt;url&gt;</code> para cargar un plugin <code>.zip</code> desde una URL para la sesión actual. Con <code>CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE</code> activo en instalaciones Homebrew o WinGet, Claude Code ejecuta el upgrade en segundo plano y propone reiniciar.</p>",
+            "en": "<p>v2.1.129 adds <code>--plugin-url &lt;url&gt;</code> to fetch a plugin <code>.zip</code> archive from a URL for the current session. When <code>CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE</code> is set on Homebrew or WinGet installs, Claude Code runs the upgrade command in the background and prompts to restart.</p>",
+            "fr": "<p>v2.1.129 ajoute le flag <code>--plugin-url &lt;url&gt;</code> pour charger une archive <code>.zip</code> de plugin depuis une URL pour la session courante. Avec <code>CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE</code> sur Homebrew ou WinGet, Claude Code exécute la mise à jour en arrière-plan et propose un redémarrage.</p>"
+          },
+          "date": "6 may 2026",
+          "source": { "url": "https://releasebot.io/updates/anthropic/claude-code", "label": "releasebot.io" }
+        },
+        {
+          "id": "cc-mcp-retry",
+          "tag": "feature",
+          "title": {
+            "es": "MCP auto-reintento al inicio + protección de carpeta de skills",
+            "en": "MCP auto-retry on startup + skill folder write protection",
+            "fr": "Auto-retry MCP au démarrage + protection des dossiers de skills"
+          },
+          "body_html": {
+            "es": "<p>Los servidores MCP con errores transitorios al iniciar ahora reintentarán hasta 3 veces automáticamente en lugar de quedarse desconectados. Además, <code>--dangerously-skip-permissions</code> ya no solicita confirmación para escrituras en <code>.claude/skills/</code>, <code>.claude/agents/</code> ni <code>.claude/commands/</code>.</p>",
+            "en": "<p>MCP servers that hit a transient error during startup now auto-retry up to 3 times instead of staying disconnected. Also, <code>--dangerously-skip-permissions</code> no longer prompts for writes to <code>.claude/skills/</code>, <code>.claude/agents/</code>, and <code>.claude/commands/</code>.</p>",
+            "fr": "<p>Les serveurs MCP qui échouent au démarrage réessaient automatiquement jusqu'à 3 fois au lieu de rester déconnectés. De plus, <code>--dangerously-skip-permissions</code> ne demande plus confirmation pour les écritures dans <code>.claude/skills/</code>, <code>.claude/agents/</code> et <code>.claude/commands/</code>.</p>"
+          },
+          "date": "6 may 2026",
+          "source": { "url": "https://releasebot.io/updates/anthropic/claude-code", "label": "releasebot.io" }
+        },
+        {
+          "id": "cc-plugin-zip",
+          "tag": "feature",
+          "title": {
+            "es": "Soporte de archivos .zip en plugins + mejoras al comando /mcp",
+            "en": "Plugin .zip archive support + enhanced /mcp command",
+            "fr": "Support archives .zip pour plugins + commande /mcp améliorée"
+          },
+          "body_html": {
+            "es": "<p>v2.1.128 expande el soporte de plugins con manejo de archivos <code>.zip</code> y mejora el comando <code>/mcp</code> para mostrar el conteo de herramientas de cada servidor conectado. Los subprocesos ya no heredan variables <code>OTEL_*</code>.</p>",
+            "en": "<p>v2.1.128 expands plugin support with <code>.zip</code> archive handling and enhances the <code>/mcp</code> command to show tool counts for each connected server. Subprocesses no longer inherit <code>OTEL_*</code> environment variables.</p>",
+            "fr": "<p>v2.1.128 étend le support des plugins avec la gestion des archives <code>.zip</code> et améliore la commande <code>/mcp</code> pour afficher le nombre d'outils par serveur connecté. Les sous-processus n'héritent plus des variables <code>OTEL_*</code>.</p>"
+          },
+          "date": "5 may 2026",
+          "source": { "url": "https://releasebot.io/updates/anthropic/claude-code", "label": "releasebot.io" }
+        },
+        {
+          "id": "cc-project-purge",
+          "tag": "feature",
+          "title": {
+            "es": "Comando claude project purge + historial Ctrl+R global restaurado",
+            "en": "claude project purge command + global Ctrl+R history restored",
+            "fr": "Commande claude project purge + historique Ctrl+R global restauré"
+          },
+          "body_html": {
+            "es": "<p>v2.1.126 introduce <code>claude project purge</code> para limpiar el estado del proyecto. El selector de historial con Ctrl+R fue restaurado para buscar todos los prompts de todos los proyectos por defecto. También mejorado el login OAuth para entornos donde el callback no puede alcanzar localhost.</p>",
+            "en": "<p>v2.1.126 introduces the <code>claude project purge</code> command for clearing project state. The Ctrl+R history picker was restored to search all prompts across all projects by default. OAuth login is also improved for environments where the browser callback cannot reach localhost.</p>",
+            "fr": "<p>v2.1.126 introduit la commande <code>claude project purge</code> pour vider l'état du projet. Le sélecteur d'historique Ctrl+R recherche à nouveau dans tous les projets par défaut. La connexion OAuth est améliorée pour les environnements où le callback navigateur ne peut pas atteindre localhost.</p>"
+          },
+          "date": "1 may 2026",
+          "source": { "url": "https://releasebot.io/updates/anthropic/claude-code", "label": "releasebot.io" }
+        },
+        {
+          "id": "cc-windows-fix",
+          "tag": "fix",
+          "title": {
+            "es": "Fix: activación VS Code en Windows + autenticación Mantle",
+            "en": "Fix: VS Code extension activation on Windows + Mantle auth header",
+            "fr": "Fix : activation extension VS Code sur Windows + header auth Mantle"
+          },
+          "body_html": {
+            "es": "<p>v2.1.131 corrige el fallo de activación de la extensión VS Code en Windows causado por una ruta de build hardcodeada, y resuelve el header <code>x-api-key</code> faltante en la autenticación del endpoint Mantle.</p>",
+            "en": "<p>v2.1.131 fixes the VS Code extension failing to activate on Windows due to a hardcoded build path, and resolves the missing <code>x-api-key</code> header for Mantle endpoint authentication.</p>",
+            "fr": "<p>v2.1.131 corrige l'échec d'activation de l'extension VS Code sur Windows causé par un chemin de build hardcodé, et résout l'absence du header <code>x-api-key</code> pour l'authentification de l'endpoint Mantle.</p>"
+          },
+          "date": "6 may 2026",
+          "source": { "url": "https://releasebot.io/updates/anthropic/claude-code", "label": "releasebot.io" }
+        }
+      ]
+    },
+    {
+      "id": "claude-platform",
+      "name": "Claude Platform",
+      "publisher": "Anthropic",
+      "theme": "claude",
+      "icon_emoji": "🧠",
+      "version": null,
+      "anchor": "claude-platform",
+      "updates": [
+        {
+          "id": "multiagent-beta",
+          "tag": "feature",
+          "title": {
+            "es": "Multiagent Sessions y Outcomes pasan a beta pública",
+            "en": "Multiagent Sessions and Outcomes now in public beta",
+            "fr": "Multiagent Sessions et Outcomes en bêta publique"
+          },
+          "body_html": {
+            "es": "<p>La plataforma de desarrolladores de Claude lanzó <strong>Multiagent Sessions</strong> y <strong>Outcomes</strong> en beta pública. Se agregó soporte de webhooks para Claude Managed Agents y refresco de credenciales en segundo plano para MCP OAuth. Las opciones de filtrado y ordenado de sesiones y eventos también fueron expandidas.</p>",
+            "en": "<p>The Claude developer platform launched <strong>Multiagent Sessions</strong> and <strong>Outcomes</strong> in public beta. Webhook support was added for Claude Managed Agents alongside background credential refresh for MCP OAuth. Filtering and sorting options for sessions and events were also expanded.</p>",
+            "fr": "<p>La plateforme développeur Claude lance <strong>Multiagent Sessions</strong> et <strong>Outcomes</strong> en bêta publique, avec support webhooks pour Claude Managed Agents, rafraîchissement d'identifiants MCP OAuth en arrière-plan, et options de filtrage et tri des sessions étendues.</p>"
+          },
+          "date": "6 may 2026",
+          "source": { "url": "https://releasebot.io/updates/anthropic", "label": "releasebot.io" }
+        },
+        {
+          "id": "agent-dreaming",
+          "tag": "preview",
+          "title": {
+            "es": "Feature 'dreaming': memoria auto-mejorable de agentes en preview",
+            "en": "Dreaming feature: agent self-improving memory in research preview",
+            "fr": "Feature 'dreaming' : mémoire auto-améliorable des agents en preview"
+          },
+          "body_html": {
+            "es": "<p>Claude presentó el feature <strong>dreaming</strong> en research preview, que permite a los agentes mejorar su propia memoria entre sesiones de forma autónoma. También se publicaron webhooks para notificaciones de finalización de tareas de agentes.</p>",
+            "en": "<p>Claude introduced the <strong>dreaming</strong> feature in research preview, enabling agents to autonomously improve their own memory across sessions. Webhook notifications for agent task completion were also released.</p>",
+            "fr": "<p>Claude a introduit la fonctionnalité <strong>dreaming</strong> en preview de recherche, permettant aux agents d'améliorer leur mémoire de façon autonome entre sessions. Des notifications webhook pour la complétion de tâches d'agents ont également été publiées.</p>"
+          },
+          "date": "6 may 2026",
+          "source": { "url": "https://releasebot.io/updates/anthropic", "label": "releasebot.io" }
+        },
+        {
+          "id": "rate-limit-spacex",
+          "tag": "update",
+          "title": {
+            "es": "Límites de uso duplicados + acuerdo de cómputo con SpaceX (220K GPUs)",
+            "en": "Usage limits doubled + SpaceX compute deal (220K+ NVIDIA GPUs)",
+            "fr": "Limites d'utilisation doublées + accord calcul SpaceX (220K+ GPUs NVIDIA)"
+          },
+          "body_html": {
+            "es": "<p>Anthropic duplicó los límites de tasa de Claude Code para los planes Pro, Max, Team y Enterprise, eliminó las reducciones de horas pico para Pro y Max, y elevó sustancialmente los límites de API de Claude Opus. El acuerdo con SpaceX suma más de 300 MW de capacidad de cómputo y más de 220.000 GPUs NVIDIA.</p>",
+            "en": "<p>Anthropic doubled Claude Code rate limits for Pro, Max, Team, and Enterprise plans, removed peak-hour rate reductions for Pro and Max, and substantially raised Claude Opus API rate limits. The SpaceX compute deal adds 300+ megawatts of capacity and 220,000+ NVIDIA GPUs.</p>",
+            "fr": "<p>Anthropic a doublé les limites de débit de Claude Code pour les plans Pro, Max, Team et Enterprise, supprimé les réductions aux heures de pointe pour Pro et Max, et considérablement augmenté les limites API Claude Opus. L'accord SpaceX ajoute 300+ MW de capacité et 220 000+ GPUs NVIDIA.</p>"
+          },
+          "date": "6 may 2026",
+          "source": { "url": "https://www.anthropic.com/news", "label": "anthropic.com" }
+        },
+        {
+          "id": "finance-agents",
+          "tag": "feature",
+          "title": {
+            "es": "10 agentes financieros pre-built + add-ins para Microsoft 365 GA",
+            "en": "10 pre-built finance agents + Microsoft 365 add-ins GA",
+            "fr": "10 agents financiers préconstruits + add-ins Microsoft 365 GA"
+          },
+          "body_html": {
+            "es": "<p>Anthropic lanzó 10 plantillas de agentes financieros listas para usar (análisis de crédito, KYC, pitchbooks, análisis de resultados, suscripción, cierre mensual, auditoría de estados y reclamaciones de seguros) y puso en disponibilidad general los add-ins de Claude para Excel, PowerPoint y Word. El add-in para Outlook llega próximamente. Se suman 8 nuevos conectores de datos incluyendo Dun &amp; Bradstreet y Moody's MCP.</p>",
+            "en": "<p>Anthropic released 10 ready-to-run finance agent templates (credit memos, KYC, pitchbooks, earnings analysis, underwriting, month-end close, statement audits, insurance claims) and made Claude add-ins for Excel, PowerPoint, and Word generally available. Claude for Outlook is coming soon. Eight new data connectors were added, including Dun &amp; Bradstreet and Moody's MCP.</p>",
+            "fr": "<p>Anthropic a publié 10 modèles d'agents financiers prêts à l'emploi (mémos de crédit, KYC, pitchbooks, analyse des résultats, souscription, clôture mensuelle, audits d'états financiers, sinistres) et rendu généralement disponibles les add-ins Claude pour Excel, PowerPoint et Word. Claude pour Outlook arrive bientôt. 8 nouveaux connecteurs de données ajoutés, dont Dun &amp; Bradstreet et Moody's MCP.</p>"
+          },
+          "date": "5 may 2026",
+          "source": { "url": "https://www.anthropic.com/news", "label": "anthropic.com" }
+        },
+        {
+          "id": "claude-security-beta",
+          "tag": "security",
+          "title": {
+            "es": "Claude Security pasa a beta pública para Enterprise",
+            "en": "Claude Security moves to public beta for Enterprise customers",
+            "fr": "Claude Security passe en bêta publique pour Enterprise"
+          },
+          "body_html": {
+            "es": "<p>Claude Security, el sistema de escaneo de vulnerabilidades de Anthropic, pasó a beta pública para clientes Enterprise. Incluye escaneo programado y dirigido de vulnerabilidades, con integración de webhooks para Slack y Jira.</p>",
+            "en": "<p>Claude Security, Anthropic's vulnerability scanning system, transitioned to public beta for Enterprise customers with scheduled and targeted scanning capabilities and webhook integration with Slack and Jira.</p>",
+            "fr": "<p>Claude Security, le système d'analyse de vulnérabilités d'Anthropic, est passé en bêta publique pour les clients Enterprise, avec scan programmé et ciblé et intégration webhook avec Slack et Jira.</p>"
+          },
+          "date": "30 abr 2026",
+          "source": { "url": "https://releasebot.io/updates/anthropic", "label": "releasebot.io" }
+        }
+      ]
+    },
+    {
+      "id": "openai-codex",
+      "name": "OpenAI Codex CLI",
+      "publisher": "OpenAI",
+      "theme": "openai",
+      "icon_emoji": "⚡",
+      "version": "v0.128.0",
+      "anchor": "openai-codex",
+      "updates": [
+        {
+          "id": "codex-0128",
+          "tag": "feature",
+          "title": {
+            "es": "Codex 0.128: workflows /goal persistentes, MultiAgentV2 y plugins de marketplace",
+            "en": "Codex 0.128: persisted /goal workflows, MultiAgentV2 config, marketplace plugins",
+            "fr": "Codex 0.128 : workflows /goal persistants, MultiAgentV2, plugins marketplace"
+          },
+          "body_html": {
+            "es": "<p>La versión 0.128.0 agrega workflows <code>/goal</code> persistentes con controles TUI (crear, pausar, reanudar, limpiar) y APIs de app-server. Los perfiles de permisos fueron expandidos con defaults integrados y selección de perfil sandbox desde CLI. La gestión de plugins ahora soporta instalación desde marketplace remoto y cacheo de bundles. Configuración de MultiAgentV2 con límites de threads y tiempos de espera, más correcciones de estabilidad en Windows y soporte Bedrock.</p>",
+            "en": "<p>Version 0.128.0 adds persisted <code>/goal</code> workflows with TUI controls (create, pause, resume, clear) and app-server APIs. Permission profiles were expanded with built-in defaults and sandbox CLI profile selection. Plugin management now supports remote marketplace installation and bundle caching. MultiAgentV2 configuration with thread caps and wait-time controls, plus stability fixes for Windows and Bedrock support.</p>",
+            "fr": "<p>La version 0.128.0 ajoute des workflows <code>/goal</code> persistants avec contrôles TUI et APIs app-server. Les profils de permissions ont été étendus avec des défauts intégrés et sélection de profil sandbox via CLI. La gestion des plugins supporte désormais l'installation depuis un marketplace distant. Configuration MultiAgentV2 avec limites de threads et temps d'attente, plus corrections de stabilité Windows et support Bedrock.</p>"
+          },
+          "date": "30 abr 2026",
+          "source": { "url": "https://developers.openai.com/codex/changelog", "label": "developers.openai.com" }
+        }
+      ]
+    },
+    {
+      "id": "gpt-models",
+      "name": "GPT / OpenAI Models",
+      "publisher": "OpenAI",
+      "theme": "openai",
+      "icon_emoji": "🧩",
+      "version": null,
+      "anchor": "gpt-models",
+      "updates": []
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini / Gemini Code Assist",
+      "publisher": "Google",
+      "theme": "gemini",
+      "icon_emoji": "✨",
+      "version": null,
+      "anchor": "gemini",
+      "updates": []
+    },
+    {
+      "id": "github-copilot",
+      "name": "GitHub Copilot",
+      "publisher": "Microsoft / GitHub",
+      "theme": "copilot",
+      "icon_emoji": "🐙",
+      "version": "v1.119",
+      "anchor": "github-copilot",
+      "updates": [
+        {
+          "id": "copilot-semantic-chronicle",
+          "tag": "feature",
+          "title": {
+            "es": "VS Code v1.116–v1.119: búsqueda semántica en repos + Chronicle experimental",
+            "en": "VS Code v1.116–v1.119: semantic search across repos + experimental Chronicle",
+            "fr": "VS Code v1.116–v1.119 : recherche sémantique dans les repos + Chronicle expérimental"
+          },
+          "body_html": {
+            "es": "<p>Las versiones de abril-mayo agregan indexación semántica para buscar por significado en cualquier workspace y ejecutar queries tipo grep en repos y organizaciones de GitHub. <strong>Chronicle</strong> (experimental) registra el historial de chat en una base de datos local para buscar sesiones pasadas. Los agentes ahora pueden leer y escribir en terminales abiertas y acceder a pestañas del navegador en tiempo real. Las notificaciones del sistema avisan sobre comandos de terminal de larga duración.</p>",
+            "en": "<p>April-May releases add semantic indexing to search by meaning in any workspace and run grep-style queries across GitHub repos and orgs. <strong>Chronicle</strong> (experimental) tracks chat interactions in a local database for searching past sessions. Agents can now read/write to open terminals and access browser tabs in real time. System notifications surface long-running terminal commands in chat.</p>",
+            "fr": "<p>Les versions avril-mai ajoutent l'indexation sémantique pour rechercher par sens dans tout workspace et des requêtes grep sur les repos GitHub. <strong>Chronicle</strong> (expérimental) enregistre les interactions chat dans une base locale. Les agents peuvent lire/écrire dans les terminaux ouverts et accéder aux onglets du navigateur. Des notifications système signalent les commandes terminal longues dans le chat.</p>"
+          },
+          "date": "6 may 2026",
+          "source": { "url": "https://github.blog/changelog/2026-05-06-github-copilot-in-visual-studio-code-april-releases/", "label": "github.blog" }
+        },
+        {
+          "id": "copilot-byok-enterprise",
+          "tag": "feature",
+          "title": {
+            "es": "BYOK extendido a Business y Enterprise + CLI 1.0.41 más rápido",
+            "en": "Bring-your-own-key extended to Business and Enterprise + faster CLI 1.0.41",
+            "fr": "BYOK étendu à Business et Enterprise + CLI 1.0.41 plus rapide"
+          },
+          "body_html": {
+            "es": "<p>Los planes Copilot Business y Enterprise ahora pueden vincular sus propias claves API para usar modelos directamente en VS Code chat. La CLI 1.0.41 (5 mayo) inicia más rápido renderizando la UI de inmediato mientras la autenticación se resuelve en segundo plano; las completions de shell se instalan automáticamente en el primer uso.</p>",
+            "en": "<p>Copilot Business and Enterprise users can now link their own API keys to use models directly in VS Code chat. CLI 1.0.41 (May 5) starts faster by rendering the UI immediately while authentication resolves in the background; shell completions are automatically installed on first run.</p>",
+            "fr": "<p>Les plans Business et Enterprise peuvent désormais lier leurs propres clés API pour utiliser des modèles dans VS Code chat. La CLI 1.0.41 (5 mai) démarre plus vite en rendant l'UI immédiatement ; les complétions shell sont installées automatiquement au premier lancement.</p>"
+          },
+          "date": "6 may 2026",
+          "source": { "url": "https://github.blog/changelog/2026-05-06-github-copilot-in-visual-studio-code-april-releases/", "label": "github.blog" }
+        },
+        {
+          "id": "copilot-enterprise-plugins",
+          "tag": "preview",
+          "title": {
+            "es": "Plugins gestionados por la empresa en Copilot CLI → preview pública",
+            "en": "Enterprise-managed plugins in Copilot CLI now in public preview",
+            "fr": "Plugins gérés par l'entreprise dans Copilot CLI en aperçu public"
+          },
+          "body_html": {
+            "es": "<p>Las organizaciones ahora pueden gestionar plugins personalizados para sus despliegues de Copilot CLI en public preview, dando a los equipos de IT control sobre qué extensiones están disponibles para sus desarrolladores.</p>",
+            "en": "<p>Organizations can now manage custom plugins for their Copilot CLI deployments in public preview, giving IT teams control over which extensions are available to their developers.</p>",
+            "fr": "<p>Les organisations peuvent désormais gérer des plugins personnalisés pour leurs déploiements Copilot CLI en aperçu public, donnant aux équipes IT le contrôle sur les extensions disponibles pour leurs développeurs.</p>"
+          },
+          "date": "6 may 2026",
+          "source": { "url": "https://github.blog/changelog/", "label": "github.blog" }
+        },
+        {
+          "id": "copilot-gpt52-deprecation",
+          "tag": "update",
+          "title": {
+            "es": "Aviso de deprecación: GPT-5.2 y GPT-5.2-Codex dejan de estar disponibles en Copilot",
+            "en": "Deprecation notice: GPT-5.2 and GPT-5.2-Codex retiring from Copilot",
+            "fr": "Avis de dépréciation : GPT-5.2 et GPT-5.2-Codex retirés de Copilot"
+          },
+          "body_html": {
+            "es": "<p>GitHub anunció que GPT-5.2 y GPT-5.2-Codex dejarán de estar disponibles en Copilot. Los usuarios que tengan configuraciones que especifiquen estos modelos explícitamente deben migrar a versiones más recientes.</p>",
+            "en": "<p>GitHub announced that GPT-5.2 and GPT-5.2-Codex will no longer be available in Copilot. Any configuration explicitly specifying these models should be updated to migrate to newer alternatives.</p>",
+            "fr": "<p>GitHub annonce que GPT-5.2 et GPT-5.2-Codex ne seront plus disponibles dans Copilot. Toute configuration spécifiant explicitement ces modèles doit être mise à jour pour migrer vers des alternatives récentes.</p>"
+          },
+          "date": "1 may 2026",
+          "source": { "url": "https://github.blog/changelog/", "label": "github.blog" }
+        }
+      ]
+    }
+  ],
+  "models": [
+    {
+      "date": "2026-04-23",
+      "name": "GPT-5.5 Instant",
+      "provider": "openai",
+      "provider_label": "OpenAI",
+      "tier": "splus",
+      "weight": "proprietary",
+      "notes": {
+        "es": "Nuevo modelo por defecto de ChatGPT (reemplaza GPT-5.3 Instant). 82.7% en Terminal-Bench 2.0. Mejor en flujos de terminal complejos, resolución de issues reales de GitHub y tareas de codificación de larga duración.",
+        "en": "New default ChatGPT model, replacing GPT-5.3 Instant. 82.7% on Terminal-Bench 2.0. Stronger on complex terminal workflows, real-world GitHub issue resolution, and long-horizon coding tasks.",
+        "fr": "Nouveau modèle par défaut de ChatGPT (remplace GPT-5.3 Instant). 82,7% sur Terminal-Bench 2.0. Meilleur sur les workflows terminal complexes, résolution d'issues GitHub réelles et codage longue durée."
+      },
+      "row_kind": "recent"
+    },
+    {
+      "date": "2026-04-22",
+      "name": "Qwen3.6-27B",
+      "provider": "alibaba",
+      "provider_label": "Alibaba / Qwen",
+      "tier": "aplus",
+      "weight": "open",
+      "notes": {
+        "es": "27B parámetros, Apache 2.0. Supera al MoE Qwen3.5-397B-A17B en benchmarks de coding agentico. SWE-bench Verified: 77.2%. Arquitectura híbrida con atención lineal Gated DeltaNet y mecanismo Thinking Preservation.",
+        "en": "27B params, Apache 2.0. Outperforms the Qwen3.5-397B-A17B MoE on agentic coding benchmarks. SWE-bench Verified: 77.2%. Hybrid architecture with Gated DeltaNet linear attention and Thinking Preservation mechanism.",
+        "fr": "27B params, Apache 2.0. Surpasse le MoE Qwen3.5-397B-A17B sur les benchmarks de codage agentique. SWE-bench Verified : 77,2%. Architecture hybride avec attention linéaire Gated DeltaNet et mécanisme Thinking Preservation."
+      },
+      "row_kind": "recent"
+    },
+    {
+      "date": "2026-04-20",
+      "name": "Kimi K2.6",
+      "provider": "moonshot",
+      "provider_label": "Moonshot AI",
+      "tier": "aplus",
+      "weight": "open",
+      "notes": {
+        "es": "1T parámetros MoE (32B activos), Modified MIT. Essaim de agentes: hasta 300 sub-agentes especializados y 4.000 pasos coordinados (3x más que K2.5). Multimodal nativo. Disponible en API, Kimi.com y Kimi Code CLI.",
+        "en": "1T param MoE (32B active), Modified MIT. Agent Swarm: up to 300 specialized sub-agents and 4,000 coordinated steps (3x vs K2.5). Natively multimodal. Available via API, Kimi.com, and Kimi Code CLI.",
+        "fr": "MoE 1T params (32B actifs), Modified MIT. Essaim d'agents : jusqu'à 300 sous-agents spécialisés et 4 000 étapes coordonnées (3x vs K2.5). Multimodal natif. Disponible via API, Kimi.com et Kimi Code CLI."
+      },
+      "row_kind": "recent"
+    },
+    {
+      "date": "2026-04-16",
+      "name": "Claude Opus 4.7",
+      "provider": "anthropic",
+      "provider_label": "Anthropic",
+      "tier": "splus",
+      "weight": "proprietary",
+      "notes": {
+        "es": "64.3% SWE-bench Pro (#1 global). 87.6% SWE-bench Verified. Resolución de imágenes 3x mejorada. Nuevo nivel de esfuerzo xhigh (entre high y max). $5/$25 por MTok entrada/salida.",
+        "en": "64.3% SWE-bench Pro (#1 global). 87.6% SWE-bench Verified. 3x image resolution improvement. New xhigh effort level (between high and max). $5/$25 per MTok input/output.",
+        "fr": "64,3% SWE-bench Pro (n°1 mondial). 87,6% SWE-bench Verified. Résolution d'image 3x améliorée. Nouveau niveau d'effort xhigh (entre high et max). 5$/25$ par MTok entrée/sortie."
+      },
+      "row_kind": "recent"
+    },
+    {
+      "date": "2026-04-16",
+      "name": "Qwen3.6-35B-A3B",
+      "provider": "alibaba",
+      "provider_label": "Alibaba / Qwen",
+      "tier": "a",
+      "weight": "open",
+      "notes": {
+        "es": "35B parámetros MoE (3B activos), Apache 2.0. Primer modelo de la serie Qwen3.6. Inferencia eficiente con activación mínima de parámetros.",
+        "en": "35B param MoE (3B active), Apache 2.0. First Qwen3.6 series model. Efficient inference with minimal parameter activation.",
+        "fr": "MoE 35B params (3B actifs), Apache 2.0. Premier modèle de la série Qwen3.6. Inférence efficace avec activation minimale des paramètres."
+      },
+      "row_kind": "recent"
+    },
+    {
+      "date": "2026-04-08",
+      "name": "GLM-5.1",
+      "provider": "zhipu",
+      "provider_label": "Z.ai (Zhipu)",
+      "tier": "a",
+      "weight": "open",
+      "notes": {
+        "es": "754B parámetros MoE, open-source (Apache 2.0). Orientado a ingeniería agentica y tareas de codificación de larga duración. Preview para suscriptores desde finales de marzo; open-source el 8 de abril.",
+        "en": "754B param MoE, open-source (Apache 2.0). Targeted at agentic engineering and long-horizon coding. Subscription preview since late March; open-source released April 8.",
+        "fr": "MoE 754B params, open-source (Apache 2.0). Orienté ingénierie agentique et codage longue durée. Preview abonnés depuis fin mars ; open-source le 8 avril."
+      },
+      "row_kind": "recent"
+    },
+    {
+      "date": "2026-04",
+      "name": "DeepSeek V4",
+      "provider": "deepseek",
+      "provider_label": "DeepSeek",
+      "tier": "s",
+      "weight": "open",
+      "notes": {
+        "es": "Salto arquitectónico para contexto ultra-largo en producción. Entrenado en +32T tokens. Ventana de contexto nativa de 1M tokens. $0.14/MTok — la opción más económica del tier S.",
+        "en": "Architectural leap for ultra-long context in production. Trained on 32T+ tokens. Native 1M-token context window. $0.14/MTok — most cost-efficient S-tier option.",
+        "fr": "Bond architectural pour le contexte ultra-long en production. 32T+ tokens d'entraînement. Fenêtre contextuelle native 1M tokens. 0,14$/MTok — l'option S-tier la plus économique."
+      },
+      "row_kind": "recent"
+    },
+    {
+      "date": "2026-04",
+      "name": "Gemini 2.5 Pro",
+      "provider": "google",
+      "provider_label": "Google",
+      "tier": "s",
+      "weight": "proprietary",
+      "notes": {
+        "es": "GA. Impulsa Gemini Code Assist Standard y Enterprise. Ventana de contexto de 2M tokens disponible en Vertex AI. Gemini 2.0 retira el 1 de junio de 2026.",
+        "en": "GA. Powers Gemini Code Assist Standard and Enterprise. 2M-token context window available on Vertex AI. Gemini 2.0 retiring June 1, 2026.",
+        "fr": "GA. Propulse Gemini Code Assist Standard et Enterprise. Fenêtre contextuelle 2M tokens disponible sur Vertex AI. Gemini 2.0 retiré le 1er juin 2026."
+      },
+      "row_kind": "recent"
+    },
+    {
+      "date": "2026-03",
+      "name": "Claude Sonnet 4.6",
+      "provider": "anthropic",
+      "provider_label": "Anthropic",
+      "tier": "s",
+      "weight": "proprietary",
+      "notes": {
+        "es": "Modelo de producción actual de Anthropic (ID: claude-sonnet-4-6). Ventana de contexto de 1M tokens disponible de forma general desde el 13 de marzo sin cargo adicional por contexto largo.",
+        "en": "Anthropic's current production model (ID: claude-sonnet-4-6). 1M-token context window generally available since March 13 at no long-context surcharge.",
+        "fr": "Modèle de production actuel d'Anthropic (ID : claude-sonnet-4-6). Fenêtre contextuelle 1M tokens généralement disponible depuis le 13 mars sans surcharge."
+      },
+      "row_kind": "recent"
+    },
+    {
+      "date": "2026-05",
+      "name": "Claude Mythos",
+      "provider": "anthropic",
+      "provider_label": "Anthropic",
+      "tier": "splus",
+      "weight": "upcoming",
+      "notes": {
+        "es": "Modelo orientado a ciberseguridad en pruebas internas y rollout limitado. Revelado por filtración de datos en marzo 2026. Representa un 'cambio de escala' en capacidades según Fortune.",
+        "en": "Cybersecurity-focused model in internal testing with limited rollout underway. Revealed via data leak March 2026. Described as a capability step-change by Fortune.",
+        "fr": "Modèle orienté cybersécurité en test interne avec déploiement limité. Révélé par une fuite de données en mars 2026. Décrit comme un changement de niveau par Fortune."
+      },
+      "row_kind": "upcoming"
+    },
+    {
+      "date": "2026-05",
+      "name": "Jupiter-v1-p",
+      "provider": "anthropic",
+      "provider_label": "Anthropic",
+      "tier": "s",
+      "weight": "upcoming",
+      "notes": {
+        "es": "En pruebas internas antes de un posible lanzamiento en mayo 2026. Detalles de capacidades aún no revelados.",
+        "en": "In internal testing ahead of a potential May 2026 launch. Capability details not yet disclosed.",
+        "fr": "En test interne avant un lancement potentiel en mai 2026. Détails des capacités non encore divulgués."
+      },
+      "row_kind": "upcoming"
+    },
+    {
+      "date": "2026-05",
+      "name": "Gemini 3.1 Ultra",
+      "provider": "google",
+      "provider_label": "Google",
+      "tier": "splus",
+      "weight": "upcoming",
+      "notes": {
+        "es": "Esperado para Google I/O 2026 (19-20 mayo). Contexto de 2M tokens. 94.3% en GPQA Diamond. Google retira Gemini 2.0 (fin de vida: 1 jun 2026) para empujar la familia Gemini 3.x como nueva base.",
+        "en": "Expected at Google I/O 2026 (May 19-20). 2M-token context. 94.3% GPQA Diamond. Google retiring Gemini 2.0 (EOL: June 1, 2026) to push the Gemini 3.x family as the new baseline.",
+        "fr": "Attendu pour Google I/O 2026 (19-20 mai). Contexte 2M tokens. 94,3% GPQA Diamond. Google retire Gemini 2.0 (fin de vie : 1er juin 2026) pour imposer la famille Gemini 3.x comme nouvelle base."
+      },
+      "row_kind": "upcoming"
+    }
+  ],
+  "model_timeline_anchor": "model-timeline",
+  "notable_trends": [
+    {
+      "es": "El computing agentico domina la semana: Claude lanzó Multiagent Sessions en beta pública y el feature de memoria auto-mejorable de agentes, Codex 0.128 persistió workflows /goal con TUI completo, y Copilot extendió a sus agentes acceso a terminales activas y pestañas del navegador. Cada plataforma compite por ofrecer la orquestación de agentes más autónoma.",
+      "en": "Agentic computing dominates the week: Claude launched Multiagent Sessions into public beta alongside an agent self-improving memory feature, Codex 0.128 persisted /goal workflows with full TUI, and Copilot extended agents' access to live terminals and browser tabs. Every platform is racing to deliver the most autonomous agent orchestration.",
+      "fr": "Le computing agentique domine la semaine : Claude a lancé Multiagent Sessions en bêta publique avec une fonctionnalité de mémoire auto-améliorable pour les agents, Codex 0.128 a persisté les workflows /goal avec TUI complet, et Copilot a étendu l'accès des agents aux terminaux actifs et onglets de navigateur."
+    },
+    {
+      "es": "La infraestructura de cómputo escala agresivamente: Anthropic firmó un acuerdo con SpaceX que suma 300+ MW y 220.000+ GPUs NVIDIA, al tiempo que duplicó los límites de tasa para todos los planes de pago. La capacidad de cómputo está dejando de ser el cuello de botella para las cargas de producción.",
+      "en": "Compute infrastructure is scaling aggressively: Anthropic signed a SpaceX deal adding 300+ megawatts and 220,000+ NVIDIA GPUs, while simultaneously doubling rate limits across all paid plans. Compute is ceasing to be the bottleneck for production AI workloads.",
+      "fr": "L'infrastructure de calcul monte en puissance : Anthropic a signé un accord SpaceX ajoutant 300+ MW et 220 000+ GPUs NVIDIA, tout en doublant les limites de débit pour tous les plans payants. Le calcul cesse d'être le goulot d'étranglement pour les charges de production."
+    },
+    {
+      "es": "Los modelos open-weight chinos consolidan su posición: Kimi K2.6 (1T params MoE, 300 sub-agentes), Qwen3.6-27B (supera modelos 10x más grandes en coding agentico) y GLM-5.1 (754B params MoE) refuerzan a los laboratorios chinos como rivales creíbles de los modelos propietarios occidentales en la carrera SWE-bench.",
+      "en": "Chinese open-weight models are consolidating their position: Kimi K2.6 (1T param MoE, 300-sub-agent swarm), Qwen3.6-27B (outperforms models 10x its size on agentic coding), and GLM-5.1 (754B param MoE) establish Chinese labs as credible rivals to Western proprietary models in the SWE-bench race.",
+      "fr": "Les modèles open-weight chinois consolident leur position : Kimi K2.6 (MoE 1T params, 300 sous-agents), Qwen3.6-27B (surpasse des modèles 10x plus grands sur le codage agentique) et GLM-5.1 (MoE 754B params) établissent les labs chinois comme rivaux crédibles des modèles propriétaires occidentaux dans la course SWE-bench."
+    }
+  ]
+}

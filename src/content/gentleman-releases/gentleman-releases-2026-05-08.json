@@ -1,0 +1,153 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 08 May 2026",
+    "en": "Gentleman Releases — 08 May 2026",
+    "fr": "Gentleman Releases — 08 May 2026"
+  },
+  "description": {
+    "es": "Releases del día en proyectos de Gentleman-Programming",
+    "en": "Today's releases from Gentleman-Programming projects",
+    "fr": "Sorties du jour des projets Gentleman-Programming"
+  },
+  "pubDate": "2026-05-08",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "engram v1.15.10 — recovery tokens contra falsos `user_selected_after_ambiguous_project`",
+        "en": "engram v1.15.10 — recovery tokens block fake `user_selected_after_ambiguous_project` claims",
+        "fr": "engram v1.15.10 — jetons de récupération contre les faux `user_selected_after_ambiguous_project`"
+      },
+      "anchor": "engram-v1-15-10",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-ai v1.26.5 — el logo de OpenCode Gentle deja de imprimir el caption extra",
+        "en": "gentle-ai v1.26.5 — OpenCode Gentle home logo drops the extra caption",
+        "fr": "gentle-ai v1.26.5 — le logo OpenCode Gentle abandonne la légende superflue"
+      },
+      "anchor": "gentle-ai-v1-26-5",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-ai v1.26.4 — Gentleman theme para Claude Code y rosa Braille en OpenCode",
+        "en": "gentle-ai v1.26.4 — Gentleman theme for Claude Code and Braille rose for OpenCode",
+        "fr": "gentle-ai v1.26.4 — thème Gentleman pour Claude Code et rose Braille pour OpenCode"
+      },
+      "anchor": "gentle-ai-v1-26-4",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-ai v1.26.3 — preset custom arregla el salto a OpenCode antes de elegir componentes",
+        "en": "gentle-ai v1.26.3 — custom preset stops jumping to OpenCode before component selection",
+        "fr": "gentle-ai v1.26.3 — le preset custom ne saute plus vers OpenCode avant la sélection de composants"
+      },
+      "anchor": "gentle-ai-v1-26-3",
+      "icon": "simple-icons:github"
+    }
+  ],
+  "tools": [
+    {
+      "id": "engram",
+      "name": "engram",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-engram",
+      "icon_emoji": "🧠",
+      "anchor": "engram",
+      "version": "v1.15.10",
+      "updates": [
+        {
+          "id": "engram-v1-15-10",
+          "tag": "fix",
+          "title": {
+            "es": "v1.15.10 — Recovery tokens en MCP ambiguous-project",
+            "en": "v1.15.10 — Recovery tokens for MCP ambiguous-project",
+            "fr": "v1.15.10 — Jetons de récupération pour ambiguous-project MCP"
+          },
+          "body_html": {
+            "es": "<p>Patch que blinda el flujo de recuperación cuando MCP no puede resolver el proyecto. Ahora un agente no puede inventar <code>project_choice_reason=user_selected_after_ambiguous_project</code> sin un token emitido por Engram.</p><ul><li>Cuando la detección de proyecto queda ambigua, <code>mem_save</code> y <code>mem_save_prompt</code> devuelven <code>recovery_token</code> + <code>token_ttl_seconds</code>.</li><li>El reintento con <code>user_selected_after_ambiguous_project</code> tiene que mandar ese token, atado al contexto ambiguo original y al proyecto elegido.</li><li>Cobertura de regresión nueva: token faltante, inválido, vencido, de proyecto equivocado, y flow válido.</li><li>Resultado: los reclamos accidentales o sintéticos de project-choice ahora fallan determinísticamente, en vez de persistir memoria bajo el proyecto incorrecto.</li></ul><p>Si tenías un agente que se mandaba con la coartada <code>user_selected_after_ambiguous_project</code>, ojo: ahora tiene que probar que el usuario eligió de verdad. Es un win.</p>",
+            "en": "<p>Patch that hardens the recovery flow when MCP can't resolve the project. An agent can no longer fabricate <code>project_choice_reason=user_selected_after_ambiguous_project</code> without a token issued by Engram.</p><ul><li>On ambiguous project detection, <code>mem_save</code> and <code>mem_save_prompt</code> now return <code>recovery_token</code> + <code>token_ttl_seconds</code>.</li><li>A retry using <code>user_selected_after_ambiguous_project</code> must include that token, bound to the original ambiguous context and the selected project.</li><li>New regression coverage: missing, invalid, stale, wrong-project, and valid recovery-token flows.</li><li>Net effect: accidental or synthetic project-choice claims now fail deterministically instead of persisting memory under the wrong project.</li></ul><p>If an agent of yours was leaning on <code>user_selected_after_ambiguous_project</code> as a free pass, heads up: it now has to prove the user actually chose. That's the point.</p>",
+            "fr": "<p>Patch qui durcit le flux de récupération quand MCP n'arrive pas à résoudre le projet. Un agent ne peut plus fabriquer <code>project_choice_reason=user_selected_after_ambiguous_project</code> sans un jeton émis par Engram.</p><ul><li>Sur détection ambiguë, <code>mem_save</code> et <code>mem_save_prompt</code> renvoient désormais <code>recovery_token</code> + <code>token_ttl_seconds</code>.</li><li>Une nouvelle tentative avec <code>user_selected_after_ambiguous_project</code> doit inclure ce jeton, lié au contexte ambigu original et au projet sélectionné.</li><li>Nouvelle couverture de régression : jeton manquant, invalide, périmé, mauvais projet, et flux valide.</li><li>Effet net : les revendications accidentelles ou synthétiques échouent désormais de façon déterministe au lieu de persister la mémoire sous le mauvais projet.</li></ul><p>Si un agent comptait sur <code>user_selected_after_ambiguous_project</code> comme passe-droit, attention : il doit maintenant prouver que l'utilisateur a réellement choisi.</p>"
+          },
+          "date": "07 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v1.15.10",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gentle-ai",
+      "name": "gentle-ai",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-gentle-ai",
+      "icon_emoji": "🎩",
+      "anchor": "gentle-ai",
+      "version": "v1.26.5",
+      "updates": [
+        {
+          "id": "gentle-ai-v1-26-5",
+          "tag": "fix",
+          "title": {
+            "es": "v1.26.5 — Logo de OpenCode Gentle sin caption extra",
+            "en": "v1.26.5 — OpenCode Gentle logo with no extra caption",
+            "fr": "v1.26.5 — Logo OpenCode Gentle sans légende superflue"
+          },
+          "body_html": {
+            "es": "<p>Patch chico y quirúrgico para el plugin OpenCode Gentle: el logo del home ahora muestra sólo la rosa, sin el caption hardcodeado debajo.</p><ul><li>Removido el texto <code>Gentleman Programming</code> hardcodeado en el <code>gentle-logo.tsx</code> generado.</li><li>El slot <code>home_logo</code> de OpenCode queda con la rosa Braille terminal-native, sin ruido alrededor.</li></ul><p>Para enganchar: <code>brew upgrade gentle-ai &amp;&amp; gentle-ai sync</code>. Si ya tenías el plugin instalado y querés refrescar el archivo generado, corré el path Full Gentleman o seleccioná <code>opencode-gentle-logo</code> en Custom.</p>",
+            "en": "<p>Small surgical patch for the OpenCode Gentle plugin: the home logo now renders only the rose, with no hardcoded caption underneath.</p><ul><li>Removed the hardcoded <code>Gentleman Programming</code> text from the generated <code>gentle-logo.tsx</code>.</li><li>OpenCode's <code>home_logo</code> slot now shows only the terminal-native Braille rose artwork, no noise around it.</li></ul><p>Pick it up: <code>brew upgrade gentle-ai &amp;&amp; gentle-ai sync</code>. If you already installed the plugin and want the generated file refreshed, rerun the Full Gentleman install path or select <code>opencode-gentle-logo</code> in Custom.</p>",
+            "fr": "<p>Patch chirurgical pour le plugin OpenCode Gentle : le logo de la home n'affiche plus que la rose, sans légende codée en dur.</p><ul><li>Suppression du texte <code>Gentleman Programming</code> codé en dur dans le <code>gentle-logo.tsx</code> généré.</li><li>Le slot <code>home_logo</code> d'OpenCode ne montre plus que la rose Braille terminal-native, sans bruit autour.</li></ul><p>Pour appliquer : <code>brew upgrade gentle-ai &amp;&amp; gentle-ai sync</code>. Si le plugin était déjà installé, relancez le chemin Full Gentleman ou sélectionnez <code>opencode-gentle-logo</code> en Custom pour rafraîchir le fichier généré.</p>"
+          },
+          "date": "07 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v1.26.5",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        },
+        {
+          "id": "gentle-ai-v1-26-4",
+          "tag": "feature",
+          "title": {
+            "es": "v1.26.4 — Identidad Gentleman en el installer y bundling SDD más prolijo",
+            "en": "v1.26.4 — Gentleman visual identity in the installer and tighter SDD bundling",
+            "fr": "v1.26.4 — Identité visuelle Gentleman dans l'installer et bundling SDD resserré"
+          },
+          "body_html": {
+            "es": "<p>Minor que mete la identidad visual de Gentleman dentro del installer y aprieta el path de skill-bundling de SDD.</p><ul><li><strong>Installables Gentleman opcionales.</strong> Full Gentleman ahora instala por default el theme custom <code>Gentleman</code> de Claude Code y el plugin de logo rosa de OpenCode Gentle.</li><li><strong>Custom granular.</strong> Las instalaciones Custom pueden optar por <code>claude-theme</code> y <code>opencode-gentle-logo</code> de forma individual.</li><li><strong>Logo rosa Braille.</strong> El logo del TUI y el home logo de OpenCode usan ahora el arte Gentle-AI rosa terminal-native.</li><li><strong>Bundling SDD.</strong> Claude Code ya no ve los <code>SKILL.md</code> de fases SDD como user skills picker-visible.</li><li><strong>Diagnóstico de inyección.</strong> Los errores del injector SDD ahora incluyen el path del asset, así fallar bundleado es debuggeable.</li><li><strong>Separación de themes.</strong> El componente <code>theme</code> sigue aplicando el overlay de settings <code>gentleman-kanagawa</code>; el theme custom de Claude Code se instala aparte.</li></ul><p>Tests: unit, golden TUI y E2E actualizados; CI verde en Ubuntu, Fedora y Arch. Para enganchar: <code>brew upgrade gentle-ai &amp;&amp; gentle-ai sync</code>.</p>",
+            "en": "<p>Minor that brings Gentleman's visual identity into the installer and tightens the SDD skill-bundling path.</p><ul><li><strong>Optional Gentleman installables.</strong> Full Gentleman now installs the Claude Code <code>Gentleman</code> custom theme and the OpenCode Gentle rose TUI logo plugin by default.</li><li><strong>Granular Custom.</strong> Custom installs can opt into <code>claude-theme</code> and <code>opencode-gentle-logo</code> individually.</li><li><strong>Braille rose logo.</strong> The TUI logo and the OpenCode home logo now use the terminal-native Gentle-AI rose artwork.</li><li><strong>SDD bundling.</strong> Claude Code no longer sees SDD phase <code>SKILL.md</code> files as picker-visible user skills.</li><li><strong>Asset injection diagnostics.</strong> SDD injector errors now include asset paths, so bundled-skill failures are debuggable.</li><li><strong>Theme separation.</strong> The existing <code>theme</code> component still applies the <code>gentleman-kanagawa</code> settings overlay; the new Claude Code custom theme installs separately.</li></ul><p>Tests: unit, TUI golden, and E2E coverage updated; CI green on Ubuntu, Fedora, and Arch. Pick it up: <code>brew upgrade gentle-ai &amp;&amp; gentle-ai sync</code>.</p>",
+            "fr": "<p>Mineur qui amène l'identité visuelle Gentleman dans l'installer et resserre le chemin de bundling de skills SDD.</p><ul><li><strong>Installables Gentleman optionnels.</strong> Full Gentleman installe désormais par défaut le thème custom <code>Gentleman</code> de Claude Code et le plugin du logo rose OpenCode Gentle.</li><li><strong>Custom granulaire.</strong> Les installs Custom peuvent activer <code>claude-theme</code> et <code>opencode-gentle-logo</code> individuellement.</li><li><strong>Logo rose Braille.</strong> Le logo TUI et le home logo OpenCode utilisent désormais l'art Gentle-AI rose terminal-native.</li><li><strong>Bundling SDD.</strong> Claude Code ne voit plus les <code>SKILL.md</code> des phases SDD comme user skills visibles dans le picker.</li><li><strong>Diagnostic d'injection d'assets.</strong> Les erreurs de l'injector SDD incluent désormais les chemins d'assets, ce qui rend les échecs de skills bundlées debuggables.</li><li><strong>Séparation des thèmes.</strong> Le composant <code>theme</code> applique toujours l'overlay de settings <code>gentleman-kanagawa</code> ; le nouveau thème custom Claude Code s'installe séparément.</li></ul><p>Tests : unit, golden TUI et E2E mis à jour ; CI au vert sur Ubuntu, Fedora et Arch. Pour appliquer : <code>brew upgrade gentle-ai &amp;&amp; gentle-ai sync</code>.</p>"
+          },
+          "date": "07 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v1.26.4",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        },
+        {
+          "id": "gentle-ai-v1-26-3",
+          "tag": "fix",
+          "title": {
+            "es": "v1.26.3 — Preset custom y descripciones de skills aptas para Claude Code",
+            "en": "v1.26.3 — Custom ecosystem preset and Claude-Code-friendly skill descriptions",
+            "fr": "v1.26.3 — Preset écosystème custom et descriptions de skills compatibles Claude Code"
+          },
+          "body_html": {
+            "es": "<p>Patch que arregla el flujo de preset ecosistema custom y deja las descripciones de skills aptas para el listado de Claude Code.</p><ul><li><strong>Custom preset.</strong> El flujo ya no salta a los plugins community de OpenCode antes de la selección de componentes.</li><li><strong>Tests de matriz TUI.</strong> Snapshots golden nuevos para preset y custom post-component navigation.</li><li><strong>Descripciones de skills Claude-friendly.</strong> Quedan en una sola línea, preservan los triggers y se cortan en 160 chars.</li><li><strong>Frontmatter más estricto.</strong> Tests reforzados y guidance de <code>skill-creator</code> actualizada para que los skills nuevos preserven el valor del trigger dentro del budget de listado de Claude.</li></ul><p>Validación: <code>go test -count=1 ./...</code>, <code>go vet ./...</code>, <code>git diff --check</code>, <code>go build ./...</code> — todo verde.</p>",
+            "en": "<p>Patch that fixes the custom ecosystem preset flow and makes skill descriptions Claude Code friendly.</p><ul><li><strong>Custom preset.</strong> The flow no longer jumps to OpenCode community plugins before component selection.</li><li><strong>TUI flow matrix tests.</strong> New golden snapshots for preset and custom post-component navigation.</li><li><strong>Claude-friendly skill descriptions.</strong> Now single-line, trigger-preserving, capped at 160 chars.</li><li><strong>Stricter frontmatter.</strong> Hardened skill frontmatter tests and updated <code>skill-creator</code> guidance so future skills preserve trigger value within Claude's skill-listing budget.</li></ul><p>Validation: <code>go test -count=1 ./...</code>, <code>go vet ./...</code>, <code>git diff --check</code>, <code>go build ./...</code> — all green.</p>",
+            "fr": "<p>Patch qui corrige le flux de preset écosystème custom et rend les descriptions de skills compatibles avec Claude Code.</p><ul><li><strong>Preset custom.</strong> Le flux ne saute plus vers les plugins community OpenCode avant la sélection des composants.</li><li><strong>Tests matriciels du TUI.</strong> Nouveaux snapshots golden pour la navigation post-composants en preset et custom.</li><li><strong>Descriptions de skills Claude-friendly.</strong> Une seule ligne, conservation des triggers, plafond à 160 caractères.</li><li><strong>Frontmatter plus strict.</strong> Tests durcis et guidance <code>skill-creator</code> mise à jour pour que les futures skills préservent la valeur du trigger dans le budget de listing de Claude.</li></ul><p>Validation : <code>go test -count=1 ./...</code>, <code>go vet ./...</code>, <code>git diff --check</code>, <code>go build ./...</code> — tout au vert.</p>"
+          },
+          "date": "07 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v1.26.3",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

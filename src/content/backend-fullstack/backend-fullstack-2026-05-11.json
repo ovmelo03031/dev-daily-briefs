@@ -1,0 +1,230 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 11 May 2026",
+    "en": "Backend & Fullstack Daily — May 11, 2026",
+    "fr": "Backend & Fullstack Daily — 11 mai 2026"
+  },
+  "description": {
+    "es": "vm2 expone 12 CVEs críticos, Cline Kanban filtra prompts vía WebSocket, Apache HTTP/2 cae en double-free, AWS MCP Server llega a GA y VS Code 1.119 emite trazas OTel para sesiones de agente.",
+    "en": "vm2 ships 12 critical CVEs, Cline Kanban leaks prompts via WebSocket, Apache HTTP/2 hits a double-free, AWS MCP Server goes GA, and VS Code 1.119 emits OpenTelemetry traces for agent sessions.",
+    "fr": "vm2 expose 12 CVE critiques, Cline Kanban fuit les prompts via WebSocket, Apache HTTP/2 souffre d'un double-free, AWS MCP Server passe GA et VS Code 1.119 émet des traces OTel pour les agents."
+  },
+  "pubDate": "2026-05-11",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "vm2: 12 CVEs críticos, sandbox roto",
+        "en": "vm2: 12 critical CVEs, sandbox broken",
+        "fr": "vm2 : 12 CVE critiques, sandbox cassé"
+      },
+      "anchor": "vm2-12-cves",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Cline Kanban: hijack de agentes via WebSocket",
+        "en": "Cline Kanban: WebSocket hijack of agents",
+        "fr": "Cline Kanban : hijack d'agents via WebSocket"
+      },
+      "anchor": "cline-kanban-cve",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Apache HTTP/2: double-free con RCE potencial",
+        "en": "Apache HTTP/2: double-free with potential RCE",
+        "fr": "Apache HTTP/2 : double-free et RCE potentiel"
+      },
+      "anchor": "apache-http2-cve",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "AWS MCP Server llega a GA",
+        "en": "AWS MCP Server hits GA",
+        "fr": "AWS MCP Server passe GA"
+      },
+      "anchor": "aws-mcp-ga",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": {
+        "es": "VS Code 1.119: trazas OTel para agentes",
+        "en": "VS Code 1.119: OTel traces for agents",
+        "fr": "VS Code 1.119 : traces OTel pour agents"
+      },
+      "anchor": "vscode-otel-agents",
+      "icon": "lucide:layers"
+    },
+    {
+      "text": {
+        "es": "RSC y deserialización: cómo defenderse",
+        "en": "RSC and deserialization: how to defend",
+        "fr": "RSC et désérialisation : comment se défendre"
+      },
+      "anchor": "ddd-cqrs-piece",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "vm2-12-cves",
+      "updates": [
+        {
+          "id": "vm2-12-cves",
+          "tag": "security",
+          "title": {
+            "es": "vm2 publica 12 CVEs críticos: el sandbox JS más usado quedó indefendible",
+            "en": "vm2 discloses 12 critical CVEs: the most-used JS sandbox is essentially indefensible",
+            "fr": "vm2 publie 12 CVE critiques : le sandbox JS le plus utilisé est intenable"
+          },
+          "date": "07 May 2026",
+          "body_html": {
+            "es": "<p>The Hacker News reportó <strong>12 vulnerabilidades de sandbox escape</strong> en <code>vm2</code>, todas con CVSS entre 9.1 y 10.0. Cuatro de ellas (CVE-2026-43997, CVE-2026-44005, CVE-2026-44006 y CVE-2026-43999) son <strong>10.0 perfectos</strong>: code injection que devuelve el host <code>Object</code>, escapes vía <code>BaseHandler.getPrototypeOf</code>, allowlist bypass para cargar builtins prohibidos. Hay fix en <strong>vm2 3.11.2</strong>, pero el autor ya dijo en 2024 que el modelo de aislar JS dentro de JS no se sostiene. <strong>Si todavía evaluás código de terceros con vm2, migrá YA</strong> a <code>isolated-vm</code>, V8 Isolates en Workers, o WASM con Wasmtime/Wasmer.</p>",
+            "en": "<p>The Hacker News disclosed <strong>12 sandbox-escape vulnerabilities</strong> in <code>vm2</code>, all CVSS 9.1–10.0. Four are <strong>perfect 10.0s</strong> (CVE-2026-43997, CVE-2026-44005, CVE-2026-44006, CVE-2026-43999): code injection returning the host <code>Object</code>, escapes through <code>BaseHandler.getPrototypeOf</code>, allowlist bypasses loading forbidden builtins. Fix lands in <strong>vm2 3.11.2</strong>, but the author already conceded in 2024 that isolating JS inside JS is structurally untenable. <strong>If you still evaluate untrusted code with vm2, migrate now</strong> to <code>isolated-vm</code>, V8 Isolates on Workers, or WASM via Wasmtime/Wasmer.</p>",
+            "fr": "<p>The Hacker News divulgue <strong>12 vulnérabilités de sandbox escape</strong> dans <code>vm2</code>, toutes CVSS 9.1–10.0 dont quatre 10.0 parfaits (CVE-2026-43997, -44005, -44006, -43999). Le correctif arrive en <strong>vm2 3.11.2</strong> mais l'auteur a déjà admis que le modèle JS-dans-JS n'est pas tenable. Migrer vers <code>isolated-vm</code>, V8 Isolates ou WASM.</p>"
+          },
+          "source": {
+            "url": "https://thehackernews.com/2026/05/vm2-nodejs-library-vulnerabilities.html",
+            "label": "thehackernews.com"
+          }
+        },
+        {
+          "id": "cline-kanban-cve",
+          "tag": "security",
+          "title": {
+            "es": "CVE-2026-44211 (CVSS 9.6): el server kanban de Cline acepta WebSockets de cualquier sitio que visites",
+            "en": "CVE-2026-44211 (CVSS 9.6): Cline's kanban server accepts WebSockets from any site you visit",
+            "fr": "CVE-2026-44211 (CVSS 9.6) : le serveur kanban Cline accepte les WebSockets de n'importe quel site"
+          },
+          "date": "08 May 2026",
+          "body_html": {
+            "es": "<p>El paquete npm <code>cline</code> (CLI del agente AI con +2M de descargas) abre un WebSocket en <code>127.0.0.1:3484</code> <strong>sin validar el header <code>Origin</code></strong>. Como WebSockets esquivan CORS, cualquier página que visite el dev se conecta sola, lee paths del workspace, info de git, chats del agente y los terminales activos &mdash; o inyecta prompts maliciosos en sesiones corriendo. Afecta todas las versiones hasta <strong>2.13.0</strong> y al cierre de esta edición <em>no hay parche</em>. Mitigación urgente: bloqueá el puerto a nivel firewall local o desactivá la integración kanban. Esto deja claro que <strong>los servers locales de agentes son nueva superficie de ataque</strong> &mdash; no asumas que &quot;localhost&quot; es zona segura.</p>",
+            "en": "<p>The <code>cline</code> npm package (2M+ downloads as the AI agent CLI) opens a WebSocket on <code>127.0.0.1:3484</code> <strong>without validating the <code>Origin</code> header</strong>. Because WebSockets bypass CORS, any site the dev visits silently connects and can leak workspace paths, git info, agent chat messages, and live terminals &mdash; or inject malicious prompts into running sessions. All versions through <strong>2.13.0</strong> affected and <em>no patch is available yet</em>. Mitigation: firewall the port locally or disable the kanban integration. Lesson: <strong>local agent servers are a brand-new attack surface</strong>. Stop trusting &quot;localhost&quot; as a safe zone.</p>",
+            "fr": "<p>Le paquet npm <code>cline</code> ouvre un WebSocket sur <code>127.0.0.1:3484</code> <strong>sans valider l'en-tête <code>Origin</code></strong>. Comme WebSocket contourne CORS, n'importe quel site visité par le dev se connecte et peut fuiter les chemins du workspace, les git infos, les chats agent et injecter des prompts. Toutes versions ≤2.13.0 impactées, pas encore de patch.</p>"
+          },
+          "source": {
+            "url": "https://advisories.gitlab.com/npm/cline/CVE-2026-44211/",
+            "label": "advisories.gitlab.com"
+          }
+        },
+        {
+          "id": "apache-http2-cve",
+          "tag": "security",
+          "title": {
+            "es": "Apache HTTP/2 CVE-2026-23918 (CVSS 8.8): dos frames y se cae el worker",
+            "en": "Apache HTTP/2 CVE-2026-23918 (CVSS 8.8): two frames and the worker crashes",
+            "fr": "Apache HTTP/2 CVE-2026-23918 (CVSS 8.8) : deux frames et le worker tombe"
+          },
+          "date": "05 May 2026",
+          "body_html": {
+            "es": "<p>Un double-free en <code>mod_http2</code> (módulo <code>h2_mplx.c</code>) deja a Apache HTTP Server <strong>2.4.66</strong> indefenso ante un HEADERS frame seguido inmediatamente de un RST_STREAM con código de error no-cero, sobre la misma stream. &quot;Una conexión TCP, dos frames, sin autenticación ni headers especiales, y el worker crashea&quot;, dicen los descubridores. Con APR + mmap allocator (default en Debian y en las imágenes oficiales de Docker), <strong>hay vector de RCE</strong> manipulando heap y la scoreboard de Apache. Fix en <strong>2.4.67</strong>. MPM prefork queda safe; cualquier MPM multithread con mod_http2 habilitado, no. Si tenés Apache delante de Node/PHP/Python en prod, actualizá hoy.</p>",
+            "en": "<p>A double-free in <code>mod_http2</code> (file <code>h2_mplx.c</code>) leaves Apache HTTP Server <strong>2.4.66</strong> wide open: a HEADERS frame followed immediately by a RST_STREAM with non-zero error code on the same stream crashes the worker. &quot;One TCP connection, two frames, no auth, no special headers&quot;, the discoverers wrote. With APR + mmap allocator (the default on Debian and on the official httpd Docker images), <strong>RCE is on the table</strong> via heap and scoreboard manipulation. Fix in <strong>2.4.67</strong>. MPM prefork is unaffected; multithread MPMs with mod_http2 enabled are not. If Apache fronts your Node/PHP/Python in prod, patch today.</p>",
+            "fr": "<p>Double-free dans <code>mod_http2</code> (<code>h2_mplx.c</code>) : Apache 2.4.66 crashe sur HEADERS + RST_STREAM immédiat. Avec APR + mmap (défaut Debian et images Docker httpd), RCE possible. Correctif en 2.4.67 ; MPM prefork épargné.</p>"
+          },
+          "source": {
+            "url": "https://thehackernews.com/2026/05/critical-apache-http2-flaw-cve-2026.html",
+            "label": "thehackernews.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "aws-mcp-ga",
+      "updates": [
+        {
+          "id": "aws-mcp-ga",
+          "tag": "ga",
+          "title": {
+            "es": "AWS MCP Server llega a GA: una sola tool para llamar a toda la API de AWS",
+            "en": "AWS MCP Server hits GA: one tool that calls every AWS API",
+            "fr": "AWS MCP Server passe GA : un seul outil pour appeler toute l'API AWS"
+          },
+          "date": "06 May 2026",
+          "body_html": {
+            "es": "<p>AWS anunció la <strong>GA del MCP Server</strong>: un servidor administrado que da a los agentes de coding acceso auditable a AWS vía el Model Context Protocol. Ahora cualquier agente compatible (Kiro, Cursor, Codex, Claude Code) puede llamar <em>cualquier</em> API de AWS con una sola tool, incluyendo operaciones con file upload y long-running. Suma <strong>ejecución sandboxed de scripts Python</strong> contra recursos AWS &mdash; sin acceso al filesystem ni al shell local. Guardrails vía IAM, métricas en CloudWatch, auditoría en CloudTrail. <strong>Cero costo adicional</strong>, pagás solo los recursos. Pegada fuerte: te ahorra escribir y mantener tool wrappers a mano, y arregla el agujero más típico de los agentes (corrieron <code>aws ec2 terminate-instances</code> sin permiso explícito).</p>",
+            "en": "<p>AWS announced <strong>GA of the MCP Server</strong>: a managed server that gives coding agents auditable access to AWS through the Model Context Protocol. Any MCP-compatible agent (Kiro, Cursor, Codex, Claude Code) can now invoke <em>any</em> AWS API through a single tool, including operations with file uploads and long-running execution. Adds <strong>sandboxed Python script execution</strong> against AWS resources &mdash; no local filesystem or shell access. IAM guardrails, CloudWatch metrics, CloudTrail audit. <strong>No additional charge</strong> &mdash; pay only for AWS resources. The win: stop maintaining tool wrappers by hand, and close the most common agent failure (running <code>aws ec2 terminate-instances</code> without explicit consent).</p>",
+            "fr": "<p>AWS annonce la <strong>GA du MCP Server</strong> : un serveur géré qui donne aux agents un accès audité à AWS via MCP. Tout agent compatible (Kiro, Cursor, Codex, Claude Code) appelle n'importe quelle API AWS avec un seul outil, plus exécution sandboxée de scripts Python. Garde-fous IAM, métriques CloudWatch, audit CloudTrail, sans coût additionnel.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/blogs/aws/the-aws-mcp-server-is-now-generally-available/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "vscode-otel-agents",
+          "tag": "release",
+          "title": {
+            "es": "VS Code 1.119: trazas OpenTelemetry para sesiones de agente (local, Copilot CLI y Claude)",
+            "en": "VS Code 1.119: OpenTelemetry traces for agent sessions (local, Copilot CLI, Claude)",
+            "fr": "VS Code 1.119 : traces OpenTelemetry pour les sessions d'agents"
+          },
+          "date": "06 May 2026",
+          "body_html": {
+            "es": "<p>VS Code <strong>1.119</strong> habilita <strong>trazas, métricas y eventos OpenTelemetry</strong> para sesiones de Copilot Chat &mdash; cubre el agente local, el background agent de Copilot CLI y el agente Claude. Sigue las semantic conventions de GenAI, así que cae en cualquier backend OTel (Tempo, Jaeger, Honeycomb, etc.) sin parsing custom. Para equipos de plataforma esto es oro: <em>por fin</em> podés medir <strong>cuánto tokens consumió cada dev, latencias por step de agent, success rate por modelo</strong> sin parchar el cliente. Suma además Agent Browser Sharing para revisar sesiones cruzadas. Bonus DX: dejá de adivinar dónde se traba tu agente.</p>",
+            "en": "<p>VS Code <strong>1.119</strong> emits <strong>OpenTelemetry traces, metrics and events</strong> for Copilot Chat sessions &mdash; covering the local agent, the Copilot CLI background agent, and the Claude agent. Follows GenAI semantic conventions, so any OTel backend (Tempo, Jaeger, Honeycomb) parses it natively. For platform teams this is gold: <em>finally</em> you can measure <strong>per-dev token spend, per-step agent latency, success rate by model</strong> without patching the client. Also ships Agent Browser Sharing for cross-session review. DX bonus: stop guessing where your agent is stuck.</p>",
+            "fr": "<p>VS Code 1.119 émet des traces, métriques et événements OpenTelemetry pour les sessions Copilot Chat (agent local, Copilot CLI, Claude). Conventions sémantiques GenAI, donc tout backend OTel le lit nativement. Enfin de quoi mesurer tokens, latence et taux de succès par modèle.</p>"
+          },
+          "source": {
+            "url": "https://visualstudiomagazine.com/articles/2026/05/07/vs-code-1-119-adds-agent-browser-sharing-opentelemetry-tracing.aspx",
+            "label": "visualstudiomagazine.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "ddd-cqrs-piece",
+      "updates": [
+        {
+          "id": "ddd-cqrs-piece",
+          "tag": "notable",
+          "title": {
+            "es": "End Point Dev: por qué CQRS es prácticamente obligatorio si hacés event sourcing",
+            "en": "End Point Dev: why CQRS is essentially mandatory once you do event sourcing",
+            "fr": "End Point Dev : pourquoi CQRS est quasi obligatoire avec l'event sourcing"
+          },
+          "date": "05 May 2026",
+          "body_html": {
+            "es": "<p>Tercera parte de la serie de End Point Dev sobre arquitectura DDD. La tesis: <strong>la lógica de negocio es la raison d'être de la app</strong>, y patrones como ports &amp; adapters y CQRS no son opcionales una vez que tu dominio se vuelve event-sourced. CQRS permite mantener <em>múltiples representaciones del mismo dato</em> &mdash; modelo de escritura optimizado para consistencia transaccional, modelos de lectura optimizados para full-text search, agregados materializados, métricas. Si tu stack actual mezcla writes y reads en un mismo modelo Active Record, este post es la lectura obligada de la semana. Pegale fuerte a las páginas 1 y 2 también si recién empezás.</p>",
+            "en": "<p>Third installment of End Point Dev's DDD architecture series. The thesis: <strong>business logic is the raison d'être of the application</strong>, and patterns like ports &amp; adapters and CQRS stop being optional once your domain becomes event-sourced. CQRS lets you hold <em>multiple representations of the same data</em> &mdash; write model tuned for transactional consistency, read models tuned for full-text search, materialized aggregates, metrics. If your current stack mixes writes and reads in one Active Record model, this is the must-read of the week. Catch parts 1–2 too if you're starting fresh.</p>",
+            "fr": "<p>Troisième volet de la série DDD chez End Point Dev. Thèse : la logique métier est la raison d'être de l'app, et CQRS devient quasi obligatoire en event sourcing pour maintenir plusieurs représentations du même donnée (écriture transactionnelle, lecture full-text, agrégats matérialisés).</p>"
+          },
+          "source": {
+            "url": "https://www.endpointdev.com/blog/2026/05/designing-software-architecture-ddd-part-3/",
+            "label": "endpointdev.com"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Tres CVEs grandes esta semana (vm2, Cline kanban, Apache HTTP/2) marcan el patrón: la frontera entre dev tools, agentes locales y servers de producción está colapsando, y todo &quot;localhost&quot; es ahora superficie de ataque.",
+      "en": "Three big CVEs this week (vm2, Cline kanban, Apache HTTP/2) confirm a pattern: the line between dev tools, local agents, and production servers is collapsing &mdash; every &quot;localhost&quot; is now attack surface.",
+      "fr": "Trois CVE majeures cette semaine (vm2, Cline kanban, Apache HTTP/2) confirment la tendance : la frontière entre outils dev, agents locaux et serveurs prod s'efface &mdash; tout localhost est désormais surface d'attaque."
+    },
+    {
+      "es": "AWS MCP Server GA + trazas OTel para agentes en VS Code: el tooling de agentes empieza a tener telemetría y guardrails serios, exactamente lo que faltaba para llevarlos a prod sin perder noches.",
+      "en": "AWS MCP Server GA + OTel traces for agents in VS Code: agent tooling is finally getting real telemetry and guardrails &mdash; exactly what was missing to ship them to prod without losing sleep.",
+      "fr": "AWS MCP Server GA et traces OTel pour agents dans VS Code : l'outillage agent gagne enfin télémétrie et garde-fous sérieux, ce qui manquait pour passer en prod sans cauchemars."
+    },
+    {
+      "es": "Mientras los CVEs te queman las manos, vale releer fundamentos: DDD/CQRS no son cosmética arquitectónica, son la única forma sana de seguir cambiando un dominio complejo sin romper invariantes.",
+      "en": "While CVEs burn your hands, it's worth revisiting fundamentals: DDD/CQRS aren't architectural cosmetics &mdash; they're the only sane way to keep a complex domain changing without breaking invariants.",
+      "fr": "Pendant que les CVE brûlent les mains, relire les fondamentaux : DDD et CQRS ne sont pas cosmétiques, c'est la seule façon saine de faire évoluer un domaine complexe sans casser les invariants."
+    }
+  ]
+}

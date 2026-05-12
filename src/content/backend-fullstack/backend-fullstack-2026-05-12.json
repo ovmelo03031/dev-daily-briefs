@@ -1,0 +1,333 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 12 May 2026",
+    "en": "Backend & Fullstack Daily — May 12, 2026",
+    "fr": "Backend & Fullstack Daily — 12 mai 2026"
+  },
+  "description": {
+    "es": "TanStack publica 84 versiones malignas en 42 paquetes via Pwn Request, el worm Mini Shai-Hulud llega a Mistral y UiPath, Docker Model Runner sufre SSRF (CVE-2026-33990) y Better Auth lanza el Agent Auth Protocol para agentes.",
+    "en": "TanStack ships 84 malicious versions across 42 packages via Pwn Request, the Mini Shai-Hulud worm hits Mistral and UiPath, Docker Model Runner takes an SSRF (CVE-2026-33990) and Better Auth ships an Agent Auth Protocol for AI agents.",
+    "fr": "TanStack publie 84 versions malveillantes sur 42 paquets via Pwn Request, le worm Mini Shai-Hulud atteint Mistral et UiPath, Docker Model Runner subit un SSRF (CVE-2026-33990) et Better Auth lance l'Agent Auth Protocol."
+  },
+  "pubDate": "2026-05-12",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "TanStack: 42 paquetes, 84 versiones envenenadas",
+        "en": "TanStack: 42 packages, 84 poisoned versions",
+        "fr": "TanStack : 42 paquets, 84 versions empoisonnées"
+      },
+      "anchor": "tanstack-supply-chain",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Mini Shai-Hulud: 169 paquetes (Mistral, UiPath)",
+        "en": "Mini Shai-Hulud: 169 packages hit (Mistral, UiPath)",
+        "fr": "Mini Shai-Hulud : 169 paquets touchés"
+      },
+      "anchor": "mini-shai-hulud-spread",
+      "icon": "lucide:flame"
+    },
+    {
+      "text": {
+        "es": "Docker Model Runner: SSRF CVE-2026-33990",
+        "en": "Docker Model Runner: SSRF CVE-2026-33990",
+        "fr": "Docker Model Runner : SSRF CVE-2026-33990"
+      },
+      "anchor": "docker-model-runner-ssrf",
+      "icon": "simple-icons:docker"
+    },
+    {
+      "text": {
+        "es": "Pwn Request: cómo blindar tus workflows",
+        "en": "Pwn Request: how to harden your workflows",
+        "fr": "Pwn Request : comment durcir vos workflows"
+      },
+      "anchor": "pwn-request-hardening",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "Better Auth: Agent Auth Protocol para LLMs",
+        "en": "Better Auth: Agent Auth Protocol for LLMs",
+        "fr": "Better Auth : Agent Auth Protocol pour LLM"
+      },
+      "anchor": "better-auth-agent-protocol",
+      "icon": "lucide:layers"
+    },
+    {
+      "text": {
+        "es": "PostgreSQL minor release programado 14 May",
+        "en": "PostgreSQL minor release scheduled May 14",
+        "fr": "PostgreSQL : version mineure prévue le 14 mai"
+      },
+      "anchor": "postgres-may-minor",
+      "icon": "simple-icons:postgresql"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "tanstack-supply-chain",
+      "updates": [
+        {
+          "id": "tanstack-supply-chain",
+          "tag": "security",
+          "title": {
+            "es": "TanStack publica 84 versiones malignas en 42 paquetes: Pwn Request + cache poisoning + robo de OIDC",
+            "en": "TanStack ships 84 malicious versions across 42 packages: Pwn Request + cache poisoning + OIDC theft",
+            "fr": "TanStack : 84 versions malveillantes sur 42 paquets via Pwn Request + cache poisoning + vol d'OIDC"
+          },
+          "date": "11 May 2026",
+          "body_html": {
+            "es": "<p>El 11 de mayo entre <strong>19:20–19:26 UTC</strong>, un atacante publicó <strong>84 versiones malignas en 42 paquetes <code>@tanstack/*</code></strong> encadenando tres fallas: (1) <code>pull_request_target</code> en <code>bundle-size.yml</code> ejecutaba código del fork sin sandbox; (2) <strong>GitHub Actions cache poisoning</strong> con un store pnpm de 1.1 GB que matcheaba la key de los workflows productivos; (3) extracción del <strong>token OIDC</strong> del runner desde memoria, lo que permitió autenticarse directo contra npm. El payload llegaba via <code>optionalDependencies</code> apuntando a un commit huérfano con <code>prepare</code> hook que disparaba <code>router_init.js</code> (~2.3 MB ofuscado). Detectado en 20 minutos por stepsecurity. Los maintainers <strong>deprecaron las 84 versiones</strong>, npm bajó tarballs y purgaron caches. Si instalaste algo de <code>@tanstack/*</code> el 11 de mayo, <strong>rotá YA</strong> credenciales AWS, GCP, Vault, GitHub, npm y SSH alcanzables desde el host.</p>",
+            "en": "<p>On May 11 between <strong>19:20–19:26 UTC</strong>, an attacker published <strong>84 malicious versions across 42 <code>@tanstack/*</code> packages</strong> by chaining three flaws: (1) <code>pull_request_target</code> in <code>bundle-size.yml</code> ran fork-controlled code without a sandbox; (2) <strong>GitHub Actions cache poisoning</strong> via a 1.1 GB pnpm store that matched production workflow lookup keys; (3) <strong>OIDC token extraction</strong> from runner process memory, enabling direct npm registry auth. The payload landed via <code>optionalDependencies</code> pointing to an orphan commit whose <code>prepare</code> lifecycle hook fired <code>router_init.js</code> (~2.3 MB obfuscated). Detected in 20 min by stepsecurity. Maintainers deprecated all 84 versions, npm pulled tarballs server-side and caches were purged. If you installed any <code>@tanstack/*</code> on May 11, <strong>rotate AWS, GCP, Vault, GitHub, npm and SSH credentials</strong> reachable from the install host.</p>",
+            "fr": "<p>Le 11 mai entre 19:20–19:26 UTC, un attaquant a publié <strong>84 versions malveillantes sur 42 paquets <code>@tanstack/*</code></strong> en enchaînant trois failles : <code>pull_request_target</code> mal isolé, GitHub Actions cache poisoning et extraction du token OIDC depuis la mémoire du runner. Détecté en 20 min. Si vous avez installé du <code>@tanstack/*</code> le 11 mai, faites tourner toutes les credentials accessibles depuis l'hôte.</p>"
+          },
+          "source": {
+            "url": "https://tanstack.com/blog/npm-supply-chain-compromise-postmortem",
+            "label": "tanstack.com"
+          }
+        },
+        {
+          "id": "mini-shai-hulud-spread",
+          "tag": "security",
+          "title": {
+            "es": "Mini Shai-Hulud sigue creciendo: 169 paquetes infectados, 373 versiones malignas, ahora con Mistral y UiPath",
+            "en": "Mini Shai-Hulud keeps spreading: 169 packages infected, 373 malicious versions, now with Mistral and UiPath",
+            "fr": "Mini Shai-Hulud s'étend : 169 paquets infectés, 373 versions malveillantes, maintenant avec Mistral et UiPath"
+          },
+          "date": "12 May 2026",
+          "body_html": {
+            "es": "<p>Aikido confirmó que la campaña <strong>Mini Shai-Hulud</strong> que arrancó el 29 de abril contra paquetes SAP CAP escaló a <strong>169 paquetes y 373 versiones malignas</strong> contando los scopes <code>@tanstack</code> (83), <code>@squawk</code> (87), <code>@uipath</code> (66), <code>@mistralai</code>, <code>@tallyui</code>, <code>@beproduct</code>, <code>@draftlab</code> y otros. Cambió de táctica: ahora usa <strong><code>router_init.js</code> ofuscado</strong> en vez de <code>setup.mjs</code>, monta el payload via <code>optionalDependencies</code> apuntando a un commit huérfano en GitHub y se autoreplica abusando de los flujos de <strong>trusted publishing</strong>. Apunta a credenciales de CI/CD: tokens npm, GitHub, AWS, GCP, Kubernetes, Vault. Ojo: el ataque <strong>se republica solo</strong>, no es un golpe único. Auditá tus <code>package-lock.json</code> y <code>pnpm-lock.yaml</code> con foco en versiones publicadas después del 29-Abr en esos scopes.</p>",
+            "en": "<p>Aikido confirmed the <strong>Mini Shai-Hulud</strong> campaign that started Apr 29 against SAP CAP packages escalated to <strong>169 packages and 373 malicious versions</strong> across <code>@tanstack</code> (83), <code>@squawk</code> (87), <code>@uipath</code> (66), <code>@mistralai</code>, <code>@tallyui</code>, <code>@beproduct</code>, <code>@draftlab</code> and others. Tactics shifted: it now uses obfuscated <strong><code>router_init.js</code></strong> instead of <code>setup.mjs</code>, drops the payload via <code>optionalDependencies</code> pointing to an orphan commit on GitHub, and self-propagates by abusing <strong>trusted publishing</strong> paths. Targets CI/CD secrets: npm, GitHub, AWS, GCP, Kubernetes, Vault tokens. The worm <strong>republishes itself</strong> — this is not a one-shot. Audit <code>package-lock.json</code> and <code>pnpm-lock.yaml</code> for any version published after Apr 29 in those scopes.</p>",
+            "fr": "<p>Aikido confirme que Mini Shai-Hulud (depuis le 29 avril) atteint 169 paquets et 373 versions malveillantes (@tanstack, @squawk, @uipath, @mistralai…). Nouveau payload <code>router_init.js</code> obfusqué via <code>optionalDependencies</code> pointant vers un commit orphelin. Auto-propagation via trusted publishing. Auditez vos lockfiles.</p>"
+          },
+          "source": {
+            "url": "https://www.aikido.dev/blog/mini-shai-hulud-is-back-tanstack-compromised",
+            "label": "aikido.dev"
+          }
+        },
+        {
+          "id": "docker-model-runner-ssrf",
+          "tag": "security",
+          "title": {
+            "es": "Docker Model Runner SSRF (CVE-2026-33990): el realm de OCI te puede pegar en localhost",
+            "en": "Docker Model Runner SSRF (CVE-2026-33990): OCI realm hijack pivots into localhost",
+            "fr": "Docker Model Runner SSRF (CVE-2026-33990) : pivot vers localhost via le realm OCI"
+          },
+          "date": "11 May 2026",
+          "body_html": {
+            "es": "<p>Docker patcheó <strong>CVE-2026-33990</strong> en Model Runner. El bug: al pullear un modelo, Model Runner sigue el <code>realm</code> URL del header <code>WWW-Authenticate</code> sin validar scheme, hostname ni rango IP. Un registry OCI maligno puede setear <code>realm: http://127.0.0.1:3000/</code> y forzar al daemon a hacer <strong>GET arbitrarios contra servicios internos</strong>, devolviendo el body completo al atacante. Peor: el token exchange relaya datos de servicios internos al registry via header <code>Authorization: Bearer</code>. Fix en <strong>Model Runner v1.1.25</strong> y <strong>Docker Desktop 4.67.0</strong>. Mitigá ya con Enhanced Container Isolation (ECI) si no podés actualizar. Aviso: si tu CI corre <code>docker model pull</code> contra registries no confiables, este bug te abre el cluster.</p>",
+            "en": "<p>Docker patched <strong>CVE-2026-33990</strong> in Model Runner. The bug: when pulling a model, Model Runner follows the <code>realm</code> URL from the <code>WWW-Authenticate</code> header without validating scheme, hostname or IP range. A malicious OCI registry can set <code>realm: http://127.0.0.1:3000/</code> and coerce the daemon into <strong>arbitrary GETs against internal services</strong>, reflecting the full response body back to the caller. Worse: the token exchange relays internal-service data back via the <code>Authorization: Bearer</code> header. Fixed in <strong>Model Runner v1.1.25</strong> and <strong>Docker Desktop 4.67.0</strong>. Enable Enhanced Container Isolation (ECI) if you can't upgrade. If your CI runs <code>docker model pull</code> against untrusted registries, this opens the cluster.</p>",
+            "fr": "<p>Docker corrige CVE-2026-33990 dans Model Runner : il suivait le <code>realm</code> du <code>WWW-Authenticate</code> sans valider scheme/hostname/IP. Un registry OCI malveillant pivote vers localhost. Fix : Model Runner v1.1.25 et Docker Desktop 4.67.0.</p>"
+          },
+          "source": {
+            "url": "https://github.com/docker/model-runner/security/advisories/GHSA-x2f5-332j-9xwq",
+            "label": "github.com/docker"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "pwn-request-hardening",
+      "updates": [
+        {
+          "id": "pwn-request-hardening",
+          "tag": "notable",
+          "title": {
+            "es": "Pwn Request 101: la lección que dejó TanStack para todo proyecto OSS",
+            "en": "Pwn Request 101: the lesson TanStack leaves every OSS project",
+            "fr": "Pwn Request 101 : la leçon TanStack pour tout projet OSS"
+          },
+          "date": "11 May 2026",
+          "body_html": {
+            "es": "<p>El compromiso de TanStack es el caso de estudio más caro del año para entender por qué <code>pull_request_target</code> con checkout del fork es <strong>RCE servida</strong>. Tres patrones que TENÉS que aplicar hoy: <strong>(1) Separá workflows</strong>: usá <code>pull_request</code> para CI no confiable y <code>pull_request_target</code> solo para triage privilegiado, conectados via <code>workflow_run</code> como frontera segura. <strong>(2) Label gating</strong>: <code>if: contains(github.event.pull_request.labels.*.name, 'safe-to-test')</code> antes de cualquier paso con secretos. <strong>(3) Permisos mínimos</strong>: setear <code>permissions: read-all</code> por defecto y elevar quirúrgicamente. Bonus: desde nov 2025 GitHub fuerza el workflow file de la default branch para <code>pull_request_target</code>, pero <strong>eso no salva si el job hace checkout del HEAD del fork</strong>. Y separá tus caches por tipo de evento — TanStack cayó porque el cache key del fork match con producción.</p>",
+            "en": "<p>The TanStack compromise is the year's most expensive case study on why <code>pull_request_target</code> with a fork checkout is <strong>RCE-as-a-service</strong>. Three patterns to apply today: <strong>(1) Split workflows</strong>: <code>pull_request</code> for untrusted CI, <code>pull_request_target</code> only for privileged triage, connected through <code>workflow_run</code> as a security boundary. <strong>(2) Label gating</strong>: <code>if: contains(github.event.pull_request.labels.*.name, 'safe-to-test')</code> before any step touching secrets. <strong>(3) Least privilege</strong>: <code>permissions: read-all</code> by default, elevate surgically. Bonus: since Nov 2025 GitHub forces the default-branch workflow file for <code>pull_request_target</code>, but <strong>that does not save you if the job checks out the fork's HEAD</strong>. And segment caches by event type — TanStack fell because the fork's cache key matched production.</p>",
+            "fr": "<p>TanStack montre pourquoi <code>pull_request_target</code> + checkout du fork = RCE-as-a-service. À appliquer : séparer les workflows (<code>pull_request</code> non-trusted, <code>pull_request_target</code> trusted via <code>workflow_run</code>), label-gating <code>safe-to-test</code>, <code>permissions: read-all</code> par défaut, et segmenter les caches par type d'événement.</p>"
+          },
+          "source": {
+            "url": "https://securitylab.github.com/resources/github-actions-preventing-pwn-requests/",
+            "label": "securitylab.github.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "better-auth-agent-protocol",
+      "updates": [
+        {
+          "id": "better-auth-agent-protocol",
+          "tag": "notable",
+          "title": {
+            "es": "Better Auth empuja el Agent Auth Protocol: identidad y scopes para agentes LLM",
+            "en": "Better Auth pushes the Agent Auth Protocol: identity and scopes for LLM agents",
+            "fr": "Better Auth pousse l'Agent Auth Protocol : identité et scopes pour agents LLM"
+          },
+          "date": "11 May 2026",
+          "body_html": {
+            "es": "<p>El equipo de <code>better-auth</code> empujó nuevos commits a <strong>agent-auth</strong> (11-May), <strong>agent-auth-protocol</strong> (08-May) y <strong>better-call</strong> (05-May). El protocolo formaliza identidad y scopes para agentes LLM que actúan en nombre de usuarios — el problema clásico que MCP y delegación OAuth todavía resuelven con cinta y alambre. Si estás escribiendo backends que exponen tools a agentes (Claude, GPT, Gemini), miralo antes de inventar tu propio JWT con un campo <code>on_behalf_of</code>. Better-Auth ya es de facto el reemplazo de Lucia (deprecado) en Astro y Next.js, y este movimiento lo posiciona como capa de auth para apps con agentes. Repo en <code>github.com/better-auth</code>.</p>",
+            "en": "<p>The <code>better-auth</code> team pushed fresh commits to <strong>agent-auth</strong> (May 11), <strong>agent-auth-protocol</strong> (May 8) and <strong>better-call</strong> (May 5). The protocol formalizes identity and scopes for LLM agents acting on behalf of users — the classic problem that MCP and OAuth delegation still solve with duct tape. If you ship backends that expose tools to agents (Claude, GPT, Gemini), check it before rolling your own JWT with an <code>on_behalf_of</code> claim. Better-Auth is already the de facto Lucia (deprecated) replacement in Astro and Next.js, and this move positions it as the auth layer for agentic apps.</p>",
+            "fr": "<p>L'équipe <code>better-auth</code> a poussé des commits sur agent-auth (11 mai), agent-auth-protocol (8 mai) et better-call (5 mai). Le protocole formalise identité et scopes pour les agents LLM agissant pour le compte d'utilisateurs. À regarder avant de réinventer un JWT avec <code>on_behalf_of</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/better-auth",
+            "label": "github.com/better-auth"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "postgres-may-minor",
+      "updates": [
+        {
+          "id": "postgres-may-minor",
+          "tag": "release",
+          "title": {
+            "es": "PostgreSQL: minor release programada para el jueves 14 de mayo",
+            "en": "PostgreSQL: minor release scheduled for Thursday May 14",
+            "fr": "PostgreSQL : version mineure prévue jeudi 14 mai"
+          },
+          "date": "12 May 2026",
+          "body_html": {
+            "es": "<p>El proyecto PostgreSQL apunta al <strong>segundo jueves</strong> de feb/may/ago/nov para sus minor releases. La de mayo está confirmada para el <strong>14 de mayo de 2026</strong>: 18.x, 17.x, 16.x, 15.x y 14.x van a recibir parches acumulativos. Después del out-of-cycle de feb (regresiones), el upgrade de mayo debería ser limpio. Versión mayor 19 sigue apuntando a septiembre. Planeá la ventana de mantenimiento ahora — bajar y subir réplicas con cero downtime sigue requiriendo failover ordenado, no un <code>kubectl rollout</code> y rezar.</p>",
+            "en": "<p>PostgreSQL targets the <strong>second Thursday</strong> of Feb/May/Aug/Nov for minor releases. The May drop is confirmed for <strong>May 14, 2026</strong>: 18.x, 17.x, 16.x, 15.x and 14.x will get cumulative patches. After February's out-of-cycle regression fixes, May should be a clean upgrade. Major version 19 still targets September. Schedule the maintenance window now — zero-downtime upgrades still need orderly replica failover, not a <code>kubectl rollout</code> and a prayer.</p>",
+            "fr": "<p>PostgreSQL vise le 2e jeudi de fév/mai/août/nov pour les versions mineures. Mai 2026 confirmé au 14 mai : 18.x, 17.x, 16.x, 15.x et 14.x. Version 19 toujours prévue pour septembre.</p>"
+          },
+          "source": {
+            "url": "https://www.postgresql.org/developer/roadmap/",
+            "label": "postgresql.org"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "k8s-136-webinar",
+      "updates": [
+        {
+          "id": "k8s-136-webinar",
+          "tag": "notable",
+          "title": {
+            "es": "Kubernetes v1.36 «Haru»: webinar oficial el 20 de mayo, 70 enhancements en juego",
+            "en": "Kubernetes v1.36 «Haru»: official webinar May 20, 70 enhancements in play",
+            "fr": "Kubernetes v1.36 « Haru » : webinar officiel le 20 mai, 70 améliorations"
+          },
+          "date": "12 May 2026",
+          "body_html": {
+            "es": "<p>Kubernetes <strong>v1.36 «Haru»</strong> salió el 22 de abril con <strong>70 enhancements</strong>: 18 GA, 25 Beta, 25 Alpha. El release webinar oficial es el <strong>20 de mayo</strong> — buen momento para entender qué llegó a Stable y qué cambios podés empezar a usar en clústeres productivos. Si estás corriendo 1.34, este es el upgrade que vale la pena revisar antes de planear la ventana. Mientras, Docker Desktop sumó <strong>Engine v29.3.0</strong> con NVIDIA Container Toolkit v1.19.0 y arregló el bug de rate limiting de Docker Hub que venía molestando.</p>",
+            "en": "<p>Kubernetes <strong>v1.36 «Haru»</strong> shipped Apr 22 with <strong>70 enhancements</strong>: 18 GA, 25 Beta, 25 Alpha. The official release webinar is <strong>May 20</strong> — good window to learn what hit Stable and what's safe for prod clusters. If you're on 1.34, this is the upgrade to scope before planning the maintenance window. Meanwhile Docker Desktop bumped to <strong>Engine v29.3.0</strong> with NVIDIA Container Toolkit v1.19.0 and fixed the Docker Hub rate-limiting headache.</p>",
+            "fr": "<p>Kubernetes v1.36 « Haru » est sorti le 22 avril (70 améliorations : 18 GA, 25 Beta, 25 Alpha). Webinar officiel le 20 mai. Docker Desktop passe à Engine v29.3.0 + NVIDIA Container Toolkit v1.19.0.</p>"
+          },
+          "source": {
+            "url": "https://kubernetes.io/blog/2026/04/22/kubernetes-v1-36-release/",
+            "label": "kubernetes.io"
+          }
+        }
+      ]
+    },
+    {
+      "id": "quick-links",
+      "name": "Quick Links",
+      "theme": "quick-links",
+      "icon_emoji": "📌",
+      "anchor": "tanstack-supply-chain",
+      "updates": [
+        {
+          "id": "ql-tanstack",
+          "tag": "minor",
+          "title": {
+            "es": "TanStack postmortem oficial",
+            "en": "TanStack official postmortem",
+            "fr": "Postmortem officiel TanStack"
+          },
+          "date": "11 May 2026",
+          "body_html": {
+            "es": "<p>Cronología minuto-a-minuto y detalles del payload.</p>",
+            "en": "<p>Minute-by-minute timeline and payload internals.</p>",
+            "fr": "<p>Chronologie et détails du payload.</p>"
+          },
+          "source": {
+            "url": "https://news.ycombinator.com/item?id=48100706",
+            "label": "news.ycombinator.com"
+          }
+        },
+        {
+          "id": "ql-stepsecurity",
+          "tag": "minor",
+          "title": {
+            "es": "StepSecurity: análisis técnico del worm",
+            "en": "StepSecurity: technical worm analysis",
+            "fr": "StepSecurity : analyse technique du worm"
+          },
+          "date": "11 May 2026",
+          "body_html": {
+            "es": "<p>El detector original publica el desarme.</p>",
+            "en": "<p>The original detector publishes the teardown.</p>",
+            "fr": "<p>Analyse par le détecteur original.</p>"
+          },
+          "source": {
+            "url": "https://www.stepsecurity.io/blog/mini-shai-hulud-is-back-a-self-spreading-supply-chain-attack-hits-the-npm-ecosystem",
+            "label": "stepsecurity.io"
+          }
+        },
+        {
+          "id": "ql-docker-cve",
+          "tag": "minor",
+          "title": {
+            "es": "Docker Model Runner SSRF — advisory completo",
+            "en": "Docker Model Runner SSRF — full advisory",
+            "fr": "Docker Model Runner SSRF — advisory complet"
+          },
+          "date": "11 May 2026",
+          "body_html": {
+            "es": "<p>Detalle de versiones afectadas y mitigaciones.</p>",
+            "en": "<p>Affected versions and mitigations in detail.</p>",
+            "fr": "<p>Versions affectées et mitigations.</p>"
+          },
+          "source": {
+            "url": "https://advisories.gitlab.com/pkg/golang/github.com/docker/model-runner/CVE-2026-33990/",
+            "label": "advisories.gitlab.com"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El patrón se consolida: los workers <code>pull_request_target</code> con checkout del fork son la nueva superficie de ataque favorita. TanStack es la tercera víctima alta-señal en seis meses.",
+      "en": "Pattern is locked in: <code>pull_request_target</code> workflows that check out the fork are the new favorite attack surface. TanStack is the third high-signal victim in six months.",
+      "fr": "Le motif se confirme : les workflows <code>pull_request_target</code> avec checkout du fork sont la nouvelle surface d'attaque privilégiée. TanStack est la 3e victime majeure en six mois."
+    },
+    {
+      "es": "Los worms npm ya no necesitan robar credenciales de maintainers — abusan de los <strong>flujos de trusted publishing</strong> y se autoreplican. Pinneá versiones, exigí <code>--ignore-scripts</code> en CI y auditá <code>optionalDependencies</code>.",
+      "en": "npm worms no longer need to steal maintainer creds — they abuse <strong>trusted publishing</strong> flows and self-propagate. Pin versions, force <code>--ignore-scripts</code> in CI, audit <code>optionalDependencies</code>.",
+      "fr": "Les worms npm n'ont plus besoin de voler les creds des mainteneurs — ils abusent du trusted publishing et s'auto-propagent. Pinnez les versions et auditez les <code>optionalDependencies</code>."
+    },
+    {
+      "es": "El stack de auth para agentes LLM se está estandarizando rápido (Better Auth Agent Auth Protocol, MCP). Si tu backend expone tools, no inventes el wheel.",
+      "en": "The auth stack for LLM agents is standardizing fast (Better Auth Agent Auth Protocol, MCP). If your backend exposes tools, don't reinvent the wheel.",
+      "fr": "La stack d'auth pour agents LLM se standardise vite (Better Auth Agent Auth Protocol, MCP). Si votre backend expose des outils, ne réinventez pas la roue."
+    }
+  ]
+}

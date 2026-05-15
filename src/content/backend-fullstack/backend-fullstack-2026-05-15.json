@@ -1,0 +1,302 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 15 de mayo, 2026",
+    "en": "Backend & Fullstack Daily — May 15, 2026",
+    "fr": "Backend & Fullstack Daily — 15 mai 2026"
+  },
+  "description": {
+    "es": "NGINX con un RCE de 18 años (CVSS 9.2), el rewrite de Bun a Rust se mergea, PostgreSQL saca patch sincronizado para 5 ramas, y AWS Lambda Managed Instances habilita scheduled scaling.",
+    "en": "NGINX hit by an 18-year-old RCE (CVSS 9.2), Bun's Rust rewrite is merged, PostgreSQL ships a synchronized patch wave for 5 branches, and AWS Lambda Managed Instances enables scheduled scaling.",
+    "fr": "NGINX touché par une RCE vieille de 18 ans (CVSS 9.2), la réécriture Rust de Bun est fusionnée, PostgreSQL publie une vague de patches sur 5 branches, et AWS Lambda Managed Instances active le scheduled scaling."
+  },
+  "pubDate": "2026-05-15",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "NGINX RCE crítico (CVSS 9.2) en rewrite",
+        "en": "NGINX critical RCE (CVSS 9.2) in rewrite",
+        "fr": "RCE critique NGINX (CVSS 9.2) dans rewrite"
+      },
+      "anchor": "nginx-rift-cve-42945",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Bun mergea su rewrite a Rust",
+        "en": "Bun merges its Rust rewrite",
+        "fr": "Bun fusionne sa réécriture Rust"
+      },
+      "anchor": "bun-rust-rewrite",
+      "icon": "simple-icons:bun"
+    },
+    {
+      "text": {
+        "es": "PostgreSQL 18.4/17.10/16.14/15.18/14.23",
+        "en": "PostgreSQL 18.4/17.10/16.14/15.18/14.23",
+        "fr": "PostgreSQL 18.4/17.10/16.14/15.18/14.23"
+      },
+      "anchor": "postgres-may-patch-wave",
+      "icon": "simple-icons:postgresql"
+    },
+    {
+      "text": {
+        "es": "Bun 1.3.13: bun test --parallel y --shard",
+        "en": "Bun 1.3.13: bun test --parallel and --shard",
+        "fr": "Bun 1.3.13 : bun test --parallel et --shard"
+      },
+      "anchor": "bun-1-3-13",
+      "icon": "lucide:terminal"
+    },
+    {
+      "text": {
+        "es": "AWS Lambda: scheduled scaling en Managed Instances",
+        "en": "AWS Lambda: scheduled scaling for Managed Instances",
+        "fr": "AWS Lambda : scheduled scaling sur Managed Instances"
+      },
+      "anchor": "lambda-scheduled-scaling",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": {
+        "es": "Strapi users-permissions: XSS + RCE en Electron",
+        "en": "Strapi users-permissions: stored XSS + Electron RCE",
+        "fr": "Strapi users-permissions : XSS stocké + RCE Electron"
+      },
+      "anchor": "strapi-cve-64526",
+      "icon": "lucide:shield"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "nginx-rift-cve-42945",
+      "updates": [
+        {
+          "id": "nginx-rift-cve-42945",
+          "tag": "breaking",
+          "title": {
+            "es": "NGINX Rift (CVE-2026-42945): RCE de 18 años en ngx_http_rewrite_module",
+            "en": "NGINX Rift (CVE-2026-42945): 18-year-old RCE in ngx_http_rewrite_module",
+            "fr": "NGINX Rift (CVE-2026-42945) : RCE vieille de 18 ans dans ngx_http_rewrite_module"
+          },
+          "date": "14 May 2026",
+          "body_html": {
+            "es": "<p>Heap buffer overflow no autenticado en el módulo <code>rewrite</code> de NGINX, <strong>CVSS v4 9.2</strong>. El bug nace de lógica de escape inconsistente: NGINX calcula el tamaño del buffer destino con un set de supuestos y copia datos con otro, así que bytes derivados de la URI atacante se salen del heap. Se dispara cuando una directiva <code>rewrite</code> usa una captura PCRE sin nombre (<code>$1</code>, <code>$2</code>), incluye <code>?</code> en el reemplazo, y va seguida de otra <code>rewrite</code>, <code>if</code> o <code>set</code> en el mismo scope. Afecta NGINX Open Source <strong>0.6.27 → 1.30.0</strong> y NGINX Plus <strong>R32 → R36</strong>. Hay PoC pública en GitHub. Subí YA a 1.30.1/1.31.0 (OSS) o R32 P6/R36 P4 (Plus); si no podés patchear, revisá las directivas <code>rewrite</code> y considerá WAF como mitigación temporal.</p>"
+          },
+          "source": {
+            "url": "https://thehackernews.com/2026/05/18-year-old-nginx-rewrite-module-flaw.html",
+            "label": "thehackernews.com"
+          }
+        },
+        {
+          "id": "bun-rust-rewrite",
+          "tag": "breaking",
+          "title": {
+            "es": "El rewrite de Bun en Rust se mergea: 99,8% de los tests pasan",
+            "en": "Bun's Rust rewrite merged: 99.8% of the test suite passes",
+            "fr": "La réécriture Rust de Bun fusionnée : 99,8 % des tests passent"
+          },
+          "date": "14 May 2026",
+          "body_html": {
+            "es": "<p>El rewrite de Bun de <strong>Zig a Rust</strong> arrancó el 4 de mayo y se mergeó el 14 de mayo — diez días, asistido por agentes de IA. Sumner reporta que el <strong>99,8% de la test suite pre-existente pasa en Linux x64 glibc</strong> ya en el rewrite. Si la rama final aterriza, 1.3.14 sería <em>la última versión en Zig</em>. ¿Qué cambia para vos? A corto plazo: nada en runtime. A mediano: integración más limpia con el ecosistema de crates de Rust (HTTP/3, criptografía, image processing) y, en teoría, mejor mantenibilidad. Ojo: el ritmo de merge a esa velocidad sólo es posible con la asistencia de IA, y tampoco es la primera vez que un runtime apuesta a Rust (Deno lo hace desde el día uno). El movimiento marca un quiebre: Bun deja Zig — el lenguaje en el que se diferenció — para apostar al stack mainstream.</p>"
+          },
+          "source": {
+            "url": "https://www.theregister.com/devops/2026/05/14/anthropics_bun_rust_rewrite/",
+            "label": "theregister.com"
+          }
+        },
+        {
+          "id": "postgres-may-patch-wave",
+          "tag": "release",
+          "title": {
+            "es": "PostgreSQL 18.4, 17.10, 16.14, 15.18 y 14.23: ola de patches sincronizada",
+            "en": "PostgreSQL 18.4, 17.10, 16.14, 15.18 and 14.23: synchronized patch wave",
+            "fr": "PostgreSQL 18.4, 17.10, 16.14, 15.18 et 14.23 : vague de patches synchronisée"
+          },
+          "date": "14 May 2026",
+          "body_html": {
+            "es": "<p>El equipo PGDG publicó <strong>cinco releases de mantenimiento</strong> el mismo día. Highlights: fix para un standby que se colgaba con &laquo;could not access status of transaction&raquo;, fix de <code>substring()</code> sobre texto no-ASCII proveniente de columnas, fix en <code>strict_word_similarity</code> de <code>pg_trgm</code> que podía corromper output o crashear, y reclasificación de <code>json_strip_nulls()</code> y <code>jsonb_strip_nulls()</code> como <strong>IMMUTABLE</strong> para que se puedan usar en índices. Si tenés HA con replicación física o índices funcionales sobre JSON, este patch te toca. Subir es directo: misma minor → misma versión, no hay cambio de catálogo.</p>"
+          },
+          "source": {
+            "url": "https://www.postgresql.org/about/news/postgresql-184-1710-1614-1518-and-1423-released-3146/",
+            "label": "postgresql.org"
+          }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "bun-1-3-13",
+      "updates": [
+        {
+          "id": "bun-1-3-13",
+          "tag": "release",
+          "title": {
+            "es": "Bun 1.3.13: bun test gana --parallel, --isolate, --shard, --changed",
+            "en": "Bun 1.3.13: bun test gains --parallel, --isolate, --shard, --changed",
+            "fr": "Bun 1.3.13 : bun test gagne --parallel, --isolate, --shard, --changed"
+          },
+          "date": "13 May 2026",
+          "body_html": {
+            "es": "<p>82 issues fixeadas. Lo más jugoso es el test runner: <strong><code>--parallel</code></strong> corre los archivos de test en paralelo dentro del mismo proceso, <strong><code>--isolate</code></strong> aísla cada archivo en su propio worker, <strong><code>--shard</code></strong> particiona la suite para CI distribuido, y <strong><code>--changed</code></strong> sólo corre tests afectados por archivos modificados (al estilo Vitest). En <code>bun install</code>, los tarballs ahora se transmiten a disco usando <strong>17× menos memoria</strong>. Sourcemaps con 8× menos memoria, gzip <strong>5,5× más rápido con zlib-ng</strong>. <code>Bun.serve()</code> ahora soporta Range requests. <code>node:crypto</code> y WebCrypto sumaron SHA-3, y <code>ws+unix://</code> permite WebSocket sobre Unix sockets. Si usás Bun para CI, esto es DX puro.</p>"
+          },
+          "source": {
+            "url": "https://bun.com/blog/bun-v1.3.13",
+            "label": "bun.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "lambda-scheduled-scaling",
+      "updates": [
+        {
+          "id": "lambda-scheduled-scaling",
+          "tag": "notable",
+          "title": {
+            "es": "AWS Lambda Managed Instances: scheduled scaling con EventBridge Scheduler",
+            "en": "AWS Lambda Managed Instances: scheduled scaling via EventBridge Scheduler",
+            "fr": "AWS Lambda Managed Instances : scheduled scaling via EventBridge Scheduler"
+          },
+          "date": "12 May 2026",
+          "body_html": {
+            "es": "<p>Lambda Managed Instances ahora acepta <strong>schedules one-time o recurrentes</strong> que ajustan los límites de capacidad de la función antes de que llegue el tráfico. Caso típico: subís el techo a las 8:00 antes del horario laboral para que los entornos de ejecución estén calientes cuando entra la primera request, y bajás a cero a la noche para no pagar idle. Se configura desde EventBridge Scheduler (consola, CLI, SDK, CDK o CloudFormation) y está disponible en todas las regiones donde corre Lambda Managed Instances. Si venías peleando cold starts en horarios predecibles, esto es la solución sin ranchear &laquo;keep-warm pings&raquo;.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/05/aws-lambda-managed-instances/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "strapi-cve-64526",
+      "updates": [
+        {
+          "id": "strapi-cve-64526",
+          "tag": "security",
+          "title": {
+            "es": "Strapi users-permissions (CVE-2025-64526): stored XSS + RCE en Electron",
+            "en": "Strapi users-permissions (CVE-2025-64526): stored XSS + Electron RCE",
+            "fr": "Strapi users-permissions (CVE-2025-64526) : XSS stocké + RCE Electron"
+          },
+          "date": "13 May 2026",
+          "body_html": {
+            "es": "<p>El plugin <code>@strapi/plugin-users-permissions</code> publicó un advisory de severidad <strong>Crítica</strong>: stored XSS en el panel admin que, en builds basados en Electron, escala a ejecución de código por la suspensión del sandbox del WebContents. Si exponés el admin de Strapi a usuarios sin confiar (o lo embebés en una app Electron), patcheá ya. El advisory recomienda upgrade inmediato; si no podés, restringí el acceso al admin a IPs internas.</p>"
+          },
+          "source": {
+            "url": "https://github.com/strapi/strapi/security/advisories",
+            "label": "github.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "quick-links",
+      "name": "Quick Links",
+      "theme": "quick-links",
+      "icon_emoji": "📌",
+      "anchor": "ql-nginx",
+      "updates": [
+        {
+          "id": "ql-nginx",
+          "tag": "minor",
+          "title": {
+            "es": "NGINX Rift advisory completo + PoC",
+            "en": "NGINX Rift advisory + PoC",
+            "fr": "Avis complet NGINX Rift + PoC"
+          },
+          "date": "14 May 2026",
+          "body_html": {
+            "es": "<p>Detalle técnico, configuraciones afectadas y enlace al PoC publicado en GitHub.</p>"
+          },
+          "source": {
+            "url": "https://securityonline.info/nginx-rce-vulnerability-cve-2026-42945-poc-disclosure/",
+            "label": "securityonline.info"
+          }
+        },
+        {
+          "id": "ql-bun-register",
+          "tag": "minor",
+          "title": {
+            "es": "Cobertura de The Register sobre el rewrite Rust de Bun",
+            "en": "The Register coverage of Bun's Rust rewrite",
+            "fr": "Couverture The Register de la réécriture Rust de Bun"
+          },
+          "date": "14 May 2026",
+          "body_html": {
+            "es": "<p>Análisis del merge en 10 días asistido por IA y qué implica para el ecosistema runtime.</p>"
+          },
+          "source": {
+            "url": "https://www.theregister.com/devops/2026/05/14/anthropics_bun_rust_rewrite/",
+            "label": "theregister.com"
+          }
+        },
+        {
+          "id": "ql-pg-news",
+          "tag": "minor",
+          "title": {
+            "es": "Anuncio oficial de PostgreSQL sobre la ola de patches",
+            "en": "Official PostgreSQL announcement of the patch wave",
+            "fr": "Annonce officielle PostgreSQL de la vague de patches"
+          },
+          "date": "14 May 2026",
+          "body_html": {
+            "es": "<p>Lista completa de fixes y guía de upgrade para 18.x, 17.x, 16.x, 15.x y 14.x.</p>"
+          },
+          "source": {
+            "url": "https://www.postgresql.org/about/news/postgresql-184-1710-1614-1518-and-1423-released-3146/",
+            "label": "postgresql.org"
+          }
+        },
+        {
+          "id": "ql-bun-blog",
+          "tag": "minor",
+          "title": {
+            "es": "Bun 1.3.13 release notes oficiales",
+            "en": "Official Bun 1.3.13 release notes",
+            "fr": "Notes de version officielles Bun 1.3.13"
+          },
+          "date": "13 May 2026",
+          "body_html": {
+            "es": "<p>Detalles del nuevo test runner, optimizaciones de install y compat con Node.</p>"
+          },
+          "source": {
+            "url": "https://bun.com/blog/bun-v1.3.13",
+            "label": "bun.com"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Dos &laquo;bugs antiguos&raquo; expuestos en una semana (NGINX 18 años, vm2 hace dos semanas) recuerdan que la profundidad de auditoría sigue siendo el cuello de botella, no la velocidad de los parches.",
+      "en": "Two &laquo;ancient bugs&raquo; surfaced in a week (NGINX 18 years, vm2 two weeks ago) prove audit depth is still the bottleneck, not patch speed.",
+      "fr": "Deux &laquo;bugs anciens&raquo; révélés en une semaine (NGINX 18 ans, vm2 il y a deux semaines) rappellent que la profondeur d&rsquo;audit reste le goulot d&rsquo;étranglement, pas la vitesse des patches."
+    },
+    {
+      "es": "Bun mergeando un rewrite completo de Zig a Rust en 10 días con asistencia de IA marca un nuevo techo de velocidad para refactors a escala — y también un nuevo nivel de riesgo.",
+      "en": "Bun merging a full Zig-to-Rust rewrite in 10 days with AI assistance sets a new ceiling for refactor speed at scale — and a new risk level too.",
+      "fr": "Bun fusionnant une réécriture Zig→Rust complète en 10 jours avec assistance IA fixe un nouveau plafond pour la vitesse de refactor à grande échelle — et un nouveau niveau de risque."
+    },
+    {
+      "es": "Lambda con scheduled scaling cierra un gap clásico vs ECS/Fargate y empuja a Lambda Managed Instances al territorio de cargas con tráfico predecible."
+    }
+  ]
+}

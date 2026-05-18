@@ -1,0 +1,258 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 18 May 2026",
+    "en": "Backend & Fullstack Daily — May 18, 2026",
+    "fr": "Backend & Fullstack Daily — 18 mai 2026"
+  },
+  "description": {
+    "es": "node-ipc comprometido roba credenciales, PostgreSQL 18.4 parchea 11 CVEs, Bun 1.3.14 trae HTTP/3 y Bun.Image, Kubernetes 1.36.1 y Vitest 4.1 estabilizan el stack.",
+    "en": "node-ipc supply-chain attack steals credentials, PostgreSQL 18.4 patches 11 CVEs, Bun 1.3.14 ships HTTP/3 and Bun.Image, Kubernetes 1.36.1 and Vitest 4.1 stabilize the stack.",
+    "fr": "node-ipc compromis vole les credentials, PostgreSQL 18.4 patche 11 CVEs, Bun 1.3.14 livre HTTP/3 et Bun.Image, Kubernetes 1.36.1 et Vitest 4.1 stabilisent la stack."
+  },
+  "pubDate": "2026-05-18",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "node-ipc roba credenciales en npm",
+        "en": "node-ipc compromised on npm",
+        "fr": "node-ipc compromis sur npm"
+      },
+      "anchor": "node-ipc-supply-chain",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "PostgreSQL 18.4 parchea 11 CVEs (3× CVSS 8.8)",
+        "en": "PostgreSQL 18.4 patches 11 CVEs (3× CVSS 8.8)",
+        "fr": "PostgreSQL 18.4 patche 11 CVEs (3× CVSS 8.8)"
+      },
+      "anchor": "postgresql-1840-cves",
+      "icon": "simple-icons:postgresql"
+    },
+    {
+      "text": {
+        "es": "Bun 1.3.14 trae HTTP/3 y Bun.Image",
+        "en": "Bun 1.3.14 ships HTTP/3 and Bun.Image",
+        "fr": "Bun 1.3.14 livre HTTP/3 et Bun.Image"
+      },
+      "anchor": "bun-1314",
+      "icon": "simple-icons:bun"
+    },
+    {
+      "text": {
+        "es": "Kubernetes 1.36.1 estabiliza User Namespaces",
+        "en": "Kubernetes 1.36.1 stabilizes User Namespaces",
+        "fr": "Kubernetes 1.36.1 stabilise User Namespaces"
+      },
+      "anchor": "kubernetes-1361",
+      "icon": "simple-icons:kubernetes"
+    },
+    {
+      "text": {
+        "es": "Vitest 4.1 trae tags estilo pytest",
+        "en": "Vitest 4.1 brings pytest-style test tags",
+        "fr": "Vitest 4.1 apporte les tags style pytest"
+      },
+      "anchor": "vitest-41",
+      "icon": "lucide:blocks"
+    },
+    {
+      "text": {
+        "es": "OpenTelemetry Collector v0.152.0 con config declarativa",
+        "en": "OpenTelemetry Collector v0.152.0 with declarative config",
+        "fr": "OpenTelemetry Collector v0.152.0 avec config déclarative"
+      },
+      "anchor": "otel-collector-152",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "node-ipc-supply-chain",
+      "updates": [
+        {
+          "id": "node-ipc-supply-chain",
+          "tag": "security",
+          "date": "14 May 2026",
+          "title": {
+            "es": "node-ipc comprometido: tres versiones maliciosas roban credenciales de nube y CI/CD",
+            "en": "node-ipc compromised: three malicious versions steal cloud & CI/CD credentials",
+            "fr": "node-ipc compromis : trois versions malveillantes volent les credentials cloud et CI/CD"
+          },
+          "body_html": {
+            "es": "<p>El 14 de mayo se publicaron en npm tres versiones envenenadas de <code>node-ipc</code> (<code>9.1.6</code>, <code>9.2.3</code>, <code>12.0.1</code>) con un payload ofuscado dentro de <code>node-ipc.cjs</code>. Al hacer <code>require('node-ipc')</code> la malware exfiltra credenciales AWS/SSH/Kubernetes y tokens de CI/CD por DNS TXT al C2 <code>sh.azurestaticprovider.net</code>. Ahl identificó el vector: tomaron control del dominio expirado <code>atlantis-software.net</code> del mantenedor, dispararon password reset en npm y publicaron sin tocar la infra original. Las versiones vivieron ~2 horas en el registry antes del takedown, pero <code>node-ipc</code> tiene 822K descargas semanales — si lo instalaste el 14 de mayo, rotá TODO secreto al que esa CI tenía acceso. Y ojo: este es el patrón <strong>dormant account takeover</strong>, no Shai-Hulud, así que tu pinning a SHA no te salvaba.</p>",
+            "en": "<p>On May 14 three poisoned versions of <code>node-ipc</code> (<code>9.1.6</code>, <code>9.2.3</code>, <code>12.0.1</code>) hit npm with an obfuscated payload buried inside <code>node-ipc.cjs</code>. On <code>require('node-ipc')</code> the malware harvested AWS/SSH/Kubernetes credentials and CI/CD tokens, exfiltrating via DNS TXT to <code>sh.azurestaticprovider.net</code>. Researcher Ian Ahl traced the vector: attackers acquired the maintainer's expired recovery domain <code>atlantis-software.net</code>, triggered a standard npm password reset and gained publish rights without touching original infrastructure. Versions lived ~2 hours before takedown, but <code>node-ipc</code> sees 822K weekly downloads — if you installed on May 14, rotate every secret reachable from that CI. This is the <strong>dormant account takeover</strong> pattern, not Shai-Hulud, so SHA pinning would not have helped.</p>",
+            "fr": "<p>Le 14 mai trois versions empoisonnées de <code>node-ipc</code> (<code>9.1.6</code>, <code>9.2.3</code>, <code>12.0.1</code>) ont atterri sur npm avec un payload obfusqué dans <code>node-ipc.cjs</code>. Au <code>require('node-ipc')</code> le malware exfiltrait credentials AWS/SSH/Kubernetes et tokens CI/CD via DNS TXT vers <code>sh.azurestaticprovider.net</code>. Vecteur : prise de contrôle du domaine de récupération expiré <code>atlantis-software.net</code>, reset password npm standard. ~2h en ligne, mais <code>node-ipc</code> totalise 822K downloads/semaine — si installé le 14 mai, rotation immédiate de tous les secrets accessibles. Pattern <strong>dormant account takeover</strong> — le pinning SHA ne protégeait pas.</p>"
+          },
+          "source": {
+            "url": "https://www.stepsecurity.io/blog/node-ipc-npm-supply-chain-attack",
+            "label": "stepsecurity.io"
+          }
+        },
+        {
+          "id": "postgresql-1840-cves",
+          "tag": "security",
+          "date": "14 May 2026",
+          "title": {
+            "es": "PostgreSQL 18.4, 17.10, 16.14, 15.18 y 14.23 corrigen 11 CVEs (3 con CVSS 8.8)",
+            "en": "PostgreSQL 18.4, 17.10, 16.14, 15.18 and 14.23 fix 11 CVEs (3 at CVSS 8.8)",
+            "fr": "PostgreSQL 18.4, 17.10, 16.14, 15.18 et 14.23 corrigent 11 CVEs (3 à CVSS 8.8)"
+          },
+          "body_html": {
+            "es": "<p>Release coordinada el 14 de mayo: <strong>once vulnerabilidades</strong> y 60+ bugs. Los tres peores son CVSS 8.8 con paths de explotación reales: <code>CVE-2026-6473</code> (integer wraparound en allocations del servidor → out-of-bounds write + segfault, encadenable a RCE), <code>CVE-2026-6477</code> (libpq <code>lo_*</code> permite al superuser del servidor sobrescribir el stack del cliente, incluyendo <code>pg_dump</code> y <code>psql</code>) y <code>CVE-2026-6475</code> (path traversal en <code>pg_basebackup</code>/<code>pg_rewind</code>). Suman <code>CVE-2026-6478</code> (canal temporal MD5 — si seguís con MD5 en vez de SCRAM-SHA-256, migrá ya), <code>CVE-2026-6479</code> (DoS por recursión en negociación SSL/GSS) y SQL injection en <code>pg_createsubscriber</code> y <code>ALTER SUBSCRIPTION ... REFRESH PUBLICATION</code>. Parche obligatorio en todas las ramas soportadas.</p>",
+            "en": "<p>Coordinated release on May 14: <strong>eleven vulnerabilities</strong> and 60+ bugs. The worst three are CVSS 8.8 with practical exploitation paths: <code>CVE-2026-6473</code> (integer wraparound in server allocations → out-of-bounds write + segfault, chainable to RCE), <code>CVE-2026-6477</code> (libpq <code>lo_*</code> lets a server superuser overwrite client stack memory, including <code>pg_dump</code> and <code>psql</code>), and <code>CVE-2026-6475</code> (path traversal in <code>pg_basebackup</code>/<code>pg_rewind</code>). Plus <code>CVE-2026-6478</code> (covert timing channel against MD5 — if you are still on MD5 instead of SCRAM-SHA-256, migrate now), <code>CVE-2026-6479</code> (DoS via uncontrolled recursion in SSL/GSS negotiation), and SQL injection in <code>pg_createsubscriber</code> and <code>ALTER SUBSCRIPTION ... REFRESH PUBLICATION</code>. Patch mandatory across all supported branches.</p>",
+            "fr": "<p>Release coordonnée le 14 mai : <strong>onze vulnérabilités</strong> et 60+ bugs. Les trois pires en CVSS 8.8 : <code>CVE-2026-6473</code> (integer wraparound, out-of-bounds write chaînable en RCE), <code>CVE-2026-6477</code> (libpq <code>lo_*</code> permet au superuser serveur d'écraser la stack client) et <code>CVE-2026-6475</code> (path traversal dans <code>pg_basebackup</code>/<code>pg_rewind</code>). Plus <code>CVE-2026-6478</code> (canal temporel MD5), <code>CVE-2026-6479</code> (DoS récursion SSL/GSS) et SQL injection dans <code>pg_createsubscriber</code>. Patch obligatoire.</p>"
+          },
+          "source": {
+            "url": "https://www.postgresql.org/about/news/postgresql-184-1710-1614-1518-and-1423-released-3297/",
+            "label": "postgresql.org"
+          }
+        },
+        {
+          "id": "bun-1314",
+          "tag": "release",
+          "date": "13 May 2026",
+          "title": {
+            "es": "Bun 1.3.14: HTTP/3 (QUIC) en Bun.serve, Bun.Image como reemplazo de sharp y warm-install 7× más rápido",
+            "en": "Bun 1.3.14: HTTP/3 (QUIC) in Bun.serve, Bun.Image as a sharp replacement, and 7× faster warm installs",
+            "fr": "Bun 1.3.14 : HTTP/3 (QUIC) dans Bun.serve, Bun.Image en remplacement de sharp et installs 7× plus rapides"
+          },
+          "body_html": {
+            "es": "<p>El 13 de mayo Bun cerró la era Zig con 1.3.14 — 92 issues resueltas. Highlights: <strong>Bun.Image</strong>, API nativa de procesamiento (JPEG/PNG/WebP/GIF/BMP siempre, HEIC/AVIF/TIFF en macOS+Windows) — drop-in para sharp, sin <code>npm install</code> con binarios nativos. <strong>HTTP/3 (QUIC) experimental en Bun.serve()</strong>, con ~2.7× más throughput vs HTTPS/1.1 en loopback. <strong>Global virtual store del isolated linker</strong> con symlinks: warm install pasó de 841ms a 115ms (7×). Suma <code>fetch()</code> HTTP/2+HTTP/3 cliente, <code>fs.watch()</code> reescrito en Linux/macOS, SHA3 en <code>node:crypto</code>, ws+unix:// y builds para FreeBSD/Android. Última release en Zig antes del Rust merge de Anthropic (que ya entró en main al día siguiente).</p>",
+            "en": "<p>On May 13 Bun closed the Zig era with 1.3.14 — 92 issues resolved. Highlights: <strong>Bun.Image</strong>, a built-in image processing API (JPEG/PNG/WebP/GIF/BMP always, HEIC/AVIF/TIFF on macOS+Windows) — drop-in for sharp, no native modules to install. <strong>Experimental HTTP/3 (QUIC) in Bun.serve()</strong>, with ~2.7× throughput vs HTTPS/1.1 on loopback. <strong>Isolated linker global store</strong> via symlinks: warm installs from 841ms to 115ms (7×). Add <code>fetch()</code> HTTP/2 and HTTP/3 client, rewritten <code>fs.watch()</code> on Linux/macOS, SHA3 in <code>node:crypto</code>, ws+unix:// support, and FreeBSD/Android builds. Last Zig release before Anthropic's Rust merge landed on main the following day.</p>",
+            "fr": "<p>Le 13 mai Bun clôt l'ère Zig avec 1.3.14 — 92 issues résolues. Highlights : <strong>Bun.Image</strong>, API native de traitement d'images en drop-in pour sharp ; <strong>HTTP/3 (QUIC) expérimental dans Bun.serve()</strong>, ~2.7× le throughput vs HTTPS/1.1 ; <strong>global virtual store de l'isolated linker</strong> via symlinks, warm install de 841ms à 115ms (7×). Plus client <code>fetch()</code> HTTP/2/3, <code>fs.watch()</code> réécrit, SHA3 dans <code>node:crypto</code>, builds FreeBSD/Android. Dernière release en Zig avant le merge Rust d'Anthropic.</p>"
+          },
+          "source": {
+            "url": "https://bun.com/blog/bun-v1.3.14",
+            "label": "bun.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "vitest-41",
+      "updates": [
+        {
+          "id": "vitest-41",
+          "tag": "release",
+          "date": "11 May 2026",
+          "title": {
+            "es": "Vitest 4.1.6: tags estilo pytest, modo nativo Node.js y reporter para agentes IA",
+            "en": "Vitest 4.1.6: pytest-style test tags, native Node.js mode and AI-agent reporter",
+            "fr": "Vitest 4.1.6 : tags style pytest, mode Node.js natif et reporter pour agents IA"
+          },
+          "body_html": {
+            "es": "<p>Vitest 4.1.6 salió el 11 de mayo, consolidando la línea 4.1 con tres features que cambian la DX de testing. <strong>Test Tags</strong>: por fin podés etiquetar tests y filtrarlos con <code>vitest --tags-filter=&quot;backend &amp;&amp; !flaky&quot;</code>, estilo pytest markers — ideal para correr suites por capa en CI. <strong><code>viteModuleRunner: false</code></strong>: modo experimental que bypassa Vite y ejecuta los tests directo con <code>node:vm</code>, recortando startup y acercándolos al comportamiento de producción. <strong>Reporter <code>agent</code></strong>: detecta cuando corrés Vitest desde un agente IA (Claude Code, Cursor, etc) y suprime stdout de tests verdes y <code>console.log</code> — menos tokens, más señal. Suma <code>aroundEach</code>/<code>aroundAll</code>, soporte Vite 8 day-one, mejor inferencia de tipos en fixtures y un reporter dedicado para GitHub Actions con job summaries.</p>",
+            "en": "<p>Vitest 4.1.6 shipped May 11, consolidating the 4.1 line with three DX-defining features. <strong>Test Tags</strong>: label tests and filter with <code>vitest --tags-filter=&quot;backend &amp;&amp; !flaky&quot;</code>, pytest-marker style — perfect for layered suites in CI. <strong><code>viteModuleRunner: false</code></strong>: experimental mode that bypasses Vite and runs tests directly via <code>node:vm</code>, cutting startup and matching production semantics. <strong><code>agent</code> reporter</strong>: detects when Vitest runs from an AI coding agent (Claude Code, Cursor, etc.) and suppresses passing-test stdout and <code>console.log</code> — fewer tokens, more signal. Plus <code>aroundEach</code>/<code>aroundAll</code> hooks, Vite 8 day-one support, better fixture type inference, and a GitHub Actions reporter with job summaries.</p>",
+            "fr": "<p>Vitest 4.1.6 sorti le 11 mai consolide la ligne 4.1. <strong>Test Tags</strong> style pytest (<code>vitest --tags-filter=&quot;backend &amp;&amp; !flaky&quot;</code>), <strong><code>viteModuleRunner: false</code></strong> expérimental qui bypasse Vite et exécute via <code>node:vm</code>, et reporter <strong><code>agent</code></strong> qui détecte les agents IA et supprime stdout des tests verts. Plus hooks <code>aroundEach</code>/<code>aroundAll</code>, support Vite 8 day-one, meilleure inférence de types dans les fixtures.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/05/vitest-4-1-ai-agents/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "kubernetes-1361",
+      "updates": [
+        {
+          "id": "kubernetes-1361",
+          "tag": "release",
+          "date": "13 May 2026",
+          "title": {
+            "es": "Kubernetes 1.36.1 estabiliza User Namespaces, Mutating Admission Policies y Kubelet API authz fine-grained",
+            "en": "Kubernetes 1.36.1 stabilizes User Namespaces, Mutating Admission Policies and fine-grained Kubelet API authz",
+            "fr": "Kubernetes 1.36.1 stabilise User Namespaces, Mutating Admission Policies et authz fine-grained de l'API Kubelet"
+          },
+          "body_html": {
+            "es": "<p>El 13 de mayo salió el primer patch (1.36.1) de Kubernetes &quot;Haru&quot;. Lo importante son las graduaciones a <strong>GA</strong>: <strong>User Namespaces</strong> mapean el root del contenedor a un user no privilegiado del host, así que un escape ya no te da root del nodo — defensa en profundidad por defecto. <strong>Mutating Admission Policies</strong> declaran mutaciones como objetos nativos con CEL, evitando el costo operativo de los webhooks. <strong>Fine-Grained Kubelet API Authorization</strong> reemplaza permisos amplios con least-privilege por endpoint, clave para monitoring/observability. Suma <strong>SELinux volume labeling</strong> estable (relabel en mount time, no recursivo — pods arrancan mucho más rápido en hosts SELinux-enforced), Volume Group Snapshots GA y validación declarativa via <code>validation-gen</code>. Si todavía corrés contenedores como root, ya no tenés excusa.</p>",
+            "en": "<p>Kubernetes 1.36.1 — first patch of the &quot;Haru&quot; line — shipped May 13. The headline is the GA graduations: <strong>User Namespaces</strong> map container root to an unprivileged host user, so a container escape no longer hands you the node — defense in depth by default. <strong>Mutating Admission Policies</strong> declare mutations as native objects backed by CEL, avoiding webhook operational tax. <strong>Fine-Grained Kubelet API Authorization</strong> replaces broad permissions with least-privilege per endpoint, key for monitoring/observability. Plus stable <strong>SELinux volume labeling</strong> (mount-time labeling, no recursive relabel — pods boot far faster on SELinux-enforced hosts), Volume Group Snapshots GA, and declarative validation via <code>validation-gen</code>.</p>",
+            "fr": "<p>Kubernetes 1.36.1 — premier patch de &quot;Haru&quot; — le 13 mai. GA : <strong>User Namespaces</strong> (root du conteneur mappé sur un user non privilégié de l'hôte), <strong>Mutating Admission Policies</strong> (mutations natives en CEL, fini les webhooks), <strong>Fine-Grained Kubelet API Authorization</strong>. Plus <strong>SELinux volume labeling</strong> stable, Volume Group Snapshots GA, validation déclarative via <code>validation-gen</code>.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/05/kubernetes-1-36-released/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "wrangler-492",
+          "tag": "minor",
+          "date": "15 May 2026",
+          "title": {
+            "es": "Wrangler 4.92.0 trae comandos artifacts para gobernar repos y tokens desde CLI",
+            "en": "Wrangler 4.92.0 ships artifacts commands for repo and token governance from CLI",
+            "fr": "Wrangler 4.92.0 ajoute des commandes artifacts pour gouverner repos et tokens en CLI"
+          },
+          "body_html": {
+            "es": "<p>El 15 de mayo Cloudflare publicó Wrangler 4.92.0 con <strong><code>wrangler artifacts</code></strong>: listar/crear/inspeccionar/borrar repos de Artifacts y emitir tokens repo-scoped para autenticar acceso git — todo lo que antes era solo HTTP API. Salida humana o <code>--json</code> para automatización. Para equipos que ya usan Workers como backend principal, esto cierra el loop de gobernanza sin scripts a medida. El dashboard de Workers además estrenó tab Domains: comprás un dominio en Cloudflare Registrar, lo conectás, gestionás routes, Preview URLs y access policies sin salir del Worker.</p>",
+            "en": "<p>On May 15 Cloudflare shipped Wrangler 4.92.0 with <strong><code>wrangler artifacts</code></strong>: list, create, inspect, delete Artifacts repos and issue repo-scoped tokens for git authentication — previously API-only. Human-readable output plus <code>--json</code> for automation pipelines. For teams running Workers as primary backend, this closes the governance loop without custom scripts. The Workers dashboard also added a Domains tab: buy a domain via Cloudflare Registrar, connect it, manage routes, Preview URLs and access policies without leaving the Worker.</p>",
+            "fr": "<p>Le 15 mai Cloudflare publie Wrangler 4.92.0 avec <strong><code>wrangler artifacts</code></strong> : lister/créer/inspecter/supprimer des repos Artifacts et émettre des tokens repo-scoped pour l'auth git — auparavant HTTP API uniquement. Sortie humaine ou <code>--json</code>. Le dashboard Workers ajoute aussi un onglet Domains pour gérer registrar, routes et Preview URLs sans quitter le Worker.</p>"
+          },
+          "source": {
+            "url": "https://developers.cloudflare.com/workers/platform/changelog/",
+            "label": "developers.cloudflare.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "otel-collector-152",
+      "updates": [
+        {
+          "id": "otel-collector-152",
+          "tag": "release",
+          "date": "12 May 2026",
+          "title": {
+            "es": "OpenTelemetry Collector v0.152.0 y la configuración declarativa llega a estable",
+            "en": "OpenTelemetry Collector v0.152.0 and declarative configuration reaches stable",
+            "fr": "OpenTelemetry Collector v0.152.0 et la configuration déclarative atteint stable"
+          },
+          "body_html": {
+            "es": "<p>El Collector v0.152.0 (12 de mayo) consolida la era post-declarative-config. Partes clave de la especificación de configuración declarativa <strong>llegaron a estable</strong>: definís pipelines de traces/metrics/logs en un único YAML que el SDK lee al arrancar — fin del &quot;cada lenguaje un bootstrap distinto&quot;. En 2026 ya son estables las convention groups de <strong>database y messaging</strong>, las <strong>GenAI semantic conventions</strong> estandarizan span naming y atributos para llamadas LLM (adiós vendor lock-in en observabilidad de IA), y el cuarto signal — <strong>continuous profiling</strong> — quedó en RC en Q1 2026. Si todavía tu stack de observability es un Frankenstein de SDKs ad-hoc, este es el momento de migrar — el ecosistema te dejó de esperar.</p>",
+            "en": "<p>Collector v0.152.0 (May 12) consolidates the post-declarative-config era. Key parts of the declarative configuration specification <strong>reached stable</strong>: define traces/metrics/logs pipelines in a single YAML the SDK reads at startup — end of &quot;each language a different bootstrap.&quot; In 2026 the <strong>database and messaging</strong> convention groups are stable, the new <strong>GenAI semantic conventions</strong> standardize span naming and attributes for LLM calls (no more vendor lock-in for AI observability), and the fourth signal — <strong>continuous profiling</strong> — entered RC in Q1 2026. If your observability stack is still a Frankenstein of ad-hoc SDKs, this is the moment to migrate.</p>",
+            "fr": "<p>Collector v0.152.0 (12 mai) consolide l'ère post-declarative-config. Parties clés de la spécification de configuration déclarative <strong>en stable</strong> : pipelines traces/metrics/logs dans un YAML unique lu au démarrage. En 2026, les convention groups <strong>database et messaging</strong> sont stables, les <strong>GenAI semantic conventions</strong> standardisent le naming pour les appels LLM, et le 4ᵉ signal — <strong>continuous profiling</strong> — est passé en RC en Q1 2026.</p>"
+          },
+          "source": {
+            "url": "https://opentelemetry.io/docs/collector/",
+            "label": "opentelemetry.io"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Account takeover por dominios expirados (node-ipc) reemplaza al worm Shai-Hulud como vector dominante en npm — auditá los recovery emails de tus maintainers críticos.",
+      "en": "Expired-domain account takeover (node-ipc) is replacing Shai-Hulud worms as the dominant npm attack vector — audit your critical maintainers' recovery emails.",
+      "fr": "Le takeover par domaine expiré (node-ipc) remplace les worms Shai-Hulud comme vecteur dominant sur npm — auditez les recovery emails de vos mainteneurs critiques."
+    },
+    {
+      "es": "PostgreSQL pone un clavo más al ataúd de MD5: con CVE-2026-6478 cualquiera con acceso a tu red puede recuperar hashes por timing. Si tu cluster no está en SCRAM-SHA-256 (default desde PG14), migrá ya.",
+      "en": "PostgreSQL drives another nail into MD5's coffin: CVE-2026-6478 lets anyone with network access recover hashes via timing. If your cluster isn't on SCRAM-SHA-256 (default since PG14), migrate now.",
+      "fr": "PostgreSQL enfonce un nouveau clou dans le cercueil de MD5 : CVE-2026-6478 permet de récupérer les hashes par timing. Migrez vers SCRAM-SHA-256 (défaut depuis PG14)."
+    },
+    {
+      "es": "HTTP/3 deja el laboratorio y entra a runtimes mainstream: Bun.serve negocia QUIC vía ALPN sin flags exóticos — empezá a medir TTFB en tu edge antes de que tu CDN te cobre el upgrade.",
+      "en": "HTTP/3 leaves the lab and enters mainstream runtimes: Bun.serve negotiates QUIC via ALPN with no exotic flags — start measuring TTFB at the edge before your CDN charges you for the upgrade.",
+      "fr": "HTTP/3 sort du labo et entre dans les runtimes mainstream : Bun.serve négocie QUIC via ALPN sans flags exotiques — mesurez le TTFB à l'edge avant que votre CDN ne facture l'upgrade."
+    }
+  ]
+}

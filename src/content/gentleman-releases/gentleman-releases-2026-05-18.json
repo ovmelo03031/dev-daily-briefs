@@ -1,0 +1,114 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 18 May 2026",
+    "en": "Gentleman Releases — 18 May 2026",
+    "fr": "Gentleman Releases — 18 May 2026"
+  },
+  "description": {
+    "es": "Releases del día en proyectos de Gentleman-Programming",
+    "en": "Today's releases from Gentleman-Programming projects",
+    "fr": "Sorties du jour des projets Gentleman-Programming"
+  },
+  "pubDate": "2026-05-18",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "gentle-ai v1.30.0 — skill-registry ahora carga skills desde paths indexados",
+        "en": "gentle-ai v1.30.0 — skill-registry now loads skills from indexed paths",
+        "fr": "gentle-ai v1.30.0 — le skill-registry charge les skills depuis les chemins indexés"
+      },
+      "anchor": "gentle-ai-v1-30-0",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-ai v1.30.1 — paridad del orquestador SDD entre agents y claude",
+        "en": "gentle-ai v1.30.1 — SDD orchestrator parity across agents and claude",
+        "fr": "gentle-ai v1.30.1 — parité de l'orchestrateur SDD entre agents et claude"
+      },
+      "anchor": "gentle-ai-v1-30-1",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-ai v1.30.2 — fix de e2e: conteos de foundation skill actualizados",
+        "en": "gentle-ai v1.30.2 — e2e fix: foundation skill counts updated",
+        "fr": "gentle-ai v1.30.2 — fix e2e : compteurs de foundation skill mis à jour"
+      },
+      "anchor": "gentle-ai-v1-30-2",
+      "icon": "simple-icons:github"
+    }
+  ],
+  "tools": [
+    {
+      "id": "gentle-ai",
+      "name": "gentle-ai",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-gentle-ai",
+      "icon_emoji": "🎩",
+      "anchor": "gentle-ai",
+      "version": "v1.30.2",
+      "updates": [
+        {
+          "id": "gentle-ai-v1-30-0",
+          "tag": "feature",
+          "title": {
+            "es": "v1.30.0 — Skill-registry carga skills desde paths indexados",
+            "en": "v1.30.0 — Skill-registry loads skills from indexed paths",
+            "fr": "v1.30.0 — Le skill-registry charge les skills depuis les chemins indexés"
+          },
+          "body_html": {
+            "es": "<p>Minor bump con foco en cómo el skill-registry resuelve y carga skills.</p><ul><li><strong>Carga desde paths indexados</strong> (<code>feat(skillregistry): load skills from indexed paths</code>): el registry ahora resuelve skills siguiendo los paths que ya tiene indexados en lugar de re-escanear el filesystem cada vez. Menos overhead de arranque y mejor predictibilidad cuando el workspace tiene muchos skills.</li><li>Si venías apoyándote en el comportamiento previo (rescan completo), revisá que tus skills estén indexados antes de invocarlos.</li></ul><p>Es la base que habilita los dos patches siguientes del día (1.30.1 y 1.30.2) — primero el feature, después los ajustes.</p>",
+            "en": "<p>Minor bump centered on how the skill-registry resolves and loads skills.</p><ul><li><strong>Load from indexed paths</strong> (<code>feat(skillregistry): load skills from indexed paths</code>): the registry now resolves skills by following its indexed paths instead of re-scanning the filesystem on every call. Less startup overhead and better predictability when the workspace ships many skills.</li><li>If you were relying on the previous full-rescan behavior, double-check that your skills are indexed before invoking them.</li></ul><p>This is the foundation that enables the two patches that followed the same day (1.30.1 and 1.30.2) — feature first, fixes after.</p>",
+            "fr": "<p>Bump mineur centré sur la façon dont le skill-registry résout et charge les skills.</p><ul><li><strong>Chargement depuis les chemins indexés</strong> (<code>feat(skillregistry): load skills from indexed paths</code>) : le registry résout désormais les skills via ses chemins indexés au lieu de re-scanner le filesystem à chaque appel. Moins de surcoût au démarrage et un comportement plus prévisible.</li><li>Si vous dépendiez du rescan complet précédent, vérifiez que vos skills sont bien indexés avant de les invoquer.</li></ul><p>C'est la base qui rend possibles les deux patches du même jour (1.30.1 et 1.30.2).</p>"
+          },
+          "date": "17 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v1.30.0",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        },
+        {
+          "id": "gentle-ai-v1-30-1",
+          "tag": "fix",
+          "title": {
+            "es": "v1.30.1 — Paridad del orquestador SDD entre agents y claude",
+            "en": "v1.30.1 — SDD orchestrator parity across agents and claude",
+            "fr": "v1.30.1 — Parité de l'orchestrateur SDD entre agents et claude"
+          },
+          "body_html": {
+            "es": "<p>Patch que sincroniza el comportamiento del orquestador SDD en los dos surface area soportados.</p><ul><li><strong>Alineación de agents</strong> (<code>fix(agents): align sdd orchestrator parity</code>): la implementación del orchestrator en el surface de agents se puso a la par con la versión de referencia.</li><li><strong>Alineación de claude</strong> (<code>fix(claude): align sdd orchestrator parity</code>): mismo ajuste del lado de Claude Code — mismas reglas de delegación, mismos triggers de fases, mismo contrato de resultados.</li></ul><p>Si veías comportamientos sutilmente distintos del SDD según el agente que lo invocaba, este patch los unifica. Releé las instrucciones del orquestador en CLAUDE.md si modificaste copia local.</p>",
+            "en": "<p>Patch that syncs the SDD orchestrator across the two supported surfaces.</p><ul><li><strong>Agents alignment</strong> (<code>fix(agents): align sdd orchestrator parity</code>): the orchestrator implementation on the agents surface is now on par with the reference version.</li><li><strong>Claude alignment</strong> (<code>fix(claude): align sdd orchestrator parity</code>): same adjustment on the Claude Code side — same delegation rules, same phase triggers, same result contract.</li></ul><p>If you were seeing subtly different SDD behavior depending on the agent invoking it, this patch unifies them. Re-read the orchestrator instructions in CLAUDE.md if you kept a local copy.</p>",
+            "fr": "<p>Patch qui synchronise l'orchestrateur SDD sur les deux surfaces supportées.</p><ul><li><strong>Alignement agents</strong> (<code>fix(agents): align sdd orchestrator parity</code>) : l'orchestrateur côté agents est désormais aligné sur la version de référence.</li><li><strong>Alignement Claude</strong> (<code>fix(claude): align sdd orchestrator parity</code>) : même ajustement côté Claude Code — mêmes règles de délégation, mêmes triggers de phase, même contrat de résultat.</li></ul><p>Si le SDD se comportait différemment selon l'agent qui l'appelait, ce patch unifie tout.</p>"
+          },
+          "date": "17 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v1.30.1",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        },
+        {
+          "id": "gentle-ai-v1-30-2",
+          "tag": "fix",
+          "title": {
+            "es": "v1.30.2 — Fix de e2e: foundation skill counts actualizados",
+            "en": "v1.30.2 — e2e fix: foundation skill counts updated",
+            "fr": "v1.30.2 — Fix e2e : compteurs de foundation skill mis à jour"
+          },
+          "body_html": {
+            "es": "<p>Patch chico pero necesario para que el CI vuelva a verde después del feature de 1.30.0.</p><ul><li><strong>Conteos de foundation skill</strong> (<code>fix(e2e): update foundation skill counts</code>): los tests e2e tenían snapshots con el número viejo de skills foundation; el cambio del skill-registry de 1.30.0 movió ese número y los tests quedaron rotos. Este patch los actualiza al valor correcto.</li><li>Solo afecta a CI/tests — no cambia el runtime ni la API expuesta.</li></ul><p>Si tenés un fork con tus propios e2e copiados, regenerá los counts contra esta versión.</p>",
+            "en": "<p>Small but necessary patch to get CI back to green after the 1.30.0 feature.</p><ul><li><strong>Foundation skill counts</strong> (<code>fix(e2e): update foundation skill counts</code>): the e2e tests carried snapshots with the old number of foundation skills; the 1.30.0 skill-registry change moved that number and broke the suite. This patch updates them to the correct value.</li><li>CI/test-only — no runtime or public API changes.</li></ul><p>If you maintain a fork with copied e2e tests, regenerate the counts against this version.</p>",
+            "fr": "<p>Petit patch nécessaire pour remettre le CI au vert après le feature 1.30.0.</p><ul><li><strong>Compteurs de foundation skill</strong> (<code>fix(e2e): update foundation skill counts</code>) : les tests e2e contenaient des snapshots avec l'ancien nombre de skills foundation ; le changement du skill-registry en 1.30.0 a déplacé ce chiffre. Ce patch les remet à jour.</li><li>CI/tests uniquement — aucun changement de runtime ni d'API.</li></ul><p>Si vous maintenez un fork avec des e2e copiés, régénérez les compteurs contre cette version.</p>"
+          },
+          "date": "17 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v1.30.2",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

@@ -1,0 +1,125 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 19 May 2026",
+    "en": "Gentleman Releases — 19 May 2026",
+    "fr": "Gentleman Releases — 19 mai 2026"
+  },
+  "description": {
+    "es": "Releases del día en proyectos de Gentleman-Programming",
+    "en": "Today's releases from Gentleman-Programming projects",
+    "fr": "Sorties du jour des projets Gentleman-Programming"
+  },
+  "pubDate": "2026-05-19",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "gentle-engram v0.1.7 — fix de fallback de proyecto en Pi MCP",
+        "en": "gentle-engram v0.1.7 — Pi MCP project fallback fix",
+        "fr": "gentle-engram v0.1.7 — correctif fallback projet Pi MCP"
+      },
+      "anchor": "engram-pi-v0-1-7",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-engram v0.1.6 — autosync Cloud y migración segura del launcher MCP",
+        "en": "gentle-engram v0.1.6 — Cloud autosync + safe MCP launcher migration",
+        "fr": "gentle-engram v0.1.6 — autosync Cloud + migration sûre du lanceur MCP"
+      },
+      "anchor": "engram-pi-v0-1-6",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-ai v1.30.3 — preflight SDD obligatorio en OpenCode",
+        "en": "gentle-ai v1.30.3 — mandatory SDD preflight in OpenCode",
+        "fr": "gentle-ai v1.30.3 — préflight SDD obligatoire dans OpenCode"
+      },
+      "anchor": "gentle-ai-v1-30-3",
+      "icon": "simple-icons:github"
+    }
+  ],
+  "tools": [
+    {
+      "id": "engram",
+      "name": "engram",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-engram",
+      "icon_emoji": "🧠",
+      "anchor": "engram",
+      "version": "pi-v0.1.7",
+      "updates": [
+        {
+          "id": "engram-pi-v0-1-7",
+          "tag": "fix",
+          "title": {
+            "es": "gentle-engram v0.1.7 — fallback de proyecto y diagnósticos más claros",
+            "en": "gentle-engram v0.1.7 — project fallback and clearer diagnostics",
+            "fr": "gentle-engram v0.1.7 — fallback projet et diagnostics plus clairs"
+          },
+          "body_html": {
+            "es": "<p>Patch en el plugin Pi de Engram. Te bumpea el fallback cuando la detección automática de proyecto no anda y suma diagnósticos cuando el server viejo no expone <code>/project/current</code>.</p><ul><li><code>mem_session_summary</code> ahora acepta un <code>project</code> explícito como fallback cuando la detección automática falla.</li><li>Si un Engram server viejo no soporta <code>/project/current</code>, cae al <code>.engram/config.json</code> local más cercano.</li><li>Diagnóstico más claro ante 404 de <code>/project/current</code> (version mismatch).</li><li><code>engram setup pi</code>, docs y package metadata ahora apuntan a <code>gentle-engram@0.1.7</code>.</li></ul><p>Publicado a npm vía GitHub Actions con provenance.</p>",
+            "en": "<p>Patch release on Engram's Pi plugin. Adds a fallback when automatic project detection breaks and surfaces clearer diagnostics when older Engram servers do not expose <code>/project/current</code>.</p><ul><li><code>mem_session_summary</code> now accepts an explicit <code>project</code> fallback when auto-detection is unavailable.</li><li>Falls back to nearest local <code>.engram/config.json</code> if the running Engram server lacks <code>/project/current</code>.</li><li>Clearer version-mismatch diagnostic on <code>/project/current</code> 404s.</li><li><code>engram setup pi</code>, docs, and package metadata bumped to <code>gentle-engram@0.1.7</code>.</li></ul><p>Published to npm via GitHub Actions with provenance.</p>",
+            "fr": "<p>Patch sur le plugin Pi d'Engram. Ajoute un fallback quand la détection automatique de projet échoue et clarifie les diagnostics si l'ancien serveur Engram n'expose pas <code>/project/current</code>.</p><ul><li><code>mem_session_summary</code> accepte désormais un <code>project</code> explicite en fallback.</li><li>Retombe sur le <code>.engram/config.json</code> local le plus proche si <code>/project/current</code> n'existe pas.</li><li>Diagnostic plus clair sur les 404 de <code>/project/current</code>.</li><li><code>engram setup pi</code>, docs et metadata pointent désormais vers <code>gentle-engram@0.1.7</code>.</li></ul><p>Publié sur npm via GitHub Actions avec provenance.</p>"
+          },
+          "date": "18 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/pi-v0.1.7",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        },
+        {
+          "id": "engram-pi-v0-1-6",
+          "tag": "fix",
+          "title": {
+            "es": "gentle-engram v0.1.6 — autosync Cloud y migración segura del launcher MCP",
+            "en": "gentle-engram v0.1.6 — Cloud autosync + safe MCP launcher migration",
+            "fr": "gentle-engram v0.1.6 — autosync Cloud et migration sûre du lanceur MCP"
+          },
+          "body_html": {
+            "es": "<p>Auto-habilita el autosync Cloud del core de Engram para procesos lanzados/configurados desde Pi cuando ya tenés token + server configurados. Importante: si vos seteaste <code>ENGRAM_CLOUD_AUTOSYNC</code> manualmente, se respeta tu override.</p><ul><li>Auto-enable de Cloud autosync para procesos Engram lanzados desde Pi.</li><li>Preserva overrides explícitos de <code>ENGRAM_CLOUD_AUTOSYNC</code> y las policies de enrollment/pause del core/server.</li><li>Migra de manera segura sólo el launcher MCP viejo generado por Pi, preservando configs MCP custom.</li><li>Suma tests para gating del env del child, paridad del launcher MCP ejecutable y migración segura del init.</li></ul>",
+            "en": "<p>Auto-enables Engram core Cloud autosync for Pi-launched/configured Engram processes when token + server are configured. Manual <code>ENGRAM_CLOUD_AUTOSYNC</code> overrides are respected.</p><ul><li>Auto-enable Cloud autosync for Pi-launched Engram processes.</li><li>Preserves explicit <code>ENGRAM_CLOUD_AUTOSYNC</code> overrides and keeps enrollment/pause policies in core/server.</li><li>Safely migrates only the known old generated Pi MCP launcher, preserving custom MCP configs.</li><li>Adds tests for child env gating, executable MCP launcher parity, and safe init migration.</li></ul>",
+            "fr": "<p>Active automatiquement l'autosync Cloud du core Engram pour les processus lancés/configurés via Pi quand le token et le serveur sont configurés. Les overrides manuels de <code>ENGRAM_CLOUD_AUTOSYNC</code> sont respectés.</p><ul><li>Auto-activation de l'autosync Cloud pour les processus Engram lancés depuis Pi.</li><li>Préserve les overrides explicites de <code>ENGRAM_CLOUD_AUTOSYNC</code> et les policies d'enrollment/pause.</li><li>Migre uniquement l'ancien lanceur MCP Pi généré, en préservant les configs MCP personnalisées.</li><li>Ajoute des tests pour le gating de l'env enfant, la parité du lanceur MCP et la migration init.</li></ul>"
+          },
+          "date": "18 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/pi-v0.1.6",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gentle-ai",
+      "name": "gentle-ai",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-gentle-ai",
+      "icon_emoji": "🤖",
+      "anchor": "gentle-ai",
+      "version": "v1.30.3",
+      "updates": [
+        {
+          "id": "gentle-ai-v1-30-3",
+          "tag": "fix",
+          "title": {
+            "es": "v1.30.3 — preflight SDD obligatorio antes de las fases en OpenCode",
+            "en": "v1.30.3 — require SDD preflight before phases in OpenCode",
+            "fr": "v1.30.3 — préflight SDD obligatoire avant les phases dans OpenCode"
+          },
+          "body_html": {
+            "es": "<p>Fix en OpenCode: ahora se exige el preflight SDD antes de entrar a cualquier fase. Ojo si tenías scripts encadenando fases directamente — van a fallar hasta que pase el preflight.</p>",
+            "en": "<p>OpenCode fix: SDD preflight is now required before entering any phase. Watch out if you had scripts chaining phases directly — they will fail until preflight passes.</p>",
+            "fr": "<p>Correctif OpenCode : le préflight SDD est désormais requis avant toute phase. Attention si vous enchaîniez les phases directement — cela échouera tant que le préflight n'est pas passé.</p>"
+          },
+          "date": "18 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v1.30.3",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

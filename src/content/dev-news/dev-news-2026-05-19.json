@@ -1,0 +1,174 @@
+{
+  "title": {
+    "es": "Dev News — 19 may 2026",
+    "en": "Dev News — May 19, 2026",
+    "fr": "Dev News — 19 mai 2026"
+  },
+  "description": {
+    "es": "Turbopack estrena graph-based CSS chunking en Next.js canary, Astro 6.3.5 cierra un agujero de CSP en Image/Picture, Svelte 5.55.8 corrige reactividad y VS Code 1.121 trae Mermaid built-in.",
+    "en": "Turbopack lands graph-based CSS chunking in Next.js canary, Astro 6.3.5 closes a CSP hole in Image/Picture, Svelte 5.55.8 fixes reactivity edge cases, and VS Code 1.121 ships built-in Mermaid rendering.",
+    "fr": "Turbopack introduit le CSS chunking par graphe dans Next.js canary, Astro 6.3.5 corrige un trou CSP sur Image/Picture, Svelte 5.55.8 stabilise la réactivité et VS Code 1.121 livre Mermaid intégré."
+  },
+  "pubDate": "2026-05-19",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": {
+        "es": "Turbopack: graph CSS chunking",
+        "en": "Turbopack: graph CSS chunking",
+        "fr": "Turbopack : CSS chunking par graphe"
+      },
+      "anchor": "next-canary-css-chunking",
+      "icon": "simple-icons:nextdotjs"
+    },
+    {
+      "text": {
+        "es": "Astro 6.3.5: CSP fix en Image",
+        "en": "Astro 6.3.5: CSP fix in Image",
+        "fr": "Astro 6.3.5 : fix CSP sur Image"
+      },
+      "anchor": "astro-6-3-5",
+      "icon": "simple-icons:astro"
+    },
+    {
+      "text": {
+        "es": "Svelte 5.55.8 limpia reactividad",
+        "en": "Svelte 5.55.8 tidies reactivity",
+        "fr": "Svelte 5.55.8 nettoie la réactivité"
+      },
+      "anchor": "svelte-5-55-8",
+      "icon": "simple-icons:svelte"
+    },
+    {
+      "text": {
+        "es": "VS Code 1.121: Mermaid built-in",
+        "en": "VS Code 1.121: Mermaid built-in",
+        "fr": "VS Code 1.121 : Mermaid intégré"
+      },
+      "anchor": "vscode-1-121",
+      "icon": "simple-icons:visualstudiocode"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "next-canary-css-chunking",
+          "tag": "beta",
+          "date": "19 May 2026",
+          "title": {
+            "es": "Next.js 16.3 canary.23: Turbopack estrena graph-based CSS chunking",
+            "en": "Next.js 16.3 canary.23: Turbopack lands graph-based CSS chunking",
+            "fr": "Next.js 16.3 canary.23 : Turbopack introduit le CSS chunking par graphe"
+          },
+          "body_html": {
+            "es": "<p>Vercel publicó <code>next@16.3.0-canary.23</code> en la madrugada del 19 may. Lo grande es Turbopack: detrás del flag <code>experimental.cssChunking: &apos;graph&apos;</code>, ahora particiona el CSS por grafo de dependencias en vez de orden de import — menos overhead y menos critical CSS duplicado en builds grandes. La canary.20 del 15 may ya había sumado <strong>instant error overlay</strong> para metadata/viewport/sync IO y el comando <code>next internal static-routes-info</code>. Si self-hosteás Next, seguí en 16.2.6 mientras 16.3 madura, pero la canary vale para vetar la migración.</p>",
+            "en": "<p>Vercel pushed <code>next@16.3.0-canary.23</code> in the early hours of May 19. The headline is Turbopack: behind <code>experimental.cssChunking: &apos;graph&apos;</code>, CSS is now partitioned by dependency graph rather than import order — less overhead and less duplicated critical CSS on big builds. canary.20 (May 15) also extended the <strong>instant error overlay</strong> to metadata/viewport/sync IO and added <code>next internal static-routes-info</code>. Stay on 16.2.6 for self-hosted prod, but the canary is the channel to vet your migration.</p>",
+            "fr": "<p>Vercel a poussé <code>next@16.3.0-canary.23</code> aux premières heures du 19 mai. La grosse nouveauté côté Turbopack : derrière <code>experimental.cssChunking: &apos;graph&apos;</code>, le CSS est partitionné par graphe de dépendances et non par ordre d&apos;import. canary.20 (15 mai) avait déjà étendu l&apos;<strong>instant error overlay</strong> à metadata/viewport/sync IO et ajouté <code>next internal static-routes-info</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vercel/next.js/releases/tag/v16.3.0-canary.23",
+            "label": "github.com/vercel/next.js"
+          }
+        },
+        {
+          "id": "astro-6-3-5",
+          "tag": "patch",
+          "date": "18 May 2026",
+          "title": {
+            "es": "Astro 6.3.5: fix CSP en Image/Picture y dev server con contenido stale",
+            "en": "Astro 6.3.5: CSP fix in Image/Picture and stale dev server content",
+            "fr": "Astro 6.3.5 : fix CSP sur Image/Picture et dev server stale"
+          },
+          "body_html": {
+            "es": "<p>Astro 6.3.5 (18 may) tapa un agujero donde la prop <code>position</code> en <code>&lt;Image&gt;</code> y <code>&lt;Picture&gt;</code> rompía la <strong>Content Security Policy</strong> al inyectar estilos inline sin nonce. Si activaste CSP estricta y dejaste hashes para tags inline, esta es la actualización obligatoria. Además arregla el dev server sirviendo contenido viejo cuando cambiaban módulos SSR-only — <code>astro:hmr-reload</code> ahora devuelve esos módulos para que Vite invalide el cache del module runner. Ojo: si seguís en 6.3.3 sin parchear, hay un XSS reflejado en slot names hidratados que se cerró en 6.3.3 mismo.</p>",
+            "en": "<p>Astro 6.3.5 (May 18) plugs a hole where the <code>position</code> prop on <code>&lt;Image&gt;</code> and <code>&lt;Picture&gt;</code> broke <strong>Content Security Policy</strong> by injecting inline styles without a nonce. If you run strict CSP with hashed inline tags, this is the mandatory bump. It also fixes the dev server serving stale content when SSR-only modules changed — <code>astro:hmr-reload</code> now returns those modules so Vite invalidates the module runner cache. Note: 6.3.3 itself had patched a reflected XSS in hydrated slot names, so don&apos;t stop short of that floor either.</p>",
+            "fr": "<p>Astro 6.3.5 (18 mai) corrige une faille où la prop <code>position</code> sur <code>&lt;Image&gt;</code> et <code>&lt;Picture&gt;</code> cassait la <strong>Content Security Policy</strong> en injectant des styles inline sans nonce. Indispensable en CSP stricte. Corrige aussi le dev server qui servait du contenu stale après changement de modules SSR-only — <code>astro:hmr-reload</code> retourne désormais ces modules pour invalider le cache de Vite.</p>"
+          },
+          "source": {
+            "url": "https://github.com/withastro/astro/releases/tag/astro%406.3.5",
+            "label": "github.com/withastro/astro"
+          }
+        },
+        {
+          "id": "vscode-1-121",
+          "tag": "release",
+          "date": "18 May 2026",
+          "title": {
+            "es": "VS Code 1.121: Mermaid built-in en Markdown y auto-approve para Agent Host",
+            "en": "VS Code 1.121: built-in Mermaid in Markdown and auto-approve for Agent Host",
+            "fr": "VS Code 1.121 : Mermaid intégré en Markdown et auto-approve pour Agent Host"
+          },
+          "body_html": {
+            "es": "<p>VS Code 1.121 (release del 18 may) suma <strong>rendering de Mermaid.js nativo</strong> en previews de Markdown — chau extensiones de terceros para diagramas. Del lado de Agent Host: <strong>auto-approve picker</strong> con clasificador basado en modelo para aprobar o denegar tool calls automáticamente, token usage widget, keyboard-interactive SSH y pinning de modelos favoritos en el picker. Para terminal: compresión de output de test runners/build tools/package managers y un idle-silence timer para <code>run_in_terminal</code>. Si dependés del REPL agent del IDE, esta release recorta fricción medible.</p>",
+            "en": "<p>VS Code 1.121 (May 18) ships <strong>native Mermaid.js rendering</strong> in Markdown previews — drop your third-party diagram extension. On Agent Host: <strong>auto-approve picker</strong> with a model-based classifier to approve or deny tool calls automatically, a token usage widget, keyboard-interactive SSH, and pinning favorite models in the language model picker. Terminal side: output compression for test runners, build tools, and package managers, plus an idle-silence timer for <code>run_in_terminal</code>. If your day runs through the IDE&apos;s agent REPL, this release trims real friction.</p>",
+            "fr": "<p>VS Code 1.121 (18 mai) livre le <strong>rendu Mermaid.js natif</strong> dans les previews Markdown — adieu les extensions tierces. Côté Agent Host : <strong>auto-approve picker</strong> avec classifieur model-based, widget de token usage, SSH keyboard-interactive et pinning des modèles favoris. Terminal : compression d&apos;output pour test runners et build tools, plus un idle-silence timer pour <code>run_in_terminal</code>.</p>"
+          },
+          "source": {
+            "url": "https://code.visualstudio.com/updates/v1_121",
+            "label": "code.visualstudio.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "js-frameworks",
+      "name": "JS Frameworks",
+      "theme": "js-frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "js-frameworks",
+      "updates": [
+        {
+          "id": "astro-6-3-4",
+          "tag": "release",
+          "date": "18 May 2026",
+          "title": {
+            "es": "Astro 6.3.4: advanced routing gana fetchFile y App.Providers",
+            "en": "Astro 6.3.4: advanced routing gains fetchFile and App.Providers",
+            "fr": "Astro 6.3.4 : advanced routing gagne fetchFile et App.Providers"
+          },
+          "body_html": {
+            "es": "<p>El mismo día que 6.3.5, Astro publicó 6.3.4 con extensiones al <strong>experimental advanced routing</strong> (el feature flag <code>experimental.advancedRouting</code> que llegó en 6.3.0). Hay nueva opción <code>fetchFile</code> para personalizar el entrypoint, interface <code>App.Providers</code> para tipar context providers custom, export <code>Fetchable</code> y propiedad <code>FetchState.response</code> que se setea automáticamente después de middleware o page. Bugs cerrados: <code>cache()</code> de Hono, styles Markdoc/MDX en Cloudflare adapter dev server, action requests fallando en <code>astro dev</code> con Cloudflare, y SVGs con dimensiones cero. TypeScript bumpeó a v6 sin cambios requeridos.</p>",
+            "en": "<p>Same day as 6.3.5, Astro shipped 6.3.4 extending <strong>experimental advanced routing</strong> (the <code>experimental.advancedRouting</code> flag from 6.3.0). New <code>fetchFile</code> option to customize the entrypoint, an <code>App.Providers</code> interface for typing custom context providers, a <code>Fetchable</code> type export, and a <code>FetchState.response</code> property that auto-sets after middleware or page processing. Bugs squashed: Hono <code>cache()</code> middleware, Markdoc/MDX styles in the Cloudflare adapter dev server, action requests failing in <code>astro dev</code> with Cloudflare, and SVGs with zero dimensions. TypeScript bumped to v6, no user changes required.</p>",
+            "fr": "<p>Le même jour que 6.3.5, Astro a livré 6.3.4 qui étend l&apos;<strong>experimental advanced routing</strong> (<code>experimental.advancedRouting</code>, arrivé en 6.3.0). Nouvelle option <code>fetchFile</code>, interface <code>App.Providers</code>, export <code>Fetchable</code> et propriété <code>FetchState.response</code>. Bugs corrigés : <code>cache()</code> de Hono, styles Markdoc/MDX dans l&apos;adapter Cloudflare en dev, action requests qui échouaient en <code>astro dev</code> avec Cloudflare. TypeScript monte à v6.</p>"
+          },
+          "source": {
+            "url": "https://github.com/withastro/astro/releases/tag/astro%406.3.4",
+            "label": "github.com/withastro/astro"
+          }
+        },
+        {
+          "id": "svelte-5-55-8",
+          "tag": "patch",
+          "date": "18 May 2026",
+          "title": {
+            "es": "Svelte 5.55.8: cinco fixes en reactividad y rendering",
+            "en": "Svelte 5.55.8: five fixes across reactivity and rendering",
+            "fr": "Svelte 5.55.8 : cinq fixes sur réactivité et rendering"
+          },
+          "body_html": {
+            "es": "<p>Patch del 18 may con cinco fixes puntuales: <strong>print</strong> ahora maneja <code>svelte:body</code> y arregla el bug de keyframes con porcentajes duplicados; <strong>derived</strong> stores no inicializados se ejecutan incluso después de destruidos; uso consistente de <strong>named symbols</strong>; los teardown effects ya no corren cuando los deriveds se descongelan; y el <code>run</code> function ahora desetea contexto sincrónicamente. Nada de breaking — bumpealo seguro si estás en 5.55.x. La 5.55.7 (14 may) ya había tapado un XSS en <code>hydratable</code> con contenido de usuario, así que revisá que no estés clavado en una versión anterior.</p>",
+            "en": "<p>May 18 patch with five targeted fixes: <strong>print</strong> now handles <code>svelte:body</code> and fixes the keyframe percentage double-printing bug; uninitialized <strong>derived</strong> stores execute even when destroyed; consistent <strong>named symbols</strong>; teardown effects no longer run when deriveds unfreeze; and the <code>run</code> function unsets context synchronously. No breaking changes — safe bump if you&apos;re on 5.55.x. Note that 5.55.7 (May 14) had already plugged an XSS in <code>hydratable</code> on user content, so don&apos;t linger on older patches.</p>",
+            "fr": "<p>Patch du 18 mai avec cinq fixes : <strong>print</strong> gère <code>svelte:body</code> et corrige le bug des keyframes en double ; les <strong>derived</strong> non initialisés s&apos;exécutent même après destruction ; <strong>named symbols</strong> partout ; teardown effects ne tournent plus pendant l&apos;unfreeze des deriveds ; <code>run</code> unset le contexte de manière synchrone. Aucun breaking. 5.55.7 (14 mai) avait déjà fixé un XSS sur <code>hydratable</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/sveltejs/svelte/releases/tag/svelte%405.55.8",
+            "label": "github.com/sveltejs/svelte"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Tres patches de seguridad/CSP en la misma ventana (Astro 6.3.3 XSS, Astro 6.3.5 CSP, Svelte 5.55.7 XSS) son recordatorio claro: si dejaste el SSR framework congelado hace dos semanas, ya tenés deuda explotable. Bumpeá los frameworks server-side primero — Next, Astro, Svelte, Vite — y dejá los frontend-only para después.",
+      "en": "Three security/CSP patches in the same window (Astro 6.3.3 XSS, Astro 6.3.5 CSP, Svelte 5.55.7 XSS) is a clear reminder: if your SSR framework has been frozen for two weeks, you already carry exploitable debt. Bump server-side frameworks first — Next, Astro, Svelte, Vite — then handle frontend-only deps.",
+      "fr": "Trois patches sécurité/CSP dans la même fenêtre (Astro 6.3.3 XSS, Astro 6.3.5 CSP, Svelte 5.55.7 XSS) rappellent : si votre framework SSR n&apos;a pas bougé depuis deux semaines, vous portez déjà de la dette exploitable. Bumpez d&apos;abord les frameworks server-side — Next, Astro, Svelte, Vite — puis les deps frontend-only."
+    }
+  ]
+}

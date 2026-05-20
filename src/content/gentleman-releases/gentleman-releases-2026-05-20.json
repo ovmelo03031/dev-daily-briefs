@@ -1,0 +1,86 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 20 May 2026",
+    "en": "Gentleman Releases — 20 May 2026",
+    "fr": "Gentleman Releases — 20 mai 2026"
+  },
+  "description": {
+    "es": "Releases del día en proyectos de Gentleman-Programming",
+    "en": "Today's releases from Gentleman-Programming projects",
+    "fr": "Sorties du jour des projets Gentleman-Programming"
+  },
+  "pubDate": "2026-05-20",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "gentle-ai v1.30.5 — preflight SDD interactivo respetado en OpenCode",
+        "en": "gentle-ai v1.30.5 — interactive SDD preflight honored in OpenCode",
+        "fr": "gentle-ai v1.30.5 — préflight SDD interactif respecté dans OpenCode"
+      },
+      "anchor": "gentle-ai-v1-30-5",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-ai v1.30.4 — installer saltea releases de Engram sin binarios",
+        "en": "gentle-ai v1.30.4 — installer skips Engram releases without binaries",
+        "fr": "gentle-ai v1.30.4 — installer ignore les releases Engram sans binaires"
+      },
+      "anchor": "gentle-ai-v1-30-4",
+      "icon": "simple-icons:github"
+    }
+  ],
+  "tools": [
+    {
+      "id": "gentle-ai",
+      "name": "gentle-ai",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-gentle-ai",
+      "icon_emoji": "🤖",
+      "anchor": "gentle-ai",
+      "version": "v1.30.5",
+      "updates": [
+        {
+          "id": "gentle-ai-v1-30-5",
+          "tag": "fix",
+          "title": {
+            "es": "v1.30.5 — honra el preflight SDD interactivo en OpenCode",
+            "en": "v1.30.5 — honor interactive SDD preflight in OpenCode",
+            "fr": "v1.30.5 — respecter le préflight SDD interactif dans OpenCode"
+          },
+          "body_html": {
+            "es": "<p>Patch sobre la inyección de SDD en OpenCode. Después del fix anterior que hacía obligatorio el preflight, este release te asegura que el modo <em>interactive</em> realmente se honra y no se saltea cuando OpenCode arma los comandos.</p><ul><li>Ajusta <code>sdd-orchestrator.md</code> y <code>sdd-ff.md</code> para que el preflight interactivo no se saltee al encadenar fases.</li><li>Actualiza la inyección de componentes SDD (<code>internal/components/sdd/inject.go</code>) y suma tests + golden (<code>sdd-opencode-multi-settings.golden</code>) para cubrir el flujo multi-settings.</li><li>Cierra <a href=\"https://github.com/Gentleman-Programming/gentle-ai/issues/580\">#580</a>.</li></ul>",
+            "en": "<p>Patch on SDD injection for OpenCode. After the previous release made preflight mandatory, this one ensures the <em>interactive</em> mode is actually honored and not bypassed when OpenCode assembles commands.</p><ul><li>Tweaks <code>sdd-orchestrator.md</code> and <code>sdd-ff.md</code> so the interactive preflight is not skipped when chaining phases.</li><li>Updates SDD component injection (<code>internal/components/sdd/inject.go</code>) plus tests and golden (<code>sdd-opencode-multi-settings.golden</code>) to cover the multi-settings flow.</li><li>Closes <a href=\"https://github.com/Gentleman-Programming/gentle-ai/issues/580\">#580</a>.</li></ul>",
+            "fr": "<p>Correctif sur l'injection SDD pour OpenCode. Après le release précédent qui a rendu le préflight obligatoire, celui-ci garantit que le mode <em>interactive</em> est réellement respecté et pas contourné quand OpenCode assemble les commandes.</p><ul><li>Ajuste <code>sdd-orchestrator.md</code> et <code>sdd-ff.md</code> pour que le préflight interactif ne soit pas sauté lors de l'enchaînement des phases.</li><li>Met à jour l'injection des composants SDD (<code>internal/components/sdd/inject.go</code>) et ajoute des tests + golden (<code>sdd-opencode-multi-settings.golden</code>) pour couvrir le flux multi-settings.</li><li>Ferme <a href=\"https://github.com/Gentleman-Programming/gentle-ai/issues/580\">#580</a>.</li></ul>"
+          },
+          "date": "19 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v1.30.5",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        },
+        {
+          "id": "gentle-ai-v1-30-4",
+          "tag": "fix",
+          "title": {
+            "es": "v1.30.4 — el installer saltea releases de Engram sin binarios",
+            "en": "v1.30.4 — installer skips Engram releases without binary assets",
+            "fr": "v1.30.4 — l'installer ignore les releases Engram sans binaires"
+          },
+          "body_html": {
+            "es": "<p>Fix en el downloader de Engram dentro del installer de gentle-ai. Antes, si una release de Engram no traía binarios (por ejemplo un release sólo de docs o de un plugin npm como <code>gentle-engram</code>), el installer se rompía buscando un asset que no existía. Ahora esos releases se saltean limpio y sigue al siguiente.</p><ul><li>Cambios en <code>internal/components/engram/download.go</code> + tests para cubrir el caso de release sin assets binarios.</li><li>Especialmente relevante después de los releases <code>pi-v0.1.6/0.1.7</code> de Engram, que son sólo del plugin Pi y no traen binario del core.</li><li>Cierra <a href=\"https://github.com/Gentleman-Programming/gentle-ai/issues/578\">#578</a>.</li></ul>",
+            "en": "<p>Fix in gentle-ai's installer Engram downloader. Previously, if an Engram release shipped without binary assets (e.g. a docs-only release or an npm plugin release like <code>gentle-engram</code>), the installer broke looking for a missing asset. Now those releases are skipped cleanly and the installer continues to the next.</p><ul><li>Changes in <code>internal/components/engram/download.go</code> plus tests covering the no-binary-assets case.</li><li>Especially relevant after Engram's recent <code>pi-v0.1.6/0.1.7</code> releases, which are Pi-plugin only and ship no core binary.</li><li>Closes <a href=\"https://github.com/Gentleman-Programming/gentle-ai/issues/578\">#578</a>.</li></ul>",
+            "fr": "<p>Correctif dans le downloader Engram de l'installer gentle-ai. Auparavant, si une release Engram ne livrait pas de binaires (par ex. une release docs ou un plugin npm comme <code>gentle-engram</code>), l'installer plantait en cherchant un asset inexistant. Désormais ces releases sont ignorées proprement et l'installer passe à la suivante.</p><ul><li>Modifications dans <code>internal/components/engram/download.go</code> avec tests couvrant le cas sans binaires.</li><li>Particulièrement pertinent après les releases <code>pi-v0.1.6/0.1.7</code> d'Engram, qui ne concernent que le plugin Pi et ne livrent aucun binaire du core.</li><li>Ferme <a href=\"https://github.com/Gentleman-Programming/gentle-ai/issues/578\">#578</a>.</li></ul>"
+          },
+          "date": "19 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v1.30.4",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

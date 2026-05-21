@@ -1,0 +1,125 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 21 May 2026",
+    "en": "Gentleman Releases — 21 May 2026",
+    "fr": "Gentleman Releases — 21 mai 2026"
+  },
+  "description": {
+    "es": "Releases del día en proyectos de Gentleman-Programming",
+    "en": "Today's releases from Gentleman-Programming projects",
+    "fr": "Sorties du jour des projets Gentleman-Programming"
+  },
+  "pubDate": "2026-05-21",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "engram v1.15.15 — fix de upsert para payloads legacy de relación",
+        "en": "engram v1.15.15 — fix legacy relation upsert payloads",
+        "fr": "engram v1.15.15 — correctif upsert pour payloads de relation legacy"
+      },
+      "anchor": "engram-v1-15-15",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "engram v1.15.14 — límite de push cloud configurable + docs Pi más claras",
+        "en": "engram v1.15.14 — configurable cloud push limit + clearer Pi docs",
+        "fr": "engram v1.15.14 — limite de push cloud configurable + docs Pi clarifiées"
+      },
+      "anchor": "engram-v1-15-14",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-ai v1.30.6 — preflight SDD localizado y back nav Pi-only",
+        "en": "gentle-ai v1.30.6 — localized SDD preflight and Pi-only back nav",
+        "fr": "gentle-ai v1.30.6 — préflight SDD localisé et retour Pi-only"
+      },
+      "anchor": "gentle-ai-v1-30-6",
+      "icon": "simple-icons:github"
+    }
+  ],
+  "tools": [
+    {
+      "id": "engram",
+      "name": "engram",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-engram",
+      "icon_emoji": "💋",
+      "anchor": "engram",
+      "version": "v1.15.15",
+      "updates": [
+        {
+          "id": "engram-v1-15-15",
+          "tag": "fix",
+          "title": {
+            "es": "v1.15.15 — repara upsert de relaciones con payloads legacy",
+            "en": "v1.15.15 — repair legacy relation upsert payloads",
+            "fr": "v1.15.15 — réparer les payloads upsert de relations legacy"
+          },
+          "body_html": {
+            "es": "<p>Patch chico sobre el store: arregla el upsert de relaciones cuando llegan payloads en el formato legacy. Si venías con datos viejos que el server no terminaba de aceptar al guardar relaciones, este release te lo soluciona sin migración.</p><ul><li>Commit clave: <code>fix(store): repair legacy relation upsert payloads</code>.</li><li>Sin cambios de API ni de schema — se queda en bump patch.</li></ul>",
+            "en": "<p>Small store patch: fixes relation upsert when payloads arrive in the legacy shape. If you were carrying older data that the server kept rejecting on relation saves, this release clears it up with no migration.</p><ul><li>Key commit: <code>fix(store): repair legacy relation upsert payloads</code>.</li><li>No API or schema changes — stays a patch bump.</li></ul>",
+            "fr": "<p>Petit correctif côté store : répare l'upsert de relations quand les payloads arrivent dans l'ancien format. Si vous traîniez des données plus anciennes que le serveur refusait lors de l'enregistrement des relations, ce release règle le problème sans migration.</p><ul><li>Commit clé : <code>fix(store): repair legacy relation upsert payloads</code>.</li><li>Pas de changement d'API ni de schéma — reste un bump patch.</li></ul>"
+          },
+          "date": "20 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v1.15.15",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        },
+        {
+          "id": "engram-v1-15-14",
+          "tag": "fix",
+          "title": {
+            "es": "v1.15.14 — límite de push cloud configurable y docs Pi clarificadas",
+            "en": "v1.15.14 — configurable cloud push limit and clarified Pi docs",
+            "fr": "v1.15.14 — limite de push cloud configurable et docs Pi clarifiées"
+          },
+          "body_html": {
+            "es": "<p>Release operativo para quienes hostean Engram cloud y para usuarios de Pi. Se vuelve configurable el límite del push y se separan en las docs los tools nativos de memoria de Pi del gateway MCP global.</p><ul><li><strong>Push cloud configurable</strong>: nueva variable <code>ENGRAM_CLOUD_MAX_PUSH_BYTES</code> para subir el techo de 8 MiB cuando un proyecto self-hosted lo necesita.</li><li><strong>Mismo límite en ambos paths</strong>: chunk push y mutation push respetan el valor configurado y mantienen 8 MiB por default.</li><li><strong>Errores claros en oversize</strong>: el mutation push devuelve un <code>413</code> estructurado en vez de un mensaje opaco.</li><li><strong>Docs Pi más claras</strong>: el footer «error MCP: 0/N servers» es del gateway MCP global y no rompe los <code>mem_*</code> nativos; la guía te dice cuándo conservar <code>pi-mcp-adapter</code> (por ejemplo si usás Notion).</li><li>Cierra issues <a href=\"https://github.com/Gentleman-Programming/engram/issues/316\">#316</a> y <a href=\"https://github.com/Gentleman-Programming/engram/issues/396\">#396</a>.</li></ul>",
+            "en": "<p>Operational release for cloud self-hosters and Pi users. The cloud push limit becomes configurable, and the Pi docs now clearly split native memory tools from the global MCP gateway.</p><ul><li><strong>Configurable cloud push</strong>: new <code>ENGRAM_CLOUD_MAX_PUSH_BYTES</code> env var to lift the 8 MiB ceiling when a self-hosted project legitimately needs it.</li><li><strong>Same limit on both paths</strong>: chunk push and mutation push honor the configured value and keep the 8 MiB default when unset.</li><li><strong>Clear oversize errors</strong>: mutation push now returns a structured <code>413</code> instead of an opaque message.</li><li><strong>Clearer Pi docs</strong>: the «error MCP: 0/N servers» footer comes from the global MCP gateway and does not break native <code>mem_*</code>; the guide tells you when to keep <code>pi-mcp-adapter</code> (e.g. if you use Notion).</li><li>Closes <a href=\"https://github.com/Gentleman-Programming/engram/issues/316\">#316</a> and <a href=\"https://github.com/Gentleman-Programming/engram/issues/396\">#396</a>.</li></ul>",
+            "fr": "<p>Release opérationnel pour les opérateurs cloud self-hosted et les utilisateurs Pi. La limite de push cloud devient configurable, et les docs Pi distinguent clairement les outils de mémoire natifs du gateway MCP global.</p><ul><li><strong>Push cloud configurable</strong> : nouvelle variable <code>ENGRAM_CLOUD_MAX_PUSH_BYTES</code> pour relever le plafond de 8 MiB lorsqu'un projet self-hosted en a besoin.</li><li><strong>Même limite des deux côtés</strong> : chunk push et mutation push respectent la valeur configurée et conservent 8 MiB par défaut.</li><li><strong>Erreurs claires en cas de dépassement</strong> : le mutation push renvoie un <code>413</code> structuré au lieu d'un message opaque.</li><li><strong>Docs Pi plus claires</strong> : le footer «error MCP: 0/N servers» vient du gateway MCP global et ne casse pas les <code>mem_*</code> natifs ; la doc indique quand garder <code>pi-mcp-adapter</code> (par ex. si vous utilisez Notion).</li><li>Ferme <a href=\"https://github.com/Gentleman-Programming/engram/issues/316\">#316</a> et <a href=\"https://github.com/Gentleman-Programming/engram/issues/396\">#396</a>.</li></ul>"
+          },
+          "date": "20 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v1.15.14",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gentle-ai",
+      "name": "gentle-ai",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-gentle-ai",
+      "icon_emoji": "🤖",
+      "anchor": "gentle-ai",
+      "version": "v1.30.6",
+      "updates": [
+        {
+          "id": "gentle-ai-v1-30-6",
+          "tag": "fix",
+          "title": {
+            "es": "v1.30.6 — preflight SDD localizado, canal de Engram y back nav Pi-only",
+            "en": "v1.30.6 — localized SDD preflight, Engram channel and Pi-only back nav",
+            "fr": "v1.30.6 — préflight SDD localisé, canal Engram et retour Pi-only"
+          },
+          "body_html": {
+            "es": "<p>Patch que limpia tres aristas que quedaron después del preflight SDD en OpenCode: prompts traducidos, update-check de Engram más fino, y back nav del installer Pi-only sin pasar por pantallas que no aplican.</p><ul><li><strong>Preflight SDD en español</strong>: las sesiones en español ahora ven el preflight entero en español, no más labels como <code>Pace</code>, <code>Artifacts</code> o <code>Review</code> mezcladas con el intro traducido. PR <a href=\"https://github.com/Gentleman-Programming/gentle-ai/pull/593\">#593</a>.</li><li><strong>Update-check de Engram filtrado por canal</strong>: el check ahora apunta al canal de releases binarios y no se confunde con tags Pi/package. PR <a href=\"https://github.com/Gentleman-Programming/gentle-ai/pull/594\">#594</a>.</li><li><strong>Back nav Pi-only</strong>: al seleccionar sólo <code>Pi</code> y volver desde el plan de dependencias, ahora regresás a la selección de agentes y no a pantallas de configuración irrelevantes. PR <a href=\"https://github.com/Gentleman-Programming/gentle-ai/pull/595\">#595</a>.</li><li>Suma cobertura de regresión amplia: round-trips de navegación en Pi-only, OpenCode, SDD single/multi, model picker, plugin picker, custom preset y skills.</li></ul>",
+            "en": "<p>Patch that cleans up three rough edges left over from the OpenCode SDD preflight work: localized prompts, a tighter Engram update check, and a fixed back-nav path in the Pi-only installer flow.</p><ul><li><strong>Spanish SDD preflight</strong>: Spanish sessions now get a fully Spanish preflight instead of a Spanish intro followed by English labels like <code>Pace</code>, <code>Artifacts</code>, and <code>Review</code>. PR <a href=\"https://github.com/Gentleman-Programming/gentle-ai/pull/593\">#593</a>.</li><li><strong>Engram update-check channel filtering</strong>: the check now targets Engram's binary release channel and is not confused by Pi/package tags. PR <a href=\"https://github.com/Gentleman-Programming/gentle-ai/pull/594\">#594</a>.</li><li><strong>Pi-only back navigation</strong>: picking only <code>Pi</code> and going back from the dependency plan now returns to agent selection, not unrelated configuration screens. PR <a href=\"https://github.com/Gentleman-Programming/gentle-ai/pull/595\">#595</a>.</li><li>Adds broad regression coverage: install-flow round-trips across Pi-only, OpenCode, SDD single/multi, model picker, plugin picker, custom preset, and skills.</li></ul>",
+            "fr": "<p>Correctif qui nettoie trois angles laissés par le travail de préflight SDD OpenCode : prompts localisés, vérification de mise à jour d'Engram plus fine, et retour en arrière du flow installer Pi-only corrigé.</p><ul><li><strong>Préflight SDD en espagnol</strong> : les sessions en espagnol obtiennent désormais un préflight entièrement en espagnol au lieu d'un intro espagnol suivi de labels anglais comme <code>Pace</code>, <code>Artifacts</code>, <code>Review</code>. PR <a href=\"https://github.com/Gentleman-Programming/gentle-ai/pull/593\">#593</a>.</li><li><strong>Filtrage du canal de mise à jour Engram</strong> : la vérification cible le canal de releases binaires et n'est plus perturbée par les tags Pi/package. PR <a href=\"https://github.com/Gentleman-Programming/gentle-ai/pull/594\">#594</a>.</li><li><strong>Retour Pi-only</strong> : en sélectionnant uniquement <code>Pi</code> et en revenant depuis le plan de dépendances, on retourne à la sélection d'agents et plus à des écrans de configuration sans rapport. PR <a href=\"https://github.com/Gentleman-Programming/gentle-ai/pull/595\">#595</a>.</li><li>Ajoute une large couverture de régression : allers-retours d'install-flow sur Pi-only, OpenCode, SDD single/multi, model picker, plugin picker, custom preset et skills.</li></ul>"
+          },
+          "date": "20 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v1.30.6",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

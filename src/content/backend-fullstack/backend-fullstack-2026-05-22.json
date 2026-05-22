@@ -1,0 +1,447 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 22 May 2026",
+    "en": "Backend & Fullstack Daily — May 22, 2026",
+    "fr": "Backend & Fullstack Daily — 22 mai 2026"
+  },
+  "description": {
+    "es": "Hono publica v4.12.21 con cuatro avisos de seguridad (mount(), IPv6, cookie, JWT), Cloudflare unifica OpenAI, Anthropic, Google y Workers AI bajo un solo endpoint de AI Gateway con billing unificado, Workers VPC ahora alcanza túneles, mesh y WAN con un único binding, Supabase self-hosted rompe compat al moverse a Postgres 17 y rol postgres en Studio, GitHub mete Issue Fields en public preview para todas las orgs y NestJS v11.1.23 patchea un bug de Terminus.",
+    "en": "Hono ships v4.12.21 with four security advisories (mount(), IPv6, cookie, JWT), Cloudflare unifies OpenAI, Anthropic, Google and Workers AI behind one AI Gateway REST endpoint with unified billing, Workers VPC reaches tunnels, mesh and WAN through a single binding, Supabase self-hosted breaks compat by jumping to Postgres 17 and a postgres role in Studio, GitHub puts Issue Fields into public preview for all orgs and NestJS v11.1.23 patches a Terminus inject bug.",
+    "fr": "Hono publie v4.12.21 avec quatre avis de sécurité (mount(), IPv6, cookie, JWT), Cloudflare unifie OpenAI, Anthropic, Google et Workers AI derrière un endpoint REST AI Gateway avec billing unifié, Workers VPC atteint tunnels, mesh et WAN via un seul binding, Supabase self-hosted casse la compat en passant à Postgres 17 et au rôle postgres dans Studio, GitHub met Issue Fields en public preview pour toutes les orgs et NestJS v11.1.23 corrige un bug Terminus."
+  },
+  "pubDate": "2026-05-22",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Hono v4.12.21: 4 CVEs (mount, IPv6, cookie, JWT)",
+        "en": "Hono v4.12.21: 4 CVEs (mount, IPv6, cookie, JWT)",
+        "fr": "Hono v4.12.21 : 4 CVE (mount, IPv6, cookie, JWT)"
+      },
+      "anchor": "hono-4-12-21-security",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "AI Gateway: un solo REST para OpenAI/Anthropic/Google",
+        "en": "AI Gateway: one REST for OpenAI/Anthropic/Google",
+        "fr": "AI Gateway : un REST pour OpenAI/Anthropic/Google"
+      },
+      "anchor": "cf-ai-gateway-rest",
+      "icon": "simple-icons:cloudflare"
+    },
+    {
+      "text": {
+        "es": "Workers VPC ya alcanza túneles, mesh y WAN",
+        "en": "Workers VPC now reaches tunnels, mesh and WAN",
+        "fr": "Workers VPC atteint désormais tunnels, mesh et WAN"
+      },
+      "anchor": "cf-workers-vpc-wan",
+      "icon": "simple-icons:cloudflare"
+    },
+    {
+      "text": {
+        "es": "Supabase self-hosted salta a Postgres 17 (breaking)",
+        "en": "Supabase self-hosted jumps to Postgres 17 (breaking)",
+        "fr": "Supabase self-hosted passe à Postgres 17 (breaking)"
+      },
+      "anchor": "supabase-pg17",
+      "icon": "simple-icons:postgresql"
+    },
+    {
+      "text": {
+        "es": "GitHub Issue Fields en public preview para todas las orgs",
+        "en": "GitHub Issue Fields in public preview for all orgs",
+        "fr": "GitHub Issue Fields en public preview pour toutes les orgs"
+      },
+      "anchor": "github-issue-fields",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "NestJS v11.1.23: fix Terminus + decorator errors",
+        "en": "NestJS v11.1.23: Terminus fix + decorator errors",
+        "fr": "NestJS v11.1.23 : fix Terminus + erreurs décorateurs"
+      },
+      "anchor": "nestjs-11-1-23",
+      "icon": "lucide:blocks"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "hono-4-12-21-security",
+      "updates": [
+        {
+          "id": "hono-4-12-21-security",
+          "tag": "security",
+          "date": "19 May 2026",
+          "title": {
+            "es": "Hono v4.12.21 publica 4 avisos de seguridad: mount(), IP restriction, cookie y JWT",
+            "en": "Hono v4.12.21 ships 4 security advisories: mount(), IP restriction, cookie and JWT",
+            "fr": "Hono v4.12.21 publie 4 avis de sécurité : mount(), IP restriction, cookie et JWT"
+          },
+          "body_html": {
+            "es": "<p>El equipo de Hono publicó v4.12.21 con <strong>cuatro fixes de seguridad</strong> coordinados: <code>GHSA-2gcr-mfcq-wcc3</code> (mount prefix stripping con paths percent-encoded), <code>GHSA-xrhx-7g5j-rcj5</code> (bypass del IP restriction middleware con IPv6 no canónico, p.ej. <code>::ffff:1.2.3.4</code> versus <code>1.2.3.4</code>), <code>GHSA-3hrh-pfw6-9m5x</code> (Set-Cookie injection vía caracteres en <code>sameSite</code> y <code>priority</code>) y <code>GHSA-f577-qrjj-4474</code> (el middleware JWT no validaba el scheme <em>Bearer</em>, aceptaba cualquier header de dos partes). Si servís Hono detrás de un edge con allowlist de IPs o usás cookies/JWT del helper, <strong>actualizá hoy</strong>. Las cuatro afectan el core o módulos populares (<code>hono/ip-restriction</code>, <code>hono/cookie</code>, <code>hono/jwt</code>) y son la primera batería seria desde el 4.12 GA.</p>",
+            "en": "<p>The Hono team shipped v4.12.21 with <strong>four coordinated security fixes</strong>: <code>GHSA-2gcr-mfcq-wcc3</code> (mount prefix stripping on percent-encoded paths), <code>GHSA-xrhx-7g5j-rcj5</code> (IP-restriction middleware bypass via non-canonical IPv6, e.g. <code>::ffff:1.2.3.4</code> vs <code>1.2.3.4</code>), <code>GHSA-3hrh-pfw6-9m5x</code> (Set-Cookie injection via characters in <code>sameSite</code> and <code>priority</code>) and <code>GHSA-f577-qrjj-4474</code> (JWT middleware did not validate the <em>Bearer</em> scheme, accepted any two-part header). If you serve Hono behind an edge IP allowlist or use the cookie/JWT helpers, <strong>upgrade today</strong>. All four hit core or popular modules (<code>hono/ip-restriction</code>, <code>hono/cookie</code>, <code>hono/jwt</code>) and are the first serious batch since the 4.12 GA.</p>",
+            "fr": "<p>L&apos;équipe Hono a livré v4.12.21 avec <strong>quatre correctifs de sécurité coordonnés</strong> : <code>GHSA-2gcr-mfcq-wcc3</code> (mount prefix stripping sur paths percent-encodés), <code>GHSA-xrhx-7g5j-rcj5</code> (bypass IP-restriction via IPv6 non canonique), <code>GHSA-3hrh-pfw6-9m5x</code> (injection Set-Cookie via <code>sameSite</code>/<code>priority</code>) et <code>GHSA-f577-qrjj-4474</code> (JWT middleware ne validait pas le scheme <em>Bearer</em>). Si vous servez Hono derrière un IP allowlist ou utilisez les helpers cookie/JWT, <strong>upgradez aujourd&apos;hui</strong>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/honojs/hono/releases/tag/v4.12.21",
+            "label": "github.com/honojs/hono"
+          }
+        },
+        {
+          "id": "cf-ai-gateway-rest",
+          "tag": "breaking",
+          "date": "21 May 2026",
+          "title": {
+            "es": "Cloudflare AI Gateway: un solo REST endpoint para OpenAI, Anthropic, Google y Workers AI",
+            "en": "Cloudflare AI Gateway: one REST endpoint for OpenAI, Anthropic, Google and Workers AI",
+            "fr": "Cloudflare AI Gateway : un seul endpoint REST pour OpenAI, Anthropic, Google et Workers AI"
+          },
+          "body_html": {
+            "es": "<p>Cloudflare lanzó el 21 de mayo el AI REST API en <code>api.cloudflare.com</code>: cuatro endpoints unificados — <code>POST /ai/run</code> (universal), <code>POST /ai/v1/chat/completions</code> (compat OpenAI SDK), <code>POST /ai/v1/responses</code> (compat OpenAI Responses) y <code>POST /ai/v1/messages</code> (compat Anthropic SDK). Lo lindo: una sola auth, logging/caching/rate-limit/guardrails aplicados automáticamente y <strong>billing unificado</strong> de Cloudflare — adiós a juggling de keys de OpenAI + Anthropic + Google. Para Workers AI usás el prefijo <code>@cf/</code> (ej: <code>@cf/moonshotai/kimi-k2.6</code>) más el header <code>cf-aig-gateway-id</code>. Si estás armando un agente multi-model, esto baja la fricción de integración a cero — y si ya tenés cuenta CF, no hace falta sumar provider keys nuevas a la matriz de secretos.</p>",
+            "en": "<p>Cloudflare shipped the AI REST API on <code>api.cloudflare.com</code> on May 21: four unified endpoints — <code>POST /ai/run</code> (universal), <code>POST /ai/v1/chat/completions</code> (OpenAI SDK compatible), <code>POST /ai/v1/responses</code> (OpenAI Responses compatible) and <code>POST /ai/v1/messages</code> (Anthropic SDK compatible). The win: single auth, logging/caching/rate-limit/guardrails applied automatically and <strong>Cloudflare-unified billing</strong> — no more juggling OpenAI + Anthropic + Google keys. For Workers AI use the <code>@cf/</code> prefix (e.g. <code>@cf/moonshotai/kimi-k2.6</code>) plus the <code>cf-aig-gateway-id</code> header. If you&apos;re wiring up a multi-model agent, this drops integration friction to zero — and if you already have a CF account, no new provider keys in your secrets matrix.</p>",
+            "fr": "<p>Cloudflare a livré le 21 mai l&apos;AI REST API sur <code>api.cloudflare.com</code> : quatre endpoints unifiés (<code>POST /ai/run</code>, <code>/ai/v1/chat/completions</code>, <code>/ai/v1/responses</code>, <code>/ai/v1/messages</code>). Auth unique, logging/caching/rate-limit/guardrails automatiques et <strong>billing unifié Cloudflare</strong>. Pour Workers AI utilisez le préfixe <code>@cf/</code> + header <code>cf-aig-gateway-id</code>.</p>"
+          },
+          "source": {
+            "url": "https://developers.cloudflare.com/changelog/post/2026-05-21-rest-api/",
+            "label": "developers.cloudflare.com"
+          }
+        },
+        {
+          "id": "cf-workers-vpc-wan",
+          "tag": "notable",
+          "date": "21 May 2026",
+          "title": {
+            "es": "Workers VPC: un solo binding alcanza túneles, mesh y WAN de Cloudflare",
+            "en": "Workers VPC: a single binding reaches Cloudflare tunnels, mesh and WAN",
+            "fr": "Workers VPC : un seul binding atteint tunnels, mesh et WAN Cloudflare"
+          },
+          "body_html": {
+            "es": "<p>Cloudflare extendió Workers VPC para que un <strong>binding único</strong> alcance tu red privada completa: nodos de Cloudflare Mesh, rutas anunciadas por Tunnel/Mesh, dispositivos cliente y destinos conectados vía Cloudflare WAN on-ramps (GRE, IPsec, CNI). Sintaxis: <code>network_id: &quot;cf1:network&quot;</code>. Antes tenías que armar bindings separados por tipo de conexión; ahora se unifica la conectividad sin importar si el destino está en un VPC cloud detrás de un Tunnel, en un subnet privado detrás de Mesh o en un data center detrás de WAN. Combinado con el soporte de <em>Hyperdrive para databases privadas vía Workers VPC</em> (29 de abril), ya tenés camino directo desde un Worker hasta tu Postgres on-prem sin abrir puertos públicos.</p>",
+            "en": "<p>Cloudflare extended Workers VPC so a <strong>single binding</strong> reaches your full private network: Cloudflare Mesh nodes, routes announced via Tunnel/Mesh, client devices and destinations connected through Cloudflare WAN on-ramps (GRE, IPsec, CNI). Syntax: <code>network_id: &quot;cf1:network&quot;</code>. Before, you needed separate bindings per connection type; now connectivity is unified whether the destination sits in a cloud VPC behind a Tunnel, a private subnet behind Mesh or a data center behind WAN. Combined with <em>Hyperdrive support for private databases via Workers VPC</em> (April 29), you have a direct path from a Worker to your on-prem Postgres without exposing public ports.</p>",
+            "fr": "<p>Cloudflare a étendu Workers VPC pour qu&apos;un <strong>binding unique</strong> atteigne tout votre réseau privé : nœuds Mesh, routes Tunnel/Mesh, devices clients et destinations WAN (GRE, IPsec, CNI). Syntaxe : <code>network_id: &quot;cf1:network&quot;</code>. Couplé au support Hyperdrive pour databases privées via Workers VPC, vous avez un chemin direct depuis un Worker vers votre Postgres on-prem sans exposer de ports publics.</p>"
+          },
+          "source": {
+            "url": "https://developers.cloudflare.com/changelog/post/2026-05-21-vpc-networks-cloudflare-wan/",
+            "label": "developers.cloudflare.com"
+          }
+        },
+        {
+          "id": "supabase-pg17",
+          "tag": "breaking",
+          "date": "18 May 2026",
+          "title": {
+            "es": "Supabase self-hosted: salto a Postgres 17, Studio sobre rol postgres, Analytics/Vector opt-in",
+            "en": "Supabase self-hosted: jump to Postgres 17, Studio on postgres role, Analytics/Vector opt-in",
+            "fr": "Supabase self-hosted : passage à Postgres 17, Studio sur rôle postgres, Analytics/Vector opt-in"
+          },
+          "body_html": {
+            "es": "<p>Supabase publicó tres cambios <em>breaking</em> en self-hosted: <strong>(1)</strong> Docker Compose pasa la imagen default de Postgres 15 a <strong>Postgres 17</strong> para alinear con la plataforma; <strong>(2)</strong> Studio cambia de <code>supabase_admin</code> a rol <code>postgres</code> — menos privilegios, más alineado al modelo de la plataforma; <strong>(3)</strong> Analytics (Logflare) y Vector dejan de venir por default — ahora son opt-in en Compose. Si bajás <code>docker-compose pull</code> a partir de la próxima rollout en junio, leé la <a href=\"https://supabase.com/docs/guides/self-hosting/docker\">guía oficial</a> antes de subir prod: tu pgvector embeddings y tus Logflare dashboards no van a aparecer si no los activás explícito. Bonus alineado: el endpoint <code>/v1/oauth/token</code> pasa de 201 Created a 200 OK el <strong>22 de mayo</strong> para cumplir OAuth 2.1.</p>",
+            "en": "<p>Supabase shipped three self-hosted <em>breaking</em> changes: <strong>(1)</strong> Docker Compose flips the default image from Postgres 15 to <strong>Postgres 17</strong> to align with the platform; <strong>(2)</strong> Studio switches from <code>supabase_admin</code> to the <code>postgres</code> role — less privilege, more platform-aligned; <strong>(3)</strong> Analytics (Logflare) and Vector are no longer included by default — they&apos;re opt-in in Compose now. If you <code>docker-compose pull</code> after the June rollout, read the <a href=\"https://supabase.com/docs/guides/self-hosting/docker\">official guide</a> before pushing prod: your pgvector embeddings and Logflare dashboards won&apos;t appear unless you enable them explicitly. Aligned bonus: the <code>/v1/oauth/token</code> endpoint moves from 201 Created to 200 OK on <strong>May 22</strong> for OAuth 2.1 compliance.</p>",
+            "fr": "<p>Supabase a livré trois changements <em>breaking</em> en self-hosted : <strong>(1)</strong> image Docker Compose passe de Postgres 15 à <strong>Postgres 17</strong> ; <strong>(2)</strong> Studio passe de <code>supabase_admin</code> au rôle <code>postgres</code> ; <strong>(3)</strong> Analytics (Logflare) et Vector deviennent opt-in dans Compose. Lisez le guide officiel avant de pull. Bonus : <code>/v1/oauth/token</code> passe de 201 à 200 OK le <strong>22 mai</strong> pour OAuth 2.1.</p>"
+          },
+          "source": {
+            "url": "https://supabase.com/changelog",
+            "label": "supabase.com/changelog"
+          }
+        },
+        {
+          "id": "github-issue-fields",
+          "tag": "ga",
+          "date": "21 May 2026",
+          "title": {
+            "es": "GitHub Issue Fields llega a public preview para todas las organizaciones",
+            "en": "GitHub Issue Fields hits public preview for all organizations",
+            "fr": "GitHub Issue Fields atteint le public preview pour toutes les organisations"
+          },
+          "body_html": {
+            "es": "<p>Los Issue Fields — metadata tipada (single-select, text, number, date) definida a nivel <em>organización</em> y aplicada automáticamente a todos los issues de todos los repos — pasaron a <strong>public preview para todas las orgs</strong> en GitHub.com y GitHub Enterprise Cloud con data residency. Desde el preview inicial en marzo se sumaron 1.000+ orgs y trajeron tres mejoras: controles de visibilidad para repos públicos, paridad de REST API (ya podés setear valores al crear issues vía API) y una skill de Copilot que migra valores existentes desde labels o project fields. Si venís parcheando Priority/Effort con labels o tableros de Projects, este es <strong>el missing link</strong> entre issues y projects sin tener que duplicar estado.</p>",
+            "en": "<p>Issue Fields — typed metadata (single-select, text, number, date) defined at the <em>organization</em> level and applied automatically across every issue in every repo — moved to <strong>public preview for all orgs</strong> on GitHub.com and GitHub Enterprise Cloud with data residency. Since the March initial preview, 1,000+ orgs adopted them, driving three additions: visibility controls for public repos, REST API parity (you can set values when creating issues via API) and a Copilot skill that bulk-migrates existing values from labels or project fields. If you&apos;ve been patching Priority/Effort with labels or Projects boards, this is <strong>the missing link</strong> between issues and projects without duplicating state.</p>",
+            "fr": "<p>Issue Fields — metadata typée (single-select, text, number, date) définie au niveau <em>organisation</em> et appliquée automatiquement à tous les issues de tous les repos — passent en <strong>public preview pour toutes les orgs</strong>. Trois ajouts depuis mars : contrôles de visibilité pour repos publics, parité REST API et skill Copilot pour migrer en masse depuis labels/project fields.</p>"
+          },
+          "source": {
+            "url": "https://github.blog/changelog/2026-05-21-issue-fields-are-now-in-public-preview-for-all-organizations/",
+            "label": "github.blog/changelog"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "nestjs-11-1-23",
+      "updates": [
+        {
+          "id": "nestjs-11-1-23",
+          "tag": "patch",
+          "date": "21 May 2026",
+          "title": {
+            "es": "NestJS v11.1.23 + Swagger 11.4.4: fix Terminus eager instantiation y errores de decoradores",
+            "en": "NestJS v11.1.23 + Swagger 11.4.4: fix Terminus eager instantiation and decorator errors",
+            "fr": "NestJS v11.1.23 + Swagger 11.4.4 : fix Terminus eager instantiation et erreurs de décorateurs"
+          },
+          "body_html": {
+            "es": "<p>NestJS publicó dos patches el <strong>21 de mayo</strong>: <code>v11.1.22</code> arregla un bug de injection en inflight requests y mejora los reports de error identificando tipos de decoradores en módulos inválidos; <code>v11.1.23</code> corrige el problema reportado desde v11.1.20 donde <code>snapshot: true</code> instanciaba eagerly indicators transient de Terminus, rompiendo el patrón de health checks de muchas apps. Si estabas pinneado a <code>11.1.19</code> esperando esto, ya podés actualizar. <code>@nestjs/swagger@11.4.4</code> también salió el mismo día. Si combinás Nest + Terminus + un health endpoint que setea <code>snapshot: true</code>, esta es la versión que querés.</p>",
+            "en": "<p>NestJS shipped two patches on <strong>May 21</strong>: <code>v11.1.22</code> fixes an inflight request injection bug and improves error reports by identifying decorator types in invalid module errors; <code>v11.1.23</code> fixes the regression introduced in v11.1.20 where <code>snapshot: true</code> eagerly instantiated Terminus transient indicators, breaking the health check pattern in many apps. If you were pinned to <code>11.1.19</code> waiting on this, you can upgrade now. <code>@nestjs/swagger@11.4.4</code> also dropped same day. If you run Nest + Terminus + a health endpoint with <code>snapshot: true</code>, this is the version you want.</p>",
+            "fr": "<p>NestJS a livré deux patches le <strong>21 mai</strong> : <code>v11.1.22</code> corrige un bug d&apos;injection inflight et améliore les reports d&apos;erreur ; <code>v11.1.23</code> corrige la régression de v11.1.20 où <code>snapshot: true</code> instanciait eagerly les indicators transient de Terminus. <code>@nestjs/swagger@11.4.4</code> sorti le même jour.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nestjs/nest/releases",
+            "label": "github.com/nestjs/nest"
+          }
+        },
+        {
+          "id": "hono-4-12-19",
+          "tag": "release",
+          "date": "16 May 2026",
+          "title": {
+            "es": "Hono v4.12.19/.20: serveStatic opcional, bearer genérico, cache entries y request.bytes()",
+            "en": "Hono v4.12.19/.20: optional serveStatic, generic bearer, cache entries and request.bytes()",
+            "fr": "Hono v4.12.19/.20 : serveStatic optionnel, bearer générique, cache entries et request.bytes()"
+          },
+          "body_html": {
+            "es": "<p>Antes del batch de seguridad de v4.12.21, Hono publicó <strong>v4.12.19 el 16 de mayo</strong> con parámetros opcionales para <code>serveStatic</code>, mejoras en cookie handling, autenticación bearer genérica (no más casts), keying configurable en cache entries y un nuevo método <code>bytes()</code> en request para leer el body como <code>Uint8Array</code> sin parsear. Después vino <strong>v4.12.20 el 19 de mayo</strong> que preserva base paths en rutas mounted y expande types de children en JSX. Si laburás Hono sobre Workers/Bun, las mejoras de cache entries son combo perfecto con el AI Gateway nuevo: cachées la respuesta del agente por <em>tenant_id + prompt hash</em> y ahorrás 60% de tokens.</p>",
+            "en": "<p>Before the v4.12.21 security batch, Hono shipped <strong>v4.12.19 on May 16</strong> with optional params for <code>serveStatic</code>, cookie handling improvements, generic bearer auth (no more casts), configurable keying in cache entries and a new <code>bytes()</code> method on request to read the body as <code>Uint8Array</code> without parsing. Then <strong>v4.12.20 on May 19</strong> preserved base paths on mounted routes and expanded JSX children types. If you run Hono on Workers/Bun, the cache entries improvements pair nicely with the new AI Gateway: cache the agent response by <em>tenant_id + prompt hash</em> and save 60% on tokens.</p>",
+            "fr": "<p>Avant le batch de sécurité de v4.12.21, Hono a livré <strong>v4.12.19 le 16 mai</strong> avec params optionnels pour <code>serveStatic</code>, bearer auth générique, keying configurable de cache entries et nouvelle méthode <code>bytes()</code> sur request. Puis <strong>v4.12.20 le 19 mai</strong> préserve les base paths sur routes mounted et étend les types JSX children.</p>"
+          },
+          "source": {
+            "url": "https://github.com/honojs/hono/releases",
+            "label": "github.com/honojs/hono"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cf-tunnel-mesh-perms",
+      "updates": [
+        {
+          "id": "cf-tunnel-mesh-perms",
+          "tag": "notable",
+          "date": "21 May 2026",
+          "title": {
+            "es": "Cloudflare: permisos granulares por Tunnel y por Mesh node",
+            "en": "Cloudflare: granular permissions per Tunnel and per Mesh node",
+            "fr": "Cloudflare : permissions granulaires par Tunnel et par Mesh node"
+          },
+          "body_html": {
+            "es": "<p>Hasta ayer, scopear permisos de Cloudflare Tunnel/Mesh era todo o nada a nivel de account. Desde el 21 de mayo, los admins pueden <strong>scope acceso a instancias individuales</strong> de Tunnel y nodos individuales de Mesh — pattern requerido para multi-tenant donde cada equipo o cliente tiene su tunnel propio y no debería tocar los de los demás. Es el complemento natural a Workers VPC + WAN: si pasás todo el tráfico privado por bindings unificados, también querés que <em>cada operador</em> tenga llaves chicas. Si corrés varios tunnels en una sola org (típico en agencias o SaaS multi-cliente), revisá las roles y limitalas <strong>YA</strong> antes de que alguien rote sin querer un tunnel que no le pertenece.</p>",
+            "en": "<p>Until yesterday, scoping Cloudflare Tunnel/Mesh permissions was all-or-nothing at the account level. Since May 21, admins can <strong>scope access to individual Tunnel instances</strong> and individual Mesh nodes — the pattern multi-tenant setups need where each team or customer owns their tunnel and shouldn&apos;t touch the others. Natural complement to Workers VPC + WAN: if you funnel all private traffic through unified bindings, you also want <em>each operator</em> to hold small keys. If you run several tunnels in one org (typical for agencies or multi-tenant SaaS), audit and tighten the roles <strong>now</strong> before someone accidentally rotates a tunnel that isn&apos;t theirs.</p>",
+            "fr": "<p>Jusqu&apos;à hier, scoper les permissions Cloudflare Tunnel/Mesh était tout ou rien au niveau account. Depuis le 21 mai, les admins peuvent <strong>scoper l&apos;accès aux instances individuelles</strong> de Tunnel et aux nodes Mesh — pattern requis pour les setups multi-tenant. Auditez vos roles maintenant.</p>"
+          },
+          "source": {
+            "url": "https://developers.cloudflare.com/changelog/post/2026-05-21-tunnel-mesh-granular-permissions/",
+            "label": "developers.cloudflare.com"
+          }
+        },
+        {
+          "id": "cf-artifacts-events",
+          "tag": "release",
+          "date": "19 May 2026",
+          "title": {
+            "es": "Cloudflare Artifacts: event subscriptions + CLI Wrangler para namespaces y repos",
+            "en": "Cloudflare Artifacts: event subscriptions + Wrangler CLI for namespaces and repos",
+            "fr": "Cloudflare Artifacts : event subscriptions + CLI Wrangler pour namespaces et repos"
+          },
+          "body_html": {
+            "es": "<p>El 19 de mayo Cloudflare habilitó <strong>event subscriptions</strong> para Artifacts: cada cambio en un repo (push de imagen Docker/OCI o publicación de package) dispara un evento consumible desde un Worker, perfecto para builds automation o promoting de imagen a prod sin webhook intermediario. El 18 de mayo ya había sumado comandos de <strong>Wrangler CLI</strong> para listar, crear y manejar namespaces, repos y tokens de Artifacts — adiós a tener que ir al dashboard cada vez que querés un repo nuevo en un script de bootstrap. Combo: con Workflows V2 (anunciado el 1 de mayo, 50K instancias concurrentes), ya tenés un pipeline Cloudflare-only para CI/CD sin GitHub Actions de por medio.</p>",
+            "en": "<p>On May 19 Cloudflare enabled <strong>event subscriptions</strong> for Artifacts: each repo change (Docker/OCI image push or package publish) fires an event consumable from a Worker, perfect for build automation or promoting images to prod without an intermediate webhook. On May 18 Cloudflare also added <strong>Wrangler CLI</strong> commands to list, create and manage Artifacts namespaces, repos and tokens — no more dashboard trips when you want a new repo from a bootstrap script. Combo: with Workflows V2 (announced May 1, 50K concurrent instances), you have a Cloudflare-only CI/CD pipeline without GitHub Actions in the middle.</p>",
+            "fr": "<p>Le 19 mai Cloudflare a activé les <strong>event subscriptions</strong> pour Artifacts : chaque changement de repo déclenche un événement consommable depuis un Worker. Le 18 mai, Cloudflare avait ajouté des commandes <strong>Wrangler CLI</strong> pour gérer namespaces, repos et tokens. Combiné à Workflows V2 (1er mai, 50K instances concurrentes), vous avez un pipeline CI/CD Cloudflare-only.</p>"
+          },
+          "source": {
+            "url": "https://developers.cloudflare.com/changelog/post/2026-05-19-artifacts-event-subscriptions/",
+            "label": "developers.cloudflare.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "ai-gateway-pattern",
+      "updates": [
+        {
+          "id": "ai-gateway-pattern",
+          "tag": "notable",
+          "date": "21 May 2026",
+          "title": {
+            "es": "Pattern del mes: AI Gateway como anti-corruption layer multi-provider",
+            "en": "Pattern of the month: AI Gateway as a multi-provider anti-corruption layer",
+            "fr": "Pattern du mois : AI Gateway comme anti-corruption layer multi-provider"
+          },
+          "body_html": {
+            "es": "<p>El AI Gateway unificado de Cloudflare formaliza un pattern que muchos ya estábamos armando a mano: un <strong>anti-corruption layer</strong> entre tu app y los LLM providers. Reglas que valen sin importar si usás Cloudflare, Portkey, LiteLLM o tu propio gateway en Hono: <strong>(1)</strong> nunca pegues directo al SDK del provider desde dominio — envolvelo en una interfaz <code>LLMClient</code> que reciba <code>{provider, model, messages, schema}</code> y devuelva un response normalizado; <strong>(2)</strong> meté el <em>caching por hash de prompt + tenant + schema</em> en el gateway, no en cada caller; <strong>(3)</strong> guardrails (PII, prompt injection, rate limit por usuario) van en el gateway, no en el handler de la route; <strong>(4)</strong> los failovers (cambiar de Anthropic a OpenAI si uno está caído) son política del gateway, no del agente. Si tu monorepo tiene 5 servicios llamando LLMs, ya tenés 5 lugares donde puede colarse un token leakeado o un prompt sin sanitizar — un gateway central reduce el blast radius a uno.</p>",
+            "en": "<p>Cloudflare&apos;s unified AI Gateway formalizes a pattern many of us were already building by hand: an <strong>anti-corruption layer</strong> between your app and LLM providers. Rules that hold whether you use Cloudflare, Portkey, LiteLLM or your own Hono gateway: <strong>(1)</strong> never call the provider SDK directly from the domain — wrap it in an <code>LLMClient</code> interface that takes <code>{provider, model, messages, schema}</code> and returns a normalized response; <strong>(2)</strong> put <em>caching by prompt hash + tenant + schema</em> in the gateway, not in each caller; <strong>(3)</strong> guardrails (PII, prompt injection, per-user rate limit) live in the gateway, not in the route handler; <strong>(4)</strong> failovers (swap Anthropic for OpenAI when one is down) are gateway policy, not agent code. If your monorepo has 5 services calling LLMs, you have 5 places where a leaked token or unsanitized prompt can slip through — a central gateway shrinks the blast radius to one.</p>",
+            "fr": "<p>L&apos;AI Gateway unifié de Cloudflare formalise un pattern que beaucoup construisaient à la main : un <strong>anti-corruption layer</strong> entre l&apos;app et les providers LLM. Règles : <strong>(1)</strong> jamais appeler le SDK provider directement depuis le domain ; <strong>(2)</strong> caching par prompt hash + tenant dans le gateway ; <strong>(3)</strong> guardrails dans le gateway ; <strong>(4)</strong> failovers en policy gateway. Un gateway central réduit le blast radius à un seul point.</p>"
+          },
+          "source": {
+            "url": "https://blog.cloudflare.com/ai-platform/",
+            "label": "blog.cloudflare.com"
+          }
+        },
+        {
+          "id": "issue-fields-pattern",
+          "tag": "notable",
+          "date": "21 May 2026",
+          "title": {
+            "es": "Issue Fields vs Projects vs labels: cuándo elegir cada uno",
+            "en": "Issue Fields vs Projects vs labels: when to use each",
+            "fr": "Issue Fields vs Projects vs labels : quand utiliser chacun"
+          },
+          "body_html": {
+            "es": "<p>Con Issue Fields en preview pública, ya hay un overlap real entre tres mecanismos de metadata en GitHub: <strong>labels</strong>, <strong>Issue Fields</strong> y <strong>Project fields</strong>. Cuándo usar cada uno: <strong>labels</strong> para taxonomías chicas y planas (<code>bug</code>, <code>enhancement</code>, <code>good-first-issue</code>) que filtrás vía search query; <strong>Issue Fields</strong> para metadata <em>tipada y org-wide</em> que toda la org necesita ver y filtrar igual en todos los repos (Priority, Effort, Team owner); <strong>Project fields</strong> para metadata <em>específica de una iniciativa</em> que no aplica fuera de ese project (sprint number, RICE score, OKR target). El antipattern: usar labels para todo y terminar con 80 labels en cada repo que nadie entiende. La skill de Copilot que migra labels a Issue Fields hace que adoptarlos sea casi free — un comando y migrás el histórico.</p>",
+            "en": "<p>With Issue Fields in public preview, there&apos;s real overlap between three GitHub metadata mechanisms: <strong>labels</strong>, <strong>Issue Fields</strong> and <strong>Project fields</strong>. When to use each: <strong>labels</strong> for flat, small taxonomies (<code>bug</code>, <code>enhancement</code>, <code>good-first-issue</code>) you filter via search query; <strong>Issue Fields</strong> for <em>typed, org-wide</em> metadata everyone in the org needs to see and filter consistently across repos (Priority, Effort, Team owner); <strong>Project fields</strong> for <em>initiative-specific</em> metadata that doesn&apos;t apply outside that project (sprint number, RICE score, OKR target). The antipattern: using labels for everything and ending with 80 labels per repo nobody understands. The Copilot skill that migrates labels to Issue Fields makes adoption almost free — one command and the history migrates.</p>",
+            "fr": "<p>Avec Issue Fields en public preview, il y a un vrai overlap entre <strong>labels</strong>, <strong>Issue Fields</strong> et <strong>Project fields</strong>. Quand utiliser : labels pour taxonomies plates ; Issue Fields pour metadata <em>typée et org-wide</em> ; Project fields pour metadata <em>spécifique à une initiative</em>. L&apos;antipattern : utiliser labels pour tout et finir avec 80 labels par repo.</p>"
+          },
+          "source": {
+            "url": "https://github.blog/changelog/2026-05-21-issue-fields-are-now-in-public-preview-for-all-organizations/",
+            "label": "github.blog/changelog"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "supabase-oauth-200",
+      "updates": [
+        {
+          "id": "supabase-oauth-200",
+          "tag": "deprecation",
+          "date": "22 May 2026",
+          "title": {
+            "es": "Supabase OAuth: /v1/oauth/token pasa de 201 Created a 200 OK hoy",
+            "en": "Supabase OAuth: /v1/oauth/token switches from 201 Created to 200 OK today",
+            "fr": "Supabase OAuth : /v1/oauth/token passe de 201 Created à 200 OK aujourd&apos;hui"
+          },
+          "body_html": {
+            "es": "<p>Desde hoy 22 de mayo el endpoint <code>POST /v1/oauth/token</code> de Supabase devuelve <strong>200 OK</strong> en lugar de <strong>201 Created</strong>, para cumplir con OAuth 2.1 y mejorar compatibilidad con clientes estrictos (los que validan exactamente <code>200</code> según RFC). Si tenés código que matchea explícitamente <code>response.status === 201</code> para flujos de OAuth, va a romperse en silencio (token no asignado a session, redirect loop, etc.). Cambiá a <code>response.ok</code> o aceptá ambos códigos. Spec OAuth 2.1 lo viene pidiendo desde 2023 y Supabase fue de los últimos en alinearse.</p>",
+            "en": "<p>From today May 22 the Supabase <code>POST /v1/oauth/token</code> endpoint returns <strong>200 OK</strong> instead of <strong>201 Created</strong>, to comply with OAuth 2.1 and improve compatibility with strict clients (those that validate exactly <code>200</code> per RFC). If you have code matching <code>response.status === 201</code> for OAuth flows, it will break silently (token not assigned to session, redirect loop, etc.). Switch to <code>response.ok</code> or accept both codes. OAuth 2.1 has required this since 2023 and Supabase is one of the last to align.</p>",
+            "fr": "<p>Depuis aujourd&apos;hui 22 mai, l&apos;endpoint Supabase <code>POST /v1/oauth/token</code> renvoie <strong>200 OK</strong> au lieu de <strong>201 Created</strong>, conformément à OAuth 2.1. Code matchant <code>response.status === 201</code> cassera silencieusement. Passez à <code>response.ok</code>.</p>"
+          },
+          "source": {
+            "url": "https://releasebot.io/updates/supabase",
+            "label": "releasebot.io/supabase"
+          }
+        }
+      ]
+    },
+    {
+      "id": "quick-links",
+      "name": "Quick Links",
+      "theme": "quick-links",
+      "icon_emoji": "📌",
+      "anchor": "quick-links",
+      "updates": [
+        {
+          "id": "ql-cf-blog-ai-platform",
+          "tag": "minor",
+          "date": "21 May 2026",
+          "title": {
+            "es": "Cloudflare blog: «AI Platform: an inference layer designed for agents»",
+            "en": "Cloudflare blog: «AI Platform: an inference layer designed for agents»",
+            "fr": "Blog Cloudflare : «AI Platform: an inference layer designed for agents»"
+          },
+          "body_html": {
+            "es": "<p>Visión completa de Cloudflare sobre por qué el AI Gateway se vuelve el plano de control para agentes multi-modelo.</p>",
+            "en": "<p>Cloudflare&apos;s full vision on why the AI Gateway becomes the control plane for multi-model agents.</p>",
+            "fr": "<p>Vision complète de Cloudflare sur l&apos;AI Gateway comme control plane multi-modèle.</p>"
+          },
+          "source": {
+            "url": "https://blog.cloudflare.com/ai-platform/",
+            "label": "blog.cloudflare.com"
+          }
+        },
+        {
+          "id": "ql-copilot-eclipse-oss",
+          "tag": "minor",
+          "date": "21 May 2026",
+          "title": {
+            "es": "GitHub Copilot for Eclipse pasa a open source bajo MIT",
+            "en": "GitHub Copilot for Eclipse goes open source under MIT",
+            "fr": "GitHub Copilot for Eclipse devient open source sous MIT"
+          },
+          "body_html": {
+            "es": "<p>GitHub liberó el código del plugin de Copilot para Eclipse — útil si tenés stack Java backend y querés auditar o forkear.</p>",
+            "en": "<p>GitHub released the Copilot for Eclipse plugin source — useful if you run a Java backend stack and want to audit or fork.</p>",
+            "fr": "<p>GitHub a libéré le code du plugin Copilot for Eclipse — utile pour stacks Java backend voulant auditer ou forker.</p>"
+          },
+          "source": {
+            "url": "https://github.blog/changelog/2026-05-21-github-copilot-for-eclipse-is-open-source/",
+            "label": "github.blog/changelog"
+          }
+        },
+        {
+          "id": "ql-cf-radar-content-types",
+          "tag": "minor",
+          "date": "20 May 2026",
+          "title": {
+            "es": "Cloudflare Radar: distribución de content-types y share de tráfico API",
+            "en": "Cloudflare Radar: content-type distribution and API traffic share",
+            "fr": "Cloudflare Radar : distribution content-types et share de trafic API"
+          },
+          "body_html": {
+            "es": "<p>Nuevos charts en Radar muestran qué porcentaje del tráfico es JSON, HTML, video, etc., y cuánto del total es API vs humanos vs bots. Útil para benchmarkearte.</p>",
+            "en": "<p>New Radar charts show what percentage of traffic is JSON, HTML, video, etc., and how much of the total is API vs humans vs bots. Useful for benchmarking your stack.</p>",
+            "fr": "<p>Nouveaux charts Radar montrant le % de trafic JSON/HTML/video et la part API vs humains vs bots. Utile pour benchmark.</p>"
+          },
+          "source": {
+            "url": "https://blog.cloudflare.com/radar-content-types-api-share/",
+            "label": "blog.cloudflare.com"
+          }
+        },
+        {
+          "id": "ql-hono-ghsa-mount",
+          "tag": "minor",
+          "date": "19 May 2026",
+          "title": {
+            "es": "GHSA-2gcr-mfcq-wcc3: detalle técnico del mount prefix stripping en Hono",
+            "en": "GHSA-2gcr-mfcq-wcc3: technical details on Hono mount prefix stripping",
+            "fr": "GHSA-2gcr-mfcq-wcc3 : détails techniques sur le mount prefix stripping Hono"
+          },
+          "body_html": {
+            "es": "<p>Advisory completo del bug de <code>app.mount()</code>, con PoC y diff del fix.</p>",
+            "en": "<p>Full advisory for the <code>app.mount()</code> bug, with PoC and fix diff.</p>",
+            "fr": "<p>Advisory complet du bug <code>app.mount()</code>, avec PoC et diff du fix.</p>"
+          },
+          "source": {
+            "url": "https://github.com/honojs/hono/security/advisories/GHSA-2gcr-mfcq-wcc3",
+            "label": "github.com/honojs/hono"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Cloudflare cerró la semana convirtiéndose en el plano de control unificado para apps modernas: VPC + Tunnel + Mesh + WAN bajo un binding, AI Gateway unificado para todos los providers, Workflows V2 con 50K concurrencia, Artifacts con eventos y CLI. Si arrancás un fullstack TypeScript nuevo en mayo 2026, el stack default ya es Hono + Workers + Hyperdrive + D1/R2 + Workers VPC + AI Gateway. AWS y GCP siguen siendo los pesados, pero Cloudflare está armando un sub-stack autosuficiente que cubre 80% de los casos sin salir del ecosistema.",
+      "en": "Cloudflare wrapped the week becoming the unified control plane for modern apps: VPC + Tunnel + Mesh + WAN under one binding, unified AI Gateway across all providers, Workflows V2 at 50K concurrency, Artifacts with events and CLI. If you start a new fullstack TypeScript project in May 2026, the default stack is now Hono + Workers + Hyperdrive + D1/R2 + Workers VPC + AI Gateway. AWS and GCP are still the heavyweights, but Cloudflare is assembling a self-sufficient sub-stack that covers 80% of cases without leaving the ecosystem.",
+      "fr": "Cloudflare a clos la semaine en devenant le control plane unifié pour apps modernes : VPC + Tunnel + Mesh + WAN sous un binding, AI Gateway unifié, Workflows V2 à 50K concurrence, Artifacts avec events et CLI. Pour un nouveau fullstack TypeScript en mai 2026, la stack par défaut est Hono + Workers + Hyperdrive + D1/R2 + Workers VPC + AI Gateway."
+    },
+    {
+      "es": "Hono se consolida como el framework default para edge — y con eso, también es target para auditoría seria. v4.12.21 trae el primer batch real de CVEs en módulos core (mount, ip-restriction, cookie, jwt) y demuestra que la auditoría de seguridad sobre Hono está madurando. Plus: el JWT middleware sin validar el scheme <em>Bearer</em> es exactamente el tipo de bug que dejás pasar cuando confiás en que «el client siempre manda Bearer». Lección: siempre escribí tests de auth con headers malformados.",
+      "en": "Hono consolidates as the default edge framework — and with that, also becomes a target for serious audit. v4.12.21 brings the first real batch of CVEs in core modules (mount, ip-restriction, cookie, jwt) and proves Hono security review is maturing. Plus: the JWT middleware not validating the <em>Bearer</em> scheme is exactly the kind of bug you let slip when you trust that &quot;the client always sends Bearer.&quot; Lesson: always write auth tests with malformed headers.",
+      "fr": "Hono se consolide comme framework edge par défaut — et devient cible d&apos;audit sérieux. v4.12.21 apporte le premier vrai batch de CVE sur modules core. Le JWT middleware ne validant pas le scheme <em>Bearer</em> est le type de bug qu&apos;on laisse passer quand on fait confiance au client. Écrivez toujours des tests d&apos;auth avec headers malformés."
+    },
+    {
+      "es": "Supabase self-hosted obliga a actualizar a Postgres 17 y mover Studio a rol postgres en una sola tanda — es la señal de que la plataforma quiere paridad estricta entre managed y self-hosted. Si llevás dos años corriendo Supabase self-hosted con la config default, la próxima rollout de junio te va a obligar a leer changelogs por primera vez en mucho tiempo. Sumado al cambio de OAuth de 201 a 200 hoy, es un buen mes para hacer un dependabot check de tu integración Supabase.",
+      "en": "Supabase self-hosted forces an upgrade to Postgres 17 and moves Studio to the postgres role in one batch — the signal that the platform wants strict parity between managed and self-hosted. If you&apos;ve been running Supabase self-hosted with the default config for two years, the upcoming June rollout will force you to read changelogs for the first time in a while. Combined with today&apos;s OAuth 201→200 change, it&apos;s a good month to run a dependabot check on your Supabase integration.",
+      "fr": "Supabase self-hosted force un upgrade vers Postgres 17 et déplace Studio vers le rôle postgres en un seul batch — signal que la plateforme veut parité stricte entre managed et self-hosted. Combiné au changement OAuth 201→200 d&apos;aujourd&apos;hui, c&apos;est le bon mois pour un dependabot check de l&apos;intégration Supabase."
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 2 Jun 2026",
+    "en": "Backend & Fullstack Daily — Jun 2, 2026",
+    "fr": "Backend & Fullstack Daily — 2 juin 2026"
+  },
+  "description": {
+    "es": "Microsoft destapa dos campañas npm consecutivas — 14 paquetes typosquat con un harvester Bun de 195KB cazando AWS/Vault/GitHub Actions el 28 de mayo y 45 paquetes de dependency confusion ejecutando recon vía postinstall el 28-29 — mientras Starlette/FastAPI patchea BadHost (CVE-2026-48710), un host-header injection con 325M descargas semanales que mete bypass de auth en cualquier servidor vLLM/LiteLLM/MCP. Ghost CMS sigue en exploitation activa con CVE-2026-26980 (700+ sitios incluido Harvard) y AWS sube la apuesta lanzando OpenSearch Serverless para workloads de agentes con integración nativa Vercel.",
+    "en": "Microsoft uncovers two back-to-back npm campaigns — 14 typosquat packages with a 195KB Bun-compiled harvester hunting AWS/Vault/GitHub Actions tokens on May 28 and 45 dependency-confusion packages running postinstall recon on May 28-29 — while Starlette/FastAPI patches BadHost (CVE-2026-48710), a Host-header injection with 325M weekly downloads that lets attackers bypass path-based auth on any vLLM/LiteLLM/MCP server. Ghost CMS stays under active exploitation via CVE-2026-26980 (700+ sites including Harvard) and AWS doubles down with OpenSearch Serverless redesigned for agent workloads with native Vercel integration.",
+    "fr": "Microsoft dévoile deux campagnes npm consécutives — 14 paquets typosquat avec un harvester Bun de 195KB ciblant AWS/Vault/GitHub Actions le 28 mai et 45 paquets en dependency confusion exécutant du recon via postinstall les 28-29 — pendant que Starlette/FastAPI patche BadHost (CVE-2026-48710), une injection de Host header avec 325M téléchargements hebdo qui contourne l'auth de tout serveur vLLM/LiteLLM/MCP. Ghost CMS reste sous exploitation active via CVE-2026-26980 (700+ sites dont Harvard) et AWS lance OpenSearch Serverless redesigné pour les workloads d'agents avec intégration native Vercel."
+  },
+  "pubDate": "2026-06-02",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "14 paquetes npm typosquat con harvester Bun a AWS/Vault",
+        "en": "14 typosquat npm packages with Bun harvester for AWS/Vault",
+        "fr": "14 paquets npm typosquat avec harvester Bun AWS/Vault"
+      },
+      "anchor": "msft-typosquat-npm",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "BadHost CVE-2026-48710: Starlette/FastAPI auth bypass",
+        "en": "BadHost CVE-2026-48710: Starlette/FastAPI auth bypass",
+        "fr": "BadHost CVE-2026-48710 : bypass auth Starlette/FastAPI"
+      },
+      "anchor": "badhost-starlette",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "45 paquetes npm via dependency confusion (Microsoft)",
+        "en": "45 dependency-confusion npm packages (Microsoft)",
+        "fr": "45 paquets npm via dependency confusion (Microsoft)"
+      },
+      "anchor": "msft-dep-confusion-npm",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Ghost CMS CVE-2026-26980 explotado en 700+ sitios",
+        "en": "Ghost CMS CVE-2026-26980 exploited on 700+ sites",
+        "fr": "Ghost CMS CVE-2026-26980 exploité sur 700+ sites"
+      },
+      "anchor": "ghost-cms-clickfix",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "AWS OpenSearch Serverless rediseñado para agentes IA",
+        "en": "AWS OpenSearch Serverless rebuilt for AI agent workloads",
+        "fr": "AWS OpenSearch Serverless redesigné pour agents IA"
+      },
+      "anchor": "aws-opensearch-serverless-agents",
+      "icon": "simple-icons:amazonwebservices"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "msft-typosquat-npm",
+      "updates": [
+        {
+          "id": "msft-typosquat-npm",
+          "tag": "security",
+          "date": "28 May 2026",
+          "title": {
+            "es": "Microsoft destapa 14 paquetes npm typosquat con stager Bun de 195KB cazando AWS, Vault y GitHub Actions",
+            "en": "Microsoft uncovers 14 typosquat npm packages with 195KB Bun-compiled stager hunting AWS, Vault and GitHub Actions secrets",
+            "fr": "Microsoft expose 14 paquets npm typosquat avec stager Bun de 195KB ciblant AWS, Vault et GitHub Actions"
+          },
+          "body_html": {
+            "es": "<p>El 28 de mayo Microsoft Threat Intelligence publicó la campaña: un actor único bajo el alias <code>vpmdhaj</code> (<code>a39155771@gmail.com</code>) subió <strong>14 paquetes en cuatro horas</strong> typosquatteando librerías populares de OpenSearch, ElasticSearch, DevOps y env-config. Todos los paquetes spoofean la URL del repo de OpenSearch en su <code>package.json</code> para parecer legit y disparan un único stager idéntico en <code>preinstall</code> sin que tu código tenga que hacer <code>require()</code>.</p><p>El segundo stage es lo nuevo: un <strong>binario JavaScript compilado con Bun de ~195KB</strong>, lo cual permite shippear lógica de exfiltración complicada sin parchear código fuente legible. El payload barre credenciales AWS, <strong>sesiones STS</strong>, contenido del Secrets Manager en 16+ regiones, tokens de HashiCorp Vault, npm publish tokens, <strong>tokens de GitHub Actions</strong> y metadata de ECS task roles. Con esos materiales el atacante mueve lateral en cloud, manipula pipelines CI/CD y publica versiones envenenadas downstream usando las credenciales de tu maintainer.</p><p>Acción inmediata: identificá sistemas que hayan instalado o construido desde el 28 de mayo, rotá <em>todo</em> lo que pueda haber pasado por el process tree de Node y movete a allowlist explícito de scopes en tu lockfile. Si seguís con <code>npm install</code> directo a registry público sin proxy ni firewall de paquetes, ponete las pilas — esto es la cuarta campaña en seis semanas.</p>",
+            "en": "<p>On May 28 Microsoft Threat Intelligence dropped the campaign: a single actor under the alias <code>vpmdhaj</code> (<code>a39155771@gmail.com</code>) pushed <strong>14 packages within a four-hour window</strong>, typosquatting popular OpenSearch, ElasticSearch, DevOps and env-config libraries. All of them spoof the upstream OpenSearch repo URL in their <code>package.json</code> to look legitimate, and they fire the same identical stager in <code>preinstall</code> — no <code>require()</code> from your code needed.</p><p>The second stage is the novel piece: a <strong>~195KB Bun-compiled JavaScript binary</strong>, which lets the operator ship sophisticated exfiltration logic without leaking readable source. The payload sweeps AWS credentials, <strong>STS sessions</strong>, Secrets Manager contents across 16+ regions, HashiCorp Vault tokens, npm publish tokens, <strong>GitHub Actions tokens</strong> and ECS task-role metadata. With that material the attacker pivots laterally in cloud, tampers with CI/CD pipelines and pushes poisoned updates downstream using the victim&apos;s maintainer identity.</p><p>Immediate action: identify any system that installed or built since May 28, rotate <em>everything</em> that touched the Node process tree, and move to an explicit scope allowlist in your lockfile. If you&apos;re still running <code>npm install</code> straight against the public registry with no proxy or package firewall, this is the fourth campaign in six weeks — get serious.</p>",
+            "fr": "<p>Le 28 mai Microsoft Threat Intelligence a publié la campagne : un acteur unique sous l&apos;alias <code>vpmdhaj</code> (<code>a39155771@gmail.com</code>) a poussé <strong>14 paquets en quatre heures</strong>, typosquattant des librairies OpenSearch, ElasticSearch, DevOps et env-config populaires. Tous spoofent l&apos;URL du repo OpenSearch dans <code>package.json</code> et déclenchent un stager identique en <code>preinstall</code>, sans nécessiter de <code>require()</code> côté victime.</p><p>Le second stage est inédit : un <strong>binaire JS compilé Bun d&apos;environ 195KB</strong>, ce qui permet d&apos;embarquer une logique d&apos;exfiltration sophistiquée sans code source lisible. Le payload aspire les credentials AWS, <strong>sessions STS</strong>, le contenu du Secrets Manager sur 16+ régions, les tokens HashiCorp Vault, les tokens de publication npm, les <strong>tokens GitHub Actions</strong> et les métadonnées des ECS task roles. Action immédiate : identifiez les systèmes ayant installé depuis le 28 mai, faites tourner toutes les credentials et passez à un allowlist explicite dans le lockfile.</p>"
+          },
+          "source": {
+            "url": "https://www.microsoft.com/en-us/security/blog/2026/05/28/typosquatted-npm-packages-used-steal-cloud-ci-cd-secrets/",
+            "label": "microsoft.com"
+          }
+        },
+        {
+          "id": "badhost-starlette",
+          "tag": "security",
+          "date": "27 May 2026",
+          "title": {
+            "es": "BadHost (CVE-2026-48710): Starlette deriva request.url del Host header sin validar — bypass de auth en FastAPI, vLLM, LiteLLM y MCP servers",
+            "en": "BadHost (CVE-2026-48710): Starlette derives request.url from the Host header unchecked — auth bypass in FastAPI, vLLM, LiteLLM and MCP servers",
+            "fr": "BadHost (CVE-2026-48710) : Starlette dérive request.url du Host header sans validation — bypass auth dans FastAPI, vLLM, LiteLLM et MCP servers"
+          },
+          "body_html": {
+            "es": "<p>X41 D-Sec con sponsorship de OSTIF divulgó el 27 de mayo <strong>CVE-2026-48710</strong>, un bug de un solo carácter en <strong>Starlette &lt; 1.0.1</strong> (325M downloads/semana, base de FastAPI). El framework reconstruye <code>request.url</code> concatenando el header <code>Host</code> con el path y re-parseando el resultado sin validar contra RFC 9112 / 3986. Un Host del tipo <code>example.com/health?x=</code> hace que <code>request.url.path</code> reporte <code>/health</code> mientras el router ASGI sirve <code>/protected</code> — tu middleware de auth ve la ruta pública, el handler corre la privada.</p><p>El blast radius es enorme porque Starlette está bajo casi todo el stack de AI tooling en Python: <strong>FastAPI, vLLM, LiteLLM, MCP servers, Ray Serve, BentoML, Google ADK-Python</strong>. Con un solo request crafted un atacante no autenticado entra a endpoints LLM restringidos, extrae API keys, llama tooling interno de agentes y quema GPU. El maintainer lo calificó 6.5 (Moderate); X41 lo subió a 7.0 (High) por la cadena hacia SSRF y en algunos casos RCE.</p><p>Fix: <strong>actualizá a Starlette 1.0.1</strong> ya. Mitigación de defensa en profundidad: mete un reverse proxy (nginx/Caddy/HAProxy) adelante que normalice y rechace Host headers malformados antes de llegar a ASGI. El tester público está en <a href=\"https://badhost.org/\">badhost.org</a>.</p>",
+            "en": "<p>X41 D-Sec, sponsored by OSTIF, disclosed <strong>CVE-2026-48710</strong> on May 27 — a one-character flaw in <strong>Starlette &lt; 1.0.1</strong> (325M weekly downloads, FastAPI&apos;s base). The framework rebuilds <code>request.url</code> by concatenating the <code>Host</code> header with the request path and reparsing the result, without validating against RFC 9112 / 3986. A Host like <code>example.com/health?x=</code> makes <code>request.url.path</code> report <code>/health</code> while the ASGI router actually serves <code>/protected</code> — your auth middleware sees the public route, the handler executes the private one.</p><p>The blast radius is huge because Starlette underpins nearly the entire Python AI tooling stack: <strong>FastAPI, vLLM, LiteLLM, MCP servers, Ray Serve, BentoML, Google ADK-Python</strong>. A single crafted request lets an unauthenticated attacker reach restricted LLM endpoints, extract API keys, drive internal agent tooling and burn GPU. The maintainer rated it 6.5 (Moderate); X41 pushed it to 7.0 (High) given chains to SSRF and in some cases RCE.</p><p>Fix: <strong>upgrade to Starlette 1.0.1</strong> now. Defense in depth: put a reverse proxy (nginx/Caddy/HAProxy) in front that normalizes and rejects malformed Host headers before they hit ASGI. Public tester at <a href=\"https://badhost.org/\">badhost.org</a>.</p>",
+            "fr": "<p>X41 D-Sec, sponsorisé par OSTIF, a divulgué <strong>CVE-2026-48710</strong> le 27 mai — un bug d&apos;un seul caractère dans <strong>Starlette &lt; 1.0.1</strong> (325M téléchargements/semaine, base de FastAPI). Le framework reconstruit <code>request.url</code> en concaténant le header <code>Host</code> avec le path sans validation RFC. Un Host comme <code>example.com/health?x=</code> trompe le middleware d&apos;auth tandis que le router ASGI sert le vrai chemin. Affecte FastAPI, vLLM, LiteLLM, MCP servers, Ray Serve, BentoML. Fix : <strong>passer à Starlette 1.0.1</strong>, mettre un reverse proxy devant.</p>"
+          },
+          "source": {
+            "url": "https://www.csoonline.com/article/4177711/fastapi-based-ai-tools-exposed-to-authentication-bypass-by-flaw-in-starlette-framework.html",
+            "label": "csoonline.com"
+          }
+        },
+        {
+          "id": "msft-dep-confusion-npm",
+          "tag": "security",
+          "date": "29 May 2026",
+          "title": {
+            "es": "Microsoft: 45 paquetes npm en dependency confusion ejecutando recon vía postinstall el 28-29 de mayo",
+            "en": "Microsoft: 45 dependency-confusion npm packages running recon via postinstall on May 28-29",
+            "fr": "Microsoft : 45 paquets npm en dependency confusion exécutant du recon via postinstall les 28-29 mai"
+          },
+          "body_html": {
+            "es": "<p>24 horas después del hit de typosquat, Microsoft publicó una segunda investigación el 29 de mayo: <strong>45 paquetes maliciosos</strong> distribuidos en nueve scopes organizacionales, atribuidos a un único operador detrás de tres alias (<code>mr.4nd3r50n</code>, <code>ce-rwb</code>, <code>t-in-one</code>). Pre-staging desde el 4 de mayo, dos ráfagas de publicación los días 28 y 29 — incluyen impersonations directas del widget de pago SberPay de Sberbank y de paquetes internos de varias orgs financieras.</p><p>Vector: <strong>dependency confusion clásico</strong> — registran en el registry público un nombre interno corporativo con una versión más alta que la del feed privado, npm la prefiere y la instala. El payload corre en <code>postinstall</code> con un stager ofuscado que harvest variables de entorno, hostname, info del sistema y \"contexto del developer\", luego baja payloads platform-specific desde <code>oob.moika[.]tech</code>. Microsoft remarca que actualmente está en <strong>modo reconocimiento</strong> — pero la misma infra permite flip a full credential theft o backdoor en cualquier momento.</p><p>Defensa: <strong>scopes con namespace explícito en lockfile</strong>, <code>publishConfig.registry</code> apuntando a tu feed interno, y <code>--ignore-scripts</code> en CI cuando no necesitás postinstall. Si tu monorepo tiene paquetes <code>@empresa/*</code> que nunca tienen que salir al registry público, registralos vos primero como squat defensivo.</p>",
+            "en": "<p>24 hours after the typosquat campaign, Microsoft published a second writeup on May 29: <strong>45 malicious packages</strong> spread across nine organizational scopes, attributed to a single operator running three aliases (<code>mr.4nd3r50n</code>, <code>ce-rwb</code>, <code>t-in-one</code>). Pre-staging since May 4, two publishing bursts on May 28 and 29 — including direct impersonations of Sberbank&apos;s SberPay payment widget and internal packages from several financial orgs.</p><p>Vector: <strong>classic dependency confusion</strong> — register an internal corporate name on the public registry with a higher version than the private feed; npm prefers it and installs it. The payload runs in <code>postinstall</code> via an obfuscated stager that harvests env vars, hostname, system info and \"developer context,\" then pulls platform-specific payloads from <code>oob.moika[.]tech</code>. Microsoft flags that the campaign is currently in <strong>recon-only mode</strong> — but the same infra can flip to full credential theft or backdoor delivery at any moment.</p><p>Defense: <strong>explicit-namespace scopes in the lockfile</strong>, <code>publishConfig.registry</code> pointed at your internal feed, and <code>--ignore-scripts</code> in CI when you don&apos;t need lifecycle hooks. If your monorepo has <code>@yourorg/*</code> packages that should never leak to the public registry, defensively squat them yourself first.</p>",
+            "fr": "<p>24 heures après la campagne typosquat, Microsoft a publié une seconde analyse le 29 mai : <strong>45 paquets malveillants</strong> sur neuf scopes organisationnels, attribués à un opérateur unique avec trois alias (<code>mr.4nd3r50n</code>, <code>ce-rwb</code>, <code>t-in-one</code>). Pre-staging depuis le 4 mai, deux salves les 28 et 29 — incluant le widget SberPay de Sberbank et des paquets internes d&apos;organisations financières.</p><p>Vecteur : <strong>dependency confusion classique</strong>. Le payload tourne en <code>postinstall</code>, exfiltre les variables d&apos;environnement et tire des payloads platform-specific de <code>oob.moika[.]tech</code>. Mode reconnaissance pour l&apos;instant, mais peut basculer en vol de credentials à tout moment. Défense : scopes namespacés explicites, <code>publishConfig.registry</code> pointé sur votre feed interne, <code>--ignore-scripts</code> en CI.</p>"
+          },
+          "source": {
+            "url": "https://www.microsoft.com/en-us/security/blog/2026/05/29/33-malicious-npm-packages-abuse-dependency-confusion-profile-developer-environments/",
+            "label": "microsoft.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "ghost-cms-clickfix",
+      "updates": [
+        {
+          "id": "ghost-cms-clickfix",
+          "tag": "security",
+          "date": "31 May 2026",
+          "title": {
+            "es": "Ghost CMS CVE-2026-26980 (CVSS 9.4): SQLi sin auth en Content API explotada en 700+ sitios — Harvard, Oxford, DuckDuckGo entre las víctimas",
+            "en": "Ghost CMS CVE-2026-26980 (CVSS 9.4): unauth SQLi in Content API exploited on 700+ sites — Harvard, Oxford, DuckDuckGo among victims",
+            "fr": "Ghost CMS CVE-2026-26980 (CVSS 9.4) : SQLi non auth dans Content API exploitée sur 700+ sites — Harvard, Oxford, DuckDuckGo parmi les victimes"
+          },
+          "body_html": {
+            "es": "<p>El Vulnerability Intelligence Report del 31 de mayo confirma que <strong>CVE-2026-26980</strong> en Ghost CMS sigue bajo explotación activa. Es un <strong>blind SQL injection sin autenticación</strong> en el Content API que afecta versiones <code>3.24.0</code> hasta <code>6.19.0</code>, CVSS 9.4. La campaña, detectada por primera vez el 7 de mayo, ya tomó más de <strong>700 sitios</strong> incluidos blogs de Harvard, Oxford y DuckDuckGo.</p><p>Cadena: dump de credenciales admin → inyección de JavaScript en posts y páginas → redirect del visitante a páginas falsas estilo Cloudflare CAPTCHA que ejecutan <strong>ClickFix social engineering</strong> y terminan instalando malware en máquinas de readers. Al menos dos clusters distintos operando — algunos sitios se implantan en menos de un día. Si manejás un Ghost autohosted y todavía estás abajo de 6.19.1, <strong>actualizá ya y asumí compromiso de la base de datos y de tus secrets de admin</strong>.</p>",
+            "en": "<p>The May 31 Vulnerability Intelligence Report confirms <strong>CVE-2026-26980</strong> in Ghost CMS is still under active exploitation. It&apos;s an <strong>unauthenticated blind SQL injection</strong> in the Content API affecting <code>3.24.0</code> through <code>6.19.0</code>, CVSS 9.4. The campaign, first detected on May 7, has now compromised more than <strong>700 sites</strong>, including Harvard, Oxford and DuckDuckGo blogs.</p><p>Chain: dump admin credentials → inject JavaScript into posts and pages → redirect visitors to fake Cloudflare CAPTCHA pages that execute <strong>ClickFix social engineering</strong>, ultimately installing malware on reader machines. At least two distinct clusters are operating — some sites are implanted within a single day. If you self-host Ghost and you&apos;re still below 6.19.1, <strong>patch now and assume your database and admin secrets are compromised</strong>.</p>",
+            "fr": "<p>Le Vulnerability Intelligence Report du 31 mai confirme que <strong>CVE-2026-26980</strong> dans Ghost CMS reste sous exploitation active. C&apos;est une <strong>injection SQL aveugle non authentifiée</strong> dans le Content API affectant <code>3.24.0</code> à <code>6.19.0</code>, CVSS 9.4. Plus de <strong>700 sites</strong> compromis depuis le 7 mai, dont Harvard, Oxford et DuckDuckGo.</p><p>Chaîne : dump des credentials admin → injection JS dans posts et pages → redirection vers fausses pages CAPTCHA Cloudflare exécutant du <strong>ClickFix</strong> et installant du malware. Au moins deux clusters distincts. Si vous auto-hébergez Ghost en dessous de 6.19.1, <strong>patchez maintenant et considérez votre base et vos secrets admin comme compromis</strong>.</p>"
+          },
+          "source": {
+            "url": "https://threat-modeling.com/vulnerability-intelligence-report-may-31-2026/",
+            "label": "threat-modeling.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "aws-opensearch-serverless-agents",
+      "updates": [
+        {
+          "id": "aws-opensearch-serverless-agents",
+          "tag": "release",
+          "date": "28 May 2026",
+          "title": {
+            "es": "AWS lanza la nueva generación de OpenSearch Serverless rediseñada para workloads de agentes — integración nativa con Vercel y Kiro",
+            "en": "AWS launches next-gen OpenSearch Serverless rebuilt for agent workloads — native Vercel and Kiro integration",
+            "fr": "AWS lance la nouvelle génération d'OpenSearch Serverless redesignée pour workloads d'agents — intégration native Vercel et Kiro"
+          },
+          "body_html": {
+            "es": "<p>AWS soltó el 28 de mayo la <strong>next-gen de OpenSearch Serverless</strong>, vendido como search + vector DB managed para workloads <em>agentic</em>. La pieza importante: <strong>desacopla compute de storage</strong>, scaling instantáneo cuando un agente dispara sub-agentes en paralelo y caída a costo cero en idle. En GA con integración nativa con <strong>Vercel</strong> y Kiro para que puedas desplegar el backend de search/RAG sin tocar infra.</p><p>El argumento de AWS (Tia White, GM): los agentes generan tráfico burst que la infra cloud tradicional, optimizada para humanos con uso sostenido, no encaja. Cloudflare ya reporta que los bots son el 31% del tráfico HTTP, con AI crawlers/assistants alrededor de un cuarto de eso; predicen tráfico no-humano superando al humano en H1 2027. Es la misma jugada que están haciendo Azure, Databricks y Snowflake — si tu stack TypeScript fullstack está armando un agente con RAG, OpenSearch Serverless ya es una opción seria sin pelearte con shards y warm pools.</p>",
+            "en": "<p>On May 28 AWS dropped the <strong>next-gen OpenSearch Serverless</strong>, pitched as a managed search + vector DB built for <em>agentic</em> workloads. The important piece: <strong>compute is decoupled from storage</strong>, instant scaling when an agent spawns parallel sub-agents, drop to zero cost on idle. GA with native integration into <strong>Vercel</strong> and Kiro so you can ship the search/RAG backend without touching infra.</p><p>AWS&apos;s argument (Tia White, GM): agents generate burst traffic that traditional cloud infrastructure — optimized for humans on sustained usage — simply doesn&apos;t fit. Cloudflare already reports bots at 31% of HTTP traffic, with AI crawlers/assistants making up roughly a quarter of that, and predicts non-human traffic overtaking human traffic in H1 2027. It&apos;s the same play Azure, Databricks and Snowflake are running — if your TypeScript fullstack is wiring up an agent with RAG, OpenSearch Serverless is now a serious option without fighting shards and warm pools.</p>",
+            "fr": "<p>Le 28 mai AWS a lancé la <strong>nouvelle génération d&apos;OpenSearch Serverless</strong>, positionnée comme search + vector DB managé pour workloads <em>agentic</em>. L&apos;essentiel : <strong>compute découplé du storage</strong>, scaling instantané quand un agent spawn des sous-agents en parallèle, coût zéro en idle. GA avec intégration native <strong>Vercel</strong> et Kiro.</p><p>Argument d&apos;AWS : les agents génèrent un trafic burst que l&apos;infra cloud traditionnelle ne gère pas bien. Cloudflare rapporte déjà 31% de trafic HTTP venant de bots et prédit que le trafic non-humain dépassera l&apos;humain en H1 2027. Même mouvement chez Azure, Databricks, Snowflake — si vous montez un agent RAG en TypeScript fullstack, OpenSearch Serverless est une option sérieuse sans gérer shards et warm pools.</p>"
+          },
+          "source": {
+            "url": "https://techcrunch.com/2026/05/28/the-internet-is-being-rebuilt-for-machines/",
+            "label": "techcrunch.com"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Cuarta campaña npm en seis semanas (TrapDoor, node-ipc, TanStack, ahora vpmdhaj + dependency confusion): el registro público sin proxy de paquetes ya no es opción seria para CI de producción. Package firewall, allowlist por scope y --ignore-scripts no son hardening avanzado, son baseline.",
+      "en": "Fourth npm campaign in six weeks (TrapDoor, node-ipc, TanStack, now vpmdhaj + dependency confusion): the public registry without a package proxy is no longer a serious option for production CI. Package firewalls, scope allowlists and --ignore-scripts are not advanced hardening, they're baseline.",
+      "fr": "Quatrième campagne npm en six semaines : le registry public sans proxy de paquets n'est plus une option sérieuse pour la CI de production. Package firewall, allowlist par scope et --ignore-scripts ne sont plus du hardening avancé, c'est du baseline."
+    },
+    {
+      "es": "BadHost en Starlette y CVE-2026-26980 en Ghost CMS confirman la misma lección de siempre: cualquier dato que venga del cliente — Host header, query string, body — necesita validación contra el grammar formal del RFC antes de tocar lógica de auth o de DB. Cuando un framework con 325M descargas semanales se confía del Host, el daño escala a todo el ecosistema downstream.",
+      "en": "BadHost in Starlette and CVE-2026-26980 in Ghost CMS confirm the same old lesson: anything from the client — Host header, query string, body — needs validation against the formal RFC grammar before touching auth or DB logic. When a framework with 325M weekly downloads trusts the Host, damage scales to the entire downstream ecosystem.",
+      "fr": "BadHost dans Starlette et CVE-2026-26980 dans Ghost CMS confirment la même leçon : toute donnée client (Host header, query string, body) doit être validée contre la grammaire RFC formelle avant de toucher l'auth ou la DB. Quand un framework à 325M téléchargements/semaine fait confiance au Host, le dégât scale à tout l'écosystème downstream."
+    },
+    {
+      "es": "AWS, Cloudflare, Azure y Snowflake convergen en infra explícitamente pensada para agentes: scaling instantáneo, idle a costo cero, integración con SDKs fullstack tipo Vercel. Si seguís diseñando para tráfico humano sostenido, en 18 meses te van a comer.",
+      "en": "AWS, Cloudflare, Azure and Snowflake are converging on infrastructure explicitly designed for agents: instant scaling, idle-to-zero pricing, integration with fullstack SDKs like Vercel. If you keep designing for sustained human traffic, you'll be undercut in 18 months.",
+      "fr": "AWS, Cloudflare, Azure et Snowflake convergent vers de l'infra explicitement pensée pour les agents : scaling instantané, idle à coût zéro, intégration aux SDK fullstack type Vercel. Continuer à designer pour du trafic humain soutenu, c'est se faire dépasser en 18 mois."
+    }
+  ]
+}

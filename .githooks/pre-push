@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+#
+# Pre-push hook: build the site locally before pushing so a broken build
+# (e.g. an invalid astro-icon name in a brief JSON) is caught here instead
+# of failing in GitHub Actions. Mirrors the CI step in deploy.yml (pnpm build).
+#
+# Bypass when needed: git push --no-verify
+
+set -e
+
+echo "pre-push: running production build (pnpm build)..."
+
+if command -v pnpm >/dev/null 2>&1; then
+	pnpm build
+else
+	echo "pre-push: pnpm not found, falling back to npm run build"
+	npm run build
+fi
+
+echo "pre-push: build OK — pushing."

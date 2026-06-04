@@ -1,0 +1,157 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 4 de junio de 2026",
+    "en": "Backend & Fullstack Daily — June 4, 2026",
+    "fr": "Backend & Fullstack Daily — 4 juin 2026"
+  },
+  "description": {
+    "es": "CloudPirates filtra credenciales en GitHub Actions (CVSS 10), OpenTelemetry lanza Blueprints para estandarizar observabilidad y Unit 42 publica un checklist concreto de hardening para la cadena de suministro npm.",
+    "en": "CloudPirates ships a CVSS 10 GitHub Actions credential leak, OpenTelemetry launches Blueprints to standardize observability, and Unit 42 publishes a concrete npm supply-chain hardening checklist.",
+    "fr": "CloudPirates expose des identifiants via GitHub Actions (CVSS 10), OpenTelemetry lance Blueprints pour standardiser l'observabilité, et Unit 42 publie une checklist concrète de durcissement de la chaîne d'approvisionnement npm."
+  },
+  "pubDate": "2026-06-04",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "CloudPirates: fuga de credenciales CI CVSS 10",
+        "en": "CloudPirates: CVSS 10 CI credential leak",
+        "fr": "CloudPirates : fuite d'identifiants CI CVSS 10"
+      },
+      "anchor": "cloudpirates-cve-45132",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "OpenTelemetry lanza Blueprints de observabilidad",
+        "en": "OpenTelemetry launches observability Blueprints",
+        "fr": "OpenTelemetry lance les Blueprints d'observabilité"
+      },
+      "anchor": "otel-blueprints",
+      "icon": "lucide:cloud"
+    },
+    {
+      "text": {
+        "es": "Unit 42: checklist de hardening npm",
+        "en": "Unit 42: npm hardening checklist",
+        "fr": "Unit 42 : checklist de durcissement npm"
+      },
+      "anchor": "unit42-npm-mitigations",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "Arquitectura: observabilidad + supply chain",
+        "en": "Architecture: observability + supply chain",
+        "fr": "Architecture : observabilité + supply chain"
+      },
+      "anchor": "otel-blueprints",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "cloudpirates-cve-45132",
+      "updates": [
+        {
+          "id": "cloudpirates-cve-45132",
+          "tag": "breaking",
+          "date": "01 Jun 2026",
+          "title": {
+            "es": "CVE-2026-45132 (CVSS 10): los Helm charts de CloudPirates filtraban un PAT y una SSH signing key desde GitHub Actions",
+            "en": "CVE-2026-45132 (CVSS 10): CloudPirates Helm charts leaked a PAT and SSH signing key from GitHub Actions",
+            "fr": "CVE-2026-45132 (CVSS 10) : les Helm charts de CloudPirates exposaient un PAT et une clé de signature SSH depuis GitHub Actions"
+          },
+          "body_html": {
+            "es": "<p>Los Helm charts open-source de CloudPirates venían con un agujero <strong>CVSS 10.0</strong> en GitHub Actions (<code>generate-schema.yaml</code>): un workflow disparable desde forks corría checkout de código no confiable con un <strong>Personal Access Token</strong> y una <strong>SSH signing key</strong> al alcance, dejando que un atacante los exfiltre. Es el clásico patrón <code>pull_request_target</code> mal configurado (CWE-94). Ojo si tirás charts de terceros en tu CI: revisá YA tus workflows. Parcheado en el commit <code>fcf9302</code>.</p>",
+            "en": "<p>CloudPirates' open-source Helm charts shipped a <strong>CVSS 10.0</strong> GitHub Actions flaw (<code>generate-schema.yaml</code>): a fork-triggerable workflow ran checkout of untrusted code while a <strong>Personal Access Token</strong> and an <strong>SSH signing key</strong> were in scope, letting an attacker exfiltrate both. Classic misconfigured <code>pull_request_target</code> pattern (CWE-94). If you pull third-party charts in CI, audit your workflows now. Patched in commit <code>fcf9302</code>.</p>",
+            "fr": "<p>Les Helm charts open-source de CloudPirates contenaient une faille <strong>CVSS 10.0</strong> dans GitHub Actions (<code>generate-schema.yaml</code>) : un workflow déclenchable depuis un fork exécutait le checkout de code non fiable avec un <strong>Personal Access Token</strong> et une <strong>clé de signature SSH</strong> accessibles. Pattern <code>pull_request_target</code> mal configuré classique (CWE-94). Corrigé dans le commit <code>fcf9302</code>.</p>"
+          },
+          "source": { "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-45132", "label": "nvd.nist.gov" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "otel-blueprints",
+      "updates": [
+        {
+          "id": "otel-blueprints",
+          "tag": "notable",
+          "date": "02 Jun 2026",
+          "title": {
+            "es": "OpenTelemetry lanza Blueprints: patrones prescriptivos para desplegar observabilidad sin reinventar la rueda",
+            "en": "OpenTelemetry launches Blueprints: prescriptive patterns to deploy observability without reinventing the wheel",
+            "fr": "OpenTelemetry lance Blueprints : des patterns prescriptifs pour déployer l'observabilité sans réinventer la roue"
+          },
+          "body_html": {
+            "es": "<p>OpenTelemetry lanzó <strong>Blueprints</strong>: patrones de arquitectura prescriptivos e implementaciones de referencia para desplegar observabilidad en Kubernetes, infra y stacks cloud-native. La idea es separar la complejidad <em>esencial</em> (inherente al problema) de la <em>accidental</em> (la que surge de adoptar OTel sin coordinación), con patrones reales de Adobe y Skyscanner. Si cada equipo tuyo arma el Collector y la config de SDK a mano, esto es un golazo para estandarizar sin perder interoperabilidad.</p>",
+            "en": "<p>The OpenTelemetry project launched <strong>Blueprints</strong>: prescriptive architecture patterns and reference implementations for deploying observability across Kubernetes, infra and cloud-native stacks. The goal is to separate <em>essential</em> complexity (inherent to observability) from <em>accidental</em> complexity (born from uncoordinated adoption), with real-world patterns from Adobe and Skyscanner. If every team hand-rolls Collector and SDK config, this is a clean way to standardize without losing interoperability.</p>",
+            "fr": "<p>Le projet OpenTelemetry a lancé <strong>Blueprints</strong> : des patterns d'architecture prescriptifs et des implémentations de référence pour déployer l'observabilité sur Kubernetes, l'infra et les stacks cloud-native. L'objectif est de distinguer la complexité <em>essentielle</em> de l'<em>accidentelle</em> (née d'une adoption non coordonnée), avec des patterns réels d'Adobe et Skyscanner.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/06/opentelemetry-blueprints-launch/", "label": "infoq.com" }
+        },
+        {
+          "id": "unit42-npm-mitigations",
+          "tag": "notable",
+          "date": "02 Jun 2026",
+          "title": {
+            "es": "Unit 42 actualiza su guía de cadena de suministro npm con un checklist de hardening concreto",
+            "en": "Unit 42 refreshes its npm supply-chain guide with a concrete hardening checklist",
+            "fr": "Unit 42 met à jour son guide de chaîne d'approvisionnement npm avec une checklist de durcissement concrète"
+          },
+          "body_html": {
+            "es": "<p>Tras la ola Miasma (@redhat-cloud-services) y los ataques de dependency-confusion, Unit 42 refrescó su guía de threat-landscape de npm con un checklist accionable: bloqueá cualquier versión publicada en las últimas <strong>24–72h</strong> vía proxy o registry privado, poné <code>ignore-scripts=true</code> en el <code>.npmrc</code>, usá <code>npm ci</code> + lockfiles en vez de <code>npm install</code>, verificá provenance con <code>slsa-verifier</code> y restringí el egress de red en CI/CD. Nada nuevo conceptualmente, pero si no lo tenés implementado, ponete las pilas: estos ataques ya son semanales.</p>",
+            "en": "<p>After the Miasma (@redhat-cloud-services) wave and the dependency-confusion campaigns, Unit 42 refreshed its npm threat-landscape guide with an actionable checklist: block any package version published in the last <strong>24–72h</strong> via a proxy or private registry, set <code>ignore-scripts=true</code> in <code>.npmrc</code>, use <code>npm ci</code> + lockfiles instead of <code>npm install</code>, verify provenance with <code>slsa-verifier</code>, and restrict CI/CD network egress. Nothing conceptually new, but if it's not in place yet, prioritize it — these attacks are now a weekly event.</p>",
+            "fr": "<p>Après la vague Miasma (@redhat-cloud-services) et les campagnes de dependency-confusion, Unit 42 a actualisé son guide avec une checklist : bloquez toute version publiée dans les dernières <strong>24–72h</strong> via un proxy ou registry privé, mettez <code>ignore-scripts=true</code> dans <code>.npmrc</code>, utilisez <code>npm ci</code> + lockfiles, vérifiez la provenance avec <code>slsa-verifier</code> et restreignez l'egress réseau en CI/CD.</p>"
+          },
+          "source": { "url": "https://unit42.paloaltonetworks.com/monitoring-npm-supply-chain-attacks/", "label": "unit42.paloaltonetworks.com" }
+        }
+      ]
+    },
+    {
+      "id": "quick-links",
+      "name": "Quick Links",
+      "theme": "quick-links",
+      "icon_emoji": "📌",
+      "anchor": "quick-links-list",
+      "updates": [
+        {
+          "id": "quick-links-list",
+          "tag": "minor",
+          "date": "04 Jun 2026",
+          "title": {
+            "es": "Todas las fuentes de hoy",
+            "en": "All of today's sources",
+            "fr": "Toutes les sources du jour"
+          },
+          "body_html": {
+            "es": "<ul><li><a href=\"https://nvd.nist.gov/vuln/detail/CVE-2026-45132\">CVE-2026-45132 — CloudPirates Helm charts (NVD)</a></li><li><a href=\"https://www.infoq.com/news/2026/06/opentelemetry-blueprints-launch/\">OpenTelemetry Blueprints (InfoQ)</a></li><li><a href=\"https://unit42.paloaltonetworks.com/monitoring-npm-supply-chain-attacks/\">npm Threat Landscape & Mitigations (Unit 42)</a></li><li><a href=\"https://www.infoq.com/news/2026/05/node-js-file-system/\">node:vfs y el debate de código IA en Node.js core (InfoQ)</a></li></ul>",
+            "en": "<ul><li><a href=\"https://nvd.nist.gov/vuln/detail/CVE-2026-45132\">CVE-2026-45132 — CloudPirates Helm charts (NVD)</a></li><li><a href=\"https://www.infoq.com/news/2026/06/opentelemetry-blueprints-launch/\">OpenTelemetry Blueprints (InfoQ)</a></li><li><a href=\"https://unit42.paloaltonetworks.com/monitoring-npm-supply-chain-attacks/\">npm Threat Landscape & Mitigations (Unit 42)</a></li><li><a href=\"https://www.infoq.com/news/2026/05/node-js-file-system/\">node:vfs and the AI-code debate in Node.js core (InfoQ)</a></li></ul>",
+            "fr": "<ul><li><a href=\"https://nvd.nist.gov/vuln/detail/CVE-2026-45132\">CVE-2026-45132 — CloudPirates Helm charts (NVD)</a></li><li><a href=\"https://www.infoq.com/news/2026/06/opentelemetry-blueprints-launch/\">OpenTelemetry Blueprints (InfoQ)</a></li><li><a href=\"https://unit42.paloaltonetworks.com/monitoring-npm-supply-chain-attacks/\">npm Threat Landscape & Mitigations (Unit 42)</a></li><li><a href=\"https://www.infoq.com/news/2026/05/node-js-file-system/\">node:vfs et le débat sur le code IA dans Node.js core (InfoQ)</a></li></ul>"
+          },
+          "source": { "url": "https://unit42.paloaltonetworks.com/monitoring-npm-supply-chain-attacks/#quick-links", "label": "sources" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El core de Node.js está debatiendo las contribuciones generadas por IA tras la propuesta node:vfs de Matteo Collina (PR #61478, ~19k líneas hechas en gran parte con Claude Code): el TSC va a votar una política sobre código asistido por IA, y Vercel y LangChain ya extrajeron la misma API a userland.",
+      "en": "Node.js core is debating AI-generated contributions after Matteo Collina's node:vfs proposal (PR #61478, ~19k lines built largely with Claude Code): the TSC is set to vote on a policy for AI-assisted code, while Vercel and LangChain have already extracted the same API into userland.",
+      "fr": "Le core de Node.js débat des contributions générées par IA après la proposition node:vfs de Matteo Collina (PR #61478, ~19k lignes en grande partie via Claude Code) : le TSC doit voter une politique sur le code assisté par IA, et Vercel et LangChain ont déjà extrait la même API en userland."
+    },
+    {
+      "es": "Los ataques a la cadena de suministro npm ya son un evento semanal (Miasma, dependency-confusion, fugas en CI tipo CloudPirates): las políticas de version-delay y el ignore-scripts pasan de nice-to-have a baseline obligatorio.",
+      "en": "npm supply-chain attacks are now a weekly event (Miasma, dependency-confusion, CloudPirates-style CI leaks): version-delay policies and ignore-scripts are moving from nice-to-have to mandatory baseline.",
+      "fr": "Les attaques de chaîne d'approvisionnement npm sont désormais hebdomadaires (Miasma, dependency-confusion, fuites CI type CloudPirates) : les politiques de version-delay et ignore-scripts passent de confort à socle obligatoire."
+    }
+  ]
+}

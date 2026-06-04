@@ -5,13 +5,22 @@
     "fr": "Backend & Fullstack Daily — 4 juin 2026"
   },
   "description": {
-    "es": "CloudPirates filtra credenciales en GitHub Actions (CVSS 10), OpenTelemetry lanza Blueprints para estandarizar observabilidad y Unit 42 publica un checklist concreto de hardening para la cadena de suministro npm.",
-    "en": "CloudPirates ships a CVSS 10 GitHub Actions credential leak, OpenTelemetry launches Blueprints to standardize observability, and Unit 42 publishes a concrete npm supply-chain hardening checklist.",
-    "fr": "CloudPirates expose des identifiants via GitHub Actions (CVSS 10), OpenTelemetry lance Blueprints pour standardiser l'observabilité, et Unit 42 publie une checklist concrète de durcissement de la chaîne d'approvisionnement npm."
+    "es": "El worm Miasma compromete 32 paquetes npm de Red Hat, CloudPirates filtra credenciales en GitHub Actions (CVSS 10), Microsoft destapa 45 paquetes de dependency-confusion y OpenTelemetry lanza Blueprints.",
+    "en": "The Miasma worm compromises 32 Red Hat npm packages, CloudPirates leaks CI credentials (CVSS 10), Microsoft exposes 45 dependency-confusion packages, and OpenTelemetry launches Blueprints.",
+    "fr": "Le worm Miasma compromet 32 paquets npm de Red Hat, CloudPirates expose des identifiants CI (CVSS 10), Microsoft révèle 45 paquets de dependency-confusion et OpenTelemetry lance Blueprints."
   },
   "pubDate": "2026-06-04",
   "category": "backend-fullstack",
   "highlights": [
+    {
+      "text": {
+        "es": "Miasma: worm en 32 paquetes npm de Red Hat",
+        "en": "Miasma: worm in 32 Red Hat npm packages",
+        "fr": "Miasma : worm dans 32 paquets npm Red Hat"
+      },
+      "anchor": "miasma-redhat-npm",
+      "icon": "lucide:shield"
+    },
     {
       "text": {
         "es": "CloudPirates: fuga de credenciales CI CVSS 10",
@@ -23,12 +32,21 @@
     },
     {
       "text": {
+        "es": "Microsoft: 45 paquetes de dependency-confusion",
+        "en": "Microsoft: 45 dependency-confusion packages",
+        "fr": "Microsoft : 45 paquets de dependency-confusion"
+      },
+      "anchor": "ms-npm-dependency-confusion",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
         "es": "OpenTelemetry lanza Blueprints de observabilidad",
         "en": "OpenTelemetry launches observability Blueprints",
         "fr": "OpenTelemetry lance les Blueprints d'observabilité"
       },
       "anchor": "otel-blueprints",
-      "icon": "lucide:cloud"
+      "icon": "lucide:layers"
     },
     {
       "text": {
@@ -37,16 +55,7 @@
         "fr": "Unit 42 : checklist de durcissement npm"
       },
       "anchor": "unit42-npm-mitigations",
-      "icon": "lucide:package"
-    },
-    {
-      "text": {
-        "es": "Arquitectura: observabilidad + supply chain",
-        "en": "Architecture: observability + supply chain",
-        "fr": "Architecture : observabilité + supply chain"
-      },
-      "anchor": "otel-blueprints",
-      "icon": "lucide:layers"
+      "icon": "lucide:cloud"
     }
   ],
   "tools": [
@@ -55,8 +64,24 @@
       "name": "Top Stories",
       "theme": "top-stories",
       "icon_emoji": "🔥",
-      "anchor": "cloudpirates-cve-45132",
+      "anchor": "miasma-redhat-npm",
       "updates": [
+        {
+          "id": "miasma-redhat-npm",
+          "tag": "breaking",
+          "date": "01 Jun 2026",
+          "title": {
+            "es": "Miasma: 32 paquetes npm @redhat-cloud-services comprometidos con un worm robacredenciales",
+            "en": "Miasma: 32 @redhat-cloud-services npm packages compromised with a credential-stealing worm",
+            "fr": "Miasma : 32 paquets npm @redhat-cloud-services compromis par un worm voleur d'identifiants"
+          },
+          "body_html": {
+            "es": "<p>El 1 de junio se publicó el ataque <strong>Miasma</strong>: al menos <strong>32 paquetes</strong> del namespace <code>@redhat-cloud-services</code> (96 versiones, ~117.000 descargas semanales) fueron envenenados con un worm robacredenciales derivado del malware <strong>(Mini) Shai-Hulud</strong>. El vector: la cuenta GitHub de un empleado de Red Hat comprometida, con publicación vía <strong>GitHub Actions OIDC</strong> (no token npm) en una ventana de <strong>72 segundos</strong>. El payload corre en <code>preinstall</code> y barre credenciales de cloud, tokens de CI/CD —incluidos <code>GITHUB_TOKEN</code> y <code>ACTIONS_RUNTIME_TOKEN</code>— y tooling de dev. Si tu pipeline consume cualquier <code>@redhat-cloud-services/*</code>, rotá secretos YA y revisá los logs de Actions.</p>",
+            "en": "<p>On June 1 the <strong>Miasma</strong> attack went public: at least <strong>32 packages</strong> in the <code>@redhat-cloud-services</code> namespace (96 versions, ~117,000 weekly downloads) were poisoned with a credential-stealing worm derived from the <strong>(Mini) Shai-Hulud</strong> malware. The vector: a Red Hat employee's compromised GitHub account, publishing via <strong>GitHub Actions OIDC</strong> (not an npm token) inside a <strong>72-second</strong> window. The payload runs in <code>preinstall</code> and sweeps cloud credentials, CI/CD secrets —including <code>GITHUB_TOKEN</code> and <code>ACTIONS_RUNTIME_TOKEN</code>— and developer tooling. If your pipeline consumes any <code>@redhat-cloud-services/*</code>, rotate secrets now and audit your Actions logs.</p>",
+            "fr": "<p>Le 1er juin, l'attaque <strong>Miasma</strong> a été rendue publique : au moins <strong>32 paquets</strong> du namespace <code>@redhat-cloud-services</code> (96 versions, ~117 000 téléchargements hebdomadaires) ont été empoisonnés par un worm voleur d'identifiants dérivé du malware <strong>(Mini) Shai-Hulud</strong>. Le vecteur : le compte GitHub compromis d'un employé de Red Hat, avec publication via <strong>GitHub Actions OIDC</strong> (pas de token npm) dans une fenêtre de <strong>72 secondes</strong>. Le payload s'exécute en <code>preinstall</code> et collecte les identifiants cloud, les secrets CI/CD —dont <code>GITHUB_TOKEN</code> et <code>ACTIONS_RUNTIME_TOKEN</code>— et le tooling dev.</p>"
+          },
+          "source": { "url": "https://www.wiz.io/blog/miasma-supply-chain-attack-targeting-redhat-npm-packages", "label": "wiz.io" }
+        },
         {
           "id": "cloudpirates-cve-45132",
           "tag": "breaking",
@@ -72,6 +97,31 @@
             "fr": "<p>Les Helm charts open-source de CloudPirates contenaient une faille <strong>CVSS 10.0</strong> dans GitHub Actions (<code>generate-schema.yaml</code>) : un workflow déclenchable depuis un fork exécutait le checkout de code non fiable avec un <strong>Personal Access Token</strong> et une <strong>clé de signature SSH</strong> accessibles. Pattern <code>pull_request_target</code> mal configuré classique (CWE-94). Corrigé dans le commit <code>fcf9302</code>.</p>"
           },
           "source": { "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-45132", "label": "nvd.nist.gov" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "ms-npm-dependency-confusion",
+      "updates": [
+        {
+          "id": "ms-npm-dependency-confusion",
+          "tag": "security",
+          "date": "29 May 2026",
+          "title": {
+            "es": "Microsoft destapa 45 paquetes npm que abusan dependency-confusion para perfilar entornos de dev",
+            "en": "Microsoft exposes 45 npm packages abusing dependency-confusion to profile developer environments",
+            "fr": "Microsoft révèle 45 paquets npm abusant du dependency-confusion pour profiler les environnements de dev"
+          },
+          "body_html": {
+            "es": "<p>Microsoft Threat Intelligence reportó <strong>45 paquetes maliciosos</strong> en 9 scopes (<code>@payments-widget</code>, <code>@sber-ecom-core</code>, <code>@data-science</code>, entre otros), publicados por tres cuentas entre el 28 y 29 de mayo. Usan <strong>dependency-confusion</strong>: nombres que imitan paquetes internos privados para que npm resuelva la versión pública. El payload corre en <code>postinstall</code> y, por ahora en modo <em>recon-only</em>, recolecta hostnames, env vars y credenciales, con C2 en <code>oob.moika[.]tech</code> y arquitectura lista para fases de explotación futuras. Mismo único operador detrás de las tres cuentas. Defender ya los detecta y pone en cuarentena.</p>",
+            "en": "<p>Microsoft Threat Intelligence reported <strong>45 malicious packages</strong> across 9 scopes (<code>@payments-widget</code>, <code>@sber-ecom-core</code>, <code>@data-science</code>, among others), published by three accounts on May 28–29. They use <strong>dependency-confusion</strong>: names mimicking private internal packages so npm resolves the public version. The payload runs in <code>postinstall</code> and, currently in <em>recon-only</em> mode, harvests hostnames, env vars and credentials, with C2 at <code>oob.moika[.]tech</code> and an architecture primed for future exploitation phases. A single operator is behind all three accounts. Defender already detects and quarantines them.</p>",
+            "fr": "<p>Microsoft Threat Intelligence a signalé <strong>45 paquets malveillants</strong> dans 9 scopes (<code>@payments-widget</code>, <code>@sber-ecom-core</code>, <code>@data-science</code>, entre autres), publiés par trois comptes les 28–29 mai. Ils utilisent le <strong>dependency-confusion</strong> : des noms imitant des paquets internes privés pour que npm résolve la version publique. Le payload s'exécute en <code>postinstall</code> et, pour l'instant en mode <em>recon-only</em>, collecte hostnames, env vars et identifiants, avec C2 sur <code>oob.moika[.]tech</code>.</p>"
+          },
+          "source": { "url": "https://www.microsoft.com/en-us/security/blog/2026/05/29/33-malicious-npm-packages-abuse-dependency-confusion-profile-developer-environments/", "label": "microsoft.com" }
         }
       ]
     },
@@ -133,9 +183,9 @@
             "fr": "Toutes les sources du jour"
           },
           "body_html": {
-            "es": "<ul><li><a href=\"https://nvd.nist.gov/vuln/detail/CVE-2026-45132\">CVE-2026-45132 — CloudPirates Helm charts (NVD)</a></li><li><a href=\"https://www.infoq.com/news/2026/06/opentelemetry-blueprints-launch/\">OpenTelemetry Blueprints (InfoQ)</a></li><li><a href=\"https://unit42.paloaltonetworks.com/monitoring-npm-supply-chain-attacks/\">npm Threat Landscape & Mitigations (Unit 42)</a></li><li><a href=\"https://www.infoq.com/news/2026/05/node-js-file-system/\">node:vfs y el debate de código IA en Node.js core (InfoQ)</a></li></ul>",
-            "en": "<ul><li><a href=\"https://nvd.nist.gov/vuln/detail/CVE-2026-45132\">CVE-2026-45132 — CloudPirates Helm charts (NVD)</a></li><li><a href=\"https://www.infoq.com/news/2026/06/opentelemetry-blueprints-launch/\">OpenTelemetry Blueprints (InfoQ)</a></li><li><a href=\"https://unit42.paloaltonetworks.com/monitoring-npm-supply-chain-attacks/\">npm Threat Landscape & Mitigations (Unit 42)</a></li><li><a href=\"https://www.infoq.com/news/2026/05/node-js-file-system/\">node:vfs and the AI-code debate in Node.js core (InfoQ)</a></li></ul>",
-            "fr": "<ul><li><a href=\"https://nvd.nist.gov/vuln/detail/CVE-2026-45132\">CVE-2026-45132 — CloudPirates Helm charts (NVD)</a></li><li><a href=\"https://www.infoq.com/news/2026/06/opentelemetry-blueprints-launch/\">OpenTelemetry Blueprints (InfoQ)</a></li><li><a href=\"https://unit42.paloaltonetworks.com/monitoring-npm-supply-chain-attacks/\">npm Threat Landscape & Mitigations (Unit 42)</a></li><li><a href=\"https://www.infoq.com/news/2026/05/node-js-file-system/\">node:vfs et le débat sur le code IA dans Node.js core (InfoQ)</a></li></ul>"
+            "es": "<ul><li><a href=\"https://www.wiz.io/blog/miasma-supply-chain-attack-targeting-redhat-npm-packages\">Miasma — @redhat-cloud-services npm worm (Wiz)</a></li><li><a href=\"https://nvd.nist.gov/vuln/detail/CVE-2026-45132\">CVE-2026-45132 — CloudPirates Helm charts (NVD)</a></li><li><a href=\"https://www.microsoft.com/en-us/security/blog/2026/05/29/33-malicious-npm-packages-abuse-dependency-confusion-profile-developer-environments/\">45 paquetes dependency-confusion (Microsoft)</a></li><li><a href=\"https://www.infoq.com/news/2026/06/opentelemetry-blueprints-launch/\">OpenTelemetry Blueprints (InfoQ)</a></li><li><a href=\"https://unit42.paloaltonetworks.com/monitoring-npm-supply-chain-attacks/\">npm Threat Landscape & Mitigations (Unit 42)</a></li></ul>",
+            "en": "<ul><li><a href=\"https://www.wiz.io/blog/miasma-supply-chain-attack-targeting-redhat-npm-packages\">Miasma — @redhat-cloud-services npm worm (Wiz)</a></li><li><a href=\"https://nvd.nist.gov/vuln/detail/CVE-2026-45132\">CVE-2026-45132 — CloudPirates Helm charts (NVD)</a></li><li><a href=\"https://www.microsoft.com/en-us/security/blog/2026/05/29/33-malicious-npm-packages-abuse-dependency-confusion-profile-developer-environments/\">45 dependency-confusion packages (Microsoft)</a></li><li><a href=\"https://www.infoq.com/news/2026/06/opentelemetry-blueprints-launch/\">OpenTelemetry Blueprints (InfoQ)</a></li><li><a href=\"https://unit42.paloaltonetworks.com/monitoring-npm-supply-chain-attacks/\">npm Threat Landscape & Mitigations (Unit 42)</a></li></ul>",
+            "fr": "<ul><li><a href=\"https://www.wiz.io/blog/miasma-supply-chain-attack-targeting-redhat-npm-packages\">Miasma — @redhat-cloud-services npm worm (Wiz)</a></li><li><a href=\"https://nvd.nist.gov/vuln/detail/CVE-2026-45132\">CVE-2026-45132 — CloudPirates Helm charts (NVD)</a></li><li><a href=\"https://www.microsoft.com/en-us/security/blog/2026/05/29/33-malicious-npm-packages-abuse-dependency-confusion-profile-developer-environments/\">45 paquets dependency-confusion (Microsoft)</a></li><li><a href=\"https://www.infoq.com/news/2026/06/opentelemetry-blueprints-launch/\">OpenTelemetry Blueprints (InfoQ)</a></li><li><a href=\"https://unit42.paloaltonetworks.com/monitoring-npm-supply-chain-attacks/\">npm Threat Landscape & Mitigations (Unit 42)</a></li></ul>"
           },
           "source": { "url": "https://unit42.paloaltonetworks.com/monitoring-npm-supply-chain-attacks/#quick-links", "label": "sources" }
         }
@@ -149,9 +199,9 @@
       "fr": "Le core de Node.js débat des contributions générées par IA après la proposition node:vfs de Matteo Collina (PR #61478, ~19k lignes en grande partie via Claude Code) : le TSC doit voter une politique sur le code assisté par IA, et Vercel et LangChain ont déjà extrait la même API en userland."
     },
     {
-      "es": "Los ataques a la cadena de suministro npm ya son un evento semanal (Miasma, dependency-confusion, fugas en CI tipo CloudPirates): las políticas de version-delay y el ignore-scripts pasan de nice-to-have a baseline obligatorio.",
-      "en": "npm supply-chain attacks are now a weekly event (Miasma, dependency-confusion, CloudPirates-style CI leaks): version-delay policies and ignore-scripts are moving from nice-to-have to mandatory baseline.",
-      "fr": "Les attaques de chaîne d'approvisionnement npm sont désormais hebdomadaires (Miasma, dependency-confusion, fuites CI type CloudPirates) : les politiques de version-delay et ignore-scripts passent de confort à socle obligatoire."
+      "es": "Los ataques a la cadena de suministro npm ya son un evento semanal (Miasma en Red Hat, 45 paquetes de dependency-confusion de Microsoft, fugas en CI tipo CloudPirates): las políticas de version-delay, ignore-scripts y OIDC con publishing scopes acotados pasan de nice-to-have a baseline obligatorio.",
+      "en": "npm supply-chain attacks are now a weekly event (Miasma on Red Hat, Microsoft's 45 dependency-confusion packages, CloudPirates-style CI leaks): version-delay policies, ignore-scripts and OIDC with scoped publishing are moving from nice-to-have to mandatory baseline.",
+      "fr": "Les attaques de chaîne d'approvisionnement npm sont désormais hebdomadaires (Miasma chez Red Hat, 45 paquets de dependency-confusion chez Microsoft, fuites CI type CloudPirates) : les politiques de version-delay, ignore-scripts et OIDC à scopes restreints passent de confort à socle obligatoire."
     }
   ]
 }

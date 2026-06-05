@@ -1,0 +1,198 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 5 Jun 2026",
+    "en": "Backend & Fullstack Daily — Jun 5, 2026",
+    "fr": "Backend & Fullstack Daily — 5 juin 2026"
+  },
+  "description": {
+    "es": "El gusano Miasma sigue mutando en npm (Phantom Gyp vía binding.gyp), PostgreSQL 19 Beta 1 con autovacuum paralelo, y Deno 2.8.2 suma cripto post-cuántica.",
+    "en": "The Miasma worm keeps mutating on npm (Phantom Gyp via binding.gyp), PostgreSQL 19 Beta 1 lands with parallel autovacuum, and Deno 2.8.2 adds post-quantum crypto.",
+    "fr": "Le ver Miasma continue de muter sur npm (Phantom Gyp via binding.gyp), PostgreSQL 19 Beta 1 arrive avec autovacuum parallèle, et Deno 2.8.2 ajoute la crypto post-quantique."
+  },
+  "pubDate": "2026-06-05",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "Gusano Miasma: 32 paquetes de Red Hat en npm", "en": "Miasma worm: 32 Red Hat npm packages", "fr": "Ver Miasma : 32 paquets Red Hat sur npm" },
+      "anchor": "miasma-redhat",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Phantom Gyp: RCE en install vía binding.gyp", "en": "Phantom Gyp: install-time RCE via binding.gyp", "fr": "Phantom Gyp : RCE à l'install via binding.gyp" },
+      "anchor": "phantom-gyp",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "PostgreSQL 19 Beta 1: autovacuum paralelo", "en": "PostgreSQL 19 Beta 1: parallel autovacuum", "fr": "PostgreSQL 19 Beta 1 : autovacuum parallèle" },
+      "anchor": "pg19-beta1",
+      "icon": "simple-icons:postgresql"
+    },
+    {
+      "text": { "es": "Deno 2.8.2: ML-DSA + ML-KEM post-cuántico", "en": "Deno 2.8.2: post-quantum ML-DSA + ML-KEM", "fr": "Deno 2.8.2 : ML-DSA + ML-KEM post-quantique" },
+      "anchor": "deno-282",
+      "icon": "simple-icons:deno"
+    },
+    {
+      "text": { "es": "45 paquetes npm de recon por dependency confusion", "en": "45 npm recon packages via dependency confusion", "fr": "45 paquets npm de recon par dependency confusion" },
+      "anchor": "dep-confusion",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Cloudflare Workers: Bulk Secrets API + Agents 0.14", "en": "Cloudflare Workers: Bulk Secrets API + Agents 0.14", "fr": "Cloudflare Workers : Bulk Secrets API + Agents 0.14" },
+      "anchor": "cloudflare-workers",
+      "icon": "simple-icons:cloudflare"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "miasma-redhat",
+      "updates": [
+        {
+          "id": "miasma-redhat",
+          "tag": "breaking",
+          "date": "02 Jun 2026",
+          "title": { "es": "Gusano Miasma troyaniza 32 paquetes @redhat-cloud-services en npm", "en": "Miasma worm trojanizes 32 @redhat-cloud-services npm packages", "fr": "Le ver Miasma trojanise 32 paquets @redhat-cloud-services sur npm" },
+          "body_html": {
+            "es": "<p>El 1 de junio un atacante comprometió el pipeline CI/CD de <code>RedHatInsights/javascript-clients</code> y publicó <strong>32 paquetes maliciosos (90+ versiones)</strong> bajo el scope <code>@redhat-cloud-services</code> usando el flujo OIDC legítimo de GitHub Actions — con <strong>provenance SLSA forjada</strong>. El dropper de <strong>4.29 MB</strong> corre en un hook <code>preinstall</code> y roba credenciales de GitHub, npm, AWS, Azure, GCP, HashiCorp Vault, Kubernetes, CircleCI, claves SSH y wallets. Tiene failsafe destructivo que borra el home del maintainer. Golazo de ingeniería ofensiva: revisá tus lockfiles y rotá tokens YA si tenés estos paquetes.</p>",
+            "en": "<p>On June 1 an attacker compromised the <code>RedHatInsights/javascript-clients</code> CI/CD pipeline and published <strong>32 malicious packages (90+ versions)</strong> under the <code>@redhat-cloud-services</code> scope via the legitimate GitHub Actions OIDC flow — with <strong>forged SLSA provenance</strong>. The <strong>4.29 MB</strong> dropper runs in a <code>preinstall</code> hook and harvests credentials from GitHub, npm, AWS, Azure, GCP, HashiCorp Vault, Kubernetes, CircleCI, SSH keys and wallets, with a destructive failsafe that wipes the maintainer home dir. Audit lockfiles and rotate tokens now if you pull these packages.</p>",
+            "fr": "<p>Le 1er juin, un attaquant a compromis le pipeline CI/CD <code>RedHatInsights/javascript-clients</code> et publié <strong>32 paquets malveillants (90+ versions)</strong> sous le scope <code>@redhat-cloud-services</code> via le flux OIDC légitime de GitHub Actions — avec <strong>provenance SLSA falsifiée</strong>. Le dropper de <strong>4,29 Mo</strong> s'exécute dans un hook <code>preinstall</code> et vole les identifiants GitHub, npm, AWS, Azure, GCP, HashiCorp Vault, Kubernetes, CircleCI, clés SSH et wallets, avec un failsafe destructeur qui efface le home du mainteneur. Auditez vos lockfiles et faites tourner vos tokens maintenant.</p>"
+          },
+          "source": { "url": "https://www.microsoft.com/en-us/security/blog/2026/06/02/preinstall-persistence-inside-red-hat-npm-miasma-credential-stealing-campaign/", "label": "microsoft.com" }
+        },
+        {
+          "id": "phantom-gyp",
+          "tag": "breaking",
+          "date": "03 Jun 2026",
+          "title": { "es": "Phantom Gyp: nueva ola de Miasma usa binding.gyp para RCE silencioso en install", "en": "Phantom Gyp: new Miasma wave uses binding.gyp for silent install-time RCE", "fr": "Phantom Gyp : nouvelle vague Miasma exploitant binding.gyp pour un RCE silencieux à l'install" },
+          "body_html": {
+            "es": "<p>Variante del gusano Miasma: <strong>57 paquetes / 286+ versiones</strong> comprometidos en menos de 2 horas (la víctima top, <code>@vapi-ai/server-sdk</code>, con 408k descargas/mes). El truco — bautizado <strong>Phantom Gyp</strong> — es un <code>binding.gyp</code> de apenas <strong>157 bytes</strong>: la sintaxis <code>&lt;!(...)</code> de node-gyp ejecuta un comando de shell <em>durante la instalación</em> sin aparecer en los scripts de <code>package.json</code>, evadiendo casi todos los scanners. El payload se autopropaga forjando attestations de Sigstore (Fulcio/Rekor) por npm, RubyGems y GitHub, y apunta a credenciales cloud, secrets de Actions y configs de asistentes IA (<code>.claude/</code>, <code>.cursor/</code>, <code>.gemini/</code>). Ojo: tu scanner de lifecycle scripts NO ve esto.</p>",
+            "en": "<p>A Miasma worm variant: <strong>57 packages / 286+ versions</strong> compromised in under 2 hours (top victim <code>@vapi-ai/server-sdk</code>, 408k monthly downloads). The trick — dubbed <strong>Phantom Gyp</strong> — is a <strong>157-byte</strong> <code>binding.gyp</code>: node-gyp's <code>&lt;!(...)</code> syntax executes a shell command <em>during install</em> without ever appearing in <code>package.json</code> scripts, evading most scanners. The payload self-propagates by forging Sigstore attestations (Fulcio/Rekor) across npm, RubyGems and GitHub, targeting cloud credentials, Actions secrets and AI-assistant configs (<code>.claude/</code>, <code>.cursor/</code>, <code>.gemini/</code>). Your lifecycle-script scanner will NOT catch this.</p>",
+            "fr": "<p>Une variante du ver Miasma : <strong>57 paquets / 286+ versions</strong> compromis en moins de 2 heures (victime principale <code>@vapi-ai/server-sdk</code>, 408k téléchargements/mois). L'astuce — baptisée <strong>Phantom Gyp</strong> — est un <code>binding.gyp</code> de <strong>157 octets</strong> : la syntaxe <code>&lt;!(...)</code> de node-gyp exécute une commande shell <em>pendant l'install</em> sans jamais apparaître dans les scripts de <code>package.json</code>, échappant à la plupart des scanners. Le payload se propage en falsifiant des attestations Sigstore (Fulcio/Rekor) sur npm, RubyGems et GitHub, ciblant identifiants cloud, secrets Actions et configs d'assistants IA (<code>.claude/</code>, <code>.cursor/</code>, <code>.gemini/</code>).</p>"
+          },
+          "source": { "url": "https://www.stepsecurity.io/blog/binding-gyp-npm-supply-chain-attack-spreads-like-worm", "label": "stepsecurity.io" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "deno-282",
+      "updates": [
+        {
+          "id": "deno-282",
+          "tag": "release",
+          "date": "03 Jun 2026",
+          "title": { "es": "Deno 2.8.2: cripto post-cuántica y deno compile --bundle", "en": "Deno 2.8.2: post-quantum crypto and deno compile --bundle", "fr": "Deno 2.8.2 : crypto post-quantique et deno compile --bundle" },
+          "body_html": {
+            "es": "<p>Deno 2.8.2 trae <strong>ML-DSA (FIPS 204)</strong> y <strong>ML-KEM (FIPS 203)</strong> post-cuánticos en WebCrypto, más ChaCha20-Poly1305 y SHAKE. Suma el flag <code>--bundle</code> a <code>deno compile</code> (mejor resolución de dependencias, embebido de npm acotado a lo que el bundle realmente usa), soporte de <code>node:wasi</code>, proxy de env/globals para <code>node:http(s)</code>, y reescribió el kernel de Jupyter en JS dejando atrás zeromq. Más de 100 fixes. Si firmás tokens o hacés single-binary deploys, este release te interesa.</p>",
+            "en": "<p>Deno 2.8.2 ships post-quantum <strong>ML-DSA (FIPS 204)</strong> and <strong>ML-KEM (FIPS 203)</strong> in WebCrypto, plus ChaCha20-Poly1305 and SHAKE. It adds a <code>--bundle</code> flag to <code>deno compile</code> (better dependency resolution, npm embedding scoped to what the bundle actually reaches), <code>node:wasi</code> support, env/global proxying for <code>node:http(s)</code>, and a JS-rewritten Jupyter kernel that drops zeromq. 100+ fixes. Worth a look if you sign tokens or ship single-binary deploys.</p>",
+            "fr": "<p>Deno 2.8.2 livre <strong>ML-DSA (FIPS 204)</strong> et <strong>ML-KEM (FIPS 203)</strong> post-quantiques dans WebCrypto, plus ChaCha20-Poly1305 et SHAKE. Il ajoute un flag <code>--bundle</code> à <code>deno compile</code> (meilleure résolution des dépendances, embarquement npm limité à ce que le bundle utilise réellement), le support de <code>node:wasi</code>, le proxy env/globals pour <code>node:http(s)</code>, et un kernel Jupyter réécrit en JS abandonnant zeromq. 100+ correctifs.</p>"
+          },
+          "source": { "url": "https://github.com/denoland/deno/releases", "label": "github.com/denoland" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "pg19-beta1",
+      "updates": [
+        {
+          "id": "pg19-beta1",
+          "tag": "beta",
+          "date": "04 Jun 2026",
+          "title": { "es": "PostgreSQL 19 Beta 1: autovacuum paralelo, async I/O escalable y pg_plan_advice", "en": "PostgreSQL 19 Beta 1: parallel autovacuum, scalable async I/O, pg_plan_advice", "fr": "PostgreSQL 19 Beta 1 : autovacuum parallèle, async I/O scalable, pg_plan_advice" },
+          "body_html": {
+            "es": "<p>Salió la primera beta de PG19. Lo que más vas a sentir: <strong>autovacuum con workers paralelos</strong> (<code>autovacuum_max_parallel_workers</code>) y un nuevo scoring para priorizar tablas; <code>io_method=worker</code> ahora escala solo entre <code>io_min_workers</code> e <code>io_max_workers</code>; inserts de foreign key más rápidos; la extensión <strong><code>pg_plan_advice</code></strong> para estabilizar decisiones del planner; <code>WAIT FOR LSN</code> contra stale reads en réplicas; y soporte SQL/PGQ. Ojo con dos cambios de default: <strong>JIT desactivado</strong> y <strong>RADIUS removido por completo</strong>. GA estimada para sep/oct. Probá en staging antes.</p>",
+            "en": "<p>PG19's first beta is out. What you'll actually feel: <strong>parallel autovacuum workers</strong> (<code>autovacuum_max_parallel_workers</code>) with a new table-prioritization scoring; <code>io_method=worker</code> now auto-scales between <code>io_min_workers</code> and <code>io_max_workers</code>; faster foreign-key inserts; the <strong><code>pg_plan_advice</code></strong> extension to stabilize planner decisions; <code>WAIT FOR LSN</code> against stale replica reads; and SQL/PGQ support. Note two default changes: <strong>JIT off by default</strong> and <strong>RADIUS auth fully removed</strong>. GA expected Sep/Oct. Test on staging first.</p>",
+            "fr": "<p>La première beta de PG19 est là. Ce que vous sentirez : <strong>autovacuum à workers parallèles</strong> (<code>autovacuum_max_parallel_workers</code>) avec un nouveau scoring de priorisation des tables ; <code>io_method=worker</code> s'auto-échelonne entre <code>io_min_workers</code> et <code>io_max_workers</code> ; inserts de clés étrangères plus rapides ; l'extension <strong><code>pg_plan_advice</code></strong> pour stabiliser les décisions du planner ; <code>WAIT FOR LSN</code> contre les lectures périmées sur réplicas ; et le support SQL/PGQ. Deux changements de défaut : <strong>JIT désactivé</strong> et <strong>RADIUS supprimé</strong>. GA prévue sept/oct.</p>"
+          },
+          "source": { "url": "https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/", "label": "postgresql.org" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloudflare-workers",
+      "updates": [
+        {
+          "id": "cloudflare-workers",
+          "tag": "release",
+          "date": "03 Jun 2026",
+          "title": { "es": "Cloudflare Workers: Bulk Secrets API, Workflow cron y Agents SDK 0.14", "en": "Cloudflare Workers: Bulk Secrets API, Workflow cron and Agents SDK 0.14", "fr": "Cloudflare Workers : Bulk Secrets API, cron Workflow et Agents SDK 0.14" },
+          "body_html": {
+            "es": "<p>Semana movida en el developer platform de Cloudflare. La <strong>Bulk Secrets API</strong> (3 jun) permite crear/actualizar/borrar hasta <strong>100 secrets en una sola request</strong> — adiós a los scripts en loop. Los <strong>Workflows</strong> ahora aceptan <strong>cron directo</strong> en <code>wrangler.jsonc</code> para disparar instancias automáticas (2 jun). Y el <strong>Agents SDK v0.14.0</strong> (2 jun) trae Agent Skills on-demand, tareas programadas con timezone, <code>ThinkWorkflow</code> para razonamiento durable y mejoras de transporte MCP. Si estás en el edge, buena DX para meter.</p>",
+            "en": "<p>Busy week on Cloudflare's developer platform. The <strong>Bulk Secrets API</strong> (Jun 3) lets you create/update/delete up to <strong>100 secrets in a single request</strong> — no more loop scripts. <strong>Workflows</strong> now accept <strong>direct cron</strong> in <code>wrangler.jsonc</code> to auto-trigger instances (Jun 2). And <strong>Agents SDK v0.14.0</strong> (Jun 2) brings on-demand Agent Skills, timezone-aware scheduled tasks, <code>ThinkWorkflow</code> for durable reasoning, and MCP transport improvements. Solid DX if you're on the edge.</p>",
+            "fr": "<p>Semaine chargée sur la plateforme développeur de Cloudflare. La <strong>Bulk Secrets API</strong> (3 juin) permet de créer/mettre à jour/supprimer jusqu'à <strong>100 secrets en une seule requête</strong> — fini les scripts en boucle. Les <strong>Workflows</strong> acceptent désormais le <strong>cron direct</strong> dans <code>wrangler.jsonc</code> pour déclencher des instances automatiques (2 juin). Et l'<strong>Agents SDK v0.14.0</strong> (2 juin) apporte les Agent Skills à la demande, des tâches planifiées tenant compte du fuseau, <code>ThinkWorkflow</code> pour le raisonnement durable et des améliorations du transport MCP.</p>"
+          },
+          "source": { "url": "https://releasebot.io/updates/cloudflare", "label": "releasebot.io" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "dep-confusion",
+      "updates": [
+        {
+          "id": "dep-confusion",
+          "tag": "security",
+          "date": "29 May 2026",
+          "title": { "es": "Campaña de dependency confusion: 45 paquetes npm de reconocimiento", "en": "Dependency-confusion campaign: 45 npm reconnaissance packages", "fr": "Campagne de dependency confusion : 45 paquets npm de reconnaissance" },
+          "body_html": {
+            "es": "<p>Microsoft documentó una campaña con <strong>45 paquetes maliciosos</strong> en tres cuentas (<code>mr.4nd3r50n</code>, <code>ce-rwb</code>, <code>t-in-one</code> — todas @yandex.ru, mismo operador según forense por C2 e tokens compartidos). Usan <strong>dependency confusion</strong>: registran paquetes scoped que imitan namespaces internos de 9 organizaciones (incluida la infra de pagos de Sberbank). Por ahora corre en modo <strong>solo reconocimiento</strong> — recolecta hostname, env vars y contexto de dev — pero la arquitectura ya está lista para robar credenciales. Si tenés scopes internos, registrá placeholders defensivos en el registry público.</p>",
+            "en": "<p>Microsoft documented a campaign with <strong>45 malicious packages</strong> across three accounts (<code>mr.4nd3r50n</code>, <code>ce-rwb</code>, <code>t-in-one</code> — all @yandex.ru, one operator per forensics via shared C2 and tokens). They use <strong>dependency confusion</strong>: registering scoped packages mirroring 9 organizations' internal namespaces (including Sberbank's payment infra). It currently runs in <strong>reconnaissance-only</strong> mode — collecting hostname, env vars and dev context — but the architecture is ready for credential theft. If you have internal scopes, register defensive placeholders on the public registry.</p>",
+            "fr": "<p>Microsoft a documenté une campagne avec <strong>45 paquets malveillants</strong> sur trois comptes (<code>mr.4nd3r50n</code>, <code>ce-rwb</code>, <code>t-in-one</code> — tous @yandex.ru, un seul opérateur selon la forensique via C2 et tokens partagés). Ils utilisent la <strong>dependency confusion</strong> : enregistrement de paquets scoped imitant les namespaces internes de 9 organisations (dont l'infra de paiement de Sberbank). Actuellement en mode <strong>reconnaissance uniquement</strong> — collecte hostname, variables d'env et contexte dev — mais l'architecture est prête pour le vol d'identifiants. Si vous avez des scopes internes, enregistrez des placeholders défensifs sur le registry public.</p>"
+          },
+          "source": { "url": "https://www.microsoft.com/en-us/security/blog/2026/05/29/33-malicious-npm-packages-abuse-dependency-confusion-profile-developer-environments/", "label": "microsoft.com" }
+        }
+      ]
+    },
+    {
+      "id": "quick-links",
+      "name": "Quick Links",
+      "theme": "quick-links",
+      "icon_emoji": "📌",
+      "anchor": "quick-links",
+      "updates": [
+        {
+          "id": "quick-links-list",
+          "tag": "minor",
+          "date": "05 Jun 2026",
+          "title": { "es": "Todas las fuentes", "en": "All sources", "fr": "Toutes les sources" },
+          "body_html": {
+            "es": "<ul><li><a href=\"https://www.microsoft.com/en-us/security/blog/2026/06/02/preinstall-persistence-inside-red-hat-npm-miasma-credential-stealing-campaign/\">Microsoft — Miasma / Red Hat npm</a></li><li><a href=\"https://www.stepsecurity.io/blog/binding-gyp-npm-supply-chain-attack-spreads-like-worm\">StepSecurity — Phantom Gyp</a></li><li><a href=\"https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/\">PostgreSQL 19 Beta 1</a></li><li><a href=\"https://github.com/denoland/deno/releases\">Deno 2.8.2 releases</a></li><li><a href=\"https://releasebot.io/updates/cloudflare\">Cloudflare developer platform</a></li><li><a href=\"https://www.microsoft.com/en-us/security/blog/2026/05/29/33-malicious-npm-packages-abuse-dependency-confusion-profile-developer-environments/\">Microsoft — dependency confusion</a></li></ul>",
+            "en": "<ul><li><a href=\"https://www.microsoft.com/en-us/security/blog/2026/06/02/preinstall-persistence-inside-red-hat-npm-miasma-credential-stealing-campaign/\">Microsoft — Miasma / Red Hat npm</a></li><li><a href=\"https://www.stepsecurity.io/blog/binding-gyp-npm-supply-chain-attack-spreads-like-worm\">StepSecurity — Phantom Gyp</a></li><li><a href=\"https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/\">PostgreSQL 19 Beta 1</a></li><li><a href=\"https://github.com/denoland/deno/releases\">Deno 2.8.2 releases</a></li><li><a href=\"https://releasebot.io/updates/cloudflare\">Cloudflare developer platform</a></li><li><a href=\"https://www.microsoft.com/en-us/security/blog/2026/05/29/33-malicious-npm-packages-abuse-dependency-confusion-profile-developer-environments/\">Microsoft — dependency confusion</a></li></ul>",
+            "fr": "<ul><li><a href=\"https://www.microsoft.com/en-us/security/blog/2026/06/02/preinstall-persistence-inside-red-hat-npm-miasma-credential-stealing-campaign/\">Microsoft — Miasma / Red Hat npm</a></li><li><a href=\"https://www.stepsecurity.io/blog/binding-gyp-npm-supply-chain-attack-spreads-like-worm\">StepSecurity — Phantom Gyp</a></li><li><a href=\"https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/\">PostgreSQL 19 Beta 1</a></li><li><a href=\"https://github.com/denoland/deno/releases\">Deno 2.8.2 releases</a></li><li><a href=\"https://releasebot.io/updates/cloudflare\">Cloudflare developer platform</a></li><li><a href=\"https://www.microsoft.com/en-us/security/blog/2026/05/29/33-malicious-npm-packages-abuse-dependency-confusion-profile-developer-environments/\">Microsoft — dependency confusion</a></li></ul>"
+          },
+          "source": { "url": "https://unit42.paloaltonetworks.com/monitoring-npm-supply-chain-attacks/", "label": "unit42.paloaltonetworks.com" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El gusano Miasma mutó de hooks preinstall (Red Hat, 1 jun) a binding.gyp (Phantom Gyp, 3 jun) en 48hs — los atacantes ya iteran más rápido que tus scanners. La provenance SLSA/Sigstore firmada NO garantiza que el código sea benigno si el pipeline está comprometido.",
+      "en": "The Miasma worm mutated from preinstall hooks (Red Hat, Jun 1) to binding.gyp (Phantom Gyp, Jun 3) in 48h — attackers now iterate faster than your scanners. Signed SLSA/Sigstore provenance does NOT guarantee benign code when the pipeline itself is compromised.",
+      "fr": "Le ver Miasma a muté des hooks preinstall (Red Hat, 1er juin) vers binding.gyp (Phantom Gyp, 3 juin) en 48h — les attaquants itèrent plus vite que vos scanners. Une provenance SLSA/Sigstore signée ne garantit PAS un code bénin si le pipeline lui-même est compromis."
+    },
+    {
+      "es": "Cripto post-cuántica entrando a runtimes mainstream: Deno 2.8.2 expone ML-DSA y ML-KEM en WebCrypto. Vale ir mapeando dónde firmás/encriptás antes de que NIST apriete los deadlines de migración.",
+      "en": "Post-quantum crypto is landing in mainstream runtimes: Deno 2.8.2 exposes ML-DSA and ML-KEM in WebCrypto. Worth mapping where you sign/encrypt before NIST migration deadlines tighten.",
+      "fr": "La crypto post-quantique arrive dans les runtimes mainstream : Deno 2.8.2 expose ML-DSA et ML-KEM dans WebCrypto. Mieux vaut cartographier où vous signez/chiffrez avant que les échéances de migration NIST se resserrent."
+    }
+  ]
+}

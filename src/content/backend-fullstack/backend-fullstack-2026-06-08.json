@@ -1,0 +1,242 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 8 de junio de 2026",
+    "en": "Backend & Fullstack Daily — June 8, 2026",
+    "fr": "Backend & Fullstack Daily — 8 juin 2026"
+  },
+  "description": {
+    "es": "El gusano Miasma llega a los repos de Microsoft Azure, Miasma v2 abusa de binding.gyp, PostgreSQL 19 Beta 1, Deno 2.8.2 con cripto post-cuántica y el agujero del Read tool en Claude Code GitHub Action.",
+    "en": "The Miasma worm reaches Microsoft Azure repos, Miasma v2 abuses binding.gyp, PostgreSQL 19 Beta 1 lands, Deno 2.8.2 ships post-quantum crypto, and the Claude Code GitHub Action Read-tool secret leak.",
+    "fr": "Le ver Miasma atteint les repos Microsoft Azure, Miasma v2 abuse de binding.gyp, PostgreSQL 19 Beta 1, Deno 2.8.2 et crypto post-quantique, et la fuite de secrets du Read tool dans Claude Code GitHub Action."
+  },
+  "pubDate": "2026-06-08",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "Gusano Miasma tira 73 repos de Microsoft Azure", "en": "Miasma worm downs 73 Microsoft Azure repos", "fr": "Le ver Miasma fait tomber 73 repos Azure" },
+      "anchor": "miasma-azure",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Miasma v2 abusa de binding.gyp: 57 paquetes", "en": "Miasma v2 abuses binding.gyp: 57 packages", "fr": "Miasma v2 abuse de binding.gyp : 57 paquets" },
+      "anchor": "miasma-v2",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "PostgreSQL 19 Beta 1: autovacuum paralelo", "en": "PostgreSQL 19 Beta 1: parallel autovacuum", "fr": "PostgreSQL 19 Beta 1 : autovacuum parallèle" },
+      "anchor": "pg19-beta1",
+      "icon": "simple-icons:postgresql"
+    },
+    {
+      "text": { "es": "Deno 2.8.2 suma cripto post-cuántica", "en": "Deno 2.8.2 ships post-quantum crypto", "fr": "Deno 2.8.2 ajoute la crypto post-quantique" },
+      "anchor": "deno-282",
+      "icon": "simple-icons:deno"
+    },
+    {
+      "text": { "es": "Claude Code GitHub Action filtraba secrets", "en": "Claude Code GitHub Action leaked secrets", "fr": "Claude Code GitHub Action fuitait des secrets" },
+      "anchor": "claude-action",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "OpenTelemetry lanza la iniciativa Blueprints", "en": "OpenTelemetry launches Blueprints", "fr": "OpenTelemetry lance Blueprints" },
+      "anchor": "otel-blueprints",
+      "icon": "lucide:layers"
+    },
+    {
+      "text": { "es": "Bun reescrito de Zig a Rust por agentes", "en": "Bun rewritten Zig to Rust by agents", "fr": "Bun réécrit de Zig à Rust par des agents" },
+      "anchor": "bun-rust",
+      "icon": "simple-icons:bun"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "miasma-azure",
+      "updates": [
+        {
+          "id": "miasma-azure",
+          "tag": "breaking",
+          "date": "05 Jun 2026",
+          "title": { "es": "El gusano Miasma llega a Microsoft Azure: 73 repos deshabilitados", "en": "Miasma worm reaches Microsoft Azure: 73 repos disabled", "fr": "Le ver Miasma atteint Microsoft Azure : 73 repos désactivés" },
+          "body_html": {
+            "es": "<p>El 5 de junio GitHub deshabilitó <strong>73 repos</strong> en cuatro orgs de Microsoft tras un commit malicioso en <code>Azure/durabletask</code> desde una cuenta de contributor comprometida. Los archivos plantados ejecutan un payload robacredenciales de <strong>4.6 MB</strong> apenas abrís el repo en Claude Code, Gemini CLI, Cursor o VS Code — apunta a secrets de GitHub Actions, AWS, GCP, Azure, K8s, Vault y npm. Ojo: el vector ahora es el editor/agente de IA, no solo <code>npm install</code>.</p>",
+            "en": "<p>On June 5 GitHub disabled <strong>73 repos</strong> across four Microsoft orgs after a malicious commit landed in <code>Azure/durabletask</code> via a compromised contributor account. Planted files auto-run a <strong>4.6 MB</strong> credential harvester the moment you open the repo in Claude Code, Gemini CLI, Cursor or VS Code — targeting GitHub Actions, AWS, GCP, Azure, K8s, Vault and npm secrets. The attack vector is now the AI editor/agent, not just <code>npm install</code>.</p>",
+            "fr": "<p>Le 5 juin, GitHub a désactivé <strong>73 repos</strong> dans quatre orgs Microsoft après un commit malveillant dans <code>Azure/durabletask</code> via un compte contributor compromis. Les fichiers plantés exécutent un voleur de credentials de <strong>4.6 Mo</strong> dès l'ouverture du repo dans Claude Code, Gemini CLI, Cursor ou VS Code.</p>"
+          },
+          "source": { "url": "https://thehackernews.com/2026/06/miasma-worm-hits-73-microsoft-github.html", "label": "thehackernews.com" }
+        },
+        {
+          "id": "miasma-v2",
+          "tag": "breaking",
+          "date": "04 Jun 2026",
+          "title": { "es": "Miasma v2: gusano npm autopropagante vía binding.gyp (Phantom Gyp)", "en": "Miasma v2: self-spreading npm worm via binding.gyp (Phantom Gyp)", "fr": "Miasma v2 : ver npm auto-propagé via binding.gyp" },
+          "body_html": {
+            "es": "<p>Semgrep documentó la evolución: en vez de <code>preinstall</code>/<code>postinstall</code> que las herramientas vigilan, el worm usa un <code>binding.gyp</code> de <strong>~157 bytes</strong> con command-substitution que dispara código durante <code>npm install</code>, sin tocar los scripts de <code>package.json</code>. Ya comprometió <strong>57 paquetes</strong> en 286+ versiones, forja attestations SLSA y exfiltra secrets a repos del atacante. Si tu pipeline confía solo en bloquear lifecycle scripts, ponete las pilas: no alcanza.</p>",
+            "en": "<p>Semgrep documented the evolution: instead of <code>preinstall</code>/<code>postinstall</code> hooks that scanners watch, the worm uses a <strong>~157-byte</strong> <code>binding.gyp</code> with a command-substitution action that fires during <code>npm install</code> without touching <code>package.json</code> scripts. It has compromised <strong>57 packages</strong> across 286+ versions, forges SLSA attestations and exfiltrates secrets to attacker repos. Blocking lifecycle scripts alone no longer protects you.</p>",
+            "fr": "<p>Semgrep a documenté l'évolution : au lieu des hooks <code>preinstall</code>/<code>postinstall</code> surveillés, le ver utilise un <code>binding.gyp</code> de <strong>~157 octets</strong> qui s'exécute pendant <code>npm install</code>. Déjà <strong>57 paquets</strong> compromis sur 286+ versions.</p>"
+          },
+          "source": { "url": "https://semgrep.dev/blog/2026/miasma-v2-self-spreading-npm-worm-now-uses-malicious-bindinggyp-file-and-compromises-57-packages/", "label": "semgrep.dev" }
+        },
+        {
+          "id": "claude-action",
+          "tag": "security",
+          "date": "05 Jun 2026",
+          "title": { "es": "Claude Code GitHub Action podía filtrar secrets vía el Read tool", "en": "Claude Code GitHub Action could leak secrets via the Read tool", "fr": "Claude Code GitHub Action pouvait fuiter des secrets via le Read tool" },
+          "body_html": {
+            "es": "<p>Microsoft Threat Intelligence detalló cómo la Claude Code GitHub Action podía exponer secrets de CI/CD al procesar contenido no confiable (issues, PRs, comentarios). El sandboxing de Bash no aplicaba al <strong>Read tool</strong>, que podía leer <code>/proc/self/environ</code> y robar el <code>ANTHROPIC_API_KEY</code> del runner. Anthropic lo mitigó en <strong>Claude Code 2.1.128</strong> rechazando incondicionalmente archivos de <code>/proc/</code>. Moraleja: tratá todo workflow de IA con acceso a secrets + file-read + red como alto riesgo.</p>",
+            "en": "<p>Microsoft Threat Intelligence detailed how the Claude Code GitHub Action could expose CI/CD secrets when processing untrusted content (issues, PRs, comments). Bash sandboxing did not cover the <strong>Read tool</strong>, which could read <code>/proc/self/environ</code> and exfiltrate the runner's <code>ANTHROPIC_API_KEY</code>. Anthropic mitigated it in <strong>Claude Code 2.1.128</strong> by unconditionally rejecting <code>/proc/</code> files. Treat any AI workflow with secrets + file-read + network access as high risk.</p>",
+            "fr": "<p>Microsoft Threat Intelligence a détaillé comment la Claude Code GitHub Action pouvait exposer des secrets CI/CD via le <strong>Read tool</strong>, qui lisait <code>/proc/self/environ</code>. Corrigé dans <strong>Claude Code 2.1.128</strong> en rejetant les fichiers <code>/proc/</code>.</p>"
+          },
+          "source": { "url": "https://www.microsoft.com/en-us/security/blog/2026/06/05/securing-ci-cd-in-agentic-world-claude-code-github-action-case/", "label": "microsoft.com" }
+        },
+        {
+          "id": "pg19-beta1",
+          "tag": "release",
+          "date": "04 Jun 2026",
+          "title": { "es": "PostgreSQL 19 Beta 1: autovacuum paralelo, REPACK y SQL/PGQ", "en": "PostgreSQL 19 Beta 1: parallel autovacuum, REPACK and SQL/PGQ", "fr": "PostgreSQL 19 Beta 1 : autovacuum parallèle, REPACK et SQL/PGQ" },
+          "body_html": {
+            "es": "<p>Salió la primera beta de PG 19 con cosas grandes: <strong>autovacuum paralelo</strong> (<code>autovacuum_max_parallel_workers</code> + scoring de prioridad), grafos de propiedades <strong>SQL/PGQ</strong>, <code>ON CONFLICT DO SELECT</code>, el nuevo comando <code>REPACK</code>, JSON nativo en <code>COPY TO</code> e <code>io_method=worker</code> autoescalable. GA estimada para septiembre/octubre. Tirale tus workloads ahora — esto es un golazo para la DX de DBA.</p>",
+            "en": "<p>PG 19's first beta lands with big wins: <strong>parallel autovacuum</strong> (<code>autovacuum_max_parallel_workers</code> + priority scoring), <strong>SQL/PGQ</strong> property-graph queries, <code>ON CONFLICT DO SELECT</code>, the new <code>REPACK</code> command, native JSON in <code>COPY TO</code>, and self-scaling <code>io_method=worker</code>. GA targeted for Sept/Oct. Throw your workloads at it now.</p>",
+            "fr": "<p>La première beta de PG 19 arrive avec du lourd : <strong>autovacuum parallèle</strong>, requêtes graphe <strong>SQL/PGQ</strong>, <code>ON CONFLICT DO SELECT</code>, la commande <code>REPACK</code> et JSON natif dans <code>COPY TO</code>. GA prévue pour sept./oct.</p>"
+          },
+          "source": { "url": "https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/", "label": "postgresql.org" }
+        },
+        {
+          "id": "ironworm",
+          "tag": "security",
+          "date": "04 Jun 2026",
+          "title": { "es": "IronWorm: 36 paquetes npm con infostealer escrito en Rust", "en": "IronWorm: 36 npm packages with a Rust-based infostealer", "fr": "IronWorm : 36 paquets npm avec un infostealer en Rust" },
+          "body_html": {
+            "es": "<p>En paralelo a Miasma, otra campaña — <strong>IronWorm</strong> — infectó <strong>36 paquetes</strong> npm con un infostealer compilado en Rust. Otra señal de que el supply chain de npm está en modo guerra esta semana: pineá versiones, exigí provenance y auditá tus <code>node_modules</code>.</p>",
+            "en": "<p>Alongside Miasma, a separate campaign — <strong>IronWorm</strong> — infected <strong>36 npm packages</strong> with a Rust-compiled infostealer. Another sign npm's supply chain is in full wartime mode this week: pin versions, demand provenance, audit your <code>node_modules</code>.</p>",
+            "fr": "<p>En parallèle de Miasma, une autre campagne — <strong>IronWorm</strong> — a infecté <strong>36 paquets npm</strong> avec un infostealer compilé en Rust. Épinglez vos versions et auditez <code>node_modules</code>.</p>"
+          },
+          "source": { "url": "https://it.slashdot.org/story/26/06/04/1948205/new-ironworm-malware-hits-36-packages-in-npm-supply-chain-attack", "label": "slashdot.org" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "deno-282",
+      "updates": [
+        {
+          "id": "deno-282",
+          "tag": "release",
+          "date": "03 Jun 2026",
+          "title": { "es": "Deno 2.8.2: criptografía post-cuántica y --bundle más afilado", "en": "Deno 2.8.2: post-quantum crypto and sharper --bundle", "fr": "Deno 2.8.2 : crypto post-quantique et --bundle affiné" },
+          "body_html": {
+            "es": "<p>Deno 2.8.2 trae <strong>ML-DSA (FIPS 204)</strong> y <strong>ML-KEM (FIPS 203)</strong> post-cuánticos, más ChaCha20-Poly1305, SHAKE/cSHAKE/TurboSHAKE y SHA-3 HMAC. Suma mejor resolución de dependencias en <code>--bundle</code> con <code>--minify</code>, kernel de Jupyter reescrito en JS y <code>--env-file</code> en tasks. Cripto seria de fábrica, sin libs externas.</p>",
+            "en": "<p>Deno 2.8.2 adds post-quantum <strong>ML-DSA (FIPS 204)</strong> and <strong>ML-KEM (FIPS 203)</strong>, plus ChaCha20-Poly1305, SHAKE/cSHAKE/TurboSHAKE and SHA-3 HMAC. It sharpens <code>--bundle</code> dependency resolution with <code>--minify</code>, a JS-rewritten Jupyter kernel and <code>--env-file</code> in tasks. Serious crypto in the box, no external libs.</p>",
+            "fr": "<p>Deno 2.8.2 ajoute le post-quantique <strong>ML-DSA (FIPS 204)</strong> et <strong>ML-KEM (FIPS 203)</strong>, plus ChaCha20-Poly1305 et SHA-3 HMAC. Améliore <code>--bundle</code> avec <code>--minify</code> et <code>--env-file</code> dans les tasks.</p>"
+          },
+          "source": { "url": "https://github.com/denoland/deno/releases", "label": "github.com/denoland" }
+        },
+        {
+          "id": "bun-rust",
+          "tag": "notable",
+          "date": "04 Jun 2026",
+          "title": { "es": "Bun reescrito de Zig a Rust por agentes de IA: ahora qué", "en": "Bun rewritten from Zig to Rust by AI agents: now what", "fr": "Bun réécrit de Zig à Rust par des agents IA : et maintenant" },
+          "body_html": {
+            "es": "<p>Sigue la onda expansiva del port de Bun de Zig a Rust: ~<strong>1 millón de líneas</strong> y 2.188 archivos traducidos por agentes de Claude Code en nueve días, pasando 99.8% del test suite. El detalle incómodo: ship con <strong>+10.000 bloques <code>unsafe</code></strong> en 700+ archivos — un port fiel de gestión manual de memoria no se vuelve memory-safe en el camino. La release estable sigue desde Zig; el Rust es experimental hasta paridad total.</p>",
+            "en": "<p>The fallout from Bun's Zig-to-Rust port continues: ~<strong>1M lines</strong> and 2,188 files translated by Claude Code agents in nine days, passing 99.8% of the test suite. The uncomfortable detail: it ships with <strong>10,000+ <code>unsafe</code> blocks</strong> across 700+ files — a faithful port of manual memory management does not become memory-safe in transit. Stable still ships from Zig; Rust stays experimental until full parity.</p>",
+            "fr": "<p>Les retombées du port de Bun de Zig à Rust continuent : ~<strong>1M de lignes</strong> traduites par des agents Claude Code en neuf jours, 99.8% des tests passés. Détail gênant : <strong>10 000+ blocs <code>unsafe</code></strong>. La stable reste en Zig.</p>"
+          },
+          "source": { "url": "https://bytecode.news/posts/2026/06/bun-has-been-converted-to-rust-now-what", "label": "bytecode.news" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "otel-blueprints",
+      "updates": [
+        {
+          "id": "otel-blueprints",
+          "tag": "notable",
+          "date": "02 Jun 2026",
+          "title": { "es": "OpenTelemetry lanza Blueprints para domar la complejidad", "en": "OpenTelemetry launches Blueprints to tame complexity", "fr": "OpenTelemetry lance Blueprints" },
+          "body_html": {
+            "es": "<p>OTel arranca la iniciativa <strong>Blueprints</strong>: guías prescriptivas, patrones de arquitectura e implementaciones de referencia para desplegar observabilidad a escala sin morir en el intento, cubriendo Kubernetes, infra, apps y entornos cloud-native. Adobe, Mastodon y Skyscanner ya aportaron casos. Si arrancás OTel desde cero, esto te ahorra meses de prueba y error.</p>",
+            "en": "<p>OTel kicks off the <strong>Blueprints</strong> initiative: prescriptive guidance, architectural patterns and reference implementations to deploy observability at scale, covering Kubernetes, infra, apps and cloud-native environments. Adobe, Mastodon and Skyscanner contributed cases. If you're starting OTel from scratch, this saves months of trial and error.</p>",
+            "fr": "<p>OTel lance l'initiative <strong>Blueprints</strong> : guides prescriptifs, patterns d'architecture et implémentations de référence pour déployer l'observabilité à l'échelle. Adobe, Mastodon et Skyscanner ont contribué des cas.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/06/opentelemetry-blueprints-launch/", "label": "infoq.com" }
+        },
+        {
+          "id": "vitest-418",
+          "tag": "patch",
+          "date": "01 Jun 2026",
+          "title": { "es": "Vitest 4.1.8: cadencia de patches sobre la línea 4.1", "en": "Vitest 4.1.8: steady patch cadence on the 4.1 line", "fr": "Vitest 4.1.8 : cadence de patches sur la ligne 4.1" },
+          "body_html": {
+            "es": "<p>Vitest publicó <strong>4.1.8</strong> el 1 de junio, manteniendo viva la línea 4.1 que trajo test tags, hooks <code>aroundEach</code>/<code>aroundAll</code> para envolver tests en transacciones o spans, el builder <code>test.extend</code> con inferencia de tipos y un reporter dedicado para agentes de IA. Soporte Vite 8 desde el día uno.</p>",
+            "en": "<p>Vitest shipped <strong>4.1.8</strong> on June 1, keeping the 4.1 line alive — the one that brought test tags, <code>aroundEach</code>/<code>aroundAll</code> hooks for wrapping tests in transactions or spans, the type-inferring <code>test.extend</code> builder and a dedicated AI-agent reporter. Vite 8 support from day one.</p>",
+            "fr": "<p>Vitest a publié <strong>4.1.8</strong> le 1er juin, maintenant la ligne 4.1 : test tags, hooks <code>aroundEach</code>/<code>aroundAll</code>, builder <code>test.extend</code> typé et reporter dédié aux agents IA. Support Vite 8 dès le premier jour.</p>"
+          },
+          "source": { "url": "https://www.npmjs.com/package/vitest?activeTab=versions", "label": "npmjs.com" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "miasma-redhat",
+      "updates": [
+        {
+          "id": "miasma-redhat",
+          "tag": "security",
+          "date": "02 Jun 2026",
+          "title": { "es": "Anatomía de Miasma: 32 paquetes @redhat-cloud-services trojanizados", "en": "Anatomy of Miasma: 32 trojanized @redhat-cloud-services packages", "fr": "Anatomie de Miasma : 32 paquets @redhat-cloud-services trojanisés" },
+          "body_html": {
+            "es": "<p>El writeup de Microsoft Security disecciona el origen: el 1 de junio se comprometió el pipeline CI/CD de <code>RedHatInsights/javascript-clients</code>, publicando <strong>32 paquetes</strong> bajo <code>@redhat-cloud-services</code> (90+ versiones) vía el workflow OIDC legítimo de GitHub Actions — con firmas de provenance auténticas. En CI escarba la memoria del runner, escala con sudo sin password y republica paquetes con provenance SLSA forjada. Marker: <em>Miasma: The Spreading Blight</em>.</p>",
+            "en": "<p>Microsoft Security's writeup dissects the origin: on June 1 the <code>RedHatInsights/javascript-clients</code> CI/CD pipeline was compromised, publishing <strong>32 packages</strong> under <code>@redhat-cloud-services</code> (90+ versions) via the legitimate GitHub Actions OIDC workflow — with authentic provenance signatures. In CI it scrapes runner memory, escalates via passwordless sudo and republishes packages with forged SLSA provenance. Marker: <em>Miasma: The Spreading Blight</em>.</p>",
+            "fr": "<p>Le writeup de Microsoft Security dissèque l'origine : le 1er juin, le pipeline CI/CD de <code>RedHatInsights/javascript-clients</code> a été compromis, publiant <strong>32 paquets</strong> sous <code>@redhat-cloud-services</code> via le workflow OIDC légitime de GitHub Actions, avec signatures de provenance authentiques.</p>"
+          },
+          "source": { "url": "https://www.microsoft.com/en-us/security/blog/2026/06/02/preinstall-persistence-inside-red-hat-npm-miasma-credential-stealing-campaign/", "label": "microsoft.com" }
+        }
+      ]
+    },
+    {
+      "id": "quick-links",
+      "name": "Quick Links",
+      "theme": "quick-links",
+      "icon_emoji": "📌",
+      "anchor": "quick-links",
+      "updates": [
+        {
+          "id": "ql-stepsecurity",
+          "tag": "minor",
+          "date": "04 Jun 2026",
+          "title": { "es": "StepSecurity: análisis del worm Phantom Gyp", "en": "StepSecurity: Phantom Gyp worm analysis", "fr": "StepSecurity : analyse du ver Phantom Gyp" },
+          "body_html": {
+            "es": "<p>Desglose técnico del vector <code>binding.gyp</code> y cómo detectarlo en tu pipeline.</p>",
+            "en": "<p>Technical breakdown of the <code>binding.gyp</code> vector and how to detect it in your pipeline.</p>",
+            "fr": "<p>Analyse technique du vecteur <code>binding.gyp</code> et comment le détecter.</p>"
+          },
+          "source": { "url": "https://www.stepsecurity.io/blog/binding-gyp-npm-supply-chain-attack-spreads-like-worm", "label": "stepsecurity.io" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Semana negra para el supply chain de npm: Miasma (v1 y v2) + IronWorm en paralelo. El patrón nuevo es doble — abusar de binding.gyp para saltarse el bloqueo de lifecycle scripts, y envenenar configs de agentes de IA para ejecutar al abrir el repo en el editor. Asumí que el editor es superficie de ataque.",
+      "en": "Brutal week for npm's supply chain: Miasma (v1 and v2) plus IronWorm running in parallel. The new pattern is twofold — abusing binding.gyp to bypass lifecycle-script blocking, and poisoning AI-agent configs to execute the moment you open the repo in your editor. Treat the editor as attack surface.",
+      "fr": "Semaine noire pour le supply chain npm : Miasma (v1 et v2) plus IronWorm en parallèle. Le nouveau pattern est double — abuser de binding.gyp et empoisonner les configs d'agents IA. Considérez l'éditeur comme une surface d'attaque."
+    },
+    {
+      "es": "La cripto post-cuántica deja de ser teoría: Deno la mete de fábrica (ML-DSA/ML-KEM). Empezá a pensar tus protocolos de firma/intercambio de claves con esquemas PQC en mente.",
+      "en": "Post-quantum crypto stops being theory: Deno ships it in-box (ML-DSA/ML-KEM). Start designing your signing and key-exchange protocols with PQC schemes in mind.",
+      "fr": "La crypto post-quantique cesse d'être théorique : Deno l'intègre nativement (ML-DSA/ML-KEM). Pensez vos protocoles de signature et d'échange de clés avec PQC en tête."
+    }
+  ]
+}

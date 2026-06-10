@@ -1,0 +1,258 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 10 Jun 2026",
+    "en": "Backend & Fullstack Daily — Jun 10, 2026",
+    "fr": "Backend & Fullstack Daily — 10 juin 2026"
+  },
+  "description": {
+    "es": "npm v12 apaga los install scripts por default, Node.js pasa a un major por año, y otro CVE de path traversal en CI/CD. La semana del supply chain deja lecciones duras.",
+    "en": "npm v12 turns install scripts off by default, Node.js moves to one major per year, and another CI/CD path-traversal CVE. The supply-chain week leaves hard lessons.",
+    "fr": "npm v12 désactive les install scripts par défaut, Node.js passe à un major par an, et un nouveau CVE de path traversal en CI/CD. La semaine supply chain laisse des leçons dures."
+  },
+  "pubDate": "2026-06-10",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "npm v12 apaga install scripts por default",
+        "en": "npm v12 turns install scripts off by default",
+        "fr": "npm v12 désactive les install scripts par défaut"
+      },
+      "anchor": "npm-v12",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "Node.js: un major por año desde Node 27",
+        "en": "Node.js: one major per year from Node 27",
+        "fr": "Node.js : un major par an dès Node 27"
+      },
+      "anchor": "nodejs-annual",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": {
+        "es": "SLSA no frenó el hijack del pipeline",
+        "en": "SLSA could not block the pipeline hijack",
+        "fr": "SLSA n'a pas bloqué le hijack du pipeline"
+      },
+      "anchor": "slsa-lesson",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "CVE-2026-24884: bypass por symlink en compressing",
+        "en": "CVE-2026-24884: symlink bypass in compressing",
+        "fr": "CVE-2026-24884 : bypass symlink dans compressing"
+      },
+      "anchor": "cve-compressing",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "NocoDB 2026.06.0: sync e historial de versiones",
+        "en": "NocoDB 2026.06.0: sync and version history",
+        "fr": "NocoDB 2026.06.0 : sync et historique de versions"
+      },
+      "anchor": "nocodb",
+      "icon": "lucide:database"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "npm-v12",
+      "updates": [
+        {
+          "id": "npm-v12",
+          "tag": "breaking",
+          "date": "09 Jun 2026",
+          "title": {
+            "es": "npm v12 apaga los install scripts y los deps remotos por default",
+            "en": "npm v12 turns install scripts and remote deps off by default",
+            "fr": "npm v12 désactive les install scripts et les deps distantes par défaut"
+          },
+          "body_html": {
+            "es": "<p>GitHub anunció los cambios rompedores de <strong>npm v12</strong> (estimado julio 2026): <code>allowScripts</code> pasa a <code>off</code> —no más <code>preinstall</code>/<code>install</code>/<code>postinstall</code> de tus dependencias salvo allowlist explícita— y <code>--allow-git</code>/<code>--allow-remote</code> quedan en <code>none</code>. Es la respuesta directa a la oleada Miasma/Phantom Gyp. Ya está detrás de warnings en <code>npm 11.16.0</code>: probá tu CI HOY porque te va a romper builds que dependían de scripts implícitos.</p>",
+            "en": "<p>GitHub announced the breaking changes for <strong>npm v12</strong> (estimated July 2026): <code>allowScripts</code> flips to <code>off</code> —no more dependency <code>preinstall</code>/<code>install</code>/<code>postinstall</code> unless explicitly allowlisted— and <code>--allow-git</code>/<code>--allow-remote</code> default to <code>none</code>. It is the direct answer to the Miasma/Phantom Gyp wave. It is already gated behind warnings in <code>npm 11.16.0</code>: test your CI now, because it will break builds that relied on implicit lifecycle scripts.</p>",
+            "fr": "<p>GitHub a annoncé les changements cassants de <strong>npm v12</strong> (estimé juillet 2026) : <code>allowScripts</code> passe à <code>off</code> —fini les <code>preinstall</code>/<code>install</code>/<code>postinstall</code> des dépendances sauf allowlist explicite— et <code>--allow-git</code>/<code>--allow-remote</code> par défaut à <code>none</code>. C'est la réponse directe à la vague Miasma/Phantom Gyp. Déjà derrière des warnings dans <code>npm 11.16.0</code> : testez votre CI maintenant.</p>"
+          },
+          "source": {
+            "url": "https://github.blog/changelog/2026-06-09-upcoming-breaking-changes-for-npm-v12/",
+            "label": "github.blog"
+          }
+        },
+        {
+          "id": "slsa-lesson",
+          "tag": "notable",
+          "date": "05 Jun 2026",
+          "title": {
+            "es": "Lección Miasma: las firmas SLSA no frenaron el hijack del pipeline",
+            "en": "Miasma lesson: SLSA signatures could not block the pipeline hijack",
+            "fr": "Leçon Miasma : les signatures SLSA n'ont pas bloqué le hijack du pipeline"
+          },
+          "body_html": {
+            "es": "<p>Con 57 paquetes más comprometidos, queda claro el agujero arquitectónico: las attestations <strong>SLSA Build L3</strong> prueban que un paquete salió del pipeline confiable, pero NO que ese pipeline estuviera limpio al ejecutarse. Los paquetes con backdoor tenían firmas válidas porque los construyó el CI legítimo de Red Hat… ya comprometido. Moraleja para seniors: la provenance es necesaria pero insuficiente. Sumá rotación de credenciales, monitoreo de secretos, publish access restrictivo y code review sobre los propios workflows de CI/CD.</p>",
+            "en": "<p>With 57 more packages compromised, the architectural gap is clear: <strong>SLSA Build L3</strong> attestations prove a package came from the trusted pipeline, but NOT that the pipeline was clean when it ran. The backdoored packages carried valid signatures because Red Hat's legitimate —already compromised— CI built them. Senior takeaway: provenance is necessary but insufficient. Layer credential rotation, secret monitoring, restrictive publish access, and code review on the CI/CD workflows themselves.</p>",
+            "fr": "<p>Avec 57 paquets de plus compromis, la faille architecturale est nette : les attestations <strong>SLSA Build L3</strong> prouvent qu'un paquet vient du pipeline de confiance, mais PAS que ce pipeline était propre au moment de l'exécution. Les paquets backdoorés avaient des signatures valides car le CI légitime —déjà compromis— de Red Hat les a construits. Leçon senior : la provenance est nécessaire mais insuffisante. Ajoutez rotation des credentials, surveillance des secrets et code review sur les workflows CI/CD.</p>"
+          },
+          "source": {
+            "url": "https://www.techtimes.com/articles/317832/20260605/red-hat-npm-packages-compromised-57-more-follow-signed-attestations-cannot-block-pipeline-hijack.htm",
+            "label": "techtimes.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "nodejs-annual",
+      "updates": [
+        {
+          "id": "nodejs-annual",
+          "tag": "notable",
+          "date": "03 Jun 2026",
+          "title": {
+            "es": "Node.js pasa a un major por año, arrancando con Node 27",
+            "en": "Node.js moves to one major release per year, starting with Node 27",
+            "fr": "Node.js passe à un major par an, à partir de Node 27"
+          },
+          "body_html": {
+            "es": "<p>Adiós al modelo par/impar de toda la vida: desde <strong>Node 27</strong> (octubre 2026) hay un solo major por año, cada abril, y promoción a LTS en octubre. Lo grande: <strong>TODA release pasa a ser LTS</strong> (antes solo las pares) y la versión se alinea al año (27 → 2027, 28 → 2028). Suman un canal Alpha de seis meses con semver prerelease (<code>27.0.0-alpha.1</code>). Si sos library author, meté las Alpha en tu CI YA para cazar bugs antes de prod. Node 26 es la última bajo el modelo viejo.</p>",
+            "en": "<p>Goodbye to the long-standing odd/even model: from <strong>Node 27</strong> (October 2026) there is a single major per year, each April, with LTS promotion in October. The big one: <strong>every release becomes LTS</strong> (previously only even numbers), and versions align to the year (27 → 2027, 28 → 2028). A six-month Alpha channel arrives with semver prereleases (<code>27.0.0-alpha.1</code>). Library authors: wire Alphas into CI early to catch bugs before prod. Node 26 is the last under the old model.</p>",
+            "fr": "<p>Adieu le modèle pair/impair historique : dès <strong>Node 27</strong> (octobre 2026), un seul major par an, chaque avril, avec promotion LTS en octobre. Le gros morceau : <strong>chaque release devient LTS</strong> (avant seulement les paires), et les versions s'alignent sur l'année (27 → 2027). Un canal Alpha de six mois arrive avec des prereleases semver (<code>27.0.0-alpha.1</code>). Auteurs de libs : branchez les Alpha sur votre CI tôt. Node 26 est le dernier sous l'ancien modèle.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/06/nodejs-release-changes/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "nocodb",
+      "updates": [
+        {
+          "id": "nocodb",
+          "tag": "release",
+          "date": "04 Jun 2026",
+          "title": {
+            "es": "NocoDB 2026.06.0: sync nativo e historial de versiones de documentos",
+            "en": "NocoDB 2026.06.0: native sync and document version history",
+            "fr": "NocoDB 2026.06.0 : sync natif et historique de versions de documents"
+          },
+          "body_html": {
+            "es": "<p>El Airtable open-source soltó su release más cargada en meses: <strong>NocoDB Sync</strong> y <strong>historial de versiones</strong> de documentos. Si usás NocoDB como capa no-code sobre Postgres/MySQL, el versionado te da auditoría y rollback sin scripts caseros. Salió en la misma semana que un Weaviate 1.38 con namespaces y los parches coordinados de Redis (8.6.4/8.4.4/8.2.7).</p>",
+            "en": "<p>The open-source Airtable shipped its most feature-rich release in months: <strong>NocoDB Sync</strong> and document <strong>version history</strong>. If you run NocoDB as a no-code layer over Postgres/MySQL, versioning gives you audit and rollback without homegrown scripts. It landed the same week as Weaviate 1.38 with namespaces and the coordinated Redis patches (8.6.4/8.4.4/8.2.7).</p>",
+            "fr": "<p>L'Airtable open-source a livré sa release la plus riche depuis des mois : <strong>NocoDB Sync</strong> et <strong>historique de versions</strong> de documents. Si vous utilisez NocoDB comme couche no-code sur Postgres/MySQL, le versioning offre audit et rollback sans scripts maison. Sorti la même semaine que Weaviate 1.38 avec namespaces et les patches coordonnés de Redis (8.6.4/8.4.4/8.2.7).</p>"
+          },
+          "source": {
+            "url": "https://blog.elest.io/elestio-catalog-updates-34-notable-releases-this-week-june-1-7-2026/",
+            "label": "blog.elest.io"
+          }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "cve-compressing",
+      "updates": [
+        {
+          "id": "cve-compressing",
+          "tag": "security",
+          "date": "03 Jun 2026",
+          "title": {
+            "es": "CVE-2026-24884: la lib compressing vuelve a ser vulnerable por bypass de symlink",
+            "en": "CVE-2026-24884: compressing library vulnerable again via symlink bypass",
+            "fr": "CVE-2026-24884 : la lib compressing de nouveau vulnérable via bypass symlink"
+          },
+          "body_html": {
+            "es": "<p>El parche original de la lib npm <code>compressing</code> usaba <code>path.resolve()</code>, que es puro string —nunca toca el disco ni detecta que un segmento es un symlink. El bypass (rastreado como <strong>CVE-2026-40931</strong>) deja pre-plantar symlinks vía <code>git clone</code>: la validación por string pasa, pero el kernel sigue el link y escribe <strong>fuera del directorio de extracción</strong>. Cero acceso previo requerido. Veneno puro en pipelines de CI/CD que clonan repos y extraen archivos automáticamente. Si dependés de <code>compressing</code>, actualizá YA.</p>",
+            "en": "<p>The original patch for the <code>compressing</code> npm library used <code>path.resolve()</code>, pure string manipulation —it never touches disk nor detects that a segment is a symlink. The bypass (tracked as <strong>CVE-2026-40931</strong>) lets attackers pre-plant symlinks via <code>git clone</code>: string validation passes, but the kernel follows the link and writes <strong>outside the extraction directory</strong>. Zero prior access required. Especially dangerous in CI/CD pipelines that clone repos and extract archives automatically. If you depend on <code>compressing</code>, update now.</p>",
+            "fr": "<p>Le patch original de la lib npm <code>compressing</code> utilisait <code>path.resolve()</code>, pure manipulation de chaîne —ne touche jamais le disque ni ne détecte qu'un segment est un symlink. Le bypass (suivi sous <strong>CVE-2026-40931</strong>) permet de pré-planter des symlinks via <code>git clone</code> : la validation par chaîne passe, mais le kernel suit le lien et écrit <strong>hors du répertoire d'extraction</strong>. Aucun accès préalable requis. Particulièrement dangereux dans les pipelines CI/CD. Mettez à jour maintenant.</p>"
+          },
+          "source": {
+            "url": "https://cyberpress.org/cve-2026-24884-patch/",
+            "label": "cyberpress.org"
+          }
+        }
+      ]
+    },
+    {
+      "id": "quick-links",
+      "name": "Quick Links",
+      "theme": "quick-links",
+      "icon_emoji": "📌",
+      "anchor": "quick-links",
+      "updates": [
+        {
+          "id": "ql-npm-v12",
+          "tag": "breaking",
+          "date": "09 Jun 2026",
+          "title": {
+            "es": "GitHub Changelog: breaking changes de npm v12",
+            "en": "GitHub Changelog: npm v12 breaking changes",
+            "fr": "GitHub Changelog : changements cassants de npm v12"
+          },
+          "body_html": {
+            "es": "<p>El anuncio oficial con todas las flags y el plan de migración.</p>",
+            "en": "<p>The official announcement with all flags and the migration plan.</p>",
+            "fr": "<p>L'annonce officielle avec toutes les flags et le plan de migration.</p>"
+          },
+          "source": {
+            "url": "https://github.blog/changelog/2026-06-09-upcoming-breaking-changes-for-npm-v12/",
+            "label": "github.blog"
+          }
+        },
+        {
+          "id": "ql-nodejs",
+          "tag": "notable",
+          "date": "03 Jun 2026",
+          "title": {
+            "es": "InfoQ: nuevo schedule de releases de Node.js",
+            "en": "InfoQ: Node.js new release schedule",
+            "fr": "InfoQ : nouveau calendrier de releases Node.js"
+          },
+          "body_html": {
+            "es": "<p>Detalle del cambio a un major por año y canal Alpha.</p>",
+            "en": "<p>Details of the one-major-per-year change and the Alpha channel.</p>",
+            "fr": "<p>Détails du passage à un major par an et du canal Alpha.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/06/nodejs-release-changes/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "La defensa de supply chain se mueve del «firmá todo» (SLSA) al «no ejecutes nada por default» (npm v12 con install scripts apagados). El modelo de confianza implícita en install se terminó.",
+      "en": "Supply-chain defense is shifting from «sign everything» (SLSA) to «execute nothing by default» (npm v12 with install scripts off). The implicit-trust-on-install model is over.",
+      "fr": "La défense supply chain passe du «tout signer» (SLSA) au «rien exécuter par défaut» (npm v12, install scripts off). Le modèle de confiance implicite à l'install est terminé."
+    },
+    {
+      "es": "Los CVEs de path traversal por symlink (compressing) muestran que validar paths con manipulación de strings es insuficiente: hay que consultar el filesystem real o extraer en sandbox.",
+      "en": "Symlink path-traversal CVEs (compressing) show that validating paths with string manipulation is insufficient: you must consult the real filesystem or extract in a sandbox.",
+      "fr": "Les CVE de path traversal par symlink (compressing) montrent que valider les chemins par manipulation de chaînes est insuffisant : il faut consulter le vrai filesystem ou extraire en sandbox."
+    },
+    {
+      "es": "El runtime de Node madura: un major anual y todas LTS reduce la fatiga de mantenimiento y simplifica la decisión de upgrade para equipos enterprise.",
+      "en": "The Node runtime matures: one annual major with all-LTS reduces maintenance fatigue and simplifies the upgrade decision for enterprise teams.",
+      "fr": "Le runtime Node mûrit : un major annuel et tout en LTS réduit la fatigue de maintenance et simplifie la décision d'upgrade pour les équipes enterprise."
+    }
+  ]
+}

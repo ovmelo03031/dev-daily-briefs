@@ -19,6 +19,11 @@ type Highlight = {
 	icon?: string;
 };
 
+type BriefNavLink = {
+	slug: string;
+	title: string;
+};
+
 type Props = {
 	title: string;
 	description: string;
@@ -26,9 +31,11 @@ type Props = {
 	category: Category;
 	highlights?: Highlight[];
 	lang?: LangCode;
+	prevBrief?: BriefNavLink;
+	nextBrief?: BriefNavLink;
 };
 
-const { title, description, pubDate, category, highlights, lang = DEFAULT_LANG } = Astro.props;
+const { title, description, pubDate, category, highlights, lang = DEFAULT_LANG, prevBrief, nextBrief } = Astro.props;
 const cat = CATEGORIES[category];
 const categoryLabel = getCategoryLabel(category, lang);
 const isAiCoding = category === 'ai-coding';
@@ -94,6 +101,44 @@ function getProseClass() {
 					{highlights && highlights.length > 0 && <HighlightBar highlights={highlights} />}
 					<slot />
 				</div>
+				{(prevBrief || nextBrief) && (
+					<nav aria-label="Brief navigation" class="mt-12 grid gap-3 border-t border-[var(--color-border)] pt-6 sm:grid-cols-2">
+						{prevBrief ? (
+							<a
+								href={localizePath(`/${category}/${prevBrief.slug}/`, lang)}
+								rel="prev"
+								class="group rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4 no-underline transition-all hover:border-[var(--color-accent)]"
+							>
+								<span class="text-xs text-[var(--color-text-muted)]">
+									<span class="lang-es">← Brief anterior</span>
+									<span class="lang-en">← Previous brief</span>
+									<span class="lang-fr">← Brief précédent</span>
+								</span>
+								<span class="mt-1 block truncate text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)]">
+									{prevBrief.title}
+								</span>
+							</a>
+						) : (
+							<span />
+						)}
+						{nextBrief && (
+							<a
+								href={localizePath(`/${category}/${nextBrief.slug}/`, lang)}
+								rel="next"
+								class="group rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4 text-right no-underline transition-all hover:border-[var(--color-accent)]"
+							>
+								<span class="text-xs text-[var(--color-text-muted)]">
+									<span class="lang-es">Brief siguiente →</span>
+									<span class="lang-en">Next brief →</span>
+									<span class="lang-fr">Brief suivant →</span>
+								</span>
+								<span class="mt-1 block truncate text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)]">
+									{nextBrief.title}
+								</span>
+							</a>
+						)}
+					</nav>
+				)}
 			</article>
 		</main>
 		<Footer />

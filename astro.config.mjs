@@ -19,7 +19,24 @@ export default defineConfig({
       redirectToDefaultLocale: false,
     },
   },
-  integrations: [mdx(), sitemap(), icon()],
+  integrations: [
+    mdx(),
+    sitemap({
+      i18n: {
+        defaultLocale: 'en',
+        locales: { en: 'en', es: 'es', fr: 'fr' },
+      },
+      serialize(item) {
+        // Brief URLs end in the publication date (…-YYYY-MM-DD/), which is the
+        // only time their content changes; expose it as lastmod so crawlers
+        // can skip unchanged pages and pick up new briefs faster.
+        const match = item.url.match(/(\d{4}-\d{2}-\d{2})\/?$/);
+        if (match) item.lastmod = new Date(`${match[1]}T00:00:00Z`).toISOString();
+        return item;
+      },
+    }),
+    icon(),
+  ],
 
   fonts: [
       {

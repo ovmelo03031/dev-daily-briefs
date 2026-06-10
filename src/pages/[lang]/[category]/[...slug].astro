@@ -5,6 +5,8 @@ import BriefStructured from '../../../components/brief/BriefStructured.astro';
 import { normalizeBrief } from '../../../components/brief/normalizeBrief';
 import { CATEGORIES, type Category, type LangCode } from '../../../consts';
 import { LOCALIZED_LANG_CODES } from '../../../utils/i18n';
+import { pickLang } from '../../../components/brief/pickLang';
+import { getBriefNeighbors } from '../../../utils/briefNav';
 
 type BriefEntry = CollectionEntry<'ai-coding' | 'backend-fullstack' | 'dev-news' | 'gentleman-releases'>;
 
@@ -16,17 +18,27 @@ export async function getStaticPaths() {
 
 	return LOCALIZED_LANG_CODES.flatMap((lang) =>
 		entries.flatMap(({ category, posts }) =>
-			posts.map((post) => ({
-				params: { lang, category, slug: post.id },
-				props: { lang, post },
-			})),
+			posts.map((post) => {
+				const { prev, next } = getBriefNeighbors(posts, post.id);
+				return {
+					params: { lang, category, slug: post.id },
+					props: { lang, post, prevEntry: prev, nextEntry: next },
+				};
+			}),
 		),
 	);
 }
 
-const { lang, post } = Astro.props as { lang: LangCode; post: BriefEntry };
+const { lang, post, prevEntry, nextEntry } = Astro.props as {
+	lang: LangCode;
+	post: BriefEntry;
+	prevEntry?: BriefEntry;
+	nextEntry?: BriefEntry;
+};
 const { data } = post;
 const { isStructured, title, description, highlightsForLayout } = normalizeBrief(data, lang);
+const prevBrief = prevEntry ? { slug: prevEntry.id, title: pickLang(prevEntry.data.title, lang) } : undefined;
+const nextBrief = nextEntry ? { slug: nextEntry.id, title: pickLang(nextEntry.data.title, lang) } : undefined;
 const Content = isStructured ? null : (await render(post)).Content;
 ---
 
@@ -37,6 +49,8 @@ const Content = isStructured ? null : (await render(post)).Content;
 	category={data.category}
 	highlights={highlightsForLayout}
 	lang={lang}
+	prevBrief={prevBrief}
+	nextBrief={nextBrief}
 >
 	{isStructured ? (
 		<BriefStructured

@@ -1,0 +1,65 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import { SITE_TITLE } from '../../consts';
+import { ENTITIES, extractTags } from '../../utils/entityTags';
+import { buildBreadcrumbSchema } from '../../utils/schema';
+
+const allPosts = [
+	...(await getCollection('ai-coding')),
+	...(await getCollection('backend-fullstack')),
+	...(await getCollection('dev-news')),
+	...(await getCollection('gentleman-releases')),
+];
+
+const counts = new Map<string, number>();
+for (const post of allPosts) {
+	for (const slug of extractTags(post.data)) {
+		counts.set(slug, (counts.get(slug) ?? 0) + 1);
+	}
+}
+
+const tags = ENTITIES.filter((e) => (counts.get(e.slug) ?? 0) > 0)
+	.map((e) => ({ ...e, count: counts.get(e.slug)! }))
+	.sort((a, b) => b.count - a.count);
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const homeUrl = Astro.site ? Astro.site.toString() : '/';
+const description = `Browse Dev Daily Briefs coverage by topic — ${tags.length} tools, models, and frameworks tracked across daily digests.`;
+const breadcrumbSchema = buildBreadcrumbSchema([
+	{ name: SITE_TITLE, url: homeUrl },
+	{ name: 'Topics', url: canonical },
+]);
+---
+
+<!doctype html>
+<html lang="en" data-lang="en">
+	<head>
+		<BaseHead title="Topics — Browse Coverage by Tool and Framework" description={description} lang="en" alternates={false} />
+		<StructuredData schema={breadcrumbSchema} />
+	</head>
+	<body>
+		<Header />
+		<main class="mx-auto max-w-5xl px-4 py-12">
+			<h1 class="text-3xl font-bold leading-tight text-[var(--color-text)]">Topics</h1>
+			<p class="mt-2 mb-8 text-[var(--color-text-muted)]">
+				Every tool, model, and framework we track — each topic lists all daily briefs covering it.
+			</p>
+			<div class="flex flex-wrap gap-2">
+				{tags.map((tag) => (
+					<a
+						href={`/tags/${tag.slug}/`}
+						class="group inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3.5 py-1.5 text-sm no-underline transition-all hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-2)]"
+					>
+						<span class="text-[var(--color-text)] group-hover:text-[var(--color-accent)]">{tag.label}</span>
+						<span class="text-xs text-[var(--color-text-muted)]">{tag.count}</span>
+					</a>
+				))}
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>

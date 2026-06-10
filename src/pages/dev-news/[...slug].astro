@@ -5,6 +5,7 @@ import BriefStructured from '../../components/brief/BriefStructured.astro';
 import { normalizeBrief } from '../../components/brief/normalizeBrief';
 import { pickLang } from '../../components/brief/pickLang';
 import { getBriefNeighbors } from '../../utils/briefNav';
+import { extractTags, getEntity } from '../../utils/entityTags';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('dev-news');
@@ -25,6 +26,7 @@ const { isStructured, title, description, highlightsForLayout } = normalizeBrief
 const Content = isStructured ? null : (await render(post)).Content;
 const prevBrief = prevEntry ? { slug: prevEntry.id, title: pickLang(prevEntry.data.title, 'en') } : undefined;
 const nextBrief = nextEntry ? { slug: nextEntry.id, title: pickLang(nextEntry.data.title, 'en') } : undefined;
+const tags = extractTags(data, { includeModels: false }).map((slug) => ({ slug, label: getEntity(slug)!.label }));
 ---
 
 <BlogPost
@@ -35,6 +37,7 @@ const nextBrief = nextEntry ? { slug: nextEntry.id, title: pickLang(nextEntry.da
 	highlights={highlightsForLayout}
 	prevBrief={prevBrief}
 	nextBrief={nextBrief}
+	tags={tags}
 >
 	{isStructured ? (
 		<BriefStructured

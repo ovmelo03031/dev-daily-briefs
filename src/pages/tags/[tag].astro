@@ -10,7 +10,7 @@ import StructuredData from '../../components/StructuredData.astro';
 import { pickLang } from '../../components/brief/pickLang';
 import { CATEGORIES, SITE_TITLE, type Category } from '../../consts';
 import { getCategoryLabel } from '../../utils/categoryCopy';
-import { ENTITIES, getEntity, extractTags } from '../../utils/entityTags';
+import { ENTITIES, getEntity, extractTags, resolveTagAnchor } from '../../utils/entityTags';
 import { buildBreadcrumbSchema } from '../../utils/schema';
 
 export async function getStaticPaths() {
@@ -114,9 +114,10 @@ for (const post of posts) {
 						<div class="space-y-2">
 							{group.posts.map((post) => {
 								const cat = CATEGORIES[post.data.category as Category];
+								const anchor = resolveTagAnchor(post.data, tag);
 								return (
 									<a
-										href={`/${post.data.category}/${post.id}/`}
+										href={`/${post.data.category}/${post.id}/${anchor ? `#${anchor}` : ''}`}
 										class="group reveal-up flex items-center gap-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4 no-underline transition-all hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-2)]"
 									>
 										<span

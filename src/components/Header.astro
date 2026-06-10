@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import { SITE_TITLE, CATEGORIES, type Category } from '../consts';
 import { getCategoryLabel } from '../utils/categoryCopy';
 import { getLangFromPath, localizePath } from '../utils/i18n';
+import { Icon } from 'astro-icon/components';
 import LangToggle from './LangToggle.astro';
 import CategoryIcon from './CategoryIcon.astro';
 import logo from '../assets/brand/logo-wordmark-transparent.png';
@@ -37,6 +38,15 @@ const lang = getLangFromPath(Astro.url.pathname);
 					</a>
 				);
 			})}
+			<a
+				href="/tags/"
+				aria-label="Topics"
+				title="Topics"
+				class="inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-sm text-[var(--color-text-muted)] hover:bg-[var(--color-surface)] hover:text-[var(--color-text)] no-underline transition-colors sm:px-3"
+			>
+				<Icon name="lucide:tags" width={18} height={18} class="sm:!h-[14px] sm:!w-[14px] text-[var(--color-accent)]" />
+				<span class="hidden sm:inline">Topics</span>
+			</a>
 			<div class="ml-1 border-l border-[var(--color-border)] pl-1 sm:ml-2 sm:pl-2">
 				<LangToggle />
 			</div>

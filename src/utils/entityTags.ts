@@ -106,3 +106,48 @@ export function extractTags(data: BriefEntry['data'], { includeModels = true }: 
 	const haystack = ` ${haystackParts.join(' ').toLowerCase()} `;
 	return ENTITIES.filter((e) => e.aliases.some((alias) => haystack.includes(alias))).map((e) => e.slug);
 }
+
+function matchesEntity(entity: EntityTag, text: string): boolean {
+	const haystack = ` ${text.toLowerCase()} `;
+	return entity.aliases.some((alias) => haystack.includes(alias));
+}
+
+/**
+ * Resolves the in-page anchor where an entity appears in a brief, so tag hub
+ * pages can deep-link straight to the relevant section (HighlightBar's hash
+ * handler scrolls to `[data-anchor]` and flashes it). Priority: tool section
+ * whose NAME matches, then tool section whose update titles match, then the
+ * model-catalog anchor. Returns undefined when the entity has no section
+ * (link falls back to the top of the brief).
+ */
+export function resolveTagAnchor(data: BriefEntry['data'], slug: string): string | undefined {
+	const entity = ENTITY_BY_SLUG.get(slug);
+	if (!entity) return undefined;
+	const d = data as Record<string, unknown>;
+
+	const tools = d.tools as
+		| Array<{ name?: unknown; id?: unknown; anchor?: unknown; updates?: Array<{ title?: unknown }> }>
+		| undefined;
+
+	for (const tool of tools ?? []) {
+		if (matchesEntity(entity, textOf(tool.name))) {
+			return textOf(tool.anchor) || textOf(tool.id) || undefined;
+		}
+	}
+	for (const tool of tools ?? []) {
+		const updateText = (tool.updates ?? []).map((u) => textOf(u.title)).join(' ');
+		if (matchesEntity(entity, updateText)) {
+			return textOf(tool.anchor) || textOf(tool.id) || undefined;
+		}
+	}
+
+	const models = d.models as Array<{ provider?: unknown; model?: unknown; name?: unknown }> | undefined;
+	const modelText = (models ?? [])
+		.map((m) => `${textOf(m.provider)} ${textOf(m.model)} ${textOf(m.name)}`)
+		.join(' ');
+	if (modelText && matchesEntity(entity, modelText)) {
+		return textOf(d.model_timeline_anchor) || undefined;
+	}
+
+	return undefined;
+}

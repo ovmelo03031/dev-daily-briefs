@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import CategoryIcon from '../../components/CategoryIcon.astro';
@@ -48,6 +49,20 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 	{ name: 'Topics', url: tagsUrl },
 	{ name: entity.label, url: canonical },
 ]);
+
+// Group posts by year/month — mirrors the category archive view.
+type Group = { key: string; label: string; posts: typeof posts };
+const groups: Group[] = [];
+const monthFmt = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' });
+for (const post of posts) {
+	const key = monthFmt.format(post.data.pubDate);
+	const last = groups[groups.length - 1];
+	if (last && last.key === key) {
+		last.posts.push(post);
+	} else {
+		groups.push({ key, label: key, posts: [post] });
+	}
+}
 ---
 
 <!doctype html>
@@ -58,45 +73,81 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 	</head>
 	<body>
 		<Header />
-		<main class="mx-auto max-w-5xl px-4 py-12">
-			<div class="mb-8">
-				<a href="/tags/" class="inline-flex items-center gap-1.5 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] no-underline mb-2">
-					<span>&larr;</span>
-					<span>All topics</span>
-				</a>
-				<h1 class="mt-3 text-3xl font-bold leading-tight text-[var(--color-text)]">{entity.label}</h1>
-				<p class="mt-2 text-[var(--color-text-muted)]">
-					{posts.length} daily brief{posts.length === 1 ? '' : 's'} covering {entity.label}
-				</p>
-			</div>
-			<div class="space-y-2">
-				{posts.map((post) => {
-					const cat = CATEGORIES[post.data.category as Category];
-					return (
-						<a
-							href={`/${post.data.category}/${post.id}/`}
-							class="group flex items-center gap-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-3 no-underline transition-all hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-2)]"
+		<main>
+			<section class="mx-auto max-w-3xl px-4 py-12">
+				<!-- Hero -->
+				<div class="mb-10">
+					<a href="/tags/" class="inline-flex items-center gap-1.5 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] no-underline mb-4">
+						<span>&larr;</span>
+						<Icon name="lucide:tags" width={14} height={14} class="text-[var(--color-accent)]" />
+						<span>All topics</span>
+					</a>
+					<div class="flex items-start gap-4">
+						<span
+							class="inline-flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-accent)]"
 						>
-							<span
-								class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-surface-2)]"
-								style={`color: ${cat.accent}`}
-							>
-								<CategoryIcon category={post.data.category as Category} width={16} height={16} />
-							</span>
-							<div class="min-w-0 flex-1">
-								<h2 class="text-sm font-medium text-[var(--color-text)] truncate group-hover:text-[var(--color-accent)]">
-									{pickLang(post.data.title, 'en')}
-								</h2>
-								<p class="text-xs text-[var(--color-text-muted)]">
-									<FormattedDate date={post.data.pubDate} />
-									<span class="mx-1.5">&middot;</span>
-									<span style={`color: ${cat.accent}`}>{getCategoryLabel(post.data.category as Category, 'en')}</span>
-								</p>
+							<Icon name="lucide:tag" width={32} height={32} />
+						</span>
+						<div class="flex-1 min-w-0">
+							<h1 class="text-3xl font-bold text-[var(--color-text)] leading-tight">{entity.label}</h1>
+							<p class="text-[var(--color-text-muted)] mt-1">
+								Every daily brief covering {entity.label} — releases, updates, and analysis.
+							</p>
+							<div class="mt-3 flex items-center gap-2">
+								<span
+									class="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-0.5 text-xs font-medium text-[var(--color-text-muted)]"
+								>
+									<Icon name="lucide:newspaper" width={12} height={12} />
+									{posts.length} {posts.length === 1 ? 'brief' : 'briefs'}
+								</span>
 							</div>
-						</a>
-					);
-				})}
-			</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Grouped list -->
+				{groups.map((group) => (
+					<div class="mb-8">
+						<h2 class="mb-3 text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
+							{group.label}
+						</h2>
+						<div class="space-y-2">
+							{group.posts.map((post) => {
+								const cat = CATEGORIES[post.data.category as Category];
+								return (
+									<a
+										href={`/${post.data.category}/${post.id}/`}
+										class="group reveal-up flex items-center gap-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4 no-underline transition-all hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-2)]"
+									>
+										<span
+											class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[var(--color-surface-2)] transition-colors group-hover:bg-[var(--color-accent-glow)]"
+											style={`color: ${cat.accent}`}
+										>
+											<CategoryIcon category={post.data.category as Category} width={16} height={16} />
+										</span>
+										<div class="min-w-0 flex-1">
+											<h3 class="text-base font-medium text-[var(--color-text)] truncate group-hover:text-[var(--color-accent)]">
+												{pickLang(post.data.title, 'en')}
+											</h3>
+											<p class="text-xs text-[var(--color-text-muted)] mt-0.5">
+												<FormattedDate date={post.data.pubDate} />
+												<span class="mx-1.5">&middot;</span>
+												<span style={`color: ${cat.accent}`}>{getCategoryLabel(post.data.category as Category, 'en')}</span>
+											</p>
+										</div>
+										<Icon
+											name="lucide:arrow-right"
+											width={16}
+											height={16}
+											class="shrink-0 -translate-x-1 text-[var(--color-text-muted)] opacity-0 transition-all group-hover:translate-x-0 group-hover:text-[var(--color-accent)] group-hover:opacity-100"
+										/>
+									</a>
+								);
+							})}
+						</div>
+					</div>
+				))}
+			</section>
 		</main>
 		<Footer />
 	</body>

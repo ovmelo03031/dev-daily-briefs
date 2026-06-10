@@ -1,5 +1,10 @@
 export const SITE_TITLE = 'Dev Daily Briefs';
 export const SITE_DESCRIPTION = 'Curated daily digests for senior developers — AI tools, backend, and frontend news.';
+export const SITE_DESCRIPTIONS = {
+	en: SITE_DESCRIPTION,
+	es: 'Resúmenes diarios curados para desarrolladores senior — herramientas de IA, backend y noticias de frontend.',
+	fr: 'Résumés quotidiens pour développeurs seniors — outils IA, backend et actualités frontend.',
+} as const;
 export const SITE_AUTHOR = 'Oswaldo Victor Melo Perez';
 export const SITE_REPO_URL = 'https://github.com/ovmelo03031/dev-daily-briefs';
 export const SITE_ALTERNATE_NAMES = ['Dev Brief', 'DevBrief', 'Dev Daily Brief'];

@@ -71,7 +71,7 @@ export interface ArticleInput {
 }
 
 export function buildArticleSchema(input: ArticleInput, site: URL | undefined) {
-	const imageUrl = abs(site, input.image ?? '/og-image.png');
+	const imageUrl = abs(site, input.image ?? '/og-image.jpg');
 	const url = typeof input.url === 'string' ? input.url : input.url.toString();
 	const lang = input.lang ?? 'en';
 	return {

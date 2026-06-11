@@ -14,6 +14,13 @@
 	(function () {
 		var HEADER_OFFSET = 72;
 		var FLASH_MS = 2800;
+
+		// Land the target below the sticky header with breathing room (~12% of
+		// the viewport) so the flashed section sits comfortably in view instead
+		// of hugging the top edge.
+		function scrollOffset() {
+			return HEADER_OFFSET + Math.min(140, Math.round(window.innerHeight * 0.12));
+		}
 		// Upper bound for a long smooth scroll; the scrollend listener usually
 		// fires the flash much earlier.
 		var SCROLL_FALLBACK_MS = 900;
@@ -42,7 +49,7 @@
 		function flashAndScroll(slug) {
 			var target = findVisibleTarget(slug);
 			if (!target) return;
-			var top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET);
+			var top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - scrollOffset());
 
 			if (Math.abs(window.scrollY - top) < 2) {
 				playFlash(target);

@@ -14,6 +14,9 @@
 	(function () {
 		var HEADER_OFFSET = 72;
 		var FLASH_MS = 2800;
+		// Upper bound for a long smooth scroll; the scrollend listener usually
+		// fires the flash much earlier.
+		var SCROLL_FALLBACK_MS = 900;
 
 		function findVisibleTarget(slug) {
 			// Briefs embed one copy per language; only the active one is laid out.
@@ -24,11 +27,7 @@
 			return null;
 		}
 
-		function flashAndScroll(slug, behavior) {
-			var target = findVisibleTarget(slug);
-			if (!target) return;
-			var top = target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
-			window.scrollTo({ top: top, behavior: behavior || 'smooth' });
+		function playFlash(target) {
 			target.classList.remove('is-target-flash');
 			void target.offsetWidth;
 			target.classList.add('is-target-flash');
@@ -37,28 +36,56 @@
 			}, FLASH_MS);
 		}
 
+		// Scroll smoothly to the target and start the flash only once the
+		// scroll has settled, so the full animation plays in view instead of
+		// burning down off-screen while the page is still moving.
+		function flashAndScroll(slug) {
+			var target = findVisibleTarget(slug);
+			if (!target) return;
+			var top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET);
+
+			if (Math.abs(window.scrollY - top) < 2) {
+				playFlash(target);
+				return;
+			}
+
+			var done = false;
+			var finish = function () {
+				if (done) return;
+				done = true;
+				window.removeEventListener('scrollend', finish);
+				playFlash(target);
+			};
+			// scrollend is not universal (older Safari) — keep a timer fallback.
+			window.addEventListener('scrollend', finish, { once: true });
+			setTimeout(finish, SCROLL_FALLBACK_MS);
+
+			window.scrollTo({ top: top, behavior: 'smooth' });
+		}
+
 		document.addEventListener('click', function (e) {
 			var link = e.target && e.target.closest ? e.target.closest('a.highlight-chip[data-target]') : null;
 			if (!link) return;
 			var slug = link.getAttribute('data-target');
 			if (!slug) return;
 			e.preventDefault();
-			flashAndScroll(slug, 'smooth');
+			flashAndScroll(slug);
 			if (history.replaceState) history.replaceState(null, '', '#' + slug);
 		});
 
-		// Deep-link arrival: the browser may have jumped to the anchor already,
-		// but we re-scroll with the sticky-header offset and play the flash.
-		// The lang copies are revealed by CSS keyed off html[data-lang], so the
-		// visible target may not be laid out on the first frame — retry across a
-		// few frames until findVisibleTarget resolves (or we give up).
+		// Deep-link arrival: wait until the visible lang copy is laid out (the
+		// copies are revealed by CSS keyed off html[data-lang]), give the layout
+		// a beat to settle past reveal animations, then smooth-scroll so the
+		// landing reads as guided motion instead of a hard jump.
 		function handleInitialHash() {
 			var hash = (location.hash || '').slice(1);
 			if (!hash) return;
 			var attempts = 0;
 			(function attempt() {
 				if (findVisibleTarget(hash)) {
-					flashAndScroll(hash, 'instant');
+					setTimeout(function () {
+						flashAndScroll(hash);
+					}, 150);
 					return;
 				}
 				if (++attempts < 30) requestAnimationFrame(attempt);
@@ -73,7 +100,7 @@
 
 		window.addEventListener('hashchange', function () {
 			var hash = (location.hash || '').slice(1);
-			if (hash) flashAndScroll(hash, 'smooth');
+			if (hash) flashAndScroll(hash);
 		});
 	})();
 </script>

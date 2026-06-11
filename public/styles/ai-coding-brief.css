@@ -11,20 +11,32 @@
 .prose-ai-coding .is-target-flash,
 .prose-brief .is-target-flash {
   animation: target-flash 2.8s cubic-bezier(0.22, 1, 0.36, 1);
+  border-radius: 12px;
 }
 
+/* Tool sections keep their own corner radius while flashing */
+.prose-ai-coding .tool-section.is-target-flash,
+.prose-brief .tool-section.is-target-flash {
+  border-radius: 16px;
+}
+
+/* Soft elegant flash: hairline accent ring + wide diffuse glow + subtle
+   interior tint (the inset shadow with a huge spread acts as a wash behind
+   the content). Holds at peak, then fades out gently. */
 @keyframes target-flash {
-  0% {
-    box-shadow: 0 0 0 0 var(--color-accent), 0 0 0 0 var(--color-accent-glow);
-  }
-  12% {
-    box-shadow: 0 0 0 3px var(--color-accent), 0 0 32px 8px var(--color-accent-glow);
-  }
-  60% {
-    box-shadow: 0 0 0 3px var(--color-accent), 0 0 32px 8px var(--color-accent-glow);
-  }
+  0%,
   100% {
-    box-shadow: 0 0 0 0 var(--color-accent), 0 0 0 0 var(--color-accent-glow);
+    box-shadow:
+      0 0 0 0 transparent,
+      0 0 0 0 transparent,
+      inset 0 0 0 999px transparent;
+  }
+  14%,
+  60% {
+    box-shadow:
+      0 0 0 2px color-mix(in srgb, var(--color-accent) 80%, transparent),
+      0 0 32px 6px color-mix(in srgb, var(--color-accent) 28%, transparent),
+      inset 0 0 0 999px color-mix(in srgb, var(--color-accent) 8%, transparent);
   }
 }
 

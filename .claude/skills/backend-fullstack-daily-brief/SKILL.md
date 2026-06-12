@@ -149,7 +149,7 @@ Every i18n field accepts either a **string** or `{ es?, en, fr? }`. `en` is requ
 ```
 
 - `anchor`: must match a `tool.anchor` OR an `update.id` elsewhere in the file.
-- `icon`: Iconify name. Brand logos (`simple-icons:*`): `typescript`, `deno`, `bun`, `nodedotjs`, `cloudflare`, `apachekafka`, `docker`, `kubernetes`, `amazonwebservices`, `redis`, `postgresql`, `mongodb`, `prisma`, `nextdotjs`, `astro`, `tanstack`, `github`. Lucide fallbacks (`lucide:*`): `flame` (top stories), `shield` (security CVE), `terminal` (runtimes), `blocks` (frameworks), `database`, `cloud`, `layers` (architecture), `server` (fullstack), `package`, `rocket`.
+- `icon`: **MUST be an Iconify name** (`simple-icons:*` or `lucide:*`). **NEVER an emoji** — `highlights[].icon` is passed to astro-icon's `<Icon name>`; an emoji throws `Unable to locate "…" icon!` and BREAKS THE BUILD. (`icon_emoji` on tools/models is the emoji field — don't confuse them.) Brand logos (`simple-icons:*`): `typescript`, `deno`, `bun`, `nodedotjs`, `cloudflare`, `apachekafka`, `docker`, `kubernetes`, `amazonwebservices`, `redis`, `postgresql`, `mongodb`, `prisma`, `nextdotjs`, `astro`, `tanstack`, `github`. Lucide fallbacks (`lucide:*`): `flame` (top stories), `shield` (security CVE), `terminal` (runtimes), `blocks` (frameworks), `database`, `cloud`, `layers` (architecture), `server` (fullstack), `package`, `rocket`.
 - **Prioritize**: major releases, GA features, breaking changes, security CVEs (high CVSS), strategic shifts. Skip minor patches.
 
 ### Tools (one entry per category section)

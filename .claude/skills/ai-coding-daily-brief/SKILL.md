@@ -233,7 +233,9 @@ Distilled teasers shown as clickable chips at the top of the brief. Each chip de
 ```
 
 - `anchor`: kebab-case, must match a `tool.anchor` OR an `update.id` OR `model_timeline_anchor` elsewhere in the file.
-- `icon`: Iconify name. Brand logos (`simple-icons:*`): `anthropic`, `openai`, `google`, `googlegemini`, `githubcopilot`, `visualstudiocode`, `meta`, `mistralai`, `alibabacloud`, `bytedance`, `minimax`, `typescript`, `react`, `tanstack`, `deno`, `bun`, `nodedotjs`, `vite`, `cloudflare`, `tailwindcss`, `docker`, `kubernetes`, `amazonwebservices`, `redis`, `postgresql`, `astro`, `nextdotjs`, `svelte`, `vuedotjs`, `angular`, `prisma`, `mongodb`, `github`, `x`. Lucide fallbacks (`lucide:*`): `flame`, `rocket`, `shield`, `atom`, `moon` (Moonshot), `brain-circuit` (Zhipu), `search` (DeepSeek), `terminal`, `blocks`, `sparkles`, `zap`.
+- `icon`: **MUST be an Iconify name** (`simple-icons:*` or `lucide:*`). **NEVER an emoji.** `highlights[].icon` is passed straight to astro-icon's `<Icon name>` — an emoji (`🤖`, `🐙`, …) throws `Unable to locate "🤖" icon!` and BREAKS THE BUILD. `icon_emoji` (used on tools/models) is different — that one IS an emoji. Do not confuse them: highlights → iconify name; tools/models → `icon_emoji`.
+  - Brand logos (`simple-icons:*`): `anthropic`, `openai`, `google`, `googlegemini`, `githubcopilot`, `visualstudiocode`, `meta`, `mistralai`, `alibabacloud`, `bytedance`, `minimax`, `typescript`, `react`, `tanstack`, `deno`, `bun`, `nodedotjs`, `vite`, `cloudflare`, `tailwindcss`, `docker`, `kubernetes`, `amazonwebservices`, `redis`, `postgresql`, `astro`, `nextdotjs`, `svelte`, `vuedotjs`, `angular`, `prisma`, `mongodb`, `github`, `x`.
+  - Lucide fallbacks (`lucide:*`) when no brand fits: `flame`, `rocket`, `shield`, `atom`, `moon` (Moonshot), `brain`, `brain-circuit` (Zhipu), `search` (DeepSeek), `terminal`, `blocks`, `sparkles`, `wind`, `badge-plus`, `zap`.
 - **Prioritize**: new model launches, GA features, major version bumps, security CVEs, breaking changes. Skip minor patches.
 
 ### Tools (5 core + adjacent launches)
@@ -314,6 +316,7 @@ Example `tools` array:
 
 - [ ] `en` is present on every i18n field
 - [ ] `highlights[].anchor` each matches a `tool.anchor`, an `update.id`, or `model_timeline_anchor`
+- [ ] `highlights[].icon` is an Iconify name (`simple-icons:*` / `lucide:*`) — **NO emoji** (emoji breaks the build)
 - [ ] Sources cited on every update (one `source` per update minimum, or a clear date)
 - [ ] No duplicates across tools (same release mentioned twice)
 - [ ] `notable_trends` has 1–3 short paragraphs grounded in the items actually found

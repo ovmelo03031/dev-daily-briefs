@@ -111,7 +111,7 @@ Every i18n field accepts either a **string** or `{ es?, en, fr? }`. `en` is requ
 ```
 
 - `anchor`: must match a `tool.anchor` OR an `update.id` elsewhere in the file.
-- `icon`: Iconify name. Brand logos (`simple-icons:*`): `typescript`, `react`, `css`, `html5`, `tanstack`, `deno`, `bun`, `nodedotjs`, `vite`, `astro`, `nextdotjs`, `svelte`, `vuedotjs`, `angular`, `tailwindcss`, `visualstudiocode`, `github`. Lucide fallbacks (`lucide:*`): `flame` (top stories), `blocks` (frameworks), `package` (build tools), `terminal` (runtimes), `code` (dev tools), `sparkles`, `zap`, `shield`.
+- `icon`: **MUST be an Iconify name** (`simple-icons:*` or `lucide:*`). **NEVER an emoji** — `highlights[].icon` is passed to astro-icon's `<Icon name>`; an emoji throws `Unable to locate "…" icon!` and BREAKS THE BUILD. (`icon_emoji` on tools/models is the emoji field — don't confuse them.) Brand logos (`simple-icons:*`): `typescript`, `react`, `css`, `html5`, `tanstack`, `deno`, `bun`, `nodedotjs`, `vite`, `astro`, `nextdotjs`, `svelte`, `vuedotjs`, `angular`, `tailwindcss`, `visualstudiocode`, `github`. Lucide fallbacks (`lucide:*`): `flame` (top stories), `blocks` (frameworks), `package` (build tools), `terminal` (runtimes), `code` (dev tools), `sparkles`, `zap`, `shield`.
 - **Prioritize**: major releases, GA features, breaking changes, new APIs reaching Baseline. Skip minor patches.
 
 ### Tools (one entry per category section)

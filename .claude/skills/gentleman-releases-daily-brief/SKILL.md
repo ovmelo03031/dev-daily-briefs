@@ -136,6 +136,7 @@ Optional aggregator section:
 
 - [ ] `en` present on every i18n field
 - [ ] Each `highlights[].anchor` matches a `tool.anchor` or `update.id`
+- [ ] `highlights[].icon` is an Iconify name (`simple-icons:*` / `lucide:*`) — **NEVER an emoji** (emoji is passed to `<Icon name>` and breaks the build; `icon_emoji` is the emoji field)
 - [ ] Every update has `source.url` pointing to the actual release tag URL on GitHub
 - [ ] Every update has `date` set to the release's `published_at` formatted as `DD MMM YYYY`
 - [ ] No two updates share the same `source.url`

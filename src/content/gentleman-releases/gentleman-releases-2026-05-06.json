@@ -1,0 +1,125 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 06 May 2026",
+    "en": "Gentleman Releases — 06 May 2026",
+    "fr": "Gentleman Releases — 06 May 2026"
+  },
+  "description": {
+    "es": "Releases del día en proyectos de Gentleman-Programming",
+    "en": "Today's releases from Gentleman-Programming projects",
+    "fr": "Sorties du jour des projets Gentleman-Programming"
+  },
+  "pubDate": "2026-05-06",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "engram v1.15.8 — autosync cloud opt-in para `engram mcp`",
+        "en": "engram v1.15.8 — opt-in cloud autosync for `engram mcp`",
+        "fr": "engram v1.15.8 — autosync cloud opt-in pour `engram mcp`"
+      },
+      "anchor": "engram-v1-15-8",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-ai v1.26.0 — personas con directiva mandatoria de skills",
+        "en": "gentle-ai v1.26.0 — personas now ship a mandatory skill-loading directive",
+        "fr": "gentle-ai v1.26.0 — personas avec directive obligatoire de skills"
+      },
+      "anchor": "gentle-ai-v1-26-0",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-ai v1.26.1 — `gentle-ai sync` regenera el bloque persona y respeta tu elección",
+        "en": "gentle-ai v1.26.1 — `gentle-ai sync` regenerates the persona block and honors your selection",
+        "fr": "gentle-ai v1.26.1 — `gentle-ai sync` régénère le bloc persona et respecte votre choix"
+      },
+      "anchor": "gentle-ai-v1-26-1",
+      "icon": "simple-icons:github"
+    }
+  ],
+  "tools": [
+    {
+      "id": "engram",
+      "name": "engram",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-engram",
+      "icon_emoji": "🧠",
+      "anchor": "engram",
+      "version": "v1.15.8",
+      "updates": [
+        {
+          "id": "engram-v1-15-8",
+          "tag": "fix",
+          "title": {
+            "es": "v1.15.8 — Autosync cloud para `engram mcp`",
+            "en": "v1.15.8 — Cloud autosync for `engram mcp`",
+            "fr": "v1.15.8 — Autosync cloud pour `engram mcp`"
+          },
+          "body_html": {
+            "es": "<p>Patch que arregla el autosync en modo MCP: ahora <code>engram mcp</code> arranca el mismo manager opt-in que <code>engram serve</code>.</p><ul><li>Honra <code>ENGRAM_CLOUD_AUTOSYNC=1</code> con <code>ENGRAM_CLOUD_TOKEN</code> y <code>ENGRAM_CLOUD_SERVER</code>.</li><li>El autosync queda no-fatal si falta config cloud y se cierra limpio cuando termina el proceso stdio MCP.</li><li>Nueva cobertura de regresión para lifecycle del manager, push disparado por escritura y pull automático del poll-ticker.</li></ul><p>Si usás <code>engram mcp</code> con cloud, ponete las pilas y reactualizá — antes de este release el autosync no arrancaba.</p>",
+            "en": "<p>Patch fix for autosync in MCP mode: <code>engram mcp</code> now starts the same opt-in manager as <code>engram serve</code>.</p><ul><li>Honors <code>ENGRAM_CLOUD_AUTOSYNC=1</code> with <code>ENGRAM_CLOUD_TOKEN</code> and <code>ENGRAM_CLOUD_SERVER</code>.</li><li>Autosync stays non-fatal when cloud config is missing or invalid, shuts down cleanly when the stdio MCP process exits.</li><li>New regression coverage for manager lifecycle, write-triggered push, and automatic poll-ticker pull.</li></ul><p>If you use <code>engram mcp</code> with cloud, upgrade — autosync didn't start before this release.</p>",
+            "fr": "<p>Patch qui corrige l'autosync en mode MCP : <code>engram mcp</code> démarre maintenant le même manager opt-in que <code>engram serve</code>.</p><ul><li>Respecte <code>ENGRAM_CLOUD_AUTOSYNC=1</code> avec <code>ENGRAM_CLOUD_TOKEN</code> et <code>ENGRAM_CLOUD_SERVER</code>.</li><li>L'autosync reste non-fatal si la config cloud manque et s'arrête proprement quand le process stdio MCP se termine.</li><li>Nouvelle couverture de régression pour le cycle de vie du manager, le push déclenché par écriture et le pull automatique du poll-ticker.</li></ul><p>Si vous utilisez <code>engram mcp</code> avec le cloud, mettez à jour — l'autosync ne démarrait pas avant cette version.</p>"
+          },
+          "date": "05 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v1.15.8",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gentle-ai",
+      "name": "gentle-ai",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-gentle-ai",
+      "icon_emoji": "🎩",
+      "anchor": "gentle-ai",
+      "version": "v1.26.1",
+      "updates": [
+        {
+          "id": "gentle-ai-v1-26-0",
+          "tag": "feature",
+          "title": {
+            "es": "v1.26.0 — Personas con directiva mandatoria de carga contextual de skills",
+            "en": "v1.26.0 — Personas now embed a mandatory contextual skill-loading directive",
+            "fr": "v1.26.0 — Personas avec directive obligatoire de chargement contextuel de skills"
+          },
+          "body_html": {
+            "es": "<p>Bump minor que cambia cómo los agentes invocan skills. Cierra #435.</p><p><strong>Antes:</strong> los skills estaban instalados, aparecían en <code>&lt;available_skills&gt;</code>, pero el modelo casi nunca los invocaba salvo que vos hubieras escrito a mano una directiva MANDATORY en tu <code>~/.claude/CLAUDE.md</code>.</p><p><strong>Ahora:</strong> cada persona emitida trae una directiva mandatoria genérica que delega la invocación de skills al mecanismo nativo de discovery del agente.</p><ul><li>Directiva inyectada en 6 personas (claude, opencode, generic gentleman/neutral, kiro, kimi). La variante Claude referencia la herramienta <code>Skill</code>; las no-Claude leen <code>SKILL.md</code> nativamente.</li><li>Eliminada la tabla hardcodeada de auto-load (la vieja de 2 filas con <code>go-testing</code> + <code>skill-creator</code> que competía con <code>&lt;available_skills&gt;</code>).</li><li>Higiene de frontmatter en <code>chained-pr</code> y <code>skill-creator</code>.</li><li>Compatibilidad: cada bloque <code>description: &gt;</code> en los 21 <code>SKILL.md</code> emitidos pasó a single-line plain scalar para evitar fragilidad de parser (ref anthropics/claude-code#9716).</li><li>Nuevos guards de regresión: <code>TestSkillFrontmatterIsLintClean</code> y <code>TestPersonasContainContextualSkillLoadingDirective</code>.</li></ul><p>Para enganchar la nueva persona: <code>brew upgrade gentle-ai &amp;&amp; gentle-ai sync</code>.</p>",
+            "en": "<p>Minor bump that changes how agents invoke skills. Closes #435.</p><p><strong>Before:</strong> skills were installed, listed in <code>&lt;available_skills&gt;</code>, but the model rarely invoked them unless the user had hand-written a MANDATORY directive in their <code>~/.claude/CLAUDE.md</code>.</p><p><strong>After:</strong> every emitted persona ships a generic mandatory directive that delegates skill invocation to the agent's native discovery mechanism.</p><ul><li>Directive injected into 6 personas (claude, opencode, generic gentleman/neutral, kiro, kimi). Claude variant references the built-in <code>Skill</code> tool; non-Claude variants read <code>SKILL.md</code> natively.</li><li>Removed the hardcoded auto-load table (old 2-row block listing <code>go-testing</code> + <code>skill-creator</code> that competed with <code>&lt;available_skills&gt;</code>).</li><li>Frontmatter hygiene in <code>chained-pr</code> and <code>skill-creator</code>.</li><li>Compatibility: every <code>description: &gt;</code> block in the 21 emitted <code>SKILL.md</code> is now a single-line plain scalar, immune to parser fragility (ref anthropics/claude-code#9716).</li><li>New regression guards: <code>TestSkillFrontmatterIsLintClean</code> and <code>TestPersonasContainContextualSkillLoadingDirective</code>.</li></ul><p>Pick up the new persona: <code>brew upgrade gentle-ai &amp;&amp; gentle-ai sync</code>.</p>",
+            "fr": "<p>Bump mineur qui change la façon dont les agents invoquent les skills. Ferme #435.</p><p><strong>Avant :</strong> les skills étaient installés, listés dans <code>&lt;available_skills&gt;</code>, mais le modèle les invoquait rarement sauf si l'utilisateur avait écrit à la main une directive MANDATORY dans son <code>~/.claude/CLAUDE.md</code>.</p><p><strong>Après :</strong> chaque persona émise embarque une directive obligatoire générique qui délègue l'invocation des skills au mécanisme natif de découverte de l'agent.</p><ul><li>Directive injectée dans 6 personas (claude, opencode, generic gentleman/neutral, kiro, kimi).</li><li>Tableau d'auto-load codé en dur retiré.</li><li>Hygiène du frontmatter dans <code>chained-pr</code> et <code>skill-creator</code>.</li><li>Tous les blocs <code>description: &gt;</code> sont désormais des scalaires simples sur une ligne.</li><li>Nouveaux garde-fous de régression.</li></ul><p>Pour activer : <code>brew upgrade gentle-ai &amp;&amp; gentle-ai sync</code>.</p>"
+          },
+          "date": "05 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v1.26.0",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        },
+        {
+          "id": "gentle-ai-v1-26-1",
+          "tag": "fix",
+          "title": {
+            "es": "v1.26.1 — `gentle-ai sync` regenera el bloque persona y respeta tu elección",
+            "en": "v1.26.1 — `gentle-ai sync` regenerates the persona block and honors your selection",
+            "fr": "v1.26.1 — `gentle-ai sync` régénère le bloc persona et respecte votre choix"
+          },
+          "body_html": {
+            "es": "<p>Patch que arregla la regresión de sync introducida cuando v1.26.0 cambió el bloque persona. Cierra #437.</p><p><strong>Antes:</strong> <code>brew upgrade gentle-ai &amp;&amp; gentle-ai sync</code> dejaba el bloque persona viejo entre los marcadores <code>&lt;!-- gentle-ai:persona --&gt;</code>. La tabla deprecada de 2 filas «Skills (Auto-load based on context)» persistía, faltaba la directiva v1.26 <code>## Contextual Skill Loading (MANDATORY)</code> y el fix de install-time no se propagaba.</p><p><strong>Ahora:</strong> sync regenera el bloque marcado en cada corrida y respeta la persona que vos instalaste (Gentleman o Neutral) — no siempre Gentleman.</p><ul><li>Nuevo <code>persona.InjectForSync</code> escribe el markdown marcado más el overlay del output-style de Claude. Skipea adrede el overlay del agente <code>gentleman</code> en <code>opencode.json</code> porque ese merge JSON choca con el overlay <code>gentle-orchestrator</code> de SDD y rompe idempotencia. Install (<code>Inject</code>) sigue haciendo el pipeline completo.</li><li>Contratos de paths separados: <code>syncComponentPaths</code> / <code>syncPersonaPaths</code>.</li><li>Persona persistida en <code>state.InstallState</code>: tanto el install CLI (<code>run.go</code>) como el TUI (<code>app.go</code>) escriben la persona elegida; <code>RunSync</code> la lee. Si tu state es viejo, hay fallback a Gentleman.</li><li>Tests nuevos: regeneración entre marcadores, lectura desde state, fallback hacia atrás, exclusión de <code>opencode.json</code> del sync, y round-trip de persona en el package <code>state</code>.</li></ul><p>Para que el bloque entre marcadores se regenere: <code>brew upgrade gentle-ai &amp;&amp; gentle-ai sync</code>. Tu contenido <strong>fuera</strong> de los marcadores se preserva tal cual.</p>",
+            "en": "<p>Patch fix for the sync regression introduced when v1.26.0 shipped a new persona block. Closes #437.</p><p><strong>Before:</strong> <code>brew upgrade gentle-ai &amp;&amp; gentle-ai sync</code> left users with the old persona block between <code>&lt;!-- gentle-ai:persona --&gt;</code> markers. The deprecated 2-row «Skills (Auto-load based on context)» table persisted, the v1.26 <code>## Contextual Skill Loading (MANDATORY)</code> directive was missing, and the install-time fix never propagated.</p><p><strong>After:</strong> sync regenerates the marker-bound block on every run and respects the persona the user actually installed (Gentleman or Neutral) — not always Gentleman.</p><ul><li>New <code>persona.InjectForSync</code> writes the marker-bound markdown plus the Claude output-style overlay. It deliberately skips the OpenCode/Kilocode <code>gentleman</code> agent overlay in <code>opencode.json</code> because that JSON merge conflicts with SDD's <code>gentle-orchestrator</code> overlay and breaks idempotency. Install (<code>Inject</code>) keeps doing the full pipeline.</li><li>Separate path contracts: <code>syncComponentPaths</code> / <code>syncPersonaPaths</code>.</li><li>Persona persisted in <code>state.InstallState</code>; CLI install (<code>run.go</code>) and TUI install (<code>app.go</code>) write the user-selected persona; <code>RunSync</code> reads it. State files written before this feature still work — fallback to Gentleman when <code>state.Persona</code> is empty.</li><li>New tests: regeneration between markers, reading persona from state, backward-compat fallback, <code>opencode.json</code> excluded from sync paths, and persona round-trip in the <code>state</code> package.</li></ul><p>Run <code>brew upgrade gentle-ai &amp;&amp; gentle-ai sync</code>. Content outside the markers is preserved verbatim.</p>",
+            "fr": "<p>Patch qui corrige la régression de sync introduite quand v1.26.0 a livré un nouveau bloc persona. Ferme #437.</p><p><strong>Avant :</strong> <code>brew upgrade gentle-ai &amp;&amp; gentle-ai sync</code> laissait l'ancien bloc persona entre les marqueurs <code>&lt;!-- gentle-ai:persona --&gt;</code>.</p><p><strong>Après :</strong> sync régénère le bloc à chaque exécution et respecte la persona installée (Gentleman ou Neutral).</p><ul><li>Nouveau <code>persona.InjectForSync</code> qui écrit le markdown marqué et l'overlay du style de sortie Claude.</li><li>Contrats de chemins séparés : <code>syncComponentPaths</code> / <code>syncPersonaPaths</code>.</li><li>Persona persistée dans <code>state.InstallState</code>, avec fallback rétrocompatible vers Gentleman.</li><li>Nouveaux tests : régénération entre marqueurs, lecture depuis state, exclusion de <code>opencode.json</code>, round-trip persona.</li></ul><p>Lancez <code>brew upgrade gentle-ai &amp;&amp; gentle-ai sync</code>. Le contenu hors des marqueurs reste intact.</p>"
+          },
+          "date": "05 May 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v1.26.1",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

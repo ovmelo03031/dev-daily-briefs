@@ -1,0 +1,157 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 19 Jun 2026",
+    "en": "Backend & Fullstack Daily — 19 Jun 2026",
+    "fr": "Backend & Fullstack Daily — 19 juin 2026"
+  },
+  "description": {
+    "es": "CVE crítico de auth bypass en LiteLLM, GitHub fuerza versión mínima de runners self-hosted, Docker Desktop 4.78 y Cloudflare Artifacts suma gestión desde el dashboard.",
+    "en": "Critical auth-bypass CVE in LiteLLM, GitHub enforces a minimum self-hosted runner version, Docker Desktop 4.78, and Cloudflare Artifacts adds dashboard management.",
+    "fr": "CVE critique de contournement d'auth dans LiteLLM, GitHub impose une version minimale des runners self-hosted, Docker Desktop 4.78 et Cloudflare Artifacts ajoute la gestion depuis le dashboard."
+  },
+  "pubDate": "2026-06-19",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "LiteLLM: auth bypass crítico vía Host header",
+        "en": "LiteLLM: critical auth bypass via Host header",
+        "fr": "LiteLLM : contournement d'auth critique via Host"
+      },
+      "anchor": "litellm-cve-49468",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "GitHub exige runners self-hosted ≥ v2.329.0",
+        "en": "GitHub enforces self-hosted runners ≥ v2.329.0",
+        "fr": "GitHub impose des runners self-hosted ≥ v2.329.0"
+      },
+      "anchor": "github-runner-enforcement",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "Docker Desktop 4.78: fixes de crash y arranque",
+        "en": "Docker Desktop 4.78: crash & startup fixes",
+        "fr": "Docker Desktop 4.78 : correctifs crash & démarrage"
+      },
+      "anchor": "docker-desktop-478",
+      "icon": "simple-icons:docker"
+    },
+    {
+      "text": {
+        "es": "Cloudflare Artifacts: storage Git desde el dashboard",
+        "en": "Cloudflare Artifacts: Git storage from the dashboard",
+        "fr": "Cloudflare Artifacts : stockage Git depuis le dashboard"
+      },
+      "anchor": "cf-artifacts-dashboard",
+      "icon": "simple-icons:cloudflare"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "litellm-cve-49468",
+      "updates": [
+        {
+          "id": "litellm-cve-49468",
+          "tag": "security",
+          "date": "17 Jun 2026",
+          "title": {
+            "es": "LiteLLM: auth bypass crítico (CVE-2026-49468) vía Host header injection",
+            "en": "LiteLLM: critical auth bypass (CVE-2026-49468) via Host header injection",
+            "fr": "LiteLLM : contournement d'auth critique (CVE-2026-49468) via injection Host"
+          },
+          "body_html": {
+            "es": "<p><strong>CVE-2026-49468</strong> afecta a todas las versiones de <code>LiteLLM</code> anteriores a <strong>1.84.0</strong>. La app deriva el path efectivo con <code>request.url.path</code>, que en aplicaciones Starlette se reconstruye desde el <code>Host</code> header que manda el cliente: un atacante falsea ese header y engaña a la capa de auth para alcanzar endpoints de management restringidos. Sin auth previa, sin interacción, vector de red, complejidad baja (CWE-290). Ojo si exponés tu gateway LLM directo: actualizá a 1.84.0 YA. Si tenés un WAF/reverse proxy con validación estricta de Host adelante, estás más cubierto — pero no te confíes.</p>",
+            "en": "<p><strong>CVE-2026-49468</strong> hits every <code>LiteLLM</code> version before <strong>1.84.0</strong>. The app derives the effective path from <code>request.url.path</code>, which Starlette apps reconstruct from the client-supplied <code>Host</code> header — an attacker spoofs it and tricks the auth layer into authorizing restricted management endpoints. No prior auth, no user interaction, network vector, low complexity (CWE-290). If your LLM gateway is exposed directly, upgrade to 1.84.0 now. A WAF/reverse proxy with strict host validation in front mitigates it.</p>",
+            "fr": "<p><strong>CVE-2026-49468</strong> touche toutes les versions de <code>LiteLLM</code> avant <strong>1.84.0</strong>. L'app dérive le chemin effectif depuis <code>request.url.path</code>, que les apps Starlette reconstruisent à partir du <code>Host</code> fourni par le client : un attaquant l'usurpe et trompe la couche d'auth pour atteindre des endpoints de management restreints. Sans auth préalable, sans interaction, vecteur réseau, complexité faible (CWE-290). Passez à 1.84.0 sans tarder.</p>"
+          },
+          "source": { "url": "https://gbhackers.com/critical-litellm-flaw/", "label": "gbhackers.com" }
+        },
+        {
+          "id": "github-runner-enforcement",
+          "tag": "breaking",
+          "date": "12 Jun 2026",
+          "title": {
+            "es": "GitHub reactiva la versión mínima obligatoria para runners self-hosted de Actions",
+            "en": "GitHub reinstates the mandatory minimum version for self-hosted Actions runners",
+            "fr": "GitHub réactive la version minimale obligatoire des runners self-hosted Actions"
+          },
+          "body_html": {
+            "es": "<p>Tras posponer el deadline de marzo por problemas de compatibilidad de kernel, GitHub vuelve a exigir versión mínima en los runners self-hosted: <strong>v2.329.0 o superior</strong> (estable actual v2.332.0), y una vez al día deben actualizarse dentro de los 30 días o GitHub deja de encolarles jobs. Los brownouts arrancan el <strong>29 de junio</strong> (fallos de registro y ejecución escalonados, 11–15h ET); enforcement total el 31 de julio para Data Residency y 25 de septiembre para Enterprise Cloud. El mayor riesgo son los runners en contenedores (Docker/Kubernetes): no se autoactualizan, hay que rebuildear las imágenes. Si tenés CI propio, revisá la versión esta semana.</p>",
+            "en": "<p>After postponing the March deadline over kernel-compatibility breakage, GitHub is again enforcing a minimum version on self-hosted runners: <strong>v2.329.0 or higher</strong> (current stable v2.332.0), and runners must pick up new releases within 30 days or GitHub stops queuing jobs to them. Brownouts begin <strong>June 29</strong> (escalating registration and job-execution failures, 11am–3pm ET); full enforcement July 31 for Data Residency and September 25 for Enterprise Cloud. Containerized runners (Docker/Kubernetes) are the biggest risk — binaries don't auto-update, so rebuild and redeploy the images. Check your CI runner versions this week.</p>",
+            "fr": "<p>Après avoir reporté l'échéance de mars pour cause d'incompatibilité kernel, GitHub réimpose une version minimale sur les runners self-hosted : <strong>v2.329.0 ou plus</strong> (stable actuelle v2.332.0), avec mise à jour obligatoire sous 30 jours sinon plus de jobs en file. Les brownouts commencent le <strong>29 juin</strong> ; enforcement total le 31 juillet (Data Residency) et le 25 septembre (Enterprise Cloud). Les runners conteneurisés sont les plus exposés : reconstruisez les images.</p>"
+          },
+          "source": { "url": "https://byteiota.com/github-actions-self-hosted-runner-enforcement-june-2026/", "label": "byteiota.com" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "docker-desktop-478",
+      "updates": [
+        {
+          "id": "docker-desktop-478",
+          "tag": "release",
+          "date": "15 Jun 2026",
+          "title": {
+            "es": "Docker Desktop 4.78.0: foco en fiabilidad y arranque",
+            "en": "Docker Desktop 4.78.0: reliability and startup focus",
+            "fr": "Docker Desktop 4.78.0 : fiabilité et démarrage"
+          },
+          "body_html": {
+            "es": "<p>Docker Desktop <strong>4.78.0</strong> es un release de pulido: mejor streaming de logs, mensajes de error más claros, updates más resilientes y fixes de crashes y problemas de arranque en Mac y Windows. Nada rompedor, pero si venís peleando con arranques colgados o updates que fallan, vale la actualización. Es la primera del mes con cambios visibles tras la 4.77.0 del 8 de junio.</p>",
+            "en": "<p>Docker Desktop <strong>4.78.0</strong> is a polish release: better log streaming, clearer error messages, more resilient updates, and fixes for crashes and startup issues on Mac and Windows. Nothing breaking, but if you've been fighting hung startups or failing updates, it's worth the bump. It follows 4.77.0 from June 8.</p>",
+            "fr": "<p>Docker Desktop <strong>4.78.0</strong> est une version de polissage : meilleur streaming des logs, messages d'erreur plus clairs, mises à jour plus résilientes et correctifs de crashs et de démarrage sur Mac et Windows. Rien de cassant, mais utile si vous luttiez contre des démarrages bloqués.</p>"
+          },
+          "source": { "url": "https://releasebot.io/updates/docker", "label": "releasebot.io" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "cf-artifacts-dashboard",
+      "updates": [
+        {
+          "id": "cf-artifacts-dashboard",
+          "tag": "notable",
+          "date": "17 Jun 2026",
+          "title": {
+            "es": "Cloudflare Artifacts: storage Git-compatible gestionable desde el dashboard",
+            "en": "Cloudflare Artifacts: Git-compatible storage now manageable from the dashboard",
+            "fr": "Cloudflare Artifacts : stockage compatible Git gérable depuis le dashboard"
+          },
+          "body_html": {
+            "es": "<p>Cloudflare suma al beta de <strong>Artifacts</strong> la gestión desde el dashboard: ahora podés ver, crear, forkear y buscar repos dentro de un namespace, copiar la remote URL y provisionar tokens con scope (read para <code>clone/fetch/pull</code>, write para <code>push</code>) sin tocar la API. Artifacts es storage versionado que habla Git nativo, construido sobre Durable Objects con un server Git escrito en Zig y compilado a WASM, replicado entre datacenters. Pensado para que un agente clone/commitee/pushee con herramientas que ya conoce, pero la idea de &laquo;tens of millions of repos&raquo; on-demand al edge es interesante para cualquier backend que necesite versionado liviano sin montar un GitLab.</p>",
+            "en": "<p>Cloudflare adds dashboard management to the <strong>Artifacts</strong> beta: you can now view, create, fork, and search repos within a namespace, copy the remote URL, and provision scoped tokens (read for <code>clone/fetch/pull</code>, write for <code>push</code>) without touching the API. Artifacts is versioned storage that speaks Git natively, built on Durable Objects with a Git server written in Zig compiled to WASM, replicated across data centers. It's aimed at agents cloning/committing/pushing with tools they already know, but on-demand &laquo;tens of millions of repos&raquo; at the edge is compelling for any backend that needs lightweight versioning without standing up a GitLab.</p>",
+            "fr": "<p>Cloudflare ajoute la gestion par dashboard au beta d'<strong>Artifacts</strong> : vous pouvez voir, créer, forker et rechercher des repos dans un namespace, copier la remote URL et provisionner des tokens scopés (read pour <code>clone/fetch/pull</code>, write pour <code>push</code>) sans toucher l'API. Artifacts est un stockage versionné qui parle Git nativement, bâti sur Durable Objects avec un serveur Git en Zig compilé en WASM, répliqué entre datacenters.</p>"
+          },
+          "source": { "url": "https://releasebot.io/updates/cloudflare", "label": "releasebot.io" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "La auth basada en Host header sigue cobrándose víctimas: LiteLLM se suma a la lista de frameworks Starlette donde reconstruir el path desde un header controlable por el cliente abre un bypass. Regla de oro: nunca derives decisiones de autorización de algo que el cliente puede falsear.",
+      "en": "Host-header-based auth keeps claiming victims: LiteLLM joins the list of Starlette apps where rebuilding the path from a client-controllable header opens a bypass. Golden rule — never base authorization decisions on anything the client can spoof.",
+      "fr": "L'auth basée sur le Host header continue de faire des victimes : LiteLLM rejoint les apps Starlette où reconstruire le chemin depuis un header contrôlable par le client ouvre un contournement. Règle d'or : ne jamais baser l'autorisation sur ce que le client peut usurper."
+    },
+    {
+      "es": "Los runners self-hosted en contenedores son el punto ciego de los pipelines: no se autoactualizan y un enforcement de versión mínima como el de GitHub puede frenar tu CI de golpe. Tratá la versión del runner como una dependencia más, con su propio renovate.",
+      "en": "Containerized self-hosted runners are the blind spot of CI pipelines: they don't auto-update, and a minimum-version enforcement like GitHub's can stall your CI overnight. Treat the runner version as a dependency with its own renovate.",
+      "fr": "Les runners self-hosted conteneurisés sont l'angle mort des pipelines CI : ils ne se mettent pas à jour seuls, et un enforcement de version minimale comme celui de GitHub peut bloquer votre CI du jour au lendemain. Traitez la version du runner comme une dépendance à part entière."
+    }
+  ]
+}

@@ -1,0 +1,430 @@
+{
+  "title": {
+    "es": "Briefing IA para Devs — 24 jun 2026",
+    "en": "AI Coding Daily Brief — Jun 24, 2026",
+    "fr": "Briefing IA pour Devs — 24 juin 2026"
+  },
+  "description": {
+    "es": "Anthropic lanza Claude Tag como equipo de trabajo en Slack (23 jun); Claude Code v2.1.187 agrega sandbox.credentials y resuelve cuelgues de MCP; Copilot CLI Terminal Interface llega a GA con tabs; BYOK en Copilot App; GPT-4.5 se retira el 27 jun.",
+    "en": "Anthropic launches Claude Tag as an AI teammate in Slack (Jun 23); Claude Code v2.1.187 adds sandbox.credentials and fixes MCP hangs; Copilot CLI Terminal Interface hits GA with tabs; BYOK lands in Copilot App; GPT-4.5 retires June 27.",
+    "fr": "Anthropic lance Claude Tag comme assistant dans Slack (23 juin); Claude Code v2.1.187 ajoute sandbox.credentials et corrige les blocages MCP; Copilot CLI Terminal Interface en GA avec onglets; BYOK dans l'app Copilot; GPT-4.5 retiré le 27 juin."
+  },
+  "pubDate": "2026-06-24",
+  "category": "ai-coding",
+  "highlights": [
+    {
+      "text": {
+        "es": "Claude Tag: agente de equipo persistente dentro de Slack",
+        "en": "Claude Tag: persistent AI teammate living inside Slack",
+        "fr": "Claude Tag: agent d'équipe permanent dans Slack"
+      },
+      "anchor": "claude-tag",
+      "icon": "simple-icons:anthropic"
+    },
+    {
+      "text": {
+        "es": "Copilot CLI Terminal Interface GA: tabs, rubber duck y voz",
+        "en": "Copilot CLI Terminal Interface GA: tabs, rubber duck, voice",
+        "fr": "Copilot CLI Terminal GA: onglets, rubber duck et voix"
+      },
+      "anchor": "copilot-cli-terminal-ga",
+      "icon": "simple-icons:githubcopilot"
+    },
+    {
+      "text": {
+        "es": "Claude Code v2.1.187: sandbox.credentials + fix cuelgues MCP",
+        "en": "Claude Code v2.1.187: sandbox.credentials shield + MCP hang fix",
+        "fr": "Claude Code v2.1.187: sandbox.credentials + correction blocages MCP"
+      },
+      "anchor": "claude-code",
+      "icon": "simple-icons:anthropic"
+    },
+    {
+      "text": {
+        "es": "GitHub Copilot App agrega BYOK para modelos propios",
+        "en": "GitHub Copilot App adds BYOK for custom model providers",
+        "fr": "L'app Copilot ajoute BYOK pour fournisseurs de modèles"
+      },
+      "anchor": "copilot-byok",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "GPT-4.5 se retira el 27 jun — migrar a GPT-4.1",
+        "en": "GPT-4.5 retires June 27 — migrate to GPT-4.1",
+        "fr": "GPT-4.5 se retire le 27 juin — migrer vers GPT-4.1"
+      },
+      "anchor": "model-timeline",
+      "icon": "simple-icons:openai"
+    }
+  ],
+  "stats": {
+    "tools_tracked": 6,
+    "updates_found": "11+",
+    "models_cataloged": 8,
+    "providers_covered": 9
+  },
+  "tools": [
+    {
+      "id": "claude-code",
+      "name": "Claude Code",
+      "publisher": "Anthropic",
+      "theme": "claude",
+      "icon_emoji": "🤖",
+      "version": "v2.1.187",
+      "anchor": "claude-code",
+      "updates": [
+        {
+          "id": "claude-code-sandbox-credentials",
+          "tag": "security",
+          "title": {
+            "es": "v2.1.187: sandbox.credentials bloquea credenciales en comandos aislados",
+            "en": "v2.1.187: sandbox.credentials blocks credential files in sandboxed commands",
+            "fr": "v2.1.187: sandbox.credentials bloque les fichiers de credentials dans le sandbox"
+          },
+          "body_html": {
+            "es": "<p>El nuevo ajuste <code>sandbox.credentials</code> impide que los comandos en modo sandbox lean archivos de credenciales y variables de entorno secretas. También agrega restricciones de modelos configuradas por la organización en el selector de modelos, soporte de clic del mouse en menús de pantalla completa, y corrige llamadas a herramientas MCP remotas que colgaban indefinidamente (ahora abortan tras 5 minutos). Además se corrige <code>--resume</code> que fallaba con «No conversation found».</p>",
+            "en": "<p>New <code>sandbox.credentials</code> setting prevents sandboxed commands from reading credential files and secret environment variables. Also adds org-configured model restrictions to the model picker, mouse click support in fullscreen menus, and fixes remote MCP tool calls hanging indefinitely (now abort after 5 minutes). Fixes <code>--resume</code> failing with <em>No conversation found</em>.</p>",
+            "fr": "<p>Le nouveau paramètre <code>sandbox.credentials</code> empêche les commandes en sandbox de lire les fichiers de credentials et les variables secrètes. Ajoute aussi les restrictions de modèles configurées par l'organisation, le clic souris en plein écran, et corrige les blocages des outils MCP distants (abandon après 5 min).</p>"
+          },
+          "date": "23 jun 2026",
+          "source": {
+            "url": "https://github.com/anthropics/claude-code/releases",
+            "label": "github.com"
+          }
+        },
+        {
+          "id": "claude-code-mcp-login",
+          "tag": "feature",
+          "title": {
+            "es": "v2.1.186: claude mcp login/logout desde la CLI + ! bash con respuesta automática",
+            "en": "v2.1.186: claude mcp login/logout from CLI + ! bash triggers auto-response",
+            "fr": "v2.1.186: claude mcp login/logout depuis la CLI + ! bash déclenche réponse auto"
+          },
+          "body_html": {
+            "es": "<p><code>claude mcp login &lt;name&gt;</code> y <code>claude mcp logout &lt;name&gt;</code> permiten autenticar servidores MCP desde la CLI sin abrir el menú <code>/mcp</code>, con soporte para completar el flujo vía <code>--no-browser</code> sobre SSH. Los comandos <code>!</code> bash ahora desencadenan respuestas automáticas de Claude. Se añade una sección <strong>Skills</strong> en la pestaña Installed de <code>/plugin</code> y la opción «Claude Platform on AWS – refresh credentials» en <code>/login</code>.</p>",
+            "en": "<p><code>claude mcp login &lt;name&gt;</code> and <code>claude mcp logout &lt;name&gt;</code> authenticate MCP servers from the CLI without opening the <code>/mcp</code> menu, with <code>--no-browser</code> stdin redirect for completing over SSH. <code>!</code> bash commands now trigger automatic Claude responses. A <strong>Skills</strong> section added to the <code>/plugin</code> Installed tab, plus a <em>Claude Platform on AWS – refresh credentials</em> option in <code>/login</code>.</p>",
+            "fr": "<p><code>claude mcp login &lt;name&gt;</code> et <code>claude mcp logout &lt;name&gt;</code> authentifient les serveurs MCP depuis la CLI, avec <code>--no-browser</code> pour compléter via SSH. Les commandes <code>!</code> bash déclenchent désormais des réponses automatiques. Section <strong>Skills</strong> ajoutée dans <code>/plugin</code> et option de rafraîchissement AWS dans <code>/login</code>.</p>"
+          },
+          "date": "22 jun 2026",
+          "source": {
+            "url": "https://releasebot.io/updates/anthropic/claude-code",
+            "label": "releasebot.io"
+          }
+        }
+      ]
+    },
+    {
+      "id": "claude-tag",
+      "name": "Claude Tag",
+      "publisher": "Anthropic",
+      "theme": "claude",
+      "icon_emoji": "🏷️",
+      "anchor": "claude-tag",
+      "updates": [
+        {
+          "id": "claude-tag-launch",
+          "tag": "feature",
+          "title": {
+            "es": "Claude Tag: compañero de equipo IA persistente en Slack para Enterprise y Team",
+            "en": "Claude Tag: persistent AI teammate inside Slack for Enterprise and Team",
+            "fr": "Claude Tag: agent d'équipe persistant dans Slack pour Enterprise et Team"
+          },
+          "body_html": {
+            "es": "<p>Anthropic lanzó <strong>Claude Tag</strong> en beta para clientes Enterprise y Team. Se agrega a canales de Slack específicos, se conecta a herramientas y fuentes de datos aprobadas, y acepta tareas vía <code>@Claude</code>. El modo <em>ambient</em> permite que Claude surfacee actualizaciones de forma proactiva entre canales. Reemplaza la app anterior de Claude en Slack con una ventana de migración de 30 días. Corre sobre <strong>Opus 4.8</strong>; el equipo de producto de Anthropic ya usa una versión interna que genera el 65% del código del equipo.</p>",
+            "en": "<p>Anthropic launched <strong>Claude Tag</strong> in beta for Enterprise and Team customers. Add it to specific Slack channels, wire it into approved tools and data sources, then tag <code>@Claude</code> to assign tasks. The optional <em>ambient</em> mode lets Claude surface proactive updates across channels. Replaces the prior Claude in Slack app with a 30-day opt-in migration window. Runs on <strong>Opus 4.8</strong>; Anthropic's product team already uses an internal version that generates 65% of team code.</p>",
+            "fr": "<p>Anthropic a lancé <strong>Claude Tag</strong> en bêta pour les clients Enterprise et Team. Ajoutez-le à des canaux Slack, connectez-le à des outils approuvés, et taguez <code>@Claude</code> pour lui assigner des tâches. Mode <em>ambient</em> disponible pour des mises à jour proactives. Remplace l'ancienne app Claude dans Slack avec une migration de 30 jours. Fonctionne sur <strong>Opus 4.8</strong>.</p>"
+          },
+          "date": "23 jun 2026",
+          "source": {
+            "url": "https://www.anthropic.com/news",
+            "label": "anthropic.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "openai-codex",
+      "name": "OpenAI Codex",
+      "publisher": "OpenAI",
+      "theme": "openai",
+      "icon_emoji": "💻",
+      "anchor": "openai-codex",
+      "updates": [
+        {
+          "id": "codex-import-and-agents",
+          "tag": "feature",
+          "title": {
+            "es": "Codex: /import desde Claude Code, presupuestos de agente y auth Bedrock",
+            "en": "Codex: /import from Claude Code, agent rollout budgets, and Bedrock auth",
+            "fr": "Codex: /import depuis Claude Code, budgets d'agents et auth Bedrock"
+          },
+          "body_html": {
+            "es": "<p>El comando <code>/import</code> permite migrar selectivamente configuración de setup, configuración de proyecto y chats recientes desde <strong>Claude Code</strong>. Se suman presupuestos de tokens para agentes (<em>rollout budgets</em>) con recordatorios de saldo y cancelación al agotarse, eliminación permanente de sesiones vía <code>/delete</code>, búsqueda web indexada con acceso restringido a URLs aprobadas, y autenticación con Amazon Bedrock mediante clave API administrada y almacenamiento local cifrado.</p>",
+            "en": "<p>The <code>/import</code> command lets you selectively migrate setup config, project config, and recent chats from <strong>Claude Code</strong>. Also added: configurable agent rollout token budgets with remaining-budget reminders and abort-on-exhaust, permanent session deletion via <code>/delete</code>, indexed web-search mode restricted to server-approved URLs, and managed Amazon Bedrock API-key auth with encrypted local storage.</p>",
+            "fr": "<p>La commande <code>/import</code> permet de migrer sélectivement la configuration et les chats récents depuis <strong>Claude Code</strong>. Ajout de budgets de tokens pour agents avec rappels de solde, suppression permanente de sessions via <code>/delete</code>, recherche web indexée restreinte, et authentification Amazon Bedrock avec stockage local chiffré.</p>"
+          },
+          "date": "jun 2026",
+          "source": {
+            "url": "https://developers.openai.com/codex/changelog",
+            "label": "openai.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gpt",
+      "name": "GPT Models",
+      "publisher": "OpenAI",
+      "theme": "openai",
+      "icon_emoji": "🧠",
+      "anchor": "gpt",
+      "updates": [
+        {
+          "id": "gpt-45-retirement",
+          "tag": "update",
+          "title": {
+            "es": "GPT-4.5 se retira el 27 jun de ChatGPT — migrar a GPT-4.1",
+            "en": "GPT-4.5 retires June 27 from ChatGPT — migrate to GPT-4.1",
+            "fr": "GPT-4.5 retiré de ChatGPT le 27 juin — migrer vers GPT-4.1"
+          },
+          "body_html": {
+            "es": "<p>OpenAI retira <strong>GPT-4.5</strong> de ChatGPT el <strong>27 de junio de 2026</strong> tras 30 días de aviso. Los usuarios que dependen de GPT-4.5 deben migrar a <strong>GPT-4.1</strong>, que supera a GPT-4.5 en seguimiento preciso de instrucciones y tareas de desarrollo web. GPT-4o y GPT-4.1 mini ya habían sido retirados previamente. GPT-5.6 sigue sin anuncio oficial dentro de la ventana 22-28 jun.</p>",
+            "en": "<p>OpenAI retires <strong>GPT-4.5</strong> from ChatGPT on <strong>June 27, 2026</strong> after a 30-day notice period. Users relying on GPT-4.5 should migrate to <strong>GPT-4.1</strong>, which outperforms GPT-4.5 on precise instruction-following and web development tasks. GPT-4o and GPT-4.1 mini were already retired. GPT-5.6 remains without an official announcement inside the June 22-28 window.</p>",
+            "fr": "<p>OpenAI retire <strong>GPT-4.5</strong> de ChatGPT le <strong>27 juin 2026</strong> après 30 jours de préavis. Migrer vers <strong>GPT-4.1</strong>, plus performant sur le suivi d'instructions et le développement web. GPT-4o et GPT-4.1 mini ont déjà été retirés. GPT-5.6 toujours sans annonce officielle dans la fenêtre 22-28 juin.</p>"
+          },
+          "date": "24 jun 2026",
+          "source": {
+            "url": "https://help.openai.com/en/articles/9624314-model-release-notes",
+            "label": "openai.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini Code Assist",
+      "publisher": "Google",
+      "theme": "gemini",
+      "icon_emoji": "✨",
+      "anchor": "gemini",
+      "updates": [
+        {
+          "id": "gemini-ide-updates",
+          "tag": "update",
+          "title": {
+            "es": "IntelliJ v1.22.1: botón para detener respuestas + VS Code v2.41.0 más veloz",
+            "en": "IntelliJ v1.22.1: stop-response button + VS Code v2.41.0 faster completions",
+            "fr": "IntelliJ v1.22.1: bouton arrêt + VS Code v2.41.0 complétions plus rapides"
+          },
+          "body_html": {
+            "es": "<p>El plugin de Gemini Code Assist para IntelliJ v1.22.1 permite detener inmediatamente respuestas largas o erróneas del chat. VS Code Extension v2.41.0 mejora la velocidad de sugerencias de completado de código. Ambos usan <strong>Gemini 2.5 Pro</strong> y <strong>Gemini 2.5 Flash</strong> (GA desde junio) en todos los tiers de usuario.</p>",
+            "en": "<p>Gemini Code Assist IntelliJ plugin v1.22.1 lets you immediately halt long-running or errant chat responses. VS Code Extension v2.41.0 improves code completion suggestion speed. Both use <strong>Gemini 2.5 Pro</strong> and <strong>Gemini 2.5 Flash</strong> (GA since June) across all user tiers for chat, code generation, and code transformation.</p>",
+            "fr": "<p>Le plugin IntelliJ v1.22.1 permet d'arrêter les réponses de chat longues ou incorrectes. L'extension VS Code v2.41.0 améliore la vitesse de complétion. Les deux utilisent <strong>Gemini 2.5 Pro</strong> et <strong>Gemini 2.5 Flash</strong> (GA depuis juin) sur tous les tiers utilisateurs.</p>"
+          },
+          "date": "jun 2026",
+          "source": {
+            "url": "https://docs.cloud.google.com/gemini/docs/codeassist/release-notes",
+            "label": "cloud.google.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "github-copilot",
+      "name": "GitHub Copilot",
+      "publisher": "Microsoft / GitHub",
+      "theme": "copilot",
+      "icon_emoji": "🤝",
+      "anchor": "github-copilot",
+      "updates": [
+        {
+          "id": "copilot-cli-terminal-ga",
+          "tag": "feature",
+          "title": {
+            "es": "Copilot CLI: interfaz de terminal rediseñada llega a GA con tabs y voz",
+            "en": "Copilot CLI: redesigned terminal interface hits GA with tabs and voice",
+            "fr": "Copilot CLI: interface terminal redessinée en GA avec onglets et voix"
+          },
+          "body_html": {
+            "es": "<p>La nueva interfaz de terminal de Copilot CLI —previamente anunciada en Microsoft Build 2026— llega a disponibilidad general. Introduce <strong>tabs</strong> para alternar entre vista de Sesión, Issues, Pull requests y Gists. El modo <em>rubber duck</em> (crítico constructivo que revisa planes, diseños e implementaciones) y la dictación por voz (mantener espacio) son ahora GA. La programación de prompts queda disponible vía <code>/experimental</code>.</p>",
+            "en": "<p>The redesigned Copilot CLI terminal interface —previewed at Microsoft Build 2026— is now generally available. Introduces <strong>tabs</strong> to switch between Session view, Issues, Pull requests, and Gists. <em>Rubber duck</em> mode (a constructive critic that reviews plans, designs, and implementations) and voice dictation (hold space) are now GA. Prompt scheduling available via <code>/experimental</code>.</p>",
+            "fr": "<p>La nouvelle interface terminal Copilot CLI est maintenant en disponibilité générale. Introduit des <strong>onglets</strong> pour naviguer entre Session, Issues, Pull requests et Gists. Mode <em>rubber duck</em> et dictée vocale (maintenir espace) sont en GA. La planification de prompts est disponible via <code>/experimental</code>.</p>"
+          },
+          "date": "23 jun 2026",
+          "source": {
+            "url": "https://github.blog/changelog/month/06-2026/",
+            "label": "github.blog"
+          }
+        },
+        {
+          "id": "copilot-byok",
+          "tag": "feature",
+          "title": {
+            "es": "Copilot App: BYOK para sesiones de agente con modelos propios",
+            "en": "Copilot App: BYOK to run agent sessions on your own model providers",
+            "fr": "App Copilot: BYOK pour sessions d'agent avec vos propres fournisseurs de modèles"
+          },
+          "body_html": {
+            "es": "<p>El <strong>GitHub Copilot App</strong> —escritorio nativo para agentes lanzado en Microsoft Build 2026— ya soporta <em>bring your own key</em> (BYOK), permitiendo ejecutar sesiones de agente contra proveedores de modelos propios. Disponible en preview técnico para Copilot Pro, Pro+, Business y Enterprise.</p>",
+            "en": "<p>The <strong>GitHub Copilot App</strong> —the agent-native desktop experience from Microsoft Build 2026— now supports <em>bring your own key</em> (BYOK), letting you run agent sessions against your own model providers. Available in technical preview for Copilot Pro, Pro+, Business, and Enterprise users.</p>",
+            "fr": "<p>L'<strong>app GitHub Copilot</strong> —l'expérience bureau native pour agents du Microsoft Build 2026— prend désormais en charge le <em>BYOK</em>, permettant d'utiliser vos propres fournisseurs de modèles. En preview technique pour Pro, Pro+, Business et Enterprise.</p>"
+          },
+          "date": "23 jun 2026",
+          "source": {
+            "url": "https://github.blog/news-insights/product-news/github-copilot-app-the-agent-native-desktop-experience/",
+            "label": "github.blog"
+          }
+        },
+        {
+          "id": "copilot-usage-metrics-api",
+          "tag": "update",
+          "title": {
+            "es": "API de métricas: consumo individual de créditos de IA rastreado por día",
+            "en": "Usage Metrics API: individual AI credit consumption tracked daily",
+            "fr": "API de métriques: consommation individuelle de crédits IA suivie par jour"
+          },
+          "body_html": {
+            "es": "<p>La API de métricas de uso de Copilot ahora rastrea el consumo individual de créditos de IA por día, ofreciendo visibilidad de facturación granular para administradores de organizaciones y empresas. Los presupuestos de usuario son ahora GA tanto para organizaciones como para empresas.</p>",
+            "en": "<p>The Copilot Usage Metrics API now tracks individual user AI credit consumption daily, providing granular billing visibility for organization and enterprise administrators. User-level budgets are now generally available for both organizations and enterprises.</p>",
+            "fr": "<p>L'API de métriques d'utilisation de Copilot suit la consommation individuelle de crédits IA par jour. Les budgets au niveau utilisateur sont maintenant en GA pour les organisations et les entreprises.</p>"
+          },
+          "date": "19 jun 2026",
+          "source": {
+            "url": "https://releasebot.io/updates/github",
+            "label": "releasebot.io"
+          }
+        }
+      ]
+    }
+  ],
+  "models": [
+    {
+      "date": "2026-06-27",
+      "name": "GPT-4.5 (retirement)",
+      "provider": "openai",
+      "provider_label": "OpenAI",
+      "tier": "a",
+      "weight": "upcoming",
+      "notes": {
+        "es": "Se retira de ChatGPT el 27 jun. Migrar a GPT-4.1 (mejor en instrucción precisa y desarrollo web).",
+        "en": "Retires from ChatGPT June 27. Migrate to GPT-4.1 (stronger on precise instruction-following and web dev).",
+        "fr": "Se retire de ChatGPT le 27 juin. Migrer vers GPT-4.1 (meilleur sur le suivi d'instructions et le développement web)."
+      },
+      "row_kind": "upcoming"
+    },
+    {
+      "date": "2026-06-28",
+      "name": "GPT-5.6",
+      "provider": "openai",
+      "provider_label": "OpenAI",
+      "tier": "splus",
+      "weight": "upcoming",
+      "notes": {
+        "es": "Ventana 22-28 jun (89% Polymarket). Contexto 1.5M tokens rumoreado. El jefe de ciencia de OpenAI lo llama un salto significativo.",
+        "en": "June 22-28 window (89% Polymarket). Rumored 1.5M-token context. OpenAI's chief scientist calls it a meaningful leap.",
+        "fr": "Fenêtre 22-28 juin (89% Polymarket). Contexte 1.5M tokens rumeur. Le chef scientifique parle d'un saut significatif."
+      },
+      "row_kind": "upcoming"
+    },
+    {
+      "date": "2026-06-30",
+      "name": "Gemini 3.5 Pro",
+      "provider": "google",
+      "provider_label": "Google",
+      "tier": "s",
+      "weight": "upcoming",
+      "notes": {
+        "es": "Anunciado en Google I/O 2026 (19 may). Preview limitada en Vertex. GA esperada antes de fin de junio.",
+        "en": "Announced at Google I/O 2026 (May 19). Limited Vertex preview. GA expected before end of June.",
+        "fr": "Annoncé au Google I/O 2026 (19 mai). Preview Vertex limitée. GA attendue avant fin juin."
+      },
+      "row_kind": "upcoming"
+    },
+    {
+      "date": "2026-06-16",
+      "name": "GLM-5.2",
+      "provider": "zhipu",
+      "provider_label": "Zhipu / Z.ai",
+      "tier": "aplus",
+      "weight": "open",
+      "notes": {
+        "es": "744B MoE (~40B activos), contexto 1M tokens (5x vs GLM-5.1). 62.1 en SWE-bench Pro — supera a GPT-5.5 (58.6). Pesos MIT en Hugging Face. Via OpenRouter a $1.40/$4.40 por millón.",
+        "en": "744B MoE (~40B active), 1M-token context (5x vs GLM-5.1). 62.1 on SWE-bench Pro — beats GPT-5.5 (58.6). MIT weights on Hugging Face. Via OpenRouter at $1.40/$4.40 per 1M tokens.",
+        "fr": "744B MoE (~40B actifs), contexte 1M tokens (5x vs GLM-5.1). 62.1 sur SWE-bench Pro — dépasse GPT-5.5 (58.6). Poids MIT sur Hugging Face."
+      },
+      "row_kind": "recent"
+    },
+    {
+      "date": "2026-06-12",
+      "name": "Kimi K2.7-Code",
+      "provider": "moonshot",
+      "provider_label": "Moonshot AI",
+      "tier": "aplus",
+      "weight": "open",
+      "notes": {
+        "es": "1T parámetros MoE (32B activos, 384 expertos), contexto 256K, licencia Modified MIT. +21.8% en Kimi Code Bench v2 vs K2.6. 30% menos tokens de razonamiento.",
+        "en": "1T parameter MoE (32B active, 384 experts), 256K context, Modified MIT license. +21.8% on Kimi Code Bench v2 vs K2.6. 30% fewer reasoning tokens.",
+        "fr": "1T paramètres MoE (32B actifs, 384 experts), 256K contexte, licence Modified MIT. +21.8% sur Kimi Code Bench v2 vs K2.6. 30% moins de tokens de raisonnement."
+      },
+      "row_kind": "recent"
+    },
+    {
+      "date": "2026-06-09",
+      "name": "Claude Fable 5",
+      "provider": "anthropic",
+      "provider_label": "Anthropic",
+      "tier": "splus",
+      "weight": "proprietary",
+      "notes": {
+        "es": "Modelo de clase Mythos para uso general con salvaguardas. $10/$50 por millón de tokens. Mythos 5 reservado para defensores e infraestructura crítica.",
+        "en": "Mythos-class model made safe for general use with guardrails. $10/$50 per 1M tokens. Mythos 5 stays locked to vetted defenders and critical infrastructure.",
+        "fr": "Modèle de classe Mythos sécurisé avec garde-fous. $10/$50 par million de tokens. Mythos 5 réservé aux défenseurs et infrastructure critique."
+      }
+    },
+    {
+      "date": "2026-06-01",
+      "name": "MiniMax M3",
+      "provider": "minimax",
+      "provider_label": "MiniMax",
+      "tier": "s",
+      "weight": "open",
+      "notes": {
+        "es": "Primer modelo open-weight con codificación frontier + contexto 1M tokens + multimodal nativo. 59.0 en SWE-bench Pro. $0.60/$2.40 por millón de tokens.",
+        "en": "First open-weight model combining frontier coding, 1M-token context, and native multimodal in one. 59.0 on SWE-bench Pro. $0.60/$2.40 per 1M tokens.",
+        "fr": "Premier modèle open-weight combinant codage frontier, contexte 1M tokens et multimodal natif. 59.0 sur SWE-bench Pro. $0,60/$2,40 par million de tokens."
+      }
+    },
+    {
+      "date": "2026-05-28",
+      "name": "Claude Opus 4.8",
+      "provider": "anthropic",
+      "provider_label": "Anthropic",
+      "tier": "s",
+      "weight": "proprietary",
+      "notes": {
+        "es": "69.2% en SWE-bench Pro. Dynamic Workflows en Claude Code. Fast mode 2.5x más rápido y 3x más económico. Motor de Claude Tag.",
+        "en": "69.2% on SWE-bench Pro. Dynamic Workflows in Claude Code. Fast mode 2.5x faster and 3x cheaper. Powers Claude Tag.",
+        "fr": "69.2% sur SWE-bench Pro. Dynamic Workflows dans Claude Code. Fast mode 2.5x plus rapide et 3x moins cher. Alimente Claude Tag."
+      }
+    }
+  ],
+  "model_timeline_anchor": "model-timeline",
+  "notable_trends": [
+    {
+      "es": "El workspace como nuevo campo de batalla: Claude Tag en Slack y el GitHub Copilot App con BYOK marcan que el siguiente frente competitivo no es el editor de código, sino el espacio de trabajo compartido. Anthropic apuesta por la comunicación asíncrona en equipo; GitHub apuesta por el escritorio nativo con agentes. Ambas apuestas buscan convertir a la IA en un participante permanente del flujo de trabajo, no una herramienta que se invoca puntualmente.",
+      "en": "The workspace as the new battleground: Claude Tag in Slack and GitHub Copilot App with BYOK signal that the next competitive front is not the code editor — it is the shared workspace. Anthropic is betting on async team communication; GitHub is betting on a native desktop with agents. Both moves aim to make AI a permanent participant in the workflow, not a tool you invoke.",
+      "fr": "Le workspace comme nouveau champ de bataille: Claude Tag dans Slack et l'app GitHub Copilot avec BYOK signalent que le prochain front compétitif n'est pas l'éditeur de code mais l'espace de travail partagé. Anthropic mise sur la communication asynchrone en équipe; GitHub mise sur le bureau natif avec agents."
+    },
+    {
+      "es": "La IA open-weight alcanza el rendimiento frontier en ingeniería de software: GLM-5.2 con 62.1 en SWE-bench Pro supera a GPT-5.5 (58.6) siendo un modelo con pesos abiertos bajo MIT. MiniMax M3 y Kimi K2.7-Code consolidan un ecosistema de modelos abiertos con contexto de 1M tokens y rendimiento de agente que era exclusivo de modelos propietarios hace seis meses.",
+      "en": "Open-weight AI reaches frontier performance on software engineering: GLM-5.2 scores 62.1 on SWE-bench Pro, beating GPT-5.5 (58.6), while releasing weights under MIT. MiniMax M3 and Kimi K2.7-Code cement an ecosystem of open models with 1M-token context and agent performance that was exclusive to proprietary models just six months ago.",
+      "fr": "L'IA open-weight atteint les performances frontier: GLM-5.2 avec 62.1 sur SWE-bench Pro dépasse GPT-5.5 (58.6) avec des poids sous MIT. MiniMax M3 et Kimi K2.7-Code consolident un écosystème de modèles ouverts avec contexte 1M tokens qui était exclusif aux modèles propriétaires il y a six mois."
+    },
+    {
+      "es": "Seguridad a nivel sandbox y limpieza de modelos: la nueva opción <code>sandbox.credentials</code> de Claude Code y la depreciación de Opus 4.6 (fast) en Copilot para el 29 jun señalan que los vendors están endureciendo controles de seguridad y eliminando deuda de modelos más rápido — señal de que los agentes están siendo desplegados en entornos más sensibles y regulados.",
+      "en": "Security at the sandbox level and model cleanup: Claude Code's new <code>sandbox.credentials</code> setting and Copilot's June 29 deprecation of Opus 4.6 (fast) show vendors tightening security controls and clearing model debt faster — a signal that agentic deployments are reaching more sensitive, regulated environments.",
+      "fr": "Sécurité au niveau sandbox et nettoyage de modèles: le paramètre <code>sandbox.credentials</code> de Claude Code et la dépréciation d'Opus 4.6 (fast) dans Copilot le 29 juin montrent les éditeurs renforçant les contrôles de sécurité — signe que les agents sont déployés dans des environnements plus sensibles."
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 25 Jun 2026",
+    "en": "Backend & Fullstack Daily — Jun 25, 2026",
+    "fr": "Backend & Fullstack Daily — 25 juin 2026"
+  },
+  "description": {
+    "es": "Node.js parcha 12 CVEs (2 HIGH), TypeScript 7.0 RC con compilador en Go ~10x más rápido, Deno Desktop en 2.9 y la tanda de seguridad de GitHub.",
+    "en": "Node.js patches 12 CVEs (2 HIGH), TypeScript 7.0 RC lands the Go compiler ~10x faster, Deno Desktop ships in 2.9, and GitHub drops a security batch.",
+    "fr": "Node.js corrige 12 CVE (2 HIGH), TypeScript 7.0 RC livre le compilateur Go ~10x plus rapide, Deno Desktop arrive en 2.9, et GitHub publie un lot sécurité."
+  },
+  "pubDate": "2026-06-25",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "Node.js parcha 12 CVEs, 2 HIGH", "en": "Node.js patches 12 CVEs, 2 HIGH", "fr": "Node.js corrige 12 CVE, 2 HIGH" },
+      "anchor": "node-june-2026-security",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "TypeScript 7.0 RC: compilador en Go ~10x", "en": "TypeScript 7.0 RC: Go compiler ~10x", "fr": "TypeScript 7.0 RC : compilateur Go ~10x" },
+      "anchor": "ts-7-rc",
+      "icon": "simple-icons:typescript"
+    },
+    {
+      "text": { "es": "Deno Desktop: apps nativas en 2.9", "en": "Deno Desktop: native apps in 2.9", "fr": "Deno Desktop : apps natives en 2.9" },
+      "anchor": "deno-desktop",
+      "icon": "simple-icons:deno"
+    },
+    {
+      "text": { "es": "GitHub: revocá credenciales al instante", "en": "GitHub: instant credential revocation", "fr": "GitHub : révocation instantanée" },
+      "anchor": "github-june-devops",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": { "es": "Next.js abre la rama 16.3 en canary", "en": "Next.js opens the 16.3 canary line", "fr": "Next.js ouvre la branche 16.3 canary" },
+      "anchor": "nextjs-1630-canary",
+      "icon": "simple-icons:nextdotjs"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "node-june-2026-security",
+      "updates": [
+        {
+          "id": "node-june-2026-security",
+          "tag": "security",
+          "date": "18 Jun 2026",
+          "title": { "es": "Node.js parcha 12 CVEs en todas las líneas (2 HIGH)", "en": "Node.js patches 12 CVEs across all lines (2 HIGH)", "fr": "Node.js corrige 12 CVE sur toutes les lignes (2 HIGH)" },
+          "body_html": {
+            "es": "<p>El 18 de junio Node.js sacó <strong>22.23.0</strong>, <strong>24.17.0</strong> y <strong>26.3.1</strong> de una, agrupando 12 CVEs en WebCrypto, TLS, HTTP/2, HTTP, DNS y Permission Model. Las dos HIGH son las que importan: <code>CVE-2026-48933</code> crashea el proceso si el input de <code>subtle.encrypt()</code> es múltiplo de 2GiB (DoS), y <code>CVE-2026-48618</code> es un <strong>bypass de autenticación por wildcard en TLS</strong> por mal manejo del separador de punto unicode. Trae bumps de openssl 3.5.7, nghttp2 1.69.0 y llhttp 9.4.2. Ojo con el de TLS: actualizá YA, no esperes la ventana de mantenimiento.</p>",
+            "en": "<p>On June 18 Node.js shipped <strong>22.23.0</strong>, <strong>24.17.0</strong> and <strong>26.3.1</strong> at once, bundling 12 CVEs across WebCrypto, TLS, HTTP/2, HTTP, DNS and the Permission Model. The two HIGH issues are the ones that matter: <code>CVE-2026-48933</code> crashes the process when <code>subtle.encrypt()</code> input is a multiple of 2GiB (DoS), and <code>CVE-2026-48618</code> is a <strong>TLS wildcard-depth authentication bypass</strong> from unicode dot-separator mishandling. Ships with openssl 3.5.7, nghttp2 1.69.0 and llhttp 9.4.2. The TLS one warrants patching now, not a maintenance window.</p>",
+            "fr": "<p>Le 18 juin, Node.js a publié <strong>22.23.0</strong>, <strong>24.17.0</strong> et <strong>26.3.1</strong> d'un coup, regroupant 12 CVE dans WebCrypto, TLS, HTTP/2, HTTP, DNS et le Permission Model. Les deux HIGH comptent : <code>CVE-2026-48933</code> fait planter le process si l'entrée de <code>subtle.encrypt()</code> est un multiple de 2 Gio (DoS), et <code>CVE-2026-48618</code> est un <strong>contournement d'authentification wildcard TLS</strong>. Inclut openssl 3.5.7, nghttp2 1.69.0 et llhttp 9.4.2. Patchez le TLS maintenant.</p>"
+          },
+          "source": { "url": "https://nodejs.org/en/blog/vulnerability/june-2026-security-releases", "label": "nodejs.org" }
+        },
+        {
+          "id": "ts-7-rc",
+          "tag": "breaking",
+          "date": "18 Jun 2026",
+          "title": { "es": "TypeScript 7.0 RC: el compilador nativo en Go aterrizó", "en": "TypeScript 7.0 RC: the Go-native compiler has landed", "fr": "TypeScript 7.0 RC : le compilateur natif en Go est là" },
+          "body_html": {
+            "es": "<p>Microsoft publicó la RC de <strong>TypeScript 7.0</strong> el 18 de junio, con el compilador reescrito en Go: dicen que el type-check es <strong>~10x más rápido</strong>. Es un port, no un rewrite, así que la semántica de tipos es idéntica. Lo jugoso: type-checking paralelo (4 checkers por default, configurable con <code>--checkers</code>), builders de project references en paralelo, <code>--watch</code> reconstruido sobre tech de Parcel, y un nuevo Language Server que reduce 20x los comandos fallidos. Ya lo corrieron Google, Slack y Figma en codebases de millones de líneas. La GA estable se espera ~1 mes después de la RC.</p>",
+            "en": "<p>Microsoft published the <strong>TypeScript 7.0</strong> RC on June 18, with the compiler rewritten in Go — type-checks are reportedly <strong>~10x faster</strong>. It's a port, not a rewrite, so type-checking semantics are identical. The good bits: parallel type-checking (4 checkers by default, tunable via <code>--checkers</code>), parallel project-reference builders, a <code>--watch</code> rebuilt on Parcel-derived tech, and a new Language Server that cuts failing commands 20x. Already battle-tested at Google, Slack and Figma on multi-million-line codebases. Stable GA expected ~1 month after the RC.</p>",
+            "fr": "<p>Microsoft a publié la RC de <strong>TypeScript 7.0</strong> le 18 juin, avec le compilateur réécrit en Go : type-check <strong>~10x plus rapide</strong>. C'est un port, pas un rewrite, donc la sémantique des types est identique. Au menu : type-checking parallèle (4 checkers par défaut, <code>--checkers</code>), builders de project references en parallèle, <code>--watch</code> reconstruit sur de la tech Parcel, et un nouveau Language Server qui réduit 20x les commandes en échec. Déjà testé chez Google, Slack et Figma. GA stable attendue ~1 mois après la RC.</p>"
+          },
+          "source": { "url": "https://devblogs.microsoft.com/typescript/announcing-typescript-7-0-rc/", "label": "devblogs.microsoft.com" }
+        },
+        {
+          "id": "deno-desktop",
+          "tag": "notable",
+          "date": "24 Jun 2026",
+          "title": { "es": "Deno Desktop: apps nativas cross-platform desde TypeScript", "en": "Deno Desktop: cross-platform native apps from TypeScript", "fr": "Deno Desktop : apps natives multiplateformes depuis TypeScript" },
+          "body_html": {
+            "es": "<p>Deno mostró <strong>Deno Desktop</strong>, un framework para empaquetar tu proyecto en un binario nativo autocontenido (macOS, Windows, Linux) que mete tu código, el runtime y un motor de render web. Auto-detecta Next.js, Astro, Fresh, Remix, Nuxt, SvelteKit, SolidStart, TanStack Start y Vite SSR sin tocar código. Usa el <strong>WebView nativo</strong> en vez de Chromium: ~68.5MB en macOS contra 308.9MB con CEF. Llega en <code>2.9.0</code> pero está marcado como pre-stable — corré <code>deno upgrade canary</code> para probarlo. APIs y config pueden cambiar antes de estabilizar.</p>",
+            "en": "<p>Deno showed off <strong>Deno Desktop</strong>, a framework that packages your project into a self-contained native binary (macOS, Windows, Linux) bundling your code, the runtime and a web rendering engine. It auto-detects Next.js, Astro, Fresh, Remix, Nuxt, SvelteKit, SolidStart, TanStack Start and Vite SSR with no code changes. It uses the <strong>native WebView</strong> instead of Chromium: ~68.5MB on macOS vs 308.9MB with CEF. It lands in <code>2.9.0</code> but is marked pre-stable — run <code>deno upgrade canary</code> to try it. APIs and config may still change before stabilizing.</p>",
+            "fr": "<p>Deno a présenté <strong>Deno Desktop</strong>, un framework qui empaquette votre projet en binaire natif autonome (macOS, Windows, Linux) avec votre code, le runtime et un moteur de rendu web. Auto-détecte Next.js, Astro, Fresh, Remix, Nuxt, SvelteKit, SolidStart, TanStack Start et Vite SSR sans changement de code. Utilise le <strong>WebView natif</strong> plutôt que Chromium : ~68,5 Mo sur macOS contre 308,9 Mo avec CEF. Arrive en <code>2.9.0</code> mais marqué pre-stable — lancez <code>deno upgrade canary</code>. APIs et config peuvent encore changer.</p>"
+          },
+          "source": { "url": "https://www.theregister.com/software/2026/06/24/deno_project_is_going_to/5261388", "label": "theregister.com" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "nextjs-1630-canary",
+      "updates": [
+        {
+          "id": "nextjs-1630-canary",
+          "tag": "release",
+          "date": "24 Jun 2026",
+          "title": { "es": "Next.js abre la línea 16.3 en canary", "en": "Next.js opens the 16.3 canary line", "fr": "Next.js ouvre la branche 16.3 en canary" },
+          "body_html": {
+            "es": "<p>Mientras 16.2.7 sigue como stable, Vercel ya empujó <code>v16.3.0-canary.64</code> el 24 de junio: trabajo en marcha hacia el próximo minor. El backport 16.2 de junio venía cargado de fixes de hidratación y router, encoding de cache tags, server actions, middleware y manejo de FormData. Si estás en producción quedate en stable; el canary es para probar lo que viene.</p>",
+            "en": "<p>While 16.2.7 stays the stable release, Vercel pushed <code>v16.3.0-canary.64</code> on June 24 — work in progress toward the next minor. June's 16.2 backport was packed with hydration and router fixes, cache-tag encoding, server actions, middleware and FormData handling. Stay on stable for production; the canary is for previewing what's next.</p>",
+            "fr": "<p>Alors que 16.2.7 reste la version stable, Vercel a poussé <code>v16.3.0-canary.64</code> le 24 juin — travail en cours vers le prochain minor. Le backport 16.2 de juin regorgeait de correctifs d'hydratation et de router, encodage des cache tags, server actions, middleware et gestion de FormData. Restez sur stable en prod ; le canary sert à prévisualiser la suite.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/next.js/releases", "label": "github.com/vercel/next.js" }
+        },
+        {
+          "id": "hono-41227",
+          "tag": "patch",
+          "date": "23 Jun 2026",
+          "title": { "es": "Hono sigue afilando la línea 4.12.x", "en": "Hono keeps polishing the 4.12.x line", "fr": "Hono continue d'affiner la branche 4.12.x" },
+          "body_html": {
+            "es": "<p>Hono publicó <code>4.12.27</code> esta semana, manteniendo la cadencia de patches sobre la serie 4.12. El framework edge-native sigue liderando los benchmarks de req/s frente a Fastify y Express, ideal si apuntás a Cloudflare Workers, Vercel Edge o Deno. Nada que rompa, pero si estás varias minors atrás, ponete al día.</p>",
+            "en": "<p>Hono shipped <code>4.12.27</code> this week, keeping its steady patch cadence on the 4.12 series. The edge-native framework still tops req/s benchmarks against Fastify and Express, ideal if you target Cloudflare Workers, Vercel Edge or Deno. Nothing breaking, but if you're several minors behind, catch up.</p>",
+            "fr": "<p>Hono a publié <code>4.12.27</code> cette semaine, maintenant sa cadence de patches sur la série 4.12. Le framework edge-native domine encore les benchmarks req/s face à Fastify et Express, idéal pour Cloudflare Workers, Vercel Edge ou Deno. Rien de cassant, mais si vous avez plusieurs minors de retard, mettez-vous à jour.</p>"
+          },
+          "source": { "url": "https://github.com/honojs/hono/releases", "label": "github.com/honojs/hono" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "github-june-devops",
+      "updates": [
+        {
+          "id": "github-june-devops",
+          "tag": "notable",
+          "date": "24 Jun 2026",
+          "title": { "es": "GitHub: revocación de credenciales para incidentes + tanda DevOps", "en": "GitHub: incident credential revocation + DevOps batch", "fr": "GitHub : révocation de credentials pour incidents + lot DevOps" },
+          "body_html": {
+            "es": "<p>Semana cargada en el changelog de GitHub. Lo más fuerte (24/jun): <strong>revocación self-service de credenciales</strong> — los owners de enterprise pueden anular TODAS las credenciales al instante durante un incidente con cuentas comprometidas. Oro puro con la oleada de worms npm dando vueltas. Además (23/jun): la <strong>Copilot CLI llegó a GA</strong> con interfaz por pestañas, Dependabot ahora lee GitHub Packages privados sin PAT, REST API de Code Quality findings en public preview, y soporte BYOK para OpenAI y Anthropic en la app. El 18/jun sumaron detección de issues duplicados y soporte de <code>AGENTS.md</code> en Copilot code review.</p>",
+            "en": "<p>Busy week in GitHub's changelog. The big one (Jun 24): <strong>self-service credential revocation</strong> — enterprise owners can instantly kill ALL credentials during an incident with compromised accounts. Gold dust given the npm worm waves going around. Also (Jun 23): <strong>Copilot CLI hit GA</strong> with a tabbed interface, Dependabot now reads private GitHub Packages without a PAT, a Code Quality findings REST API in public preview, and BYOK support for OpenAI and Anthropic in the app. June 18 added duplicate-issue detection and <code>AGENTS.md</code> support in Copilot code review.</p>",
+            "fr": "<p>Semaine chargée dans le changelog de GitHub. Le gros morceau (24 juin) : <strong>révocation self-service des credentials</strong> — les owners enterprise peuvent annuler TOUTES les credentials instantanément lors d'un incident. Précieux vu les vagues de worms npm. Aussi (23 juin) : <strong>Copilot CLI en GA</strong> avec interface à onglets, Dependabot lit les GitHub Packages privés sans PAT, REST API Code Quality en public preview, et support BYOK pour OpenAI et Anthropic. Le 18 juin : détection d'issues dupliquées et support <code>AGENTS.md</code> dans Copilot code review.</p>"
+          },
+          "source": { "url": "https://github.blog/changelog/month/06-2026/", "label": "github.blog" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Los runtimes de TS se mudan a lenguajes nativos: TypeScript 7.0 en Go (~10x) y Prisma 7 saliéndose del query engine en Rust. La performance del tooling es la nueva batalla.",
+      "en": "TS runtimes are migrating to native languages: TypeScript 7.0 in Go (~10x) and Prisma 7 ditching its Rust query engine. Tooling performance is the new battleground.",
+      "fr": "Les runtimes TS migrent vers des langages natifs : TypeScript 7.0 en Go (~10x) et Prisma 7 abandonnant son query engine Rust. La performance du tooling est le nouveau champ de bataille."
+    },
+    {
+      "es": "La cadena de suministro de npm sigue bajo fuego (familias Shai-Hulud/Miasma), y los proveedores responden: GitHub ahora deja revocar credenciales al instante ante un incidente.",
+      "en": "The npm supply chain stays under fire (Shai-Hulud/Miasma families), and vendors are responding: GitHub now lets you revoke credentials instantly during an incident.",
+      "fr": "La chaîne d'approvisionnement npm reste sous le feu (familles Shai-Hulud/Miasma), et les fournisseurs réagissent : GitHub permet désormais de révoquer les credentials instantanément lors d'un incident."
+    },
+    {
+      "es": "El runtime como plataforma de apps de escritorio: Deno Desktop empaqueta proyectos web en binarios nativos con WebView, compitiendo de frente con Electron y Tauri.",
+      "en": "The runtime as a desktop-app platform: Deno Desktop packages web projects into native WebView binaries, going head-to-head with Electron and Tauri.",
+      "fr": "Le runtime comme plateforme d'apps desktop : Deno Desktop empaquette des projets web en binaires natifs WebView, en concurrence directe avec Electron et Tauri."
+    }
+  ]
+}

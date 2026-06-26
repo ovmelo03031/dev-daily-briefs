@@ -1,0 +1,171 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 26 Jun 2026",
+    "en": "Backend & Fullstack Daily — Jun 26, 2026",
+    "fr": "Backend & Fullstack Daily — 26 juin 2026"
+  },
+  "description": {
+    "es": "Deno 2.9 trae apps de escritorio nativas sin Electron, Cloudflare deja que los agentes de IA deployeen Workers sin registro, y OpenTelemetry estabiliza atributos de Kubernetes.",
+    "en": "Deno 2.9 ships native desktop apps without Electron, Cloudflare lets AI agents deploy Workers with no signup, and OpenTelemetry stabilizes Kubernetes attributes.",
+    "fr": "Deno 2.9 livre des apps desktop natives sans Electron, Cloudflare laisse les agents IA déployer des Workers sans inscription, et OpenTelemetry stabilise les attributs Kubernetes."
+  },
+  "pubDate": "2026-06-26",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Deno 2.9: apps desktop nativas, sin Electron",
+        "en": "Deno 2.9: native desktop apps, no Electron",
+        "fr": "Deno 2.9 : apps desktop natives, sans Electron"
+      },
+      "anchor": "deno-2-9",
+      "icon": "simple-icons:deno"
+    },
+    {
+      "text": {
+        "es": "Cloudflare: agentes deployean Workers sin registro",
+        "en": "Cloudflare: AI agents deploy Workers, no signup",
+        "fr": "Cloudflare : agents IA déploient des Workers sans compte"
+      },
+      "anchor": "cf-temp-deploy",
+      "icon": "simple-icons:cloudflare"
+    },
+    {
+      "text": {
+        "es": "OTel: attrs de K8s a stable, gen_ai.* se muda",
+        "en": "OTel: K8s attrs go stable, gen_ai.* moves out",
+        "fr": "OTel : attrs K8s stables, gen_ai.* déménage"
+      },
+      "anchor": "otel-semconv",
+      "icon": "lucide:layers"
+    },
+    {
+      "text": {
+        "es": "deno desktop: 68MB vs 309MB de Electron",
+        "en": "deno desktop: 68MB vs 309MB Electron",
+        "fr": "deno desktop : 68 Mo vs 309 Mo Electron"
+      },
+      "anchor": "deno-desktop",
+      "icon": "lucide:server"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "deno-2-9",
+      "updates": [
+        {
+          "id": "deno-2-9",
+          "tag": "breaking",
+          "date": "25 Jun 2026",
+          "title": {
+            "es": "Deno 2.9: escritorio nativo, migración de lockfiles y supply-chain por defecto",
+            "en": "Deno 2.9: native desktop, lockfile migration, supply-chain on by default",
+            "fr": "Deno 2.9 : desktop natif, migration de lockfiles, supply-chain par défaut"
+          },
+          "body_html": {
+            "es": "<p><strong>Deno 2.9</strong> salió el 25 de junio con <code>deno desktop</code>: compilás un archivo TS o una app Next.js/Astro/Fresh/TanStack Start/Vite SSR en un único binario nativo usando el WebView del sistema (sin Electron, sin CEF). El cold start es <strong>1.98x</strong> más rápido (34ms&rarr;17ms) y la memoria baja 2.2&ndash;3.1x bajo carga. <code>deno install</code> ahora lee lockfiles de npm/pnpm/yarn/Bun directo, y <code>min-release-age</code> viene en una ventana de 24h por defecto: una versión recién publicada y comprometida no te entra al árbol el día cero. Golazo para la DX y la supply-chain.</p>",
+            "en": "<p><strong>Deno 2.9</strong> shipped on Jun 25 with <code>deno desktop</code> — compile a plain TS file or a Next.js/Astro/Fresh/TanStack Start/Vite SSR app into a single native binary using the OS WebView (no Electron, no CEF). Cold start is <strong>1.98x</strong> faster (34ms&rarr;17ms) and memory drops 2.2&ndash;3.1x under load. <code>deno install</code> now reads npm/pnpm/yarn/Bun lockfiles directly, and <code>min-release-age</code> defaults to a 24h window so a freshly-published compromised version never lands in your tree on day zero.</p>",
+            "fr": "<p><strong>Deno 2.9</strong> est sorti le 25 juin avec <code>deno desktop</code> : compilez un fichier TS ou une app Next.js/Astro/Fresh/TanStack Start/Vite SSR en un seul binaire natif via la WebView du système (sans Electron, sans CEF). Le démarrage à froid est <strong>1.98x</strong> plus rapide (34ms&rarr;17ms), la mémoire baisse 2.2&ndash;3.1x en charge. <code>deno install</code> lit désormais les lockfiles npm/pnpm/yarn/Bun, et <code>min-release-age</code> est à 24h par défaut.</p>"
+          },
+          "source": { "url": "https://deno.com/blog/v2.9", "label": "deno.com" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cf-temp-deploy",
+      "updates": [
+        {
+          "id": "cf-temp-deploy",
+          "tag": "notable",
+          "date": "19 Jun 2026",
+          "title": {
+            "es": "Cloudflare: Workers temporales para agentes y Durable Objects que no se mueren",
+            "en": "Cloudflare: temporary Workers for AI agents and longer-lived Durable Objects",
+            "fr": "Cloudflare : Workers temporaires pour agents et Durable Objects plus résilients"
+          },
+          "body_html": {
+            "es": "<p>El drop de plataforma del 19 de junio de Cloudflare deja que <strong>los agentes de IA deployeen Workers sin registrarse</strong>: <code>wrangler deploy --temporary</code> (Wrangler 4.102.0+) publica en una cuenta preview temporal que después reclama un humano. El mismo día, <strong>Durable Objects</strong> sumó dos mejoras: las conexiones TCP/WebSocket activas mantienen vivo el DO hasta 15 minutos (chau eviction a mitad de stream) y los nuevos hints <code>apac-ne</code>/<code>apac-se</code> dan placement más fino en Asia-Pacífico. Hay también una Unified Routes Page que junta Mesh, Tunnel, WAN y Magic Transit.</p>",
+            "en": "<p>Cloudflare's Jun 19 platform drop lets <strong>AI agents deploy Workers with zero signup</strong>: <code>wrangler deploy --temporary</code> (Wrangler 4.102.0+) ships to a temporary preview account a human can claim later. Same day, <strong>Durable Objects</strong> got two upgrades — active TCP/WebSocket connections now keep a DO alive for up to 15 minutes (no more mid-stream eviction), and new <code>apac-ne</code>/<code>apac-se</code> location hints give finer placement across Asia-Pacific. A new Unified Routes Page also consolidates Mesh, Tunnel, WAN and Magic Transit.</p>",
+            "fr": "<p>La mise à jour plateforme du 19 juin de Cloudflare laisse <strong>les agents IA déployer des Workers sans inscription</strong> : <code>wrangler deploy --temporary</code> (Wrangler 4.102.0+) publie sur un compte preview temporaire réclamable plus tard. Le même jour, <strong>Durable Objects</strong> a reçu deux améliorations : les connexions TCP/WebSocket actives maintiennent un DO en vie jusqu'à 15 minutes, et les nouveaux indices <code>apac-ne</code>/<code>apac-se</code> affinent le placement en Asie-Pacifique.</p>"
+          },
+          "source": { "url": "https://developers.cloudflare.com/changelog/", "label": "developers.cloudflare.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "otel-semconv",
+      "updates": [
+        {
+          "id": "otel-semconv",
+          "tag": "release",
+          "date": "24 Jun 2026",
+          "title": {
+            "es": "OpenTelemetry semantic-conventions 0.64b0: K8s a stable, gen_ai.* deprecado",
+            "en": "OpenTelemetry semantic-conventions 0.64b0: K8s stable, gen_ai.* deprecated",
+            "fr": "OpenTelemetry semantic-conventions 0.64b0 : K8s stable, gen_ai.* déprécié"
+          },
+          "body_html": {
+            "es": "<p>El corte 0.64b0 de <code>semantic-conventions</code> de OpenTelemetry salió el 24 de junio. Un set core de <strong>atributos de recursos de Kubernetes y container registry pasó a stable</strong>, mientras <code>cpu.mode</code>, atributos de proceso y métricas core de CPU-time pasaron a release_candidate. Todos los <code>gen_ai.*</code> quedaron deprecados y se mudan a un repo dedicado de convenciones GenAI: si instrumentás spans de LLM/agentes, te van a cambiar los imports. Ponete las pilas antes de que rompa el pipeline de observabilidad.</p>",
+            "en": "<p>The OpenTelemetry <code>semantic-conventions</code> 0.64b0 cut landed Jun 24. A core set of <strong>Kubernetes and container-registry resource attributes graduated to stable</strong>, while <code>cpu.mode</code>, process attributes and core CPU-time metrics moved to release_candidate. All <code>gen_ai.*</code> attributes are now deprecated and split into a dedicated GenAI conventions repo — if you instrument LLM/agent spans, your imports are about to move.</p>",
+            "fr": "<p>La version 0.64b0 de <code>semantic-conventions</code> d'OpenTelemetry est sortie le 24 juin. Un ensemble d'<strong>attributs de ressources Kubernetes et container-registry est passé en stable</strong>, tandis que <code>cpu.mode</code>, les attributs de process et les métriques CPU-time passent en release_candidate. Tous les <code>gen_ai.*</code> sont dépréciés et déplacés vers un dépôt GenAI dédié.</p>"
+          },
+          "source": { "url": "https://github.com/open-telemetry/semantic-conventions/releases", "label": "github.com/open-telemetry" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "deno-desktop",
+      "updates": [
+        {
+          "id": "deno-desktop",
+          "tag": "notable",
+          "date": "24 Jun 2026",
+          "title": {
+            "es": "deno desktop a prueba: 68MB con WebView contra 308MB con CEF",
+            "en": "deno desktop tested: 68MB with WebView vs 308MB with CEF",
+            "fr": "deno desktop testé : 68 Mo avec WebView vs 308 Mo avec CEF"
+          },
+          "body_html": {
+            "es": "<p>The Register probó <code>deno desktop</code>: una app de macOS compilada con el WebView nativo pesó <strong>68.5MB contra 308.9MB</strong> con CEF embebido — el argumento anti-Electron en un solo número. Compila TS plano o frameworks completos (Next.js, Astro, Fresh, TanStack Start, Vite SSR). Ojo: <strong>todavía no es stable</strong> — el botón de cerrar del WebView en macOS no andaba y algunos frameworks pedían maña. Promete, pero no lo mandes a producción todavía.</p>",
+            "en": "<p>The Register took <code>deno desktop</code> for a spin: a compiled macOS app using the native WebView weighed <strong>68.5MB vs 308.9MB</strong> with bundled CEF — the Electron-killer pitch in one number. It compiles plain TS or full frameworks (Next.js, Astro, Fresh, TanStack Start, Vite SSR). Caveat: it is <strong>not stable yet</strong> — the macOS WebView close button didn't work and some frameworks needed coaxing. Promising, not production.</p>",
+            "fr": "<p>The Register a essayé <code>deno desktop</code> : une app macOS compilée avec la WebView native pesait <strong>68,5 Mo vs 308,9 Mo</strong> avec CEF embarqué — l'argument anti-Electron en un chiffre. Elle compile du TS simple ou des frameworks complets (Next.js, Astro, Fresh, TanStack Start, Vite SSR). Attention : <strong>pas encore stable</strong> — le bouton de fermeture WebView macOS ne marchait pas.</p>"
+          },
+          "source": { "url": "https://www.theregister.com/software/2026/06/24/deno-project-is-going-to-add-cross-platform-desktop-apps-in-next-major-update/", "label": "theregister.com" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "La supply-chain se vuelve default: Deno 2.9 trae <code>min-release-age</code> de 24h activado, una defensa directa contra los typosquats y paquetes comprometidos que dominaron junio.",
+      "en": "Supply-chain hardening becomes default: Deno 2.9 ships <code>min-release-age</code> at 24h, a direct answer to the typosquat and compromised-package wave that dominated June.",
+      "fr": "Le durcissement supply-chain devient la norme : Deno 2.9 active <code>min-release-age</code> à 24h, réponse directe à la vague de typosquats de juin."
+    },
+    {
+      "es": "Infra pensada para agentes: el <code>wrangler deploy --temporary</code> de Cloudflare asume que el que deploya puede ser una IA, no una persona. El edge se está adaptando al workflow agéntico.",
+      "en": "Agent-native infra: Cloudflare's <code>wrangler deploy --temporary</code> assumes the deployer may be an AI, not a human. The edge is adapting to agentic workflows.",
+      "fr": "Infra pensée pour les agents : <code>wrangler deploy --temporary</code> de Cloudflare suppose que le déployeur peut être une IA. L'edge s'adapte aux workflows agentiques."
+    },
+    {
+      "es": "WebView nativo vs Electron: el binario de 68MB de Deno contra los 308MB de CEF reabre el debate sobre el peso de las apps de escritorio web.",
+      "en": "Native WebView vs Electron: Deno's 68MB binary against CEF's 308MB reopens the web-desktop bloat debate.",
+      "fr": "WebView native vs Electron : le binaire de 68 Mo de Deno contre les 308 Mo de CEF relance le débat sur le poids des apps desktop web."
+    }
+  ]
+}

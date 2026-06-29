@@ -1,0 +1,203 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 29 Jun 2026",
+    "en": "Backend & Fullstack Daily — Jun 29, 2026",
+    "fr": "Backend & Fullstack Daily — 29 juin 2026"
+  },
+  "description": {
+    "es": "AWS Lambda estrena MicroVMs con 8h de runtime aislado, curl parchea un bug de mTLS de 25 años, y Next.js 16.3 Preview se rediseña para agentes de IA.",
+    "en": "AWS Lambda debuts MicroVMs with 8h isolated runtime, curl patches a 25-year mTLS bug, and Next.js 16.3 Preview is rebuilt for AI agents.",
+    "fr": "AWS Lambda lance les MicroVMs avec 8h de runtime isolé, curl corrige un bug mTLS vieux de 25 ans, et Next.js 16.3 Preview est repensé pour les agents IA."
+  },
+  "pubDate": "2026-06-29",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "AWS Lambda MicroVMs: sandboxes de 8h",
+        "en": "AWS Lambda MicroVMs: 8h isolated sandboxes",
+        "fr": "AWS Lambda MicroVMs : sandboxes de 8h"
+      },
+      "anchor": "aws-microvms",
+      "icon": "lucide:cloud"
+    },
+    {
+      "text": {
+        "es": "curl 8.21.0 parchea bug de mTLS de 25 años",
+        "en": "curl 8.21.0 patches 25-year mTLS bug",
+        "fr": "curl 8.21.0 corrige un bug mTLS de 25 ans"
+      },
+      "anchor": "curl-8210",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Next.js 16.3: rediseñado para agentes",
+        "en": "Next.js 16.3: rebuilt for AI agents",
+        "fr": "Next.js 16.3 : repensé pour les agents"
+      },
+      "anchor": "nextjs-16-3",
+      "icon": "simple-icons:nextdotjs"
+    },
+    {
+      "text": {
+        "es": "Cloudflare: Images API dentro del Worker",
+        "en": "Cloudflare: Images API inside the Worker",
+        "fr": "Cloudflare : Images API dans le Worker"
+      },
+      "anchor": "cf-images-api",
+      "icon": "simple-icons:cloudflare"
+    },
+    {
+      "text": {
+        "es": "Clean Architecture en Next.js + Postgres",
+        "en": "Clean Architecture in Next.js + Postgres",
+        "fr": "Clean Architecture en Next.js + Postgres"
+      },
+      "anchor": "clean-arch-next",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "aws-microvms",
+      "updates": [
+        {
+          "id": "aws-microvms",
+          "tag": "breaking",
+          "date": "22 Jun 2026",
+          "title": {
+            "es": "AWS Lambda MicroVMs: sandboxes Firecracker aislados de hasta 8 horas",
+            "en": "AWS Lambda MicroVMs: isolated Firecracker sandboxes up to 8 hours",
+            "fr": "AWS Lambda MicroVMs : sandboxes Firecracker isolées jusqu'à 8 heures"
+          },
+          "body_html": {
+            "es": "<p>En el AWS Summit New York (22 jun), AWS presentó <strong>Lambda MicroVMs</strong>: contenedores Linux aislados sobre <strong>Firecracker</strong> que corren hasta <strong>8 horas</strong> — contra los 15 minutos del Lambda clásico. Cada MicroVM es un sandbox VM-level sin kernel compartido, con estados <code>running</code>/<code>suspended</code>/<code>terminated</code>, autoscaling hasta 4x y suspensión que preserva estado (pagás por consumo, no por wall-time). El caso de uso que AWS pone primero te dice todo: <em>inspeccionar paquetes maliciosos, escanear vulnerabilidades y correr código generado por IA blindándote contra prompt injection</em>. Esto es infra pensada para agentes y CI/CD de código no confiable. Golazo.</p>",
+            "en": "<p>At AWS Summit New York (Jun 22), AWS unveiled <strong>Lambda MicroVMs</strong>: isolated Linux containers on <strong>Firecracker</strong> that run up to <strong>8 hours</strong> — versus classic Lambda's 15-minute ceiling. Each MicroVM is a VM-level sandbox with no shared kernel, with <code>running</code>/<code>suspended</code>/<code>terminated</code> states, autoscaling up to 4x base spec, and suspend-with-state-preservation (consumption-based pricing, not wall-time). AWS's lead use case says it all: <em>inspecting malicious packages, scanning for vulnerabilities, and running AI-generated code while guarding against prompt injection</em>. This is infra built for agents and untrusted-code CI/CD.</p>",
+            "fr": "<p>À l'AWS Summit New York (22 juin), AWS a dévoilé <strong>Lambda MicroVMs</strong> : des conteneurs Linux isolés sur <strong>Firecracker</strong> qui tournent jusqu'à <strong>8 heures</strong> — contre les 15 minutes du Lambda classique. Chaque MicroVM est un sandbox au niveau VM sans noyau partagé, avec états <code>running</code>/<code>suspended</code>/<code>terminated</code>, autoscaling jusqu'à 4x et suspension préservant l'état (tarification à la consommation). Cas d'usage phare : inspecter des paquets malveillants, scanner des vulnérabilités et exécuter du code généré par IA en se protégeant du prompt injection.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/blogs/aws/run-isolated-sandboxes-with-full-lifecycle-control-aws-lambda-introduces-microvms/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "curl-8210",
+          "tag": "security",
+          "date": "24 Jun 2026",
+          "title": {
+            "es": "curl 8.21.0: 18 fixes y un bug de reuso de conexión mTLS de 25 años",
+            "en": "curl 8.21.0: 18 fixes and a 25-year-old mTLS connection-reuse bug",
+            "fr": "curl 8.21.0 : 18 correctifs et un bug de réutilisation de connexion mTLS de 25 ans"
+          },
+          "body_html": {
+            "es": "<p>curl 8.21.0 salió el 24 de junio con <strong>18 fixes de seguridad</strong>, encabezados por <strong>CVE-2026-8932</strong>: libcurl reusaba una conexión existente aunque hubieran cambiado el certificado de cliente o la clave privada, lo que abre la puerta a un <strong>bypass de autenticación en mTLS</strong>. El bug entró en curl 7.7 en marzo de 2001 — es el más viejo jamás reportado en el proyecto. Con curl embebido en ~30 mil millones de dispositivos (cada server, móvil, auto, consola), si tu backend hace mTLS con connection pooling, actualizá YA. El parche también cubre fugas de password y bugs de memoria en WebSocket.</p>",
+            "en": "<p>curl 8.21.0 shipped Jun 24 with <strong>18 security fixes</strong>, led by <strong>CVE-2026-8932</strong>: libcurl could reuse an existing connection even after the client certificate or private key changed, opening an <strong>mTLS authentication bypass</strong>. The flaw landed in curl 7.7 back in March 2001 — the oldest issue ever reported to the project. With curl embedded in ~30 billion devices (every server, phone, car, console), if your backend does mTLS with connection pooling, patch now. The release also covers a password leak and WebSocket memory bugs.</p>",
+            "fr": "<p>curl 8.21.0 est sorti le 24 juin avec <strong>18 correctifs de sécurité</strong>, menés par <strong>CVE-2026-8932</strong> : libcurl pouvait réutiliser une connexion existante même après changement du certificat client ou de la clé privée, ouvrant un <strong>contournement d'authentification mTLS</strong>. Le bug date de curl 7.7 en mars 2001 — le plus ancien jamais signalé au projet. curl étant embarqué dans ~30 milliards d'appareils, si votre backend fait du mTLS avec pooling de connexions, mettez à jour maintenant.</p>"
+          },
+          "source": { "url": "https://daniel.haxx.se/blog/2026/06/24/curl-8-21-0/", "label": "daniel.haxx.se" }
+        },
+        {
+          "id": "nextjs-16-3",
+          "tag": "notable",
+          "date": "26 Jun 2026",
+          "title": {
+            "es": "Next.js 16.3 Preview: Instant Navigations y un framework rediseñado para agentes",
+            "en": "Next.js 16.3 Preview: Instant Navigations and a framework rebuilt for agents",
+            "fr": "Next.js 16.3 Preview : Instant Navigations et un framework repensé pour les agents"
+          },
+          "body_html": {
+            "es": "<p>Next.js 16.3 Preview salió el 26 de junio con dos ejes. El primero, <strong>Instant Navigations</strong>: nuevas primitivas de rendering y prefetching, un Navigation Inspector y un panel de Instant Insights. El segundo es el que marca tendencia: <strong>el framework se está rediseñando para desarrollo dirigido por agentes</strong>. <code>next dev</code> ahora escribe y mantiene un bloque en tu <code>AGENTS.md</code> que apunta a los docs bundleados (versión-matched, no el training data del modelo), trae <strong>Skills first-party</strong> (<code>next-dev-loop</code>, adopción de Cache Components), errores accionables con botón <em>Copy as prompt</em>, y páginas de error escritas para que las lean los agentes. Vercel lo dice sin vueltas: cada vez más del crecimiento de Next viene de código escrito por Claude Code, Cursor y Codex.</p>",
+            "en": "<p>Next.js 16.3 Preview shipped Jun 26 along two axes. First, <strong>Instant Navigations</strong>: new rendering and prefetching primitives, a Navigation Inspector and an Instant Insights panel. The second is the trend-setter: <strong>the framework is being redesigned for agent-driven development</strong>. <code>next dev</code> now writes and maintains a block in your <code>AGENTS.md</code> pointing agents at the version-matched bundled docs (not their training data), ships <strong>first-party Skills</strong> (<code>next-dev-loop</code>, Cache Components adoption), actionable errors with a <em>Copy as prompt</em> button, and per-error docs pages written for agents to read. Vercel says it plainly: more of Next's growth is driven by code written through Claude Code, Cursor and Codex.</p>",
+            "fr": "<p>Next.js 16.3 Preview est sorti le 26 juin sur deux axes. D'abord, <strong>Instant Navigations</strong> : nouvelles primitives de rendu et prefetching, un Navigation Inspector et un panneau Instant Insights. Le second donne le ton : <strong>le framework est repensé pour le développement piloté par agents</strong>. <code>next dev</code> écrit et maintient désormais un bloc dans votre <code>AGENTS.md</code> pointant vers les docs bundlées (version-matched), livre des <strong>Skills first-party</strong> (<code>next-dev-loop</code>), des erreurs actionnables avec bouton <em>Copy as prompt</em>, et des pages d'erreur écrites pour les agents.</p>"
+          },
+          "source": { "url": "https://nextjs.org/blog/next-16-3-ai-improvements", "label": "nextjs.org" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cf-images-api",
+      "updates": [
+        {
+          "id": "cf-images-api",
+          "tag": "release",
+          "date": "23 Jun 2026",
+          "title": {
+            "es": "Cloudflare workerd: Images API directo dentro del Worker",
+            "en": "Cloudflare workerd: Images API directly inside the Worker",
+            "fr": "Cloudflare workerd : Images API directement dans le Worker"
+          },
+          "body_html": {
+            "es": "<p>El 23 de junio salió <code>workerd v1.20260623.1</code> con un fix para los stubs persistentes y, más jugoso, <strong>la Images API ahora se usa directo dentro del Worker</strong>: redimensionás, transformás y superponés imágenes con control fino del flujo de transformación y del caché — sin tener que exponer las imágenes por URL. Para pipelines de media en el edge esto te saca un hop entero. Si ya laburás con Workers y manipulás imágenes, vale la pena el bump.</p>",
+            "en": "<p>Jun 23 brought <code>workerd v1.20260623.1</code> with a persistent-stubs fix and, more interesting, <strong>the Images API now runs directly inside the Worker</strong>: resize, transform and overlay images with fine-grained control over the transformation flow and cache behavior — without exposing images through a URL first. For edge media pipelines that removes an entire hop. If you already work with Workers and manipulate images, the bump is worth it.</p>",
+            "fr": "<p>Le 23 juin est sorti <code>workerd v1.20260623.1</code> avec un correctif pour les stubs persistants et, plus intéressant, <strong>l'Images API tourne désormais directement dans le Worker</strong> : redimensionner, transformer et superposer des images avec un contrôle fin du flux de transformation et du cache — sans exposer les images via une URL. Pour les pipelines média en edge, cela supprime un hop entier.</p>"
+          },
+          "source": { "url": "https://developers.cloudflare.com/workers/platform/changelog/", "label": "developers.cloudflare.com" }
+        },
+        {
+          "id": "aws-async-payload",
+          "tag": "notable",
+          "date": "22 Jun 2026",
+          "title": {
+            "es": "AWS sube el payload async de 256KB a 1MB en Lambda, SQS y EventBridge",
+            "en": "AWS raises async payload from 256KB to 1MB across Lambda, SQS and EventBridge",
+            "fr": "AWS porte le payload async de 256 Ko à 1 Mo sur Lambda, SQS et EventBridge"
+          },
+          "body_html": {
+            "es": "<p>Otra del Summit de New York (22 jun): AWS subió el <strong>tamaño máximo de payload de 256KB a 1MB</strong> para invocaciones asíncronas de Lambda, mensajes de SQS y eventos de EventBridge. Esto te saca de encima los workarounds de siempre — chunking de datos y punteros a S3 — para sistemas event-driven con contexto más rico. En el mismo evento, AWS también mostró Lambda con coordinación de pasos durables de hasta un año sin pagar compute en idle. El event-driven en AWS afloja sus límites históricos.</p>",
+            "en": "<p>Also from AWS Summit New York (Jun 22): AWS raised the <strong>maximum payload size from 256KB to 1MB</strong> for async Lambda invocations, SQS messages and EventBridge events. That kills the usual workarounds — data chunking and S3-pointer indirection — for context-rich event-driven systems. At the same event, AWS also showed Lambda coordinating durable multi-step workflows for up to a year without paying for idle compute. AWS's event-driven primitives are loosening their historical limits.</p>",
+            "fr": "<p>Toujours de l'AWS Summit New York (22 juin) : AWS a porté la <strong>taille max de payload de 256 Ko à 1 Mo</strong> pour les invocations async de Lambda, les messages SQS et les événements EventBridge. Fini les contournements habituels — chunking et indirection via S3 — pour des systèmes event-driven plus riches. Au même événement, AWS a montré Lambda coordonnant des workflows durables jusqu'à un an sans payer le compute en idle.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/blogs/aws/top-announcements-of-the-aws-summit-in-new-york-2026/", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "clean-arch-next",
+      "updates": [
+        {
+          "id": "clean-arch-next",
+          "tag": "minor",
+          "date": "28 Jun 2026",
+          "title": {
+            "es": "Clean Architecture en Next.js con TypeScript y PostgreSQL",
+            "en": "Clean Architecture in Next.js with TypeScript and PostgreSQL",
+            "fr": "Clean Architecture en Next.js avec TypeScript et PostgreSQL"
+          },
+          "body_html": {
+            "es": "<p>Buena lectura del 28 de junio sobre llevar <strong>Clean Architecture</strong> a un fullstack Next.js + TS + Postgres: separar la lógica de negocio del framework, la base y la UI para que el core quede testeable y no quedes atado a la versión del framework ni al motor de base. El punto fino, y donde la mayoría se equivoca, es la <strong>Dependency Rule</strong>: las dependencias siempre apuntan hacia adentro, y los detalles (Next, Postgres) se inyectan en los bordes. Si metés queries de Drizzle/Prisma directo en tus Server Components, no estás haciendo Clean Architecture — estás acoplando. Conceptos antes que código.</p>",
+            "en": "<p>A solid Jun 28 read on bringing <strong>Clean Architecture</strong> to a Next.js + TS + Postgres fullstack: decouple business logic from the framework, the database and the UI so the core stays testable and you're not locked to a framework version or DB engine. The subtle part — where most people get it wrong — is the <strong>Dependency Rule</strong>: dependencies always point inward, and details (Next, Postgres) are injected at the edges. If you drop Drizzle/Prisma queries straight into your Server Components, you're not doing Clean Architecture — you're coupling. Concepts before code.</p>",
+            "fr": "<p>Une bonne lecture du 28 juin sur l'application de la <strong>Clean Architecture</strong> à un fullstack Next.js + TS + Postgres : découpler la logique métier du framework, de la base et de l'UI pour garder un core testable, sans verrouillage de version ni de moteur de base. Le point subtil — où la plupart se trompent — est la <strong>Dependency Rule</strong> : les dépendances pointent toujours vers l'intérieur, les détails (Next, Postgres) s'injectent aux bords. Les concepts avant le code.</p>"
+          },
+          "source": { "url": "https://dohost.us/index.php/2026/06/28/implementing-clean-architecture-in-next-js-with-typescript-and-postgresql/", "label": "dohost.us" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El sandbox es la nueva primitiva serverless: las Lambda MicroVMs de AWS nacen con el caso de uso de correr código no confiable y generado por IA. La infra se está diseñando asumiendo que el agente, no el humano, ejecuta el código.",
+      "en": "The sandbox is the new serverless primitive: AWS's Lambda MicroVMs ship with running untrusted, AI-generated code as the headline use case. Infra is being designed assuming the agent, not the human, runs the code.",
+      "fr": "Le sandbox est la nouvelle primitive serverless : les Lambda MicroVMs d'AWS arrivent avec l'exécution de code non fiable généré par IA comme cas d'usage phare. L'infra est conçue en supposant que c'est l'agent qui exécute le code."
+    },
+    {
+      "es": "AGENTS.md como contrato de framework: Next.js 16.3 escribe y mantiene el archivo por vos para que los agentes lean docs version-matched en vez de su training data. La docs-para-agentes deja de ser un nice-to-have y pasa a ser parte del framework.",
+      "en": "AGENTS.md as a framework contract: Next.js 16.3 writes and maintains the file for you so agents read version-matched docs instead of training data. Docs-for-agents stops being a nice-to-have and becomes part of the framework.",
+      "fr": "AGENTS.md comme contrat de framework : Next.js 16.3 écrit et maintient le fichier pour que les agents lisent des docs version-matched plutôt que leur training data. La doc-pour-agents devient une partie du framework."
+    },
+    {
+      "es": "Las dependencias viejas no perdonan: el bug de mTLS de curl tenía 25 años. Cuanto más fundamental y embebida la librería, más larga la cola de riesgo — revisá qué corre debajo de tu stack, no solo tu package.json.",
+      "en": "Old dependencies don't forgive: curl's mTLS bug was 25 years old. The more fundamental and embedded the library, the longer the risk tail — audit what runs beneath your stack, not just your package.json.",
+      "fr": "Les vieilles dépendances ne pardonnent pas : le bug mTLS de curl avait 25 ans. Plus une librairie est fondamentale et embarquée, plus la traîne de risque est longue — auditez ce qui tourne sous votre stack, pas seulement votre package.json."
+    }
+  ]
+}

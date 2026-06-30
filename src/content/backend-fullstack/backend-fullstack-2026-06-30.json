@@ -1,0 +1,187 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 30 Jun 2026",
+    "en": "Backend & Fullstack Daily — Jun 30, 2026",
+    "fr": "Backend & Fullstack Daily — 30 juin 2026"
+  },
+  "description": {
+    "es": "npm blinda las cuentas de alto impacto contra account-takeover, GitHub Actions estrena pasos en paralelo y tokens de caché read-only, y un repaso de cuándo los microservicios realmente valen la pena.",
+    "en": "npm shields high-impact accounts against takeover, GitHub Actions ships parallel steps and read-only cache tokens, and a sober take on when microservices actually pay off.",
+    "fr": "npm blinde les comptes à fort impact contre le account-takeover, GitHub Actions livre des étapes parallèles et des tokens de cache en lecture seule, et un point lucide sur quand les microservices valent vraiment le coup."
+  },
+  "pubDate": "2026-06-30",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "npm: read-only 72h en cuentas de alto impacto",
+        "en": "npm: 72h read-only on high-impact accounts",
+        "fr": "npm : lecture seule 72h sur comptes à fort impact"
+      },
+      "anchor": "npm-account-protection",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "GitHub Actions: pasos en paralelo nativos",
+        "en": "GitHub Actions: native parallel steps",
+        "fr": "GitHub Actions : étapes parallèles natives"
+      },
+      "anchor": "actions-parallel-steps",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "Tokens de caché read-only en triggers no confiables",
+        "en": "Read-only cache tokens on untrusted triggers",
+        "fr": "Tokens de cache en lecture seule sur triggers non fiables"
+      },
+      "anchor": "actions-readonly-cache",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "Runners GitHub-hosted: grupos y políticas",
+        "en": "GitHub-hosted runners: groups and policies",
+        "fr": "Runners GitHub-hosted : groupes et politiques"
+      },
+      "anchor": "ghhosted-runners-control",
+      "icon": "lucide:cloud"
+    },
+    {
+      "text": {
+        "es": "Cuándo los microservicios valen la pena (y cuándo no)",
+        "en": "When microservices actually pay off (and when not)",
+        "fr": "Quand les microservices valent le coup (ou pas)"
+      },
+      "anchor": "microservices-when",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "npm-account-protection",
+      "updates": [
+        {
+          "id": "npm-account-protection",
+          "tag": "security",
+          "date": "25 Jun 2026",
+          "title": {
+            "es": "npm congela en read-only por 72h las cuentas de alto impacto ante cambios sensibles",
+            "en": "npm freezes high-impact accounts read-only for 72h on sensitive changes",
+            "fr": "npm gèle en lecture seule 72h les comptes à fort impact lors de changements sensibles"
+          },
+          "body_html": {
+            "es": "<p>El 25 de junio npm sumó un freno preventivo para las <strong>cuentas de alto impacto</strong> — las que mantienen los paquetes más usados del registro. Cuando una de esas cuentas <strong>cambia el email o usa un código de recuperación de 2FA</strong>, npm la pone en estado <strong>read-only por 72 horas</strong> y manda una alerta al email anterior. Durante ese período podés instalar, descargar y mirar settings, pero <em>publicar, mintear tokens, cambiar visibilidad de paquetes o tocar membresías de org</em> queda pausado. Esto tapa exactamente el vector que explotaron los últimos ataques de supply chain: cuenta comprometida → cambian el email → mintean un token nuevo → publican versiones maliciosas. Tarde pero buenísimo: el registro deja de confiar ciegamente en una sesión autenticada.</p>",
+            "en": "<p>On Jun 25 npm added a preventive brake for <strong>high-impact accounts</strong> — the ones maintaining the registry's most widely used packages. When one of those accounts <strong>changes its email or uses a 2FA recovery code</strong>, npm drops it into a <strong>72-hour read-only state</strong> and alerts the previous email address. During that window you can still install, download and browse settings, but <em>publishing, minting tokens, changing package visibility or modifying org membership</em> are paused. This closes the exact vector recent supply-chain attacks exploited: compromised account → change email → mint a fresh token → publish malicious versions. Overdue but excellent: the registry stops blindly trusting an authenticated session.</p>",
+            "fr": "<p>Le 25 juin, npm a ajouté un frein préventif pour les <strong>comptes à fort impact</strong> — ceux qui maintiennent les paquets les plus utilisés du registre. Quand un tel compte <strong>change son email ou utilise un code de récupération 2FA</strong>, npm le place en <strong>lecture seule pendant 72 heures</strong> et alerte l'ancienne adresse email. Pendant cette fenêtre, on peut encore installer, télécharger et consulter les réglages, mais <em>publier, générer des tokens, changer la visibilité d'un paquet ou modifier l'appartenance à une org</em> sont en pause. Cela ferme précisément le vecteur exploité par les récentes attaques de supply chain.</p>"
+          },
+          "source": { "url": "https://github.blog/changelog/2026-06-25-npm-adds-preventive-account-protection-for-high-impact-accounts/", "label": "github.blog" }
+        },
+        {
+          "id": "actions-parallel-steps",
+          "tag": "notable",
+          "date": "25 Jun 2026",
+          "title": {
+            "es": "GitHub Actions: pasos en paralelo nativos con background, wait y parallel",
+            "en": "GitHub Actions: native parallel steps with background, wait and parallel",
+            "fr": "GitHub Actions : étapes parallèles natives avec background, wait et parallel"
+          },
+          "body_html": {
+            "es": "<p>El 25 de junio GitHub Actions resolvió una limitación histórica: <strong>los steps ahora corren en paralelo de verdad</strong>. Antes, todo step esperaba a que terminara el anterior. Llegan keywords nuevas: <code>background: true</code> lanza un step async y sigue al siguiente; <code>wait</code> / <code>wait-all</code> pausan hasta que uno o todos los steps en background terminen; <code>cancel</code> corta limpio un step en background que ya no necesitás (ideal para levantar servicios efímeros); y <code>parallel</code> es azúcar sintáctico que agarra un grupo de steps, los corre concurrentes y mete un wait al final. Lo importante para la DX: a diferencia del viejo truco de mandar todo al background del shell, <strong>cada step mantiene sus logs separados</strong> sin interleaving. Si tenés jobs con builds o tests independientes dentro del mismo runner, esto te acorta el wall-time sin partir el workflow.</p>",
+            "en": "<p>On Jun 25 GitHub Actions fixed a long-standing limitation: <strong>steps now genuinely run in parallel</strong>. Previously every step waited for the prior one to finish. New keywords arrive: <code>background: true</code> launches a step async and moves on; <code>wait</code> / <code>wait-all</code> pause until one or all background steps complete; <code>cancel</code> gracefully terminates a background step you no longer need (great for ephemeral services); and <code>parallel</code> is syntactic sugar that takes a group of steps, runs them concurrently and appends a wait. The DX win: unlike the old shell-backgrounding trick, <strong>each step keeps its logs separate</strong> with no interleaving. If you have independent builds or tests inside one runner, this trims wall-time without splitting the workflow.</p>",
+            "fr": "<p>Le 25 juin, GitHub Actions a corrigé une limitation historique : <strong>les steps tournent désormais vraiment en parallèle</strong>. Avant, chaque step attendait la fin du précédent. Nouveaux mots-clés : <code>background: true</code> lance un step async et continue ; <code>wait</code> / <code>wait-all</code> mettent en pause jusqu'à la fin d'un ou de tous les steps en arrière-plan ; <code>cancel</code> termine proprement un step en arrière-plan devenu inutile ; et <code>parallel</code> est du sucre syntaxique qui exécute un groupe de steps en concurrence puis ajoute un wait. Le gain DX : contrairement à l'ancien backgrounding shell, <strong>chaque step garde ses logs séparés</strong> sans entrelacement.</p>"
+          },
+          "source": { "url": "https://github.blog/changelog/2026-06-25-actions-steps-can-now-be-run-in-parallel/", "label": "github.blog" }
+        },
+        {
+          "id": "actions-readonly-cache",
+          "tag": "security",
+          "date": "26 Jun 2026",
+          "title": {
+            "es": "GitHub Actions emite tokens de caché read-only para triggers no confiables",
+            "en": "GitHub Actions issues read-only cache tokens for untrusted triggers",
+            "fr": "GitHub Actions émet des tokens de cache en lecture seule pour les triggers non fiables"
+          },
+          "body_html": {
+            "es": "<p>El 26 de junio GitHub cerró un agujero clásico de cache poisoning en CI. Ahora <strong>los eventos que se pueden disparar sin permisos de escritura</strong> — pensá <code>pull_request_target</code> y workflows desde forks — reciben <strong>tokens de caché read-only</strong> apuntados a la rama default. Antes, un trigger no confiable podía escribir una entrada de caché envenenada que después un workflow confiable (<code>push</code>, <code>schedule</code>) restauraba, abriendo la puerta a escalada de privilegios y robo de secrets. Los triggers de escritura habituales (<code>push</code>, <code>schedule</code>, <code>workflow_dispatch</code>, <code>repository_dispatch</code>) y los scopes fuera de la default branch conservan read-write. ¿Qué cambia para vos? Si tus workflows no confiables necesitaban cachear, ahora tenés que mover la escritura a un workflow confiable separado; <code>actions/cache</code> logea un warning al fallar la escritura pero el job sigue. Ojo si dependías de eso.</p>",
+            "en": "<p>On Jun 26 GitHub closed a classic CI cache-poisoning hole. Now <strong>events that can be triggered without write permissions</strong> — think <code>pull_request_target</code> and fork workflows — get <strong>read-only cache tokens</strong> scoped to the default branch. Previously an untrusted trigger could write a poisoned cache entry that a trusted workflow (<code>push</code>, <code>schedule</code>) later restored, enabling privilege escalation and secret theft. Common write triggers (<code>push</code>, <code>schedule</code>, <code>workflow_dispatch</code>, <code>repository_dispatch</code>) and non-default-branch scopes keep read-write. What changes for you: if your untrusted workflows relied on caching, you must move writes to a separate trusted workflow; <code>actions/cache</code> logs a warning on failed writes but the job continues. Worth checking if you depended on it.</p>",
+            "fr": "<p>Le 26 juin, GitHub a fermé un trou classique de cache poisoning en CI. Désormais, <strong>les événements déclenchables sans permissions d'écriture</strong> — par exemple <code>pull_request_target</code> et les workflows de forks — reçoivent des <strong>tokens de cache en lecture seule</strong> liés à la branche par défaut. Avant, un trigger non fiable pouvait écrire une entrée de cache empoisonnée qu'un workflow de confiance (<code>push</code>, <code>schedule</code>) restaurait ensuite, ouvrant la voie à l'escalade de privilèges et au vol de secrets. Les triggers d'écriture habituels gardent le read-write. À vérifier si vos workflows non fiables dépendaient du cache.</p>"
+          },
+          "source": { "url": "https://github.blog/changelog/2026-06-26-read-only-actions-cache-for-untrusted-triggers/", "label": "github.blog" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "ghhosted-runners-control",
+      "updates": [
+        {
+          "id": "ghhosted-runners-control",
+          "tag": "notable",
+          "date": "25 Jun 2026",
+          "title": {
+            "es": "GitHub-hosted runners: grupos de macOS, labels desactivables y routing por política",
+            "en": "GitHub-hosted runners: macOS groups, disable-able standard labels and policy routing",
+            "fr": "Runners GitHub-hosted : groupes macOS, labels standard désactivables et routage par politique"
+          },
+          "body_html": {
+            "es": "<p>También del 25 de junio: GitHub te da <strong>más control de gobernanza sobre los runners hosted</strong> sin tener que montar infra self-hosted. Ahora podés <strong>meter runners de macOS en runner groups</strong> y restringir el acceso por org, repo o workflow; <strong>desactivar los labels estándar</strong> (como <code>ubuntu-latest</code>) para forzar el uso de grupos configurados; y rutear jobs referenciando el grupo por nombre. Para equipos en Team/Enterprise esto significa imponer políticas de uso, manejar capacidad de macOS por límites de concurrencia y mantener compliance sin abrir la mano. Detalle: los runners de macOS todavía no soportan configuraciones de red.</p>",
+            "en": "<p>Also from Jun 25: GitHub gives you <strong>more governance control over hosted runners</strong> without standing up self-hosted infra. You can now <strong>add macOS runners to runner groups</strong> and restrict access by org, repo or workflow; <strong>disable the standard labels</strong> (like <code>ubuntu-latest</code>) to enforce configured groups; and route jobs by referencing the group by name. For Team/Enterprise teams that means enforcing usage policies, managing macOS capacity via concurrency limits and keeping compliance without loosening control. Caveat: macOS runners don't yet support network configurations.</p>",
+            "fr": "<p>Toujours du 25 juin : GitHub offre <strong>plus de contrôle de gouvernance sur les runners hosted</strong> sans monter d'infra self-hosted. On peut désormais <strong>ajouter des runners macOS aux runner groups</strong> et restreindre l'accès par org, repo ou workflow ; <strong>désactiver les labels standard</strong> (comme <code>ubuntu-latest</code>) pour imposer les groupes configurés ; et router les jobs en référençant le groupe par son nom. Pour les équipes Team/Enterprise : imposer des politiques d'usage et gérer la capacité macOS par limites de concurrence. À noter : les runners macOS ne supportent pas encore les configurations réseau.</p>"
+          },
+          "source": { "url": "https://github.blog/changelog/2026-06-25-more-control-over-your-github-hosted-runners/", "label": "github.blog" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "microservices-when",
+      "updates": [
+        {
+          "id": "microservices-when",
+          "tag": "minor",
+          "date": "24 Jun 2026",
+          "title": {
+            "es": "Cuándo los microservicios realmente tienen sentido (y cuándo el monolito modular gana)",
+            "en": "When microservices actually make sense (and when the modular monolith wins)",
+            "fr": "Quand les microservices ont vraiment du sens (et quand le monolithe modulaire gagne)"
+          },
+          "body_html": {
+            "es": "<p>Lectura del 24 de junio que conviene tener a mano para la próxima discusión de arquitectura. La tesis es sana y va contra el hype: <strong>los microservicios se justifican solo cuando se alinean condiciones organizativas y técnicas concretas</strong> — límites de dominio bien definidos e independientes, equipos estructurados para ownership autónomo, requerimientos de escalabilidad y disponibilidad que <em>varían</em> entre servicios, y necesidad real de diversidad tecnológica. Si eso no aplica, un <strong>monolito modular</strong> casi siempre es más simple y menos propenso a errores. El punto que más duele: los microservicios exigen madurez operativa real — Kubernetes, service mesh, observabilidad con OpenTelemetry — y sin esa base, lo único que ganás es latencia de red y debugging distribuido. Conceptos antes que arquitectura de moda.</p>",
+            "en": "<p>A Jun 24 read worth keeping handy for your next architecture debate. The thesis is healthy and cuts against the hype: <strong>microservices are justified only when specific organizational and technical conditions align</strong> — well-defined, independent domain boundaries, teams structured for autonomous ownership, scalability and availability needs that <em>vary</em> across services, and a genuine need for technology diversity. If that doesn't apply, a <strong>modular monolith</strong> is almost always simpler and less error-prone. The part that stings: microservices demand real operational maturity — Kubernetes, service mesh, OpenTelemetry observability — and without that base, all you buy is network latency and distributed debugging. Concepts before fashionable architecture.</p>",
+            "fr": "<p>Une lecture du 24 juin à garder sous la main pour votre prochain débat d'architecture. La thèse est saine et va contre le hype : <strong>les microservices ne se justifient que lorsque des conditions organisationnelles et techniques précises s'alignent</strong> — frontières de domaine bien définies et indépendantes, équipes structurées pour un ownership autonome, besoins de scalabilité et de disponibilité qui <em>varient</em> entre services, et un vrai besoin de diversité technologique. Sinon, un <strong>monolithe modulaire</strong> est presque toujours plus simple et moins sujet aux erreurs. Le point qui pique : les microservices exigent une vraie maturité opérationnelle — Kubernetes, service mesh, observabilité OpenTelemetry.</p>"
+          },
+          "source": { "url": "https://www.sachith.co.uk/when-microservices-actually-make-sense-best-practices-in-2025-practical-guide-jun-24-2026/", "label": "sachith.co.uk" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El registro deja de confiar en la sesión: npm congela cuentas de alto impacto ante cambios de email o uso de recovery 2FA. Después de un semestre de supply-chain attacks, la defensa se mueve del token al comportamiento de la cuenta.",
+      "en": "The registry stops trusting the session: npm freezes high-impact accounts on email changes or 2FA recovery use. After a half-year of supply-chain attacks, the defense moves from the token to account behavior.",
+      "fr": "Le registre cesse de faire confiance à la session : npm gèle les comptes à fort impact lors d'un changement d'email ou d'un usage de récupération 2FA. Après un semestre d'attaques de supply chain, la défense passe du token au comportement du compte."
+    },
+    {
+      "es": "El CI endurece sus fronteras de confianza: caché read-only para triggers no confiables y pasos en paralelo con logs separados. GitHub Actions madura de azúcar de automatización a plataforma con modelo de seguridad explícito.",
+      "en": "CI hardens its trust boundaries: read-only cache for untrusted triggers and parallel steps with separate logs. GitHub Actions matures from automation sugar into a platform with an explicit security model.",
+      "fr": "Le CI durcit ses frontières de confiance : cache en lecture seule pour les triggers non fiables et étapes parallèles à logs séparés. GitHub Actions passe du sucre d'automatisation à une plateforme avec un modèle de sécurité explicite."
+    },
+    {
+      "es": "El péndulo arquitectónico vuelve al medio: la mejor lectura de la semana defiende el monolito modular como default y los microservicios como decisión condicionada a madurez operativa real. Conceptos antes que hype.",
+      "en": "The architecture pendulum swings back to center: the week's best read defends the modular monolith as the default and microservices as a decision gated on real operational maturity. Concepts before hype.",
+      "fr": "Le pendule architectural revient au centre : la meilleure lecture de la semaine défend le monolithe modulaire comme défaut et les microservices comme une décision conditionnée à une vraie maturité opérationnelle. Les concepts avant le hype."
+    }
+  ]
+}

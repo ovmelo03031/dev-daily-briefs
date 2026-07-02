@@ -1,0 +1,173 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 2 Jul 2026",
+    "en": "Backend & Fullstack Daily — 2 Jul 2026",
+    "fr": "Backend & Fullstack Daily — 2 Jul 2026"
+  },
+  "description": {
+    "es": "PoC público para el CVE crítico de libssh2, Deno 2.9 con deno desktop, Next.js 16.3 y navegaciones instantáneas, y Kafka 4.3.1.",
+    "en": "Public PoC for the critical libssh2 CVE, Deno 2.9 with deno desktop, Next.js 16.3 instant navigations, and Kafka 4.3.1.",
+    "fr": "PoC public pour la CVE critique de libssh2, Deno 2.9 avec deno desktop, Next.js 16.3 et navigations instantanées, et Kafka 4.3.1."
+  },
+  "pubDate": "2026-07-02",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "libssh2 CVE-2026-55200: RCE, CVSS 9.2, PoC público",
+        "en": "libssh2 CVE-2026-55200: RCE, CVSS 9.2, public PoC",
+        "fr": "libssh2 CVE-2026-55200 : RCE, CVSS 9.2, PoC public"
+      },
+      "anchor": "cve-libssh2",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Deno 2.9: deno desktop y cold-start 2x",
+        "en": "Deno 2.9: deno desktop and 2x cold-start",
+        "fr": "Deno 2.9 : deno desktop et cold-start 2x"
+      },
+      "anchor": "deno-29",
+      "icon": "simple-icons:deno"
+    },
+    {
+      "text": {
+        "es": "Next.js 16.3: navegaciones instantáneas tipo SPA",
+        "en": "Next.js 16.3: SPA-like instant navigations",
+        "fr": "Next.js 16.3 : navigations instantanées type SPA"
+      },
+      "anchor": "nextjs-163-instant",
+      "icon": "simple-icons:nextdotjs"
+    },
+    {
+      "text": {
+        "es": "Kafka 4.3.1: fix a leak de memoria en RocksDB",
+        "en": "Kafka 4.3.1: fixes RocksDB memory leak",
+        "fr": "Kafka 4.3.1 : corrige une fuite mémoire RocksDB"
+      },
+      "anchor": "kafka-431",
+      "icon": "simple-icons:apachekafka"
+    },
+    {
+      "text": {
+        "es": "Next.js 16.3: AGENTS.md y Skills para agentes",
+        "en": "Next.js 16.3: AGENTS.md and Skills for agents",
+        "fr": "Next.js 16.3 : AGENTS.md et Skills pour agents"
+      },
+      "anchor": "nextjs-163-ai",
+      "icon": "lucide:blocks"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "cve-libssh2",
+      "updates": [
+        {
+          "id": "cve-libssh2",
+          "date": "29 Jun 2026",
+          "tag": "security",
+          "title": {
+            "es": "PoC público para el CVE-2026-55200 crítico de libssh2 (client-side)",
+            "en": "Public PoC for critical client-side libssh2 CVE-2026-55200",
+            "fr": "PoC public pour la CVE-2026-55200 critique de libssh2 (côté client)"
+          },
+          "body_html": {
+            "es": "<p>Integer overflow (<code>CWE-680</code>) en <code>ssh2_transport_read()</code>: un servidor SSH malicioso manda un <code>packet_length</code> de <code>0xffffffff</code>, la aritmética de 32 bits hace wrap, libssh2 reserva un buffer diminuto y después escribe fuera de límites en el heap. <strong>CVSS 4.0 de 9.2</strong>, afecta toda versión hasta <code>1.11.1</code> y está embebido en <code>curl</code>, <code>git</code>, <code>PHP</code>, backup agents y firmware. Todavía sin patch oficial. Ojo: cualquier cliente que se conecte a un endpoint SSH no confiable es blanco. Auditá tus dependencias YA.</p>",
+            "en": "<p>Integer overflow (<code>CWE-680</code>) in <code>ssh2_transport_read()</code>: a malicious SSH server sends a <code>packet_length</code> of <code>0xffffffff</code>, the 32-bit arithmetic wraps, libssh2 allocates a tiny buffer and then writes out of bounds on the heap. <strong>CVSS 4.0 of 9.2</strong>, affects every release up to <code>1.11.1</code>, and it is embedded in <code>curl</code>, <code>git</code>, <code>PHP</code>, backup agents and firmware. No official patch yet. Any client reaching an untrusted SSH endpoint is a target — audit your dependencies now.</p>",
+            "fr": "<p>Integer overflow (<code>CWE-680</code>) dans <code>ssh2_transport_read()</code> : un serveur SSH malveillant envoie un <code>packet_length</code> de <code>0xffffffff</code>, l&apos;arithmétique 32 bits déborde, libssh2 alloue un buffer minuscule puis écrit hors limites sur le heap. <strong>CVSS 4.0 de 9.2</strong>, affecte toute version jusqu&apos;à <code>1.11.1</code>, embarqué dans <code>curl</code>, <code>git</code>, <code>PHP</code>, agents de backup et firmware. Pas encore de patch officiel — auditez vos dépendances maintenant.</p>"
+          },
+          "source": { "url": "https://thehackernews.com/2026/06/public-poc-released-for-critical.html", "label": "thehackernews.com" }
+        },
+        {
+          "id": "deno-29",
+          "date": "25 Jun 2026",
+          "tag": "release",
+          "title": {
+            "es": "Deno 2.9: deno desktop, lockfiles ajenos y cold-start 2x",
+            "en": "Deno 2.9: deno desktop, foreign lockfiles and 2x cold-start",
+            "fr": "Deno 2.9 : deno desktop, lockfiles étrangers et cold-start 2x"
+          },
+          "body_html": {
+            "es": "<p>Golazo para la DX: <code>deno desktop</code> arma apps nativas desde el web stack en un solo binario, sin boilerplate de Electron. Además <code>deno install</code> lee lockfiles de <code>npm</code>, <code>pnpm</code>, <code>yarn</code> y <code>Bun</code> directamente, así que migrar un proyecto Node es casi trivial. El cold-start de un hello-world baja de <strong>34ms a 17ms</strong>, la memoria pico cae 2-3x y el test runner suma snapshots, tests parametrizados con <code>Deno.test.each</code> y selección change-aware.</p>",
+            "en": "<p>Big DX win: <code>deno desktop</code> builds native apps from the web stack into a single binary, no Electron boilerplate. Also <code>deno install</code> now reads <code>npm</code>, <code>pnpm</code>, <code>yarn</code> and <code>Bun</code> lockfiles directly, so migrating a Node project is nearly trivial. Hello-world cold-start drops from <strong>34ms to 17ms</strong>, peak memory falls 2-3x, and the test runner adds snapshots, parameterized tests via <code>Deno.test.each</code> and change-aware selection.</p>",
+            "fr": "<p>Gros gain DX : <code>deno desktop</code> construit des apps natives depuis le web stack en un seul binaire, sans boilerplate Electron. De plus, <code>deno install</code> lit désormais les lockfiles <code>npm</code>, <code>pnpm</code>, <code>yarn</code> et <code>Bun</code> directement. Le cold-start hello-world passe de <strong>34ms à 17ms</strong>, la mémoire pic chute 2-3x, et le test runner ajoute snapshots, tests paramétrés via <code>Deno.test.each</code> et sélection change-aware.</p>"
+          },
+          "source": { "url": "https://deno.com/blog/v2.9", "label": "deno.com" }
+        },
+        {
+          "id": "kafka-431",
+          "date": "25 Jun 2026",
+          "tag": "patch",
+          "title": {
+            "es": "Apache Kafka 4.3.1: fix a leak de memoria nativa en RocksDB",
+            "en": "Apache Kafka 4.3.1: fixes RocksDB native memory leak",
+            "fr": "Apache Kafka 4.3.1 : corrige une fuite mémoire native RocksDB"
+          },
+          "body_html": {
+            "es": "<p>Release de bugfix que corrige un <strong>memory leak de memoria nativa en RocksDB</strong> dentro de Kafka Streams, más varios fixes críticos. Si tenés apps de Streams con state stores en producción, este leak te come RAM despacito hasta el OOM. Ponete las pilas y actualizá.</p>",
+            "en": "<p>Bugfix release that corrects a <strong>RocksDB native memory leak</strong> in Kafka Streams, plus several critical fixes. If you run Streams apps with state stores in production, this leak slowly eats RAM until OOM — worth the upgrade.</p>",
+            "fr": "<p>Release de bugfix qui corrige une <strong>fuite mémoire native RocksDB</strong> dans Kafka Streams, plus plusieurs correctifs critiques. Si vous exécutez des apps Streams avec state stores en production, cette fuite grignote la RAM jusqu&apos;à l&apos;OOM — mise à jour recommandée.</p>"
+          },
+          "source": { "url": "https://kafka.apache.org/blog/releases/", "label": "kafka.apache.org" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "nextjs-163-instant",
+      "updates": [
+        {
+          "id": "nextjs-163-instant",
+          "date": "25 Jun 2026",
+          "tag": "notable",
+          "title": {
+            "es": "Next.js 16.3 Preview: Instant Navigations (Stream / Cache / Block)",
+            "en": "Next.js 16.3 Preview: Instant Navigations (Stream / Cache / Block)",
+            "fr": "Next.js 16.3 Preview : Instant Navigations (Stream / Cache / Block)"
+          },
+          "body_html": {
+            "es": "<p>Vercel ataca la crítica de siempre a los Server Components: navegaciones que se sienten lentas. Con <code>cacheComponents: true</code>, cada ruta que hace <code>await</code> te obliga a elegir: <strong>Stream</strong> con <code>&lt;Suspense&gt;</code>, <strong>Cache</strong> con <code>&apos;use cache&apos;</code>, o <strong>Block</strong> con <code>export const instant = false</code>. Suma Partial Prefetching (una shell reutilizable por ruta en vez de un prefetch por link) y un helper <code>instant()</code> para Playwright. Instalá con <code>npm install next@preview</code>.</p>",
+            "en": "<p>Vercel tackles the long-standing Server Components criticism: navigations that feel slow. With <code>cacheComponents: true</code>, every route that <code>await</code>s forces a choice: <strong>Stream</strong> with <code>&lt;Suspense&gt;</code>, <strong>Cache</strong> with <code>&apos;use cache&apos;</code>, or <strong>Block</strong> via <code>export const instant = false</code>. Adds Partial Prefetching (one reusable shell per route instead of a prefetch per link) and an <code>instant()</code> Playwright helper. Install with <code>npm install next@preview</code>.</p>",
+            "fr": "<p>Vercel s&apos;attaque à la vieille critique des Server Components : des navigations qui semblent lentes. Avec <code>cacheComponents: true</code>, chaque route qui <code>await</code> impose un choix : <strong>Stream</strong> avec <code>&lt;Suspense&gt;</code>, <strong>Cache</strong> avec <code>&apos;use cache&apos;</code>, ou <strong>Block</strong> via <code>export const instant = false</code>. Ajoute le Partial Prefetching et un helper <code>instant()</code> pour Playwright. Installez avec <code>npm install next@preview</code>.</p>"
+          },
+          "source": { "url": "https://nextjs.org/blog/next-16-3-instant-navigations", "label": "nextjs.org" }
+        },
+        {
+          "id": "nextjs-163-ai",
+          "date": "25 Jun 2026",
+          "tag": "notable",
+          "title": {
+            "es": "Next.js 16.3 Preview: mejoras de IA (AGENTS.md, Skills, Agent Browser)",
+            "en": "Next.js 16.3 Preview: AI improvements (AGENTS.md, Skills, Agent Browser)",
+            "fr": "Next.js 16.3 Preview : améliorations IA (AGENTS.md, Skills, Agent Browser)"
+          },
+          "body_html": {
+            "es": "<p>El mismo preview trae tooling pensado para agentes: docs bundleadas vía <code>AGENTS.md</code>, Skills first-party para workflows multi-paso, un Agent Browser con introspección de React, errores accionables con menús de fix y prompts listos para pegar, y un MCP server más chico y enfocado. La tendencia es clara: el framework asume que un agente edita tu código.</p>",
+            "en": "<p>The same preview ships agent-focused tooling: bundled docs via <code>AGENTS.md</code>, first-party Skills for multi-step workflows, an Agent Browser with React introspection, actionable errors with fix menus and paste-ready prompts, and a smaller, more focused MCP server. The trend is clear: the framework now assumes an agent edits your code.</p>",
+            "fr": "<p>Le même preview livre un outillage pensé pour les agents : docs bundlées via <code>AGENTS.md</code>, Skills first-party pour workflows multi-étapes, un Agent Browser avec introspection React, erreurs actionnables avec menus de fix et prompts prêts à coller, et un serveur MCP plus petit et ciblé. La tendance est claire : le framework suppose désormais qu&apos;un agent édite votre code.</p>"
+          },
+          "source": { "url": "https://nextjs.org/blog/next-16-3-ai-improvements", "label": "nextjs.org" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "La cadena de suministro de npm sigue caliente: el mes cerró con oleadas de ataques (Miasma en @redhat-cloud-services, node-gyp, 144 paquetes de Mastra por Sapphire Sleet). Pineá versiones y activá provenance.",
+      "en": "The npm supply chain stays hot: the month closed with waves of attacks (Miasma on @redhat-cloud-services, node-gyp, 144 Mastra packages by Sapphire Sleet). Pin versions and enable provenance.",
+      "fr": "La chaîne d&apos;approvisionnement npm reste brûlante : le mois s&apos;est clôturé sur des vagues d&apos;attaques (Miasma sur @redhat-cloud-services, node-gyp, 144 paquets Mastra par Sapphire Sleet). Épinglez les versions et activez provenance."
+    },
+    {
+      "es": "Los runtimes convergen en compatibilidad: Deno 2.9 lee lockfiles de npm/pnpm/yarn/Bun y apunta a Node 26. La guerra ya no es de sintaxis, es de portabilidad del ecosistema.",
+      "en": "Runtimes converge on compatibility: Deno 2.9 reads npm/pnpm/yarn/Bun lockfiles and targets Node 26. The battle is no longer syntax — it is ecosystem portability.",
+      "fr": "Les runtimes convergent sur la compatibilité : Deno 2.9 lit les lockfiles npm/pnpm/yarn/Bun et vise Node 26. La bataille n&apos;est plus la syntaxe, c&apos;est la portabilité de l&apos;écosystème."
+    }
+  ]
+}

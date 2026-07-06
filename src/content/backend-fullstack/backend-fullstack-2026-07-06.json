@@ -1,0 +1,196 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 6 Jul 2026",
+    "en": "Backend & Fullstack Daily — 6 Jul 2026",
+    "fr": "Backend & Fullstack Daily — 6 Jul 2026"
+  },
+  "description": {
+    "es": "Errata críticas de PostgreSQL y Valkey (RCE) en AlmaLinux, OpenTelemetry graduado en la CNCF, Deno 2.9.1, remote functions de SvelteKit y Copilot CLI en Actions sin PAT.",
+    "en": "Critical PostgreSQL and Valkey (RCE) errata on AlmaLinux, OpenTelemetry graduates in the CNCF, Deno 2.9.1, SvelteKit remote functions and Copilot CLI in Actions without a PAT.",
+    "fr": "Errata critiques PostgreSQL et Valkey (RCE) sur AlmaLinux, OpenTelemetry diplômé à la CNCF, Deno 2.9.1, remote functions SvelteKit et Copilot CLI dans Actions sans PAT."
+  },
+  "pubDate": "2026-07-06",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "PostgreSQL + Valkey: errata críticas, RCE CVSS 7.7",
+        "en": "PostgreSQL + Valkey: critical errata, RCE CVSS 7.7",
+        "fr": "PostgreSQL + Valkey : errata critiques, RCE CVSS 7.7"
+      },
+      "anchor": "postgres-valkey-rce",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "OpenTelemetry graduado: máximo nivel de madurez CNCF",
+        "en": "OpenTelemetry graduated: top CNCF maturity level",
+        "fr": "OpenTelemetry diplômé : niveau de maturité CNCF max"
+      },
+      "anchor": "otel-cncf",
+      "icon": "lucide:layers"
+    },
+    {
+      "text": {
+        "es": "Deno 2.9.1: fixes de desktop y compat con Node",
+        "en": "Deno 2.9.1: desktop fixes and Node compat",
+        "fr": "Deno 2.9.1 : correctifs desktop et compat Node"
+      },
+      "anchor": "deno-291",
+      "icon": "simple-icons:deno"
+    },
+    {
+      "text": {
+        "es": "SvelteKit: remote functions maduran (2.62–2.68)",
+        "en": "SvelteKit: remote functions mature (2.62–2.68)",
+        "fr": "SvelteKit : remote functions arrivent à maturité (2.62–2.68)"
+      },
+      "anchor": "sveltekit-remote",
+      "icon": "lucide:server"
+    },
+    {
+      "text": {
+        "es": "GitHub: Copilot CLI en Actions con GITHUB_TOKEN, sin PAT",
+        "en": "GitHub: Copilot CLI in Actions via GITHUB_TOKEN, no PAT",
+        "fr": "GitHub : Copilot CLI dans Actions via GITHUB_TOKEN, sans PAT"
+      },
+      "anchor": "gh-copilot-actions",
+      "icon": "simple-icons:github"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "postgres-valkey-rce",
+      "updates": [
+        {
+          "id": "postgres-valkey-rce",
+          "date": "02 Jul 2026",
+          "tag": "breaking",
+          "title": {
+            "es": "AlmaLinux 9 publica errata críticas de PostgreSQL y Valkey (RCE)",
+            "en": "AlmaLinux 9 ships critical PostgreSQL and Valkey errata (RCE)",
+            "fr": "AlmaLinux 9 publie des errata critiques PostgreSQL et Valkey (RCE)"
+          },
+          "body_html": {
+            "es": "<p>El 2 de julio AlmaLinux liberó tres errata de severidad <strong>Important</strong>. <strong>PostgreSQL 15 y 16</strong> (<code>ALSA-2026:28037</code> y <code>ALSA-2026:26203</code>) arreglan <code>CVE-2026-6473/6475/6477/6478</code>: hijack de la cuenta del sistema operativo vía symlink following, buffer overflow, recuperación de credenciales por timing channel e integer overflow. <strong>Valkey</strong> (<code>ALSA-2026:25925</code>) tapa <code>CVE-2026-23479</code> —use-after-free en el unblock client flow, <strong>CVSS 7.7</strong>, RCE post-auth— más <code>CVE-2026-23631</code> (RCE via Lua) y <code>CVE-2026-25243</code> (RESTORE con acceso a memoria inválido). Ojo: son bugs post-autenticación pero llegan a ejecución remota de código. Si corrés Postgres o Valkey en tus VMs, actualizá YA y revisá que <code>EVAL</code>/<code>EVALSHA</code> estén restringidos por ACL.</p>",
+            "en": "<p>On July 2 AlmaLinux shipped three <strong>Important</strong>-severity errata. <strong>PostgreSQL 15 and 16</strong> (<code>ALSA-2026:28037</code> and <code>ALSA-2026:26203</code>) fix <code>CVE-2026-6473/6475/6477/6478</code>: OS account hijack via symlink following, buffer overflow, credential recovery through a timing channel and integer overflow. <strong>Valkey</strong> (<code>ALSA-2026:25925</code>) patches <code>CVE-2026-23479</code> —use-after-free in the unblock client flow, <strong>CVSS 7.7</strong>, post-auth RCE— plus <code>CVE-2026-23631</code> (RCE via Lua) and <code>CVE-2026-25243</code> (RESTORE invalid memory access). These are post-authentication bugs that still reach remote code execution. If you run Postgres or Valkey on your VMs, patch now and confirm <code>EVAL</code>/<code>EVALSHA</code> are locked down by ACL.</p>",
+            "fr": "<p>Le 2 juillet, AlmaLinux a publié trois errata de sévérité <strong>Important</strong>. <strong>PostgreSQL 15 et 16</strong> (<code>ALSA-2026:28037</code> et <code>ALSA-2026:26203</code>) corrigent <code>CVE-2026-6473/6475/6477/6478</code> : hijack du compte OS via symlink following, buffer overflow, récupération de credentials par timing channel et integer overflow. <strong>Valkey</strong> (<code>ALSA-2026:25925</code>) corrige <code>CVE-2026-23479</code> —use-after-free dans le unblock client flow, <strong>CVSS 7.7</strong>, RCE post-auth— plus <code>CVE-2026-23631</code> (RCE via Lua) et <code>CVE-2026-25243</code> (accès mémoire invalide sur RESTORE). Ce sont des bugs post-authentification qui atteignent l&apos;exécution de code à distance. Si vous exécutez Postgres ou Valkey sur vos VMs, corrigez maintenant et vérifiez que <code>EVAL</code>/<code>EVALSHA</code> sont restreints par ACL.</p>"
+          },
+          "source": { "url": "https://www.linuxcompatible.org/story/kernel-apache-postgresql-php-mysql-and-valkey-updates-for-almalinux", "label": "linuxcompatible.org" }
+        },
+        {
+          "id": "deno-291",
+          "date": "01 Jul 2026",
+          "tag": "release",
+          "title": {
+            "es": "Deno 2.9.1: pulido de deno desktop y fixes de compat con Node",
+            "en": "Deno 2.9.1: deno desktop polish and Node compat fixes",
+            "fr": "Deno 2.9.1 : peaufinage de deno desktop et correctifs compat Node"
+          },
+          "body_html": {
+            "es": "<p>Patch sobre el 2.9 de la semana pasada. <code>deno check</code> suma flag <code>--desktop</code> para type-checkear apps de escritorio, los deep-link URL schemes se registran en build time y <code>deno bundle</code> ahora soporta CSS modules. Vienen varios fixes de compatibilidad con Node, resolución de symlinks del app launcher en Linux y mejoras en WebView y raw backend en Windows. No es una feature bomba, pero si ya saltaste a <code>deno desktop</code> este patch te saca varias piedras del camino.</p>",
+            "en": "<p>Patch on top of last week&apos;s 2.9. <code>deno check</code> gains a <code>--desktop</code> flag to type-check desktop apps, deep-link URL schemes register at bundle time and <code>deno bundle</code> now supports CSS modules. It ships several Node compatibility fixes, app-launcher symlink resolution on Linux and WebView/raw backend improvements on Windows. Not a headline feature, but if you already jumped to <code>deno desktop</code> this patch clears real friction.</p>",
+            "fr": "<p>Patch au-dessus du 2.9 de la semaine dernière. <code>deno check</code> gagne un flag <code>--desktop</code> pour type-checker les apps desktop, les deep-link URL schemes sont enregistrés au bundle time et <code>deno bundle</code> supporte désormais les CSS modules. Plusieurs correctifs de compat Node, résolution des symlinks de l&apos;app launcher sous Linux et améliorations WebView/raw backend sous Windows. Pas une feature phare, mais utile si vous êtes déjà passé à <code>deno desktop</code>.</p>"
+          },
+          "source": { "url": "https://github.com/denoland/deno/releases", "label": "github.com/denoland" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "otel-cncf",
+      "updates": [
+        {
+          "id": "otel-cncf",
+          "date": "03 Jul 2026",
+          "tag": "notable",
+          "title": {
+            "es": "OpenTelemetry gradúa al máximo nivel de madurez de la CNCF",
+            "en": "OpenTelemetry graduates to CNCF&apos;s highest maturity level",
+            "fr": "OpenTelemetry atteint le plus haut niveau de maturité CNCF"
+          },
+          "body_html": {
+            "es": "<p>La CNCF elevó a <strong>OpenTelemetry</strong> a proyecto <em>graduated</em>, el mismo estatus que Kubernetes, Prometheus, Envoy o Istio: producción-ready, gobernanza sólida y adopción amplia. Es el sello de que la instrumentación abierta (traces, métricas y logs bajo un mismo estándar) ganó la pelea contra el vendor lock-in de la observabilidad. Dato para tener en el radar: la señal de <strong>profiling</strong> —basada en el formato perf de Linux y stacks recolectados por eBPF— apunta a GA para Q3 2026, y el timing no es casual con la explosión de telemetría que generan los agentes de IA. Si todavía instrumentás con SDKs propietarios, este es el momento de migrar a OTel.</p>",
+            "en": "<p>The CNCF elevated <strong>OpenTelemetry</strong> to a <em>graduated</em> project, the same tier as Kubernetes, Prometheus, Envoy and Istio: production-ready, strong governance, broad adoption. It is the stamp that open instrumentation (traces, metrics and logs under one standard) won the fight against observability vendor lock-in. Worth watching: the <strong>profiling</strong> signal —built on the Linux perf format with eBPF-collected stacks— is targeting GA for Q3 2026, and the timing tracks the telemetry explosion from AI agents. If you still instrument with proprietary SDKs, now is the time to move to OTel.</p>",
+            "fr": "<p>La CNCF a élevé <strong>OpenTelemetry</strong> au rang de projet <em>graduated</em>, le même niveau que Kubernetes, Prometheus, Envoy et Istio : production-ready, gouvernance solide, adoption large. C&apos;est la confirmation que l&apos;instrumentation ouverte (traces, métriques et logs sous un standard unique) a gagné contre le vendor lock-in de l&apos;observabilité. À surveiller : la signal <strong>profiling</strong> —basée sur le format perf de Linux avec stacks collectés par eBPF— vise la GA pour le Q3 2026, en phase avec l&apos;explosion de télémétrie des agents IA. Si vous instrumentez encore avec des SDK propriétaires, c&apos;est le moment de passer à OTel.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/07/opentelemetry-cncf-maturity/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "sveltekit-remote",
+      "updates": [
+        {
+          "id": "sveltekit-remote",
+          "date": "01 Jul 2026",
+          "tag": "notable",
+          "title": {
+            "es": "SvelteKit: remote functions maduran y la config se muda a Vite (2.62–2.68)",
+            "en": "SvelteKit: remote functions mature and config moves to Vite (2.62–2.68)",
+            "fr": "SvelteKit : remote functions arrivent à maturité et la config passe à Vite (2.62–2.68)"
+          },
+          "body_html": {
+            "es": "<p>El resumen de julio de Svelte trae una tanda densa. Las <strong>remote functions</strong> se afilan: los commands ahora aceptan objetos <code>File</code> directo sin envolver en <code>FormData</code> (2.64), las queries pueden refrescar otras queries para invalidar datos sin esfuerzo (2.65) y se exportan los tipos <code>RemoteFormEnhanceInstance</code>/<code>RemoteFormEnhanceCallback</code> (2.68). Además ya podés pasar la config de SvelteKit directo al plugin de Vite —adiós <code>svelte.config.js</code> separado— como anticipo de que <strong>Kit 3</strong> exigirá la config en <code>vite.config.js</code> (2.62). Suma env vars explícitas como preview de <code>$env/*</code> en Kit 3 (2.63). Si vivís en el App Router de Svelte, esto es DX pura.</p>",
+            "en": "<p>Svelte&apos;s July roundup lands a dense batch. <strong>Remote functions</strong> sharpen up: commands now accept <code>File</code> objects directly without wrapping in <code>FormData</code> (2.64), queries can refresh other queries for effortless invalidation (2.65) and the <code>RemoteFormEnhanceInstance</code>/<code>RemoteFormEnhanceCallback</code> types are exported (2.68). You can also pass SvelteKit config straight to the Vite plugin —no separate <code>svelte.config.js</code>— previewing how <strong>Kit 3</strong> will require config in <code>vite.config.js</code> (2.62). Plus explicit env vars as a preview of <code>$env/*</code> in Kit 3 (2.63). If you live in Svelte&apos;s App Router, this is pure DX.</p>",
+            "fr": "<p>Le récap de juillet de Svelte livre un lot dense. Les <strong>remote functions</strong> s&apos;affinent : les commands acceptent désormais des objets <code>File</code> directement sans wrapper dans <code>FormData</code> (2.64), les queries peuvent rafraîchir d&apos;autres queries pour une invalidation sans effort (2.65) et les types <code>RemoteFormEnhanceInstance</code>/<code>RemoteFormEnhanceCallback</code> sont exportés (2.68). Vous pouvez aussi passer la config SvelteKit directement au plugin Vite —fini le <code>svelte.config.js</code> séparé— en préview de <strong>Kit 3</strong> qui exigera la config dans <code>vite.config.js</code> (2.62). Plus des env vars explicites en préview de <code>$env/*</code> dans Kit 3 (2.63).</p>"
+          },
+          "source": { "url": "https://svelte.dev/blog/whats-new-in-svelte-july-2026", "label": "svelte.dev" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "gh-copilot-actions",
+      "updates": [
+        {
+          "id": "gh-copilot-actions",
+          "date": "02 Jul 2026",
+          "tag": "notable",
+          "title": {
+            "es": "GitHub: Copilot CLI corre en Actions con GITHUB_TOKEN, sin PAT",
+            "en": "GitHub: Copilot CLI runs in Actions with GITHUB_TOKEN, no PAT",
+            "fr": "GitHub : Copilot CLI tourne dans Actions avec GITHUB_TOKEN, sans PAT"
+          },
+          "body_html": {
+            "es": "<p>Ahora podés correr <strong>Copilot CLI dentro de GitHub Actions</strong> usando el <code>GITHUB_TOKEN</code> integrado del workflow, sin fabricar ni guardar un personal access token. Solo necesitás el permiso <code>copilot-requests: write</code> y listo: cero secrets extra. En repos de una organización, los créditos de IA que consume el CLI se facturan directo a la org. Es un fix chico pero de esos que sacan fricción real: menos PATs rotando, menos superficie de fuga de credenciales en tus pipelines. Golazo para la higiene de secrets.</p>",
+            "en": "<p>You can now run <strong>Copilot CLI inside GitHub Actions</strong> using the workflow&apos;s built-in <code>GITHUB_TOKEN</code>, with no personal access token to mint or store. You just need the <code>copilot-requests: write</code> permission — zero extra secrets. In org-owned repos, the AI credits the CLI consumes bill straight to the organization. A small change, but the kind that removes real friction: fewer PATs rotating, less credential-leak surface across your pipelines. A win for secrets hygiene.</p>",
+            "fr": "<p>Vous pouvez désormais exécuter <strong>Copilot CLI dans GitHub Actions</strong> avec le <code>GITHUB_TOKEN</code> intégré du workflow, sans créer ni stocker de personal access token. Il suffit du permission <code>copilot-requests: write</code> — zéro secret supplémentaire. Dans les repos d&apos;une organisation, les crédits IA consommés par le CLI sont facturés directement à l&apos;org. Un petit changement, mais du genre qui enlève une vraie friction : moins de PAT en rotation, moins de surface de fuite de credentials dans vos pipelines.</p>"
+          },
+          "source": { "url": "https://github.blog/changelog/2026-07-02-copilot-cli-no-longer-needs-a-personal-access-token-in-github-actions/", "label": "github.blog" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Semana cargada de errata de distro: los CVEs de PostgreSQL y Valkey no vinieron del upstream esta semana sino de los security errata de AlmaLinux/RHEL. Si dependés de paquetes del sistema, seguí los canales de tu distro, no solo los changelogs upstream.",
+      "en": "A distro-errata heavy week: the PostgreSQL and Valkey CVEs surfaced this week through AlmaLinux/RHEL security errata, not upstream releases. If you rely on system packages, watch your distro&apos;s channels, not just upstream changelogs.",
+      "fr": "Une semaine dominée par les errata de distro : les CVEs PostgreSQL et Valkey ont fait surface via les security errata AlmaLinux/RHEL, pas via des releases upstream. Si vous dépendez de paquets système, suivez les canaux de votre distro, pas seulement les changelogs upstream."
+    },
+    {
+      "es": "El estándar de observabilidad se consolidó: con OpenTelemetry graduado en la CNCF, instrumentar con SDKs propietarios cada vez tiene menos sentido para un stack nuevo.",
+      "en": "The observability standard consolidated: with OpenTelemetry graduated in the CNCF, instrumenting with proprietary SDKs makes less and less sense for a fresh stack.",
+      "fr": "Le standard d&apos;observabilité s&apos;est consolidé : avec OpenTelemetry diplômé à la CNCF, instrumenter avec des SDK propriétaires a de moins en moins de sens pour un nouveau stack."
+    },
+    {
+      "es": "Los meta-frameworks siguen empujando el data-fetching type-safe al server: las remote functions de SvelteKit maduran en la misma dirección que los server actions y el RPC end-to-end del resto del ecosistema TypeScript.",
+      "en": "Meta-frameworks keep pushing type-safe data fetching to the server: SvelteKit remote functions mature in the same direction as server actions and end-to-end RPC across the rest of the TypeScript ecosystem.",
+      "fr": "Les méta-frameworks continuent de pousser le data-fetching type-safe vers le serveur : les remote functions SvelteKit mûrissent dans la même direction que les server actions et le RPC end-to-end du reste de l&apos;écosystème TypeScript."
+    }
+  ]
+}

@@ -77,7 +77,7 @@ const briefSchema = z.object({
 	title_fr: z.string().optional(),
 	description: z.union([z.string(), z.object({ es: z.string().optional(), en: z.string(), fr: z.string().optional() })]),
 	pubDate: z.coerce.date(),
-	category: z.enum(['ai-coding', 'backend-fullstack', 'dev-news', 'gentleman-releases']),
+	category: z.enum(['ai-coding', 'backend-fullstack', 'dev-news', 'gentleman-releases', 'ai-security']),
 	highlights: z.array(highlightSchema).optional(),
 	// Structured body — when present, the page renders via components
 	// instead of rendering the markdown body.
@@ -108,9 +108,15 @@ const gentlemanReleases = defineCollection({
 	schema: briefSchema,
 });
 
+const aiSecurity = defineCollection({
+	loader: glob({ base: './src/content/ai-security', pattern: '**/*.{md,mdx,json}' }),
+	schema: briefSchema,
+});
+
 export const collections = {
 	'ai-coding': aiCoding,
 	'backend-fullstack': backendFullstack,
 	'dev-news': devNews,
 	'gentleman-releases': gentlemanReleases,
+	'ai-security': aiSecurity,
 };

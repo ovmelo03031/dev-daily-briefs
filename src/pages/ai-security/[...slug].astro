@@ -1,0 +1,53 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import BlogPost from '../../layouts/BlogPost.astro';
+import BriefStructured from '../../components/brief/BriefStructured.astro';
+import { normalizeBrief } from '../../components/brief/normalizeBrief';
+import { pickLang } from '../../components/brief/pickLang';
+import { getBriefNeighbors } from '../../utils/briefNav';
+import { extractTags, getEntity } from '../../utils/entityTags';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('ai-security');
+	return posts.map((post) => {
+		const { prev, next } = getBriefNeighbors(posts, post.id);
+		return {
+			params: { slug: post.id },
+			props: { post, prevEntry: prev, nextEntry: next },
+		};
+	});
+}
+type Entry = CollectionEntry<'ai-security'>;
+type Props = { post: Entry; prevEntry?: Entry; nextEntry?: Entry };
+
+const { post, prevEntry, nextEntry } = Astro.props;
+const { data } = post;
+const { isStructured, title, description, highlightsForLayout } = normalizeBrief(data);
+const Content = isStructured ? null : (await render(post)).Content;
+const prevBrief = prevEntry ? { slug: prevEntry.id, title: pickLang(prevEntry.data.title, 'en') } : undefined;
+const nextBrief = nextEntry ? { slug: nextEntry.id, title: pickLang(nextEntry.data.title, 'en') } : undefined;
+const tags = extractTags(data, { includeModels: false }).map((slug) => ({ slug, label: getEntity(slug)!.label }));
+---
+
+<BlogPost
+	title={title}
+	description={description}
+	pubDate={data.pubDate}
+	category={data.category}
+	highlights={highlightsForLayout}
+	prevBrief={prevBrief}
+	nextBrief={nextBrief}
+	tags={tags}
+>
+	{isStructured ? (
+		<BriefStructured
+			stats={data.stats}
+			tools={data.tools}
+			models={data.models}
+			modelTimelineAnchor={data.model_timeline_anchor}
+			notableTrends={data.notable_trends}
+		/>
+	) : (
+		Content && <Content />
+	)}
+</BlogPost>

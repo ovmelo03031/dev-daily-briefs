@@ -54,6 +54,17 @@ export const CATEGORIES = {
 		icon: 'lucide:code',
 		accent: '#7c3aed',
 	},
+	'ai-security': {
+		label: 'AI Security',
+		label_es: 'Seguridad IA',
+		label_fr: 'Sécurité IA',
+		description: 'AI/model security incidents, LLM vulnerabilities, ML framework CVEs, and supply-chain attacks',
+		description_es: 'Incidentes de seguridad en IA/modelos, vulnerabilidades LLM, CVEs de frameworks ML y ataques de supply chain',
+		description_fr: 'Incidents de sécurité IA/modèles, vulnérabilités LLM, CVEs de frameworks ML et attaques de la chaîne d\'approvisionnement',
+		emoji: '🛡️',
+		icon: 'lucide:shield-alert',
+		accent: '#f43f5e',
+	},
 	'gentleman-releases': {
 		label: 'Gentleman Releases',
 		label_es: 'Lanzamientos Gentleman',

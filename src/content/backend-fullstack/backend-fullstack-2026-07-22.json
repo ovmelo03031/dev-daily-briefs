@@ -1,0 +1,286 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 22 Jul 2026",
+    "en": "Backend & Fullstack Daily — Jul 22, 2026",
+    "fr": "Backend & Fullstack Daily — 22 juil. 2026"
+  },
+  "description": {
+    "es": "Semana cargada de seguridad: compromiso npm en AsyncAPI con payload en tiempo de import, ViteVenom con C2 en blockchain, y releases de seguridad coordinados de Next.js y Node.js. Además PostgreSQL 19 Beta 2 y Bun reescrito en Rust dentro de Claude Code.",
+    "en": "Security-heavy week: AsyncAPI npm compromise with an import-time payload, ViteVenom with blockchain C2, plus coordinated Next.js and Node.js security releases. Also PostgreSQL 19 Beta 2 and a Rust-rewritten Bun shipping inside Claude Code.",
+    "fr": "Semaine chargée en sécurité : compromission npm d&apos;AsyncAPI avec charge au moment de l&apos;import, ViteVenom avec C2 sur blockchain, plus des releases de sécurité coordonnées de Next.js et Node.js. Aussi PostgreSQL 19 Beta 2 et un Bun réécrit en Rust dans Claude Code."
+  },
+  "pubDate": "2026-07-22",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "AsyncAPI npm: payload en tiempo de import",
+        "en": "AsyncAPI npm: import-time payload",
+        "fr": "AsyncAPI npm : charge au moment de l&apos;import"
+      },
+      "anchor": "asyncapi-npm",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Next.js: 4 high + 5 medium parcheadas",
+        "en": "Next.js patches 4 high + 5 medium",
+        "fr": "Next.js corrige 4 high + 5 medium"
+      },
+      "anchor": "nextjs-security",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Node.js: fix HIGH en 22, 24 y 26",
+        "en": "Node.js: HIGH fix across 22, 24, 26",
+        "fr": "Node.js : correctif HIGH sur 22, 24, 26"
+      },
+      "anchor": "node-july-security",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": {
+        "es": "Claude Code ya corre Bun reescrito en Rust",
+        "en": "Claude Code now runs Bun rewritten in Rust",
+        "fr": "Claude Code fait tourner Bun réécrit en Rust"
+      },
+      "anchor": "bun-rust",
+      "icon": "simple-icons:bun"
+    },
+    {
+      "text": {
+        "es": "PostgreSQL 19 Beta 2 afina temporal tables",
+        "en": "PostgreSQL 19 Beta 2 refines temporal tables",
+        "fr": "PostgreSQL 19 Beta 2 affine les tables temporelles"
+      },
+      "anchor": "pg19-beta2",
+      "icon": "simple-icons:postgresql"
+    },
+    {
+      "text": {
+        "es": "Lambda: código servido desde tu propio S3",
+        "en": "Lambda: code served from your own S3",
+        "fr": "Lambda : code servi depuis votre propre S3"
+      },
+      "anchor": "lambda-s3-storage",
+      "icon": "simple-icons:amazonwebservices"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "asyncapi-npm",
+      "updates": [
+        {
+          "id": "asyncapi-npm",
+          "tag": "breaking",
+          "date": "15 Jul 2026",
+          "title": {
+            "es": "Compromiso npm en @asyncapi con payload en tiempo de import",
+            "en": "@asyncapi npm compromise delivers an import-time payload",
+            "fr": "Compromission npm de @asyncapi avec charge au moment de l&apos;import"
+          },
+          "body_html": {
+            "es": "<p>Microsoft Threat Intelligence detectó la republicación de 5 versiones maliciosas en 4 paquetes: <code>@asyncapi/specs</code> (6.11.2-alpha.1 y 6.11.2), <code>@asyncapi/generator@3.3.1</code>, <code>@asyncapi/generator-components@0.7.1</code> y <code>@asyncapi/generator-helpers@1.1.1</code>. Lo grave: el loader ejecuta en <strong>module-load (import/require)</strong>, no en postinstall, así que <code>npm install --ignore-scripts</code> no te salva. Entregaba el runtime modular Miasma con ejecución de comandos, persistencia y robo de credenciales. Como <code>@asyncapi/specs</code> es dependencia transitiva de mucho tooling, pegó en workstations y CI/CD. Ojo: auditá tus lockfiles YA.</p>",
+            "en": "<p>Microsoft Threat Intelligence caught 5 malicious versions republished across 4 packages: <code>@asyncapi/specs</code> (6.11.2-alpha.1 and 6.11.2), <code>@asyncapi/generator@3.3.1</code>, <code>@asyncapi/generator-components@0.7.1</code> and <code>@asyncapi/generator-helpers@1.1.1</code>. The key twist: the loader runs at <strong>module-load (import/require)</strong> time, not postinstall — so <code>npm install --ignore-scripts</code> gives you zero protection. It delivered the Miasma modular runtime with command execution, persistence and credential harvesting. Since <code>@asyncapi/specs</code> is a transitive dependency of much AsyncAPI tooling, it hit workstations and CI/CD alike. Audit your lockfiles now.</p>",
+            "fr": "<p>Microsoft Threat Intelligence a détecté 5 versions malveillantes republiées sur 4 paquets : <code>@asyncapi/specs</code> (6.11.2-alpha.1 et 6.11.2), <code>@asyncapi/generator@3.3.1</code>, <code>@asyncapi/generator-components@0.7.1</code> et <code>@asyncapi/generator-helpers@1.1.1</code>. Le point clé : le loader s&apos;exécute au <strong>chargement du module (import/require)</strong>, pas en postinstall — donc <code>npm install --ignore-scripts</code> ne protège pas. Il livrait le runtime modulaire Miasma avec exécution de commandes, persistance et vol d&apos;identifiants. Comme <code>@asyncapi/specs</code> est une dépendance transitive de nombreux outils, il a touché postes de travail et CI/CD. Auditez vos lockfiles.</p>"
+          },
+          "source": {
+            "url": "https://www.microsoft.com/en-us/security/blog/2026/07/15/unpacking-asyncapi-npm-supply-chain-compromise-import-time-payload-delivery/",
+            "label": "microsoft.com"
+          }
+        },
+        {
+          "id": "nextjs-security",
+          "tag": "security",
+          "date": "21 Jul 2026",
+          "title": {
+            "es": "Next.js estrena programa de seguridad: 4 high + 5 medium parcheadas",
+            "en": "Next.js launches security program: 4 high + 5 medium patched",
+            "fr": "Next.js lance son programme de sécurité : 4 high + 5 medium corrigées"
+          },
+          "body_html": {
+            "es": "<p>Next.js formaliza un <strong>programa de releases de seguridad mensual</strong> con aviso previo, dejando atrás los parches ad-hoc. El primero, publicado el 21 de julio, trae parches para <code>16.2</code> y <code>15.5</code> con 4 vulnerabilidades high y 5 medium. Vercel atribuye el aumento de reportes al research asistido por LLM (usan su propio <code>deepsec</code>). Si estás en 16.2 o 15.5, actualizá y sumate al calendario: ahora podés planificar los upgrades en vez de correr.</p>",
+            "en": "<p>Next.js is formalizing a <strong>monthly, pre-announced security release program</strong>, retiring the old ad-hoc patches. The first drop, published July 21, ships patches for <code>16.2</code> and <code>15.5</code> covering 4 high and 5 medium vulnerabilities. Vercel credits the rising report volume to LLM-assisted research (they run their own <code>deepsec</code>). On 16.2 or 15.5? Patch up — and now you can plan upgrades around the calendar instead of scrambling.</p>",
+            "fr": "<p>Next.js formalise un <strong>programme de releases de sécurité mensuel</strong> annoncé à l&apos;avance, abandonnant les patchs ad-hoc. Le premier, publié le 21 juillet, livre des correctifs pour <code>16.2</code> et <code>15.5</code> couvrant 4 vulnérabilités high et 5 medium. Vercel attribue la hausse des rapports au research assisté par LLM (ils utilisent leur propre <code>deepsec</code>). Sur 16.2 ou 15.5 ? Mettez à jour.</p>"
+          },
+          "source": {
+            "url": "https://nextjs.org/blog/next-security-release-program",
+            "label": "nextjs.org"
+          }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "node-july-security",
+      "updates": [
+        {
+          "id": "node-july-security",
+          "tag": "security",
+          "date": "21 Jul 2026",
+          "title": {
+            "es": "Node.js anuncia security releases (severidad HIGH) para 22, 24 y 26",
+            "en": "Node.js pre-announces HIGH-severity security releases for 22, 24, 26",
+            "fr": "Node.js préannonce des releases de sécurité HIGH pour 22, 24, 26"
+          },
+          "body_html": {
+            "es": "<p>El proyecto avisó el 21 de julio que saca nuevas versiones de las líneas <code>26.x</code>, <code>24.x</code> y <code>22.x</code> el <strong>lunes 27 de julio</strong> o poco después. La severidad más alta parcheada es <strong>HIGH</strong> en las tres líneas. Las versiones EOL también están afectadas. Marcá el calendario y prepará el rollout: el detalle de CVEs sale con el release.</p>",
+            "en": "<p>The project announced on July 21 that it will cut new releases of the <code>26.x</code>, <code>24.x</code> and <code>22.x</code> lines on or shortly after <strong>Monday, July 27</strong>. The highest severity patched is <strong>HIGH</strong> across all three lines. EOL versions are affected too. Mark the calendar and stage your rollout — the CVE details land with the release.</p>",
+            "fr": "<p>Le projet a annoncé le 21 juillet de nouvelles versions des lignes <code>26.x</code>, <code>24.x</code> et <code>22.x</code> le <strong>lundi 27 juillet</strong> ou peu après. La sévérité la plus haute corrigée est <strong>HIGH</strong> sur les trois lignes. Les versions EOL sont aussi concernées. Préparez le déploiement — les détails des CVE arriveront avec la release.</p>"
+          },
+          "source": {
+            "url": "https://nodejs.org/en/blog/vulnerability/july-2026-security-releases",
+            "label": "nodejs.org"
+          }
+        },
+        {
+          "id": "bun-rust",
+          "tag": "notable",
+          "date": "19 Jul 2026",
+          "title": {
+            "es": "Claude Code ya empaqueta un Bun reescrito en Rust (v1.4.0 canary)",
+            "en": "Claude Code now bundles a Rust-rewritten Bun (v1.4.0 canary)",
+            "fr": "Claude Code embarque désormais un Bun réécrit en Rust (v1.4.0 canary)"
+          },
+          "body_html": {
+            "es": "<p>Simon Willison confirmó, inspeccionando el binario, que Claude Code (desde <code>v2.1.181</code>) embebe un <strong>Bun v1.4.0</strong> canary con la reescritura de Zig a Rust — la primera vez que ese Bun corre en producción, en millones de dispositivos. El resultado: ~10% de mejora de startup en Linux, pasado casi desapercibido. La filosofía del post: «boring is good», mejoras incrementales confiables por sobre anuncios rimbombantes. Golazo silencioso para la DX de todo el ecosistema Bun.</p>",
+            "en": "<p>Inspecting the binary, Simon Willison confirmed that Claude Code (since <code>v2.1.181</code>) embeds a <strong>Bun v1.4.0</strong> canary carrying the Zig-to-Rust rewrite — the first time that Bun has run in production, across millions of devices. Payoff: a ~10% startup improvement on Linux, shipped almost unnoticed. The post&apos;s ethos: «boring is good» — reliable incremental gains over splashy announcements. A quiet win for the whole Bun ecosystem&apos;s DX.</p>",
+            "fr": "<p>En inspectant le binaire, Simon Willison a confirmé que Claude Code (depuis <code>v2.1.181</code>) embarque un <strong>Bun v1.4.0</strong> canary portant la réécriture Zig vers Rust — la première fois que ce Bun tourne en production, sur des millions d&apos;appareils. Résultat : ~10% d&apos;amélioration au démarrage sous Linux, passé presque inaperçu. La philosophie : «boring is good», des gains incrémentaux fiables plutôt que des annonces tape-à-l&apos;œil.</p>"
+          },
+          "source": {
+            "url": "https://simonwillison.net/2026/Jul/19/claude-code-in-bun-in-rust/",
+            "label": "simonwillison.net"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "pg19-beta2",
+      "updates": [
+        {
+          "id": "pg19-beta2",
+          "tag": "beta",
+          "date": "16 Jul 2026",
+          "title": {
+            "es": "PostgreSQL 19 Beta 2: afina temporal tables y property graphs",
+            "en": "PostgreSQL 19 Beta 2: refines temporal tables and property graphs",
+            "fr": "PostgreSQL 19 Beta 2 : affine tables temporelles et property graphs"
+          },
+          "body_html": {
+            "es": "<p>Segunda beta de PG19 con foco en pulir las features grandes: múltiples fixes para la nueva sintaxis temporal <code>FOR PORTION OF</code>, mejoras al feature de <strong>property graphs SQL/PGQ</strong>, optimización de deform de tuplas para columnas generadas virtuales, y fix de race condition en la activación de logical decoding. También <code>REPACK</code>, autovacuum multixact-age y locking en <code>ALTER DOMAIN ... VALIDATE CONSTRAINT</code>. El final se espera para septiembre/octubre — buen momento para testear tus workloads contra la beta.</p>",
+            "en": "<p>PG19&apos;s second beta focuses on polishing the big features: multiple fixes for the new <code>FOR PORTION OF</code> temporal syntax, improvements to the <strong>SQL/PGQ property graph</strong> feature, tuple-deform optimization for virtual generated columns, and a race-condition fix in logical decoding activation. Also <code>REPACK</code> worker cleanup, autovacuum multixact-age scoring, and locking on <code>ALTER DOMAIN ... VALIDATE CONSTRAINT</code>. Final release is expected Sept/Oct — a good moment to test your workloads against the beta.</p>",
+            "fr": "<p>La deuxième beta de PG19 se concentre sur le polissage des grandes features : plusieurs correctifs pour la nouvelle syntaxe temporelle <code>FOR PORTION OF</code>, des améliorations au feature <strong>property graphs SQL/PGQ</strong>, une optimisation de déformation de tuples pour les colonnes générées virtuelles, et un correctif de race condition dans l&apos;activation du logical decoding. La version finale est attendue pour sept./oct.</p>"
+          },
+          "source": {
+            "url": "https://www.postgresql.org/about/news/postgresql-19-beta-2-released-3350/",
+            "label": "postgresql.org"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "lambda-s3-storage",
+      "updates": [
+        {
+          "id": "lambda-s3-storage",
+          "tag": "release",
+          "date": "15 Jul 2026",
+          "title": {
+            "es": "AWS Lambda: código servido desde tu propio bucket S3",
+            "en": "AWS Lambda: code served from your own S3 bucket",
+            "fr": "AWS Lambda : code servi depuis votre propre bucket S3"
+          },
+          "body_html": {
+            "es": "<p>Lambda ahora soporta <strong>self-managed code storage</strong>: referenciás el código directo desde tus buckets S3 sin que Lambda cree copias intermedias. Esto elimina los límites de storage de código y reduce el tiempo de activación de la función tras crear/actualizar, al sacar el paso de copia. Útil si manejás artefactos grandes o querés control total sobre dónde vive tu código.</p>",
+            "en": "<p>Lambda now supports <strong>self-managed code storage</strong>: reference source code directly from your own S3 buckets, with no intermediate copies created by Lambda. That removes code-storage limits and cuts function activation time after create/update by dropping the copy step. Handy if you ship large artifacts or want full control over where your code lives.</p>",
+            "fr": "<p>Lambda supporte désormais le <strong>self-managed code storage</strong> : référencez le code source directement depuis vos buckets S3, sans copies intermédiaires créées par Lambda. Cela supprime les limites de stockage de code et réduit le temps d&apos;activation après create/update en éliminant l&apos;étape de copie. Pratique pour les gros artefacts.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/07/lambda-self-managed-code-storage/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "aws-weekly-roundup",
+          "tag": "minor",
+          "date": "20 Jul 2026",
+          "title": {
+            "es": "AWS Weekly Roundup: setup de Lambda en un click y GPT-5.6 en Bedrock",
+            "en": "AWS Weekly Roundup: one-click Lambda setup and GPT-5.6 on Bedrock",
+            "fr": "AWS Weekly Roundup : setup Lambda en un clic et GPT-5.6 sur Bedrock"
+          },
+          "body_html": {
+            "es": "<p>El roundup del 20 de julio destaca un <strong>prompt de setup de Lambda en un click</strong> para arrancar funciones más rápido, y la llegada de los modelos <strong>OpenAI GPT-5.6 a Amazon Bedrock</strong>. Si armás backends con IA, tener GPT-5.6 gestionado en Bedrock te simplifica el governance y el billing dentro de AWS.</p>",
+            "en": "<p>The July 20 roundup highlights a <strong>one-click Lambda setup prompt</strong> to spin up functions faster, and the arrival of <strong>OpenAI GPT-5.6 models on Amazon Bedrock</strong>. If you build AI-backed services, having GPT-5.6 managed inside Bedrock simplifies governance and billing within AWS.</p>",
+            "fr": "<p>Le roundup du 20 juillet met en avant un <strong>prompt de setup Lambda en un clic</strong> pour démarrer les fonctions plus vite, et l&apos;arrivée des modèles <strong>OpenAI GPT-5.6 sur Amazon Bedrock</strong>. Pour des services adossés à l&apos;IA, avoir GPT-5.6 géré dans Bedrock simplifie la gouvernance et la facturation dans AWS.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/blogs/aws/aws-weekly-roundup-one-click-lambda-setup-prompt-openai-gpt-5-6-models-on-bedrock-and-more-july-20-2026/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "vitevenom",
+      "updates": [
+        {
+          "id": "vitevenom",
+          "tag": "breaking",
+          "date": "17 Jul 2026",
+          "title": {
+            "es": "ViteVenom: 7 paquetes npm maliciosos con C2 en blockchain sueltan un RAT",
+            "en": "ViteVenom: 7 malicious npm packages use blockchain C2 to drop a RAT",
+            "fr": "ViteVenom : 7 paquets npm malveillants avec C2 sur blockchain livrent un RAT"
+          },
+          "body_html": {
+            "es": "<p>Checkmarx destapó <strong>ViteVenom</strong>, un cluster de 7 paquetes npm que impersonan el namespace <code>@vitejs/*</code> con scoped names para verse legítimos. Subidos entre el 29/6 y el 3/7, sumaron cientos de descargas antes de ser detectados. El RAT hace reverse shell, roba credenciales, exfiltra archivos e inyecta backdoors persistentes. Lo novedoso: un <strong>C2 de 4 capas sobre blockchain</strong> (Tron, Aptos y Binance Smart Chain), mucho más difícil de tumbar que un server tradicional. Atribuido al actor SuccessKey. Ponete las pilas: fijate bien el scope de tus deps de Vite.</p>",
+            "en": "<p>Checkmarx uncovered <strong>ViteVenom</strong>, a cluster of 7 npm packages impersonating the <code>@vitejs/*</code> namespace with scoped names to look legit. Uploaded between June 29 and July 3, they racked up hundreds of downloads before detection. The RAT runs a reverse shell, harvests credentials, exfiltrates files and injects persistent backdoors. The novel part: a <strong>four-layer blockchain C2</strong> (Tron, Aptos, Binance Smart Chain), far harder to take down than a traditional server. Attributed to the actor SuccessKey. Double-check the scope of your Vite deps.</p>",
+            "fr": "<p>Checkmarx a découvert <strong>ViteVenom</strong>, un cluster de 7 paquets npm imitant le namespace <code>@vitejs/*</code> avec des scoped names pour paraître légitimes. Mis en ligne entre le 29/6 et le 3/7, ils ont cumulé des centaines de téléchargements avant détection. Le RAT lance un reverse shell, vole des identifiants, exfiltre des fichiers et injecte des backdoors persistantes. La nouveauté : un <strong>C2 sur blockchain à quatre couches</strong> (Tron, Aptos, Binance Smart Chain), bien plus dur à démanteler. Attribué à l&apos;acteur SuccessKey.</p>"
+          },
+          "source": {
+            "url": "https://thehackernews.com/2026/07/seven-malicious-vite-npm-packages-use.html",
+            "label": "thehackernews.com"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "La cadena de suministro npm sigue siendo el frente caliente: dos campañas en una semana (AsyncAPI y ViteVenom) muestran que los atacantes ya se corren del postinstall hacia payloads en tiempo de import y C2 sobre blockchain. Auditá lockfiles y fijá versiones.",
+      "en": "The npm supply chain remains the hot front: two campaigns in one week (AsyncAPI and ViteVenom) show attackers moving beyond postinstall toward import-time payloads and blockchain C2. Audit lockfiles and pin versions.",
+      "fr": "La chaîne d&apos;approvisionnement npm reste le front chaud : deux campagnes en une semaine (AsyncAPI et ViteVenom) montrent des attaquants qui dépassent le postinstall vers des charges au moment de l&apos;import et des C2 sur blockchain. Auditez les lockfiles."
+    },
+    {
+      "es": "Los releases de seguridad programados y con aviso previo se vuelven norma: Next.js copia el modelo que Node.js ya practica. Menos parches sorpresa, más capacidad de planificar upgrades — y el research asistido por LLM está subiendo el volumen de reportes.",
+      "en": "Scheduled, pre-announced security releases are becoming the norm: Next.js adopts the model Node.js already runs. Fewer surprise patches, more room to plan upgrades — and LLM-assisted research is driving report volume up.",
+      "fr": "Les releases de sécurité planifiées et préannoncées deviennent la norme : Next.js adopte le modèle que Node.js pratique déjà. Moins de patchs surprises, plus de marge pour planifier — et le research assisté par LLM fait grimper le volume de rapports."
+    },
+    {
+      "es": "La reescritura de runtimes hacia lenguajes nativos ya está en producción real: Bun en Rust corre en millones de dispositivos vía Claude Code. La tendencia («boring is good») premia mejoras incrementales confiables por sobre los anuncios.",
+      "en": "Rewriting runtimes toward native languages is now in real production: Bun-in-Rust runs on millions of devices via Claude Code. The trend («boring is good») rewards reliable incremental gains over announcements.",
+      "fr": "La réécriture des runtimes vers des langages natifs est désormais en production réelle : Bun-en-Rust tourne sur des millions d&apos;appareils via Claude Code. La tendance («boring is good») récompense les gains incrémentaux fiables."
+    }
+  ]
+}

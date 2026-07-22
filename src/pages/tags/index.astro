@@ -13,6 +13,7 @@ const allPosts = [
 	...(await getCollection('backend-fullstack')),
 	...(await getCollection('dev-news')),
 	...(await getCollection('gentleman-releases')),
+	...(await getCollection('ai-security')),
 ];
 
 const counts = new Map<string, number>();
@@ -45,13 +46,43 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 		<Header />
 		<main class="mx-auto max-w-5xl px-4 py-12">
 			<h1 class="text-3xl font-bold leading-tight text-[var(--color-text)]">Topics</h1>
-			<p class="mt-2 mb-8 text-[var(--color-text-muted)]">
+			<p class="mt-2 mb-6 text-[var(--color-text-muted)]">
 				Every tool, model, and framework we track — each topic lists all daily briefs covering it.
 			</p>
-			<div class="flex flex-wrap gap-2">
+			<div class="relative mb-6 max-w-md">
+				<svg
+					class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--color-text-muted)]"
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					aria-hidden="true"
+				>
+					<circle cx="11" cy="11" r="8"></circle>
+					<path d="m21 21-4.3-4.3"></path>
+				</svg>
+				<input
+					id="topic-search"
+					type="search"
+					autocomplete="off"
+					placeholder="Filter topics…"
+					aria-label="Filter topics by name"
+					aria-controls="topic-list"
+					class="w-full rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] py-2 pl-9 pr-4 text-sm text-[var(--color-text)] outline-none transition-colors placeholder:text-[var(--color-text-muted)] focus:border-[var(--color-accent)]"
+				/>
+			</div>
+			<p id="topic-count" class="mb-4 text-xs text-[var(--color-text-muted)]" aria-live="polite">
+				{tags.length} topics
+			</p>
+			<div id="topic-list" class="flex flex-wrap gap-2">
 				{tags.map((tag) => (
 					<a
 						href={`/tags/${tag.slug}/`}
+						data-topic
+						data-search={`${tag.label} ${tag.slug} ${tag.aliases.join(' ')}`.toLowerCase()}
 						class="group inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3.5 py-1.5 text-sm no-underline transition-all hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-2)]"
 					>
 						<span class="text-[var(--color-text)] group-hover:text-[var(--color-accent)]">{tag.label}</span>
@@ -59,6 +90,40 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 					</a>
 				))}
 			</div>
+			<p id="topic-empty" class="mt-4 text-sm text-[var(--color-text-muted)]" style="display: none">
+				No topics match your search.
+			</p>
+
+			<script is:inline>
+				(() => {
+					const input = document.getElementById('topic-search');
+					const list = document.getElementById('topic-list');
+					const count = document.getElementById('topic-count');
+					const empty = document.getElementById('topic-empty');
+					if (!input || !list || !count || !empty) return;
+
+					const items = Array.from(list.querySelectorAll('[data-topic]'));
+					const total = items.length;
+
+					const filter = () => {
+						const q = input.value.trim().toLowerCase();
+						let shown = 0;
+						for (const el of items) {
+							const match = !q || (el.dataset.search || '').includes(q);
+							// Inline style beats Tailwind's .hidden, which loses to the
+							// pill's .inline-flex utility by source order.
+							el.style.display = match ? '' : 'none';
+							if (match) shown++;
+						}
+						count.textContent = q ? `${shown} of ${total} topics` : `${total} topics`;
+						empty.style.display = shown === 0 ? '' : 'none';
+					};
+
+					input.addEventListener('input', filter);
+					// Restore state if the browser repopulated the field on back-nav.
+					if (input.value) filter();
+				})();
+			</script>
 		</main>
 		<Footer />
 	</body>

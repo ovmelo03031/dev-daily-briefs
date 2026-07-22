@@ -10,6 +10,8 @@ export async function GET(context: APIContext) {
 			getCollection('ai-coding'),
 			getCollection('backend-fullstack'),
 			getCollection('dev-news'),
+			getCollection('gentleman-releases'),
+			getCollection('ai-security'),
 		])
 	).flat();
 

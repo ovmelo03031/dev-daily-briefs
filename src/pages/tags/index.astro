@@ -44,12 +44,12 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 	</head>
 	<body>
 		<Header />
-		<main class="mx-auto max-w-5xl px-4 py-12">
+		<main class="mx-auto w-full max-w-5xl px-4 py-12">
 			<h1 class="text-3xl font-bold leading-tight text-[var(--color-text)]">Topics</h1>
 			<p class="mt-2 mb-6 text-[var(--color-text-muted)]">
 				Every tool, model, and framework we track — each topic lists all daily briefs covering it.
 			</p>
-			<div class="relative mb-6 max-w-md">
+			<div class="relative mb-6">
 				<svg
 					class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--color-text-muted)]"
 					xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +77,7 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 			<p id="topic-count" class="mb-4 text-xs text-[var(--color-text-muted)]" aria-live="polite">
 				{tags.length} topics
 			</p>
-			<div id="topic-list" class="flex flex-wrap gap-2">
+			<div id="topic-list" class="flex flex-wrap content-start items-start gap-2">
 				{tags.map((tag) => (
 					<a
 						href={`/tags/${tag.slug}/`}
@@ -89,10 +89,10 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 						<span class="text-xs text-[var(--color-text-muted)]">{tag.count}</span>
 					</a>
 				))}
+				<p id="topic-empty" class="basis-full text-sm text-[var(--color-text-muted)]" style="display: none">
+					No topics match your search.
+				</p>
 			</div>
-			<p id="topic-empty" class="mt-4 text-sm text-[var(--color-text-muted)]" style="display: none">
-				No topics match your search.
-			</p>
 
 			<script is:inline>
 				(() => {
@@ -104,6 +104,14 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 
 					const items = Array.from(list.querySelectorAll('[data-topic]'));
 					const total = items.length;
+
+					// Reserve the full-grid height so filtering never collapses the
+					// page or makes the footer jump. Measured (not hardcoded) so it
+					// adapts to how many rows the pills wrap into at the current width.
+					const reserve = () => {
+						list.style.minHeight = '';
+						list.style.minHeight = list.offsetHeight + 'px';
+					};
 
 					const filter = () => {
 						const q = input.value.trim().toLowerCase();
@@ -117,9 +125,28 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 						}
 						count.textContent = q ? `${shown} of ${total} topics` : `${total} topics`;
 						empty.style.display = shown === 0 ? '' : 'none';
+						// Re-measure only when the full grid is showing (empty query).
+						if (!q) reserve();
 					};
 
+					// Reserve now, then again once late layout shifts settle (web
+					// fonts can rewrap the pills into a different number of rows).
+					const reserveIfIdle = () => {
+						if (!input.value.trim()) reserve();
+					};
+					reserveIfIdle();
+					if (document.fonts && document.fonts.ready) document.fonts.ready.then(reserveIfIdle);
+					window.addEventListener('load', reserveIfIdle, { once: true });
 					input.addEventListener('input', filter);
+					// Recompute the reserved height on resize when nothing is filtered,
+					// since the pills rewrap into a different number of rows.
+					let rAF = 0;
+					window.addEventListener('resize', () => {
+						cancelAnimationFrame(rAF);
+						rAF = requestAnimationFrame(() => {
+							if (!input.value.trim()) reserve();
+						});
+					});
 					// Restore state if the browser repopulated the field on back-nav.
 					if (input.value) filter();
 				})();

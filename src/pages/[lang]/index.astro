@@ -26,6 +26,7 @@ const allPosts = [
 	...(await getCollection('backend-fullstack')),
 	...(await getCollection('dev-news')),
 	...(await getCollection('gentleman-releases')),
+	...(await getCollection('ai-security')),
 ].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 function isSameDay(a: Date, b: Date) {
@@ -37,7 +38,7 @@ function isSameDay(a: Date, b: Date) {
 }
 
 const now = new Date();
-const cats: Category[] = ['ai-coding', 'backend-fullstack', 'dev-news', 'gentleman-releases'];
+const cats: Category[] = ['ai-coding', 'backend-fullstack', 'dev-news', 'ai-security', 'gentleman-releases'];
 
 function normalizeHighlight(h: (typeof allPosts)[number]['data']['highlights'] extends (infer U)[] | undefined ? U : never) {
 	if (typeof h.text === 'string') {

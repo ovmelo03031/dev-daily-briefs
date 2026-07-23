@@ -20,6 +20,7 @@ const allPosts = [
 	...(await getCollection('backend-fullstack')),
 	...(await getCollection('dev-news')),
 	...(await getCollection('gentleman-releases')),
+	...(await getCollection('ai-security')),
 ].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 // Build grouped highlights for the homepage: latest brief per category that
@@ -34,7 +35,7 @@ function isSameDay(a: Date, b: Date) {
 }
 
 const now = new Date();
-const cats: Category[] = ['ai-coding', 'backend-fullstack', 'dev-news', 'gentleman-releases'];
+const cats: Category[] = ['ai-coding', 'backend-fullstack', 'dev-news', 'ai-security', 'gentleman-releases'];
 
 // Normalize highlight text shape so TodayHighlights (expects flat text/text_es/text_fr)
 // works with both legacy MD briefs and new JSON briefs that use nested { es, en, fr }.

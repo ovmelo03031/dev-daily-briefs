@@ -1,0 +1,278 @@
+{
+  "title": {
+    "es": "Brief IA-Coding: seguridad en Claude Code, Codex más seguro y Qwen3.8-Max entra fuerte",
+    "en": "AI-Coding Brief: Claude Code security fixes, safer Codex reviews, Qwen3.8-Max arrives",
+    "fr": "Brief IA-Coding : correctifs de sécurité Claude Code, revues Codex plus sûres, arrivée de Qwen3.8-Max"
+  },
+  "description": {
+    "es": "Claude Code v2.1.223 cierra bypasses de permisos, Codex CLI 0.146.1 endurece el auto-review, GitHub Copilot suma control de razonamiento, y Alibaba, DeepSeek y MiniMax lanzan modelos nuevos.",
+    "en": "Claude Code v2.1.223 closes permission bypasses, Codex CLI 0.146.1 hardens auto-review, GitHub Copilot adds reasoning-level control, and Alibaba, DeepSeek, and MiniMax ship new models.",
+    "fr": "Claude Code v2.1.223 corrige des contournements de permissions, Codex CLI 0.146.1 renforce la revue automatique, GitHub Copilot ajoute un contrôle du niveau de raisonnement, et Alibaba, DeepSeek et MiniMax lancent de nouveaux modèles."
+  },
+  "pubDate": "2026-08-06",
+  "category": "ai-coding",
+  "highlights": [
+    {
+      "text": { "es": "Claude Code 2.1.223 cierra bypass de permisos en Bash", "en": "Claude Code 2.1.223 closes a Bash permission bypass", "fr": "Claude Code 2.1.223 corrige un contournement de permissions Bash" },
+      "anchor": "claude-code",
+      "icon": "simple-icons:anthropic"
+    },
+    {
+      "text": { "es": "Codex CLI 0.146.1: auto-review más seguro con GPT-5.6 Luna", "en": "Codex CLI 0.146.1: safer auto-review powered by GPT-5.6 Luna", "fr": "Codex CLI 0.146.1 : revue automatique plus sûre avec GPT-5.6 Luna" },
+      "anchor": "openai-codex",
+      "icon": "simple-icons:openai"
+    },
+    {
+      "text": { "es": "Copilot deja elegir el nivel de razonamiento del cloud agent", "en": "Copilot lets you tune the cloud agent's reasoning level", "fr": "Copilot permet de régler le niveau de raisonnement du cloud agent" },
+      "anchor": "github-copilot",
+      "icon": "simple-icons:githubcopilot"
+    },
+    {
+      "text": { "es": "Qwen3.8-Max: 2.4T parámetros, pelea con Fable 5", "en": "Qwen3.8-Max: 2.4T params, trading blows with Fable 5", "fr": "Qwen3.8-Max : 2,4T de paramètres, au coude-à-coude avec Fable 5" },
+      "anchor": "model-timeline",
+      "icon": "simple-icons:alibabacloud"
+    },
+    {
+      "text": { "es": "DeepSeek V4-Flash entra en beta pública, foco agentic", "en": "DeepSeek V4-Flash hits public beta, agent-focused", "fr": "DeepSeek V4-Flash entre en bêta publique, orienté agents" },
+      "anchor": "model-timeline",
+      "icon": "lucide:search"
+    },
+    {
+      "text": { "es": "MiniMax abre H3, video multimodal a precio bajo", "en": "MiniMax open-sources H3, cut-rate multimodal video", "fr": "MiniMax ouvre H3, vidéo multimodale à bas coût" },
+      "anchor": "model-timeline",
+      "icon": "simple-icons:minimax"
+    }
+  ],
+  "stats": {
+    "tools_tracked": 5,
+    "updates_found": "6+",
+    "models_cataloged": 6,
+    "providers_covered": 5
+  },
+  "tools": [
+    {
+      "id": "claude-code",
+      "name": "Claude Code",
+      "publisher": "Anthropic",
+      "theme": "claude",
+      "icon_emoji": "🤖",
+      "version": "v2.1.223",
+      "anchor": "claude-code",
+      "updates": [
+        {
+          "id": "claude-code-2-1-223",
+          "tag": "security",
+          "title": { "es": "v2.1.223: cierra bypass de permisos en Bash y agrega /teleport", "en": "v2.1.223: closes Bash permission bypass, adds /teleport", "fr": "v2.1.223 : corrige un contournement de permissions Bash, ajoute /teleport" },
+          "body_html": {
+            "es": "<p>Corrige un bypass donde un comando manipulado podía ocultar parte de sí mismo al chequeo de permisos, y otro donde tabs o Unicode invisible escondían texto en el diálogo de aprobación. Suma entradas wildcard <code>owner/*</code> para permitir o bloquear todos los repos de marketplace de una org, un hint <code>/teleport</code> para continuar sesiones cloud en local, y convierte <code>/review</code> en alias de <code>/code-review</code>.</p>",
+            "en": "<p>Fixes a Bash permission bypass where a crafted command could hide parts of itself from permission checks, plus a second bug where tabs or invisible Unicode hid text in the approval dialog. Adds <code>owner/*</code> wildcard entries to allow or block every marketplace repo under a GitHub org, a <code>/teleport</code> hint to continue cloud sessions locally, and makes <code>/review</code> an alias of <code>/code-review</code>.</p>",
+            "fr": "<p>Corrige un contournement où une commande falsifiée pouvait cacher une partie d'elle-même au contrôle des permissions, ainsi qu'un second bug où des tabulations ou de l'Unicode invisible masquaient du texte dans la boîte d'approbation. Ajoute des entrées génériques <code>owner/*</code> pour autoriser ou bloquer tous les dépôts marketplace d'une organisation, une astuce <code>/teleport</code> pour reprendre une session cloud en local, et fait de <code>/review</code> un alias de <code>/code-review</code>.</p>"
+          },
+          "date": "6 ago 2026",
+          "source": { "url": "https://code.claude.com/docs/en/changelog", "label": "code.claude.com" }
+        },
+        {
+          "id": "claude-code-2-1-222",
+          "tag": "fix",
+          "title": { "es": "v2.1.222: sesiones worktree ya no tocan el checkout principal", "en": "v2.1.222: worktree sessions stop touching the main checkout", "fr": "v2.1.222 : les sessions worktree ne touchent plus le checkout principal" },
+          "body_html": {
+            "es": "<p>Corrige que sesiones aisladas por worktree pudieran correr comandos git destructivos contra el checkout principal, y que hooks <code>PreToolUse</code> de auto-allow saltearan restricciones de herramientas en tareas en background.</p>",
+            "en": "<p>Fixes worktree-isolated sessions being able to run destructive git commands against the main checkout, and <code>PreToolUse</code> auto-allow hooks bypassing tool restrictions inside background tasks.</p>",
+            "fr": "<p>Corrige le fait que des sessions isolées par worktree pouvaient exécuter des commandes git destructives sur le checkout principal, ainsi que des hooks <code>PreToolUse</code> en auto-allow contournant les restrictions d'outils dans les tâches en arrière-plan.</p>"
+          },
+          "date": "4 ago 2026",
+          "source": { "url": "https://code.claude.com/docs/en/changelog", "label": "code.claude.com" }
+        }
+      ]
+    },
+    {
+      "id": "openai-codex",
+      "name": "OpenAI Codex / Codex CLI",
+      "publisher": "OpenAI",
+      "theme": "openai",
+      "icon_emoji": "🧠",
+      "version": "0.146.1",
+      "anchor": "openai-codex",
+      "updates": [
+        {
+          "id": "codex-cli-0-146-1",
+          "tag": "security",
+          "title": { "es": "Codex CLI 0.146.1: auto-review más seguro con GPT-5.6 Luna", "en": "Codex CLI 0.146.1: safer auto-review on GPT-5.6 Luna", "fr": "Codex CLI 0.146.1 : revue automatique plus sûre sur GPT-5.6 Luna" },
+          "body_html": {
+            "es": "<p>El auto-review pasa a defaults más seguros para modelos con capacidades ofensivas, corriendo ahora sobre GPT-5.6 Luna, y las explicaciones de permisos en la terminal quedan más claras. También llega una nueva Activity view en el sidebar para ver chats recientes que necesitan atención.</p>",
+            "en": "<p>Auto-review moves to safer defaults for cyber-capable models, now running on GPT-5.6 Luna, with clearer permission explanations in the terminal. A new Activity view in the sidebar also surfaces recent chats that need attention.</p>",
+            "fr": "<p>La revue automatique passe à des réglages par défaut plus sûrs pour les modèles à capacités offensives, s'appuyant désormais sur GPT-5.6 Luna, avec des explications de permissions plus claires dans le terminal. Une nouvelle vue Activity dans la barre latérale signale aussi les discussions récentes nécessitant une attention.</p>"
+          },
+          "date": "5 ago 2026",
+          "source": { "url": "https://github.com/openai/codex/releases", "label": "github.com/openai/codex" }
+        }
+      ]
+    },
+    {
+      "id": "gpt-models",
+      "name": "GPT Models",
+      "publisher": "OpenAI",
+      "theme": "openai",
+      "icon_emoji": "✨",
+      "version": "GPT-5.6",
+      "anchor": "gpt-models",
+      "updates": []
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini / Gemini Code Assist",
+      "publisher": "Google",
+      "theme": "gemini",
+      "icon_emoji": "♊",
+      "version": "3.6",
+      "anchor": "gemini",
+      "updates": []
+    },
+    {
+      "id": "github-copilot",
+      "name": "GitHub Copilot",
+      "publisher": "Microsoft/GitHub",
+      "theme": "copilot",
+      "icon_emoji": "🐙",
+      "version": "CLI v1.0.78",
+      "anchor": "github-copilot",
+      "updates": [
+        {
+          "id": "copilot-cloud-agent-reasoning",
+          "tag": "feature",
+          "title": { "es": "Nivel de razonamiento configurable en el cloud agent", "en": "Configurable reasoning level for the cloud agent", "fr": "Niveau de raisonnement configurable pour le cloud agent" },
+          "body_html": {
+            "es": "<p>Ahora se puede elegir cuánto razona un modelo compatible antes de responder en Copilot cloud agent, para balancear calidad de respuesta contra consumo de tokens. Disponible en planes Copilot de pago que incluyen cloud agent.</p>",
+            "en": "<p>Users can now choose how much a supported model reasons before responding in Copilot cloud agent, balancing answer quality against token use. Available on paid Copilot plans that include cloud agent.</p>",
+            "fr": "<p>Il est désormais possible de choisir le niveau de raisonnement d'un modèle compatible avant sa réponse dans le cloud agent Copilot, pour équilibrer qualité de réponse et consommation de tokens. Disponible sur les plans Copilot payants incluant le cloud agent.</p>"
+          },
+          "date": "3 ago 2026",
+          "source": { "url": "https://github.blog/changelog/label/copilot/", "label": "github.blog/changelog" }
+        },
+        {
+          "id": "copilot-cli-1-0-78",
+          "tag": "feature",
+          "title": { "es": "Copilot CLI v1.0.78: tiempos en vivo por herramienta", "en": "Copilot CLI v1.0.78: live per-tool timing", "fr": "Copilot CLI v1.0.78 : chronométrage en direct par outil" },
+          "body_html": {
+            "es": "<p>La CLI ahora muestra cuánto tarda cada herramienta en ejecutarse y mantiene actualizados automáticamente los paquetes first-party.</p>",
+            "en": "<p>The CLI now shows live timing for how long each tool takes to run, and automatically keeps first-party packages up to date.</p>",
+            "fr": "<p>La CLI affiche désormais en direct la durée d'exécution de chaque outil et maintient automatiquement les paquets internes à jour.</p>"
+          },
+          "date": "3 ago 2026",
+          "source": { "url": "https://www.havoptic.com/tools/github-copilot", "label": "havoptic.com" }
+        },
+        {
+          "id": "copilot-enterprise-model-policy",
+          "tag": "feature",
+          "title": { "es": "Model policy targeting por equipo en preview público", "en": "Team-level model policy targeting in public preview", "fr": "Ciblage des politiques de modèles par équipe en préversion publique" },
+          "body_html": {
+            "es": "<p>Los administradores de GitHub Enterprise con licencias Copilot Business o Enterprise pueden fijar un baseline de modelos para toda la org y otorgar modelos adicionales a usuarios específicos.</p>",
+            "en": "<p>GitHub Enterprise admins on Copilot Business or Enterprise licenses can set a baseline of models for the whole org and grant additional models to specific users.</p>",
+            "fr": "<p>Les administrateurs GitHub Enterprise avec licences Copilot Business ou Enterprise peuvent définir un socle de modèles pour toute l'organisation et accorder des modèles supplémentaires à des utilisateurs spécifiques.</p>"
+          },
+          "date": "31 jul 2026",
+          "source": { "url": "https://github.blog/changelog/label/copilot/", "label": "github.blog/changelog" }
+        }
+      ]
+    }
+  ],
+  "models": [
+    {
+      "date": "2026-08-03",
+      "name": "Qwen3.8-Max",
+      "provider": "alibaba",
+      "provider_label": "Alibaba",
+      "tier": "splus",
+      "weight": "proprietary",
+      "notes": {
+        "es": "2.4T parámetros (95B activos, MoE). Alibaba dice que empata o supera a Fable 5 en varios benchmarks de código y multimodal. Pesos abiertos prometidos «la semana próxima»; sin evaluación independiente aún.",
+        "en": "2.4T params (95B active, MoE). Alibaba claims parity or wins over Fable 5 on several coding and multimodal benchmarks. Open weights promised \"next week\"; no independent evals yet.",
+        "fr": "2,4T de paramètres (95B actifs, MoE). Alibaba affirme égaler ou dépasser Fable 5 sur plusieurs benchmarks de code et multimodaux. Poids ouverts promis « la semaine prochaine » ; pas encore d'évaluation indépendante."
+      },
+      "row_kind": "recent"
+    },
+    {
+      "date": "2026-08-03",
+      "name": "MiniMax H3",
+      "provider": "minimax",
+      "provider_label": "MiniMax",
+      "tier": "a",
+      "weight": "open",
+      "notes": {
+        "es": "Modelo de video multimodal 2K con audio nativo, ~1/12 del costo por segundo de Seedance 2.5. Pesos open-source anunciados para «los próximos días».",
+        "en": "2K multimodal video model with native audio, roughly 1/12th the per-second cost of Seedance 2.5. Open-source weights announced for \"the coming days\".",
+        "fr": "Modèle vidéo multimodal 2K avec audio natif, environ 1/12 du coût par seconde de Seedance 2.5. Poids open source annoncés pour « les prochains jours »."
+      },
+      "row_kind": "recent"
+    },
+    {
+      "date": "2026-07-31",
+      "name": "DeepSeek V4-Flash (Public Beta)",
+      "provider": "deepseek",
+      "provider_label": "DeepSeek",
+      "tier": "aplus",
+      "weight": "open",
+      "notes": {
+        "es": "Beta pública con capacidades agentic reforzadas, Terminal-Bench 2.1 en 82.7. Soporta nativamente el formato Responses API y está adaptado para Codex.",
+        "en": "Public beta with strengthened agent capabilities, Terminal-Bench 2.1 at 82.7. Natively supports the Responses API format and is tuned for Codex.",
+        "fr": "Bêta publique aux capacités agentiques renforcées, Terminal-Bench 2.1 à 82,7. Prend nativement en charge le format Responses API et est adapté pour Codex."
+      },
+      "row_kind": "recent"
+    },
+    {
+      "date": "2026-07-24",
+      "name": "Claude Opus 5",
+      "provider": "anthropic",
+      "provider_label": "Anthropic",
+      "tier": "splus",
+      "weight": "proprietary",
+      "notes": {
+        "es": "Inteligencia cercana a frontera a mitad del precio de Fable 5. Contexto de 1M tokens, $10/$50 por Mtok en modo fast.",
+        "en": "Near-frontier intelligence at half the price of Fable 5. 1M-token context, $10/$50 per Mtok in fast mode.",
+        "fr": "Intelligence proche de la frontière à moitié prix de Fable 5. Contexte de 1M tokens, 10$/50$ par Mtok en mode rapide."
+      },
+      "row_kind": "recent"
+    },
+    {
+      "date": "2026-06-30",
+      "name": "Claude Sonnet 5",
+      "provider": "anthropic",
+      "provider_label": "Anthropic",
+      "tier": "s",
+      "weight": "proprietary",
+      "notes": {
+        "es": "Rinde cerca de Opus 4.8 a menor costo; mejor resistencia a prompt injection que Sonnet 4.6. Precio de lanzamiento $2/$10 hasta el 31 ago 2026.",
+        "en": "Performs close to Opus 4.8 at lower cost; better prompt-injection resistance than Sonnet 4.6. Launch pricing $2/$10 through Aug 31, 2026.",
+        "fr": "Performances proches d'Opus 4.8 à moindre coût ; meilleure résistance à l'injection de prompt que Sonnet 4.6. Tarif de lancement 2$/10$ jusqu'au 31 août 2026."
+      },
+      "row_kind": "recent"
+    },
+    {
+      "date": "2026-08",
+      "name": "GLM-5.5 (rumored)",
+      "provider": "zhipu",
+      "provider_label": "Z.ai / Zhipu",
+      "tier": "s",
+      "weight": "upcoming",
+      "notes": {
+        "es": "Reportado por JPMorgan/Reuters con >1T parámetros y contexto de 1M tokens. Al 6 ago 2026, Zhipu no confirmó specs ni fecha — sigue promocionando GLM-5.2.",
+        "en": "Reported by JPMorgan/Reuters at >1T params with a 1M-token context. As of Aug 6, 2026, Zhipu has confirmed neither specs nor date — still promoting GLM-5.2.",
+        "fr": "Rapporté par JPMorgan/Reuters avec plus de 1T de paramètres et un contexte de 1M tokens. Au 6 août 2026, Zhipu n'a confirmé ni les caractéristiques ni la date — l'entreprise met toujours en avant GLM-5.2."
+      },
+      "row_kind": "upcoming"
+    }
+  ],
+  "model_timeline_anchor": "model-timeline",
+  "notable_trends": [
+    {
+      "es": "Los laboratorios chinos siguen marcando el ritmo de lanzamientos: Alibaba, DeepSeek y MiniMax metieron modelos nuevos en la misma semana, todos con pesos abiertos (llegando) y precios agresivos frente a la competencia occidental.",
+      "en": "Chinese labs keep setting the release cadence: Alibaba, DeepSeek, and MiniMax all shipped new models in the same week, each with open weights (arriving) and pricing aimed squarely under Western competitors.",
+      "fr": "Les labos chinois continuent de dicter le rythme des sorties : Alibaba, DeepSeek et MiniMax ont tous lancé de nouveaux modèles la même semaine, chacun avec des poids ouverts (à venir) et des prix visant directement sous ceux de la concurrence occidentale."
+    },
+    {
+      "es": "En las herramientas de código, la semana fue de endurecimiento de seguridad más que de features nuevas: Claude Code cerró dos bypasses de permisos distintos y Codex CLI movió sus defaults de auto-review a un modelo más seguro para tareas cyber-capable.",
+      "en": "On the tooling side, this was a security-hardening week more than a feature week: Claude Code closed two distinct permission bypasses, and Codex CLI moved its auto-review defaults to a safer model for cyber-capable tasks.",
+      "fr": "Côté outillage, la semaine a surtout été marquée par le renforcement de la sécurité plutôt que par de nouvelles fonctionnalités : Claude Code a corrigé deux contournements de permissions distincts, et Codex CLI a fait passer ses réglages de revue automatique à un modèle plus sûr pour les tâches à capacités offensives."
+    }
+  ]
+}

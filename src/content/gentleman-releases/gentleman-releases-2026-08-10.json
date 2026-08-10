@@ -1,0 +1,76 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 10 Aug 2026",
+    "en": "Gentleman Releases — 10 Aug 2026",
+    "fr": "Gentleman Releases — 10 Aug 2026"
+  },
+  "description": {
+    "es": "Releases del día en proyectos de Gentleman-Programming",
+    "en": "Today's releases from Gentleman-Programming projects",
+    "fr": "Sorties du jour des projets Gentleman-Programming"
+  },
+  "pubDate": "2026-08-10",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "gentle-ai v2.4.0-rc.3 — el review de pre-PR ahora se ata al merge base y sobrevive a bases que avanzan",
+        "en": "gentle-ai v2.4.0-rc.3 — pre-PR review now binds to the merge base and survives moving bases",
+        "fr": "gentle-ai v2.4.0-rc.3 — la revue pre-PR se lie désormais à la base de fusion et survit aux bases qui avancent"
+      },
+      "anchor": "gentle-ai-v2-4-0-rc-3",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "Se puede entregar un subconjunto monotónico de lo revisado sin exigir el árbol completo",
+        "en": "A monotonic subset of the reviewed tree can now ship without requiring the full tree",
+        "fr": "Un sous-ensemble monotone de l'arbre revu peut être livré sans exiger l'arbre complet"
+      },
+      "anchor": "gentle-ai-v2-4-0-rc-3",
+      "icon": "lucide:git-merge"
+    },
+    {
+      "text": {
+        "es": "El handoff de defectos del provider suma tres salidas explícitas: reportar, seguir sin reportar, o parar",
+        "en": "Provider-defect handoff gains three explicit outcomes: report, continue without reporting, or stop",
+        "fr": "Le handoff de défaut du provider gagne trois issues explicites : signaler, continuer sans signaler, ou arrêter"
+      },
+      "anchor": "gentle-ai-v2-4-0-rc-3",
+      "icon": "lucide:shield-alert"
+    }
+  ],
+  "tools": [
+    {
+      "id": "gentle-ai",
+      "name": "gentle-ai",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-gentle-ai",
+      "icon_emoji": "🤖",
+      "anchor": "gentle-ai",
+      "version": "v2.4.0-rc.3",
+      "updates": [
+        {
+          "id": "gentle-ai-v2-4-0-rc-3",
+          "tag": "beta",
+          "title": {
+            "es": "v2.4.0-rc.3 — La prueba sigue al candidato",
+            "en": "v2.4.0-rc.3 — Proof follows the candidate",
+            "fr": "v2.4.0-rc.3 — La preuve suit le candidat"
+          },
+          "body_html": {
+            "es": "<p>Tercer release candidate de la línea 2.4.0. Si <code>rc.1</code> hizo que los rechazos fueran accionables, este ajusta la otra mitad del contrato: la prueba tiene que quedar atada al candidato que estás entregando, aunque el repo se te mueva abajo de los pies. Todo queda dentro de 2.4.0, sin ensanchar la API pública de Go ni aflojar la admisión fail-closed.</p><ul><li><strong>Pre-PR sigue bases que se mueven:</strong> antes el candidato se ataba al tip de la base, así que un avance no relacionado te invalidaba un candidato intacto. Ahora la identidad de pre-PR se ata al <em>merge base</em>: los avances compatibles preservan el candidato revisado, y las pruebas malformadas o no disponibles siguen fallando cerrado.</li><li><strong>Subsets revisados pueden salir:</strong> delivery ya no exige que el árbol staged sea byte a byte idéntico al árbol revisado completo cuando el candidato staged es un subconjunto monotónico. La prueba chequea el merge result real y rechaza resolución de merge no revisada, así que angostar un cambio ya revisado está permitido sin colar bytes nuevos.</li><li><strong>Las salidas de recovery son ejecutables:</strong> el rescope consecutivo de SDD mantiene su continuación delimiter-safe y atada al fixture del RC publicado. Los caminos de compact-budget y post-remediación conservan sus contratos nativos en vez de mandarte a una transición imposible.</li><li><strong>Defectos del provider ya no te obligan a reportar:</strong> el handoff ofrece tres salidas explícitas — reportar y seguir, seguir sin reportar, o parar. Los dos caminos de continuación reusan la invocación de decline capturada por el provider una sola vez, validan resultado y target, y vuelven a entrar por STATUS negociado. Seguir nunca desactiva receipt-driven development.</li><li><strong>Windows sin módulo ACL de PowerShell:</strong> el manejo de permisos de archivos gestionados dependía del módulo ACL opcional; donde no estaba, el check fallaba por motivos ajenos a la propiedad bajo test. Ahora los permisos se afirman sin esa dependencia y la provenance de herencia de ACL se ignora en vez de compararse, porque variaba por política del host.</li></ul><p>También viene: el layout mínimo del TUI mantiene visible la acción seleccionada en viewports cortos, se admiten correcciones atómicas de una línea, los PID files vacíos y transitorios de Engram tienen retry acotado, los paths de handoff de linked worktree se canonicalizan en Windows, y la doc de canales stable/prerelease quedó al día.</p><p><strong>Ojo con rc.2:</strong> se publicó sin binarios y no se pudo reparar — el release es inmutable y borrarlo quemó el nombre del tag para siempre. Este candidato trae todo lo de rc.2 más el laburo de Windows. Usá este.</p><p><strong>Known open:</strong> el recovery negociado todavía puede imprimir <code>--agent &lt;your-runtime-identity&gt;</code> cuando el runtime está sin bindear; pasarle un rol lógico de orquestador falla cerrado correctamente pero te deja el workflow varado (issue #2885).</p><p>Instalación: <code>go install github.com/gentleman-programming/gentle-ai/v2/cmd/gentle-ai@v2.4.0-rc.3</code> — y después del upgrade corré <code>gentle-ai sync</code>, que los assets gestionados están atados a la versión del binario.</p>",
+            "en": "<p>Third release candidate on the 2.4.0 line. Where <code>rc.1</code> made refusals actionable, this one tightens the other half of the contract: the proof must stay bound to the candidate you're actually delivering, even when the repository moves underneath it. Everything stays inside 2.4.0 — no widening of the public Go API and no weakening of fail-closed admission.</p><ul><li><strong>Pre-PR review follows moving bases:</strong> it used to bind the candidate to the base tip, so an unrelated base advance invalidated an otherwise unchanged candidate. Pre-PR identity now binds to the <em>merge base</em>: compatible base advances preserve the reviewed candidate, while malformed or unavailable proofs still fail closed.</li><li><strong>Reviewed subsets can ship:</strong> delivery no longer requires the staged tree to be byte-for-byte identical to the full reviewed tree when the staged candidate is a monotonic subset of it. The proof checks the actual merge result and rejects unreviewed merge resolution, so narrowing a reviewed change is allowed without admitting new bytes.</li><li><strong>Recovery exits are executable:</strong> consecutive SDD rescope recovery keeps its continuation delimiter-safe and bound to the exact published RC fixture. Compact-budget and post-remediation paths preserve their native contracts instead of pointing the operator at an impossible transition.</li><li><strong>Provider defects no longer force reporting:</strong> the handoff offers three explicit outcomes — report and continue, continue without reporting, or stop. Both continuation paths reuse the provider-captured candidate-scoped decline invocation exactly once, validate its result and target, then re-enter through negotiated STATUS. Continuing never disables receipt-driven development.</li><li><strong>Windows drops the PowerShell ACL dependency:</strong> managed-file permission handling depended on the optional PowerShell ACL module; where it was absent the check failed for reasons unrelated to the property under test. Permissions are now asserted without that dependency, and ACL inheritance provenance is ignored rather than compared, since it varies by host policy.</li></ul><p>Also in this candidate: the minimum TUI layout keeps its selected action visible on short viewports, atomic one-line corrections are admitted, transient empty Engram PID files get a bounded retry, linked-worktree handoff paths are canonicalized on Windows, and stable/prerelease channel documentation is current.</p><p><strong>Heads up on rc.2:</strong> it was published without binaries and could not be repaired — the release is immutable and deleting it burned the tag name permanently. This candidate carries everything rc.2 contained plus the Windows work. Use this one.</p><p><strong>Known open:</strong> negotiated recovery can still print <code>--agent &lt;your-runtime-identity&gt;</code> when the runtime is unbound; supplying a logical orchestrator role fails closed correctly but strands the workflow (issue #2885).</p><p>Install: <code>go install github.com/gentleman-programming/gentle-ai/v2/cmd/gentle-ai@v2.4.0-rc.3</code> — and run <code>gentle-ai sync</code> after upgrading, since managed assets are version-bound to the binary.</p>",
+            "fr": "<p>Troisième release candidate de la ligne 2.4.0. Là où <code>rc.1</code> rendait les refus actionnables, celle-ci resserre l'autre moitié du contrat : la preuve doit rester liée au candidat que vous livrez réellement, même quand le dépôt bouge sous vos pieds. Tout reste dans 2.4.0 — sans élargir l'API publique Go ni affaiblir l'admission fail-closed.</p><ul><li><strong>La revue pre-PR suit les bases mobiles :</strong> le candidat était lié au tip de la base, donc une avance sans rapport invalidait un candidat pourtant inchangé. L'identité pre-PR se lie désormais à la <em>base de fusion</em> : les avances compatibles préservent le candidat revu, et les preuves malformées ou indisponibles échouent toujours en mode fermé.</li><li><strong>Les sous-ensembles revus peuvent être livrés :</strong> la livraison n'exige plus que l'arbre staged soit identique octet par octet à l'arbre revu complet lorsque le candidat staged en est un sous-ensemble monotone. La preuve vérifie le résultat de fusion réel et rejette toute résolution de fusion non revue, donc restreindre un changement revu est permis sans admettre de nouveaux octets.</li><li><strong>Les sorties de recovery sont exécutables :</strong> le rescope consécutif SDD garde sa continuation delimiter-safe et liée à la fixture RC publiée exacte. Les chemins de compact-budget et de post-remédiation conservent leurs contrats natifs au lieu d'orienter l'opérateur vers une transition impossible.</li><li><strong>Les défauts du provider n'imposent plus de signalement :</strong> le handoff offre trois issues explicites — signaler et continuer, continuer sans signaler, ou arrêter. Les deux chemins de continuation réutilisent exactement une fois l'invocation de decline capturée par le provider, valident son résultat et sa cible, puis rentrent par le STATUS négocié. Continuer ne désactive jamais le receipt-driven development.</li><li><strong>Windows abandonne la dépendance au module ACL PowerShell :</strong> la gestion des permissions de fichiers managés dépendait du module ACL optionnel ; en son absence, le contrôle échouait pour des raisons étrangères à la propriété testée. Les permissions sont désormais vérifiées sans cette dépendance, et la provenance d'héritage ACL est ignorée plutôt que comparée, car elle varie selon la politique de l'hôte.</li></ul><p>Aussi dans cette candidate : le layout minimal du TUI garde son action sélectionnée visible sur les viewports courts, les corrections atomiques d'une ligne sont admises, les fichiers PID Engram vides et transitoires obtiennent un retry borné, les chemins de handoff de linked worktree sont canonicalisés sous Windows, et la documentation des canaux stable/prerelease est à jour.</p><p><strong>Attention à rc.2 :</strong> publiée sans binaires et irréparable — la release est immuable et sa suppression a brûlé le nom du tag définitivement. Cette candidate contient tout ce que rc.2 contenait, plus le travail Windows. Utilisez celle-ci.</p><p><strong>Known open :</strong> le recovery négocié peut encore afficher <code>--agent &lt;your-runtime-identity&gt;</code> quand le runtime n'est pas lié ; fournir un rôle logique d'orchestrateur échoue correctement en mode fermé mais bloque le workflow (issue #2885).</p><p>Installation : <code>go install github.com/gentleman-programming/gentle-ai/v2/cmd/gentle-ai@v2.4.0-rc.3</code> — et lancez <code>gentle-ai sync</code> après la mise à niveau, les assets managés étant liés à la version du binaire.</p>"
+          },
+          "date": "09 Aug 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v2.4.0-rc.3",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

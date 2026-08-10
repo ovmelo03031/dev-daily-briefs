@@ -1,0 +1,456 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 10 Ago 2026",
+    "en": "Backend & Fullstack — Aug 10, 2026",
+    "fr": "Backend & Fullstack — 10 août 2026"
+  },
+  "description": {
+    "es": "Prisma entra en la línea RC de v8 con breaking changes en agregados, el gusano ChainDrop envenena 400+ paquetes npm, Gateway API 1.6 gradúa TCPRoute/UDPRoute y Lambda escala a 10.000 pollers de SQS.",
+    "en": "Prisma enters its v8 RC line with breaking aggregate changes, the ChainDrop worm poisons 400+ npm packages, Gateway API 1.6 graduates TCPRoute/UDPRoute, and Lambda scales to 10,000 SQS pollers.",
+    "fr": "Prisma entre dans sa ligne RC v8 avec des ruptures sur les agrégats, le ver ChainDrop empoisonne plus de 400 paquets npm, Gateway API 1.6 stabilise TCPRoute/UDPRoute et Lambda passe à 10 000 pollers SQS."
+  },
+  "pubDate": "2026-08-10",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Prisma v8 RC: count() ahora devuelve bigint",
+        "en": "Prisma v8 RC: count() now returns bigint",
+        "fr": "Prisma v8 RC : count() renvoie un bigint"
+      },
+      "anchor": "prisma-8-rc",
+      "icon": "simple-icons:prisma"
+    },
+    {
+      "text": {
+        "es": "ChainDrop: gusano npm en 400+ paquetes",
+        "en": "ChainDrop: npm worm across 400+ packages",
+        "fr": "ChainDrop : ver npm sur plus de 400 paquets"
+      },
+      "anchor": "chaindrop-worm",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Gateway API 1.6: TCPRoute y UDPRoute GA",
+        "en": "Gateway API 1.6: TCPRoute and UDPRoute GA",
+        "fr": "Gateway API 1.6 : TCPRoute et UDPRoute GA"
+      },
+      "anchor": "gateway-api-16",
+      "icon": "simple-icons:kubernetes"
+    },
+    {
+      "text": {
+        "es": "Lambda SQS: hasta 10.000 event pollers",
+        "en": "Lambda SQS: up to 10,000 event pollers",
+        "fr": "Lambda SQS : jusqu'à 10 000 event pollers"
+      },
+      "anchor": "lambda-sqs-pollers",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": {
+        "es": "Hono 4.13: JSON 1.25x más rápido y método QUERY",
+        "en": "Hono 4.13: 1.25x faster JSON plus QUERY method",
+        "fr": "Hono 4.13 : JSON 1,25x plus rapide et méthode QUERY"
+      },
+      "anchor": "hono-4-13",
+      "icon": "lucide:blocks"
+    },
+    {
+      "text": {
+        "es": "Deno 2.9.5 suma backend experimental QuickJS",
+        "en": "Deno 2.9.5 adds an experimental QuickJS backend",
+        "fr": "Deno 2.9.5 ajoute un backend QuickJS expérimental"
+      },
+      "anchor": "deno-295",
+      "icon": "simple-icons:deno"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "prisma-8-rc",
+      "updates": [
+        {
+          "id": "prisma-8-rc",
+          "tag": "breaking",
+          "date": "07 Aug 2026",
+          "title": {
+            "es": "Prisma abre la línea 8.0.0-rc y rompe los tipos de agregados",
+            "en": "Prisma opens the 8.0.0-rc line and breaks aggregate types",
+            "fr": "Prisma ouvre la ligne 8.0.0-rc et casse les types d'agrégats"
+          },
+          "body_html": {
+            "es": "<p>Se terminaron los minors <code>0.x</code>: ahora todo sale como <code>8.0.0-rc.N</code>. Lo que te va a doler: cada agregado se lee con el codec que declara su target, así que <code>count()</code> devuelve <strong>bigint</strong> en PostgreSQL y SQLite (<code>count === 2</code> es false, y <code>JSON.stringify</code> explota). En PostgreSQL, <code>sum</code> sobre <code>int2</code>/<code>int4</code> se ensancha a bigint, y <code>sum(int8)</code> y <code>avg</code> vuelven como strings decimales exactos. Además la interfaz <code>SqlQueryable</code> se parte en <code>query()</code> (streaming de filas) y <code>execute()</code> (stats). Un RC puede seguir rompiendo cosas: leé los breaking changes antes de actualizar.</p>",
+            "en": "<p>The <code>0.x</code> minors are over: releases now ship as <code>8.0.0-rc.N</code>. The painful part: every aggregate is read back through the codec its target declares, so <code>count()</code> returns a <strong>bigint</strong> on PostgreSQL and SQLite (<code>count === 2</code> is false, and <code>JSON.stringify</code> throws). On PostgreSQL, <code>sum</code> over <code>int2</code>/<code>int4</code> widens to bigint, while <code>sum(int8)</code> and <code>avg</code> come back as exact decimal strings. The <code>SqlQueryable</code> driver interface also splits into <code>query()</code> for row streaming and <code>execute()</code> for statistics. An RC respin may still break things — read the breaking-changes section before upgrading.</p>",
+            "fr": "<p>Fini les minors <code>0.x</code> : les versions sortent désormais en <code>8.0.0-rc.N</code>. Le point sensible : chaque agrégat est relu via le codec déclaré par sa cible, donc <code>count()</code> renvoie un <strong>bigint</strong> sur PostgreSQL et SQLite (<code>count === 2</code> est faux et <code>JSON.stringify</code> lève une erreur). Sur PostgreSQL, <code>sum</code> sur <code>int2</code>/<code>int4</code> s'élargit en bigint, tandis que <code>sum(int8)</code> et <code>avg</code> reviennent en chaînes décimales exactes. L'interface <code>SqlQueryable</code> se scinde en <code>query()</code> (streaming de lignes) et <code>execute()</code> (statistiques). Une nouvelle RC peut encore casser : lisez la section breaking changes avant de migrer.</p>"
+          },
+          "source": {
+            "url": "https://github.com/prisma/prisma/releases/tag/v8.0.0-rc.1",
+            "label": "github.com/prisma"
+          }
+        },
+        {
+          "id": "chaindrop-worm",
+          "tag": "security",
+          "date": "04 Aug 2026",
+          "title": {
+            "es": "ChainDrop: el gusano npm que se propaga solo y roba credenciales de CI",
+            "en": "ChainDrop: the self-propagating npm worm that steals CI credentials",
+            "fr": "ChainDrop : le ver npm auto-propagé qui vole les identifiants CI"
+          },
+          "body_html": {
+            "es": "<p>Microsoft Threat Intelligence publicó la anatomía del compromiso: más de 400 paquetes npm con un payload Bun ofuscado que se ejecuta vía hook <code>preinstall</code> antes de que termine el install. Cosecha tokens de npm, GitHub, AWS, Kubernetes y HashiCorp Vault, se republica solo con los tokens robados, inyecta persistencia en configs de VS Code y usa repos de GitHub como canal de exfiltración de respaldo. Detecta si está en workstation o en CI y en CI se queda al acecho de secrets y permisos OIDC. Acción concreta: npm CLI v12 con <code>min-release-age</code>, auditá lockfiles, purgá caches y <strong>rotá credenciales desde un host limpio</strong>.</p>",
+            "en": "<p>Microsoft Threat Intelligence published the anatomy of the compromise: 400+ npm packages carrying an obfuscated Bun payload that runs from a <code>preinstall</code> hook before your install even finishes. It harvests npm, GitHub, AWS, Kubernetes and HashiCorp Vault credentials, republishes itself with stolen npm tokens, injects persistence into VS Code configs, and falls back to GitHub repos for exfiltration. It fingerprints workstation vs. CI and stays resident in CI to reach workflow secrets and OIDC publishing permissions. Action: npm CLI v12 with <code>min-release-age</code>, audit lockfiles, purge caches, and <strong>rotate every credential from a clean host</strong>.</p>",
+            "fr": "<p>Microsoft Threat Intelligence a publié l'anatomie de la compromission : plus de 400 paquets npm embarquant un payload Bun obfusqué exécuté via un hook <code>preinstall</code>, avant même la fin de l'installation. Il collecte les identifiants npm, GitHub, AWS, Kubernetes et HashiCorp Vault, se republie avec les tokens npm volés, injecte de la persistance dans les configs VS Code et utilise des dépôts GitHub comme canal d'exfiltration de secours. Il distingue poste de travail et CI, et reste actif en CI pour atteindre les secrets de workflow et les permissions OIDC. À faire : npm CLI v12 avec <code>min-release-age</code>, audit des lockfiles, purge des caches et <strong>rotation des identifiants depuis un hôte sain</strong>.</p>"
+          },
+          "source": {
+            "url": "https://www.microsoft.com/en-us/security/blog/2026/08/04/chaindrop-supply-chain-compromise-anatomy-self-propagating-worm/",
+            "label": "microsoft.com"
+          }
+        },
+        {
+          "id": "gateway-api-16",
+          "tag": "ga",
+          "date": "03 Aug 2026",
+          "title": {
+            "es": "Gateway API v1.6: TCPRoute y UDPRoute llegan a estándar",
+            "en": "Gateway API v1.6: TCPRoute and UDPRoute graduate to Standard",
+            "fr": "Gateway API v1.6 : TCPRoute et UDPRoute passent en Standard"
+          },
+          "body_html": {
+            "es": "<p>El ruteo L4 crudo por fin es GA en la API <code>v1</code>: TCPRoute y UDPRoute rutean por protocolo y puerto, sin necesidad de entender L7. Traducción: bases de datos, DNS, VoIP, gaming y telemetría IoT ya tienen forma portable de colgarse de un Gateway, sin CRDs propietarios de cada controlador. Además los recursos experimentales se mudan a su propio grupo de API (<code>gateway.networking.x-k8s.io</code>) con prefijo X, así no confundís nunca más lo estable con lo que todavía se puede mover.</p>",
+            "en": "<p>Raw L4 routing is finally GA in the <code>v1</code> API: TCPRoute and UDPRoute route on protocol and port alone, with no L7 awareness required. Databases, DNS, VoIP, gaming and IoT telemetry now have a portable way to sit behind a Gateway instead of per-controller proprietary CRDs. Experimental resources also move to their own API group (<code>gateway.networking.x-k8s.io</code>) with an X prefix, so stable and in-flux resources stop looking alike.</p>",
+            "fr": "<p>Le routage L4 brut est enfin GA dans l'API <code>v1</code> : TCPRoute et UDPRoute routent selon le protocole et le port, sans connaissance L7. Bases de données, DNS, VoIP, jeux et télémétrie IoT disposent enfin d'une voie portable derrière un Gateway, au lieu de CRDs propriétaires par contrôleur. Les ressources expérimentales migrent aussi vers leur propre groupe d'API (<code>gateway.networking.x-k8s.io</code>) avec un préfixe X, pour ne plus confondre stable et mouvant.</p>"
+          },
+          "source": {
+            "url": "https://kubernetes.io/blog/2026/08/03/gateway-api-v1-6-release/",
+            "label": "kubernetes.io"
+          }
+        },
+        {
+          "id": "lambda-sqs-pollers",
+          "tag": "notable",
+          "date": "03 Aug 2026",
+          "title": {
+            "es": "Lambda: Provisioned Mode para SQS sube a 10.000 event pollers",
+            "en": "Lambda: Provisioned Mode for SQS goes up to 10,000 event pollers",
+            "fr": "Lambda : le Provisioned Mode SQS monte à 10 000 event pollers"
+          },
+          "body_html": {
+            "es": "<p>El techo pasa de 2.000 a 10.000 pollers por event source mapping — 5x — lo que habilita hasta <strong>100.000 invocaciones concurrentes</strong> desde una sola cola. Sirve para picos de órdenes, pipelines de transacciones e ingesta IoT donde el escalado por defecto llegaba tarde. Ojo con la factura: se cobra por Event Poller Unit (EPU), así que el mínimo de pollers que dejes configurado se paga aunque la cola esté vacía.</p>",
+            "en": "<p>The ceiling moves from 2,000 to 10,000 pollers per event source mapping — a 5x jump — enabling up to <strong>100,000 concurrent invocations</strong> from a single queue. Useful for order spikes, transaction pipelines and IoT ingestion where default scaling arrived too late. Watch the bill: you pay per Event Poller Unit (EPU), so the minimum poller count you configure costs money even on an idle queue.</p>",
+            "fr": "<p>Le plafond passe de 2 000 à 10 000 pollers par event source mapping — un facteur 5 — permettant jusqu'à <strong>100 000 invocations concurrentes</strong> depuis une seule file. Utile pour les pics de commandes, les pipelines de transactions et l'ingestion IoT où la montée en charge par défaut arrivait trop tard. Attention à la facture : on paie à l'Event Poller Unit (EPU), donc le minimum configuré se paie même file vide.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/aws-Lambda-provisioned-sqs-esm-max-pollers/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "hono-4-13",
+          "tag": "release",
+          "date": "03 Aug 2026",
+          "title": {
+            "es": "Hono v4.13: JSON 1.25x más rápido y soporte first-class de QUERY",
+            "en": "Hono v4.13: 1.25x faster JSON and first-class QUERY support",
+            "fr": "Hono v4.13 : JSON 1,25x plus rapide et support natif de QUERY"
+          },
+          "body_html": {
+            "es": "<p>Optimizaciones de bajo nivel en el camino request/response: menos allocations de <code>Headers</code>, <code>indexOf</code> en lugar de regex y estado interno lazy. En el benchmark propio: <code>json</code> 1.25x, <code>body</code> 1.15x, <code>query</code> 1.09x, y el rewrite de RegExpRouter deja el registro de rutas + primer match ~20% más rápido. Suma el método <strong>QUERY</strong> del RFC 10008 con <code>app.query()</code> — seguro, idempotente y con body, justo lo que faltaba para búsquedas complejas sin ensuciar la URL — más un middleware de Method Not Allowed.</p>",
+            "en": "<p>Low-level optimizations across the request/response path: fewer <code>Headers</code> allocations, <code>indexOf</code> instead of regex tests, lazily allocated internal state. In their own benchmark: <code>json</code> 1.25x, <code>body</code> 1.15x, <code>query</code> 1.09x, and the RegExpRouter rewrite makes route registration plus first match roughly 20% faster. It also adds the RFC 10008 <strong>QUERY</strong> method via <code>app.query()</code> — safe, idempotent, and body-carrying, exactly what complex searches needed without stuffing the URL — plus a Method Not Allowed middleware.</p>",
+            "fr": "<p>Optimisations bas niveau sur le chemin requête/réponse : moins d'allocations de <code>Headers</code>, <code>indexOf</code> au lieu de tests regex, état interne alloué paresseusement. Dans leur benchmark : <code>json</code> 1,25x, <code>body</code> 1,15x, <code>query</code> 1,09x, et la réécriture de RegExpRouter rend l'enregistrement des routes plus le premier match ~20% plus rapides. S'ajoute la méthode <strong>QUERY</strong> du RFC 10008 via <code>app.query()</code> — sûre, idempotente et porteuse d'un body — ainsi qu'un middleware Method Not Allowed.</p>"
+          },
+          "source": {
+            "url": "https://github.com/honojs/hono/releases/tag/v4.13.0",
+            "label": "github.com/honojs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "deno-295",
+      "updates": [
+        {
+          "id": "deno-295",
+          "tag": "release",
+          "date": "06 Aug 2026",
+          "title": {
+            "es": "Deno 2.9.5: backend experimental QuickJS y otra tanda de compat con Node",
+            "en": "Deno 2.9.5: experimental QuickJS backend and another round of Node compat",
+            "fr": "Deno 2.9.5 : backend QuickJS expérimental et nouvelle vague de compat Node"
+          },
+          "body_html": {
+            "es": "<p>Llega un <strong>backend experimental de QuickJS</strong>, el flag <code>--unscoped</code> en <code>deno add</code> y <code>--members</code> para correr tasks solo en los miembros del workspace. El grueso son fixes de compat con Node: backpressure en <code>Readable.toWeb()</code>, tags de <code>node:test</code>, <code>util.diff</code>, <code>v8.promiseHooks</code>, orden de <code>fs.readdir</code> igual que Node. Y dos de seguridad que valen leer: <code>node:dns.getServers()</code> ahora exige <code>--allow-sys</code> y <code>fetch</code> limita headers sensibles a redirects por origen.</p>",
+            "en": "<p>This one lands an <strong>experimental QuickJS backend</strong>, an <code>--unscoped</code> flag for <code>deno add</code>, and <code>--members</code> to run tasks in workspace members only. Most of the changelog is Node compat: backpressure in <code>Readable.toWeb()</code>, <code>node:test</code> tags, <code>util.diff</code>, <code>v8.promiseHooks</code>, and <code>fs.readdir</code> ordering matching Node. Two security-flavored fixes are worth noting: <code>node:dns.getServers()</code> now requires <code>--allow-sys</code>, and <code>fetch</code> scopes redirect-sensitive headers by origin.</p>",
+            "fr": "<p>Au menu : un <strong>backend QuickJS expérimental</strong>, un flag <code>--unscoped</code> pour <code>deno add</code> et <code>--members</code> pour n'exécuter les tâches que dans les membres du workspace. L'essentiel du changelog concerne la compat Node : backpressure dans <code>Readable.toWeb()</code>, tags <code>node:test</code>, <code>util.diff</code>, <code>v8.promiseHooks</code>, ordre de <code>fs.readdir</code> aligné sur Node. Deux correctifs sécurité à noter : <code>node:dns.getServers()</code> exige désormais <code>--allow-sys</code>, et <code>fetch</code> limite les en-têtes sensibles aux redirections par origine.</p>"
+          },
+          "source": {
+            "url": "https://github.com/denoland/deno/releases/tag/v2.9.5",
+            "label": "github.com/denoland"
+          }
+        },
+        {
+          "id": "node-24-19",
+          "tag": "release",
+          "date": "03 Aug 2026",
+          "title": {
+            "es": "Node.js v24.19.0: compresión de certificados TLS y control fino de keep-alive",
+            "en": "Node.js v24.19.0: TLS certificate compression and finer keep-alive control",
+            "fr": "Node.js v24.19.0 : compression de certificats TLS et keep-alive plus fin"
+          },
+          "body_html": {
+            "es": "<p>Tanda semver-minor con cosas útiles para servidores: opción <code>certificateCompression</code> en TLS (y OpenSSL compilado con soporte), reporte de los grupos TLS negociados, <code>TCP_KEEPINTVL</code> y <code>TCP_KEEPCNT</code> en <code>setKeepAlive</code>, y una opción <code>httpValidation</code> para configurar la validación de valores de headers. Suma <code>blob.textStream()</code>, buffers provistos por el llamador en <code>readFile()</code>, muestreo del event loop delay por iteración y <code>stream.compose</code> marcado como estable.</p>",
+            "en": "<p>A semver-minor batch with real server-side value: a TLS <code>certificateCompression</code> option (with OpenSSL built for it), reporting of negotiated TLS groups, <code>TCP_KEEPINTVL</code> and <code>TCP_KEEPCNT</code> in <code>setKeepAlive</code>, and an <code>httpValidation</code> option to configure header value validation. Also <code>blob.textStream()</code>, caller-supplied buffers for <code>readFile()</code>, per-iteration event loop delay sampling, and <code>stream.compose</code> marked stable.</p>",
+            "fr": "<p>Un lot semver-minor utile côté serveur : option TLS <code>certificateCompression</code> (avec OpenSSL compilé en conséquence), remontée des groupes TLS négociés, <code>TCP_KEEPINTVL</code> et <code>TCP_KEEPCNT</code> dans <code>setKeepAlive</code>, et une option <code>httpValidation</code> pour régler la validation des valeurs d'en-têtes. Également <code>blob.textStream()</code>, buffers fournis par l'appelant pour <code>readFile()</code>, échantillonnage du délai de boucle d'événements par itération et <code>stream.compose</code> marqué stable.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nodejs/node/releases/tag/v24.19.0",
+            "label": "github.com/nodejs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "fastify-5-11-3",
+      "updates": [
+        {
+          "id": "fastify-5-11-3",
+          "tag": "patch",
+          "date": "08 Aug 2026",
+          "title": {
+            "es": "Fastify 5.11.3: fixes de trailers, decorators y parsers content-type",
+            "en": "Fastify 5.11.3: trailer, decorator and content-type parser fixes",
+            "fr": "Fastify 5.11.3 : correctifs trailers, decorators et parsers content-type"
+          },
+          "body_html": {
+            "es": "<p>Patch chiquito pero con un bug clásico adentro: los parsers de content-type con regex global o sticky no reseteaban <code>lastIndex</code>, así que el mismo request podía matchear o no según el estado previo. Además limpia el estado de trailers al removerlos todos, pasa <code>null</code> en vez de <code>undefined</code> a <code>requestCompleted</code> y reconoce propiedades built-in asignadas en el constructor como decorators.</p>",
+            "en": "<p>Small patch with a classic bug inside: content-type parsers using global or sticky regexes were not resetting <code>lastIndex</code>, so the same request could match or not depending on prior state. It also clears trailer state when all trailers are removed, passes <code>null</code> instead of <code>undefined</code> to <code>requestCompleted</code>, and recognizes constructor-assigned built-in properties as decorators.</p>",
+            "fr": "<p>Petit patch avec un bug classique : les parsers de content-type utilisant des regex globales ou sticky ne réinitialisaient pas <code>lastIndex</code>, si bien qu'une même requête pouvait matcher ou non selon l'état précédent. Il nettoie aussi l'état des trailers quand on les retire tous, passe <code>null</code> au lieu de <code>undefined</code> à <code>requestCompleted</code>, et reconnaît les propriétés natives assignées dans le constructeur comme decorators.</p>"
+          },
+          "source": {
+            "url": "https://github.com/fastify/fastify/releases/tag/v5.11.3",
+            "label": "github.com/fastify"
+          }
+        },
+        {
+          "id": "hono-4-13-1",
+          "tag": "patch",
+          "date": "07 Aug 2026",
+          "title": {
+            "es": "Hono v4.13.1 sale a los cuatro días del minor",
+            "en": "Hono v4.13.1 lands four days after the minor",
+            "fr": "Hono v4.13.1 sort quatre jours après le minor"
+          },
+          "body_html": {
+            "es": "<p>Patch de seguimiento del 4.13.0. Si ya saltaste al minor por la performance, actualizá directo a 4.13.1 y evitá el rato de convivir con los bordes recién estrenados del router.</p>",
+            "en": "<p>Follow-up patch to 4.13.0. If you already jumped to the minor for the performance win, go straight to 4.13.1 and skip living with the freshly shipped router edges.</p>",
+            "fr": "<p>Patch de suivi de la 4.13.0. Si vous êtes déjà passé au minor pour les gains de performance, allez directement en 4.13.1 et évitez de cohabiter avec les aspérités toutes fraîches du routeur.</p>"
+          },
+          "source": {
+            "url": "https://github.com/honojs/hono/releases/tag/v4.13.1",
+            "label": "github.com/honojs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "supabase-pipelines",
+      "updates": [
+        {
+          "id": "supabase-pipelines",
+          "tag": "beta",
+          "date": "07 Aug 2026",
+          "title": {
+            "es": "Supabase Pipelines entra en alpha pública: CDC de Postgres a BigQuery",
+            "en": "Supabase Pipelines hits public alpha: Postgres CDC into BigQuery",
+            "fr": "Supabase Pipelines en alpha publique : CDC Postgres vers BigQuery"
+          },
+          "body_html": {
+            "es": "<p>Pipelines streamea cambios de Postgres a BigQuery casi en tiempo real como servicio CDC gestionado, configurable desde el dashboard y disponible en todos los planes pagos. Si venías armando Debezium a mano para alimentar el warehouse, es la primera alternativa que no te obliga a operar Kafka. Alpha pública: probalo, no lo pongas de columna vertebral del reporting todavía.</p>",
+            "en": "<p>Pipelines streams Postgres changes into BigQuery in near real time as a managed CDC service, configured from the dashboard and available on all paid plans. If you were hand-rolling Debezium to feed the warehouse, this is the first alternative that does not force you to operate Kafka. Public alpha: try it, but do not make it the backbone of your reporting yet.</p>",
+            "fr": "<p>Pipelines diffuse les changements Postgres vers BigQuery quasiment en temps réel, sous forme de service CDC managé configurable depuis le dashboard et disponible sur tous les plans payants. Si vous montiez Debezium à la main pour alimenter le warehouse, c'est la première alternative qui ne vous oblige pas à opérer Kafka. Alpha publique : à tester, pas encore à mettre au cœur du reporting.</p>"
+          },
+          "source": {
+            "url": "https://github.com/supabase/supabase/releases/tag/v1.26.08",
+            "label": "github.com/supabase"
+          }
+        },
+        {
+          "id": "bullmq-6-0-9",
+          "tag": "patch",
+          "date": "07 Aug 2026",
+          "title": {
+            "es": "BullMQ 6.0.9 tipa el returnvalue del evento completed",
+            "en": "BullMQ 6.0.9 types the completed event returnvalue",
+            "fr": "BullMQ 6.0.9 type le returnvalue de l'événement completed"
+          },
+          "body_html": {
+            "es": "<p>El evento <code>completed</code> ahora tipa <code>returnvalue</code> como el valor ya deserializado, no como el string crudo. Chiquito, pero mata una clase entera de <code>JSON.parse</code> defensivo en los listeners y cierra un issue que venía de arrastre.</p>",
+            "en": "<p>The <code>completed</code> event now types <code>returnvalue</code> as the deserialized value rather than the raw string. Small change, but it kills a whole class of defensive <code>JSON.parse</code> in listeners and closes a long-standing issue.</p>",
+            "fr": "<p>L'événement <code>completed</code> type désormais <code>returnvalue</code> comme la valeur désérialisée et non comme la chaîne brute. Petit changement, mais il supprime toute une classe de <code>JSON.parse</code> défensifs dans les listeners et clôt un issue de longue date.</p>"
+          },
+          "source": {
+            "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.0.9",
+            "label": "github.com/taskforcesh"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "k8s-137-rc0",
+      "updates": [
+        {
+          "id": "k8s-137-rc0",
+          "tag": "beta",
+          "date": "06 Aug 2026",
+          "title": {
+            "es": "Kubernetes v1.37.0-rc.0: última ventana para probar antes del GA",
+            "en": "Kubernetes v1.37.0-rc.0: last window to test before GA",
+            "fr": "Kubernetes v1.37.0-rc.0 : dernière fenêtre de test avant la GA"
+          },
+          "body_html": {
+            "es": "<p>Salió el primer release candidate de la 1.37, con el GA apuntado al 26 de agosto. Si tenés operators, CRDs o admission webhooks propios, este es el momento de correrlos contra el RC en staging — después del GA vas a estar debuggeando con el cluster de producción de rehén. Bonus de agenda: la 1.34 entra en maintenance mode el 27 de agosto.</p>",
+            "en": "<p>The first 1.37 release candidate is out, with GA targeted for August 26. If you maintain operators, CRDs or admission webhooks, this is the moment to run them against the RC in staging — after GA you will be debugging with production as the hostage. Calendar bonus: 1.34 enters maintenance mode on August 27.</p>",
+            "fr": "<p>La première release candidate de la 1.37 est disponible, la GA visant le 26 août. Si vous maintenez des operators, CRDs ou admission webhooks, c'est le moment de les passer sur la RC en staging — après la GA, vous déboguerez avec la production en otage. Bonus agenda : la 1.34 entre en maintenance mode le 27 août.</p>"
+          },
+          "source": {
+            "url": "https://github.com/kubernetes/kubernetes/releases/tag/v1.37.0-rc.0",
+            "label": "github.com/kubernetes"
+          }
+        },
+        {
+          "id": "cf-workers-ai-gateway",
+          "tag": "notable",
+          "date": "07 Aug 2026",
+          "title": {
+            "es": "Cloudflare unifica Workers AI y AI Gateway en un solo binding",
+            "en": "Cloudflare unifies Workers AI and AI Gateway behind one binding",
+            "fr": "Cloudflare unifie Workers AI et AI Gateway derrière un seul binding"
+          },
+          "body_html": {
+            "es": "<p>Mismo binding <code>AI</code> y misma REST API para modelos alojados en Workers AI o en proveedores externos, con AI Gateway aportando observabilidad, logging, caching, seguridad y control de billing. Además podés pagar inferencia de Workers AI con créditos prepagos de AI Gateway. Para el que arma backends en el edge: un solo punto de instrumentación en vez de dos caminos con métricas distintas.</p>",
+            "en": "<p>The same <code>AI</code> binding and REST API now call models hosted on Workers AI or by supported third-party providers, with AI Gateway supplying observability, logging, caching, security and billing controls. You can also pay for Workers AI inference with prepaid AI Gateway credits. For edge backends: one instrumentation point instead of two paths with different metrics.</p>",
+            "fr": "<p>Le même binding <code>AI</code> et la même API REST appellent désormais les modèles hébergés sur Workers AI ou chez des fournisseurs tiers pris en charge, AI Gateway apportant observabilité, logging, caching, sécurité et contrôle de facturation. Les crédits prépayés AI Gateway peuvent aussi payer l'inférence Workers AI. Pour les backends edge : un seul point d'instrumentation au lieu de deux chemins aux métriques distinctes.</p>"
+          },
+          "source": {
+            "url": "https://developers.cloudflare.com/changelog/post/2026-08-07-workers-ai-unified-billing/",
+            "label": "developers.cloudflare.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "fastify-untrusted-params",
+      "updates": [
+        {
+          "id": "fastify-untrusted-params",
+          "tag": "notable",
+          "date": "04 Aug 2026",
+          "title": {
+            "es": "Fastify documenta los route params percent-decoded como input NO confiable",
+            "en": "Fastify documents percent-decoded route params as untrusted input",
+            "fr": "Fastify documente les route params percent-décodés comme entrée non fiable"
+          },
+          "body_html": {
+            "es": "<p>Cambio de docs firmado por Matteo Collina que vale más que muchos releases: el framework decodifica los params por vos, así que <code>%2e%2e%2f</code> llega a tu handler ya convertido en <code>../</code>. Si concatenás un param a un path de filesystem, a una key de S3 o a un comando, tenés path traversal aunque el router se vea prolijo. La regla es vieja pero se olvida: validá <em>después</em> del decode, con allowlist, no con blacklist de caracteres.</p>",
+            "en": "<p>A docs change signed by Matteo Collina that is worth more than plenty of releases: the framework decodes params for you, so <code>%2e%2e%2f</code> reaches your handler already turned into <code>../</code>. Concatenate a param into a filesystem path, an S3 key or a command and you have path traversal, however tidy the router looks. Old rule, easily forgotten: validate <em>after</em> decoding, with an allowlist, not a character blacklist.</p>",
+            "fr": "<p>Un changement de docs signé Matteo Collina qui vaut plus que bien des releases : le framework décode les params pour vous, donc <code>%2e%2e%2f</code> arrive dans votre handler déjà transformé en <code>../</code>. Concaténez un param dans un chemin de fichiers, une clé S3 ou une commande et vous obtenez un path traversal, aussi propre que paraisse le routeur. Règle ancienne mais vite oubliée : validez <em>après</em> le décodage, avec une allowlist, pas une blacklist de caractères.</p>"
+          },
+          "source": {
+            "url": "https://github.com/fastify/fastify/pull/6903",
+            "label": "github.com/fastify"
+          }
+        },
+        {
+          "id": "kysely-0-29-5",
+          "tag": "patch",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "Kysely 0.29.5: TypeScript 7 abarata el chequeo y los tipos se van de mambo",
+            "en": "Kysely 0.29.5: TypeScript 7 makes checking cheap, and types run wild",
+            "fr": "Kysely 0.29.5 : TypeScript 7 rend la vérification bon marché et les types s'emballent"
+          },
+          "body_html": {
+            "es": "<p>Dato de arquitectura escondido en un patch: el equipo cuenta que <strong>TypeScript 7 permite cómputos más profundos</strong>, y eso dispara muchas más instanciaciones y wall clock en varios escenarios. Traducción para quien diseña APIs con tipos: el compilador rápido no elimina el costo de los tipos condicionales recursivos, lo corre de lugar. Este release arregla una recursión infinita de type-check y optimiza las comprobaciones de asignabilidad builder contra builder.</p>",
+            "en": "<p>An architecture insight hidden in a patch release: the team reports that <strong>TypeScript 7 allows deeper computations</strong>, which now cause far more instantiations and wall clock time in various scenarios. Translation for anyone designing type-heavy APIs: the fast compiler does not remove the cost of recursive conditional types, it moves where you feel it. This release fixes an infinite type-check recursion and optimizes builder-vs-builder assignability checks.</p>",
+            "fr": "<p>Un enseignement d'architecture caché dans un patch : l'équipe indique que <strong>TypeScript 7 autorise des calculs plus profonds</strong>, ce qui provoque bien plus d'instanciations et de temps réel dans divers scénarios. Traduction pour qui conçoit des APIs très typées : le compilateur rapide ne supprime pas le coût des types conditionnels récursifs, il en déplace la perception. Cette version corrige une récursion infinie de type-check et optimise les vérifications d'assignabilité builder contre builder.</p>"
+          },
+          "source": {
+            "url": "https://github.com/kysely-org/kysely/releases/tag/v0.29.5",
+            "label": "github.com/kysely-org"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "turborepo-2-10-9",
+      "updates": [
+        {
+          "id": "turborepo-2-10-9",
+          "tag": "patch",
+          "date": "07 Aug 2026",
+          "title": {
+            "es": "Turborepo 2.10.9: tanda gorda de performance en lockfiles y hashing",
+            "en": "Turborepo 2.10.9: a heavy performance pass on lockfiles and hashing",
+            "fr": "Turborepo 2.10.9 : grosse passe de performance sur lockfiles et hashing"
+          },
+          "body_html": {
+            "es": "<p>Casi todo el changelog son <code>perf</code>: parser rápido de pnpm que no clona strings al pepe, resolución de closures compartida para npm y yarn1, índice de nodos del workspace por nombre, memoización de la inferencia de framework durante el hashing de tasks y globs con prefijo literal recorridos sin compilar wax. Nada de API nueva — es puro tiempo de arranque devuelto en monorepos grandes, que es donde Turbo se gana o se pierde el lugar.</p>",
+            "en": "<p>Almost the entire changelog is <code>perf</code>: a pnpm fast parser that stops cloning strings needlessly, shared closure resolution for npm and yarn1 lockfiles, workspace nodes indexed by name, memoized framework inference during task hashing, and literal-prefix globs walked without wax compilation. No new API — just startup time handed back on large monorepos, which is exactly where Turbo earns or loses its seat.</p>",
+            "fr": "<p>Le changelog est presque intégralement <code>perf</code> : parser rapide pnpm qui cesse de cloner des chaînes inutilement, résolution de closures partagée pour les lockfiles npm et yarn1, nœuds du workspace indexés par nom, inférence de framework mémoïsée pendant le hashing des tâches, et globs à préfixe littéral parcourus sans compilation wax. Aucune nouvelle API — juste du temps de démarrage rendu sur les gros monorepos, là où Turbo se justifie ou non.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vercel/turborepo/releases/tag/v2.10.9",
+            "label": "github.com/vercel"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El compilador nativo de TypeScript ya cambió el juego de las librerías: Kysely reporta que con TS 7 los tipos se pueden ir mucho más profundo, y eso reaparece como instanciaciones y wall clock. Compilador rápido no es lo mismo que tipos gratis.",
+      "en": "TypeScript's native compiler is already reshaping library design: Kysely reports that TS 7 lets types go much deeper, which comes back as instantiations and wall clock time. A fast compiler is not the same as free types.",
+      "fr": "Le compilateur natif de TypeScript redessine déjà la conception des librairies : Kysely rapporte qu'avec TS 7 les types vont bien plus loin, ce qui revient en instanciations et en temps réel. Compilateur rapide ne veut pas dire types gratuits."
+    },
+    {
+      "es": "La cadena de suministro de npm dejó de ser un riesgo teórico: ChainDrop se ejecuta en preinstall, se republica solo con tokens robados y va derecho al CI. Si tu pipeline no tiene min-release-age, lockfiles auditados y rotación de credenciales, no tenés defensa — tenés suerte.",
+      "en": "The npm supply chain stopped being a theoretical risk: ChainDrop runs on preinstall, republishes itself with stolen tokens and heads straight for CI. If your pipeline lacks min-release-age, audited lockfiles and credential rotation, you do not have a defense — you have luck.",
+      "fr": "La chaîne d'approvisionnement npm n'est plus un risque théorique : ChainDrop s'exécute au preinstall, se republie avec des tokens volés et vise directement la CI. Sans min-release-age, lockfiles audités et rotation des identifiants, ce n'est pas une défense — c'est de la chance."
+    },
+    {
+      "es": "Semana de romper contratos con cuidado: Prisma pasa a línea RC con agregados en bigint y Gateway API separa lo experimental en su propio grupo de API. Dos formas distintas de decir lo mismo — la estabilidad se comunica en el versionado, no en el changelog.",
+      "en": "A week of breaking contracts deliberately: Prisma moves to an RC line with bigint aggregates, and Gateway API splits experimental resources into their own API group. Two different ways of saying the same thing — stability is communicated through versioning, not through the changelog.",
+      "fr": "Une semaine de ruptures assumées : Prisma passe en ligne RC avec des agrégats en bigint, et Gateway API isole l'expérimental dans son propre groupe d'API. Deux façons de dire la même chose — la stabilité se communique par le versioning, pas par le changelog."
+    }
+  ]
+}

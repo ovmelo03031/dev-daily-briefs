@@ -1,0 +1,399 @@
+{
+  "title": {
+    "es": "Dev News — 11 de agosto de 2026",
+    "en": "Dev News — August 11, 2026",
+    "fr": "Dev News — 11 août 2026"
+  },
+  "description": {
+    "es": "pnpm 12 entra en RC y cambia cómo se resuelven las dependencias de git, VS Code 1.132 comenta dentro del browser, Node 26.7 suma perfetto, y Vue 3.6 llega a RC3.",
+    "en": "pnpm 12 hits RC and changes how git dependencies resolve, VS Code 1.132 adds commenting inside the browser, Node 26.7 lands perfetto tracing, and Vue 3.6 reaches RC3.",
+    "fr": "pnpm 12 passe en RC et change la résolution des dépendances git, VS Code 1.132 commente dans le navigateur, Node 26.7 ajoute perfetto, et Vue 3.6 atteint la RC3."
+  },
+  "pubDate": "2026-08-11",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": {
+        "es": "pnpm 12 RC rompe la resolución de deps git",
+        "en": "pnpm 12 RC breaks git dependency resolution",
+        "fr": "pnpm 12 RC casse la résolution des deps git"
+      },
+      "anchor": "pnpm-12-rc",
+      "icon": "simple-icons:pnpm"
+    },
+    {
+      "text": {
+        "es": "VS Code 1.132: comentarios en el browser",
+        "en": "VS Code 1.132: comment inside the browser",
+        "fr": "VS Code 1.132 : commentaires dans le navigateur"
+      },
+      "anchor": "vscode-1-132",
+      "icon": "simple-icons:visualstudiocode"
+    },
+    {
+      "text": {
+        "es": "Node 26.7 suma tracing con perfetto",
+        "en": "Node 26.7 lands perfetto tracing",
+        "fr": "Node 26.7 ajoute le tracing perfetto"
+      },
+      "anchor": "node-26-7-0",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": {
+        "es": "Vue 3.6 llega a RC3, Vapor cada vez más cerca",
+        "en": "Vue 3.6 reaches RC3, Vapor inches closer",
+        "fr": "Vue 3.6 en RC3, Vapor se rapproche"
+      },
+      "anchor": "vue-3-6-rc3",
+      "icon": "simple-icons:vuedotjs"
+    },
+    {
+      "text": {
+        "es": "SvelteKit 3 parte los plugins de adapter",
+        "en": "SvelteKit 3 splits adapter Vite plugins",
+        "fr": "SvelteKit 3 scinde les plugins d'adaptateur"
+      },
+      "anchor": "sveltekit-3-next-18",
+      "icon": "simple-icons:svelte"
+    },
+    {
+      "text": {
+        "es": "Turborepo 2.10.9: release full de performance",
+        "en": "Turborepo 2.10.9 is a pure performance release",
+        "fr": "Turborepo 2.10.9 : release 100% performance"
+      },
+      "anchor": "turborepo-2-10-9",
+      "icon": "simple-icons:turborepo"
+    },
+    {
+      "text": {
+        "es": "Chrome 151 estable llega a desktop",
+        "en": "Chrome 151 stable rolls out to desktop",
+        "fr": "Chrome 151 stable arrive sur desktop"
+      },
+      "anchor": "chrome-151-stable",
+      "icon": "simple-icons:googlechrome"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "pnpm-12-rc",
+          "tag": "breaking",
+          "date": "09 Aug 2026",
+          "title": {
+            "es": "pnpm 12 entra en RC: las dependencias de git ahora son identidad, no transporte",
+            "en": "pnpm 12 hits RC: git dependencies are now identity, not transport",
+            "fr": "pnpm 12 en RC : les dépendances git deviennent une identité, pas un transport"
+          },
+          "body_html": {
+            "es": "<p>Ojo con esto porque toca el lockfile. En pnpm 12 las dependencias de git alojadas en hosts conocidos (GitHub, GitLab, Bitbucket) se tratan como <strong>identidad</strong>: <code>github:owner/repo</code>, <code>owner/repo</code>, <code>git+https://…</code> y <code>git+ssh://git@…</code> resuelven todas por la URL HTTPS canónica del host, y el lockfile <strong>ya nunca guarda una URL SSH</strong> para ellas. ¿Y por qué importa? Porque antes pnpm sondeaba la red para decidir HTTPS o SSH en tiempo de resolución, y podía dejar grabado un transporte que solo funcionaba en la máquina que corrió el install — clásico lockfile que rompe el runner de CI sin claves SSH. Si necesitás SSH para un repo privado, ahora se configura en la máquina con <code>git config --global url.&quot;git@github.com:&quot;.insteadOf https://github.com/</code>. Los hosts desconocidos y las URLs con credenciales embebidas quedan intactos. La RC también trae un montón de fast paths: sacar una dependencia del <code>package.json</code>, cambiar una entrada de catálogo a otra versión exacta o tocar <code>patchedDependencies</code> ya no re-resuelven todo el grafo.</p>",
+            "en": "<p>This one touches the lockfile. In pnpm 12, git dependencies on known hosts (GitHub, GitLab, Bitbucket) are treated as <strong>identity</strong>: <code>github:owner/repo</code>, <code>owner/repo</code>, <code>git+https://…</code> and <code>git+ssh://git@…</code> all resolve through the host's canonical HTTPS URL, and the lockfile <strong>never records an SSH URL</strong> for them again. Why it matters: pnpm used to probe the network to pick HTTPS or SSH at resolution time, which could bake in a transport that only worked on the machine that ran the install — the classic lockfile that breaks CI runners without SSH keys. For private hosted repos you now configure the machine instead: <code>git config --global url.&quot;git@github.com:&quot;.insteadOf https://github.com/</code>. Unknown hosts and URLs with embedded credentials stay verbatim. The RC also adds a pile of fast paths: removing a dependency from <code>package.json</code>, switching a catalog entry to a different exact version, or editing <code>patchedDependencies</code> no longer re-resolve the whole graph.</p>",
+            "fr": "<p>Celle-ci touche au lockfile. Dans pnpm 12, les dépendances git sur les hosts connus (GitHub, GitLab, Bitbucket) sont traitées comme une <strong>identité</strong> : <code>github:owner/repo</code>, <code>owner/repo</code>, <code>git+https://…</code> et <code>git+ssh://git@…</code> résolvent toutes via l'URL HTTPS canonique du host, et le lockfile <strong>n'enregistre plus jamais d'URL SSH</strong> pour elles. Pourquoi c'est important : pnpm sondait le réseau pour choisir HTTPS ou SSH à la résolution, ce qui pouvait figer un transport ne fonctionnant que sur la machine ayant lancé l'install — le lockfile classique qui casse les runners CI sans clés SSH. Pour un repo privé, on configure désormais la machine : <code>git config --global url.&quot;git@github.com:&quot;.insteadOf https://github.com/</code>. Les hosts inconnus et les URLs avec credentials restent tels quels. La RC ajoute aussi des fast paths : retirer une dépendance du <code>package.json</code>, changer une entrée de catalogue vers une autre version exacte ou modifier <code>patchedDependencies</code> ne re-résolvent plus tout le graphe.</p>"
+          },
+          "source": {
+            "url": "https://github.com/pnpm/pnpm/releases/tag/v12.0.0-rc.1",
+            "label": "github.com/pnpm/pnpm"
+          }
+        },
+        {
+          "id": "vscode-1-132",
+          "tag": "release",
+          "date": "05 Aug 2026",
+          "title": {
+            "es": "VS Code 1.132: comentar elementos del browser integrado y side chats con /btw",
+            "en": "VS Code 1.132: comment on integrated browser elements and side chats with /btw",
+            "fr": "VS Code 1.132 : commenter des éléments du navigateur intégré et side chats avec /btw"
+          },
+          "body_html": {
+            "es": "<p>La release de agosto va toda para el loop con agentes. Lo más útil: <strong>comentarios dentro del browser integrado</strong> — señalás un elemento concreto de la página y le dejás el feedback ahí, en vez de describirlo por escrito. Suma <strong>side chats con <code>/btw</code></strong> para preguntar algo puntual sin cortarle el laburo al agente que ya está corriendo, dictado multilingüe con modelo on-device que detecta el idioma solo, y un modo experimental de <strong>diffs de Markdown renderizado</strong> con indicadores en el gutter mientras el documento sigue editable. El agent host también muestra status pills en vivo con cambios, previews, subagentes e interacciones del browser.</p>",
+            "en": "<p>The August release is all about the agent loop. The most useful bit: <strong>commenting inside the integrated browser</strong> — you point at a specific page element and leave feedback there instead of describing it in prose. It also adds <strong>side chats via <code>/btw</code></strong> so you can ask a one-off question without interrupting the agent already working, multilingual dictation with an on-device model that auto-detects language, and an experimental <strong>rendered Markdown diff</strong> mode with gutter indicators while the document stays editable. The agent host now shows live status pills for changes, previews, subagents and browser interactions.</p>",
+            "fr": "<p>La release d'août tourne entièrement autour de la boucle agent. Le plus utile : <strong>commenter dans le navigateur intégré</strong> — on pointe un élément précis de la page et on y laisse le feedback au lieu de le décrire. Arrivent aussi les <strong>side chats via <code>/btw</code></strong> pour poser une question ponctuelle sans interrompre l'agent en cours, la dictée multilingue avec un modèle on-device qui détecte la langue, et un mode expérimental de <strong>diff Markdown rendu</strong> avec indicateurs dans la gouttière, le document restant éditable. L'agent host affiche désormais des status pills en direct : changements, previews, subagents et interactions navigateur.</p>"
+          },
+          "source": {
+            "url": "https://code.visualstudio.com/updates/v1_132",
+            "label": "code.visualstudio.com"
+          }
+        },
+        {
+          "id": "node-26-7-0",
+          "tag": "release",
+          "date": "05 Aug 2026",
+          "title": {
+            "es": "Node.js 26.7.0: soporte perfetto, Symbol.dispose en ModuleHooks y cobertura total en el test runner",
+            "en": "Node.js 26.7.0: perfetto support, Symbol.dispose in ModuleHooks and full test-runner coverage",
+            "fr": "Node.js 26.7.0 : support perfetto, Symbol.dispose dans ModuleHooks et couverture complète du test runner"
+          },
+          "body_html": {
+            "es": "<p>Release semver-minor con cosas jugosas para profiling: Node ahora integra <strong>perfetto</strong>, el trazador de Google, así que el tracing deja de ser un parche y pasa a ser parte del runtime. Suma <code>Symbol.dispose</code> en <code>ModuleHooks</code> (explicit resource management llegando a los loaders), soporte para cargar claves privadas vía STORE loaders de OpenSSL, y <code>--test-coverage-include-all</code> en el test runner — la bandera que te faltaba para que los archivos nunca importados también cuenten en la cobertura. Además actualiza npm a 11.19.0 y los root certificates a NSS 3.125.</p>",
+            "en": "<p>A semver-minor release with real profiling meat: Node now integrates <strong>perfetto</strong>, Google's tracing stack, so tracing stops being a bolt-on and becomes part of the runtime. It also adds <code>Symbol.dispose</code> in <code>ModuleHooks</code> (explicit resource management reaching loaders), private key loading through OpenSSL STORE loaders, and <code>--test-coverage-include-all</code> in the test runner — the flag you wanted so never-imported files still count toward coverage. It bumps npm to 11.19.0 and root certificates to NSS 3.125.</p>",
+            "fr": "<p>Une release semver-minor avec du vrai contenu profiling : Node intègre désormais <strong>perfetto</strong>, la stack de tracing de Google, donc le tracing devient natif au runtime. S'ajoutent <code>Symbol.dispose</code> dans <code>ModuleHooks</code> (explicit resource management jusqu'aux loaders), le chargement de clés privées via les STORE loaders d'OpenSSL, et <code>--test-coverage-include-all</code> dans le test runner — le flag qui manquait pour que les fichiers jamais importés comptent aussi dans la couverture. npm passe à 11.19.0 et les root certificates à NSS 3.125.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nodejs/node/releases/tag/v26.7.0",
+            "label": "github.com/nodejs/node"
+          }
+        }
+      ]
+    },
+    {
+      "id": "js-frameworks",
+      "name": "JS Frameworks",
+      "theme": "js-frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "js-frameworks",
+      "updates": [
+        {
+          "id": "vue-3-6-rc3",
+          "tag": "beta",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "Vue 3.6.0-rc.3: la rama minor sigue puliéndose",
+            "en": "Vue 3.6.0-rc.3: the minor branch keeps polishing",
+            "fr": "Vue 3.6.0-rc.3 : la branche minor continue de se peaufiner"
+          },
+          "body_html": {
+            "es": "<p>Tercera release candidate de Vue 3.6, publicada esta madrugada. El equipo mantiene el changelog de pre-releases en la rama <code>minor</code>, así que si venés siguiendo el ciclo, ahí está el detalle fino. Lo importante es la señal: 3.6 lleva semanas en RC y el ritmo de candidatas se acortó, mientras la línea estable sigue en 3.5.41. Si tenés una app grande, este es el momento de probar la RC en una branch y reportar, no cuando salga la estable.</p>",
+            "en": "<p>Third release candidate for Vue 3.6, published overnight. The team keeps the pre-release changelog on the <code>minor</code> branch, so that is where the fine-grained detail lives. The signal matters more than the diff: 3.6 has been in RC for weeks and the cadence between candidates is tightening, while the stable line sits at 3.5.41. If you run a large app, now is the time to test the RC on a branch and file reports — not after stable ships.</p>",
+            "fr": "<p>Troisième release candidate de Vue 3.6, publiée cette nuit. L'équipe garde le changelog des pré-releases sur la branche <code>minor</code>, c'est là que se trouve le détail. Le signal compte plus que le diff : 3.6 est en RC depuis des semaines et la cadence entre candidates se resserre, tandis que la ligne stable reste en 3.5.41. Sur une grosse app, c'est maintenant qu'il faut tester la RC sur une branche et remonter les retours, pas après la stable.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vuejs/core/releases/tag/v3.6.0-rc.3",
+            "label": "github.com/vuejs/core"
+          }
+        },
+        {
+          "id": "sveltekit-3-next-18",
+          "tag": "breaking",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "SvelteKit 3.0.0-next.18 separa los plugins de Vite de los adapters en pre y post",
+            "en": "SvelteKit 3.0.0-next.18 splits adapter Vite plugins into pre and post",
+            "fr": "SvelteKit 3.0.0-next.18 scinde les plugins Vite des adaptateurs en pre et post"
+          },
+          "body_html": {
+            "es": "<p>Cambio breaking en la línea next de SvelteKit 3: los plugins de Vite que aportan los adapters ahora se dividen en <code>pre</code> y <code>post</code> (<a href=\"https://github.com/sveltejs/kit/pull/16711\">#16711</a>). Traducción para el que mantiene un adapter propio: vas a tener que declarar en qué fase corre cada plugin en vez de tirar todo junto. Si sos usuario del adapter oficial, esto te llega gratis en el upgrade — pero si tenés un adapter custom para tu infra, revisalo antes de que 3.0 sea estable.</p>",
+            "en": "<p>Breaking change on the SvelteKit 3 next line: Vite plugins contributed by adapters are now separated into <code>pre</code> and <code>post</code> (<a href=\"https://github.com/sveltejs/kit/pull/16711\">#16711</a>). Translation for anyone maintaining their own adapter: you now declare which phase each plugin runs in instead of handing over one flat list. Users of official adapters get this for free on upgrade — but if you keep a custom adapter for your infra, audit it before 3.0 goes stable.</p>",
+            "fr": "<p>Changement breaking sur la ligne next de SvelteKit 3 : les plugins Vite fournis par les adaptateurs sont désormais séparés en <code>pre</code> et <code>post</code> (<a href=\"https://github.com/sveltejs/kit/pull/16711\">#16711</a>). Traduction pour qui maintient son propre adaptateur : il faut déclarer la phase d'exécution de chaque plugin au lieu d'une liste unique. Les utilisateurs des adaptateurs officiels l'obtiennent gratuitement à l'upgrade — mais un adaptateur custom pour votre infra mérite un audit avant la 3.0 stable.</p>"
+          },
+          "source": {
+            "url": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs%2Fkit%403.0.0-next.18",
+            "label": "github.com/sveltejs/kit"
+          }
+        },
+        {
+          "id": "tanstack-start-beta-30",
+          "tag": "beta",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "TanStack Start 2.0 sigue en beta con el port a Solid al día",
+            "en": "TanStack Start 2.0 keeps shipping betas with the Solid port in lockstep",
+            "fr": "TanStack Start 2.0 continue ses betas, le port Solid suit le rythme"
+          },
+          "body_html": {
+            "es": "<p>Otra tanda de betas del monorepo de TanStack Router: <code>@tanstack/solid-start</code> 2.0.0-beta.31, <code>solid-router</code> 2.0.0-beta.30 y compañía salieron el 10 de agosto, con las líneas de Vue moviéndose en paralelo en 1.168.x. No hay una feature titular acá, pero el dato importa: el 2.0 avanza a ritmo de release diaria y los ports por framework ya no van atrás del de React. Si estás evaluando Start para un proyecto nuevo, el 2.0 sigue siendo beta — planificá en consecuencia.</p>",
+            "en": "<p>Another batch of betas from the TanStack Router monorepo: <code>@tanstack/solid-start</code> 2.0.0-beta.31, <code>solid-router</code> 2.0.0-beta.30 and friends landed on August 10, with the Vue lines moving in parallel on 1.168.x. There is no headline feature here, but the cadence is the story: 2.0 is shipping at near-daily pace and the per-framework ports are no longer trailing the React one. If you are evaluating Start for a greenfield project, 2.0 is still beta — plan accordingly.</p>",
+            "fr": "<p>Nouvelle salve de betas dans le monorepo TanStack Router : <code>@tanstack/solid-start</code> 2.0.0-beta.31, <code>solid-router</code> 2.0.0-beta.30 et consorts sont sortis le 10 août, les lignes Vue avançant en parallèle en 1.168.x. Pas de feature phare ici, mais la cadence est l'info : la 2.0 sort presque quotidiennement et les ports par framework ne traînent plus derrière celui de React. Si vous évaluez Start pour un nouveau projet, la 2.0 reste en beta — planifiez en conséquence.</p>"
+          },
+          "source": {
+            "url": "https://github.com/TanStack/router/releases/tag/release-2026-08-10-2032",
+            "label": "github.com/TanStack/router"
+          }
+        }
+      ]
+    },
+    {
+      "id": "react",
+      "name": "React",
+      "theme": "react",
+      "icon_emoji": "⚛️",
+      "anchor": "react",
+      "updates": [
+        {
+          "id": "shadcn-react-0-3",
+          "tag": "release",
+          "date": "05 Aug 2026",
+          "title": {
+            "es": "@shadcn/react 0.3.0 agrega la primitiva Questionnaire",
+            "en": "@shadcn/react 0.3.0 adds the Questionnaire primitive",
+            "fr": "@shadcn/react 0.3.0 ajoute la primitive Questionnaire"
+          },
+          "body_html": {
+            "es": "<p>Nueva primitiva <strong>Questionnaire</strong>: preguntas multi-step, respuestas libres, validación y navegación por teclado, todo resuelto de una (<a href=\"https://github.com/shadcn-ui/ui/pull/11414\">#11414</a>). Es exactamente ese componente que todos terminamos escribiendo mal tres veces — el wizard de onboarding, el formulario por pasos, la encuesta. Que venga con navegación por teclado de fábrica no es un detalle: es la parte que casi siempre se saltea y la que rompe la accesibilidad.</p>",
+            "en": "<p>New <strong>Questionnaire</strong> primitive: multi-step questions, freeform answers, validation and keyboard navigation, handled in one piece (<a href=\"https://github.com/shadcn-ui/ui/pull/11414\">#11414</a>). This is exactly the component everyone ends up writing badly three times — the onboarding wizard, the stepped form, the survey. Shipping keyboard navigation by default is not a detail: it is the part teams usually skip, and the part that breaks accessibility.</p>",
+            "fr": "<p>Nouvelle primitive <strong>Questionnaire</strong> : questions multi-étapes, réponses libres, validation et navigation clavier, le tout d'un bloc (<a href=\"https://github.com/shadcn-ui/ui/pull/11414\">#11414</a>). C'est exactement le composant que tout le monde finit par mal écrire trois fois — le wizard d'onboarding, le formulaire par étapes, le sondage. La navigation clavier par défaut n'est pas un détail : c'est la partie qu'on saute d'habitude, et celle qui casse l'accessibilité.</p>"
+          },
+          "source": {
+            "url": "https://github.com/shadcn-ui/ui/releases/tag/%40shadcn%2Freact%400.3.0",
+            "label": "github.com/shadcn-ui/ui"
+          }
+        }
+      ]
+    },
+    {
+      "id": "build-tools",
+      "name": "Build Tools & Runtimes",
+      "theme": "build-tools",
+      "icon_emoji": "🔧",
+      "anchor": "build-tools",
+      "updates": [
+        {
+          "id": "turborepo-2-10-9",
+          "tag": "release",
+          "date": "07 Aug 2026",
+          "title": {
+            "es": "Turborepo 2.10.9: casi toda la release es performance",
+            "en": "Turborepo 2.10.9 is almost entirely performance work",
+            "fr": "Turborepo 2.10.9 : quasiment que de la performance"
+          },
+          "body_html": {
+            "es": "<p>Contá los commits y la mayoría son <code>perf</code>: parseo de lockfiles de pnpm por fast path, hashing de fingerprints de resolución en paralelo, listas de identidad compartidas entre closures idénticos, globs con prefijo literal recorridos sin compilar wax, e indexado de entradas anidadas de Bun por nombre. Traducido: el arranque del task graph en monorepos grandes debería sentirse más liviano sin que cambies una línea. También acepta rangos semver en <code>devEngines.packageManager.version</code> y arregla la composición de tareas afectadas con filtros de paquete.</p>",
+            "en": "<p>Count the commits and most of them are <code>perf</code>: pnpm lockfile parsing on a fast path, resolution fingerprint hashing done in parallel, resolution identity lists shared across identical workspace closures, literal-prefix globs walked without wax compilation, and Bun nested lockfile entries indexed by name. Translation: task graph startup in large monorepos should feel lighter without you changing a line. It also accepts semver ranges in <code>devEngines.packageManager.version</code> and fixes composing affected tasks with package filters.</p>",
+            "fr": "<p>Comptez les commits : la majorité sont des <code>perf</code> — parsing des lockfiles pnpm en fast path, hachage des fingerprints de résolution en parallèle, listes d'identité partagées entre closures identiques, globs à préfixe littéral parcourus sans compilation wax, et entrées imbriquées de lockfile Bun indexées par nom. Traduction : le démarrage du task graph sur gros monorepos devrait être plus léger sans changer une ligne. La release accepte aussi des ranges semver dans <code>devEngines.packageManager.version</code> et corrige la composition des tâches affectées avec les filtres de packages.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vercel/turborepo/releases/tag/v2.10.9",
+            "label": "github.com/vercel/turborepo"
+          }
+        },
+        {
+          "id": "esbuild-0-28-2",
+          "tag": "patch",
+          "date": "08 Aug 2026",
+          "title": {
+            "es": "esbuild 0.28.2 arregla un tree shaking roto por alias de import de TypeScript",
+            "en": "esbuild 0.28.2 fixes tree shaking broken by a TypeScript import alias",
+            "fr": "esbuild 0.28.2 corrige un tree shaking cassé par un alias d'import TypeScript"
+          },
+          "body_html": {
+            "es": "<p>Dos bugs finos pero peligrosos. El primero: con la sintaxis de asignación de import de TypeScript (<code>import Alias = Base.SomeType</code>), esbuild podía tree-shakear imports que sí se usaban en un type alias (<a href=\"https://github.com/evanw/esbuild/issues/4507\">#4507</a>). El segundo es del minificador de CSS, que borraba un <code>&amp;</code> cuando no era seguro hacerlo dentro de un <code>:not()</code> anidado (<a href=\"https://github.com/evanw/esbuild/issues/4497\">#4497</a>) — o sea, estilos que se rompían solo en build de producción. Justo el tipo de bug que te come una tarde.</p>",
+            "en": "<p>Two subtle but nasty bugs. First: with TypeScript's import assignment syntax (<code>import Alias = Base.SomeType</code>), esbuild could tree-shake imports that were in fact used in a type alias (<a href=\"https://github.com/evanw/esbuild/issues/4507\">#4507</a>). Second is in the CSS minifier, which dropped an <code>&amp;</code> when it was unsafe to do so inside a nested <code>:not()</code> (<a href=\"https://github.com/evanw/esbuild/issues/4497\">#4497</a>) — styles breaking only in production builds. Exactly the class of bug that eats an afternoon.</p>",
+            "fr": "<p>Deux bugs subtils mais méchants. Le premier : avec la syntaxe d'assignation d'import TypeScript (<code>import Alias = Base.SomeType</code>), esbuild pouvait tree-shaker des imports pourtant utilisés dans un type alias (<a href=\"https://github.com/evanw/esbuild/issues/4507\">#4507</a>). Le second vient du minifieur CSS, qui supprimait un <code>&amp;</code> alors que ce n'était pas sûr dans un <code>:not()</code> imbriqué (<a href=\"https://github.com/evanw/esbuild/issues/4497\">#4497</a>) — des styles cassés uniquement en build de production. Exactement le genre de bug qui bouffe un après-midi.</p>"
+          },
+          "source": {
+            "url": "https://github.com/evanw/esbuild/releases/tag/v0.28.2",
+            "label": "github.com/evanw/esbuild"
+          }
+        },
+        {
+          "id": "vite-8-2-1",
+          "tag": "patch",
+          "date": "06 Aug 2026",
+          "title": {
+            "es": "Vite 8.2.1 y plugin-legacy 8.2.3",
+            "en": "Vite 8.2.1 and plugin-legacy 8.2.3",
+            "fr": "Vite 8.2.1 et plugin-legacy 8.2.3"
+          },
+          "body_html": {
+            "es": "<p>Patch de mantenimiento de la línea 8.2, publicado junto a <code>@vitejs/plugin-legacy</code> 8.2.3. El detalle está en el CHANGELOG del tag; no hay cambios de API. Actualizá y seguí.</p>",
+            "en": "<p>Maintenance patch on the 8.2 line, shipped alongside <code>@vitejs/plugin-legacy</code> 8.2.3. Details live in the CHANGELOG for the tag; no API changes. Bump and move on.</p>",
+            "fr": "<p>Patch de maintenance sur la ligne 8.2, publié avec <code>@vitejs/plugin-legacy</code> 8.2.3. Le détail est dans le CHANGELOG du tag ; aucun changement d'API. Mettez à jour et passez à la suite.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vitejs/vite/releases/tag/v8.2.1",
+            "label": "github.com/vitejs/vite"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dev-tools",
+      "name": "Developer Tools",
+      "theme": "dev-tools",
+      "icon_emoji": "🛠️",
+      "anchor": "dev-tools",
+      "updates": [
+        {
+          "id": "eslint-10-8-1",
+          "tag": "patch",
+          "date": "07 Aug 2026",
+          "title": {
+            "es": "ESLint 10.8.1 cierra dos autofix que podían romper tu código",
+            "en": "ESLint 10.8.1 closes two autofixes that could break your code",
+            "fr": "ESLint 10.8.1 corrige deux autofix capables de casser votre code"
+          },
+          "body_html": {
+            "es": "<p>Lo relevante son los <strong>ASI hazards</strong>: el autofix de <code>no-unused-labels</code> y la sugerencia <code>removeVar</code> de <code>no-unused-vars</code> podían dejar código donde el punto y coma automático cambiaba el significado. Si corrés <code>--fix</code> en CI, esto te importa. Suman falsos positivos arreglados en <code>getter-return</code> y <code>accessor-pairs</code>, y ahora <code>id-denylist</code> e <code>id-match</code> ignoran nombres de meta-properties.</p>",
+            "en": "<p>The relevant part is the <strong>ASI hazards</strong>: the <code>no-unused-labels</code> autofix and the <code>removeVar</code> suggestion in <code>no-unused-vars</code> could leave code where automatic semicolon insertion changed the meaning. If you run <code>--fix</code> in CI, this matters to you. It also fixes false positives in <code>getter-return</code> and <code>accessor-pairs</code>, and <code>id-denylist</code> plus <code>id-match</code> now ignore meta-property names.</p>",
+            "fr": "<p>L'essentiel, ce sont les <strong>ASI hazards</strong> : l'autofix de <code>no-unused-labels</code> et la suggestion <code>removeVar</code> de <code>no-unused-vars</code> pouvaient laisser du code où l'insertion automatique de point-virgule changeait le sens. Si vous lancez <code>--fix</code> en CI, ça vous concerne. S'ajoutent des faux positifs corrigés dans <code>getter-return</code> et <code>accessor-pairs</code>, et <code>id-denylist</code> comme <code>id-match</code> ignorent désormais les noms de meta-properties.</p>"
+          },
+          "source": {
+            "url": "https://github.com/eslint/eslint/releases/tag/v10.8.1",
+            "label": "github.com/eslint/eslint"
+          }
+        },
+        {
+          "id": "cypress-15-20-1",
+          "tag": "patch",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "Cypress 15.20.1 sale cinco días después del 15.20.0",
+            "en": "Cypress 15.20.1 lands five days after 15.20.0",
+            "fr": "Cypress 15.20.1 arrive cinq jours après la 15.20.0"
+          },
+          "body_html": {
+            "es": "<p>Patch rápido sobre la 15.20.0 del 4 de agosto. El equipo publica el detalle en el changelog de la doc, no en la release de GitHub, así que si venís de 15.19 conviene leerlo antes de saltar directo a la última.</p>",
+            "en": "<p>A quick patch on top of 15.20.0 from August 4. The team publishes the detail in the docs changelog rather than the GitHub release, so if you are coming from 15.19 it is worth reading before jumping straight to the latest.</p>",
+            "fr": "<p>Patch rapide sur la 15.20.0 du 4 août. L'équipe publie le détail dans le changelog de la doc, pas dans la release GitHub : si vous venez de 15.19, lisez-le avant de sauter directement à la dernière.</p>"
+          },
+          "source": {
+            "url": "https://github.com/cypress-io/cypress/releases/tag/v15.20.1",
+            "label": "github.com/cypress-io/cypress"
+          }
+        }
+      ]
+    },
+    {
+      "id": "html",
+      "name": "HTML / Web Platform",
+      "theme": "html",
+      "icon_emoji": "🌐",
+      "anchor": "html",
+      "updates": [
+        {
+          "id": "chrome-151-stable",
+          "tag": "release",
+          "date": "06 Aug 2026",
+          "title": {
+            "es": "Chrome 151 estable llega a desktop, Android e iOS",
+            "en": "Chrome 151 stable rolls out to desktop, Android and iOS",
+            "fr": "Chrome 151 stable arrive sur desktop, Android et iOS"
+          },
+          "body_html": {
+            "es": "<p>El canal estable pasó a <code>151.0.7922.108/.109</code> en Windows y Mac, y <code>151.0.7922.108</code> en Linux, con los updates de Android e iOS el mismo día. Es el rollout habitual escalonado, así que ojo con asumir que tus usuarios ya están ahí: si dependés de una feature nueva de la 151, seguí necesitando feature detection.</p>",
+            "en": "<p>The stable channel moved to <code>151.0.7922.108/.109</code> on Windows and Mac, and <code>151.0.7922.108</code> on Linux, with Android and iOS updates the same day. It is the usual staged rollout, so do not assume your users are already there: if you depend on a new 151 feature, you still need feature detection.</p>",
+            "fr": "<p>Le canal stable est passé en <code>151.0.7922.108/.109</code> sur Windows et Mac, et <code>151.0.7922.108</code> sur Linux, avec les updates Android et iOS le même jour. C'est le déploiement progressif habituel : ne supposez pas que vos utilisateurs y sont déjà — si vous dépendez d'une nouveauté de la 151, la feature detection reste nécessaire.</p>"
+          },
+          "source": {
+            "url": "https://chromereleases.googleblog.com/2026/08/stable-channel-update-for-desktop_01193673229.html",
+            "label": "chromereleases.googleblog.com"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El tema de la semana es la resolución de dependencias: pnpm 12 deja de sondear la red para elegir transporte y Turborepo dedica media release a parsear lockfiles más rápido. Los package managers dejaron de competir por features y ahora compiten por determinismo y milisegundos.",
+      "en": "The theme of the week is dependency resolution: pnpm 12 stops probing the network to pick a transport, and Turborepo spends half a release parsing lockfiles faster. Package managers stopped competing on features and now compete on determinism and milliseconds.",
+      "fr": "Le thème de la semaine, c'est la résolution de dépendances : pnpm 12 cesse de sonder le réseau pour choisir un transport, et Turborepo consacre la moitié d'une release à parser les lockfiles plus vite. Les package managers ne se battent plus sur les features mais sur le déterminisme et les millisecondes."
+    },
+    {
+      "es": "Semana sin novedades verificadas en TypeScript, React core ni React Native: TypeScript sigue publicando nightlies de 7.1 sin anuncio, React no sacó release, y React Native quedó en 0.87.0-rc.4 desde el 5 de agosto. Cuando no hay noticia, no la inventamos.",
+      "en": "No verified TypeScript, React core or React Native news this week: TypeScript keeps publishing 7.1 nightlies with no announcement, React shipped no release, and React Native has sat on 0.87.0-rc.4 since August 5. When there is no news, we do not invent it.",
+      "fr": "Aucune nouvelle vérifiée côté TypeScript, React core ou React Native cette semaine : TypeScript continue ses nightlies 7.1 sans annonce, React n'a rien publié, et React Native reste en 0.87.0-rc.4 depuis le 5 août. Quand il n'y a pas d'info, on ne l'invente pas."
+    },
+    {
+      "es": "VS Code 1.132 confirma que el editor ya no se diseña para vos solo, sino para vos y un agente: comentarios sobre elementos del browser, side chats para no interrumpirlo y status pills de subagentes. Nos guste o no, ese es el nuevo loop.",
+      "en": "VS Code 1.132 confirms the editor is no longer designed for you alone but for you plus an agent: comments on browser elements, side chats so you do not interrupt it, and subagent status pills. Like it or not, that is the new loop.",
+      "fr": "VS Code 1.132 confirme que l'éditeur n'est plus pensé pour vous seul mais pour vous et un agent : commentaires sur les éléments du navigateur, side chats pour ne pas l'interrompre, status pills des subagents. Qu'on aime ou non, c'est la nouvelle boucle."
+    }
+  ]
+}

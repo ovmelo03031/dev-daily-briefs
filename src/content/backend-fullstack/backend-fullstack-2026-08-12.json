@@ -1,0 +1,598 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 12 de agosto de 2026",
+    "en": "Backend & Fullstack — August 12, 2026",
+    "fr": "Backend & Fullstack — 12 août 2026"
+  },
+  "description": {
+    "es": "Fastify 6 arranca su alpha con breaking changes, Vitest 5 llega a RC, Prisma estrena la línea 8.0.0-rc y Cloudflare cierra su Agents Week con TCP/gRPC en Workers.",
+    "en": "Fastify 6 opens its alpha with breaking changes, Vitest 5 hits RC, Prisma launches the 8.0.0-rc line, and Cloudflare closes Agents Week with TCP/gRPC on Workers.",
+    "fr": "Fastify 6 ouvre son alpha avec des breaking changes, Vitest 5 atteint la RC, Prisma lance la ligne 8.0.0-rc et Cloudflare clôt son Agents Week avec TCP/gRPC sur Workers."
+  },
+  "pubDate": "2026-08-12",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Fastify 6 alpha: adiós a tipos deprecados",
+        "en": "Fastify 6 alpha: deprecated types removed",
+        "fr": "Fastify 6 alpha : types dépréciés supprimés"
+      },
+      "anchor": "fastify-6-alpha",
+      "icon": "lucide:blocks"
+    },
+    {
+      "text": {
+        "es": "Vitest 5 RC: assertions async sin await fallan",
+        "en": "Vitest 5 RC: unawaited async assertions now fail",
+        "fr": "Vitest 5 RC : assertions async non attendues échouent"
+      },
+      "anchor": "vitest-5-rc1",
+      "icon": "lucide:flame"
+    },
+    {
+      "text": {
+        "es": "Prisma abre la línea 8.0.0-rc; count() es bigint",
+        "en": "Prisma opens the 8.0.0-rc line; count() is bigint",
+        "fr": "Prisma ouvre la ligne 8.0.0-rc ; count() est bigint"
+      },
+      "anchor": "prisma-8-rc1",
+      "icon": "simple-icons:prisma"
+    },
+    {
+      "text": {
+        "es": "Workers ya habla TCP y gRPC nativo",
+        "en": "Workers now speaks native TCP and gRPC",
+        "fr": "Workers parle désormais TCP et gRPC natif"
+      },
+      "anchor": "cloudflare-agents-week",
+      "icon": "simple-icons:cloudflare"
+    },
+    {
+      "text": {
+        "es": "CHAINDROP: gusano npm con C2 en Ethereum",
+        "en": "CHAINDROP: npm worm with C2 on Ethereum",
+        "fr": "CHAINDROP : ver npm avec C2 sur Ethereum"
+      },
+      "anchor": "chaindrop-worm",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Canva revoca sesiones a escala usando S3",
+        "en": "Canva revokes sessions at scale using S3",
+        "fr": "Canva révoque les sessions à grande échelle via S3"
+      },
+      "anchor": "canva-session-revocation",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "fastify-6-alpha",
+      "updates": [
+        {
+          "id": "fastify-6-alpha",
+          "tag": "breaking",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "Fastify 6.0.0-alpha.0: limpieza total de deprecaciones",
+            "en": "Fastify 6.0.0-alpha.0: full deprecation cleanup",
+            "fr": "Fastify 6.0.0-alpha.0 : grand nettoyage des dépréciations"
+          },
+          "body_html": {
+            "es": "<p>Arrancó la línea 6 y viene con el machete afilado: se van los tipos <code>FastifyPlugin</code>, <code>FastifyLoggerInstance</code>, <code>FastifyRequestContext</code>/<code>FastifyReplyContext</code> y <code>ValidationResult</code>, se elimina el ponyfill de <code>Promise.withResolvers</code>, sube la versión mínima de runtime, se pasa a <strong>undici v8</strong> y por defecto ya no se permite sobrescribir el error handler. Si tenés un monolito sobre Fastify 5, este alpha es tu lista de tareas de migración: leelo ahora y no en diciembre.</p>",
+            "en": "<p>The v6 line is open and it swings hard: the <code>FastifyPlugin</code>, <code>FastifyLoggerInstance</code>, <code>FastifyRequestContext</code>/<code>FastifyReplyContext</code> and <code>ValidationResult</code> types are gone, the <code>Promise.withResolvers</code> ponyfill is removed, the minimum runtime version goes up, dependencies move to <strong>undici v8</strong>, and error-handler overrides are disabled by default. If you run a monolith on Fastify 5, this alpha is your migration checklist.</p>",
+            "fr": "<p>La ligne v6 est ouverte et elle taille dans le vif : les types <code>FastifyPlugin</code>, <code>FastifyLoggerInstance</code>, <code>FastifyRequestContext</code>/<code>FastifyReplyContext</code> et <code>ValidationResult</code> disparaissent, le ponyfill <code>Promise.withResolvers</code> est retiré, la version minimale du runtime augmente, le passage à <strong>undici v8</strong> est fait et la surcharge du error handler est désactivée par défaut. Si vous tournez sur Fastify 5, cette alpha est votre checklist de migration.</p>"
+          },
+          "source": {
+            "url": "https://github.com/fastify/fastify/releases/tag/v6.0.0-alpha.0",
+            "label": "github.com/fastify"
+          }
+        },
+        {
+          "id": "vitest-5-rc1",
+          "tag": "breaking",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "Vitest 5.0.0-rc.1: los tests mienten menos",
+            "en": "Vitest 5.0.0-rc.1: tests lie less",
+            "fr": "Vitest 5.0.0-rc.1 : les tests mentent moins"
+          },
+          "body_html": {
+            "es": "<p>El cambio que más va a doler (para bien): <strong>una assertion asíncrona sin <code>await</code> ahora hace fallar el test</strong>. Sumale proyectos inline que heredan la config raíz por defecto, proyectos anidados, servidor de Vite compartido entre proyectos inline, mocking de <code>Temporal</code> sin fake timers y <code>&gt;</code> como separador en <code>-t</code>. Si tenías tests verdes por accidente, este RC te los va a mostrar.</p>",
+            "en": "<p>The change that will hurt the most (in a good way): <strong>an async assertion that is not awaited now fails the test</strong>. Add inline projects extending the root config by default, nested projects, a Vite server shared across inline projects, <code>Temporal</code> mocking without fake timers, and <code>&gt;</code> as the separator in <code>-t</code>. If you had accidentally green tests, this RC will surface them.</p>",
+            "fr": "<p>Le changement qui fera le plus mal (pour de bonnes raisons) : <strong>une assertion asynchrone non attendue fait désormais échouer le test</strong>. Ajoutez les projets inline héritant de la config racine par défaut, les projets imbriqués, un serveur Vite partagé entre projets inline, le mocking de <code>Temporal</code> sans fake timers et <code>&gt;</code> comme séparateur dans <code>-t</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.0.0-rc.1",
+            "label": "github.com/vitest-dev"
+          }
+        },
+        {
+          "id": "cloudflare-agents-week",
+          "tag": "notable",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "Cloudflare cierra Agents Week: TCP y gRPC en Workers",
+            "en": "Cloudflare wraps Agents Week: TCP and gRPC on Workers",
+            "fr": "Cloudflare clôt son Agents Week : TCP et gRPC sur Workers"
+          },
+          "body_html": {
+            "es": "<p>El recap deja cosas concretas para backend: <strong>soporte TCP y gRPC en Workers</strong> (adiós a una de las excusas clásicas para no ir al edge), RPC entre Workers de Python y JavaScript, <em>tracing</em> distribuido en local para debuggear antes de producción, y CI/CD programable escrito en código en vez de YAML. El resto es agentes, pero el plumbing sirve igual.</p>",
+            "en": "<p>The recap leaves concrete backend material: <strong>TCP and gRPC support on Workers</strong> (one classic excuse for avoiding the edge is gone), Worker-to-Worker RPC between Python and JavaScript, distributed tracing locally for pre-production debugging, and programmable CI/CD written in code instead of YAML.</p>",
+            "fr": "<p>Le récapitulatif laisse du concret côté backend : <strong>support TCP et gRPC sur Workers</strong>, RPC entre Workers Python et JavaScript, tracing distribué en local pour déboguer avant la production, et CI/CD programmable écrit en code plutôt qu'en YAML.</p>"
+          },
+          "source": {
+            "url": "https://blog.cloudflare.com/agents-week-review-august-2026/",
+            "label": "blog.cloudflare.com"
+          }
+        },
+        {
+          "id": "prisma-8-rc1",
+          "tag": "breaking",
+          "date": "07 Aug 2026",
+          "title": {
+            "es": "Prisma abre la línea 8.0.0-rc y rompe los agregados",
+            "en": "Prisma opens the 8.0.0-rc line and breaks aggregates",
+            "fr": "Prisma ouvre la ligne 8.0.0-rc et casse les agrégats"
+          },
+          "body_html": {
+            "es": "<p>Se terminaron los <code>0.x</code>: ahora las releases se numeran <code>8.0.0-rc.N</code>. El cambio fuerte es semántico: cada agregado se lee a través del codec que declara su target, así que <code>count()</code> devuelve <strong><code>bigint</code></strong> en PostgreSQL y SQLite (<code>count === 2</code> ya es falso, y <code>JSON.stringify</code> revienta). En Postgres, <code>sum</code> sobre <code>int2</code>/<code>int4</code> se ensancha a bigint y <code>avg</code> vuelve como string decimal exacto. Ojo: un respin de RC todavía puede traer breaking changes.</p>",
+            "en": "<p>No more <code>0.x</code>: releases are now numbered <code>8.0.0-rc.N</code>. The heavy change is semantic — every aggregate reads back through the codec its target declares, so <code>count()</code> returns a <strong><code>bigint</code></strong> on PostgreSQL and SQLite (<code>count === 2</code> is now false, and <code>JSON.stringify</code> throws). On Postgres, <code>sum</code> over <code>int2</code>/<code>int4</code> widens to bigint and <code>avg</code> comes back as an exact decimal string. Note: an RC respin may still contain breaking changes.</p>",
+            "fr": "<p>Fini les <code>0.x</code> : les releases sont numérotées <code>8.0.0-rc.N</code>. Le changement lourd est sémantique — chaque agrégat est relu via le codec déclaré par sa cible, donc <code>count()</code> renvoie un <strong><code>bigint</code></strong> sur PostgreSQL et SQLite. Sur Postgres, <code>sum</code> sur <code>int2</code>/<code>int4</code> s'élargit en bigint et <code>avg</code> revient en chaîne décimale exacte.</p>"
+          },
+          "source": {
+            "url": "https://github.com/prisma/prisma/releases/tag/v8.0.0-rc.1",
+            "label": "github.com/prisma"
+          }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "chaindrop-worm",
+      "updates": [
+        {
+          "id": "chaindrop-worm",
+          "tag": "security",
+          "date": "06 Aug 2026",
+          "title": {
+            "es": "CHAINDROP: el gusano de npm que saca su C2 de un contrato en Ethereum",
+            "en": "CHAINDROP: the npm worm pulling its C2 from an Ethereum contract",
+            "fr": "CHAINDROP : le ver npm qui tire son C2 d'un contrat Ethereum"
+          },
+          "body_html": {
+            "es": "<p>Elastic Security Labs desarmó la campaña que arrancó con <code>keyv</code>: más de <strong>400 paquetes</strong> comprometidos, un hook <code>preinstall</code> que barre credenciales con más de 300 patrones (cloud, tooling de IA, plataformas de dev) y un payload que <strong>consulta un contrato inteligente de Ethereum</strong> para resolver su C2, así rotan endpoints sin tocar el código malicioso. Recomendación concreta y muy sana: poné un período de cuarentena antes de adoptar versiones nuevas — en pnpm eso es <code>minimumReleaseAge</code>.</p>",
+            "en": "<p>Elastic Security Labs took apart the campaign that started with <code>keyv</code>: over <strong>400 compromised packages</strong>, a <code>preinstall</code> hook harvesting credentials across 300+ patterns (cloud, AI tooling, dev platforms), and a payload that <strong>queries an Ethereum smart contract</strong> to resolve its C2, letting attackers rotate endpoints without touching the malicious code. Concrete advice: enforce a cooldown before adopting new versions — in pnpm that is <code>minimumReleaseAge</code>.</p>",
+            "fr": "<p>Elastic Security Labs a décortiqué la campagne partie de <code>keyv</code> : plus de <strong>400 paquets</strong> compromis, un hook <code>preinstall</code> qui aspire les identifiants via plus de 300 motifs, et un payload qui <strong>interroge un contrat intelligent Ethereum</strong> pour résoudre son C2. Conseil concret : imposez un délai de quarantaine avant d'adopter de nouvelles versions — dans pnpm, c'est <code>minimumReleaseAge</code>.</p>"
+          },
+          "source": {
+            "url": "https://www.elastic.co/security-labs/shai-hulud-chaindrop-npm-supply-chain",
+            "label": "elastic.co"
+          }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "deno-2-9-5",
+      "updates": [
+        {
+          "id": "deno-2-9-5",
+          "tag": "minor",
+          "date": "06 Aug 2026",
+          "title": {
+            "es": "Deno 2.9.5: backend QuickJS experimental y arreglos de permisos",
+            "en": "Deno 2.9.5: experimental QuickJS backend and permission fixes",
+            "fr": "Deno 2.9.5 : backend QuickJS expérimental et correctifs de permissions"
+          },
+          "body_html": {
+            "es": "<p>Patch cargado: <code>--unscoped</code> en <code>deno add</code> para aliasear paquetes sin scope, <code>--members</code> en <code>deno task</code> para correr tareas solo en los miembros del workspace, <code>textStream()</code> en Blob/Body y un <strong>backend experimental de QuickJS</strong>. Del lado serio: <code>node:dns.getServers()</code> ahora exige <code>--allow-sys</code> y <code>deno bundle</code> respeta los permisos de archivos en runtime.</p>",
+            "en": "<p>A loaded patch: <code>--unscoped</code> in <code>deno add</code> to alias packages by their unscoped name, <code>--members</code> in <code>deno task</code> to run tasks only in workspace members, <code>textStream()</code> on Blob/Body, and an <strong>experimental QuickJS backend</strong>. On the serious side: <code>node:dns.getServers()</code> now requires <code>--allow-sys</code> and <code>deno bundle</code> respects runtime file permissions.</p>",
+            "fr": "<p>Un patch bien rempli : <code>--unscoped</code> dans <code>deno add</code>, <code>--members</code> dans <code>deno task</code>, <code>textStream()</code> sur Blob/Body et un <strong>backend QuickJS expérimental</strong>. Côté sérieux : <code>node:dns.getServers()</code> exige désormais <code>--allow-sys</code> et <code>deno bundle</code> respecte les permissions de fichiers.</p>"
+          },
+          "source": {
+            "url": "https://github.com/denoland/deno/releases/tag/v2.9.5",
+            "label": "github.com/denoland"
+          }
+        },
+        {
+          "id": "kysely-0-29-5",
+          "tag": "patch",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "Kysely 0.29.5 y el costo real de TypeScript 7",
+            "en": "Kysely 0.29.5 and the real cost of TypeScript 7",
+            "fr": "Kysely 0.29.5 et le coût réel de TypeScript 7"
+          },
+          "body_html": {
+            "es": "<p>Además de arreglar una recursión infinita en el type check, el equipo dejó una observación que aplica a cualquier librería con tipos pesados: <strong>TypeScript 7 permite cálculos más profundos y eso dispara instanciaciones y wall clock</strong> en varios escenarios. Están optimizando la asignabilidad builder vs. builder. Si mantenés tipos genéricos ambiciosos, medí antes de festejar el compilador en Go.</p>",
+            "en": "<p>Beyond fixing an infinite type-check recursion, the team left a note that applies to any library with heavy types: <strong>TypeScript 7 allows deeper computations, which drives up instantiations and wall-clock time</strong> in several scenarios. They are optimizing builder-vs-builder assignability. If you maintain ambitious generic types, measure before celebrating the Go compiler.</p>",
+            "fr": "<p>Au-delà d'une récursion infinie corrigée dans le type check, l'équipe note un point valable pour toute librairie à types lourds : <strong>TypeScript 7 autorise des calculs plus profonds, ce qui augmente les instanciations et le temps réel</strong>. Ils optimisent l'assignabilité builder vs builder.</p>"
+          },
+          "source": {
+            "url": "https://github.com/kysely-org/kysely/releases/tag/v0.29.5",
+            "label": "github.com/kysely-org"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "hono-4-13-1",
+      "updates": [
+        {
+          "id": "hono-4-13-1",
+          "tag": "patch",
+          "date": "07 Aug 2026",
+          "title": {
+            "es": "Hono 4.13.1: router, streams y ETag",
+            "en": "Hono 4.13.1: router, streams and ETag",
+            "fr": "Hono 4.13.1 : router, streams et ETag"
+          },
+          "body_html": {
+            "es": "<p>Tres fixes chicos pero que muerden en producción: el trie-router ahora cuenta cada slash que consume un patrón, el helper de streams vuelve a tomar el lock del writer cuando <code>pipe()</code> tira error, y el middleware de ETag saltea métodos unsafe o respuestas de error en el caso no-<code>*</code>.</p>",
+            "en": "<p>Three small fixes that bite in production: the trie-router now counts every slash a pattern consumes, the stream helper re-acquires the writer lock when <code>pipe()</code> throws, and the ETag middleware skips unsafe methods or error responses in the non-<code>*</code> case.</p>",
+            "fr": "<p>Trois petits correctifs qui comptent en production : le trie-router compte chaque slash consommé par un motif, le helper de streams réacquiert le verrou du writer quand <code>pipe()</code> échoue, et le middleware ETag ignore les méthodes unsafe ou les réponses d'erreur.</p>"
+          },
+          "source": {
+            "url": "https://github.com/honojs/hono/releases/tag/v4.13.1",
+            "label": "github.com/honojs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "rds-mariadb-12-3",
+      "updates": [
+        {
+          "id": "rds-mariadb-12-3",
+          "tag": "release",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "Amazon RDS soporta MariaDB 12.3",
+            "en": "Amazon RDS now supports MariaDB 12.3",
+            "fr": "Amazon RDS prend en charge MariaDB 12.3"
+          },
+          "body_html": {
+            "es": "<p>RDS suma MariaDB 12.3 al catálogo gestionado. Si venís arrastrando una 10.x, este es el momento de planificar el salto: el ciclo de soporte de las versiones viejas no se estira solo.</p>",
+            "en": "<p>RDS adds MariaDB 12.3 to its managed catalog. If you are still dragging a 10.x, this is the moment to plan the jump — support windows for old versions do not stretch by themselves.</p>",
+            "fr": "<p>RDS ajoute MariaDB 12.3 à son catalogue managé. Si vous traînez encore une 10.x, c'est le moment de planifier la migration.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/amazon-rds-mariadb-1232-available/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "opensearch-serverless-collections",
+          "tag": "notable",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "OpenSearch Serverless: hasta 10.000 colecciones por grupo",
+            "en": "OpenSearch Serverless: up to 10,000 collections per group",
+            "fr": "OpenSearch Serverless : jusqu'à 10 000 collections par groupe"
+          },
+          "body_html": {
+            "es": "<p>El límite pasa a <strong>10.000 colecciones por collection group</strong>. Para arquitecturas multi-tenant donde cada cliente tiene su índice aislado, esto cambia el cálculo: menos sharding artificial a nivel cuenta, menos plumbing de enrutado.</p>",
+            "en": "<p>The ceiling moves to <strong>10,000 collections per collection group</strong>. For multi-tenant architectures where each customer gets an isolated index, this changes the math: less artificial account-level sharding, less routing plumbing.</p>",
+            "fr": "<p>Le plafond passe à <strong>10 000 collections par collection group</strong>. Pour les architectures multi-tenant où chaque client dispose d'un index isolé, cela change le calcul.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/amazon-opensearch-serverless-supports-10000-collections-per-collection-group/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "k8s-1-37-rc0",
+      "updates": [
+        {
+          "id": "k8s-1-37-rc0",
+          "tag": "beta",
+          "date": "06 Aug 2026",
+          "title": {
+            "es": "Kubernetes v1.37.0-rc.0 disponible para probar",
+            "en": "Kubernetes v1.37.0-rc.0 available for testing",
+            "fr": "Kubernetes v1.37.0-rc.0 disponible pour tests"
+          },
+          "body_html": {
+            "es": "<p>Primera release candidate de la 1.37, con GA prevista para fines de agosto. Traé tus clusters de staging ahora, no después: la 1.37 sigue empujando la salida de cgroup v1 y la deprecación del modo <code>ipvs</code> en kube-proxy.</p>",
+            "en": "<p>First release candidate for 1.37, with GA expected late August. Bring your staging clusters now, not later: 1.37 keeps pushing cgroup v1 toward the exit and continues the <code>ipvs</code> kube-proxy mode deprecation.</p>",
+            "fr": "<p>Première release candidate de la 1.37, GA attendue fin août. Testez vos clusters de staging maintenant : 1.37 poursuit la sortie de cgroup v1 et la dépréciation du mode <code>ipvs</code> de kube-proxy.</p>"
+          },
+          "source": {
+            "url": "https://github.com/kubernetes/kubernetes/releases/tag/v1.37.0-rc.0",
+            "label": "github.com/kubernetes"
+          }
+        },
+        {
+          "id": "gh-rulesets-migration",
+          "tag": "notable",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "GitHub migra automáticamente branch protection a rulesets",
+            "en": "GitHub automatically migrates branch protection to rulesets",
+            "fr": "GitHub migre automatiquement branch protection vers rulesets"
+          },
+          "body_html": {
+            "es": "<p>Las reglas de protección de rama pasan a <strong>repository rulesets</strong> de forma automática. Rulesets es el modelo que recibe features nuevas hace rato; si tu organización aplica políticas por API o Terraform, revisá los módulos antes de que la migración te cambie el estado bajo los pies.</p>",
+            "en": "<p>Branch protection rules migrate automatically to <strong>repository rulesets</strong>. Rulesets is where new features have been landing for a while; if your org applies policy via API or Terraform, review those modules before the migration shifts state under you.</p>",
+            "fr": "<p>Les règles de protection de branche migrent automatiquement vers les <strong>repository rulesets</strong>. Si votre organisation applique ses politiques via API ou Terraform, vérifiez ces modules avant que la migration ne change l'état.</p>"
+          },
+          "source": {
+            "url": "https://github.blog/changelog/2026-08-11-automatically-migrate-branch-protection-rules-to-repository-rulesets",
+            "label": "github.blog"
+          }
+        },
+        {
+          "id": "aws-secrets-jenkins-sonarqube",
+          "tag": "release",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "Secrets Manager gestiona secretos externos de Jenkins y SonarQube",
+            "en": "Secrets Manager adds managed external secrets for Jenkins and SonarQube",
+            "fr": "Secrets Manager gère les secrets externes de Jenkins et SonarQube"
+          },
+          "body_html": {
+            "es": "<p>AWS suma soporte de secretos externos gestionados para <strong>Jenkins y SonarQube</strong>. Traducción para el que mantiene el pipeline: menos tokens eternos hardcodeados en la config del CI y rotación gestionada desde un solo lugar.</p>",
+            "en": "<p>AWS adds managed external secrets support for <strong>Jenkins and SonarQube</strong>. Translation for whoever owns the pipeline: fewer eternal tokens hardcoded in CI config, and rotation managed from one place.</p>",
+            "fr": "<p>AWS ajoute la prise en charge des secrets externes managés pour <strong>Jenkins et SonarQube</strong> : moins de tokens éternels codés en dur dans la config CI et une rotation gérée depuis un seul endroit.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/secrets-manager-integration-jenkins-sonarqube/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "ec2-application-status-checks",
+          "tag": "notable",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "EC2 estrena application status checks",
+            "en": "EC2 introduces application status checks",
+            "fr": "EC2 introduit les application status checks"
+          },
+          "body_html": {
+            "es": "<p>A los status checks de instancia y sistema se suma uno a nivel <strong>aplicación</strong>. Es health checking más cerca de lo que al usuario le importa: la instancia puede estar viva y tu proceso muerto, y hasta ahora esa diferencia la tenías que instrumentar vos.</p>",
+            "en": "<p>On top of instance and system status checks, EC2 adds an <strong>application</strong>-level one. That is health checking closer to what users actually care about: the instance can be alive while your process is dead, and until now you had to instrument that gap yourself.</p>",
+            "fr": "<p>Aux status checks d'instance et système s'ajoute un niveau <strong>application</strong> : un health check plus proche de ce qui compte pour l'utilisateur, l'instance pouvant être vivante alors que votre process est mort.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/amazon-ec2-application-status-checks",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "buildpacks-hardening",
+          "tag": "notable",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "Buildpacks mueven el hardening de contenedores fuera del Dockerfile",
+            "en": "Buildpacks move container hardening away from the Dockerfile",
+            "fr": "Les buildpacks déplacent le durcissement hors du Dockerfile"
+          },
+          "body_html": {
+            "es": "<p>InfoQ analiza cómo los buildpacks corren el punto de control del parcheo de imágenes: en vez de que cada equipo mantenga su Dockerfile con su base y sus CVEs, la plataforma reconstruye y repara las capas. Es <em>Screaming Architecture</em> aplicada al build: la responsabilidad vive donde corresponde, no copiada 40 veces.</p>",
+            "en": "<p>InfoQ examines how buildpacks shift the control point for image patching: instead of every team maintaining its own Dockerfile, base image and CVEs, the platform rebuilds and repairs layers. It is responsibility placed where it belongs instead of copy-pasted forty times.</p>",
+            "fr": "<p>InfoQ analyse comment les buildpacks déplacent le point de contrôle du patching d'images : au lieu que chaque équipe maintienne son Dockerfile, la plateforme reconstruit et répare les couches.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/08/buildpacks-dockerfile-patching/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "canva-session-revocation",
+      "updates": [
+        {
+          "id": "canva-session-revocation",
+          "tag": "notable",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "Canva revoca cientos de millones de sesiones usando S3 como base de datos",
+            "en": "Canva revokes hundreds of millions of sessions using S3 as a database",
+            "fr": "Canva révoque des centaines de millions de sessions avec S3"
+          },
+          "body_html": {
+            "es": "<p>Caso de estudio hermoso. Problema: cada deploy, cientos de gateways golpeaban MySQL con millones de requests para chequear revocaciones. Solución: guardar la ventana de 12 horas en <strong>S3</strong>, partida en objetos de 30 minutos, con cada revocación como un registro binario de <strong>16 bytes</strong> (principal + timestamp), arrays ordenados en memoria y GET/PUT condicionales para concurrencia optimista. Resultado: <strong>87,5% menos memoria</strong>, más de 2.000 revocaciones por segundo y la carga de base escalando con las escrituras en vez de con la cantidad de instancias. La lección no es <em>usá S3</em>: es elegir la estructura de datos antes que el datastore.</p>",
+            "en": "<p>A beautiful case study. Problem: on every deploy, hundreds of gateways hammered MySQL with millions of requests to check revocations. Solution: keep the 12-hour window in <strong>S3</strong>, split into 30-minute objects, each revocation a <strong>16-byte</strong> binary record (principal + timestamp), sorted arrays in memory and conditional GET/PUT for optimistic concurrency. Result: <strong>87.5% less memory</strong>, over 2,000 revocations per second, and database load scaling with writes instead of gateway instance count. The lesson is not <em>use S3</em> — it is pick the data structure before the datastore.</p>",
+            "fr": "<p>Une belle étude de cas. Problème : à chaque déploiement, des centaines de gateways martelaient MySQL. Solution : conserver la fenêtre de 12 heures dans <strong>S3</strong>, découpée en objets de 30 minutes, chaque révocation étant un enregistrement binaire de <strong>16 octets</strong>, avec des GET/PUT conditionnels pour la concurrence optimiste. Résultat : <strong>87,5 % de mémoire en moins</strong> et plus de 2 000 révocations par seconde.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/08/canva-session-revocation-scale/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "netflix-service-map",
+          "tag": "notable",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "Cómo Netflix escaló su mapa de servicios en tiempo real",
+            "en": "How Netflix scaled its real-time service map",
+            "fr": "Comment Netflix a mis à l'échelle sa carte de services en temps réel"
+          },
+          "body_html": {
+            "es": "<p>Topología de servicios viva, no un diagrama de Confluence de hace dos años. Si tu organización tiene más de veinte servicios y nadie puede decir quién llama a quién <strong>hoy</strong>, este es el tipo de observabilidad que hay que construir antes del próximo incidente, no durante.</p>",
+            "en": "<p>A live service topology, not a two-year-old Confluence diagram. If your org runs more than twenty services and nobody can say who calls whom <strong>today</strong>, this is the kind of observability to build before the next incident, not during it.</p>",
+            "fr": "<p>Une topologie de services vivante, pas un diagramme Confluence vieux de deux ans. Si personne ne peut dire qui appelle qui <strong>aujourd'hui</strong>, c'est le type d'observabilité à construire avant le prochain incident.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/08/netflix-service-topology/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "comprehension-architecture",
+          "tag": "notable",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "La comprensión como característica arquitectónica",
+            "en": "Comprehension as an architectural characteristic",
+            "fr": "La compréhension comme caractéristique architecturale"
+          },
+          "body_html": {
+            "es": "<p>Tesis del artículo: <strong>un sistema que no se entiende no puede evolucionar de forma segura</strong>. Y ojo, esto pega justo en la era de código generado por IA: si nadie del equipo puede explicar por qué una capa existe, la deuda no es técnica, es cognitiva. Conceptos antes que código — siempre.</p>",
+            "en": "<p>The thesis: <strong>a system that is not understood cannot evolve safely</strong>. And it lands hard in the era of AI-generated code — if nobody on the team can explain why a layer exists, the debt is not technical, it is cognitive. Concepts before code, always.</p>",
+            "fr": "<p>La thèse : <strong>un système que l'on ne comprend pas ne peut pas évoluer en sécurité</strong>. À l'ère du code généré par IA, si personne ne peut expliquer pourquoi une couche existe, la dette n'est pas technique mais cognitive.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/articles/system-comprehension-evolutionary-architecture/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "pinterest-terraform-pipeline",
+          "tag": "minor",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "Pinterest centraliza su infra AWS en un pipeline de Terraform",
+            "en": "Pinterest centralizes AWS infra in one Terraform pipeline",
+            "fr": "Pinterest centralise son infra AWS dans un pipeline Terraform"
+          },
+          "body_html": {
+            "es": "<p>Un solo pipeline de Terraform como punto de control para asegurar la infraestructura a escala. La idea de fondo: los guardrails que se aplican en un único camino se cumplen; los que dependen de que cada equipo se acuerde, no.</p>",
+            "en": "<p>A single Terraform pipeline as the control point for securing infrastructure at scale. The underlying idea: guardrails enforced on one path get followed; guardrails that depend on every team remembering do not.</p>",
+            "fr": "<p>Un unique pipeline Terraform comme point de contrôle pour sécuriser l'infrastructure à grande échelle : les garde-fous appliqués sur un seul chemin sont respectés, les autres non.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/08/pinterest-secures-aws-infra/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "github-code-quality",
+          "tag": "notable",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "GitHub Code Quality apunta a la mantenibilidad del código generado por IA",
+            "en": "GitHub Code Quality targets maintainability as AI code grows",
+            "fr": "GitHub Code Quality vise la maintenabilité du code généré par IA"
+          },
+          "body_html": {
+            "es": "<p>Con más código generado entrando a los repos, GitHub mueve el foco de «¿compila?» a «¿esto se puede mantener?». Nosotros dirigimos, la IA ejecuta — pero el criterio de calidad tiene que estar en el pipeline, no en la buena voluntad del reviewer del viernes a las 18.</p>",
+            "en": "<p>With more generated code landing in repos, GitHub shifts focus from «does it compile?» to «can this be maintained?». We direct, AI executes — but the quality bar has to live in the pipeline, not in the goodwill of the Friday-evening reviewer.</p>",
+            "fr": "<p>Avec toujours plus de code généré dans les dépôts, GitHub déplace le curseur de « est-ce que ça compile ? » vers « est-ce maintenable ? ». Le critère de qualité doit vivre dans le pipeline.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/08/github-code-quality/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "pnpm-11-21-0",
+      "updates": [
+        {
+          "id": "pnpm-11-21-0",
+          "tag": "release",
+          "date": "09 Aug 2026",
+          "title": {
+            "es": "pnpm 11.21.0: menos re-resoluciones y aviso por sudo",
+            "en": "pnpm 11.21.0: fewer re-resolutions and a sudo warning",
+            "fr": "pnpm 11.21.0 : moins de re-résolutions et avertissement sudo"
+          },
+          "body_html": {
+            "es": "<p>Dos mejoras que se sienten en el día a día del monorepo: sacar una dependencia del <code>package.json</code> y reinstalar <strong>ya no re-resuelve el grafo entero</strong>, y cambiar una entrada del catálogo a otra versión exacta tampoco. Además, correr <code>pnpm setup</code> o <code>pnpm add --global</code> con <code>sudo</code> ahora avisa — y en la v12 va a fallar con <code>ERR_PNPM_SUDO_NOT_SUPPORTED</code>.</p>",
+            "en": "<p>Two wins you feel daily in a monorepo: removing a dependency from <code>package.json</code> and reinstalling <strong>no longer re-resolves the whole graph</strong>, and neither does changing a catalog entry to a different exact version. Also, running <code>pnpm setup</code> or <code>pnpm add --global</code> under <code>sudo</code> now warns — and will fail with <code>ERR_PNPM_SUDO_NOT_SUPPORTED</code> in v12.</p>",
+            "fr": "<p>Deux gains quotidiens en monorepo : retirer une dépendance de <code>package.json</code> puis réinstaller <strong>ne re-résout plus tout le graphe</strong>, idem pour un changement de version exacte dans le catalogue. De plus, <code>pnpm setup</code> sous <code>sudo</code> déclenche un avertissement — et échouera en v12.</p>"
+          },
+          "source": {
+            "url": "https://github.com/pnpm/pnpm/releases/tag/v11.21.0",
+            "label": "github.com/pnpm"
+          }
+        },
+        {
+          "id": "turborepo-2-10-9",
+          "tag": "patch",
+          "date": "07 Aug 2026",
+          "title": {
+            "es": "Turborepo 2.10.9: tanda gorda de performance",
+            "en": "Turborepo 2.10.9: a big performance batch",
+            "fr": "Turborepo 2.10.9 : gros lot de performance"
+          },
+          "body_html": {
+            "es": "<p>Release casi íntegramente de performance: parseo rápido de lockfiles de pnpm, indexado de nodos del workspace por nombre, memoización de la inferencia de framework durante el hashing de tareas y globs de prefijo literal sin compilar. En monorepos grandes, el tiempo de arranque de <code>turbo</code> es tiempo perdido en cada CI run — este parche va justo ahí.</p>",
+            "en": "<p>An almost entirely performance-driven release: fast pnpm lockfile parsing, workspace nodes indexed by name, framework inference memoized during task hashing, and literal-prefix globs walked without compilation. In big monorepos, <code>turbo</code> startup time is wasted time on every CI run — this patch aims right there.</p>",
+            "fr": "<p>Une release quasi entièrement axée performance : parsing rapide des lockfiles pnpm, indexation des nœuds du workspace par nom, mémoïsation de l'inférence de framework et globs à préfixe littéral sans compilation.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vercel/turborepo/releases/tag/v2.10.9",
+            "label": "github.com/vercel"
+          }
+        },
+        {
+          "id": "sveltekit-3-next-20",
+          "tag": "beta",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "SvelteKit 3.0.0-next.20 reordena los tipos del server",
+            "en": "SvelteKit 3.0.0-next.20 reshuffles server types",
+            "fr": "SvelteKit 3.0.0-next.20 réorganise les types serveur"
+          },
+          "body_html": {
+            "es": "<p>Breaking changes de superficie de tipos en la línea 3: los tipos de <em>remote functions</em> se mudan a <code>$app/server</code>, los de hooks a <code>@sveltejs/kit/hooks</code> y los de env a <code>@sveltejs/kit/env</code>; además se quita la definición <code>#lib</code> de <code>paths</code>, lo que obliga a extensiones de módulo explícitas. Suma logging de respuestas más útil.</p>",
+            "en": "<p>Type-surface breaking changes on the v3 line: remote-function types move to <code>$app/server</code>, hook types to <code>@sveltejs/kit/hooks</code> and env types to <code>@sveltejs/kit/env</code>; the <code>#lib</code> definition is dropped from <code>paths</code>, which forces explicit module extensions. Plus better response logging.</p>",
+            "fr": "<p>Breaking changes sur la surface de types en v3 : les types des remote functions passent dans <code>$app/server</code>, ceux des hooks dans <code>@sveltejs/kit/hooks</code> et ceux de l'env dans <code>@sveltejs/kit/env</code> ; la définition <code>#lib</code> disparaît de <code>paths</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs%2Fkit%403.0.0-next.20",
+            "label": "github.com/sveltejs"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Semana de release candidates: Fastify 6, Vitest 5, Prisma 8, Kubernetes 1.37 y SvelteKit 3 están todos en preview al mismo tiempo. Aprovechá para migrar en staging ahora, cuando romper sale barato.",
+      "en": "Release-candidate week: Fastify 6, Vitest 5, Prisma 8, Kubernetes 1.37 and SvelteKit 3 are all in preview at once. Migrate in staging now, while breaking things is cheap.",
+      "fr": "Semaine des release candidates : Fastify 6, Vitest 5, Prisma 8, Kubernetes 1.37 et SvelteKit 3 sont tous en preview. Migrez en staging maintenant, quand casser coûte peu."
+    },
+    {
+      "es": "El costo de los tipos vuelve a la conversación: Kysely avisa que TypeScript 7 permite cálculos más profundos y eso dispara instanciaciones. Compilador más rápido no es lo mismo que tipos gratis.",
+      "en": "The cost of types is back on the table: Kysely warns that TypeScript 7 allows deeper computations, which drives instantiations up. A faster compiler is not the same as free types.",
+      "fr": "Le coût des types revient sur la table : Kysely prévient que TypeScript 7 autorise des calculs plus profonds, faisant grimper les instanciations. Un compilateur plus rapide n'égale pas des types gratuits."
+    },
+    {
+      "es": "Después de CHAINDROP, la cuarentena de versiones deja de ser paranoia y pasa a ser configuración: esperar unos días antes de adoptar una release nueva es la defensa más barata contra un preinstall malicioso.",
+      "en": "After CHAINDROP, version cooldowns stop being paranoia and become configuration: waiting a few days before adopting a new release is the cheapest defense against a malicious preinstall.",
+      "fr": "Après CHAINDROP, la quarantaine des versions cesse d'être de la paranoïa : attendre quelques jours avant d'adopter une nouvelle release est la défense la moins chère contre un preinstall malveillant."
+    }
+  ]
+}

@@ -1,0 +1,616 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 13 de agosto de 2026",
+    "en": "Backend & Fullstack — August 13, 2026",
+    "fr": "Backend & Fullstack — 13 août 2026"
+  },
+  "description": {
+    "es": "MCP elimina las sesiones del protocolo, pnpm 12 activa frozen lockfile por defecto en CI, Terraform 1.16 llega a RC y Netflix reemplaza su scheduler de batch por Kueue.",
+    "en": "MCP drops protocol sessions, pnpm 12 turns on frozen lockfile by default in CI, Terraform 1.16 hits RC, and Netflix replaces its in-house batch scheduler with Kueue.",
+    "fr": "MCP supprime les sessions du protocole, pnpm 12 active frozen lockfile par défaut en CI, Terraform 1.16 atteint la RC et Netflix remplace son scheduler batch par Kueue."
+  },
+  "pubDate": "2026-08-13",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "MCP se vuelve stateless: adiós sesiones",
+        "en": "MCP goes stateless: sessions removed",
+        "fr": "MCP devient stateless : sessions supprimées"
+      },
+      "anchor": "mcp-stateless-spec",
+      "icon": "lucide:layers"
+    },
+    {
+      "text": {
+        "es": "pnpm 12: frozen lockfile por defecto en CI",
+        "en": "pnpm 12: frozen lockfile by default in CI",
+        "fr": "pnpm 12 : frozen lockfile par défaut en CI"
+      },
+      "anchor": "pnpm-12-rc4",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "Terraform 1.16 RC: import dentro de módulos",
+        "en": "Terraform 1.16 RC: import blocks inside modules",
+        "fr": "Terraform 1.16 RC : import dans les modules"
+      },
+      "anchor": "terraform-1-16-rc1",
+      "icon": "lucide:cloud"
+    },
+    {
+      "text": {
+        "es": "Netflix jubila su batch scheduler por Kueue",
+        "en": "Netflix retires its batch scheduler for Kueue",
+        "fr": "Netflix remplace son scheduler batch par Kueue"
+      },
+      "anchor": "netflix-kueue",
+      "icon": "simple-icons:kubernetes"
+    },
+    {
+      "text": {
+        "es": "BullMQ 6.1: migraciones Postgres explícitas",
+        "en": "BullMQ 6.1: explicit Postgres schema migrations",
+        "fr": "BullMQ 6.1 : migrations Postgres explicites"
+      },
+      "anchor": "bullmq-6-1-0",
+      "icon": "lucide:database"
+    },
+    {
+      "text": {
+        "es": "SvelteKit 3 sigue moviendo su rama next",
+        "en": "SvelteKit 3 keeps its next branch moving",
+        "fr": "SvelteKit 3 continue de faire avancer sa branche next"
+      },
+      "anchor": "sveltekit-3-next22",
+      "icon": "lucide:server"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "mcp-stateless-spec",
+      "updates": [
+        {
+          "id": "mcp-stateless-spec",
+          "tag": "breaking",
+          "date": "12 Aug 2026",
+          "title": {
+            "es": "MCP elimina las sesiones del protocolo (spec 2026-07-28)",
+            "en": "MCP removes protocol sessions (spec 2026-07-28)",
+            "fr": "MCP supprime les sessions du protocole (spec 2026-07-28)"
+          },
+          "body_html": {
+            "es": "<p>La spec <code>2026-07-28</code> de MCP borra las sesiones: se van el handshake de inicialización y el session tracking, así que cualquier request puede rutear a cualquier instancia sin session pinning. Suma dos headers HTTP obligatorios, <code>Mcp-Method</code> y <code>Mcp-Name</code>, para que el gateway haga rate limiting, routing y metering sin parsear el body JSON. Ojo, media comunidad ya está preguntando si esto no convierte a MCP en una API REST con otro nombre — y no les falta razón: si tenías infra de load balancing peleando con sesiones pegajosas, esto te la simplifica de golpe.</p>",
+            "en": "<p>The MCP <code>2026-07-28</code> spec drops sessions entirely: the initialization handshake and session tracking are gone, so any request can route to any instance without session pinning. It adds two mandatory HTTP headers, <code>Mcp-Method</code> and <code>Mcp-Name</code>, so gateways can do rate limiting, routing and metering without parsing the JSON body. Plenty of developers are already asking whether this just turns MCP back into a plain API — but if your load balancing infra was fighting sticky sessions, this removes the problem outright.</p>",
+            "fr": "<p>La spec MCP <code>2026-07-28</code> supprime les sessions : plus de handshake d'initialisation ni de session tracking, donc n'importe quelle requête peut être routée vers n'importe quelle instance sans session pinning. Elle ajoute deux en-têtes HTTP obligatoires, <code>Mcp-Method</code> et <code>Mcp-Name</code>, pour que les gateways fassent rate limiting, routage et metering sans parser le corps JSON. Beaucoup se demandent si cela ne ramène pas MCP à une simple API — mais si votre infra de load balancing luttait contre les sessions collantes, le problème disparaît.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/mcp-stateless-gateway/", "label": "infoq.com" }
+        },
+        {
+          "id": "pnpm-12-rc4",
+          "tag": "breaking",
+          "date": "12 Aug 2026",
+          "title": {
+            "es": "pnpm 12.0.0-rc.4: frozen lockfile por defecto en CI",
+            "en": "pnpm 12.0.0-rc.4: frozen lockfile by default in CI",
+            "fr": "pnpm 12.0.0-rc.4 : frozen lockfile par défaut en CI"
+          },
+          "body_html": {
+            "es": "<p>La cuarta RC de pnpm 12 hace que <code>pnpm install</code> en CI use modo frozen lockfile por defecto cuando ya existe un <code>pnpm-lock.yaml</code> no vacío: un lockfile desactualizado ahora falla en vez de reescribirse en silencio. Además renombra <code>cleanupUnusedCatalogs</code> a <code>catalogPrune</code>, agrega <code>minimumReleaseAgeExcludePrune</code> y <code>syncInjectedDepsAfterScripts</code>, y hace que los global installs cambien de versión de forma atómica. La joya escondida: resolver peer dependencies en workspaces con muchos ciclos ahora usa menos de la mitad de memoria y va el doble de rápido.</p>",
+            "en": "<p>The fourth pnpm 12 RC makes <code>pnpm install</code> in CI default to frozen lockfile mode whenever a non-empty <code>pnpm-lock.yaml</code> exists: an outdated lockfile now fails instead of being silently rewritten. It also renames <code>cleanupUnusedCatalogs</code> to <code>catalogPrune</code>, adds <code>minimumReleaseAgeExcludePrune</code> and <code>syncInjectedDepsAfterScripts</code>, and makes global installs switch versions atomically. The hidden gem: resolving peer dependencies in workspaces full of cycles now uses less than half the memory and runs about twice as fast.</p>",
+            "fr": "<p>La quatrième RC de pnpm 12 fait que <code>pnpm install</code> en CI passe par défaut en mode frozen lockfile dès qu'un <code>pnpm-lock.yaml</code> non vide existe : un lockfile obsolète échoue au lieu d'être réécrit en silence. Elle renomme aussi <code>cleanupUnusedCatalogs</code> en <code>catalogPrune</code>, ajoute <code>minimumReleaseAgeExcludePrune</code> et <code>syncInjectedDepsAfterScripts</code>, et rend les installs globaux atomiques. La pépite : la résolution des peer dependencies dans les workspaces à cycles multiples consomme moins de la moitié de la mémoire et va deux fois plus vite.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.0.0-rc.4", "label": "github.com" }
+        },
+        {
+          "id": "terraform-1-16-rc1",
+          "tag": "release",
+          "date": "12 Aug 2026",
+          "title": {
+            "es": "Terraform 1.16.0-rc1: import dentro de módulos y private data en el plan",
+            "en": "Terraform 1.16.0-rc1: import inside modules and planned private data",
+            "fr": "Terraform 1.16.0-rc1 : import dans les modules et private data au plan"
+          },
+          "body_html": {
+            "es": "<p>Terraform 1.16 entra en RC con bloques <code>import</code> soportados dentro de módulos, un bloque <code>store</code> en <code>terraform_data</code> para arrastrar valores efímeros y sensibles entre plan y apply, y private data del provider persistida en el plan. Suma <code>on_failure</code> con modos <code>halt</code>, <code>taint</code> o <code>continue</code> en action triggers, y salida <code>-json</code> en <code>state show</code> y <code>workspace list</code>. Si automatizás pipelines de IaC, esos dos <code>-json</code> te sacan un montón de parsing frágil de encima.</p>",
+            "en": "<p>Terraform 1.16 reaches RC with <code>import</code> blocks supported inside modules, a <code>store</code> block on <code>terraform_data</code> to carry ephemeral and sensitive values across plan and apply, and provider private data persisted in the plan. It adds <code>on_failure</code> modes of <code>halt</code>, <code>taint</code> or <code>continue</code> on action triggers, plus <code>-json</code> output for <code>state show</code> and <code>workspace list</code>. If you automate IaC pipelines, those two <code>-json</code> flags kill a lot of brittle text parsing.</p>",
+            "fr": "<p>Terraform 1.16 passe en RC avec les blocs <code>import</code> pris en charge dans les modules, un bloc <code>store</code> sur <code>terraform_data</code> pour transporter des valeurs éphémères et sensibles entre plan et apply, et les private data du provider persistées dans le plan. S'ajoutent les modes <code>on_failure</code> <code>halt</code>, <code>taint</code> ou <code>continue</code> sur les action triggers, et une sortie <code>-json</code> pour <code>state show</code> et <code>workspace list</code>.</p>"
+          },
+          "source": { "url": "https://github.com/hashicorp/terraform/releases/tag/v1.16.0-rc1", "label": "github.com" }
+        },
+        {
+          "id": "netflix-kueue",
+          "tag": "notable",
+          "date": "12 Aug 2026",
+          "title": {
+            "es": "Netflix jubila su batch scheduler propio y adopta Kueue",
+            "en": "Netflix retires its in-house batch scheduler for Kueue",
+            "fr": "Netflix abandonne son scheduler batch maison pour Kueue"
+          },
+          "body_html": {
+            "es": "<p>Netflix migró sus workloads batch desde Compute Managed Batch, su sistema propio, a <strong>Kueue</strong>, la solución de job queueing nativa de Kubernetes. Mapearon los tenants internos a Cohorts y ClusterQueues manteniendo paridad de API para que la migración fuera transparente para los usuarios, y usan fair sharing basado en preemption para prestar capacidad ociosa entre tenants. Millones de workloads batch en producción sobre upstream: la mejor señal de que build-your-own scheduler ya no paga.</p>",
+            "en": "<p>Netflix migrated its batch workloads from Compute Managed Batch, its homegrown system, to <strong>Kueue</strong>, the Kubernetes-native job queueing project. Internal tenants were mapped onto Cohorts and ClusterQueues while keeping API parity so the move stayed transparent for users, and preemption-based fair sharing lets idle capacity be lent between tenants. Millions of batch workloads now run in production on upstream — a strong signal that build-your-own schedulers no longer pay off.</p>",
+            "fr": "<p>Netflix a migré ses workloads batch depuis Compute Managed Batch, son système maison, vers <strong>Kueue</strong>, la solution de job queueing native Kubernetes. Les tenants internes ont été mappés sur des Cohorts et ClusterQueues en conservant la parité d'API, et le fair sharing par préemption permet de prêter la capacité inutilisée entre tenants. Des millions de workloads batch tournent désormais en production sur l'upstream.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/netflix-kueue-kubernetes-batch/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "workerd-20260813",
+      "updates": [
+        {
+          "id": "workerd-20260813",
+          "tag": "minor",
+          "date": "13 Aug 2026",
+          "title": {
+            "es": "workerd v1.20260813.1: el runtime de Workers sigue con cadencia diaria",
+            "en": "workerd v1.20260813.1: the Workers runtime keeps its daily cadence",
+            "fr": "workerd v1.20260813.1 : le runtime Workers garde sa cadence quotidienne"
+          },
+          "body_html": {
+            "es": "<p>Cloudflare publicó otra build diaria de <code>workerd</code>, el runtime open source detrás de Workers. Si corrés Workers self-hosted o usás <code>wrangler dev</code> contra una versión pineada, vale la pena seguir estos tags: el compat date de tu Worker se resuelve contra estas builds y las diferencias de comportamiento aparecen ahí primero.</p>",
+            "en": "<p>Cloudflare shipped another daily build of <code>workerd</code>, the open-source runtime behind Workers. If you self-host Workers or run <code>wrangler dev</code> against a pinned version, these tags are worth tracking: your Worker compat date resolves against these builds, and behavior differences show up here first.</p>",
+            "fr": "<p>Cloudflare a publié une nouvelle build quotidienne de <code>workerd</code>, le runtime open source derrière Workers. Si vous auto-hébergez Workers ou lancez <code>wrangler dev</code> sur une version épinglée, ces tags méritent d'être suivis : la compat date de votre Worker se résout sur ces builds.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workerd/releases/tag/v1.20260813.1", "label": "github.com" }
+        },
+        {
+          "id": "oxc-0-144",
+          "tag": "release",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "Oxc publica crates 0.144.0 y apps 1.78.0",
+            "en": "Oxc ships crates 0.144.0 and apps 1.78.0",
+            "fr": "Oxc publie crates 0.144.0 et apps 1.78.0"
+          },
+          "body_html": {
+            "es": "<p>El toolchain de JavaScript escrito en Rust siguió su cadencia con <code>crates_v0.144.0</code> y <code>apps_v1.78.0</code> (oxlint y compañía). Para monorepos TypeScript grandes, oxlint sigue siendo la vía más rápida para bajar el tiempo de lint sin reescribir tu config entera.</p>",
+            "en": "<p>The Rust-based JavaScript toolchain kept its cadence with <code>crates_v0.144.0</code> and <code>apps_v1.78.0</code> (oxlint and friends). For large TypeScript monorepos, oxlint remains the quickest way to cut lint time without rewriting your entire config.</p>",
+            "fr": "<p>Le toolchain JavaScript en Rust poursuit sa cadence avec <code>crates_v0.144.0</code> et <code>apps_v1.78.0</code> (oxlint et consorts). Pour les gros monorepos TypeScript, oxlint reste le moyen le plus rapide de réduire le temps de lint.</p>"
+          },
+          "source": { "url": "https://github.com/oxc-project/oxc/releases/tag/apps_v1.78.0", "label": "github.com" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "effect-4-rc108",
+      "updates": [
+        {
+          "id": "effect-4-rc108",
+          "tag": "beta",
+          "date": "12 Aug 2026",
+          "title": {
+            "es": "Effect 4.0.0-rc.108: la línea 4 pasa de beta a RC",
+            "en": "Effect 4.0.0-rc.108: the 4.x line moves from beta to RC",
+            "fr": "Effect 4.0.0-rc.108 : la ligne 4 passe de bêta à RC"
+          },
+          "body_html": {
+            "es": "<p>Effect movió su línea 4.0 de <code>beta</code> a <code>rc</code> y ya va por la <code>rc.108</code>, con todo el ecosistema versionado en lockstep: <code>@effect/vitest</code>, <code>@effect/sql-*</code> para SQLite (node, bun, wasm, Durable Objects), pglite y compañía. Si estás evaluando Effect para backend, este es el momento de armar un spike: la superficie de API se está estabilizando, pero todavía no la fijes en producción.</p>",
+            "en": "<p>Effect moved its 4.0 line from <code>beta</code> to <code>rc</code> and is already at <code>rc.108</code>, with the whole ecosystem versioned in lockstep: <code>@effect/vitest</code>, the <code>@effect/sql-*</code> drivers for SQLite (node, bun, wasm, Durable Objects), pglite and friends. If you are evaluating Effect for backend work, now is the moment for a spike — the API surface is stabilizing, but do not pin it in production yet.</p>",
+            "fr": "<p>Effect a fait passer sa ligne 4.0 de <code>beta</code> à <code>rc</code> et en est déjà à <code>rc.108</code>, tout l'écosystème étant versionné en lockstep : <code>@effect/vitest</code>, les drivers <code>@effect/sql-*</code> pour SQLite (node, bun, wasm, Durable Objects), pglite, etc. Bon moment pour un spike, mais pas encore pour la production.</p>"
+          },
+          "source": { "url": "https://github.com/Effect-TS/effect/releases/tag/effect%404.0.0-rc.108", "label": "github.com" }
+        },
+        {
+          "id": "apollo-router-2-16-2-rc",
+          "tag": "beta",
+          "date": "12 Aug 2026",
+          "title": {
+            "es": "Apollo Router 2.16.2-rc.0 en pre-release",
+            "en": "Apollo Router 2.16.2-rc.0 hits pre-release",
+            "fr": "Apollo Router 2.16.2-rc.0 en pré-version"
+          },
+          "body_html": {
+            "es": "<p>El router de federación GraphQL publicó su release candidate <code>2.16.2-rc.0</code>. Si tenés supergraph en producción, el ciclo de RC de Apollo es el lugar donde validar cambios de plan de query y comportamiento de coprocessors antes de que salgan estables.</p>",
+            "en": "<p>The GraphQL federation router published its <code>2.16.2-rc.0</code> release candidate. If you run a supergraph in production, Apollo's RC cycle is where you validate query-plan changes and coprocessor behavior before they go stable.</p>",
+            "fr": "<p>Le router de fédération GraphQL a publié sa release candidate <code>2.16.2-rc.0</code>. Si vous exploitez un supergraph en production, le cycle RC d'Apollo est l'endroit pour valider les changements de plan de requête et le comportement des coprocessors.</p>"
+          },
+          "source": { "url": "https://github.com/apollographql/router/releases/tag/v2.16.2-rc.0", "label": "github.com" }
+        },
+        {
+          "id": "biome-2-5-8",
+          "tag": "minor",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "Biome 2.5.8 suma useReactCompiler y acelera noImportCycles",
+            "en": "Biome 2.5.8 adds useReactCompiler and speeds up noImportCycles",
+            "fr": "Biome 2.5.8 ajoute useReactCompiler et accélère noImportCycles"
+          },
+          "body_html": {
+            "es": "<p>Biome 2.5.8 agrega la regla nursery <code>useReactCompiler</code>, que reporta diagnósticos del modo lint del React Compiler directo desde Biome, y otra <code>noSvelteLegacyConst</code> para empujar <code>$derived()</code>. También mejora la performance de <code>noImportCycles</code> — clave si la corrés sobre un monorepo grande — y arregla <code>useAwait</code> con <code>await using</code>.</p>",
+            "en": "<p>Biome 2.5.8 adds the nursery rule <code>useReactCompiler</code>, which surfaces React Compiler lint-mode diagnostics straight from Biome, plus <code>noSvelteLegacyConst</code> to push <code>$derived()</code>. It also improves <code>noImportCycles</code> performance — the one that matters on a big monorepo — and fixes <code>useAwait</code> around <code>await using</code> declarations.</p>",
+            "fr": "<p>Biome 2.5.8 ajoute la règle nursery <code>useReactCompiler</code>, qui remonte les diagnostics du mode lint de React Compiler, et <code>noSvelteLegacyConst</code> pour encourager <code>$derived()</code>. Elle améliore aussi les performances de <code>noImportCycles</code> et corrige <code>useAwait</code> avec <code>await using</code>.</p>"
+          },
+          "source": { "url": "https://github.com/biomejs/biome/releases/tag/%40biomejs%2Fbiome%402.5.8", "label": "github.com" }
+        },
+        {
+          "id": "esbuild-0-28-2",
+          "tag": "patch",
+          "date": "08 Aug 2026",
+          "title": {
+            "es": "esbuild 0.28.2 arregla tree shaking con import alias de TypeScript",
+            "en": "esbuild 0.28.2 fixes tree shaking with TypeScript import aliases",
+            "fr": "esbuild 0.28.2 corrige le tree shaking avec les alias d'import TypeScript"
+          },
+          "body_html": {
+            "es": "<p>esbuild 0.28.2 corrige un bug donde imports usados en un type alias de TypeScript vía <code>import Alias = Base.SomeType</code> podían ser tree-shakeados incorrectamente, y otro del minificador CSS que borraba un <code>&amp;</code> cuando no era seguro. Bugs chiquitos, consecuencias grandes: uno te rompe el bundle en runtime y el otro te cambia el matching de selectores.</p>",
+            "en": "<p>esbuild 0.28.2 fixes a bug where imports used in a TypeScript type alias via <code>import Alias = Base.SomeType</code> could be incorrectly tree-shaken, plus a CSS minifier bug that stripped an <code>&amp;</code> when it was unsafe to do so. Small bugs, big blast radius: one breaks your bundle at runtime, the other silently changes selector matching.</p>",
+            "fr": "<p>esbuild 0.28.2 corrige un bug où des imports utilisés dans un type alias TypeScript via <code>import Alias = Base.SomeType</code> pouvaient être supprimés à tort par le tree shaking, et un bug du minifieur CSS qui retirait un <code>&amp;</code> de façon non sûre.</p>"
+          },
+          "source": { "url": "https://github.com/evanw/esbuild/releases/tag/v0.28.2", "label": "github.com" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "bullmq-6-1-0",
+      "updates": [
+        {
+          "id": "bullmq-6-1-0",
+          "tag": "release",
+          "date": "12 Aug 2026",
+          "title": {
+            "es": "BullMQ 6.1.0 hace explícitas las migraciones de schema en Postgres",
+            "en": "BullMQ 6.1.0 makes Postgres schema migrations explicit",
+            "fr": "BullMQ 6.1.0 rend les migrations de schéma Postgres explicites"
+          },
+          "body_html": {
+            "es": "<p>BullMQ 6.1.0 deja de correr migraciones de schema de Postgres implícitamente y te obliga a dispararlas vos. Es exactamente lo que querés en producción: nada de que un deploy de la librería te toque el schema por sorpresa en el arranque. Revisá tu pipeline de deploy antes de subir de <code>6.0.x</code>, porque ahora la migración es un paso propio.</p>",
+            "en": "<p>BullMQ 6.1.0 stops running Postgres schema migrations implicitly and makes you trigger them yourself. That is exactly what you want in production: no library upgrade quietly touching your schema at boot. Review your deploy pipeline before jumping from <code>6.0.x</code>, because migration is now its own explicit step.</p>",
+            "fr": "<p>BullMQ 6.1.0 n'exécute plus les migrations de schéma Postgres implicitement : c'est à vous de les déclencher. Exactement ce qu'on veut en production. Vérifiez votre pipeline de déploiement avant de passer de <code>6.0.x</code>, la migration étant désormais une étape explicite.</p>"
+          },
+          "source": { "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.1.0", "label": "github.com" }
+        },
+        {
+          "id": "spotify-rap",
+          "tag": "notable",
+          "date": "12 Aug 2026",
+          "title": {
+            "es": "Spotify construye un índice externo para point queries sobre su data lake",
+            "en": "Spotify builds an external index for point queries on its data lake",
+            "fr": "Spotify construit un index externe pour les point queries sur son data lake"
+          },
+          "body_html": {
+            "es": "<p>Spotify presentó <strong>Random Access Parquet</strong>, una capa de índice externo que permite point queries de baja latencia directo contra el data lake. En vez de escanear miles de archivos, el índice mapea la clave de búsqueda al archivo Parquet y a la fila exacta, así lee puntual desde object storage. Convive con tablas Iceberg y soporta índices primarios y secundarios sin tocar los Parquet inmutables: el mismo dataset sirve analytics, ML y aplicaciones online sensibles a latencia.</p>",
+            "en": "<p>Spotify introduced <strong>Random Access Parquet</strong>, an external indexing layer that enables low-latency point queries straight against the data lake. Instead of scanning thousands of files, the index maps a lookup key to a specific Parquet file and row location, so reads hit object storage precisely. It sits alongside Apache Iceberg tables and supports primary and secondary indexes without modifying the immutable Parquet files, letting one dataset serve analytics, ML and latency-sensitive online apps at once.</p>",
+            "fr": "<p>Spotify a présenté <strong>Random Access Parquet</strong>, une couche d'index externe qui permet des point queries à faible latence directement sur le data lake. L'index associe une clé de recherche à un fichier Parquet et à une ligne précise, évitant de scanner des milliers de fichiers. Il cohabite avec Apache Iceberg et gère index primaires et secondaires sans modifier les fichiers Parquet immuables.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/spotify-data-lake-point-queries/", "label": "infoq.com" }
+        },
+        {
+          "id": "mikro-orm-7-1-11",
+          "tag": "patch",
+          "date": "06 Aug 2026",
+          "title": {
+            "es": "MikroORM 7.1.11",
+            "en": "MikroORM 7.1.11",
+            "fr": "MikroORM 7.1.11"
+          },
+          "body_html": {
+            "es": "<p>MikroORM publicó el patch <code>7.1.11</code> de su línea 7. Si venís de la 6, la 7 sigue siendo la que vale la pena mirar por su unit of work y el manejo de identity map — pero como siempre, subí de patch primero y corré tus tests de integración.</p>",
+            "en": "<p>MikroORM shipped the <code>7.1.11</code> patch on its 7.x line. If you are still on 6, the 7 line remains the one worth looking at for its unit of work and identity map handling — but as always, take the patch bump first and run your integration tests.</p>",
+            "fr": "<p>MikroORM a publié le patch <code>7.1.11</code> de sa ligne 7. Si vous êtes encore en 6, la ligne 7 reste celle à regarder pour son unit of work et sa gestion de l'identity map.</p>"
+          },
+          "source": { "url": "https://github.com/mikro-orm/mikro-orm/releases/tag/v7.1.11", "label": "github.com" }
+        },
+        {
+          "id": "supabase-1-26-08",
+          "tag": "minor",
+          "date": "07 Aug 2026",
+          "title": {
+            "es": "Supabase publica la release v1.26.08",
+            "en": "Supabase ships release v1.26.08",
+            "fr": "Supabase publie la version v1.26.08"
+          },
+          "body_html": {
+            "es": "<p>Supabase cortó su release <code>v1.26.08</code> del monorepo. Si self-hosteás la plataforma, es el tag a seguir para alinear versiones de Studio, gateway y servicios auxiliares con tu Postgres.</p>",
+            "en": "<p>Supabase cut its <code>v1.26.08</code> monorepo release. If you self-host the platform, this is the tag to track to keep Studio, the gateway and the auxiliary services aligned with your Postgres.</p>",
+            "fr": "<p>Supabase a publié sa release <code>v1.26.08</code> du monorepo. Si vous auto-hébergez la plateforme, c'est le tag à suivre pour aligner Studio, la gateway et les services auxiliaires avec votre Postgres.</p>"
+          },
+          "source": { "url": "https://github.com/supabase/supabase/releases/tag/v1.26.08", "label": "github.com" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "containerd-2-4-beta",
+      "updates": [
+        {
+          "id": "containerd-2-4-beta",
+          "tag": "beta",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "containerd 2.4.0-beta.0: release no-LTS con posibles breaking changes",
+            "en": "containerd 2.4.0-beta.0: non-LTS release with possible breaking changes",
+            "fr": "containerd 2.4.0-beta.0 : version non-LTS avec breaking changes possibles"
+          },
+          "body_html": {
+            "es": "<p>containerd 2.4 es un release regular (no LTS) con ventana de soporte más corta, y por venir después del 2.3 LTS es el punto del ciclo donde se remueven features ya deprecadas — o sea, puede traer breaking changes. Trae warm image cache para el snapshotter erofs, media type en el evento de creación de contenido e introspección de features OCI para runtimes que no son runc. Si priorizás estabilidad, quedate en 2.3 LTS; si vas a subir, limpiá primero todos los warnings de deprecación.</p>",
+            "en": "<p>containerd 2.4 is a regular (non-LTS) release with a shorter support window, and because it follows the 2.3 LTS it is the point in the cycle where previously deprecated features get removed — meaning it may ship breaking changes. Highlights include a warm image cache for the erofs snapshotter, media type in the content create event, and OCI runtime feature introspection for non-runc runtimes. Prioritizing stability? Stay on 2.3 LTS; upgrading? Clear every deprecation warning first.</p>",
+            "fr": "<p>containerd 2.4 est une version régulière (non-LTS) à fenêtre de support courte ; suivant la 2.3 LTS, c'est le moment du cycle où les fonctionnalités dépréciées sont retirées, donc des breaking changes sont possibles. Au menu : warm image cache pour le snapshotter erofs, media type dans l'événement de création de contenu et introspection des features OCI pour les runtimes non-runc.</p>"
+          },
+          "source": { "url": "https://github.com/containerd/containerd/releases/tag/v2.4.0-beta.0", "label": "github.com" }
+        },
+        {
+          "id": "argocd-3-5-1",
+          "tag": "patch",
+          "date": "12 Aug 2026",
+          "title": {
+            "es": "Argo CD 3.5.1, 3.4.7 y 3.3.14: corte de patches en tres líneas",
+            "en": "Argo CD 3.5.1, 3.4.7 and 3.3.14: patches across three lines",
+            "fr": "Argo CD 3.5.1, 3.4.7 et 3.3.14 : patches sur trois lignes"
+          },
+          "body_html": {
+            "es": "<p>Argo CD publicó patches simultáneos en sus tres líneas soportadas. Entre los fixes destaca uno de ApplicationSet que frenaba el progressive sync reconciliando en un loop apretado — si viste el controller quemando CPU sin motivo, ahí está tu causa. Todas las imágenes vienen firmadas con cosign y con provenance SLSA nivel 3.</p>",
+            "en": "<p>Argo CD shipped simultaneous patches across its three supported lines. Among the fixes is an ApplicationSet bug that kept progressive sync reconciling in a tight loop — if you saw the controller burning CPU for no reason, that was it. All images ship signed with cosign and with SLSA Level 3 provenance.</p>",
+            "fr": "<p>Argo CD a publié des patches simultanés sur ses trois lignes supportées. Parmi les correctifs, un bug d'ApplicationSet qui faisait boucler le progressive sync en réconciliation serrée. Toutes les images sont signées avec cosign et disposent d'une provenance SLSA niveau 3.</p>"
+          },
+          "source": { "url": "https://github.com/argoproj/argo-cd/releases/tag/v3.5.1", "label": "github.com" }
+        },
+        {
+          "id": "eks-control-plane-params",
+          "tag": "notable",
+          "date": "12 Aug 2026",
+          "title": {
+            "es": "Amazon EKS permite configurar parámetros avanzados del control plane",
+            "en": "Amazon EKS supports advanced control plane configuration parameters",
+            "fr": "Amazon EKS prend en charge des paramètres avancés du control plane"
+          },
+          "body_html": {
+            "es": "<p>EKS ahora expone parámetros avanzados de configuración del control plane de Kubernetes. Hasta ahora eso era justamente lo que perdías al usar un control plane managed frente a uno self-hosted: si tenías clusters con perfiles de carga raros y venías tuneando kube-apiserver a mano, esto te devuelve la palanca sin salir de EKS.</p>",
+            "en": "<p>EKS now exposes advanced Kubernetes control plane configuration parameters. That was precisely what you gave up by choosing a managed control plane over self-hosting: if you run clusters with unusual load profiles and used to hand-tune kube-apiserver, this hands the lever back without leaving EKS.</p>",
+            "fr": "<p>EKS expose désormais des paramètres avancés de configuration du control plane Kubernetes. C'était précisément ce que l'on perdait avec un control plane managé : si vos clusters ont des profils de charge atypiques, vous récupérez ce levier sans quitter EKS.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/amazon-eks-control-plane-configuration-parameters", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "aws-iam-role-manager",
+          "tag": "notable",
+          "date": "12 Aug 2026",
+          "title": {
+            "es": "AWS IAM estrena role manager para armar roles automáticamente",
+            "en": "AWS IAM adds a role manager that sets up roles automatically",
+            "fr": "AWS IAM lance un role manager pour créer les rôles automatiquement"
+          },
+          "body_html": {
+            "es": "<p>IAM suma un role manager que crea los roles de servicio automáticamente para integraciones típicas como Lambda o EventBridge. Menos copiar y pegar policies de StackOverflow, menos <code>*</code> en el Action por apuro. Igual: revisá lo que genera antes de aceptarlo — least privilege sigue siendo tu responsabilidad, no la del wizard.</p>",
+            "en": "<p>IAM adds a role manager that automatically sets up service roles for common integrations like Lambda and EventBridge. Less copy-pasting policies from StackOverflow, fewer <code>*</code> Actions added out of impatience. Still, review what it generates before accepting it — least privilege stays your responsibility, not the wizard's.</p>",
+            "fr": "<p>IAM ajoute un role manager qui crée automatiquement les rôles de service pour les intégrations courantes comme Lambda ou EventBridge. Moins de policies copiées-collées, moins d'Actions en <code>*</code>. Vérifiez tout de même ce qui est généré : le moindre privilège reste votre responsabilité.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/aws-iam-role-manager", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "cf-sandbox-sdk-1-preview",
+          "tag": "beta",
+          "date": "07 Aug 2026",
+          "title": {
+            "es": "Cloudflare publica el preview del Sandbox SDK 1.0 en @next",
+            "en": "Cloudflare ships the Sandbox SDK 1.0 preview on @next",
+            "fr": "Cloudflare publie la préversion du Sandbox SDK 1.0 sur @next"
+          },
+          "body_html": {
+            "es": "<p>El preview del Sandbox SDK 1.0 llega al tag <code>@next</code> con una interfaz de ejecución simplificada y mejor integración con containers. Si estás construyendo ejecución de código no confiable — agentes, playgrounds, CI efímero — este SDK te ahorra montar tu propio aislamiento a mano.</p>",
+            "en": "<p>The Sandbox SDK 1.0 preview lands on the <code>@next</code> tag with a simplified execution interface and better container integration. If you are building untrusted code execution — agents, playgrounds, ephemeral CI — this SDK saves you from hand-rolling your own isolation.</p>",
+            "fr": "<p>La préversion du Sandbox SDK 1.0 arrive sur le tag <code>@next</code> avec une interface d'exécution simplifiée et une meilleure intégration des containers. Utile si vous construisez de l'exécution de code non fiable : agents, playgrounds, CI éphémère.</p>"
+          },
+          "source": { "url": "https://developers.cloudflare.com/changelog/post/2026-08-07-sandbox-sdk-1-0-preview/", "label": "developers.cloudflare.com" }
+        },
+        {
+          "id": "cf-pages-skip-superseded",
+          "tag": "minor",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "Cloudflare Pages ahora saltea builds encoladas ya superadas",
+            "en": "Cloudflare Pages now skips superseded queued builds",
+            "fr": "Cloudflare Pages ignore désormais les builds en file déjà dépassées"
+          },
+          "body_html": {
+            "es": "<p>Pages descarta automáticamente builds en cola cuando ya hay builds más nuevas encoladas para el mismo proyecto. Si hacés varios push seguidos, dejás de pagar minutos de CI por deploys que nadie iba a ver.</p>",
+            "en": "<p>Pages now automatically skips queued builds when newer builds for the same project are already in the queue. If you push several times in a row, you stop burning CI minutes on deploys nobody was going to see.</p>",
+            "fr": "<p>Pages ignore automatiquement les builds en file lorsque des builds plus récentes du même projet sont déjà en attente. Fini les minutes de CI dépensées pour des déploiements que personne ne verra.</p>"
+          },
+          "source": { "url": "https://developers.cloudflare.com/changelog/post/2026-08-11-skip-superseded-builds/", "label": "developers.cloudflare.com" }
+        },
+        {
+          "id": "github-rule-insights",
+          "tag": "beta",
+          "date": "12 Aug 2026",
+          "title": {
+            "es": "GitHub abre Rule insights para organizaciones en public preview",
+            "en": "GitHub opens Rule insights for organizations in public preview",
+            "fr": "GitHub ouvre Rule insights pour les organisations en public preview"
+          },
+          "body_html": {
+            "es": "<p>Rule insights a nivel organización entra en public preview: podés ver qué rulesets se están evaluando, qué se bloqueó y qué se bypasseó a lo largo de todos los repos. Combinado con la migración automática de branch protection a rulesets de la semana pasada, es la señal clara de que rulesets es el camino y branch protection queda atrás.</p>",
+            "en": "<p>Organization-level Rule insights enters public preview: you can see which rulesets are being evaluated, what got blocked and what was bypassed across every repo. Paired with last week's automatic migration of branch protection to rulesets, the direction is unambiguous — rulesets is the path forward and branch protection is the past.</p>",
+            "fr": "<p>Rule insights au niveau organisation passe en public preview : visualisez quels rulesets sont évalués, ce qui a été bloqué et ce qui a été contourné sur tous les dépôts. Avec la migration automatique de branch protection vers les rulesets, la direction est claire.</p>"
+          },
+          "source": { "url": "https://github.blog/changelog/2026-08-12-rule-insights-for-organizations-in-public-preview", "label": "github.blog" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "jetbrains-ai-spend",
+      "updates": [
+        {
+          "id": "jetbrains-ai-spend",
+          "tag": "notable",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "JetBrains cuenta cómo empezó a controlar su gasto en AI",
+            "en": "JetBrains details its first steps to bring AI spend under control",
+            "fr": "JetBrains détaille ses premiers pas pour maîtriser ses dépenses AI"
+          },
+          "body_html": {
+            "es": "<p>JetBrains publicó sus primeros pasos para meterle disciplina FinOps a un gasto en AI que venía creciendo rápido. Es lectura obligada para cualquier equipo que metió LLMs en el backend sin presupuesto ni atribución de costos: el patrón se repite — arranca como experimento, termina como línea de costo fija sin dueño.</p>",
+            "en": "<p>JetBrains published its first steps toward applying FinOps discipline to rapidly growing AI spend. Required reading for any team that wired LLMs into the backend without a budget or cost attribution: the pattern repeats — it starts as an experiment and ends as a fixed cost line with no owner.</p>",
+            "fr": "<p>JetBrains a publié ses premières mesures pour appliquer une discipline FinOps à des dépenses AI en forte croissance. Lecture indispensable pour toute équipe ayant branché des LLM dans son backend sans budget ni attribution des coûts.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/jetbrains-ai-spend/", "label": "infoq.com" }
+        },
+        {
+          "id": "cf-webmcp-preview",
+          "tag": "notable",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "Cloudflare previsualiza soporte automático de WebMCP para páginas web",
+            "en": "Cloudflare previews automatic WebMCP support for web pages",
+            "fr": "Cloudflare préversionne le support automatique de WebMCP pour les pages web"
+          },
+          "body_html": {
+            "es": "<p>Cloudflare mostró un preview donde tus páginas exponen capacidades WebMCP automáticamente, sin que vos escribas el servidor MCP. Junto con la spec stateless de MCP, esto empuja la superficie de agentes hacia el edge: tu HTML pasa a ser también una interfaz de herramientas, con todo lo que eso implica en autorización y rate limiting.</p>",
+            "en": "<p>Cloudflare previewed a setup where your pages expose WebMCP capabilities automatically, without you writing the MCP server. Together with the stateless MCP spec, this pushes the agent surface toward the edge: your HTML becomes a tool interface too, with everything that implies for authorization and rate limiting.</p>",
+            "fr": "<p>Cloudflare a présenté une préversion où vos pages exposent automatiquement des capacités WebMCP, sans écrire de serveur MCP. Combiné à la spec MCP stateless, cela pousse la surface agentique vers l'edge : votre HTML devient aussi une interface d'outils, avec les enjeux d'autorisation et de rate limiting associés.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/cloudflare-webmcp/", "label": "infoq.com" }
+        },
+        {
+          "id": "lightwell-ai-oss",
+          "tag": "notable",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "IBM y Red Hat amplían Lightwell para gobernar el open source en la era AI",
+            "en": "IBM and Red Hat expand Lightwell for AI-era open source governance",
+            "fr": "IBM et Red Hat étendent Lightwell pour gouverner l'open source à l'ère AI"
+          },
+          "body_html": {
+            "es": "<p>IBM y Red Hat expandieron Lightwell para reforzar confianza y gobernanza en el open source de la era AI. Traducido a tu día a día: procedencia, firmas y trazabilidad de dependencias dejan de ser un extra y pasan a ser parte de la definición de una dependencia sana — justo después del año que tuvimos con los gusanos en npm.</p>",
+            "en": "<p>IBM and Red Hat expanded Lightwell to strengthen trust and governance for AI-era open source. Translated to your day job: provenance, signatures and dependency traceability stop being a nice-to-have and become part of what a healthy dependency even means — right after the year npm has had with worms.</p>",
+            "fr": "<p>IBM et Red Hat ont étendu Lightwell pour renforcer la confiance et la gouvernance de l'open source à l'ère AI. Concrètement : provenance, signatures et traçabilité des dépendances deviennent constitutives d'une dépendance saine, après l'année qu'a connue npm avec ses vers.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/lightwell-ai-open-source/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "sveltekit-3-next22",
+      "updates": [
+        {
+          "id": "sveltekit-3-next22",
+          "tag": "beta",
+          "date": "13 Aug 2026",
+          "title": {
+            "es": "SvelteKit 3.0.0-next.22 y @sveltejs/package 3.0.0-next.7",
+            "en": "SvelteKit 3.0.0-next.22 and @sveltejs/package 3.0.0-next.7",
+            "fr": "SvelteKit 3.0.0-next.22 et @sveltejs/package 3.0.0-next.7"
+          },
+          "body_html": {
+            "es": "<p>La rama <code>next</code> de SvelteKit 3 sigue moviéndose fuerte: cuatro tags en tres días, con <code>@sveltejs/package</code> acompañando. Si mantenés una librería Svelte, seguí de cerca los cambios de <code>package</code> — ahí es donde suelen romperse los exports al pasar de mayor.</p>",
+            "en": "<p>The SvelteKit 3 <code>next</code> branch keeps moving fast: four tags in three days, with <code>@sveltejs/package</code> following along. If you maintain a Svelte library, watch the <code>package</code> changes closely — that is where exports usually break on a major bump.</p>",
+            "fr": "<p>La branche <code>next</code> de SvelteKit 3 avance vite : quatre tags en trois jours, avec <code>@sveltejs/package</code> qui suit. Si vous maintenez une librairie Svelte, surveillez les changements de <code>package</code> : c'est là que les exports cassent lors d'un changement majeur.</p>"
+          },
+          "source": { "url": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs%2Fkit%403.0.0-next.22", "label": "github.com" }
+        },
+        {
+          "id": "astro-7-2-1",
+          "tag": "patch",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "Astro 7.2.1 y adapters alineados",
+            "en": "Astro 7.2.1 with adapters in lockstep",
+            "fr": "Astro 7.2.1 et adapters alignés"
+          },
+          "body_html": {
+            "es": "<p>Cinco días después del 7.2.0 llega el patch <code>7.2.1</code>, con <code>@astrojs/node</code> 11.1.1, <code>@astrojs/cloudflare</code> 14.2.1 y <code>@astrojs/netlify</code> 8.2.1 sincronizados. Si ya subiste a 7.2.0, este es el bump de seguimiento que querés antes de deployar.</p>",
+            "en": "<p>Five days after 7.2.0 comes the <code>7.2.1</code> patch, with <code>@astrojs/node</code> 11.1.1, <code>@astrojs/cloudflare</code> 14.2.1 and <code>@astrojs/netlify</code> 8.2.1 all in sync. If you already moved to 7.2.0, this is the follow-up bump you want before deploying.</p>",
+            "fr": "<p>Cinq jours après la 7.2.0 arrive le patch <code>7.2.1</code>, avec <code>@astrojs/node</code> 11.1.1, <code>@astrojs/cloudflare</code> 14.2.1 et <code>@astrojs/netlify</code> 8.2.1 synchronisés.</p>"
+          },
+          "source": { "url": "https://github.com/withastro/astro/releases/tag/astro%407.2.1", "label": "github.com" }
+        },
+        {
+          "id": "tanstack-router-2026-08-12",
+          "tag": "release",
+          "date": "12 Aug 2026",
+          "title": {
+            "es": "TanStack Router y Start publican dos releases el mismo día",
+            "en": "TanStack Router and Start ship two releases in one day",
+            "fr": "TanStack Router et Start publient deux versions le même jour"
+          },
+          "body_html": {
+            "es": "<p>TanStack cortó dos releases en el mismo día, incluyendo <code>@tanstack/vue-start</code> 1.168.41, <code>vue-router</code> 1.170.24 y los paquetes de server functions y storage context. La rama Vue de Start está avanzando en serio: si venías esperando fullstack con TanStack fuera de React, ya hay algo real para probar.</p>",
+            "en": "<p>TanStack cut two releases on the same day, including <code>@tanstack/vue-start</code> 1.168.41, <code>vue-router</code> 1.170.24 and the server functions and storage context packages. The Vue side of Start is moving seriously — if you were waiting for TanStack fullstack outside React, there is something real to try now.</p>",
+            "fr": "<p>TanStack a publié deux releases le même jour, dont <code>@tanstack/vue-start</code> 1.168.41, <code>vue-router</code> 1.170.24 et les paquets server functions et storage context. La branche Vue de Start avance sérieusement.</p>"
+          },
+          "source": { "url": "https://github.com/TanStack/router/releases/tag/release-2026-08-12-0919", "label": "github.com" }
+        },
+        {
+          "id": "better-auth-1-6-27",
+          "tag": "patch",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "better-auth 1.6.27 arregla requests de sesión duplicadas en Suspense",
+            "en": "better-auth 1.6.27 fixes duplicate session requests across Suspense retries",
+            "fr": "better-auth 1.6.27 corrige les requêtes de session dupliquées avec Suspense"
+          },
+          "body_html": {
+            "es": "<p>La 1.6.27 estable corrige requests de sesión duplicadas causadas por los reintentos de Suspense, más fixes de tipos en <code>@better-auth/scim</code> y un CLI que ahora alinea los paquetes instalados con su propia versión. En paralelo salió la <code>1.7.0-rc.5</code>, así que la línea 1.7 sigue cocinándose.</p>",
+            "en": "<p>Stable 1.6.27 fixes duplicate session requests caused by Suspense retries, plus type fixes in <code>@better-auth/scim</code> and a CLI that now aligns installed packages with its own version. In parallel, <code>1.7.0-rc.5</code> landed, so the 1.7 line keeps cooking.</p>",
+            "fr": "<p>La 1.6.27 stable corrige les requêtes de session dupliquées dues aux retries de Suspense, avec des corrections de types dans <code>@better-auth/scim</code> et un CLI qui aligne les paquets installés sur sa propre version. En parallèle, la <code>1.7.0-rc.5</code> est sortie.</p>"
+          },
+          "source": { "url": "https://github.com/better-auth/better-auth/releases/tag/v1.6.27", "label": "github.com" }
+        },
+        {
+          "id": "angular-v22",
+          "tag": "release",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "Angular v22: Signal Forms estables, OnPush por defecto y WebMCP experimental",
+            "en": "Angular v22: stable Signal Forms, OnPush by default and experimental WebMCP",
+            "fr": "Angular v22 : Signal Forms stables, OnPush par défaut et WebMCP expérimental"
+          },
+          "body_html": {
+            "es": "<p>Google publicó Angular v22 con Signal Forms estables, <code>OnPush</code> como estrategia de detección de cambios por defecto y soporte experimental de WebMCP. El default de <code>OnPush</code> es el cambio grande: si tu app venía apoyada en detección de cambios por defecto, prepará el upgrade con calma.</p>",
+            "en": "<p>Google released Angular v22 with stable Signal Forms, <code>OnPush</code> as the default change detection strategy and experimental WebMCP support. The <code>OnPush</code> default is the big one: if your app leaned on default change detection, plan that upgrade carefully.</p>",
+            "fr": "<p>Google a publié Angular v22 avec des Signal Forms stables, <code>OnPush</code> comme stratégie de détection de changements par défaut et un support expérimental de WebMCP. Le défaut <code>OnPush</code> est le gros changement : préparez la montée de version soigneusement.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/angular-v22-released/", "label": "infoq.com" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El protocolo se aplana: MCP saca sesiones y mueve el control al gateway con headers HTTP, mientras Cloudflare empuja WebMCP automático en el edge. La capa de agentes se está pareciendo cada vez más a infra HTTP común y corriente — y eso es buena noticia para quien ya sabe operar HTTP.",
+      "en": "The protocol is flattening out: MCP drops sessions and moves control to the gateway via HTTP headers, while Cloudflare pushes automatic WebMCP at the edge. The agent layer increasingly looks like ordinary HTTP infrastructure — good news for anyone who already knows how to operate HTTP.",
+      "fr": "Le protocole s'aplatit : MCP supprime les sessions et déplace le contrôle vers la gateway via des en-têtes HTTP, tandis que Cloudflare pousse WebMCP automatique à l'edge. La couche agentique ressemble de plus en plus à de l'infra HTTP classique."
+    },
+    {
+      "es": "Menos magia implícita en las herramientas: pnpm 12 fuerza frozen lockfile en CI y BullMQ 6.1 exige disparar las migraciones de Postgres a mano. La tendencia es clara — nada que toque tu lockfile o tu schema debería pasar por accidente durante un deploy.",
+      "en": "Less implicit magic in tooling: pnpm 12 forces frozen lockfile in CI and BullMQ 6.1 requires you to trigger Postgres migrations yourself. The direction is clear — nothing that touches your lockfile or your schema should happen by accident during a deploy.",
+      "fr": "Moins de magie implicite dans l'outillage : pnpm 12 impose le frozen lockfile en CI et BullMQ 6.1 exige de déclencher soi-même les migrations Postgres. Rien qui touche au lockfile ou au schéma ne devrait arriver par accident lors d'un déploiement."
+    },
+    {
+      "es": "Construir tu propio scheduler ya no paga: Netflix reemplazó su batch scheduler interno por Kueue upstream, y Spotify prefirió indexar Parquet inmutable antes que migrar el data lake entero. Extender lo que ya existe le está ganando a reescribir desde cero, incluso a escala gigante.",
+      "en": "Building your own scheduler no longer pays: Netflix replaced its in-house batch scheduler with upstream Kueue, and Spotify chose to index immutable Parquet rather than migrate its whole data lake. Extending what already exists is beating rewriting from scratch, even at enormous scale.",
+      "fr": "Construire son propre scheduler ne paie plus : Netflix a remplacé son scheduler batch maison par Kueue upstream, et Spotify a préféré indexer du Parquet immuable plutôt que migrer tout son data lake. Étendre l'existant l'emporte sur la réécriture, même à très grande échelle."
+    }
+  ]
+}

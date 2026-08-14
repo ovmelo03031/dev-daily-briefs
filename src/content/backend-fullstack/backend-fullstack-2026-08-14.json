@@ -1,0 +1,490 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 14 de agosto de 2026",
+    "en": "Backend & Fullstack — August 14, 2026",
+    "fr": "Backend & Fullstack — 14 août 2026"
+  },
+  "description": {
+    "es": "PostgreSQL parchea 28 CVEs y anuncia el EOL de PG14, Fastify v6 entra en alpha, Prisma 8 llega a RC con count() en bigint y Vitest 5 RC rompe los asserts async sin await.",
+    "en": "PostgreSQL patches 28 CVEs and sets the PG14 EOL date, Fastify v6 hits alpha, Prisma 8 reaches RC with bigint counts, and Vitest 5 RC fails tests on un-awaited async assertions.",
+    "fr": "PostgreSQL corrige 28 CVE et annonce la fin de vie de PG14, Fastify v6 passe en alpha, Prisma 8 atteint la RC avec des count() en bigint et Vitest 5 RC échoue sur les assertions async sans await."
+  },
+  "pubDate": "2026-08-14",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "PostgreSQL cierra 28 CVEs · PG14 EOL",
+        "en": "PostgreSQL closes 28 CVEs · PG14 EOL",
+        "fr": "PostgreSQL corrige 28 CVE · fin de PG14"
+      },
+      "anchor": "pg-1806-security",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Fastify v6 arranca su primera alpha",
+        "en": "Fastify v6 ships its first alpha",
+        "fr": "Fastify v6 publie sa première alpha"
+      },
+      "anchor": "fastify-v6-alpha",
+      "icon": "lucide:blocks"
+    },
+    {
+      "text": {
+        "es": "Prisma 8 RC: count() devuelve bigint",
+        "en": "Prisma 8 RC: count() returns bigint",
+        "fr": "Prisma 8 RC : count() renvoie un bigint"
+      },
+      "anchor": "prisma-8-rc1",
+      "icon": "simple-icons:prisma"
+    },
+    {
+      "text": {
+        "es": "Vitest 5 RC falla si no await-eás un assert",
+        "en": "Vitest 5 RC fails un-awaited assertions",
+        "fr": "Vitest 5 RC échoue sans await sur un assert"
+      },
+      "anchor": "vitest-5-rc1",
+      "icon": "lucide:rocket"
+    },
+    {
+      "text": {
+        "es": "pnpm 12 RC: lockfiles byte a byte iguales",
+        "en": "pnpm 12 RC: byte-identical lockfiles",
+        "fr": "pnpm 12 RC : lockfiles identiques au bit près"
+      },
+      "anchor": "pnpm-12-rc5",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "Netflix escala su service map en tiempo real",
+        "en": "Netflix scales its real-time service map",
+        "fr": "Netflix met à l'échelle sa carte de services"
+      },
+      "anchor": "netflix-service-map",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "pg-1806-security",
+      "updates": [
+        {
+          "id": "pg-1806-security",
+          "tag": "security",
+          "date": "13 Aug 2026",
+          "title": {
+            "es": "PostgreSQL 18.6, 17.11, 16.15, 15.19 y 14.24: 28 CVEs cerrados y PG14 con fecha de defunción",
+            "en": "PostgreSQL 18.6, 17.11, 16.15, 15.19 and 14.24: 28 CVEs closed and a death date for PG14",
+            "fr": "PostgreSQL 18.6, 17.11, 16.15, 15.19 et 14.24 : 28 CVE corrigées et une date de fin pour PG14"
+          },
+          "body_html": {
+            "es": "<p>Update a todas las versiones soportadas: <strong>28 vulnerabilidades</strong> y más de 110 bugs. Entre ellas <code>CVE-2026-6464</code> (inyección de comandos vía <code>COPY FROM STDIN</code> en psql, CVSS 8.1), varios heap buffer overflows con CVSS 8.8 y <code>CVE-2026-15741</code> (SQL injection al deparsear el argumento de <code>EXTRACT</code>). Ojo: el update no alcanza — hay que <code>REINDEX</code> de índices <code>btree_gist</code> sobre float/bit, <code>ltree</code> con muchísimos labels, y <code>ANALYZE</code> en tablas con índices GIN construidos en paralelo (quedaron con <code>reltuples</code> en Infinity/NaN y el autovacuum ni los mira). También salió PostgreSQL 19 Beta 3 — revirtieron <code>GROUP BY ALL</code>. Y PG14 deja de recibir parches el 12 de noviembre de 2026: si lo tenés en prod, la migración va en el roadmap de este trimestre, no del próximo.</p>",
+            "en": "<p>Update every supported branch: <strong>28 vulnerabilities</strong> and 110+ bugs fixed. Highlights include <code>CVE-2026-6464</code> (psql <code>COPY FROM STDIN</code> command injection, CVSS 8.1), several heap buffer overflows at CVSS 8.8, and <code>CVE-2026-15741</code> (SQL injection while deparsing an <code>EXTRACT</code> argument). Patching alone is not enough: you must <code>REINDEX</code> <code>btree_gist</code> indexes over float/bit columns and <code>ltree</code> indexes with very many labels, and run <code>ANALYZE</code> on tables whose GIN indexes were built in parallel (their <code>reltuples</code> landed on Infinity/NaN, so autovacuum skips them). PostgreSQL 19 Beta 3 also shipped, reverting <code>GROUP BY ALL</code>. PostgreSQL 14 stops receiving fixes on November 12, 2026.</p>",
+            "fr": "<p>Mettez à jour toutes les branches supportées : <strong>28 vulnérabilités</strong> et plus de 110 bugs corrigés. Notamment <code>CVE-2026-6464</code> (injection de commande via <code>COPY FROM STDIN</code> dans psql, CVSS 8.1), plusieurs heap buffer overflows en CVSS 8.8 et <code>CVE-2026-15741</code> (injection SQL lors du deparse de l'argument d'<code>EXTRACT</code>). Le patch ne suffit pas : il faut <code>REINDEX</code> les index <code>btree_gist</code> sur colonnes float/bit et les index <code>ltree</code> à très nombreux labels, puis lancer <code>ANALYZE</code> sur les tables dont les index GIN ont été construits en parallèle (leur <code>reltuples</code> vaut Infinity/NaN et l'autovacuum les ignore). PostgreSQL 19 Beta 3 est aussi sorti, avec le retrait de <code>GROUP BY ALL</code>. PostgreSQL 14 cesse de recevoir des correctifs le 12 novembre 2026.</p>"
+          },
+          "source": {
+            "url": "https://www.postgresql.org/about/news/postgresql-186-1711-1615-1519-1424-and-19-beta-3-released-3365/",
+            "label": "postgresql.org"
+          }
+        },
+        {
+          "id": "fastify-v6-alpha",
+          "tag": "breaking",
+          "date": "13 Aug 2026",
+          "title": {
+            "es": "Fastify v6.0.0-alpha.1: arranca el próximo major (y v5.12.0 en paralelo)",
+            "en": "Fastify v6.0.0-alpha.1: the next major begins (with v5.12.0 alongside)",
+            "fr": "Fastify v6.0.0-alpha.1 : le prochain major démarre (avec v5.12.0 en parallèle)"
+          },
+          "body_html": {
+            "es": "<p>Dos alphas en tres días (alpha.0 el 11, alpha.1 el 13) marcan el inicio de la línea v6. Lo concreto: se eliminan los raw response headers, llega <code>Reply.prototype.mediaType</code> como API nueva, y los media types inválidos ahora devuelven <code>undefined</code> en vez del comportamiento anterior. En la misma tanda salió <strong>v5.12.0</strong> estable. Es alpha: probalo en una rama, no en prod, pero si mantenés plugins de Fastify este es el momento de empezar a mirar el diff.</p>",
+            "en": "<p>Two alphas in three days (alpha.0 on the 11th, alpha.1 on the 13th) open the v6 line. Concretely: raw response headers are removed, <code>Reply.prototype.mediaType</code> lands as a new API, and invalid media types now return <code>undefined</code> instead of the previous behavior. Stable <strong>v5.12.0</strong> shipped in the same batch. It is alpha software — branch, don't deploy — but plugin maintainers should start reading the diff now.</p>",
+            "fr": "<p>Deux alphas en trois jours (alpha.0 le 11, alpha.1 le 13) ouvrent la ligne v6. Concrètement : suppression des raw response headers, arrivée de <code>Reply.prototype.mediaType</code> comme nouvelle API, et les media types invalides renvoient désormais <code>undefined</code>. La version stable <strong>v5.12.0</strong> est sortie dans la même fournée. C'est une alpha : à tester sur une branche, pas en production — mais les mainteneurs de plugins ont intérêt à lire le diff dès maintenant.</p>"
+          },
+          "source": {
+            "url": "https://github.com/fastify/fastify/releases/tag/v6.0.0-alpha.1",
+            "label": "github.com/fastify"
+          }
+        },
+        {
+          "id": "prisma-8-rc1",
+          "tag": "breaking",
+          "date": "07 Aug 2026",
+          "title": {
+            "es": "Prisma 8.0.0-rc.1: count() devuelve bigint y la interfaz de driver SQL se parte en dos",
+            "en": "Prisma 8.0.0-rc.1: count() returns bigint and the SQL driver interface splits in two",
+            "fr": "Prisma 8.0.0-rc.1 : count() renvoie un bigint et l'interface driver SQL se scinde"
+          },
+          "body_html": {
+            "es": "<p>Arranca la línea release-candidate (<code>8.0.0-rc.1</code>, <code>rc.2</code>, y así). El breaking que te va a morder: los agregados devuelven el tipo declarado del codec, así que <code>count()</code> devuelve <code>bigint</code> — o sea que <code>count === 2</code> ahora es <code>false</code> porque el valor es <code>2n</code>. Lo mismo aplica a <code>sum</code> y <code>avg</code> en PostgreSQL y SQLite. Además <code>SqlQueryable</code> pasa de tres métodos a dos: <code>query()</code> para streamear filas y <code>execute()</code> para estadísticas del statement. Las instalaciones 0.x no saltan solas a la línea RC por cómo npm trata los prereleases.</p>",
+            "en": "<p>The release-candidate line starts (<code>8.0.0-rc.1</code>, <code>rc.2</code>, and so on). The breaking change that will bite: aggregates now return their declared codec type, so <code>count()</code> returns <code>bigint</code> — meaning <code>count === 2</code> is <code>false</code> when the value is <code>2n</code>. Same for <code>sum</code> and <code>avg</code> on PostgreSQL and SQLite. <code>SqlQueryable</code> also drops from three methods to two: <code>query()</code> streams rows, <code>execute()</code> returns statement statistics. Existing 0.x installs won't jump to the RC line because of how npm handles prereleases.</p>",
+            "fr": "<p>La ligne release-candidate démarre (<code>8.0.0-rc.1</code>, <code>rc.2</code>, etc.). Le changement cassant à surveiller : les agrégats renvoient le type déclaré du codec, donc <code>count()</code> renvoie un <code>bigint</code> — <code>count === 2</code> devient <code>false</code> quand la valeur est <code>2n</code>. Idem pour <code>sum</code> et <code>avg</code> sur PostgreSQL et SQLite. <code>SqlQueryable</code> passe aussi de trois méthodes à deux : <code>query()</code> pour streamer les lignes et <code>execute()</code> pour les statistiques du statement. Les installations 0.x ne basculent pas seules vers la ligne RC.</p>"
+          },
+          "source": {
+            "url": "https://github.com/prisma/prisma/releases/tag/v8.0.0-rc.1",
+            "label": "github.com/prisma"
+          }
+        },
+        {
+          "id": "vitest-5-rc1",
+          "tag": "breaking",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "Vitest 5.0.0-rc.1: si no await-eás un assert async, el test falla",
+            "en": "Vitest 5.0.0-rc.1: an un-awaited async assertion now fails the test",
+            "fr": "Vitest 5.0.0-rc.1 : une assertion async sans await fait échouer le test"
+          },
+          "body_html": {
+            "es": "<p>La RC de Vitest 5 trae el cambio que más falsos verdes va a matar: <strong>el test falla cuando una assertion asíncrona no se await-ea</strong>. Sumale que los proyectos inline extienden la config raíz por defecto, hay soporte de proyectos anidados, el separador de nombres en <code>-t</code> pasa a <code>&gt;</code>, y se puede mockear <code>Temporal</code> sin fake timers. Del lado de features: breakdown de duración con porcentajes, shorthand <code>-p</code> para <code>--project</code>, ESM en VM pools y menos pico de memoria con <code>--changed</code>. Si tu suite pasa hoy, no asumas que pasa en la 5.</p>",
+            "en": "<p>The Vitest 5 RC lands the change that will kill the most false greens: <strong>an async assertion that isn't awaited now fails the test</strong>. On top of that, inline projects extend the root config by default, nested projects are supported, the <code>-t</code> name separator becomes <code>&gt;</code>, and <code>Temporal</code> can be mocked without fake timers. Feature side: duration breakdown with percentages, a <code>-p</code> shorthand for <code>--project</code>, ESM support in VM pools, and lower peak memory with <code>--changed</code>. If your suite is green today, don't assume it stays green on 5.</p>",
+            "fr": "<p>La RC de Vitest 5 apporte le changement qui tuera le plus de faux verts : <strong>une assertion asynchrone non awaited fait désormais échouer le test</strong>. S'y ajoutent : les projets inline étendent la config racine par défaut, la prise en charge des projets imbriqués, le séparateur de noms de <code>-t</code> qui devient <code>&gt;</code>, et le mock de <code>Temporal</code> sans fake timers. Côté fonctionnalités : détail des durées en pourcentage, raccourci <code>-p</code> pour <code>--project</code>, ESM dans les VM pools et pic mémoire réduit avec <code>--changed</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.0.0-rc.1",
+            "label": "github.com/vitest-dev"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "nestjs-11-1-29",
+      "updates": [
+        {
+          "id": "nestjs-11-1-29",
+          "tag": "patch",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "NestJS 11.1.29: SSE con comments, validador de archivos con mimetype override",
+            "en": "NestJS 11.1.29: SSE comments and a mimetype override in the file validator",
+            "fr": "NestJS 11.1.29 : commentaires SSE et override de mimetype dans le validateur de fichiers"
+          },
+          "body_html": {
+            "es": "<p>Patch con 11 PRs mergeados. Lo útil: soporte de comments en Server-Sent Events y serialización correcta del campo <code>retry</code>, opción de override de mimetype en el file type validator, fix del lookup de imports en el core y de los regex de middleware, tipado del cliente Redis pub/sub en microservices y limpieza del cliente gRPC. Nada épico, pero si usás SSE detrás de un proxy, los comments son justamente el keep-alive que te faltaba.</p>",
+            "en": "<p>A patch with 11 merged PRs. The useful bits: SSE comment support and correct <code>retry</code> field serialization, a mimetype override option in the file type validator, fixes to core import lookup and middleware regexes, Redis pub/sub client typing in microservices, and gRPC client cleanup. Nothing epic — but if you run SSE behind a proxy, comments are exactly the keep-alive you were missing.</p>",
+            "fr": "<p>Un patch avec 11 PR fusionnées. L'utile : prise en charge des commentaires SSE et sérialisation correcte du champ <code>retry</code>, option d'override de mimetype dans le validateur de type de fichier, corrections du lookup d'imports du core et des regex de middleware, typage du client Redis pub/sub côté microservices et nettoyage du client gRPC.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nestjs/nest/releases/tag/v11.1.29",
+            "label": "github.com/nestjs"
+          }
+        },
+        {
+          "id": "hono-4-13-2",
+          "tag": "patch",
+          "date": "13 Aug 2026",
+          "title": {
+            "es": "Hono 4.13.2: Permissions-Policy bien formada y ETag estable en respuestas chunked",
+            "en": "Hono 4.13.2: well-formed Permissions-Policy and stable ETags on chunked responses",
+            "fr": "Hono 4.13.2 : Permissions-Policy correcte et ETag stable sur les réponses chunked"
+          },
+          "body_html": {
+            "es": "<p>Nueve arreglos. El middleware <code>secureHeaders</code> corrige el formato de las directivas <code>Permissions-Policy</code> y agrega las que faltaban del W3C; ETag deja de romper el hashing en respuestas chunked y estabiliza el digest; JSX arregla los metadata children async que renderizaban <code>[object Promise]</code>; el client mejora la serialización de cookies y permite mandar bodies JSON falsy; y CORS pre-junta los arrays estáticos para no rearmarlos por request. Si tenías el header de Permissions-Policy mal armado, ahí estaba el bug.</p>",
+            "en": "<p>Nine fixes. The <code>secureHeaders</code> middleware corrects <code>Permissions-Policy</code> directive formatting and adds missing W3C directives; ETag stops breaking hashing on chunked responses and stabilizes the digest; JSX fixes async metadata children that rendered as <code>[object Promise]</code>; the client improves cookie serialization and allows falsy JSON bodies; CORS pre-joins static array options instead of rebuilding them per request.</p>",
+            "fr": "<p>Neuf correctifs. Le middleware <code>secureHeaders</code> corrige le format des directives <code>Permissions-Policy</code> et ajoute celles qui manquaient au W3C ; ETag ne casse plus le hashing sur les réponses chunked et stabilise le digest ; JSX corrige les metadata children async rendus en <code>[object Promise]</code> ; le client améliore la sérialisation des cookies et accepte les bodies JSON falsy ; CORS pré-assemble les options statiques.</p>"
+          },
+          "source": {
+            "url": "https://github.com/honojs/hono/releases/tag/v4.13.2",
+            "label": "github.com/honojs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "kysely-0-29-5",
+      "updates": [
+        {
+          "id": "kysely-0-29-5",
+          "tag": "patch",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "Kysely 0.29.5: optimizan los tipos para sobrevivir a TypeScript 7",
+            "en": "Kysely 0.29.5: type optimizations to survive TypeScript 7",
+            "fr": "Kysely 0.29.5 : optimisation des types pour survivre à TypeScript 7"
+          },
+          "body_html": {
+            "es": "<p>Release de mantenimiento con foco en compilación: arreglan la recursión infinita en los checks de asignabilidad del builder y agregan los <code>beforeThrow</code> que faltaban en el handler de abort. El contexto importa — el equipo dice estar «cavando hondo en los tipos» porque <strong>TypeScript 7</strong> dispara más instanciaciones y tiempos de compilación más largos. Si tenés un schema grande y la migración a TS 7 en el radar, esto te toca directo.</p>",
+            "en": "<p>A maintenance release focused on compilation: infinite type-check recursion in builder assignability checks is fixed, and missing <code>beforeThrow</code> calls in the query abort handler are added. The context matters — the team says it is digging deep into its types because <strong>TypeScript 7</strong> triggers more type instantiations and longer compile times. Large schemas plus a TS 7 migration on the roadmap means this one is for you.</p>",
+            "fr": "<p>Version de maintenance centrée sur la compilation : correction d'une récursion infinie dans les vérifications d'assignabilité du builder et ajout des appels <code>beforeThrow</code> manquants dans le handler d'abort. Le contexte compte : l'équipe optimise ses types parce que <strong>TypeScript 7</strong> déclenche davantage d'instanciations et des temps de compilation plus longs.</p>"
+          },
+          "source": {
+            "url": "https://github.com/kysely-org/kysely/releases/tag/v0.29.5",
+            "label": "github.com/kysely-org"
+          }
+        },
+        {
+          "id": "rds-mariadb-1232",
+          "tag": "minor",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "Amazon RDS suma MariaDB 12.3",
+            "en": "Amazon RDS adds MariaDB 12.3",
+            "fr": "Amazon RDS ajoute MariaDB 12.3"
+          },
+          "body_html": {
+            "es": "<p>RDS ya soporta MariaDB 12.3, que trae compatibilidad con la función <code>TO_DATE()</code> de Oracle y mejoras en el query optimizer. Si estás migrando desde Oracle y venías escribiendo shims de fecha a mano, ahí tenés un problema menos.</p>",
+            "en": "<p>RDS now supports MariaDB 12.3, which brings Oracle <code>TO_DATE()</code> function compatibility and query optimizer performance improvements. If you're migrating off Oracle and hand-writing date shims, that's one problem fewer.</p>",
+            "fr": "<p>RDS prend désormais en charge MariaDB 12.3, avec la compatibilité de la fonction <code>TO_DATE()</code> d'Oracle et des améliorations de l'optimiseur de requêtes.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/amazon-rds-mariadb-1232-available/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "helm-4-2-4",
+      "updates": [
+        {
+          "id": "helm-4-2-4",
+          "tag": "patch",
+          "date": "13 Aug 2026",
+          "title": {
+            "es": "Helm 4.2.4: vuelve el retry de conflictos en server-side apply",
+            "en": "Helm 4.2.4: server-side apply conflict retry is back",
+            "fr": "Helm 4.2.4 : le retry de conflits en server-side apply est de retour"
+          },
+          "body_html": {
+            "es": "<p>Patch con arreglos que sí importan en pipelines: restauran la lógica de retry ante conflictos en <strong>server-side apply</strong> (se había perdido), corrigen el scope del token al pushear charts a registries con auth por token, matan un panic en llamadas repetidas a <code>IsReachable</code>, mejoran los logs de los test pods y los mensajes de <code>helm template --debug</code> con <code>--show-only</code>. Bumps de gRPC 1.82.1 y OpenTelemetry 1.44.0. Próximo release programado: 9 de septiembre (4.3.0 y 3.22.0).</p>",
+            "en": "<p>A patch with fixes that matter in pipelines: the conflict retry logic in <strong>server-side apply</strong> is restored (it had gone missing), token scope handling is fixed when pushing charts to token-authenticated registries, a panic on repeated <code>IsReachable</code> calls is gone, test pod log collection is improved, and <code>helm template --debug</code> with <code>--show-only</code> reports better errors. gRPC 1.82.1 and OpenTelemetry 1.44.0 bumps included. Next scheduled release: September 9 (4.3.0 and 3.22.0).</p>",
+            "fr": "<p>Un patch avec des correctifs utiles en pipeline : restauration de la logique de retry sur conflit en <strong>server-side apply</strong>, correction du scope de token lors du push de charts vers des registries authentifiés par token, suppression d'un panic sur appels répétés à <code>IsReachable</code>, meilleure collecte des logs des test pods et messages plus clairs pour <code>helm template --debug</code> avec <code>--show-only</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/helm/helm/releases/tag/v4.2.4",
+            "label": "github.com/helm"
+          }
+        },
+        {
+          "id": "istio-131-alpha2",
+          "tag": "beta",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "Istio 1.31.0-alpha.2 en el aire",
+            "en": "Istio 1.31.0-alpha.2 is out",
+            "fr": "Istio 1.31.0-alpha.2 est disponible"
+          },
+          "body_html": {
+            "es": "<p>Segunda alpha del ciclo 1.31. Es la ventana para probar el upgrade del mesh en staging antes de que la estable te agarre desprevenido — sobre todo si venís arrastrando config de ambient mode.</p>",
+            "en": "<p>The second alpha of the 1.31 cycle. This is the window to rehearse the mesh upgrade in staging before the stable release catches you off guard — especially if you're carrying ambient mode config forward.</p>",
+            "fr": "<p>Deuxième alpha du cycle 1.31. C'est la fenêtre pour répéter la montée de version du mesh en staging avant la sortie stable.</p>"
+          },
+          "source": {
+            "url": "https://github.com/istio/istio/releases/tag/1.31.0-alpha.2",
+            "label": "github.com/istio"
+          }
+        },
+        {
+          "id": "aws-secrets-jenkins-sonarqube",
+          "tag": "minor",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "AWS Secrets Manager rota tokens de Jenkins y SonarQube",
+            "en": "AWS Secrets Manager rotates Jenkins and SonarQube tokens",
+            "fr": "AWS Secrets Manager fait tourner les tokens Jenkins et SonarQube"
+          },
+          "body_html": {
+            "es": "<p>Secrets Manager suma managed external secrets para Jenkins y SonarQube: rotación automática de API tokens de Jenkins y tokens de SonarQube desde la consola. Un token de CI hardcodeado que nunca rota es de los agujeros más aburridos y más explotados que hay — si tenés esos dos en tu stack, ponete las pilas.</p>",
+            "en": "<p>Secrets Manager adds managed external secrets for Jenkins and SonarQube, enabling automatic rotation of Jenkins API tokens and SonarQube tokens from the console. A hardcoded CI token that never rotates is one of the dullest and most exploited holes around.</p>",
+            "fr": "<p>Secrets Manager ajoute les managed external secrets pour Jenkins et SonarQube : rotation automatique des tokens d'API Jenkins et des tokens SonarQube depuis la console.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/secrets-manager-integration-jenkins-sonarqube/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "github-rulesets-migration",
+          "tag": "notable",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "GitHub convierte tus branch protection rules a rulesets con un click",
+            "en": "GitHub converts branch protection rules to rulesets in one click",
+            "fr": "GitHub convertit les branch protection rules en rulesets en un clic"
+          },
+          "body_html": {
+            "es": "<p>En <strong>Settings → Branches</strong> aparece un botón <em>Convert to ruleset</em> que mapea automáticamente reviews requeridos, status checks y restricciones de push a su equivalente en rulesets. La ganancia real es lo que viene después: matching multi-branch, políticas en capas, gestión a nivel organización/enterprise y bypass granular por usuario, equipo o app. GitHub está dejando clarísimo que las classic rules son el pasado.</p>",
+            "en": "<p>Under <strong>Settings → Branches</strong> there's now a <em>Convert to ruleset</em> button that automatically maps required reviews, status checks, and push restrictions to their ruleset equivalents. The real win is what comes after: multi-branch pattern matching, layered policy, org/enterprise-level management, and granular bypass for users, teams, and apps. GitHub is making it clear that classic rules are the past.</p>",
+            "fr": "<p>Dans <strong>Settings → Branches</strong>, un bouton <em>Convert to ruleset</em> mappe automatiquement les reviews requises, les status checks et les restrictions de push vers leurs équivalents en rulesets. Le vrai gain vient ensuite : matching multi-branches, politiques en couches, gestion au niveau organisation/entreprise et bypass granulaire.</p>"
+          },
+          "source": {
+            "url": "https://github.blog/changelog/2026-08-11-automatically-migrate-branch-protection-rules-to-repository-rulesets/",
+            "label": "github.blog"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "netflix-service-map",
+      "updates": [
+        {
+          "id": "netflix-service-map",
+          "tag": "notable",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "Cómo Netflix escaló su service map en tiempo real",
+            "en": "How Netflix scaled its real-time service map",
+            "fr": "Comment Netflix a mis à l'échelle sa carte de services en temps réel"
+          },
+          "body_html": {
+            "es": "<p>Netflix rediseñó el pipeline de streaming que arma su mapa de dependencias entre servicios: tres etapas de procesamiento y server-sent events para llegar a escala de producción sin morir de backpressure. Lectura obligada si estás construyendo observabilidad propia — el manejo de backpressure en cada etapa es la parte que casi nadie diseña hasta que explota.</p>",
+            "en": "<p>Netflix redesigned the streaming pipeline behind its service dependency map: three processing stages plus server-sent events to reach production scale without drowning in backpressure. Required reading if you're building your own observability — per-stage backpressure handling is the part almost nobody designs until it blows up.</p>",
+            "fr": "<p>Netflix a repensé le pipeline de streaming derrière sa carte de dépendances de services : trois étapes de traitement et des server-sent events pour tenir l'échelle de production sans être noyé par la backpressure. Lecture indispensable si vous construisez votre propre observabilité.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/08/netflix-service-topology/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "canva-session-revocation",
+          "tag": "notable",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "Canva revoca sesiones a escala con S3 e índices en memoria",
+            "en": "Canva revokes sessions at scale with S3 and in-memory indexes",
+            "fr": "Canva révoque les sessions à grande échelle avec S3 et des index en mémoire"
+          },
+          "body_html": {
+            "es": "<p>Con 100M de sesiones activas, Canva sacó la revocación de la base de datos: registros durables en <strong>Amazon S3</strong> más índices compactos en memoria distribuidos a los gateways de aplicación. Resultado: menos infraestructura de base, deploys más rápidos y <strong>87,5%</strong> menos memoria en el cache de revocación. El patrón — mover el estado de lectura caliente fuera de la DB y distribuirlo como índice — se aplica a mucho más que sesiones.</p>",
+            "en": "<p>With 100M active sessions, Canva moved revocation out of the database: durable revocation records in <strong>Amazon S3</strong> plus compact in-memory indexes distributed to application gateways. The result: less database infrastructure, faster deploys, and an <strong>87.5%</strong> smaller revocation cache memory footprint. The pattern — pull hot read state out of the DB and ship it as an index — generalizes well beyond sessions.</p>",
+            "fr": "<p>Avec 100 M de sessions actives, Canva a sorti la révocation de la base de données : enregistrements durables sur <strong>Amazon S3</strong> et index compacts en mémoire distribués aux gateways applicatifs. Résultat : moins d'infrastructure de base, déploiements plus rapides et une empreinte mémoire du cache de révocation réduite de <strong>87,5 %</strong>.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/08/canva-session-revocation-scale/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "stripe-db-remediation",
+          "tag": "notable",
+          "date": "09 Aug 2026",
+          "title": {
+            "es": "Stripe automatiza la remediación de bases de datos con búsqueda en grafos",
+            "en": "Stripe automates database remediation with graph search",
+            "fr": "Stripe automatise la remédiation de bases de données par recherche dans un graphe"
+          },
+          "body_html": {
+            "es": "<p>Stripe modela su infraestructura como un grafo y usa algoritmos de búsqueda más máquinas de estado para calcular y ejecutar planes de remediación automáticamente ante incidentes. Es el paso natural después de los runbooks: si el estado del sistema y las transiciones válidas están modelados, el plan de recuperación se computa en vez de escribirse a mano a las 3 AM.</p>",
+            "en": "<p>Stripe models its infrastructure as a graph and combines search algorithms with state machines to compute and execute remediation plans automatically during incidents. It's the natural step after runbooks: once system state and valid transitions are modeled, the recovery plan gets computed instead of hand-written at 3 AM.</p>",
+            "fr": "<p>Stripe modélise son infrastructure sous forme de graphe et combine algorithmes de recherche et machines à états pour calculer et exécuter automatiquement des plans de remédiation lors d'incidents. C'est l'étape suivante après les runbooks.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/08/database-remediation-graph/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "pnpm-12-rc5",
+      "updates": [
+        {
+          "id": "pnpm-12-rc5",
+          "tag": "release",
+          "date": "13 Aug 2026",
+          "title": {
+            "es": "pnpm 12.0.0-rc.5: ciclos de dependencias cortados siempre en el mismo lugar",
+            "en": "pnpm 12.0.0-rc.5: dependency cycles always cut at the same edge",
+            "fr": "pnpm 12.0.0-rc.5 : les cycles de dépendances coupés toujours au même endroit"
+          },
+          "body_html": {
+            "es": "<p>El cambio grande: los ciclos de dependencias ahora se rompen de forma canónica durante la resolución de peers — los miembros de cada ciclo se ordenan por package id y las aristas que cierran el ciclo se cortan siempre en el mismo punto. Traducción práctica: <strong>lockfiles byte a byte idénticos</strong> sin importar el orden de instalación, resolución de peers 2–3× más rápida en workspaces con muchos ciclos, ~25% menos memoria y lockfiles bastante más chicos. Además, los peers auto-instalados ahora resuelven a la versión más alta que satisface el rango, no a la más baja, y <code>pnpm update</code> escribe los rangos nuevos en <code>package.json</code> preservando el operador. Si tenés diffs de lockfile fantasma en CI, esto es el fix.</p>",
+            "en": "<p>The big change: dependency cycles are now broken canonically during peer resolution — cycle members are ordered by package id and the closing edges are always cut at the same place. In practice: <strong>byte-identical lockfiles</strong> regardless of install order, 2–3× faster peer resolution on cycle-heavy workspaces, ~25% lower memory use, and substantially smaller lockfiles. Auto-installed peers now resolve to the highest satisfying version instead of the lowest, and <code>pnpm update</code> writes new ranges into <code>package.json</code> while preserving the existing range operator. If phantom lockfile diffs haunt your CI, this is the fix.</p>",
+            "fr": "<p>Le changement majeur : les cycles de dépendances sont désormais rompus de façon canonique pendant la résolution des peers — les membres de chaque cycle sont ordonnés par package id et les arêtes fermantes sont toujours coupées au même endroit. En pratique : <strong>des lockfiles identiques au bit près</strong> quel que soit l'ordre d'installation, une résolution des peers 2 à 3× plus rapide sur les workspaces riches en cycles, ~25 % de mémoire en moins et des lockfiles nettement plus petits.</p>"
+          },
+          "source": {
+            "url": "https://github.com/pnpm/pnpm/releases/tag/v12.0.0-rc.5",
+            "label": "github.com/pnpm"
+          }
+        },
+        {
+          "id": "nextjs-16-3-1",
+          "tag": "patch",
+          "date": "13 Aug 2026",
+          "title": {
+            "es": "Next.js 16.3.1: tanda de fixes en Turbopack, caché e imágenes",
+            "en": "Next.js 16.3.1: a batch of Turbopack, cache and image fixes",
+            "fr": "Next.js 16.3.1 : correctifs Turbopack, cache et images"
+          },
+          "body_html": {
+            "es": "<p>18 commits desde 16.3.0. En Turbopack: HMR arreglado para dynamic imports evaluados desde layouts, compilación correcta de redirects de middleware en dev y varios fixes de runtime y analyzer. En caché: la revalidación descarta solo las entradas previas al tag, mejor encoding de nombres en <code>unstable_cache</code> y retención de versión con TTL más fallback a mtime. Sumale que <code>headers()</code> vuelve a devolver la vista viva del request y que los estilos de styled-jsx faltantes en SSR del Pages Router están de vuelta.</p>",
+            "en": "<p>18 commits since 16.3.0. Turbopack: HMR fixed for dynamic imports evaluated from layouts, correct middleware redirect route compilation in dev, plus runtime and analyzer fixes. Caching: revalidation now discards only pre-tag entries, better cache item name encoding in <code>unstable_cache</code>, and cache version retention with TTL plus mtime fallback. Also, <code>headers()</code> returns the live view of the incoming request again, and missing styled-jsx styles in Pages Router SSR are back.</p>",
+            "fr": "<p>18 commits depuis 16.3.0. Turbopack : HMR corrigé pour les imports dynamiques évalués depuis les layouts, compilation correcte des redirections de middleware en dev, et divers correctifs runtime et analyzer. Cache : la revalidation ne supprime que les entrées antérieures au tag, meilleur encodage des noms dans <code>unstable_cache</code> et rétention de version avec TTL et fallback sur mtime.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vercel/next.js/releases/tag/v16.3.1",
+            "label": "github.com/vercel"
+          }
+        },
+        {
+          "id": "turborepo-2-10-9",
+          "tag": "minor",
+          "date": "07 Aug 2026",
+          "title": {
+            "es": "Turborepo 2.10.9: globs más rápidos y tareas de calidad para Python",
+            "en": "Turborepo 2.10.9: faster globs and Python quality tasks",
+            "fr": "Turborepo 2.10.9 : globs plus rapides et tâches qualité Python"
+          },
+          "body_html": {
+            "es": "<p>Performance primero: recorren los globs con prefijo literal sin compilar wax, paralelizan el hashing de fingerprints de resolución y el armado de listas de identidad, e internan strings con <code>Arc&lt;str&gt;</code> para bajar memoria. Del lado de features, llega el parsing y la resolución de herramientas de calidad de <strong>Python</strong>, con síntesis de tareas y hashing de inputs — señal clara de que el monorepo políglota ya no es un caso borde. También arreglan el pruning de dev dependencies con wildcards de workspace en Bun y el cleanup de procesos en Windows.</p>",
+            "en": "<p>Performance first: literal-prefix tree globs are walked without wax compilation, resolution fingerprint hashing and identity list building run in parallel, and <code>Arc&lt;str&gt;</code> interning cuts memory. On features, <strong>Python</strong> quality tool declarations are parsed and resolved, with task synthesis and input hashing — a clear signal that polyglot monorepos aren't an edge case anymore. Also fixed: Bun wildcard workspace dev dependency pruning and Windows process cleanup against PID reuse.</p>",
+            "fr": "<p>Performance d'abord : parcours des globs à préfixe littéral sans compilation wax, hashing des fingerprints de résolution et construction des listes d'identité en parallèle, et interning avec <code>Arc&lt;str&gt;</code> pour réduire la mémoire. Côté fonctionnalités : parsing et résolution des outils qualité <strong>Python</strong>, avec synthèse de tâches et hashing des inputs.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vercel/turborepo/releases/tag/v2.10.9",
+            "label": "github.com/vercel"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Semana de release candidates: Prisma 8, Vitest 5, pnpm 12 y Fastify 6 alpha caen casi juntos. Si mantenés una plataforma, este es el trimestre para armar una rama de upgrade y correr la suite ahí, no para improvisar en diciembre.",
+      "en": "A week of release candidates: Prisma 8, Vitest 5, pnpm 12, and the Fastify 6 alpha all land together. If you maintain a platform, this is the quarter to spin up an upgrade branch and run your suite there.",
+      "fr": "Une semaine de release candidates : Prisma 8, Vitest 5, pnpm 12 et l'alpha de Fastify 6 arrivent ensemble. Si vous maintenez une plateforme, c'est le trimestre pour créer une branche de montée de version."
+    },
+    {
+      "es": "El determinismo dejó de ser un lujo: pnpm corta ciclos de forma canónica para lograr lockfiles reproducibles y Vitest falla los asserts async sin await. La industria se cansó de los «funciona en mi máquina» y los falsos verdes.",
+      "en": "Determinism stopped being a luxury: pnpm cuts cycles canonically for reproducible lockfiles, and Vitest fails un-awaited async assertions. The industry is done with «works on my machine» and false greens.",
+      "fr": "Le déterminisme n'est plus un luxe : pnpm coupe les cycles de façon canonique pour des lockfiles reproductibles et Vitest fait échouer les assertions async sans await."
+    },
+    {
+      "es": "Netflix, Canva y Stripe publicaron la misma lección desde ángulos distintos: modelá el estado caliente fuera de la base de datos (índices distribuidos, grafos, pipelines por etapas) y la operación deja de depender de un humano despierto a las 3 AM.",
+      "en": "Netflix, Canva, and Stripe published the same lesson from different angles: model hot state outside the database — distributed indexes, graphs, staged pipelines — and operations stop depending on a human awake at 3 AM.",
+      "fr": "Netflix, Canva et Stripe publient la même leçon sous des angles différents : modélisez l'état chaud hors de la base de données (index distribués, graphes, pipelines par étapes) et l'exploitation cesse de dépendre d'un humain réveillé à 3 h du matin."
+    },
+    {
+      "es": "TypeScript 7 ya está condicionando el diseño de librerías: Kysely está reescribiendo sus tipos para bajar instanciaciones. Si publicás tipos complejos, medí tu tiempo de compilación antes de que lo midan tus usuarios.",
+      "en": "TypeScript 7 is already shaping library design: Kysely is rewriting its types to cut instantiations. If you publish complex types, measure your compile time before your users do.",
+      "fr": "TypeScript 7 influence déjà la conception des bibliothèques : Kysely réécrit ses types pour réduire les instanciations. Si vous publiez des types complexes, mesurez votre temps de compilation avant vos utilisateurs."
+    }
+  ]
+}

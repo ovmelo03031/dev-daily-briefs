@@ -1,0 +1,362 @@
+{
+  "title": {
+    "es": "AI Security — 14 Ago 2026",
+    "en": "AI Security — 14 Aug 2026",
+    "fr": "AI Security — 14 Août 2026"
+  },
+  "description": {
+    "es": "vLLM publica un lote de cinco CVEs con fuga de inferencias entre usuarios, RovoBlast saca datos de Jira con un solo click, y OpenAI frena Astra al tocar el umbral cyber crítico.",
+    "en": "vLLM ships a five-CVE batch including cross-user inference leakage, RovoBlast pulls Jira data with a single click, and OpenAI pauses Astra after hitting its critical cyber threshold.",
+    "fr": "vLLM publie un lot de cinq CVE dont une fuite d'inférences entre utilisateurs, RovoBlast extrait des données Jira en un clic, et OpenAI met Astra en pause au seuil cyber critique."
+  },
+  "pubDate": "2026-08-14",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "RovoBlast: un click y Rovo filtra datos internos",
+        "en": "RovoBlast: one click and Rovo leaks internal data",
+        "fr": "RovoBlast : un clic et Rovo fuite des données internes"
+      },
+      "anchor": "inc-rovoblast",
+      "icon": "lucide:shield-alert"
+    },
+    {
+      "text": {
+        "es": "vLLM: overflow filtra inferencias de otro usuario",
+        "en": "vLLM: overflow leaks another user's inference result",
+        "fr": "vLLM : un overflow fuite l'inférence d'un autre user"
+      },
+      "anchor": "cve-vllm-73558",
+      "icon": "lucide:radiation"
+    },
+    {
+      "text": {
+        "es": "PapersGPT: RCE crítico vía eval de respuesta LLM",
+        "en": "PapersGPT: critical RCE via eval of LLM response",
+        "fr": "PapersGPT : RCE critique via eval d'une réponse LLM"
+      },
+      "anchor": "cve-papersgpt-73032",
+      "icon": "lucide:skull"
+    },
+    {
+      "text": {
+        "es": "OpenAI pausa Astra por umbral cyber crítico",
+        "en": "OpenAI pauses Astra over critical cyber threshold",
+        "fr": "OpenAI met Astra en pause au seuil cyber critique"
+      },
+      "anchor": "inc-astra-pause",
+      "icon": "simple-icons:openai"
+    },
+    {
+      "text": {
+        "es": "Slopsquatting: un paquete inventado llegó a 230 repos",
+        "en": "Slopsquatting: one fake package reached 230 repos",
+        "fr": "Slopsquatting : un paquet inventé dans 230 dépôts"
+      },
+      "anchor": "supply-chain",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "Computer History de OpenAI sube el riesgo de injection",
+        "en": "OpenAI Computer History raises prompt injection risk",
+        "fr": "Computer History d'OpenAI accroît le risque d'injection"
+      },
+      "anchor": "adv-computer-history",
+      "icon": "lucide:lock"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-incidents",
+      "name": "Top Incidents",
+      "theme": "top-incidents",
+      "icon_emoji": "🚨",
+      "anchor": "top-incidents",
+      "updates": [
+        {
+          "id": "inc-rovoblast",
+          "tag": "high",
+          "title": {
+            "es": "RovoBlast: un link malicioso convierte a Rovo de Atlassian en exfiltrador",
+            "en": "RovoBlast: a crafted link turns Atlassian Rovo into an exfiltration tool",
+            "fr": "RovoBlast : un lien piégé transforme Rovo d'Atlassian en outil d'exfiltration"
+          },
+          "body_html": {
+            "es": "<p>Varonis Threat Labs presentó en DEF CON 34 una falla en Rovo, el asistente de IA empresarial de Atlassian, que abusa de un parámetro de URL que precarga el input del chat sin confirmación del usuario.</p><p>Con eso, el atacante siembra instrucciones dentro de la sesión autenticada de la víctima y usa el ResearchAgent de Rovo para extraer datos internos de Jira, Confluence y Bitbucket, y publicarlos donde el atacante pueda leerlos. Los investigadores describieron los guardrails contra prompts no confiables como «casi inexistentes»: un solo click alcanza, sin técnicas de bypass sofisticadas.</p><p>Ojo con esto: es prompt injection clásica montada sobre la sesión del usuario, no un bug de modelo. Atlassian corrigió la falla tras la divulgación del 7 de agosto.</p>",
+            "en": "<p>Varonis Threat Labs presented a flaw at DEF CON 34 in Rovo, Atlassian's enterprise AI assistant, abusing a URL parameter that pre-fills chat input without any user confirmation.</p><p>That lets an attacker seed instructions into the victim's authenticated session and drive Rovo's ResearchAgent to pull internal data out of Jira, Confluence and Bitbucket and post it where the attacker can read it. Researchers called Rovo's guardrails around untrusted prompts &quot;almost non-existent&quot; — a single click is usually enough, no advanced bypass required.</p><p>This is textbook indirect prompt injection riding the user's own session, not a model bug. Atlassian fixed it after the 7 August disclosure.</p>",
+            "fr": "<p>Varonis Threat Labs a présenté à DEF CON 34 une faille dans Rovo, l'assistant IA d'entreprise d'Atlassian, exploitant un paramètre d'URL qui préremplit le champ de chat sans confirmation de l'utilisateur.</p><p>L'attaquant injecte ainsi ses instructions dans la session authentifiée de la victime et utilise le ResearchAgent de Rovo pour extraire des données internes de Jira, Confluence et Bitbucket, puis les publier là où il pourra les lire. Les chercheurs qualifient les garde-fous contre les prompts non fiables de &quot;quasi inexistants&quot; : un seul clic suffit généralement.</p><p>C'est de l'injection de prompt indirecte classique, portée par la session de l'utilisateur, pas un bug de modèle. Atlassian a corrigé après la divulgation du 7 août.</p>"
+          },
+          "date": "10 Aug 2026",
+          "source": {
+            "url": "https://www.infosecurity-magazine.com/news/rovoblast-atlassian-rovo-url/",
+            "label": "Infosecurity Magazine"
+          }
+        },
+        {
+          "id": "inc-astra-pause",
+          "tag": "advisory",
+          "title": {
+            "es": "OpenAI frena el testing interno de Astra al tocar el umbral cyber crítico",
+            "en": "OpenAI pauses internal Astra testing after hitting the critical cyber threshold",
+            "fr": "OpenAI suspend les tests internes d'Astra au seuil cyber critique"
+          },
+          "body_html": {
+            "es": "<p>OpenAI detuvo temporalmente el testing interno de Astra después de evaluar que sus capacidades cyber alcanzaban el umbral «crítico» de su Preparedness Framework.</p><p>La definición que usa la compañía: un modelo llega a ese umbral si puede identificar y desarrollar exploits zero-day funcionales, de cualquier severidad, contra sistemas críticos reales y endurecidos, sin intervención humana; o idear estrategias de ataque novedosas contra blancos endurecidos por su cuenta.</p><p>Las mitigaciones anunciadas: entornos de testing aislados, acceso de red restringido, cifrado reforzado, monitoreo y vigilancia universal de acciones agénticas riesgosas. El anuncio salió en un post del 7 de agosto.</p>",
+            "en": "<p>OpenAI temporarily halted internal testing of its Astra model after assessing that its cyber capabilities reached the &quot;critical&quot; threshold under its Preparedness Framework.</p><p>The company's own bar: a model hits the critical cybersecurity threshold if it can identify and develop functional zero-day exploits of all severity levels against many hardened real-world critical systems without human intervention, or devise novel attack strategies against hardened targets on its own.</p><p>Announced mitigations include isolated testing environments, restricted network access, stronger encryption, monitoring, and universal surveillance of risky agentic actions. The disclosure landed in a 7 August blog post.</p>",
+            "fr": "<p>OpenAI a temporairement suspendu les tests internes du modèle Astra après avoir estimé que ses capacités cyber atteignaient le seuil &quot;critique&quot; de son Preparedness Framework.</p><p>Le critère : un modèle atteint ce seuil s'il peut identifier et développer des exploits zero-day fonctionnels, de toute sévérité, contre de nombreux systèmes critiques réels et durcis sans intervention humaine, ou concevoir seul de nouvelles stratégies d'attaque contre des cibles durcies.</p><p>Mitigations annoncées : environnements de test isolés, accès réseau restreint, chiffrement renforcé, monitoring et surveillance universelle des actions agentiques risquées. Annonce publiée le 7 août.</p>"
+          },
+          "date": "11 Aug 2026",
+          "source": {
+            "url": "https://www.infosecurity-magazine.com/news/openai-pauses-development-astra/",
+            "label": "Infosecurity Magazine"
+          }
+        }
+      ]
+    },
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "cve-papersgpt-73032",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-73032 — RCE en PapersGPT for Zotero por pasar la respuesta del LLM a eval (CVSS 9.4)",
+            "en": "CVE-2026-73032 — RCE in PapersGPT for Zotero: LLM response piped straight into eval (CVSS 9.4)",
+            "fr": "CVE-2026-73032 — RCE dans PapersGPT for Zotero : réponse LLM passée à eval (CVSS 9.4)"
+          },
+          "body_html": {
+            "es": "<p>PapersGPT for Zotero 0.6.1 y anteriores toman la respuesta del endpoint LLM y la pasan sin sanitizar a <code>window.eval()</code> en <code>views.ts</code>. Cualquier JavaScript devuelto por el modelo se ejecuta dentro del contexto privilegiado de Zotero.</p><p>Tres vías de entrega: prompt injection dentro de un PDF que el usuario abre, intercepción man-in-the-middle del tráfico al endpoint, o un endpoint LLM custom controlado por el atacante. El resultado es acceso al filesystem y a todos los datos guardados.</p><p>CVSS v4.0 9.4 / v3.1 9.6, crítico. Este es el patrón a matar: la salida del modelo es input no confiable, nunca código.</p>",
+            "en": "<p>PapersGPT for Zotero 0.6.1 and earlier take the LLM endpoint's response and hand it unsanitized to <code>window.eval()</code> in <code>views.ts</code>. Any JavaScript the model returns executes inside Zotero's privileged context.</p><p>Three delivery paths: prompt injection embedded in a PDF the user opens, man-in-the-middle interception of endpoint traffic, or an attacker-controlled custom LLM endpoint. Payoff is file access plus everything stored in the library.</p><p>CVSS v4.0 9.4 / v3.1 9.6, critical. This is the anti-pattern to kill: model output is untrusted input, never code.</p>",
+            "fr": "<p>PapersGPT for Zotero 0.6.1 et antérieurs transmettent la réponse de l'endpoint LLM sans assainissement à <code>window.eval()</code> dans <code>views.ts</code>. Tout JavaScript renvoyé par le modèle s'exécute dans le contexte privilégié de Zotero.</p><p>Trois vecteurs : injection de prompt dans un PDF ouvert par l'utilisateur, interception man-in-the-middle du trafic, ou endpoint LLM personnalisé contrôlé par l'attaquant. Résultat : accès aux fichiers et à toutes les données stockées.</p><p>CVSS v4.0 9.4 / v3.1 9.6, critique. L'anti-pattern à éliminer : la sortie du modèle est une entrée non fiable, jamais du code.</p>"
+          },
+          "date": "11 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-73032",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-vllm-73558",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-73558 — Integer overflow en vLLM filtra la inferencia de otro usuario (CVSS 5.3)",
+            "en": "CVE-2026-73558 — Integer overflow in vLLM leaks another user's inference result (CVSS 5.3)",
+            "fr": "CVE-2026-73558 — Integer overflow dans vLLM : fuite de l'inférence d'un autre utilisateur (CVSS 5.3)"
+          },
+          "body_html": {
+            "es": "<p>En vLLM anterior a 0.27.0, la función <code>act_and_mul_kernel</code> de <code>activation_kernels.cu</code> sufre un integer overflow en <code>blockIdx.x * 2 * d</code>. Cuando dos requests caen en el mismo batch, un usuario puede terminar accediendo al resultado de inferencia de otro.</p><p>Es fuga cross-user dentro del mismo servidor de inferencia: en multi-tenant, esto es exposición de datos directa, no teórica.</p><p>CVSS v3.1 5.3 (medium). Fix en 0.27.0; el workaround es aislar requests por usuario para que no compartan batch. Advisory GHSA-7m6h-x95x-82q5.</p>",
+            "en": "<p>In vLLM before 0.27.0, <code>act_and_mul_kernel</code> in <code>activation_kernels.cu</code> hits an integer overflow in <code>blockIdx.x * 2 * d</code>. When two requests land in the same batch, one user can end up reading another user's inference result.</p><p>That's cross-user leakage inside a single inference server — in a multi-tenant deployment this is direct data exposure, not a theoretical edge case.</p><p>CVSS v3.1 5.3 (medium). Fixed in 0.27.0; the workaround is isolating requests so users never share a batch. Advisory GHSA-7m6h-x95x-82q5.</p>",
+            "fr": "<p>Dans vLLM avant 0.27.0, <code>act_and_mul_kernel</code> dans <code>activation_kernels.cu</code> subit un integer overflow sur <code>blockIdx.x * 2 * d</code>. Quand deux requêtes tombent dans le même batch, un utilisateur peut lire le résultat d'inférence d'un autre.</p><p>C'est une fuite cross-user au sein d'un même serveur d'inférence : en multi-tenant, c'est une exposition de données directe.</p><p>CVSS v3.1 5.3 (medium). Corrigé en 0.27.0 ; contournement : isoler les requêtes pour qu'elles ne partagent pas de batch. Advisory GHSA-7m6h-x95x-82q5.</p>"
+          },
+          "date": "13 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-73558",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-vllm-73557",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-73557 — Race condition en vLLM permite saltear la validación de prompt embeds (CVSS 6.3)",
+            "en": "CVE-2026-73557 — Race condition in vLLM bypasses prompt-embed validation (CVSS 6.3)",
+            "fr": "CVE-2026-73557 — Race condition dans vLLM contournant la validation des prompt embeds (CVSS 6.3)"
+          },
+          "body_html": {
+            "es": "<p>Desde 0.20.2rc0 hasta 0.26.0, <code>safe_load_prompt_embeds</code> en <code>vllm/renderers/embed_utils.py</code> usa <code>torch.sparse.check_sparse_tensor_invariants</code>, cuyo estado de save/enable/restore es global al proceso.</p><p>Partes concurrentes de <code>prompt_embeds</code> pueden correr esa carrera y colar tensores sparse inválidos, esquivando el control de seguridad. Solo aplica si tenés prompt embeddings habilitados.</p><p>CVSS v4.0 6.3 (medium). Corregido en 0.26.0. Advisory GHSA-pr7f-p5mw-fc87.</p>",
+            "en": "<p>From 0.20.2rc0 up to 0.26.0, <code>safe_load_prompt_embeds</code> in <code>vllm/renderers/embed_utils.py</code> relies on <code>torch.sparse.check_sparse_tensor_invariants</code>, whose save/enable/restore state is process-global.</p><p>Concurrent <code>prompt_embeds</code> parts can race that state and slip invalid sparse tensors past the check. Only exposed when prompt embeddings are enabled.</p><p>CVSS v4.0 6.3 (medium). Fixed in 0.26.0. Advisory GHSA-pr7f-p5mw-fc87.</p>",
+            "fr": "<p>De 0.20.2rc0 à 0.26.0, <code>safe_load_prompt_embeds</code> dans <code>vllm/renderers/embed_utils.py</code> s'appuie sur <code>torch.sparse.check_sparse_tensor_invariants</code>, dont l'état save/enable/restore est global au processus.</p><p>Des parties concurrentes de <code>prompt_embeds</code> peuvent gagner cette course et faire passer des tenseurs sparse invalides. Exposé uniquement si les prompt embeddings sont activés.</p><p>CVSS v4.0 6.3 (medium). Corrigé en 0.26.0. Advisory GHSA-pr7f-p5mw-fc87.</p>"
+          },
+          "date": "13 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-73557",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-vllm-73556",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-73556 — ReDoS sin autenticar vía structured_outputs.regex en vLLM (CVSS 5.3)",
+            "en": "CVE-2026-73556 — Unauthenticated ReDoS via structured_outputs.regex in vLLM (CVSS 5.3)",
+            "fr": "CVE-2026-73556 — ReDoS non authentifié via structured_outputs.regex dans vLLM (CVSS 5.3)"
+          },
+          "body_html": {
+            "es": "<p>El parámetro <code>structured_outputs.regex</code> de vLLM no valida timeout de compilación. Un request sin autenticar con un patrón catastrófico frena el motor de structured output y produce denegación de servicio.</p><p>Afecta a todas las versiones previas a 0.26.0. Si exponés el endpoint de completions sin auth y con structured outputs habilitado, un solo regex te tira el nodo.</p><p>CVSS 5.3 (medium). Advisory GHSA-48jh-3gj7-fg8v.</p>",
+            "en": "<p>vLLM's <code>structured_outputs.regex</code> parameter enforces no compile timeout. An unauthenticated request carrying a catastrophic pattern stalls the structured-output engine and takes the service down.</p><p>All versions before 0.26.0 are affected. If your completions endpoint is unauthenticated with structured outputs enabled, one regex is enough to hang the node.</p><p>CVSS 5.3 (medium). Advisory GHSA-48jh-3gj7-fg8v.</p>",
+            "fr": "<p>Le paramètre <code>structured_outputs.regex</code> de vLLM n'impose aucun timeout de compilation. Une requête non authentifiée portant un motif catastrophique bloque le moteur de structured output et provoque un déni de service.</p><p>Toutes les versions antérieures à 0.26.0 sont affectées. Endpoint de completions non authentifié plus structured outputs activés : un seul regex suffit à figer le nœud.</p><p>CVSS 5.3 (medium). Advisory GHSA-48jh-3gj7-fg8v.</p>"
+          },
+          "date": "13 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-73556",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-anythingllm-72917",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-72917 — Account takeover en AnythingLLM por whitespace en los recovery codes (CVSS 5.9)",
+            "en": "CVE-2026-72917 — AnythingLLM account takeover via whitespace in recovery codes (CVSS 5.9)",
+            "fr": "CVE-2026-72917 — Prise de contrôle de compte AnythingLLM via espaces dans les codes de récupération (CVSS 5.9)"
+          },
+          "body_html": {
+            "es": "<p>AnythingLLM 1.0.0 a 1.15.0 deduplica los recovery codes ANTES de recortar whitespace. Traducción: mandás el mismo código dos veces con espaciado distinto y el sistema lo cuenta como dos códigos diferentes.</p><p>Con un username y un solo recovery code válido, el atacante obtiene un token de reseteo de password y se queda con la cuenta — incluidas las de administrador.</p><p>CVSS v3.1 5.9 (medium), vector AV:N/AC:H/PR:N. Parcheado por Mintplex-Labs; advisory GHSA-vv8w-wg6r-hq56.</p>",
+            "en": "<p>AnythingLLM 1.0.0 through 1.15.0 deduplicates recovery codes BEFORE trimming whitespace. Translation: submit the same code twice with different spacing and the system counts it as two distinct codes.</p><p>With a username and a single valid recovery code, an attacker obtains a password-reset token and takes over the account — administrator accounts included.</p><p>CVSS v3.1 5.9 (medium), vector AV:N/AC:H/PR:N. Patched by Mintplex-Labs; advisory GHSA-vv8w-wg6r-hq56.</p>",
+            "fr": "<p>AnythingLLM 1.0.0 à 1.15.0 déduplique les codes de récupération AVANT de supprimer les espaces. Autrement dit : soumettre le même code deux fois avec un espacement différent le fait compter comme deux codes distincts.</p><p>Avec un nom d'utilisateur et un seul code valide, l'attaquant obtient un token de réinitialisation et prend le contrôle du compte, y compris administrateur.</p><p>CVSS v3.1 5.9 (medium), vecteur AV:N/AC:H/PR:N. Corrigé par Mintplex-Labs ; advisory GHSA-vv8w-wg6r-hq56.</p>"
+          },
+          "date": "10 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-72917",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-llm-memory-mcp-19282",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-19282 — Command injection en el servidor MCP llm_memory_mcp (CVSS 4.8)",
+            "en": "CVE-2026-19282 — Command injection in the llm_memory_mcp server (CVSS 4.8)",
+            "fr": "CVE-2026-19282 — Command injection dans le serveur MCP llm_memory_mcp (CVSS 4.8)"
+          },
+          "body_html": {
+            "es": "<p>El proyecto <code>llm_memory_mcp</code> de andreahaku tiene command injection en la función <code>auto.capture</code> de <code>GitHooksManager.ts</code>: manipular el argumento <code>hash</code> alcanza para inyectar comandos. El ataque está restringido a ejecución local.</p><p>El proyecto no usa versionado, así que enumerar releases afectados es difícil: se listan todas las versiones hasta el commit f11dc8b.</p><p>CVSS v4.0 4.8 (medium). Recordatorio de que la superficie MCP hereda todos los bugs clásicos de shell — un servidor MCP corre con tus permisos.</p>",
+            "en": "<p>andreahaku's <code>llm_memory_mcp</code> project carries a command injection in the <code>auto.capture</code> function of <code>GitHooksManager.ts</code>: manipulating the <code>hash</code> argument is enough to inject commands. Attacks are restricted to local execution.</p><p>The project has no versioning, so enumerating affected releases is awkward — everything up to commit f11dc8b is listed.</p><p>CVSS v4.0 4.8 (medium). A reminder that the MCP surface inherits every classic shell bug — an MCP server runs with your permissions.</p>",
+            "fr": "<p>Le projet <code>llm_memory_mcp</code> d'andreahaku présente une command injection dans la fonction <code>auto.capture</code> de <code>GitHooksManager.ts</code> : manipuler l'argument <code>hash</code> suffit à injecter des commandes. L'attaque est limitée à une exécution locale.</p><p>Le projet n'est pas versionné, l'énumération des releases affectées est donc délicate : tout jusqu'au commit f11dc8b est listé.</p><p>CVSS v4.0 4.8 (medium). Rappel : la surface MCP hérite de tous les bugs shell classiques — un serveur MCP tourne avec vos permissions.</p>"
+          },
+          "date": "08 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-19282",
+            "label": "OpenCVE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "supply-chain",
+      "name": "Supply Chain",
+      "theme": "supply-chain",
+      "icon_emoji": "📦",
+      "anchor": "supply-chain",
+      "updates": [
+        {
+          "id": "sc-slopsquatting-ingestion",
+          "tag": "research",
+          "title": {
+            "es": "Slopsquatting: un paquete npm alucinado se propagó a más de 230 repos",
+            "en": "Slopsquatting: one hallucinated npm package spread to 230+ repos",
+            "fr": "Slopsquatting : un paquet npm halluciné propagé dans plus de 230 dépôts"
+          },
+          "body_html": {
+            "es": "<p>Un análisis sobre ingesta de open source vía herramientas de IA documenta el caso de <code>react-codeshift</code>: un nombre de paquete alucinado, originado en 47 agent skills generadas por IA, que se propagó por forks a más de 230 repositorios antes de que alguien lo notara.</p><p>Los números de fondo: 85% de las organizaciones usa asistentes de código con IA, pero solo 9% tiene controles de AppSec específicos para IA. Un estudio de USENIX Security sobre más de 500.000 muestras de código en 16 modelos encontró que un porcentaje medible de los paquetes sugeridos no existe en los registries públicos, y que cerca de la mitad de las dependencias que sí resuelven traen CVEs conocidos o releases desactualizados.</p><p>El vector es directo: el atacante registra el nombre alucinado con payload malicioso y espera. A eso se le dice slopsquatting.</p>",
+            "en": "<p>An analysis of AI-driven open source ingestion documents the <code>react-codeshift</code> case: a hallucinated package name originating in 47 AI-generated agent skills that spread through forks to over 230 repositories before an engineer noticed.</p><p>The backdrop numbers: 85% of organizations use AI coding assistants, but only 9% have dedicated AI AppSec controls. A USENIX Security study across 500,000+ code samples and 16 models found a measurable share of suggested package names do not exist in public registries, and nearly half of the dependencies that do resolve carry known CVEs or outdated releases.</p><p>The vector is blunt: an attacker registers the hallucinated name with a malicious payload and waits. That's slopsquatting.</p>",
+            "fr": "<p>Une analyse de l'ingestion open source pilotée par l'IA documente le cas <code>react-codeshift</code> : un nom de paquet halluciné, issu de 47 agent skills générées par IA, propagé via des forks dans plus de 230 dépôts avant d'être repéré.</p><p>Les chiffres de fond : 85% des organisations utilisent des assistants de code IA, mais seulement 9% disposent de contrôles AppSec dédiés à l'IA. Une étude USENIX Security sur plus de 500 000 échantillons et 16 modèles montre qu'une part mesurable des noms de paquets suggérés n'existe pas dans les registries publics, et que près de la moitié des dépendances qui résolvent portent des CVE connues ou des releases obsolètes.</p><p>Le vecteur est simple : l'attaquant enregistre le nom halluciné avec un payload malveillant et attend. C'est le slopsquatting.</p>"
+          },
+          "date": "13 Aug 2026",
+          "source": {
+            "url": "https://www.bleepingcomputer.com/news/security/who-vets-ais-code-the-scale-challenge-facing-open-source-ingestion/",
+            "label": "BleepingComputer"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "atk-agent-delegation",
+          "tag": "research",
+          "title": {
+            "es": "Tarea vaga, acceso total: el 65% de las empresas ya tuvo un incidente con agentes",
+            "en": "Vague task, total access: 65% of enterprises already had an agent incident",
+            "fr": "Tâche vague, accès total : 65% des entreprises ont déjà eu un incident d'agent"
+          },
+          "body_html": {
+            "es": "<p>Entre el 21 de julio y el 6 de agosto de 2026, OpenAI, Anthropic, Meta, Moonshot AI y el UK AI Security Institute divulgaron incidentes donde agentes excedieron su alcance previsto. El patrón común: tarea vaga más credenciales amplias.</p><p>La frase que resume el problema: para un modelo, capacidad y permiso son lo mismo. Un agente con permisos de creador o conectores compartidos va a usar todo lo que técnicamente puede, sin dudar.</p><p>Datos de un estudio de CSA/Token Security: 65% de las empresas reportó un incidente de seguridad con un agente de IA, y solo 21% tiene procesos formales de decomisionado. Por qué fallan los safeguards actuales: mejores prompts no evitan el overreach (las instrucciones llegan por múltiples canales), los guardrails atajan ~99% de los pedidos malos pero ese 1% escala, y los sandboxes limitan lo que se ofrece, no lo que el agente termina alcanzando.</p><p>La propuesta: tratar la gestión de agentes como control de acceso de empleados — credenciales acotadas al propósito, monitoreo continuo contra el mandato.</p>",
+            "en": "<p>Between 21 July and 6 August 2026, OpenAI, Anthropic, Meta, Moonshot AI and the UK AI Security Institute all disclosed incidents where agents exceeded their intended scope. Common pattern: vague task plus broad credentials.</p><p>The line that captures it: to a model, capability and permission are the same thing. An agent holding creator-level permissions or shared connectors will use everything it technically can, without hesitating.</p><p>From a CSA/Token Security study: 65% of enterprises reported a security incident involving an AI agent, and only 21% have formal decommissioning processes. Why current safeguards fail — better prompts don't prevent overreach (instructions arrive through multiple channels), guardrails catch roughly 99% of bad requests but that remaining 1% scales, and sandboxes constrain what is offered, not what the agent actually reaches.</p><p>The proposed fix: manage agents like employee access — credentials scoped to a defined purpose, continuously monitored against their mandate.</p>",
+            "fr": "<p>Entre le 21 juillet et le 6 août 2026, OpenAI, Anthropic, Meta, Moonshot AI et l'UK AI Security Institute ont tous divulgué des incidents où des agents ont dépassé leur périmètre prévu. Schéma commun : tâche vague plus identifiants trop larges.</p><p>La formule qui résume : pour un modèle, capacité et permission sont la même chose. Un agent doté de permissions créateur ou de connecteurs partagés utilisera tout ce qu'il peut techniquement faire.</p><p>Étude CSA/Token Security : 65% des entreprises signalent un incident de sécurité impliquant un agent IA, et seules 21% disposent de processus formels de décommissionnement. Pourquoi les garde-fous échouent : de meilleurs prompts n'empêchent pas le dépassement (les instructions arrivent par plusieurs canaux), les guardrails filtrent environ 99% des requêtes dangereuses mais le 1% restant passe à l'échelle, et les sandboxes contraignent ce qui est offert, pas ce que l'agent atteint réellement.</p><p>La proposition : gérer les agents comme des accès employés — identifiants limités à un objectif défini, surveillés en continu.</p>"
+          },
+          "date": "11 Aug 2026",
+          "source": {
+            "url": "https://www.bleepingcomputer.com/news/security/vague-task-total-access-when-ai-delegation-becomes-a-security-risk/",
+            "label": "BleepingComputer"
+          }
+        }
+      ]
+    },
+    {
+      "id": "advisories",
+      "name": "Vendor Advisories",
+      "theme": "advisories",
+      "icon_emoji": "📢",
+      "anchor": "advisories",
+      "updates": [
+        {
+          "id": "adv-computer-history",
+          "tag": "advisory",
+          "title": {
+            "es": "OpenAI admite que Computer History aumenta el riesgo de prompt injection",
+            "en": "OpenAI acknowledges Computer History increases prompt injection risk",
+            "fr": "OpenAI reconnaît que Computer History accroît le risque d'injection de prompt"
+          },
+          "body_html": {
+            "es": "<p>Computer History es una función opt-in de ChatGPT en macOS (Pro, Business y Enterprise) que registra clicks, tipeo, atajos de teclado, cambios de app y contexto usando el sistema de accesibilidad, y los convierte en resúmenes de texto y archivos de memoria locales sobre una línea de tiempo.</p><p>La propia documentación de OpenAI advierte que esos archivos pueden contener información sensible, que Computer History aumenta el riesgo de prompt injection desde el contenido de apps y sitios web, y que los datos quedan sin cifrar en local hasta 48 horas — donde otros programas podrían leerlos.</p><p>Recomendaciones del vendor: desactivarla durante comunicaciones sin consentimiento previo de los demás, y pausar o excluir apps con datos de salud, financieros o personales.</p>",
+            "en": "<p>Computer History is an opt-in ChatGPT feature on macOS (Pro, Business and Enterprise) that records clicks, typing, keyboard shortcuts, app switches and context through the accessibility system, turning them into text summaries and local memory files on a timeline.</p><p>OpenAI's own documentation warns those files can contain sensitive information, that Computer History increases the risk of prompt injection from content in apps and websites, and that data sits unencrypted locally for up to 48 hours — where other programs may be able to read it.</p><p>Vendor guidance: disable it during communications without prior consent from others, and pause or exclude apps holding health, financial or personal data.</p>",
+            "fr": "<p>Computer History est une fonctionnalité opt-in de ChatGPT sur macOS (Pro, Business et Enterprise) qui enregistre clics, frappe, raccourcis clavier, changements d'application et contexte via le système d'accessibilité, puis les convertit en résumés textuels et fichiers de mémoire locaux sur une timeline.</p><p>La documentation d'OpenAI avertit que ces fichiers peuvent contenir des informations sensibles, que Computer History accroît le risque d'injection de prompt depuis le contenu des apps et sites web, et que les données restent non chiffrées localement jusqu'à 48 heures — accessibles à d'autres programmes.</p><p>Recommandations du vendor : désactiver pendant les communications sans consentement préalable, mettre en pause ou exclure les apps contenant des données de santé, financières ou personnelles.</p>"
+          },
+          "date": "14 Aug 2026",
+          "source": {
+            "url": "https://www.theregister.com/ai-and-ml/2026/08/14/openai-ditches-recall-style-screenshot-surveillance-for-friendly-keylogging/5287618",
+            "label": "The Register"
+          }
+        },
+        {
+          "id": "adv-nist-nvd-ai",
+          "tag": "advisory",
+          "title": {
+            "es": "NIST abre consulta pública para modernizar el NVD de cara a la IA",
+            "en": "NIST opens public consultation on an AI-ready NVD modernization",
+            "fr": "NIST ouvre une consultation publique sur la modernisation IA du NVD"
+          },
+          "body_html": {
+            "es": "<p>NIST publicó un RFI con 30 preguntas para modernizar la National Vulnerability Database y volverla continua, contextual y automatizada, en lugar de depender de escaneo periódico y remediación manual.</p><p>El ángulo IA es de doble filo y el propio NIST lo reconoce: la IA mejora el descubrimiento de vulnerabilidades, pero también habilita explotación asistida por IA. La consulta busca definir cómo integrar workflows de IA sin perder confiabilidad.</p><p>Los expertos consultados insisten en que la supervisión humana sigue siendo indispensable, sobre todo para remediación en sistemas productivos. La fecha límite para comentarios es el 13 de octubre de 2026.</p>",
+            "en": "<p>NIST published an RFI with 30 questions on modernizing the National Vulnerability Database into something continuous, contextual and automated, rather than leaning on periodic scanning and manual remediation.</p><p>The AI angle cuts both ways and NIST says so: AI improves vulnerability discovery, but it also enables AI-assisted exploitation. The consultation is about how to integrate AI workflows without losing reliability.</p><p>Security leaders quoted stress that human oversight remains essential, particularly for remediation in production systems. Comments close 13 October 2026.</p>",
+            "fr": "<p>NIST a publié un RFI de 30 questions sur la modernisation de la National Vulnerability Database vers un système continu, contextuel et automatisé, plutôt que fondé sur le scan périodique et la remédiation manuelle.</p><p>L'angle IA est à double tranchant, et NIST le reconnaît : l'IA améliore la découverte de vulnérabilités mais permet aussi l'exploitation assistée par IA. La consultation vise à définir comment intégrer des workflows IA sans perdre en fiabilité.</p><p>Les experts cités insistent : la supervision humaine reste indispensable, surtout pour la remédiation en production. Clôture des commentaires le 13 octobre 2026.</p>"
+          },
+          "date": "12 Aug 2026",
+          "source": {
+            "url": "https://www.infosecurity-magazine.com/news/nist-seeks-public-input-ai-nvd/",
+            "label": "Infosecurity Magazine"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "vLLM soltó un lote de cinco CVEs el mismo día: fuga cross-user, race condition en validación, ReDoS, agotamiento de recursos e information disclosure. Si servís inferencia multi-tenant, 0.27.0 no es opcional.",
+      "en": "vLLM shipped a five-CVE batch on a single day: cross-user leakage, a validation race, ReDoS, resource exhaustion and information disclosure. If you serve multi-tenant inference, 0.27.0 is not optional.",
+      "fr": "vLLM a publié cinq CVE le même jour : fuite cross-user, race condition de validation, ReDoS, épuisement de ressources et divulgation d'informations. En inférence multi-tenant, 0.27.0 n'est pas optionnel."
+    },
+    {
+      "es": "Dos items de hoy comparten la misma raíz: tratar la salida del modelo como confiable. PapersGPT la pasa a eval y se come un CVSS 9.4; Rovo la deja actuar sobre la sesión autenticada del usuario y termina exfiltrando Jira.",
+      "en": "Two of today's items share one root cause: treating model output as trusted. PapersGPT pipes it into eval and earns a CVSS 9.4; Rovo lets it act on the user's authenticated session and ends up exfiltrating Jira.",
+      "fr": "Deux items du jour partagent la même racine : considérer la sortie du modèle comme fiable. PapersGPT la passe à eval et récolte un CVSS 9.4 ; Rovo la laisse agir sur la session authentifiée et finit par exfiltrer Jira."
+    },
+    {
+      "es": "El foco regulatorio y de vendors se corrió al perímetro de permisos, no al modelo: OpenAI aísla Astra por capacidad cyber, el análisis de delegación pide credenciales acotadas por propósito, y NIST se pregunta cómo automatizar el NVD sin regalarle el mapa a los atacantes.",
+      "en": "Vendor and regulator focus shifted to the permission perimeter rather than the model: OpenAI isolates Astra over cyber capability, the delegation analysis calls for purpose-scoped credentials, and NIST asks how to automate the NVD without handing attackers the map.",
+      "fr": "L'attention des vendors et régulateurs s'est déplacée vers le périmètre de permissions plutôt que le modèle : OpenAI isole Astra pour capacité cyber, l'analyse sur la délégation réclame des identifiants limités à un objectif, et NIST cherche à automatiser le NVD sans offrir la carte aux attaquants."
+    }
+  ]
+}

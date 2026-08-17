@@ -1,0 +1,641 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 17 de agosto 2026",
+    "en": "Backend & Fullstack — August 17, 2026",
+    "fr": "Backend & Fullstack — 17 août 2026"
+  },
+  "description": {
+    "es": "PostgreSQL parchea 6 CVEs, Fastify 6 entra en alpha con breaking changes, NestJS suma el método HTTP QUERY, Vitest 5 llega a RC y Canva cuenta cómo revoca cientos de millones de sesiones con S3.",
+    "en": "PostgreSQL patches 6 CVEs, Fastify 6 enters alpha with breaking changes, NestJS adds the HTTP QUERY method, Vitest 5 reaches RC, and Canva explains how it revokes hundreds of millions of sessions using S3.",
+    "fr": "PostgreSQL corrige 6 CVE, Fastify 6 entre en alpha avec des breaking changes, NestJS ajoute la méthode HTTP QUERY, Vitest 5 atteint la RC et Canva explique comment il révoque des centaines de millions de sessions avec S3."
+  },
+  "pubDate": "2026-08-17",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "PostgreSQL parchea 6 CVEs en todas las ramas",
+        "en": "PostgreSQL patches 6 CVEs across all branches",
+        "fr": "PostgreSQL corrige 6 CVE sur toutes les branches"
+      },
+      "anchor": "postgres-18-6",
+      "icon": "simple-icons:postgresql"
+    },
+    {
+      "text": {
+        "es": "Trigger.dev: prototype pollution CVSS 8.5",
+        "en": "Trigger.dev: prototype pollution, CVSS 8.5",
+        "fr": "Trigger.dev : prototype pollution, CVSS 8.5"
+      },
+      "anchor": "cve-2026-73654",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Fastify 6 alpha: adiós a los tipos deprecados",
+        "en": "Fastify 6 alpha: deprecated types are gone",
+        "fr": "Fastify 6 alpha : adieu les types dépréciés"
+      },
+      "anchor": "fastify-6-alpha",
+      "icon": "lucide:blocks"
+    },
+    {
+      "text": {
+        "es": "NestJS 11.2 soporta el método HTTP QUERY",
+        "en": "NestJS 11.2 supports the HTTP QUERY method",
+        "fr": "NestJS 11.2 supporte la méthode HTTP QUERY"
+      },
+      "anchor": "nestjs-11-2",
+      "icon": "lucide:server"
+    },
+    {
+      "text": {
+        "es": "Vitest 5 RC falla si no awaiteás un assert",
+        "en": "Vitest 5 RC fails on un-awaited assertions",
+        "fr": "Vitest 5 RC échoue sur les assertions non attendues"
+      },
+      "anchor": "vitest-5-rc",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "Canva revoca sesiones a escala con S3",
+        "en": "Canva revokes sessions at scale using S3",
+        "fr": "Canva révoque des sessions à grande échelle avec S3"
+      },
+      "anchor": "canva-session-revocation",
+      "icon": "lucide:layers"
+    },
+    {
+      "text": {
+        "es": "Ataques DDoS de 1 Tbps: +519% intertrimestral",
+        "en": "1 Tbps DDoS attacks: +519% quarter-over-quarter",
+        "fr": "Attaques DDoS de 1 Tbps : +519% trimestriel"
+      },
+      "anchor": "cloudflare-ddos-h1-2026",
+      "icon": "simple-icons:cloudflare"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "postgres-18-6",
+      "updates": [
+        {
+          "id": "postgres-18-6",
+          "tag": "security",
+          "date": "13 Aug 2026",
+          "title": {
+            "es": "PostgreSQL 18.6, 17.11, 16.15, 15.19 y 14.24: seis CVEs cerrados",
+            "en": "PostgreSQL 18.6, 17.11, 16.15, 15.19 and 14.24: six CVEs closed",
+            "fr": "PostgreSQL 18.6, 17.11, 16.15, 15.19 et 14.24 : six CVE corrigées"
+          },
+          "body_html": {
+            "es": "<p>Update de seguridad en <strong>todas las ramas soportadas</strong>, más <code>19 Beta 3</code>. Las dos que más duelen: <strong>CVE-2026-14662</strong> (CVSS 8.8) — allocations undersize en <code>tsvector</code>/<code>tsquery</code> por integer wraparound — y <strong>CVE-2026-6464</strong> (CVSS 8.1), donde un fallo temprano de <code>COPY FROM STDIN</code> hace que <code>psql</code> interprete las líneas de datos como comandos. Completan la lista <strong>CVE-2026-6471</strong> (CVSS 7.2, logical decoding puede hacer <code>dlopen</code> de un archivo arbitrario), <strong>CVE-2026-6470</strong>, <strong>CVE-2026-6469</strong> y <strong>CVE-2026-14663</strong>, esta última bastante fea: <code>pgcrypto</code>, con ciphers deshabilitados en OpenSSL, encripta y desencripta silenciosamente en cleartext. Los updates son acumulativos: no hace falta dump-and-reload ni <code>pg_upgrade</code>, parás el servicio y actualizás los binarios. Actualizá YA.</p>",
+            "en": "<p>Security update across <strong>every supported branch</strong>, plus <code>19 Beta 3</code>. The two that hurt most: <strong>CVE-2026-14662</strong> (CVSS 8.8) — undersize allocations in <code>tsvector</code>/<code>tsquery</code> via integer wraparound — and <strong>CVE-2026-6464</strong> (CVSS 8.1), where an early <code>COPY FROM STDIN</code> failure makes <code>psql</code> process data lines as commands. Rounding out the list: <strong>CVE-2026-6471</strong> (CVSS 7.2, logical decoding can <code>dlopen</code> an arbitrary file), <strong>CVE-2026-6470</strong>, <strong>CVE-2026-6469</strong>, and the nastiest of the bunch, <strong>CVE-2026-14663</strong>: <code>pgcrypto</code>, for OpenSSL-disabled ciphers, silently encrypts to and decrypts from cleartext. Updates are cumulative — no dump-and-reload or <code>pg_upgrade</code> needed, just stop the service and swap the binaries.</p>",
+            "fr": "<p>Mise à jour de sécurité sur <strong>toutes les branches supportées</strong>, plus <code>19 Beta 3</code>. Les deux plus graves : <strong>CVE-2026-14662</strong> (CVSS 8.8) — allocations sous-dimensionnées dans <code>tsvector</code>/<code>tsquery</code> via integer wraparound — et <strong>CVE-2026-6464</strong> (CVSS 8.1), où un échec précoce de <code>COPY FROM STDIN</code> fait que <code>psql</code> traite les lignes de données comme des commandes. S'ajoutent <strong>CVE-2026-6471</strong> (CVSS 7.2, le logical decoding peut faire un <code>dlopen</code> sur un fichier arbitraire), <strong>CVE-2026-6470</strong>, <strong>CVE-2026-6469</strong> et la plus vicieuse, <strong>CVE-2026-14663</strong> : <code>pgcrypto</code>, pour les ciphers désactivés dans OpenSSL, chiffre et déchiffre silencieusement en clair. Les mises à jour sont cumulatives : ni dump-and-reload ni <code>pg_upgrade</code>, on arrête le service et on remplace les binaires.</p>"
+          },
+          "source": {
+            "url": "https://www.postgresql.org/about/news/postgresql-186-1711-1615-1519-1424-and-19-beta-3-released-3365/",
+            "label": "postgresql.org"
+          }
+        },
+        {
+          "id": "cve-2026-73654",
+          "tag": "security",
+          "date": "13 Aug 2026",
+          "title": {
+            "es": "CVE-2026-73654: prototype pollution en Trigger.dev tumba todo el proceso",
+            "en": "CVE-2026-73654: prototype pollution in Trigger.dev takes down the whole process",
+            "fr": "CVE-2026-73654 : prototype pollution dans Trigger.dev met à terre tout le processus"
+          },
+          "body_html": {
+            "es": "<p><strong>CVSS 8.5</strong> en <code>@trigger.dev/core</code>. Las operaciones de metadata de un run permiten prototype pollution, y el resultado no es un bug local: es un <strong>DoS cross-tenant a nivel de proceso</strong>. Afecta desde <code>3.3.8</code> hasta <code>4.5.5</code> inclusive; el fix está en <strong>4.5.6</strong>. Si corrés Trigger.dev self-hosted con múltiples tenants en el mismo worker, esto es prioridad uno.</p>",
+            "en": "<p><strong>CVSS 8.5</strong> in <code>@trigger.dev/core</code>. Run metadata operations allow prototype pollution, and the blast radius is not local: it is a <strong>process-wide cross-tenant DoS</strong>. Affects <code>3.3.8</code> through <code>4.5.5</code> inclusive; fixed in <strong>4.5.6</strong>. If you self-host Trigger.dev with multiple tenants on the same worker, this is priority one.</p>",
+            "fr": "<p><strong>CVSS 8.5</strong> dans <code>@trigger.dev/core</code>. Les opérations de metadata d'un run permettent une prototype pollution, et le rayon d'impact n'est pas local : c'est un <strong>DoS cross-tenant à l'échelle du processus</strong>. Affecte de <code>3.3.8</code> à <code>4.5.5</code> inclus ; corrigé en <strong>4.5.6</strong>. Si vous auto-hébergez Trigger.dev avec plusieurs tenants sur le même worker, c'est la priorité numéro un.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-p28v-f755-9qrg",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "fastify-6-alpha",
+          "tag": "breaking",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "Fastify 6.0.0-alpha: limpieza masiva de deprecaciones y undici v8",
+            "en": "Fastify 6.0.0-alpha: massive deprecation cleanup and undici v8",
+            "fr": "Fastify 6.0.0-alpha : grand nettoyage des dépréciations et undici v8"
+          },
+          "body_html": {
+            "es": "<p>Arrancó la major. La alpha barre con todo lo deprecado: se van los tipos <code>FastifyPlugin</code>, <code>FastifyLoggerInstance</code>, <code>FastifyRequestContext</code>/<code>FastifyReplyContext</code>, <code>ValidationResult</code> y <code>ResSerializerReply</code>, más las deprecaciones <code>FSTDEP022</code> a <code>FSTDEP025</code>. Cambia el default de <strong>override del error handler: ahora está deshabilitado</strong>, sube la versión mínima de runtime y salta a <strong>undici v8</strong>. También cae el ponyfill de <code>Promise.withResolvers</code>. La <code>alpha.1</code> llegó dos días después. Si tenés plugins propios tipados, andá probando ya — migrar tipos a último momento es cómo se pierden tres días.</p>",
+            "en": "<p>The major has started. The alpha sweeps out everything deprecated: the <code>FastifyPlugin</code>, <code>FastifyLoggerInstance</code>, <code>FastifyRequestContext</code>/<code>FastifyReplyContext</code>, <code>ValidationResult</code> and <code>ResSerializerReply</code> types are gone, along with the <code>FSTDEP022</code>–<code>FSTDEP025</code> deprecations. <strong>Error handler overrides are now disabled by default</strong>, the minimum runtime version goes up, and it jumps to <strong>undici v8</strong>. The <code>Promise.withResolvers</code> ponyfill is also dropped. <code>alpha.1</code> followed two days later. If you maintain typed in-house plugins, start testing now.</p>",
+            "fr": "<p>La major est lancée. L'alpha balaie tout ce qui était déprécié : les types <code>FastifyPlugin</code>, <code>FastifyLoggerInstance</code>, <code>FastifyRequestContext</code>/<code>FastifyReplyContext</code>, <code>ValidationResult</code> et <code>ResSerializerReply</code> disparaissent, ainsi que les dépréciations <code>FSTDEP022</code>–<code>FSTDEP025</code>. <strong>L'override du error handler est désormais désactivé par défaut</strong>, la version minimale du runtime augmente et le passage à <strong>undici v8</strong> est fait. Le ponyfill <code>Promise.withResolvers</code> saute aussi. L-<code>alpha.1</code> a suivi deux jours plus tard.</p>"
+          },
+          "source": {
+            "url": "https://github.com/fastify/fastify/releases/tag/v6.0.0-alpha.0",
+            "label": "github.com/fastify"
+          }
+        },
+        {
+          "id": "vitest-5-rc",
+          "tag": "breaking",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "Vitest 5.0.0-rc.1: los asserts async sin await ahora fallan el test",
+            "en": "Vitest 5.0.0-rc.1: un-awaited async assertions now fail the test",
+            "fr": "Vitest 5.0.0-rc.1 : les assertions async sans await font désormais échouer le test"
+          },
+          "body_html": {
+            "es": "<p>El RC trae el cambio que más falsos verdes va a matar: <strong>si una assertion asíncrona no se awaitea, el test falla</strong>. Cuántos suites verdes esconden asserts que nunca se ejecutaron, ¿eh? Se suman: los proyectos inline <strong>extienden la config root por default</strong>, soporte de <strong>proyectos anidados</strong>, servidor Vite <strong>compartido entre proyectos inline</strong>, <code>&gt;</code> como separador en <code>-t</code>, y mocking de <code>Temporal</code> sin fake timers. Del lado de fixes, uno grande: <code>vitest --typecheck</code> ya no reporta un falso éxito cuando el proceso <code>tsc</code> crashea.</p>",
+            "en": "<p>The RC lands the change that will kill the most false greens: <strong>an asynchronous assertion that is not awaited now fails the test</strong>. Also in: inline projects <strong>extend the root config by default</strong>, <strong>nested projects</strong> are supported, the Vite server is <strong>shared between inline projects</strong>, <code>&gt;</code> becomes the separator in <code>-t</code>, and <code>Temporal</code> can be mocked without fake timers. On the fix side, a big one: <code>vitest --typecheck</code> no longer reports a false success when the <code>tsc</code> process crashes.</p>",
+            "fr": "<p>La RC apporte le changement qui tuera le plus de faux verts : <strong>une assertion asynchrone non attendue fait échouer le test</strong>. S'ajoutent : les projets inline <strong>étendent la config racine par défaut</strong>, le support des <strong>projets imbriqués</strong>, le serveur Vite <strong>partagé entre projets inline</strong>, <code>&gt;</code> comme séparateur dans <code>-t</code>, et le mocking de <code>Temporal</code> sans fake timers. Côté correctifs, un gros : <code>vitest --typecheck</code> ne rapporte plus un faux succès quand le processus <code>tsc</code> crashe.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.0.0-rc.1",
+            "label": "github.com/vitest-dev"
+          }
+        },
+        {
+          "id": "nestjs-11-2",
+          "tag": "release",
+          "date": "14 Aug 2026",
+          "title": {
+            "es": "NestJS 11.2.0 suma el método HTTP QUERY (RFC 10008)",
+            "en": "NestJS 11.2.0 adds the HTTP QUERY method (RFC 10008)",
+            "fr": "NestJS 11.2.0 ajoute la méthode HTTP QUERY (RFC 10008)"
+          },
+          "body_html": {
+            "es": "<p>Esto es más grande de lo que parece. <code>QUERY</code> es el método que resuelve el dilema eterno del <em>GET con body</em>: búsquedas complejas que no entran en la query string y que hoy resolvés con un <code>POST /search</code> que miente sobre su semántica. <strong>QUERY es seguro e idempotente, y cacheable.</strong> Nest lo soporta en core, common y platform-fastify, con tests e2e incluidos. También llega <code>sse signal</code>, y del lado de fixes: providers singleton compartidos con módulos lazy, y middleware que ahora corre en rutas excluidas del prefijo global en Fastify. La <code>11.2.1</code> salió el mismo día.</p>",
+            "en": "<p>Bigger than it looks. <code>QUERY</code> is the method that settles the eternal <em>GET with a body</em> dilemma: complex searches that do not fit in a query string and that you currently solve with a <code>POST /search</code> that lies about its semantics. <strong>QUERY is safe, idempotent, and cacheable.</strong> Nest supports it across core, common and platform-fastify, with e2e tests included. Also landing: <code>sse signal</code>, plus fixes for singleton providers shared with lazily loaded modules and middleware now running on routes excluded from the global prefix under Fastify. <code>11.2.1</code> shipped the same day.</p>",
+            "fr": "<p>Plus important qu-il n'y paraît. <code>QUERY</code> est la méthode qui règle l'éternel dilemme du <em>GET avec body</em> : les recherches complexes qui ne tiennent pas dans une query string et qu-on résout aujourd-hui par un <code>POST /search</code> qui ment sur sa sémantique. <strong>QUERY est sûre, idempotente et cacheable.</strong> Nest la supporte dans core, common et platform-fastify, avec des tests e2e. Arrivent aussi <code>sse signal</code>, et des correctifs pour les providers singleton partagés avec les modules lazy et le middleware qui s'exécute désormais sur les routes exclues du préfixe global sous Fastify. La <code>11.2.1</code> est sortie le même jour.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nestjs/nest/releases/tag/v11.2.0",
+            "label": "github.com/nestjs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "fastify-5-12",
+      "updates": [
+        {
+          "id": "fastify-5-12",
+          "tag": "minor",
+          "date": "13 Aug 2026",
+          "title": {
+            "es": "Fastify 5.12.0: llega Reply.prototype.mediaType",
+            "en": "Fastify 5.12.0: Reply.prototype.mediaType arrives",
+            "fr": "Fastify 5.12.0 : arrivée de Reply.prototype.mediaType"
+          },
+          "body_html": {
+            "es": "<p>La línea estable sigue viva mientras la 6 cocina. Nuevo <code>Reply.prototype.mediaType</code>, se dejan de devolver los raw response headers, y el parseo de content-type ahora devuelve <code>undefined</code> para media types inválidos en vez de improvisar. Cambio chico pero correcto: un content-type inválido no debería adivinarse.</p>",
+            "en": "<p>The stable line keeps moving while 6 cooks. New <code>Reply.prototype.mediaType</code>, raw response headers are no longer returned, and content-type parsing now returns <code>undefined</code> for invalid media types instead of improvising. Small but correct: an invalid content-type should not be guessed at.</p>",
+            "fr": "<p>La ligne stable continue pendant que la 6 mijote. Nouveau <code>Reply.prototype.mediaType</code>, les raw response headers ne sont plus renvoyés, et le parsing du content-type retourne désormais <code>undefined</code> pour les media types invalides au lieu d'improviser.</p>"
+          },
+          "source": {
+            "url": "https://github.com/fastify/fastify/releases/tag/v5.12.0",
+            "label": "github.com/fastify"
+          }
+        },
+        {
+          "id": "hono-4-13-2",
+          "tag": "patch",
+          "date": "13 Aug 2026",
+          "title": {
+            "es": "Hono 4.13.2: secure-headers al día con W3C y ETag arreglado en streams",
+            "en": "Hono 4.13.2: secure-headers caught up with W3C, ETag fixed for streams",
+            "fr": "Hono 4.13.2 : secure-headers à jour avec le W3C, ETag corrigé sur les streams"
+          },
+          "body_html": {
+            "es": "<p>Release de mantenimiento con varios fixes que importan en producción. <code>secure-headers</code> suma las directivas de Permissions-Policy que faltaban del W3C y ahora emite paréntesis vacíos <code>()</code> en lugar de <code>none</code> para las deshabilitadas. Dos fixes de <strong>ETag</strong>: hashing incremental incorrecto en respuestas chunked y digest inestable entre chunks de stream — si servís streams con ETag, esto te estaba mintiendo. El client ahora serializa múltiples cookies bien y manda bodies JSON falsy. Bonus perf: <code>cors</code> pre-junta los headers estáticos en la inicialización.</p>",
+            "en": "<p>Maintenance release with several fixes that matter in production. <code>secure-headers</code> adds the missing W3C Permissions-Policy directives and now emits standard empty parentheses <code>()</code> instead of <code>none</code> for disabled ones. Two <strong>ETag</strong> fixes: incorrect incremental hashing on chunked responses, and an unstable digest across stream chunks — if you serve streams with ETag, this was lying to you. The client now serializes multiple cookies correctly and sends falsy JSON bodies. Perf bonus: <code>cors</code> pre-joins static header options at initialization.</p>",
+            "fr": "<p>Release de maintenance avec plusieurs correctifs qui comptent en production. <code>secure-headers</code> ajoute les directives Permissions-Policy manquantes du W3C et émet désormais des parenthèses vides <code>()</code> au lieu de <code>none</code> pour celles désactivées. Deux correctifs <strong>ETag</strong> : hashing incrémental incorrect sur les réponses chunked et digest instable entre les chunks de stream. Le client sérialise correctement plusieurs cookies et envoie les bodies JSON falsy. Bonus perf : <code>cors</code> pré-assemble les options de headers statiques à l'initialisation.</p>"
+          },
+          "source": {
+            "url": "https://github.com/honojs/hono/releases/tag/v4.13.2",
+            "label": "github.com/honojs"
+          }
+        },
+        {
+          "id": "apollo-router-2-16-2",
+          "tag": "patch",
+          "date": "13 Aug 2026",
+          "title": {
+            "es": "Apollo Router 2.16.2",
+            "en": "Apollo Router 2.16.2",
+            "fr": "Apollo Router 2.16.2"
+          },
+          "body_html": {
+            "es": "<p>Patch del router de federación, publicado tras dos release candidates (<code>rc.0</code> el 12 y <code>rc.1</code> el 13). Si tenés supergraph en producción, la cadencia de patches de Apollo sigue siendo semanal — vale la pena tener el bump automatizado en vez de acumular seis versiones de deuda.</p>",
+            "en": "<p>Patch for the federation router, shipped after two release candidates (<code>rc.0</code> on the 12th, <code>rc.1</code> on the 13th). If you run a supergraph in production, Apollo's patch cadence remains weekly — worth automating the bump rather than accumulating six versions of debt.</p>",
+            "fr": "<p>Patch du router de fédération, publié après deux release candidates (<code>rc.0</code> le 12, <code>rc.1</code> le 13). Si vous avez un supergraph en production, la cadence de patches d'Apollo reste hebdomadaire — mieux vaut automatiser le bump que d'accumuler six versions de dette.</p>"
+          },
+          "source": {
+            "url": "https://github.com/apollographql/router/releases/tag/v2.16.2",
+            "label": "github.com/apollographql"
+          }
+        },
+        {
+          "id": "kysely-0-29-5",
+          "tag": "patch",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "Kysely 0.29.5",
+            "en": "Kysely 0.29.5",
+            "fr": "Kysely 0.29.5"
+          },
+          "body_html": {
+            "es": "<p>Patch del query builder type-safe. Semana tranquila para los ORMs: <strong>Prisma, Drizzle, TypeORM y tRPC no publicaron releases</strong> en la ventana. Kysely fue el único que se movió.</p>",
+            "en": "<p>Patch for the type-safe query builder. Quiet week for ORMs: <strong>Prisma, Drizzle, TypeORM and tRPC shipped no releases</strong> in the window. Kysely was the only one that moved.</p>",
+            "fr": "<p>Patch du query builder type-safe. Semaine calme pour les ORM : <strong>Prisma, Drizzle, TypeORM et tRPC n'ont publié aucune release</strong> dans la fenêtre. Kysely est le seul à avoir bougé.</p>"
+          },
+          "source": {
+            "url": "https://github.com/kysely-org/kysely/releases/tag/v0.29.5",
+            "label": "github.com/kysely-org"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "bullmq-6-1",
+      "updates": [
+        {
+          "id": "bullmq-6-1",
+          "tag": "release",
+          "date": "12 Aug 2026",
+          "title": {
+            "es": "BullMQ 6.1.0: las migraciones de schema en Postgres ahora son explícitas",
+            "en": "BullMQ 6.1.0: Postgres schema migrations are now explicit",
+            "fr": "BullMQ 6.1.0 : les migrations de schéma Postgres deviennent explicites"
+          },
+          "body_html": {
+            "es": "<p>Cambio de diseño que celebro: el backend de <strong>Postgres</strong> ya no corre migraciones de schema por su cuenta al arrancar — ahora son explícitas. Migraciones automáticas en el boot de un worker es de esas cosas que funcionan hasta que tenés doce réplicas arrancando en paralelo contra la misma base. Que sea un paso deliberado del deploy es lo correcto. La <code>6.1.1</code> y la <code>6.1.2</code> siguieron el 14 y el 16.</p>",
+            "en": "<p>A design change worth celebrating: the <strong>Postgres</strong> backend no longer runs schema migrations on its own at startup — they are now explicit. Automatic migrations on worker boot is one of those things that works right up until you have twelve replicas starting in parallel against the same database. Making it a deliberate deploy step is the correct call. <code>6.1.1</code> and <code>6.1.2</code> followed on the 14th and 16th.</p>",
+            "fr": "<p>Un choix de conception à saluer : le backend <strong>Postgres</strong> ne lance plus les migrations de schéma tout seul au démarrage — elles sont désormais explicites. Les migrations automatiques au boot d'un worker fonctionnent jusqu-au jour où douze réplicas démarrent en parallèle sur la même base. En faire une étape délibérée du déploiement est le bon choix. Les <code>6.1.1</code> et <code>6.1.2</code> ont suivi les 14 et 16.</p>"
+          },
+          "source": {
+            "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.1.0",
+            "label": "github.com/taskforcesh"
+          }
+        },
+        {
+          "id": "spotify-data-lake-index",
+          "tag": "notable",
+          "date": "12 Aug 2026",
+          "title": {
+            "es": "Random Access Parquet: Spotify hace point queries sobre el data lake sin replicar nada",
+            "en": "Random Access Parquet: Spotify runs point queries on the data lake without replicating anything",
+            "fr": "Random Access Parquet : Spotify fait des point queries sur le data lake sans rien répliquer"
+          },
+          "body_html": {
+            "es": "<p>Un data lake está optimizado para escaneos analíticos, no para buscar una fila. La salida habitual es replicar el dataset a una base operacional — y bancarse el pipeline, el costo y la deriva. Spotify eligió otra: <strong>Random Access Parquet (RAP)</strong>, una capa de <strong>índice externo</strong> sobre archivos Parquet que mapea claves de lookup (por ejemplo un user ID) directamente a un archivo y una posición de fila. En vez de escanear miles de archivos, la query resuelve la clave contra el índice y hace una <strong>ranged read dirigida</strong> contra el object storage. A medida que entra data nueva en tablas <strong>Iceberg</strong>, un index builder genera <strong>fragmentos de índice append-only</strong> sin tocar los Parquet inmutables. El mismo dataset sigue sirviendo analytics, ML y online serving. Lindo recordatorio: cuando el patrón de acceso no encaja con la forma del storage, indexar casi siempre le gana a copiar.</p>",
+            "en": "<p>A data lake is optimized for analytical scans, not for fetching a single row. The usual escape hatch is replicating the dataset into an operational database — and eating the pipeline, the cost and the drift. Spotify picked another: <strong>Random Access Parquet (RAP)</strong>, an <strong>external index</strong> layer over Parquet files that maps lookup keys (a user ID, say) directly to a file and row location. Instead of scanning thousands of files, a query resolves the key through the index and issues a <strong>targeted ranged read</strong> against object storage. As new data lands in <strong>Iceberg</strong> tables, an index builder generates <strong>append-only index fragments</strong> without modifying the immutable Parquet files. The same dataset keeps serving analytics, ML and online serving. A neat reminder: when the access pattern does not match the shape of your storage, indexing almost always beats copying.</p>",
+            "fr": "<p>Un data lake est optimisé pour les scans analytiques, pas pour récupérer une seule ligne. L'échappatoire habituelle consiste à répliquer le dataset dans une base opérationnelle — et à assumer le pipeline, le coût et la dérive. Spotify a choisi autre chose : <strong>Random Access Parquet (RAP)</strong>, une couche d'<strong>index externe</strong> au-dessus des fichiers Parquet qui associe les clés de lookup (un user ID, par exemple) directement à un fichier et à une position de ligne. Au lieu de scanner des milliers de fichiers, la requête résout la clé via l'index et émet une <strong>ranged read ciblée</strong> contre l'object storage. À mesure que de nouvelles données arrivent dans les tables <strong>Iceberg</strong>, un index builder génère des <strong>fragments d'index append-only</strong> sans modifier les fichiers Parquet immuables.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/08/spotify-data-lake-point-queries/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloudflare-ddos-h1-2026",
+      "updates": [
+        {
+          "id": "cloudflare-ddos-h1-2026",
+          "tag": "notable",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "Cloudflare DDoS H1 2026: 935 ataques de más de 1 Tbps y DNS floods disparados",
+            "en": "Cloudflare DDoS H1 2026: 935 attacks above 1 Tbps and DNS floods surging",
+            "fr": "Cloudflare DDoS H1 2026 : 935 attaques de plus de 1 Tbps et DNS floods en flèche"
+          },
+          "body_html": {
+            "es": "<p>Los números son para sentarse a pensar la arquitectura. Cloudflare mitigó <strong>935 ataques network-layer por encima de 1 Tbps</strong> en el primer semestre, con un salto de <strong>+519% intertrimestral</strong> — 805 de ellos solo en Q2. Los ataques basados en <strong>DNS ya son el 34,3%</strong> de toda la actividad network-layer, y los DNS Floods pasaron del 25,7% al 40,0% entre trimestres. El centro de gravedad se corrió de botnet floods a <strong>reflection y amplification</strong>: los CLDAP Floods subieron +580% y son el vector #3. Abril fue el pico: 6,46 billones de requests y 165 PB.</p>",
+            "en": "<p>Numbers worth pausing on when you plan your architecture. Cloudflare mitigated <strong>935 network-layer attacks above 1 Tbps</strong> in the first half, a <strong>+519% quarter-over-quarter</strong> jump — 805 of them in Q2 alone. <strong>DNS-based attacks are now 34.3%</strong> of all network-layer activity, with DNS Floods climbing from 25.7% to 40.0% quarter-over-quarter. The center of gravity shifted from botnet floods to <strong>reflection and amplification</strong>: CLDAP Floods surged +580% to become the #3 vector. April peaked at 6.46 trillion requests and 165 PB.</p>",
+            "fr": "<p>Des chiffres qui méritent une pause architecture. Cloudflare a mitigé <strong>935 attaques network-layer au-dessus de 1 Tbps</strong> au premier semestre, soit <strong>+519% en trimestriel</strong> — 805 rien qu-au T2. Les attaques basées sur le <strong>DNS représentent désormais 34,3%</strong> de toute l'activité network-layer, les DNS Floods passant de 25,7% à 40,0% d'un trimestre à l'autre. Le centre de gravité s'est déplacé des botnet floods vers la <strong>reflection et l'amplification</strong> : les CLDAP Floods ont bondi de +580% pour devenir le vecteur n°3. Avril a culminé à 6,46 billions de requêtes et 165 Po.</p>"
+          },
+          "source": {
+            "url": "https://blog.cloudflare.com/ddos-threat-report-2026-h1/",
+            "label": "blog.cloudflare.com"
+          }
+        },
+        {
+          "id": "netflix-kueue",
+          "tag": "notable",
+          "date": "12 Aug 2026",
+          "title": {
+            "es": "Netflix reemplaza su scheduler de batch propio por Kueue",
+            "en": "Netflix replaces its in-house batch scheduler with Kueue",
+            "fr": "Netflix remplace son scheduler batch maison par Kueue"
+          },
+          "body_html": {
+            "es": "<p>Netflix migró la mayoría de sus workloads batch a <strong>Kueue</strong>, el sistema Kubernetes-native de job queueing, jubilando su <em>Compute Managed Batch</em> (CMB) construido sobre Titus. Ya corren <strong>millones de workloads batch en producción</strong> con Kueue, y la migración sigue en curso. Lo más valioso de la historia no es Kueue: es la estrategia. Usaron <strong>paridad de API con el sistema existente</strong> para desriesgar el proyecto y migrar de forma gradual. Ese es el patrón que hace que un reemplazo de infraestructura no termine en un big bang.</p>",
+            "en": "<p>Netflix migrated most of its batch workloads to <strong>Kueue</strong>, the Kubernetes-native job queueing system, retiring its <em>Compute Managed Batch</em> (CMB) built on Titus. It is already running <strong>millions of batch workloads in production</strong> on Kueue, with the migration still underway. The most valuable part of the story is not Kueue — it is the strategy: they used <strong>API parity with the existing system</strong> to derisk the project and migrate gradually. That is the pattern that keeps an infrastructure replacement from turning into a big bang.</p>",
+            "fr": "<p>Netflix a migré la plupart de ses workloads batch vers <strong>Kueue</strong>, le système de job queueing Kubernetes-native, retirant son <em>Compute Managed Batch</em> (CMB) bâti sur Titus. L'entreprise fait déjà tourner <strong>des millions de workloads batch en production</strong> sur Kueue, la migration étant encore en cours. Le plus précieux n'est pas Kueue mais la stratégie : ils ont utilisé la <strong>parité d'API avec le système existant</strong> pour dérisquer le projet et migrer progressivement.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/08/netflix-kueue-kubernetes-batch/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "helm-4-2-4",
+          "tag": "patch",
+          "date": "13 Aug 2026",
+          "title": {
+            "es": "Helm 4.2.4 y 3.21.4: fixes de provenance y bumps de seguridad en dependencias",
+            "en": "Helm 4.2.4 and 3.21.4: provenance fixes and security dependency bumps",
+            "fr": "Helm 4.2.4 et 3.21.4 : correctifs de provenance et bumps de sécurité"
+          },
+          "body_html": {
+            "es": "<p>Patch en las dos ramas (4.2.4 el 13, 3.21.4 el 14). Destacan el chequeo del error de retorno en <code>Digest</code> y <code>encodeRelease</code> del lado de <strong>provenance</strong>, el fix del retry faltante en conflictos con <em>server-side apply</em>, y dos bumps por avisos de seguridad de Go: <code>grpc</code> a 1.82.1 (GO-2026-6061) y <code>otel</code> a v1.44.0 (GO-2026-5158). También se arregla el panic en llamadas repetidas a <code>IsReachable</code>.</p>",
+            "en": "<p>Patch on both branches (4.2.4 on the 13th, 3.21.4 on the 14th). Highlights: the return-error check in <code>Digest</code> and <code>encodeRelease</code> on the <strong>provenance</strong> side, the fix for the missing retry on <em>server-side apply</em> conflicts, and two bumps driven by Go security advisories — <code>grpc</code> to 1.82.1 (GO-2026-6061) and <code>otel</code> to v1.44.0 (GO-2026-5158). The panic on repeated <code>IsReachable</code> calls is also fixed.</p>",
+            "fr": "<p>Patch sur les deux branches (4.2.4 le 13, 3.21.4 le 14). À retenir : la vérification de l'erreur de retour dans <code>Digest</code> et <code>encodeRelease</code> côté <strong>provenance</strong>, le correctif du retry manquant sur les conflits <em>server-side apply</em>, et deux bumps liés à des avis de sécurité Go — <code>grpc</code> vers 1.82.1 (GO-2026-6061) et <code>otel</code> vers v1.44.0 (GO-2026-5158).</p>"
+          },
+          "source": {
+            "url": "https://github.com/helm/helm/releases/tag/v4.2.4",
+            "label": "github.com/helm"
+          }
+        },
+        {
+          "id": "argocd-3-5-1",
+          "tag": "patch",
+          "date": "12 Aug 2026",
+          "title": {
+            "es": "Argo CD parchea tres ramas a la vez: 3.5.1, 3.4.7 y 3.3.14",
+            "en": "Argo CD patches three branches at once: 3.5.1, 3.4.7 and 3.3.14",
+            "fr": "Argo CD patche trois branches d'un coup : 3.5.1, 3.4.7 et 3.3.14"
+          },
+          "body_html": {
+            "es": "<p>Release coordinado en las tres ramas soportadas el mismo día — el patrón típico cuando hay algo que vale la pena backportear. Todas las imágenes siguen firmadas con <strong>cosign</strong> y con provenance <strong>SLSA nivel 3</strong> para imágenes y binarios de CLI. Si tenés GitOps en producción y no estás verificando esas firmas en el pipeline, ahí tenés una tarea pendiente.</p>",
+            "en": "<p>Coordinated release across all three supported branches on the same day — the usual pattern when something is worth backporting. All images remain signed with <strong>cosign</strong>, with <strong>SLSA Level 3</strong> provenance for container images and CLI binaries. If you run GitOps in production and are not verifying those signatures in your pipeline, there is your pending task.</p>",
+            "fr": "<p>Release coordonnée sur les trois branches supportées le même jour — le schéma habituel quand quelque chose mérite un backport. Toutes les images restent signées avec <strong>cosign</strong>, avec une provenance <strong>SLSA niveau 3</strong> pour les images et les binaires CLI.</p>"
+          },
+          "source": {
+            "url": "https://github.com/argoproj/argo-cd/releases/tag/v3.5.1",
+            "label": "github.com/argoproj"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "canva-session-revocation",
+      "updates": [
+        {
+          "id": "canva-session-revocation",
+          "tag": "notable",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "Canva revoca cientos de millones de sesiones sin tocar una base de datos",
+            "en": "Canva revokes hundreds of millions of sessions without touching a database",
+            "fr": "Canva révoque des centaines de millions de sessions sans toucher à une base de données"
+          },
+          "body_html": {
+            "es": "<p>Esta es la pieza de arquitectura de la semana, y hay que leerla entera. El problema: sesiones en cookies encriptadas escalan hermoso, pero <strong>revocar</strong> exige un lookup por request. Canva lo resolvió guardando la data de revocación en <strong>S3 como registros inmutables y compactos</strong>, distribuidos a los gateways como índices en memoria. La ventana de revocación de 12 horas se parte en <strong>objetos S3 de 30 minutos</strong> que el gateway baja bajo demanda. Cada revocación son <strong>16 bytes binarios</strong> (principal + timestamp), en arrays ordenados que permiten búsqueda directa en memoria: <strong>87,5% menos footprint de cache</strong>. El worker procesa más de <strong>2.000 revocaciones por segundo</strong>, y un chunk con un millón de revocaciones pesa apenas ~16 MB. Menos infraestructura de base de datos, deploys más rápidos. La lección de fondo: cuando el patrón de acceso es <em>append-only y con ventana temporal</em>, S3 más un índice en memoria le gana a una base de datos.</p>",
+            "en": "<p>This is the architecture piece of the week, and it deserves a full read. The problem: sessions in encrypted cookies scale beautifully, but <strong>revocation</strong> demands a lookup per request. Canva solved it by storing revocation data in <strong>S3 as compact, immutable records</strong>, distributed to application gateways as in-memory indexes. The 12-hour revocation window is split into <strong>30-minute S3 objects</strong> that gateways download on demand. Each revocation is <strong>16 binary bytes</strong> (principal + timestamp), held in sorted arrays that allow direct in-memory search — a <strong>87.5% reduction in cache footprint</strong>. The worker processes more than <strong>2,000 revocations per second</strong>, and a chunk holding a million revocations is only ~16 MB. Less database infrastructure, faster deploys. The underlying lesson: when the access pattern is <em>append-only with a time window</em>, S3 plus an in-memory index beats a database.</p>",
+            "fr": "<p>C'est la pièce d'architecture de la semaine, à lire en entier. Le problème : les sessions en cookies chiffrés passent très bien à l'échelle, mais la <strong>révocation</strong> exige un lookup par requête. Canva a stocké les données de révocation dans <strong>S3 sous forme d'enregistrements compacts et immuables</strong>, distribués aux gateways comme index en mémoire. La fenêtre de révocation de 12 heures est découpée en <strong>objets S3 de 30 minutes</strong> téléchargés à la demande. Chaque révocation tient en <strong>16 octets binaires</strong> (principal + timestamp), dans des tableaux triés permettant une recherche directe en mémoire : <strong>87,5% d'empreinte cache en moins</strong>. Le worker traite plus de <strong>2 000 révocations par seconde</strong>, et un chunk d'un million de révocations ne pèse que ~16 Mo.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/08/canva-session-revocation-scale/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "netflix-service-topology",
+          "tag": "notable",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "Netflix: backpressure a Kafka en vez de tirar registros",
+            "en": "Netflix: backpressure to Kafka instead of dropping records",
+            "fr": "Netflix : backpressure vers Kafka au lieu de jeter des enregistrements"
+          },
+          "body_html": {
+            "es": "<p>Netflix rediseñó el pipeline de <em>Service Topology</em>, su mapa de dependencias en tiempo real, y las decisiones son oro puro para cualquiera que construya streaming. Tres etapas que separan resolución de intermediarios, enrichment y persistencia. <strong>Server-sent events en vez de gRPC</strong> para transferencias internas de alto volumen. Y la decisión clave: cuando el graph storage no da abasto, la presión <strong>viaja aguas arriba hasta pausar el consumer de Kafka</strong>, dejando los registros ahí hasta que vuelva la capacidad. El resultado es <em>frescura demorada bajo carga</em>, no data perdida ni un mapa incompleto — que es exactamente lo que querés durante un incidente. Para reconstruir el pasado no guardan snapshots completos ni replayean el event log: mantienen snapshots del agregador por ventana temporal más historial de mutaciones a nivel de propiedad.</p>",
+            "en": "<p>Netflix redesigned the pipeline behind <em>Service Topology</em>, its real-time dependency map, and the decisions are gold for anyone building streaming systems. Three stages separating intermediary resolution, enrichment and persistence. <strong>Server-sent events instead of gRPC</strong> for high-volume internal transfers. And the key call: when graph storage cannot keep up, pressure <strong>travels upstream until the Kafka consumer pauses</strong>, leaving records in Kafka until capacity returns. The result is <em>delayed freshness under load</em> rather than dropped data or an incomplete map — exactly what you want during an incident. To reconstruct the past they keep neither full graph snapshots nor a replayed event log: they hold time-windowed aggregator snapshots plus property-level mutation history.</p>",
+            "fr": "<p>Netflix a redessiné le pipeline derrière <em>Service Topology</em>, sa carte de dépendances en temps réel, et les décisions sont précieuses pour quiconque construit du streaming. Trois étapes séparant résolution des intermédiaires, enrichissement et persistance. <strong>Server-sent events plutôt que gRPC</strong> pour les transferts internes à haut volume. Et le choix clé : quand le graph storage ne suit plus, la pression <strong>remonte jusqu-à mettre en pause le consumer Kafka</strong>, laissant les enregistrements dans Kafka jusqu-au retour de la capacité. Résultat : une <em>fraîcheur retardée sous charge</em> plutôt que des données perdues.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/08/netflix-service-topology/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "buildpacks-hardening",
+          "tag": "notable",
+          "date": "10 Aug 2026",
+          "title": {
+            "es": "Buildpacks mueven el punto de control del hardening fuera del Dockerfile",
+            "en": "Buildpacks move the container hardening control point away from the Dockerfile",
+            "fr": "Les buildpacks déplacent le point de contrôle du hardening hors du Dockerfile"
+          },
+          "body_html": {
+            "es": "<p>El viejo debate Dockerfile vs. buildpacks se volvió un debate de seguridad, y el argumento es bueno. Con un Dockerfile, la elección de la base image y la cadencia de parcheo quedan en manos de <strong>cada equipo de aplicación</strong>; con Cloud Native Buildpacks esas decisiones se mueven a <strong>platform engineering</strong>, que decide qué tan rápido se remedia un CVE crítico en una flota de cientos de servicios. El mecanismo es el comando <strong><code>rebase</code></strong>: detecta una runtime base image más nueva y reescribe el manifest y la config OCI, cambiando los digests de la capa de OS. Es esencialmente editar un JSON — milisegundos, sin rebuild, sin acceso al source, sin cola de CI. El proyecto se graduó en la CNCF el 17 de julio de 2026. El costo: perdés el control paso a paso del Dockerfile escrito a mano, incómodo si necesitás paquetes de OS custom o ecosistemas que los buildpacks no cubren.</p>",
+            "en": "<p>The old Dockerfile vs. buildpacks debate has become a security argument, and it is a good one. With a Dockerfile, base image selection and patch cadence sit with <strong>each application team</strong>; with Cloud Native Buildpacks those decisions move to <strong>platform engineering</strong>, which decides how fast a critical CVE gets remediated across a fleet of hundreds of services. The mechanism is the <strong><code>rebase</code></strong> command: it detects a newer runtime base image and rewrites the OCI manifest and configuration, swapping the OS layer digests. It is essentially a JSON edit — milliseconds, no rebuild, no source access, no CI queue. The project graduated within the CNCF on 17 July 2026. The cost: you give up the step-by-step control of a hand-written Dockerfile, awkward for workloads needing custom OS packages or ecosystems buildpacks do not cover.</p>",
+            "fr": "<p>Le vieux débat Dockerfile vs. buildpacks est devenu un argument de sécurité, et il est solide. Avec un Dockerfile, le choix de la base image et la cadence de patch reviennent à <strong>chaque équipe applicative</strong> ; avec les Cloud Native Buildpacks, ces décisions passent au <strong>platform engineering</strong>, qui décide de la vitesse de remédiation d'un CVE critique sur une flotte de centaines de services. Le mécanisme est la commande <strong><code>rebase</code></strong> : elle détecte une runtime base image plus récente et réécrit le manifest et la configuration OCI en échangeant les digests de la couche OS. C'est essentiellement une édition de JSON — des millisecondes, sans rebuild, sans accès au source, sans file d'attente CI. Le projet a été gradué à la CNCF le 17 juillet 2026.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/08/buildpacks-dockerfile-patching/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "pnpm-11-22",
+      "updates": [
+        {
+          "id": "pnpm-11-22",
+          "tag": "release",
+          "date": "15 Aug 2026",
+          "title": {
+            "es": "pnpm 11.22.0: instalaciones globales atómicas y menos re-resolución del lockfile",
+            "en": "pnpm 11.22.0: atomic global installs and less lockfile re-resolution",
+            "fr": "pnpm 11.22.0 : installations globales atomiques et moins de re-résolution du lockfile"
+          },
+          "body_html": {
+            "es": "<p>Release cargado, y varias cosas apuntan a supply chain. Nuevo <code>pnpm cache path</code> para que CI cachee el directorio de metadata — incluido el log de verificación del lockfile, lo que permite saltear el re-chequeo de un lockfile sin cambios contra las políticas de supply-chain. Un <code>pnpm-workspace.yaml</code> de proyecto <strong>ya no puede decidir dónde pnpm guarda credenciales, su propia instalación, ni el registry desde el que se descarga</strong> — <code>configDir</code>, <code>npmrcAuthFile</code>, <code>userconfig</code> y compañía se ignoran ahí. Eso cierra un vector de escalada vía repo hostil. Las <strong>instalaciones globales ahora conmutan atómicamente</strong>: los shims apuntan a un link estable por paquete, así que un comando nunca falta del PATH durante un install y un install fallido deja la versión previa en pie. Además <code>pnpm add</code> deja de re-resolver el grafo cuando el lockfile ya tiene una versión que satisface, y <code>pnpm deploy</code> vuelve a inyectar dependencias de workspace. El mismo día salió la <code>12.0.0-rc.6</code>.</p>",
+            "en": "<p>Loaded release, and several items point at supply chain. New <code>pnpm cache path</code> so CI can cache the metadata directory — including the lockfile verification log, letting a job skip re-checking an unchanged lockfile against configured supply-chain policies. A project's <code>pnpm-workspace.yaml</code> <strong>can no longer choose where pnpm keeps credentials, its own installation, or the registry it downloads from</strong> — <code>configDir</code>, <code>npmrcAuthFile</code>, <code>userconfig</code> and friends are ignored there. That closes an escalation vector via a hostile repo. <strong>Global installs now switch over atomically</strong>: shims point at a stable per-package link, so a command can never be missing from PATH mid-install and a failed install leaves the previous version in place. Also, <code>pnpm add</code> stops re-resolving the graph when the lockfile already holds a satisfying version, and <code>pnpm deploy</code> injects workspace dependencies again. <code>12.0.0-rc.6</code> shipped the same day.</p>",
+            "fr": "<p>Release chargée, plusieurs points visent la supply chain. Nouveau <code>pnpm cache path</code> pour que la CI cache le répertoire de metadata — y compris le log de vérification du lockfile, permettant de sauter la re-vérification d'un lockfile inchangé face aux politiques configurées. Le <code>pnpm-workspace.yaml</code> d'un projet <strong>ne peut plus décider où pnpm garde ses credentials, sa propre installation ou le registry depuis lequel il se télécharge</strong> — <code>configDir</code>, <code>npmrcAuthFile</code>, <code>userconfig</code> et consorts y sont ignorés. Cela ferme un vecteur d'escalade via un dépôt hostile. Les <strong>installations globales basculent désormais de façon atomique</strong>. La <code>12.0.0-rc.6</code> est sortie le même jour.</p>"
+          },
+          "source": {
+            "url": "https://github.com/pnpm/pnpm/releases/tag/v11.22.0",
+            "label": "github.com/pnpm"
+          }
+        },
+        {
+          "id": "turborepo-2-10-10",
+          "tag": "release",
+          "date": "14 Aug 2026",
+          "title": {
+            "es": "Turborepo 2.10.10: parchea js-yaml, recorre el repo una sola vez al prunear",
+            "en": "Turborepo 2.10.10: patches js-yaml, walks the repo once when pruning",
+            "fr": "Turborepo 2.10.10 : patche js-yaml, parcourt le dépôt une seule fois au pruning"
+          },
+          "body_html": {
+            "es": "<p>Sube <code>js-yaml</code> a 4.3.1 por <strong>GHSA-5p4m-2wfm-xmqj</strong> (CVSS 7.5): consumo cuadrático de CPU al resolver <code>!!omap</code>, afectando 3.x y 4.x. Si tenés <code>js-yaml</code> en el árbol de dependencias — y casi seguro que sí — chequeá tu versión: el fix está en <strong>4.3.1</strong> y <strong>3.15.1</strong>. Del lado de features: <code>turbo prune</code> ahora recorre el repositorio <strong>una sola vez</strong>, soporte de archivos <code>nub.lock</code>, descubrimiento de tasks de <code>pytest</code>, y fix de patrones de <code>.gitignore</code> anidados en el hashing manual. Dato de color: el repo ya está en <strong>TypeScript 7.0.2</strong>.</p>",
+            "en": "<p>Bumps <code>js-yaml</code> to 4.3.1 for <strong>GHSA-5p4m-2wfm-xmqj</strong> (CVSS 7.5): quadratic CPU consumption in <code>!!omap</code> resolution, affecting both 3.x and 4.x. If <code>js-yaml</code> is in your dependency tree — and it almost certainly is — check your version: fixes are in <strong>4.3.1</strong> and <strong>3.15.1</strong>. On features: <code>turbo prune</code> now walks the repository <strong>once</strong>, <code>nub.lock</code> files are supported, <code>pytest</code> task discovery lands, and nested <code>.gitignore</code> patterns are applied in manual hashing. Side note: the repo is already on <strong>TypeScript 7.0.2</strong>.</p>",
+            "fr": "<p>Passe <code>js-yaml</code> à 4.3.1 pour <strong>GHSA-5p4m-2wfm-xmqj</strong> (CVSS 7.5) : consommation CPU quadratique lors de la résolution de <code>!!omap</code>, affectant 3.x et 4.x. Si <code>js-yaml</code> est dans votre arbre de dépendances — et c'est quasi certain — vérifiez votre version : les correctifs sont en <strong>4.3.1</strong> et <strong>3.15.1</strong>. Côté features : <code>turbo prune</code> parcourt désormais le dépôt <strong>une seule fois</strong>, support des fichiers <code>nub.lock</code>, découverte des tasks <code>pytest</code>. À noter : le dépôt est déjà sur <strong>TypeScript 7.0.2</strong>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vercel/turborepo/releases/tag/v2.10.10",
+            "label": "github.com/vercel"
+          }
+        },
+        {
+          "id": "next-16-3-1",
+          "tag": "patch",
+          "date": "13 Aug 2026",
+          "title": {
+            "es": "Next.js 16.3.1: cache, headers() en vivo y bugs de prefetch",
+            "en": "Next.js 16.3.1: caching, live headers() and prefetch bugs",
+            "fr": "Next.js 16.3.1 : cache, headers() en direct et bugs de prefetch"
+          },
+          "body_html": {
+            "es": "<p>Patch grande, con foco en el server. Se <strong>restaura la vista en vivo de <code>headers()</code></strong> sobre el request entrante, se permiten exports literales en archivos <code>'use cache'</code>, y hay dos fixes finos de invalidación: solo se descartan las entradas de cache <strong>anteriores a una revalidación por tag</strong> (reusando las completadas), y se retienen menos versiones stale usando TTL con fallback a mtime. También se codifica el nombre del cache item que arma <code>unstable_cache</code>, y se arreglan loops de prefetch repetido en el routing optimista. Del lado Turbopack: HMR para dynamic imports evaluados desde layouts.</p>",
+            "en": "<p>Big patch, server-focused. The <strong>live <code>headers()</code> view of the incoming request is restored</strong>, literal exports are allowed in <code>'use cache'</code> files, and there are two sharp invalidation fixes: only cache entries that <strong>predate a tag revalidation</strong> are discarded (completed ones are reused), and fewer stale versions are retained via a TTL with an mtime fallback. The cache item name built by <code>unstable_cache</code> is now encoded, and repeated prefetch loops in optimistic routing are fixed. On the Turbopack side: HMR for dynamic imports evaluated from layouts.</p>",
+            "fr": "<p>Gros patch, orienté serveur. La <strong>vue en direct de <code>headers()</code> sur la requête entrante est restaurée</strong>, les exports littéraux sont autorisés dans les fichiers <code>'use cache'</code>, et deux correctifs fins d'invalidation : seules les entrées de cache <strong>antérieures à une revalidation par tag</strong> sont écartées (les complétées sont réutilisées), et moins de versions stale sont retenues via un TTL avec fallback mtime. Côté Turbopack : HMR pour les dynamic imports évalués depuis les layouts.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vercel/next.js/releases/tag/v16.3.1",
+            "label": "github.com/vercel"
+          }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "better-auth-sso-fix",
+      "updates": [
+        {
+          "id": "better-auth-sso-fix",
+          "tag": "security",
+          "date": "14 Aug 2026",
+          "title": {
+            "es": "better-auth 1.6.29: el SSO ya no da acceso por un dominio meramente reclamado",
+            "en": "better-auth 1.6.29: SSO no longer grants access on a merely claimed domain",
+            "fr": "better-auth 1.6.29 : le SSO n'accorde plus l'accès sur un domaine simplement revendiqué"
+          },
+          "body_html": {
+            "es": "<p>Fix de autorización que vale leer con atención. En <code>@better-auth/sso</code>, la asignación automática de organización por dominio de email ahora exige <strong>dominio verificado del provider Y email verificado del usuario</strong> — antes, un social sign-in podía otorgar acceso porque el provider SSO simplemente <em>reclamaba</em> el dominio. Ese es el tipo de bug que no rompe nada y te regala un tenant. Además, la verificación de dominio toma un snapshot de los dominios del provider al inicio del request y devuelve <code>409</code> con <code>SSO_PROVIDER_CHANGED</code> si el provider cambia durante la verificación DNS.</p>",
+            "en": "<p>An authorization fix worth reading closely. In <code>@better-auth/sso</code>, automatic email-domain organization assignment now requires <strong>both a verified provider domain and a verified user email</strong> — previously, a social sign-in could grant access because the SSO provider merely <em>claimed</em> the domain. That is the kind of bug that breaks nothing and hands over a tenant. Domain verification also snapshots the provider's domains at request start and returns <code>409</code> with <code>SSO_PROVIDER_CHANGED</code> if the provider changes mid DNS verification.</p>",
+            "fr": "<p>Un correctif d'autorisation à lire attentivement. Dans <code>@better-auth/sso</code>, l'assignation automatique d'organisation par domaine d'email exige désormais <strong>un domaine de provider vérifié ET un email utilisateur vérifié</strong> — auparavant, un social sign-in pouvait accorder l'accès parce que le provider SSO se contentait de <em>revendiquer</em> le domaine. La vérification de domaine fige aussi les domaines du provider au début de la requête et retourne <code>409</code> avec <code>SSO_PROVIDER_CHANGED</code> si le provider change pendant la vérification DNS.</p>"
+          },
+          "source": {
+            "url": "https://github.com/better-auth/better-auth/releases/tag/v1.6.29",
+            "label": "github.com/better-auth"
+          }
+        },
+        {
+          "id": "cve-2026-55102",
+          "tag": "security",
+          "date": "13 Aug 2026",
+          "title": {
+            "es": "CVE-2026-55102: hashi-vault-js filtra tokens y secretos en los errores",
+            "en": "CVE-2026-55102: hashi-vault-js leaks tokens and secrets in thrown errors",
+            "fr": "CVE-2026-55102 : hashi-vault-js fuite tokens et secrets dans les erreurs"
+          },
+          "body_html": {
+            "es": "<p>El token de Vault y los valores de los secretos quedan expuestos en las excepciones que lanza la librería. Si esos errores viajan a tu logger, a Sentry o a una respuesta HTTP de error, <strong>tus secretos ya están en un sistema de terceros</strong>. Buen recordatorio para revisar qué serializa tu error handler global antes de mandarlo a cualquier lado.</p>",
+            "en": "<p>The Vault token and secret values are exposed in the exceptions the library throws. If those errors reach your logger, Sentry, or an HTTP error response, <strong>your secrets are already in a third-party system</strong>. A good prompt to audit what your global error handler serializes before it ships anywhere.</p>",
+            "fr": "<p>Le token Vault et les valeurs des secrets sont exposés dans les exceptions lancées par la bibliothèque. Si ces erreurs atteignent votre logger, Sentry ou une réponse HTTP d'erreur, <strong>vos secrets sont déjà dans un système tiers</strong>. Bonne occasion d'auditer ce que sérialise votre error handler global.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-5pq8-3ffp-7w5m",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "cve-2026-35219",
+          "tag": "security",
+          "date": "14 Aug 2026",
+          "title": {
+            "es": "CVE-2026-35219: SSRF en Budibase saltea la blacklist de IPs",
+            "en": "CVE-2026-35219: SSRF in Budibase bypasses the IP blacklist",
+            "fr": "CVE-2026-35219 : SSRF dans Budibase contourne la blacklist d'IP"
+          },
+          "body_html": {
+            "es": "<p>Severidad alta. Los automation steps de Webhook, Zapier, N8N, Slack y Discord permiten <strong>saltear la blacklist de IPs</strong> y alcanzar destinos internos. El patrón se repite en toda herramienta low-code con steps salientes: la lista negra por IP es una defensa frágil cuando el usuario controla la URL. Si exponés integraciones outbound configurables, la mitigación real es un proxy egress con allowlist, no una blacklist.</p>",
+            "en": "<p>High severity. The Webhook, Zapier, N8N, Slack and Discord automation steps allow <strong>bypassing the IP blacklist</strong> and reaching internal destinations. The pattern recurs in every low-code tool with outbound steps: an IP blacklist is a fragile defense when the user controls the URL. If you expose configurable outbound integrations, the real mitigation is an egress proxy with an allowlist, not a blacklist.</p>",
+            "fr": "<p>Sévérité haute. Les automation steps Webhook, Zapier, N8N, Slack et Discord permettent de <strong>contourner la blacklist d'IP</strong> et d'atteindre des destinations internes. Le pattern se répète dans tout outil low-code avec des steps sortants : une blacklist d'IP est une défense fragile quand l'utilisateur contrôle l'URL. La vraie mitigation est un proxy egress avec allowlist.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-5fpj-28rv-84r7",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "cve-2026-73080",
+          "tag": "security",
+          "date": "11 Aug 2026",
+          "title": {
+            "es": "CVE-2026-73080: SSRF sin autenticar en SeaweedFS con lectura de la respuesta",
+            "en": "CVE-2026-73080: unauthenticated SSRF in SeaweedFS with response read-back",
+            "fr": "CVE-2026-73080 : SSRF non authentifiée dans SeaweedFS avec lecture de la réponse"
+          },
+          "body_html": {
+            "es": "<p>Severidad crítica, <strong>CVSS 9.3</strong>. El endpoint <code>VolumeServer.FetchAndWriteNeedle</code> permite SSRF <strong>sin autenticación</strong> y con <strong>read-back de la respuesta</strong> — o sea, no es SSRF ciego: el atacante ve lo que devuelve el destino interno. Si corrés SeaweedFS como object storage detrás de tus servicios, revisá la exposición del volume server ya mismo.</p>",
+            "en": "<p>Critical severity. The <code>VolumeServer.FetchAndWriteNeedle</code> endpoint allows SSRF <strong>without authentication</strong> and with <strong>response read-back</strong> — this is not blind SSRF: the attacker sees what the internal destination returns. If you run SeaweedFS as object storage behind your services, review the volume server's exposure right now.</p>",
+            "fr": "<p>Sévérité critique. L'endpoint <code>VolumeServer.FetchAndWriteNeedle</code> permet une SSRF <strong>sans authentification</strong> et avec <strong>lecture de la réponse</strong> — ce n'est pas une SSRF aveugle : l'attaquant voit ce que retourne la destination interne. Si vous utilisez SeaweedFS comme object storage, vérifiez immédiatement l'exposition du volume server.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-87fv-vqqr-m4jr",
+            "label": "github.com/advisories"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Semana muerta en runtimes: Node.js, Deno, Bun y TypeScript no publicaron ni una release entre el 10 y el 17 de agosto. Lo último fue Node 26.7.0 el 5 de agosto y TypeScript 7.0 el 8 de julio. Por eso no hay sección de runtimes hoy — no vamos a inventar noticias.",
+      "en": "Dead week for runtimes: Node.js, Deno, Bun and TypeScript shipped zero releases between August 10 and 17. The most recent were Node 26.7.0 on August 5 and TypeScript 7.0 on July 8. That is why there is no runtimes section today — we are not going to invent news.",
+      "fr": "Semaine morte côté runtimes : Node.js, Deno, Bun et TypeScript n'ont publié aucune release entre le 10 et le 17 août. Les dernières étaient Node 26.7.0 le 5 août et TypeScript 7.0 le 8 juillet. D'où l'absence de section runtimes aujourd-hui — pas question d'inventer des nouvelles."
+    },
+    {
+      "es": "El hardening se corre del código de aplicación a la plataforma. Buildpacks moviendo el parcheo de CVEs de cada Dockerfile a platform engineering, pnpm cerrando la puerta a que un repo hostil redirija credenciales, Helm bumpeando dependencias por avisos de Go, Turborepo parcheando js-yaml. La pregunta ya no es si tu código es seguro, sino quién decide la cadencia de parcheo de tu flota.",
+      "en": "Hardening is shifting from application code to the platform. Buildpacks moving CVE patching from each Dockerfile to platform engineering, pnpm closing the door on a hostile repo redirecting credentials, Helm bumping dependencies over Go advisories, Turborepo patching js-yaml. The question is no longer whether your code is secure, but who decides your fleet's patch cadence.",
+      "fr": "Le hardening se déplace du code applicatif vers la plateforme. Les buildpacks déplaçant le patching des CVE de chaque Dockerfile vers le platform engineering, pnpm fermant la porte à un dépôt hostile qui redirige les credentials, Helm bumpant ses dépendances sur avis Go, Turborepo patchant js-yaml. La question n'est plus de savoir si votre code est sûr, mais qui décide de la cadence de patch de votre flotte."
+    },
+    {
+      "es": "Tres CVEs de esta semana son SSRF o exfiltración por canales laterales: Budibase saltea blacklists de IP, SeaweedFS expone SSRF sin auth con read-back, y hashi-vault-js filtra secretos en los mensajes de error. Ninguno es un desbordamiento exótico — son fallas de diseño en los bordes. Revisá qué serializa tu error handler y cómo controlás el egress.",
+      "en": "Three of this week's CVEs are SSRF or side-channel exfiltration: Budibase bypasses IP blacklists, SeaweedFS exposes unauthenticated SSRF with read-back, and hashi-vault-js leaks secrets in error messages. None is an exotic overflow — they are design failures at the edges. Audit what your error handler serializes and how you control egress.",
+      "fr": "Trois CVE de cette semaine sont des SSRF ou de l'exfiltration par canal latéral : Budibase contourne les blacklists d'IP, SeaweedFS expose une SSRF non authentifiée avec lecture de la réponse, et hashi-vault-js fuite des secrets dans les messages d'erreur. Aucune n'est un overflow exotique — ce sont des défauts de conception aux frontières."
+    },
+    {
+      "es": "Los tres casos de arquitectura de la semana (Canva, Netflix x2, Spotify) comparten una idea: en vez de escalar la base de datos, cambiaron la forma del acceso. Índice externo sobre el data lake, S3 más índice en memoria para revocación, backpressure a Kafka en vez de drop. Antes de agregar réplicas, preguntate si el patrón de acceso realmente necesita esa base de datos.",
+      "en": "This week's three architecture cases (Canva, Netflix twice, Spotify) share one idea: instead of scaling the database, they changed the shape of the access. An external index over the data lake, S3 plus an in-memory index for revocation, backpressure to Kafka instead of dropping. Before adding replicas, ask whether the access pattern really needs that database.",
+      "fr": "Les trois cas d'architecture de la semaine (Canva, Netflix deux fois, Spotify) partagent une idée : au lieu de scaler la base de données, ils ont changé la forme de l'accès. Un index externe sur le data lake, S3 plus un index en mémoire pour la révocation, du backpressure vers Kafka au lieu de jeter. Avant d'ajouter des réplicas, demandez-vous si le pattern d'accès a vraiment besoin de cette base."
+    }
+  ]
+}

@@ -1,0 +1,395 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 18 de agosto 2026",
+    "en": "Backend & Fullstack — August 18, 2026",
+    "fr": "Backend & Fullstack — 18 août 2026"
+  },
+  "description": {
+    "es": "Redis parchea nueve fallas de seguridad con RCE incluida, vm2 suma tres escapes críticos de sandbox, better-auth 1.7 rompe la identidad de las cuentas, Prisma 8 rc.2 unifica la CLI y DynamoDB estrena vector search nativo.",
+    "en": "Redis patches nine security flaws including RCE, vm2 lands three critical sandbox escapes, better-auth 1.7 breaks account identity, Prisma 8 rc.2 unifies the CLI, and DynamoDB ships native vector search.",
+    "fr": "Redis corrige neuf failles de sécurité dont une RCE, vm2 accumule trois évasions critiques de sandbox, better-auth 1.7 casse l'identité des comptes, Prisma 8 rc.2 unifie la CLI et DynamoDB lance la vector search native."
+  },
+  "pubDate": "2026-08-18",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Redis: nueve fixes de seguridad, uno con RCE",
+        "en": "Redis: nine security fixes, one with RCE",
+        "fr": "Redis : neuf correctifs de sécurité, dont une RCE"
+      },
+      "anchor": "redis-security-8-10-1",
+      "icon": "simple-icons:redis"
+    },
+    {
+      "text": {
+        "es": "vm2: escape de sandbox a RCE, CVSS 9.9",
+        "en": "vm2: sandbox escape to RCE, CVSS 9.9",
+        "fr": "vm2 : évasion de sandbox vers RCE, CVSS 9.9"
+      },
+      "anchor": "vm2-critical-escapes",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "better-auth 1.7 exige backfill de identidad",
+        "en": "better-auth 1.7 requires an identity backfill",
+        "fr": "better-auth 1.7 exige un backfill d'identité"
+      },
+      "anchor": "better-auth-1-7",
+      "icon": "lucide:server"
+    },
+    {
+      "text": {
+        "es": "Prisma 8 rc.2: adiós al binario prisma-next",
+        "en": "Prisma 8 rc.2: the prisma-next binary is gone",
+        "fr": "Prisma 8 rc.2 : fin du binaire prisma-next"
+      },
+      "anchor": "prisma-8-rc2",
+      "icon": "simple-icons:prisma"
+    },
+    {
+      "text": {
+        "es": "DynamoDB suma vector search nativo",
+        "en": "DynamoDB adds native vector search",
+        "fr": "DynamoDB ajoute la vector search native"
+      },
+      "anchor": "dynamodb-vector-search",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": {
+        "es": "Cloudflare: pipelines de CI en TypeScript",
+        "en": "Cloudflare: CI pipelines in TypeScript",
+        "fr": "Cloudflare : pipelines CI en TypeScript"
+      },
+      "anchor": "cloudflare-ci-sdk",
+      "icon": "simple-icons:cloudflare"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "redis-security-8-10-1",
+      "updates": [
+        {
+          "id": "redis-security-8-10-1",
+          "tag": "security",
+          "date": "17 Aug 2026",
+          "title": {
+            "es": "Redis 8.10.1, 8.8.2, 8.6.6 y 8.4.6: nueve fixes de seguridad, uno con RCE potencial",
+            "en": "Redis 8.10.1, 8.8.2, 8.6.6 and 8.4.6: nine security fixes, one with potential RCE",
+            "fr": "Redis 8.10.1, 8.8.2, 8.6.6 et 8.4.6 : neuf correctifs de sécurité, dont une RCE potentielle"
+          },
+          "body_html": {
+            "es": "<p>Release coordinado en cuatro ramas con urgencia <strong>SECURITY</strong>, y la lista asusta. La peor: un payload RDB malicioso con un <code>SLOT_INFO</code> fuera de rango corrompe memoria durante la carga y <strong>puede terminar en ejecución remota de código</strong>. Le sigue un <strong>bypass de autenticación por certificado cliente TLS</strong> — un Common Name con un NUL byte embebido se truncaba, permitiendo autenticarse como otro usuario ACL, posiblemente privilegiado. Ese es el bug clásico de parsing que convierte una defensa en una puerta. Suman <strong>CVE-2026-62356</strong> (buffer mal calculado al cargar <code>CMSketch</code> desde RDB, heap OOB write), OOB en el cleanup del heap de TopK, use-after-free en la lista de pending data de TLS, y <strong>tres fallas en Vector Sets</strong>: validación de nivel de nodo faltante al cargar desde RDB, use-after-free cuando <code>VREM</code> muta el grafo HNSW mientras corren <code>VSIM</code> en background, y un retorno negativo de <code>hnsw_search()</code> tratado como unsigned gigante. Si cargás RDBs de origen no confiable o exponés TLS con auth por certificado, actualizá YA.</p>",
+            "en": "<p>Coordinated release across four branches with <strong>SECURITY</strong> urgency, and the list is ugly. Worst of the batch: a malicious RDB payload with an out-of-range <code>SLOT_INFO</code> slot id corrupts memory during RDB loading and <strong>may lead to remote code execution</strong>. Next to it, a <strong>TLS client certificate authentication bypass</strong> — a Common Name containing an embedded NUL byte was truncated, letting a client authenticate as another, possibly privileged, ACL user. That is the classic parsing bug that turns a defense into a door. Also in: <strong>CVE-2026-62356</strong> (miscalculated buffer size in <code>CMSketch</code> RDB loading, heap OOB write), out-of-bounds access in the TopK heap cleanup path, a use-after-free in the TLS pending-data list, and <strong>three Vector Sets flaws</strong>: missing node level validation when loading from RDB, a use-after-free when <code>VREM</code> mutates the HNSW graph while background <code>VSIM</code> threads run, and a negative <code>hnsw_search()</code> return treated as a huge unsigned count. If you load RDBs from untrusted sources or expose TLS with certificate auth, patch now.</p>",
+            "fr": "<p>Release coordonnée sur quatre branches avec urgence <strong>SECURITY</strong>, et la liste fait peur. La pire : un payload RDB malveillant avec un <code>SLOT_INFO</code> hors plage corrompt la mémoire pendant le chargement et <strong>peut mener à une exécution de code à distance</strong>. Ensuite, un <strong>contournement de l'authentification par certificat client TLS</strong> — un Common Name contenant un NUL byte était tronqué, permettant de s'authentifier comme un autre utilisateur ACL, potentiellement privilégié. S'ajoutent <strong>CVE-2026-62356</strong> (taille de buffer mal calculée au chargement RDB de <code>CMSketch</code>, heap OOB write), un accès hors limites dans le cleanup du heap TopK, un use-after-free dans la liste de pending data TLS, et <strong>trois failles Vector Sets</strong>. Si vous chargez des RDB non fiables ou exposez TLS avec auth par certificat, patchez maintenant.</p>"
+          },
+          "source": {
+            "url": "https://github.com/redis/redis/releases/tag/8.10.1",
+            "label": "github.com/redis"
+          }
+        },
+        {
+          "id": "vm2-critical-escapes",
+          "tag": "security",
+          "date": "14 Aug 2026",
+          "title": {
+            "es": "vm2: CVSS 9.9 por escape de sandbox a RCE vía Error.cause",
+            "en": "vm2: CVSS 9.9 sandbox escape to RCE via Error.cause",
+            "fr": "vm2 : CVSS 9.9, évasion de sandbox vers RCE via Error.cause"
+          },
+          "body_html": {
+            "es": "<p><strong>CVSS 9.9</strong> y escape completo. <code>handleException()</code> no sanitiza la propiedad <code>Error.cause</code> de ES2022: si el embebedor expone una función que lanza errores con <code>.cause</code> apuntando a objetos del host como <code>process</code>, el código sandboxeado se lleva <strong>acceso total al proceso host</strong> — filesystem, subprocesos y red. Afecta hasta <code>3.11.5</code> inclusive, fix en <strong>3.11.6</strong>. Y no viene solo: la misma tanda suma otro escape crítico por <em>host proto mutators</em>, un tercero donde <code>builtin: ['*']</code> expone <code>os</code> y <code>dns</code>, más dos DoS por bypass de <code>bufferAllocLimit</code>. El recordatorio de fondo no cambia: <strong>vm2 no es un límite de seguridad</strong>. Si necesitás correr código no confiable, la respuesta es aislamiento de proceso o de VM, no un sandbox in-process.</p>",
+            "en": "<p><strong>CVSS 9.9</strong> and a full escape. <code>handleException()</code> does not sanitize the ES2022 <code>Error.cause</code> property: if the embedder exposes a function that throws errors whose <code>.cause</code> references host objects like <code>process</code>, sandboxed code walks away with <strong>full host process access</strong> — file operations, subprocess execution and network. Affects up to <code>3.11.5</code> inclusive, fixed in <strong>3.11.6</strong>. And it does not come alone: the same batch adds another critical escape via dangerous host proto mutators, a third where <code>builtin: ['*']</code> exposes <code>os</code> and <code>dns</code>, plus two DoS issues bypassing <code>bufferAllocLimit</code>. The underlying reminder has not changed: <strong>vm2 is not a security boundary</strong>. If you must run untrusted code, the answer is process or VM isolation, not an in-process sandbox.</p>",
+            "fr": "<p><strong>CVSS 9.9</strong> et évasion complète. <code>handleException()</code> ne sanitise pas la propriété ES2022 <code>Error.cause</code> : si l'embedder expose une fonction qui lance des erreurs dont <code>.cause</code> référence des objets host comme <code>process</code>, le code sandboxé obtient un <strong>accès total au processus host</strong> — fichiers, sous-processus et réseau. Affecte jusqu'à <code>3.11.5</code> inclus, corrigé en <strong>3.11.6</strong>. Et ce n'est pas tout : la même série ajoute une autre évasion critique via des host proto mutators, une troisième où <code>builtin: ['*']</code> expose <code>os</code> et <code>dns</code>, plus deux DoS contournant <code>bufferAllocLimit</code>. Le rappel de fond ne change pas : <strong>vm2 n'est pas une frontière de sécurité</strong>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-m283-3h24-438v",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "better-auth-1-7",
+          "tag": "breaking",
+          "date": "18 Aug 2026",
+          "title": {
+            "es": "better-auth 1.7.0: las cuentas ahora se identifican por issuer, y hay que backfillear antes de deployar",
+            "en": "better-auth 1.7.0: accounts are now scoped by issuer, and you must backfill before deploying",
+            "fr": "better-auth 1.7.0 : les comptes sont désormais scopés par issuer, avec backfill avant déploiement"
+          },
+          "body_html": {
+            "es": "<p>Major de breaking changes en la capa que menos te gusta romper: la identidad. <code>Account.issuer</code> pasa a ser <strong>obligatorio</strong>, y la identidad del provider OAuth ahora sale de los <strong>perfiles verificados crudos</strong> — OIDC usa <code>sub</code>, OAuth plano usa <code>id</code>, y un provider puede declarar <code>accountSubject</code> para otro campo inmutable. Se terminó el switcheo runtime entre <code>sub</code> e <code>id</code>. Consecuencia práctica: <code>getUserInfo().user</code> ya no lleva identidad de provider, <code>mapProfileToUser</code> no puede devolver <code>id</code>, y tenés que leer desde <code>accountInfo.account.accountId</code>. Los subjects de SSO pasan a ser definidos por protocolo: OIDC usa el claim <code>sub</code> verificado, SAML el <code>NameID</code> firmado, y <code>mapping.id</code> desaparece de ambas configs. <strong>Ojo con esto: la migración de schema generada NO asigna issuers confiables ni resuelve colisiones de identidad existentes</strong> — hay que aplicar el backfill de la guía de upgrade a mano antes de deployar. Además, <code>experimental.joins</code> se mueve a <code>advanced.database.joins</code>, MCP sale como paquete propio (<code>withMcpAuth</code> → <code>requireMcpAuth</code>, tablas <code>oauthClient</code>, <code>oauthRefreshToken</code>, <code>oauthClientAssertion</code>) y llega <strong>OIDC back-channel logout</strong>: cuando la sesión termina en el OP, cada Relying Party registrado recibe un <code>logout+jwt</code> firmado y el acceso se corta en el momento, en vez de esperar el TTL del access token.</p>",
+            "en": "<p>Breaking changes in the layer you least enjoy breaking: identity. <code>Account.issuer</code> becomes <strong>required</strong>, and OAuth provider identity now comes from <strong>raw verified profiles</strong> — OIDC uses <code>sub</code>, plain OAuth uses <code>id</code>, and a provider can declare <code>accountSubject</code> for another immutable field. No more runtime switching between <code>sub</code> and <code>id</code>. Practical fallout: <code>getUserInfo().user</code> no longer carries provider identity, <code>mapProfileToUser</code> cannot return <code>id</code>, and you read the selected identity from <code>accountInfo.account.accountId</code>. SSO account subjects become protocol-defined: OIDC uses the verified <code>sub</code> claim, SAML the signed <code>NameID</code>, and <code>mapping.id</code> is removed from both configurations. <strong>Read this twice: the generated schema migration does NOT assign trusted issuers or resolve existing identity collisions</strong> — apply the upgrade guide's account-identity backfill before you deploy. Also, <code>experimental.joins</code> moves to <code>advanced.database.joins</code>, MCP ships as its own package (<code>withMcpAuth</code> → <code>requireMcpAuth</code>, with <code>oauthClient</code>, <code>oauthRefreshToken</code> and <code>oauthClientAssertion</code> tables), and <strong>OIDC back-channel logout</strong> arrives: when a session ends at the OP, every registered Relying Party receives a signed <code>logout+jwt</code> and API access is cut immediately instead of surviving until the access token's own TTL.</p>",
+            "fr": "<p>Breaking changes dans la couche qu'on aime le moins casser : l'identité. <code>Account.issuer</code> devient <strong>obligatoire</strong>, et l'identité du provider OAuth provient désormais des <strong>profils vérifiés bruts</strong> — OIDC utilise <code>sub</code>, OAuth simple utilise <code>id</code>, et un provider peut déclarer <code>accountSubject</code> pour un autre champ immuable. Conséquence pratique : <code>getUserInfo().user</code> ne porte plus l'identité du provider, <code>mapProfileToUser</code> ne peut plus retourner <code>id</code>, et on lit l'identité depuis <code>accountInfo.account.accountId</code>. Les subjects SSO deviennent définis par protocole : <code>sub</code> vérifié pour OIDC, <code>NameID</code> signé pour SAML. <strong>Attention : la migration de schéma générée n'assigne pas les issuers de confiance et ne résout pas les collisions d'identité existantes</strong> — appliquez le backfill du guide de mise à niveau avant de déployer. Par ailleurs, <code>experimental.joins</code> passe à <code>advanced.database.joins</code>, MCP devient un paquet à part, et le <strong>back-channel logout OIDC</strong> arrive.</p>"
+          },
+          "source": {
+            "url": "https://github.com/better-auth/better-auth/releases/tag/v1.7.0",
+            "label": "github.com/better-auth"
+          }
+        },
+        {
+          "id": "prisma-8-rc2",
+          "tag": "breaking",
+          "date": "17 Aug 2026",
+          "title": {
+            "es": "Prisma 8.0.0-rc.2: se retira el binario prisma-next y vuelven los números de JavaScript",
+            "en": "Prisma 8.0.0-rc.2: the prisma-next binary is retired and JavaScript numbers return",
+            "fr": "Prisma 8.0.0-rc.2 : le binaire prisma-next disparaît et les nombres JavaScript reviennent"
+          },
+          "body_html": {
+            "es": "<p>La rc.2 pide trabajo real: <strong>casi toda aplicación va a tener que re-emitir su contract y renombrar el archivo de config</strong>. El repo ya no publica CLI propia — nada expone el bin <code>prisma-next</code> y hay que instalar <code>@prisma/cli</code>, reemplazando <code>prisma-next &lt;command&gt;</code> en scripts y CI. El config se muda de <code>prisma-next.config.ts</code> a <strong><code>prisma.config.ts</code></strong>, con forma engine-shaped y tu config ORM anidada bajo una sección <code>orm</code>; el nombre viejo y la forma plana siguen cargando con warning en stderr, así que el rename y el rewrap pueden ir en commits separados. Del lado del runtime: los agregados por default <strong>vuelven a ser números de JavaScript</strong>, con variantes lossless al lado, las <strong>CHECK constraints pasan a ser parte declarada del contract</strong>, y se separan las queries que devuelven filas de las escrituras que no devuelven nada. Vienen dos recipes de upgrade con las traducciones mecánicas, una para usuarios y otra para autores de extensiones.</p>",
+            "en": "<p>rc.2 asks for real work: <strong>almost every application will need to re-emit its contract and rename its config file</strong>. The repository no longer publishes a CLI — nothing ships a <code>prisma-next</code> bin anymore, so install <code>@prisma/cli</code> and replace <code>prisma-next &lt;command&gt;</code> across package scripts and CI. Config moves from <code>prisma-next.config.ts</code> to <strong><code>prisma.config.ts</code></strong>, now engine-shaped with your ORM config nested under an <code>orm</code> section; the old filename and flat shape still load with a deprecation warning on stderr, so the rename and the rewrap can land separately. On the runtime side: default aggregates are <strong>plain JavaScript numbers again</strong>, with lossless variants beside them, <strong>CHECK constraints become a declared part of the contract</strong>, and row-returning queries are split from non-returning writes. Two upgrade recipes ship with the mechanical translations — one for users, one for extension authors.</p>",
+            "fr": "<p>La rc.2 demande du vrai travail : <strong>presque toutes les applications devront ré-émettre leur contract et renommer leur fichier de config</strong>. Le dépôt ne publie plus de CLI — plus aucun bin <code>prisma-next</code>, il faut installer <code>@prisma/cli</code> et remplacer <code>prisma-next &lt;command&gt;</code> dans les scripts et la CI. La config passe de <code>prisma-next.config.ts</code> à <strong><code>prisma.config.ts</code></strong>, désormais engine-shaped avec la config ORM imbriquée sous une section <code>orm</code> ; l'ancien nom et la forme plate se chargent encore avec un avertissement. Côté runtime : les agrégats par défaut redeviennent des <strong>nombres JavaScript</strong>, avec des variantes lossless à côté, les <strong>contraintes CHECK deviennent une partie déclarée du contract</strong>, et les requêtes qui retournent des lignes sont séparées des écritures sans retour.</p>"
+          },
+          "source": {
+            "url": "https://github.com/prisma/prisma/releases/tag/v8.0.0-rc.2",
+            "label": "github.com/prisma"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "vitest-5-rc2",
+      "updates": [
+        {
+          "id": "vitest-5-rc2",
+          "tag": "release",
+          "date": "17 Aug 2026",
+          "title": {
+            "es": "Vitest 5.0.0-rc.2: vuelve el límite global de concurrencia y el browser mode deja de colgarse",
+            "en": "Vitest 5.0.0-rc.2: the global concurrency limit returns and browser mode stops hanging",
+            "fr": "Vitest 5.0.0-rc.2 : la limite globale de concurrence revient et le browser mode ne se fige plus"
+          },
+          "body_html": {
+            "es": "<p>Segunda RC, casi toda de fixes — que es exactamente lo que querés ver antes de una major. Se <strong>revive el límite global de concurrencia</strong> para el ciclo de vida de los tests, el runner se apropia del rerun post-restart manteniendo <code>process.exit</code> deshabilitado en los workers, y se preserva el root correcto al resolver la config. En browser mode hay tres arreglos que importan si tenés CI flaky: <strong>falla en vez de colgarse</strong> cuando el browser deja de responder, salida elegante si el browser se desconecta durante una cancelación, y GC de Playwright/Chromium cuando queda poco disco. Suma también un título custom para el summary de GitHub Actions.</p>",
+            "en": "<p>Second RC, almost entirely fixes — exactly what you want before a major. The <strong>global concurrency limit for the test lifecycle is revived</strong>, the runner owns the post-restart rerun while keeping <code>process.exit</code> disabled in workers, and the correct root is preserved during config resolution. Browser mode gets three fixes that matter if your CI is flaky: it <strong>fails instead of hanging</strong> when the browser stops responding, exits gracefully when the browser disconnects mid-cancellation, and triggers Playwright/Chromium GC on low disk availability. A custom GitHub Actions summary title also lands.</p>",
+            "fr": "<p>Deuxième RC, presque uniquement des correctifs — exactement ce qu'on veut avant une major. La <strong>limite globale de concurrence du cycle de vie des tests est rétablie</strong>, le runner reprend la main sur le rerun après redémarrage en gardant <code>process.exit</code> désactivé dans les workers, et le root correct est préservé lors de la résolution de config. Le browser mode reçoit trois correctifs utiles si votre CI est flaky : il <strong>échoue au lieu de se figer</strong> quand le navigateur ne répond plus, sort proprement en cas de déconnexion pendant une annulation, et déclenche le GC Playwright/Chromium quand l'espace disque manque.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.0.0-rc.2",
+            "label": "github.com/vitest-dev"
+          }
+        },
+        {
+          "id": "biome-2-5-9",
+          "tag": "patch",
+          "date": "17 Aug 2026",
+          "title": {
+            "es": "Biome 2.5.9: el parser CSS se recupera de declaraciones rotas",
+            "en": "Biome 2.5.9: the CSS parser recovers from broken declarations",
+            "fr": "Biome 2.5.9 : le parser CSS récupère après des déclarations invalides"
+          },
+          "body_html": {
+            "es": "<p>Patch chico pero de calidad de vida. El <strong>parser CSS ahora se recupera en los límites de declaración</strong> tras una declaración inválida, así que las declaraciones válidas que vienen después sí se parsean — antes una línea rota te tiraba el resto del bloque. Llega también la regla nursery <code>useNamedLayer</code>, que prohíbe las cascade layers anónimas (<code>@layer { ... }</code> sin nombre), el formatter de HTML preserva las líneas en blanco significativas, y <code>biome rage</code> reporta más variables de entorno (<code>BIOME_BINARY</code>, <code>BIOME_LOG_FILE</code>, <code>RUST_BACKTRACE</code>).</p>",
+            "en": "<p>Small but welcome quality-of-life patch. The <strong>CSS parser now recovers at declaration boundaries</strong> after a bogus declaration, so valid declarations that follow are parsed — previously one broken line took the rest of the block with it. Also landing: the nursery rule <code>useNamedLayer</code>, which disallows anonymous cascade layers (<code>@layer { ... }</code> with no name), the HTML formatter preserving meaningful blank lines, and <code>biome rage</code> reporting more environment variables (<code>BIOME_BINARY</code>, <code>BIOME_LOG_FILE</code>, <code>RUST_BACKTRACE</code>).</p>",
+            "fr": "<p>Petit patch de confort. Le <strong>parser CSS récupère désormais aux limites de déclaration</strong> après une déclaration invalide, si bien que les déclarations valides suivantes sont analysées — auparavant une ligne cassée emportait le reste du bloc. Arrivent aussi la règle nursery <code>useNamedLayer</code>, qui interdit les cascade layers anonymes, la préservation des lignes vides significatives par le formatter HTML, et plus de variables d'environnement rapportées par <code>biome rage</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/biomejs/biome/releases/tag/%40biomejs/biome%402.5.9",
+            "label": "github.com/biomejs"
+          }
+        },
+        {
+          "id": "effect-4-rc110",
+          "tag": "beta",
+          "date": "17 Aug 2026",
+          "title": {
+            "es": "Effect 4.0.0-rc.110: la cadencia de la major sigue firme",
+            "en": "Effect 4.0.0-rc.110: the major's cadence holds steady",
+            "fr": "Effect 4.0.0-rc.110 : la cadence de la major se maintient"
+          },
+          "body_html": {
+            "es": "<p>Otra RC del ecosistema Effect, publicada junto a <code>@effect/vitest</code> y los drivers SQL. Si estás evaluando Effect 4 para backend TypeScript, el número de RC te cuenta la historia: <strong>110 candidates y sigue</strong>. Ideal para prototipar y aprender la API, arriesgado para comprometer un servicio en producción antes del estable.</p>",
+            "en": "<p>Another RC across the Effect ecosystem, published alongside <code>@effect/vitest</code> and the SQL drivers. If you are evaluating Effect 4 for backend TypeScript, the RC number tells the story: <strong>110 candidates and counting</strong>. Great for prototyping and learning the API, risky for committing a production service before the stable release.</p>",
+            "fr": "<p>Une nouvelle RC de l'écosystème Effect, publiée avec <code>@effect/vitest</code> et les drivers SQL. Si vous évaluez Effect 4 pour du backend TypeScript, le numéro de RC raconte l'histoire : <strong>110 candidates et ça continue</strong>. Parfait pour prototyper et apprendre l'API, risqué pour engager un service en production avant la stable.</p>"
+          },
+          "source": {
+            "url": "https://github.com/Effect-TS/effect/releases/tag/effect%404.0.0-rc.110",
+            "label": "github.com/Effect-TS"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "dynamodb-vector-search",
+      "updates": [
+        {
+          "id": "dynamodb-vector-search",
+          "tag": "ga",
+          "date": "16 Aug 2026",
+          "title": {
+            "es": "DynamoDB suma vector search nativo: se acabó el side-car de base vectorial",
+            "en": "DynamoDB adds native vector search: no more vector-database side-car",
+            "fr": "DynamoDB ajoute la vector search native : fini le side-car de base vectorielle"
+          },
+          "body_html": {
+            "es": "<p>AWS suma un tipo de índice nuevo sobre embeddings guardados en atributos de la tabla, con una API <code>SearchVectors</code> para queries de vecinos más cercanos aproximados. Soporta hasta <strong>4.096 dimensiones</strong>, distancias euclidiana, coseno y dot product, filtrado inline, y escala horizontalmente sin límite de storage. Está disponible en todas las regiones donde ya corre DynamoDB, con table classes Standard y Standard-IA. Ojo con el billing: son <strong>tres dimensiones de cobro adicionales</strong> — data escrita al índice, data procesada en las búsquedas y data almacenada, todas medidas por byte y facturadas por gigabyte. Para memoria de agentes, RAG o recomendaciones, esto elimina un componente entero de la arquitectura: la base vectorial separada que había que sincronizar. Y sincronizar dos stores es donde nacen la mitad de los bugs de consistencia.</p>",
+            "en": "<p>AWS adds a new index type over embeddings stored in table attributes, with a <code>SearchVectors</code> API for approximate nearest-neighbor queries. It supports up to <strong>4,096 dimensions</strong>, Euclidean, cosine and dot-product distances, inline filtering, and scales horizontally with no storage limit. Available in every region where DynamoDB already runs, on Standard and Standard-IA table classes. Watch the billing: there are <strong>three extra charge dimensions</strong> — data written to the index, data processed during searches, and stored data, all metered per byte and billed per gigabyte. For agentic memory, RAG or recommendation engines, this removes an entire architectural component: the separate vector database you had to keep in sync. And keeping two stores in sync is where half your consistency bugs are born.</p>",
+            "fr": "<p>AWS ajoute un nouveau type d'index sur les embeddings stockés dans les attributs de table, avec une API <code>SearchVectors</code> pour les requêtes de plus proches voisins approximatifs. Jusqu'à <strong>4 096 dimensions</strong>, distances euclidienne, cosinus et produit scalaire, filtrage inline, et scaling horizontal sans limite de stockage. Disponible dans toutes les régions DynamoDB, sur les table classes Standard et Standard-IA. Attention à la facturation : <strong>trois dimensions de coût supplémentaires</strong> — données écrites dans l'index, données traitées pendant les recherches et données stockées, mesurées par octet et facturées par gigaoctet. Pour la mémoire d'agents, le RAG ou les moteurs de recommandation, cela supprime un composant entier de l'architecture.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/08/aws-dynamodb-vector-search/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloudflare-ci-sdk",
+      "updates": [
+        {
+          "id": "cloudflare-ci-sdk",
+          "tag": "notable",
+          "date": "17 Aug 2026",
+          "title": {
+            "es": "Cloudflare convierte los pipelines de CI en workflows de TypeScript",
+            "en": "Cloudflare turns CI pipelines into TypeScript workflows",
+            "fr": "Cloudflare transforme les pipelines CI en workflows TypeScript"
+          },
+          "body_html": {
+            "es": "<p>El paquete <code>@cloudflare/ci</code> (Apache 2.0, sobre el runtime de Workers) deja definir pipelines en <strong>TypeScript en lugar de YAML</strong>. Cada etapa mapea a un step de Workflow, o sea <strong>ejecución con checkpoint</strong>: un step que falla reintenta con el estado preservado. Los steps corren concurrentes salvo que declares dependencias — lint, test, typecheck y build se envuelven en <code>Promise.all()</code> antes del deploy. El caching de dependencias usa snapshots del filesystem de Sandbox guardados en R2, y un campo <code>events</code> nuevo en la config de Wrangler dispara Workflows directo desde eventos de version control. Dos advertencias antes de que te entusiasmes: los comandos <strong>tienen que ser idempotentes</strong> porque los steps son reintentables, y el SDK <strong>no redacta secretos</strong> de los logs de salida. La integración inicial lee repos desde Cloudflare Artifacts, todavía en private beta.</p>",
+            "en": "<p>The <code>@cloudflare/ci</code> package (Apache 2.0, on the Workers runtime) lets you define pipelines in <strong>TypeScript instead of YAML</strong>. Each stage maps to a Workflow step, which means <strong>checkpointed execution</strong>: a failed step retries with state preserved. Steps run concurrently unless you declare dependencies — lint, test, typecheck and build get wrapped in <code>Promise.all()</code> before deploy. Dependency caching uses Sandbox filesystem snapshots stored in R2 buckets, and a new <code>events</code> field in Wrangler configuration triggers Workflows straight from version-control events. Two warnings before you get excited: commands <strong>must be idempotent</strong> because Workflow steps are retryable, and the SDK <strong>does not redact secrets</strong> from output logs. The initial integration reads repositories from Cloudflare Artifacts, still in private beta.</p>",
+            "fr": "<p>Le paquet <code>@cloudflare/ci</code> (Apache 2.0, sur le runtime Workers) permet de définir des pipelines en <strong>TypeScript plutôt qu'en YAML</strong>. Chaque étape correspond à un step de Workflow, donc une <strong>exécution avec checkpoint</strong> : un step échoué retente avec l'état préservé. Les steps s'exécutent en parallèle sauf dépendances déclarées via <code>Promise.all()</code>. Le cache de dépendances utilise des snapshots du filesystem Sandbox stockés dans R2, et un nouveau champ <code>events</code> dans la config Wrangler déclenche les Workflows depuis les événements de version control. Deux avertissements : les commandes <strong>doivent être idempotentes</strong> car les steps sont retentables, et le SDK <strong>ne masque pas les secrets</strong> dans les logs.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/08/cloudflare-ci-code-workflows/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "grafana-gcx-mcp-ga",
+          "tag": "ga",
+          "date": "17 Aug 2026",
+          "title": {
+            "es": "Grafana lleva gcx y su MCP server a GA: los agentes ahora leen telemetría real",
+            "en": "Grafana takes gcx and its MCP server to GA: agents can now read real telemetry",
+            "fr": "Grafana passe gcx et son serveur MCP en GA : les agents lisent la télémétrie réelle"
+          },
+          "body_html": {
+            "es": "<p>Dos herramientas en GA: <strong>gcx</strong>, una CLI flexible para armar workflows propios contra Grafana Cloud o self-hosted, y el <strong>Grafana MCP Server</strong>, más opinado y disponible self-hosted o con endpoint hosteado. Ambos permiten consultar métricas, logs, traces, SLOs y resultados de Synthetic Monitoring. El problema que atacan es el que más duele con código generado por agentes: <strong>la brecha de verificación</strong>. La pregunta deja de ser si el agente entendió el ticket y pasa a ser si el sistema corriendo se comporta como esperabas. Incluyen creación de dashboards, generación de scripts k6 de load testing a partir de telemetría de producción, iteración local vía OpenTelemetry Collector y enriquecimiento de PRs con dashboards en vivo. Ahora bien, no te confundas: <strong>que el agente pueda leer tus métricas no reemplaza entender qué medís</strong>.</p>",
+            "en": "<p>Two tools reach GA: <strong>gcx</strong>, a flexible CLI for building your own workflows against Grafana Cloud or self-hosted instances, and the <strong>Grafana MCP Server</strong>, more opinionated and available self-hosted or through a hosted endpoint. Both let agents query metrics, logs, traces, SLOs and Synthetic Monitoring results. The problem they attack is the sharpest one with agent-generated code: <strong>the verification gap</strong>. The question stops being whether the agent understood the ticket and becomes whether the running system behaves as expected. Features include dashboard creation, k6 load-test script generation from production telemetry, local iteration via the OpenTelemetry Collector, and pull requests enriched with live dashboards. One caveat: an agent being able to read your metrics does not replace understanding what you measure.</p>",
+            "fr": "<p>Deux outils en GA : <strong>gcx</strong>, une CLI flexible pour construire ses propres workflows contre Grafana Cloud ou une instance self-hosted, et le <strong>Grafana MCP Server</strong>, plus opinionné, disponible self-hosted ou via un endpoint hébergé. Les deux permettent d'interroger métriques, logs, traces, SLO et résultats de Synthetic Monitoring. Le problème visé est le plus douloureux avec du code généré par agent : <strong>l'écart de vérification</strong>. La question n'est plus de savoir si l'agent a compris le ticket, mais si le système en fonctionnement se comporte comme prévu. Au menu : création de dashboards, génération de scripts k6 depuis la télémétrie de production, itération locale via l'OpenTelemetry Collector et enrichissement des PR avec des dashboards en direct.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/08/grafana-mcp-server-telemetry/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "aws-dogwood-cedar",
+      "updates": [
+        {
+          "id": "aws-dogwood-cedar",
+          "tag": "notable",
+          "date": "16 Aug 2026",
+          "title": {
+            "es": "AWS abre Dogwood: políticas de autorización que sí miran el pasado",
+            "en": "AWS open-sources Dogwood: authorization policies that actually look at the past",
+            "fr": "AWS ouvre Dogwood : des politiques d'autorisation qui regardent le passé"
+          },
+          "body_html": {
+            "es": "<p>Pieza de diseño interesante para cualquiera que modele autorización, con o sin agentes. Cedar evalúa cada request <strong>aislado</strong>: le das el mismo request dos veces y devuelve lo mismo, sin importar qué pasó antes. Dogwood (Apache 2.0) agrega una cláusula <code>when temporal</code> con cuatro operadores — <code>formerly</code> (ventanas de tiempo), <code>count_within</code> (límites de frecuencia), <code>count_distinct_within</code> (valores únicos) y <code>sum_within</code> (totales agregados) — implementados como <strong>macros sobre lógica temporal de primer orden métrica</strong>, no como primitivas del lenguaje. Con eso podés expresar reglas que antes vivían enterradas en código de aplicación: exigir aprobación antes de una acción, mantener totales corrientes, o prohibir contacto con terceros después de haber tocado datos confidenciales. El precio es alto y está bien declarado: la evaluación temporal <strong>necesita tracking de eventos con estado</strong> y <strong>sacrifica el razonamiento automatizado de Cedar</strong> — las políticas con condiciones temporales ya no se pueden analizar formalmente. Además el intérprete de referencia es para explorar y testear, <strong>no para autorizar en producción</strong>. Las políticas Cedar existentes siguen siendo compatibles.</p>",
+            "en": "<p>An interesting design piece for anyone modeling authorization, agents or not. Cedar evaluates each request <strong>in isolation</strong>: feed it the same request twice and you get the same answer, regardless of what happened before. Dogwood (Apache 2.0) adds a <code>when temporal</code> clause with four operators — <code>formerly</code> (time-window checks), <code>count_within</code> (frequency limits), <code>count_distinct_within</code> (unique value counts) and <code>sum_within</code> (aggregate totals) — implemented as <strong>macros over Metric First-Order Temporal Logic</strong> rather than language primitives. That lets you express rules that used to live buried in application code: require approval before an action, maintain running totals, or forbid contact with external parties after handling confidential data. The price is steep and clearly stated: temporal evaluation <strong>requires stateful event tracking</strong> and <strong>sacrifices Cedar's automated reasoning</strong> — policies using temporal conditions can no longer be formally analyzed. The reference interpreter is also for exploring and testing, <strong>not for running authorization in production</strong>. Existing Cedar policies remain fully compatible.</p>",
+            "fr": "<p>Une pièce de conception intéressante pour quiconque modélise l'autorisation, avec ou sans agents. Cedar évalue chaque requête <strong>isolément</strong> : la même requête deux fois donne la même réponse, quel que soit le passé. Dogwood (Apache 2.0) ajoute une clause <code>when temporal</code> avec quatre opérateurs — <code>formerly</code>, <code>count_within</code>, <code>count_distinct_within</code> et <code>sum_within</code> — implémentés comme des <strong>macros sur la logique temporelle du premier ordre métrique</strong> plutôt que comme des primitives du langage. On peut ainsi exprimer des règles jusque-là enfouies dans le code applicatif. Le prix est élevé et clairement annoncé : l'évaluation temporelle <strong>exige un suivi d'événements avec état</strong> et <strong>sacrifie le raisonnement automatisé de Cedar</strong>. L'interpréteur de référence sert à explorer et tester, <strong>pas à autoriser en production</strong>.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/08/aws-dogwood-agent-policy/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "grab-analytics-agents",
+          "tag": "notable",
+          "date": "17 Aug 2026",
+          "title": {
+            "es": "Grab bajó el trabajo mecánico de analytics del 44% al 30%, y el contexto fue el trabajo pesado",
+            "en": "Grab cut mechanical analytics work from 44% to 30%, and the context was the heavy lifting",
+            "fr": "Grab a réduit le travail analytique mécanique de 44% à 30%, le contexte étant le vrai chantier"
+          },
+          "body_html": {
+            "es": "<p>Los titulares se quedan con el número — trabajo analítico rutinario del <strong>44% en febrero al 30% en junio</strong> — pero lo que hay que mirar es la infraestructura que lo hizo posible: más de <strong>5.000 tablas y métricas certificadas, 4.000 documentos de contexto y 2.000 golden records</strong> a través de su sistema ContextIQ. Los agentes no arreglaron un data warehouse desordenado; el data warehouse ordenado fue el requisito. Grab usa un modelo de <strong>cinco niveles de autonomía</strong>: en el nivel 3 los agentes descubren data y redactan análisis mientras los humanos formulan la pregunta y revisan el resultado. Su sistema Spartan enruta requests a workflows especializados con más de 50 skills y 120 frameworks de análisis. Los números de self-service de marzo a mayo: métricas del 53% al 67%, data pulls del 63% al 90%, requests de SQL del 50% al 81%. Definición de métricas, interpretación causal y decisión final siguen siendo humanas — y ahí está la lección: <strong>la parte que no se automatiza es justo la que exige entender el dominio</strong>.</p>",
+            "en": "<p>The headline keeps the number — routine analytical work down from <strong>44% in February to 30% in June</strong> — but what deserves your attention is the infrastructure that made it possible: more than <strong>5,000 certified tables and metrics, 4,000 context documents and 2,000 golden records</strong> through their ContextIQ system. The agents did not fix a messy data warehouse; the tidy data warehouse was the prerequisite. Grab uses a <strong>five-level autonomy model</strong>: at level 3, agents discover data and draft analyses while humans frame the question and review the result. Their Spartan system routes requests to specialized workflows across more than 50 skills and 120 analysis frameworks. Self-service numbers from March to May: metric requests 53% to 67%, data pulls 63% to 90%, SQL requests 50% to 81%. Metric definitions, causal interpretation and final decisions stay human — and there is the lesson: <strong>the part that does not get automated is exactly the part that requires understanding the domain</strong>.</p>",
+            "fr": "<p>Le titre retient le chiffre — travail analytique routinier passé de <strong>44% en février à 30% en juin</strong> — mais ce qui compte est l'infrastructure qui l'a rendu possible : plus de <strong>5 000 tables et métriques certifiées, 4 000 documents de contexte et 2 000 golden records</strong> via leur système ContextIQ. Les agents n'ont pas réparé un data warehouse en désordre ; le data warehouse ordonné était le prérequis. Grab utilise un <strong>modèle d'autonomie à cinq niveaux</strong> : au niveau 3, les agents découvrent les données et rédigent des analyses pendant que les humains formulent la question et vérifient le résultat. Définitions de métriques, interprétation causale et décision finale restent humaines.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/08/grab-ai-analytics-agents/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "deepmerge-ts-recursion",
+      "updates": [
+        {
+          "id": "deepmerge-ts-recursion",
+          "tag": "security",
+          "date": "16 Aug 2026",
+          "title": {
+            "es": "deepmerge-ts: un objeto recursivo tumba el proceso, CVSS 8.2",
+            "en": "deepmerge-ts: a recursive object takes down the process, CVSS 8.2",
+            "fr": "deepmerge-ts : un objet récursif fait tomber le processus, CVSS 8.2"
+          },
+          "body_html": {
+            "es": "<p>Severidad alta, <strong>CVSS 8.2</strong>, y un caso de manual de <strong>CWE-674 (recursión no controlada)</strong>. El merge de records está implementado recursivamente <strong>sin detección de ciclos</strong>: si dos objetos se referencian a sí mismos por el mismo path de propiedades, la recursión no termina y te comés un <code>RangeError: Maximum call stack size exceeded</code>. Afecta a <code>deepmerge()</code>, <code>deepmergeCustom()</code>, <code>deepmergeInto()</code> y <code>deepmergeIntoCustom()</code> — o sea, toda la API pública. Versiones anteriores a <strong>8.0.0</strong>; el fix está en 8.0.0. En Node, un atacante que controle el objeto de entrada logra crashes sincrónicos repetidos y reinicios de worker en loop. Si mergeás config o payloads que vienen de afuera, este es tu recordatorio de que <strong>parsear no es validar</strong>.</p>",
+            "en": "<p>High severity, <strong>CVSS 8.2</strong>, and a textbook case of <strong>CWE-674 (uncontrolled recursion)</strong>. Record merging is implemented recursively <strong>with no cycle detection</strong>: if two objects reference themselves through identical property paths, the recursion never terminates and you get a <code>RangeError: Maximum call stack size exceeded</code>. It affects <code>deepmerge()</code>, <code>deepmergeCustom()</code>, <code>deepmergeInto()</code> and <code>deepmergeIntoCustom()</code> — the whole public API. Versions before <strong>8.0.0</strong>; fixed in 8.0.0. Under Node, an attacker controlling the input object gets repeated synchronous crashes and looping worker restarts. If you merge config or payloads that come from outside, this is your reminder that <strong>parsing is not validating</strong>.</p>",
+            "fr": "<p>Sévérité haute, <strong>CVSS 8.2</strong>, cas d'école de <strong>CWE-674 (récursion non contrôlée)</strong>. Le merge de records est implémenté récursivement <strong>sans détection de cycles</strong> : si deux objets se référencent eux-mêmes par le même chemin de propriétés, la récursion ne se termine jamais et provoque un <code>RangeError: Maximum call stack size exceeded</code>. Toute l'API publique est touchée — <code>deepmerge()</code>, <code>deepmergeCustom()</code>, <code>deepmergeInto()</code> et <code>deepmergeIntoCustom()</code>. Versions antérieures à <strong>8.0.0</strong> ; corrigé en 8.0.0. Sous Node, un attaquant contrôlant l'objet d'entrée obtient des crashes synchrones répétés et des redémarrages de worker en boucle.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-ggr8-5vv4-36mx",
+            "label": "github.com/advisories"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Segunda semana sin runtimes: Node.js, Deno, Bun y TypeScript no publicaron nada entre el 11 y el 18 de agosto. Lo último sigue siendo Node 26.7.0 del 5 de agosto y Deno 2.9.5 del 6. Bun no saca release desde el 13 de mayo. Por eso hoy tampoco hay sección de runtimes — no inventamos noticias.",
+      "en": "Second week without runtimes: Node.js, Deno, Bun and TypeScript shipped nothing between August 11 and 18. The most recent are still Node 26.7.0 on August 5 and Deno 2.9.5 on the 6th. Bun has not shipped since May 13. That is why there is no runtimes section today either — we do not invent news.",
+      "fr": "Deuxième semaine sans runtimes : Node.js, Deno, Bun et TypeScript n'ont rien publié entre le 11 et le 18 août. Les plus récents restent Node 26.7.0 du 5 août et Deno 2.9.5 du 6. Bun n'a rien sorti depuis le 13 mai. D'où l'absence, encore, de section runtimes."
+    },
+    {
+      "es": "Las dos fallas más graves de la semana no son overflows exóticos: son parsing. El NUL byte embebido en un Common Name de certificado TLS que Redis truncaba, y el Error.cause que vm2 no sanitiza. Ambas convierten un mecanismo de defensa en el vector de ataque. Cuando escribas un parser en un borde de confianza, asumí que la entrada fue diseñada para romperlo.",
+      "en": "The two worst flaws of the week are not exotic overflows — they are parsing. The embedded NUL byte in a TLS certificate Common Name that Redis truncated, and the Error.cause that vm2 fails to sanitize. Both turn a defense mechanism into the attack vector. When you write a parser at a trust boundary, assume the input was designed to break it.",
+      "fr": "Les deux failles les plus graves de la semaine ne sont pas des overflows exotiques : c'est du parsing. Le NUL byte embarqué dans un Common Name de certificat TLS que Redis tronquait, et le Error.cause que vm2 ne sanitise pas. Les deux transforment un mécanisme de défense en vecteur d'attaque. Quand vous écrivez un parser sur une frontière de confiance, supposez que l'entrée a été conçue pour le casser."
+    },
+    {
+      "es": "better-auth y Prisma rompen la misma semana, y ambos avisan lo mismo: la migración generada no alcanza. Prisma exige re-emitir el contract y renombrar la config; better-auth pide un backfill manual de identidad porque el schema no puede asignar issuers confiables ni resolver colisiones existentes. Cuando el mantenedor te dice que la herramienta no automatiza el paso, no lo automatices vos a las apuradas.",
+      "en": "better-auth and Prisma break in the same week, and both raise the same flag: the generated migration is not enough. Prisma requires re-emitting the contract and renaming the config; better-auth requires a manual identity backfill because the schema cannot assign trusted issuers or resolve existing collisions. When the maintainer tells you the tool does not automate a step, do not rush to automate it yourself.",
+      "fr": "better-auth et Prisma cassent la même semaine, et les deux disent la même chose : la migration générée ne suffit pas. Prisma exige de ré-émettre le contract et de renommer la config ; better-auth demande un backfill d'identité manuel car le schéma ne peut ni assigner les issuers de confiance ni résoudre les collisions existantes. Quand le mainteneur dit que l'outil n'automatise pas une étape, ne l'automatisez pas à la hâte."
+    },
+    {
+      "es": "Tres piezas de esta semana empujan la misma idea desde ángulos distintos: la autorización, el CI y la observabilidad se están volviendo código TypeScript o política declarativa con estado. Dogwood mete historial temporal en Cedar, Cloudflare cambia YAML por Workflows con checkpoint, y Grafana expone telemetría en vivo a los agentes. El patrón común es que las decisiones dejan de vivir en configuración opaca y pasan a ser código que se testea.",
+      "en": "Three pieces this week push the same idea from different angles: authorization, CI and observability are becoming TypeScript code or stateful declarative policy. Dogwood puts temporal history into Cedar, Cloudflare swaps YAML for checkpointed Workflows, and Grafana exposes live telemetry to agents. The common pattern is that decisions stop living in opaque configuration and become code you can test.",
+      "fr": "Trois sujets de la semaine poussent la même idée sous des angles différents : l'autorisation, la CI et l'observabilité deviennent du code TypeScript ou de la politique déclarative avec état. Dogwood intègre l'historique temporel dans Cedar, Cloudflare remplace le YAML par des Workflows avec checkpoint, et Grafana expose la télémétrie en direct aux agents. Le point commun : les décisions quittent la configuration opaque pour devenir du code testable."
+    }
+  ]
+}

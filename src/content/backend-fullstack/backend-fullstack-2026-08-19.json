@@ -1,0 +1,641 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 19 de agosto de 2026",
+    "en": "Backend & Fullstack — August 19, 2026",
+    "fr": "Backend & Fullstack — 19 août 2026"
+  },
+  "description": {
+    "es": "Fastify parchea dos CVE de validación y trustProxy, vm2 suma un sandbox escape con CVSS 10, GitHub abre stacked PRs en preview público y Prisma 8 rc.4 rompe la config vieja.",
+    "en": "Fastify patches two CVEs in schema validation and trustProxy, vm2 lands a CVSS 10 sandbox escape, GitHub opens stacked PRs in public preview, and Prisma 8 rc.4 breaks the legacy config.",
+    "fr": "Fastify corrige deux CVE de validation et trustProxy, vm2 écope d une évasion de sandbox CVSS 10, GitHub ouvre les stacked PRs en préversion publique et Prisma 8 rc.4 casse l ancienne config."
+  },
+  "pubDate": "2026-08-19",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Fastify 5.12.1: dos CVE, actualizá ya",
+        "en": "Fastify 5.12.1: two CVEs, upgrade now",
+        "fr": "Fastify 5.12.1 : deux CVE, mettez à jour"
+      },
+      "anchor": "fastify-security",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "vm2: sandbox escape con CVSS 10",
+        "en": "vm2: sandbox escape rated CVSS 10",
+        "fr": "vm2 : évasion de sandbox notée CVSS 10"
+      },
+      "anchor": "vm2-cvss10",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "GitHub: stacked PRs en preview público",
+        "en": "GitHub: stacked PRs in public preview",
+        "fr": "GitHub : stacked PRs en préversion"
+      },
+      "anchor": "github-stacked-prs",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "Prisma 8 rc.4 rompe la config vieja",
+        "en": "Prisma 8 rc.4 breaks the legacy config",
+        "fr": "Prisma 8 rc.4 casse l ancienne config"
+      },
+      "anchor": "prisma-rc4",
+      "icon": "simple-icons:prisma"
+    },
+    {
+      "text": {
+        "es": "Docker: path traversal en docker cp",
+        "en": "Docker: path traversal in docker cp",
+        "fr": "Docker : path traversal dans docker cp"
+      },
+      "anchor": "docker-go-archive",
+      "icon": "simple-icons:docker"
+    },
+    {
+      "text": {
+        "es": "Cloudflare WriteGuard controla MCP",
+        "en": "Cloudflare WriteGuard gates MCP writes",
+        "fr": "Cloudflare WriteGuard encadre MCP"
+      },
+      "anchor": "cloudflare-writeguard",
+      "icon": "simple-icons:cloudflare"
+    },
+    {
+      "text": {
+        "es": "pnpm 12 rc.7 arregla los registries",
+        "en": "pnpm 12 rc.7 reworks registry config",
+        "fr": "pnpm 12 rc.7 revoit les registries"
+      },
+      "anchor": "pnpm-12-rc7",
+      "icon": "lucide:package"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "fastify-security",
+      "updates": [
+        {
+          "id": "fastify-security",
+          "tag": "security",
+          "date": "18 Aug 2026",
+          "title": {
+            "es": "Fastify 5.12.1: release de seguridad con dos CVE",
+            "en": "Fastify 5.12.1: security release fixing two CVEs",
+            "fr": "Fastify 5.12.1 : release de sécurité, deux CVE"
+          },
+          "body_html": {
+            "es": "<p>Fastify publicó un <strong>release de seguridad</strong> que tapa dos agujeros. <code>CVE-2026-18504</code> (CVSS 5.4): en schemas de body primitivos, Fastify validaba el valor <em>coercionado</em> pero le pasaba el original al handler — un JSON <code>&quot;10&quot;</code> pasaba la validación de integer y llegaba como string a <code>request.body</code>. Objetos y arrays no están afectados. <code>CVE-2026-16732</code> (CVSS 6.1): fix incompleto de un bug previo, el <code>trustProxy</code> numérico (por ejemplo <code>trustProxy: 1</code>) no valida bien la dirección que conecta, y permite spoofear <code>X-Forwarded-*</code> para inyectar host, saltear HTTPS enforcement y romper protecciones de secure-cookie y CSRF-origin. Afecta &gt;= 5.8.3 y &lt; 5.12.1. Ojo con este: si exponés Fastify detrás de un proxy, actualizá YA.</p>",
+            "en": "<p>Fastify shipped a <strong>security release</strong> closing two holes. <code>CVE-2026-18504</code> (CVSS 5.4): for root-level primitive body schemas, Fastify validated the <em>coerced</em> value but handed the original to the handler — a JSON <code>\"10\"</code> passed integer validation and still arrived as a string in <code>request.body</code>. Object and array schemas are unaffected. <code>CVE-2026-16732</code> (CVSS 6.1): an incomplete fix for an earlier bug means numeric <code>trustProxy</code> (e.g. <code>trustProxy: 1</code>) fails to validate the connecting address, letting an attacker with direct origin access spoof <code>X-Forwarded-*</code> to inject hosts, bypass HTTPS enforcement, and defeat secure-cookie and CSRF-origin protections. Affects &gt;= 5.8.3, &lt; 5.12.1.</p>",
+            "fr": "<p>Fastify a publié une <strong>release de sécurité</strong> corrigeant deux failles. <code>CVE-2026-18504</code> (CVSS 5.4) : pour les schémas de body primitifs, Fastify validait la valeur <em>coercée</em> mais transmettait l originale au handler — un JSON <code>&quot;10&quot;</code> passait la validation integer et arrivait en string dans <code>request.body</code>. Objets et tableaux non affectés. <code>CVE-2026-16732</code> (CVSS 6.1) : correctif incomplet, le <code>trustProxy</code> numérique ne valide pas l adresse de connexion, permettant d usurper <code>X-Forwarded-*</code> pour injecter des hosts et contourner les protections secure-cookie et CSRF-origin. Concerne &gt;= 5.8.3, &lt; 5.12.1.</p>"
+          },
+          "source": {
+            "url": "https://github.com/fastify/fastify/releases/tag/v5.12.1",
+            "label": "github.com/fastify"
+          }
+        },
+        {
+          "id": "vm2-cvss10",
+          "tag": "security",
+          "date": "17 Aug 2026",
+          "title": {
+            "es": "vm2: CVSS 10 — hijack de DNS del host desde el sandbox",
+            "en": "vm2: CVSS 10 — host-wide DNS hijack from inside the sandbox",
+            "fr": "vm2 : CVSS 10 — détournement DNS de l hôte depuis le sandbox"
+          },
+          "body_html": {
+            "es": "<p>Nueva tanda de advisories contra <code>vm2</code>, y esta es la más brava: <strong>CVSS 10</strong>. Con <code>NodeVM</code> configurado como <code>builtin: [&#39;*&#39;]</code>, el código del sandbox llega a <code>os</code> y <code>dns</code> del proceso host. Lectura: UID, GID, home, interfaces de red con IP y MAC, config DNS. Escritura: <code>os.setPriority()</code> y — lo grave — <code>dns.setServers()</code> con resolvers del atacante, o sea un <em>DNS hijack de todo el proceso en una línea</em>, que persiste después de que el sandbox terminó. Afecta &lt;= 3.11.5, parcheado en 3.11.6. Si todavía usás vm2 para correr código no confiable, ese es el bug de diseño — migrá a <code>isolated-vm</code> o a un worker aislado de verdad.</p>",
+            "en": "<p>A fresh batch of <code>vm2</code> advisories landed, and this is the worst: <strong>CVSS 10</strong>. With <code>NodeVM</code> configured as <code>builtin: ['*']</code>, sandbox code reaches the host process <code>os</code> and <code>dns</code> modules. Reads: UID, GID, home directory, network interfaces with IP and MAC, DNS config. Writes: <code>os.setPriority()</code> and, critically, <code>dns.setServers()</code> pointed at attacker resolvers — a <em>process-wide DNS hijack in one line of sandbox code</em> that persists after the sandbox finishes. Affects &lt;= 3.11.5, patched in 3.11.6. If you still run untrusted code in vm2, that is the design flaw; move to <code>isolated-vm</code> or a genuinely isolated worker.</p>",
+            "fr": "<p>Nouvelle série d advisories <code>vm2</code>, et celle-ci est la pire : <strong>CVSS 10</strong>. Avec <code>NodeVM</code> configuré en <code>builtin: [&#39;*&#39;]</code>, le code du sandbox atteint les modules <code>os</code> et <code>dns</code> du processus hôte. Lecture : UID, GID, home, interfaces réseau avec IP et MAC. Écriture : <code>os.setPriority()</code> et surtout <code>dns.setServers()</code> vers des resolvers pilotés par l attaquant — un <em>détournement DNS de tout le processus en une ligne</em>, persistant après la fin du sandbox. Concerne &lt;= 3.11.5, corrigé en 3.11.6.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-m5w8-4gq2-6f8x",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "github-stacked-prs",
+          "tag": "beta",
+          "date": "18 Aug 2026",
+          "title": {
+            "es": "GitHub abre stacked pull requests en preview público",
+            "en": "GitHub brings stacked pull requests to public preview",
+            "fr": "GitHub ouvre les stacked pull requests en préversion publique"
+          },
+          "body_html": {
+            "es": "<p>GitHub por fin trae <strong>stacked PRs nativos</strong>: partís un cambio grande en varios PRs dependientes que se revisan por separado, y seguís construyendo arriba del trabajo anterior mientras los reviewers evalúan cada capa. Branch protection, reviews y merge policies siguen funcionando igual. El concepto no es nuevo — Meta popularizó los <em>stacked diffs</em> y Graphite vive de esto — pero tenerlo nativo cambia el default del equipo. El contexto real es que la generación de código con AI creció más rápido que la capacidad humana de review. Si venís mandando PRs de 2000 líneas, esto es tu salida.</p>",
+            "en": "<p>GitHub finally ships <strong>native stacked PRs</strong>: split a large change into smaller dependent pull requests reviewed independently, and keep building on earlier work while reviewers evaluate each layer. Branch protection, reviews, and merge policies all keep working. The concept is not new — Meta popularized stacked diffs and Graphite built a business on it — but going native changes the team default. The real driver is that AI-assisted code generation outgrew human review capacity.</p>",
+            "fr": "<p>GitHub propose enfin les <strong>stacked PRs natifs</strong> : découpez un gros changement en pull requests dépendantes relues indépendamment, tout en continuant à construire par-dessus pendant que les reviewers évaluent chaque couche. Branch protection, reviews et politiques de merge restent inchangées. Le concept n est pas neuf — Meta a popularisé les stacked diffs — mais le natif change la norme d équipe.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/08/github-stacked-pull-requests/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "prisma-rc4",
+          "tag": "breaking",
+          "date": "18 Aug 2026",
+          "title": {
+            "es": "Prisma 8.0.0-rc.4: se terminó el período de gracia de la config",
+            "en": "Prisma 8.0.0-rc.4: the config transition period is over",
+            "fr": "Prisma 8.0.0-rc.4 : fin de la période de transition de la config"
+          },
+          "body_html": {
+            "es": "<p>Prisma cerró la transición: el CLI <strong>ya no lee <code>prisma-next.config.ts</code></strong> ni acepta la forma plana (sin anidar) de la config — ahora fallan fuerte en vez de tirar warning. Lo único que se lee es <code>prisma.config.ts</code> con la forma de envelope, y el binario <code>prisma-next</code> del workspace se retira: el CLI unificado corre los comandos de ORM en el top level. Hay que renombrar el archivo y envolver las opciones en <code>definePrismaConfig({ orm: ormConfig({ … }) })</code>, y mantener <code>import &#39;dotenv/config&#39;</code> si tu config lee <code>process.env</code>. Los proyectos scaffoldeados con <code>init</code> de rc.2 en adelante no tocan nada. Suman dos fixes: <code>contract emit</code> ya no crashea con root relativo, e <code>init</code> genera <code>definePrismaConfig</code>.</p>",
+            "en": "<p>Prisma closed the transition: the CLI <strong>no longer reads <code>prisma-next.config.ts</code></strong> and no longer accepts the flat (un-nested) config shape — both now fail loudly instead of warning. The only config read is <code>prisma.config.ts</code> in the envelope shape, and the workspace <code>prisma-next</code> binary is retired, with the unified CLI running ORM commands at the top level. Rename the file, wrap ORM options in <code>definePrismaConfig({ orm: ormConfig({ … }) })</code>, and keep <code>import 'dotenv/config'</code> if your config reads <code>process.env</code>. Projects scaffolded by rc.2+ <code>init</code> need no changes. Two fixes ride along: <code>contract emit</code> no longer crashes on a relative project root, and <code>init</code> scaffolds <code>definePrismaConfig</code>.</p>",
+            "fr": "<p>Prisma clôt la transition : le CLI <strong>ne lit plus <code>prisma-next.config.ts</code></strong> et refuse la forme plate de la config — les deux échouent bruyamment au lieu d avertir. Seul <code>prisma.config.ts</code> en forme d enveloppe est lu, et le binaire <code>prisma-next</code> est retiré au profit du CLI unifié. Renommez le fichier et enveloppez les options dans <code>definePrismaConfig({ orm: ormConfig({ … }) })</code>. Les projets créés par <code>init</code> depuis rc.2 ne changent rien.</p>"
+          },
+          "source": {
+            "url": "https://github.com/prisma/prisma/releases/tag/v8.0.0-rc.4",
+            "label": "github.com/prisma"
+          }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "docker-go-archive",
+      "updates": [
+        {
+          "id": "docker-go-archive",
+          "tag": "security",
+          "date": "18 Aug 2026",
+          "title": {
+            "es": "moby/go-archive: un tar armado escribe fuera del directorio destino",
+            "en": "moby/go-archive: a crafted tar writes outside the extraction directory",
+            "fr": "moby/go-archive : une archive tar piégée écrit hors du répertoire cible"
+          },
+          "body_html": {
+            "es": "<p><code>CVE-2026-17106</code>, severidad alta (CVSS v4 <strong>7.1</strong>). Las funciones de extracción de tar de <code>github.com/moby/go-archive</code> no confinan bien las operaciones al directorio destino: un archivo malicioso puede crear o pisar archivos en cualquier path escribible por el proceso que extrae, vía symlinks y path traversal. Toca <code>docker cp</code> y funcionalidad relacionada. Afecta &lt; 0.3.0, parcheado en <strong>0.3.0</strong>. Si tenés CI que hace <code>docker cp</code> sobre artefactos que no controlás, ese es tu vector.</p>",
+            "en": "<p><code>CVE-2026-17106</code>, high severity (CVSS v4 <strong>7.1</strong>). The tar extraction functions in <code>github.com/moby/go-archive</code> fail to confine operations to the destination directory: a malicious archive can create or overwrite files at arbitrary paths writable by the extracting process, via crafted symlinks and path traversal. This reaches <code>docker cp</code> and related functionality. Affects &lt; 0.3.0, patched in <strong>0.3.0</strong>. If your CI runs <code>docker cp</code> over artifacts you do not control, that is the vector.</p>",
+            "fr": "<p><code>CVE-2026-17106</code>, sévérité élevée (CVSS v4 <strong>7.1</strong>). Les fonctions d extraction tar de <code>github.com/moby/go-archive</code> ne confinent pas correctement les opérations au répertoire cible : une archive malveillante peut créer ou écraser des fichiers à des chemins arbitraires accessibles en écriture, via symlinks et path traversal. Cela touche <code>docker cp</code>. Concerne &lt; 0.3.0, corrigé en <strong>0.3.0</strong>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-hfg8-hc9c-6c3h",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "vm2-proto-mutators",
+          "tag": "security",
+          "date": "17 Aug 2026",
+          "title": {
+            "es": "vm2: breakout del sandbox vía mutadores peligrosos del proto del host",
+            "en": "vm2: sandbox breakout using dangerous host proto mutators",
+            "fr": "vm2 : évasion du sandbox via des mutateurs de proto de l hôte"
+          },
+          "body_html": {
+            "es": "<p>Segundo advisory de la misma tanda del 17 de agosto: el sandbox se escapa usando mutadores del prototipo del host. Junto con el de CVSS 10, el DoS por <code>bufferAllocLimit</code> y el bypass de <code>Buffer.concat</code>, ya son <strong>cinco advisories nuevos contra vm2 en un mismo día</strong>. El mensaje es claro: vm2 no es un límite de seguridad. Si tu arquitectura depende de correr código de terceros en el mismo proceso, el problema no es el parche — es el diseño.</p>",
+            "en": "<p>A second advisory from the same August 17 batch: sandbox breakout using dangerous host proto mutators. Together with the CVSS 10 issue, the <code>bufferAllocLimit</code> DoS, and the <code>Buffer.concat</code> bypass, that is <strong>five new vm2 advisories in a single day</strong>. The message is blunt: vm2 is not a security boundary. If your architecture depends on running third-party code in the same process, the patch is not the fix — the design is.</p>",
+            "fr": "<p>Deuxième advisory de la même série du 17 août : évasion du sandbox via des mutateurs de prototype de l hôte. Avec le CVSS 10, le DoS <code>bufferAllocLimit</code> et le contournement de <code>Buffer.concat</code>, cela fait <strong>cinq nouveaux advisories vm2 en un seul jour</strong>. vm2 n est pas une frontière de sécurité.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-cfcw-xp6x-25gj",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "newapi-token-leak",
+          "tag": "security",
+          "date": "17 Aug 2026",
+          "title": {
+            "es": "New API: la User List API filtra el access token del root",
+            "en": "New API: User List API leaks the root user access token",
+            "fr": "New API : l API User List divulgue le token du root"
+          },
+          "body_html": {
+            "es": "<p><code>CVE-2026-64859</code>, <strong>crítico</strong>. El endpoint de listado de usuarios de New API devuelve el access token del usuario root, lo que da escalada de privilegios directa. Vino con hermanos: <code>CVE-2026-71479</code> (crítico, integer overflow en el billing de cuota que produce cargos negativos, o sea auto-crédito), <code>CVE-2026-64868</code> (alto, DoS de memoria y disco por webhooks de pago sin autenticar que leen el body completo y lo loguean entero) y dos medios más. Lección de diseño transversal: <strong>nunca serialices la entidad de usuario entera en una respuesta de listado</strong> — usá un DTO explícito.</p>",
+            "en": "<p><code>CVE-2026-64859</code>, <strong>critical</strong>. New API's user listing endpoint returns the root user's access token, giving direct privilege escalation. It arrived with siblings: <code>CVE-2026-71479</code> (critical, integer overflow in quota billing yielding negative charges, i.e. self-crediting), <code>CVE-2026-64868</code> (high, memory and disk DoS via unauthenticated payment webhooks doing unbounded body reads plus full-body logging), and two medium issues. The transferable design lesson: <strong>never serialize the whole user entity into a list response</strong> — use an explicit DTO.</p>",
+            "fr": "<p><code>CVE-2026-64859</code>, <strong>critique</strong>. L endpoint de listing utilisateurs de New API renvoie le token d accès du root, offrant une escalade de privilèges directe. Accompagné de <code>CVE-2026-71479</code> (critique, dépassement d entier dans la facturation de quota donnant des charges négatives) et <code>CVE-2026-64868</code> (élevé, DoS via webhooks de paiement non authentifiés). Leçon : <strong>ne sérialisez jamais l entité utilisateur complète</strong> — utilisez un DTO explicite.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-6x2c-phff-wx57",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "trivy-path-traversal",
+          "tag": "security",
+          "date": "18 Aug 2026",
+          "title": {
+            "es": "Trivy Plugin Manager: path traversal con escritura arbitraria",
+            "en": "Trivy Plugin Manager: path traversal allowing arbitrary file write",
+            "fr": "Trivy Plugin Manager : path traversal permettant l écriture arbitraire"
+          },
+          "body_html": {
+            "es": "<p><code>CVE-2026-63328</code>, severidad media. El gestor de plugins de Trivy tiene un path traversal que permite escritura arbitraria de archivos. Irónico y peligroso a la vez: Trivy suele correr <em>dentro</em> del pipeline de CI con permisos amplios, así que un plugin malicioso escribe donde quiera. Si instalás plugins de Trivy desde fuentes que no auditaste, revisá eso hoy.</p>",
+            "en": "<p><code>CVE-2026-63328</code>, medium severity. Trivy's plugin manager has a path traversal that allows arbitrary file write. Both ironic and dangerous: Trivy typically runs <em>inside</em> the CI pipeline with broad permissions, so a malicious plugin writes wherever it likes. If you install Trivy plugins from unaudited sources, review that today.</p>",
+            "fr": "<p><code>CVE-2026-63328</code>, sévérité moyenne. Le gestionnaire de plugins de Trivy présente un path traversal permettant l écriture arbitraire de fichiers. Ironique et dangereux : Trivy s exécute souvent <em>dans</em> le pipeline CI avec des permissions larges.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-8rc5-4fr6-64pw",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "go-pkcs12-bypass",
+          "tag": "security",
+          "date": "17 Aug 2026",
+          "title": {
+            "es": "Go pkcs12: bypass de autenticación en las funciones Decode",
+            "en": "Go pkcs12: authentication bypass in Decode functions",
+            "fr": "Go pkcs12 : contournement d authentification dans Decode"
+          },
+          "body_html": {
+            "es": "<p>Severidad media, sin CVE asignado todavía. Las funciones <code>Decode</code> del paquete <code>pkcs12</code> tienen un bypass de autenticación. Si tu backend parsea bundles PKCS#12 subidos por el usuario — típico en flujos de mTLS o de importación de certificados — estás en el camino del bug. Revisá la versión que traés transitivamente.</p>",
+            "en": "<p>Medium severity, no CVE assigned yet. The <code>Decode</code> functions in the <code>pkcs12</code> package carry an authentication bypass. If your backend parses user-uploaded PKCS#12 bundles — common in mTLS or certificate-import flows — you are on the bug's path. Check which version you pull in transitively.</p>",
+            "fr": "<p>Sévérité moyenne, pas encore de CVE. Les fonctions <code>Decode</code> du paquet <code>pkcs12</code> présentent un contournement d authentification. Si votre backend parse des bundles PKCS#12 fournis par l utilisateur — courant en mTLS — vous êtes concerné.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-mpwr-8vm7-h73f",
+            "label": "github.com/advisories"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "fastify-v6-alpha2",
+      "updates": [
+        {
+          "id": "fastify-v6-alpha2",
+          "tag": "beta",
+          "date": "19 Aug 2026",
+          "title": {
+            "es": "Fastify 6.0.0-alpha.2 con los mismos fixes de seguridad",
+            "en": "Fastify 6.0.0-alpha.2 carries the same security fixes",
+            "fr": "Fastify 6.0.0-alpha.2 embarque les mêmes correctifs"
+          },
+          "body_html": {
+            "es": "<p>La rama v6 recibió el mismo par de advisories parcheados, más limpieza rumbo al major: se borran los avisos de API deprecada de la documentación, el hook <code>preClose</code> ahora corre <strong>exactamente una vez por instancia declarante</strong> (antes se disparaba de más en árboles de plugins anidados) y se reporta la URL canónica de la ruta cuando hay un slash de prefijo oculto. Sigue en alpha, así que no lo pongas en prod todavía — pero si estás evaluando la migración a v6, este es el commit para empezar a probar.</p>",
+            "en": "<p>The v6 branch picked up the same pair of patched advisories, plus cleanup heading into the major: deprecated-API notices are removed from the docs, the <code>preClose</code> hook now runs <strong>exactly once per declaring instance</strong> (it previously over-fired in nested plugin trees), and the canonical route URL is reported for hidden prefix-slash routes. Still alpha, so keep it out of production — but if you are scoping the v6 migration, this is the build to test against.</p>",
+            "fr": "<p>La branche v6 reçoit les mêmes advisories corrigés, plus du nettoyage avant la majeure : suppression des avis d API dépréciée, le hook <code>preClose</code> s exécute désormais <strong>exactement une fois par instance déclarante</strong>, et l URL canonique est reportée pour les routes à slash de préfixe caché. Toujours en alpha.</p>"
+          },
+          "source": {
+            "url": "https://github.com/fastify/fastify/releases/tag/v6.0.0-alpha.2",
+            "label": "github.com/fastify"
+          }
+        },
+        {
+          "id": "hono-4133",
+          "tag": "patch",
+          "date": "18 Aug 2026",
+          "title": {
+            "es": "Hono 4.13.3: tanda de fixes en router, CORS, CSRF y ETag",
+            "en": "Hono 4.13.3: fixes across router, CORS, CSRF and ETag",
+            "fr": "Hono 4.13.3 : correctifs router, CORS, CSRF et ETag"
+          },
+          "body_html": {
+            "es": "<p>Release de mantenimiento sólido y con varios detalles que importan en producción. Routing: el trie-router ahora matchea rutas con wildcard de sufijo, y el pattern-router y el linear-router dejan de hacer <em>overmatch</em> de prefijo en rutas wildcard. CORS: se agrega <code>Origin</code> al header <code>Vary</code> en el preflight OPTIONS — clásico bug de cache envenenada si tenés CDN adelante. CSRF: las requests OPTIONS quedan exentas de la validación. ETag: se copian los bytes pendientes del stream y se dejan de saltear headers al filtrar respuestas 304. Suma <code>pretty-json</code> con soporte de content-types estructurados (<code>+json</code>).</p>",
+            "en": "<p>A solid maintenance release with several details that matter in production. Routing: the trie-router now matches suffix wildcard routes, and both pattern-router and linear-router stop prefix-overmatching wildcard routes. CORS: <code>Origin</code> is appended to the <code>Vary</code> header on OPTIONS preflight — a classic cache-poisoning bug when a CDN sits in front. CSRF: OPTIONS requests are now exempt from validation. ETag: pending stream bytes are copied, and headers are no longer skipped when filtering 304 responses. Plus <code>pretty-json</code> now supports structured content types (<code>+json</code>).</p>",
+            "fr": "<p>Release de maintenance solide. Routing : le trie-router matche les routes wildcard en suffixe, et pattern-router et linear-router cessent le sur-matching de préfixe. CORS : <code>Origin</code> est ajouté au header <code>Vary</code> lors du preflight OPTIONS — bug classique d empoisonnement de cache derrière un CDN. CSRF : les requêtes OPTIONS sont exemptées. ETag : les octets de stream en attente sont copiés.</p>"
+          },
+          "source": {
+            "url": "https://github.com/honojs/hono/releases/tag/v4.13.3",
+            "label": "github.com/honojs"
+          }
+        },
+        {
+          "id": "vitest-4111",
+          "tag": "patch",
+          "date": "18 Aug 2026",
+          "title": {
+            "es": "Vitest 4.1.11: vuelve el límite de concurrencia global",
+            "en": "Vitest 4.1.11: the global concurrency limit is back",
+            "fr": "Vitest 4.1.11 : retour de la limite de concurrence globale"
+          },
+          "body_html": {
+            "es": "<p>Backport a la rama v4 mientras la v5 sigue en release candidate. Lo importante: se revive el <strong>límite de concurrencia global para el ciclo de vida de los tests</strong>, que se había perdido — si tu suite empezó a saturar la máquina sin explicación, era esto. También endurecen el mocker restringiendo los redirect mocks al allowlist de filesystem, y en el modo browser encodean el <code>iframeId</code> en la URL del tester y disparan GC de Chromium cuando queda poco disco.</p>",
+            "en": "<p>A backport to the v4 branch while v5 stays in release candidate. The headline: the <strong>global concurrency limit for the test lifecycle</strong> is revived after being lost — if your suite started saturating the machine for no clear reason, this was it. The mocker is also hardened by restricting redirect mocks to the filesystem allowlist, and browser mode now encodes <code>iframeId</code> in the tester iframe URL and triggers Chromium GC on low disk availability.</p>",
+            "fr": "<p>Backport sur la branche v4 pendant que la v5 reste en release candidate. L essentiel : la <strong>limite de concurrence globale du cycle de vie des tests</strong> est rétablie après avoir été perdue. Le mocker est durci en restreignant les redirect mocks à l allowlist du filesystem.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vitest-dev/vitest/releases/tag/v4.1.11",
+            "label": "github.com/vitest-dev"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "bullmq-612",
+      "updates": [
+        {
+          "id": "bullmq-612",
+          "tag": "security",
+          "date": "16 Aug 2026",
+          "title": {
+            "es": "BullMQ 6.1.2: parches de seguridad en dependencias",
+            "en": "BullMQ 6.1.2: dependency security patches",
+            "fr": "BullMQ 6.1.2 : correctifs de sécurité des dépendances"
+          },
+          "body_html": {
+            "es": "<p>Release chico pero marcado explícitamente como <code>[security]</code>: actualiza parches de seguridad en dependencias. En una librería de colas que corre con acceso a Redis y suele tener credenciales de producción a mano, los updates transitivos no son opcionales. Bumpealo y seguí.</p>",
+            "en": "<p>A small release, but explicitly tagged <code>[security]</code>: it pulls dependency security patches. In a queue library that runs with Redis access and usually has production credentials nearby, transitive updates are not optional. Bump it and move on.</p>",
+            "fr": "<p>Petite release, mais explicitement marquée <code>[security]</code> : elle intègre des correctifs de sécurité des dépendances. Dans une librairie de files d attente ayant accès à Redis, les mises à jour transitives ne sont pas optionnelles.</p>"
+          },
+          "source": {
+            "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.1.2",
+            "label": "github.com/taskforcesh"
+          }
+        },
+        {
+          "id": "pg19-beta3-rds",
+          "tag": "beta",
+          "date": "17 Aug 2026",
+          "title": {
+            "es": "PostgreSQL 19 Beta 3 llega al RDS Database Preview Environment",
+            "en": "PostgreSQL 19 Beta 3 lands in the RDS Database Preview Environment",
+            "fr": "PostgreSQL 19 Beta 3 arrive dans le RDS Database Preview Environment"
+          },
+          "body_html": {
+            "es": "<p>AWS habilitó PostgreSQL 19 Beta 3 en el entorno de preview de RDS, pocos días después del release upstream. Lo jugoso de este ciclo es la <strong>gestión de performance de queries</strong> y las optimizaciones de <strong>autovacuum</strong> — justo los dos lugares donde más se sufre a escala. Es preview, o sea entorno descartable y sin SLA, pero si tenés una tabla que te pelea el autovacuum, vale la pena medir ahí antes del GA.</p>",
+            "en": "<p>AWS enabled PostgreSQL 19 Beta 3 in the RDS preview environment days after the upstream release. The interesting part of this cycle is <strong>query performance management</strong> and <strong>autovacuum</strong> optimization — precisely the two places that hurt most at scale. It is a preview environment, so no SLA and treat it as disposable, but if you have a table that fights autovacuum, it is worth benchmarking before GA.</p>",
+            "fr": "<p>AWS a activé PostgreSQL 19 Beta 3 dans l environnement de préversion RDS, quelques jours après la publication upstream. L intérêt de ce cycle : la <strong>gestion de la performance des requêtes</strong> et les optimisations d <strong>autovacuum</strong>. Environnement de préversion, sans SLA.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/postgresql-19-beta-3-amazon-rds-database-preview-environment/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "powa-archivist-530",
+          "tag": "release",
+          "date": "17 Aug 2026",
+          "title": {
+            "es": "powa-archivist 5.3.0, el recolector de métricas de PoWA",
+            "en": "powa-archivist 5.3.0, the PoWA metrics collector",
+            "fr": "powa-archivist 5.3.0, le collecteur de métriques PoWA"
+          },
+          "body_html": {
+            "es": "<p>Nueva versión del componente que recolecta y guarda las estadísticas de PoWA (PostgreSQL Workload Analyzer). Es la pieza de fondo del stack de observabilidad nativo de Postgres: se apoya en <code>pg_stat_statements</code> y compañía para darte histórico real en vez de solo el snapshot actual. Si estás tuneando queries a ciegas porque solo mirás <code>pg_stat_activity</code>, este es el camino que te falta.</p>",
+            "en": "<p>A new version of the component that collects and stores PoWA (PostgreSQL Workload Analyzer) statistics. It is the backing piece of the native Postgres observability stack, building on <code>pg_stat_statements</code> and friends to give you real history rather than only the current snapshot. If you are tuning queries blind because you only look at <code>pg_stat_activity</code>, this is the missing path.</p>",
+            "fr": "<p>Nouvelle version du composant qui collecte et stocke les statistiques de PoWA (PostgreSQL Workload Analyzer). C est la pièce de fond de la stack d observabilité native Postgres, appuyée sur <code>pg_stat_statements</code> pour offrir un historique réel plutôt qu un simple instantané.</p>"
+          },
+          "source": {
+            "url": "https://www.postgresql.org/about/news/powa-archivist-530-is-out-3366/",
+            "label": "postgresql.org"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloudflare-writeguard",
+      "updates": [
+        {
+          "id": "cloudflare-writeguard",
+          "tag": "beta",
+          "date": "18 Aug 2026",
+          "title": {
+            "es": "Cloudflare WriteGuard: control fino sobre lo que escriben los MCP servers",
+            "en": "Cloudflare WriteGuard: fine-grained control over MCP server writes",
+            "fr": "Cloudflare WriteGuard : contrôle fin des écritures des serveurs MCP"
+          },
+          "body_html": {
+            "es": "<p>En private beta, WriteGuard se para detrás del MCP server portal de Cloudflare como <strong>capa compartida de política, atribución y auditoría</strong>. El problema que resuelve es concreto: cuando los agentes pasaron de solo lectura a tener permisos de escritura sobre bases, GitHub, SaaS y APIs internas, cada equipo terminaba reimplementando los controles en cada server. WriteGuard intercepta las requests MCP y decide según políticas por herramienta, con tiers de riesgo que van de read-only a crítico (un deploy a producción es crítico; dejar un comentario es impacto mínimo). No crea cuentas propias: usa las credenciales OAuth existentes y les suma contexto de cliente MCP y sesión para mantener trazabilidad, clasificando cada invocación como exitosa, fallida o bloqueada.</p>",
+            "en": "<p>In private beta, WriteGuard sits behind Cloudflare's MCP server portal as a <strong>shared policy, attribution, and auditing layer</strong>. The problem is concrete: once agents moved past read-only into write access over databases, GitHub, SaaS, and internal APIs, every team ended up reimplementing controls in each server. WriteGuard intercepts MCP requests and decides based on per-tool policies, with risk tiers from read-only to critical (a production deployment is critical; adding a comment is minimal impact). It creates no standalone accounts: it uses existing OAuth credentials and adds MCP client and session context for auditability, classifying each invocation as successful, failed, or blocked.</p>",
+            "fr": "<p>En bêta privée, WriteGuard se place derrière le portail MCP de Cloudflare comme <strong>couche partagée de politique, d attribution et d audit</strong>. Le problème est concret : dès que les agents sont passés de la lecture seule à l écriture sur bases, GitHub et APIs internes, chaque équipe réimplémentait les contrôles. WriteGuard intercepte les requêtes MCP et décide selon des politiques par outil, avec des niveaux de risque du read-only au critique.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/08/cloudflare-writeguard-mcp-safety/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "aws-iam-autopilot-terraform",
+          "tag": "notable",
+          "date": "17 Aug 2026",
+          "title": {
+            "es": "IAM Policy Autopilot ahora lee archivos de plan de Terraform",
+            "en": "IAM Policy Autopilot now supports Terraform plan files",
+            "fr": "IAM Policy Autopilot lit désormais les fichiers de plan Terraform"
+          },
+          "body_html": {
+            "es": "<p>AWS extendió IAM Policy Autopilot para analizar planes de Terraform y <strong>generar de forma determinística políticas IAM acotadas</strong> que después refinás a medida que la app evoluciona. Esto ataca el pecado capital de todo equipo apurado: el <code>Action: &quot;*&quot;</code> temporal que se queda tres años. Que sea determinístico importa — no es un LLM adivinando permisos, sale del plan.</p>",
+            "en": "<p>AWS extended IAM Policy Autopilot to analyze Terraform plans and <strong>deterministically generate scoped-down IAM policies</strong> you then refine as the application evolves. This attacks every rushed team's cardinal sin: the temporary <code>Action: \"*\"</code> that stays for three years. Determinism matters here — it is not an LLM guessing permissions, it comes from the plan.</p>",
+            "fr": "<p>AWS étend IAM Policy Autopilot à l analyse des plans Terraform pour <strong>générer de façon déterministe des politiques IAM restreintes</strong>, à affiner ensuite. Cela s attaque au péché capital des équipes pressées : le <code>Action: «*»</code> temporaire qui reste trois ans. Le déterminisme compte : ce n est pas un LLM qui devine.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/iam-policy-autopilot-now-supports-terraform-plan-files",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "grafana-1320",
+          "tag": "release",
+          "date": "18 Aug 2026",
+          "title": {
+            "es": "Grafana 13.2.0 y parches simultáneos en cinco ramas",
+            "en": "Grafana 13.2.0 plus simultaneous patches across five branches",
+            "fr": "Grafana 13.2.0 et correctifs simultanés sur cinq branches"
+          },
+          "body_html": {
+            "es": "<p>Grafana publicó 13.2.0 junto con 13.1.4, 13.0.7, 12.4.9 y 12.3.11 <strong>el mismo día</strong> — patrón típico de release coordinado con fixes de seguridad hacia atrás. En features: mejoras de alerting con importación y templates de notificación, provisioning con Git Sync expandido y webhooks multiplataforma, más profundidad de anidamiento en dashboards y refinamientos en el manejo de session tokens. Se deprecan los scripted dashboards (deshabilitados por default) y la homepage unificada se activa para todos. Si corrés Grafana self-hosted, subí a la rama que te corresponda.</p>",
+            "en": "<p>Grafana published 13.2.0 alongside 13.1.4, 13.0.7, 12.4.9, and 12.3.11 <strong>on the same day</strong> — the usual signature of a coordinated release carrying security fixes to older branches. On features: alerting gains import and notification templates, provisioning expands Git Sync with multi-platform webhooks, dashboards allow deeper nesting, and session token handling is refined. Scripted dashboards are deprecated (disabled by default) and the unified homepage is enabled for all users. Self-hosting Grafana? Move up on whichever branch you are on.</p>",
+            "fr": "<p>Grafana a publié 13.2.0 en même temps que 13.1.4, 13.0.7, 12.4.9 et 12.3.11 <strong>le même jour</strong> — signature d une release coordonnée portant des correctifs de sécurité vers les anciennes branches. Côté fonctionnalités : alerting avec import et templates de notification, provisioning avec Git Sync étendu et webhooks multiplateformes. Les scripted dashboards sont dépréciés.</p>"
+          },
+          "source": {
+            "url": "https://github.com/grafana/grafana/releases/tag/v13.2.0",
+            "label": "github.com/grafana"
+          }
+        },
+        {
+          "id": "aws-ecr-replication",
+          "tag": "minor",
+          "date": "17 Aug 2026",
+          "title": {
+            "es": "Amazon ECR sube a 25 reglas de replicación por registry",
+            "en": "Amazon ECR now supports 25 replication rules per registry",
+            "fr": "Amazon ECR passe à 25 règles de réplication par registry"
+          },
+          "body_html": {
+            "es": "<p>El límite subió y habilita estrategias de replicación más precisas, por ejemplo distribuir imágenes a muchas regiones con reglas distintas por prefijo. Suena chico, pero si tenés un despliegue multi-región con varios equipos compartiendo un registry, el límite anterior te obligaba a reglas demasiado amplias — y replicar imágenes de más cuesta plata y transferencia.</p>",
+            "en": "<p>The limit went up, enabling more precise replication strategies — for example distributing images across many regions with different rules per prefix. It sounds small, but on a multi-region deployment with several teams sharing one registry, the old cap forced overly broad rules, and replicating more images than needed costs money and transfer.</p>",
+            "fr": "<p>La limite augmente et permet des stratégies de réplication plus précises, par exemple distribuer des images sur de nombreuses régions avec des règles par préfixe. Sur un déploiement multi-région partagé entre équipes, l ancienne limite imposait des règles trop larges — et répliquer trop d images coûte cher.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/amazon-ecr-increased-replication-rules-limit",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "aws-mwaa-serverless",
+          "tag": "notable",
+          "date": "18 Aug 2026",
+          "title": {
+            "es": "MWAA Serverless suma PythonOperator y BashOperator",
+            "en": "MWAA Serverless adds PythonOperator and BashOperator",
+            "fr": "MWAA Serverless ajoute PythonOperator et BashOperator"
+          },
+          "body_html": {
+            "es": "<p>Amazon MWAA Serverless ahora permite ejecutar scripts Python y shell propios dentro del runtime serverless, sin aprovisionar infra extra. Es el gap que hacía que muchos equipos se quedaran en el MWAA clásico: sin esos dos operadores, cualquier paso de pegamento en un DAG te obligaba a levantar workers. Con esto, Airflow serverless deja de ser solo para orquestación pura.</p>",
+            "en": "<p>Amazon MWAA Serverless can now execute custom Python and shell scripts inside the serverless runtime without provisioning extra infrastructure. This was the gap keeping many teams on classic MWAA: without those two operators, any glue step in a DAG forced you to run workers. Serverless Airflow is no longer limited to pure orchestration.</p>",
+            "fr": "<p>Amazon MWAA Serverless peut désormais exécuter des scripts Python et shell personnalisés dans le runtime serverless, sans provisionner d infrastructure supplémentaire. C était le manque qui gardait beaucoup d équipes sur MWAA classique : sans ces deux opérateurs, toute étape de glue dans un DAG imposait des workers.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/mwaa-serverless-pythonoperator-bashoperator/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "netflix-oci-agent",
+      "updates": [
+        {
+          "id": "netflix-oci-agent",
+          "tag": "notable",
+          "date": "18 Aug 2026",
+          "title": {
+            "es": "Netflix libera su workflow agéntico actor-crítico para inferencia causal",
+            "en": "Netflix open-sources its actor-critic agentic workflow for causal inference",
+            "fr": "Netflix libère son workflow agentique acteur-critique d inférence causale"
+          },
+          "body_html": {
+            "es": "<p>Más allá del dominio estadístico, el <strong>patrón arquitectónico</strong> es lo que vale acá. Netflix separa dos agentes: el <em>actor</em> toma un plan de análisis definido por humanos y un notebook templateado, produce specs, completa parámetros y ejecuta; el <em>crítico</em> revisa la salida, la puntúa (<code>not_satisfactory</code>, <code>satisfactory_with_caveats</code>, <code>fully_satisfactory</code>) y recomienda modificaciones al spec. La clave de diseño: los agentes no escupen una respuesta final, publican <strong>planes, specs, plots y notebooks que un humano puede inspeccionar y re-ejecutar</strong>. En el caso de estudio, el resultado del workflow fue apenas el 25% del baseline de un LLM directo, y el crítico detectó sesgo de early adopters y tests placebo fallidos que un análisis naíf se comía enteros. Si estás metiendo agentes en un pipeline serio, copiá esta forma: auditoría de proceso, no de resultado.</p>",
+            "en": "<p>Beyond the statistics domain, the <strong>architectural pattern</strong> is the valuable part. Netflix splits two agents: the <em>actor</em> takes a human-defined analysis plan and a templated Jupyter notebook, produces specs, fills parameters, and runs the analysis; the <em>critic</em> reviews the output, rates it (<code>not_satisfactory</code>, <code>satisfactory_with_caveats</code>, <code>fully_satisfactory</code>), and recommends spec modifications. The design key: agents do not emit a final answer, they publish <strong>plans, specs, plots, and notebooks a human can inspect and re-execute</strong>. In their case study the workflow's estimate was just 25% of the direct-LLM baseline, and the critic caught early adopter bias and failed placebo tests a naive analysis would have swallowed whole. If you are putting agents into a serious pipeline, copy this shape: audit the process, not the result.</p>",
+            "fr": "<p>Au-delà du domaine statistique, c est le <strong>patron architectural</strong> qui compte. Netflix sépare deux agents : l <em>acteur</em> prend un plan d analyse défini par des humains et un notebook templaté, produit des specs et exécute ; le <em>critique</em> relit la sortie, la note et recommande des modifications. La clé : les agents ne produisent pas une réponse finale, ils publient <strong>plans, specs, graphiques et notebooks qu un humain peut inspecter et ré-exécuter</strong>. Le critique a détecté un biais d early adopters qu une analyse naïve aurait manqué.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/08/netflix-oci-agent/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "cloudflare-bgp-rfc9234",
+          "tag": "notable",
+          "date": "18 Aug 2026",
+          "title": {
+            "es": "Cloudflare mide la adopción de RFC 9234 y encuentra dos Tier 1 rompiendo OTC",
+            "en": "Cloudflare tracks RFC 9234 adoption and finds two Tier 1 networks stripping OTC",
+            "fr": "Cloudflare mesure l adoption du RFC 9234 et trouve deux Tier 1 supprimant OTC"
+          },
+          "body_html": {
+            "es": "<p>RFC 9234 hace que los routers <strong>rechacen route leaks por su cuenta</strong>, usando BGP Roles y el atributo Only to Customer (OTC), en vez de depender de filtros configurados a mano que siempre se desactualizan. Cloudflare midió la adopción real y encontró dos redes Tier 1 removiendo el atributo OTC de forma inesperada — o sea, rompiendo la garantía justo en el lugar donde más importa. Lectura recomendada aunque no toques BGP: es un caso de manual de cómo un mecanismo de seguridad correcto se degrada por implementaciones parciales en el camino.</p>",
+            "en": "<p>RFC 9234 makes routers <strong>reject route leaks on their own</strong>, using BGP Roles and the Only to Customer (OTC) attribute, instead of relying on hand-maintained filters that always drift. Cloudflare measured real-world adoption and found two Tier 1 networks unexpectedly removing the OTC attribute — breaking the guarantee exactly where it matters most. Worth reading even if you never touch BGP: it is a textbook case of a correct security mechanism degraded by partial implementations along the path.</p>",
+            "fr": "<p>Le RFC 9234 permet aux routeurs de <strong>rejeter les fuites de routes par eux-mêmes</strong>, via les BGP Roles et l attribut Only to Customer (OTC), plutôt que des filtres maintenus à la main. Cloudflare a mesuré l adoption réelle et trouvé deux réseaux Tier 1 supprimant l attribut OTC — cassant la garantie là où elle compte le plus. Cas d école d un mécanisme correct dégradé par des implémentations partielles.</p>"
+          },
+          "source": {
+            "url": "https://blog.cloudflare.com/rfc9234-bgp-role-model/",
+            "label": "blog.cloudflare.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "pnpm-12-rc7",
+      "updates": [
+        {
+          "id": "pnpm-12-rc7",
+          "tag": "beta",
+          "date": "18 Aug 2026",
+          "title": {
+            "es": "pnpm 12.0.0-rc.7: los registries se declaran una sola vez",
+            "en": "pnpm 12.0.0-rc.7: registries are declared once, by URL",
+            "fr": "pnpm 12.0.0-rc.7 : les registries déclarés une seule fois"
+          },
+          "body_html": {
+            "es": "<p>Release candidate cargado. El setting <code>registries</code> ahora declara cada registry <strong>una sola vez, con su URL como clave</strong>, y todo lo suyo adentro: layout de URLs de tarball, scopes ruteados y prefijo de bare specifier. Además, <code>node_modules/.modules.yaml</code> deja de registrar los registries de los que resolvió el install — venía de un formato de lockfile viejo y causaba que <code>pnpm list</code> y <code>pnpm why</code> leyeran un proyecto por el registry <em>anterior</em> aunque hubiera cambiado. Otro grande: con <code>enableGlobalVirtualStore</code> activo, cada proceso que pnpm spawnea recibe <code>NODE_PATH</code> más un <code>--import</code> que registra un resolve hook, así las dependencias que importan paquetes fantasma siguen resolviendo — en CJS y en ESM — sin instalar el config dependency aparte. Y <code>resolutionMode: time-based</code> ahora se puede declarar por registry con <code>supportsTimeField</code>, para no pagar el metadata completo en todos.</p>",
+            "en": "<p>A loaded release candidate. The <code>registries</code> setting now declares each registry <strong>once, keyed by URL</strong>, with everything about it inside: tarball URL layout, routed scopes, and the bare-specifier prefix it answers to. Also, <code>node_modules/.modules.yaml</code> stops recording the registries an install resolved from — a leftover from an old lockfile format that made <code>pnpm list</code> and <code>pnpm why</code> read a project through its <em>previous</em> registry after a change. Another big one: with <code>enableGlobalVirtualStore</code> on, every process pnpm spawns receives <code>NODE_PATH</code> plus a <code>--import</code> flag registering a resolve hook, so dependencies importing phantom packages keep resolving — in both CJS and ESM — without a separate config dependency. And <code>resolutionMode: time-based</code> can now be declared per registry via <code>supportsTimeField</code>, avoiding full metadata everywhere.</p>",
+            "fr": "<p>Release candidate chargée. Le paramètre <code>registries</code> déclare chaque registry <strong>une seule fois, indexé par URL</strong>, avec tout son contenu : layout des URLs de tarball, scopes routés et préfixe de bare specifier. De plus, <code>node_modules/.modules.yaml</code> cesse d enregistrer les registries de résolution — héritage d un ancien format de lockfile. Avec <code>enableGlobalVirtualStore</code>, chaque processus reçoit <code>NODE_PATH</code> et un hook de résolution pour les paquets fantômes, en CJS comme en ESM.</p>"
+          },
+          "source": {
+            "url": "https://github.com/pnpm/pnpm/releases/tag/v12.0.0-rc.7",
+            "label": "github.com/pnpm"
+          }
+        },
+        {
+          "id": "better-auth-171",
+          "tag": "security",
+          "date": "18 Aug 2026",
+          "title": {
+            "es": "better-auth 1.7.1: se endurece la verificación de firmas SAML",
+            "en": "better-auth 1.7.1: SAML assertion signature verification hardened",
+            "fr": "better-auth 1.7.1 : vérification des signatures SAML durcie"
+          },
+          "body_html": {
+            "es": "<p>Patch de seguimiento del 1.7.0 con un fix que vale leer: en <code>@better-auth/sso</code>, la verificación de firma de assertions SAML ahora <strong>valida la firma sobre la assertion cruda</strong> en vez de confiar en una respuesta ya parseada, y se aplican política de firmado y límites de tamaño al metadata del SP. Eso es exactamente la clase de bug que habilita signature wrapping. Además <code>wantAssertionsSigned</code> ahora controla de verdad si el SP exige assertions firmadas. En el core, soporte de transacciones nativas en instancias de test para PostgreSQL y MySQL, y bump de <code>jose</code> y los paquetes noble.</p>",
+            "en": "<p>A follow-up patch to 1.7.0 with one fix worth reading: in <code>@better-auth/sso</code>, SAML assertion signature verification now <strong>validates signatures on the raw assertion</strong> instead of trusting an already-parsed response, and signing policy plus size limits are enforced on SP metadata. That is exactly the bug class that enables signature wrapping. Also, <code>wantAssertionsSigned</code> now genuinely controls whether the SP requires signed assertions. In core: native database transaction support for test instances on PostgreSQL and MySQL, plus bumps to <code>jose</code> and the noble crypto packages.</p>",
+            "fr": "<p>Patch de suivi de 1.7.0 avec un correctif notable : dans <code>@better-auth/sso</code>, la vérification de signature des assertions SAML <strong>valide désormais la signature sur l assertion brute</strong> au lieu de faire confiance à une réponse déjà parsée, avec politique de signature et limites de taille sur les métadonnées SP. C est précisément la classe de bug qui permet le signature wrapping. Côté core : transactions natives pour les instances de test PostgreSQL et MySQL.</p>"
+          },
+          "source": {
+            "url": "https://github.com/better-auth/better-auth/releases/tag/v1.7.1",
+            "label": "github.com/better-auth"
+          }
+        },
+        {
+          "id": "turborepo-21011",
+          "tag": "release",
+          "date": "18 Aug 2026",
+          "title": {
+            "es": "Turborepo 2.10.11: cachea tasks de uv y respeta gitignore sin metadata de git",
+            "en": "Turborepo 2.10.11: caches native uv tasks, respects gitignore without git metadata",
+            "fr": "Turborepo 2.10.11 : cache les tâches uv et respecte gitignore sans métadonnées git"
+          },
+          "body_html": {
+            "es": "<p>Release con varios fixes de los que arreglan dolores reales en monorepos grandes. Ahora <strong>cachea tasks nativas de la herramienta uv</strong> (bienvenido si tenés Python y TS conviviendo), <strong>respeta gitignore aunque no haya metadata de git</strong> — el caso clásico de contenedores de CI con checkout sin <code>.git</code> — y tolera archivos de input transitorios en vez de explotar. Suma que evita el recorrido repetido de entrypoints en modo estricto y aísla los bundles de config de generadores concurrentes.</p>",
+            "en": "<p>A release with several fixes that address real pain in large monorepos. It now <strong>caches native uv tool tasks</strong> (welcome if Python and TS coexist in your repo), <strong>respects gitignore even without git metadata</strong> — the classic CI container checkout with no <code>.git</code> — and tolerates transient input files instead of blowing up. It also avoids repeated strict entrypoint traversal and isolates concurrent generator config bundles.</p>",
+            "fr": "<p>Release avec plusieurs correctifs qui répondent à de vraies douleurs des gros monorepos. Turborepo <strong>cache désormais les tâches natives de l outil uv</strong>, <strong>respecte gitignore même sans métadonnées git</strong> — le cas classique du checkout CI sans <code>.git</code> — et tolère les fichiers d entrée transitoires. Il évite aussi le parcours répété des entrypoints en mode strict.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vercel/turborepo/releases/tag/v2.10.11",
+            "label": "github.com/vercel"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Semana pesada de seguridad en la capa de borde del backend: Fastify parchea validación de schema y spoofing de X-Forwarded-*, vm2 acumula cinco advisories en un día (uno con CVSS 10) y moby/go-archive filtra escrituras fuera del directorio en docker cp. El patrón común es siempre el mismo — confiar en un valor que alguien más ya parseó o coercionó.",
+      "en": "A heavy security week at the backend's edge layer: Fastify patches schema validation and X-Forwarded-* spoofing, vm2 racks up five advisories in one day (one at CVSS 10), and moby/go-archive leaks writes outside the destination directory in docker cp. The common pattern never changes — trusting a value someone else already parsed or coerced.",
+      "fr": "Semaine de sécurité chargée à la couche de bordure du backend : Fastify corrige la validation de schéma et l usurpation de X-Forwarded-*, vm2 accumule cinq advisories en un jour (dont un CVSS 10), et moby/go-archive laisse écrire hors du répertoire cible dans docker cp. Le motif commun ne change jamais : faire confiance à une valeur déjà parsée par quelqu un d autre."
+    },
+    {
+      "es": "El governance de agentes se está volviendo infraestructura de plataforma, no un problema de cada equipo: Cloudflare WriteGuard centraliza política y auditoría de escrituras MCP, y AWS Dogwood venía por el mismo lado. Si tus agentes tienen permisos de escritura, la pregunta ya no es si vas a necesitar una capa de política, es dónde la vas a poner.",
+      "en": "Agent governance is becoming platform infrastructure rather than each team's problem: Cloudflare WriteGuard centralizes policy and auditing for MCP writes, and AWS Dogwood was aimed at the same target. If your agents hold write permissions, the question is no longer whether you need a policy layer, but where you put it.",
+      "fr": "La gouvernance des agents devient une infrastructure de plateforme plutôt qu un problème par équipe : Cloudflare WriteGuard centralise politique et audit des écritures MCP, et AWS Dogwood visait la même cible. Si vos agents ont des permissions d écriture, la question n est plus de savoir s il vous faut une couche de politique, mais où la placer."
+    },
+    {
+      "es": "El tooling se está acomodando a que el review humano es el cuello de botella: GitHub trae stacked PRs nativos justo cuando la generación de código con AI supera la capacidad de revisión, y Netflix publica un patrón actor-crítico donde el agente entrega plan, spec y notebook re-ejecutable en vez de una respuesta final. Los dos apuntan a lo mismo: hacer auditable el proceso, no confiar en el output.",
+      "en": "Tooling is adapting to human review being the bottleneck: GitHub ships native stacked PRs exactly as AI code generation outpaces review capacity, and Netflix publishes an actor-critic pattern where the agent hands over a plan, spec, and re-executable notebook instead of a final answer. Both point the same way — make the process auditable rather than trusting the output.",
+      "fr": "L outillage s adapte au fait que la revue humaine est le goulot d étranglement : GitHub livre les stacked PRs natifs au moment où la génération de code par IA dépasse la capacité de revue, et Netflix publie un patron acteur-critique où l agent livre un plan, une spec et un notebook ré-exécutable plutôt qu une réponse finale. Les deux visent la même chose : rendre le processus auditable."
+    },
+    {
+      "es": "Nada de Node.js, Deno, Bun ni el compilador de TypeScript en la ventana de esta semana — el último release de Node fue el 26.7.0 del 5 de agosto. Por eso no hay sección de Runtimes hoy: mejor omitirla que rellenarla con cosas viejas.",
+      "en": "Nothing from Node.js, Deno, Bun, or the TypeScript compiler landed in this week's window — Node's most recent release was 26.7.0 on August 5. Hence no Runtimes section today: better to omit it than pad it with stale items.",
+      "fr": "Rien du côté de Node.js, Deno, Bun ou du compilateur TypeScript dans la fenêtre de cette semaine — la dernière version de Node était la 26.7.0 du 5 août. D où l absence de section Runtimes aujourd hui : mieux vaut l omettre que la remplir d éléments périmés."
+    }
+  ]
+}

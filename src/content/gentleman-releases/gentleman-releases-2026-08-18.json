@@ -1,0 +1,103 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 18 Aug 2026",
+    "en": "Gentleman Releases — 18 Aug 2026",
+    "fr": "Gentleman Releases — 18 Aug 2026"
+  },
+  "description": {
+    "es": "Releases del día en proyectos de Gentleman-Programming",
+    "en": "Today's releases from Gentleman-Programming projects",
+    "fr": "Sorties du jour des projets Gentleman-Programming"
+  },
+  "pubDate": "2026-08-18",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "gentle-ai v2.4.0 estable — cierra la línea 2.4.0 después de ocho release candidates",
+        "en": "gentle-ai v2.4.0 stable — closes the 2.4.0 line after eight release candidates",
+        "fr": "gentle-ai v2.4.0 stable — clôt la ligne 2.4.0 après huit release candidates"
+      },
+      "anchor": "gentle-ai-v2-4-0",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "Breaking: receipt-driven development pasa a ser opt-in — el review ya no arranca solo en cada clone",
+        "en": "Breaking: receipt-driven development is now opt-in — review no longer starts by itself in every clone",
+        "fr": "Breaking : le receipt-driven development devient opt-in — la revue ne démarre plus d'elle-même dans chaque clone"
+      },
+      "anchor": "gentle-ai-v2-4-0",
+      "icon": "lucide:toggle-left"
+    },
+    {
+      "text": {
+        "es": "pi entra como runtime de review host-mediated: reviewer, refuter y validator se lanzan desde un proceso que maneja Go",
+        "en": "pi lands as a host-mediated review runtime: reviewer, refuter and validator all launch from a Go-owned process",
+        "fr": "pi arrive comme runtime de revue host-mediated : reviewer, refuter et validator sont lancés depuis un processus piloté par Go"
+      },
+      "anchor": "gentle-ai-v2-4-0",
+      "icon": "lucide:bot"
+    },
+    {
+      "text": {
+        "es": "Un candidato grande ya no rompe el review: la evidencia se acota por bytes y se rechaza antes del START, no en la mitad",
+        "en": "A large candidate no longer breaks review: evidence is bounded by bytes and refused before START, not halfway through",
+        "fr": "Un gros candidat ne casse plus la revue : les preuves sont bornées en octets et refusées avant le START, pas à mi-parcours"
+      },
+      "anchor": "gentle-ai-v2-4-0",
+      "icon": "lucide:scaling"
+    },
+    {
+      "text": {
+        "es": "Nuevo reset del review store con scope de clone, y un store reset que deja de destruir lo que él mismo reporta como salvado",
+        "en": "New clone-scoped review store reset, and a store reset that stops destroying what it reports as spared",
+        "fr": "Nouveau reset du review store à portée de clone, et un store reset qui cesse de détruire ce qu'il annonce épargner"
+      },
+      "anchor": "gentle-ai-v2-4-0",
+      "icon": "lucide:rotate-ccw"
+    },
+    {
+      "text": {
+        "es": "El verify report post-review se atestigua por settlement nativo, y las carpetas de exploración dejan de figurar como cambios activos",
+        "en": "The post-review verify report is attested through native settlement, and exploration-only folders stop reading as active changes",
+        "fr": "Le verify report post-revue est attesté par settlement natif, et les dossiers d'exploration cessent d'apparaître comme changements actifs"
+      },
+      "anchor": "gentle-ai-v2-4-0",
+      "icon": "lucide:file-check"
+    }
+  ],
+  "tools": [
+    {
+      "id": "gentle-ai",
+      "name": "gentle-ai",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-gentle-ai",
+      "icon_emoji": "🤖",
+      "anchor": "gentle-ai",
+      "version": "v2.4.0",
+      "updates": [
+        {
+          "id": "gentle-ai-v2-4-0",
+          "tag": "breaking",
+          "title": {
+            "es": "v2.4.0 — Receipt-driven development pasa a opt-in, y pi entra como runtime de review",
+            "en": "v2.4.0 — Receipt-driven development goes opt-in, and pi lands as a review runtime",
+            "fr": "v2.4.0 — Le receipt-driven development devient opt-in, et pi arrive comme runtime de revue"
+          },
+          "body_html": {
+            "es": "<p>Estable al fin. Ocho release candidates después — rc.1 hizo que los rechazos nombraran su salida, rc.3 ató la prueba al candidato que entregás, rc.4 y rc.6 desatascaron el ledger de attempts — <code>v2.4.0</code> cierra la línea con un cambio de default que te toca a vos y una superficie de runtime nueva.</p><ul><li><strong>Breaking — receipt-driven development es opt-in:</strong> el review con receipts dejó de estar prendido por default. Un clone nuevo ya no te abre reviews solo; los prendés cuando querés. Si venías apoyándote en que el review arrancaba solo, ese supuesto se murió: encendelo explícitamente. Como contraparte, el rechazo que aparece cuando el review está apagado ahora nombra una recuperación que realmente lo enciende, en vez de mandarte a una prosa que no corría.</li><li><strong>pi es un runtime de review host-mediated:</strong> queda registrado como identidad de runtime propia, con su admisión gateada por el contrato de host relay declarado. El provider task lo emite Go y se materializa para el relay — reviewer primero, después refuter y validator — y las capturas adversariales corren en un proceso que Go es dueño, con deadline. El finalize de runtime compilado ahora tiene un deadline que le entra a una corrida de modelo, no uno pensado para una llamada corta. Sumado a eso: política de background-subagents manejada para el runtime de pi, que proyecta solo decisiones manejadas y no te tumba la etapa de apply por un policy file ajeno.</li><li><strong>Un candidato grande ya es reviewable:</strong> la evidencia del reviewer se acota por bytes y se rechaza <em>antes</em> del START, no cuando ya arrancaste; el manifiesto de changed-paths emite una línea por entrada; y cada resultado del probe de representabilidad del contexto de lens queda clasificado. Ojo con esto si venías chocando contra candidatos que no entraban.</li><li><strong>Store reset con scope de clone:</strong> comando nuevo para resetear el review store de un clone. Decide bajo el lease que él mismo toma, y — el detalle que importa — dejó de destruir lo que reportaba como salvado.</li><li><strong>Validator targeted, genérico y retryable:</strong> los slots capturados del validator targeted se finalizan de forma genérica, el validator recibe su recipe de inspección, y una validación inconclusa se rutea como reintentable con recaptura acotada en vez de consumirte el intento. Los receipts aprobados ahora declaran disposición de findings no bloqueantes.</li><li><strong>SDD:</strong> el verify report post-review se atestigua por settlement nativo — honesto, anclado, degradable y read-only en status. Los directorios de exploración dejan de contar como cambios activos, las continuaciones de selección de cambio salen ejecutables, y la remediación se juzga contra el baseline de evidencia que falló, no contra cualquiera.</li><li><strong>Windows y delivery:</strong> la propiedad del repair del RAR se decide por control de token, las denegaciones de gate nombran al lock holder vivo, el scope ensanchado de corrección se honra en el gate de delivery y se revierte cuando una corrección escala. Los shards de <code>internal/cli</code> se rebalancearon por costo medido.</li></ul><p>También trae: las operaciones de review negociado que salen bien ya no ensucian stderr, los schemas publicados se alinearon con los envelopes vivos (<code>ledger_ids</code> como array, preview de disposición status-v5, admisión del agente pi), el refresh del skill-registry se guarda contra roots que no son proyecto, y el install evita fallar por runtimes de agente opcionales.</p><p>Instalación: <code>go install github.com/gentleman-programming/gentle-ai/v2/cmd/gentle-ai@v2.4.0</code>, o bajate un binario del release y verificalo contra <code>SHA256SUMS.txt</code>.</p>",
+            "en": "<p>Stable at last. Eight release candidates later — rc.1 made refusals name their exit, rc.3 bound the proof to the candidate you deliver, rc.4 and rc.6 unjammed the attempt ledger — <code>v2.4.0</code> closes the line with a default change that reaches you and a new runtime surface.</p><ul><li><strong>Breaking — receipt-driven development is opt-in:</strong> receipt-backed review is no longer on by default. A fresh clone will not open reviews on its own; you turn them on when you want them. If you were relying on review starting by itself, that assumption is gone — enable it explicitly. In exchange, the refusal you get while review is off now names a recovery that actually turns reviews on, instead of pointing at prose that never ran.</li><li><strong>pi is a host-mediated review runtime:</strong> it is registered as its own runtime identity, with admission gated on the declared host relay contract. The provider task is issued by Go and materialized for the relay — reviewer first, then refuter and validator — and adversarial role captures execute through a Go-owned process with a deadline. Compiled-runtime finalize now carries a deadline sized for a model run rather than a short call. Alongside it: a managed background-subagents policy for the pi runtime, which projects only managed decisions and never fails the apply stage over a foreign policy file.</li><li><strong>A large candidate is now reviewable:</strong> reviewer evidence is bounded by bytes and refused <em>before</em> START rather than mid-run; the changed-path manifest emits one line per entry; and every lens-context representability probe outcome is classified. Relevant if you had been bouncing off candidates that simply did not fit.</li><li><strong>Clone-scoped store reset:</strong> a new command to reset a clone's review store. It decides under the lease it takes, and — the part that matters — it stopped destroying what it reported as spared.</li><li><strong>Targeted validator, generic and retryable:</strong> captured targeted-validator slots finalize generically, the validator gets its own inspection recipe, and an inconclusive validation routes as retryable with bounded recapture instead of consuming the attempt. Approved receipts now declare non-blocking finding disposition.</li><li><strong>SDD:</strong> the post-review verify report is attested through native settlement — honest, anchored, degradable, and read-only on status. Exploration-only directories stop counting as active changes, change-selection continuations come out runnable, and remediation is judged against the failed evidence baseline rather than any baseline.</li><li><strong>Windows and delivery:</strong> RAR repair ownership is decided by token control, gate denials name the live lock holder, the widened correction scope is honoured at the delivery gate and rolled back when a correction escalates. <code>internal/cli</code> shards were rebalanced by measured cost.</li></ul><p>Also in this release: successful negotiated review operations no longer write to stderr, published schemas were aligned with live envelopes (<code>ledger_ids</code> as an array, status-v5 disposition preview, pi agent admission), skill-registry refresh is guarded against non-project roots, and install avoids failing over optional agent runtimes.</p><p>Install: <code>go install github.com/gentleman-programming/gentle-ai/v2/cmd/gentle-ai@v2.4.0</code>, or download a binary from the release and verify it against <code>SHA256SUMS.txt</code>.</p>",
+            "fr": "<p>Stable enfin. Huit release candidates plus tard — rc.1 faisait nommer leur sortie aux refus, rc.3 liait la preuve au candidat livré, rc.4 et rc.6 ont débloqué le ledger d'attempts — <code>v2.4.0</code> clôt la ligne avec un changement de défaut qui vous concerne et une nouvelle surface de runtime.</p><ul><li><strong>Breaking — le receipt-driven development est opt-in :</strong> la revue adossée aux receipts n'est plus activée par défaut. Un clone neuf n'ouvre plus de revues de lui-même ; vous les activez quand vous le décidez. Si vous comptiez sur un démarrage automatique de la revue, cette hypothèse disparaît — activez-la explicitement. En contrepartie, le refus obtenu quand la revue est désactivée nomme désormais une récupération qui l'active réellement, au lieu de renvoyer à une prose inexécutable.</li><li><strong>pi est un runtime de revue host-mediated :</strong> il est enregistré comme identité de runtime à part entière, son admission étant conditionnée au contrat de host relay déclaré. Le provider task est émis par Go et matérialisé pour le relay — reviewer d'abord, puis refuter et validator — et les captures de rôles adversariaux s'exécutent dans un processus piloté par Go, avec deadline. Le finalize de runtime compilé dispose maintenant d'une deadline calibrée pour une exécution de modèle, non pour un appel court. En complément : une politique de background-subagents gérée pour le runtime pi, qui ne projette que les décisions gérées et ne fait jamais échouer l'étape d'apply à cause d'un policy file étranger.</li><li><strong>Un gros candidat est désormais reviewable :</strong> les preuves du reviewer sont bornées en octets et refusées <em>avant</em> le START plutôt qu'en cours d'exécution ; le manifeste des changed-paths émet une ligne par entrée ; et chaque résultat du probe de représentabilité du contexte de lens est classifié. Utile si vous butiez sur des candidats qui ne rentraient tout simplement pas.</li><li><strong>Store reset à portée de clone :</strong> une nouvelle commande pour réinitialiser le review store d'un clone. Elle décide sous le lease qu'elle prend et — le point important — a cessé de détruire ce qu'elle annonçait épargner.</li><li><strong>Validator targeted, générique et retryable :</strong> les slots capturés du validator targeted se finalisent génériquement, le validator reçoit sa propre recette d'inspection, et une validation non concluante est routée comme réessayable avec recapture bornée au lieu de consommer la tentative. Les receipts approuvés déclarent désormais la disposition des findings non bloquants.</li><li><strong>SDD :</strong> le verify report post-revue est attesté par settlement natif — honnête, ancré, dégradable et read-only sur status. Les répertoires d'exploration cessent de compter comme changements actifs, les continuations de sélection de changement sortent exécutables, et la remédiation est jugée contre le baseline de preuves qui a échoué, non contre n'importe lequel.</li><li><strong>Windows et livraison :</strong> la propriété du repair RAR est décidée par contrôle de token, les refus de gate nomment le lock holder vivant, le scope de correction élargi est honoré au gate de livraison et annulé quand une correction escalade. Les shards <code>internal/cli</code> ont été rééquilibrés selon un coût mesuré.</li></ul><p>Aussi dans cette version : les opérations de revue négociée réussies n'écrivent plus sur stderr, les schemas publiés ont été alignés sur les envelopes vivantes (<code>ledger_ids</code> en tableau, preview de disposition status-v5, admission de l'agent pi), le refresh du skill-registry est protégé contre les roots hors projet, et l'installation évite d'échouer sur des runtimes d'agent optionnels.</p><p>Installation : <code>go install github.com/gentleman-programming/gentle-ai/v2/cmd/gentle-ai@v2.4.0</code>, ou téléchargez un binaire de la release et vérifiez-le contre <code>SHA256SUMS.txt</code>.</p>"
+          },
+          "date": "17 Aug 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v2.4.0",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

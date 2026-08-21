@@ -1,0 +1,511 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 20 Ago 2026",
+    "en": "Backend & Fullstack — Aug 20, 2026",
+    "fr": "Backend & Fullstack — 20 août 2026"
+  },
+  "description": {
+    "es": "Docker reescribe su capa de virtualización, Kubernetes 1.37 llega a RC, Terraform 1.16 rc2 con private data, React Router v8 y dos CVEs en BuildKit.",
+    "en": "Docker rebuilds its virtualization layer, Kubernetes 1.37 hits RC, Terraform 1.16 rc2 lands provider private data, React Router v8 ships, and two BuildKit CVEs.",
+    "fr": "Docker réécrit sa couche de virtualisation, Kubernetes 1.37 en RC, Terraform 1.16 rc2 avec les private data, React Router v8 et deux CVE BuildKit."
+  },
+  "pubDate": "2026-08-20",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Docker reescribe su capa de virtualización",
+        "en": "Docker rebuilds its virtualization layer",
+        "fr": "Docker réécrit sa couche de virtualisation"
+      },
+      "anchor": "docker-vmm",
+      "icon": "simple-icons:docker"
+    },
+    {
+      "text": {
+        "es": "Kubernetes 1.37.0-rc.1 disponible",
+        "en": "Kubernetes 1.37.0-rc.1 is out",
+        "fr": "Kubernetes 1.37.0-rc.1 disponible"
+      },
+      "anchor": "k8s-137-rc1",
+      "icon": "simple-icons:kubernetes"
+    },
+    {
+      "text": {
+        "es": "BuildKit: bypass de Seccomp/AppArmor",
+        "en": "BuildKit: Seccomp/AppArmor bypass",
+        "fr": "BuildKit : contournement Seccomp/AppArmor"
+      },
+      "anchor": "buildkit-seccomp",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Terraform 1.16-rc2: private data de providers",
+        "en": "Terraform 1.16-rc2: provider private data",
+        "fr": "Terraform 1.16-rc2 : private data des providers"
+      },
+      "anchor": "terraform-116-rc2",
+      "icon": "lucide:cloud"
+    },
+    {
+      "text": {
+        "es": "React Router v8: ESM-only y Remix v2 EOL",
+        "en": "React Router v8: ESM-only, Remix v2 EOL",
+        "fr": "React Router v8 : ESM-only, Remix v2 EOL"
+      },
+      "anchor": "react-router-v8",
+      "icon": "lucide:server"
+    },
+    {
+      "text": {
+        "es": "workerd sube el límite de fila SQLite a 4 MiB",
+        "en": "workerd raises SQLite row limit to 4 MiB",
+        "fr": "workerd porte la limite de ligne SQLite à 4 Mio"
+      },
+      "anchor": "workerd-20260820",
+      "icon": "simple-icons:cloudflare"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "docker-vmm",
+      "updates": [
+        {
+          "id": "docker-vmm",
+          "tag": "breaking",
+          "date": "19 Aug 2026",
+          "title": {
+            "es": "Docker Desktop estrena capa de virtualización propia",
+            "en": "Docker Desktop ships a fully rebuilt virtualization layer",
+            "fr": "Docker Desktop lance sa nouvelle couche de virtualisation"
+          },
+          "body_html": {
+            "es": "<p>Docker reemplazó los componentes externos de virtualización por tecnología propia optimizada para workloads de containers, ahora en <strong>public beta</strong> en Desktop. Traducción: menos overhead de I/O y arranques más rápidos. Si vivís con <code>docker compose up</code> todo el día, probá la beta y medí antes de festejar.</p>",
+            "en": "<p>Docker replaced the external virtualization components in Desktop with proprietary technology tuned for container workloads, now in <strong>public beta</strong>. Expect lower I/O overhead and faster startups — measure it on your own stack before celebrating.</p>",
+            "fr": "<p>Docker a remplacé les composants de virtualisation externes de Desktop par une technologie maison optimisée pour les workloads conteneurisés, désormais en <strong>public beta</strong>. Moins d'overhead I/O et des démarrages plus rapides — à mesurer sur votre propre stack.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/docker-vmm-layer/", "label": "infoq.com" }
+        },
+        {
+          "id": "k8s-137-rc1",
+          "tag": "release",
+          "date": "20 Aug 2026",
+          "title": {
+            "es": "Kubernetes 1.37.0-rc.1 publicado",
+            "en": "Kubernetes 1.37.0-rc.1 released",
+            "fr": "Kubernetes 1.37.0-rc.1 publié"
+          },
+          "body_html": {
+            "es": "<p>Primer release candidate de la 1.37: la ventana de cambios está cerrada y el ciclo entra en estabilización. Momento ideal para pasar tus clusters de staging al RC y detectar deprecaciones antes del GA, no después.</p>",
+            "en": "<p>The first 1.37 release candidate is out — the change window is closed and the cycle enters stabilization. Good moment to run staging clusters on the RC and catch deprecations before GA, not after.</p>",
+            "fr": "<p>Première release candidate de 1.37 : la fenêtre de changements est fermée, le cycle entre en stabilisation. Le bon moment pour passer les clusters de staging sur la RC et repérer les dépréciations avant la GA.</p>"
+          },
+          "source": { "url": "https://github.com/kubernetes/kubernetes/releases/tag/v1.37.0-rc.1", "label": "github.com" }
+        },
+        {
+          "id": "buildkit-seccomp",
+          "tag": "security",
+          "date": "19 Aug 2026",
+          "title": {
+            "es": "BuildKit: un frontend custom podía desactivar Seccomp y AppArmor",
+            "en": "BuildKit: custom frontend could bypass Seccomp/AppArmor",
+            "fr": "BuildKit : un frontend custom pouvait contourner Seccomp/AppArmor"
+          },
+          "body_html": {
+            "es": "<p>Un frontend malicioso podía mandar un build request armado que <strong>desactivaba Seccomp y AppArmor</strong> en el container de build, sin que el usuario habilitara el entitlement <code>security.insecure</code> (CVSS 5.3). Las capabilities de Linux seguían aplicándose. Arreglado en <code>v0.31.1+</code>; mientras tanto, usá solo frontends de proveedores confiables.</p>",
+            "en": "<p>A malicious frontend could send a crafted build request that <strong>disabled Seccomp and AppArmor</strong> on the build container without the user granting the <code>security.insecure</code> entitlement (CVSS 5.3). Linux capabilities still applied. Fixed in <code>v0.31.1+</code>; until then, only use frontends from trusted providers.</p>",
+            "fr": "<p>Un frontend malveillant pouvait envoyer une requête de build forgée qui <strong>désactivait Seccomp et AppArmor</strong> sur le conteneur de build sans l'entitlement <code>security.insecure</code> (CVSS 5.3). Les capabilities Linux restaient appliquées. Corrigé en <code>v0.31.1+</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-7236-3392-c5c6", "label": "github.com/advisories" }
+        },
+        {
+          "id": "react-router-v8",
+          "tag": "breaking",
+          "date": "19 Aug 2026",
+          "title": {
+            "es": "React Router v8: builds ESM-only y fin de vida para Remix v2",
+            "en": "React Router v8: ESM-only builds, Remix v2 reaches EOL",
+            "fr": "React Router v8 : builds ESM-only, fin de vie de Remix v2"
+          },
+          "body_html": {
+            "es": "<p>Release deliberadamente aburrida: <strong>ESM-only</strong>, middleware por defecto y mínimos breaking changes. La noticia real es que <code>react-router</code> v6 y <strong>Remix v2 llegaron a End of Life</strong>. Si seguís en v6, ya no hay parches de seguridad esperándote — planificá la migración este sprint.</p>",
+            "en": "<p>A deliberately boring release: <strong>ESM-only</strong> builds, middleware on by default, minimal breaking changes. The real news is that <code>react-router</code> v6 and <strong>Remix v2 hit End of Life</strong>. Still on v6? No more security patches — plan the migration now.</p>",
+            "fr": "<p>Une release volontairement ennuyeuse : builds <strong>ESM-only</strong>, middleware par défaut, breaking changes minimes. La vraie info : <code>react-router</code> v6 et <strong>Remix v2 sont en fin de vie</strong>. Plus de correctifs de sécurité — planifiez la migration.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/react-route-v8/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "workerd-20260820",
+      "updates": [
+        {
+          "id": "workerd-20260820",
+          "tag": "release",
+          "date": "20 Aug 2026",
+          "title": {
+            "es": "workerd 1.20260820.1: límite de fila SQLite a 4 MiB",
+            "en": "workerd 1.20260820.1: SQLite row limit bumped to 4 MiB",
+            "fr": "workerd 1.20260820.1 : limite de ligne SQLite portée à 4 Mio"
+          },
+          "body_html": {
+            "es": "<p>El runtime de Workers sube el límite de fila de SQLite a <strong>4 MiB</strong> (adiós al workaround de chunkear blobs en Durable Objects), expone location hints de instancias de Workflows y ahora <em>avisa</em> en vez de fallar cuando un compat flag ya está activo por fecha.</p>",
+            "en": "<p>The Workers runtime raises the SQLite row limit to <strong>4 MiB</strong> (no more chunking blobs in Durable Objects), exposes Workflow instance location hints, and now warns instead of failing when a compat flag is already enabled by date.</p>",
+            "fr": "<p>Le runtime Workers porte la limite de ligne SQLite à <strong>4 Mio</strong> (fini le découpage des blobs dans les Durable Objects), expose les location hints des instances Workflows et avertit désormais au lieu d'échouer quand un compat flag est déjà actif par date.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workerd/releases/tag/v1.20260820.1", "label": "github.com" }
+        },
+        {
+          "id": "oxc-146",
+          "tag": "minor",
+          "date": "19 Aug 2026",
+          "title": {
+            "es": "Oxc 0.146.0: minifier y codegen más rápidos",
+            "en": "Oxc 0.146.0: faster minifier and codegen",
+            "fr": "Oxc 0.146.0 : minifier et codegen plus rapides"
+          },
+          "body_html": {
+            "es": "<p>Mejor negación de expresiones en contexto booleano en el minifier, <code>sourceText</code> chequeado una sola vez en codegen y fixes de sourcemaps en enums. Toolchain Rust para JS/TS que sigue puliendo microsegundos.</p>",
+            "en": "<p>Better expression negation in boolean context in the minifier, <code>sourceText</code> checked only once in codegen, and enum sourcemap fixes. The Rust JS/TS toolchain keeps shaving microseconds.</p>",
+            "fr": "<p>Meilleure négation des expressions en contexte booléen dans le minifier, <code>sourceText</code> vérifié une seule fois en codegen et corrections de sourcemaps sur les enums.</p>"
+          },
+          "source": { "url": "https://github.com/oxc-project/oxc/releases/tag/crates_v0.146.0", "label": "github.com" }
+        },
+        {
+          "id": "rolldown-125",
+          "tag": "minor",
+          "date": "19 Aug 2026",
+          "title": {
+            "es": "Rolldown 1.2.5: warning por star re-exports en conflicto",
+            "en": "Rolldown 1.2.5: NAMESPACE_CONFLICT warning for star re-exports",
+            "fr": "Rolldown 1.2.5 : avertissement NAMESPACE_CONFLICT"
+          },
+          "body_html": {
+            "es": "<p>Nuevo warning <code>NAMESPACE_CONFLICT</code> cuando dos <code>export *</code> chocan, soporte armv7 Android, tracking de memoria pico por suite en el bench y fix de PnP de Yarn. Barrel files, ustedes fueron avisados.</p>",
+            "en": "<p>New <code>NAMESPACE_CONFLICT</code> warning when two <code>export *</code> collide, armv7 Android support, per-suite peak memory in the bench, and a Yarn PnP resolve fix. Barrel files, consider yourselves warned.</p>",
+            "fr": "<p>Nouvel avertissement <code>NAMESPACE_CONFLICT</code> quand deux <code>export *</code> entrent en conflit, support armv7 Android, mémoire pic par suite dans le bench et correctif Yarn PnP.</p>"
+          },
+          "source": { "url": "https://github.com/rolldown/rolldown/releases/tag/v1.2.5", "label": "github.com" }
+        },
+        {
+          "id": "dotnet-11-p7",
+          "tag": "beta",
+          "date": "19 Aug 2026",
+          "title": {
+            "es": ".NET 11 Preview 7: C#, ASP.NET Core y EF Core",
+            "en": ".NET 11 Preview 7: C#, ASP.NET Core and EF Core updates",
+            "fr": ".NET 11 Preview 7 : C#, ASP.NET Core et EF Core"
+          },
+          "body_html": {
+            "es": "<p>Labeled <code>break</code>/<code>continue</code> en C#, pausa de circuitos en Blazor y soporte del tipo <code>Half</code> para SQLite en EF Core. Si tu backend es políglota, vale mirarlo aunque vivas en TypeScript.</p>",
+            "en": "<p>Labeled <code>break</code>/<code>continue</code> in C#, Blazor circuit pausing, and <code>Half</code> type support for SQLite in EF Core. Worth a look if your backend is polyglot, even from TypeScript land.</p>",
+            "fr": "<p><code>break</code>/<code>continue</code> étiquetés en C#, pause des circuits Blazor et support du type <code>Half</code> pour SQLite dans EF Core.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/dotnet-11-preview-7/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "yoga-graphql17",
+      "updates": [
+        {
+          "id": "yoga-graphql17",
+          "tag": "notable",
+          "date": "19 Aug 2026",
+          "title": {
+            "es": "GraphQL Yoga: soporte para graphql-js 17",
+            "en": "GraphQL Yoga adds graphql-js 17 support",
+            "fr": "GraphQL Yoga : support de graphql-js 17"
+          },
+          "body_html": {
+            "es": "<p>Los paquetes <code>@graphql-yoga/apollo-link</code> y <code>@graphql-yoga/urql-exchange</code> saltan a 5.7.0 con compatibilidad para <strong>graphql-js 17</strong>, incluyendo tipados corregidos y ajustes en <code>subscribe</code>. Primer paso concreto para migrar el server sin romper los clientes.</p>",
+            "en": "<p><code>@graphql-yoga/apollo-link</code> and <code>@graphql-yoga/urql-exchange</code> jump to 5.7.0 with <strong>graphql-js 17</strong> compatibility, fixed typings and <code>subscribe</code> adjustments. A concrete first step to migrating the server without breaking clients.</p>",
+            "fr": "<p><code>@graphql-yoga/apollo-link</code> et <code>@graphql-yoga/urql-exchange</code> passent en 5.7.0 avec la compatibilité <strong>graphql-js 17</strong>, typages corrigés et ajustements de <code>subscribe</code>.</p>"
+          },
+          "source": { "url": "https://github.com/dotansimha/graphql-yoga/releases/tag/release-1787131280487", "label": "github.com" }
+        },
+        {
+          "id": "effect-rc111",
+          "tag": "beta",
+          "date": "20 Aug 2026",
+          "title": {
+            "es": "Effect 4.0.0-rc.111",
+            "en": "Effect 4.0.0-rc.111",
+            "fr": "Effect 4.0.0-rc.111"
+          },
+          "body_html": {
+            "es": "<p>Nuevo RC del monorepo Effect, con toda la familia sincronizada: <code>@effect/vitest</code>, los drivers <code>@effect/sql-sqlite-*</code> (node, wasm, react-native, Durable Objects) y el core. La 4.0 sigue acercándose; si ya estás en la línea rc, actualizá en bloque, nunca paquete por paquete.</p>",
+            "en": "<p>Another RC across the Effect monorepo with the whole family in lockstep: <code>@effect/vitest</code>, the <code>@effect/sql-sqlite-*</code> drivers (node, wasm, react-native, Durable Objects) and core. If you track the rc line, upgrade the whole set at once — never package by package.</p>",
+            "fr": "<p>Nouvelle RC du monorepo Effect, toute la famille synchronisée : <code>@effect/vitest</code>, les drivers <code>@effect/sql-sqlite-*</code> et le core. Mettez à jour l'ensemble d'un bloc.</p>"
+          },
+          "source": { "url": "https://github.com/Effect-TS/effect/releases/tag/effect%404.0.0-rc.111", "label": "github.com" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "terraform-116-rc2",
+      "updates": [
+        {
+          "id": "terraform-116-rc2",
+          "tag": "notable",
+          "date": "19 Aug 2026",
+          "title": {
+            "es": "Terraform 1.16.0-rc2: private data de providers e import en módulos",
+            "en": "Terraform 1.16.0-rc2: provider private data and import blocks in modules",
+            "fr": "Terraform 1.16.0-rc2 : private data des providers et import dans les modules"
+          },
+          "body_html": {
+            "es": "<p>Terraform ahora guarda <strong>planned private data</strong> de los providers, preservando estado específico entre plan y apply. Suma el bloque <code>store</code> en <code>terraform_data</code> para valores efímeros y sensibles, bloques anidados como computed, e <code>import</code> dentro de módulos. Esto último solo ya justifica el upgrade.</p>",
+            "en": "<p>Terraform now stores <strong>planned private data</strong> for providers, preserving provider-specific state across plan and apply. Plus a new <code>store</code> block in <code>terraform_data</code> for ephemeral/sensitive values, nested blocks as computed values, and <code>import</code> blocks inside modules — that last one alone justifies the upgrade.</p>",
+            "fr": "<p>Terraform conserve désormais les <strong>planned private data</strong> des providers entre plan et apply. S'y ajoutent le bloc <code>store</code> dans <code>terraform_data</code>, les blocs imbriqués en valeurs calculées et les blocs <code>import</code> dans les modules.</p>"
+          },
+          "source": { "url": "https://github.com/hashicorp/terraform/releases/tag/v1.16.0-rc2", "label": "github.com" }
+        },
+        {
+          "id": "terraform-1159",
+          "tag": "patch",
+          "date": "19 Aug 2026",
+          "title": {
+            "es": "Terraform 1.15.9 mitiga CVE-2026-14978 en go-slug",
+            "en": "Terraform 1.15.9 mitigates CVE-2026-14978 in go-slug",
+            "fr": "Terraform 1.15.9 corrige CVE-2026-14978 dans go-slug"
+          },
+          "body_html": {
+            "es": "<p>Bump de <code>go-slug</code> a v0.18.3 por <strong>CVE-2026-14978</strong>: un problema de normalización Unicode hacía que archivos no se excluyeran correctamente vía <code>.terraformignore</code> y terminaran subidos a HCP Terraform o Terraform Enterprise. Traducción: secretos que creías ignorados podían viajar. Además, arreglaron la validación de módulos hijos.</p>",
+            "en": "<p><code>go-slug</code> bumped to v0.18.3 for <strong>CVE-2026-14978</strong>: a Unicode normalization issue meant files were not correctly excluded via <code>.terraformignore</code> and could be uploaded to HCP Terraform or Terraform Enterprise. Files you thought were ignored may have travelled. Child module validation was also fixed.</p>",
+            "fr": "<p><code>go-slug</code> passe en v0.18.3 pour <strong>CVE-2026-14978</strong> : un problème de normalisation Unicode empêchait l'exclusion correcte via <code>.terraformignore</code>, avec upload vers HCP Terraform ou Terraform Enterprise.</p>"
+          },
+          "source": { "url": "https://github.com/hashicorp/terraform/releases/tag/v1.15.9", "label": "github.com" }
+        },
+        {
+          "id": "istio-131-rc0",
+          "tag": "release",
+          "date": "19 Aug 2026",
+          "title": {
+            "es": "Istio 1.31.0-rc.0",
+            "en": "Istio 1.31.0-rc.0",
+            "fr": "Istio 1.31.0-rc.0"
+          },
+          "body_html": {
+            "es": "<p>El service mesh pasa de beta.2 a su primer release candidate el mismo día. Si operás ambient mode, este es el build para validar en staging antes de que caiga el GA.</p>",
+            "en": "<p>The service mesh went from beta.2 to its first release candidate the same day. If you run ambient mode, this is the build to validate in staging before GA lands.</p>",
+            "fr": "<p>Le service mesh est passé de beta.2 à sa première release candidate le même jour. À valider en staging si vous utilisez le mode ambient.</p>"
+          },
+          "source": { "url": "https://github.com/istio/istio/releases/tag/1.31.0-rc.0", "label": "github.com" }
+        },
+        {
+          "id": "aws-cw-tag-propagation",
+          "tag": "minor",
+          "date": "19 Aug 2026",
+          "title": {
+            "es": "CloudWatch Logs propaga tags entre cuentas",
+            "en": "CloudWatch Logs centralization propagates tags across accounts",
+            "fr": "CloudWatch Logs propage les tags entre comptes"
+          },
+          "body_html": {
+            "es": "<p>La centralización de logs ahora copia los tags del log group desde la cuenta origen a la destino, preservando metadata de compliance y cost allocation al agregar logs. Chiquito, pero te ahorra un script de reconciliación de tags.</p>",
+            "en": "<p>Log centralization now copies log group tags from source to destination accounts, preserving compliance and cost-tracking metadata during aggregation. Small, but it kills a tag-reconciliation script.</p>",
+            "fr": "<p>La centralisation des logs copie désormais les tags du log group du compte source vers le compte destination, préservant les métadonnées de compliance et de coûts.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/amazon-cloudwatch-centralization-tag-propogation/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "bedrock-agentcore-runtime",
+          "tag": "notable",
+          "date": "19 Aug 2026",
+          "title": {
+            "es": "Bedrock AgentCore suma compute persistente para multi-agente",
+            "en": "Bedrock AgentCore gains persistent compute for multi-agent workflows",
+            "fr": "Bedrock AgentCore ajoute du compute persistant multi-agents"
+          },
+          "body_html": {
+            "es": "<p>AWS extendió AgentCore con instancias de runtime pensadas para workflows largos y coordinación multi-agente. Es la respuesta de infra a un problema real: los agentes que corren horas no encajan en el modelo request/response de Lambda.</p>",
+            "en": "<p>AWS extended AgentCore with runtime instances aimed at long-running workflows and multi-agent coordination — an infra answer to a real problem: agents that run for hours don't fit Lambda's request/response model.</p>",
+            "fr": "<p>AWS étend AgentCore avec des instances de runtime pour les workflows longs et la coordination multi-agents — les agents qui tournent des heures ne rentrent pas dans le modèle request/response de Lambda.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/aws-bedrock-agentcore-runtime/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "logto-tunnel-traversal",
+      "updates": [
+        {
+          "id": "logto-tunnel-traversal",
+          "tag": "security",
+          "date": "19 Aug 2026",
+          "title": {
+            "es": "logto-tunnel sirve archivos fuera de --experience-path (CVSS 8.7)",
+            "en": "logto-tunnel serves files outside --experience-path (CVSS 8.7)",
+            "fr": "logto-tunnel sert des fichiers hors de --experience-path (CVSS 8.7)"
+          },
+          "body_html": {
+            "es": "<p>Path traversal de severidad <strong>alta (8.7)</strong> en el tunnel de Logto: se pueden leer archivos fuera del directorio configurado con <code>--experience-path</code>. Si lo corrés para customizar la sign-in experience, actualizá ya.</p>",
+            "en": "<p><strong>High severity (8.7)</strong> path traversal in the Logto tunnel: files outside the directory set by <code>--experience-path</code> can be served. If you run it to customize the sign-in experience, patch now.</p>",
+            "fr": "<p>Path traversal de sévérité <strong>haute (8.7)</strong> dans le tunnel Logto : des fichiers hors du répertoire <code>--experience-path</code> peuvent être servis. Mettez à jour immédiatement.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-rxjr-6c9q-h67x", "label": "github.com/advisories" }
+        },
+        {
+          "id": "buildkit-dos",
+          "tag": "security",
+          "date": "19 Aug 2026",
+          "title": {
+            "es": "BuildKit: DoS por parsing de grupos sin límite",
+            "en": "BuildKit: runtime DoS via unbounded group parsing",
+            "fr": "BuildKit : DoS via parsing de groupes non borné"
+          },
+          "body_html": {
+            "es": "<p>Segunda advisory de BuildKit del día (CVSS 2.3, baja): parsing de grupos sin cota que puede degradar el runtime. Menor, pero si vas a actualizar por el bypass de Seccomp, te llevás las dos de una.</p>",
+            "en": "<p>Second BuildKit advisory of the day (CVSS 2.3, low): unbounded group parsing can degrade the runtime. Minor, but if you're patching for the Seccomp bypass anyway, you get both.</p>",
+            "fr": "<p>Deuxième advisory BuildKit du jour (CVSS 2.3, faible) : parsing de groupes non borné pouvant dégrader le runtime. Corrigé avec le contournement Seccomp.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-72x6-4j93-7w86", "label": "github.com/advisories" }
+        },
+        {
+          "id": "contentful-mcp-ssrf",
+          "tag": "security",
+          "date": "19 Aug 2026",
+          "title": {
+            "es": "Contentful MCP Server: el LLM podía redirigir tu PAT a un host atacante",
+            "en": "Contentful MCP Server: LLM-controlled host/proxy can redirect your PAT",
+            "fr": "Contentful MCP Server : le LLM pouvait rediriger votre PAT"
+          },
+          "body_html": {
+            "es": "<p>CVSS <strong>7.7</strong>: las tools <code>export_space</code>/<code>import_space</code> pasaban argumentos <code>host</code> y <code>proxy</code> controlados por el LLM directo al cliente de la CMA, mandando el <strong>PAT del server a un endpoint del atacante</strong>. Regla de oro: ningún argumento generado por un modelo debería definir a qué host viaja tu credencial.</p>",
+            "en": "<p>CVSS <strong>7.7</strong>: the <code>export_space</code>/<code>import_space</code> tools passed LLM-controlled <code>host</code> and <code>proxy</code> args straight to the CMA client, sending the <strong>server PAT to an attacker-controlled endpoint</strong>. Golden rule: no model-generated argument should decide which host your credential travels to.</p>",
+            "fr": "<p>CVSS <strong>7.7</strong> : les tools <code>export_space</code>/<code>import_space</code> passaient les arguments <code>host</code> et <code>proxy</code> contrôlés par le LLM au client CMA, envoyant le <strong>PAT du serveur vers un endpoint attaquant</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-2xhg-73j7-rrgx", "label": "github.com/advisories" }
+        },
+        {
+          "id": "geoserver-ssti",
+          "tag": "security",
+          "date": "19 Aug 2026",
+          "title": {
+            "es": "GeoServer: SSTI en templates FreeMarker (CVSS 7.2)",
+            "en": "GeoServer: SSTI in FreeMarker template processing (CVSS 7.2)",
+            "fr": "GeoServer : SSTI dans les templates FreeMarker (CVSS 7.2)"
+          },
+          "body_html": {
+            "es": "<p>Server-Side Template Injection al procesar templates FreeMarker. El clásico recordatorio: los motores de templates que evalúan expresiones son ejecución de código con otro nombre — nunca les des input de usuario sin sandbox.</p>",
+            "en": "<p>Server-Side Template Injection while processing FreeMarker templates. The usual reminder: expression-evaluating template engines are code execution by another name — never feed them user input without a sandbox.</p>",
+            "fr": "<p>Server-Side Template Injection lors du traitement des templates FreeMarker. Un moteur de templates qui évalue des expressions, c'est de l'exécution de code déguisée.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-wf6j-gr27-g7ch", "label": "github.com/advisories" }
+        },
+        {
+          "id": "langgraph-authz",
+          "tag": "security",
+          "date": "19 Aug 2026",
+          "title": {
+            "es": "langgraph-api: autorización incompleta y webhooks relativos",
+            "en": "langgraph-api: incomplete authorization and relative webhook targets",
+            "fr": "langgraph-api : autorisation incomplète et webhooks relatifs"
+          },
+          "body_html": {
+            "es": "<p>Dos advisories medias (CVSS 5.9) en LangGraph Server: autorización incompleta de assistants al crear runs, y <strong>webhooks con target relativo</strong> que alcanzan rutas in-process sin autenticación. Si exponés LangGraph Server, revisá ambas.</p>",
+            "en": "<p>Two medium advisories (CVSS 5.9) in LangGraph Server: incomplete assistant authorization on run creation, and <strong>relative webhook targets</strong> that can reach in-process routes with no authentication. Check both if you expose LangGraph Server.</p>",
+            "fr": "<p>Deux advisories moyennes (CVSS 5.9) dans LangGraph Server : autorisation incomplète des assistants à la création de runs et <strong>webhooks relatifs</strong> atteignant des routes in-process sans authentification.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-2c9q-c2q9-qgqv", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "sveltekit-3-next24",
+      "updates": [
+        {
+          "id": "sveltekit-3-next24",
+          "tag": "beta",
+          "date": "20 Aug 2026",
+          "title": {
+            "es": "SvelteKit 3.0.0-next.24 con adapters Vercel y Netlify",
+            "en": "SvelteKit 3.0.0-next.24 with Vercel and Netlify adapters",
+            "fr": "SvelteKit 3.0.0-next.24 avec adapters Vercel et Netlify"
+          },
+          "body_html": {
+            "es": "<p>Nueva next de la línea 3.0, acompañada por <code>@sveltejs/adapter-vercel@7.0.0-next.7</code> y <code>adapter-netlify@7.0.0-next.9</code>. Los adapters se mueven al ritmo del core: si probás la next, alineá las tres versiones.</p>",
+            "en": "<p>Another 3.0 next release, shipping alongside <code>@sveltejs/adapter-vercel@7.0.0-next.7</code> and <code>adapter-netlify@7.0.0-next.9</code>. Adapters move in lockstep with core — align all three if you're testing the next line.</p>",
+            "fr": "<p>Nouvelle next de la ligne 3.0, avec <code>@sveltejs/adapter-vercel@7.0.0-next.7</code> et <code>adapter-netlify@7.0.0-next.9</code>. Alignez les trois versions.</p>"
+          },
+          "source": { "url": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs%2Fkit%403.0.0-next.24", "label": "github.com" }
+        },
+        {
+          "id": "astro-724",
+          "tag": "patch",
+          "date": "19 Aug 2026",
+          "title": {
+            "es": "Astro 7.2.4 con integraciones actualizadas",
+            "en": "Astro 7.2.4 with refreshed integrations",
+            "fr": "Astro 7.2.4 avec intégrations mises à jour"
+          },
+          "body_html": {
+            "es": "<p>Patch del core más un barrido de integraciones: <code>@astrojs/node@11.1.4</code>, <code>vercel@11.0.7</code>, <code>netlify@8.2.3</code>, <code>react@6.0.4</code>, <code>preact@6.0.4</code> y <code>mdx@7.0.7</code>. Upgrade de rutina, bajo riesgo.</p>",
+            "en": "<p>A core patch plus an integration sweep: <code>@astrojs/node@11.1.4</code>, <code>vercel@11.0.7</code>, <code>netlify@8.2.3</code>, <code>react@6.0.4</code>, <code>preact@6.0.4</code> and <code>mdx@7.0.7</code>. Routine, low-risk upgrade.</p>",
+            "fr": "<p>Patch du core plus une mise à jour des intégrations : <code>@astrojs/node@11.1.4</code>, <code>vercel@11.0.7</code>, <code>netlify@8.2.3</code>, <code>react@6.0.4</code>, <code>preact@6.0.4</code> et <code>mdx@7.0.7</code>.</p>"
+          },
+          "source": { "url": "https://github.com/withastro/astro/releases/tag/astro%407.2.4", "label": "github.com" }
+        },
+        {
+          "id": "tanstack-20260819",
+          "tag": "minor",
+          "date": "19 Aug 2026",
+          "title": {
+            "es": "TanStack Router/Start: release del 19 de agosto",
+            "en": "TanStack Router/Start: August 19 release train",
+            "fr": "TanStack Router/Start : train de release du 19 août"
+          },
+          "body_html": {
+            "es": "<p>Otro tren de releases del monorepo: <code>@tanstack/vue-router@1.170.28</code>, <code>vue-start@1.168.45</code>, <code>start-server-core@1.169.30</code> y compañía. Ecosistema Vue de Start avanzando en paralelo al de React.</p>",
+            "en": "<p>Another monorepo release train: <code>@tanstack/vue-router@1.170.28</code>, <code>vue-start@1.168.45</code>, <code>start-server-core@1.169.30</code> and friends. Start's Vue ecosystem moving in parallel with the React one.</p>",
+            "fr": "<p>Nouveau train de releases du monorepo : <code>@tanstack/vue-router@1.170.28</code>, <code>vue-start@1.168.45</code>, <code>start-server-core@1.169.30</code> et consorts.</p>"
+          },
+          "source": { "url": "https://github.com/TanStack/router/releases/tag/release-2026-08-19-1138", "label": "github.com" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Los MCP servers son la nueva superficie de ataque del backend: Contentful, SearXNG y langgraph-api publicaron advisories el mismo día, todas por confiar en argumentos generados por el modelo. Tratá cada arg de una tool como input hostil.",
+      "en": "MCP servers are the backend's new attack surface: Contentful, SearXNG and langgraph-api all published advisories the same day, every one of them from trusting model-generated arguments. Treat every tool arg as hostile input.",
+      "fr": "Les serveurs MCP sont la nouvelle surface d'attaque du backend : Contentful, SearXNG et langgraph-api ont publié des advisories le même jour, toutes liées à des arguments générés par le modèle."
+    },
+    {
+      "es": "Semana de release candidates en infra: Kubernetes 1.37, Istio 1.31 y Terraform 1.16 entraron en RC casi juntos. Es la ventana para validar en staging; después del GA, el costo del bug lo pagás en producción.",
+      "en": "Infra RC week: Kubernetes 1.37, Istio 1.31 and Terraform 1.16 all hit release candidate within hours of each other. This is the window to validate in staging — after GA, bugs get paid for in production.",
+      "fr": "Semaine des release candidates côté infra : Kubernetes 1.37, Istio 1.31 et Terraform 1.16 sont passés en RC à quelques heures d'intervalle. C'est la fenêtre pour valider en staging."
+    },
+    {
+      "es": "React Router v8 se define a sí misma como aburrida y hace lo importante: ESM-only, middleware por defecto y EOL para v6 y Remix v2. Un release aburrido bien ejecutado vale más que diez features nuevos.",
+      "en": "React Router v8 calls itself deliberately boring and does the important thing anyway: ESM-only, middleware by default, EOL for v6 and Remix v2. A well-executed boring release beats ten new features.",
+      "fr": "React Router v8 se qualifie d'ennuyeuse et fait l'essentiel : ESM-only, middleware par défaut, fin de vie de v6 et Remix v2. Une release ennuyeuse bien exécutée vaut mieux que dix nouveautés."
+    }
+  ]
+}

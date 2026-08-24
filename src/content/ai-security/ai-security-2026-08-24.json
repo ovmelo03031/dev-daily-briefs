@@ -1,0 +1,310 @@
+{
+  "title": {
+    "es": "AI Security — 24 Ago 2026",
+    "en": "AI Security — 24 Aug 2026",
+    "fr": "AI Security — 24 Août 2026"
+  },
+  "description": {
+    "es": "Grok cae por instrucciones cifradas, Omnigent suma cuatro CVEs de escape de agente, y un backdoor de npm llega con capa de comandos LLM.",
+    "en": "Grok falls for encrypted instructions, Omnigent racks up four agent-escape CVEs, and an npm backdoor ships with an LLM command layer.",
+    "fr": "Grok tombe face à des instructions chiffrées, Omnigent accumule quatre CVE d'évasion d'agent, et une backdoor npm embarque une couche de commandes LLM."
+  },
+  "pubDate": "2026-08-24",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "Grok descifra y ejecuta payloads ocultos",
+        "en": "Grok decrypts and runs hidden payloads",
+        "fr": "Grok déchiffre et exécute des payloads cachés"
+      },
+      "anchor": "grok-crypto-context-injection",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "Omnigent < 0.3.0: cuatro CVEs, una 9.0",
+        "en": "Omnigent < 0.3.0: four CVEs, one at 9.0",
+        "fr": "Omnigent < 0.3.0 : quatre CVE, une à 9.0"
+      },
+      "anchor": "cve-2026-62674-omnigent-bundle-rce",
+      "icon": "lucide:shield-alert"
+    },
+    {
+      "text": {
+        "es": "14 paquetes npm traen RedC2 con Red Agent",
+        "en": "14 npm packages carry RedC2 with Red Agent",
+        "fr": "14 paquets npm embarquent RedC2 avec Red Agent"
+      },
+      "anchor": "redc2-npm-llm-backdoor",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "Slopsquatting: el agente sugirió malware",
+        "en": "Slopsquatting: the agent suggested malware",
+        "fr": "Slopsquatting : l'agent a suggéré un malware"
+      },
+      "anchor": "slopsquatting-near-miss",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": {
+        "es": "GLM-5.3 halló 2.436 vulnerabilidades reales",
+        "en": "GLM-5.3 found 2,436 real vulnerabilities",
+        "fr": "GLM-5.3 a trouvé 2 436 vraies vulnérabilités"
+      },
+      "anchor": "glm-53-offensive-model",
+      "icon": "lucide:radiation"
+    },
+    {
+      "text": {
+        "es": "17M acciones ofensivas, 50+ zero-days",
+        "en": "17M offensive actions, 50+ zero-days",
+        "fr": "17M d'actions offensives, 50+ zero-days"
+      },
+      "anchor": "agentic-red-teaming-advisory",
+      "icon": "lucide:siren"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-incidents",
+      "name": "Top Incidents",
+      "theme": "top-incidents",
+      "icon_emoji": "🚨",
+      "anchor": "top-incidents",
+      "updates": [
+        {
+          "id": "grok-crypto-context-injection",
+          "tag": "high",
+          "title": {
+            "es": "Cryptographic Context Injection: una página web se lleva tu historial de Grok",
+            "en": "Cryptographic Context Injection: a web page walks off with your Grok chat history",
+            "fr": "Cryptographic Context Injection : une page web repart avec votre historique Grok"
+          },
+          "body_html": {
+            "es": "<p>Investigadores de Adversa AI, con Rony Utevsky a la cabeza, publicaron un ataque contra el chat web de Grok (Grok 4.5 Fast) que evita por completo el escáner de guardrails. El truco es simple y por eso duele: el atacante deja en la página instrucciones maliciosas <strong>cifradas</strong> junto con la clave de descifrado. El escáner no puede leer texto cifrado, así que lo deja pasar; después el modelo descifra el payload dentro de su propio sandbox de ejecución y confía en el resultado como si fuera suyo. Utevsky lo llama <em>trust laundering</em>.</p><p>El PoC exfiltra el historial de chat completo —nombre, ubicación, tier de suscripción y transcripciones enteras— pegándolo como parámetros de una URL. Ojo con esto: xAI fue notificada el 3 de junio de 2026 por contacto directo y por el bug bounty, y al 19 de agosto seguía sin patch.</p>",
+            "en": "<p>Adversa AI researchers, led by Rony Utevsky, published an attack against Grok web chat (running Grok 4.5 Fast) that walks straight past the guardrail scanner. The trick is simple, which is exactly why it stings: the attacker plants <strong>encrypted</strong> malicious instructions on the page alongside the decryption key. The scanner cannot read encrypted text, so it lets it through; the model then decrypts the payload inside its own code execution sandbox and trusts the result as its own. Utevsky calls it <em>trust laundering</em>.</p><p>The proof of concept exfiltrates the full chat history — name, location, subscription tier and complete transcripts — by appending it to a URL as parameters. xAI was notified on 3 June 2026 via direct contact and its bug bounty programme; as of 19 August the flaw remained unpatched.</p>",
+            "fr": "<p>Des chercheurs d'Adversa AI, menés par Rony Utevsky, ont publié une attaque contre le chat web de Grok (Grok 4.5 Fast) qui contourne entièrement le scanner de garde-fous. L'attaquant place sur la page des instructions malveillantes <strong>chiffrées</strong> accompagnées de la clé de déchiffrement. Le scanner ne peut pas lire du texte chiffré et le laisse passer ; le modèle déchiffre ensuite le payload dans son propre bac à sable d'exécution et fait confiance au résultat. Utevsky parle de <em>trust laundering</em>.</p><p>Le PoC exfiltre l'historique complet — nom, localisation, niveau d'abonnement et transcriptions entières — en l'ajoutant aux paramètres d'une URL. xAI a été prévenue le 3 juin 2026 ; au 19 août, la faille n'était toujours pas corrigée.</p>"
+          },
+          "date": "20 Aug 2026",
+          "source": {
+            "url": "https://www.theregister.com/ai-and-ml/2026/08/20/grok_chat_duped_into_swallowing_injected_instructions/5290019",
+            "label": "The Register"
+          }
+        },
+        {
+          "id": "redc2-npm-llm-backdoor",
+          "tag": "breach",
+          "title": {
+            "es": "14 paquetes npm troyanizados entregan RedC2 4.0 con una capa de comandos LLM",
+            "en": "14 trojanized npm packages deliver RedC2 4.0 with an LLM command layer",
+            "fr": "14 paquets npm trojanisés livrent RedC2 4.0 avec une couche de commandes LLM"
+          },
+          "body_html": {
+            "es": "<p>TrendAI y el investigador Aliakbar Zahravi identificaron 14 paquetes npm maliciosos —<code>streak-metrics-math</code>, <code>kit-map-vim</code>, <code>streak-map-cache</code>, <code>streak-map-kit</code>, <code>map-streak-kit</code> y compañía— que se hacen pasar por librerías de calendario y utilidades. No necesitan hooks de instalación: alcanza con importar el paquete para que ejecute binarios ELF embebidos. Una sola dependencia transitiva basta.</p><p>El payload es RedC2 4.0, un backdoor de Linux con shell interactiva, reconocimiento, robo de claves SSH y credenciales del browser, persistencia, ejecución de ELF en memoria, proxy SOCKS5 y pivoting de red. La parte nueva es <strong>Red Agent</strong>: una capa de ejecución de comandos respaldada por LLM que traduce prompts en lenguaje natural a comandos del framework, bajando la barrera operativa para atacantes de cualquier nivel.</p>",
+            "en": "<p>TrendAI and researcher Aliakbar Zahravi identified 14 malicious npm packages — <code>streak-metrics-math</code>, <code>kit-map-vim</code>, <code>streak-map-cache</code>, <code>streak-map-kit</code>, <code>map-streak-kit</code> and siblings — masquerading as calendar and utility libraries. They need no install hooks: importing the package is enough to execute bundled Linux ELF binaries. A single transitive dependency is sufficient.</p><p>The payload is RedC2 4.0, a Linux backdoor offering interactive shell access, system reconnaissance, SSH key and browser credential theft, persistence, in-memory ELF execution, SOCKS5 proxying and network pivoting. The new part is <strong>Red Agent</strong>: an LLM-backed command execution layer that turns natural-language prompts into framework commands, lowering the operational barrier for attackers of any skill level.</p>",
+            "fr": "<p>TrendAI et le chercheur Aliakbar Zahravi ont identifié 14 paquets npm malveillants — <code>streak-metrics-math</code>, <code>kit-map-vim</code>, <code>streak-map-cache</code> et consorts — se faisant passer pour des bibliothèques de calendrier et d'utilitaires. Aucun hook d'installation nécessaire : importer le paquet suffit à exécuter des binaires ELF embarqués. Une seule dépendance transitive suffit.</p><p>Le payload est RedC2 4.0, une backdoor Linux avec shell interactif, reconnaissance, vol de clés SSH et d'identifiants de navigateur, persistance, exécution ELF en mémoire, proxy SOCKS5 et pivot réseau. La nouveauté est <strong>Red Agent</strong>, une couche d'exécution adossée à un LLM qui traduit des prompts en langage naturel en commandes du framework.</p>"
+          },
+          "date": "21 Aug 2026",
+          "source": {
+            "url": "https://thehackernews.com/2026/08/14-trojanized-npm-packages-drop-redc2.html",
+            "label": "The Hacker News"
+          }
+        }
+      ]
+    },
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "cve-2026-62674-omnigent-bundle-rce",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-62674 — Omnigent < 0.3.0: reemplazá el agent bundle compartido y ejecutás lo que quieras (9.0)",
+            "en": "CVE-2026-62674 — Omnigent < 0.3.0: swap the shared agent bundle, run whatever you like (9.0)",
+            "fr": "CVE-2026-62674 — Omnigent < 0.3.0 : remplacez le bundle d'agent partagé et exécutez ce que vous voulez (9.0)"
+          },
+          "body_html": {
+            "es": "<p>El endpoint <code>PUT /sessions/{session_id}/agent</code> del framework de agentes Omnigent valida mal los permisos. Un usuario autenticado con acceso de edición a una sesión puede reemplazar el agent bundle compartido, agregarle un servidor MCP por stdio y hacer que las sesiones posteriores lancen un comando controlado por el atacante.</p><p>El comando corre con los permisos del proceso runner: credenciales, datos del workspace y servicios internos quedan expuestos. Privilegio requerido bajo, vector de red, impacto alto en confidencialidad, integridad y disponibilidad. Actualizá a 0.3.0, restringí el permiso de edición de sesiones a administradores de confianza y auditá los bundles compartidos que ya existan.</p>",
+            "en": "<p>The <code>PUT /sessions/{session_id}/agent</code> endpoint in the Omnigent agent framework validates permissions improperly. An authenticated user with edit access to a session can replace the shared agent bundle, add a stdio MCP server, and cause later sessions to launch an attacker-controlled command.</p><p>The command executes with runner process permissions, exposing credentials, workspace data and internal services. Low privileges required, network vector, high confidentiality, integrity and availability impact. Upgrade to 0.3.0, restrict session edit permissions to trusted administrators, and audit existing shared bundles for unauthorized modifications.</p>",
+            "fr": "<p>Le point de terminaison <code>PUT /sessions/{session_id}/agent</code> du framework d'agents Omnigent valide mal les permissions. Un utilisateur authentifié disposant d'un accès en édition peut remplacer le bundle d'agent partagé, y ajouter un serveur MCP en stdio et faire lancer par les sessions suivantes une commande contrôlée par l'attaquant.</p><p>La commande s'exécute avec les permissions du processus runner, exposant identifiants, données de workspace et services internes. Mettez à jour vers 0.3.0 et auditez les bundles partagés existants.</p>"
+          },
+          "date": "21 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-62674",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-62677-omnigent-path-traversal",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-62677 — Omnigent: el campo os_env.cwd se guarda tal cual y se escapa del workspace (8.8)",
+            "en": "CVE-2026-62677 — Omnigent: the os_env.cwd field is stored verbatim and escapes the workspace (8.8)",
+            "fr": "CVE-2026-62677 — Omnigent : le champ os_env.cwd est stocké tel quel et sort du workspace (8.8)"
+          },
+          "body_html": {
+            "es": "<p>Omnigent almacena el campo <code>os_env.cwd</code> de los agent bundles subidos sin validarlo, así que un atacante autenticado puede poner rutas absolutas o con traversal (CWE-22). Con eso lee, escribe, edita y ejecuta archivos en todo el filesystem del host: secretos de entorno afuera y movimiento lateral servido.</p><p>La condición es que el runner tenga <code>OMNIGENT_RUNNER_WORKSPACE</code> sin setear. Fix: actualizar a 0.3.0, definir esa variable para forzar el aislamiento del workspace y limitar la subida de bundles a usuarios de confianza.</p>",
+            "en": "<p>Omnigent stores the <code>os_env.cwd</code> field from uploaded agent bundles verbatim without validation, so an authenticated attacker can set absolute or traversal paths (CWE-22). That grants read, write, edit and execute across the host filesystem — environment secrets exposed and lateral movement on a plate.</p><p>The precondition is a runner with <code>OMNIGENT_RUNNER_WORKSPACE</code> unset. Fix: upgrade to 0.3.0, set that environment variable to enforce workspace isolation, and restrict bundle uploads to trusted users.</p>",
+            "fr": "<p>Omnigent stocke le champ <code>os_env.cwd</code> des bundles d'agents téléversés sans validation : un attaquant authentifié peut donc définir des chemins absolus ou de traversée (CWE-22), et lire, écrire, modifier et exécuter des fichiers sur tout le système hôte.</p><p>La condition est un runner dont <code>OMNIGENT_RUNNER_WORKSPACE</code> n'est pas défini. Correctif : passer à 0.3.0 et définir cette variable.</p>"
+          },
+          "date": "21 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-62677",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-62676-omnigent-shell-parser",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-62676 — Omnigent: el parser de shell no ve setsid ni nice, y la política se cae (7.1)",
+            "en": "CVE-2026-62676 — Omnigent: the shell parser misses setsid and nice, and the policy collapses (7.1)",
+            "fr": "CVE-2026-62676 — Omnigent : le parseur shell ignore setsid et nice, la politique s'effondre (7.1)"
+          },
+          "body_html": {
+            "es": "<p>El parser de comandos en <code>policies/builtins/_shell.py</code> no reconoce flags de intérprete combinados, los wrappers <code>timeout</code>, <code>nice</code>, <code>setsid</code> y <code>stdbuf</code>, las sustituciones de comando ni un operador de control en background. Cuando esas formas pasan sin detectarse, las políticas que restringen operaciones de Git y acceso al workspace dejan pasar el comando igual.</p><p>Clásico CWE-184 (lista incompleta de entradas prohibidas). Un usuario autenticado —o un agente con prompt injection encima— puede pushear código a repos o ramas no autorizadas y escaparse del confinamiento del workspace. Actualizá a 0.3.0 y mirá los push de los agentes.</p>",
+            "en": "<p>The command parser in <code>policies/builtins/_shell.py</code> fails to recognize combined interpreter flags, the <code>timeout</code>, <code>nice</code>, <code>setsid</code> and <code>stdbuf</code> wrappers, command substitutions, and a single background control operator. When those forms slip past detection, policies restricting Git operations and workspace access wave the command through anyway.</p><p>Textbook CWE-184 (incomplete list of disallowed inputs). An authenticated user — or a prompt-injected agent — can push code to unauthorized repositories or branches and escape workspace confinement. Upgrade to 0.3.0 and monitor agent Git push activity.</p>",
+            "fr": "<p>Le parseur de commandes de <code>policies/builtins/_shell.py</code> ne reconnaît ni les flags d'interpréteur combinés, ni les wrappers <code>timeout</code>, <code>nice</code>, <code>setsid</code> et <code>stdbuf</code>, ni les substitutions de commande. Les politiques restreignant Git et l'accès au workspace laissent alors passer la commande.</p><p>CWE-184 typique. Un utilisateur authentifié — ou un agent victime de prompt injection — peut pousser du code vers des dépôts non autorisés. Passez à 0.3.0.</p>"
+          },
+          "date": "21 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-62676",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-71494-infracost-token-leak",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-71494 — Infracost < 0.10.45: un pull request se lleva tu token de Terraform Cloud (5.9)",
+            "en": "CVE-2026-71494 — Infracost < 0.10.45: a pull request walks off with your Terraform Cloud token (5.9)",
+            "fr": "CVE-2026-71494 — Infracost < 0.10.45 : une pull request emporte votre token Terraform Cloud (5.9)"
+          },
+          "body_html": {
+            "es": "<p>Infracost —usado habitualmente por agentes de coding para estimar costos de infraestructura— tiene un loader de variables remotas que arma el hostname de destino a partir de input de Terraform no confiable y le adjunta el token de Terraform Cloud o del registry sin validar a dónde va.</p><p>Quien controle el código Terraform o influya en el pipeline de CI —un pull request alcanza— puede redirigir el request a un host propio y quedarse con el token (CWE-522). Actualizá a 0.10.45 y limitá el loader a hosts de confianza validando el hostname antes de adjuntar credenciales.</p>",
+            "en": "<p>Infracost — routinely wired into AI coding agents for infrastructure cost estimates — has a remote variables loader that derives the destination hostname from untrusted Terraform input and attaches the Terraform Cloud or registry token without validating where it is going.</p><p>Anyone who controls the Terraform code or influences the CI pipeline — a pull request is enough — can redirect the request to an attacker-controlled host and walk off with the token (CWE-522). Upgrade to 0.10.45 and limit the loader to trusted hosts by validating destination hostnames before attaching tokens.</p>",
+            "fr": "<p>Infracost — souvent branché sur des agents de codage pour estimer les coûts d'infrastructure — possède un chargeur de variables distantes qui dérive le nom d'hôte de destination d'une entrée Terraform non fiable et y attache le token Terraform Cloud sans validation.</p><p>Quiconque contrôle le code Terraform ou influence le pipeline CI — une pull request suffit — peut rediriger la requête vers un hôte contrôlé et récupérer le token (CWE-522). Passez à 0.10.45.</p>"
+          },
+          "date": "21 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-71494",
+            "label": "OpenCVE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "supply-chain",
+      "name": "Supply Chain",
+      "theme": "supply-chain",
+      "icon_emoji": "📦",
+      "anchor": "supply-chain",
+      "updates": [
+        {
+          "id": "slopsquatting-near-miss",
+          "tag": "advisory",
+          "title": {
+            "es": "Slopsquatting en la práctica: un agente recomendó un paquete malicioso y casi entra",
+            "en": "Slopsquatting in practice: an agent recommended a malicious package and it nearly landed",
+            "fr": "Slopsquatting en pratique : un agent a recommandé un paquet malveillant, tout près d'être installé"
+          },
+          "body_html": {
+            "es": "<p>Sergiy Fitsak, managing director de Softjourn, contó el incidente: un agente de IA le recomendó a un ingeniero instalar un paquete que resultó ser malware. El patrón se llama <strong>slopsquatting</strong> y explota las alucinaciones del modelo — como lo explica Fitsak, los modelos inventan nombres de paquete que suenan plausibles pero no existen, y los atacantes ya se avivaron y registran paquetes reales con esos nombres inventados.</p><p>Lo que salvó a Softjourn fue una política de verificación, no una herramienta: el ingeniero abrió el repo en GitHub y vio las señales — muy pocas descargas y fecha de creación de días atrás. La conclusión es incómoda pero clara: revisá el código fuente y las métricas de descarga antes de instalar lo que te sugiere el agente, aunque la tarea parezca rutinaria.</p>",
+            "en": "<p>Sergiy Fitsak, managing director at Softjourn, shared the incident: an AI agent recommended that an engineer install a package that turned out to be malware. The pattern is called <strong>slopsquatting</strong> and it exploits model hallucinations — as Fitsak puts it, models invent package names that sound plausible but do not exist, and attackers have caught on and now register real packages under those invented names.</p><p>What saved Softjourn was a verification policy, not a tool: the engineer opened the repo on GitHub and spotted the red flags — very few downloads and a creation date only days earlier. The takeaway is uncomfortable but clear: review the source and the download metrics before installing whatever the agent suggests, even for routine work.</p>",
+            "fr": "<p>Sergiy Fitsak, directeur général de Softjourn, raconte l'incident : un agent IA a recommandé à un ingénieur d'installer un paquet qui s'est révélé être un malware. Ce schéma, le <strong>slopsquatting</strong>, exploite les hallucinations des modèles — ceux-ci inventent des noms de paquets plausibles, et les attaquants enregistrent désormais de vrais paquets sous ces noms inventés.</p><p>Ce qui a sauvé Softjourn est une politique de vérification : l'ingénieur a ouvert le dépôt sur GitHub et repéré les signaux — très peu de téléchargements et une date de création vieille de quelques jours seulement.</p>"
+          },
+          "date": "20 Aug 2026",
+          "source": {
+            "url": "https://www.theregister.com/security/2026/08/20/ai-agent-suggested-installing-a-malware-package-engineer-almost-took-its-advice/5289849",
+            "label": "The Register"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "glm-53-offensive-model",
+          "tag": "research",
+          "title": {
+            "es": "GLM-5.3: el modelo de Z.ai halló 2.436 vulnerabilidades en 269 proyectos reales",
+            "en": "GLM-5.3: Z.ai's model found 2,436 vulnerabilities across 269 real projects",
+            "fr": "GLM-5.3 : le modèle de Z.ai a trouvé 2 436 vulnérabilités dans 269 projets réels"
+          },
+          "body_html": {
+            "es": "<p>La startup china Z.ai lanzó GLM-5.3, un modelo orientado al descubrimiento y la explotación de vulnerabilidades. Es state of the art en CyberGym para descubrimiento y fuerte en planificación de explotación multi-etapa.</p><p>Z.ai lo probó junto con equipos de seguridad chinos contra codebases reales: <strong>2.436 vulnerabilidades en 269 proyectos</strong>, de las cuales 1.097 son de severidad media a alta, repartidas entre kernels de sistema, sistemas operativos, browsers y protocolos de red. Algunas llevaban décadas sin detectarse. El matiz que importa: en los benchmarks GLM-5.3 todavía queda por detrás de Mythos 5 de Anthropic a la hora de convertir un hallazgo en un exploit funcional. Encontrar no es explotar — pero la distancia se está achicando.</p>",
+            "en": "<p>Chinese startup Z.ai released GLM-5.3, a model aimed at vulnerability discovery and exploitation. It is state of the art on CyberGym for discovery and notably strong at multi-stage exploitation planning.</p><p>Z.ai tested it with Chinese security teams against real codebases: <strong>2,436 vulnerabilities across 269 projects</strong>, 1,097 of them medium-to-high severity, spanning system kernels, operating systems, browsers and network protocols. Some had gone undetected for decades. The caveat that matters: benchmarks show GLM-5.3 still trails Anthropic's Mythos 5 at converting a finding into a working exploit. Finding is not exploiting — but the gap is narrowing.</p>",
+            "fr": "<p>La startup chinoise Z.ai a publié GLM-5.3, un modèle dédié à la découverte et à l'exploitation de vulnérabilités, état de l'art sur CyberGym pour la découverte.</p><p>Z.ai l'a testé avec des équipes de sécurité chinoises sur de vrais codebases : <strong>2 436 vulnérabilités dans 269 projets</strong>, dont 1 097 de sévérité moyenne à élevée, couvrant noyaux, systèmes d'exploitation, navigateurs et protocoles réseau. Certaines passaient inaperçues depuis des décennies. Nuance importante : GLM-5.3 reste derrière Mythos 5 d'Anthropic pour transformer une découverte en exploit fonctionnel.</p>"
+          },
+          "date": "20 Aug 2026",
+          "source": {
+            "url": "https://thehackernews.com/2026/08/threatsday-gogs-100-rce-n8n-workflow-to.html",
+            "label": "The Hacker News"
+          }
+        }
+      ]
+    },
+    {
+      "id": "advisories",
+      "name": "Vendor Advisories",
+      "theme": "advisories",
+      "icon_emoji": "📢",
+      "anchor": "advisories",
+      "updates": [
+        {
+          "id": "agentic-red-teaming-advisory",
+          "tag": "advisory",
+          "title": {
+            "es": "17 millones de acciones ofensivas y 50+ zero-days: el red teaming agéntico ya no es un experimento",
+            "en": "17 million offensive actions and 50+ zero-days: agentic red teaming is no longer an experiment",
+            "fr": "17 millions d'actions offensives et 50+ zero-days : le red teaming agentique n'est plus une expérience"
+          },
+          "body_html": {
+            "es": "<p>Un ejercicio de ataque controlado de Armadin y Tenex.ai generó <strong>17 millones de acciones ofensivas</strong>, descubrió 38 rutas de ataque validadas, produjo 238 hallazgos de seguridad e identificó más de 50 zero-days con ejecución remota de código en los entornos de clientes probados. El equivalente humano: unas 2.400 horas de analista, cerca de cuatro meses.</p><p>Matt Hartman, ex jefe de ciber interino de CISA, resume el riesgo: hay un riesgo enorme asociado a la IA agéntica y a las identidades de máquina. Rob Joyce, ex jefe de ciber de la NSA, agrega el argumento incómodo: te van a hacer red teaming igual, mejor que los resultados los controles vos. Evan Peña, cofundador de Armadin, lo cierra sin vueltas — los agentes no duermen ni se toman vacaciones. Jay Bavisi (EC-Council) declara obsoleto el pentesting anual frente a ataques acelerados por IA.</p><p>La superficie nueva son los canales de integración de datos y las identidades no humanas, que esquivan las políticas de seguridad tradicionales.</p>",
+            "en": "<p>A controlled attack exercise by Armadin and Tenex.ai generated <strong>17 million offensive actions</strong>, discovered 38 validated attack paths, produced 238 security findings and identified over 50 zero-days enabling remote code execution across the customer environments tested. The human equivalent: roughly 2,400 analyst hours, about four months.</p><p>Matt Hartman, former CISA acting cyber chief, sums up the risk: there is tremendous risk associated with agentic AI and machine identities. Rob Joyce, former NSA cyber boss, adds the uncomfortable argument — you will be red teamed regardless, so better to control the results internally. Evan Peña of Armadin puts it plainly: agents don't sleep and they don't take holidays. Jay Bavisi of EC-Council calls annual pen-testing obsolete against AI-accelerated attacks.</p><p>The new surface is data-integration channels and non-human identities, which sidestep traditional security policy.</p>",
+            "fr": "<p>Un exercice d'attaque contrôlé mené par Armadin et Tenex.ai a généré <strong>17 millions d'actions offensives</strong>, découvert 38 chemins d'attaque validés, produit 238 constats de sécurité et identifié plus de 50 zero-days permettant l'exécution de code à distance. Équivalent humain : environ 2 400 heures d'analyste, soit près de quatre mois.</p><p>Matt Hartman, ex-responsable cyber par intérim de la CISA, résume le risque lié à l'IA agentique et aux identités machine. Rob Joyce, ex-patron cyber de la NSA, ajoute qu'on vous fera du red teaming de toute façon. Evan Peña (Armadin) le dit simplement : les agents ne dorment pas et ne prennent pas de vacances.</p><p>La nouvelle surface d'attaque : les canaux d'intégration de données et les identités non humaines, qui contournent les politiques de sécurité traditionnelles.</p>"
+          },
+          "date": "22 Aug 2026",
+          "source": {
+            "url": "https://www.theregister.com/security/2026/08/22/if-youre-not-using-ai-to-attack-your-own-systems-your-adversaries-will/5291346",
+            "label": "The Register"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El agent bundle es el nuevo formato de ejecución peligroso. Tres de los cuatro CVEs de Omnigent nacen del mismo lugar: un bundle es código, configuración de MCP y rutas de filesystem en un solo artefacto compartido, y se lo trata como si fuera un archivo de datos.",
+      "en": "The agent bundle is the new dangerous executable format. Three of the four Omnigent CVEs come from the same place: a bundle is code, MCP configuration and filesystem paths in one shared artifact, and it gets treated as if it were a data file.",
+      "fr": "Le bundle d'agent est le nouveau format exécutable dangereux. Trois des quatre CVE Omnigent viennent du même endroit : un bundle mêle code, configuration MCP et chemins de fichiers dans un seul artefact partagé, traité comme un simple fichier de données."
+    },
+    {
+      "es": "Los guardrails que inspeccionan texto plano fallan contra cualquier codificación. Cryptographic Context Injection no rompe el filtro de Grok: lo esquiva pasándole algo que no puede leer y dejando que el propio modelo haga la decodificación adentro del sandbox.",
+      "en": "Guardrails that inspect plaintext fail against any encoding. Cryptographic Context Injection does not break Grok's filter: it sidesteps it by handing over something unreadable and letting the model do the decoding itself, inside the sandbox.",
+      "fr": "Les garde-fous qui inspectent du texte en clair échouent face à tout encodage. Cryptographic Context Injection ne casse pas le filtre de Grok : il le contourne en lui donnant quelque chose d'illisible et en laissant le modèle décoder lui-même, dans le bac à sable."
+    },
+    {
+      "es": "El LLM ya no es solo el objetivo del ataque, es parte del tooling ofensivo. Red Agent dentro de RedC2 y GLM-5.3 apuntan a lo mismo: bajar la barrera de entrada para operar frameworks de C2 y para encontrar bugs a escala industrial.",
+      "en": "The LLM is no longer only the target of the attack, it is part of the offensive tooling. Red Agent inside RedC2 and GLM-5.3 point the same way: lowering the barrier to operating C2 frameworks and to finding bugs at industrial scale.",
+      "fr": "Le LLM n'est plus seulement la cible de l'attaque, il fait partie de l'outillage offensif. Red Agent dans RedC2 et GLM-5.3 vont dans le même sens : abaisser la barrière pour opérer des frameworks C2 et trouver des bugs à l'échelle industrielle."
+    },
+    {
+      "es": "La defensa que funcionó esta semana no fue técnica. Softjourn se salvó del slopsquatting por una política de verificación humana, no por una herramienta: mirar descargas y fecha de creación del repo antes de instalar lo que sugiere el agente.",
+      "en": "The defense that worked this week was not technical. Softjourn escaped slopsquatting through a human verification policy, not a tool: check download counts and repo creation date before installing whatever the agent suggests.",
+      "fr": "La défense qui a fonctionné cette semaine n'était pas technique. Softjourn a échappé au slopsquatting grâce à une politique de vérification humaine : contrôler le nombre de téléchargements et la date de création du dépôt avant d'installer ce que suggère l'agent."
+    }
+  ]
+}

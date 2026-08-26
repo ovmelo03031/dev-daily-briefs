@@ -1,0 +1,670 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 26 de agosto de 2026",
+    "en": "Backend & Fullstack — August 26, 2026",
+    "fr": "Backend & Fullstack — 26 août 2026"
+  },
+  "description": {
+    "es": "Dos RCE críticos sin autenticar en Next.js, Hono parchea tres agujeros, DuckDB 2.0 se vuelve cliente/servidor y Lambda estrena Node.js 26 en preview.",
+    "en": "Two critical unauthenticated RCEs in Next.js, Hono patches three holes, DuckDB 2.0 goes client/server, and Lambda previews Node.js 26.",
+    "fr": "Deux RCE critiques non authentifiées dans Next.js, Hono corrige trois failles, DuckDB 2.0 passe en client/serveur et Lambda teste Node.js 26."
+  },
+  "pubDate": "2026-08-26",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "Next.js: RCE sin auth, CVSS 9.5", "en": "Next.js: unauthenticated RCE, CVSS 9.5", "fr": "Next.js : RCE non authentifiée, CVSS 9.5" },
+      "anchor": "nextjs-avif-rce",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Hono 4.13.5 parchea tres fallos", "en": "Hono 4.13.5 patches three flaws", "fr": "Hono 4.13.5 corrige trois failles" },
+      "anchor": "hono-4-13-5",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "DuckDB 2.0 estrena modo cliente/servidor", "en": "DuckDB 2.0 ships client/server mode", "fr": "DuckDB 2.0 lance le mode client/serveur" },
+      "anchor": "duckdb-2-0",
+      "icon": "lucide:database"
+    },
+    {
+      "text": { "es": "Nuxt 4.5: SSR streaming y Vite 8", "en": "Nuxt 4.5: SSR streaming and Vite 8", "fr": "Nuxt 4.5 : streaming SSR et Vite 8" },
+      "anchor": "nuxt-4-5",
+      "icon": "lucide:server"
+    },
+    {
+      "text": { "es": "Lambda: Node.js 26 en preview", "en": "Lambda: Node.js 26 in preview", "fr": "Lambda : Node.js 26 en préversion" },
+      "anchor": "lambda-node-26",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": { "es": "Prisma 7.10 convive con Prisma 8", "en": "Prisma 7.10 runs beside Prisma 8", "fr": "Prisma 7.10 cohabite avec Prisma 8" },
+      "anchor": "prisma-7-10-0",
+      "icon": "simple-icons:prisma"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "nextjs-avif-rce",
+      "updates": [
+        {
+          "id": "nextjs-avif-rce",
+          "tag": "security",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "Next.js: RCE sin autenticar en la Image Optimization API con archivos AVIF (CVSS 9.5)",
+            "en": "Next.js: unauthenticated RCE in the Image Optimization API with AVIF files (CVSS 9.5)",
+            "fr": "Next.js : RCE non authentifiée dans l API d optimisation d images avec des fichiers AVIF (CVSS 9.5)"
+          },
+          "body_html": {
+            "es": "<p>Una falla en <code>libheif</code>, dependencia de <code>sharp</code>, permite ejecución remota de código sin autenticación al procesar AVIF por el pipeline de optimización. Afecta <strong>next &gt;= 10.0.0 &lt; 15.5.24</strong> y <strong>&lt; 16.3.3</strong>. El parche desactiva la optimización de AVIF hasta que se resuelva el bug de fondo. Si servís imágenes de usuario, actualizá YA.</p>",
+            "en": "<p>A flaw in <code>libheif</code>, a <code>sharp</code> dependency, allows unauthenticated remote code execution when AVIF images go through the optimization pipeline. Affects <strong>next &gt;= 10.0.0 &lt; 15.5.24</strong> and <strong>&lt; 16.3.3</strong>. The patch disables AVIF optimization until the underlying bug is fixed.</p>",
+            "fr": "<p>Une faille dans <code>libheif</code>, dépendance de <code>sharp</code>, permet une exécution de code à distance non authentifiée lors du traitement d images AVIF. Affecte <strong>next &gt;= 10.0.0 &lt; 15.5.24</strong> et <strong>&lt; 16.3.3</strong>. Le correctif désactive l optimisation AVIF.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/next.js/security/advisories/GHSA-2xp9-vwfh-vxw4", "label": "github.com" }
+        },
+        {
+          "id": "nextjs-windows-rce",
+          "tag": "security",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "Next.js: segundo RCE sin autenticar en servidores hosteados en Windows (CVSS 9.0)",
+            "en": "Next.js: second unauthenticated RCE on Windows-hosted servers (CVSS 9.0)",
+            "fr": "Next.js : seconde RCE non authentifiée sur les serveurs Windows (CVSS 9.0)"
+          },
+          "body_html": {
+            "es": "<p>El mismo release train trae un segundo aviso crítico: ejecución remota de código sin autenticación en despliegues sobre Windows. Se corrige en <strong>16.3.3</strong> y <strong>15.5.24</strong>. Dos críticos en un día en el framework más usado del ecosistema: revisá tu lockfile hoy mismo.</p>",
+            "en": "<p>The same release train carries a second critical advisory: unauthenticated remote code execution on Windows-hosted deployments. Fixed in <strong>16.3.3</strong> and <strong>15.5.24</strong>. Two criticals in one day on the ecosystem s most-used framework.</p>",
+            "fr": "<p>Le même train de versions apporte un second avis critique : exécution de code à distance non authentifiée sur les déploiements Windows. Corrigé dans <strong>16.3.3</strong> et <strong>15.5.24</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/next.js/security/advisories/GHSA-p293-qw3h-jr36", "label": "github.com" }
+        },
+        {
+          "id": "hono-4-13-5",
+          "tag": "security",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "Hono 4.13.5: tres fallos de seguridad, incluido un bypass incompleto de CVE-2026-39408",
+            "en": "Hono 4.13.5: three security fixes, including an incomplete fix for CVE-2026-39408",
+            "fr": "Hono 4.13.5 : trois correctifs de sécurité, dont un correctif incomplet de CVE-2026-39408"
+          },
+          "body_html": {
+            "es": "<p>El parser de query leía parámetros después del fragmento de URL, generando diferencias de interpretación entre tu app y el proxy o WAF que tenés delante (cache poisoning en potencia). Además, <code>toSSG()</code> seguía escribiendo fuera del directorio de salida por segmentos <code>..</code> consecutivos, y <code>parseBody({ dot: true })</code> permitía agotar la heap con anidamiento ilimitado por dot-notation.</p>",
+            "en": "<p>The query parser read parameters after the URL fragment, creating cache-key and proxy interpretation differentials. On top of that, <code>toSSG()</code> still wrote files outside the output directory via consecutive parent segments, and <code>parseBody({ dot: true })</code> allowed heap exhaustion through unbounded dot-notation nesting.</p>",
+            "fr": "<p>Le parseur de requête lisait des paramètres après le fragment d URL, créant des divergences d interprétation avec le proxy ou le WAF. De plus, <code>toSSG()</code> écrivait encore hors du répertoire de sortie et <code>parseBody({ dot: true })</code> permettait d épuiser la heap.</p>"
+          },
+          "source": { "url": "https://github.com/honojs/hono/releases/tag/v4.13.5", "label": "github.com" }
+        },
+        {
+          "id": "duckdb-2-0",
+          "tag": "breaking",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "DuckDB 2.0 deja de ser solo embebido: modo cliente/servidor con el protocolo quack",
+            "en": "DuckDB 2.0 goes beyond embedded: client/server mode over the quack protocol",
+            "fr": "DuckDB 2.0 dépasse l embarqué : mode client/serveur via le protocole quack"
+          },
+          "body_html": {
+            "es": "<p>La v2.0 suma modo cliente/servidor nativo mediante la extensión del protocolo <code>quack</code> y la nueva sentencia <code>CONNECT</code>, permitiendo conexiones remotas sin embeber el motor. También estabiliza la C API con versionado explícito en YAML y garantías de ABI, más soporte maduro de <code>VARIANT</code> para datos semiestructurados. Cambio de categoría, no un release más.</p>",
+            "en": "<p>v2.0 adds a native client/server mode powered by the <code>quack</code> protocol extension and a new <code>CONNECT</code> statement, enabling remote connections without embedding the engine. It also stabilizes the C API with an explicit YAML-defined spec and ABI guarantees, plus mature <code>VARIANT</code> support for semi-structured data.</p>",
+            "fr": "<p>La v2.0 ajoute un mode client/serveur natif via l extension du protocole <code>quack</code> et la nouvelle instruction <code>CONNECT</code>. Elle stabilise aussi l API C avec une spécification YAML et des garanties d ABI, plus un support mature de <code>VARIANT</code>.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/duckdb-v2-distributed/", "label": "infoq.com" }
+        },
+        {
+          "id": "lambda-node-26",
+          "tag": "beta",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "AWS Lambda lanza runtimes gestionados en preview para Node.js 26 y Python 3.15",
+            "en": "AWS Lambda introduces managed runtimes in public preview for Node.js 26 and Python 3.15",
+            "fr": "AWS Lambda lance des runtimes gérés en préversion pour Node.js 26 et Python 3.15"
+          },
+          "body_html": {
+            "es": "<p>Public preview de los runtimes gestionados de <strong>Node.js 26</strong> y <strong>Python 3.15</strong>. Buen momento para probar tus handlers contra la próxima línea de Node antes de que sea la default en producción, pero no lo lleves a workloads críticos todavía.</p>",
+            "en": "<p>Public preview of managed <strong>Node.js 26</strong> and <strong>Python 3.15</strong> runtimes. A good moment to test handlers against the next Node line before it becomes the production default — not for critical workloads yet.</p>",
+            "fr": "<p>Préversion publique des runtimes gérés <strong>Node.js 26</strong> et <strong>Python 3.15</strong>. Bon moment pour tester vos handlers, mais pas encore pour les charges critiques.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/aws-lambda-node-js-python-public-preview/", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "workerd-20260826",
+      "updates": [
+        {
+          "id": "workerd-20260826",
+          "tag": "release",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "workerd v1.20260826.1: build diario del runtime de Cloudflare Workers",
+            "en": "workerd v1.20260826.1: daily build of the Cloudflare Workers runtime",
+            "fr": "workerd v1.20260826.1 : build quotidien du runtime Cloudflare Workers"
+          },
+          "body_html": {
+            "es": "<p>Nueva iteración diaria del runtime open source que corre debajo de Workers. Si fijás la versión de <code>workerd</code> en CI para que los tests de edge sean deterministas, este es el tag de hoy.</p>",
+            "en": "<p>Another daily iteration of the open-source runtime behind Workers. If you pin <code>workerd</code> in CI to keep edge tests deterministic, this is today s tag.</p>",
+            "fr": "<p>Nouvelle itération quotidienne du runtime open source derrière Workers. Si vous épinglez <code>workerd</code> en CI, voici le tag du jour.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workerd/releases/tag/v1.20260826.1", "label": "github.com" }
+        },
+        {
+          "id": "oxc-0-147-0",
+          "tag": "minor",
+          "date": "24 Aug 2026",
+          "title": {
+            "es": "Oxc 0.147.0: minifier más agresivo y correcciones de codegen",
+            "en": "Oxc 0.147.0: a more aggressive minifier and codegen fixes",
+            "fr": "Oxc 0.147.0 : minifier plus agressif et correctifs de codegen"
+          },
+          "body_html": {
+            "es": "<p>El minifier ahora pliega <code>switch</code> cuyo padre no es un block statement, y se corrigen varios casos donde fusionar <code>if</code> dentro de <code>for</code> rompía en sloppy mode con function declarations. También hay mejoras de performance en los builds con sourcemap.</p>",
+            "en": "<p>The minifier now folds <code>switch</code> statements whose parent is not a block statement, and several cases where merging <code>if</code> into <code>for</code> broke in sloppy mode with function declarations are fixed. Sourcemap builds also get performance work.</p>",
+            "fr": "<p>Le minifier replie désormais les <code>switch</code> dont le parent n est pas un bloc, et plusieurs cas de fusion <code>if</code> vers <code>for</code> en mode sloppy sont corrigés.</p>"
+          },
+          "source": { "url": "https://github.com/oxc-project/oxc/releases/tag/crates_v0.147.0", "label": "github.com" }
+        },
+        {
+          "id": "effect-4-rc-112",
+          "tag": "beta",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "Effect 4.0.0-rc.112: el tren de release candidates sigue",
+            "en": "Effect 4.0.0-rc.112: the release-candidate train keeps rolling",
+            "fr": "Effect 4.0.0-rc.112 : le train de release candidates continue"
+          },
+          "body_html": {
+            "es": "<p>Nuevo RC del ecosistema Effect, con toda la familia <code>@effect/sql-sqlite-*</code> y <code>@effect/vitest</code> alineada a la misma versión. Si estás evaluando Effect 4 para tu capa de dominio, seguí los RCs pero no fijes todavía una API en producción.</p>",
+            "en": "<p>Another RC across the Effect ecosystem, with the whole <code>@effect/sql-sqlite-*</code> family and <code>@effect/vitest</code> aligned on the same version. Track the RCs if you are evaluating Effect 4, but do not pin an API in production yet.</p>",
+            "fr": "<p>Nouvelle RC de l écosystème Effect, avec toute la famille <code>@effect/sql-sqlite-*</code> alignée sur la même version.</p>"
+          },
+          "source": { "url": "https://github.com/Effect-TS/effect/releases/tag/effect%404.0.0-rc.112", "label": "github.com" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "nestjs-11-2-3",
+      "updates": [
+        {
+          "id": "nestjs-11-2-3",
+          "tag": "patch",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "NestJS 11.2.2 y 11.2.3: dos parches seguidos para arreglos de bootstrap",
+            "en": "NestJS 11.2.2 and 11.2.3: two back-to-back patches for bootstrap breakage",
+            "fr": "NestJS 11.2.2 et 11.2.3 : deux correctifs consécutifs au démarrage"
+          },
+          "body_html": {
+            "es": "<p>11.2.2 arregla dos regresiones que rompían el arranque de la app: <code>ObserveInstrument</code> con <code>@nestjs/core@11.2.x</code> y un crash con proxy providers de <code>nestjs-cls</code> (<code>ProxyProviderNotResolvedException</code> en <code>CLS_REQ</code>). 11.2.3 llegó horas después con el fix de durable providers circulares. Si estás en 11.2.0 o 11.2.1, saltá directo a 11.2.3.</p>",
+            "en": "<p>11.2.2 fixes two regressions that broke app startup: <code>ObserveInstrument</code> with <code>@nestjs/core@11.2.x</code>, and a crash with <code>nestjs-cls</code> proxy providers (<code>ProxyProviderNotResolvedException</code> on <code>CLS_REQ</code>). 11.2.3 landed hours later with a circular durable providers fix. On 11.2.0 or 11.2.1, jump straight to 11.2.3.</p>",
+            "fr": "<p>11.2.2 corrige deux régressions bloquant le démarrage : <code>ObserveInstrument</code> avec <code>@nestjs/core@11.2.x</code> et un crash avec les proxy providers de <code>nestjs-cls</code>. 11.2.3 ajoute le correctif des durable providers circulaires.</p>"
+          },
+          "source": { "url": "https://github.com/nestjs/nest/releases/tag/v11.2.3", "label": "github.com" }
+        },
+        {
+          "id": "prisma-7-10-0",
+          "tag": "release",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "Prisma 7.10.0: un paquete de compatibilidad para correr Prisma 7 al lado de Prisma 8",
+            "en": "Prisma 7.10.0: a compatibility package to run Prisma 7 alongside Prisma 8",
+            "fr": "Prisma 7.10.0 : un paquet de compatibilité pour faire cohabiter Prisma 7 et Prisma 8"
+          },
+          "body_html": {
+            "es": "<p>Llega <code>@prisma/prisma7</code>, que te deja instalar <code>prisma@8</code> y conservar el CLI y la config de la 7 en el mismo proyecto: <code>npx prisma7 migrate dev</code> convive con <code>npx prisma</code>. Prisma 7 ahora prefiere archivos de configuración versionados (<code>prisma7.config.ts</code>) para no chocar con <code>prisma.config.*</code>. También asegura el server local de Prisma Studio y arregla los adapters de PostgreSQL, MariaDB, Neon y SQLite. Esto es un golazo para migrar de a poco.</p>",
+            "en": "<p><code>@prisma/prisma7</code> lets you install <code>prisma@8</code> while keeping the Prisma 7 CLI and config in the same project: <code>npx prisma7 migrate dev</code> lives beside <code>npx prisma</code>. Prisma 7 now prefers version-specific config files (<code>prisma7.config.ts</code>) so they do not clash with <code>prisma.config.*</code>. It also secures Prisma Studio s local server and fixes the PostgreSQL, MariaDB, Neon and SQLite adapters.</p>",
+            "fr": "<p><code>@prisma/prisma7</code> permet d installer <code>prisma@8</code> tout en conservant le CLI et la config Prisma 7 dans le même projet. Prisma 7 privilégie désormais des fichiers de config versionnés et sécurise le serveur local de Prisma Studio.</p>"
+          },
+          "source": { "url": "https://github.com/prisma/prisma/releases/tag/7.10.0", "label": "github.com" }
+        },
+        {
+          "id": "prisma-8-rc-7",
+          "tag": "beta",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "Prisma 8.0.0-rc.7: dos RCs en el mismo día antes del estable",
+            "en": "Prisma 8.0.0-rc.7: two RCs in a single day ahead of stable",
+            "fr": "Prisma 8.0.0-rc.7 : deux RC le même jour avant la version stable"
+          },
+          "body_html": {
+            "es": "<p>Prisma publicó rc.6 y rc.7 el mismo día que el 7.10.0. La cadencia sugiere que el estable de la 8 está cerca; si vas a migrar, hacelo con el paquete de compatibilidad, no de un salto.</p>",
+            "en": "<p>Prisma shipped rc.6 and rc.7 on the same day as 7.10.0. The cadence suggests stable 8 is close; if you plan to migrate, do it through the compatibility package rather than in one jump.</p>",
+            "fr": "<p>Prisma a publié rc.6 et rc.7 le même jour que la 7.10.0. La version stable 8 approche ; migrez via le paquet de compatibilité.</p>"
+          },
+          "source": { "url": "https://github.com/prisma/prisma/releases/tag/v8.0.0-rc.7", "label": "github.com" }
+        },
+        {
+          "id": "tanstack-router-2026-08-25",
+          "tag": "release",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "TanStack Router/Start: release train del 25 de agosto con Solid Start 2.0.0-rc.2",
+            "en": "TanStack Router/Start: August 25 release train with Solid Start 2.0.0-rc.2",
+            "fr": "TanStack Router/Start : train de versions du 25 août avec Solid Start 2.0.0-rc.2"
+          },
+          "body_html": {
+            "es": "<p>La línea Solid del ecosistema (<code>@tanstack/solid-start</code>, <code>solid-router</code>, sus paquetes de server y client) sube a <strong>2.0.0-rc.2</strong> dentro del release train diario. La paridad entre adaptadores de framework sigue cerrándose.</p>",
+            "en": "<p>The Solid line of the ecosystem (<code>@tanstack/solid-start</code>, <code>solid-router</code>, plus their server and client packages) moves to <strong>2.0.0-rc.2</strong> inside the daily release train. Parity across framework adapters keeps closing.</p>",
+            "fr": "<p>La ligne Solid de l écosystème passe en <strong>2.0.0-rc.2</strong> dans le train de versions quotidien. La parité entre adaptateurs continue de se resserrer.</p>"
+          },
+          "source": { "url": "https://github.com/TanStack/router/releases/tag/release-2026-08-25-1811", "label": "github.com" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "rds-postgres-minors",
+      "updates": [
+        {
+          "id": "rds-postgres-minors",
+          "tag": "notable",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "RDS for PostgreSQL sube a 18.6, 17.11, 16.15, 15.19 y 14.24",
+            "en": "RDS for PostgreSQL adds minor versions 18.6, 17.11, 16.15, 15.19 and 14.24",
+            "fr": "RDS for PostgreSQL ajoute les versions mineures 18.6, 17.11, 16.15, 15.19 et 14.24"
+          },
+          "body_html": {
+            "es": "<p>Barrido de minors en las cinco líneas soportadas. Los minors de PostgreSQL traen fixes de seguridad y corrupción: programá la ventana de mantenimiento, no la dejes correr sola en la ventana automática.</p>",
+            "en": "<p>A sweep of minors across all five supported lines. PostgreSQL minors carry security and data-corruption fixes: schedule the maintenance window rather than letting the automatic one decide for you.</p>",
+            "fr": "<p>Mise à jour des versions mineures sur les cinq lignes supportées. Les mineures PostgreSQL apportent des correctifs de sécurité : planifiez la fenêtre de maintenance.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/amazon-rds-postgresql-18-6-17-11-16-15-15-19-14-24/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "aurora-postgres-minors",
+          "tag": "minor",
+          "date": "24 Aug 2026",
+          "title": {
+            "es": "Aurora PostgreSQL suma 18.4, 17.10, 16.14, 15.18 y 14.23",
+            "en": "Aurora PostgreSQL now supports 18.4, 17.10, 16.14, 15.18 and 14.23",
+            "fr": "Aurora PostgreSQL prend en charge 18.4, 17.10, 16.14, 15.18 et 14.23"
+          },
+          "body_html": {
+            "es": "<p>Mismo barrido del lado de Aurora, un día antes que RDS. Ojo con la diferencia de numeración: Aurora va un minor por detrás de RDS en varias líneas, así que no asumas paridad al planear un blue/green.</p>",
+            "en": "<p>The same sweep on the Aurora side, a day before RDS. Mind the numbering gap: Aurora trails RDS by one minor on several lines, so do not assume parity when planning a blue/green.</p>",
+            "fr": "<p>Même vague côté Aurora, un jour avant RDS. Attention à l écart de numérotation lors d un blue/green.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/amazon-aurora-postgresql-18-4-17-10-16-14-15-18-14-23/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "rds-mysql-8411",
+          "tag": "minor",
+          "date": "24 Aug 2026",
+          "title": {
+            "es": "RDS for MySQL habilita la minor 8.4.11",
+            "en": "RDS for MySQL now supports minor version 8.4.11",
+            "fr": "RDS for MySQL prend en charge la version mineure 8.4.11"
+          },
+          "body_html": {
+            "es": "<p>La línea 8.4 LTS de MySQL recibe su nueva minor en RDS. Update de rutina, pero es el camino de menor fricción para salir de 8.0 antes de que llegue el EOL.</p>",
+            "en": "<p>MySQL s 8.4 LTS line gets its new minor on RDS. Routine update, but it is the lowest-friction path off 8.0 before EOL lands.</p>",
+            "fr": "<p>La ligne 8.4 LTS de MySQL reçoit sa nouvelle mineure sur RDS. Mise à jour de routine avant l EOL de 8.0.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/amazon-rds-mysql-8411-available/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "bullmq-6-2-2",
+          "tag": "patch",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "BullMQ 6.2.1 y 6.2.2: stalled jobs con keys correctas y rate limit que deja de mentir",
+            "en": "BullMQ 6.2.1 and 6.2.2: correct keys for stalled jobs and a rate limit that stops lying",
+            "fr": "BullMQ 6.2.1 et 6.2.2 : bonnes clés pour les jobs bloqués et rate limit corrigé"
+          },
+          "body_html": {
+            "es": "<p>6.2.1 corrige los valores de key en <code>move_stalled_jobs_to_wait</code> — un bug silencioso que te desordena la recuperación de jobs colgados. 6.2.2 evita que el procesamiento de deferred failures consuma cuota del rate limiter (en los bindings de Python, Elixir, Rust y .NET).</p>",
+            "en": "<p>6.2.1 fixes the key values in <code>move_stalled_jobs_to_wait</code> — a silent bug that scrambles recovery of hung jobs. 6.2.2 stops deferred-failure processing from eating rate limiter budget (across the Python, Elixir, Rust and .NET bindings).</p>",
+            "fr": "<p>6.2.1 corrige les clés de <code>move_stalled_jobs_to_wait</code>. 6.2.2 empêche le traitement des échecs différés de consommer le quota du rate limiter.</p>"
+          },
+          "source": { "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.2.2", "label": "github.com" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "lambda-iam-resource-policies",
+      "updates": [
+        {
+          "id": "lambda-iam-resource-policies",
+          "tag": "notable",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "Lambda soporta políticas IAM basadas en recurso completas",
+            "en": "AWS Lambda functions now support full IAM resource-based policies",
+            "fr": "Les fonctions AWS Lambda supportent des politiques IAM complètes basées sur les ressources"
+          },
+          "body_html": {
+            "es": "<p>Hasta ahora la resource policy de Lambda era un subconjunto limitado. Con soporte completo podés expresar condiciones y denies reales sobre la función, en lugar de empujar toda la autorización al rol que invoca. Menos IAM enredado, más least privilege de verdad.</p>",
+            "en": "<p>Lambda s resource policy was a limited subset until now. Full support lets you express real conditions and explicit denies on the function itself instead of pushing all authorization into the invoking role. Less tangled IAM, more actual least privilege.</p>",
+            "fr": "<p>La resource policy de Lambda était jusqu ici un sous-ensemble limité. Le support complet permet d exprimer de vraies conditions et des refus explicites sur la fonction elle-même.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/aws-lambda-full-iam-resource-based-policies/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "lambda-microvm-privatelink",
+          "tag": "notable",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "Lambda MicroVMs ahora soporta AWS PrivateLink",
+            "en": "AWS Lambda MicroVMs now supports AWS PrivateLink",
+            "fr": "AWS Lambda MicroVMs supporte désormais AWS PrivateLink"
+          },
+          "body_html": {
+            "es": "<p>Conectividad privada a MicroVMs directamente desde tu VPC, sin salir a internet pública. Para arquitecturas reguladas donde el tráfico no puede tocar el borde, esto destraba el uso de MicroVMs.</p>",
+            "en": "<p>Private connectivity to Lambda MicroVMs directly from your VPC, with no trip through the public internet. For regulated architectures where traffic cannot touch the edge, this unblocks MicroVM adoption.</p>",
+            "fr": "<p>Connectivité privée aux MicroVMs Lambda directement depuis votre VPC, sans passer par l internet public.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/lambda-microvms-supports-privatelink", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "eks-multi-oidc",
+          "tag": "notable",
+          "date": "24 Aug 2026",
+          "title": {
+            "es": "EKS acepta múltiples proveedores OIDC externos por cluster",
+            "en": "Amazon EKS now supports multiple external OIDC identity providers per cluster",
+            "fr": "Amazon EKS supporte plusieurs fournisseurs OIDC externes par cluster"
+          },
+          "body_html": {
+            "es": "<p>Antes era un IdP externo por cluster, lo que obligaba a federar todo por un único proveedor o a partir clusters por organización. Ahora podés convivir varios IdPs — útil en fusiones, multi-tenant y migraciones de identidad sin big bang.</p>",
+            "en": "<p>Previously one external IdP per cluster, forcing you to federate everything through a single provider or split clusters per organization. Multiple IdPs can now coexist — handy for mergers, multi-tenant setups, and identity migrations without a big bang.</p>",
+            "fr": "<p>Auparavant limité à un IdP externe par cluster. Plusieurs IdP peuvent désormais coexister — utile pour les fusions et les migrations d identité.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/amazon-eks-multiple-oidc-providers", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "ecs-agent-health",
+          "tag": "minor",
+          "date": "24 Aug 2026",
+          "title": {
+            "es": "ECS detecta y repara instancias con conectividad de agente degradada",
+            "en": "Amazon ECS automatically detects and repairs container instances with impaired agent connectivity",
+            "fr": "Amazon ECS détecte et répare les instances dont l agent perd la connectivité"
+          },
+          "body_html": {
+            "es": "<p>El clásico nodo zombi: la instancia sigue viva, el agente perdió el enlace con el control plane y tus tasks quedan en el limbo. ECS ahora lo detecta y remedia solo. Un runbook manual menos.</p>",
+            "en": "<p>The classic zombie node: the instance is alive, the agent lost its link to the control plane, and your tasks sit in limbo. ECS now detects and remediates this on its own. One less manual runbook.</p>",
+            "fr": "<p>Le nœud zombie classique : l instance est vivante mais l agent a perdu le lien avec le control plane. ECS détecte et corrige désormais tout seul.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/amazon-ecs-agent-connectivity-health", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "istio-1-31-rc2",
+          "tag": "beta",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "Istio 1.31.0-rc.2",
+            "en": "Istio 1.31.0-rc.2",
+            "fr": "Istio 1.31.0-rc.2"
+          },
+          "body_html": {
+            "es": "<p>Segundo release candidate de la 1.31. Si mantenés un mesh, es la ventana para correr tus tests de conformance antes del estable, no después.</p>",
+            "en": "<p>Second release candidate for 1.31. If you run a mesh, this is the window to run your conformance tests before stable — not after.</p>",
+            "fr": "<p>Seconde release candidate de la 1.31. C est la fenêtre pour lancer vos tests de conformité avant la stable.</p>"
+          },
+          "source": { "url": "https://github.com/istio/istio/releases/tag/1.31.0-rc.2", "label": "github.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "ms-ai-governance-runtime",
+      "updates": [
+        {
+          "id": "ms-ai-governance-runtime",
+          "tag": "notable",
+          "date": "24 Aug 2026",
+          "title": {
+            "es": "Microsoft mueve el governance de IA de la política al enforcement en runtime",
+            "en": "Microsoft moves AI governance from policy to runtime enforcement",
+            "fr": "Microsoft fait passer la gouvernance IA de la politique à l application au runtime"
+          },
+          "body_html": {
+            "es": "<p>El framework cubre nueve dominios (política, datos, modelos, agentes) con cuatro funciones: definición de política, enforcement de controles, observabilidad y generación de pruebas. La tesis arquitectónica es la que importa: la telemetría operativa tiene que validar el cumplimiento, no un documento. Aplicá el mismo criterio a cualquier control de tu sistema — si no lo podés observar en producción, no existe.</p>",
+            "en": "<p>The framework spans nine domains (policy, data, models, agents) with four functions: policy definition, control enforcement, observability, and proof generation. The architectural thesis is what matters: operational telemetry must validate compliance, not documentation. Apply the same test to any control in your system — if you cannot observe it in production, it does not exist.</p>",
+            "fr": "<p>Le framework couvre neuf domaines avec quatre fonctions : définition de politique, application des contrôles, observabilité et génération de preuves. La thèse architecturale : la télémétrie opérationnelle doit valider la conformité, pas la documentation.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/microsoft-ai-governance/", "label": "infoq.com" }
+        },
+        {
+          "id": "bmc-vulnerabilities",
+          "tag": "security",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "Vulnerabilidades en BMC exponen miles de servidores a compromiso a nivel hardware",
+            "en": "BMC vulnerabilities put thousands of servers at risk of hardware-level compromise",
+            "fr": "Des vulnérabilités BMC exposent des milliers de serveurs à une compromission matérielle"
+          },
+          "body_html": {
+            "es": "<p>El Baseboard Management Controller vive por debajo del SO: si cae, tu hardening del host es decoración. Si corrés bare metal o colocation, el BMC es parte de tu superficie de ataque y casi nunca está en el inventario de parcheo. Revisalo.</p>",
+            "en": "<p>The Baseboard Management Controller lives below the OS: if it falls, your host hardening is decoration. If you run bare metal or colocation, the BMC is part of your attack surface and is almost never in the patch inventory. Go check it.</p>",
+            "fr": "<p>Le Baseboard Management Controller se situe sous le système d exploitation : s il tombe, le durcissement de l hôte ne sert à rien. Sur du bare metal, le BMC fait partie de votre surface d attaque.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/bmc-vulnerabilities/", "label": "infoq.com" }
+        },
+        {
+          "id": "jdk-27-rc1",
+          "tag": "release",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "Java News Roundup: primer release candidate de JDK 27, Jakarta EE, Helidon y Tika 4.0",
+            "en": "Java News Roundup: first JDK 27 release candidate, Jakarta EE, Helidon and Tika 4.0",
+            "fr": "Java News Roundup : première release candidate de JDK 27, Jakarta EE, Helidon et Tika 4.0"
+          },
+          "body_html": {
+            "es": "<p>JDK 27 llega a RC1. No es TypeScript, pero si tu backend es políglota o consumís servicios JVM, la cadencia de LTS te condiciona los plazos de migración. Vale tenerlo en el radar.</p>",
+            "en": "<p>JDK 27 reaches RC1. Not TypeScript, but if your backend is polyglot or you consume JVM services, the LTS cadence drives your migration timelines. Worth keeping on the radar.</p>",
+            "fr": "<p>JDK 27 atteint sa RC1. Si votre backend est polyglotte, la cadence LTS conditionne vos délais de migration.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/java-news-roundup-aug17-2026/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "nuxt-4-5",
+      "updates": [
+        {
+          "id": "nuxt-4-5",
+          "tag": "breaking",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "Nuxt 4.5: SSR streaming experimental, Vite 8 y un builder Rspack sobre Rsbuild",
+            "en": "Nuxt 4.5: experimental SSR streaming, Vite 8 and an Rsbuild-powered Rspack builder",
+            "fr": "Nuxt 4.5 : streaming SSR expérimental, Vite 8 et un builder Rspack via Rsbuild"
+          },
+          "body_html": {
+            "es": "<p>El release más grande en tiempo: streaming SSR experimental que hace flush inmediato del shell HTML y renderiza el body progresivamente (mejor TTFB), salto a <strong>Vite 8</strong>, builder Rspack 2 vía Rsbuild, sistema estable de códigos de error y el composable <code>useLayout</code>. Ojo: <code>unhead</code> y <code>unctx</code> suben de major, así que tenés que refrescar el lockfile al actualizar.</p>",
+            "en": "<p>Their biggest release in a while: experimental SSR streaming that flushes the HTML shell immediately and renders the body progressively (better TTFB), a jump to <strong>Vite 8</strong>, an Rspack 2 builder via Rsbuild, a stable error-code system, and a <code>useLayout</code> composable. Heads up: <code>unhead</code> and <code>unctx</code> get major bumps, so refresh your lockfile on upgrade.</p>",
+            "fr": "<p>Leur plus grosse version depuis longtemps : streaming SSR expérimental, passage à <strong>Vite 8</strong>, builder Rspack 2 via Rsbuild, système stable de codes d erreur et composable <code>useLayout</code>. Attention : <code>unhead</code> et <code>unctx</code> changent de version majeure.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/nuxt-4-5-streaming/", "label": "infoq.com" }
+        },
+        {
+          "id": "nextjs-16-3-3",
+          "tag": "security",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "Next.js 16.3.3 y 15.5.24: los releases que cierran los dos críticos",
+            "en": "Next.js 16.3.3 and 15.5.24: the releases that close both criticals",
+            "fr": "Next.js 16.3.3 et 15.5.24 : les versions qui corrigent les deux failles critiques"
+          },
+          "body_html": {
+            "es": "<p>Ambas líneas soportadas reciben parche el mismo día. Si estás en cualquier versión desde la 10 en adelante y usás la Image Optimization API, no hay debate: actualizá hoy.</p>",
+            "en": "<p>Both supported lines get patched the same day. If you are on anything from 10 onward and use the Image Optimization API, there is no debate: upgrade today.</p>",
+            "fr": "<p>Les deux lignes supportées sont corrigées le même jour. Si vous utilisez l API d optimisation d images, mettez à jour aujourd hui.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/next.js/releases/tag/v16.3.3", "label": "github.com" }
+        },
+        {
+          "id": "pnpm-12-rc-11",
+          "tag": "beta",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "pnpm 12.0.0-rc.11: el CLI en Rust sigue afinándose",
+            "en": "pnpm 12.0.0-rc.11: the Rust CLI keeps tightening up",
+            "fr": "pnpm 12.0.0-rc.11 : le CLI en Rust continue de se peaufiner"
+          },
+          "body_html": {
+            "es": "<p>Otro RC de la línea 12, la que reescribe el CLI en Rust. Probalo en una rama de CI antes de que salga estable — el cambio de motor no es cosmético.</p>",
+            "en": "<p>Another RC on the 12 line, the one rewriting the CLI in Rust. Try it on a CI branch before stable lands — the engine swap is not cosmetic.</p>",
+            "fr": "<p>Nouvelle RC de la ligne 12, celle qui réécrit le CLI en Rust. Testez-la sur une branche CI avant la stable.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.0.0-rc.11", "label": "github.com" }
+        },
+        {
+          "id": "turborepo-2-10-12",
+          "tag": "patch",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "Turborepo 2.10.12: menos stats de package config y dry-run JSON en streaming",
+            "en": "Turborepo 2.10.12: fewer package-config stats and streamed dry-run JSON",
+            "fr": "Turborepo 2.10.12 : moins de stats de config et JSON de dry-run en streaming"
+          },
+          "body_html": {
+            "es": "<p>Dos mejoras de performance concretas: se saltean los <code>stat</code> de package configuration que no se usan, y la salida JSON del <code>dry-run</code> pasa a streaming. En monorepos grandes eso se nota en cada invocación de CI.</p>",
+            "en": "<p>Two concrete performance wins: unused package-configuration <code>stat</code> calls are skipped, and <code>dry-run</code> JSON output is now streamed. In large monorepos that shows up on every CI invocation.</p>",
+            "fr": "<p>Deux gains de performance : les appels <code>stat</code> inutiles sont évités et la sortie JSON du <code>dry-run</code> est diffusée en streaming.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/turborepo/releases/tag/v2.10.12", "label": "github.com" }
+        },
+        {
+          "id": "astro-7-2-7",
+          "tag": "patch",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "Astro 7.2.7 y la integración de Cloudflare 14.2.5",
+            "en": "Astro 7.2.7 and the Cloudflare integration 14.2.5",
+            "fr": "Astro 7.2.7 et l intégration Cloudflare 14.2.5"
+          },
+          "body_html": {
+            "es": "<p>Tres patches en dos días (7.2.5, 7.2.6, 7.2.7) más <code>@astrojs/cloudflare@14.2.5</code> y el language server. Cadencia sana de bugfixes; si estás en 7.2.4 saltá directo al final de la fila.</p>",
+            "en": "<p>Three patches in two days (7.2.5, 7.2.6, 7.2.7) plus <code>@astrojs/cloudflare@14.2.5</code> and the language server. A healthy bugfix cadence; if you are on 7.2.4, jump straight to the end of the queue.</p>",
+            "fr": "<p>Trois patchs en deux jours plus <code>@astrojs/cloudflare@14.2.5</code> et le language server. Si vous êtes en 7.2.4, passez directement à la dernière.</p>"
+          },
+          "source": { "url": "https://github.com/withastro/astro/releases/tag/astro%407.2.7", "label": "github.com" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "whistle-path-traversal",
+      "updates": [
+        {
+          "id": "whistle-path-traversal",
+          "tag": "security",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "Whistle: path traversal (CVSS 8.7)",
+            "en": "Whistle vulnerable to path traversal (CVSS 8.7)",
+            "fr": "Whistle vulnérable à une traversée de chemin (CVSS 8.7)"
+          },
+          "body_html": {
+            "es": "<p>El proxy de debugging HTTP más usado en entornos Node expone lectura de archivos fuera de su raíz. Whistle suele correr en máquinas de desarrollo con credenciales a mano: no lo dejes escuchando en <code>0.0.0.0</code>.</p>",
+            "en": "<p>The HTTP debugging proxy widely used in Node environments exposes file reads outside its root. Whistle usually runs on developer machines with credentials nearby: do not leave it listening on <code>0.0.0.0</code>.</p>",
+            "fr": "<p>Le proxy de débogage HTTP expose la lecture de fichiers hors de sa racine. Ne le laissez pas écouter sur <code>0.0.0.0</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-3vfr-4gwf-qxfp", "label": "github.com" }
+        },
+        {
+          "id": "urllib-credential-leak",
+          "tag": "security",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "urllib: los redirects cross-origin conservan headers con credenciales",
+            "en": "urllib: cross-origin redirects preserve credential-bearing headers",
+            "fr": "urllib : les redirections cross-origin conservent les en-têtes d authentification"
+          },
+          "body_html": {
+            "es": "<p>Si el destino redirige a otro origen, tu <code>Authorization</code> viaja con él. Es la trampa clásica de todo cliente HTTP: cualquier endpoint que consumas y que controle su propio redirect puede quedarse con tu token. Revisá también tus wrappers internos de fetch.</p>",
+            "en": "<p>If the target redirects to another origin, your <code>Authorization</code> header goes along. It is the classic HTTP-client trap: any endpoint you consume that controls its own redirect can walk off with your token. Audit your internal fetch wrappers too.</p>",
+            "fr": "<p>Si la cible redirige vers une autre origine, votre en-tête <code>Authorization</code> suit. Auditez aussi vos wrappers fetch internes.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-hq3h-g68c-hp78", "label": "github.com" }
+        },
+        {
+          "id": "mediasoup-sctp-cookie",
+          "tag": "security",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "mediasoup: la cookie de estado SCTP no está autenticada criptográficamente",
+            "en": "mediasoup: SCTP state cookie lacks cryptographic authentication",
+            "fr": "mediasoup : le cookie d état SCTP n est pas authentifié cryptographiquement"
+          },
+          "body_html": {
+            "es": "<p>Viola la RFC 9260 y permite establecer asociaciones sin autorización. Si tenés WebRTC con data channels en producción sobre mediasoup, esto es puerta de entrada, no un detalle de conformidad.</p>",
+            "en": "<p>It violates RFC 9260 and allows unauthorized association establishment. If you run WebRTC data channels in production on mediasoup, this is an entry point, not a conformance footnote.</p>",
+            "fr": "<p>Cela viole la RFC 9260 et permet d établir des associations sans autorisation. Un point d entrée, pas un détail de conformité.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-p7x2-g5cq-fhmq", "label": "github.com" }
+        },
+        {
+          "id": "plate-iframe-bypass",
+          "tag": "security",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "Plate: los metadatos del proveedor de media embebida saltean la sanitización de URL",
+            "en": "Plate: media embed provider metadata bypasses URL sanitization",
+            "fr": "Plate : les métadonnées du fournisseur d embed contournent la sanitisation d URL"
+          },
+          "body_html": {
+            "es": "<p>Un embed puede terminar ejecutando JavaScript dentro de un iframe pese al saneamiento. Moraleja de arquitectura: sanitizar la URL no alcanza si después construís el iframe con metadata que viene del mismo input no confiable.</p>",
+            "en": "<p>An embed can end up executing JavaScript inside an iframe despite sanitization. Architectural lesson: sanitizing the URL is not enough if you then build the iframe from metadata sourced from the same untrusted input.</p>",
+            "fr": "<p>Un embed peut exécuter du JavaScript dans une iframe malgré la sanitisation. Sanitiser l URL ne suffit pas si l iframe est construite depuis les mêmes données non fiables.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-qj6x-xx2h-8hvv", "label": "github.com" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Día de parches críticos en el frontend server-side: Next.js con dos RCE sin autenticar y Hono con tres fallos, ambos el mismo día. Si tenés Node en el borde, hoy tocaba actualizar, no leer.",
+      "en": "A critical-patch day for server-side frontend: Next.js with two unauthenticated RCEs and Hono with three flaws, both on the same day. If you run Node at the edge, today was for upgrading, not reading.",
+      "fr": "Journée de correctifs critiques côté serveur : Next.js avec deux RCE non authentifiées et Hono avec trois failles, le même jour."
+    },
+    {
+      "es": "La cadena de dependencias vuelve a morder: el RCE de Next.js no está en Next.js, está en libheif por debajo de sharp. Tu SBOM importa más que tu changelog.",
+      "en": "The dependency chain bites again: the Next.js RCE is not in Next.js, it is in libheif underneath sharp. Your SBOM matters more than your changelog.",
+      "fr": "La chaîne de dépendances frappe encore : la RCE de Next.js vient de libheif sous sharp. Votre SBOM compte plus que votre changelog."
+    },
+    {
+      "es": "DuckDB 2.0 y Prisma 7.10 apuntan al mismo problema desde lados opuestos: cómo evolucionar sin romper a quien ya está en producción. Uno con ABI versionada, el otro con un paquete de convivencia entre majors.",
+      "en": "DuckDB 2.0 and Prisma 7.10 attack the same problem from opposite ends: how to evolve without breaking whoever is already in production. One with a versioned ABI, the other with a package that lets two majors coexist.",
+      "fr": "DuckDB 2.0 et Prisma 7.10 abordent le même problème : évoluer sans casser la production. L un via une ABI versionnée, l autre via un paquet de cohabitation entre majeures."
+    },
+    {
+      "es": "Nuxt 4.5 con Vite 8 y builder Rspack, pnpm 12 en Rust, Turborepo optimizando stats: el toolchain de JavaScript se sigue mudando a binarios nativos y a builders intercambiables.",
+      "en": "Nuxt 4.5 on Vite 8 with an Rspack builder, pnpm 12 in Rust, Turborepo trimming stats: the JavaScript toolchain keeps migrating to native binaries and swappable builders.",
+      "fr": "Nuxt 4.5 sur Vite 8, pnpm 12 en Rust, Turborepo qui optimise : la toolchain JavaScript continue sa migration vers des binaires natifs."
+    }
+  ]
+}

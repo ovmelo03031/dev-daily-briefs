@@ -1,0 +1,233 @@
+{
+  "title": {
+    "es": "AI Security — 26 Ago 2026",
+    "en": "AI Security — 26 Aug 2026",
+    "fr": "AI Security — 26 Août 2026"
+  },
+  "description": {
+    "es": "Una página web te envenena el modelo local de Ollama, cuatro CVE nuevos en tooling de agentes y MCP, y anuncios falsos de OpenAI Codex que reparten un stealer para macOS.",
+    "en": "A web page poisons your local Ollama model, four fresh CVEs across agent and MCP tooling, and fake OpenAI Codex ads pushing a macOS stealer.",
+    "fr": "Une page web empoisonne votre modèle Ollama local, quatre nouveaux CVE dans l'outillage d'agents et MCP, et de fausses publicités OpenAI Codex diffusant un stealer macOS."
+  },
+  "pubDate": "2026-08-26",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "Una web envenena tu modelo local de Ollama",
+        "en": "A web page poisons your local Ollama model",
+        "fr": "Une page web empoisonne votre modèle Ollama"
+      },
+      "anchor": "nemoclaw-ollama-poisoning",
+      "icon": "lucide:radiation"
+    },
+    {
+      "text": {
+        "es": "Strands Agents Tools: RCE sin consentimiento (9.2)",
+        "en": "Strands Agents Tools: consent-free RCE (9.2)",
+        "fr": "Strands Agents Tools : RCE sans consentement (9.2)"
+      },
+      "anchor": "cve-2026-78379-strands",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "Headroom: un header y leés la memoria ajena (9.3)",
+        "en": "Headroom: one header reads another user's memory",
+        "fr": "Headroom : un en-tête lit la mémoire d'autrui"
+      },
+      "anchor": "cve-2026-77776-headroom",
+      "icon": "lucide:lock"
+    },
+    {
+      "text": {
+        "es": "Un notebook de marimo ejecuta comandos MCP",
+        "en": "A marimo notebook runs MCP commands on open",
+        "fr": "Un notebook marimo exécute des commandes MCP"
+      },
+      "anchor": "cve-2026-75149-marimo",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": {
+        "es": "Anuncios falsos de Codex reparten stealer en macOS",
+        "en": "Fake Codex ads deliver a macOS stealer",
+        "fr": "De fausses pubs Codex livrent un stealer macOS"
+      },
+      "anchor": "fake-codex-ads-amos",
+      "icon": "simple-icons:openai"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-incidents",
+      "name": {
+        "es": "Incidentes destacados",
+        "en": "Top Incidents",
+        "fr": "Incidents majeurs"
+      },
+      "theme": "top-incidents",
+      "icon_emoji": "🚨",
+      "anchor": "top-incidents",
+      "updates": [
+        {
+          "id": "nemoclaw-ollama-poisoning",
+          "tag": "research",
+          "title": {
+            "es": "NemoClaw expone Ollama a la red y una web te reescribe el chat template",
+            "en": "NemoClaw exposes Ollama to the network and a web page rewrites your chat template",
+            "fr": "NemoClaw expose Ollama au réseau et une page web réécrit votre chat template"
+          },
+          "body_html": {
+            "es": "<p>Oasis Security publicó una cadena que no toca el disco ni pide permisos: NVIDIA NemoClaw arranca Ollama con <code>OLLAMA_HOST=0.0.0.0:11434</code> en vez de loopback. El puerto 11434 no tiene autenticación, y la validación de <code>Host</code>/<code>Origin</code> se saltea justamente cuando la dirección no es loopback. Con DNS rebinding, una página cualquiera llega a tu localhost y modifica el template Go del modelo, que en cada inferencia le pega texto controlado por el atacante al system message.</p><p>Ojo con esto: el payload vive en el modelo, no en la sesión. Reiniciás, abrís un chat nuevo y las instrucciones inyectadas siguen ahí. Corregido en macOS y Linux en v0.0.106, que rechaza backends que no sean loopback. En Windows y WSL sólo hay un warning: sin fix completo al momento de la publicación.</p>",
+            "en": "<p>Oasis Security disclosed a chain that never touches disk and never asks for a permission: NVIDIA NemoClaw starts Ollama bound to <code>OLLAMA_HOST=0.0.0.0:11434</code> instead of loopback. Port 11434 has no authentication, and the <code>Host</code>/<code>Origin</code> validation is skipped precisely when the address is not loopback. Using DNS rebinding, an arbitrary page reaches your localhost and edits the model's Go template, which then appends attacker-controlled text to the system message on every inference.</p><p>The payload lives in the model, not in the session. Restart, open a fresh chat, and the injected instructions are still there. Fixed on macOS and Linux in v0.0.106, which refuses non-loopback backends. Windows and WSL got a warning only — no complete fix at publication time.</p>",
+            "fr": "<p>Oasis Security a divulgué une chaîne qui ne touche jamais le disque : NVIDIA NemoClaw démarre Ollama sur <code>OLLAMA_HOST=0.0.0.0:11434</code> au lieu du loopback. Le port 11434 n'a aucune authentification, et la validation <code>Host</code>/<code>Origin</code> est ignorée précisément quand l'adresse n'est pas loopback. Via DNS rebinding, une page quelconque atteint votre localhost et modifie le template Go du modèle, qui ajoute alors du texte contrôlé par l'attaquant au system message à chaque inférence.</p><p>Le payload vit dans le modèle, pas dans la session. Corrigé sur macOS et Linux en v0.0.106 ; Windows et WSL n'ont qu'un avertissement.</p>"
+          },
+          "date": "25 Aug 2026",
+          "source": {
+            "url": "https://thehackernews.com/2026/08/a-malicious-webpage-could-poison-your.html",
+            "label": "The Hacker News"
+          }
+        }
+      ]
+    },
+    {
+      "id": "framework-cves",
+      "name": {
+        "es": "CVEs de frameworks",
+        "en": "Framework CVEs",
+        "fr": "CVE des frameworks"
+      },
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "cve-2026-77776-headroom",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-77776 — Headroom: el proxy le cree al header x-headroom-user-id (9.3)",
+            "en": "CVE-2026-77776 — Headroom: the proxy trusts the x-headroom-user-id header (9.3)",
+            "fr": "CVE-2026-77776 — Headroom : le proxy fait confiance à l'en-tête x-headroom-user-id (9.3)"
+          },
+          "body_html": {
+            "es": "<p>El proxy LLM Headroom deriva el dueño de la memoria directamente del header <code>x-headroom-user-id</code>, sin atarlo a ninguna credencial autenticada. Poné el identificador de otra persona y leés o modificás su memoria almacenada. CWE-639, autorización rota por clave controlada por el usuario.</p><p>El docker-compose de referencia lo empeora: expone el proxy en <code>0.0.0.0</code> sin exigir token. Arreglado en 0.36.1. Si no podés actualizar hoy, limitá el acceso a localhost, forzá <code>HEADROOM_PROXY_TOKEN</code> y cerrá el puerto con firewall.</p>",
+            "en": "<p>The Headroom LLM proxy derives the memory owner straight from the <code>x-headroom-user-id</code> header, without binding it to any authenticated credential. Set someone else's identifier and you read or modify their stored memory. CWE-639, authorization bypass through a user-controlled key.</p><p>The reference docker-compose makes it worse: it exposes the proxy on <code>0.0.0.0</code> with no token required. Fixed in 0.36.1. If you cannot upgrade today, restrict access to localhost, enforce <code>HEADROOM_PROXY_TOKEN</code>, and firewall the port.</p>",
+            "fr": "<p>Le proxy LLM Headroom dérive le propriétaire de la mémoire directement de l'en-tête <code>x-headroom-user-id</code>, sans le lier à une quelconque credential authentifiée. Mettez l'identifiant d'autrui et vous lisez ou modifiez sa mémoire stockée. CWE-639.</p><p>Le docker-compose de référence expose le proxy sur <code>0.0.0.0</code> sans token. Corrigé en 0.36.1.</p>"
+          },
+          "date": "21 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-77776",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-78379-strands",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-78379 — Amazon Strands Agents Tools: el prompt apaga el consentimiento humano (9.2)",
+            "en": "CVE-2026-78379 — Amazon Strands Agents Tools: a prompt switches off human consent (9.2)",
+            "fr": "CVE-2026-78379 — Amazon Strands Agents Tools : un prompt désactive le consentement humain (9.2)"
+          },
+          "body_html": {
+            "es": "<p>En Amazon Strands Agents Tools anterior a 0.8.5, el componente <code>python_repl</code> pide confirmación humana antes de ejecutar código. El problema es que el parámetro <code>non_interactive_mode</code> se puede reenviar a través del batch tool, y el prompt injection alcanza para setearlo. Resultado: ejecución de Python arbitrario sin autenticación, sin interacción del usuario y sin la puerta de consentimiento.</p><p>CWE-1427, el clasificador nuevo para neutralización indebida de input usado en prompting de LLM. Actualizá a 0.8.5. Mitigación de emergencia: deshabilitar <code>python_repl</code> o bloquear el reenvío de parámetros entre herramientas.</p>",
+            "en": "<p>In Amazon Strands Agents Tools before 0.8.5, the <code>python_repl</code> component asks for human confirmation before running code. The catch: the <code>non_interactive_mode</code> parameter can be forwarded through the batch tool, and prompt injection is enough to set it. Result: arbitrary Python execution with no authentication, no user interaction, and no consent gate.</p><p>CWE-1427, the newer class for improper neutralization of input used in LLM prompting. Upgrade to 0.8.5. Emergency mitigation: disable <code>python_repl</code> or block parameter forwarding between tools.</p>",
+            "fr": "<p>Dans Amazon Strands Agents Tools avant 0.8.5, le composant <code>python_repl</code> demande une confirmation humaine avant d'exécuter du code. Mais le paramètre <code>non_interactive_mode</code> peut être transmis via le batch tool, et un prompt injection suffit à le définir. Résultat : exécution Python arbitraire sans authentification ni interaction.</p><p>CWE-1427. Mettez à jour vers 0.8.5.</p>"
+          },
+          "date": "25 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-78379",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-75149-marimo",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-75149 — marimo: abrir un notebook lanza comandos MCP antes de la primera celda (8.8)",
+            "en": "CVE-2026-75149 — marimo: opening a notebook launches MCP commands before the first cell (8.8)",
+            "fr": "CVE-2026-75149 — marimo : ouvrir un notebook lance des commandes MCP avant la première cellule (8.8)"
+          },
+          "body_html": {
+            "es": "<p>marimo trataba la configuración embebida en el notebook como input confiable. Un notebook armado a mano mete comandos MCP en su metadata y, al abrirlo en modo edición, se ejecutan como subproceso local <em>antes</em> de que corra una sola celda. CVSS 8.7 (v4) / 8.8 (v3.1).</p><p>El parche adopta allowlist y saca de la configuración provista por el notebook las secciones <code>ai</code>, <code>mcp</code>, <code>completion</code>, <code>secrets</code> y <code>server</code>. Arreglado en 0.23.15. La lección se repite: la metadata del notebook es input del atacante.</p>",
+            "en": "<p>marimo treated notebook-embedded configuration as trusted input. A hand-crafted notebook plants MCP commands in its metadata, and opening it in edit mode runs them as a local subprocess <em>before</em> a single cell executes. CVSS 8.7 (v4) / 8.8 (v3.1).</p><p>The patch switches to an allowlist and strips the <code>ai</code>, <code>mcp</code>, <code>completion</code>, <code>secrets</code>, and <code>server</code> sections from notebook-supplied config. Fixed in 0.23.15. Same lesson again: notebook metadata is attacker input.</p>",
+            "fr": "<p>marimo traitait la configuration embarquée dans le notebook comme une entrée de confiance. Un notebook fabriqué place des commandes MCP dans ses métadonnées, exécutées comme sous-processus local <em>avant</em> la moindre cellule. CVSS 8.7 (v4) / 8.8 (v3.1).</p><p>Le correctif passe à une allowlist et retire les sections <code>ai</code>, <code>mcp</code>, <code>completion</code>, <code>secrets</code> et <code>server</code>. Corrigé en 0.23.15.</p>"
+          },
+          "date": "25 Aug 2026",
+          "source": {
+            "url": "https://thehackernews.com/2026/08/marimo-notebook-flaw-could-run-mcp.html",
+            "label": "The Hacker News"
+          }
+        },
+        {
+          "id": "cve-2026-55582-mcp-shell",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-55582 — mcp-shell: un alias de Git tira abajo el modo seguro (8.4)",
+            "en": "CVE-2026-55582 — mcp-shell: a Git alias takes down secure mode (8.4)",
+            "fr": "CVE-2026-55582 — mcp-shell : un alias Git fait tomber le mode sécurisé (8.4)"
+          },
+          "body_html": {
+            "es": "<p>El servidor MCP mcp-shell tiene una allowlist de binarios. Git está adentro, y Git ejecuta shell arbitrario con sus alias: <code>/usr/bin/git -c alias.pwn=!&lt;comando&gt;</code> vía la tool <code>shell_exec</code> y la allowlist deja de significar nada. CWE-78, inyección de comandos del sistema operativo.</p><p>El deployment Docker por defecto es explotable tal cual viene: corre como <code>mcpuser</code>, con Git instalado y modo seguro activo, y no pide más que conectividad MCP. Arreglado en 0.6.0. Si no actualizás, sacá <code>/usr/bin/git</code> de <code>security.yaml</code> o desactivá <code>shell_exec</code>.</p>",
+            "en": "<p>The mcp-shell MCP server keeps an allowlist of binaries. Git is on it, and Git runs arbitrary shell through its aliases: <code>/usr/bin/git -c alias.pwn=!&lt;command&gt;</code> via the <code>shell_exec</code> tool and the allowlist stops meaning anything. CWE-78, OS command injection.</p><p>The default Docker deployment is exploitable as shipped: it runs as <code>mcpuser</code>, with Git installed and secure mode on, and asks for nothing beyond MCP connectivity. Fixed in 0.6.0. If you cannot upgrade, drop <code>/usr/bin/git</code> from <code>security.yaml</code> or disable <code>shell_exec</code>.</p>",
+            "fr": "<p>Le serveur MCP mcp-shell maintient une allowlist de binaires. Git y figure, et Git exécute un shell arbitraire via ses alias : <code>/usr/bin/git -c alias.pwn=!&lt;commande&gt;</code> avec la tool <code>shell_exec</code>, et l'allowlist ne veut plus rien dire. CWE-78.</p><p>Le déploiement Docker par défaut est exploitable tel quel. Corrigé en 0.6.0.</p>"
+          },
+          "date": "25 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-55582",
+            "label": "OpenCVE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "supply-chain",
+      "name": {
+        "es": "Cadena de suministro",
+        "en": "Supply Chain",
+        "fr": "Chaîne d'approvisionnement"
+      },
+      "theme": "supply-chain",
+      "icon_emoji": "📦",
+      "anchor": "supply-chain",
+      "updates": [
+        {
+          "id": "fake-codex-ads-amos",
+          "tag": "breach",
+          "title": {
+            "es": "Anuncios pagos de OpenAI Codex falso reparten un stealer para macOS",
+            "en": "Paid ads for a fake OpenAI Codex deliver a macOS stealer",
+            "fr": "Des publicités payantes pour un faux OpenAI Codex livrent un stealer macOS"
+          },
+          "body_html": {
+            "es": "<p>Cato Networks documentó una campaña que compra anuncios en Google para páginas de descarga falsas de OpenAI Codex, alojadas en Google Sites, que aparecen arriba del resultado legítimo. La víctima recibe lo que parece un comando de instalación npm y lo pega en la terminal: en realidad decodifica una URL en Base64, baja un script shell del atacante y lo pipea a zsh.</p><p>El segundo stage escribe un ejecutable Mach-O universal en <code>/tmp/helper</code> y le borra la metadata de cuarentena que macOS usa para marcar descargas sospechosas. Es una variante de ClickFix con parecidos fuertes a campañas previas de AMOS. La infraestructura filtra por sistema operativo y por ruta de acceso para mostrarle contenido inocuo a quien no es objetivo, y los investigadores encontraron páginas falsas de Anthropic Claude Code en la misma infra. El vector es simple: el atacante paga para estar arriba de la búsqueda que hace un dev que quiere la herramienta de verdad.</p>",
+            "en": "<p>Cato Networks documented a campaign buying Google ads for fake OpenAI Codex download pages hosted on Google Sites, placed above the legitimate result. The victim is handed what looks like an npm install command and pastes it into Terminal: it actually decodes a Base64 URL, fetches an attacker-controlled shell script, and pipes it into zsh.</p><p>The second stage writes a universal Mach-O executable to <code>/tmp/helper</code> and strips the quarantine metadata macOS uses to flag suspicious downloads. It is a ClickFix variant with substantial similarities to earlier AMOS campaigns. The infrastructure filters by OS and access path so non-targets see benign content, and researchers found fake Anthropic Claude Code pages on the same infra. The vector is plain: the attacker pays to sit above the search a developer runs to get the real tool.</p>",
+            "fr": "<p>Cato Networks a documenté une campagne achetant des publicités Google pour de fausses pages de téléchargement OpenAI Codex hébergées sur Google Sites. La victime colle dans le Terminal ce qui ressemble à une commande npm : en réalité elle décode une URL Base64, récupère un script shell de l'attaquant et le passe à zsh.</p><p>Le second stage écrit un exécutable Mach-O universel dans <code>/tmp/helper</code> et supprime les métadonnées de quarantaine de macOS. Variante de ClickFix proche des campagnes AMOS. De fausses pages Anthropic Claude Code ont été trouvées sur la même infrastructure.</p>"
+          },
+          "date": "25 Aug 2026",
+          "source": {
+            "url": "https://www.theregister.com/security/2026/08/25/crooks-push-mac-malware-through-fake-openai-codex-ads/5291899",
+            "label": "The Register"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El patrón del día es la confianza mal puesta en input controlable: metadata de notebook en marimo, un header de identidad en Headroom, un parámetro reenviado entre tools en Strands. En los tres casos el control existía; lo que faltó fue atarlo a algo que el atacante no pudiera escribir.",
+      "en": "The pattern of the day is trust placed in attacker-writable input: notebook metadata in marimo, an identity header in Headroom, a parameter forwarded between tools in Strands. In all three the control existed — what was missing was binding it to something the attacker could not write.",
+      "fr": "Le motif du jour : la confiance accordée à une entrée contrôlable par l'attaquant — métadonnées de notebook dans marimo, en-tête d'identité dans Headroom, paramètre transmis entre tools dans Strands. Le contrôle existait ; il n'était pas lié à quelque chose d'inaccessible à l'attaquant."
+    },
+    {
+      "es": "Las allowlists de binarios siguen perdiendo contra intérpretes disfrazados de herramientas. mcp-shell permitía Git y Git ejecuta shell arbitrario con alias, igual que setsid y nice rompieron el parser de Omnigent la semana pasada. Si el binario permitido puede lanzar otro proceso, la allowlist es decorativa.",
+      "en": "Binary allowlists keep losing to interpreters wearing a tool's clothes. mcp-shell allowed Git, and Git runs arbitrary shell through aliases — the same shape as setsid and nice breaking Omnigent's parser last week. If an allowed binary can spawn another process, the allowlist is decoration.",
+      "fr": "Les allowlists de binaires perdent toujours face aux interpréteurs déguisés en outils. mcp-shell autorisait Git, et Git exécute un shell arbitraire via ses alias — comme setsid et nice avaient cassé le parser d'Omnigent la semaine dernière. Si un binaire autorisé peut lancer un autre processus, l'allowlist est décorative."
+    },
+    {
+      "es": "El envenenamiento de NemoClaw cambia la duración del daño: la inyección no vive en el contexto de la sesión sino en el chat template del modelo, así que sobrevive al reinicio. Y la campaña de anuncios falsos de Codex apunta al mismo eslabón desde afuera: el dev que instala la herramienta de IA es hoy el objetivo más barato de la cadena.",
+      "en": "The NemoClaw poisoning changes how long the damage lasts: the injection lives in the model's chat template rather than the session context, so it survives a restart. And the fake Codex ad campaign hits the same link from the outside — the developer installing the AI tool is now the cheapest target in the chain.",
+      "fr": "L'empoisonnement de NemoClaw change la durée du dommage : l'injection vit dans le chat template du modèle et non dans le contexte de session, elle survit donc au redémarrage. Et la campagne de fausses publicités Codex vise le même maillon depuis l'extérieur — le développeur qui installe l'outil d'IA est aujourd'hui la cible la moins chère de la chaîne."
+    }
+  ]
+}

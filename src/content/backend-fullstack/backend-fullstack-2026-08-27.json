@@ -1,0 +1,465 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 27 Ago 2026",
+    "en": "Backend & Fullstack — Aug 27, 2026",
+    "fr": "Backend & Fullstack — 27 août 2026"
+  },
+  "description": {
+    "es": "Node.js 26.8.0 (con hotfix 26.8.1), Kubernetes v1.37 «Garhwal», pnpm 12.0.0 GA con breaking changes en dependencias git, y un crítico CVSS 9.6 en Kyverno que crea RoleBindings en kube-system.",
+    "en": "Node.js 26.8.0 (plus a 26.8.1 hotfix), Kubernetes v1.37 «Garhwal», pnpm 12.0.0 GA with breaking git-dependency changes, and a CVSS 9.6 critical in Kyverno that creates RoleBindings in kube-system.",
+    "fr": "Node.js 26.8.0 (avec hotfix 26.8.1), Kubernetes v1.37 «Garhwal», pnpm 12.0.0 GA avec des breaking changes sur les dépendances git, et une faille critique CVSS 9.6 dans Kyverno créant des RoleBindings dans kube-system."
+  },
+  "pubDate": "2026-08-27",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Kyverno crítico: RoleBindings en kube-system",
+        "en": "Kyverno critical: RoleBindings in kube-system",
+        "fr": "Kyverno critique : RoleBindings dans kube-system"
+      },
+      "anchor": "kyverno-nsgp-escalation",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Node.js 26.8.0 + hotfix 26.8.1 el mismo día",
+        "en": "Node.js 26.8.0 + same-day 26.8.1 hotfix",
+        "fr": "Node.js 26.8.0 + hotfix 26.8.1 le même jour"
+      },
+      "anchor": "node-26-8-0",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": {
+        "es": "Kubernetes v1.37 «Garhwal»: 67 mejoras",
+        "en": "Kubernetes v1.37 «Garhwal»: 67 enhancements",
+        "fr": "Kubernetes v1.37 «Garhwal» : 67 améliorations"
+      },
+      "anchor": "k8s-1-37-garhwal",
+      "icon": "simple-icons:kubernetes"
+    },
+    {
+      "text": {
+        "es": "pnpm 12.0.0 GA rompe deps git por SSH",
+        "en": "pnpm 12.0.0 GA breaks SSH git deps",
+        "fr": "pnpm 12.0.0 GA casse les deps git en SSH"
+      },
+      "anchor": "pnpm-12-0-0",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "PyPI: pantheon-agents troyanizado roba credenciales",
+        "en": "PyPI: trojanized pantheon-agents steals creds",
+        "fr": "PyPI : pantheon-agents troyanisé vole des creds"
+      },
+      "anchor": "pantheon-agents-trojan",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "AsyncLocalStorage con scopes using en Node 24",
+        "en": "AsyncLocalStorage using scopes land in Node 24",
+        "fr": "AsyncLocalStorage avec scopes using dans Node 24"
+      },
+      "anchor": "node-24-20-0",
+      "icon": "lucide:terminal"
+    },
+    {
+      "text": {
+        "es": "Diagrid Catalyst 2.0: ejecución durable para agentes",
+        "en": "Diagrid Catalyst 2.0: durable agent execution",
+        "fr": "Diagrid Catalyst 2.0 : exécution durable pour agents"
+      },
+      "anchor": "diagrid-catalyst-2",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "kyverno-nsgp-escalation",
+      "updates": [
+        {
+          "id": "kyverno-nsgp-escalation",
+          "tag": "security",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "Kyverno: crítico CVSS 9.6 permite crear RoleBindings en cualquier namespace",
+            "en": "Kyverno: CVSS 9.6 critical lets attackers create RoleBindings in any namespace",
+            "fr": "Kyverno : critique CVSS 9.6 permettant de créer des RoleBindings dans n'importe quel namespace"
+          },
+          "body_html": {
+            "es": "<p>El argumento <code>namespace</code> de <code>generator.apply()</code> en una <code>NamespacedGeneratingPolicy</code> no se valida, así que el background controller genera <strong>RoleBindings en cualquier namespace, incluido <code>kube-system</code></strong>. Escalada de privilegios de tenant a cluster-admin con <strong>CVSS 9.6</strong>. Parcheado en <code>1.18.2</code>. Si tenés Kyverno multi-tenant, actualizá YA — esto es el policy engine escribiéndole RBAC al atacante.</p>",
+            "en": "<p>The <code>namespace</code> argument of <code>generator.apply()</code> in a <code>NamespacedGeneratingPolicy</code> is unvalidated, so the background controller creates <strong>RoleBindings in any namespace, including <code>kube-system</code></strong>. Tenant-to-cluster-admin privilege escalation at <strong>CVSS 9.6</strong>. Patched in <code>1.18.2</code>. If you run multi-tenant Kyverno, patch now — this is your policy engine writing RBAC for the attacker.</p>",
+            "fr": "<p>L'argument <code>namespace</code> de <code>generator.apply()</code> dans une <code>NamespacedGeneratingPolicy</code> n'est pas validé : le background controller crée des <strong>RoleBindings dans n'importe quel namespace, y compris <code>kube-system</code></strong>. Escalade de privilèges tenant → cluster-admin, <strong>CVSS 9.6</strong>. Corrigé en <code>1.18.2</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-79gf-7frw-68m9", "label": "github.com/advisories" }
+        },
+        {
+          "id": "node-26-8-0",
+          "tag": "release",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "Node.js 26.8.0: cifrados SIV/GCM-SIV, TracingChannel estable y REPL con highlighting",
+            "en": "Node.js 26.8.0: SIV/GCM-SIV ciphers, stable TracingChannel and a highlighted REPL",
+            "fr": "Node.js 26.8.0 : chiffrements SIV/GCM-SIV, TracingChannel stable et REPL colorisé"
+          },
+          "body_html": {
+            "es": "<p>Llegan los modos <strong>SIV y GCM-SIV</strong> a <code>Cipher</code>/<code>Decipher</code> (cifrado resistente a reuso de nonce, un golazo para tokens), <code>TracingChannel</code> de <code>diagnostics_channel</code> pasa a <strong>stable</strong>, <code>StatementSync.prototype.close()</code> en <code>node:sqlite</code>, mejor performance de <code>net.BlockList</code> y raíces NSS 3.126. Bonus: el REPL ahora tiene syntax highlighting básico.</p>",
+            "en": "<p>Adds <strong>SIV and GCM-SIV</strong> modes to <code>Cipher</code>/<code>Decipher</code> (nonce-misuse-resistant encryption), promotes <code>diagnostics_channel</code>'s <code>TracingChannel</code> to <strong>stable</strong>, ships <code>StatementSync.prototype.close()</code> in <code>node:sqlite</code>, faster <code>net.BlockList</code>, and NSS 3.126 root certs. Bonus: the REPL now does basic syntax highlighting.</p>",
+            "fr": "<p>Ajoute les modes <strong>SIV et GCM-SIV</strong> à <code>Cipher</code>/<code>Decipher</code>, stabilise <code>TracingChannel</code> de <code>diagnostics_channel</code>, ajoute <code>StatementSync.prototype.close()</code> dans <code>node:sqlite</code>, améliore <code>net.BlockList</code> et met à jour les racines NSS 3.126. Bonus : coloration syntaxique basique dans le REPL.</p>"
+          },
+          "source": { "url": "https://github.com/nodejs/node/releases/tag/v26.8.0", "label": "github.com/nodejs" }
+        },
+        {
+          "id": "k8s-1-37-garhwal",
+          "tag": "release",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "Kubernetes v1.37 «Garhwal»: 67 enhancements, 16 a Stable",
+            "en": "Kubernetes v1.37 «Garhwal»: 67 enhancements, 16 graduating to Stable",
+            "fr": "Kubernetes v1.37 «Garhwal» : 67 améliorations, 16 en Stable"
+          },
+          "body_html": {
+            "es": "<p>Nuevo minor del ciclo: <strong>16 features a Stable, 23 a Beta, 27 nuevas en Alpha</strong> y una remoción. Entre lo graduado, <code>ResilientWatchCacheInitialization</code> llega a estable junto con el <code>WatchCacheInitializationPostStartHook</code>, o sea menos sustos en el arranque del API server bajo carga. Ojo con la deprecación antes de planear el upgrade del cluster.</p>",
+            "en": "<p>The new minor lands <strong>16 features to Stable, 23 to Beta, 27 new in Alpha</strong> plus one removal. Among the graduations, <code>ResilientWatchCacheInitialization</code> goes stable alongside <code>WatchCacheInitializationPostStartHook</code> — fewer surprises when the API server warms up under load. Check the removal before planning your cluster upgrade.</p>",
+            "fr": "<p>Ce minor apporte <strong>16 fonctionnalités en Stable, 23 en Beta, 27 nouvelles en Alpha</strong> et une suppression. Parmi les stabilisations, <code>ResilientWatchCacheInitialization</code> passe stable avec <code>WatchCacheInitializationPostStartHook</code>.</p>"
+          },
+          "source": { "url": "https://kubernetes.io/blog/2026/08/26/kubernetes-v1-37-release/", "label": "kubernetes.io" }
+        },
+        {
+          "id": "pnpm-12-0-0",
+          "tag": "breaking",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "pnpm 12.0.0 GA: las dependencias git ahora son identidades, no transporte",
+            "en": "pnpm 12.0.0 GA: git dependencies are identities now, not transports",
+            "fr": "pnpm 12.0.0 GA : les dépendances git sont des identités, plus des transports"
+          },
+          "body_html": {
+            "es": "<p>Después de once RCs, pnpm 12 es GA. Cambio grande: para hosts conocidos (GitHub, GitLab, Bitbucket) <code>github:owner/repo</code>, <code>git+https</code> y <code>git+ssh</code> resuelven todos a la <strong>URL HTTPS canónica</strong> y el lockfile <strong>ya no guarda URLs SSH</strong>. ¿Repo privado? Configurás la máquina, no el proyecto: <code>git config --global url.&quot;git@github.com:&quot;.insteadOf https://github.com/</code>. Además, una clave desconocida en <code>pnpm-workspace.yaml</code> ya no se ignora en silencio: falla con <code>ERR_PNPM_UNRECOGNIZED_WORKSPACE_SETTINGS</code> cuando el proyecto pinea la versión de pnpm. Adiós al <code>minimumReleaseAge</code> mal escrito que nunca aplicó nada.</p>",
+            "en": "<p>After eleven RCs, pnpm 12 is GA. The big one: for known hosts (GitHub, GitLab, Bitbucket), <code>github:owner/repo</code>, <code>git+https</code> and <code>git+ssh</code> all resolve through the <strong>canonical HTTPS URL</strong>, and the lockfile <strong>never records an SSH URL</strong> again. Private repo? Configure the machine, not the project: <code>git config --global url.&quot;git@github.com:&quot;.insteadOf https://github.com/</code>. Also, an unknown key in <code>pnpm-workspace.yaml</code> is no longer silently ignored — it fails with <code>ERR_PNPM_UNRECOGNIZED_WORKSPACE_SETTINGS</code> when the project pins a satisfied pnpm version. No more misspelled <code>minimumReleaseAge</code> quietly doing nothing.</p>",
+            "fr": "<p>Après onze RC, pnpm 12 est GA. Changement majeur : pour les hôtes connus, toutes les formes d'URL git résolvent via l'<strong>URL HTTPS canonique</strong> et le lockfile n'enregistre plus d'URL SSH. Pour un dépôt privé, configurez la machine avec <code>git config --global url.&quot;git@github.com:&quot;.insteadOf https://github.com/</code>. De plus, une clé inconnue dans <code>pnpm-workspace.yaml</code> échoue désormais avec <code>ERR_PNPM_UNRECOGNIZED_WORKSPACE_SETTINGS</code>.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.0.0", "label": "github.com/pnpm" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "node-24-20-0",
+      "updates": [
+        {
+          "id": "node-24-20-0",
+          "tag": "release",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "Node.js 24.20.0: AsyncLocalStorage con scopes using y buffer con parámetro end",
+            "en": "Node.js 24.20.0: AsyncLocalStorage using scopes and a buffer end parameter",
+            "fr": "Node.js 24.20.0 : scopes using pour AsyncLocalStorage et paramètre end sur buffer"
+          },
+          "body_html": {
+            "es": "<p>La línea 24 suma <code>using</code> scopes a <code>AsyncLocalStorage</code> — explicit resource management aplicado al context propagation, o sea que el store se cierra solo al salir del bloque en vez de encadenar <code>run()</code> anidados. También llega el parámetro <code>end</code> en <code>buffer</code> y raíces NSS 3.125. Si mantenés tracing o multi-tenant context, esto te simplifica la vida.</p>",
+            "en": "<p>The 24 line gains <code>using</code> scopes for <code>AsyncLocalStorage</code> — explicit resource management applied to context propagation, so the store closes on block exit instead of nesting <code>run()</code> callbacks. Also lands an <code>end</code> parameter on <code>buffer</code> and NSS 3.125 roots. Nice win if you maintain tracing or multi-tenant context.</p>",
+            "fr": "<p>La ligne 24 ajoute les scopes <code>using</code> à <code>AsyncLocalStorage</code> : le store se ferme à la sortie du bloc au lieu d'imbriquer des <code>run()</code>. Ajoute aussi un paramètre <code>end</code> sur <code>buffer</code> et les racines NSS 3.125.</p>"
+          },
+          "source": { "url": "https://github.com/nodejs/node/releases/tag/v24.20.0", "label": "github.com/nodejs" }
+        },
+        {
+          "id": "node-26-8-1",
+          "tag": "patch",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "Node.js 26.8.1: release out-of-band porque node --version decía alpha",
+            "en": "Node.js 26.8.1: out-of-band release because node --version reported an alpha",
+            "fr": "Node.js 26.8.1 : release hors cycle car node --version affichait une alpha"
+          },
+          "body_html": {
+            "es": "<p>Ocho horas después de 26.8.0 salió el parche: una designación alpha accidental se coló en el binario y <code>node --version</code> reportaba una versión alpha. Cero cambios funcionales, pero si tenés CI que parsea la versión o gates que rechazan prereleases, saltá directo a <code>26.8.1</code>.</p>",
+            "en": "<p>Eight hours after 26.8.0 came the patch: an accidental alpha designation shipped in the binary and <code>node --version</code> reported an alpha version. Zero functional changes, but if your CI parses the version string or your gates reject prereleases, jump straight to <code>26.8.1</code>.</p>",
+            "fr": "<p>Huit heures après 26.8.0 : une désignation alpha accidentelle s'est glissée dans le binaire et <code>node --version</code> affichait une alpha. Aucun changement fonctionnel, mais si votre CI parse la version, passez directement à <code>26.8.1</code>.</p>"
+          },
+          "source": { "url": "https://github.com/nodejs/node/releases/tag/v26.8.1", "label": "github.com/nodejs" }
+        },
+        {
+          "id": "workerd-20260827",
+          "tag": "minor",
+          "date": "27 Aug 2026",
+          "title": {
+            "es": "workerd v1.20260827.1: nuevo compat build del runtime de Workers",
+            "en": "workerd v1.20260827.1: fresh compatibility build of the Workers runtime",
+            "fr": "workerd v1.20260827.1 : nouveau build de compatibilité du runtime Workers"
+          },
+          "body_html": {
+            "es": "<p>Cloudflare sigue con su cadencia diaria de builds del runtime open source de Workers. Si fijás <code>compatibility_date</code> en tu <code>wrangler.toml</code>, este es el nuevo piso disponible para desarrollo local con <code>workerd</code>.</p>",
+            "en": "<p>Cloudflare keeps its daily cadence on the open-source Workers runtime. If you pin <code>compatibility_date</code> in <code>wrangler.toml</code>, this is the new floor available for local development with <code>workerd</code>.</p>",
+            "fr": "<p>Cloudflare poursuit sa cadence quotidienne sur le runtime open source Workers. Si vous fixez <code>compatibility_date</code> dans <code>wrangler.toml</code>, voici le nouveau socle disponible en local.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workerd/releases/tag/v1.20260827.1", "label": "github.com/cloudflare" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "prisma-8-rc-8",
+      "updates": [
+        {
+          "id": "prisma-8-rc-8",
+          "tag": "beta",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "Prisma 8.0.0-rc.8: migration plan deja de planear desde una base vacía",
+            "en": "Prisma 8.0.0-rc.8: migration plan stops planning from an empty database",
+            "fr": "Prisma 8.0.0-rc.8 : migration plan ne planifie plus depuis une base vide"
+          },
+          "body_html": {
+            "es": "<p>El toolchain se pega a <code>@prisma/cli-engine@0.3.0</code> como peer exacto (antes 0.2.3) y ahora <code>@prisma/management-api-sdk</code> es peer dependency del engine. El fix que importa: <code>migration plan</code> ya no planifica en silencio desde una base vacía cuando ya existen migraciones — ese bug te generaba diffs fantasma en CI. Hay recipe de upgrade rc.7 → rc.8 en el repo.</p>",
+            "en": "<p>The toolchain pins <code>@prisma/cli-engine@0.3.0</code> as an exact peer (up from 0.2.3) and <code>@prisma/management-api-sdk</code> becomes a peer dependency of the engine. The fix that matters: <code>migration plan</code> no longer silently plans from an empty database when migrations already exist — that bug produced phantom diffs in CI. An rc.7 → rc.8 upgrade recipe ships in the repo.</p>",
+            "fr": "<p>Le toolchain épingle <code>@prisma/cli-engine@0.3.0</code> en peer exact et <code>@prisma/management-api-sdk</code> devient peer dependency de l'engine. Le correctif clé : <code>migration plan</code> ne planifie plus silencieusement depuis une base vide quand des migrations existent.</p>"
+          },
+          "source": { "url": "https://github.com/prisma/prisma/releases/tag/v8.0.0-rc.8", "label": "github.com/prisma" }
+        },
+        {
+          "id": "better-auth-1-7-2",
+          "tag": "patch",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "better-auth 1.7.2: bans permanentes, cookie cache y migraciones en D1",
+            "en": "better-auth 1.7.2: permanent bans, cookie cache and D1 migrations",
+            "fr": "better-auth 1.7.2 : bans permanents, cookie cache et migrations D1"
+          },
+          "body_html": {
+            "es": "<p>Ronda de fixes útiles: un ban permanente ahora limpia la expiración que había dejado un ban temporal previo (sí, un usuario baneado para siempre se desbaneaba solo), warnings cuando la session data firmada en el cookie cache es inválida, migraciones programáticas funcionando en <strong>Cloudflare D1</strong>, e índices MyISAM deshabilitados que ya no pasan los checks de migración.</p>",
+            "en": "<p>A useful round of fixes: a permanent ban now clears the expiry left behind by an earlier temporary ban (yes, permanently banned users un-banned themselves), warnings on invalid signed session data in the cookie cache, working programmatic migrations on <strong>Cloudflare D1</strong>, and disabled MyISAM indexes no longer satisfying migration index checks.</p>",
+            "fr": "<p>Série de correctifs utiles : un ban permanent efface désormais l'expiration laissée par un ban temporaire, des avertissements sur les données de session signées invalides dans le cookie cache, des migrations programmatiques fonctionnelles sur <strong>Cloudflare D1</strong>, et les index MyISAM désactivés ne valident plus les checks de migration.</p>"
+          },
+          "source": { "url": "https://github.com/better-auth/better-auth/releases/tag/v1.7.2", "label": "github.com/better-auth" }
+        },
+        {
+          "id": "astro-7-2-8",
+          "tag": "patch",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "Astro 7.2.8: Sharp mínimo 0.35.4 y adiós a find-process",
+            "en": "Astro 7.2.8: Sharp minimum bumped to 0.35.4, find-process dropped",
+            "fr": "Astro 7.2.8 : Sharp minimum 0.35.4 et find-process remplacé"
+          },
+          "body_html": {
+            "es": "<p>Sube el mínimo soportado de <code>sharp</code> a <code>0.35.4</code> — relevante porque la cadena libheif/sharp fue justo el vector del RCE de AVIF en Next.js esta semana — y reemplaza la dependencia interna <code>find-process</code> por una alternativa más liviana. Menos superficie, menos <code>node_modules</code>.</p>",
+            "en": "<p>Raises the minimum supported <code>sharp</code> to <code>0.35.4</code> — relevant because the libheif/sharp chain was exactly the AVIF RCE vector in Next.js this week — and swaps the internal <code>find-process</code> dependency for a lighter alternative. Less surface, smaller <code>node_modules</code>.</p>",
+            "fr": "<p>Relève la version minimale de <code>sharp</code> à <code>0.35.4</code> — pertinent car la chaîne libheif/sharp était le vecteur du RCE AVIF dans Next.js cette semaine — et remplace la dépendance interne <code>find-process</code> par une alternative plus légère.</p>"
+          },
+          "source": { "url": "https://github.com/withastro/astro/releases/tag/astro%407.2.8", "label": "github.com/withastro" }
+        },
+        {
+          "id": "tanstack-router-2026-08-26",
+          "tag": "minor",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "TanStack Router: release del 26 de agosto con ssr-query en 1.167.2",
+            "en": "TanStack Router: Aug 26 release ships ssr-query at 1.167.2",
+            "fr": "TanStack Router : release du 26 août avec ssr-query en 1.167.2"
+          },
+          "body_html": {
+            "es": "<p>Otro release train diario del monorepo. Los adaptadores <code>ssr-query</code> de React, Vue y Solid quedan en <code>1.167.2</code> y <code>router-ssr-query-core</code> en <code>1.169.2</code>. Si estás hidratando queries en SSR, alineá las versiones del core y del adaptador — desalinearlas es la fuente clásica de mismatches de hidratación.</p>",
+            "en": "<p>Another daily release train from the monorepo. The React, Vue and Solid <code>ssr-query</code> adapters land at <code>1.167.2</code> and <code>router-ssr-query-core</code> at <code>1.169.2</code>. If you hydrate queries during SSR, keep core and adapter versions aligned — drift there is the classic source of hydration mismatches.</p>",
+            "fr": "<p>Nouveau train de release quotidien du monorepo. Les adaptateurs <code>ssr-query</code> React, Vue et Solid passent en <code>1.167.2</code> et <code>router-ssr-query-core</code> en <code>1.169.2</code>. Gardez core et adaptateur alignés.</p>"
+          },
+          "source": { "url": "https://github.com/TanStack/router/releases/tag/release-2026-08-26-2336", "label": "github.com/TanStack" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "bullmq-6-3-1",
+      "updates": [
+        {
+          "id": "bullmq-6-3-1",
+          "tag": "minor",
+          "date": "27 Aug 2026",
+          "title": {
+            "es": "BullMQ 6.3.0 y 6.3.1: SSL en el backend Postgres del port Elixir",
+            "en": "BullMQ 6.3.0 and 6.3.1: SSL for the Elixir port's Postgres backend",
+            "fr": "BullMQ 6.3.0 et 6.3.1 : SSL pour le backend Postgres du port Elixir"
+          },
+          "body_html": {
+            "es": "<p>Dos releases en menos de doce horas. La feature: la opción <code>:ssl</code> ahora se reenvía a la conexión Postgrex del port Elixir, o sea colas BullMQ sobre <strong>Postgres con TLS</strong> sin parches locales. Si venías corriendo BullMQ contra un Postgres gestionado que exige SSL, esto te destraba.</p>",
+            "en": "<p>Two releases in under twelve hours. The feature: the <code>:ssl</code> option is now forwarded to the Elixir port's Postgrex connection, meaning BullMQ queues over <strong>Postgres with TLS</strong> without local patches. If you were running BullMQ against a managed Postgres that requires SSL, this unblocks you.</p>",
+            "fr": "<p>Deux releases en moins de douze heures. L'option <code>:ssl</code> est désormais transmise à la connexion Postgrex du port Elixir : des files BullMQ sur <strong>Postgres avec TLS</strong> sans patch local.</p>"
+          },
+          "source": { "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.3.1", "label": "github.com/taskforcesh" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "aws-batch-ecs-managed",
+      "updates": [
+        {
+          "id": "aws-batch-ecs-managed",
+          "tag": "ga",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "AWS Batch ahora soporta ECS Managed Instances",
+            "en": "AWS Batch now supports Amazon ECS Managed Instances",
+            "fr": "AWS Batch prend en charge les ECS Managed Instances"
+          },
+          "body_html": {
+            "es": "<p>Batch puede correr jobs sobre <strong>ECS Managed Instances</strong>, incluidas cargas con GPU, mientras AWS se hace cargo de updates de AMI, parcheo de seguridad y ciclo de vida de las instancias. Menos capacity provider casero para mantener; para pipelines batch de ML o de datos es una tarea operativa menos en tu backlog.</p>",
+            "en": "<p>Batch can run jobs on <strong>ECS Managed Instances</strong>, GPU-accelerated workloads included, while AWS handles AMI updates, security patching and instance lifecycle. One less hand-rolled capacity provider to maintain — for ML or data batch pipelines, that's an ops chore off your backlog.</p>",
+            "fr": "<p>Batch peut exécuter des jobs sur des <strong>ECS Managed Instances</strong>, workloads GPU inclus, pendant qu'AWS gère les mises à jour d'AMI, les correctifs de sécurité et le cycle de vie des instances.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/aws-batch-on-ecs-managed-instances/", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "diagrid-catalyst-2",
+      "updates": [
+        {
+          "id": "diagrid-catalyst-2",
+          "tag": "notable",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "Diagrid Catalyst 2.0: ejecución durable y verificable para agentes",
+            "en": "Diagrid Catalyst 2.0 adds durable and verifiable execution for AI agents",
+            "fr": "Diagrid Catalyst 2.0 : exécution durable et vérifiable pour les agents IA"
+          },
+          "body_html": {
+            "es": "<p>Catalyst 2.0 aplica recovery e historial de workflow firmado a través de distintos frameworks de agentes. Más allá del hype de agentes, el patrón es el de siempre y vale para tu backend: <strong>durable execution</strong> (el workflow sobrevive al crash del proceso) más una traza <strong>atestiguable</strong> de qué pasó. Es Temporal/Dapr aplicado a llamadas no determinísticas.</p>",
+            "en": "<p>Catalyst 2.0 applies recovery and signed workflow history across agent frameworks. Past the agent hype, the pattern is the familiar one and it applies to your backend too: <strong>durable execution</strong> (the workflow survives a process crash) plus an <strong>attestable</strong> trace of what happened. Temporal/Dapr thinking applied to non-deterministic calls.</p>",
+            "fr": "<p>Catalyst 2.0 applique recovery et historique de workflow signé à plusieurs frameworks d'agents. Au-delà du hype : <strong>durable execution</strong> plus une trace <strong>attestable</strong> de ce qui s'est passé.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/diagrid-catalyst-ai-agents/", "label": "infoq.com" }
+        },
+        {
+          "id": "aws-spec-driven-data",
+          "tag": "notable",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "AWS propone composición spec-driven para pipelines de datos",
+            "en": "AWS introduces specification-driven composition for data workflows",
+            "fr": "AWS propose une composition spec-driven pour les workflows de données"
+          },
+          "body_html": {
+            "es": "<p>AWS describe cómo especificaciones declarativas bajan el onboarding de un dataset de semanas a días sin perder trazabilidad ni governance. Es el mismo argumento de siempre a favor de lo declarativo — la spec es el contrato, el runtime la ejecuta — trasladado a data engineering. Si venís haciendo Clean Architecture, la idea te va a sonar familiar: separá el <em>qué</em> del <em>cómo</em>.</p>",
+            "en": "<p>AWS describes how declarative specifications cut dataset onboarding from weeks to days without giving up traceability or governance. It's the perennial case for declarative design — the spec is the contract, the runtime executes it — carried into data engineering. If you do Clean Architecture, the idea will feel familiar: separate the <em>what</em> from the <em>how</em>.</p>",
+            "fr": "<p>AWS explique comment des spécifications déclaratives réduisent l'onboarding d'un dataset de semaines à jours sans sacrifier traçabilité ni gouvernance : la spec est le contrat, le runtime l'exécute.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/aws-spec-driven-data-workflow/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "pantheon-agents-trojan",
+      "updates": [
+        {
+          "id": "pantheon-agents-trojan",
+          "tag": "security",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "PyPI: pantheon-agents 0.6.1 y 0.6.2 troyanizados con un roba-credenciales",
+            "en": "PyPI: trojanized pantheon-agents 0.6.1 and 0.6.2 ship a credential stealer",
+            "fr": "PyPI : pantheon-agents 0.6.1 et 0.6.2 troyanisés avec un voleur d'identifiants"
+          },
+          "body_html": {
+            "es": "<p>La cuenta que publica <code>pantheon-agents</code> fue comprometida en el ataque de cadena de suministro «Hades» de junio 2026 (linaje Mini Shai-Hulud / Miasma). Con un <strong>token de API de PyPI robado y de larga vida</strong> el atacante subió releases troyanizadas directo al registry. <strong>Solo los artefactos de PyPI están afectados</strong>: el repo de GitHub, sus tags y los demás canales están limpios. Moraleja repetida: tokens de publicación de larga vida son deuda de seguridad — pasate a trusted publishing.</p>",
+            "en": "<p>The account publishing <code>pantheon-agents</code> was compromised in the June 2026 «Hades» PyPI supply-chain attack (Mini Shai-Hulud / Miasma lineage). Using a <strong>stolen, long-lived PyPI API token</strong>, the attacker uploaded trojanized releases straight to the registry. <strong>Only the PyPI artifacts are affected</strong> — the GitHub repo, its tags and every other channel are clean. Same lesson again: long-lived publish tokens are security debt, move to trusted publishing.</p>",
+            "fr": "<p>Le compte publiant <code>pantheon-agents</code> a été compromis lors de l'attaque supply-chain PyPI «Hades» de juin 2026. Avec un <strong>token API PyPI volé et à longue durée de vie</strong>, l'attaquant a publié des releases troyanisées. <strong>Seuls les artefacts PyPI sont touchés</strong> ; le dépôt GitHub et ses tags sont sains.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-93qj-5q5v-3c2h", "label": "github.com/advisories" }
+        },
+        {
+          "id": "logtape-syslog-injection",
+          "tag": "security",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "@logtape/syslog: inyección de logs por caracteres de control sin escapar (CVSS 8.6)",
+            "en": "@logtape/syslog: log injection via unescaped control characters (CVSS 8.6)",
+            "fr": "@logtape/syslog : injection de logs via caractères de contrôle non échappés (CVSS 8.6)"
+          },
+          "body_html": {
+            "es": "<p>El sink de syslog no escapa caracteres de control ni valida las claves SD-NAME, así que un valor controlado por el usuario que llegue a un log puede <strong>forjar entradas de syslog enteras</strong> — falsificás auditoría, envenenás el SIEM, escondés lo que hiciste. Parcheado en <code>2.1.5</code>, <code>2.0.14</code> y <code>1.3.11</code>. Regla que no cambia: todo lo que loggeás desde input del usuario es untrusted, incluida la estructura del mensaje.</p>",
+            "en": "<p>The syslog sink doesn't escape control characters or validate SD-NAME keys, so any user-controlled value reaching a log can <strong>forge entire syslog entries</strong> — falsify audit trails, poison the SIEM, hide what you did. Patched in <code>2.1.5</code>, <code>2.0.14</code> and <code>1.3.11</code>. The rule never changes: anything you log from user input is untrusted, message structure included.</p>",
+            "fr": "<p>Le sink syslog n'échappe pas les caractères de contrôle et ne valide pas les clés SD-NAME : une valeur contrôlée par l'utilisateur peut <strong>forger des entrées syslog complètes</strong>. Corrigé en <code>2.1.5</code>, <code>2.0.14</code> et <code>1.3.11</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-8h6h-x5pq-56fq", "label": "github.com/advisories" }
+        },
+        {
+          "id": "asyncssh-scp-traversal",
+          "tag": "security",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "asyncssh: path traversal en SCP con escritura arbitraria de archivos (CVSS 8.1)",
+            "en": "asyncssh: SCP path traversal leading to arbitrary file write (CVSS 8.1)",
+            "fr": "asyncssh : path traversal SCP menant à une écriture de fichier arbitraire (CVSS 8.1)"
+          },
+          "body_html": {
+            "es": "<p>Un servidor SSH malicioso (o comprometido) puede hacer que el cliente SCP escriba fuera del directorio destino. Si tenés jobs de CI o pipelines de deploy que traen artefactos por SCP desde un host que no controlás del todo, esto es escritura arbitraria en tu runner. Parcheado en <code>2.23.1</code>.</p>",
+            "en": "<p>A malicious (or compromised) SSH server can make the SCP client write outside the destination directory. If you run CI jobs or deploy pipelines pulling artifacts over SCP from a host you don't fully control, that's arbitrary write on your runner. Patched in <code>2.23.1</code>.</p>",
+            "fr": "<p>Un serveur SSH malveillant peut faire écrire le client SCP hors du répertoire cible. Pour un job CI récupérant des artefacts en SCP, c'est une écriture arbitraire sur le runner. Corrigé en <code>2.23.1</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-2wxc-x7rj-hg8f", "label": "github.com/advisories" }
+        },
+        {
+          "id": "budibase-s3-signed-url",
+          "tag": "security",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "Budibase: usuarios autenticados pueden emitir URLs firmadas de subida a S3",
+            "en": "Budibase: authenticated users can issue arbitrary S3 signed upload URLs",
+            "fr": "Budibase : des utilisateurs authentifiés peuvent émettre des URLs d'upload S3 signées"
+          },
+          "body_html": {
+            "es": "<p>El endpoint <code>/api/attachments/:datasourceId/url</code> emite URLs firmadas de subida sin acotar el destino, así que cualquier usuario autenticado puede escribir en buckets que no le corresponden. Patrón a mirar en tu propio código: <strong>el que firma la URL es el que autoriza</strong> — si el path viene del cliente, ya perdiste.</p>",
+            "en": "<p>The <code>/api/attachments/:datasourceId/url</code> endpoint issues signed upload URLs without constraining the destination, so any authenticated user can write to buckets they shouldn't touch. Pattern worth checking in your own code: <strong>whoever signs the URL is the one authorizing</strong> — if the path comes from the client, you already lost.</p>",
+            "fr": "<p>L'endpoint <code>/api/attachments/:datasourceId/url</code> émet des URLs d'upload signées sans contraindre la destination : tout utilisateur authentifié peut écrire dans des buckets interdits. À vérifier dans votre code : <strong>celui qui signe l'URL autorise</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-6x9p-4r67-5gjx", "label": "github.com/advisories" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Día de versiones grandes: Kubernetes v1.37, pnpm 12 GA y dos minors de Node el mismo miércoles. Si administrás plataforma, esta semana planificás upgrades, no features.",
+      "en": "A day of big version numbers: Kubernetes v1.37, pnpm 12 GA and two Node minors on the same Wednesday. If you own platform, this week you plan upgrades, not features.",
+      "fr": "Journée de versions majeures : Kubernetes v1.37, pnpm 12 GA et deux minors Node le même mercredi. Si vous gérez la plateforme, cette semaine vous planifiez des upgrades."
+    },
+    {
+      "es": "El patrón de supply chain no afloja: token de publicación robado, artefactos troyanizados en el registry, repo de origen limpio. Firmar y verificar en el registry es el único control que ataja esto — el código en GitHub se ve impecable.",
+      "en": "The supply-chain pattern isn't letting up: stolen publish token, trojanized artifacts in the registry, clean upstream repo. Signing and verifying at the registry is the only control that catches this — the GitHub code looks pristine.",
+      "fr": "Le schéma supply-chain persiste : token de publication volé, artefacts troyanisés dans le registry, dépôt source sain. Signer et vérifier au niveau du registry est le seul contrôle efficace."
+    },
+    {
+      "es": "Tres advisories del día son la misma clase de bug: un path o un namespace que viene del cliente y nadie valida (Kyverno, asyncssh, Budibase). No es criptografía rota, es confianza mal ubicada en el borde de tu API.",
+      "en": "Three of today's advisories are the same class of bug: a path or a namespace arriving from the client that nobody validates (Kyverno, asyncssh, Budibase). Not broken crypto — misplaced trust at your API boundary.",
+      "fr": "Trois advisories du jour relèvent de la même classe de bug : un chemin ou un namespace venu du client que personne ne valide (Kyverno, asyncssh, Budibase). Pas de crypto cassée, une confiance mal placée à la frontière de l'API."
+    }
+  ]
+}

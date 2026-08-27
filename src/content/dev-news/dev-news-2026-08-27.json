@@ -1,0 +1,343 @@
+{
+  "title": {
+    "es": "Dev News — 27 de agosto de 2026",
+    "en": "Dev News — August 27, 2026",
+    "fr": "Dev News — 27 août 2026"
+  },
+  "description": {
+    "es": "pnpm 12 sale estable con cambios grandes en dependencias git y shims globales, Node.js 26.8 suma APIs de ZIP en zlib y REPL con syntax highlighting, y VS Code 1.135 reorganiza toda la ventana de agentes.",
+    "en": "pnpm 12 ships stable with major changes to git dependencies and global shims, Node.js 26.8 adds ZIP APIs to zlib plus a syntax-highlighted REPL, and VS Code 1.135 reshapes the whole Agents window.",
+    "fr": "pnpm 12 sort en stable avec des changements majeurs sur les dépendances git et les shims globaux, Node.js 26.8 ajoute des API ZIP à zlib et un REPL colorisé, et VS Code 1.135 réorganise toute la fenêtre Agents."
+  },
+  "pubDate": "2026-08-27",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": {
+        "es": "pnpm 12.0.0 estable",
+        "en": "pnpm 12.0.0 goes stable",
+        "fr": "pnpm 12.0.0 en stable"
+      },
+      "anchor": "pnpm-12-0-0",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "Node.js 26.8: ZipFile en zlib",
+        "en": "Node.js 26.8: ZipFile in zlib",
+        "fr": "Node.js 26.8 : ZipFile dans zlib"
+      },
+      "anchor": "node-26-8-0",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": {
+        "es": "VS Code 1.135 rehace Agents",
+        "en": "VS Code 1.135 reworks Agents",
+        "fr": "VS Code 1.135 refond Agents"
+      },
+      "anchor": "vscode-1-135",
+      "icon": "simple-icons:visualstudiocode"
+    },
+    {
+      "text": {
+        "es": "React Native 0.87.1 arregla SwiftPM",
+        "en": "React Native 0.87.1 fixes SwiftPM",
+        "fr": "React Native 0.87.1 corrige SwiftPM"
+      },
+      "anchor": "rn-0-87-1",
+      "icon": "simple-icons:react"
+    },
+    {
+      "text": {
+        "es": "Astro 7.2.8 exige Sharp 0.35.4",
+        "en": "Astro 7.2.8 requires Sharp 0.35.4",
+        "fr": "Astro 7.2.8 exige Sharp 0.35.4"
+      },
+      "anchor": "astro-7-2-8",
+      "icon": "simple-icons:astro"
+    },
+    {
+      "text": {
+        "es": "Rolldown 1.2.6 mangla propiedades",
+        "en": "Rolldown 1.2.6 mangles property names",
+        "fr": "Rolldown 1.2.6 mangle les propriétés"
+      },
+      "anchor": "rolldown-1-2-6",
+      "icon": "lucide:package"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "pnpm-12-0-0",
+          "tag": "breaking",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "pnpm 12.0.0 sale estable",
+            "en": "pnpm 12.0.0 ships stable",
+            "fr": "pnpm 12.0.0 sort en stable"
+          },
+          "body_html": {
+            "es": "<p>Después de once RCs, pnpm 12 es estable — y trae cambios que te van a tocar. Las dependencias git en hosts conocidos (GitHub, GitLab, Bitbucket) ahora son <strong>identidades, no transportes</strong>: todas las formas de escribir el mismo repo resuelven a la URL HTTPS canónica y el lockfile nunca guarda una URL SSH. Para repos privados por SSH configurás <code>git config --global url.&quot;git@github.com:&quot;.insteadOf https://github.com/</code> en la máquina, no en el proyecto. Además, un setting desconocido en <code>pnpm-workspace.yaml</code> ya no se ignora en silencio: ahora avisa, y falla con <code>ERR_PNPM_UNRECOGNIZED_WORKSPACE_SETTINGS</code> cuando el proyecto pinea una versión de pnpm que la que corre satisface. Los ciclos de dependencias se cortan de forma canónica, así que el lockfile pasa a ser una función pura del grafo: instalaciones repetidas dan lockfiles byte a byte idénticos, y en workspaces con muchos ciclos la resolución de peers es 2–3× más rápida con ~25% menos memoria. Ojo con esto en CI.</p>",
+            "en": "<p>After eleven RCs, pnpm 12 is stable — and it carries changes you will feel. Git dependencies on known hosts (GitHub, GitLab, Bitbucket) are now <strong>identities rather than transport choices</strong>: every spelling of the same repo resolves through the canonical HTTPS URL, and the lockfile never records an SSH URL. To reach a private repo over SSH you configure the machine with <code>git config --global url.&quot;git@github.com:&quot;.insteadOf https://github.com/</code>, not the project. An unrecognized setting in <code>pnpm-workspace.yaml</code> is no longer silently ignored: it now warns, and fails with <code>ERR_PNPM_UNRECOGNIZED_WORKSPACE_SETTINGS</code> when the project pins a pnpm version the running pnpm satisfies. Dependency cycles are broken canonically, so the lockfile becomes a pure function of the graph — repeated installs produce byte-identical lockfiles, and on cycle-heavy workspaces peer resolution runs 2–3× faster with about 25% less memory.</p>",
+            "fr": "<p>Après onze RC, pnpm 12 est stable — avec des changements qui se remarquent. Les dépendances git sur les hôtes connus (GitHub, GitLab, Bitbucket) sont désormais des <strong>identités et non des choix de transport</strong> : chaque écriture du même dépôt passe par l'URL HTTPS canonique, et le lockfile n'enregistre jamais d'URL SSH. Pour un dépôt privé en SSH, on configure la machine avec <code>git config --global url.&quot;git@github.com:&quot;.insteadOf https://github.com/</code>, pas le projet. Un réglage inconnu dans <code>pnpm-workspace.yaml</code> n'est plus ignoré en silence : il avertit, et échoue avec <code>ERR_PNPM_UNRECOGNIZED_WORKSPACE_SETTINGS</code> quand le projet épingle une version de pnpm satisfaite par celle qui tourne. Les cycles de dépendances sont coupés de façon canonique : le lockfile devient une fonction pure du graphe, les installations répétées produisent des lockfiles identiques octet pour octet, et sur les workspaces riches en cycles la résolution des peers est 2 à 3× plus rapide avec environ 25 % de mémoire en moins.</p>"
+          },
+          "source": {
+            "url": "https://github.com/pnpm/pnpm/releases/tag/v12.0.0",
+            "label": "github.com/pnpm/pnpm"
+          }
+        },
+        {
+          "id": "pnpm-12-global-shims",
+          "tag": "notable",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "pnpm 12 instala otros package managers y runtimes",
+            "en": "pnpm 12 installs other package managers and runtimes",
+            "fr": "pnpm 12 installe d'autres gestionnaires et runtimes"
+          },
+          "body_html": {
+            "es": "<p>La feature más divertida de pnpm 12: ahora instala npm, Yarn Classic, Yarn Berry, Yarn 6 y Bun, verificados contra la firma de npm de esa versión exacta. <code>pnx yarn@4 install</code>, <code>pnx npm@11 ci</code> y <code>pnx node@22</code> provisionan la cosa real en vez del paquete npm que comparte el nombre. Y el nuevo setting <code>globalShims</code> (por defecto <code>{ node: true, deno: true, bun: true }</code>) hace que los bins globales sigan al proyecto: si el proyecto pinea Node por <code>devEngines.runtime</code>, escribir <code>node</code> adentro corre esa versión, descargada y autenticada contra las firmas del release team, sin hooks de shell. Los candidatos sin firma verificada preguntan «¿confiás en este proyecto?» una sola vez.</p>",
+            "en": "<p>The most fun part of pnpm 12: it now installs npm, Yarn Classic, Yarn Berry, Yarn 6 and Bun, verified against npm's signature for the exact version. <code>pnx yarn@4 install</code>, <code>pnx npm@11 ci</code> and <code>pnx node@22</code> provision the real thing instead of the npm package that shares the name. The new <code>globalShims</code> setting (defaulting to <code>{ node: true, deno: true, bun: true }</code>) makes global bins follow the project: if a project pins Node through <code>devEngines.runtime</code>, typing <code>node</code> inside it runs that release — downloaded and authenticated against the Node.js release-team signatures — with no shell hooks. Candidates that are not signature-verified ask «do you trust this project?» once.</p>",
+            "fr": "<p>La partie la plus amusante de pnpm 12 : il installe désormais npm, Yarn Classic, Yarn Berry, Yarn 6 et Bun, vérifiés contre la signature npm de la version exacte. <code>pnx yarn@4 install</code>, <code>pnx npm@11 ci</code> et <code>pnx node@22</code> provisionnent la vraie chose plutôt que le paquet npm homonyme. Le nouveau réglage <code>globalShims</code> (par défaut <code>{ node: true, deno: true, bun: true }</code>) fait suivre le projet aux binaires globaux : si un projet épingle Node via <code>devEngines.runtime</code>, taper <code>node</code> à l'intérieur exécute cette version, téléchargée et authentifiée contre les signatures de l'équipe de release, sans hooks shell. Les candidats non vérifiés demandent une seule fois « faites-vous confiance à ce projet ? ».</p>"
+          },
+          "source": {
+            "url": "https://github.com/pnpm/pnpm/releases",
+            "label": "github.com/pnpm/pnpm"
+          }
+        },
+        {
+          "id": "node-26-8-0",
+          "tag": "notable",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "Node.js 26.8.0: ZipFile en zlib, REPL con colores y TracingChannel estable",
+            "en": "Node.js 26.8.0: ZipFile in zlib, colored REPL, TracingChannel stable",
+            "fr": "Node.js 26.8.0 : ZipFile dans zlib, REPL colorisé, TracingChannel stable"
+          },
+          "body_html": {
+            "es": "<p>Release cargado. <code>zlib</code> suma <strong>ZipEntry, ZipFile y ZipBuffer</strong>, así que leer un ZIP deja de necesitar dependencia externa. El REPL estrena syntax highlighting básico, <code>TracingChannel</code> de <code>diagnostics_channel</code> pasa a <strong>estable</strong>, y <code>node:sqlite</code> agrega <code>StatementSync.prototype.close()</code> más <code>[Symbol.dispose]()</code> — o sea, <code>using</code> sobre statements. También entran los modos SIV y GCM-SIV en Cipher/Decipher, <code>MIMEType.parse</code> que no tira, y mejoras de performance en <code>net.BlockList</code>. Node 24.20.0 salió el mismo día para la línea LTS.</p>",
+            "en": "<p>A loaded release. <code>zlib</code> gains <strong>ZipEntry, ZipFile and ZipBuffer</strong>, so reading a ZIP no longer needs an external dependency. The REPL picks up basic syntax highlighting, <code>diagnostics_channel</code>'s <code>TracingChannel</code> is marked <strong>stable</strong>, and <code>node:sqlite</code> adds <code>StatementSync.prototype.close()</code> plus <code>[Symbol.dispose]()</code> — meaning <code>using</code> over statements. Also landing: SIV and GCM-SIV modes in the Cipher/Decipher APIs, a non-throwing <code>MIMEType.parse</code>, and performance work on <code>net.BlockList</code>. Node 24.20.0 shipped the same day for the LTS line.</p>",
+            "fr": "<p>Une version chargée. <code>zlib</code> gagne <strong>ZipEntry, ZipFile et ZipBuffer</strong> : lire un ZIP ne demande plus de dépendance externe. Le REPL obtient une coloration syntaxique de base, <code>TracingChannel</code> de <code>diagnostics_channel</code> passe <strong>stable</strong>, et <code>node:sqlite</code> ajoute <code>StatementSync.prototype.close()</code> ainsi que <code>[Symbol.dispose]()</code> — donc <code>using</code> sur les statements. Arrivent aussi les modes SIV et GCM-SIV dans Cipher/Decipher, un <code>MIMEType.parse</code> qui ne lève pas d'erreur, et des gains de performance sur <code>net.BlockList</code>. Node 24.20.0 est sorti le même jour pour la ligne LTS.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nodejs/node/releases/tag/v26.8.0",
+            "label": "github.com/nodejs/node"
+          }
+        }
+      ]
+    },
+    {
+      "id": "react-native",
+      "name": "React Native",
+      "theme": "react-native",
+      "icon_emoji": "📱",
+      "anchor": "react-native",
+      "updates": [
+        {
+          "id": "rn-0-87-1",
+          "tag": "patch",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "React Native 0.87.1: tanda de arreglos de SwiftPM",
+            "en": "React Native 0.87.1: a batch of SwiftPM fixes",
+            "fr": "React Native 0.87.1 : lot de correctifs SwiftPM"
+          },
+          "body_html": {
+            "es": "<p>Primer patch de la línea 0.87 y viene casi entero para <strong>SwiftPM</strong>: nombres de módulo que colisionaban ya no se descartan en silencio, se resuelven colisiones de nombres en el manifiesto Swift, se lee <code>spm.name</code> desde <code>react-native.config.js</code>, y se arregla el mismatch de versión entre runtime y compilador de Hermes que tiraba crashes «Wrong bytecode version» en builds Release. Del lado de TypeScript, <code>Animated.Value.addListener()</code> tipa su payload como <code>{value: number}</code> en vez de <code>any</code>, y <code>Animated.event()</code> deja de ser <code>any</code>. Chico pero se agradece.</p>",
+            "en": "<p>The first patch on the 0.87 line, and it is almost entirely <strong>SwiftPM</strong>: colliding module names are rejected instead of silently dropped, Swift manifest naming collisions are resolved, <code>spm.name</code> is actually read from <code>react-native.config.js</code>, and the Hermes runtime/compiler version mismatch causing «Wrong bytecode version» crashes in Release builds is fixed. On the TypeScript side, <code>Animated.Value.addListener()</code> now types its payload as <code>{value: number}</code> rather than <code>any</code>, and <code>Animated.event()</code> is typed as an event handler.</p>",
+            "fr": "<p>Premier patch de la ligne 0.87, presque entièrement consacré à <strong>SwiftPM</strong> : les noms de modules en collision sont rejetés au lieu d'être supprimés en silence, les collisions de noms du manifeste Swift sont résolues, <code>spm.name</code> est bien lu depuis <code>react-native.config.js</code>, et le décalage de version runtime/compilateur Hermes provoquant des crashs « Wrong bytecode version » en build Release est corrigé. Côté TypeScript, <code>Animated.Value.addListener()</code> type sa charge utile en <code>{value: number}</code> plutôt qu'en <code>any</code>, et <code>Animated.event()</code> est typé comme gestionnaire d'événement.</p>"
+          },
+          "source": {
+            "url": "https://github.com/facebook/react-native/releases/tag/v0.87.1",
+            "label": "github.com/facebook/react-native"
+          }
+        }
+      ]
+    },
+    {
+      "id": "js-frameworks",
+      "name": "JS Frameworks",
+      "theme": "js-frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "js-frameworks",
+      "updates": [
+        {
+          "id": "astro-7-2-8",
+          "tag": "patch",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "Astro 7.2.8 sube el mínimo de Sharp a 0.35.4",
+            "en": "Astro 7.2.8 raises the minimum Sharp version to 0.35.4",
+            "fr": "Astro 7.2.8 relève Sharp au minimum 0.35.4"
+          },
+          "body_html": {
+            "es": "<p>Patch corto pero con contexto: Astro sube la versión mínima soportada de <strong>Sharp a 0.35.4</strong>, justo después de la semana en que la cadena libheif/sharp fue el vector del RCE crítico sin autenticación en Next.js. Si tenés pipeline de imágenes, actualizá. Además reemplaza la dependencia interna <code>find-process</code> por una alternativa más liviana.</p>",
+            "en": "<p>A short patch with useful context: Astro raises the minimum supported <strong>Sharp to 0.35.4</strong>, right after the week in which the libheif/sharp chain was the vector for the critical unauthenticated RCE in Next.js. If you run an image pipeline, update. It also swaps the internal <code>find-process</code> dependency for a smaller, lighter alternative.</p>",
+            "fr": "<p>Un petit patch au contexte utile : Astro relève la version minimale de <strong>Sharp à 0.35.4</strong>, juste après la semaine où la chaîne libheif/sharp a servi de vecteur au RCE critique non authentifié dans Next.js. Si vous avez un pipeline d'images, mettez à jour. La dépendance interne <code>find-process</code> est aussi remplacée par une alternative plus légère.</p>"
+          },
+          "source": {
+            "url": "https://github.com/withastro/astro/releases/tag/astro%407.2.8",
+            "label": "github.com/withastro/astro"
+          }
+        },
+        {
+          "id": "angular-22-1-4",
+          "tag": "patch",
+          "date": "27 Aug 2026",
+          "title": {
+            "es": "Angular publica patches en las tres líneas soportadas",
+            "en": "Angular ships patches across all three supported lines",
+            "fr": "Angular publie des correctifs sur ses trois lignes"
+          },
+          "body_html": {
+            "es": "<p>Tanda de mantenimiento: <strong>22.1.4</strong>, <strong>21.2.22</strong> y <strong>20.3.30</strong> salieron con pocas horas de diferencia, más un <code>22.2.0-next.4</code> para los que siguen el próximo minor. Nada que rompa: es la cadencia semanal de siempre, pero conviene alinear el monorepo antes de que se acumule.</p>",
+            "en": "<p>A maintenance batch: <strong>22.1.4</strong>, <strong>21.2.22</strong> and <strong>20.3.30</strong> landed within hours of each other, plus a <code>22.2.0-next.4</code> for anyone tracking the upcoming minor. Nothing breaking — the usual weekly cadence — but worth realigning the monorepo before it piles up.</p>",
+            "fr": "<p>Lot de maintenance : <strong>22.1.4</strong>, <strong>21.2.22</strong> et <strong>20.3.30</strong> sont sortis à quelques heures d'intervalle, plus un <code>22.2.0-next.4</code> pour ceux qui suivent le prochain minor. Rien de cassant — la cadence hebdomadaire habituelle — mais autant réaligner le monorepo avant que ça s'accumule.</p>"
+          },
+          "source": {
+            "url": "https://github.com/angular/angular/releases/tag/22.1.4",
+            "label": "github.com/angular/angular"
+          }
+        },
+        {
+          "id": "tanstack-solid-start-rc3",
+          "tag": "beta",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "TanStack Solid Start llega a 2.0.0-rc.3",
+            "en": "TanStack Solid Start reaches 2.0.0-rc.3",
+            "fr": "TanStack Solid Start atteint 2.0.0-rc.3"
+          },
+          "body_html": {
+            "es": "<p>El stack de Solid dentro de TanStack avanza: <code>@tanstack/solid-start</code>, <code>solid-router</code> y <code>solid-router-ssr-query</code> pasaron a <strong>2.0.0-rc.3</strong> un día después del rc.2. Combinado con Solid 2.0 también en RC, el ecosistema Solid está a un paso del estable.</p>",
+            "en": "<p>The Solid stack inside TanStack keeps moving: <code>@tanstack/solid-start</code>, <code>solid-router</code> and <code>solid-router-ssr-query</code> went to <strong>2.0.0-rc.3</strong> one day after rc.2. With Solid 2.0 also in RC, the Solid ecosystem is one step from stable.</p>",
+            "fr": "<p>La pile Solid de TanStack avance : <code>@tanstack/solid-start</code>, <code>solid-router</code> et <code>solid-router-ssr-query</code> sont passés en <strong>2.0.0-rc.3</strong> un jour après la rc.2. Avec Solid 2.0 également en RC, l'écosystème Solid n'est plus qu'à un pas du stable.</p>"
+          },
+          "source": {
+            "url": "https://github.com/TanStack/router/releases/tag/release-2026-08-26-1635",
+            "label": "github.com/TanStack/router"
+          }
+        }
+      ]
+    },
+    {
+      "id": "build-tools",
+      "name": "Build Tools & Runtimes",
+      "theme": "build-tools",
+      "icon_emoji": "🔧",
+      "anchor": "build-tools",
+      "updates": [
+        {
+          "id": "node-26-8-1",
+          "tag": "patch",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "Node.js 26.8.1 sale de urgencia por un --version mal puesto",
+            "en": "Node.js 26.8.1 ships out-of-band over a wrong --version",
+            "fr": "Node.js 26.8.1 sort en urgence pour un --version erroné"
+          },
+          "body_html": {
+            "es": "<p>Ocho horas después de 26.8.0, release fuera de banda: <code>node --version</code> reportaba una versión <em>alpha</em> por una designación accidental en el código. Un solo revert. Si automatizás gates de CI contra la salida de <code>node --version</code>, saltá directo a 26.8.1.</p>",
+            "en": "<p>Eight hours after 26.8.0, an out-of-band release: <code>node --version</code> was reporting an <em>alpha</em> version because of an accidental designation in the source. A single revert. If you gate CI on the output of <code>node --version</code>, jump straight to 26.8.1.</p>",
+            "fr": "<p>Huit heures après 26.8.0, une version hors bande : <code>node --version</code> annonçait une version <em>alpha</em> à cause d'une désignation accidentelle dans le code. Un seul revert. Si votre CI se base sur la sortie de <code>node --version</code>, passez directement à 26.8.1.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nodejs/node/releases/tag/v26.8.1",
+            "label": "github.com/nodejs/node"
+          }
+        },
+        {
+          "id": "rolldown-1-2-6",
+          "tag": "notable",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "Rolldown 1.2.6 suma property name mangling al minifier",
+            "en": "Rolldown 1.2.6 adds property name mangling to the minifier",
+            "fr": "Rolldown 1.2.6 ajoute le mangling de propriétés au minifier"
+          },
+          "body_html": {
+            "es": "<p>El bundler que va a estar debajo de Vite gana <strong>mangling de nombres de propiedades</strong> en el minifier — de las últimas piezas grandes que le faltaban para competir en tamaño de bundle. También agrega una opción <code>tsconfig</code> a <code>transform</code> y a los plugins de resolve/transform de Vite, expone queries del module graph en el dev engine, y mete una tanda de fixes de dev server más caché de compilación vía <code>module.enableCompileCache()</code>.</p>",
+            "en": "<p>The bundler destined to sit under Vite gains <strong>property name mangling</strong> in its minifier — one of the last big pieces it was missing to compete on bundle size. It also adds a <code>tsconfig</code> option to <code>transform</code> and to the Vite resolve/transform plugins, exposes module graph queries on the dev engine handle, and lands a batch of dev-server fixes plus compile caching via <code>module.enableCompileCache()</code>.</p>",
+            "fr": "<p>Le bundler destiné à passer sous Vite gagne le <strong>mangling des noms de propriétés</strong> dans son minifier — l'une des dernières grosses pièces qui lui manquaient pour rivaliser sur la taille de bundle. Il ajoute aussi une option <code>tsconfig</code> à <code>transform</code> et aux plugins resolve/transform de Vite, expose les requêtes du module graph sur le handle du dev engine, et apporte un lot de correctifs dev-server ainsi qu'un cache de compilation via <code>module.enableCompileCache()</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/rolldown/rolldown/releases/tag/v1.2.6",
+            "label": "github.com/rolldown/rolldown"
+          }
+        },
+        {
+          "id": "turborepo-2-10-12",
+          "tag": "minor",
+          "date": "25 Aug 2026",
+          "title": {
+            "es": "Turborepo 2.10.12",
+            "en": "Turborepo 2.10.12",
+            "fr": "Turborepo 2.10.12"
+          },
+          "body_html": {
+            "es": "<p>Patch de mantenimiento en la línea 2.10, con la 2.10.13 ya en canary. Nada urgente, pero si estás en un monorepo grande conviene no quedarse atrás de la línea.</p>",
+            "en": "<p>A maintenance patch on the 2.10 line, with 2.10.13 already in canary. Nothing urgent, but on a large monorepo it pays not to drift behind the line.</p>",
+            "fr": "<p>Un patch de maintenance sur la ligne 2.10, la 2.10.13 étant déjà en canary. Rien d'urgent, mais sur un gros monorepo mieux vaut ne pas décrocher.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vercel/turborepo/releases/tag/v2.10.12",
+            "label": "github.com/vercel/turborepo"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dev-tools",
+      "name": "Developer Tools",
+      "theme": "dev-tools",
+      "icon_emoji": "🛠️",
+      "anchor": "dev-tools",
+      "updates": [
+        {
+          "id": "vscode-1-135",
+          "tag": "notable",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "VS Code 1.135 rehace la ventana de agentes y suma «Rubber Duck»",
+            "en": "VS Code 1.135 reworks the Agents window and adds «Rubber Duck»",
+            "fr": "VS Code 1.135 refond la fenêtre Agents et ajoute « Rubber Duck »"
+          },
+          "body_html": {
+            "es": "<p>Release de agosto y viene casi todo del lado de agentes. Lo más concreto: <strong>External Agent Sessions</strong> deja ver y continuar sesiones recientes de Copilot o Claude arrancadas en otras apps, directo desde el editor. <strong>Rubber Duck</strong> (experimental) pide una segunda opinión a un modelo complementario sobre el trabajo del agente para cazar detalles y edge cases que se le pasaron. El layout de panel único pasa a ser default en la ventana de Agents, aparecen pills de artefactos (cambios, PRs, issues) arriba del input, y el hover del footer del chat muestra el desglose por modelo de tokens de input, input cacheado y output. También llega el <strong>Agent Host</strong>, un proceso dedicado basado en el Agent Host Protocol que permite conectar varias ventanas a la misma sesión.</p>",
+            "en": "<p>The August release, and almost all of it is agent-side. The concrete parts: <strong>External Agent Sessions</strong> lets you view and continue recent Copilot or Claude sessions started in other apps, straight from the editor. <strong>Rubber Duck</strong> (experimental) gets a second opinion from a complementary model on the agent's work to catch overlooked details and edge cases. The single-pane side layout becomes the default in the Agents window, artifact pills (changes, PRs, issues) appear above the chat input, and hovering the chat response footer reveals a per-model breakdown of input, cached input and output tokens. There is also <strong>Agent Host</strong>, a dedicated process based on the Agent Host Protocol that lets multiple windows connect to the same agent session.</p>",
+            "fr": "<p>La version d'août, presque entièrement côté agents. Le concret : <strong>External Agent Sessions</strong> permet de voir et de reprendre des sessions Copilot ou Claude récentes lancées dans d'autres applications, directement depuis l'éditeur. <strong>Rubber Duck</strong> (expérimental) demande un second avis à un modèle complémentaire sur le travail de l'agent pour repérer les détails et cas limites oubliés. La disposition en panneau unique devient le défaut de la fenêtre Agents, des pastilles d'artefacts (changements, PR, issues) apparaissent au-dessus du champ de chat, et le survol du pied de réponse affiche la répartition par modèle des tokens d'entrée, d'entrée mise en cache et de sortie. Arrive aussi <strong>Agent Host</strong>, un processus dédié fondé sur l'Agent Host Protocol qui permet à plusieurs fenêtres de se connecter à la même session.</p>"
+          },
+          "source": {
+            "url": "https://code.visualstudio.com/updates/v1_135",
+            "label": "code.visualstudio.com"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El día fue de gestores de paquetes y runtimes, no de frameworks: pnpm 12 estable, Node 26.8 y su patch de urgencia, Rolldown avanzando. La capa de abajo del stack está moviéndose más rápido que la de arriba.",
+      "en": "The day belonged to package managers and runtimes, not frameworks: pnpm 12 stable, Node 26.8 and its emergency patch, Rolldown pushing forward. The bottom of the stack is moving faster than the top right now.",
+      "fr": "La journée appartenait aux gestionnaires de paquets et aux runtimes, pas aux frameworks : pnpm 12 stable, Node 26.8 et son patch d'urgence, Rolldown qui avance. Le bas de la pile bouge plus vite que le haut en ce moment."
+    },
+    {
+      "es": "Determinismo como feature vendible: pnpm 12 corta ciclos de forma canónica para que el lockfile sea función pura del grafo, y Node saca un release fuera de banda porque <code>--version</code> mentía. Reproducibilidad primero.",
+      "en": "Determinism as a headline feature: pnpm 12 breaks cycles canonically so the lockfile is a pure function of the graph, and Node ships out-of-band because <code>--version</code> was lying. Reproducibility first.",
+      "fr": "Le déterminisme comme argument principal : pnpm 12 coupe les cycles de façon canonique pour que le lockfile soit une fonction pure du graphe, et Node publie hors bande parce que <code>--version</code> mentait. La reproductibilité d'abord."
+    },
+    {
+      "es": "La onda expansiva de la cadena libheif/sharp sigue: Astro sube el mínimo de Sharp dos días después del RCE crítico en Next.js. Ojo con las dependencias nativas de procesamiento de imágenes.",
+      "en": "The libheif/sharp blast radius keeps widening: Astro raises its Sharp minimum two days after the critical Next.js RCE. Watch your native image-processing dependencies.",
+      "fr": "L'onde de choc libheif/sharp continue : Astro relève son minimum Sharp deux jours après le RCE critique de Next.js. Surveillez vos dépendances natives de traitement d'images."
+    }
+  ]
+}

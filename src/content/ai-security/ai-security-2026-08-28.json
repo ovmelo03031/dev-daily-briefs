@@ -1,0 +1,273 @@
+{
+  "title": {
+    "es": "AI Security — 28 Ago 2026",
+    "en": "AI Security — 28 Aug 2026",
+    "fr": "AI Security — 28 Août 2026"
+  },
+  "description": {
+    "es": "Una tanda coordinada de advisories deja al descubierto el mismo bug en todo el ecosistema MCP: servidores atados a todas las interfaces sin auth. UI-TARS-desktop llega a 10.0, y un repo hostil convence al agente de Amazon Kiro de filtrar tus archivos.",
+    "en": "A coordinated batch of advisories exposes the same bug across the MCP ecosystem: servers bound to every interface with no auth. UI-TARS-desktop hits 10.0, and a hostile repo talks the Amazon Kiro agent into leaking your files.",
+    "fr": "Une salve coordonnée d'advisories expose le même bug dans tout l'écosystème MCP : des serveurs liés à toutes les interfaces sans auth. UI-TARS-desktop atteint 10.0, et un dépôt hostile convainc l'agent Amazon Kiro d'exfiltrer vos fichiers."
+  },
+  "pubDate": "2026-08-28",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "UI-TARS-desktop: MCP en 0.0.0.0 sin auth, RCE (10.0)",
+        "en": "UI-TARS-desktop: MCP on all interfaces, no auth (10.0)",
+        "fr": "UI-TARS-desktop : MCP sur toutes les interfaces (10.0)"
+      },
+      "anchor": "cve-2026-81735-ui-tars",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "ToolUniverse: escape del sandbox de Python (9.3)",
+        "en": "ToolUniverse: Python sandbox escape, unauth RCE (9.3)",
+        "fr": "ToolUniverse : évasion du sandbox Python (9.3)"
+      },
+      "anchor": "cve-2026-81096-tooluniverse",
+      "icon": "lucide:skull"
+    },
+    {
+      "text": {
+        "es": "mcp-go: sin validación de Host, DNS rebinding (7.6)",
+        "en": "mcp-go: no Host validation, DNS rebinding (7.6)",
+        "fr": "mcp-go : pas de validation Host, DNS rebinding (7.6)"
+      },
+      "anchor": "cve-2026-81092-mcp-go",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": {
+        "es": "Un repo hostil hace que Kiro filtre tus archivos",
+        "en": "A hostile repo makes Kiro exfiltrate your files",
+        "fr": "Un dépôt hostile pousse Kiro à exfiltrer vos fichiers"
+      },
+      "anchor": "amazon-kiro-prompt-injection",
+      "icon": "lucide:radiation"
+    },
+    {
+      "text": {
+        "es": "Airtable MCP CLI manda tu token adonde le digan",
+        "en": "Airtable MCP CLI ships your token wherever it is told",
+        "fr": "Airtable MCP CLI envoie votre token où on lui dit"
+      },
+      "anchor": "cve-2026-81101-airtable-mcp",
+      "icon": "lucide:lock"
+    }
+  ],
+  "tools": [
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "cve-2026-81735-ui-tars",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-81735 — UI-TARS-desktop: el servidor MCP escucha en todas las interfaces y la auth es opcional (10.0)",
+            "en": "CVE-2026-81735 — UI-TARS-desktop: the MCP server listens on every interface and auth is optional (10.0)",
+            "fr": "CVE-2026-81735 — UI-TARS-desktop : le serveur MCP écoute sur toutes les interfaces et l'auth est optionnelle (10.0)"
+          },
+          "body_html": {
+            "es": "<p><code>startServer.ts</code>, en el paquete <code>mcp-http-server</code> de UI-TARS-desktop, ponía la dirección de escucha en <code>::</code> cuando no se le pasaba host. El middleware de autenticación existe, pero es opcional y no se aplica por defecto. Resultado: los servicios de comandos y de filesystem quedan expuestos a cualquiera que alcance el puerto, con RCE como el usuario que corre el server.</p><p>Ojo con el detalle de versionado: el paquete quedó en 1.2.4 aun después del parche, así que el límite real es el commit <code>c2ad42e3</code>, que cambia el bind por defecto a <code>127.0.0.1</code>. Si dependés del número de versión para saber si estás parcheado, no te alcanza. Firewall y middleware de auth activo, mientras tanto.</p>",
+            "en": "<p><code>startServer.ts</code>, in UI-TARS-desktop's <code>mcp-http-server</code> package, defaulted its listen address to <code>::</code> when no host was given. The authentication middleware exists, but it is optional and not applied by default. The result: the command and filesystem services sit exposed to anyone who can reach the port, with RCE as the user running the server.</p><p>Watch the versioning detail: the package stayed at 1.2.4 even after the patch, so the real boundary is commit <code>c2ad42e3</code>, which changes the default bind to <code>127.0.0.1</code>. If you rely on a version number to know whether you are patched, that is not enough here. Firewall the port and turn the auth middleware on in the meantime.</p>",
+            "fr": "<p><code>startServer.ts</code>, dans le paquet <code>mcp-http-server</code> d'UI-TARS-desktop, fixait son adresse d'écoute à <code>::</code> en l'absence d'hôte. Le middleware d'authentification existe mais reste optionnel et non appliqué par défaut. Résultat : les services de commandes et de fichiers sont exposés à quiconque atteint le port, avec RCE sous l'utilisateur du serveur.</p><p>Attention au versionnage : le paquet est resté en 1.2.4 après le correctif, la vraie limite est le commit <code>c2ad42e3</code>, qui passe le bind par défaut à <code>127.0.0.1</code>.</p>"
+          },
+          "date": "27 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-81735",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-81096-tooluniverse",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-81096 — ToolUniverse: un dunder por string lookup rompe el sandbox de Python (9.3)",
+            "en": "CVE-2026-81096 — ToolUniverse: a dunder reached by string lookup breaks the Python sandbox (9.3)",
+            "fr": "CVE-2026-81096 — ToolUniverse : un dunder atteint par string lookup casse le sandbox Python (9.3)"
+          },
+          "body_html": {
+            "es": "<p>ToolUniverse hasta 1.2.6 expone <code>python_code_executor</code> sin autenticación y en todas las interfaces. El filtro de atributos del sandbox no frenaba un dunder alcanzado mediante string lookup ni a través de un módulo ya permitido, así que llegar a <code>subprocess</code> es cuestión de rodeo, no de exploit exótico. Cualquier cliente con alcance de red ejecuta código como el proceso del server.</p><p>1.3.0 mete tres cosas juntas: bearer token, bind a localhost por defecto y validación de atributos más estricta. Si no podés actualizar ya, cortá el endpoint por firewall o desactivá <code>python_code_executor</code> directamente.</p>",
+            "en": "<p>ToolUniverse through 1.2.6 exposes <code>python_code_executor</code> unauthenticated and on every interface. The sandbox's attribute filter did not stop a dunder reached through a string lookup, nor one reached through an already-permitted module, so getting to <code>subprocess</code> is a matter of indirection rather than an exotic exploit. Any network-reachable client runs code as the server process.</p><p>1.3.0 ships three things at once: bearer-token auth, localhost binding by default, and stricter attribute validation. If you cannot upgrade now, firewall the endpoint or disable <code>python_code_executor</code> outright.</p>",
+            "fr": "<p>ToolUniverse jusqu'à 1.2.6 expose <code>python_code_executor</code> sans authentification et sur toutes les interfaces. Le filtre d'attributs du sandbox n'arrêtait pas un dunder atteint via string lookup ni via un module déjà autorisé : atteindre <code>subprocess</code> relève du détour, pas de l'exploit exotique.</p><p>1.3.0 apporte bearer token, bind localhost par défaut et validation d'attributs renforcée.</p>"
+          },
+          "date": "27 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-81096",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-81098-telnyx-mcp",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-81098 — Telnyx MCP Server: una request sin credencial completa el initialize y despacha tools (9.3)",
+            "en": "CVE-2026-81098 — Telnyx MCP Server: a request with no credential completes initialize and dispatches tools (9.3)",
+            "fr": "CVE-2026-81098 — Telnyx MCP Server : une requête sans identifiant termine l'initialize et exécute des tools (9.3)"
+          },
+          "body_html": {
+            "es": "<p>Hasta la 6.83.0 inclusive, el transporte HTTP del Telnyx MCP Server no autentica nada: una request sin credencial completa la inicialización y despacha tools. Quien alcance el puerto se lleva las API keys que el server tiene cargadas y la capacidad de ejecutar código.</p><p>Actualizar a una versión que fuerce auth, atar el listener a localhost o cerrarlo por firewall, y rotar todo lo que estuvo detrás de ese proceso. Lo último no es opcional: si el puerto estuvo alcanzable, asumí que las credenciales salieron.</p>",
+            "en": "<p>Through 6.83.0 inclusive, the Telnyx MCP Server's HTTP transport authenticates nothing: a request without any credential completes initialisation and dispatches tools. Whoever reaches the port walks away with the API keys the server holds, plus code execution.</p><p>Upgrade to a version that enforces auth, bind the listener to localhost or close it at the firewall, and rotate everything that sat behind that process. That last part is not optional: if the port was reachable, assume the credentials left.</p>",
+            "fr": "<p>Jusqu'à la 6.83.0 incluse, le transport HTTP du Telnyx MCP Server n'authentifie rien : une requête sans identifiant termine l'initialisation et exécute des tools. Qui atteint le port récupère les clés API du serveur et l'exécution de code.</p><p>Mettre à jour, lier le listener à localhost ou fermer le port, puis faire tourner toutes les credentials concernées.</p>"
+          },
+          "date": "27 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-81098",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-81094-mcp-router",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-81094 — mcp-router: el comando serve arranca en todas las interfaces y el token es un flag opcional (9.3)",
+            "en": "CVE-2026-81094 — mcp-router: the serve command starts on all interfaces and the token is an optional flag (9.3)",
+            "fr": "CVE-2026-81094 — mcp-router : la commande serve démarre sur toutes les interfaces et le token est un flag optionnel (9.3)"
+          },
+          "body_html": {
+            "es": "<p>El CLI de mcp-router antes de 0.6.3 ponía el host del comando <code>serve</code> en la dirección de todas las interfaces sobre un puerto fijo, y exigía token solo si le pasabas el flag correspondiente. Lo grave acá es qué hay del otro lado: mcp-router es un agregador, así que un atacante sin autenticar no toca un solo servidor MCP sino todos los que ese router tenga colgados.</p><p>0.6.3 cambia el default a loopback y obliga token cuando exponés una interfaz externa. Si no podés subir de versión, bind manual a <code>127.0.0.1</code>, token siempre, y regla de firewall sobre el puerto.</p>",
+            "en": "<p>The mcp-router CLI before 0.6.3 defaulted the <code>serve</code> command's host to the all-interfaces address on a fixed port, and required a token only when you passed the matching flag. What makes this bad is what sits behind it: mcp-router is an aggregator, so an unauthenticated attacker does not reach one MCP server but every server that router fronts.</p><p>0.6.3 flips the default to loopback and enforces a token when you expose an external interface. If you cannot upgrade, bind manually to <code>127.0.0.1</code>, always supply the token, and put a firewall rule on the port.</p>",
+            "fr": "<p>Le CLI mcp-router avant 0.6.3 fixait l'hôte de la commande <code>serve</code> à l'adresse toutes-interfaces sur un port fixe, et n'exigeait un token qu'avec le flag correspondant. Le problème : mcp-router est un agrégateur, un attaquant non authentifié atteint donc tous les serveurs MCP derrière lui.</p><p>0.6.3 passe le défaut en loopback et impose le token sur interface externe.</p>"
+          },
+          "date": "27 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-81094",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-81092-mcp-go",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-81092 — mcp-go: el transporte HTTP atendía sin mirar el header Host (7.6)",
+            "en": "CVE-2026-81092 — mcp-go: the HTTP transport served requests without looking at the Host header (7.6)",
+            "fr": "CVE-2026-81092 — mcp-go : le transport HTTP servait les requêtes sans vérifier l'en-tête Host (7.6)"
+          },
+          "body_html": {
+            "es": "<p>mcp-go de Mark3 Labs antes de 0.56.0 servía requests sin validar el header <code>Host</code> en sus transportes HTTP. Eso habilita DNS rebinding clásico: una página apunta un dominio propio al loopback y desde el browser de la víctima alcanza un servidor MCP local que asumía que solo lo iba a llamar alguien de confianza. No hace falta acceso local, solo una página hostil y un dominio controlado.</p><p>0.56.0 agrega <code>http_localhost.go</code>, que rechaza una request atada a loopback si el host que trae no es un nombre de loopback. Como es una librería, el impacto real depende de cuántos servidores tuyos la usen: revisá el <code>go.mod</code> de todo lo que exponga MCP por HTTP.</p>",
+            "en": "<p>Mark3 Labs' mcp-go before 0.56.0 served requests without validating the <code>Host</code> header on its HTTP transports. That enables classic DNS rebinding: a page points a name it controls at the loopback address and, from the victim's browser, reaches a local MCP server that assumed only trusted callers would ever arrive. No local access needed — just a hostile page and a controlled domain.</p><p>0.56.0 adds <code>http_localhost.go</code>, which rejects a loopback-bound request carrying a host that is not a loopback name. Since this is a library, your real exposure depends on how many of your servers pull it in: check the <code>go.mod</code> of anything serving MCP over HTTP.</p>",
+            "fr": "<p>mcp-go de Mark3 Labs avant 0.56.0 servait les requêtes sans valider l'en-tête <code>Host</code> sur ses transports HTTP, ce qui autorise le DNS rebinding classique : une page pointe un nom qu'elle contrôle vers le loopback et atteint, depuis le navigateur de la victime, un serveur MCP local.</p><p>0.56.0 ajoute <code>http_localhost.go</code>. Comme il s'agit d'une librairie, vérifiez le <code>go.mod</code> de tout ce qui sert MCP en HTTP.</p>"
+          },
+          "date": "27 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-81092",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-81421-sentry-mcp",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-81421 — sentry-selfhosted-mcp: el parámetro endpoint de raw_sentry_api es un SSRF con exploit público (6.9)",
+            "en": "CVE-2026-81421 — sentry-selfhosted-mcp: the raw_sentry_api endpoint parameter is an SSRF with a public exploit (6.9)",
+            "fr": "CVE-2026-81421 — sentry-selfhosted-mcp : le paramètre endpoint de raw_sentry_api est une SSRF avec exploit public (6.9)"
+          },
+          "body_html": {
+            "es": "<p>En sentry-selfhosted-mcp 0.4.0, el componente <code>raw_sentry_api</code> toma el parámetro <code>endpoint</code> tal cual y arma la request saliente con eso. SSRF de manual (CWE-918), explotable en remoto y sin autenticación, con recursos internos y movimiento lateral como premio.</p><p>Lo incómodo: hay exploit público y el vendor no respondió a la disclosure temprana. Sin parche del que colgarse, queda desactivar el componente o encerrar el parámetro con una allowlist de destinos y controles de red.</p>",
+            "en": "<p>In sentry-selfhosted-mcp 0.4.0, the <code>raw_sentry_api</code> component takes the <code>endpoint</code> parameter as-is and builds the outbound request from it. Textbook SSRF (CWE-918), remotely exploitable without authentication, with internal resources and lateral movement as the payoff.</p><p>The awkward part: a public exploit exists and the vendor did not respond to early disclosure. With no patch to lean on, the options are disabling the component or fencing the parameter behind a destination allowlist plus network controls.</p>",
+            "fr": "<p>Dans sentry-selfhosted-mcp 0.4.0, le composant <code>raw_sentry_api</code> reprend le paramètre <code>endpoint</code> tel quel pour construire la requête sortante. SSRF classique (CWE-918), exploitable à distance sans authentification.</p><p>Un exploit public existe et le vendor n'a pas répondu à la divulgation : désactiver le composant ou restreindre le paramètre par allowlist.</p>"
+          },
+          "date": "26 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-81421",
+            "label": "OpenCVE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "amazon-kiro-prompt-injection",
+          "tag": "research",
+          "title": {
+            "es": "Amazon Kiro: abrir un workspace hostil alcanza para que el agente escriba su propia ruta de exfiltración",
+            "en": "Amazon Kiro: opening a hostile workspace is enough for the agent to write its own exfiltration path",
+            "fr": "Amazon Kiro : ouvrir un workspace hostile suffit pour que l'agent écrive sa propre voie d'exfiltration"
+          },
+          "body_html": {
+            "es": "<p>La cadena es corta y no pide nada raro al usuario. El atacante arma un archivo de workspace con contenido de proyecto controlado por él. La víctima lo abre con <em>File → Open Workspace From File</em> —no con «abrir carpeta», ese matiz importa— y manda cualquier mensaje al agente. Las instrucciones del repo influyen el comportamiento del agente, que lee información local sensible, la escribe en la configuración del IDE, y desde ahí las propias capacidades del IDE convierten esa config modificada en tráfico saliente hacia el endpoint del atacante.</p><p>El punto no es un bug puntual sino el límite de confianza: el contenido del repositorio se trata como instrucción. Amazon parcheó en Kiro IDE 0.8.140 tras disclosure responsable (el hallazgo era sobre 0.7.45 en Windows). Los investigadores marcan el mismo patrón en Cursor, Claude Desktop, GitHub Copilot CLI, Gemini CLI y Codex.</p>",
+            "en": "<p>The chain is short and asks nothing unusual of the user. The attacker builds a workspace file carrying project content they control. The victim opens it via <em>File → Open Workspace From File</em> — not folder-open, and that distinction matters — then sends any message to the agent. The repository instructions influence the agent, which reads sensitive local information, writes it into the IDE configuration, and from there the IDE's own capabilities turn that modified config into outbound traffic to the attacker's endpoint.</p><p>The point is not one isolated bug but the trust boundary: repository content is treated as instruction. Amazon fixed it in Kiro IDE 0.8.140 after responsible disclosure (the finding was against 0.7.45 on Windows). Researchers flag the same pattern in Cursor, Claude Desktop, GitHub Copilot CLI, Gemini CLI and Codex.</p>",
+            "fr": "<p>La chaîne est courte : l'attaquant prépare un fichier de workspace au contenu qu'il contrôle, la victime l'ouvre via <em>File → Open Workspace From File</em> puis envoie un message quelconque à l'agent. Les instructions du dépôt influencent l'agent, qui lit des informations locales sensibles, les écrit dans la configuration de l'IDE, et les capacités de l'IDE transforment cette config en trafic sortant vers l'attaquant.</p><p>Le fond du problème est la frontière de confiance : le contenu du dépôt est traité comme instruction. Corrigé dans Kiro IDE 0.8.140. Même motif signalé sur Cursor, Claude Desktop, GitHub Copilot CLI, Gemini CLI et Codex.</p>"
+          },
+          "date": "27 Aug 2026",
+          "source": {
+            "url": "https://thehackernews.com/2026/08/amazon-kiro-prompt-injection-can.html",
+            "label": "The Hacker News"
+          }
+        },
+        {
+          "id": "cve-2026-55529-praisonai",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-55529 — PraisonAI: localhost.evil.example pasa la validación de origin (6.9)",
+            "en": "CVE-2026-55529 — PraisonAI: localhost.evil.example passes the origin check (6.9)",
+            "fr": "CVE-2026-55529 — PraisonAI : localhost.evil.example passe la validation d'origine (6.9)"
+          },
+          "body_html": {
+            "es": "<p>PraisonAI antes de 4.6.58 valida el origin del MCP HTTP Stream con <code>request_origin.startswith(allowed)</code>. Un prefijo no es un host: <code>localhost.evil.example</code> matchea la allowlist de <code>localhost</code> y una página hostil ejecuta tools contra tu servidor MCP local sin API key. Pide interacción del usuario (visitar la página), nada más.</p><p>Es el mismo error conceptual que el resto de la tanda de hoy —confiar en una comparación de strings donde hacía falta una comparación de host— pero acá el bug se ve a simple vista en una sola línea. Actualizar a 4.6.58, exigir API key y limitar el acceso a hosts confiables.</p>",
+            "en": "<p>PraisonAI before 4.6.58 validates the MCP HTTP Stream origin with <code>request_origin.startswith(allowed)</code>. A prefix is not a host: <code>localhost.evil.example</code> matches the <code>localhost</code> allowlist, and a hostile page runs tools against your local MCP server with no API key. It needs user interaction — visiting the page — and nothing else.</p><p>It is the same conceptual mistake as the rest of today's batch — trusting a string comparison where a host comparison was needed — except here the bug is visible in a single line. Upgrade to 4.6.58, require an API key, and restrict access to trusted hosts.</p>",
+            "fr": "<p>PraisonAI avant 4.6.58 valide l'origine du MCP HTTP Stream avec <code>request_origin.startswith(allowed)</code>. Un préfixe n'est pas un hôte : <code>localhost.evil.example</code> correspond à l'allowlist <code>localhost</code>, et une page hostile exécute des tools sur votre serveur MCP local sans clé API.</p><p>Même erreur conceptuelle que le reste de la salve du jour. Passer en 4.6.58 et exiger une clé API.</p>"
+          },
+          "date": "25 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-55529",
+            "label": "OpenCVE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "supply-chain",
+      "name": "Supply Chain",
+      "theme": "supply-chain",
+      "icon_emoji": "📦",
+      "anchor": "supply-chain",
+      "updates": [
+        {
+          "id": "cve-2026-81101-airtable-mcp",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-81101 — Airtable MCP CLI: el endpoint se guarda sin validar y el token viaja con cada request (6.9)",
+            "en": "CVE-2026-81101 — Airtable MCP CLI: the endpoint is stored unvalidated and the token rides along on every request (6.9)",
+            "fr": "CVE-2026-81101 — Airtable MCP CLI : l'endpoint est stocké sans validation et le token part à chaque requête (6.9)"
+          },
+          "body_html": {
+            "es": "<p>En Airtable MCP CLI antes de 0.2.5, <code>ConfigureCommand.execute</code> en <code>src/cli.ts</code> persistía el valor de la opción <code>endpoint</code> en el perfil del usuario sin pasarlo por <code>createSafeUrl</code>. Como el token guardado se adjunta como bearer a toda request que va a ese endpoint, alcanza con convencer a alguien de correr un <code>configure</code> con una URL hostil: el personal access token sale hacia el server del atacante en cada invocación del CLI, indefinidamente.</p><p>Es supply chain en el sentido que más duele en tooling de agentes: no hace falta comprometer el paquete, alcanza con envenenar la config que el paquete obedece. Y un comando de setup copiado de un README no despierta sospecha. Actualizar a 0.2.5 y rotar el PAT si alguna vez lo configuraste contra un endpoint que no fuera el oficial.</p>",
+            "en": "<p>In Airtable MCP CLI before 0.2.5, <code>ConfigureCommand.execute</code> in <code>src/cli.ts</code> persisted the value given to its <code>endpoint</code> option into the user profile without passing it through <code>createSafeUrl</code>. Since the stored token is attached as bearer credentials to every request sent to that endpoint, talking someone into running <code>configure</code> with a hostile URL is enough: the personal access token goes to the attacker's server on every CLI invocation, indefinitely.</p><p>This is supply chain in the way that hurts most in agent tooling: you do not need to compromise the package, you only need to poison the config the package obeys. And a setup command copied from a README raises nobody's eyebrow. Upgrade to 0.2.5 and rotate the PAT if you ever pointed it at a non-official endpoint.</p>",
+            "fr": "<p>Dans Airtable MCP CLI avant 0.2.5, <code>ConfigureCommand.execute</code> dans <code>src/cli.ts</code> enregistrait la valeur de l'option <code>endpoint</code> dans le profil utilisateur sans la passer par <code>createSafeUrl</code>. Le token stocké étant joint en bearer à chaque requête vers cet endpoint, il suffit de faire exécuter un <code>configure</code> avec une URL hostile pour que le PAT parte vers le serveur de l'attaquant à chaque appel du CLI.</p><p>Supply chain sous sa forme la plus gênante pour l'outillage d'agents : inutile de compromettre le paquet, il suffit d'empoisonner la config qu'il applique. Passer en 0.2.5 et faire tourner le PAT.</p>"
+          },
+          "date": "27 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-81101",
+            "label": "OpenCVE"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "La tanda de advisories de ayer no son diez bugs distintos, es uno solo repetido diez veces: el servidor MCP local asume que solo lo va a llamar alguien de confianza, y esa suposición se paga con el bind por defecto y con la auth opcional. mcp-go, mcp-router, Telnyx, ToolUniverse, UI-TARS, PraisonAI, pg-aiguide, Dash — mismo diagnóstico. Si escribís un servidor MCP, el default correcto es loopback más validación de Host, y la auth no puede ser un flag.",
+      "en": "Yesterday's batch of advisories is not ten different bugs, it is one bug repeated ten times: the local MCP server assumes only trusted callers will ever arrive, and that assumption gets paid for with the default bind and with optional auth. mcp-go, mcp-router, Telnyx, ToolUniverse, UI-TARS, PraisonAI, pg-aiguide, Dash — same diagnosis. If you write an MCP server, the correct default is loopback plus Host validation, and auth cannot be a flag.",
+      "fr": "La salve d'advisories d'hier n'est pas dix bugs distincts, c'est un seul répété dix fois : le serveur MCP local suppose que seuls des appelants de confiance arriveront, et cette supposition se paie par le bind par défaut et l'auth optionnelle. mcp-go, mcp-router, Telnyx, ToolUniverse, UI-TARS, PraisonAI, pg-aiguide, Dash — même diagnostic. Le bon défaut est loopback plus validation du Host, et l'auth ne peut pas être un flag."
+    },
+    {
+      "es": "Kiro y Airtable MCP CLI atacan el mismo punto ciego desde ángulos distintos: la configuración del entorno de desarrollo es una superficie de escritura para el atacante. Un repo hostil escribe en la config del IDE; un README hostil te hace escribir vos el endpoint. En ambos casos el agente no fue engañado a nivel modelo — fue el entorno el que se reconfiguró debajo.",
+      "en": "Kiro and Airtable MCP CLI hit the same blind spot from different angles: the development environment's configuration is a writable surface for the attacker. A hostile repo writes into the IDE config; a hostile README makes you write the endpoint yourself. In neither case was the agent fooled at the model level — the environment was reconfigured underneath it.",
+      "fr": "Kiro et Airtable MCP CLI touchent le même angle mort par deux voies : la configuration de l'environnement de développement est une surface inscriptible pour l'attaquant. Un dépôt hostile écrit dans la config de l'IDE ; un README hostile vous fait écrire l'endpoint vous-même. Dans les deux cas, l'agent n'a pas été trompé au niveau du modèle — c'est l'environnement qui a été reconfiguré en dessous."
+    }
+  ]
+}

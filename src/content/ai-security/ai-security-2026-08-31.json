@@ -1,0 +1,282 @@
+{
+  "title": {
+    "es": "AI Security — 31 Ago 2026",
+    "en": "AI Security — 31 Aug 2026",
+    "fr": "AI Security — 31 Août 2026"
+  },
+  "description": {
+    "es": "La tanda de esta semana golpea al agente en sí: DB-GPT y ai-maestro entregan RCE sin auth, Agno pasa argumentos del LLM directo a exec(), y Rehberger demuestra que a Claude Code le alcanza con pedirle un resumen de una web para terminar corriendo código ajeno.",
+    "en": "This week's batch hits the agent itself: DB-GPT and ai-maestro hand out unauthenticated RCE, Agno passes LLM-generated arguments straight into exec(), and Rehberger shows that asking Claude Code to summarize a website is enough to end up running someone else's code.",
+    "fr": "La salve de cette semaine frappe l'agent lui-même : DB-GPT et ai-maestro offrent un RCE non authentifié, Agno transmet des arguments générés par le LLM directement à exec(), et Rehberger montre qu'un simple résumé de page web suffit à faire exécuter du code étranger à Claude Code."
+  },
+  "pubDate": "2026-08-31",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "ai-maestro: command injection sin auth (9.8)",
+        "en": "ai-maestro: unauthenticated command injection (9.8)",
+        "fr": "ai-maestro : injection de commandes sans auth (9.8)"
+      },
+      "anchor": "cve-2026-37751-ai-maestro",
+      "icon": "lucide:skull"
+    },
+    {
+      "text": {
+        "es": "DB-GPT: path traversal a RCE sin auth (9.3)",
+        "en": "DB-GPT: unauthenticated path traversal to RCE (9.3)",
+        "fr": "DB-GPT : path traversal vers RCE sans auth (9.3)"
+      },
+      "anchor": "cve-2026-80104-dbgpt",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "Agno: argumentos del LLM directo a exec()",
+        "en": "Agno: LLM-generated arguments land in exec()",
+        "fr": "Agno : arguments du LLM directement dans exec()"
+      },
+      "anchor": "cve-2026-37003-agno",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": {
+        "es": "Hermes Agent: catálogo MCP atado a ramas mutables (9.0)",
+        "en": "Hermes Agent: MCP catalog pinned to mutable branches (9.0)",
+        "fr": "Hermes Agent : catalogue MCP sur branches mutables (9.0)"
+      },
+      "anchor": "cve-2026-82021-hermes",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "Claude Code: un resumen de web termina en RCE",
+        "en": "Claude Code: a website summary ends in RCE",
+        "fr": "Claude Code : un résumé de site finit en RCE"
+      },
+      "anchor": "claude-code-automode-rce",
+      "icon": "lucide:radiation"
+    },
+    {
+      "text": {
+        "es": "Qwen-Agent: SSRF hacia metadata del cloud (8.7)",
+        "en": "Qwen-Agent: SSRF into cloud metadata services (8.7)",
+        "fr": "Qwen-Agent : SSRF vers les métadonnées cloud (8.7)"
+      },
+      "anchor": "cve-2026-82268-qwen-agent",
+      "icon": "lucide:shield-alert"
+    }
+  ],
+  "tools": [
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "cve-2026-37751-ai-maestro",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-37751 — ai-maestro: command injection en killSessionSync, sin auth ni interacción (9.8)",
+            "en": "CVE-2026-37751 — ai-maestro: command injection in killSessionSync, no auth, no interaction (9.8)",
+            "fr": "CVE-2026-37751 — ai-maestro : injection de commandes dans killSessionSync, sans auth (9.8)"
+          },
+          "body_html": {
+            "es": "<p>La función <code>killSessionSync</code> de 23blocks-OS ai-maestro v0.24.17 arma un comando de shell con input controlado por el atacante y lo ejecuta sin sanitizar. Vector de red, complejidad baja, cero privilegios, cero interacción del usuario: <code>AV:N/AC:L/PR:N/UI:N</code> con impacto alto en las tres patas. Eso es el 9.8 completo, no un score inflado.</p><p>Ojo con esto: el orquestador de agentes es justo el componente que suele quedar escuchando en la red interna porque «solo lo llaman nuestros propios workers». Hasta que actualices, segmentá la red, cerrá el endpoint y mirá los logs de ejecución de comandos. Un orquestador comprometido no te cuesta un servicio, te cuesta todos los agentes que despacha.</p>",
+            "en": "<p>The <code>killSessionSync</code> function in 23blocks-OS ai-maestro v0.24.17 builds a shell command from attacker-controlled input and runs it without sanitization. Network vector, low complexity, no privileges, no user interaction: <code>AV:N/AC:L/PR:N/UI:N</code> with high impact on all three legs. That is a genuine 9.8, not an inflated score.</p><p>Watch this one: the agent orchestrator is exactly the component people leave listening on the internal network because «only our own workers call it». Until you upgrade, segment the network, close the endpoint, and watch your command-execution logs. A compromised orchestrator does not cost you one service, it costs you every agent it dispatches.</p>",
+            "fr": "<p>La fonction <code>killSessionSync</code> d'ai-maestro v0.24.17 construit une commande shell à partir d'entrées contrôlées par l'attaquant et l'exécute sans assainissement. Vecteur réseau, complexité faible, aucun privilège, aucune interaction : <code>AV:N/AC:L/PR:N/UI:N</code> avec impact élevé sur les trois axes.</p><p>L'orchestrateur d'agents est précisément le composant laissé à l'écoute sur le réseau interne. En attendant la mise à jour : segmentation, fermeture de l'endpoint, surveillance des logs d'exécution.</p>"
+          },
+          "date": "28 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-37751",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-80104-dbgpt",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-80104 — DB-GPT 0.8.0: la subida de skills escribe donde le digas, y la auth devuelve admin siempre (9.3)",
+            "en": "CVE-2026-80104 — DB-GPT 0.8.0: skill upload writes anywhere, and the auth function always returns admin (9.3)",
+            "fr": "CVE-2026-80104 — DB-GPT 0.8.0 : l'upload de skills écrit n'importe où, et l'auth renvoie toujours admin (9.3)"
+          },
+          "body_html": {
+            "es": "<p>Tres fallas encadenadas en el endpoint de subida de skills de DB-GPT 0.8.0 (eosphoros-ai): el handler usa el filename tal cual, sin canonicalizar ni verificar que quede dentro del directorio; el endpoint no pide autenticación; y la función de auth devuelve privilegios de admin sin importar las credenciales. Un payload tipo <code>../../../tmp/malicious.py</code> escribe donde el proceso tenga permiso.</p><p>El salto a ejecución no es teórico: si el módulo Python subido se importa después, el código corre. 9.3 en CVSS v4.0, 9.8 en v3.1. Parche en v0.8.1. Y mientras tanto la lección de siempre: canonicalizá el path ANTES de tocar el filesystem, y una función de auth que devuelve admin en todos los caminos no es auth, es decoración.</p>",
+            "en": "<p>Three chained failures in DB-GPT 0.8.0's skill upload endpoint (eosphoros-ai): the handler uses the filename as-is with no canonicalization and no directory boundary check; the endpoint requires no authentication; and the auth function returns admin privileges regardless of credentials. A payload like <code>../../../tmp/malicious.py</code> writes anywhere the process can reach.</p><p>The jump to execution is not theoretical: if the uploaded Python module gets imported later, the code runs. 9.3 on CVSS v4.0, 9.8 on v3.1. Patched in v0.8.1. In the meantime, the usual lesson: canonicalize the path BEFORE touching the filesystem, and an auth function that returns admin on every path is not auth, it is decoration.</p>",
+            "fr": "<p>Trois failles chaînées dans l'endpoint d'upload de skills de DB-GPT 0.8.0 : nom de fichier utilisé tel quel sans canonicalisation, endpoint sans authentification, et fonction d'auth renvoyant admin quelles que soient les credentials. Un payload <code>../../../tmp/malicious.py</code> écrit partout où le processus a droit.</p><p>Le saut vers l'exécution n'est pas théorique : si le module Python uploadé est importé ensuite, le code s'exécute. Correctif en v0.8.1.</p>"
+          },
+          "date": "25 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-80104",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-37003-agno",
+          "tag": "cve",
+          "title": {
+            "es": "CVE-2026-37003 — Agno ≤ 2.5.8: PythonTools y ShellTools mandan lo que dice el LLM directo a exec() y subprocess",
+            "en": "CVE-2026-37003 — Agno ≤ 2.5.8: PythonTools and ShellTools pipe LLM output straight into exec() and subprocess",
+            "fr": "CVE-2026-37003 — Agno ≤ 2.5.8 : PythonTools et ShellTools envoient la sortie du LLM dans exec() et subprocess"
+          },
+          "body_html": {
+            "es": "<p>En Agno hasta 2.5.8, los componentes <code>PythonTools</code> y <code>ShellTools</code> pasan argumentos generados por el LLM, sin sanitizar, directo a sinks de ejecución: <code>exec()</code>, <code>runpy.run_path()</code> y <code>subprocess.run()</code>. El atacante no necesita credenciales: le alcanza con meter instrucciones en contenido que el agente vaya a procesar — una página web, un documento, un ticket.</p><p>Esta es la clase de bug que va a definir el año. La salida del modelo NO es input confiable. Es input de un tercero que casualmente pasa por tu modelo. Actualizá por encima de 2.5.8, validá todo argumento generado por el LLM antes del sink, y corré el proceso del agente en sandbox o container. Las tres cosas, no una.</p>",
+            "en": "<p>In Agno up to 2.5.8, the <code>PythonTools</code> and <code>ShellTools</code> components pass unsanitized, LLM-generated arguments straight into execution sinks: <code>exec()</code>, <code>runpy.run_path()</code> and <code>subprocess.run()</code>. The attacker needs no credentials — planting instructions in content the agent will process is enough: a web page, a document, a ticket.</p><p>This is the bug class that will define the year. Model output is NOT trusted input. It is third-party input that happened to pass through your model. Upgrade past 2.5.8, validate every LLM-generated argument before the sink, and run the agent process in a sandbox or container. All three, not one.</p>",
+            "fr": "<p>Dans Agno jusqu'à 2.5.8, <code>PythonTools</code> et <code>ShellTools</code> transmettent des arguments générés par le LLM, non assainis, vers <code>exec()</code>, <code>runpy.run_path()</code> et <code>subprocess.run()</code>. Aucune authentification requise : il suffit d'injecter des instructions dans un contenu traité par l'agent.</p><p>La sortie du modèle n'est PAS une entrée de confiance. Mettez à jour au-delà de 2.5.8, validez chaque argument avant le sink, et isolez le processus.</p>"
+          },
+          "date": "27 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-37003",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-82268-qwen-agent",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-82268 — Qwen-Agent ≤ 0.0.34: el parser de documentos acepta cualquier URL y te trae la metadata del cloud (8.7)",
+            "en": "CVE-2026-82268 — Qwen-Agent ≤ 0.0.34: the document parser accepts any URL and fetches your cloud metadata (8.7)",
+            "fr": "CVE-2026-82268 — Qwen-Agent ≤ 0.0.34 : le parseur de documents accepte n'importe quelle URL (8.7)"
+          },
+          "body_html": {
+            "es": "<p>SSRF clásico (CWE-918) en el parseo de documentos de Qwen-Agent: la URL que provee el llamador no se valida ni por esquema ni por host. Vía la interfaz Gradio, que va sin autenticación, se manda una ruta de documento que el servidor trata como URL legítima y sale a buscar direcciones internas — incluidos los servicios de metadata del cloud — devolviendo el contenido.</p><p>Hay PoC pública y la explotación es trivial. Arreglado en 0.0.35. Si no podés actualizar hoy: autenticación delante de Gradio, restricción del tráfico entrante, o whitelist de salida. Y anotá el patrón: cada vez que un agente acepta «una URL de documento», acabás de darle a un desconocido un cliente HTTP adentro de tu VPC.</p>",
+            "en": "<p>Textbook SSRF (CWE-918) in Qwen-Agent's document parsing: the caller-supplied URL gets no scheme restriction and no host validation. Through the Gradio interface, which ships unauthenticated, you hand it a document path the server treats as a legitimate URL and it goes fetching internal addresses — cloud metadata services included — handing the content back.</p><p>A PoC is public and exploitation is trivial. Fixed in 0.0.35. If you cannot upgrade today: put auth in front of Gradio, restrict inbound traffic, or whitelist outbound requests. And note the pattern: every time an agent accepts «a document URL», you just handed a stranger an HTTP client inside your VPC.</p>",
+            "fr": "<p>SSRF classique (CWE-918) dans le parsing de documents de Qwen-Agent : l'URL fournie par l'appelant n'est validée ni par schéma ni par hôte. Via l'interface Gradio non authentifiée, le serveur va chercher des adresses internes — services de métadonnées cloud inclus — et renvoie le contenu.</p><p>PoC publique, exploitation triviale. Corrigé en 0.0.35.</p>"
+          },
+          "date": "28 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-82268",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-55585-qwed",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-55585 — QWED: expresiones matemáticas a SymPy parse_expr() sin namespace restringido, y el signup abierto por defecto (8.8)",
+            "en": "CVE-2026-55585 — QWED: math expressions into SymPy parse_expr() with no restricted namespace, and signup open by default (8.8)",
+            "fr": "CVE-2026-55585 — QWED : expressions envoyées à SymPy parse_expr() sans namespace restreint (8.8)"
+          },
+          "body_html": {
+            "es": "<p>El paquete <code>qwed-verification</code>, anterior a 5.1.2, pasa expresiones matemáticas controladas por el llamador directo a <code>parse_expr()</code> de SymPy sin namespace restringido. Traducción: ejecución arbitraria de Python en el servidor. Los endpoints afectados son <code>POST /verify/math</code>, que acepta cualquier API key de tenant, y <code>POST /verify/batch</code>.</p><p>Lo que sube el impacto no es el bug en sí, es la combinación: <code>POST /auth/signup</code> viene habilitado por defecto, así que cualquiera se crea una cuenta de tenant y ya tiene la key que hace falta. En un despliegue multi-tenant compartido, eso es leer y escribir archivos, ejecutar comandos y comprometer a los demás tenants. Actualizá a 5.1.2 y apagá el signup público.</p>",
+            "en": "<p>The <code>qwed-verification</code> package before 5.1.2 passes caller-controlled math expressions straight into SymPy's <code>parse_expr()</code> with no restricted namespace. Translation: arbitrary Python execution on the server. The affected endpoints are <code>POST /verify/math</code>, which accepts any tenant API key, and <code>POST /verify/batch</code>.</p><p>What raises the impact is not the bug itself but the combination: <code>POST /auth/signup</code> is enabled by default, so anyone creates a tenant account and already holds the key they need. In a shared multi-tenant deployment that means reading and writing files, running system commands, and compromising other tenants. Upgrade to 5.1.2 and turn public signup off.</p>",
+            "fr": "<p>Le paquet <code>qwed-verification</code> avant 5.1.2 transmet des expressions contrôlées par l'appelant à <code>parse_expr()</code> de SymPy sans namespace restreint : exécution Python arbitraire côté serveur, via <code>POST /verify/math</code> et <code>POST /verify/batch</code>.</p><p>Aggravant : <code>POST /auth/signup</code> est activé par défaut, n'importe qui obtient donc la clé nécessaire. Mettez à jour vers 5.1.2 et désactivez l'inscription publique.</p>"
+          },
+          "date": "25 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-55585",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-82640-browser-use",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-82640 — browser-use web-ui: las API keys de los proveedores quedan en disco en texto plano (6.8)",
+            "en": "CVE-2026-82640 — browser-use web-ui: provider API keys written to disk in cleartext (6.8)",
+            "fr": "CVE-2026-82640 — browser-use web-ui : clés API des fournisseurs écrites en clair sur disque (6.8)"
+          },
+          "body_html": {
+            "es": "<p>browser-use web-ui, de 2.0.0 a 3.0.0, escribe las API keys de LLM configuradas a disco en texto plano, sin cifrado ni restricción de acceso, en archivos JSON de nombre predecible dentro de directorios temporales de settings. CWE-312. Vector local, complejidad baja: cualquiera con lectura sobre esos directorios se lleva tus claves de proveedor.</p><p>Un 6.8 no te va a despertar de noche, pero medí el blast radius real: no es la app la que se compromete, es tu factura de OpenAI o Anthropic y todo lo que esas claves puedan tocar. Rotá las keys si corriste alguna de esas versiones en una máquina compartida, y revisá permisos en los directorios de settings.</p>",
+            "en": "<p>browser-use web-ui, versions 2.0.0 through 3.0.0, writes configured LLM API keys to disk in cleartext — no encryption, no access restrictions — in predictably-named JSON files inside temporary settings directories. CWE-312. Local vector, low complexity: anyone with read access to those directories walks off with your provider keys.</p><p>A 6.8 will not wake you up at night, but measure the real blast radius: it is not the app that gets compromised, it is your OpenAI or Anthropic bill and everything those keys can reach. Rotate the keys if you ran any of those versions on a shared machine, and check the permissions on the settings directories.</p>",
+            "fr": "<p>browser-use web-ui, versions 2.0.0 à 3.0.0, écrit les clés API LLM configurées en clair sur disque, sans chiffrement ni restriction, dans des fichiers JSON aux noms prévisibles. CWE-312, vecteur local, complexité faible.</p><p>Le vrai rayon d'impact n'est pas l'application mais votre facture fournisseur et tout ce que ces clés atteignent. Faites tourner les clés si vous avez utilisé ces versions sur une machine partagée.</p>"
+          },
+          "date": "30 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-82640",
+            "label": "OpenCVE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "supply-chain",
+      "name": "Supply Chain",
+      "theme": "supply-chain",
+      "icon_emoji": "📦",
+      "anchor": "supply-chain",
+      "updates": [
+        {
+          "id": "cve-2026-82021-hermes",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-82021 — Hermes Agent: el catálogo MCP apunta a ramas mutables, no a commits fijos (9.0)",
+            "en": "CVE-2026-82021 — Hermes Agent: the MCP catalog points at mutable branches, not fixed commits (9.0)",
+            "fr": "CVE-2026-82021 — Hermes Agent : le catalogue MCP pointe vers des branches mutables (9.0)"
+          },
+          "body_html": {
+            "es": "<p>El catálogo MCP que trae Hermes Agent de NousResearch, versiones 0.18.2 a 0.19.0, referencia repositorios upstream por rama mutable en lugar de por hash de commit fijo. CWE-494, «Download of Code Without Integrity Check». Si alguien compromete uno de esos repos upstream, el payload se propaga solo a todas las máquinas que instalen esa entrada del catálogo, sin que ningún operador haga nada.</p><p>Actualizá a 0.19.0 o posterior. Pero el arreglo estructural es otro y aplica a todos: pineá las entradas del catálogo MCP a un SHA de commit específico, exigí firma de commits y limitá el write access a mantenedores de confianza. Una rama es un puntero móvil; confiar en ella es delegarle tu integridad a quien tenga push.</p>",
+            "en": "<p>The MCP catalog bundled with NousResearch's Hermes Agent, versions 0.18.2 through 0.19.0, references upstream repositories by mutable branch instead of by fixed commit hash. CWE-494, «Download of Code Without Integrity Check». If someone compromises one of those upstream repos, the payload propagates on its own to every machine installing that catalog entry, with no operator involved.</p><p>Upgrade to 0.19.0 or later. But the structural fix is a different one and it applies to everybody: pin MCP catalog entries to a specific commit SHA, require commit signing, and restrict write access to trusted maintainers. A branch is a moving pointer; trusting it means delegating your integrity to whoever holds push.</p>",
+            "fr": "<p>Le catalogue MCP fourni avec Hermes Agent (0.18.2 à 0.19.0) référence des dépôts upstream par branche mutable plutôt que par hash de commit. CWE-494. Un dépôt upstream compromis propage automatiquement son payload à toutes les machines installant cette entrée.</p><p>Mettez à jour vers 0.19.0. Le vrai correctif : épingler les entrées du catalogue à un SHA de commit, exiger la signature des commits, restreindre l'accès en écriture.</p>"
+          },
+          "date": "28 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-82021",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-55557-browse-mcp",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-55557 — browse-mcp: path traversal en download y save_state, con prompt injection como disparador (8.6)",
+            "en": "CVE-2026-55557 — browse-mcp: path traversal in download and save_state, with prompt injection as the trigger (8.6)",
+            "fr": "CVE-2026-55557 — browse-mcp : path traversal dans download et save_state (8.6)"
+          },
+          "body_html": {
+            "es": "<p>browse-mcp, servidor MCP de navegador headless, antes de 0.8.2: <code>browser_download</code> no valida el directorio de guardado que le pasan, y <code>browser_save_state</code> / <code>browser_load_state</code> aceptan rutas sin validar. CWE-22. El atacante controla la ruta y el contenido, así que puede escribir en <code>~/.bashrc</code>, en un cron o en entradas de autostart.</p><p>La parte interesante es quién dispara el ataque. No hace falta un cliente MCP malicioso: alcanza con un agente autónomo dirigido por prompt injection indirecta desde una página que visitó. La página elige el <code>save_dir</code>. Eso es lo que significa darle al agente un filesystem sin fronteras. Actualizá a 0.8.2, firewall al servidor MCP y monitoreo sobre directorios críticos.</p>",
+            "en": "<p>browse-mcp, a headless-browser MCP server, before 0.8.2: <code>browser_download</code> does not validate the caller-supplied save directory, and <code>browser_save_state</code> / <code>browser_load_state</code> accept unvalidated paths. CWE-22. The attacker controls both the path and the content, so they can write to <code>~/.bashrc</code>, a cron job, or autostart entries.</p><p>The interesting part is who pulls the trigger. A malicious MCP client is not required: an autonomous agent steered by indirect prompt injection on a page it visited is enough. The page picks the <code>save_dir</code>. That is what handing an agent a borderless filesystem actually means. Upgrade to 0.8.2, firewall the MCP server, and monitor critical directories.</p>",
+            "fr": "<p>browse-mcp, serveur MCP de navigateur headless, avant 0.8.2 : <code>browser_download</code> ne valide pas le répertoire de sauvegarde, et <code>browser_save_state</code> / <code>browser_load_state</code> acceptent des chemins non validés. CWE-22. Écriture possible dans <code>~/.bashrc</code>, un cron ou l'autostart.</p><p>Le déclencheur : un agent autonome piloté par prompt injection indirecte sur une page visitée. Mettez à jour vers 0.8.2 et surveillez les répertoires critiques.</p>"
+          },
+          "date": "25 Aug 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-55557",
+            "label": "OpenCVE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "claude-code-automode-rce",
+          "tag": "research",
+          "title": {
+            "es": "«Resumime esta web» termina en RCE: Rehberger encadena curl, un ZIP y module shadowing contra Claude Code en Auto Mode",
+            "en": "«Summarize this website» ends in RCE: Rehberger chains curl, a ZIP and module shadowing against Claude Code in Auto Mode",
+            "fr": "« Résume ce site » finit en RCE : Rehberger enchaîne curl, un ZIP et du module shadowing contre Claude Code"
+          },
+          "body_html": {
+            "es": "<p>Johann Rehberger (wunderwuzzi) mostró que Claude Code corriendo Opus 5 en Auto Mode se puede llevar a ejecutar código del atacante partiendo de un pedido inocente: resumir una página. La cadena son varios pasos que individualmente parecen benignos — el resumen dispara un WebFetch que falla, el fallo empuja a usar <code>curl</code>, el <code>curl</code> redirige a un ZIP hostil, y ahí entra el module shadowing de Python.</p><p>El truco fino: el atacante planta un <code>struct.py</code> envenenado, que se ejecuta cuando el modelo escribe su propio decodificador. Los guardrails que se niegan a correr binarios provistos por el usuario no ven nada raro, porque el código lo escribe el modelo. Tasa de éxito del 60–80% según la variante. Demostró calculadora, reconocimiento del sistema, e instancias anidadas de Claude Code con acceso a herramientas propio.</p><p>Anthropic describe Auto Mode como una función de conveniencia respaldada por un clasificador best-effort, no como una garantía de seguridad. Rehberger lo resume mejor: no confíes en la salida del modelo. La defensa real es sandbox — SO y red restringidos — no un clasificador.</p>",
+            "en": "<p>Johann Rehberger (wunderwuzzi) showed that Claude Code running Opus 5 in Auto Mode can be walked into executing attacker code from an innocent starting point: summarize a page. The chain is several individually benign-looking steps — the summary triggers a WebFetch that fails, the failure pushes the model toward <code>curl</code>, the <code>curl</code> redirects to a hostile ZIP, and Python module shadowing takes over from there.</p><p>The sharp part: the attacker plants a poisoned <code>struct.py</code> that executes when the model writes its own decoder. Guardrails that refuse to run user-supplied binaries see nothing wrong, because the model wrote the code. Success rate of 60–80% depending on the variant. He demonstrated launching Calculator, system reconnaissance, and nested Claude Code instances with their own independent tool access.</p><p>Anthropic describes Auto Mode as a convenience feature backed by a best-effort classifier, not a security guarantee. Rehberger puts it better: do not trust the model output. The real defense is a sandbox — restricted OS and network access — not a classifier.</p>",
+            "fr": "<p>Johann Rehberger (wunderwuzzi) a montré que Claude Code sous Opus 5 en Auto Mode peut être amené à exécuter du code attaquant à partir d'une demande anodine : résumer une page. La chaîne enchaîne des étapes bénignes — WebFetch qui échoue, bascule vers <code>curl</code>, redirection vers un ZIP hostile, puis module shadowing Python.</p><p>Le point clé : un <code>struct.py</code> empoisonné s'exécute quand le modèle écrit son propre décodeur. Les garde-fous refusant les binaires fournis ne voient rien, car c'est le modèle qui écrit le code. Taux de réussite de 60 à 80 %.</p><p>Anthropic décrit Auto Mode comme une commodité adossée à un classificateur best-effort, pas une garantie de sécurité. La vraie défense est le sandbox, pas le classificateur.</p>"
+          },
+          "date": "28 Aug 2026",
+          "source": {
+            "url": "https://www.theregister.com/research/2026/08/28/researcher-shows-how-claude-code-can-be-tricked-simply-by-asking-it-to-summarize-a-website/5293372",
+            "label": "The Register"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Cambió el objetivo. Las semanas anteriores el bug repetido era el servidor MCP mal atado; esta semana el patrón es el agente que trata la salida del LLM como si fuera código propio. Agno la manda a exec(), browse-mcp deja que una página visitada elija el directorio de escritura, y la cadena de Rehberger contra Claude Code funciona justamente porque el modelo escribe el decodificador que ejecuta el struct.py envenenado. Si tu guardrail pregunta «¿quién escribió este código?» en vez de «¿de dónde vino esta instrucción?», ya perdiste.",
+      "en": "The target moved. In previous weeks the repeated bug was the badly-bound MCP server; this week the pattern is the agent treating LLM output as if it were its own code. Agno sends it to exec(), browse-mcp lets a visited page pick the write directory, and Rehberger's chain against Claude Code works precisely because the model writes the decoder that executes the poisoned struct.py. If your guardrail asks «who wrote this code?» instead of «where did this instruction come from?», you already lost.",
+      "fr": "La cible a bougé. Les semaines précédentes, le bug récurrent était le serveur MCP mal lié ; cette semaine, le motif est l'agent qui traite la sortie du LLM comme son propre code. Agno l'envoie à exec(), browse-mcp laisse une page visitée choisir le répertoire d'écriture, et la chaîne de Rehberger fonctionne précisément parce que le modèle écrit le décodeur qui exécute le struct.py empoisonné. Si votre garde-fou demande « qui a écrit ce code ? » au lieu de « d'où vient cette instruction ? », c'est déjà perdu."
+    },
+    {
+      "es": "Segundo patrón, más aburrido y más caro: la interfaz de administración sin auth. DB-GPT con una función de auth que devuelve admin siempre, Qwen-Agent con Gradio abierto, QWED con signup público habilitado por defecto, ai-maestro escuchando en la red. Ninguno de estos es un bug sofisticado. Son defaults pensados para la demo local que llegaron a producción sin que nadie los revisara. El default correcto para una UI de agente es loopback y auth obligatoria, siempre.",
+      "en": "Second pattern, duller and more expensive: the unauthenticated admin surface. DB-GPT with an auth function that always returns admin, Qwen-Agent with Gradio wide open, QWED with public signup enabled by default, ai-maestro listening on the network. None of these is a sophisticated bug. They are defaults designed for the local demo that reached production with nobody reviewing them. The correct default for an agent UI is loopback plus mandatory auth, every time.",
+      "fr": "Deuxième motif, plus banal et plus coûteux : la surface d'administration sans authentification. DB-GPT avec une fonction d'auth renvoyant toujours admin, Qwen-Agent avec Gradio ouvert, QWED avec inscription publique par défaut, ai-maestro à l'écoute sur le réseau. Aucun n'est sophistiqué : ce sont des défauts pensés pour la démo locale arrivés en production sans relecture. Le bon défaut pour une UI d'agent est loopback plus auth obligatoire."
+    }
+  ]
+}

@@ -1,0 +1,333 @@
+{
+  "title": {
+    "es": "Dev News — 31 Ago 2026",
+    "en": "Dev News — Aug 31, 2026",
+    "fr": "Dev News — 31 août 2026"
+  },
+  "description": {
+    "es": "pnpm 12.1 mete concurrencia por tarea y cache remoto de side-effects, Safari TP 251 trae corner-shape y popover=hint, y Electron publica cuatro líneas estables el mismo día.",
+    "en": "pnpm 12.1 lands per-task concurrency and a remote side-effects cache, Safari TP 251 ships corner-shape and popover=hint, and Electron cuts four stable lines in one day.",
+    "fr": "pnpm 12.1 apporte la concurrence par tâche et un cache distant de side-effects, Safari TP 251 livre corner-shape et popover=hint, et Electron publie quatre lignes stables le même jour."
+  },
+  "pubDate": "2026-08-31",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": {
+        "es": "pnpm 12.1: concurrencia por tarea",
+        "en": "pnpm 12.1: per-task concurrency",
+        "fr": "pnpm 12.1 : concurrence par tâche"
+      },
+      "anchor": "pnpm-12-1-0",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "Safari TP 251: corner-shape y random-item()",
+        "en": "Safari TP 251: corner-shape and random-item()",
+        "fr": "Safari TP 251 : corner-shape et random-item()"
+      },
+      "anchor": "stp-251",
+      "icon": "simple-icons:css"
+    },
+    {
+      "text": {
+        "es": "Electron parchea 42, 43, 44 y 45 el mismo día",
+        "en": "Electron patches 42, 43, 44 and 45 in one day",
+        "fr": "Electron corrige 42, 43, 44 et 45 le même jour"
+      },
+      "anchor": "electron-44-1-0",
+      "icon": "lucide:zap"
+    },
+    {
+      "text": {
+        "es": "Svelte 5.57: defaultValue en select",
+        "en": "Svelte 5.57: defaultValue on select",
+        "fr": "Svelte 5.57 : defaultValue sur select"
+      },
+      "anchor": "svelte-5-57-0",
+      "icon": "simple-icons:svelte"
+    },
+    {
+      "text": {
+        "es": "Vitest 5 RC3 estabiliza parseSpecifications",
+        "en": "Vitest 5 RC3 stabilizes parseSpecifications",
+        "fr": "Vitest 5 RC3 stabilise parseSpecifications"
+      },
+      "anchor": "vitest-5-rc3",
+      "icon": "simple-icons:vite"
+    },
+    {
+      "text": {
+        "es": "Solid Query 6.0 entra en RC",
+        "en": "Solid Query 6.0 enters RC",
+        "fr": "Solid Query 6.0 entre en RC"
+      },
+      "anchor": "solid-query-6-rc1",
+      "icon": "simple-icons:tanstack"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "pnpm-12-1-0",
+          "tag": "breaking",
+          "date": "29 Aug 2026",
+          "title": {
+            "es": "pnpm 12.1.0: concurrencia por tarea, resume-from real y cache remoto de side-effects",
+            "en": "pnpm 12.1.0: per-task concurrency, real resume-from, and a remote side-effects cache",
+            "fr": "pnpm 12.1.0 : concurrence par tâche, resume-from réel et cache distant de side-effects"
+          },
+          "body_html": {
+            "es": "<p>Dos días después del 12.0.0 llega un minor que pega fuerte en monorepos. Ahora podés limitar cuántas instancias de una tarea corren a la vez con <code>tasks.&lt;name&gt;.concurrency</code> en <code>pnpm-workspace.yaml</code>, el trabajo de workspace arranca apenas terminan sus dependencias en vez de esperar al grupo topológico entero, y <code>--resume-from</code> ahora persiste las tareas que sí pasaron para saltear exactamente ese trabajo. Sumale <code>sideEffectsCache</code> con tier <code>remote</code> para compartir output de build entre máquinas.</p><p>Ojo con esto: también endurecieron auth. Un <code>scope</code> puesto en el <code>pnpm-workspace.yaml</code> del proyecto ahora se ignora con warning, porque un archivo commiteado al repo podía redirigir un scope como <code>@acme</code> en TODOS tus otros proyectos después de un login de rutina. Usá <code>--scope</code>, <code>PNPM_CONFIG_SCOPE</code> o el config global.</p>",
+            "en": "<p>Two days after 12.0.0 comes a minor that hits hard in monorepos. You can now cap how many instances of a task run at once via <code>tasks.&lt;name&gt;.concurrency</code> in <code>pnpm-workspace.yaml</code>, workspace work starts as soon as its dependencies finish instead of waiting on an unrelated topological group, and <code>--resume-from</code> now persists completed tasks so it skips exactly the work that passed. Add <code>sideEffectsCache</code> with a <code>remote</code> tier to share build output across machines.</p><p>Also an auth hardening worth reading: a <code>scope</code> set in a project's <code>pnpm-workspace.yaml</code> is now ignored with a warning, because a repository-committed file could redirect a scope like <code>@acme</code> across all of a user's other projects after one routine login. Use <code>--scope</code>, <code>PNPM_CONFIG_SCOPE</code>, or the global config instead.</p>",
+            "fr": "<p>Deux jours après la 12.0.0, une mineure qui compte pour les monorepos. Vous pouvez désormais limiter le nombre d'instances d'une tâche via <code>tasks.&lt;name&gt;.concurrency</code> dans <code>pnpm-workspace.yaml</code>, le travail de workspace démarre dès que ses dépendances sont finies au lieu d'attendre tout un groupe topologique, et <code>--resume-from</code> persiste les tâches réussies pour ne rejouer que le reste. Ajoutez <code>sideEffectsCache</code> avec un tier <code>remote</code> pour partager la sortie de build entre machines.</p><p>Côté sécurité : un <code>scope</code> défini dans le <code>pnpm-workspace.yaml</code> d'un projet est désormais ignoré avec un avertissement, car un fichier commité pouvait rediriger un scope comme <code>@acme</code> dans tous les autres projets après un simple login. Utilisez <code>--scope</code>, <code>PNPM_CONFIG_SCOPE</code> ou la config globale.</p>"
+          },
+          "source": {
+            "url": "https://github.com/pnpm/pnpm/releases/tag/v12.1.0",
+            "label": "github.com/pnpm"
+          }
+        },
+        {
+          "id": "stp-251",
+          "tag": "notable",
+          "date": "26 Aug 2026",
+          "title": {
+            "es": "Safari Technology Preview 251: corner-shape, object-view-box, random-item() y popover=hint",
+            "en": "Safari Technology Preview 251: corner-shape, object-view-box, random-item() and popover=hint",
+            "fr": "Safari Technology Preview 251 : corner-shape, object-view-box, random-item() et popover=hint"
+          },
+          "body_html": {
+            "es": "<p>Tanda gorda de CSS en WebKit: <code>corner-shape</code> para esquinas que no sean el redondeo de siempre, <code>object-view-box</code>, la función <code>random-item()</code> con keywords de caché de valor aleatorio, <code>@container</code> con condiciones separadas por coma, y las notaciones funcionales <code>ident()</code> e <code>inherit()</code>. También <code>@supports at-rule(...)</code>, que por fin te deja testear si una at-rule está soportada.</p><p>Del lado de HTML y Web APIs: <code>popover=hint</code>, la propiedad <code>to</code> en <code>NavigationTransition</code>, precommit handlers al interceptar navegación, y backpressure en upload de streams con <code>fetch</code>. Esto es ENORME para quien viene peleando con el Navigation API.</p>",
+            "en": "<p>A big CSS batch in WebKit: <code>corner-shape</code> for corners beyond the usual radius, <code>object-view-box</code>, the <code>random-item()</code> function with random-value caching keywords, <code>@container</code> with comma-separated conditions, and the <code>ident()</code> and <code>inherit()</code> functional notations. Plus <code>@supports at-rule(...)</code>, which finally lets you feature-test an at-rule.</p><p>On the HTML and Web API side: <code>popover=hint</code>, a <code>to</code> property on <code>NavigationTransition</code>, precommit handlers for navigation interception, and stream upload backpressure in <code>fetch</code>. Notable for anyone building on the Navigation API.</p>",
+            "fr": "<p>Grosse fournée CSS dans WebKit : <code>corner-shape</code> pour des coins au-delà de l'arrondi habituel, <code>object-view-box</code>, la fonction <code>random-item()</code> avec ses mots-clés de cache de valeur aléatoire, <code>@container</code> avec conditions séparées par virgule, et les notations <code>ident()</code> et <code>inherit()</code>. Plus <code>@supports at-rule(...)</code>, qui permet enfin de tester le support d'une at-rule.</p><p>Côté HTML et Web APIs : <code>popover=hint</code>, la propriété <code>to</code> sur <code>NavigationTransition</code>, des precommit handlers à l'interception de navigation, et le backpressure d'upload de flux dans <code>fetch</code>.</p>"
+          },
+          "source": {
+            "url": "https://webkit.org/blog/18194/release-notes-for-safari-technology-preview-251/",
+            "label": "webkit.org"
+          }
+        },
+        {
+          "id": "electron-44-1-0",
+          "tag": "release",
+          "date": "31 Aug 2026",
+          "title": {
+            "es": "Electron 44.1.0, 43.5.0 y 42.11.0 salen juntos con una tanda de fixes de crash",
+            "en": "Electron 44.1.0, 43.5.0 and 42.11.0 ship together with a wave of crash fixes",
+            "fr": "Electron 44.1.0, 43.5.0 et 42.11.0 sortent ensemble avec une vague de correctifs de crash"
+          },
+          "body_html": {
+            "es": "<p>Tres líneas estables el mismo día, todas con el mismo lote de backports. Lo grueso son crashes: en Windows cuando V8 posteaba una tarea de worker demorada durante el shutdown, en macOS con el prompt de Touch ID de WebAuthn sin recursos de locale cargados, en <code>utilityProcess.postMessage()</code> después de que el proceso salió, y varios por bugs de lifetime en <code>sharedTexture</code> e <code>ipcRenderer</code> de service worker.</p><p>Ojo si estás en Linux arm64 o armv7l: <code>fs.constants.O_DIRECTORY</code>, <code>O_NOFOLLOW</code> y <code>O_DIRECT</code> tenían valores de x86, así que abrir un directorio fallaba con <code>EINVAL</code>. También se arregló el tray icon que no aparecía en GNOME desde 44.0.0-beta.6.</p>",
+            "en": "<p>Three stable lines on the same day, all carrying the same backport batch. Most of it is crashes: on Windows when V8 posted a delayed worker task during shutdown, on macOS when a WebAuthn Touch ID prompt ran with no locale resources loaded, in <code>utilityProcess.postMessage()</code> after the process had exited, and several from object-lifetime bugs in <code>sharedTexture</code> and service-worker <code>ipcRenderer</code>.</p><p>Worth checking on Linux arm64 or armv7l: <code>fs.constants.O_DIRECTORY</code>, <code>O_NOFOLLOW</code> and <code>O_DIRECT</code> held x86 values, so opening a directory failed with <code>EINVAL</code>. The tray icon missing on GNOME since 44.0.0-beta.6 is fixed too.</p>",
+            "fr": "<p>Trois lignes stables le même jour, avec le même lot de backports. L'essentiel concerne des crashs : sous Windows quand V8 postait une tâche worker différée pendant l'arrêt, sous macOS avec le prompt Touch ID WebAuthn sans ressources de locale, dans <code>utilityProcess.postMessage()</code> après la sortie du processus, et plusieurs dus à des bugs de durée de vie d'objets.</p><p>À noter sous Linux arm64 ou armv7l : <code>fs.constants.O_DIRECTORY</code>, <code>O_NOFOLLOW</code> et <code>O_DIRECT</code> portaient des valeurs x86, faisant échouer l'ouverture d'un répertoire avec <code>EINVAL</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/electron/electron/releases/tag/v44.1.0",
+            "label": "github.com/electron"
+          }
+        }
+      ]
+    },
+    {
+      "id": "js-frameworks",
+      "name": "JS Frameworks",
+      "theme": "js-frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "js-frameworks",
+      "updates": [
+        {
+          "id": "svelte-5-57-0",
+          "tag": "notable",
+          "date": "28 Aug 2026",
+          "title": {
+            "es": "Svelte 5.57.0: defaultValue en select, has() en createContext y CSP exportado",
+            "en": "Svelte 5.57.0: defaultValue on select, has() on createContext, and CSP types exported",
+            "fr": "Svelte 5.57.0 : defaultValue sur select, has() sur createContext et types CSP exportés"
+          },
+          "body_html": {
+            "es": "<p>Minor con cuatro features que se agradecen: soporte de <code>defaultValue</code> en <code>&lt;select&gt;</code>, una función <code>has</code> en <code>createContext</code>, <code>getOrInsert</code>/<code>getOrInsertComputed</code> en <code>SvelteMap</code>, y la exportación de <code>RenderOutput</code>, <code>SyncRenderOutput</code>, <code>Csp</code> y <code>Sha256Source</code> desde <code>svelte/server</code>.</p><p>Entre los fixes hay uno que vale la pena mirar si usás runas: ahora se reporta <code>derived_invalid_export</code> para <code>export let x = $derived(...)</code> en modo runes. También se arreglaron anchors de <code>&lt;svelte:head&gt;</code> que quedaban colgados al desmontar.</p>",
+            "en": "<p>A minor with four welcome features: <code>defaultValue</code> support on <code>&lt;select&gt;</code>, a <code>has</code> function on <code>createContext</code>, <code>getOrInsert</code>/<code>getOrInsertComputed</code> on <code>SvelteMap</code>, and <code>RenderOutput</code>, <code>SyncRenderOutput</code>, <code>Csp</code> and <code>Sha256Source</code> now exported from <code>svelte/server</code>.</p><p>One fix worth noting if you use runes: <code>derived_invalid_export</code> is now reported for <code>export let x = $derived(...)</code> in runes mode. Dangling <code>&lt;svelte:head&gt;</code> anchors on unmount are fixed too.</p>",
+            "fr": "<p>Une mineure avec quatre ajouts bienvenus : support de <code>defaultValue</code> sur <code>&lt;select&gt;</code>, une fonction <code>has</code> sur <code>createContext</code>, <code>getOrInsert</code>/<code>getOrInsertComputed</code> sur <code>SvelteMap</code>, et l'export de <code>RenderOutput</code>, <code>SyncRenderOutput</code>, <code>Csp</code> et <code>Sha256Source</code> depuis <code>svelte/server</code>.</p><p>Un correctif à surveiller en mode runes : <code>derived_invalid_export</code> est désormais signalé pour <code>export let x = $derived(...)</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/sveltejs/svelte/releases/tag/svelte%405.57.0",
+            "label": "github.com/sveltejs"
+          }
+        },
+        {
+          "id": "solid-query-6-rc1",
+          "tag": "beta",
+          "date": "28 Aug 2026",
+          "title": {
+            "es": "TanStack Solid Query 6.0.0-rc.1",
+            "en": "TanStack Solid Query 6.0.0-rc.1",
+            "fr": "TanStack Solid Query 6.0.0-rc.1"
+          },
+          "body_html": {
+            "es": "<p>Solid Query entra en release candidate para su major 6, junto con <code>solid-query-persist-client</code> y <code>solid-query-devtools</code>. El resto de los adapters (react, vue, svelte) siguen en la línea 5.102.x, así que el salto es específico de Solid por ahora.</p>",
+            "en": "<p>Solid Query enters release candidate for its 6.0 major, alongside <code>solid-query-persist-client</code> and <code>solid-query-devtools</code>. The other adapters (react, vue, svelte) stay on the 5.102.x line, so the jump is Solid-specific for now.</p>",
+            "fr": "<p>Solid Query entre en release candidate pour sa majeure 6.0, avec <code>solid-query-persist-client</code> et <code>solid-query-devtools</code>. Les autres adaptateurs (react, vue, svelte) restent sur la ligne 5.102.x.</p>"
+          },
+          "source": {
+            "url": "https://github.com/TanStack/query/releases/tag/%40tanstack/solid-query%406.0.0-rc.1",
+            "label": "github.com/TanStack"
+          }
+        },
+        {
+          "id": "solid-start-rc4",
+          "tag": "beta",
+          "date": "29 Aug 2026",
+          "title": {
+            "es": "TanStack Solid Start y Solid Router llegan a 2.0.0-rc.4",
+            "en": "TanStack Solid Start and Solid Router reach 2.0.0-rc.4",
+            "fr": "TanStack Solid Start et Solid Router atteignent 2.0.0-rc.4"
+          },
+          "body_html": {
+            "es": "<p>Cuarto RC del stack Solid de TanStack: <code>solid-start</code>, <code>solid-start-server</code>, <code>solid-start-client</code>, <code>solid-router</code>, <code>solid-router-ssr-query</code> y devtools, todos alineados en rc.4. Junto con el RC de Solid Query, el ecosistema Solid de TanStack se está sincronizando para un major coordinado.</p>",
+            "en": "<p>Fourth RC of TanStack's Solid stack: <code>solid-start</code>, <code>solid-start-server</code>, <code>solid-start-client</code>, <code>solid-router</code>, <code>solid-router-ssr-query</code> and devtools, all aligned on rc.4. Together with the Solid Query RC, TanStack's Solid ecosystem is converging on a coordinated major.</p>",
+            "fr": "<p>Quatrième RC de la stack Solid de TanStack : <code>solid-start</code>, <code>solid-start-server</code>, <code>solid-start-client</code>, <code>solid-router</code>, <code>solid-router-ssr-query</code> et devtools, tous alignés sur rc.4.</p>"
+          },
+          "source": {
+            "url": "https://github.com/TanStack/router/releases/tag/release-2026-08-29-0036",
+            "label": "github.com/TanStack"
+          }
+        }
+      ]
+    },
+    {
+      "id": "react",
+      "name": "React",
+      "theme": "react",
+      "icon_emoji": "⚛️",
+      "anchor": "react",
+      "updates": [
+        {
+          "id": "react-router-8-3-1",
+          "tag": "patch",
+          "date": "28 Aug 2026",
+          "title": {
+            "es": "React Router 8.3.1 y 7.18.3 en paralelo",
+            "en": "React Router 8.3.1 and 7.18.3 land in parallel",
+            "fr": "React Router 8.3.1 et 7.18.3 en parallèle"
+          },
+          "body_html": {
+            "es": "<p>Patch simultáneo en las dos líneas mantenidas. El equipo sigue publicando la 7.x junto a la 8.x, así que si todavía no migraste no estás abandonado. Los detalles están en el CHANGELOG del repo, no en el cuerpo del release.</p>",
+            "en": "<p>Simultaneous patch on both maintained lines. The team keeps shipping 7.x alongside 8.x, so if you haven't migrated yet you're not stranded. Details live in the repo CHANGELOG rather than the release body.</p>",
+            "fr": "<p>Patch simultané sur les deux lignes maintenues. L'équipe continue de publier la 7.x en parallèle de la 8.x. Les détails sont dans le CHANGELOG du dépôt, pas dans le corps de la release.</p>"
+          },
+          "source": {
+            "url": "https://github.com/remix-run/react-router/releases/tag/react-router%408.3.1",
+            "label": "github.com/remix-run"
+          }
+        }
+      ]
+    },
+    {
+      "id": "react-native",
+      "name": "React Native",
+      "theme": "react-native",
+      "icon_emoji": "📱",
+      "anchor": "react-native",
+      "updates": [
+        {
+          "id": "reanimated-4-5-5",
+          "tag": "patch",
+          "date": "27 Aug 2026",
+          "title": {
+            "es": "Reanimated 4.5.5",
+            "en": "Reanimated 4.5.5",
+            "fr": "Reanimated 4.5.5"
+          },
+          "body_html": {
+            "es": "<p>Segundo patch en dos días para la línea 4.5 de Reanimated, después del 4.5.4. Nada de API nueva: mantenimiento sobre la New Architecture.</p>",
+            "en": "<p>Second patch in two days on the Reanimated 4.5 line, following 4.5.4. No new API here — maintenance on top of the New Architecture.</p>",
+            "fr": "<p>Deuxième patch en deux jours sur la ligne Reanimated 4.5, après la 4.5.4. Pas de nouvelle API : de la maintenance sur la New Architecture.</p>"
+          },
+          "source": {
+            "url": "https://github.com/software-mansion/react-native-reanimated/releases/tag/4.5.5",
+            "label": "github.com/software-mansion"
+          }
+        }
+      ]
+    },
+    {
+      "id": "build-tools",
+      "name": "Build Tools & Runtimes",
+      "theme": "build-tools",
+      "icon_emoji": "🔧",
+      "anchor": "build-tools",
+      "updates": [
+        {
+          "id": "electron-45-alpha-2",
+          "tag": "beta",
+          "date": "31 Aug 2026",
+          "title": {
+            "es": "Electron 45.0.0-alpha.2",
+            "en": "Electron 45.0.0-alpha.2",
+            "fr": "Electron 45.0.0-alpha.2"
+          },
+          "body_html": {
+            "es": "<p>Segundo alpha de la 45 en tres días, publicado en la misma tanda que los estables. Si mantenés una app Electron grande, es buen momento para empezar a probar la 45 en CI antes de que la beta te agarre desprevenido.</p>",
+            "en": "<p>Second 45 alpha in three days, cut in the same batch as the stable lines. If you maintain a large Electron app, this is a good moment to start exercising 45 in CI before the beta arrives.</p>",
+            "fr": "<p>Deuxième alpha de la 45 en trois jours, publiée dans le même lot que les lignes stables. Si vous maintenez une grosse app Electron, c'est le moment de tester la 45 en CI.</p>"
+          },
+          "source": {
+            "url": "https://github.com/electron/electron/releases/tag/v45.0.0-alpha.2",
+            "label": "github.com/electron"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dev-tools",
+      "name": "Developer Tools",
+      "theme": "dev-tools",
+      "icon_emoji": "🛠️",
+      "anchor": "dev-tools",
+      "updates": [
+        {
+          "id": "vitest-5-rc3",
+          "tag": "beta",
+          "date": "28 Aug 2026",
+          "title": {
+            "es": "Vitest 5.0.0-rc.3: parseSpecifications sale de experimental y la UI de traces madura",
+            "en": "Vitest 5.0.0-rc.3: parseSpecifications leaves experimental and the trace UI matures",
+            "fr": "Vitest 5.0.0-rc.3 : parseSpecifications quitte l'expérimental et l'UI de traces mûrit"
+          },
+          "body_html": {
+            "es": "<p><code>parseSpecifications</code> deja de ser experimental, y coverage pasa a los paquetes <code>@vitest/istanbuljs</code>. La UI se llevó la mayor parte del trabajo: highlight de ubicaciones de código, navegación de pasos de trace por teclado, selección de trace persistida en la URL y tamaños del split pane que se recuerdan.</p><p>Del lado de fixes: combinar varios filtros <code>--project</code> ahora funciona bien, y <code>toMatchFileSnapshot</code> rechaza si comparte archivo de snapshot con <code>toMatchSnapshot</code>. La 5.0 está cerca.</p>",
+            "en": "<p><code>parseSpecifications</code> is promoted out of experimental, and coverage moves to the <code>@vitest/istanbuljs</code> packages. The UI took most of the work: editor source-location highlighting, keyboard navigation through trace steps, trace selection persisted in the URL, and remembered split-pane sizes.</p><p>On fixes: combining multiple <code>--project</code> filters now works correctly, and <code>toMatchFileSnapshot</code> rejects when it shares a snapshot file with <code>toMatchSnapshot</code>. 5.0 is close.</p>",
+            "fr": "<p><code>parseSpecifications</code> sort de l'expérimental et la couverture passe aux paquets <code>@vitest/istanbuljs</code>. L'UI a reçu le gros du travail : surlignage des emplacements source, navigation clavier dans les étapes de trace, sélection persistée dans l'URL et tailles de split pane mémorisées.</p><p>Côté correctifs : combiner plusieurs filtres <code>--project</code> fonctionne enfin, et <code>toMatchFileSnapshot</code> échoue s'il partage un fichier de snapshot avec <code>toMatchSnapshot</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.0.0-rc.3",
+            "label": "github.com/vitest-dev"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Fin de semana largo y flojo en releases: TypeScript, Vite, Node, Bun, React y React Native no publicaron nada entre el 28 y el 31. Lo que se movió fue tooling de monorepo y runtime de escritorio.",
+      "en": "A quiet long weekend for releases: TypeScript, Vite, Node, Bun, React and React Native shipped nothing between the 28th and the 31st. What moved was monorepo tooling and the desktop runtime.",
+      "fr": "Un long week-end calme côté releases : TypeScript, Vite, Node, Bun, React et React Native n'ont rien publié entre le 28 et le 31. Ce qui a bougé, c'est l'outillage monorepo et le runtime desktop."
+    },
+    {
+      "es": "pnpm publicó 12.0.0 y 12.1.0 en tres días, y el 12.1 trae más sustancia que el major. Si estás evaluando la migración, mirá directo el 12.1.",
+      "en": "pnpm shipped 12.0.0 and 12.1.0 within three days, and 12.1 carries more substance than the major. If you're evaluating the migration, look straight at 12.1.",
+      "fr": "pnpm a publié 12.0.0 et 12.1.0 en trois jours, et la 12.1 apporte plus de substance que la majeure. Si vous évaluez la migration, regardez directement la 12.1."
+    },
+    {
+      "es": "Tres RCs grandes en paralelo esta semana: Vitest 5, Vue 3.6 y el stack Solid de TanStack. Septiembre pinta cargado de majors.",
+      "en": "Three big RCs running in parallel this week: Vitest 5, Vue 3.6, and TanStack's Solid stack. September is shaping up to be heavy on majors.",
+      "fr": "Trois gros RC en parallèle cette semaine : Vitest 5, Vue 3.6 et la stack Solid de TanStack. Septembre s'annonce chargé en majeures."
+    }
+  ]
+}

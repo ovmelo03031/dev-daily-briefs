@@ -1,0 +1,450 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 31 de agosto de 2026",
+    "en": "Backend & Fullstack — August 31, 2026",
+    "fr": "Backend & Fullstack — 31 août 2026"
+  },
+  "description": {
+    "es": "Zod 4.5 compila schemas y vuela 9x, Cloudflare Workers acepta TCP entrante después de ocho años, pnpm 12.1 reescribe la orquestación del monorepo, y el conector MariaDB de npm filtra la password en texto plano.",
+    "en": "Zod 4.5 compiles schemas for a 9x speedup, Cloudflare Workers accepts inbound TCP after eight years, pnpm 12.1 rewrites monorepo task orchestration, and the npm MariaDB connector leaks cleartext passwords.",
+    "fr": "Zod 4.5 compile les schémas pour un gain de 9x, Cloudflare Workers accepte le TCP entrant après huit ans, pnpm 12.1 réécrit l orchestration monorepo, et le connecteur MariaDB npm fuit les mots de passe en clair."
+  },
+  "pubDate": "2026-08-31",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Zod 4.5: z.compile() parsea hasta 9x más rápido",
+        "en": "Zod 4.5: z.compile() parses up to 9x faster",
+        "fr": "Zod 4.5 : z.compile() parse jusqu à 9x plus vite"
+      },
+      "anchor": "zod-4-5-0",
+      "icon": "simple-icons:typescript"
+    },
+    {
+      "text": {
+        "es": "Cloudflare Workers ya acepta TCP entrante",
+        "en": "Cloudflare Workers now accepts inbound TCP",
+        "fr": "Cloudflare Workers accepte le TCP entrant"
+      },
+      "anchor": "workers-inbound-tcp",
+      "icon": "simple-icons:cloudflare"
+    },
+    {
+      "text": {
+        "es": "pnpm 12.1: orquestación de tasks por dependencia",
+        "en": "pnpm 12.1: per-dependency task orchestration",
+        "fr": "pnpm 12.1 : orchestration des tâches par dépendance"
+      },
+      "anchor": "pnpm-12-1-0",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "MariaDB npm: password en claro pese a ssl true",
+        "en": "MariaDB npm: cleartext password despite ssl true",
+        "fr": "MariaDB npm : mot de passe en clair malgré ssl true"
+      },
+      "anchor": "mariadb-charset-sqli",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Uber GitFarm: checkout de monorepo en 500 ms",
+        "en": "Uber GitFarm: monorepo checkout in 500 ms",
+        "fr": "Uber GitFarm : checkout monorepo en 500 ms"
+      },
+      "anchor": "uber-gitfarm",
+      "icon": "lucide:layers"
+    },
+    {
+      "text": {
+        "es": "Portainer: restore sin auth = takeover de admin",
+        "en": "Portainer: unauthenticated restore = admin takeover",
+        "fr": "Portainer : restore sans auth = prise de contrôle admin"
+      },
+      "anchor": "portainer-restore",
+      "icon": "simple-icons:docker"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "zod-4-5-0",
+      "updates": [
+        {
+          "id": "zod-4-5-0",
+          "tag": "breaking",
+          "date": "28 Aug 2026",
+          "title": {
+            "es": "Zod 4.5: z.compile() convierte la validación en un problema resuelto",
+            "en": "Zod 4.5: z.compile() turns validation into a solved problem",
+            "fr": "Zod 4.5 : z.compile() fait de la validation un problème résolu"
+          },
+          "body_html": {
+            "es": "<p>La feature estrella es <code>z.compile(schema)</code>: pre-compilás cualquier schema y lo usás exactamente igual, pero parsea <strong>3–9x más rápido</strong> (objeto de 20 keys: 301 ns → 38 ns). En el bench Moltar <em>parseSafe</em>, Zod compilado marca <strong>47.5M ops/s</strong> y le pasa por arriba a typia (45.3M) — contra 11.6M del Zod sin compilar. Suma <code>z.validate()</code> como fast-path booleano (hasta 16x más rápido con input inválido), <code>z.deepPartial()</code>, <code>z.properties()</code>, <code>z.creditCard()</code> con checksum de Luhn, y una <strong>reducción de 9x en memoria</strong> por schema. Si validás payloads en cada request de tu API, esto es un golazo directo al p99. Ojo igual: el tren de patches 4.5.1 → 4.5.4 salió en menos de 24 horas, así que anclá en 4.5.4.</p>",
+            "en": "<p>The flagship feature is <code>z.compile(schema)</code>: pre-compile any schema, use it exactly as before, and parsing gets <strong>3–9x faster</strong> (a 20-key object goes 301 ns → 38 ns). On the Moltar <em>parseSafe</em> benchmark, compiled Zod hits <strong>47.5M ops/s</strong> and overtakes typia (45.3M) — against 11.6M for uncompiled Zod. It also adds <code>z.validate()</code> as a boolean fast-path (up to 16x faster on invalid input), <code>z.deepPartial()</code>, <code>z.properties()</code>, <code>z.creditCard()</code> with a Luhn checksum, and a <strong>9x cut in per-schema memory</strong>. If you validate payloads on every API request, this lands straight on your p99. Note the 4.5.1 → 4.5.4 patch train shipped in under 24 hours, so pin 4.5.4.</p>",
+            "fr": "<p>La fonctionnalité phare est <code>z.compile(schema)</code> : pré-compilez n importe quel schéma, utilisez-le à l identique, et le parsing devient <strong>3 à 9x plus rapide</strong> (objet de 20 clés : 301 ns → 38 ns). Sur le benchmark Moltar <em>parseSafe</em>, Zod compilé atteint <strong>47,5M ops/s</strong> et dépasse typia (45,3M) — contre 11,6M pour Zod non compilé. S ajoutent <code>z.validate()</code> en fast-path booléen (jusqu à 16x plus rapide sur entrée invalide), <code>z.deepPartial()</code>, <code>z.properties()</code>, <code>z.creditCard()</code> avec somme de Luhn, et une <strong>réduction de 9x de la mémoire</strong> par schéma. Si vous validez des payloads à chaque requête, l effet est direct sur le p99. Attention : le train de patches 4.5.1 → 4.5.4 est sorti en moins de 24 heures, épinglez donc 4.5.4.</p>"
+          },
+          "source": { "url": "https://github.com/colinhacks/zod/releases/tag/v4.5.0", "label": "github.com/colinhacks/zod" }
+        },
+        {
+          "id": "workers-inbound-tcp",
+          "tag": "breaking",
+          "date": "29 Aug 2026",
+          "title": {
+            "es": "Cloudflare Workers acepta TCP entrante y rompe ocho años de solo-HTTP",
+            "en": "Cloudflare Workers accepts inbound TCP, ending eight years of HTTP-only",
+            "fr": "Cloudflare Workers accepte le TCP entrant et met fin à huit ans de HTTP seul"
+          },
+          "body_html": {
+            "es": "<p>Un handler nuevo, <code>connect(socket)</code>, deja que un Worker reciba conexiones TCP crudas ruteadas vía Spectrum. gRPC es el primer protocolo encima: el Worker sirve unary y server-streaming traduciendo con gRPC-web (bidireccional no, por los límites de stream de HTTP/2). El socket se puede pasar a un Durable Object, o a un Container vía <code>getTcpPort()</code>, que sí soporta full-duplex. Traducción: el edge ahora termina <strong>protocolos binarios arbitrarios</strong> — brokers de mensajes, proxies de base de datos, lo que tengas — con lógica de ruteo en JavaScript por delante. Está en private beta. Detalle jugoso: Cloudflare admitió que internamente no usa gRPC, usa Cap n Proto.</p>",
+            "en": "<p>A new <code>connect(socket)</code> handler lets a Worker receive raw TCP connections routed through Spectrum. gRPC is the first protocol on top: the Worker serves unary and server-streaming via gRPC-web translation (no bidirectional, due to HTTP/2 stream-level constraints). The socket can be handed to a Durable Object, or to a Container via <code>getTcpPort()</code>, which does support full duplex. Translation: the edge now terminates <strong>arbitrary binary protocols</strong> — message brokers, database proxies, whatever you have — with JavaScript routing logic in front. Currently private beta. Juicy detail: Cloudflare admitted it does not use gRPC internally, it uses Cap n Proto.</p>",
+            "fr": "<p>Un nouveau handler <code>connect(socket)</code> permet à un Worker de recevoir des connexions TCP brutes routées via Spectrum. gRPC est le premier protocole par-dessus : le Worker sert l unary et le server-streaming par traduction gRPC-web (pas de bidirectionnel, contraintes de stream HTTP/2). Le socket peut être transmis à un Durable Object, ou à un Container via <code>getTcpPort()</code>, qui supporte le full duplex. Traduction : l edge termine désormais des <strong>protocoles binaires arbitraires</strong> — brokers de messages, proxies de base de données — avec une logique de routage JavaScript en amont. En bêta privée. Détail savoureux : Cloudflare reconnaît ne pas utiliser gRPC en interne, mais Cap n Proto.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/workers-inbound-tcp-grpc/", "label": "infoq.com" }
+        },
+        {
+          "id": "pnpm-12-1-0",
+          "tag": "release",
+          "date": "29 Aug 2026",
+          "title": {
+            "es": "pnpm 12.1.0: la orquestación del monorepo deja de trabajar por chunks",
+            "en": "pnpm 12.1.0: monorepo orchestration stops working in chunks",
+            "fr": "pnpm 12.1.0 : l orchestration monorepo abandonne les chunks"
+          },
+          "body_html": {
+            "es": "<p>La RFC 23 aterriza: <code>pnpm -r run</code> y <code>pnpm -r exec</code> ahora schedulean <strong>por task, no por grupo topológico</strong>. Un proyecto arranca apenas terminan sus dependencias, sin esperar a proyectos ajenos que caían en el mismo chunk. Una sección <code>tasks</code> en <code>pnpm-workspace.yaml</code> declara dependencias con la convención <code>^</code> y admite <code>tasks.&lt;name&gt;.concurrency</code> para limitar cuántas instancias corren a la vez. Además: <code>--resume-from</code> ahora persiste las tasks que ya pasaron, <code>sideEffectsCache</code> se vuelve un objeto con <code>read</code>/<code>write</code>/<code>remote</code>, y los artefactos remotos verificados se re-verifican contra la política actual antes de reusarse. <strong>Ojo con esto</strong>: el <code>scope</code> en <code>pnpm-workspace.yaml</code> ahora se ignora con warning, porque un archivo commiteado al repo podía redirigir un scope como <code>@acme</code> en <em>todos</em> los proyectos del usuario tras un login rutinario. Usá <code>--scope</code> o <code>PNPM_CONFIG_SCOPE</code>.</p>",
+            "en": "<p>RFC 23 lands: <code>pnpm -r run</code> and <code>pnpm -r exec</code> now schedule <strong>per task, not per topological chunk</strong>. A project starts as soon as its own dependencies finish, instead of waiting on unrelated projects that shared its chunk. A <code>tasks</code> section in <code>pnpm-workspace.yaml</code> declares dependencies with the <code>^</code> convention and supports <code>tasks.&lt;name&gt;.concurrency</code> to cap simultaneous instances. Also: <code>--resume-from</code> now persists tasks that already passed, <code>sideEffectsCache</code> becomes an object with <code>read</code>/<code>write</code>/<code>remote</code>, and verified remote artifacts are re-verified against current trust and policy before reuse. <strong>Watch this one</strong>: a <code>scope</code> in <code>pnpm-workspace.yaml</code> is now ignored with a warning, because a repository-committed file could redirect a scope such as <code>@acme</code> across <em>all</em> of a user other projects after one routine login. Use <code>--scope</code> or <code>PNPM_CONFIG_SCOPE</code> instead.</p>",
+            "fr": "<p>La RFC 23 arrive : <code>pnpm -r run</code> et <code>pnpm -r exec</code> planifient désormais <strong>par tâche, pas par groupe topologique</strong>. Un projet démarre dès que ses dépendances sont terminées, sans attendre des projets sans rapport partageant son chunk. Une section <code>tasks</code> dans <code>pnpm-workspace.yaml</code> déclare les dépendances avec la convention <code>^</code> et supporte <code>tasks.&lt;name&gt;.concurrency</code>. Aussi : <code>--resume-from</code> persiste les tâches déjà réussies, <code>sideEffectsCache</code> devient un objet avec <code>read</code>/<code>write</code>/<code>remote</code>, et les artefacts distants vérifiés sont re-vérifiés avant réutilisation. <strong>Attention</strong> : un <code>scope</code> dans <code>pnpm-workspace.yaml</code> est maintenant ignoré avec avertissement, car un fichier commité pouvait rediriger un scope comme <code>@acme</code> dans <em>tous</em> les autres projets après un simple login. Utilisez <code>--scope</code> ou <code>PNPM_CONFIG_SCOPE</code>.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.1.0", "label": "github.com/pnpm/pnpm" }
+        },
+        {
+          "id": "mariadb-charset-sqli",
+          "tag": "security",
+          "date": "28 Aug 2026",
+          "title": {
+            "es": "El conector MariaDB de npm: SQL injection por charset y password en claro pese a ssl true",
+            "en": "The npm MariaDB connector: charset SQL injection and cleartext password despite ssl true",
+            "fr": "Le connecteur MariaDB npm : injection SQL par charset et mot de passe en clair malgré ssl true"
+          },
+          "body_html": {
+            "es": "<p>Se publicó un racimo de siete advisories contra los conectores MariaDB (npm, JDBC y R2DBC) el mismo día. Los dos que te tocan si escribís Node: <strong>SQL injection en el escapado de parámetros <code>Buffer</code></strong> bajo los charsets de cliente <code>big5</code>, <code>gbk</code>, <code>sjis</code>, <code>cp932</code> y <code>gb18030</code> (CVSS 6.5) — el escapado asume single-byte donde el charset es multi-byte, el clásico. Y la <strong>transmisión de credenciales en texto plano</strong>: con <code>ssl: true</code> pero sin CA ni certificado de servidor configurado, el conector valida el fingerprint <em>después</em> del intercambio de autenticación, así que un MITM activo que presente su propio certificado se lleva la password antes de que la conexión se aborte. Si tu app usa charset asiático o confía en <code>ssl: true</code> pelado, actualizá y configurá CA explícita.</p>",
+            "en": "<p>A cluster of seven advisories landed against the MariaDB connectors (npm, JDBC and R2DBC) on the same day. The two that matter if you write Node: <strong>SQL injection in <code>Buffer</code> parameter escaping</strong> under the <code>big5</code>, <code>gbk</code>, <code>sjis</code>, <code>cp932</code> and <code>gb18030</code> client charsets (CVSS 6.5) — escaping assumes single-byte where the charset is multi-byte, the classic. And <strong>cleartext credential transmission</strong>: with <code>ssl: true</code> but no CA or server certificate configured, the connector validates the fingerprint <em>after</em> the authentication exchange, so an active MITM presenting its own certificate collects the password before the connection aborts. If your app uses an Asian charset or relies on a bare <code>ssl: true</code>, upgrade and configure an explicit CA.</p>",
+            "fr": "<p>Une grappe de sept advisories a visé les connecteurs MariaDB (npm, JDBC et R2DBC) le même jour. Les deux qui comptent en Node : <strong>injection SQL dans l échappement des paramètres <code>Buffer</code></strong> sous les charsets client <code>big5</code>, <code>gbk</code>, <code>sjis</code>, <code>cp932</code> et <code>gb18030</code> (CVSS 6.5) — l échappement suppose du single-byte là où le charset est multi-byte. Et la <strong>transmission des identifiants en clair</strong> : avec <code>ssl: true</code> mais sans CA ni certificat serveur configuré, le connecteur valide l empreinte <em>après</em> l échange d authentification, si bien qu un MITM actif récupère le mot de passe avant l abandon de la connexion. Mettez à jour et configurez une CA explicite.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-g5xc-5w98-jfvm", "label": "github.com/advisories" }
+        },
+        {
+          "id": "uber-gitfarm",
+          "tag": "notable",
+          "date": "28 Aug 2026",
+          "title": {
+            "es": "Uber convierte Git en un servicio: checkout de monorepo en menos de 500 ms",
+            "en": "Uber turns Git into a service: monorepo checkout in under 500 ms",
+            "fr": "Uber transforme Git en service : checkout monorepo en moins de 500 ms"
+          },
+          "body_html": {
+            "es": "<p>Los sistemas de automatización de Uber invocan Git millones de veces por día, y cada servicio mantenía su propio checkout completo. Clonar el monorepo de Go solo pedía <strong>15 minutos, 6 cores, 32 GB de RAM y 40+ GB de disco</strong>. GitFarm centraliza todo detrás de una API gRPC: un Gateway hace authn/authz y rutea a clusters backend que ejecutan comandos en sandboxes efímeros, sobre clones bare sincronizados por push más fetch periódico, con pools de checkouts pre-calentados. Los workflows multi-comando van por sesiones gRPC bidireccionales. Números: checkout <strong>bajo 500 ms</strong> contra 10–15 minutos en frío, y −80% de uso de recursos del lado cliente. El servicio de code ownership pasó de 70+ cores y 400 GB a 16 cores y 32 GB. Si tu CI clona el monorepo en cada job, acá tenés la arquitectura para dejar de hacerlo.</p>",
+            "en": "<p>Uber automation systems invoke Git millions of times a day, and each service kept its own full checkout. Cloning the Go monorepo alone cost <strong>15 minutes, 6 cores, 32 GB of RAM and 40+ GB of disk</strong>. GitFarm centralizes it behind a gRPC API: a Gateway handles authn/authz and routes to backend clusters that run commands in ephemeral sandboxes, over bare clones synced by push plus periodic fetch, with pools of pre-warmed checkouts. Multi-command workflows use bidirectional gRPC sessions. The numbers: checkout <strong>under 500 ms</strong> versus 10–15 minute cold starts, and client-side resource use down more than 80%. The code ownership service went from 70+ cores and 400 GB to 16 cores and 32 GB. If your CI clones the monorepo on every job, here is the architecture to stop.</p>",
+            "fr": "<p>Les systèmes d automatisation d Uber invoquent Git des millions de fois par jour, chaque service gardant son propre checkout complet. Cloner le monorepo Go coûtait <strong>15 minutes, 6 cœurs, 32 Go de RAM et 40+ Go de disque</strong>. GitFarm centralise le tout derrière une API gRPC : une Gateway gère authn/authz et route vers des clusters backend exécutant les commandes dans des sandboxes éphémères, sur des clones bare synchronisés, avec des pools de checkouts préchauffés. Les workflows multi-commandes passent par des sessions gRPC bidirectionnelles. Les chiffres : checkout <strong>sous 500 ms</strong> contre 10 à 15 minutes à froid, et −80% de ressources côté client.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/uber-gitfarm-git-as-a-service/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "workerd-20260831",
+      "updates": [
+        {
+          "id": "workerd-20260831",
+          "tag": "patch",
+          "date": "31 Aug 2026",
+          "title": {
+            "es": "workerd v1.20260831.1: el runtime de Workers sigue con su build diaria",
+            "en": "workerd v1.20260831.1: the Workers runtime keeps its daily build cadence",
+            "fr": "workerd v1.20260831.1 : le runtime Workers poursuit sa build quotidienne"
+          },
+          "body_html": {
+            "es": "<p>Tres builds del runtime open-source de Cloudflare Workers durante el fin de semana — <code>v1.20260829.1</code>, <code>v1.20260830.1</code> y <code>v1.20260831.1</code>. Nada de esto es una feature en sí, pero la fecha del tag es literalmente tu <code>compatibility_date</code>: si estás fijando una vieja, cada build que pasa es superficie de comportamiento que no estás tomando. Vale sobre todo esta semana, con el handler <code>connect(socket)</code> de TCP entrante moviéndose en private beta.</p>",
+            "en": "<p>Three builds of Cloudflare open-source Workers runtime over the weekend — <code>v1.20260829.1</code>, <code>v1.20260830.1</code> and <code>v1.20260831.1</code>. None of these is a feature in itself, but the tag date is literally your <code>compatibility_date</code>: if you are pinned to an old one, every passing build is behavior surface you are not taking. Especially relevant this week, with the inbound-TCP <code>connect(socket)</code> handler moving through private beta.</p>",
+            "fr": "<p>Trois builds du runtime open source Cloudflare Workers durant le week-end — <code>v1.20260829.1</code>, <code>v1.20260830.1</code> et <code>v1.20260831.1</code>. Aucune n est une fonctionnalité en soi, mais la date du tag est littéralement votre <code>compatibility_date</code> : rester épinglé sur une ancienne, c est renoncer à toute cette surface de comportement. Pertinent cette semaine, avec le handler TCP entrant <code>connect(socket)</code> en bêta privée.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workerd/releases/tag/v1.20260831.1", "label": "github.com/cloudflare/workerd" }
+        },
+        {
+          "id": "zod-4-5-4",
+          "tag": "patch",
+          "date": "29 Aug 2026",
+          "title": {
+            "es": "Zod 4.5.1 → 4.5.4 en menos de 24 horas: anclá en la última",
+            "en": "Zod 4.5.1 → 4.5.4 in under 24 hours: pin the last one",
+            "fr": "Zod 4.5.1 → 4.5.4 en moins de 24 heures : épinglez la dernière"
+          },
+          "body_html": {
+            "es": "<p>Después de la GA de 4.5.0 salieron cuatro patches en un día. El último, <strong>4.5.4</strong>, arregla que el recorrido de ciclos disparara una default factory que no correspondía — o sea, schemas con referencias circulares y <code>.default(() =&gt; ...)</code> podían ejecutar el factory de más. Si ya saltaste a 4.5, no te quedes en 4.5.0.</p>",
+            "en": "<p>Four patches shipped within a day of the 4.5.0 GA. The last one, <strong>4.5.4</strong>, stops the cycle walk from firing a default factory it should not have — meaning schemas with circular references and <code>.default(() =&gt; ...)</code> could run the factory extra times. If you already jumped to 4.5, do not sit on 4.5.0.</p>",
+            "fr": "<p>Quatre patches en une journée après la GA de 4.5.0. Le dernier, <strong>4.5.4</strong>, empêche le parcours de cycles de déclencher une default factory à tort — des schémas avec références circulaires et <code>.default(() =&gt; ...)</code> pouvaient exécuter la factory en trop. Ne restez pas sur 4.5.0.</p>"
+          },
+          "source": { "url": "https://github.com/colinhacks/zod/releases/tag/v4.5.4", "label": "github.com/colinhacks/zod" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "react-router-8-3-1",
+      "updates": [
+        {
+          "id": "react-router-8-3-1",
+          "tag": "patch",
+          "date": "28 Aug 2026",
+          "title": {
+            "es": "React Router 8.3.1 y 7.18.3: patches en paralelo para las dos líneas",
+            "en": "React Router 8.3.1 and 7.18.3: parallel patches on both lines",
+            "fr": "React Router 8.3.1 et 7.18.3 : patches parallèles sur les deux lignes"
+          },
+          "body_html": {
+            "es": "<p>El equipo sacó las dos ramas el mismo día, con quince minutos de diferencia. Que 7.x siga recibiendo patches en paralelo con 8.x es la señal que importa si todavía no migraste: la línea vieja no está congelada, pero tampoco vas a ver features nuevas ahí. El changelog completo vive en el <code>CHANGELOG.md</code> del repo, no en el cuerpo del release.</p>",
+            "en": "<p>The team shipped both branches on the same day, fifteen minutes apart. That 7.x still gets patches in parallel with 8.x is the signal that matters if you have not migrated: the old line is not frozen, but you will not see new features there either. The full changelog lives in the repo <code>CHANGELOG.md</code>, not in the release body.</p>",
+            "fr": "<p>L équipe a publié les deux branches le même jour, à quinze minutes d intervalle. Que 7.x reçoive encore des patches en parallèle de 8.x est le signal qui compte si vous n avez pas migré : l ancienne ligne n est pas gelée, mais n aura pas de nouvelles fonctionnalités. Le changelog complet est dans le <code>CHANGELOG.md</code> du dépôt.</p>"
+          },
+          "source": { "url": "https://github.com/remix-run/react-router/releases/tag/react-router%408.3.1", "label": "github.com/remix-run/react-router" }
+        },
+        {
+          "id": "tanstack-solid-rc4",
+          "tag": "beta",
+          "date": "29 Aug 2026",
+          "title": {
+            "es": "TanStack Solid Start 2.0.0-rc.4 se sincroniza con Solid 2.0 rc.4",
+            "en": "TanStack Solid Start 2.0.0-rc.4 syncs with Solid 2.0 rc.4",
+            "fr": "TanStack Solid Start 2.0.0-rc.4 se synchronise avec Solid 2.0 rc.4"
+          },
+          "body_html": {
+            "es": "<p>Todo el stack Solid de TanStack subió a rc.4 de una: <code>solid-router</code>, <code>solid-start</code>, <code>solid-start-client</code>, <code>solid-start-server</code>, <code>solid-router-ssr-query</code> y devtools. El cambio de fondo es el bump a <code>solid-js@2.0.0-rc.4</code> y <code>@solidjs/vite-plugin@3.0.0-next.35</code>. Si estás siguiendo Solid 2.0 hacia la GA, TanStack va pegado al tren — pero rc.4 todavía es rc, no lo pongas en producción.</p>",
+            "en": "<p>The whole TanStack Solid stack moved to rc.4 at once: <code>solid-router</code>, <code>solid-start</code>, <code>solid-start-client</code>, <code>solid-start-server</code>, <code>solid-router-ssr-query</code> and devtools. The underlying change is the bump to <code>solid-js@2.0.0-rc.4</code> and <code>@solidjs/vite-plugin@3.0.0-next.35</code>. If you are tracking Solid 2.0 toward GA, TanStack is riding right behind it — but rc.4 is still an rc, keep it out of production.</p>",
+            "fr": "<p>Toute la stack Solid de TanStack passe en rc.4 d un coup : <code>solid-router</code>, <code>solid-start</code>, <code>solid-start-client</code>, <code>solid-start-server</code>, <code>solid-router-ssr-query</code> et devtools. Le changement de fond est le bump vers <code>solid-js@2.0.0-rc.4</code> et <code>@solidjs/vite-plugin@3.0.0-next.35</code>. rc.4 reste une rc : pas de production.</p>"
+          },
+          "source": { "url": "https://github.com/TanStack/router/releases/tag/release-2026-08-29-0036", "label": "github.com/TanStack/router" }
+        },
+        {
+          "id": "next-16-4-canary-12",
+          "tag": "beta",
+          "date": "29 Aug 2026",
+          "title": {
+            "es": "Next.js 16.4.0-canary.12: el tren de la 16.4 no para",
+            "en": "Next.js 16.4.0-canary.12: the 16.4 train keeps rolling",
+            "fr": "Next.js 16.4.0-canary.12 : le train 16.4 continue"
+          },
+          "body_html": {
+            "es": "<p>Otra canary de la línea 16.4, publicada el sábado. Para quien mantiene API routes y route handlers, la canary sigue siendo el lugar donde se ven los cambios de runtime del lado servidor antes de que lleguen al stable. No es para producción, pero si tenés un canary channel en staging vale la pena mirarlo antes de la GA.</p>",
+            "en": "<p>Another canary on the 16.4 line, published on Saturday. If you maintain API routes and route handlers, the canary is still where server-side runtime changes surface before they reach stable. Not for production, but if you run a canary channel in staging it is worth watching ahead of GA.</p>",
+            "fr": "<p>Une nouvelle canary de la ligne 16.4, publiée samedi. Pour qui maintient des API routes et des route handlers, la canary reste l endroit où les changements de runtime côté serveur apparaissent avant le stable. Pas pour la production, mais utile en staging avant la GA.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/next.js/releases/tag/v16.4.0-canary.12", "label": "github.com/vercel/next.js" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "bullmq-6-3-2",
+      "updates": [
+        {
+          "id": "bullmq-6-3-2",
+          "tag": "patch",
+          "date": "29 Aug 2026",
+          "title": {
+            "es": "BullMQ 6.3.2 y el port Python 3.2.0: el backend manda en el blocking timeout",
+            "en": "BullMQ 6.3.2 and the Python port 3.2.0: the backend owns the blocking timeout",
+            "fr": "BullMQ 6.3.2 et le port Python 3.2.0 : le backend décide du blocking timeout"
+          },
+          "body_html": {
+            "es": "<p>6.3.2 sube <code>msgpackr</code> a 2.1.0 y <code>uuid</code> a 1.26.0 en el core Rust, y en el port Python delega <code>maximumBlockTimeout</code> al backend en lugar de calcularlo en el worker — que es lo correcto cuando el backend puede ser Redis o Postgres. Detrás vinieron <code>vpy3.1.1</code>, <code>vrs1.2.8</code> y <code>vpy3.2.0</code> en tres días. BullMQ mantiene cuatro runtimes en paralelo ahora (Node, Rust, Python, Elixir); si tu queue cruza lenguajes, mirá que las versiones acompañen.</p>",
+            "en": "<p>6.3.2 bumps <code>msgpackr</code> to 2.1.0 and <code>uuid</code> to 1.26.0 in the Rust core, and in the Python port delegates <code>maximumBlockTimeout</code> to the backend instead of computing it in the worker — which is correct once the backend can be Redis or Postgres. Behind it came <code>vpy3.1.1</code>, <code>vrs1.2.8</code> and <code>vpy3.2.0</code> across three days. BullMQ now maintains four runtimes in parallel (Node, Rust, Python, Elixir); if your queue spans languages, check the versions line up.</p>",
+            "fr": "<p>6.3.2 passe <code>msgpackr</code> en 2.1.0 et <code>uuid</code> en 1.26.0 dans le cœur Rust, et le port Python délègue <code>maximumBlockTimeout</code> au backend au lieu de le calculer dans le worker — correct dès lors que le backend peut être Redis ou Postgres. Ont suivi <code>vpy3.1.1</code>, <code>vrs1.2.8</code> et <code>vpy3.2.0</code> en trois jours. BullMQ maintient désormais quatre runtimes en parallèle.</p>"
+          },
+          "source": { "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.3.2", "label": "github.com/taskforcesh/bullmq" }
+        },
+        {
+          "id": "seaweedfs-s3-traversal",
+          "tag": "security",
+          "date": "28 Aug 2026",
+          "title": {
+            "es": "SeaweedFS: path traversal en el header X-Amz-Copy-Source permite leer objetos de otro bucket",
+            "en": "SeaweedFS: path traversal in the X-Amz-Copy-Source header allows cross-bucket object reads",
+            "fr": "SeaweedFS : path traversal dans l en-tête X-Amz-Copy-Source permettant la lecture inter-buckets"
+          },
+          "body_html": {
+            "es": "<p>CVSS 7.7 en el gateway S3 de SeaweedFS: el header <code>X-Amz-Copy-Source</code> no sanitiza el path, así que un usuario con acceso a un bucket puede leer objetos de <em>otro</em>. Vino acompañado de un segundo advisory (CVSS 4.3) donde la API REST de S3Tables/Iceberg deja que un usuario S3 de bajo privilegio enumere table buckets del administrador. Si usás SeaweedFS como almacenamiento S3-compatible auto-hosteado, el aislamiento entre buckets es exactamente lo que estabas comprando — revisá versiones.</p>",
+            "en": "<p>CVSS 7.7 in the SeaweedFS S3 gateway: the <code>X-Amz-Copy-Source</code> header does not sanitize the path, so a user with access to one bucket can read objects from <em>another</em>. It came alongside a second advisory (CVSS 4.3) where the S3Tables/Iceberg REST management API lets a low-privileged S3 user enumerate administrator-owned table buckets. If you run SeaweedFS as self-hosted S3-compatible storage, bucket isolation is exactly what you were buying — check your versions.</p>",
+            "fr": "<p>CVSS 7.7 dans la gateway S3 de SeaweedFS : l en-tête <code>X-Amz-Copy-Source</code> ne nettoie pas le chemin, un utilisateur ayant accès à un bucket peut lire les objets d un <em>autre</em>. Un second advisory (CVSS 4.3) permet à un utilisateur S3 peu privilégié d énumérer les table buckets de l administrateur. Vérifiez vos versions.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-56wq-x3wv-3ff4", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloudflare-ai-search",
+      "updates": [
+        {
+          "id": "cloudflare-ai-search",
+          "tag": "notable",
+          "date": "30 Aug 2026",
+          "title": {
+            "es": "Cloudflare AI Search: crawl, embed y retrieval en un solo comando",
+            "en": "Cloudflare AI Search: crawl, embed and retrieval in a single command",
+            "fr": "Cloudflare AI Search : crawl, embed et retrieval en une seule commande"
+          },
+          "body_html": {
+            "es": "<p>Cloudflare junta primitivas que hasta ahora eran separadas en un pipeline end-to-end: crawling, ingesta, embedding y retrieval con un comando. Trae discovery mode (encuentra páginas sin sitemap), búsqueda multimodal sobre datos estructurados y no estructurados, y un endpoint público que consulta varias instancias sin auth. Se despliega como Worker o se expone en <code>/mcp</code> y <code>/search</code>. Lo interesante es el pricing: embedding y re-ranking <strong>gratis</strong> con los modelos default de Workers AI, y solo cobran generación de respuesta y query rewriting. En beta es todo gratis. Si venías armando RAG a mano con Vectorize, esto te borra medio pipeline.</p>",
+            "en": "<p>Cloudflare folds previously separate primitives into an end-to-end pipeline: crawling, ingestion, embedding and retrieval in one command. It brings discovery mode (finds pages without a sitemap), multimodal search across structured and unstructured data, and a public endpoint that queries several instances without auth. Deploy it as a Worker or expose it at <code>/mcp</code> and <code>/search</code>. The interesting part is pricing: embedding and re-ranking are <strong>free</strong> with default Workers AI models, and only answer generation and query rewriting are billed. Everything is free during beta. If you were hand-rolling RAG on Vectorize, this deletes half your pipeline.</p>",
+            "fr": "<p>Cloudflare regroupe des primitives jusque-là séparées en un pipeline end-to-end : crawling, ingestion, embedding et retrieval en une commande. Avec un discovery mode (trouve les pages sans sitemap), une recherche multimodale et un endpoint public interrogeant plusieurs instances sans auth. Déployable comme Worker ou exposé sur <code>/mcp</code> et <code>/search</code>. Le pricing est notable : embedding et re-ranking <strong>gratuits</strong> avec les modèles Workers AI par défaut, seuls la génération de réponse et la réécriture de requête sont facturées.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/cloudflare-ai-search/", "label": "infoq.com" }
+        },
+        {
+          "id": "aks-node-disruption",
+          "tag": "notable",
+          "date": "28 Aug 2026",
+          "title": {
+            "es": "AKS: tu PDB al 100% es lo que está bloqueando los upgrades",
+            "en": "AKS: your 100% PDB is what is blocking your upgrades",
+            "fr": "AKS : votre PDB à 100% est ce qui bloque vos upgrades"
+          },
+          "body_html": {
+            "es": "<p>Microsoft publicó guía nueva para Node Auto-Provisioning y el punto central es incómodo: un Pod Disruption Budget que exige que el <strong>100% de las réplicas siga disponible</strong> impide drenar el nodo por completo, y con eso te bloquea consolidación <em>y</em> upgrades. Del lado de infra, <code>WhenEmptyOrUnderutilized</code> habilita bin-packing, <code>consolidateAfter</code> demora la consolidación y <code>expireAfter</code> fuerza una vida máxima del nodo. La distinción clave que mucha gente pasa por alto: todos esos controles gobiernan disrupción <strong>voluntaria</strong>. Fallos de hardware y evictions de Spot no los toca nadie — si corrés Spot, tu app tiene que tolerar interrupción, punto.</p>",
+            "en": "<p>Microsoft published new Node Auto-Provisioning guidance and the core point is uncomfortable: a Pod Disruption Budget demanding <strong>100% of replicas stay available</strong> prevents the node from draining at all, and that blocks consolidation <em>and</em> upgrades. On the infrastructure side, <code>WhenEmptyOrUnderutilized</code> enables bin-packing, <code>consolidateAfter</code> delays consolidation and <code>expireAfter</code> enforces a maximum node lifetime. The key distinction many people miss: all of those controls govern <strong>voluntary</strong> disruption. Hardware failures and Spot evictions are untouched — if you run Spot, your app has to tolerate interruption, full stop.</p>",
+            "fr": "<p>Microsoft publie de nouvelles recommandations pour Node Auto-Provisioning, et le point central dérange : un Pod Disruption Budget exigeant que <strong>100% des réplicas restent disponibles</strong> empêche tout drain du nœud, bloquant consolidation <em>et</em> upgrades. Côté infra, <code>WhenEmptyOrUnderutilized</code> active le bin-packing, <code>consolidateAfter</code> retarde la consolidation et <code>expireAfter</code> impose une durée de vie maximale. Distinction clé : ces contrôles ne gouvernent que la disruption <strong>volontaire</strong>.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/aks-node-disruption/", "label": "infoq.com" }
+        },
+        {
+          "id": "portainer-restore",
+          "tag": "security",
+          "date": "28 Aug 2026",
+          "title": {
+            "es": "Portainer: endpoint de restore sin autenticación = takeover de admin",
+            "en": "Portainer: unauthenticated restore endpoint = admin takeover",
+            "fr": "Portainer : endpoint de restore sans authentification = prise de contrôle admin"
+          },
+          "body_html": {
+            "es": "<p>En instancias de Portainer <strong>sin inicializar</strong>, el endpoint de restore no pide autenticación, y un atacante puede restaurar un backup propio y quedarse con el admin. El escenario real es feo y común: levantás Portainer en un host, lo dejás expuesto un rato mientras terminás otra cosa, y esa ventana entre el deploy y la creación del primer usuario es toda la superficie que hace falta. Regla vieja que sigue valiendo: nunca expongas un panel de administración de containers antes de completar su setup inicial.</p>",
+            "en": "<p>On <strong>uninitialized</strong> Portainer instances the restore endpoint requires no authentication, and an attacker can restore their own backup and walk away with admin. The real-world scenario is ugly and common: you bring Portainer up on a host, leave it exposed for a while as you finish something else, and that window between deploy and first-user creation is all the surface needed. Old rule that still holds: never expose a container admin panel before its initial setup is complete.</p>",
+            "fr": "<p>Sur les instances Portainer <strong>non initialisées</strong>, l endpoint de restore n exige aucune authentification : un attaquant restaure son propre backup et récupère l admin. Le scénario réel est banal : vous déployez Portainer, le laissez exposé un moment, et la fenêtre entre le déploiement et la création du premier utilisateur suffit. Règle intemporelle : n exposez jamais un panneau d administration de containers avant la fin de son setup initial.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-x626-fcwx-f5pc", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "kiro-crew",
+      "updates": [
+        {
+          "id": "kiro-crew",
+          "tag": "notable",
+          "date": "30 Aug 2026",
+          "title": {
+            "es": "AWS libera Kiro Crew y el diseño de seguridad es lo que hay que mirar",
+            "en": "AWS open sources Kiro Crew, and the security design is the part worth reading",
+            "fr": "AWS ouvre Kiro Crew, et c est le design de sécurité qu il faut lire"
+          },
+          "body_html": {
+            "es": "<p>Apache 2.0, orquesta múltiples agentes de coding asincrónicos vía Agent Client Protocol, con memoria persistente, skills reutilizables, jobs agendados y concurrencia. Corre sobre Kiro CLI en macOS, Linux y Windows, e integra herramientas externas por MCP y webhooks. Lo que vale para un senior no es el agente: es el modelo de <strong>defense in depth</strong> que documentan — sandboxing a nivel OS, comandos denegados por default, bloqueo de patrones sospechosos, validación de input, redacción de credenciales y <strong>audit logs firmados</strong>. Ese es el checklist que deberías estar aplicando a cualquier proceso automatizado con acceso a tu repo, use o no agentes. Adopción interna: 39.000 devs de Amazon y 500 contributors en seis meses sobre el precursor MeshClaw. La queja recurrente: quema tokens bastante más rápido que Kiro CLI.</p>",
+            "en": "<p>Apache 2.0, orchestrating multiple asynchronous coding agents over the Agent Client Protocol, with persistent memory, reusable skills, scheduled jobs and concurrency. It runs on Kiro CLI across macOS, Linux and Windows, and integrates external tools via MCP and webhooks. The part worth a senior time is not the agent: it is the documented <strong>defense in depth</strong> model — OS-level sandboxing, denied-by-default commands, suspicious-pattern blocking, input validation, credential redaction and <strong>signed audit logs</strong>. That is the checklist you should be applying to any automated process with access to your repo, agents or not. Internal adoption: 39,000 Amazon developers and 500 contributors in six months on the MeshClaw precursor. The recurring complaint: it burns tokens noticeably faster than Kiro CLI.</p>",
+            "fr": "<p>Apache 2.0, orchestrant plusieurs agents de coding asynchrones via l Agent Client Protocol, avec mémoire persistante, skills réutilisables, jobs planifiés et concurrence. Tourne sur Kiro CLI (macOS, Linux, Windows), intègre des outils externes via MCP et webhooks. Ce qui vaut le détour n est pas l agent mais le modèle documenté de <strong>defense in depth</strong> : sandboxing OS, commandes refusées par défaut, blocage de motifs suspects, validation d entrée, rédaction des identifiants et <strong>audit logs signés</strong>. Adoption interne : 39 000 développeurs Amazon et 500 contributeurs en six mois.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/kiro-crew-coding-agents/", "label": "infoq.com" }
+        },
+        {
+          "id": "9router-proxy-bypass",
+          "tag": "security",
+          "date": "28 Aug 2026",
+          "title": {
+            "es": "9router: dos bypasses de auth convierten tu proxy de LLM en relay abierto y SSRF",
+            "en": "9router: two auth bypasses turn your LLM proxy into an open relay and SSRF",
+            "fr": "9router : deux contournements d auth transforment votre proxy LLM en relais ouvert et SSRF"
+          },
+          "body_html": {
+            "es": "<p>Dos advisories el mismo día contra el mismo proxy: acceso no autenticado a <code>/v1</code> por spoofing del header <code>Host</code> (CVSS 8.2, con SSRF de yapa) y bypass de autorización en el rewrite de <code>/codex</code> (CVSS 8.6). El patrón es el que te tiene que quedar: <strong>confiar en un header controlado por el cliente para decidir autorización</strong>. Lo mismo aparece esta semana en phpSysInfo, donde la allowlist de IPs se saltea spoofeando <code>X-Forwarded-For</code>. Si tu gateway resuelve identidad o política desde <code>Host</code>, <code>X-Forwarded-For</code> o <code>Client-IP</code> sin un proxy de confianza que los reescriba, tenés el mismo bug.</p>",
+            "en": "<p>Two advisories on the same day against the same proxy: unauthenticated <code>/v1</code> access via <code>Host</code> header spoofing (CVSS 8.2, with SSRF thrown in) and an authorization bypass in the <code>/codex</code> rewrite (CVSS 8.6). The pattern is what should stick: <strong>trusting a client-controlled header to make an authorization decision</strong>. The same shape shows up this week in phpSysInfo, where the IP allowlist is bypassed by spoofing <code>X-Forwarded-For</code>. If your gateway resolves identity or policy from <code>Host</code>, <code>X-Forwarded-For</code> or <code>Client-IP</code> without a trusted proxy rewriting them, you have the same bug.</p>",
+            "fr": "<p>Deux advisories le même jour contre le même proxy : accès non authentifié à <code>/v1</code> par spoofing de l en-tête <code>Host</code> (CVSS 8.2, avec SSRF en prime) et contournement d autorisation dans la réécriture <code>/codex</code> (CVSS 8.6). Le motif à retenir : <strong>faire confiance à un en-tête contrôlé par le client pour une décision d autorisation</strong>. Même forme cette semaine dans phpSysInfo via <code>X-Forwarded-For</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-86m2-fcxq-5q7c", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "pnpm-11-25-0",
+      "updates": [
+        {
+          "id": "pnpm-11-25-0",
+          "tag": "release",
+          "date": "29 Aug 2026",
+          "title": {
+            "es": "pnpm 11.25.0 sale junto a la 12.1.0: la línea anterior sigue viva",
+            "en": "pnpm 11.25.0 ships alongside 12.1.0: the previous line stays alive",
+            "fr": "pnpm 11.25.0 sort avec la 12.1.0 : l ancienne ligne reste vivante"
+          },
+          "body_html": {
+            "es": "<p>El equipo publicó <code>v12.1.0</code> y <code>v11.25.0</code> con veinte segundos de diferencia, más <code>pnpr@0.1.0-alpha.9</code>. Que la 11.x siga recibiendo minors el mismo día que la 12.x es buena noticia si todavía no migraste — pnpm 12 cambió el manejo de dependencias git (ahora son identidades, no transportes) y eso rompe suposiciones en monorepos grandes. Tenés margen para planificar el salto sin quedarte sin patches.</p>",
+            "en": "<p>The team published <code>v12.1.0</code> and <code>v11.25.0</code> twenty seconds apart, plus <code>pnpr@0.1.0-alpha.9</code>. That 11.x still receives minors on the same day as 12.x is good news if you have not migrated — pnpm 12 changed git dependency handling (they are identities now, not transports) and that breaks assumptions in large monorepos. You have room to plan the jump without going unpatched.</p>",
+            "fr": "<p>L équipe a publié <code>v12.1.0</code> et <code>v11.25.0</code> à vingt secondes d intervalle, plus <code>pnpr@0.1.0-alpha.9</code>. Que 11.x reçoive encore des minors le même jour que 12.x est une bonne nouvelle si vous n avez pas migré — pnpm 12 a changé la gestion des dépendances git (désormais des identités, non des transports), ce qui casse des hypothèses dans les gros monorepos.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v11.25.0", "label": "github.com/pnpm/pnpm" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Fin de semana flojo en runtimes — Node, Deno, Bun y TypeScript no publicaron nada entre el viernes y hoy. Lo que se movió fue la capa de arriba: validación, package managers y el edge.",
+      "en": "Quiet weekend for runtimes — Node, Deno, Bun and TypeScript published nothing between Friday and today. What moved was the layer above: validation, package managers and the edge.",
+      "fr": "Week-end calme côté runtimes — Node, Deno, Bun et TypeScript n ont rien publié entre vendredi et aujourd hui. Ce qui a bougé, c est la couche au-dessus : validation, package managers et edge."
+    },
+    {
+      "es": "La performance de validación dejó de ser un empate. Con z.compile(), Zod pasa a 47.5M ops/s y le gana a typia, que era el argumento fuerte para irse a un validador basado en codegen. El costo de un schema en el hot path ya no es excusa de arquitectura.",
+      "en": "Validation performance stopped being a tie. With z.compile(), Zod moves to 47.5M ops/s and beats typia, which was the strong argument for moving to a codegen-based validator. The cost of a schema in the hot path is no longer an architectural excuse.",
+      "fr": "La performance de validation n est plus une égalité. Avec z.compile(), Zod atteint 47,5M ops/s et dépasse typia, qui était l argument fort pour passer à un validateur basé sur codegen. Le coût d un schéma dans le hot path n est plus une excuse d architecture."
+    },
+    {
+      "es": "Tres advisories distintos esta semana comparten el mismo bug: decidir autorización desde un header que controla el cliente. 9router con Host, phpSysInfo con X-Forwarded-For, Bifrost con una deny-list de SSRF incompleta. Si tu gateway confía en un header sin un proxy que lo reescriba, ya sabés qué revisar el lunes.",
+      "en": "Three separate advisories this week share the same bug: deciding authorization from a client-controlled header. 9router with Host, phpSysInfo with X-Forwarded-For, Bifrost with an incomplete SSRF deny-list. If your gateway trusts a header without a proxy rewriting it, you know what to review on Monday.",
+      "fr": "Trois advisories distincts cette semaine partagent le même bug : décider de l autorisation à partir d un en-tête contrôlé par le client. 9router avec Host, phpSysInfo avec X-Forwarded-For, Bifrost avec une deny-list SSRF incomplète. Si votre gateway fait confiance à un en-tête sans proxy qui le réécrit, vous savez quoi auditer."
+    },
+    {
+      "es": "El edge deja de ser un runtime de HTTP. Workers acepta TCP entrante y pasa sockets a Durable Objects y Containers; en paralelo, AI Search convierte crawl-embed-retrieval en un comando. Cloudflare está armando un backend completo, no un CDN con scripting.",
+      "en": "The edge is no longer an HTTP runtime. Workers accepts inbound TCP and hands sockets to Durable Objects and Containers; in parallel, AI Search turns crawl-embed-retrieval into one command. Cloudflare is assembling a full backend, not a CDN with scripting.",
+      "fr": "L edge n est plus un runtime HTTP. Workers accepte le TCP entrant et transmet des sockets aux Durable Objects et Containers ; en parallèle, AI Search réduit crawl-embed-retrieval à une commande. Cloudflare assemble un backend complet, pas un CDN scriptable."
+    },
+    {
+      "es": "Uber con GitFarm y pnpm con la RFC 23 atacan el mismo problema desde lados distintos: el monorepo escala mal cuando cada consumidor paga el costo completo del grafo. Uno centraliza Git como servicio, el otro deja de agrupar tasks en chunks topológicos. Mismo diagnóstico.",
+      "en": "Uber with GitFarm and pnpm with RFC 23 attack the same problem from different sides: monorepos scale badly when every consumer pays the full cost of the graph. One centralizes Git as a service, the other stops grouping tasks into topological chunks. Same diagnosis.",
+      "fr": "Uber avec GitFarm et pnpm avec la RFC 23 attaquent le même problème par des côtés différents : le monorepo passe mal à l échelle quand chaque consommateur paie le coût complet du graphe. L un centralise Git en service, l autre cesse de grouper les tâches en chunks topologiques. Même diagnostic."
+    }
+  ]
+}

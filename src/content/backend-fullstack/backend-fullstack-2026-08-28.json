@@ -1,0 +1,479 @@
+{
+  "title": {
+    "es": "NestJS 12 GA, RCE sin auth en Redis TLS y Sätteri en Rust",
+    "en": "NestJS 12 GA, unauthenticated RCE in Redis TLS, and Rust-powered Sätteri",
+    "fr": "NestJS 12 GA, RCE non authentifiée dans Redis TLS et Sätteri en Rust"
+  },
+  "description": {
+    "es": "NestJS 12 llega estable con paquetes ESM, Standard Schema y observabilidad nativa; Redis parchea un use-after-free en TLS que permite RCE sin autenticar; Astro estrena un procesador Markdown en Rust hasta 60% más rápido.",
+    "en": "NestJS 12 lands stable with ESM packages, Standard Schema and native observability; Redis patches a TLS use-after-free that allows unauthenticated RCE; Astro ships a Rust Markdown processor up to 60% faster.",
+    "fr": "NestJS 12 sort en stable avec des paquets ESM, Standard Schema et une observabilité native ; Redis corrige un use-after-free TLS permettant une RCE non authentifiée ; Astro livre un processeur Markdown en Rust jusqu-à 60% plus rapide."
+  },
+  "pubDate": "2026-08-28",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "NestJS 12 GA: ESM y Standard Schema",
+        "en": "NestJS 12 GA: ESM and Standard Schema",
+        "fr": "NestJS 12 GA : ESM et Standard Schema"
+      },
+      "anchor": "nestjs-12",
+      "icon": "lucide:blocks"
+    },
+    {
+      "text": {
+        "es": "Redis: RCE sin auth vía TLS, CVSS 9.2",
+        "en": "Redis: unauthenticated RCE via TLS, CVSS 9.2",
+        "fr": "Redis : RCE non authentifiée via TLS, CVSS 9.2"
+      },
+      "anchor": "redis-tls-uaf",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "MCP server de UI-TARS expuesto: CVSS 10",
+        "en": "UI-TARS MCP server exposed to the world: CVSS 10",
+        "fr": "Serveur MCP d-UI-TARS exposé : CVSS 10"
+      },
+      "anchor": "uitars-mcp-rce",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Sätteri: Markdown en Rust, builds 60% más rápidos",
+        "en": "Sätteri: Rust Markdown, builds up to 60% faster",
+        "fr": "Sätteri : Markdown en Rust, builds 60% plus rapides"
+      },
+      "anchor": "astro-satteri",
+      "icon": "simple-icons:astro"
+    },
+    {
+      "text": {
+        "es": "Deno 2.9.6: NAPI, fetch y desktop",
+        "en": "Deno 2.9.6: NAPI, fetch and desktop fixes",
+        "fr": "Deno 2.9.6 : NAPI, fetch et desktop"
+      },
+      "anchor": "deno-296",
+      "icon": "simple-icons:deno"
+    },
+    {
+      "text": {
+        "es": "Spring: 90+ CVEs cerrados en los M1",
+        "en": "Spring: 90+ CVEs closed across the M1 wave",
+        "fr": "Spring : plus de 90 CVE corrigées dans les M1"
+      },
+      "anchor": "spring-m1-wave",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "Google Cloud: agentes para operar bases de datos",
+        "en": "Google Cloud: AI agents for database operations",
+        "fr": "Google Cloud : agents IA pour les bases de données"
+      },
+      "anchor": "gcp-db-agents",
+      "icon": "lucide:database"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "nestjs-12",
+      "updates": [
+        {
+          "id": "nestjs-12",
+          "tag": "breaking",
+          "date": "27 Aug 2026",
+          "title": {
+            "es": "NestJS 12.0.0 GA: paquetes ESM, Standard Schema y observabilidad propia",
+            "en": "NestJS 12.0.0 GA: ESM packages, Standard Schema and first-party observability",
+            "fr": "NestJS 12.0.0 GA : paquets ESM, Standard Schema et observabilité maison"
+          },
+          "body_html": {
+            "es": "<p>El major más grande de Nest en años. Todos los paquetes core pasan a <strong>ESM</strong> — gracias a <code>require(esm)</code> la mayoría de apps CommonJS siguen funcionando sin reescribir nada, pero el piso sube a <strong>Node 20.19+ / 22.12+</strong>. Llega soporte de primera clase para <a href=\"https://standardschema.dev/\">Standard Schema</a>: <code>@Body({ schema })</code>, <code>StandardSchemaValidationPipe</code> y <code>StandardSchemaSerializerInterceptor</code> te dejan usar Zod, Valibot o ArkType sin abandonar <code>class-validator</code> (que sigue soportado, sin plan de removerlo). El <code>@nestjs/config</code> también migra de Joi a Standard Schema. Suma <code>@nestjs/observe</code>, un SDK de observabilidad que se engancha al lifecycle propio de Nest en vez de parchear el server HTTP, así los spans hablan de tus controllers y providers y no de rutas anónimas. El CLI se reescribió entero: Rspack como bundler por defecto en monorepos, oxlint en lugar de ESLint, Vitest en proyectos ESM y comandos nuevos <code>nest upgrade</code> y <code>nest deploy</code>. Ojo con los diagnósticos de rutas: <code>routeConflictPolicy</code> te avisa cuando <code>@Get(&quot;:id&quot;)</code> le come el request a <code>@Get(&quot;me&quot;)</code>. Corré <code>nest upgrade --dry-run</code> antes de tocar nada.</p>",
+            "en": "<p>Nest's biggest major in years. Every core package now ships as <strong>ESM</strong> — thanks to <code>require(esm)</code> most CommonJS apps keep working without a rewrite, but the floor moves to <strong>Node 20.19+ / 22.12+</strong>. First-class <a href=\"https://standardschema.dev/\">Standard Schema</a> support arrives: <code>@Body({ schema })</code>, <code>StandardSchemaValidationPipe</code> and <code>StandardSchemaSerializerInterceptor</code> let you use Zod, Valibot or ArkType without abandoning <code>class-validator</code> (still fully supported, no removal planned). <code>@nestjs/config</code> also moves from Joi-specific validation to Standard Schema. Add <code>@nestjs/observe</code>, an observability SDK that hooks into Nest's own request lifecycle instead of patching the HTTP server, so spans describe your controllers and providers rather than anonymous routes. The CLI was rebuilt: Rspack is the default monorepo bundler, oxlint replaces ESLint, Vitest is default for ESM projects, and new <code>nest upgrade</code> and <code>nest deploy</code> commands land. Note the route diagnostics: <code>routeConflictPolicy</code> warns when <code>@Get(&quot;:id&quot;)</code> silently shadows a later <code>@Get(&quot;me&quot;)</code>. Run <code>nest upgrade --dry-run</code> first.</p>",
+            "fr": "<p>Le plus gros major de Nest depuis des années. Tous les paquets core passent en <strong>ESM</strong> — grâce à <code>require(esm)</code> la plupart des applications CommonJS continuent de fonctionner, mais le socle passe à <strong>Node 20.19+ / 22.12+</strong>. Support de première classe pour <a href=\"https://standardschema.dev/\">Standard Schema</a> : <code>@Body({ schema })</code>, <code>StandardSchemaValidationPipe</code> et <code>StandardSchemaSerializerInterceptor</code> permettent d-utiliser Zod, Valibot ou ArkType sans abandonner <code>class-validator</code>. <code>@nestjs/config</code> quitte aussi Joi pour Standard Schema. S-ajoute <code>@nestjs/observe</code>, un SDK d-observabilité branché sur le cycle de vie de Nest plutôt que sur le serveur HTTP. Le CLI a été réécrit : Rspack par défaut en monorepo, oxlint à la place d-ESLint, Vitest par défaut en ESM, plus les commandes <code>nest upgrade</code> et <code>nest deploy</code>. Lancez <code>nest upgrade --dry-run</code> d-abord.</p>"
+          },
+          "source": { "url": "https://github.com/nestjs/nest/releases/tag/v12.0.0", "label": "github.com/nestjs" }
+        },
+        {
+          "id": "redis-tls-uaf",
+          "tag": "security",
+          "date": "27 Aug 2026",
+          "title": {
+            "es": "Redis: use-after-free en TLS permite ejecución remota sin autenticar (CVSS 9.2)",
+            "en": "Redis: TLS use-after-free allows unauthenticated remote code execution (CVSS 9.2)",
+            "fr": "Redis : use-after-free TLS permettant une exécution de code non authentifiée (CVSS 9.2)"
+          },
+          "body_html": {
+            "es": "<p>Un use-after-free en <code>tlsProcessPendingData()</code>, la función que maneja la lista de datos pendientes cuando Redis corre con TLS, deja que un atacante <strong>remoto y sin autenticar</strong> ejecute comandos arbitrarios con los privilegios del server. Si tenés TLS habilitado — o sea, prácticamente cualquier Redis expuesto fuera de la VPC — actualizá YA: parchado en <strong>8.2.9, 8.4.6, 8.6.6, 8.8.2 y 8.10.1</strong>. Sin autenticación previa y con RCE al final del camino, esto es el peor combo posible para un datastore que suele tener sesiones, colas y cachés adentro.</p>",
+            "en": "<p>A use-after-free in <code>tlsProcessPendingData()</code> — the function handling the TLS pending-data list when Redis is built with TLS support — lets a <strong>remote, unauthenticated</strong> attacker execute arbitrary commands with the privileges of the Redis server. If TLS is enabled, which covers essentially any Redis reachable outside the VPC, patch now: fixed in <strong>8.2.9, 8.4.6, 8.6.6, 8.8.2 and 8.10.1</strong>. No prior authentication plus RCE at the end is the worst possible combination for a datastore usually holding sessions, queues and caches.</p>",
+            "fr": "<p>Un use-after-free dans <code>tlsProcessPendingData()</code>, la fonction gérant la liste des données TLS en attente, permet à un attaquant <strong>distant et non authentifié</strong> d-exécuter des commandes arbitraires avec les privilèges du serveur Redis. Si TLS est activé, corrigez immédiatement : versions <strong>8.2.9, 8.4.6, 8.6.6, 8.8.2 et 8.10.1</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-32xw-c2hw-m34g", "label": "github.com/advisories" }
+        },
+        {
+          "id": "uitars-mcp-rce",
+          "tag": "security",
+          "date": "27 Aug 2026",
+          "title": {
+            "es": "UI-TARS: el MCP server se ataba a todas las interfaces y sin auth (CVSS 10)",
+            "en": "UI-TARS: MCP server bound to every interface with optional auth (CVSS 10)",
+            "fr": "UI-TARS : serveur MCP lié à toutes les interfaces sans auth (CVSS 10)"
+          },
+          "body_html": {
+            "es": "<p><code>startServer.ts</code> del paquete <code>mcp-http-server</code> de UI-TARS-desktop usaba <code>::</code> como host por defecto, así que los transports Streamable HTTP y SSE quedaban escuchando en <strong>todas las interfaces</strong>. Peor: el middleware de autenticación era opcional y ni <code>@agent-infra/mcp-server-commands</code> ni <code>@agent-infra/mcp-server-filesystem</code> pasaban uno. El server de commands expone <code>run_command</code>, que manda el string directo a <code>child_process.exec</code>. Resultado: cualquiera que llegara al puerto ejecutaba comandos como el usuario del proceso, y el de filesystem regalaba lectura y escritura de archivos. El default pasó a <code>127.0.0.1</code> en el commit <code>c2ad42e</code>, pero <strong>la versión del paquete se quedó en 1.2.4</strong> — el límite es el commit, no el release. Si armás agentes con MCP, esta es la lección del día: bind local por defecto y auth obligatoria, no opcional.</p>",
+            "en": "<p><code>startServer.ts</code> in UI-TARS-desktop's <code>mcp-http-server</code> package defaulted its listen address to <code>::</code>, so the Streamable HTTP and SSE MCP transports bound to <strong>every interface</strong>. Worse, its authentication middleware was optional and neither <code>@agent-infra/mcp-server-commands</code> nor <code>@agent-infra/mcp-server-filesystem</code> supplied one. The commands server exposes a <code>run_command</code> tool that hands its string straight to <code>child_process.exec</code>, so any unauthenticated client reaching the port ran arbitrary commands as the server's user, and the filesystem server handed out file reads and writes on the same terms. The default became <code>127.0.0.1</code> in commit <code>c2ad42e</code>, but <strong>the package version stayed at 1.2.4</strong> across that change — the boundary is the commit, not a release. If you build MCP agents, the lesson is loud: bind to localhost by default and make auth mandatory, not optional.</p>",
+            "fr": "<p><code>startServer.ts</code> du paquet <code>mcp-http-server</code> d-UI-TARS-desktop utilisait <code>::</code> par défaut, exposant les transports MCP sur <strong>toutes les interfaces</strong>, avec un middleware d-authentification optionnel que personne ne fournissait. Le serveur de commandes expose <code>run_command</code> qui transmet directement la chaîne à <code>child_process.exec</code> : exécution de commandes arbitraires sans authentification. Le défaut est passé à <code>127.0.0.1</code> au commit <code>c2ad42e</code>, mais <strong>la version est restée à 1.2.4</strong> — la frontière est le commit, pas une release.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-p68p-fq8j-3639", "label": "github.com/advisories" }
+        },
+        {
+          "id": "astro-satteri",
+          "tag": "notable",
+          "date": "27 Aug 2026",
+          "title": {
+            "es": "Sätteri: el procesador Markdown/MDX en Rust que acelera builds hasta 60%",
+            "en": "Sätteri: the Rust Markdown/MDX processor cutting builds by up to 60%",
+            "fr": "Sätteri : le processeur Markdown/MDX en Rust jusqu-à 60% plus rapide"
+          },
+          "body_html": {
+            "es": "<p>Sätteri saca el parseo de Markdown de JavaScript y lo lleva a Rust: <code>pulldown-cmark</code> para CommonMark, <code>Oxc</code> para las expresiones MDX, binarios nativos por plataforma y fallback a WebAssembly. Los números: builds de Astro 7 entre <strong>15% y 61% más rápidos</strong>, más de un minuto ahorrado en las docs de Astro y de Cloudflare, y un pipeline con ~<strong>100 dependencias menos</strong> que el stack unified. Trae GFM, smart punctuation, container directives, math y frontmatter de fábrica, y mantiene pluggability tanto propia como compatible con unified. Ya es el procesador por defecto en Astro 7.0 (fue opt-in en 6.4). Si tenés un sitio de contenido grande, esto es un golazo para el CI.</p>",
+            "en": "<p>Sätteri moves Markdown parsing out of JavaScript into Rust: <code>pulldown-cmark</code> for CommonMark, <code>Oxc</code> for MDX expressions, per-platform native binaries with a WebAssembly fallback. The numbers: Astro 7 builds <strong>15% to 61% faster</strong>, over a minute shaved off both the Astro and Cloudflare docs sites, and a pipeline roughly <strong>100 dependencies leaner</strong> than the unified stack. GFM, smart punctuation, container directives, math and frontmatter are native, and pluggability survives — both its own and unified-compatible. It is already the default processor in Astro 7.0 after landing as opt-in in 6.4. For a large content site this is straight CI savings.</p>",
+            "fr": "<p>Sätteri déplace le parsing Markdown de JavaScript vers Rust : <code>pulldown-cmark</code> pour CommonMark, <code>Oxc</code> pour les expressions MDX, binaires natifs par plateforme et repli WebAssembly. Les chiffres : builds Astro 7 <strong>15% à 61% plus rapides</strong>, plus d-une minute gagnée sur les docs Astro et Cloudflare, et un pipeline environ <strong>100 dépendances plus léger</strong> que la pile unified. Déjà processeur par défaut dans Astro 7.0.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/astro-satteri-rust/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "deno-296",
+      "updates": [
+        {
+          "id": "deno-296",
+          "tag": "patch",
+          "date": "27 Aug 2026",
+          "title": {
+            "es": "Deno 2.9.6: tanda gorda de fixes en NAPI, fetch, http y desktop",
+            "en": "Deno 2.9.6: a heavy fix train across NAPI, fetch, http and desktop",
+            "fr": "Deno 2.9.6 : gros train de correctifs NAPI, fetch, http et desktop"
+          },
+          "body_html": {
+            "es": "<p>Patch grande y muy de plomería. En <code>ext/napi</code> arreglan finalizers que se invocaban dos veces al teardown, tracking de finalizers pendientes por identidad y el wake del event loop en el próximo deadline de <code>uv_timer</code> — si mantenés addons nativos, esto te toca. En <code>fetch</code>: se aplican permisos a los transports de proxy, sólo se reintentan errores de transporte en conexiones pooled y el <code>SETTINGS_MAX_HEADER_LIST_SIZE</code> de HTTP/2 sube a 256KB. En <code>ext/http</code>, el body del request queda legible después de mandar la respuesta y las respuestas async inválidas van a <code>onError</code>. Suma clipboard API en desktop y soporte del content type <code>text/x-component</code> para compresión.</p>",
+            "en": "<p>A big, deeply plumbing-level patch. In <code>ext/napi</code>: finalizers no longer fire twice at teardown, pending finalizers are tracked by identity, and the event loop wakes at the next <code>uv_timer</code> deadline — native addon maintainers, this one is for you. In <code>fetch</code>: permissions are now enforced for proxy transports, only transport errors retry on pooled connections, and the HTTP/2 <code>SETTINGS_MAX_HEADER_LIST_SIZE</code> default rises to 256KB. In <code>ext/http</code>, the request body stays readable after the response is sent and invalid async responses route to <code>onError</code>. Plus a desktop clipboard API and <code>text/x-component</code> compression support.</p>",
+            "fr": "<p>Gros patch de plomberie. Dans <code>ext/napi</code> : finalizers qui ne s-exécutent plus deux fois au teardown, suivi par identité, réveil de la boucle d-événements à la prochaine échéance <code>uv_timer</code>. Dans <code>fetch</code> : permissions appliquées aux transports proxy et <code>SETTINGS_MAX_HEADER_LIST_SIZE</code> HTTP/2 porté à 256KB. Dans <code>ext/http</code>, le corps de requête reste lisible après l-envoi de la réponse.</p>"
+          },
+          "source": { "url": "https://github.com/denoland/deno/releases/tag/v2.9.6", "label": "github.com/denoland" }
+        },
+        {
+          "id": "workerd-0828",
+          "tag": "minor",
+          "date": "28 Aug 2026",
+          "title": {
+            "es": "workerd v1.20260828.1: build diario del runtime de Cloudflare Workers",
+            "en": "workerd v1.20260828.1: the daily Cloudflare Workers runtime build",
+            "fr": "workerd v1.20260828.1 : build quotidien du runtime Cloudflare Workers"
+          },
+          "body_html": {
+            "es": "<p>Nueva build de compatibilidad del runtime open source detrás de Workers. Si fijás <code>compatibility_date</code> en tu <code>wrangler.jsonc</code>, este es el tren que define qué flags están disponibles cuando movés esa fecha hacia adelante.</p>",
+            "en": "<p>A fresh compatibility build of the open-source runtime behind Workers. If you pin a <code>compatibility_date</code> in <code>wrangler.jsonc</code>, this is the train that decides which flags exist when you move that date forward.</p>",
+            "fr": "<p>Nouveau build de compatibilité du runtime open source derrière Workers. Si vous fixez une <code>compatibility_date</code> dans <code>wrangler.jsonc</code>, ce train détermine les flags disponibles lorsque vous avancez cette date.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workerd/releases/tag/v1.20260828.1", "label": "github.com/cloudflare" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "spring-m1-wave",
+      "updates": [
+        {
+          "id": "spring-m1-wave",
+          "tag": "notable",
+          "date": "27 Aug 2026",
+          "title": {
+            "es": "Spring vuelve con una ola de M1 y más de 90 CVEs cerrados",
+            "en": "Spring returns with a wave of M1 releases and 90+ CVEs closed",
+            "fr": "Spring revient avec une vague de M1 et plus de 90 CVE corrigées"
+          },
+          "body_html": {
+            "es": "<p>Después de 10 semanas de silencio, el ecosistema Spring largó primeros milestones en todos los frentes: <strong>Boot 4.2.0-M1</strong> con soporte AMQP 1.0 sobre RabbitMQ y el <code>GracefulHandler</code> de Jetty para shutdown coordinado; <strong>Framework 7.1.0-M1</strong> con <code>forParameter()</code> en <code>ResolvableType</code>; <strong>Data 2026.1.0-M1</strong> con soporte inicial de Redis JSON vía <code>RedisJsonTemplate</code>; <strong>Security 7.2.0-M1</strong> con mejor detección de configuración CORS. Lo importante para producción: <strong>Integration 7.2.0-M1</strong> cierra dos CVEs críticos de RCE por deserialización, y <strong>AMQP 4.2.0-M1</strong> arregla otros dos, incluida exposición de credenciales. En total más de 90 CVEs entre todos los releases. Aunque no estés en la JVM, el patrón vale: deserialización sigue siendo el vector que más RCEs regala.</p>",
+            "en": "<p>After a 10-week hiatus the Spring ecosystem shipped first milestones across the board: <strong>Boot 4.2.0-M1</strong> with AMQP 1.0 support on RabbitMQ and Jetty's <code>GracefulHandler</code> for coordinated shutdown; <strong>Framework 7.1.0-M1</strong> adding <code>forParameter()</code> to <code>ResolvableType</code>; <strong>Data 2026.1.0-M1</strong> with initial Redis JSON support via <code>RedisJsonTemplate</code>; <strong>Security 7.2.0-M1</strong> with improved CORS configuration detection. The production-relevant part: <strong>Integration 7.2.0-M1</strong> closes two critical deserialization RCE CVEs, and <strong>AMQP 4.2.0-M1</strong> fixes two more including credential exposure. Over 90 CVEs were addressed collectively. Even off the JVM the pattern holds — deserialization is still the vector handing out the most RCEs.</p>",
+            "fr": "<p>Après 10 semaines de pause, l-écosystème Spring publie ses premiers milestones : <strong>Boot 4.2.0-M1</strong> avec AMQP 1.0 et le <code>GracefulHandler</code> de Jetty, <strong>Framework 7.1.0-M1</strong>, <strong>Data 2026.1.0-M1</strong> avec Redis JSON via <code>RedisJsonTemplate</code>, <strong>Security 7.2.0-M1</strong>. Côté production : <strong>Integration 7.2.0-M1</strong> corrige deux CVE critiques de RCE par désérialisation et <strong>AMQP 4.2.0-M1</strong> deux autres. Plus de 90 CVE au total.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/spring-news-roundup-aug17-2026/", "label": "infoq.com" }
+        },
+        {
+          "id": "astro-729",
+          "tag": "patch",
+          "date": "27 Aug 2026",
+          "title": {
+            "es": "Astro 7.2.9: manifest SSR con referencias muertas y escaping en MDX",
+            "en": "Astro 7.2.9: stale SSR manifest references and MDX escaping",
+            "fr": "Astro 7.2.9 : références mortes dans le manifest SSR et échappement MDX"
+          },
+          "body_html": {
+            "es": "<p>Cuatro fixes que valen la pena si servís SSR: el manifest ya no arrastra <code>entryModules</code> apuntando a chunks prerender-only que no existen en el build final, y se cae el crash al pedir <code>/index.html</code> contra una ruta dinámica <code>[slug].astro</code>. Suma el tipado de imports <code>.html</code> fuera de archivos <code>.astro</code> y el escaping de <code>set:text</code> dentro de elementos <code>script</code> y <code>style</code> en MDX — ese último tiene olor a XSS latente.</p>",
+            "en": "<p>Four fixes worth taking if you serve SSR: the manifest no longer carries <code>entryModules</code> pointing at prerender-only chunks missing from the final build, and requesting <code>/index.html</code> against a dynamic <code>[slug].astro</code> route no longer crashes. Plus typing for <code>.html</code> imports outside <code>.astro</code> files and <code>set:text</code> escaping inside MDX <code>script</code> and <code>style</code> elements — that last one smells like latent XSS.</p>",
+            "fr": "<p>Quatre correctifs utiles en SSR : le manifest ne conserve plus d-<code>entryModules</code> pointant vers des chunks prerender-only absents du build final, et demander <code>/index.html</code> sur une route dynamique <code>[slug].astro</code> ne plante plus. Plus le typage des imports <code>.html</code> et l-échappement de <code>set:text</code> dans les éléments <code>script</code> et <code>style</code> en MDX.</p>"
+          },
+          "source": { "url": "https://github.com/withastro/astro/releases/tag/astro%407.2.9", "label": "github.com/withastro" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "gcp-db-agents",
+      "updates": [
+        {
+          "id": "gcp-db-agents",
+          "tag": "notable",
+          "date": "27 Aug 2026",
+          "title": {
+            "es": "Google Cloud mete agentes de IA en el ciclo de vida de las bases de datos",
+            "en": "Google Cloud puts AI agents into the database lifecycle",
+            "fr": "Google Cloud intègre des agents IA au cycle de vie des bases de données"
+          },
+          "body_html": {
+            "es": "<p>Dos agentes nuevos integrados con Gemini Cloud Assist. El <strong>Onboarding Agent</strong> toma requisitos en lenguaje natural, analiza cosas como IOPS y latencia, recomienda una base y genera los comandos de provisioning. El <strong>Observability Agent</strong> apunta a SRE y DevOps: correlaciona telemetría de Database Insights, Cloud Monitoring, Cloud Logging y Cloud Trace para encontrar root cause y sugerir remediación. Corre sobre Cloud SQL, Spanner, AlloyDB, Firestore, Memorystore y BigTable, y — decisión acertada — no inventa un dashboard nuevo: entra por el chat de Gemini, la consola, la CLI, IDEs y servers MCP. El agente sugiere, vos seguís firmando el <code>terraform apply</code>.</p>",
+            "en": "<p>Two new agents integrated with Gemini Cloud Assist. The <strong>Onboarding Agent</strong> takes requirements in natural language, analyses things like IOPS and latency, recommends a database and generates provisioning commands. The <strong>Observability Agent</strong> targets SRE and DevOps: it correlates telemetry across Database Insights, Cloud Monitoring, Cloud Logging and Cloud Trace to find root causes and suggest remediation. It covers Cloud SQL, Spanner, AlloyDB, Firestore, Memorystore and BigTable and — a good call — invents no new dashboard: it arrives through Gemini chat, the console, the CLI, IDEs and MCP servers. The agent suggests; you still sign the <code>terraform apply</code>.</p>",
+            "fr": "<p>Deux nouveaux agents intégrés à Gemini Cloud Assist. L-<strong>Onboarding Agent</strong> prend des besoins en langage naturel, analyse IOPS et latence, recommande une base et génère les commandes de provisioning. L-<strong>Observability Agent</strong> corrèle la télémétrie de Database Insights, Cloud Monitoring, Cloud Logging et Cloud Trace pour trouver la cause racine. Couvre Cloud SQL, Spanner, AlloyDB, Firestore, Memorystore et BigTable, accessible via le chat Gemini, la console, la CLI, les IDE et des serveurs MCP.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/google-database-operation-agents/", "label": "infoq.com" }
+        },
+        {
+          "id": "redshift-10mib",
+          "tag": "minor",
+          "date": "27 Aug 2026",
+          "title": {
+            "es": "Redshift streaming ahora ingiere registros de 10 MiB desde Kinesis",
+            "en": "Redshift streaming now ingests 10 MiB records from Kinesis",
+            "fr": "Le streaming Redshift ingère désormais des enregistrements de 10 Mio depuis Kinesis"
+          },
+          "body_html": {
+            "es": "<p>El límite por registro en la ingesta desde Kinesis Data Streams pasa de 1 MiB a <strong>10 MiB</strong>, un 10x. Si venías fragmentando payloads grandes en el producer sólo para entrar en el límite, ese workaround ya no hace falta.</p>",
+            "en": "<p>The per-record limit for streaming ingestion from Kinesis Data Streams goes from 1 MiB to <strong>10 MiB</strong>, a 10x increase. If you were chunking large payloads in the producer purely to fit the cap, that workaround can go.</p>",
+            "fr": "<p>La limite par enregistrement pour l-ingestion depuis Kinesis Data Streams passe de 1 Mio à <strong>10 Mio</strong>, soit 10x. Le découpage des gros payloads côté producteur devient inutile.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/redshift-streaming-supports-kds-10mib-records", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "bullmq-5814",
+          "tag": "patch",
+          "date": "27 Aug 2026",
+          "title": {
+            "es": "BullMQ 5.81.4: FlowProducer expone createScripts para extenderlo",
+            "en": "BullMQ 5.81.4: FlowProducer exposes createScripts for extension",
+            "fr": "BullMQ 5.81.4 : FlowProducer expose createScripts pour l-extension"
+          },
+          "body_html": {
+            "es": "<p>Fix chico pero útil si extendés BullMQ: <code>FlowProducer</code> suma un método <code>createScripts</code> para que las subclases puedan inyectar sus propios scripts Lua sin parchear internals. También salieron <code>ex2.2.2</code> del port a Elixir y <code>py3.1.0</code> del cliente Python.</p>",
+            "en": "<p>Small but handy if you extend BullMQ: <code>FlowProducer</code> gains a <code>createScripts</code> method so subclasses can inject their own Lua scripts without patching internals. The Elixir port <code>ex2.2.2</code> and Python client <code>py3.1.0</code> also shipped.</p>",
+            "fr": "<p>Petit correctif utile si vous étendez BullMQ : <code>FlowProducer</code> gagne une méthode <code>createScripts</code> permettant aux sous-classes d-injecter leurs propres scripts Lua. Le port Elixir <code>ex2.2.2</code> et le client Python <code>py3.1.0</code> sont aussi sortis.</p>"
+          },
+          "source": { "url": "https://github.com/taskforcesh/bullmq/releases/tag/v5.81.4", "label": "github.com/taskforcesh" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "istio-patches",
+      "updates": [
+        {
+          "id": "istio-patches",
+          "tag": "patch",
+          "date": "27 Aug 2026",
+          "title": {
+            "es": "Istio 1.30.4 y 1.29.7, más el rc.4 de 1.31",
+            "en": "Istio 1.30.4 and 1.29.7 land, plus 1.31 rc.4",
+            "fr": "Istio 1.30.4 et 1.29.7, plus la rc.4 de 1.31"
+          },
+          "body_html": {
+            "es": "<p>Doble patch en las dos líneas soportadas el mismo día, y el tren de <strong>1.31.0-rc.4</strong> sigue avanzando. En una service mesh los patches de línea estable no son opcionales: el sidecar está en el path de todo request que entra a tu cluster.</p>",
+            "en": "<p>Two patches across both supported lines on the same day, and the <strong>1.31.0-rc.4</strong> train keeps moving. In a service mesh, stable-line patches are not optional — the sidecar sits in the path of every request entering your cluster.</p>",
+            "fr": "<p>Deux patches sur les deux lignes supportées le même jour, et le train <strong>1.31.0-rc.4</strong> avance. Dans un service mesh, les patches de ligne stable ne sont pas optionnels : le sidecar est sur le chemin de chaque requête.</p>"
+          },
+          "source": { "url": "https://github.com/istio/istio/releases/tag/1.30.4", "label": "github.com/istio" }
+        },
+        {
+          "id": "redshift-agent-toolkit",
+          "tag": "minor",
+          "date": "27 Aug 2026",
+          "title": {
+            "es": "Redshift se integra con Agent Toolkit for AWS",
+            "en": "Redshift integrates with Agent Toolkit for AWS",
+            "fr": "Redshift s-intègre à Agent Toolkit for AWS"
+          },
+          "body_html": {
+            "es": "<p>Permite construir y consultar el data warehouse directamente desde agentes de IA. Junto con los agentes de base de datos de Google, marca la tendencia del día: los cloud providers están abriendo la operación de datos a agentes en vez de a dashboards.</p>",
+            "en": "<p>Lets you build and query the data warehouse directly from AI agents. Together with Google's database agents it marks the trend of the day: cloud providers are opening data operations to agents rather than to dashboards.</p>",
+            "fr": "<p>Permet de construire et d-interroger l-entrepôt de données directement depuis des agents IA. Avec les agents de base de données de Google, c-est la tendance du jour : les fournisseurs cloud ouvrent l-exploitation des données aux agents plutôt qu-aux tableaux de bord.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/redshift-agenttoolkit-for-ai-assisted-datawarehouse-mgmt", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "sustainable-testing",
+      "updates": [
+        {
+          "id": "sustainable-testing",
+          "tag": "notable",
+          "date": "27 Aug 2026",
+          "title": {
+            "es": "Testing sostenible: fail fast, correr sólo lo afectado y medir energía",
+            "en": "Sustainable testing: fail fast, run only what changed, measure energy",
+            "fr": "Tests durables : fail fast, n-exécuter que l-impacté, mesurer l-énergie"
+          },
+          "body_html": {
+            "es": "<p>Charla de Jochen Joswig en OOP con recomendaciones que aplican aunque la sostenibilidad no te mueva un pelo — porque son exactamente las que arreglan un CI lento. Uno: tener estrategia de testing y <strong>borrar los tests que no aportan</strong>, no acumularlos. Dos: <strong>fail fast</strong> — unit primero, y si rompe, cortar antes de gastar en integración, e2e y UI. Tres: correr <strong>sólo los tests afectados</strong>; en un monorepo, si tocaste frontend, el backend no se testea. Cuatro: medir consumo de energía por test y poner umbrales, que termina siendo un proxy honesto de tests lentos y caros. Suma análisis estático — Creedengo, plugin open source de SonarQube — para detectar queries dentro de loops. Traducción: la métrica no es cuántos tests tenés, es cuánto tarda tu feedback loop.</p>",
+            "en": "<p>Jochen Joswig's OOP talk lands recommendations that apply even if sustainability moves you not at all — because they are exactly what fixes a slow CI. One: have a real testing strategy and <strong>delete the tests that add nothing</strong> instead of accumulating them. Two: <strong>fail fast</strong> — unit tests first, and once one fails, halt before spending on integration, e2e and UI. Three: run <strong>only affected tests</strong>; in a monorepo, if only the frontend changed the backend needs no run. Four: track energy consumption per test and set thresholds, which ends up an honest proxy for slow and expensive tests. Plus static analysis — Creedengo, an open-source SonarQube plugin — to catch database queries inside loops. Translation: the metric is not how many tests you own, it is how long your feedback loop takes.</p>",
+            "fr": "<p>La conférence de Jochen Joswig à OOP livre des recommandations valables même sans intérêt pour la durabilité — ce sont exactement celles qui réparent un CI lent. Un : une vraie stratégie de test et <strong>supprimer les tests inutiles</strong>. Deux : <strong>fail fast</strong> — unitaires d-abord, arrêt dès l-échec. Trois : n-exécuter que les <strong>tests affectés</strong>. Quatre : mesurer la consommation d-énergie par test et fixer des seuils. Plus l-analyse statique avec Creedengo pour détecter les requêtes dans les boucles.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/making-testing-sustainable/", "label": "infoq.com" }
+        },
+        {
+          "id": "x402-spending-controls",
+          "tag": "notable",
+          "date": "27 Aug 2026",
+          "title": {
+            "es": "Cloudflare Wallets llega tarde a x402 y los controles de gasto se quedan cortos",
+            "en": "Cloudflare Wallets arrives late to x402 and the spending controls stop at the payment",
+            "fr": "Cloudflare Wallets arrive tard sur x402 et les contrôles de dépense s-arrêtent au paiement"
+          },
+          "body_html": {
+            "es": "<p>Cloudflare suma wallets para pagos de agentes sobre x402, pero el análisis marca el límite real: los controles de gasto cubren la transacción y nada más. Para quien diseña sistemas agentic, el punto arquitectónico es viejo conocido — autorizar el pago no es autorizar la acción, y el límite de presupuesto no reemplaza un límite de permisos.</p>",
+            "en": "<p>Cloudflare adds wallets for agent payments over x402, but the analysis marks the real limit: spending controls cover the transaction and nothing beyond it. For anyone designing agentic systems the architectural point is familiar — authorising the payment is not authorising the action, and a budget cap is no substitute for a permission boundary.</p>",
+            "fr": "<p>Cloudflare ajoute des wallets pour les paiements d-agents via x402, mais l-analyse pointe la limite réelle : les contrôles de dépense couvrent la transaction et rien au-delà. Autoriser le paiement n-est pas autoriser l-action, et un plafond budgétaire ne remplace pas une frontière de permissions.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/agent-payment-rails-x402/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "servicenow-cvss10",
+      "updates": [
+        {
+          "id": "servicenow-cvss10",
+          "tag": "security",
+          "date": "27 Aug 2026",
+          "title": {
+            "es": "ServiceNow: tres vulnerabilidades CVSS 10, incluyendo SQL injection y code injection",
+            "en": "ServiceNow: three CVSS 10 vulnerabilities including SQL and code injection",
+            "fr": "ServiceNow : trois vulnérabilités CVSS 10, dont injection SQL et de code"
+          },
+          "body_html": {
+            "es": "<p>ServiceNow remedió tres fallas con <strong>CVSS 10</strong>: una SQL injection, un control de acceso roto y una code injection en su plataforma de IA. Puntaje máximo significa sin autenticación, sin interacción del usuario y con impacto total. Si tu organización corre ServiceNow, confirmá con el equipo de plataforma que el parche ya está aplicado — no es una decisión de backend, pero sí es tu problema si integrás contra su API.</p>",
+            "en": "<p>ServiceNow remediated three <strong>CVSS 10</strong> flaws: a SQL injection, a broken access control, and a code injection in its AI platform. A maximum score means no authentication, no user interaction, total impact. If your organisation runs ServiceNow, confirm with the platform team that the patch is applied — not a backend decision, but very much your problem if you integrate against its API.</p>",
+            "fr": "<p>ServiceNow a corrigé trois failles <strong>CVSS 10</strong> : une injection SQL, un contrôle d-accès défaillant et une injection de code dans sa plateforme IA. Un score maximal signifie aucune authentification, aucune interaction utilisateur, impact total.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-75mr-vw8w-4mx8", "label": "github.com/advisories" }
+        },
+        {
+          "id": "libreoffice-convert-traversal",
+          "tag": "security",
+          "date": "27 Aug 2026",
+          "title": {
+            "es": "libreoffice-convert: path traversal con escritura arbitraria de archivos",
+            "en": "libreoffice-convert: path traversal leading to arbitrary file write",
+            "fr": "libreoffice-convert : path traversal menant à une écriture de fichier arbitraire"
+          },
+          "body_html": {
+            "es": "<p>Advisory npm del día. El paquete permite escapar del directorio de destino y escribir archivos arbitrarios. Si convertís documentos subidos por usuarios — el caso de uso obvio de este paquete — el nombre del archivo llega directo del atacante. Revisá si está en tu árbol de dependencias con <code>npm ls libreoffice-convert</code>.</p>",
+            "en": "<p>The npm advisory of the day. The package lets a caller escape the destination directory and write arbitrary files. If you convert user-uploaded documents — the obvious use case for this package — the filename comes straight from the attacker. Check your dependency tree with <code>npm ls libreoffice-convert</code>.</p>",
+            "fr": "<p>L-advisory npm du jour. Le paquet permet de sortir du répertoire de destination et d-écrire des fichiers arbitraires. Si vous convertissez des documents téléversés par des utilisateurs, le nom de fichier vient directement de l-attaquant. Vérifiez avec <code>npm ls libreoffice-convert</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-gmxc-r82q-347r", "label": "github.com/advisories" }
+        },
+        {
+          "id": "n8n-sqlite3-traversal",
+          "tag": "security",
+          "date": "27 Aug 2026",
+          "title": {
+            "es": "n8n-nodes-sqlite3: path traversal vía el parámetro db_path (CVSS 6.1)",
+            "en": "n8n-nodes-sqlite3: path traversal via the db_path parameter (CVSS 6.1)",
+            "fr": "n8n-nodes-sqlite3 : path traversal via le paramètre db_path (CVSS 6.1)"
+          },
+          "body_html": {
+            "es": "<p>El path del archivo de base de datos es controlado por el usuario y no se valida, así que un workflow puede apuntar a cualquier SQLite del host. Severidad media, pero en n8n los workflows suelen correr con los permisos del proceso y acceso a todo el filesystem del container.</p>",
+            "en": "<p>The database file path is user-controlled and unvalidated, so a workflow can point at any SQLite file on the host. Medium severity, but n8n workflows typically run with the process's permissions and full access to the container filesystem.</p>",
+            "fr": "<p>Le chemin du fichier de base de données est contrôlé par l-utilisateur et non validé : un workflow peut viser n-importe quel fichier SQLite de l-hôte. Sévérité moyenne, mais les workflows n8n tournent avec les permissions du processus et un accès complet au système de fichiers du conteneur.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-q7m3-rhxg-7vxr", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "next-canary-164",
+      "updates": [
+        {
+          "id": "next-canary-164",
+          "tag": "beta",
+          "date": "28 Aug 2026",
+          "title": {
+            "es": "Next.js 16.4.0-canary.10: el tren de la 16.4 sigue rodando",
+            "en": "Next.js 16.4.0-canary.10: the 16.4 train keeps rolling",
+            "fr": "Next.js 16.4.0-canary.10 : le train 16.4 continue"
+          },
+          "body_html": {
+            "es": "<p>Dos canaries en dos días camino a la 16.4. Contexto importante: esta línea viene de cerrar dos RCEs sin autenticar en la Image Optimization API a principios de semana, así que si todavía no pasaste a <strong>16.3.3</strong> o <strong>15.5.24</strong>, hacelo antes de mirar canaries.</p>",
+            "en": "<p>Two canaries in two days on the way to 16.4. Important context: this line just closed two unauthenticated RCEs in the Image Optimization API earlier in the week, so if you have not moved to <strong>16.3.3</strong> or <strong>15.5.24</strong> yet, do that before looking at canaries.</p>",
+            "fr": "<p>Deux canaries en deux jours vers la 16.4. Contexte important : cette ligne vient de corriger deux RCE non authentifiées dans l-API d-optimisation d-images en début de semaine — passez à <strong>16.3.3</strong> ou <strong>15.5.24</strong> avant de regarder les canaries.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/next.js/releases/tag/v16.4.0-canary.10", "label": "github.com/vercel" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Standard Schema se está convirtiendo en el interface común de validación del ecosistema TypeScript. NestJS 12 lo adopta en decorators, serialización y config, y saca a Joi del centro. La consecuencia práctica: tus schemas de Zod dejan de ser un detalle de la capa HTTP y pasan a ser un contrato portable entre frameworks.",
+      "en": "Standard Schema is becoming the TypeScript ecosystem's common validation interface. NestJS 12 adopts it across decorators, serialization and config, moving Joi out of the centre. The practical consequence: your Zod schemas stop being an HTTP-layer detail and become a contract portable across frameworks.",
+      "fr": "Standard Schema devient l-interface de validation commune de l-écosystème TypeScript. NestJS 12 l-adopte dans les décorateurs, la sérialisation et la configuration, écartant Joi du centre. Vos schémas Zod deviennent un contrat portable entre frameworks."
+    },
+    {
+      "es": "Las herramientas de build de JavaScript siguen migrando a Rust y el ahorro ya no es marginal: Sätteri corta hasta 61% del build de Astro y saca ~100 dependencias del pipeline. NestJS 12, en paralelo, pone Rspack y oxlint como defaults. Menos dependencias no es sólo velocidad, también es menos superficie de supply chain.",
+      "en": "JavaScript build tooling keeps migrating to Rust and the savings are no longer marginal: Sätteri cuts up to 61% off Astro builds and removes roughly 100 dependencies from the pipeline. In parallel NestJS 12 makes Rspack and oxlint the defaults. Fewer dependencies is not only speed — it is less supply-chain surface.",
+      "fr": "L-outillage de build JavaScript continue de migrer vers Rust et les gains ne sont plus marginaux : Sätteri retire jusqu-à 61% du temps de build Astro et environ 100 dépendances du pipeline. En parallèle, NestJS 12 impose Rspack et oxlint par défaut. Moins de dépendances, c-est aussi moins de surface supply chain."
+    },
+    {
+      "es": "Los servidores MCP se están volviendo un vector de ataque de primera categoría. El caso de UI-TARS es un manual de lo que no hay que hacer: bind a todas las interfaces por defecto, middleware de auth opcional y una tool que pasa strings a exec. Si exponés tooling a agentes, tratá ese puerto con la misma paranoia que un endpoint público.",
+      "en": "MCP servers are becoming a first-class attack surface. The UI-TARS case is a manual of what not to do: bind to every interface by default, optional auth middleware, and a tool handing strings to exec. If you expose tooling to agents, treat that port with the same paranoia as a public endpoint.",
+      "fr": "Les serveurs MCP deviennent une surface d-attaque de premier plan. Le cas UI-TARS est un manuel de ce qu-il ne faut pas faire : bind sur toutes les interfaces par défaut, middleware d-authentification optionnel et un outil qui transmet des chaînes à exec. Traitez ce port avec la paranoïa d-un endpoint public."
+    },
+    {
+      "es": "Los cloud providers dejaron de agregar dashboards y empezaron a agregar agentes. Google mete agentes de onboarding y observabilidad en Cloud SQL, Spanner y AlloyDB; AWS conecta Redshift al Agent Toolkit. El patrón compartido y sensato: entran por la CLI, el IDE y servers MCP, no por una consola nueva.",
+      "en": "Cloud providers stopped adding dashboards and started adding agents. Google puts onboarding and observability agents into Cloud SQL, Spanner and AlloyDB; AWS wires Redshift to the Agent Toolkit. The shared and sensible pattern: they arrive through the CLI, the IDE and MCP servers rather than through yet another console.",
+      "fr": "Les fournisseurs cloud ont cessé d-ajouter des tableaux de bord pour ajouter des agents. Google intègre des agents d-onboarding et d-observabilité à Cloud SQL, Spanner et AlloyDB ; AWS relie Redshift à l-Agent Toolkit. Le schéma commun et sensé : ils passent par la CLI, l-IDE et des serveurs MCP plutôt que par une console de plus."
+    }
+  ]
+}

@@ -1,0 +1,433 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 1 de septiembre de 2026",
+    "en": "Backend & Fullstack — September 1, 2026",
+    "fr": "Backend & Fullstack — 1 septembre 2026"
+  },
+  "description": {
+    "es": "Valkey parchea un use-after-free sin autenticar en Lua, Hono deja pasar el state de OAuth, Engine.IO se cae por WebTransport y AWS libera el Agent Registry en GA.",
+    "en": "Valkey patches an unauthenticated Lua use-after-free, Hono lets the OAuth state slip through, Engine.IO crashes over WebTransport, and AWS ships Agent Registry GA.",
+    "fr": "Valkey corrige un use-after-free Lua non authentifié, Hono laisse passer le state OAuth, Engine.IO tombe via WebTransport et AWS livre Agent Registry en GA."
+  },
+  "pubDate": "2026-09-01",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Valkey: use-after-free de Lua sin auth",
+        "en": "Valkey: unauthenticated Lua use-after-free",
+        "fr": "Valkey : use-after-free Lua non authentifié"
+      },
+      "anchor": "valkey-912-security",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Hono OAuth: el state ausente pasa el check",
+        "en": "Hono OAuth: missing state passes the check",
+        "fr": "Hono OAuth : un state absent passe le contrôle"
+      },
+      "anchor": "hono-oauth-state",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Engine.IO: __proto__ mata el proceso Node",
+        "en": "Engine.IO: __proto__ kills the Node process",
+        "fr": "Engine.IO : __proto__ tue le processus Node"
+      },
+      "anchor": "engineio-webtransport-dos",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": {
+        "es": "Pangolin: un share link abre cualquier recurso",
+        "en": "Pangolin: one share link opens every resource",
+        "fr": "Pangolin : un lien de partage ouvre tout"
+      },
+      "anchor": "pangolin-auth-bypass",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "AWS Agent Registry llega a GA",
+        "en": "AWS Agent Registry hits GA",
+        "fr": "AWS Agent Registry atteint la GA"
+      },
+      "anchor": "aws-agent-registry-ga",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": {
+        "es": "OTel JS 2.11 usa AsyncLocalStorage nativo",
+        "en": "OTel JS 2.11 uses native AsyncLocalStorage",
+        "fr": "OTel JS 2.11 utilise AsyncLocalStorage natif"
+      },
+      "anchor": "otel-js-211",
+      "icon": "lucide:layers"
+    },
+    {
+      "text": {
+        "es": "Vitest 5 rc.4 rompe vitest list",
+        "en": "Vitest 5 rc.4 breaks vitest list",
+        "fr": "Vitest 5 rc.4 casse vitest list"
+      },
+      "anchor": "vitest-5-rc4",
+      "icon": "lucide:blocks"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "valkey-912-security",
+      "updates": [
+        {
+          "id": "valkey-912-security",
+          "tag": "breaking",
+          "date": "31 Aug 2026",
+          "title": {
+            "es": "Valkey 9.1.2, 9.0.6 y 8.1.10: use-after-free del intérprete Lua sin autenticar",
+            "en": "Valkey 9.1.2, 9.0.6 and 8.1.10: unauthenticated use-after-free of the Lua interpreter",
+            "fr": "Valkey 9.1.2, 9.0.6 et 8.1.10 : use-after-free non authentifié de l'interpréteur Lua"
+          },
+          "body_html": {
+            "es": "<p>Valkey publicó las tres líneas el mismo día con <strong>upgrade urgency SECURITY</strong>. La grave es <code>GHSA-fq2f-crmw-q97r</code>: una tabla global de comandos del debugger de scripts cacheaba un puntero crudo al intérprete Lua ya liberado y nunca se invalidaba — <strong>use-after-free sin autenticación</strong>. Suma <code>GHSA-jcj7-v34w-v9vv</code> (UAF en RDMA vía <code>CLIENT KILL</code>, solo con <code>USE_RDMA</code>), un bypass de ACL en <code>GEORADIUS</code> con <code>STORE</code> duplicado, <code>HGETEX</code> que dejaba a usuarios read-only tocar TTLs, y un CN de certificado TLS con NUL embebido que permitía suplantar otro usuario ACL. Si tenés Valkey expuesto, actualizá YA.</p>",
+            "en": "<p>Valkey shipped all three lines the same day with <strong>upgrade urgency SECURITY</strong>. The bad one is <code>GHSA-fq2f-crmw-q97r</code>: a process-global script debugger command table cached a raw pointer to a freed Lua interpreter and was never invalidated — an <strong>unauthenticated use-after-free</strong>. Add <code>GHSA-jcj7-v34w-v9vv</code> (RDMA UAF via <code>CLIENT KILL</code>, only with <code>USE_RDMA</code>), an ACL bypass where duplicate <code>STORE</code> options let <code>GEORADIUS</code> write outside permitted patterns, <code>HGETEX</code> letting read-only users change field TTLs, and a TLS certificate CN with an embedded NUL impersonating another ACL user. Patch now.</p>",
+            "fr": "<p>Valkey a publié les trois lignes le même jour avec <strong>upgrade urgency SECURITY</strong>. La pire : <code>GHSA-fq2f-crmw-q97r</code>, une table globale de commandes du debugger de scripts qui cachait un pointeur brut vers un interpréteur Lua libéré, jamais invalidé — <strong>use-after-free non authentifié</strong>. S'ajoutent <code>GHSA-jcj7-v34w-v9vv</code> (UAF RDMA via <code>CLIENT KILL</code>), un contournement d'ACL sur <code>GEORADIUS</code>, <code>HGETEX</code> modifiable par des utilisateurs read-only, et un CN de certificat TLS avec NUL embarqué permettant l'usurpation d'un autre utilisateur ACL.</p>"
+          },
+          "source": { "url": "https://github.com/valkey-io/valkey/releases/tag/9.1.2", "label": "github.com/valkey-io" }
+        },
+        {
+          "id": "hono-oauth-state",
+          "tag": "security",
+          "date": "31 Aug 2026",
+          "title": {
+            "es": "@hono/oauth-providers: el chequeo de state falla abierto y habilita login CSRF",
+            "en": "@hono/oauth-providers: the state check fails open, enabling login CSRF",
+            "fr": "@hono/oauth-providers : le contrôle du state échoue en mode ouvert et permet un login CSRF"
+          },
+          "body_html": {
+            "es": "<p>El check anti-CSRF trataba <strong>dos valores ausentes como coincidencia</strong>: un callback sin <code>state</code>, para el que nunca se guardó ningún <code>state</code>, podía canjear el authorization code. Afecta a los providers <code>google</code>, <code>github</code>, <code>facebook</code>, <code>discord</code>, <code>twitch</code>, <code>linkedin</code> y <code>msentra</code>; <code>x</code> se salva por el binding PKCE. El middleware <code>csrf()</code> de Hono no te cubre: solo inspecciona requests tipo formulario, y el callback OAuth es un <code>GET</code> de navegación que considera seguro. Resultado: login CSRF y account linking forzado. Parcheado en <code>0.8.6</code>.</p>",
+            "en": "<p>The anti-CSRF check treated <strong>two absent values as a match</strong>: a callback that omits <code>state</code>, and for which no <code>state</code> was ever stored, could redeem the authorization code. Affects the <code>google</code>, <code>github</code>, <code>facebook</code>, <code>discord</code>, <code>twitch</code>, <code>linkedin</code> and <code>msentra</code> providers; <code>x</code> escapes thanks to PKCE binding. Hono's <code>csrf()</code> middleware does not save you — it only inspects form-style requests, and the OAuth callback is a top-level <code>GET</code> it treats as safe. Outcome: login CSRF and forced account linking. Fixed in <code>0.8.6</code>.</p>",
+            "fr": "<p>Le contrôle anti-CSRF considérait <strong>deux valeurs absentes comme identiques</strong> : un callback sans <code>state</code>, pour lequel aucun <code>state</code> n'avait été stocké, pouvait échanger le code d'autorisation. Concerne <code>google</code>, <code>github</code>, <code>facebook</code>, <code>discord</code>, <code>twitch</code>, <code>linkedin</code> et <code>msentra</code>. Le middleware <code>csrf()</code> de Hono n'aide pas : le callback OAuth est un <code>GET</code> de navigation jugé sûr. Corrigé en <code>0.8.6</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-fm3f-ch8h-qw8q", "label": "github.com/advisories" }
+        },
+        {
+          "id": "engineio-webtransport-dos",
+          "tag": "security",
+          "date": "31 Aug 2026",
+          "title": {
+            "es": "Engine.IO: un session ID llamado __proto__ tumba el proceso Node (CVSS 7.5)",
+            "en": "Engine.IO: a session ID called __proto__ takes down the Node process (CVSS 7.5)",
+            "fr": "Engine.IO : un session ID nommé __proto__ tue le processus Node (CVSS 7.5)"
+          },
+          "body_html": {
+            "es": "<p>Con <strong>WebTransport habilitado</strong>, un cliente no autenticado manda un upgrade con un session ID elegido a mano — por ejemplo <code>__proto__</code> — y el lookup resuelve a una propiedad heredada del prototipo en vez de a un cliente real. El <code>TypeError</code> ocurre en contexto asíncrono, así que termina en unhandled rejection y mata el proceso. Bajo un supervisor, esto es un crash loop. Afecta <code>engine.io &gt;= 6.5.0 &lt; 6.6.7</code>; WebTransport no viene activado por defecto, pero si lo prendiste, actualizá a <code>6.6.7</code>.</p>",
+            "en": "<p>With <strong>WebTransport enabled</strong>, an unauthenticated client sends an upgrade carrying a hand-picked session ID — <code>__proto__</code>, say — and the lookup resolves to an inherited prototype property instead of a real client. The <code>TypeError</code> fires in an async context, becomes an unhandled rejection and terminates the process. Under a supervisor that is a crash loop. Affects <code>engine.io &gt;= 6.5.0 &lt; 6.6.7</code>; WebTransport is off by default, but if you turned it on, go to <code>6.6.7</code>.</p>",
+            "fr": "<p>Avec <strong>WebTransport activé</strong>, un client non authentifié envoie un upgrade avec un session ID choisi — <code>__proto__</code> par exemple — et la recherche résout une propriété héritée du prototype. Le <code>TypeError</code> survient en contexte asynchrone, devient une unhandled rejection et tue le processus. Concerne <code>engine.io &gt;= 6.5.0 &lt; 6.6.7</code> ; correctif en <code>6.6.7</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-gr94-w7qr-f4j3", "label": "github.com/advisories" }
+        },
+        {
+          "id": "pangolin-auth-bypass",
+          "tag": "breaking",
+          "date": "31 Aug 2026",
+          "title": {
+            "es": "Pangolin: un solo share link autentica contra cualquier recurso de cualquier organización",
+            "en": "Pangolin: one share link authenticates against any resource in any organization",
+            "fr": "Pangolin : un seul lien de partage authentifie contre n'importe quelle ressource"
+          },
+          "body_html": {
+            "es": "<p>El endpoint de autenticación por share link acepta un parámetro de URL controlado por el atacante y <strong>omite el identificador de recurso</strong> en la verificación del token. Con un único share link válido de cualquier recurso, un atacante autentica contra recursos arbitrarios cruzando organizaciones, salteando SSO, passwords de recurso, PIN, allowlists de email y header auth. Arreglado en <code>1.22.0</code>. Si usás Pangolin como reverse proxy de tus servicios internos, esto es puerta abierta.</p>",
+            "en": "<p>The share-link authentication endpoint accepts an attacker-controlled URL parameter and <strong>omits the resource identifier</strong> from token verification. Holding a single valid share link for any resource lets an attacker authenticate against arbitrary resources across organizations, bypassing SSO, resource passwords, PIN codes, email allowlists and header auth. Fixed in <code>1.22.0</code>. If Pangolin fronts your internal services, this is an open door.</p>",
+            "fr": "<p>Le endpoint d'authentification par lien de partage accepte un paramètre d'URL contrôlé par l'attaquant et <strong>omet l'identifiant de ressource</strong> lors de la vérification du token. Un seul lien valide suffit pour s'authentifier contre des ressources arbitraires, toutes organisations confondues, en contournant SSO, mots de passe, PIN, allowlists et header auth. Corrigé en <code>1.22.0</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-gqgf-x763-r89w", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "workerd-20260901",
+      "updates": [
+        {
+          "id": "workerd-20260901",
+          "tag": "minor",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "workerd v1.20260901.1: el runtime de Workers mantiene el build diario",
+            "en": "workerd v1.20260901.1: the Workers runtime keeps its daily build",
+            "fr": "workerd v1.20260901.1 : le runtime Workers garde sa build quotidienne"
+          },
+          "body_html": {
+            "es": "<p>Nueva build diaria del runtime open source detrás de Cloudflare Workers. Si fijás <code>compatibility_date</code> en <code>wrangler.jsonc</code> — y deberías — este es el tag que marca qué comportamiento vas a tener en producción. Nada rompe, pero conviene ver el diff antes de mover la fecha.</p>",
+            "en": "<p>Another daily build of the open source runtime behind Cloudflare Workers. If you pin <code>compatibility_date</code> in <code>wrangler.jsonc</code> — and you should — this tag is what defines the behavior you get in production. Nothing breaks, but read the diff before moving the date.</p>",
+            "fr": "<p>Nouvelle build quotidienne du runtime open source derrière Cloudflare Workers. Si vous figez <code>compatibility_date</code> dans <code>wrangler.jsonc</code>, ce tag définit le comportement en production. Rien ne casse, mais lisez le diff avant de déplacer la date.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workerd/releases/tag/v1.20260901.1", "label": "github.com/cloudflare" }
+        },
+        {
+          "id": "decode-uri-component-dos",
+          "tag": "notable",
+          "date": "31 Aug 2026",
+          "title": {
+            "es": "decode-uri-component: denial of service por decodificación exponencial",
+            "en": "decode-uri-component: denial of service via exponential decoding",
+            "fr": "decode-uri-component : déni de service par décodage exponentiel"
+          },
+          "body_html": {
+            "es": "<p>Input percent-encoded malformado dispara decodificación exponencial en un paquete que casi nadie instala a propósito pero que <strong>arrastra medio ecosistema</strong> como dependencia transitiva (query-string, y de ahí para arriba). Severidad media, pero revisá tu <code>pnpm why decode-uri-component</code>: probablemente lo tengas en el path de parseo de querystrings de tu API.</p>",
+            "en": "<p>Malformed percent-encoded input triggers exponential decoding in a package almost nobody installs on purpose but that <strong>half the ecosystem pulls in</strong> transitively (query-string, and upward from there). Medium severity, but run <code>pnpm why decode-uri-component</code>: odds are it sits in your API's querystring parsing path.</p>",
+            "fr": "<p>Une entrée percent-encoded malformée déclenche un décodage exponentiel dans un paquet que presque personne n'installe volontairement mais que <strong>la moitié de l'écosystème</strong> tire en transitif (query-string). Sévérité moyenne, mais vérifiez <code>pnpm why decode-uri-component</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-vcc3-ghjq-m6fr", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "nextjs-1634",
+      "updates": [
+        {
+          "id": "nextjs-1634",
+          "tag": "patch",
+          "date": "31 Aug 2026",
+          "title": {
+            "es": "Next.js 16.3.4 y 15.5.25: vuelve AVIF y se arregla la recursión infinita en testmode",
+            "en": "Next.js 16.3.4 and 15.5.25: AVIF returns and testmode's infinite recursion is fixed",
+            "fr": "Next.js 16.3.4 et 15.5.25 : AVIF revient et la récursion infinie de testmode est corrigée"
+          },
+          "body_html": {
+            "es": "<p>Release de seguimiento a la 16.3.3 que <strong>reactiva la optimización de imágenes AVIF</strong>. Backports: recursión infinita en el passthrough fetch de testmode, error de build al aliasear typescript a <code>@typescript/typescript6</code>, y <code>crossOrigin</code> sin setear en los manifests de Turbopack. La línea 15 recibe el mismo tratamiento en <code>15.5.25</code>. Parche puro, sin features.</p>",
+            "en": "<p>Follow-up to 16.3.3 that <strong>re-enables AVIF image optimization</strong>. Backports: infinite recursion in the testmode passthrough fetch, a build error when aliasing typescript to <code>@typescript/typescript6</code>, and unset <code>crossOrigin</code> in Turbopack manifests. The 15 line gets the same treatment in <code>15.5.25</code>. Pure patch, no features.</p>",
+            "fr": "<p>Release de suivi de la 16.3.3 qui <strong>réactive l'optimisation d'images AVIF</strong>. Backports : récursion infinie dans le passthrough fetch de testmode, erreur de build lors de l'alias typescript vers <code>@typescript/typescript6</code>, et <code>crossOrigin</code> non défini dans les manifests Turbopack. La ligne 15 reçoit le même traitement en <code>15.5.25</code>.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/next.js/releases/tag/v16.3.4", "label": "github.com/vercel" }
+        },
+        {
+          "id": "vitest-5-rc4",
+          "tag": "beta",
+          "date": "31 Aug 2026",
+          "title": {
+            "es": "Vitest 5.0.0-rc.4: vitest list ahora parsea archivos estáticamente",
+            "en": "Vitest 5.0.0-rc.4: vitest list now parses files statically",
+            "fr": "Vitest 5.0.0-rc.4 : vitest list parse désormais les fichiers statiquement"
+          },
+          "body_html": {
+            "es": "<p>Breaking change en la RC: <code>vitest list</code> pasa a <strong>parseo estático por defecto</strong>, así que ya no ejecuta tu archivo para enumerar tests — más rápido, pero si generás tests dinámicamente en runtime van a desaparecer del listado. Además <code>clearCache</code> sale de experimental, <code>--maxWorkers</code> se propaga a los proyectos del monorepo, y el formateo de fallos de spy matchers pasa a ser lazy.</p>",
+            "en": "<p>Breaking change in the RC: <code>vitest list</code> moves to <strong>static parsing by default</strong>, so it no longer executes your file to enumerate tests — faster, but tests you generate dynamically at runtime vanish from the listing. Also: <code>clearCache</code> leaves experimental, <code>--maxWorkers</code> propagates to monorepo projects, and spy matcher failure formatting goes lazy.</p>",
+            "fr": "<p>Breaking change dans la RC : <code>vitest list</code> passe au <strong>parsing statique par défaut</strong> et n'exécute plus votre fichier pour énumérer les tests — plus rapide, mais les tests générés dynamiquement disparaissent du listing. Aussi : <code>clearCache</code> sort de l'expérimental et <code>--maxWorkers</code> se propage aux projets du monorepo.</p>"
+          },
+          "source": { "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.0.0-rc.4", "label": "github.com/vitest-dev" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "documentdb-8-upgrade",
+      "updates": [
+        {
+          "id": "documentdb-8-upgrade",
+          "tag": "release",
+          "date": "31 Aug 2026",
+          "title": {
+            "es": "DocumentDB: upgrade directo de 3.6 y 4.0 a 8.0, sin escalas",
+            "en": "DocumentDB: direct major version upgrade from 3.6 and 4.0 to 8.0",
+            "fr": "DocumentDB : montée de version directe de 3.6 et 4.0 vers 8.0"
+          },
+          "body_html": {
+            "es": "<p>AWS elimina los saltos intermedios: si tenés un cluster viejo en 3.6 o 4.0 podés ir <strong>directo a 8.0</strong> preservando datos, configuración y settings del cluster. Menos ventanas de mantenimiento encadenadas y menos riesgo acumulado por migración escalonada. Si venías postergando el upgrade porque el camino era de tres etapas, ya no tenés excusa.</p>",
+            "en": "<p>AWS removes the intermediate hops: an old 3.6 or 4.0 cluster can go <strong>straight to 8.0</strong> while preserving data, configuration and cluster settings. Fewer chained maintenance windows and less risk accumulated across a staged migration. If you were postponing the upgrade because the path had three legs, that excuse is gone.</p>",
+            "fr": "<p>AWS supprime les étapes intermédiaires : un ancien cluster 3.6 ou 4.0 peut passer <strong>directement en 8.0</strong> en préservant données, configuration et paramètres du cluster. Moins de fenêtres de maintenance enchaînées et moins de risque cumulé.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/documentdb-major-version-upgrade-8-0/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "redshift-iceberg-v3",
+          "tag": "notable",
+          "date": "31 Aug 2026",
+          "title": {
+            "es": "Redshift soporta Apache Iceberg v3: deletion vectors y row lineage",
+            "en": "Redshift supports Apache Iceberg v3: deletion vectors and row lineage",
+            "fr": "Redshift supporte Apache Iceberg v3 : deletion vectors et row lineage"
+          },
+          "body_html": {
+            "es": "<p>Llegan las tres piezas que faltaban para CDC serio sobre lakehouse: <strong>valores por defecto en columnas</strong>, <strong>row lineage</strong> y <strong>deletion vectors</strong>. Los deletion vectors son lo importante: los deletes dejan de reescribir archivos de datos completos, así que los flujos de update sobre tablas grandes bajan de costo y latencia de forma notable.</p>",
+            "en": "<p>The three missing pieces for serious CDC over a lakehouse land: <strong>column default values</strong>, <strong>row lineage</strong> and <strong>deletion vectors</strong>. Deletion vectors are the real story — deletes stop rewriting whole data files, so update workflows over large tables drop meaningfully in cost and latency.</p>",
+            "fr": "<p>Les trois pièces manquantes pour un vrai CDC sur lakehouse arrivent : <strong>valeurs par défaut de colonnes</strong>, <strong>row lineage</strong> et <strong>deletion vectors</strong>. Les deletion vectors sont l'essentiel : les suppressions ne réécrivent plus des fichiers de données entiers.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/amazon-redshift-supports-apache-iceberg-v3", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "aws-agent-registry-ga",
+      "updates": [
+        {
+          "id": "aws-agent-registry-ga",
+          "tag": "ga",
+          "date": "31 Aug 2026",
+          "title": {
+            "es": "AWS Agent Registry en GA: gobernanza privada de agentes y tools",
+            "en": "AWS Agent Registry hits GA: private governance for agents and tools",
+            "fr": "AWS Agent Registry en GA : gouvernance privée des agents et outils"
+          },
+          "body_html": {
+            "es": "<p>Registro privado para agentes y tools, con provisioning por <strong>CloudFormation y Terraform</strong> y compartición cross-account vía AWS RAM. Lo interesante no es el hype de agentes: es que por fin tratás los agentes como artefactos versionados con IaC y control de acceso, en vez de scripts sueltos en la cuenta de alguien. Eso es lo que hace que esto sobreviva a una auditoría.</p>",
+            "en": "<p>A private registry for agents and tools, provisioned through <strong>CloudFormation and Terraform</strong> and shared cross-account via AWS RAM. The interesting part is not the agent hype: it is that agents finally become versioned artifacts under IaC and access control, rather than loose scripts in somebody's account. That is what survives an audit.</p>",
+            "fr": "<p>Un registre privé pour agents et outils, provisionné via <strong>CloudFormation et Terraform</strong> et partagé cross-account avec AWS RAM. L'essentiel n'est pas le hype : les agents deviennent enfin des artefacts versionnés sous IaC et contrôle d'accès.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/aws-agent-registry-generally-available", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "aurora-serverless-perf",
+          "tag": "notable",
+          "date": "31 Aug 2026",
+          "title": {
+            "es": "Aurora Serverless: +30% de performance llega a cinco regiones más",
+            "en": "Aurora Serverless: up to 30% better performance reaches five more regions",
+            "fr": "Aurora Serverless : jusqu'à 30% de performance en plus dans cinq régions de plus"
+          },
+          "body_html": {
+            "es": "<p>Las mejoras de performance y escalado de Aurora Serverless para PostgreSQL y MySQL se expanden a cinco regiones adicionales. Hasta <strong>30% mejor performance</strong> sin cambiar nada de tu lado — pero verificá que tu región esté en la lista antes de rehacer tus benchmarks de capacity planning.</p>",
+            "en": "<p>Aurora Serverless performance and scaling improvements for PostgreSQL and MySQL expand to five additional regions. Up to <strong>30% better performance</strong> with no change on your side — but confirm your region is on the list before you redo your capacity planning benchmarks.</p>",
+            "fr": "<p>Les améliorations de performance et de scaling d'Aurora Serverless pour PostgreSQL et MySQL s'étendent à cinq régions supplémentaires. Jusqu'à <strong>30% de performance en plus</strong> sans changement de votre côté.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/amazon-aurora-serverless-performance-improvement-additional-regions/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "dokploy-path-traversal",
+          "tag": "security",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "Dokploy ≤ 0.29.7: path traversal remoto en la config de Traefik (CVSS 9.9)",
+            "en": "Dokploy ≤ 0.29.7: remote path traversal in the Traefik config writer (CVSS 9.9)",
+            "fr": "Dokploy ≤ 0.29.7 : path traversal distant dans l'écriture de config Traefik (CVSS 9.9)"
+          },
+          "body_html": {
+            "es": "<p>La función <code>writeTraefikConfigInPath</code> en <code>packages/server/src/utils/traefik/application.ts</code> deja manipular el argumento <code>path</code>: <strong>path traversal explotable remotamente</strong> en el PaaS self-hosted que mucha gente usa como alternativa a Vercel. El exploit ya es público y, según el reporte, <strong>el vendor no respondió</strong> al contacto previo. No hay versión parcheada anunciada: si tenés un panel de Dokploy accesible, cerralo detrás de red privada ahora.</p>",
+            "en": "<p>The <code>writeTraefikConfigInPath</code> function in <code>packages/server/src/utils/traefik/application.ts</code> lets the <code>path</code> argument be manipulated: <strong>remotely exploitable path traversal</strong> in the self-hosted PaaS many people run as a Vercel alternative. The exploit is public and, per the report, <strong>the vendor did not respond</strong> to prior contact. No patched version announced — if your Dokploy panel is reachable, put it behind a private network now.</p>",
+            "fr": "<p>La fonction <code>writeTraefikConfigInPath</code> dans <code>packages/server/src/utils/traefik/application.ts</code> permet de manipuler l'argument <code>path</code> : <strong>path traversal exploitable à distance</strong> dans ce PaaS self-hosted. L'exploit est public et le vendeur n'a pas répondu. Aucune version corrigée annoncée.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-mqx4-45wh-4j76", "label": "github.com/advisories" }
+        },
+        {
+          "id": "devtron-api-token",
+          "tag": "security",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "Devtron ≤ 2.2.0: sin chequeo de autorización en GET /orchestrator/api-token",
+            "en": "Devtron ≤ 2.2.0: no authorization check on GET /orchestrator/api-token",
+            "fr": "Devtron ≤ 2.2.0 : aucun contrôle d'autorisation sur GET /orchestrator/api-token"
+          },
+          "body_html": {
+            "es": "<p>La plataforma de CD sobre Kubernetes <strong>no aplica chequeos de autorización</strong> en el endpoint de API tokens (CVSS 8.8). Un usuario con acceso mínimo lista tokens que le permiten escalar dentro del orchestrator — y desde ahí, sobre tus deployments. Regla de siempre: todo endpoint que devuelve credenciales necesita autorización explícita, no solo autenticación.</p>",
+            "en": "<p>The Kubernetes CD platform <strong>fails to enforce authorization checks</strong> on the API token endpoint (CVSS 8.8). A minimally privileged user can list tokens that escalate inside the orchestrator — and from there, over your deployments. The standing rule: every endpoint returning credentials needs explicit authorization, not just authentication.</p>",
+            "fr": "<p>La plateforme CD pour Kubernetes <strong>n'applique pas de contrôle d'autorisation</strong> sur le endpoint des API tokens (CVSS 8.8). Un utilisateur peu privilégié peut lister des tokens permettant une escalade dans l'orchestrator.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-mrqp-7v92-wchj", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "doordash-flux",
+      "updates": [
+        {
+          "id": "doordash-flux",
+          "tag": "notable",
+          "date": "31 Aug 2026",
+          "title": {
+            "es": "DoorDash corre 130.000 tareas de ingeniería al mes en microVMs aisladas",
+            "en": "DoorDash runs 130,000 engineering tasks a month inside isolated microVMs",
+            "fr": "DoorDash exécute 130 000 tâches d'ingénierie par mois dans des microVMs isolées"
+          },
+          "body_html": {
+            "es": "<p>DoorDash movió sus cargas de agentes a Flux: <strong>130.000 tareas mensuales</strong> y más de 25.000 code reviews por semana, cada una en una <strong>microVM aislada</strong> con auditoría centralizada. Lo que hay que copiar no es el número, es el diseño: aislamiento fuerte por tarea y un único punto de auditoría. Si vas a dejar que algo escriba código en tu repo, esa es la línea base de arquitectura — no un contenedor compartido con tu CI y las credenciales colgando.</p>",
+            "en": "<p>DoorDash moved its agent workloads onto Flux: <strong>130,000 tasks a month</strong> and 25,000+ code reviews a week, each in an <strong>isolated microVM</strong> with centralized auditing. The number is not the lesson — the design is: hard per-task isolation plus a single audit point. If you are going to let something write code in your repo, that is the architectural baseline, not a shared container next to your CI with credentials hanging off it.</p>",
+            "fr": "<p>DoorDash a déplacé ses charges d'agents sur Flux : <strong>130 000 tâches par mois</strong> et plus de 25 000 code reviews par semaine, chacune dans une <strong>microVM isolée</strong> avec audit centralisé. La leçon n'est pas le chiffre mais le design : isolation forte par tâche et point d'audit unique.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/08/doordash-flux-cloud-agent/", "label": "infoq.com" }
+        },
+        {
+          "id": "otel-js-211",
+          "tag": "release",
+          "date": "31 Aug 2026",
+          "title": {
+            "es": "OpenTelemetry JS 2.11.0: attach() delega en AsyncLocalStorage.withScope()",
+            "en": "OpenTelemetry JS 2.11.0: attach() delegates to AsyncLocalStorage.withScope()",
+            "fr": "OpenTelemetry JS 2.11.0 : attach() délègue à AsyncLocalStorage.withScope()"
+          },
+          "body_html": {
+            "es": "<p><code>AsyncLocalStorageContextManager</code> implementa <code>attach()</code>: en <strong>Node.js 25.9+</strong> delega en <code>AsyncLocalStorage.withScope()</code> nativo devolviendo un <code>RunScope</code>, y en versiones viejas cae a <code>enterWith()</code> con un wrapper disposable manual. Se acabó el context leaking artesanal en propagación de traces. Suman timeout de force flush configurable por llamada y se ignora <code>Infinity</code> en histogramas exponenciales.</p>",
+            "en": "<p><code>AsyncLocalStorageContextManager</code> implements <code>attach()</code>: on <strong>Node.js 25.9+</strong> it delegates to native <code>AsyncLocalStorage.withScope()</code> returning a <code>RunScope</code>, falling back to <code>enterWith()</code> with a manual disposable wrapper on older versions. Hand-rolled context leaking in trace propagation is over. Also: per-call force flush timeout, and <code>Infinity</code> is now ignored in exponential histograms.</p>",
+            "fr": "<p><code>AsyncLocalStorageContextManager</code> implémente <code>attach()</code> : sur <strong>Node.js 25.9+</strong> il délègue au <code>AsyncLocalStorage.withScope()</code> natif en renvoyant un <code>RunScope</code>, avec repli sur <code>enterWith()</code> sur les versions plus anciennes. S'ajoutent un timeout de force flush par appel et l'ignorance de <code>Infinity</code> dans les histogrammes exponentiels.</p>"
+          },
+          "source": { "url": "https://github.com/open-telemetry/opentelemetry-js/releases/tag/v2.11.0", "label": "github.com/open-telemetry" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "nx-232-rc",
+      "updates": [
+        {
+          "id": "nx-232-rc",
+          "tag": "beta",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "Nx 23.2.0-rc.1: la 23.2 entra en release candidate",
+            "en": "Nx 23.2.0-rc.1: the 23.2 line enters release candidate",
+            "fr": "Nx 23.2.0-rc.1 : la ligne 23.2 passe en release candidate"
+          },
+          "body_html": {
+            "es": "<p>Nx pasó de <code>23.2.0-beta.12</code> a <code>rc.0</code> y <code>rc.1</code> en menos de doce horas. Si mantenés un monorepo grande, este es el momento de probar la RC en una rama: el ciclo beta ya se cerró y los cambios de acá al GA van a ser mínimos, así que los problemas de migración que encuentres ahora todavía llegan a tiempo.</p>",
+            "en": "<p>Nx went from <code>23.2.0-beta.12</code> to <code>rc.0</code> and <code>rc.1</code> in under twelve hours. If you maintain a large monorepo, now is the moment to try the RC on a branch: the beta cycle is closed and changes between here and GA will be minimal, so migration problems you find now still land in time.</p>",
+            "fr": "<p>Nx est passé de <code>23.2.0-beta.12</code> à <code>rc.0</code> puis <code>rc.1</code> en moins de douze heures. Si vous maintenez un gros monorepo, c'est le moment de tester la RC sur une branche : le cycle beta est clos et les changements d'ici la GA seront minimes.</p>"
+          },
+          "source": { "url": "https://github.com/nrwl/nx/releases/tag/23.2.0-rc.1", "label": "github.com/nrwl" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Tres advisories de hoy — Hono OAuth, Pangolin y Devtron — son el mismo bug conceptual: un chequeo de autorización que falla abierto porque el valor esperado estaba ausente en vez de ser inválido. Ausente nunca debe ser igual a válido.",
+      "en": "Three of today's advisories — Hono OAuth, Pangolin and Devtron — are the same conceptual bug: an authorization check that fails open because the expected value was absent rather than invalid. Absent must never equal valid.",
+      "fr": "Trois advisories du jour — Hono OAuth, Pangolin et Devtron — sont le même bug conceptuel : un contrôle d'autorisation qui échoue en mode ouvert parce que la valeur attendue était absente plutôt qu'invalide."
+    },
+    {
+      "es": "Valkey y Engine.IO comparten patrón de explotación: estado de proceso global que sobrevive al objeto que lo respaldaba. Un puntero cacheado a un intérprete Lua liberado y un lookup de session ID que resuelve al prototipo terminan en el mismo lugar — proceso caído sin autenticación.",
+      "en": "Valkey and Engine.IO share an exploitation pattern: process-global state that outlives the object backing it. A cached pointer to a freed Lua interpreter and a session ID lookup resolving to the prototype end up in the same place — an unauthenticated process crash.",
+      "fr": "Valkey et Engine.IO partagent le même schéma d'exploitation : un état global au processus qui survit à l'objet qui le portait. Un pointeur caché vers un interpréteur Lua libéré et une recherche de session ID résolvant vers le prototype aboutissent au même résultat."
+    },
+    {
+      "es": "La infraestructura self-hosted de deploy — Dokploy, Pangolin, Devtron — concentra los CVSS más altos de la jornada. Elegir alternativas open source a Vercel o Heroku te ahorra factura, pero te transfiere el trabajo de parcheo y de exposición de red. Ese trabajo no es opcional.",
+      "en": "Self-hosted deployment infrastructure — Dokploy, Pangolin, Devtron — carries today's highest CVSS scores. Picking open source alternatives to Vercel or Heroku saves you the bill but transfers the patching and network-exposure work to you. That work is not optional.",
+      "fr": "L'infrastructure de déploiement self-hosted — Dokploy, Pangolin, Devtron — concentre les CVSS les plus élevés du jour. Choisir des alternatives open source à Vercel ou Heroku réduit la facture mais vous transfère le travail de patch et d'exposition réseau."
+    }
+  ]
+}

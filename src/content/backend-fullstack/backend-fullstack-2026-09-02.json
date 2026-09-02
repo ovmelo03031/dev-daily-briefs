@@ -1,0 +1,456 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 2 de septiembre de 2026",
+    "en": "Backend & Fullstack — September 2, 2026",
+    "fr": "Backend & Fullstack — 2 septembre 2026"
+  },
+  "description": {
+    "es": "pnpm filtra tu NPM_TOKEN con solo clonar un repo, mysql2 manda la password en texto plano, nanoid rompe el CSPRNG del proceso y gRPC-Go se queda sin memoria con frames HTTP/2 de 1 byte.",
+    "en": "pnpm leaks your NPM_TOKEN from a mere clone, mysql2 sends the password in plaintext, nanoid corrupts the process CSPRNG, and gRPC-Go runs out of memory on 1-byte HTTP/2 frames.",
+    "fr": "pnpm fuit votre NPM_TOKEN au simple clonage, mysql2 envoie le mot de passe en clair, nanoid corrompt le CSPRNG du processus et gRPC-Go sature la mémoire avec des frames HTTP/2 d'un octet."
+  },
+  "pubDate": "2026-09-02",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "pnpm install filtra NPM_TOKEN a un proxy hostil",
+        "en": "pnpm install leaks NPM_TOKEN to a hostile proxy",
+        "fr": "pnpm install fuit NPM_TOKEN vers un proxy hostile"
+      },
+      "anchor": "pnpm-proxy-env-exfil",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "mysql2 manda la password en texto plano",
+        "en": "mysql2 sends the password in plaintext",
+        "fr": "mysql2 envoie le mot de passe en clair"
+      },
+      "anchor": "mysql2-clear-password",
+      "icon": "lucide:database"
+    },
+    {
+      "text": {
+        "es": "nanoid deja de ser aleatorio para siempre",
+        "en": "nanoid stops being random, permanently",
+        "fr": "nanoid cesse d'être aléatoire, définitivement"
+      },
+      "anchor": "nanoid-csprng-overflow",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "gRPC-Go: OOM con frames HTTP/2 de 1 byte",
+        "en": "gRPC-Go: OOM from 1-byte HTTP/2 frames",
+        "fr": "gRPC-Go : OOM via des frames HTTP/2 d'un octet"
+      },
+      "anchor": "grpc-go-frame-oom",
+      "icon": "lucide:server"
+    },
+    {
+      "text": {
+        "es": "Valkey 9.0.6 parchea un use-after-free en RDMA",
+        "en": "Valkey 9.0.6 patches an RDMA use-after-free",
+        "fr": "Valkey 9.0.6 corrige un use-after-free RDMA"
+      },
+      "anchor": "valkey-906-security",
+      "icon": "simple-icons:redis"
+    },
+    {
+      "text": {
+        "es": "Cloudflare habilita scopes OAuth opcionales",
+        "en": "Cloudflare ships optional OAuth scopes",
+        "fr": "Cloudflare livre des scopes OAuth optionnels"
+      },
+      "anchor": "cloudflare-optional-oauth-scopes",
+      "icon": "simple-icons:cloudflare"
+    },
+    {
+      "text": {
+        "es": "pnpm 12.2 resuelve catalogs vía workspace:",
+        "en": "pnpm 12.2 resolves catalogs through workspace:",
+        "fr": "pnpm 12.2 résout les catalogs via workspace:"
+      },
+      "anchor": "pnpm-12-2-0",
+      "icon": "lucide:package"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "pnpm-proxy-env-exfil",
+      "updates": [
+        {
+          "id": "pnpm-proxy-env-exfil",
+          "tag": "breaking",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "pnpm: clonar un repo hostil te roba el NPM_TOKEN",
+            "en": "pnpm: cloning a hostile repo steals your NPM_TOKEN",
+            "fr": "pnpm : cloner un dépôt hostile vole votre NPM_TOKEN"
+          },
+          "body_html": {
+            "es": "<p>pnpm expandía placeholders <code>${VAR}</code> en <code>httpProxy</code> / <code>httpsProxy</code> / <code>noProxy</code> leídos del <code>pnpm-workspace.yaml</code> del proyecto. Como ese manifiesto lo controla el repo, alcanza con clonar y correr <code>pnpm install</code> para que todo el tráfico salga por un proxy del atacante cuyo hostname o userinfo <strong>embebe y exfiltra</strong> tu <code>NPM_TOKEN</code> o <code>GITHUB_TOKEN</code>. Severidad alta (CVSS 7.4), parcheado en <code>11.11.0</code> y <code>10.34.5</code>. Ojo con esto en runners de CI: actualizá YA.</p>",
+            "en": "<p>pnpm expanded <code>${VAR}</code> placeholders in the <code>httpProxy</code> / <code>httpsProxy</code> / <code>noProxy</code> settings read from a project's <code>pnpm-workspace.yaml</code>. Since that manifest is repository-controlled, merely cloning and running <code>pnpm install</code> routes every install request through an attacker proxy whose hostname or userinfo <strong>embeds and exfiltrates</strong> an env secret such as <code>NPM_TOKEN</code> or <code>GITHUB_TOKEN</code>. High severity (CVSS 7.4), fixed in <code>11.11.0</code> and <code>10.34.5</code>.</p>",
+            "fr": "<p>pnpm développait les placeholders <code>${VAR}</code> dans <code>httpProxy</code> / <code>httpsProxy</code> / <code>noProxy</code> lus depuis le <code>pnpm-workspace.yaml</code> du projet. Ce manifeste étant contrôlé par le dépôt, il suffit de cloner et de lancer <code>pnpm install</code> pour router tout le trafic via un proxy attaquant dont le hostname ou le userinfo <strong>encapsule et exfiltre</strong> un secret comme <code>NPM_TOKEN</code> ou <code>GITHUB_TOKEN</code>. Sévérité haute (CVSS 7.4), corrigé en <code>11.11.0</code> et <code>10.34.5</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-vx52-2968-3vc6", "label": "github.com/advisories" }
+        },
+        {
+          "id": "mysql2-clear-password",
+          "tag": "security",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "mysql2: un servidor rogue te saca la password en texto plano",
+            "en": "mysql2: a rogue server pulls your password in plaintext",
+            "fr": "mysql2 : un serveur malveillant récupère le mot de passe en clair"
+          },
+          "body_html": {
+            "es": "<p>Un servidor MySQL rogue —o un MITM— manda un <code>AuthSwitchRequest</code> pidiendo <code>mysql_clear_password</code> y el driver obedece <strong>sin verificar que TLS esté activo</strong>. El plugin devuelve literalmente <code>password + '\\0'</code>. CVSS 8.2, arreglado en <code>mysql2 3.22.0</code>. Si tu connection string apunta a un host que no controlás al 100%, esto es crítico.</p>",
+            "en": "<p>A rogue MySQL server — or a MITM — sends an <code>AuthSwitchRequest</code> asking for <code>mysql_clear_password</code>, and the driver complies <strong>without checking that TLS is active</strong>. The plugin literally returns <code>password + '\\0'</code>. CVSS 8.2, fixed in <code>mysql2 3.22.0</code>.</p>",
+            "fr": "<p>Un serveur MySQL malveillant — ou un MITM — envoie un <code>AuthSwitchRequest</code> demandant <code>mysql_clear_password</code>, et le driver obéit <strong>sans vérifier que TLS est actif</strong>. Le plugin renvoie littéralement <code>password + '\\0'</code>. CVSS 8.2, corrigé dans <code>mysql2 3.22.0</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-3f6p-5ww8-9rcr", "label": "github.com/advisories" }
+        },
+        {
+          "id": "nanoid-csprng-overflow",
+          "tag": "security",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "nanoid: un integer overflow te deja los tokens en «uuuuuuuu»",
+            "en": "nanoid: an integer overflow leaves your tokens as «uuuuuuuu»",
+            "fr": "nanoid : un integer overflow réduit vos tokens à «uuuuuuuu»"
+          },
+          "body_html": {
+            "es": "<p>CVE-2026-73086. <code>nanoid(size)</code> hace <code>size |= 0</code>, así que con <code>size >= 2^31</code> el pool CSPRNG del proceso queda <strong>corrupto de forma permanente</strong> y todo ID posterior devuelve la cadena determinista <code>uuuuuuuuuuuuuuuuuuuuu</code>. Si el <code>size</code> viene de input de usuario, perdiste session tokens y CSRF tokens hasta reiniciar el proceso. Parcheado en <code>3.3.12</code> y <code>5.1.11</code>.</p>",
+            "en": "<p>CVE-2026-73086. <code>nanoid(size)</code> coerces with <code>size |= 0</code>, so a <code>size >= 2^31</code> <strong>permanently corrupts</strong> the process-wide CSPRNG pool and every later ID returns the deterministic string <code>uuuuuuuuuuuuuuuuuuuuu</code>. If <code>size</code> is user-influenced, session and CSRF tokens lose all randomness until restart. Fixed in <code>3.3.12</code> and <code>5.1.11</code>.</p>",
+            "fr": "<p>CVE-2026-73086. <code>nanoid(size)</code> applique <code>size |= 0</code> : avec <code>size >= 2^31</code>, le pool CSPRNG du processus est <strong>corrompu définitivement</strong> et chaque ID suivant renvoie la chaîne déterministe <code>uuuuuuuuuuuuuuuuuuuuu</code>. Si <code>size</code> dépend de l'utilisateur, les tokens de session et CSRF perdent tout aléa jusqu'au redémarrage. Corrigé en <code>3.3.12</code> et <code>5.1.11</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-xwg4-73v4-xw9w", "label": "github.com/advisories" }
+        },
+        {
+          "id": "grpc-go-frame-oom",
+          "tag": "security",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "gRPC-Go: millones de frames DATA de 1 byte y adiós heap",
+            "en": "gRPC-Go: millions of 1-byte DATA frames and the heap is gone",
+            "fr": "gRPC-Go : des millions de frames DATA d'un octet et le heap explose"
+          },
+          "body_html": {
+            "es": "<p>CVE-2026-84304, CVSS 8.7. Un atacante sin autenticar abre un stream y fragmenta el payload en millones de frames HTTP/2 <code>DATA</code> de 1 byte. Aunque el volumen total respete las ventanas de flow-control, cada fragmento arrastra estructuras de tracking y colas: multiplexando streams se llega al OOM. Afecta <code>&lt;= 1.83.0</code>, parcheado en <code>1.83.1</code>. Si tenés gateways gRPC expuestos, esto es prioridad.</p>",
+            "en": "<p>CVE-2026-84304, CVSS 8.7. An unauthenticated attacker opens a stream and fragments the payload into millions of 1-byte HTTP/2 <code>DATA</code> frames. Even when total volume stays within flow-control windows, each fragment carries tracking structures and queue allocations; multiplexing streams drives the runtime to OOM. Affects <code>&lt;= 1.83.0</code>, fixed in <code>1.83.1</code>.</p>",
+            "fr": "<p>CVE-2026-84304, CVSS 8.7. Un attaquant non authentifié ouvre un stream et fragmente le payload en millions de frames HTTP/2 <code>DATA</code> d'un octet. Même dans les fenêtres de flow-control, chaque fragment porte des structures de suivi et des allocations de queue ; le multiplexage mène à l'OOM. Affecte <code>&lt;= 1.83.0</code>, corrigé en <code>1.83.1</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-vp52-pcj8-j9qc", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "pnpm-pacquet-symlink",
+      "updates": [
+        {
+          "id": "pnpm-pacquet-symlink",
+          "tag": "security",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "pnpm: pacquet crea symlinks fuera del proyecto",
+            "en": "pnpm: pacquet creates symlinks outside the project",
+            "fr": "pnpm : pacquet crée des symlinks hors du projet"
+          },
+          "body_html": {
+            "es": "<p>Segundo advisory de pnpm en el mismo día (CVSS 7.1): un alias fabricado en el lockfile llega a varios joins de filesystem del install. Con <code>--trust-lockfile</code> o lockfile congelado, los segmentos de traversal creaban links fuera del proyecto o del <code>node_modules</code>. El parche valida nombres de dependencia y cada slot del virtual store antes de crear directorios, links, bins o entradas hoisted.</p>",
+            "en": "<p>pnpm's second advisory of the day (CVSS 7.1): a crafted lockfile alias reaches several install-time filesystem joins. With <code>--trust-lockfile</code> or a frozen lockfile, traversal segments could create links outside the project or <code>node_modules</code> boundary. The patch validates dependency names and every virtual-store slot before creating directories, links, bins, or hoisted entries.</p>",
+            "fr": "<p>Deuxième advisory pnpm du jour (CVSS 7.1) : un alias forgé dans le lockfile atteint plusieurs joins filesystem à l'install. Avec <code>--trust-lockfile</code> ou un lockfile figé, des segments de traversée créaient des liens hors du projet ou de <code>node_modules</code>. Le correctif valide les noms de dépendance et chaque slot du virtual store.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-2rx9-3g3h-c2jv", "label": "github.com/advisories" }
+        },
+        {
+          "id": "browserslist-cache-oom",
+          "tag": "security",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "Browserslist: cache sin eviction = OOM lento",
+            "en": "Browserslist: an unevicted cache means a slow OOM",
+            "fr": "Browserslist : un cache sans éviction, donc un OOM lent"
+          },
+          "body_html": {
+            "es": "<p>CVE-2026-73089, CVSS 7.5. Los objetos <code>cache</code> y <code>parseCache</code> de <code>index.js</code> crecen sin límite: cada query distinta agrega una entrada que nunca se libera. En un servicio de larga vida que compila con queries dinámicas, el heap sube hasta el OOM. Parcheado en <code>4.28.7</code>. Es un recordatorio clásico: un cache sin política de eviction es un memory leak con buen marketing.</p>",
+            "en": "<p>CVE-2026-73089, CVSS 7.5. The <code>cache</code> and <code>parseCache</code> objects in <code>index.js</code> grow without bound: every distinct query adds an entry that is never released. In a long-lived service compiling with dynamic queries, the heap climbs to OOM. Fixed in <code>4.28.7</code>. A cache with no eviction policy is a memory leak with good marketing.</p>",
+            "fr": "<p>CVE-2026-73089, CVSS 7.5. Les objets <code>cache</code> et <code>parseCache</code> de <code>index.js</code> croissent sans limite : chaque requête distincte ajoute une entrée jamais libérée. Dans un service longue durée compilant avec des requêtes dynamiques, le heap monte jusqu'à l'OOM. Corrigé en <code>4.28.7</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-c83g-rgw3-j3cx", "label": "github.com/advisories" }
+        },
+        {
+          "id": "grafana-13-2-1",
+          "tag": "patch",
+          "date": "02 Sep 2026",
+          "title": {
+            "es": "Grafana saca patches de seguridad en cuatro ramas a la vez",
+            "en": "Grafana ships security patches across four branches at once",
+            "fr": "Grafana publie des correctifs de sécurité sur quatre branches"
+          },
+          "body_html": {
+            "es": "<p>Grafana publicó <code>13.2.1</code>, <code>13.1.5</code>, <code>13.0.8</code> y <code>12.4.10</code> el mismo día, todas con fixes para <strong>CVE-2026-12704</strong> y <strong>CVE-2026-14199</strong>. Cuando un proyecto backportea a cuatro ramas en simultáneo, no es un patch de rutina: planificá la ventana de upgrade de tu stack de observabilidad.</p>",
+            "en": "<p>Grafana shipped <code>13.2.1</code>, <code>13.1.5</code>, <code>13.0.8</code>, and <code>12.4.10</code> on the same day, all carrying fixes for <strong>CVE-2026-12704</strong> and <strong>CVE-2026-14199</strong>. A simultaneous four-branch backport is not routine maintenance: plan the upgrade window for your observability stack.</p>",
+            "fr": "<p>Grafana a publié <code>13.2.1</code>, <code>13.1.5</code>, <code>13.0.8</code> et <code>12.4.10</code> le même jour, toutes avec des correctifs pour <strong>CVE-2026-12704</strong> et <strong>CVE-2026-14199</strong>. Un backport simultané sur quatre branches n'est pas de la maintenance de routine.</p>"
+          },
+          "source": { "url": "https://github.com/grafana/grafana/releases/tag/v13.2.1", "label": "github.com/grafana" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "valkey-906-security",
+      "updates": [
+        {
+          "id": "valkey-906-security",
+          "tag": "security",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "Valkey 9.0.6: use-after-free en RDMA y un bypass de ACL en GEORADIUS",
+            "en": "Valkey 9.0.6: an RDMA use-after-free and a GEORADIUS ACL bypass",
+            "fr": "Valkey 9.0.6 : use-after-free RDMA et contournement d'ACL GEORADIUS"
+          },
+          "body_html": {
+            "es": "<p>Release marcada <strong>SECURITY</strong>. GHSA-jcj7-v34w-v9vv: un cliente autenticado podía crashear el server con <code>CLIENT KILL</code> vía use-after-free en el manejo de conexiones RDMA (solo builds con <code>USE_RDMA</code> y listener RDMA). Encima viene un bypass de ACL en <code>GEORADIUS</code>/<code>GEORADIUSBYMEMBER</code> donde los <code>STORE</code> duplicados solo chequeaban la primera key destino, y ahora el RDB load y <code>RESTORE</code> validan payloads en profundidad siempre (<code>sanitize-dump-payload</code> queda como no-op deprecado).</p>",
+            "en": "<p>Release flagged <strong>SECURITY</strong>. GHSA-jcj7-v34w-v9vv: an authenticated client could crash the server via <code>CLIENT KILL</code> through a use-after-free in RDMA connection handling (only builds with <code>USE_RDMA</code> and an RDMA listener). It also fixes an ACL bypass in <code>GEORADIUS</code>/<code>GEORADIUSBYMEMBER</code> where duplicate <code>STORE</code> options checked only the first destination key, and RDB load and <code>RESTORE</code> now always deep-validate payloads (<code>sanitize-dump-payload</code> becomes a deprecated no-op).</p>",
+            "fr": "<p>Release marquée <strong>SECURITY</strong>. GHSA-jcj7-v34w-v9vv : un client authentifié pouvait crasher le serveur via <code>CLIENT KILL</code> grâce à un use-after-free dans la gestion des connexions RDMA (uniquement builds <code>USE_RDMA</code> avec listener RDMA). S'y ajoute un contournement d'ACL sur <code>GEORADIUS</code>/<code>GEORADIUSBYMEMBER</code> où les options <code>STORE</code> dupliquées ne vérifiaient que la première clé de destination.</p>"
+          },
+          "source": { "url": "https://github.com/valkey-io/valkey/releases/tag/9.0.6", "label": "github.com/valkey-io" }
+        },
+        {
+          "id": "cloudwatch-db-insights-postgres",
+          "tag": "ga",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "CloudWatch Database Insights ahora ve tu PostgreSQL self-managed",
+            "en": "CloudWatch Database Insights now sees your self-managed PostgreSQL",
+            "fr": "CloudWatch Database Insights voit désormais votre PostgreSQL auto-géré"
+          },
+          "body_html": {
+            "es": "<p>AWS extendió Database Insights a PostgreSQL self-managed corriendo en EC2, vía el CloudWatch agent. Ahora ves RDS, Aurora y tus instancias propias en la misma consola: database load, análisis de wait events, estadísticas a nivel query y métricas de host. Disponible en todas las regiones comerciales. Si tenías dos herramientas de monitoreo porque la mitad de la flota no era managed, esto te unifica el workflow.</p>",
+            "en": "<p>AWS extended Database Insights to self-managed PostgreSQL on EC2 through the CloudWatch agent. RDS, Aurora, and your own instances now sit in one console: database load, wait event analysis, query-level statistics, and host metrics. Available in all commercial regions. If you ran two monitoring tools because half the fleet was unmanaged, this unifies the workflow.</p>",
+            "fr": "<p>AWS a étendu Database Insights à PostgreSQL auto-géré sur EC2 via l'agent CloudWatch. RDS, Aurora et vos propres instances dans une seule console : charge, analyse des wait events, statistiques par requête et métriques hôte. Disponible dans toutes les régions commerciales.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/database-insights-self-managed-postgresql/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "mwaa-airflow-331",
+          "tag": "release",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "MWAA soporta Airflow 3.3.1: tasks con estado durable y SDK en Java/Go",
+            "en": "MWAA supports Airflow 3.3.1: durable stateful tasks and a Java/Go SDK",
+            "fr": "MWAA supporte Airflow 3.3.1 : tâches à état durable et SDK Java/Go"
+          },
+          "body_html": {
+            "es": "<p>Lo importante de 3.3 son las <strong>stateful tasks</strong>: una task persiste estado durable entre retries y reruns, lo que habilita cursor tracking y reconexión crash-safe a operaciones en curso. Sumale el Language Task SDK experimental para escribir la lógica en Java o Go manteniendo la orquestación en Python, más particionado de assets ampliado, retry policies customizables y operaciones bulk sobre DAG runs. Se puede lanzar nuevo o upgradear desde 3.2+.</p>",
+            "en": "<p>The headline in 3.3 is <strong>stateful tasks</strong>: a task persists durable state across retries and reruns, enabling cursor tracking and crash-safe reconnection to in-flight operations. Add the experimental Language Task SDK for writing task logic in Java or Go while orchestration stays in Python, plus expanded asset partitioning, customizable retry policies, and bulk operations on DAG runs. Launch new or upgrade from 3.2+.</p>",
+            "fr": "<p>L'essentiel de 3.3 : les <strong>stateful tasks</strong>, qui persistent un état durable entre retries et reruns, permettant le suivi de curseur et la reconnexion crash-safe. S'ajoutent le Language Task SDK expérimental (Java ou Go, orchestration en Python), le partitionnement d'assets étendu, des retry policies personnalisables et des opérations bulk sur les DAG runs.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-mwaa-apache-airflow-3-3-1/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "bullmq-634",
+          "tag": "patch",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "BullMQ 6.3.4 actualiza croner a v4 por seguridad",
+            "en": "BullMQ 6.3.4 bumps croner to v4 for security",
+            "fr": "BullMQ 6.3.4 passe croner en v4 pour la sécurité"
+          },
+          "body_html": {
+            "es": "<p>Patch chiquito pero de dependencia: BullMQ sube el crate Rust <code>croner</code> a v4 por un fix de seguridad. Si tenés repeatable jobs con expresiones cron, es un bump de un renglón — hacelo y seguí.</p>",
+            "en": "<p>A small dependency patch: BullMQ moves the Rust <code>croner</code> crate to v4 for a security fix. If you run repeatable jobs on cron expressions, it is a one-line bump — take it and move on.</p>",
+            "fr": "<p>Petit patch de dépendance : BullMQ passe le crate Rust <code>croner</code> en v4 pour un correctif de sécurité. Si vous utilisez des repeatable jobs avec des expressions cron, c'est un bump d'une ligne.</p>"
+          },
+          "source": { "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.3.4", "label": "github.com/taskforcesh" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloudflare-optional-oauth-scopes",
+      "updates": [
+        {
+          "id": "cloudflare-optional-oauth-scopes",
+          "tag": "notable",
+          "date": "02 Sep 2026",
+          "title": {
+            "es": "Cloudflare: scopes OAuth opcionales, se acabó el todo-o-nada",
+            "en": "Cloudflare: optional OAuth scopes end the all-or-nothing consent",
+            "fr": "Cloudflare : des scopes OAuth optionnels, fini le tout ou rien"
+          },
+          "body_html": {
+            "es": "<p>Ahora el dueño del client puede marcar qué permisos el usuario <strong>puede deseleccionar</strong> en la pantalla de consentimiento. Antes había dos malas opciones: pedir permisos mínimos y romper los casos avanzados, o pedir todo y ver al usuario abandonar el consent screen. La contrapartida es de diseño: tu app tiene que <strong>inspectar los scopes concedidos en runtime</strong> y degradar features con elegancia, en vez de asumir acceso completo. Con agentes pidiendo permisos amplios que quizá nunca usen, esto pasa de nice-to-have a obligatorio.</p>",
+            "en": "<p>Client owners can now mark which permissions users <strong>may deselect</strong> on the consent screen. Previously there were two bad choices: request minimal permissions and break advanced use cases, or request everything and watch users bounce. The design cost is real: your app must <strong>inspect granted scopes at runtime</strong> and degrade gracefully instead of assuming full access. With agents requesting broad permission sets they may never use, this moves from nice-to-have to mandatory.</p>",
+            "fr": "<p>Les propriétaires de client peuvent marquer les permissions que l'utilisateur <strong>peut désélectionner</strong> sur l'écran de consentement. Avant : demander le minimum et casser les cas avancés, ou tout demander et voir l'utilisateur fuir. Le coût de conception est réel : l'app doit <strong>inspecter les scopes accordés à l'exécution</strong> et se dégrader proprement.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/cloudflare-optional-oauth-scopes/", "label": "infoq.com" }
+        },
+        {
+          "id": "workerd-20260902",
+          "tag": "release",
+          "date": "02 Sep 2026",
+          "title": {
+            "es": "workerd v1.20260902.1: container.inspect() sale de experimental",
+            "en": "workerd v1.20260902.1: container.inspect() leaves experimental",
+            "fr": "workerd v1.20260902.1 : container.inspect() quitte l'expérimental"
+          },
+          "body_html": {
+            "es": "<p>El runtime de Workers saca el flag experimental de <code>container.inspect()</code> y suma <code>tryReadSync</code>/<code>tryWriteSync</code>. Del lado de Durable Objects hay trabajo fuerte de correctitud: serialización de writes de WebSocket a través de la hibernación, retry loop para fetches al actor con propagación del estado del retry gate, y manejo elegante de code updates sobre WebSockets hibernados. Si operás DOs con conexiones largas, este release es de los que importan.</p>",
+            "en": "<p>The Workers runtime drops the experimental flag on <code>container.inspect()</code> and adds <code>tryReadSync</code>/<code>tryWriteSync</code>. On the Durable Objects side there is real correctness work: WebSocket writes serialized across hibernation, a retry loop for actor fetch requests with retry-gate state propagation, and graceful handling of code updates on hibernated WebSockets. If you run DOs with long-lived connections, this one matters.</p>",
+            "fr": "<p>Le runtime Workers retire le flag expérimental de <code>container.inspect()</code> et ajoute <code>tryReadSync</code>/<code>tryWriteSync</code>. Côté Durable Objects : sérialisation des writes WebSocket à travers l'hibernation, boucle de retry pour les fetch d'acteur avec propagation de l'état du retry gate, et gestion propre des mises à jour de code sur WebSockets hibernés.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workerd/releases/tag/v1.20260902.1", "label": "github.com/cloudflare" }
+        },
+        {
+          "id": "kinesis-dry-run",
+          "tag": "minor",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "Kinesis Data Streams suma dry run para validar permisos",
+            "en": "Kinesis Data Streams adds a dry run to validate permissions",
+            "fr": "Kinesis Data Streams ajoute un dry run pour valider les permissions"
+          },
+          "body_html": {
+            "es": "<p>Ahora podés testear un request de API <strong>sin ejecutar la operación</strong>, para verificar permisos de forma segura. Chiquito, pero es exactamente lo que necesitás en pipelines de IaC y en scripts de migración donde el <code>AccessDenied</code> aparece a mitad de camino.</p>",
+            "en": "<p>You can now test an API request <strong>without executing the operation</strong> to verify permissions safely. Small, but exactly what you want in IaC pipelines and migration scripts where <code>AccessDenied</code> surfaces halfway through.</p>",
+            "fr": "<p>Vous pouvez désormais tester une requête API <strong>sans exécuter l'opération</strong> afin de vérifier les permissions. Modeste, mais précisément ce qu'il faut dans les pipelines IaC et les scripts de migration.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-kinesis-data-streams-api/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "cloudwatch-alarm-warmup",
+          "tag": "minor",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "CloudWatch Alarms: período de warm-up contra el ruido",
+            "en": "CloudWatch Alarms: a warm-up period against the noise",
+            "fr": "CloudWatch Alarms : une période de warm-up contre le bruit"
+          },
+          "body_html": {
+            "es": "<p>Se puede retrasar la evaluación de una alarma después de crearla, para que un recurso nuevo termine de inicializarse y empiece a publicar métricas antes de disparar. Menos falsos positivos en cada deploy con autoscaling. Si tu canal de on-call se llena de alarmas fantasma cada vez que escala el grupo, ponete las pilas con esto.</p>",
+            "en": "<p>You can delay alarm evaluation after creation so a new resource finishes initializing and starts publishing metrics before it can fire. Fewer false positives on every autoscaling deploy. If your on-call channel fills with phantom alarms whenever the group scales, this is the fix.</p>",
+            "fr": "<p>Vous pouvez retarder l'évaluation d'une alarme après sa création, le temps qu'une ressource neuve s'initialise et publie ses métriques. Moins de faux positifs à chaque déploiement avec autoscaling.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/amazon-cloudwatch-alarms-warmup-period", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "hcp-terraform-ai-control-plane",
+      "updates": [
+        {
+          "id": "hcp-terraform-ai-control-plane",
+          "tag": "notable",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "HashiCorp: el trabajo de plataforma ahora es construir los límites",
+            "en": "HashiCorp: platform work is now about building the boundaries",
+            "fr": "HashiCorp : le travail de plateforme consiste à bâtir les limites"
+          },
+          "body_html": {
+            "es": "<p>HCP Terraform se posiciona como capa de gobernanza para infraestructura manejada por agentes: módulos aprobados, policy-as-code, identidades con scope de proyecto y audit trails. Más allá del anuncio, la tesis arquitectónica es la que vale: el equipo de plataforma deja de aprovisionar cada componente a mano y pasa a <strong>crear los límites dentro de los cuales la automatización puede operar sin romper los estándares</strong>. Es el mismo principio que un bounded context bien puesto — el valor no está en el código que escribís, sino en la frontera que definís.</p>",
+            "en": "<p>HCP Terraform positions itself as a governance layer for agent-driven infrastructure: approved modules, policy-as-code, project-scoped identities, and audit trails. Past the announcement, the architectural thesis is what counts: the platform team stops hand-provisioning every component and starts <strong>creating the boundaries within which automation can operate without breaking organizational standards</strong>. Same principle as a well-placed bounded context — the value is in the frontier you define, not the code you write.</p>",
+            "fr": "<p>HCP Terraform se positionne en couche de gouvernance pour l'infrastructure pilotée par agents : modules approuvés, policy-as-code, identités à portée projet et pistes d'audit. Au-delà de l'annonce, la thèse architecturale compte : l'équipe plateforme cesse de provisionner à la main et <strong>crée les limites dans lesquelles l'automatisation peut opérer</strong>.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/hcp-terraform-ai-driven-control/", "label": "infoq.com" }
+        },
+        {
+          "id": "drf-upload-limit-bypass",
+          "tag": "security",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "DRF: el límite de upload de Django no aplica a request.data",
+            "en": "DRF: Django's upload limit does not apply to request.data",
+            "fr": "DRF : la limite d'upload de Django ne s'applique pas à request.data"
+          },
+          "body_html": {
+            "es": "<p>CVE-2026-73228. Django levanta <code>RequestDataTooBig</code> cuando accedés a <code>request.body</code> o <code>request.POST</code>, pero el <code>request.data</code> de DRF parseaba igual bodies JSON y urlencoded gigantes, salteando <code>DATA_UPLOAD_MAX_MEMORY_SIZE</code>. Parcheado en <code>3.17.2</code>. La lección va más allá de Django: <strong>cada capa de abstracción que agregás sobre el request puede evadir un control que creías global</strong>. Si tu framework envuelve el request, verificá que los límites viajen con él.</p>",
+            "en": "<p>CVE-2026-73228. Django raises <code>RequestDataTooBig</code> when you touch <code>request.body</code> or <code>request.POST</code>, but DRF's <code>request.data</code> happily parsed the same oversized JSON and urlencoded bodies, bypassing <code>DATA_UPLOAD_MAX_MEMORY_SIZE</code>. Fixed in <code>3.17.2</code>. The lesson generalizes: <strong>every abstraction layer you stack on the request can route around a control you assumed was global</strong>. If your framework wraps the request, verify the limits travel with it.</p>",
+            "fr": "<p>CVE-2026-73228. Django lève <code>RequestDataTooBig</code> sur <code>request.body</code> ou <code>request.POST</code>, mais <code>request.data</code> de DRF parsait les mêmes bodies JSON et urlencoded surdimensionnés, contournant <code>DATA_UPLOAD_MAX_MEMORY_SIZE</code>. Corrigé en <code>3.17.2</code>. La leçon se généralise : chaque couche d'abstraction sur la requête peut contourner un contrôle supposé global.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-2m8g-3cmr-wg3w", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "pnpm-12-2-0",
+      "updates": [
+        {
+          "id": "pnpm-12-2-0",
+          "tag": "release",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "pnpm 12.2: los catalogs resuelven dependencias del workspace",
+            "en": "pnpm 12.2: catalogs resolve workspace dependencies",
+            "fr": "pnpm 12.2 : les catalogs résolvent les dépendances du workspace"
+          },
+          "body_html": {
+            "es": "<p>La feature es corta pero jugosa: los catalogs ya resuelven dependencias del workspace a través del protocolo <code>workspace:</code>. Además <code>pnpm deploy</code> deja de exigir <code>injectWorkspacePackages</code> — la dependencia linkeada se reescribe como <code>file:</code> en el lockfile de deploy — y los installs en workspaces grandes se aceleran resolviendo cada <code>workspace:</code> una sola vez en lugar de por proyecto. Se sumaron fixes de <code>pnpm audit --fix</code>, de shims en Windows/WSL2 y de hashes del virtual store global en ciclos de dependencias. <strong>Nota</strong>: instalá directamente <code>12.2.1</code> o superior por el advisory de proxy de arriba.</p>",
+            "en": "<p>Short but juicy: catalogs now resolve workspace dependencies through the <code>workspace:</code> protocol. Also, <code>pnpm deploy</code> no longer requires <code>injectWorkspacePackages</code> — a linked workspace dependency is rewritten as a <code>file:</code> dependency in the deploy lockfile — and large-workspace installs speed up by resolving each named <code>workspace:</code> dependency once instead of per project. Plus fixes to <code>pnpm audit --fix</code>, Windows/WSL2 shims, and global virtual-store hashes for dependency cycles. <strong>Note</strong>: install <code>12.2.1</code> or later given the proxy advisory above.</p>",
+            "fr": "<p>Court mais dense : les catalogs résolvent désormais les dépendances du workspace via le protocole <code>workspace:</code>. De plus, <code>pnpm deploy</code> n'exige plus <code>injectWorkspacePackages</code>, et les installs sur gros workspaces accélèrent en résolvant chaque dépendance <code>workspace:</code> une seule fois. <strong>Note</strong> : installez <code>12.2.1</code> ou plus récent au vu de l'advisory proxy ci-dessus.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.2.0", "label": "github.com/pnpm" }
+        },
+        {
+          "id": "nx-232-rc2",
+          "tag": "beta",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "Nx 23.2.0-rc.2: el linter atrapa imports prohibidos vía proyectos internos",
+            "en": "Nx 23.2.0-rc.2: the linter catches banned imports through internal projects",
+            "fr": "Nx 23.2.0-rc.2 : le linter attrape les imports interdits via projets internes"
+          },
+          "body_html": {
+            "es": "<p>El fix interesante del RC es de arquitectura, no de tooling: el linter ahora marca <strong>imports externos prohibidos que llegan atravesando proyectos internos</strong>. O sea, ya no podés lavar una dependencia baneada haciéndola pasar por una lib intermedia — que es exactamente el agujero por el que se filtran las violaciones de capas en un monorepo grande. Suma soporte de publish con config scoped para pnpm 11+ y coverage por target atomizado en Vitest.</p>",
+            "en": "<p>The interesting fix in this RC is architectural, not tooling: the linter now flags <strong>banned external imports reached through internal projects</strong>. You can no longer launder a banned dependency by routing it through an intermediate lib — which is exactly the hole layering violations slip through in a large monorepo. Also: scoped publish config for pnpm 11+, and per-target coverage directories for atomized Vitest tasks.</p>",
+            "fr": "<p>Le correctif intéressant est architectural : le linter signale désormais les <strong>imports externes interdits atteints via des projets internes</strong>. Impossible de blanchir une dépendance bannie en la routant par une lib intermédiaire — précisément la faille des violations de couches dans un gros monorepo. Aussi : config de publish scoped pour pnpm 11+, et coverage par target atomisé sous Vitest.</p>"
+          },
+          "source": { "url": "https://github.com/nrwl/nx/releases/tag/23.2.0-rc.2", "label": "github.com/nrwl" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Tres de los cuatro top stories de hoy son del mismo tipo: <strong>una dependencia chiquita que rompe una garantía de seguridad enorme</strong>. nanoid tiene 20 líneas de lógica y te deja los session tokens en una constante; mysql2 obedece un auth switch sin mirar si hay TLS. El tamaño del paquete no predice el blast radius.",
+      "en": "Three of today's four top stories share one shape: <strong>a tiny dependency breaking an enormous security guarantee</strong>. nanoid has twenty lines of logic and can freeze your session tokens into a constant; mysql2 obeys an auth switch without checking whether TLS is up. Package size does not predict blast radius.",
+      "fr": "Trois des quatre top stories du jour partagent une forme : <strong>une dépendance minuscule qui casse une garantie de sécurité énorme</strong>. nanoid tient en vingt lignes et peut figer vos tokens de session en une constante ; mysql2 obéit à un auth switch sans vérifier TLS. La taille du paquet ne prédit pas le rayon d'impact."
+    },
+    {
+      "es": "Dos advisories de pnpm en el mismo día, ambos sobre lo mismo: <strong>el manifiesto del repo es input no confiable</strong>. Un <code>pnpm-workspace.yaml</code> o un lockfile hostiles alcanzan para exfiltrar secrets o escribir symlinks fuera del proyecto. Si tu CI corre <code>install</code> sobre PRs de forks, ese runner es superficie de ataque, no infraestructura.",
+      "en": "Two pnpm advisories on the same day, both making one point: <strong>the repository manifest is untrusted input</strong>. A hostile <code>pnpm-workspace.yaml</code> or lockfile is enough to exfiltrate secrets or write symlinks outside the project. If your CI runs <code>install</code> on fork PRs, that runner is attack surface, not infrastructure.",
+      "fr": "Deux advisories pnpm le même jour, avec le même message : <strong>le manifeste du dépôt est une entrée non fiable</strong>. Un <code>pnpm-workspace.yaml</code> ou un lockfile hostile suffit à exfiltrer des secrets ou à écrire des symlinks hors du projet. Si votre CI lance <code>install</code> sur des PR de forks, ce runner est une surface d'attaque."
+    },
+    {
+      "es": "Los frames de 1 byte en gRPC-Go y el cache sin eviction de Browserslist son el mismo bug con distinta ropa: <strong>un límite que cuenta bytes cuando el costo real está en la cantidad de entradas</strong>. Cada vez que definas un rate limit o un flow control, preguntate qué recurso estás midiendo de verdad.",
+      "en": "The 1-byte frames in gRPC-Go and Browserslist's unevicted cache are the same bug in different clothes: <strong>a limit that counts bytes when the real cost lives in the number of entries</strong>. Every time you define a rate limit or flow control, ask which resource you are actually measuring.",
+      "fr": "Les frames d'un octet dans gRPC-Go et le cache sans éviction de Browserslist sont le même bug déguisé : <strong>une limite qui compte les octets alors que le coût réel tient au nombre d'entrées</strong>. Chaque fois que vous définissez un rate limit ou un flow control, demandez-vous quelle ressource vous mesurez vraiment."
+    }
+  ]
+}

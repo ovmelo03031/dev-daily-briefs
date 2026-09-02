@@ -1,0 +1,301 @@
+{
+  "title": {
+    "es": "Dev News — 2 de septiembre 2026",
+    "en": "Dev News — September 2, 2026",
+    "fr": "Dev News — 2 septembre 2026"
+  },
+  "description": {
+    "es": "Electron parchea una fuga de datos a extensiones en cuatro ramas, Solid 2.0 hace que refresh() devuelva una promesa, EAS CLI abre SSH a los workers de workflow, y ronda de builds: rspack, pnpm, wrangler, Nx, Jest y oxlint.",
+    "en": "Electron patches an extension data leak across four branches, Solid 2.0 makes refresh() return a promise, EAS CLI opens SSH into workflow workers, plus a build-tool round: rspack, pnpm, wrangler, Nx, Jest and oxlint.",
+    "fr": "Electron corrige une fuite de données vers les extensions sur quatre branches, Solid 2.0 fait de refresh() une promesse, EAS CLI ouvre SSH sur les workers de workflow, et une salve d'outils de build : rspack, pnpm, wrangler, Nx, Jest et oxlint."
+  },
+  "pubDate": "2026-09-02",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": {
+        "es": "Electron parchea fuga de tabs a extensiones",
+        "en": "Electron patches tab data leak to extensions",
+        "fr": "Electron corrige une fuite d'onglets aux extensions"
+      },
+      "anchor": "electron-44-1-1",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Solid 2.0 rc.5: refresh() ahora es promesa",
+        "en": "Solid 2.0 rc.5: refresh() now returns a promise",
+        "fr": "Solid 2.0 rc.5 : refresh() renvoie une promesse"
+      },
+      "anchor": "solid-2-rc5",
+      "icon": "lucide:zap"
+    },
+    {
+      "text": {
+        "es": "EAS CLI: SSH a los workers de workflow",
+        "en": "EAS CLI: SSH into workflow workers",
+        "fr": "EAS CLI : SSH sur les workers de workflow"
+      },
+      "anchor": "eas-cli-23-2-0",
+      "icon": "lucide:terminal"
+    },
+    {
+      "text": {
+        "es": "pnpm 12.2.1 arregla el upgrade roto en POSIX",
+        "en": "pnpm 12.2.1 fixes the broken POSIX upgrade",
+        "fr": "pnpm 12.2.1 corrige la mise à jour POSIX cassée"
+      },
+      "anchor": "pnpm-12-2-1",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "rspack 2.2.2: tanda de perf en ids y chunks",
+        "en": "rspack 2.2.2: perf pass on ids and chunks",
+        "fr": "rspack 2.2.2 : optimisations ids et chunks"
+      },
+      "anchor": "build-tools",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "Jest 30.5.1 revierte el cambio de moduleNameMapper",
+        "en": "Jest 30.5.1 reverts the moduleNameMapper change",
+        "fr": "Jest 30.5.1 annule le changement moduleNameMapper"
+      },
+      "anchor": "jest-30-5-1",
+      "icon": "lucide:code"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "electron-44-1-1",
+          "tag": "security",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "Electron parchea en 42/43/44/45 una fuga de URL y título a extensiones sin permiso",
+            "en": "Electron patches a URL/title leak to unprivileged extensions across 42/43/44/45",
+            "fr": "Electron corrige une fuite d'URL et de titre vers des extensions sans permission sur 42/43/44/45"
+          },
+          "body_html": {
+            "es": "<p><code>chrome.tabs.query()</code> devolvía <code>url</code> y <code>title</code> a extensiones que no tenían el permiso <code>tabs</code> ni host access. Ahora se alinea con <code>tabs.get</code>. Backporteado a las cuatro ramas vivas (44.1.1, 43.5.1, 42.11.1, 45.0.0-alpha.3). Ojo si tu app Electron carga extensiones de terceros: esto es exposición de datos de navegación, no un bug cosmético. El mismo release arregla crashes de <code>contextBridge</code> cuando un getter tira excepción.</p>",
+            "en": "<p><code>chrome.tabs.query()</code> was returning <code>url</code> and <code>title</code> to extensions holding neither the <code>tabs</code> permission nor host access; it now matches <code>tabs.get</code>. Backported across all four live branches (44.1.1, 43.5.1, 42.11.1, 45.0.0-alpha.3). If your Electron app loads third-party extensions, this is browsing-data exposure, not cosmetics. The same release fixes <code>contextBridge</code> crashes when a property getter throws.</p>",
+            "fr": "<p><code>chrome.tabs.query()</code> renvoyait <code>url</code> et <code>title</code> à des extensions sans permission <code>tabs</code> ni host access ; le comportement s'aligne désormais sur <code>tabs.get</code>. Rétroporté sur les quatre branches actives (44.1.1, 43.5.1, 42.11.1, 45.0.0-alpha.3). Le même correctif règle des crashs de <code>contextBridge</code> lorsqu'un getter lève une exception.</p>"
+          },
+          "source": { "url": "https://github.com/electron/electron/releases/tag/v44.1.1", "label": "github.com/electron" }
+        },
+        {
+          "id": "solid-2-rc5",
+          "tag": "breaking",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "Solid 2.0.0-rc.5: refresh(target) devuelve una promesa que resuelve en quiescencia",
+            "en": "Solid 2.0.0-rc.5: refresh(target) returns a promise that settles on quiescence",
+            "fr": "Solid 2.0.0-rc.5 : refresh(target) renvoie une promesse résolue à la quiescence"
+          },
+          "body_html": {
+            "es": "<p><code>refresh(target)</code> ahora devuelve una promesa que resuelve cuando el re-ask (y todo lo que lo supersede) se asentó. Dentro de una action, <code>yield refresh(x)</code> tira en el punto del yield si falla y revierte como cualquier paso fallido; el valor entregado es el staged de la transacción, nunca tu override optimista. Fire-and-forget sigue igual: una promesa ignorada no genera unhandled rejection. Esto es semántica de quiescencia, no identidad de vuelo — varios refresh del mismo tick colapsan en un solo re-ask.</p>",
+            "en": "<p><code>refresh(target)</code> now returns a promise resolving once the re-ask — and anything superseding it — has settled. Inside an action, <code>yield refresh(x)</code> throws at the yield point on failure and reverts like any failed step, and delivers the transaction's staged value rather than your optimistic override. Fire-and-forget is unchanged: an ignored promise never surfaces an unhandled rejection. The contract is quiescence, not flight identity, so same-tick refreshes coalesce into one re-ask.</p>",
+            "fr": "<p><code>refresh(target)</code> renvoie maintenant une promesse résolue une fois le re-ask (et ce qui le remplace) stabilisé. Dans une action, <code>yield refresh(x)</code> lève au point du yield en cas d'échec et annule comme toute étape ratée, en livrant la valeur mise en attente par la transaction plutôt que l'override optimiste. Le fire-and-forget ne change pas : une promesse ignorée ne provoque aucun unhandled rejection.</p>"
+          },
+          "source": { "url": "https://github.com/solidjs/solid/releases/tag/solid-js%402.0.0-rc.5", "label": "github.com/solidjs" }
+        },
+        {
+          "id": "eas-cli-23-2-0",
+          "tag": "notable",
+          "date": "31 Aug 2026",
+          "title": {
+            "es": "EAS CLI 23.2.0: SSH dentro del worker que corre tu workflow",
+            "en": "EAS CLI 23.2.0: SSH into the worker running your workflow",
+            "fr": "EAS CLI 23.2.0 : SSH dans le worker qui exécute votre workflow"
+          },
+          "body_html": {
+            "es": "<p><code>eas workflow:ssh &lt;workflow-job-id&gt;</code> abre una sesión en la VM del job, y <code>eas workflow:run --ssh</code> lo habilita desde el arranque. Sumale logs de workflow en tiempo real en lugar del refresh cada 10 segundos. Debuggear builds a ciegas leyendo logs se terminó. También llega <code>--tag</code> en <code>eas simulator</code> para agrupar sesiones por variante de app.</p>",
+            "en": "<p><code>eas workflow:ssh &lt;workflow-job-id&gt;</code> opens a session on the job's VM, and <code>eas workflow:run --ssh</code> enables it up front. Workflow run logs now stream in real time instead of refreshing every 10 seconds. Debugging a remote build purely from log scrollback is over. <code>eas simulator</code> also gains <code>--tag</code> to group sessions by app variant.</p>",
+            "fr": "<p><code>eas workflow:ssh &lt;workflow-job-id&gt;</code> ouvre une session sur la VM du job, et <code>eas workflow:run --ssh</code> l'active dès le lancement. Les logs de workflow sont désormais diffusés en temps réel au lieu d'un rafraîchissement toutes les 10 secondes. <code>eas simulator</code> gagne aussi <code>--tag</code>.</p>"
+          },
+          "source": { "url": "https://github.com/expo/eas-cli/releases/tag/v23.2.0", "label": "github.com/expo" }
+        }
+      ]
+    },
+    {
+      "id": "js-frameworks",
+      "name": "JS Frameworks",
+      "theme": "js-frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "js-frameworks",
+      "updates": [
+        {
+          "id": "qwik-2-beta-43",
+          "tag": "beta",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "Qwik 2.0.0-beta.43 sale con optimizer 2.1.0-beta.8",
+            "en": "Qwik 2.0.0-beta.43 ships alongside optimizer 2.1.0-beta.8",
+            "fr": "Qwik 2.0.0-beta.43 sort avec optimizer 2.1.0-beta.8"
+          },
+          "body_html": {
+            "es": "<p>Otra beta semanal del tren 2.0: <code>@qwik.dev/core</code>, <code>router</code>, <code>react</code>, <code>utils</code>, <code>create-qwik</code> y <code>eslint-plugin-qwik</code> alineados en beta.43, con el optimizer moviéndose por separado en 2.1.0-beta.8. Si venís siguiendo el RC, actualizá el set completo junto — mezclar versiones del optimizer con el core es la forma más rápida de romperte el build.</p>",
+            "en": "<p>Another weekly beta on the 2.0 train: <code>@qwik.dev/core</code>, <code>router</code>, <code>react</code>, <code>utils</code>, <code>create-qwik</code> and <code>eslint-plugin-qwik</code> all land on beta.43, with the optimizer tracking separately at 2.1.0-beta.8. Bump the whole set together — mismatching optimizer and core versions is the fastest way to break a build.</p>",
+            "fr": "<p>Nouvelle beta hebdomadaire du train 2.0 : <code>@qwik.dev/core</code>, <code>router</code>, <code>react</code>, <code>utils</code>, <code>create-qwik</code> et <code>eslint-plugin-qwik</code> passent en beta.43, l'optimizer avançant séparément en 2.1.0-beta.8. Mettez tout à jour ensemble.</p>"
+          },
+          "source": { "url": "https://github.com/QwikDev/qwik/releases/tag/create-qwik%402.0.0-beta.43", "label": "github.com/QwikDev" }
+        }
+      ]
+    },
+    {
+      "id": "build-tools",
+      "name": "Build Tools & Runtimes",
+      "theme": "build-tools",
+      "icon_emoji": "🔧",
+      "anchor": "build-tools",
+      "updates": [
+        {
+          "id": "pnpm-12-2-1",
+          "tag": "patch",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "pnpm 12.2.1: restaura el ejecutable sin extensión y desbloquea el upgrade en POSIX",
+            "en": "pnpm 12.2.1 restores the extensionless binary and unblocks POSIX upgrades",
+            "fr": "pnpm 12.2.1 restaure le binaire sans extension et débloque la mise à jour POSIX"
+          },
+          "body_html": {
+            "es": "<p>12.2.0 había dejado de publicar el target <code>pnpm</code> sin extensión, lo que rompía el auto-upgrade desde 12.1 y anteriores en sistemas POSIX. 12.2.1 lo devuelve. Si quedaste trabado en 12.1 sin poder subir, este es el parche.</p>",
+            "en": "<p>12.2.0 stopped shipping the extensionless <code>pnpm</code> target, which broke self-upgrades from 12.1 and earlier on POSIX systems. 12.2.1 restores it. If you were stuck on 12.1 unable to move forward, this is the fix.</p>",
+            "fr": "<p>12.2.0 ne publiait plus la cible <code>pnpm</code> sans extension, cassant la mise à jour depuis 12.1 et antérieures sur POSIX. 12.2.1 la restaure.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.2.1", "label": "github.com/pnpm" }
+        },
+        {
+          "id": "rspack-2-2-2",
+          "tag": "release",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "rspack 2.2.2: perf en module ids, hashes y render de chunks",
+            "en": "rspack 2.2.2: perf work on module ids, hashes and chunk rendering",
+            "fr": "rspack 2.2.2 : performances sur les ids de modules, hashes et rendu des chunks"
+          },
+          "body_html": {
+            "es": "<p>Cuatro optimizaciones seguidas: asignación de ids deterministas, runtimes compartidos en flag dependency usage, render de módulos para chunk assets y creación de hashes. Suma infrastructure logging para el cache nuevo y <code>JavascriptModulesPlugin.getChunkFilenameTemplate</code>. Nada rompe: es la clase de release que bajás sin pensarlo.</p>",
+            "en": "<p>Four perf passes back to back: deterministic module id assignment, shared runtimes in flag dependency usage, module rendering for chunk assets, and module hash creation. Adds infrastructure logging for the new cache plus <code>JavascriptModulesPlugin.getChunkFilenameTemplate</code>. Nothing breaks — the kind of release you take without thinking.</p>",
+            "fr": "<p>Quatre passes de perf : attribution déterministe des ids, runtimes partagés, rendu des modules pour les chunk assets et création des hashes. Ajoute le logging d'infrastructure pour le nouveau cache et <code>JavascriptModulesPlugin.getChunkFilenameTemplate</code>.</p>"
+          },
+          "source": { "url": "https://github.com/web-infra-dev/rspack/releases/tag/v2.2.2", "label": "github.com/rspack" }
+        },
+        {
+          "id": "wrangler-4-128-0",
+          "tag": "minor",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "Wrangler 4.128.0 mueve utilidades de bindings a @cloudflare/workers-utils",
+            "en": "Wrangler 4.128.0 moves binding utilities into @cloudflare/workers-utils",
+            "fr": "Wrangler 4.128.0 déplace les utilitaires de bindings vers @cloudflare/workers-utils"
+          },
+          "body_html": {
+            "es": "<p>Conversión, impresión y validación local de bindings salen de <code>@cloudflare/deploy-helpers</code> y ahora se exportan desde <code>@cloudflare/workers-utils</code>, compartidas entre Wrangler y el plugin de Vite. Además <code>unstable_printBindings</code> pasa de cinco parámetros posicionales a un objeto de opciones, y <code>wrangler workflows instances list</code> acepta <code>--date-start</code> / <code>--date-end</code>. Si importabas de deploy-helpers, actualizá el import.</p>",
+            "en": "<p>Binding conversion, printing and local-dev validation move out of <code>@cloudflare/deploy-helpers</code> and are now exported from <code>@cloudflare/workers-utils</code>, shared between Wrangler and the Cloudflare Vite plugin. <code>unstable_printBindings</code> swaps five positional parameters for an options object, and <code>wrangler workflows instances list</code> gains <code>--date-start</code> / <code>--date-end</code>. Update your imports if you reached into deploy-helpers.</p>",
+            "fr": "<p>La conversion, l'affichage et la validation locale des bindings quittent <code>@cloudflare/deploy-helpers</code> pour <code>@cloudflare/workers-utils</code>, partagé entre Wrangler et le plugin Vite. <code>unstable_printBindings</code> prend désormais un objet d'options, et <code>wrangler workflows instances list</code> accepte <code>--date-start</code> / <code>--date-end</code>.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workers-sdk/releases/tag/wrangler%404.128.0", "label": "github.com/cloudflare" }
+        },
+        {
+          "id": "nx-23-2-rc2",
+          "tag": "beta",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "Nx 23.2.0-rc.2: publish con config scoped para pnpm 11+ y linter más estricto",
+            "en": "Nx 23.2.0-rc.2: scoped publish config for pnpm 11+ and a stricter linter",
+            "fr": "Nx 23.2.0-rc.2 : config de publication scoped pour pnpm 11+ et linter plus strict"
+          },
+          "body_html": {
+            "es": "<p>El RC arregla <code>publish</code> para usar la forma scoped de config en pnpm 11+, hace que el linter marque imports externos prohibidos alcanzados a través de proyectos internos (agujero real en boundaries) y evita que una task inferida de oxlint termine linteando proyectos anidados.</p>",
+            "en": "<p>The RC fixes <code>publish</code> to use the scoped config form on pnpm 11+, makes the linter flag banned external imports reached through internal projects — a real hole in module boundaries — and stops an inferred oxlint task from linting nested projects.</p>",
+            "fr": "<p>Le RC corrige <code>publish</code> pour la forme scoped de pnpm 11+, fait signaler par le linter les imports externes interdits atteints via des projets internes, et empêche une tâche oxlint inférée de linter les projets imbriqués.</p>"
+          },
+          "source": { "url": "https://github.com/nrwl/nx/releases/tag/23.2.0-rc.2", "label": "github.com/nrwl" }
+        }
+      ]
+    },
+    {
+      "id": "dev-tools",
+      "name": "Developer Tools",
+      "theme": "dev-tools",
+      "icon_emoji": "🛠️",
+      "anchor": "dev-tools",
+      "updates": [
+        {
+          "id": "jest-30-5-1",
+          "tag": "patch",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "Jest 30.5.1 revierte el cambio de moduleNameMapper y arregla imports #dep en ESM",
+            "en": "Jest 30.5.1 reverts the moduleNameMapper change and fixes #dep imports under ESM",
+            "fr": "Jest 30.5.1 annule le changement moduleNameMapper et corrige les imports #dep en ESM"
+          },
+          "body_html": {
+            "es": "<p>Dos regresiones al piso: <code>moduleNameMapper</code> vuelve a matchear contra el specifier tal como está escrito, y los package <code>imports</code> tipo <code>#dep</code> resuelven de nuevo bajo ESM. Además, las opciones global-only en un project config ahora avisan en vez de ser ignoradas en silencio — <code>reporters</code>, <code>coverageReporters</code>, <code>maxWorkers</code>, <code>coverageThreshold</code>. Si tenías eso en un project config, nunca hizo nada.</p>",
+            "en": "<p>Two regressions reverted: <code>moduleNameMapper</code> matches against the specifier as written again, and package <code>imports</code> like <code>#dep</code> resolve under ESM again. On top of that, global-only options placed in a project config now warn instead of being silently dropped — <code>reporters</code>, <code>coverageReporters</code>, <code>maxWorkers</code>, <code>coverageThreshold</code>. If yours lived in a project config, it never did anything.</p>",
+            "fr": "<p>Deux régressions annulées : <code>moduleNameMapper</code> se compare de nouveau au specifier tel qu'écrit, et les imports de package comme <code>#dep</code> se résolvent à nouveau en ESM. Les options global-only placées dans une config de projet avertissent désormais au lieu d'être ignorées.</p>"
+          },
+          "source": { "url": "https://github.com/jestjs/jest/releases/tag/v30.5.1", "label": "github.com/jestjs" }
+        },
+        {
+          "id": "oxlint-1-81-0",
+          "tag": "release",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "Oxlint 1.81.0: sugerencias nuevas y varios falsos positivos menos",
+            "en": "Oxlint 1.81.0: new suggestions and several false positives gone",
+            "fr": "Oxlint 1.81.0 : nouvelles suggestions et faux positifs en moins"
+          },
+          "body_html": {
+            "es": "<p><code>nextjs/no-typos</code> gana suggestion, <code>object-shorthand</code> preserva la semántica de <code>__proto__</code>, <code>prefer-set-size</code> ignora constructores <code>Set</code> shadoweados, <code>no-unassigned-vars</code> deja de correr en archivos Svelte y Vue y <code>no-use-before-define</code> ahora sí corre en JS y JSX. También frenan que tsgolint se quede agarrando procesos desde el LSP.</p>",
+            "en": "<p><code>nextjs/no-typos</code> gains a suggestion, <code>object-shorthand</code> preserves <code>__proto__</code> semantics, <code>prefer-set-size</code> ignores shadowed <code>Set</code> constructors, <code>no-unassigned-vars</code> stops running on Svelte and Vue files, and <code>no-use-before-define</code> now does run on JS and JSX. The LSP also stops tsgolint from holding onto processes.</p>",
+            "fr": "<p><code>nextjs/no-typos</code> gagne une suggestion, <code>object-shorthand</code> préserve la sémantique de <code>__proto__</code>, <code>prefer-set-size</code> ignore les constructeurs <code>Set</code> masqués, et <code>no-use-before-define</code> s'applique enfin aux fichiers JS et JSX.</p>"
+          },
+          "source": { "url": "https://github.com/oxc-project/oxc/releases/tag/apps_v1.81.0", "label": "github.com/oxc-project" }
+        },
+        {
+          "id": "storybook-10-6-beta-2",
+          "tag": "beta",
+          "date": "01 Sep 2026",
+          "title": {
+            "es": "Storybook 10.6.0-beta.2 limpia stack traces del addon de Vitest",
+            "en": "Storybook 10.6.0-beta.2 cleans up Vitest addon stack traces",
+            "fr": "Storybook 10.6.0-beta.2 nettoie les stack traces de l'addon Vitest"
+          },
+          "body_html": {
+            "es": "<p>El addon de Vitest filtra la instrumentación de Storybook de los stack traces reportados y resuelve los globs de story tests contra el project root. En Angular los preprocesadores de estilos pasan a peers opcionales y te nombra el que falta en vez de reventar sin contexto.</p>",
+            "en": "<p>The Vitest addon filters Storybook instrumentation out of reported stack traces and resolves story test globs against the project root. On Angular, style preprocessors become optional peers and the missing one gets named instead of failing with no context.</p>",
+            "fr": "<p>L'addon Vitest filtre l'instrumentation Storybook des stack traces et résout les globs de tests d'histoires depuis la racine du projet. Sur Angular, les préprocesseurs de styles deviennent des peers optionnels et celui qui manque est nommé.</p>"
+          },
+          "source": { "url": "https://github.com/storybookjs/storybook/releases/tag/v10.6.0-beta.2", "label": "github.com/storybookjs" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Día flaco en el lenguaje y el browser: cero releases de TypeScript, React o Vite, y WebKit sigue sin publicar un STP nuevo desde el 251. Todo el movimiento está en tooling.",
+      "en": "Thin day at the language and browser layer: no TypeScript, React or Vite releases, and WebKit still has no Safari Technology Preview newer than 251. All the movement is in tooling.",
+      "fr": "Journée creuse côté langage et navigateur : aucune version de TypeScript, React ou Vite, et WebKit n'a toujours pas publié de Safari Technology Preview après la 251. Tout bouge côté outillage."
+    },
+    {
+      "es": "Patrón del día: los parches importantes son reversiones. Jest revierte moduleNameMapper, pnpm restaura un binario que había sacado. Publicar rápido tiene su precio y esta semana lo estamos viendo.",
+      "en": "Pattern of the day: the patches that matter are reverts. Jest reverts moduleNameMapper, pnpm restores a binary it had dropped. Shipping fast has a bill, and this week it came due.",
+      "fr": "Motif du jour : les correctifs qui comptent sont des retours en arrière. Jest annule moduleNameMapper, pnpm restaure un binaire supprimé. Livrer vite a un prix."
+    },
+    {
+      "es": "El tooling se está metiendo en la VM: EAS abre SSH a los workers de workflow y Nx endurece boundaries a través de proyectos internos. La caja negra del CI se abre de a poco.",
+      "en": "Tooling keeps moving into the VM: EAS opens SSH into workflow workers while Nx tightens module boundaries reached through internal projects. The CI black box is slowly cracking open.",
+      "fr": "L'outillage entre dans la VM : EAS ouvre SSH sur les workers de workflow, Nx durcit les frontières atteintes via des projets internes. La boîte noire du CI s'ouvre peu à peu."
+    }
+  ]
+}

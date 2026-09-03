@@ -1,0 +1,58 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 03 Sep 2026",
+    "en": "Gentleman Releases — 03 Sep 2026",
+    "fr": "Gentleman Releases — 03 Sep 2026"
+  },
+  "description": {
+    "es": "engram v2.0.0-rc.4 endurece import, autosync y las integraciones con agentes",
+    "en": "engram v2.0.0-rc.4 hardens import, autosync and the agent integrations",
+    "fr": "engram v2.0.0-rc.4 renforce l'import, l'autosync et les intégrations agents"
+  },
+  "pubDate": "2026-09-03",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "engram v2.0.0-rc.4 — búsqueda CJK, imports last-write-wins y el módulo Go /v2 que por fin instala",
+        "en": "engram v2.0.0-rc.4 — CJK search, last-write-wins imports and a Go /v2 module path that finally installs",
+        "fr": "engram v2.0.0-rc.4 — recherche CJK, imports last-write-wins et un module Go /v2 enfin installable"
+      },
+      "anchor": "engram-v2-0-0-rc-4",
+      "icon": "simple-icons:github"
+    }
+  ],
+  "tools": [
+    {
+      "id": "engram",
+      "name": "engram",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-engram",
+      "icon_emoji": "💋",
+      "anchor": "engram",
+      "version": "v2.0.0-rc.4",
+      "updates": [
+        {
+          "id": "engram-v2-0-0-rc-4",
+          "tag": "beta",
+          "title": {
+            "es": "v2.0.0-rc.4 — Safer Sync, Search, and Agent Integrations",
+            "en": "v2.0.0-rc.4 — Safer Sync, Search, and Agent Integrations",
+            "fr": "v2.0.0-rc.4 — Safer Sync, Search, and Agent Integrations"
+          },
+          "body_html": {
+            "es": "<p>Candidata de testing comunitario, 23 commits arriba de la rc.3 (fuente <code>32b903ab</code>, CI verde en unit, e2e y plugin tests). Las rc anteriores quedan intactas.</p><p>En storage: la búsqueda de observaciones y prompts pasa a un contrato FTS5 de trigramas, así que el matching por substring en CJK anda, y los índices viejos o incompletos se reparan transaccionalmente. Los imports ahora ordenan por last-write-wins según identidad de sync: un snapshot viejo ya no te pisa observaciones nuevas ni te revive cosas borradas, y el resultado distingue importado, actualizado y stale. <code>doctor repair</code> detecta observaciones activas sin campos de source y te previsualiza la reparación antes de aplicarla. Y ojo con esto: el autosync ahora pone en cuarentena local las mutaciones con identidad de proyecto ausente o inválida, en vez de frenar los grupos de proyectos sanos.</p><p>En integraciones: las instrucciones del server MCP se arman desde el allowlist de tools registrado, así que el agente ya no se entera de tools que no existen en su perfil. Los writes con <code>session_id</code> inventado siguen fallando estricto, pero ahora traen <code>invalid_session_id</code> y <code>retry_without_session_id</code> para recuperarte solo. Se arregla la atribución de sesión en OpenCode, el hook SubagentStop de Codex en Windows nativo (JSON válido en stdout, diagnósticos en stderr) y <code>gentle-engram</code> pasa <code>@earendil-works/pi-tui</code> a peer opcional para que npm no rompa los child processes de Pi.</p><p>Lo más práctico: las releases v2 usan el módulo <code>github.com/Gentleman-Programming/engram/v2</code>, así que instalá con <code>go install github.com/Gentleman-Programming/engram/v2/cmd/engram@v2.0.0-rc.4</code>. Los tags v1 mantienen el path sin versionar. Bonus: <code>ENGRAM_NO_UPDATE_CHECK=1</code> apaga los chequeos de update para flujos offline. Esta prerelease no toca Homebrew: bajate el asset y verificalo contra <code>checksums.txt</code>.</p>",
+            "en": "<p>A community-testing candidate sitting 23 commits ahead of rc.3 (source <code>32b903ab</code>, CI green on unit, e2e and plugin tests). Earlier release candidates are unchanged.</p><p>On storage: observation and prompt search moves to a trigram FTS5 contract, so CJK substring matching works, and legacy or incomplete indexes are repaired transactionally. Imports now apply last-write-wins ordering by sync identity, so a stale snapshot cannot overwrite newer local observations or resurrect deleted ones, and the result distinguishes imported, updated and stale records. <code>doctor repair</code> detects active observations missing required source fields and previews recoverable title repairs before applying them. Autosync now quarantines mutations with absent or invalid project identity locally instead of blocking healthy project groups.</p><p>On integrations: MCP server instructions are built from the registered tool allowlist, so agents are no longer pointed at tools their profile does not expose. Writes with an invented <code>session_id</code> still fail strictly, but errors now carry <code>invalid_session_id</code> and <code>retry_without_session_id</code> so callers can recover. OpenCode session attribution resolves to the authoritative parent session, the Codex SubagentStop hook emits valid JSON on stdout on native Windows (diagnostics to stderr), and <code>gentle-engram</code> treats <code>@earendil-works/pi-tui</code> as an optional peer so npm stops installing a conflicting copy that crashed Pi child processes.</p><p>Most practical change: v2 releases use the Go module path <code>github.com/Gentleman-Programming/engram/v2</code>, so install with <code>go install github.com/Gentleman-Programming/engram/v2/cmd/engram@v2.0.0-rc.4</code>. v1 tags keep the unversioned path. Bonus: <code>ENGRAM_NO_UPDATE_CHECK=1</code> suppresses release-update requests for offline workflows. This prerelease does not update Homebrew — download a platform asset and verify it against <code>checksums.txt</code>.</p>",
+            "fr": "<p>Candidate de test communautaire, 23 commits devant la rc.3 (source <code>32b903ab</code>, CI verte sur les tests unitaires, e2e et plugins). Les candidates précédentes restent inchangées.</p><p>Côté stockage : la recherche d'observations et de prompts passe à un contrat FTS5 en trigrammes, donc le matching par sous-chaîne en CJK fonctionne, et les index anciens ou incomplets sont réparés de façon transactionnelle. Les imports appliquent désormais un ordre last-write-wins par identité de sync : un snapshot périmé ne peut plus écraser des observations locales plus récentes ni ressusciter des éléments supprimés, et le résultat distingue importé, mis à jour et périmé. <code>doctor repair</code> détecte les observations actives dont les champs source manquent et prévisualise la réparation avant application. L'autosync met en quarantaine locale les mutations dont l'identité de projet est absente ou invalide, au lieu de bloquer les groupes de projets sains.</p><p>Côté intégrations : les instructions du serveur MCP sont construites depuis l'allowlist de tools enregistrée, donc les agents ne sont plus orientés vers des tools indisponibles. Les écritures avec un <code>session_id</code> inventé échouent toujours strictement, mais les erreurs portent maintenant <code>invalid_session_id</code> et <code>retry_without_session_id</code>. L'attribution de session OpenCode remonte à la session parente autoritaire, le hook SubagentStop de Codex émet du JSON valide sur stdout sous Windows natif (diagnostics sur stderr), et <code>gentle-engram</code> traite <code>@earendil-works/pi-tui</code> comme peer optionnel pour éviter les crashs des processus enfants de Pi.</p><p>Le plus concret : les versions v2 utilisent le module Go <code>github.com/Gentleman-Programming/engram/v2</code>, donc installez avec <code>go install github.com/Gentleman-Programming/engram/v2/cmd/engram@v2.0.0-rc.4</code>. Les tags v1 gardent le chemin non versionné. Bonus : <code>ENGRAM_NO_UPDATE_CHECK=1</code> supprime les requêtes de mise à jour pour les flux hors ligne. Cette préversion ne met pas à jour Homebrew : téléchargez un asset et vérifiez-le contre <code>checksums.txt</code>.</p>"
+          },
+          "date": "02 Sep 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v2.0.0-rc.4",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

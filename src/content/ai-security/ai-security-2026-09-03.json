@@ -1,0 +1,347 @@
+{
+  "title": {
+    "es": "AI Security — 03 Sep 2026",
+    "en": "AI Security — 03 Sep 2026",
+    "fr": "AI Security — 03 Sep 2026"
+  },
+  "description": {
+    "es": "GitSpawn: un .git/config malicioso hace que Claude Code, Codex, goose y otros cuatro agentes ejecuten comandos del atacante antes de cualquier prompt de aprobación; Unit 42 documentó una intrusión completa hecha por agentes en menos de 10 horas; NLTK acumula tres bypasses de su propio módulo de seguridad; y MLflow ignora su flag anti-pickle en el flavor de statsmodels.",
+    "en": "GitSpawn: a malicious .git/config makes Claude Code, Codex, goose and four other agents run attacker commands before any approval prompt; Unit 42 documented a full agent-run intrusion in under 10 hours; NLTK stacks up three bypasses of its own security module; and MLflow ignores its anti-pickle flag in the statsmodels flavor.",
+    "fr": "GitSpawn : un .git/config malveillant fait exécuter des commandes de l'attaquant à Claude Code, Codex, goose et quatre autres agents avant toute demande d'approbation ; Unit 42 a documenté une intrusion complète menée par des agents en moins de 10 heures ; NLTK cumule trois contournements de son propre module de sécurité ; et MLflow ignore son drapeau anti-pickle dans le flavor statsmodels."
+  },
+  "pubDate": "2026-09-03",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "GitSpawn: 7 agentes ejecutan código por .git/config",
+        "en": "GitSpawn: 7 coding agents run code from .git/config",
+        "fr": "GitSpawn : 7 agents exécutent du code via .git/config"
+      },
+      "anchor": "gitspawn-fsmonitor",
+      "icon": "lucide:siren"
+    },
+    {
+      "text": {
+        "es": "Agentes tomaron una red entera en menos de 10 horas",
+        "en": "Agents owned an entire network in under 10 hours",
+        "fr": "Des agents ont pris tout un réseau en moins de 10 h"
+      },
+      "anchor": "unit42-agentic-ransomware",
+      "icon": "lucide:skull"
+    },
+    {
+      "text": {
+        "es": "NLTK: inyección de args a la JVM, CVSS 9.3",
+        "en": "NLTK: JVM argument injection, CVSS 9.3",
+        "fr": "NLTK : injection d'arguments JVM, CVSS 9.3"
+      },
+      "anchor": "nltk-cve-2026-79675",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "MLflow: el flag anti-pickle no cubre statsmodels",
+        "en": "MLflow: the anti-pickle flag misses statsmodels",
+        "fr": "MLflow : le drapeau anti-pickle rate statsmodels"
+      },
+      "anchor": "mlflow-statsmodels-pickle",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "Claude Mythos completó sola la kill chain entera",
+        "en": "Claude Mythos alone finished the whole kill chain",
+        "fr": "Claude Mythos a bouclé seule toute la kill chain"
+      },
+      "anchor": "booz-allen-cyber-weapon-index",
+      "icon": "lucide:radiation"
+    },
+    {
+      "text": {
+        "es": "El parser de guardrails de Omnigent falla abierto",
+        "en": "Omnigent's guardrail parser fails open",
+        "fr": "Le parseur de guardrails d'Omnigent échoue ouvert"
+      },
+      "anchor": "omnigent-cve-2026-62676",
+      "icon": "lucide:shield-alert"
+    },
+    {
+      "text": {
+        "es": "Google, Anthropic y OpenAI abren modelos de ciber",
+        "en": "Google, Anthropic and OpenAI ship cyber models",
+        "fr": "Google, Anthropic et OpenAI sortent des modèles cyber"
+      },
+      "anchor": "vendor-cyber-models",
+      "icon": "lucide:lock"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-incidents",
+      "name": "Top Incidents",
+      "theme": "top-incidents",
+      "icon_emoji": "🚨",
+      "anchor": "top-incidents",
+      "updates": [
+        {
+          "id": "gitspawn-fsmonitor",
+          "tag": "breach",
+          "title": {
+            "es": "GitSpawn: un .git/config hostil hace que siete agentes de código ejecuten comandos antes de pedirte permiso",
+            "en": "GitSpawn: a hostile .git/config makes seven coding agents run commands before asking you",
+            "fr": "GitSpawn : un .git/config hostile fait exécuter des commandes à sept agents avant toute demande"
+          },
+          "body_html": {
+            "es": "<p>Manifold Security publicó GitSpawn, una clase de bug que afecta a siete agentes de código a la vez. El truco es viejo y elegante: Git tiene una opción de configuración llamada <code>core.fsmonitor</code> que define un comando que Git ejecuta para saber qué archivos cambiaron. Vive en el <code>.git/config</code> del repositorio, o sea que viaja con el repo.</p><p>Los agentes corren <code>git status</code> y <code>git diff</code> por su cuenta, en segundo plano, para entender el estado del working tree. Y lo hacen sin sanitizar la config del repo. Resultado: el comando del atacante corre fuera del sandbox del agente y ANTES de que aparezca cualquier prompt de aprobación. No hay nada que aprobar porque el agente todavía no decidió hacer nada, apenas está mirando el repo.</p><p>El estado de parches está desparejo: goose corregido en 1.44.0 (CVE-2026-72718, CVSS 4.0 de 7.0), Codex CLI en 0.131.0 (CVE-2026-19592, más otros dos CVEs de la misma clase), Claude Code corregido en 2.1.196 para el camino de <code>core.fsmonitor</code> (CVE-2026-55607, que cubre operaciones de worktree) —pero el camino vía <code>claude ultrareview</code> seguía sin parche en 2.1.258. Hermes Agent, Qwen Code y Grok Build siguen sin corregir.</p><p>Ojo con esto: clonar un repo para que un agente lo mire ya no es una acción de solo lectura. Si tu flujo es «cloná este PR de un contribuidor y pedile al agente que lo revise», estás ejecutando código del contribuidor.</p>",
+            "en": "<p>Manifold Security published GitSpawn, a bug class hitting seven coding agents at once. The trick is old and elegant: Git has a config option called <code>core.fsmonitor</code> that names a command Git runs to learn which files changed. It lives in the repository's <code>.git/config</code>, which means it travels with the repo.</p><p>Agents run <code>git status</code> and <code>git diff</code> on their own, in the background, to understand the working tree state. And they do it without sanitizing the repo config. The result: the attacker's command runs outside the agent's sandbox and BEFORE any approval prompt appears. There is nothing to approve, because the agent has not decided to do anything yet — it is merely looking at the repo.</p><p>Patch status is uneven: goose fixed in 1.44.0 (CVE-2026-72718, CVSS 4.0 base 7.0), Codex CLI in 0.131.0 (CVE-2026-19592, plus two more CVEs in the same class), Claude Code fixed by 2.1.196 for the <code>core.fsmonitor</code> path (CVE-2026-55607, covering worktree operations) — but the <code>claude ultrareview</code> path was still unfixed as of 2.1.258. Hermes Agent, Qwen Code and Grok Build remain unpatched.</p><p>Take this one seriously: cloning a repo so an agent can look at it is no longer a read-only action. If your workflow is «clone this contributor's PR and have the agent review it», you are executing the contributor's code.</p>",
+            "fr": "<p>Manifold Security a publié GitSpawn, une classe de bugs touchant sept agents de code à la fois. L'astuce est ancienne et élégante : Git possède une option <code>core.fsmonitor</code> qui désigne une commande exécutée par Git pour savoir quels fichiers ont changé. Elle réside dans le <code>.git/config</code> du dépôt, donc elle voyage avec lui.</p><p>Les agents lancent <code>git status</code> et <code>git diff</code> d'eux-mêmes, en arrière-plan, sans assainir la configuration du dépôt. Résultat : la commande de l'attaquant s'exécute hors du sandbox de l'agent et AVANT toute demande d'approbation.</p><p>L'état des correctifs est inégal : goose corrigé en 1.44.0 (CVE-2026-72718), Codex CLI en 0.131.0 (CVE-2026-19592), Claude Code corrigé en 2.1.196 pour le chemin <code>core.fsmonitor</code> (CVE-2026-55607) — mais le chemin <code>claude ultrareview</code> restait non corrigé en 2.1.258. Hermes Agent, Qwen Code et Grok Build restent vulnérables.</p>"
+          },
+          "date": "02 Sep 2026",
+          "source": {
+            "url": "https://thehackernews.com/2026/09/malicious-git-configs-can-make-claude.html",
+            "label": "The Hacker News"
+          }
+        },
+        {
+          "id": "unit42-agentic-ransomware",
+          "tag": "breach",
+          "title": {
+            "es": "Unit 42: agentes hicieron cada paso de la intrusión en menos de 10 horas y dejaron una auditoría de 80 páginas",
+            "en": "Unit 42: agents did every step of the intrusion in under 10 hours, then left an 80-page audit",
+            "fr": "Unit 42 : des agents ont mené chaque étape de l'intrusion en moins de 10 heures"
+          },
+          "body_html": {
+            "es": "<p>Unit 42 (Palo Alto Networks) documentó una intrusión donde un operador humano usó modelos de frontera para hacer cada etapa de la cadena. Tiempo total: menos de 10 horas. Un equipo humano tarda unas dos semanas en el mismo recorrido.</p><p>La secuencia: agentes de reconocimiento encontraron un endpoint de API público vulnerable y lo usaron para entrar; adentro, agentes automatizados mapearon los microservicios internos; subagentes rastrillaron los repositorios de código en busca de tokens y contraseñas de servicio hardcodeadas; con esas credenciales llegaron al gestor de secretos de la organización y sacaron acceso administrativo maestro. Después, «agentes de pivoteo especializados» validaron ese acceso contra cloud, identidad, CI/CD, contenedores y SaaS. Para persistir, secuestraron workflows de CI/CD y robaron access keys de cloud —y reutilizaron los servicios de IA de la propia víctima como infraestructura post-compromiso.</p><p>Al final dejaron un informe de 80 páginas detallando las vulnerabilidades que explotaron. Unit 42 no quiso decirle a The Register qué modelos o frameworks se usaron.</p><p>Lo que cambia acá no es ninguna técnica nueva, todas son conocidas. Lo que cambia es que el agente monitoreaba, evaluaba y replanificaba en tiempo real durante toda la cadena. Tus ventanas de detección estaban calibradas para semanas de dwell time. Ahora tenés horas.</p>",
+            "en": "<p>Unit 42 (Palo Alto Networks) documented an intrusion where a human operator used frontier models for every stage of the chain. Total elapsed time: under 10 hours. A human team takes roughly two weeks for the same run.</p><p>The sequence: recon agents found a vulnerable public API endpoint and tunneled in; inside, automated agents mapped the internal microservices; subagents scraped code repositories for hardcoded tokens and service passwords; those credentials got them into the organization's secret-management system and master administrative access. Then «specialist pivot agents» validated that access across cloud, identity, CI/CD, container and SaaS environments. For persistence they hijacked CI/CD workflows to steal cloud access keys — and repurposed the victim's own cloud AI services as post-compromise infrastructure.</p><p>On the way out they left an 80-page security audit detailing the vulnerabilities they had exploited. Unit 42 would not tell The Register which models or frameworks were involved.</p><p>What changes here is not any single technique — all of them are known. What changes is that the agent monitored, evaluated and replanned in real time across the whole chain. Your detection windows were calibrated for weeks of dwell time. You now have hours.</p>",
+            "fr": "<p>Unit 42 (Palo Alto Networks) a documenté une intrusion où un opérateur humain a utilisé des modèles de frontière à chaque étape de la chaîne. Durée totale : moins de 10 heures, contre environ deux semaines pour une équipe humaine.</p><p>La séquence : des agents de reconnaissance ont trouvé un endpoint d'API public vulnérable ; à l'intérieur, des agents automatisés ont cartographié les microservices internes ; des sous-agents ont ratissé les dépôts de code à la recherche de tokens et mots de passe en dur ; ces identifiants ont ouvert le gestionnaire de secrets et l'accès administrateur maître. Des «agents de pivot spécialisés» ont ensuite validé cet accès sur le cloud, l'identité, la CI/CD, les conteneurs et le SaaS.</p><p>En partant, ils ont laissé un audit de sécurité de 80 pages. Vos fenêtres de détection étaient calibrées pour des semaines de dwell time. Vous avez désormais des heures.</p>"
+          },
+          "date": "02 Sep 2026",
+          "source": {
+            "url": "https://www.theregister.com/security/2026/09/02/ai-agents-carried-out-every-step-of-this-ransomware-attack-then-left-the-victim-an-80-page-security-audit/5294009",
+            "label": "The Register"
+          }
+        }
+      ]
+    },
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "nltk-cve-2026-79675",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-79675 — NLTK: el fix de inyección de argumentos a la JVM no cubre el camino por llamada (9.3)",
+            "en": "CVE-2026-79675 — NLTK: the JVM argument injection fix misses the per-call path (9.3)",
+            "fr": "CVE-2026-79675 — NLTK : le correctif d'injection d'arguments JVM rate le chemin par appel (9.3)"
+          },
+          "body_html": {
+            "es": "<p>Un fix incompleto, que es la peor categoría de bug porque el equipo ya cree que el problema está resuelto. El parche de CVE-2026-12841 agregó <code>_validate_java_options()</code> en <code>nltk/internals.py</code> para bloquear flags peligrosos de la JVM: <code>-agentlib</code>, <code>-agentpath</code>, <code>-javaagent</code>, <code>-Xrunjdwp</code> y referencias a <code>@argfile</code>.</p><p>El problema: esa validación solo corre cuando configurás opciones globales vía <code>config_java()</code>. La función <code>java()</code> acepta además un parámetro <code>options</code> por llamada —agregado en el PR #3683, que a su vez era el fix de CVE-2026-12615— y ese camino pasa las opciones directo a <code>subprocess.Popen</code> sin validar nada. Las cuatro clases wrapper de Stanford aceptan <code>java_options</code> del usuario y todas enrutan por ahí.</p><p>O sea: dos fixes de seguridad consecutivos, y el segundo abrió un bypass del primero. CVSS v4 9.3, v3 9.8. Si tu pipeline de NLP le pasa <code>java_options</code> a los wrappers de Stanford con algo derivado de input externo, tenés ejecución de código.</p>",
+            "en": "<p>An incomplete fix — the worst category of bug, because the team already believes the problem is solved. The CVE-2026-12841 patch added <code>_validate_java_options()</code> in <code>nltk/internals.py</code> to block dangerous JVM flags: <code>-agentlib</code>, <code>-agentpath</code>, <code>-javaagent</code>, <code>-Xrunjdwp</code> and <code>@argfile</code> references.</p><p>The problem: that validation only runs when you set global options through <code>config_java()</code>. The <code>java()</code> function also accepts a per-call <code>options</code> parameter — added in PR #3683, which was itself the CVE-2026-12615 fix — and that path passes options straight to <code>subprocess.Popen</code> with no validation at all. All four Stanford Java wrapper classes accept user-supplied <code>java_options</code> and all of them route through it.</p><p>So: two consecutive security fixes, and the second one opened a bypass of the first. CVSS v4 9.3, v3 9.8. If your NLP pipeline feeds <code>java_options</code> into the Stanford wrappers from anything externally derived, you have code execution.</p>",
+            "fr": "<p>Un correctif incomplet — la pire catégorie de bug, car l'équipe croit déjà le problème résolu. Le patch de CVE-2026-12841 avait ajouté <code>_validate_java_options()</code> dans <code>nltk/internals.py</code> pour bloquer les drapeaux JVM dangereux : <code>-agentlib</code>, <code>-javaagent</code>, <code>-Xrunjdwp</code> et les références <code>@argfile</code>.</p><p>Le souci : cette validation ne s'applique qu'aux options globales via <code>config_java()</code>. La fonction <code>java()</code> accepte aussi un paramètre <code>options</code> par appel, ajouté par le PR #3683 (lui-même le correctif de CVE-2026-12615), qui transmet les options directement à <code>subprocess.Popen</code> sans validation. Les quatre classes wrapper Stanford passent toutes par là. CVSS v4 9.3, v3 9.8.</p>"
+          },
+          "date": "01 Sep 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-m4rf-3fr8-xwx3",
+            "label": "GitHub Security Advisory"
+          }
+        },
+        {
+          "id": "nltk-cve-2026-62388",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-62388 — NLTK: el módulo pathsec viene con ENFORCE=False, o sea solo emite warnings (8.7)",
+            "en": "CVE-2026-62388 — NLTK: pathsec defaults to ENFORCE=False, so it only warns (8.7)",
+            "fr": "CVE-2026-62388 — NLTK : pathsec par défaut à ENFORCE=False, il ne fait qu'avertir (8.7)"
+          },
+          "body_html": {
+            "es": "<p>El módulo <code>pathsec.py</code> de NLTK existe porque fue el fix de dos vulnerabilidades reales: CVE-2024-39705 (ejecución de código arbitrario vía pickle) y CVE-2026-0846 (path traversal). Tiene ocho funciones de validación.</p><p>Las ocho consultan la constante <code>ENFORCE</code> en la línea 24, que por defecto vale <code>False</code>. Con ese default, cada control emite un <code>RuntimeWarning</code> y deja pasar la operación en vez de tirar excepción. En la práctica: <code>pathsec.open('/etc/passwd')</code> lee el archivo, <code>pathsec.validate_network_url('http://169.254.169.254/...')</code> deja llegar al endpoint de metadata de la nube, y <code>nltk.data.load()</code> ejecuta <code>pickle.loads()</code> sobre una fuente no confiable. Todo con un warning que nadie lee, porque los warnings de Python se pierden en el ruido de cualquier pipeline de ML.</p><p>Un control de seguridad apagado por defecto no es un control de seguridad, es documentación. Poné la variable de entorno en enforce.</p>",
+            "en": "<p>NLTK's <code>pathsec.py</code> module exists because it was the fix for two real vulnerabilities: CVE-2024-39705 (arbitrary code execution via pickle) and CVE-2026-0846 (path traversal). It ships eight validation functions.</p><p>All eight consult the <code>ENFORCE</code> constant on line 24, which defaults to <code>False</code>. Under that default every gate emits a <code>RuntimeWarning</code> and lets the operation through instead of raising. In practice: <code>pathsec.open('/etc/passwd')</code> reads the file, <code>pathsec.validate_network_url('http://169.254.169.254/...')</code> reaches the cloud metadata endpoint, and <code>nltk.data.load()</code> runs <code>pickle.loads()</code> against an untrusted source. All with a warning nobody reads, because Python warnings vanish into the noise of any ML pipeline.</p><p>A security control that is off by default is not a security control, it is documentation. Set the environment variable to enforce.</p>",
+            "fr": "<p>Le module <code>pathsec.py</code> de NLTK existe parce qu'il était le correctif de deux vulnérabilités réelles : CVE-2024-39705 (exécution de code via pickle) et CVE-2026-0846 (path traversal). Il embarque huit fonctions de validation.</p><p>Toutes consultent la constante <code>ENFORCE</code> ligne 24, dont la valeur par défaut est <code>False</code>. Avec ce défaut, chaque garde émet un <code>RuntimeWarning</code> et laisse passer l'opération : <code>pathsec.open('/etc/passwd')</code> lit le fichier, <code>validate_network_url()</code> atteint l'endpoint de métadonnées cloud, et <code>nltk.data.load()</code> exécute <code>pickle.loads()</code> sur une source non fiable.</p><p>Un contrôle de sécurité désactivé par défaut n'est pas un contrôle, c'est de la documentation.</p>"
+          },
+          "date": "02 Sep 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-p3m8-78j2-g5p3",
+            "label": "GitHub Security Advisory"
+          }
+        },
+        {
+          "id": "nltk-cve-2026-81726",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-81726 — NLTK: las APIs de artefactos de modelo escriben fuera de los roots permitidos, sin parche (8.3)",
+            "en": "CVE-2026-81726 — NLTK: model-artifact APIs write outside allowed roots, unpatched (8.3)",
+            "fr": "CVE-2026-81726 — NLTK : les API d'artefacts de modèle écrivent hors des roots autorisés (8.3)"
+          },
+          "body_html": {
+            "es": "<p>Tercer problema de NLTK en la misma tanda, y el más incómodo porque todavía no hay parche. Incluso cuando activás la seguridad de rutas de NLTK, varias APIs de artefactos de modelo siguen tratando las rutas controladas por el llamador como nombres de archivo comunes: usan <code>open()</code> nativo en vez de los helpers con pathsec.</p><p>Los afectados: <code>TransitionParser.train</code> (escribe fuera del root), <code>TransitionParser.parse</code> (lee fuera del root), <code>AveragedPerceptron.save</code> y <code>.load</code>, <code>PerceptronTagger.save_to_json</code>, y <code>save_maxent_params</code>. Los mismos paths de afuera del root son rechazados correctamente por los helpers protegidos —así que el sandbox existe, simplemente estas rutas de código no lo usan.</p><p>Reproducido en la 3.9.4 publicada y en el source actual v3.10.0-rc2. Sin versión parcheada al momento de escribir esto.</p>",
+            "en": "<p>NLTK's third issue in the same batch, and the most uncomfortable because there is still no patch. Even with NLTK path security enforced, several model-artifact APIs keep treating caller-controlled model paths as ordinary filenames: they use built-in <code>open()</code> instead of the pathsec-aware helpers.</p><p>Affected: <code>TransitionParser.train</code> (writes outside the root), <code>TransitionParser.parse</code> (reads outside the root), <code>AveragedPerceptron.save</code> and <code>.load</code>, <code>PerceptronTagger.save_to_json</code>, and <code>save_maxent_params</code>. The very same outside-root paths are correctly rejected by the guarded helpers — so the sandbox exists, these code paths simply do not use it.</p><p>Reproduced on published 3.9.4 and on current source v3.10.0-rc2. No patched version at time of writing.</p>",
+            "fr": "<p>Troisième problème NLTK du même lot, et le plus gênant car aucun correctif n'existe encore. Même avec la sécurité de chemins activée, plusieurs API d'artefacts de modèle traitent les chemins contrôlés par l'appelant comme de simples noms de fichiers : elles utilisent <code>open()</code> natif au lieu des helpers pathsec.</p><p>Concernés : <code>TransitionParser.train</code> et <code>.parse</code>, <code>AveragedPerceptron.save</code> et <code>.load</code>, <code>PerceptronTagger.save_to_json</code>, <code>save_maxent_params</code>. Les mêmes chemins hors root sont pourtant rejetés par les helpers protégés.</p><p>Reproduit sur la 3.9.4 publiée et sur les sources v3.10.0-rc2. Aucune version corrigée à ce jour.</p>"
+          },
+          "date": "02 Sep 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-8mgp-746c-j5xp",
+            "label": "GitHub Security Advisory"
+          }
+        }
+      ]
+    },
+    {
+      "id": "supply-chain",
+      "name": "Supply Chain",
+      "theme": "supply-chain",
+      "icon_emoji": "📦",
+      "anchor": "supply-chain",
+      "updates": [
+        {
+          "id": "mlflow-statsmodels-pickle",
+          "tag": "high",
+          "title": {
+            "es": "MLflow: el flavor de statsmodels ignora MLFLOW_ALLOW_PICKLE_DESERIALIZATION=False y te da RCE (8.8)",
+            "en": "MLflow: the statsmodels flavor ignores MLFLOW_ALLOW_PICKLE_DESERIALIZATION=False and gives you RCE (8.8)",
+            "fr": "MLflow : le flavor statsmodels ignore MLFLOW_ALLOW_PICKLE_DESERIALIZATION=False et donne un RCE (8.8)"
+          },
+          "body_html": {
+            "es": "<p>MLflow introdujo <code>MLFLOW_ALLOW_PICKLE_DESERIALIZATION</code> como control de seguridad para frenar el <code>pickle.load</code> inseguro durante la carga de modelos —fue la respuesta a la serie CVE-2024-37052 hasta CVE-2024-37060. Cuando lo ponés en <code>False</code>, la expectativa del operador es clara: nada de pickle, punto.</p><p>El flavor <code>mlflow.statsmodels</code> omite ese guard por completo. El fix más reciente (#21188) había tapado un bypass en el flavor pyfunc, pero no tocó statsmodels. Un atacante que pueda poner un artefacto MLmodel armado en cualquier artifact store accesible logra ejecución de código arbitrario en cualquier proceso que llame a <code>mlflow.pyfunc.load_model()</code> contra ese modelo —con el flag en <code>False</code>.</p><p>Esta es la definición exacta de un bypass de control de seguridad: el operador cree que mitigó el RCE por pickle, y el flavor lo ignora en silencio. Si tenés un registry de modelos donde varios equipos escriben, revisá qué flavors están habilitados antes que el flag.</p>",
+            "en": "<p>MLflow introduced <code>MLFLOW_ALLOW_PICKLE_DESERIALIZATION</code> as a security control to stop unsafe <code>pickle.load</code> during model loading — it was the answer to the CVE-2024-37052 through CVE-2024-37060 series. When you set it to <code>False</code>, the operator expectation is unambiguous: no pickle, full stop.</p><p>The <code>mlflow.statsmodels</code> flavor omits that guard entirely. The most recent fix (#21188) patched a bypass in the pyfunc flavor but never touched statsmodels. An attacker who can drop a crafted MLmodel artifact into any accessible artifact store gets arbitrary code execution in any process calling <code>mlflow.pyfunc.load_model()</code> against that model — with the flag set to <code>False</code>.</p><p>This is the textbook definition of a security control bypass: the operator believes pickle RCE is mitigated, and the flavor silently ignores the control. If you run a model registry several teams can write to, audit which flavors are enabled before you trust the flag.</p>",
+            "fr": "<p>MLflow a introduit <code>MLFLOW_ALLOW_PICKLE_DESERIALIZATION</code> pour bloquer le <code>pickle.load</code> non sûr au chargement des modèles — la réponse à la série CVE-2024-37052 à CVE-2024-37060. Mis à <code>False</code>, l'attente de l'opérateur est claire : plus de pickle.</p><p>Le flavor <code>mlflow.statsmodels</code> omet complètement cette garde. Le correctif le plus récent (#21188) avait corrigé un contournement dans le flavor pyfunc sans toucher à statsmodels. Un attaquant capable de déposer un artefact MLmodel forgé dans un artifact store accessible obtient l'exécution de code arbitraire dans tout processus appelant <code>mlflow.pyfunc.load_model()</code>.</p><p>C'est la définition manuelle d'un contournement de contrôle de sécurité.</p>"
+          },
+          "date": "01 Sep 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-gqvg-gmmx-x4hm",
+            "label": "GitHub Security Advisory"
+          }
+        },
+        {
+          "id": "omnigent-cve-2026-62674",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-62674 — Omnigent: sobrescribir un agente compartido convierte cada sesión futura en RCE (9.0)",
+            "en": "CVE-2026-62674 — Omnigent: overwriting a shared agent turns every future session into RCE (9.0)",
+            "fr": "CVE-2026-62674 — Omnigent : écraser un agent partagé transforme chaque session future en RCE (9.0)"
+          },
+          "body_html": {
+            "es": "<p>Omnigent (Databricks) es un meta-harness que corre Claude Code, Codex y Pi bajo políticas y sandboxing. La UI muestra los agentes compartidos y de template como no editables por MCP. Pero el endpoint de subida completa del bundle, <code>PUT /sessions/{session_id}/agent</code>, sigue aceptando un bundle de reemplazo.</p><p>El chequeo de permisos que hace ese endpoint es <code>LEVEL_EDIT</code> sobre la sesión —o sea, sobre <em>tu propia</em> sesión. Un usuario autenticado con acceso de edición a su sesión puede sobrescribir el agente compartido para todos. Agregando un servidor MCP <code>stdio</code> a ese agente compartido, cada sesión futura de runner que lo use arranca un comando del atacante.</p><p>Es supply chain interna: no envenenaste un paquete de npm, envenenaste la plantilla de agente que usa todo el equipo. Un solo permiso mal alcanzado —permiso sobre la sesión usado para autorizar una escritura sobre un recurso compartido— y el radio de impacto pasa de un usuario a la organización entera.</p>",
+            "en": "<p>Omnigent (Databricks) is a meta-harness running Claude Code, Codex and Pi under policies and sandboxing. The UI shows shared and template agents as not MCP-editable. But the full bundle upload endpoint, <code>PUT /sessions/{session_id}/agent</code>, still accepts a replacement bundle.</p><p>The permission check on that endpoint is <code>LEVEL_EDIT</code> on the session — that is, on <em>your own</em> session. An authenticated user with edit access to their session can overwrite the shared agent for everyone. By adding a <code>stdio</code> MCP server to that shared agent, every future runner session using it starts an attacker-controlled command.</p><p>This is internal supply chain: you did not poison an npm package, you poisoned the agent template the whole team uses. One mis-scoped permission — session-level permission authorizing a write to a shared resource — and the blast radius goes from one user to the whole organization.</p>",
+            "fr": "<p>Omnigent (Databricks) est un méta-harness exécutant Claude Code, Codex et Pi sous politiques et sandboxing. L'UI présente les agents partagés et templates comme non éditables par MCP. Mais l'endpoint d'upload complet du bundle, <code>PUT /sessions/{session_id}/agent</code>, accepte toujours un bundle de remplacement.</p><p>Le contrôle de permission porte sur <code>LEVEL_EDIT</code> de la session — donc de <em>votre propre</em> session. Un utilisateur authentifié peut écraser l'agent partagé pour tout le monde. En y ajoutant un serveur MCP <code>stdio</code>, chaque future session runner démarre une commande contrôlée par l'attaquant.</p><p>C'est de la supply chain interne : on n'empoisonne pas un paquet npm, on empoisonne le template d'agent de toute l'équipe.</p>"
+          },
+          "date": "02 Sep 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-jrrm-9hc7-2v3h",
+            "label": "GitHub Security Advisory"
+          }
+        },
+        {
+          "id": "banks-cve-2026-71492",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-71492 — Banks: el registry de prompts escribe donde le digas, incluso rutas absolutas (6.0)",
+            "en": "CVE-2026-71492 — Banks: the prompt registry writes wherever you say, absolute paths included (6.0)",
+            "fr": "CVE-2026-71492 — Banks : le registre de prompts écrit où vous voulez, chemins absolus compris (6.0)"
+          },
+          "body_html": {
+            "es": "<p>Banks es una librería de gestión de prompts para LLMs. Su <code>DirectoryPromptRegistry.set()</code> interpola <code>Prompt.name</code> —controlable por el atacante— dentro de una expresión <code>Path</code>, sin canonicalizar nada. En <code>src/banks/registries/directory.py:44</code>:</p><pre><code>prompt_file = path / f&quot;{prompt.name}.{prompt.version}.jinja&quot;\nprompt_file.write_text(prompt.raw)</code></pre><p>Dos modos de falla. El obvio: <code>name=&quot;../victim/foo&quot;</code> resuelve a <code>&lt;registry&gt;/../victim/foo.0.jinja</code>, afuera del root. El menos obvio, y más interesante: <code>pathlib</code> documenta que <code>Path(&quot;/a&quot;) / Path(&quot;/b&quot;)</code> devuelve <code>Path(&quot;/b&quot;)</code>. Así que <code>name=&quot;/abs/path&quot;</code> descarta el root del registry por completo —el registry ni se consulta.</p><p>Detalle que empeora la cosa: el <code>name</code> envenenado se persiste en <code>index.json</code>, así que la ruta fuera del root se sigue reconstruyendo después. Y el contenido escrito es una plantilla Jinja. Si tu app deriva el nombre del prompt de datos de request, alguien te escribe bytes elegidos en cualquier parte del filesystem.</p>",
+            "en": "<p>Banks is an LLM prompt-management library. Its <code>DirectoryPromptRegistry.set()</code> interpolates the attacker-controllable <code>Prompt.name</code> into a <code>Path</code> expression with no canonicalization. In <code>src/banks/registries/directory.py:44</code>:</p><pre><code>prompt_file = path / f&quot;{prompt.name}.{prompt.version}.jinja&quot;\nprompt_file.write_text(prompt.raw)</code></pre><p>Two failure modes. The obvious one: <code>name=&quot;../victim/foo&quot;</code> resolves to <code>&lt;registry&gt;/../victim/foo.0.jinja</code>, outside the root. The less obvious and more interesting one: <code>pathlib</code> documents that <code>Path(&quot;/a&quot;) / Path(&quot;/b&quot;)</code> returns <code>Path(&quot;/b&quot;)</code>. So <code>name=&quot;/abs/path&quot;</code> discards the registry root entirely — the registry is never consulted.</p><p>The detail that makes it worse: the poisoned <code>name</code> is persisted to <code>index.json</code>, so the out-of-root path keeps getting reconstructed afterwards. And the content written is a Jinja template. If your app derives the prompt name from request data, someone writes chosen bytes anywhere on your filesystem.</p>",
+            "fr": "<p>Banks est une bibliothèque de gestion de prompts LLM. Son <code>DirectoryPromptRegistry.set()</code> interpole <code>Prompt.name</code>, contrôlable par l'attaquant, dans une expression <code>Path</code> sans canonicalisation, dans <code>src/banks/registries/directory.py:44</code>.</p><p>Deux modes de défaillance. L'évident : <code>name=&quot;../victim/foo&quot;</code> sort du root. Le moins évident : <code>pathlib</code> documente que <code>Path(&quot;/a&quot;) / Path(&quot;/b&quot;)</code> renvoie <code>Path(&quot;/b&quot;)</code>, donc <code>name=&quot;/abs/path&quot;</code> écarte totalement le root du registre.</p><p>Pire : le <code>name</code> empoisonné est persisté dans <code>index.json</code>, et le contenu écrit est un template Jinja.</p>"
+          },
+          "date": "02 Sep 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-x8wg-4xgc-vr54",
+            "label": "GitHub Security Advisory"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "booz-allen-cyber-weapon-index",
+          "tag": "research",
+          "title": {
+            "es": "Cyber Weapon Index: de 18 modelos evaluados, solo Claude Mythos completó la kill chain entera sola",
+            "en": "Cyber Weapon Index: of 18 models tested, only Claude Mythos finished the full kill chain alone",
+            "fr": "Cyber Weapon Index : sur 18 modèles testés, seul Claude Mythos a bouclé la kill chain complet"
+          },
+          "body_html": {
+            "es": "<p>Booz Allen Hamilton publicó el Cyber Weapon Index, un framework que evalúa la capacidad autónoma de los modelos en ataques, combinando puntaje de investigación de vulnerabilidades con métricas de avance en la kill chain. Probaron 18 modelos bajo condiciones idénticas: nueve estadounidenses y nueve chinos.</p><p>Claude Mythos, de Anthropic, sacó 80 y fue el único que completó la kill chain completa de forma autónoma. Con credenciales robadas obtuvo acceso de administrador en todos los intentos, e identificó por su cuenta caminos de escalada de privilegios sin seguir una secuencia predeterminada. Otros tres —Grok-4.5, Muse Spark 1.1 y GLM-5.2— llegaron a acceso total de dominio. Cuatro lograron movimiento lateral. Todos menos uno consiguieron acceso inicial a la red.</p><p>El dato que más te tiene que preocupar no es el número de arriba: «cuando se lo emparejó con un harness de ataque, Claude Sonnet rivalizó con la performance de Claude Mythos». Traducido: el software de orquestación amplifica tanto como el modelo. Tu modelo de amenaza no puede estar anclado a qué modelo de frontera está disponible, porque un modelo más chico con buen harness llega al mismo lugar.</p>",
+            "en": "<p>Booz Allen Hamilton published the Cyber Weapon Index, a framework evaluating models' autonomous attack capability by combining vulnerability-research scores with kill-chain attainment metrics. They tested 18 models under identical conditions: nine American and nine Chinese.</p><p>Anthropic's Claude Mythos scored 80 and was the only model to complete the full cyber kill chain autonomously. With stolen credentials it achieved administrator access in every attempt, and independently identified privilege-escalation paths without following a predetermined sequence. Three others — Grok-4.5, Muse Spark 1.1 and GLM-5.2 — reached full domain access. Four achieved lateral movement. All but one gained initial network access.</p><p>The number at the top is not the finding that should worry you: «when paired with an attack harness, Claude Sonnet rivaled Claude Mythos' performance». Translated: the orchestration software amplifies as much as the model does. Your threat model cannot be anchored to which frontier model is available, because a smaller model with a good harness lands in the same place.</p>",
+            "fr": "<p>Booz Allen Hamilton a publié le Cyber Weapon Index, un cadre évaluant la capacité d'attaque autonome des modèles en combinant recherche de vulnérabilités et progression dans la kill chain. 18 modèles testés dans des conditions identiques : neuf américains, neuf chinois.</p><p>Claude Mythos d'Anthropic a obtenu 80 et fut le seul à boucler la kill chain complète de façon autonome, obtenant l'accès administrateur à chaque tentative avec des identifiants volés. Trois autres — Grok-4.5, Muse Spark 1.1 et GLM-5.2 — ont atteint l'accès domaine complet.</p><p>Le constat le plus inquiétant : «associé à un harness d'attaque, Claude Sonnet rivalisait avec Claude Mythos». Le logiciel d'orchestration amplifie autant que le modèle lui-même.</p>"
+          },
+          "date": "02 Sep 2026",
+          "source": {
+            "url": "https://www.theregister.com/security/2026/09/02/claude-mythos-only-model-to-complete-full-cyber-kill-chain-experts-say/5294071",
+            "label": "The Register"
+          }
+        },
+        {
+          "id": "omnigent-cve-2026-62676",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-62676 — Omnigent: el parser de shell falla abierto, y None significa permitir (7.1)",
+            "en": "CVE-2026-62676 — Omnigent: the shell parser fails open, and None means allow (7.1)",
+            "fr": "CVE-2026-62676 — Omnigent : le parseur shell échoue ouvert, et None signifie autoriser (7.1)"
+          },
+          "body_html": {
+            "es": "<p>Reportado por Aeon, un agente de seguridad autónomo —o sea, un agente encontrando bugs en el harness que gobierna a otros agentes. El componente es <code>omnigent/policies/builtins/_shell.py</code>, el parser de comandos shell compartido que consumen <code>github.py</code> (allowlist de <code>write_repos</code> y <code>write_branches</code>) y <code>working_dir.py</code> (confinamiento al workspace).</p><p>El parser falla abierto. Cuando un comando gateado está escrito de una forma que el parser no reconoce, no produce ninguna operación; el evaluador de políticas devuelve <code>None</code>; y <code>None</code> es abstención, que se trata como ALLOW. O sea que cualquier comando que el parser no entienda pasa por encima de las dos garantías centrales del producto a la vez: la allowlist de repos y branches, y el confinamiento al working directory.</p><p>Este es el patrón que vas a ver una y otra vez en guardrails de agentes: la política se escribe como «denegar lo que reconozco como malo» y el parser es la superficie de ataque real. Un agente con prompt injection no necesita romper la política, solo necesita escribir el comando de una forma que el parser no parsee.</p>",
+            "en": "<p>Reported by Aeon, an autonomous security agent — an agent finding bugs in the harness that governs other agents. The component is <code>omnigent/policies/builtins/_shell.py</code>, the shared shell-command parser consumed by <code>github.py</code> (the <code>write_repos</code>/<code>write_branches</code> allowlist) and <code>working_dir.py</code> (workspace confinement).</p><p>The parser fails open. When a gated command is spelled in a way the parser does not recognize, it produces no operation; the policy evaluator returns <code>None</code>; and <code>None</code> means abstain, which is treated as ALLOW. So any command the parser misses bypasses both of the product's core safety guarantees at once: the repo/branch allowlist and the working-directory confinement.</p><p>This is the pattern you will keep seeing in agent guardrails: the policy is written as «deny what I recognize as bad», and the parser is the real attack surface. A prompt-injected agent does not need to break the policy — it only needs to spell the command in a way the parser fails to parse.</p>",
+            "fr": "<p>Signalé par Aeon, un agent de sécurité autonome — donc un agent trouvant des bugs dans le harness qui gouverne d'autres agents. Le composant est <code>omnigent/policies/builtins/_shell.py</code>, le parseur de commandes partagé par <code>github.py</code> (allowlist <code>write_repos</code>/<code>write_branches</code>) et <code>working_dir.py</code> (confinement au workspace).</p><p>Le parseur échoue ouvert. Quand une commande gatée est écrite d'une façon non reconnue, aucune opération n'est produite ; l'évaluateur renvoie <code>None</code> ; et <code>None</code> vaut abstention, traitée comme ALLOW. Toute commande manquée contourne donc les deux garanties centrales du produit.</p><p>Le motif à retenir : la politique dit «refuser ce que je reconnais comme mauvais», et le parseur est la vraie surface d'attaque.</p>"
+          },
+          "date": "02 Sep 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-7mqg-cx4g-x2rf",
+            "label": "GitHub Security Advisory"
+          }
+        }
+      ]
+    },
+    {
+      "id": "advisories",
+      "name": "Vendor Advisories",
+      "theme": "advisories",
+      "icon_emoji": "📢",
+      "anchor": "advisories",
+      "updates": [
+        {
+          "id": "vendor-cyber-models",
+          "tag": "advisory",
+          "title": {
+            "es": "Google, Anthropic y OpenAI sacan modelos de ciberseguridad el mismo día, cada uno con su programa de acceso",
+            "en": "Google, Anthropic and OpenAI ship cybersecurity models the same day, each with its own access program",
+            "fr": "Google, Anthropic et OpenAI sortent des modèles cyber le même jour, chacun avec son programme d'accès"
+          },
+          "body_html": {
+            "es": "<p>Los tres laboratorios anunciaron el mismo día, y la coincidencia dice más que los anuncios.</p><p><strong>Google</strong> presentó Gemini 3.8 Flash Cyber, su modelo de ciberseguridad más capaz, accesible por el nuevo Fairwind Program: acceso temprano para gobiernos, prestadores de salud y telecomunicaciones, con más de 650 organizaciones asociadas, entre ellas CrowdStrike y Palo Alto Networks.</p><p><strong>Anthropic</strong> lanzó Claude Fable 5.1 y Claude Mythos 5.1 con salvaguardas diferenciadas: Fable 5.1 ahora permite trabajo de identificación de vulnerabilidades, aunque ciertas tareas de ciberseguridad siguen restringidas. Sumó Enterprise Frontier Safeguards, que combina retención cero de datos con salvaguardas reforzadas, y reconoció incidentes previos de acceso no autorizado más medidas extra de contención para fallas de alineamiento.</p><p><strong>OpenAI</strong> dijo que su modelo Astra, todavía sin salir, alcanza el umbral de capacidad crítica en ciberseguridad: detecta y explota zero-days por su cuenta, con tasas de ejecución de código arbitrario muy superiores a las de sus predecesores, y encontró vulnerabilidades desconocidas durante las pruebas. Lo va a liberar de forma controlada por el programa Daybreak Blue.</p><p>Los tres describen la misma cosa: capacidad ofensiva real, entregada tras una puerta de acceso curada. Y el índice de Booz Allen de esta misma jornada muestra qué tan poco te protege esa puerta cuando el harness importa tanto como el modelo.</p>",
+            "en": "<p>All three labs announced on the same day, and the coincidence says more than the announcements do.</p><p><strong>Google</strong> unveiled Gemini 3.8 Flash Cyber, its most capable cybersecurity model, reachable through the new Fairwind Program: early access for governments, healthcare providers and telecoms, with over 650 partner organizations including CrowdStrike and Palo Alto Networks.</p><p><strong>Anthropic</strong> released Claude Fable 5.1 and Claude Mythos 5.1 with differentiated safeguards: Fable 5.1 now permits vulnerability-identification work, though certain cybersecurity tasks remain restricted. It added Enterprise Frontier Safeguards, combining zero data retention with hardened safeguards, and disclosed previous unauthorized-access incidents plus extra containment measures for alignment failures.</p><p><strong>OpenAI</strong> said its forthcoming Astra model meets the Critical cybersecurity capability threshold: it detects and exploits zero-days independently, shows much higher arbitrary code-execution rates than its predecessors, and found previously unknown vulnerabilities during testing. Release will be controlled through the Daybreak Blue program.</p><p>All three describe the same thing: real offensive capability, delivered behind a curated access gate. And Booz Allen's index from the very same day shows how little that gate protects you when the harness matters as much as the model.</p>",
+            "fr": "<p>Les trois laboratoires ont annoncé le même jour, et la coïncidence en dit plus que les annonces.</p><p><strong>Google</strong> a dévoilé Gemini 3.8 Flash Cyber, accessible via le nouveau Fairwind Program : accès anticipé pour gouvernements, santé et télécoms, avec plus de 650 organisations partenaires dont CrowdStrike et Palo Alto Networks.</p><p><strong>Anthropic</strong> a sorti Claude Fable 5.1 et Claude Mythos 5.1 avec des garde-fous différenciés : Fable 5.1 autorise désormais l'identification de vulnérabilités. S'y ajoutent les Enterprise Frontier Safeguards, combinant rétention zéro et garde-fous renforcés, ainsi que la divulgation d'incidents d'accès non autorisé antérieurs.</p><p><strong>OpenAI</strong> annonce que son futur modèle Astra atteint le seuil de capacité cyber Critique : il détecte et exploite des zero-days de façon autonome. Diffusion contrôlée via le programme Daybreak Blue.</p><p>Tous décrivent la même chose : une capacité offensive réelle derrière une porte d'accès curée.</p>"
+          },
+          "date": "02 Sep 2026",
+          "source": {
+            "url": "https://thehackernews.com/2026/09/google-anthropic-and-openai-unveil.html",
+            "label": "The Hacker News"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El tema del día es el control de seguridad que existe pero no corre. NLTK tiene un módulo pathsec entero, escrito específicamente como fix de un RCE por pickle y un path traversal, y viene con ENFORCE=False por defecto: ocho gates que emiten warnings en vez de tirar excepción. MLflow tiene un flag para prohibir la deserialización de pickle, y el flavor de statsmodels ni lo consulta. El parser de guardrails de Omnigent devuelve None ante un comando que no entiende, y None se lee como permitir. Tres proyectos distintos, la misma falla de diseño: el control se agregó como respuesta a un CVE real, y después alguien eligió un default o un camino de código que lo desactiva en silencio. Si tenés un flag de seguridad en tu stack de ML, andá a verificar que esté prendido y que cubra todos los caminos —no alcanza con que el módulo exista.",
+      "en": "Today's theme is the security control that exists but does not run. NLTK ships an entire pathsec module, written specifically as the fix for a pickle RCE and a path traversal, and it defaults to ENFORCE=False: eight gates that emit warnings instead of raising. MLflow has a flag to forbid pickle deserialization, and the statsmodels flavor never consults it. Omnigent's guardrail parser returns None on a command it does not understand, and None reads as allow. Three different projects, one design failure: the control was added in response to a real CVE, and then someone picked a default or a code path that silently disables it. If you have a security flag anywhere in your ML stack, go verify it is on and that it covers every path — the module existing is not enough.",
+      "fr": "Le thème du jour est le contrôle de sécurité qui existe mais ne s'exécute pas. NLTK embarque tout un module pathsec, écrit comme correctif d'un RCE pickle et d'un path traversal, avec ENFORCE=False par défaut : huit gardes qui avertissent au lieu de lever. MLflow dispose d'un drapeau interdisant la désérialisation pickle, que le flavor statsmodels ne consulte jamais. Le parseur de guardrails d'Omnigent renvoie None sur une commande incomprise, et None vaut autoriser. Trois projets, une même faille de conception : le contrôle ajouté après un CVE réel, puis un défaut ou un chemin de code qui le désactive en silence."
+    },
+    {
+      "es": "El otro eje es que el harness ya vale tanto como el modelo, y lo dicen dos fuentes independientes del mismo día. Booz Allen midió 18 modelos y encontró que Claude Sonnet con un harness de ataque rivaliza con Claude Mythos suelto. Unit 42 documentó una intrusión completa en menos de 10 horas donde lo decisivo fue la orquestación: subagentes especializados para repos, para pivoteo, para CI/CD, replanificando en tiempo real. Y GitSpawn muestra el reverso: el harness es también la superficie de ataque, porque siete agentes distintos ejecutan git status sin sanitizar la config del repo. Si estás modelando amenazas por «qué modelo de frontera puede conseguir el atacante», estás midiendo la variable equivocada.",
+      "en": "The other axis is that the harness now weighs as much as the model, and two independent sources said so on the same day. Booz Allen measured 18 models and found Claude Sonnet with an attack harness rivals Claude Mythos on its own. Unit 42 documented a full intrusion in under 10 hours where orchestration was the decisive factor: specialist subagents for repos, for pivoting, for CI/CD, replanning in real time. And GitSpawn shows the flip side — the harness is also the attack surface, because seven different agents run git status without sanitizing the repo config. If you are threat-modeling around «which frontier model can the attacker get», you are measuring the wrong variable.",
+      "fr": "L'autre axe : le harness pèse désormais autant que le modèle, et deux sources indépendantes l'ont dit le même jour. Booz Allen a mesuré 18 modèles et trouvé que Claude Sonnet avec un harness d'attaque rivalise avec Claude Mythos seul. Unit 42 a documenté une intrusion complète en moins de 10 heures où l'orchestration fut décisive : des sous-agents spécialisés replanifiant en temps réel. Et GitSpawn montre le revers — le harness est aussi la surface d'attaque. Modéliser la menace autour du «quel modèle de frontière l'attaquant peut-il obtenir» revient à mesurer la mauvaise variable."
+    }
+  ]
+}

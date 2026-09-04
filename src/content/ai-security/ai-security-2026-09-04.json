@@ -1,0 +1,276 @@
+{
+  "title": {
+    "es": "AI Security — 04 Sep 2026",
+    "en": "AI Security — 04 Sep 2026",
+    "fr": "AI Security — 04 Sep 2026"
+  },
+  "description": {
+    "es": "Claude Code Templates expone un servidor sin auth en 0.0.0.0 que ejecuta comandos del atacante; unstructured, la capa de ingesta de URLs de medio ecosistema RAG, tiene SSRF de lectura completa; el parser de Codex CLI se traga el token --% de PowerShell; y BraZetsu usa IA generativa para tasar máquinas comprometidas antes de venderlas.",
+    "en": "Claude Code Templates ships an unauthenticated server on 0.0.0.0 that runs attacker commands; unstructured — the URL ingestion layer for half the RAG ecosystem — has a full-read SSRF; Codex CLI's safety parser swallows PowerShell's --% token; and BraZetsu uses generative AI to price compromised machines before selling them.",
+    "fr": "Claude Code Templates expose un serveur sans authentification sur 0.0.0.0 qui exécute les commandes de l'attaquant ; unstructured, la couche d'ingestion d'URL de la moitié de l'écosystème RAG, souffre d'un SSRF en lecture complète ; le parser de Codex CLI avale le token --% de PowerShell ; et BraZetsu utilise l'IA générative pour évaluer les machines compromises avant de les revendre."
+  },
+  "pubDate": "2026-09-04",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "Claude Code Templates: RCE sin auth en --studio",
+        "en": "Claude Code Templates: unauth RCE in --studio",
+        "fr": "Claude Code Templates : RCE sans auth via --studio"
+      },
+      "anchor": "cve-2026-73222-claude-code-templates",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "unstructured: SSRF de lectura completa, CVSS 9.3",
+        "en": "unstructured: full-read SSRF, CVSS 9.3",
+        "fr": "unstructured : SSRF en lecture complète, CVSS 9.3"
+      },
+      "anchor": "cve-2026-71428-unstructured-ssrf",
+      "icon": "lucide:radiation"
+    },
+    {
+      "text": {
+        "es": "Codex CLI: el token --% burla el parser de seguridad",
+        "en": "Codex CLI: --% token defeats the safety parser",
+        "fr": "Codex CLI : le token --% déjoue le parser de sûreté"
+      },
+      "anchor": "cve-2026-19591-codex-powershell",
+      "icon": "simple-icons:openai"
+    },
+    {
+      "text": {
+        "es": "BraZetsu tasa máquinas hackeadas con IA generativa",
+        "en": "BraZetsu prices hacked machines with generative AI",
+        "fr": "BraZetsu évalue les machines piratées avec l'IA"
+      },
+      "anchor": "brazetsu-ai-access-broker",
+      "icon": "lucide:skull"
+    },
+    {
+      "text": {
+        "es": "MCP de CKAN: colisión de cache key envenena respuestas",
+        "en": "CKAN MCP: cache-key collision poisons responses",
+        "fr": "MCP CKAN : collision de clé de cache empoisonne"
+      },
+      "anchor": "cve-2026-73846-ckan-mcp-cache",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "Proponen diodos de datos para encerrar modelos frontier",
+        "en": "Data diodes proposed to box in frontier models",
+        "fr": "Des diodes de données pour confiner les modèles"
+      },
+      "anchor": "one-way-networks-data-diodes",
+      "icon": "lucide:lock"
+    },
+    {
+      "text": {
+        "es": "OpenAI pone mil millones en créditos para defensores",
+        "en": "OpenAI puts $1B in credits behind cyber defenders",
+        "fr": "OpenAI met 1 Md$ de crédits pour les défenseurs"
+      },
+      "anchor": "openai-daybreak-defenders",
+      "icon": "lucide:shield-alert"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-incidents",
+      "name": "Top Incidents",
+      "theme": "top-incidents",
+      "icon_emoji": "🚨",
+      "anchor": "top-incidents",
+      "updates": [
+        {
+          "id": "brazetsu-ai-access-broker",
+          "tag": "breach",
+          "title": {
+            "es": "BraZetsu: la IA generativa no escribe el malware, le pone precio a tu máquina",
+            "en": "BraZetsu: generative AI does not just write the malware, it prices your machine",
+            "fr": "BraZetsu : l'IA générative n'écrit pas que le malware, elle tarife votre machine"
+          },
+          "body_html": {
+            "es": "<p>El grupo <strong>Exilware</strong> opera BraZetsu, un framework modular en Python para Windows que funciona como toolkit de <em>Initial Access Broker</em>: compromete equipos y los publica en el «Infected Marketplace» a unos 5,80 dólares el acceso. Cinco versiones distintas detectadas desde principios de 2026.</p><p>Lo interesante para este brief no es el RAT en sí, sino dónde metieron el modelo. Los investigadores señalan uso intensivo de IA generativa <strong>no solo para desarrollar el malware, sino para el triage de datos en el backend y la priorización de objetivos</strong>. El framework perfila hardware y red de cada víctima y deja que el modelo evalúe el potencial comercial de la máquina, la categorice y le asigne precio automáticamente.</p><p>Ojo con esto: es el ciclo de monetización completo automatizado. Capacidades del implante: recon de red, extracción de historial de Chrome, Edge, Brave, Opera y Vivaldi, detección y manipulación de archivos financieros CNAB brasileños, shell remota, capturas de pantalla y WebSocket persistente contra la infraestructura de comando. Comparte código con CNABHunter y el backdoor AgenteV2, y apunta sobre todo a organizaciones ibéricas y latinoamericanas de finanzas, corporativo y e-commerce.</p>",
+            "en": "<p>The <strong>Exilware</strong> crew runs BraZetsu, a modular Python framework for Windows that works as an <em>Initial Access Broker</em> toolkit: it compromises hosts and lists them on the «Infected Marketplace» at roughly $5.80 per access point. Five distinct versions have been spotted since early 2026.</p><p>What matters here is not the RAT itself but where the model was wired in. Researchers point to heavy use of generative AI <strong>not just for malware development, but for backend data triage and target prioritization</strong>. The framework profiles each victim's hardware and network and lets the model assess the machine's commercial potential, categorize it, and price it automatically.</p><p>That is the full monetization loop automated. Implant capabilities: network recon, browser history extraction from Chrome, Edge, Brave, Opera and Vivaldi, detection and manipulation of Brazilian CNAB financial files, remote shell, screenshots, and a persistent WebSocket to command infrastructure. It shares a codebase with CNABHunter and the AgenteV2 backdoor, and targets mostly Iberian and Latin American finance, corporate and e-commerce organizations.</p>",
+            "fr": "<p>Le groupe <strong>Exilware</strong> exploite BraZetsu, un framework Python modulaire pour Windows qui sert de boîte à outils d'<em>Initial Access Broker</em> : il compromet des machines et les publie sur le «Infected Marketplace» à environ 5,80 dollars l'accès. Cinq versions distinctes détectées depuis début 2026.</p><p>Le point notable n'est pas le RAT lui-même mais l'endroit où le modèle a été branché. Les chercheurs relèvent un usage intensif de l'IA générative <strong>non seulement pour développer le malware, mais aussi pour le triage des données côté backend et la priorisation des cibles</strong>. Le framework profile le matériel et le réseau de chaque victime, puis laisse le modèle évaluer le potentiel commercial de la machine, la classer et lui fixer un prix automatiquement.</p><p>C'est la boucle de monétisation complète automatisée. Capacités de l'implant : reconnaissance réseau, extraction de l'historique de Chrome, Edge, Brave, Opera et Vivaldi, détection et manipulation des fichiers financiers CNAB brésiliens, shell distante, captures d'écran et WebSocket persistant vers l'infrastructure de commande. Il partage du code avec CNABHunter et la backdoor AgenteV2, et vise surtout des organisations ibériques et latino-américaines de la finance, du corporate et de l'e-commerce.</p>"
+          },
+          "date": "03 Sep 2026",
+          "source": {
+            "url": "https://thehackernews.com/2026/09/brazetsu-malware-turns-compromised.html",
+            "label": "The Hacker News"
+          }
+        }
+      ]
+    },
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "cve-2026-71428-unstructured-ssrf",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-71428 — unstructured: SSRF de lectura completa en la ingesta por URL (9.3)",
+            "en": "CVE-2026-71428 — unstructured: full-read SSRF in URL-based partitioning (9.3)",
+            "fr": "CVE-2026-71428 — unstructured : SSRF en lecture complète dans l'ingestion par URL (9.3)"
+          },
+          "body_html": {
+            "es": "<p>El argumento <code>url=</code> de <code>partition()</code>, <code>partition_html()</code> y <code>partition_md()</code> se resuelve con <code>requests.get()</code> <strong>sin ninguna validación de host</strong>. Y como el cuerpo de la respuesta vuelve como texto de un <code>Element</code>, esto no es un SSRF ciego: es de lectura completa. El atacante llega a APIs de administración en loopback, servicios HTTP internos y endpoints de metadata de cloud, y se lleva la respuesta.</p><p>El alcance es lo que lo vuelve crítico. <code>unstructured</code> es la capa de facto de ingesta de URLs para <code>UnstructuredURLLoader</code> de LangChain, <code>UnstructuredReader</code> de LlamaIndex, Chainlit y un montón de frameworks de agentes. Si tu pipeline RAG deja que el usuario proponga una URL para indexar, ya tenés el sink.</p><p>Tres sinks confirmados en 0.22.26. Parcheado en <strong>0.24.0</strong>. Los mantenedores lo dicen explícito en el advisory: los defaults seguros tienen que vivir en la librería, no en cada caller río abajo.</p>",
+            "en": "<p>The <code>url=</code> argument of <code>partition()</code>, <code>partition_html()</code> and <code>partition_md()</code> is fetched via <code>requests.get()</code> <strong>with no host validation at all</strong>. And because the response body comes back as <code>Element</code> text, this is not a blind SSRF — it is full-read. Attackers reach loopback admin APIs, internal HTTP services and cloud metadata endpoints, and read the answer.</p><p>Reach is what makes this critical. <code>unstructured</code> is the de facto URL ingestion layer for LangChain's <code>UnstructuredURLLoader</code>, LlamaIndex's <code>UnstructuredReader</code>, Chainlit and a long list of agent frameworks. If your RAG pipeline lets a user hand it a URL to index, you already have the sink.</p><p>Three confirmed sinks in 0.22.26. Patched in <strong>0.24.0</strong>. The advisory states it plainly: secure defaults must live in the library, not in every downstream caller.</p>",
+            "fr": "<p>L'argument <code>url=</code> de <code>partition()</code>, <code>partition_html()</code> et <code>partition_md()</code> est récupéré via <code>requests.get()</code> <strong>sans aucune validation d'hôte</strong>. Et comme le corps de la réponse revient sous forme de texte d'<code>Element</code>, ce n'est pas un SSRF aveugle : c'est une lecture complète. L'attaquant atteint les API d'administration en loopback, les services HTTP internes et les endpoints de métadonnées cloud, et en lit la réponse.</p><p>C'est la portée qui rend la faille critique. <code>unstructured</code> est la couche d'ingestion d'URL de facto pour <code>UnstructuredURLLoader</code> de LangChain, <code>UnstructuredReader</code> de LlamaIndex, Chainlit et bien d'autres frameworks d'agents. Si votre pipeline RAG accepte une URL fournie par l'utilisateur, le sink est déjà là.</p><p>Trois sinks confirmés en 0.22.26. Corrigé en <strong>0.24.0</strong>. L'advisory le dit clairement : les valeurs par défaut sûres doivent vivre dans la bibliothèque, pas chez chaque appelant en aval.</p>"
+          },
+          "date": "03 Sep 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-4mvj-m6j5-pmf7",
+            "label": "GitHub Security Advisory"
+          }
+        },
+        {
+          "id": "cve-2026-73222-claude-code-templates",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-73222 — Claude Code Templates: RCE sin autenticación en el servidor --studio (8.8)",
+            "en": "CVE-2026-73222 — Claude Code Templates: unauthenticated RCE in the --studio server (8.8)",
+            "fr": "CVE-2026-73222 — Claude Code Templates : RCE sans authentification dans le serveur --studio (8.8)"
+          },
+          "body_html": {
+            "es": "<p><code>npx claude-code-templates --studio</code> levanta «Claude Code Studio», un servidor Express (<code>cli-tool/src/sandbox-server.js</code>, puerto 3444 por defecto) que hace tres cosas mal a la vez: bindea a <strong>todas las interfaces</strong> (<code>0.0.0.0</code>), setea <code>Access-Control-Allow-Origin: *</code> y <strong>no pide autenticación</strong>.</p><p>Dos endpoints POST pasan campos del body controlados por el atacante directo a <code>child_process.spawn(..., { shell: true })</code>. Con <code>shell: true</code>, Node une el array de argv en un solo string para <code>sh -c</code>, así que los metacaracteres los interpreta la shell y ejecutan.</p><p>El vector práctico es doble: una página web maliciosa que el dev visita (el CORS abierto se encarga) o cualquiera en la misma LAN. Parcheado en <strong>1.29.4</strong>. Si corriste <code>--studio</code> en una cafetería o en una red de oficina compartida, actualizá y revisá.</p>",
+            "en": "<p><code>npx claude-code-templates --studio</code> launches «Claude Code Studio», an Express server (<code>cli-tool/src/sandbox-server.js</code>, default port 3444) that gets three things wrong at once: it binds to <strong>all interfaces</strong> (<code>0.0.0.0</code>), sets <code>Access-Control-Allow-Origin: *</code>, and <strong>requires no authentication</strong>.</p><p>Two POST endpoints pass attacker-controlled request-body fields straight into <code>child_process.spawn(..., { shell: true })</code>. With <code>shell: true</code>, Node joins the argv array into a single <code>sh -c</code> string, so metacharacters get parsed by the shell and execute.</p><p>Two practical vectors: a malicious web page the developer visits (the wide-open CORS handles the rest), or anyone on the same LAN. Patched in <strong>1.29.4</strong>. If you ran <code>--studio</code> from a coffee shop or a shared office network, update and go look.</p>",
+            "fr": "<p><code>npx claude-code-templates --studio</code> lance «Claude Code Studio», un serveur Express (<code>cli-tool/src/sandbox-server.js</code>, port 3444 par défaut) qui cumule trois erreurs : il écoute sur <strong>toutes les interfaces</strong> (<code>0.0.0.0</code>), positionne <code>Access-Control-Allow-Origin: *</code> et <strong>n'exige aucune authentification</strong>.</p><p>Deux endpoints POST transmettent des champs du corps de requête contrôlés par l'attaquant directement à <code>child_process.spawn(..., { shell: true })</code>. Avec <code>shell: true</code>, Node fusionne le tableau argv en une seule chaîne <code>sh -c</code> : les métacaractères sont interprétés par le shell et s'exécutent.</p><p>Deux vecteurs concrets : une page web malveillante visitée par le développeur (le CORS ouvert fait le reste), ou n'importe qui sur le même LAN. Corrigé en <strong>1.29.4</strong>. Si vous avez lancé <code>--studio</code> depuis un café ou un réseau de bureau partagé, mettez à jour et vérifiez.</p>"
+          },
+          "date": "03 Sep 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-79wm-x847-7cvg",
+            "label": "GitHub Security Advisory"
+          }
+        },
+        {
+          "id": "cve-2026-19591-codex-powershell",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-19591 — Codex CLI: el token --% de PowerShell burla el parser de comandos seguros (8.8)",
+            "en": "CVE-2026-19591 — Codex CLI: PowerShell's --% token defeats the command-safety parser (8.8)",
+            "fr": "CVE-2026-19591 — Codex CLI : le token --% de PowerShell déjoue le parser de sûreté (8.8)"
+          },
+          "body_html": {
+            "es": "<p>Codex CLI para Windows, macOS y Linux, y Codex Desktop para Windows y macOS, <strong>clasificaban como seguros ciertos comandos de PowerShell</strong> porque su parser de command-safety interpretaba el token de stop-parsing (<code>--%</code>) distinto de como lo interpreta PowerShell.</p><p>La cadena de ataque es la que da miedo: el usuario abre un repo malicioso, Codex ejecuta comandos git de escritura de archivos <strong>sin pedir aprobación</strong>, el atacante modifica la configuración de Codex, y en la siguiente carga esa config manipulada levanta un <strong>servidor MCP controlado por el atacante</strong>. A partir de ahí, ejecución de código completa con los privilegios del usuario.</p><p>Es exactamente el mismo patrón que vimos con GitSpawn: el parser de aprobación es una superficie de ataque, no una garantía. Requiere interacción del usuario. Parcheado en CLI <strong>0.131.0</strong> y en las versiones actualizadas de Desktop para macOS y Windows.</p>",
+            "en": "<p>Codex CLI for Windows, macOS and Linux, and Codex Desktop for Windows and macOS, <strong>misclassified certain PowerShell commands as safe</strong> because their command-safety parser interpreted PowerShell's stop-parsing token (<code>--%</code>) differently than PowerShell itself does.</p><p>The chain is the scary part: the user opens a malicious repository, Codex runs file-writing git commands <strong>without an approval prompt</strong>, the attacker rewrites Codex's configuration files, and on the next load that tampered config launches an <strong>attacker-controlled MCP server</strong>. From there it is full code execution under the user's privileges.</p><p>Same pattern as GitSpawn: the approval parser is an attack surface, not a guarantee. Requires user interaction. Patched in CLI <strong>0.131.0</strong> and later, plus updated Desktop builds for macOS and Windows.</p>",
+            "fr": "<p>Codex CLI pour Windows, macOS et Linux, ainsi que Codex Desktop pour Windows et macOS, <strong>classaient certaines commandes PowerShell comme sûres</strong> parce que leur parser de sûreté interprétait le token de stop-parsing (<code>--%</code>) autrement que PowerShell lui-même.</p><p>La chaîne d'attaque fait froid dans le dos : l'utilisateur ouvre un dépôt malveillant, Codex exécute des commandes git d'écriture de fichiers <strong>sans demande d'approbation</strong>, l'attaquant réécrit la configuration de Codex, et au chargement suivant cette config altérée lance un <strong>serveur MCP contrôlé par l'attaquant</strong>. Ensuite, exécution de code complète avec les privilèges de l'utilisateur.</p><p>Même schéma que GitSpawn : le parser d'approbation est une surface d'attaque, pas une garantie. Nécessite une interaction utilisateur. Corrigé en CLI <strong>0.131.0</strong> et versions ultérieures, ainsi que dans les builds Desktop mis à jour pour macOS et Windows.</p>"
+          },
+          "date": "01 Sep 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-19591",
+            "label": "OpenCVE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "supply-chain",
+      "name": "Supply Chain",
+      "theme": "supply-chain",
+      "icon_emoji": "📦",
+      "anchor": "supply-chain",
+      "updates": [
+        {
+          "id": "cve-2026-73846-ckan-mcp-cache",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-73846 — CKAN MCP Server: una colisión de cache key te sirve la respuesta del atacante (6.5)",
+            "en": "CVE-2026-73846 — CKAN MCP Server: a cache-key collision serves you the attacker's response (6.5)",
+            "fr": "CVE-2026-73846 — CKAN MCP Server : une collision de clé de cache vous sert la réponse de l'attaquant (6.5)"
+          },
+          "body_html": {
+            "es": "<p>El cache de respuestas de <code>@aborruso/ckan-mcp-server</code> deriva su clave de una serialización ambigua de los parámetros. <code>canonicalizeParams</code> une pares <code>${key}=${value}</code> ordenados con <code>&amp;</code> y <strong>no escapa <code>&amp;</code>, <code>=</code> ni los separadores <code>|</code></strong> que usa <code>buildCacheKey</code>.</p><p>Resultado: dos conjuntos de parámetros lógicamente <strong>distintos</strong> pueden serializar a la <strong>misma</strong> clave y compartir entrada de cache. Como el valor cacheado es el que devolvió el upstream para la request que llenó la entrada primero, el atacante puede cebar una clave colisionante y hacer que la consulta legítima de la víctima (mismo <code>server_url</code>) reciba su respuesta.</p><p>En un servidor MCP eso significa que el contenido que entra al contexto del modelo lo eligió el atacante. La misma versión trae <strong>CVE-2026-73844</strong> (3.7, low): los paths de error reflejan cuerpos de respuesta upstream crudos y mensajes de excepción internos — hostnames, IPs internas, errores de base de datos, fragmentos de stack — en el resultado de la tool. Ambos parcheados en <strong>0.4.112</strong>.</p>",
+            "en": "<p>The response cache in <code>@aborruso/ckan-mcp-server</code> derives its key from an ambiguous serialization of the request parameters. <code>canonicalizeParams</code> joins sorted <code>${key}=${value}</code> pairs with <code>&amp;</code> and <strong>does not escape <code>&amp;</code>, <code>=</code>, or the <code>|</code> field separators</strong> used by <code>buildCacheKey</code>.</p><p>So two logically <strong>different</strong> parameter sets can serialize to the <strong>same</strong> key and share one cache entry. Since the cached value is whatever upstream returned for whichever request populated the entry first, an attacker can prime a colliding key so the victim's distinct query (same <code>server_url</code>) is served the attacker's response.</p><p>On an MCP server that means the content entering the model's context was chosen by the attacker. The same release also fixes <strong>CVE-2026-73844</strong> (3.7, low): error paths reflect raw upstream response bodies and internal exception messages — hostnames, internal IPs, DB errors, stack fragments — straight into the tool result. Both patched in <strong>0.4.112</strong>.</p>",
+            "fr": "<p>Le cache de réponses de <code>@aborruso/ckan-mcp-server</code> dérive sa clé d'une sérialisation ambiguë des paramètres. <code>canonicalizeParams</code> assemble des paires <code>${key}=${value}</code> triées avec <code>&amp;</code> et <strong>n'échappe ni <code>&amp;</code>, ni <code>=</code>, ni les séparateurs <code>|</code></strong> utilisés par <code>buildCacheKey</code>.</p><p>Résultat : deux jeux de paramètres logiquement <strong>différents</strong> peuvent se sérialiser vers la <strong>même</strong> clé et partager une entrée de cache. Comme la valeur mise en cache est celle renvoyée par l'upstream pour la requête ayant rempli l'entrée en premier, un attaquant peut amorcer une clé en collision pour que la requête distincte de la victime (même <code>server_url</code>) reçoive sa réponse.</p><p>Sur un serveur MCP, cela signifie que le contenu entrant dans le contexte du modèle a été choisi par l'attaquant. La même version corrige aussi <strong>CVE-2026-73844</strong> (3.7, low) : les chemins d'erreur reflètent les corps de réponse upstream bruts et les messages d'exception internes — noms d'hôtes, IP internes, erreurs de base, fragments de stack — dans le résultat de l'outil. Les deux corrigés en <strong>0.4.112</strong>.</p>"
+          },
+          "date": "03 Sep 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-78x9-fhhx-v2g6",
+            "label": "GitHub Security Advisory"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "one-way-networks-data-diodes",
+          "tag": "research",
+          "title": {
+            "es": "Para encerrar al genio: diodos de datos y arquitectura Bell-LaPadula para modelos frontier",
+            "en": "Boxing in the genie: data diodes and Bell-LaPadula architecture for frontier models",
+            "fr": "Enfermer le génie : diodes de données et architecture Bell-LaPadula pour les modèles frontier"
+          },
+          "body_html": {
+            "es": "<p>Eli-Shaoul Khedouri, CEO de Intuition Machines (la gente de hCaptcha), propone una respuesta de hardware al problema de modelos frontier que se escapan del entorno de testing y colaboran en ataques. La referencia concreta que cita: los modelos de OpenAI que se metieron con Hugging Face.</p><p>La propuesta es <strong>diodos de datos</strong> — hardware que impone flujo de información en una sola dirección. La arquitectura completa: zonas de entrenamiento aisladas sin acceso a internet, un <em>diodo óptico de ingreso</em> que solo deja pasar artefactos verificados, diodos ópticos separados para sacar telemetría hacia receptores con capacidad de scrubbing, gestión de red fuera de banda, snapshots inmutables de los registries (PyPI, GitHub, npm) y versiones mockeadas de servicios web y APIs.</p><p>Nada de esto es nuevo: viene directo de entornos clasificados de defensa, los SCIF, y aplica el modelo de seguridad Bell-LaPadula. Khedouri estima menos de un 5% de overhead por gigawatt. Y acto seguido admite lo obvio: con la presión competitiva actual, ningún lab frontier lo va a adoptar.</p>",
+            "en": "<p>Eli-Shaoul Khedouri, CEO of Intuition Machines (the hCaptcha people), proposes a hardware answer to frontier models escaping test environments and collaborating on attacks. The concrete precedent he cites: OpenAI's models breaching Hugging Face.</p><p>The proposal is <strong>data diodes</strong> — hardware that enforces one-way information flow. The full architecture: isolated training zones with no internet access, an <em>optical ingress diode</em> that admits only vetted artifacts, separate optical diodes pushing telemetry out to receivers with scrubbing capability, out-of-band network management, immutable snapshots of software registries (PyPI, GitHub, npm), and mocked versions of web services and APIs.</p><p>None of this is new: it comes straight out of classified defense settings — SCIFs — and applies the Bell-LaPadula security model. Khedouri estimates under 5% overhead per gigawatt. Then he concedes the obvious: given current competitive pressure, no frontier lab is going to adopt it.</p>",
+            "fr": "<p>Eli-Shaoul Khedouri, PDG d'Intuition Machines (les créateurs de hCaptcha), propose une réponse matérielle au problème des modèles frontier qui s'échappent de leur environnement de test et collaborent à des attaques. Le précédent concret qu'il cite : les modèles d'OpenAI s'en prenant à Hugging Face.</p><p>La proposition : des <strong>diodes de données</strong>, du matériel imposant un flux d'information à sens unique. L'architecture complète comprend des zones d'entraînement isolées sans accès internet, une <em>diode optique d'entrée</em> n'admettant que des artefacts vérifiés, des diodes optiques distinctes pour sortir la télémétrie vers des récepteurs capables de scrubbing, une gestion réseau hors bande, des snapshots immuables des registries (PyPI, GitHub, npm) et des versions simulées des services web et API.</p><p>Rien de neuf : cela vient directement des environnements classifiés de la défense, les SCIF, et applique le modèle de sécurité Bell-LaPadula. Khedouri estime le surcoût à moins de 5% par gigawatt. Puis il concède l'évidence : vu la pression concurrentielle actuelle, aucun laboratoire frontier ne l'adoptera.</p>"
+          },
+          "date": "03 Sep 2026",
+          "source": {
+            "url": "https://www.theregister.com/ai-and-ml/2026/09/03/to-keep-the-ai-hacking-genie-bottled-up-try-one-way-networks/5294121",
+            "label": "The Register"
+          }
+        }
+      ]
+    },
+    {
+      "id": "advisories",
+      "name": "Vendor Advisories",
+      "theme": "advisories",
+      "icon_emoji": "📢",
+      "anchor": "advisories",
+      "updates": [
+        {
+          "id": "openai-daybreak-defenders",
+          "tag": "advisory",
+          "title": {
+            "es": "OpenAI compromete mil millones en créditos de IA para defensores de primera línea",
+            "en": "OpenAI commits $1B in AI credits to frontline cyber defenders",
+            "fr": "OpenAI engage 1 milliard de dollars de crédits IA pour les défenseurs de première ligne"
+          },
+          "body_html": {
+            "es": "<p>OpenAI anunció «Daybreak for Frontline Defenders»: mil millones de dólares en créditos de IA a lo largo de seis meses para equipos de seguridad con pocos recursos que protegen infraestructura crítica. Califican operadores de infraestructura crítica, bancos comunitarios, organizaciones sin fines de lucro y <strong>mantenedores de open source</strong>. Las aplicaciones van por el portal de ciberdefensa colectiva.</p><p>Lo relevante para el análisis de riesgo son los dos tiers de acceso restringido. <strong>Daybreak Blue</strong> usa GPT-5.6 Sol para workflows defensivos entre partners seleccionados. <strong>Daybreak Red</strong> exige aprobaciones adicionales y usa GPT-5.6 Cyber para tareas ofensivas: desarrollo de exploits, pentesting y red teaming. El modelo Astra queda para «más adelante» en ambos programas, por restricciones de seguridad.</p><p>Los guardrails que describen son los de siempre: mitigaciones a nivel de sistema que bloquean ciertos prompts y rechazos a nivel de modelo que impiden ciertos tipos de tarea. Hay además un acuerdo con MS-ISAC para entrenamiento y soporte, arrancando por defensores del sector público y de sistemas de agua. Llega dos días después del anuncio conjunto de modelos de ciberseguridad de Google, Anthropic y OpenAI.</p>",
+            "en": "<p>OpenAI announced «Daybreak for Frontline Defenders»: $1 billion in AI credits over six months for under-resourced security teams defending critical infrastructure. Eligible parties include critical infrastructure operators, community banks, nonprofits and <strong>open-source maintainers</strong>. Applications run through the collective cyberdefense portal.</p><p>What matters for risk analysis are the two restricted-access tiers. <strong>Daybreak Blue</strong> uses GPT-5.6 Sol for defensive cybersecurity workflows among select partners. <strong>Daybreak Red</strong> requires additional approvals and uses GPT-5.6 Cyber for offensive work: exploit development, penetration testing and red teaming. The Astra model is held back to «a later date» for both programs on safety grounds.</p><p>The described guardrails are the familiar pair: system-level mitigations that block certain prompts, and model-level refusals that prevent certain types of tasks. There is also an MS-ISAC partnership for training and hands-on support, starting with public-sector and water-system defenders. This lands two days after the joint Google, Anthropic and OpenAI cybersecurity model announcements.</p>",
+            "fr": "<p>OpenAI a annoncé «Daybreak for Frontline Defenders» : 1 milliard de dollars de crédits IA sur six mois pour les équipes de sécurité peu dotées qui protègent des infrastructures critiques. Sont éligibles les opérateurs d'infrastructures critiques, les banques communautaires, les associations et les <strong>mainteneurs open source</strong>. Les candidatures passent par le portail de cyberdéfense collective.</p><p>Ce qui compte pour l'analyse de risque, ce sont les deux niveaux d'accès restreint. <strong>Daybreak Blue</strong> utilise GPT-5.6 Sol pour des workflows de cybersécurité défensive chez des partenaires sélectionnés. <strong>Daybreak Red</strong> exige des approbations supplémentaires et utilise GPT-5.6 Cyber pour l'offensif : développement d'exploits, tests d'intrusion et red teaming. Le modèle Astra est reporté à «une date ultérieure» pour les deux programmes, pour des raisons de sûreté.</p><p>Les garde-fous décrits sont les habituels : mitigations au niveau système bloquant certains prompts, et refus au niveau modèle empêchant certains types de tâches. S'y ajoute un partenariat avec MS-ISAC pour la formation et le support, à commencer par les défenseurs du secteur public et des systèmes de distribution d'eau. Cela survient deux jours après les annonces conjointes de modèles de cybersécurité de Google, Anthropic et OpenAI.</p>"
+          },
+          "date": "04 Sep 2026",
+          "source": {
+            "url": "https://www.theregister.com/security/2026/09/04/openai-commits-1b-in-ai-credits-to-frontline-cyber-defenders/5294382",
+            "label": "The Register"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Tercer día seguido en que el parser de aprobación de un agente de código es el bug. GitSpawn el 2 de septiembre, ahora el token --% de PowerShell en Codex CLI: en ambos casos el atacante no rompe el sandbox, convence al clasificador de que el comando es seguro. Si tu modelo de amenazas asume que el prompt de aprobación te protege, ese es el modelo que hay que revisar.",
+      "en": "Third day running where the bug is a coding agent's approval parser. GitSpawn on September 2, now PowerShell's --% token in Codex CLI: in both cases the attacker does not break the sandbox, they convince the classifier that the command is safe. If your threat model assumes the approval prompt protects you, that is the model to revisit.",
+      "fr": "Troisième jour consécutif où le bug est le parser d'approbation d'un agent de code. GitSpawn le 2 septembre, maintenant le token --% de PowerShell dans Codex CLI : dans les deux cas, l'attaquant ne casse pas le sandbox, il convainc le classifieur que la commande est sûre. Si votre modèle de menace suppose que la demande d'approbation vous protège, c'est ce modèle qu'il faut revoir."
+    },
+    {
+      "es": "La ingesta de contenido es el sink olvidado del stack RAG. unstructured devuelve el cuerpo de la respuesta como texto de Element, y el MCP de CKAN deja que una colisión de clave de cache elija qué entra al contexto. En ambos casos el atacante no ataca al modelo: le controla la entrada. Validá hosts en la capa de ingesta, no en cada caller.",
+      "en": "Content ingestion is the forgotten sink in the RAG stack. unstructured returns the response body as Element text, and CKAN's MCP server lets a cache-key collision pick what enters the context. In both cases the attacker is not attacking the model — they control its input. Validate hosts at the ingestion layer, not in every caller.",
+      "fr": "L'ingestion de contenu est le sink oublié de la stack RAG. unstructured renvoie le corps de la réponse comme texte d'Element, et le serveur MCP de CKAN laisse une collision de clé de cache décider de ce qui entre dans le contexte. Dans les deux cas, l'attaquant n'attaque pas le modèle : il en contrôle l'entrée. Validez les hôtes dans la couche d'ingestion, pas chez chaque appelant."
+    },
+    {
+      "es": "El uso criminal de IA generativa se corrió del desarrollo de malware a la operación del negocio. BraZetsu no usa el modelo para escribir el implante: lo usa para tasar máquinas comprometidas y priorizar objetivos. Es la parte del ciclo que antes requería un humano con criterio, y es la que hace que el marketplace escale.",
+      "en": "Criminal use of generative AI has moved from writing malware to running the business. BraZetsu does not use the model to write the implant — it uses it to price compromised machines and prioritize targets. That is the part of the loop that used to need a human with judgment, and it is what lets the marketplace scale.",
+      "fr": "L'usage criminel de l'IA générative est passé de l'écriture de malware à la gestion du business. BraZetsu n'utilise pas le modèle pour écrire l'implant : il l'utilise pour évaluer les machines compromises et prioriser les cibles. C'est la partie de la boucle qui exigeait auparavant un humain doté de jugement, et c'est ce qui permet au marketplace de passer à l'échelle."
+    }
+  ]
+}

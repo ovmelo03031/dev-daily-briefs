@@ -1,0 +1,472 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 4 de septiembre de 2026",
+    "en": "Backend & Fullstack — September 4, 2026",
+    "fr": "Backend & Fullstack — 4 septembre 2026"
+  },
+  "description": {
+    "es": "Orval convierte un spec de OpenAPI en RCE con doce advisories, Vitest 5 sale estable con Node 22 obligatorio, TOON se contamina el prototype y Aurora MySQL 8.4.8 trae TLS post-cuántico.",
+    "en": "Orval turns an OpenAPI spec into RCE across twelve advisories, Vitest 5 ships stable with Node 22 required, TOON pollutes the prototype, and Aurora MySQL 8.4.8 brings post-quantum TLS.",
+    "fr": "Orval transforme un spec OpenAPI en RCE via douze advisories, Vitest 5 sort en stable avec Node 22 requis, TOON pollue le prototype et Aurora MySQL 8.4.8 apporte le TLS post-quantique."
+  },
+  "pubDate": "2026-09-04",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Orval: 12 advisories, RCE desde un OpenAPI",
+        "en": "Orval: 12 advisories, RCE from an OpenAPI spec",
+        "fr": "Orval : 12 advisories, RCE depuis un spec OpenAPI"
+      },
+      "anchor": "orval-openapi-rce",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Vitest 5 estable: Node 22 y Vite 6.4 obligatorios",
+        "en": "Vitest 5 stable: Node 22 and Vite 6.4 required",
+        "fr": "Vitest 5 stable : Node 22 et Vite 6.4 requis"
+      },
+      "anchor": "vitest-5-stable",
+      "icon": "lucide:rocket"
+    },
+    {
+      "text": {
+        "es": "TOON: decodificar input hostil contamina el prototype",
+        "en": "TOON: decoding hostile input pollutes the prototype",
+        "fr": "TOON : décoder une entrée hostile pollue le prototype"
+      },
+      "anchor": "toon-prototype-pollution",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "amqp091-go: el broker te revienta la memoria",
+        "en": "amqp091-go: the broker blows up your memory",
+        "fr": "amqp091-go : le broker fait exploser la mémoire"
+      },
+      "anchor": "amqp091-go-oversized-frame",
+      "icon": "lucide:server"
+    },
+    {
+      "text": {
+        "es": "Aurora MySQL 8.4.8 suma TLS post-cuántico",
+        "en": "Aurora MySQL 8.4.8 adds post-quantum TLS",
+        "fr": "Aurora MySQL 8.4.8 ajoute le TLS post-quantique"
+      },
+      "anchor": "aurora-mysql-848",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": {
+        "es": "Cilium: un ipBlock abre todo el namespace",
+        "en": "Cilium: one ipBlock opens the whole namespace",
+        "fr": "Cilium : un ipBlock ouvre tout le namespace"
+      },
+      "anchor": "cilium-ipblock-namespace",
+      "icon": "simple-icons:kubernetes"
+    },
+    {
+      "text": {
+        "es": "pnpm 12 en Rust: install cacheado de 472ms a 15ms",
+        "en": "pnpm 12 in Rust: cached install from 472ms to 15ms",
+        "fr": "pnpm 12 en Rust : install caché de 472ms à 15ms"
+      },
+      "anchor": "pnpm-12-rust-numbers",
+      "icon": "lucide:package"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "orval-openapi-rce",
+      "updates": [
+        {
+          "id": "orval-openapi-rce",
+          "tag": "breaking",
+          "date": "03 Sep 2026",
+          "title": {
+            "es": "Orval: doce advisories, nueve críticos, y un backtick que te ejecuta código",
+            "en": "Orval: twelve advisories, nine critical, and one backtick that runs your code",
+            "fr": "Orval : douze advisories, neuf critiques, et un backtick qui exécute du code"
+          },
+          "body_html": {
+            "es": "<p>Doce advisories publicados el mismo día contra <code>orval</code>, el generador de clientes desde OpenAPI. Nueve son <strong>críticos con CVSS 9.3</strong>. El patrón raíz: Orval emite el path del OpenAPI dentro de un <strong>template literal sin escapar el backtick</strong>. Un path con un backtick cierra el literal e inyecta una expresión que se evalúa al llamar la función generada. Afecta a los clients de axios, fetch, react-query y swr, y <strong>sobrevive a la validación de OpenAPI por defecto</strong>. Las variantes cubren <code>servers[].url</code>, defaults de schema, nombres de propiedades y de query/header params, con RCE incluso en tiempo de import del módulo zod generado. Parcheado en <code>8.21.0</code>.</p><p>La lección va más allá de Orval: si tu pipeline hace codegen desde un spec de terceros, <strong>ese spec es código, no datos</strong>.</p>",
+            "en": "<p>Twelve advisories published the same day against <code>orval</code>, the OpenAPI client generator. Nine are <strong>critical at CVSS 9.3</strong>. The root pattern: Orval emits the OpenAPI path inside a <strong>template literal without escaping the backtick</strong>. A path containing a backtick closes the literal and injects an expression evaluated when the generated function is called. It affects the axios, fetch, react-query, and swr clients, and <strong>survives Orval's default OpenAPI validation</strong>. The variants cover <code>servers[].url</code>, schema defaults, property names, and query/header parameter names, reaching RCE at import time of the generated zod module. Fixed in <code>8.21.0</code>.</p><p>The lesson generalizes past Orval: if your pipeline runs codegen against a third-party spec, <strong>that spec is code, not data</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-fg9p-mrxr-hvq7", "label": "github.com/advisories" }
+        },
+        {
+          "id": "vitest-5-stable",
+          "tag": "release",
+          "date": "03 Sep 2026",
+          "title": {
+            "es": "Vitest 5 estable: hasta 53% más rápido, y clearMocks ahora es true por defecto",
+            "en": "Vitest 5 stable: up to 53% faster, and clearMocks now defaults to true",
+            "fr": "Vitest 5 stable : jusqu'à 53% plus rapide, et clearMocks passe à true par défaut"
+          },
+          "body_html": {
+            "es": "<p>Salió estable después de cuatro RCs. En proyectos reales miden <strong>19% más rápido en un monolito enterprise y hasta 53%</strong> en otras configuraciones, gracias a servidores de Vite compartidos entre inline projects, cache de módulos en disco y vm pools más rápidos. Lo nuevo que importa: <strong>Trace View</strong> en Browser Mode con replay paso a paso, <code>vi.when()</code> para mocking condicional por argumentos, nested projects con herencia de config y una API de benchmark reescrita.</p><p>Los breaking changes son muchos y reales: requiere <strong>Node.js >= 22.12.0 y Vite >= 6.4.0</strong>, <code>clearMocks</code> pasa a <code>true</code> por defecto, las assertions asíncronas (<code>resolves</code>/<code>rejects</code>) <strong>fallan el test si no las await-eás</strong>, se elimina <code>sequential</code> en favor de <code>concurrent</code>, y ya no se busca el config file en directorios ancestros. Leé el changelog antes de bumpear en un monorepo.</p>",
+            "en": "<p>Stable after four RCs. On real projects they measure <strong>19% faster on an enterprise monolith and up to 53%</strong> on other setups, via Vite servers shared across inline projects, disk-based module caching, and faster vm pools. The new things that matter: <strong>Trace View</strong> in Browser Mode with step-by-step replay, <code>vi.when()</code> for argument-conditional mocking, nested projects with config inheritance, and a rewritten benchmark API.</p><p>The breaking changes are many and real: it requires <strong>Node.js >= 22.12.0 and Vite >= 6.4.0</strong>, <code>clearMocks</code> now defaults to <code>true</code>, async assertions (<code>resolves</code>/<code>rejects</code>) <strong>fail the test when not awaited</strong>, <code>sequential</code> is removed in favor of <code>concurrent</code>, and the config file is no longer looked up in ancestor directories. Read the changelog before bumping a monorepo.</p>"
+          },
+          "source": { "url": "https://vitest.dev/blog/vitest-5.html", "label": "vitest.dev" }
+        },
+        {
+          "id": "toon-prototype-pollution",
+          "tag": "security",
+          "date": "03 Sep 2026",
+          "title": {
+            "es": "TOON: decodificar input no confiable te contamina Object.prototype",
+            "en": "TOON: decoding untrusted input pollutes Object.prototype",
+            "fr": "TOON : décoder une entrée non fiable pollue Object.prototype"
+          },
+          "body_html": {
+            "es": "<p>CVE-2026-82404. Decodificar TOON con una key <code>__proto__</code>, <code>constructor</code> o <code>prototype</code> escribía <strong>a través de la cadena de prototipos</strong> en vez de crear una propiedad propia, contaminando <code>Object.prototype</code> para todo el runtime. El vector más fuerte era <code>expandPaths: 'safe'</code> con keys punteadas tipo <code>a.__proto__.x</code>, pero también caían objetos anidados planos, filas tabulares y keys entrecomilladas. El encoder tenía el defecto espejo: descartaba silenciosamente propiedades propias <code>__proto__</code> y podía disparar un setter heredado. Parcheado en <code>@toon-format/toon 2.3.1</code>.</p><p>Si estás serializando payloads para LLMs con TOON —que es exactamente para lo que se está usando— cualquier servicio que decodifique input externo está afectado.</p>",
+            "en": "<p>CVE-2026-82404. Decoding TOON carrying a <code>__proto__</code>, <code>constructor</code>, or <code>prototype</code> key wrote <strong>through the prototype chain</strong> instead of creating an own property, polluting <code>Object.prototype</code> for the entire runtime. The strongest vector was <code>expandPaths: 'safe'</code> with dotted keys like <code>a.__proto__.x</code>, but plain nested objects, tabular rows, and quoted keys were all affected. The encoder had the mirror defect: it silently dropped own <code>__proto__</code> properties and could fire an inherited setter. Fixed in <code>@toon-format/toon 2.3.1</code>.</p><p>If you serialize LLM payloads with TOON — which is exactly what it is being used for — any service decoding external input is affected.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-p95v-992w-h6c3", "label": "github.com/advisories" }
+        },
+        {
+          "id": "amqp091-go-oversized-frame",
+          "tag": "security",
+          "date": "03 Sep 2026",
+          "title": {
+            "es": "amqp091-go: el broker de RabbitMQ ignora el frame_max negociado",
+            "en": "amqp091-go: the RabbitMQ broker ignores the negotiated frame_max",
+            "fr": "amqp091-go : le broker RabbitMQ ignore le frame_max négocié"
+          },
+          "body_html": {
+            "es": "<p>CVE-2026-79921, CVSS 8.9. Cliente y broker negocian un <code>frame_max</code> en el handshake AMQP 0-9-1 —pongamos 4096 bytes—. Después de esa negociación, un broker comprometido o malicioso manda un <code>basic.deliver</code> válido con un content body frame cuyo header <strong>declara un payload mayor al límite</strong>, y el cliente reserva y procesa igual. Resultado: consumo de memoria inesperado o DoS a nivel aplicación, salteando la restricción de framing del propio protocolo. Parcheado en <code>1.13.0</code>.</p><p>Ojo con el modelo de amenaza acá: el atacante es <strong>el broker</strong>. Si consumís de un RabbitMQ que no operás vos, esto te aplica.</p>",
+            "en": "<p>CVE-2026-79921, CVSS 8.9. Client and broker negotiate a <code>frame_max</code> during the AMQP 0-9-1 handshake — say 4096 bytes. After that negotiation, a compromised or malicious broker sends a valid <code>basic.deliver</code> sequence with a content body frame whose header <strong>declares a payload above the limit</strong>, and the client allocates and processes it anyway. Result: unexpected memory consumption or application-layer DoS, bypassing the protocol's own framing constraint. Fixed in <code>1.13.0</code>.</p><p>Note the threat model: the attacker is <strong>the broker</strong>. If you consume from a RabbitMQ you do not operate, this applies to you.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-6c5v-hqjr-5xxp", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "cilium-ipblock-namespace",
+      "updates": [
+        {
+          "id": "cilium-ipblock-namespace",
+          "tag": "security",
+          "date": "03 Sep 2026",
+          "title": {
+            "es": "Cilium: una NetworkPolicy con ipBlock abre todo el namespace",
+            "en": "Cilium: a NetworkPolicy with ipBlock opens the whole namespace",
+            "fr": "Cilium : une NetworkPolicy avec ipBlock ouvre tout le namespace"
+          },
+          "body_html": {
+            "es": "<p>CVE-2026-56743. Una <code>NetworkPolicy</code> estándar de Kubernetes que usa reglas <code>ipBlock</code> basadas en CIDR <strong>sin pod ni namespace selector</strong> generaba erróneamente una regla wildcard de namespace. Pasa cuando Cilium está desplegado con un <code>clusterName</code> custom en lugar del <code>any</code> por defecto: el parser instancia un pod selector sobre peers que no lo tenían, y termina permitiendo tráfico desde cualquier otro workload del mismo namespace que el sujeto de la policy. Afecta <code>>= 1.19.0, &lt; 1.19.5</code>.</p><p>Este es de los peores: tu policy <strong>parece correcta en el YAML</strong> y no lo es en el datapath. Si tenés clusterName custom, auditá.</p>",
+            "en": "<p>CVE-2026-56743. A standard Kubernetes <code>NetworkPolicy</code> using CIDR-based <code>ipBlock</code> rules <strong>without pod or namespace selectors</strong> erroneously generated a wildcard namespace allow rule. It triggers when Cilium is deployed with a custom <code>clusterName</code> instead of the default <code>any</code>: the parser instantiates a pod selector on selectorless peers and ends up allowing traffic from any other workload in the same namespace as the policy subject. Affects <code>>= 1.19.0, &lt; 1.19.5</code>.</p><p>This is the nasty kind: your policy <strong>looks correct in the YAML</strong> and is not correct in the datapath. If you run a custom clusterName, audit now.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-fm8w-2m5w-9j7r", "label": "github.com/advisories" }
+        },
+        {
+          "id": "phoenix-channel-dos",
+          "tag": "security",
+          "date": "03 Sep 2026",
+          "title": {
+            "es": "Phoenix: canales sin límite por conexión y se cae la VM",
+            "en": "Phoenix: unbounded channels per connection take down the VM",
+            "fr": "Phoenix : des canaux sans limite par connexion font tomber la VM"
+          },
+          "body_html": {
+            "es": "<p>CVE-2026-56811, CVSS 8.7. Los transports de Phoenix no limitaban la cantidad de canales por conexión, así que un atacante sin autenticar podía spawnear <strong>cientos de miles de procesos sobre una sola conexión</strong> hasta tocar el límite de max processes de la VM de Erlang. El fix limita canales por transport, obligando al atacante a abrir conexiones nuevas —lo que le da a tu rate limiter y a tu CDN algo con qué intervenir—. Parcheado en <code>1.5.15</code>, <code>1.6.17</code>, <code>1.7.24</code> y <code>1.8.9</code>.</p>",
+            "en": "<p>CVE-2026-56811, CVSS 8.7. Phoenix transports did not limit the number of channels per connection, so an unauthenticated attacker could spawn <strong>hundreds of thousands of processes over a single connection</strong> until hitting the Erlang VM max-process limit. The fix caps channels per transport, forcing the attacker to open new connections — which finally gives your rate limiter and CDN something to act on. Fixed in <code>1.5.15</code>, <code>1.6.17</code>, <code>1.7.24</code>, and <code>1.8.9</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-6983-jfq8-485w", "label": "github.com/advisories" }
+        },
+        {
+          "id": "stream-json-quadratic",
+          "tag": "security",
+          "date": "03 Sep 2026",
+          "title": {
+            "es": "stream-json: el filtro estrella es O(profundidad²)",
+            "en": "stream-json: the flagship filter is O(depth²)",
+            "fr": "stream-json : le filtre phare est en O(profondeur²)"
+          },
+          "body_html": {
+            "es": "<p>CVE-2026-71429. Los filtros <code>pick</code>, <code>ignore</code>, <code>filter</code> y <code>replace</code> —la feature estrella de «extracción quirúrgica» de la librería— <strong>recalculan el path completo desde el stack de anidamiento en cada token chequeable</strong>. Como el largo del stack es igual a la profundidad actual y se emite un token en cada nivel, procesar un documento de profundidad D cuesta <strong>O(D²)</strong>, no O(D).</p><p>Lo dispara la <strong>estructura, no el volumen</strong>: un payload chiquito bloquea el event loop de segundos a minutos. Y no es un caso raro — es el ejemplo insignia del README, <code>pick({filter: 'data'})</code>. Parcheado en <code>3.5.0</code>.</p>",
+            "en": "<p>CVE-2026-71429. The <code>pick</code>, <code>ignore</code>, <code>filter</code>, and <code>replace</code> filters — the library's headline «surgical extraction» feature — <strong>recompute the full path string from the nesting stack on every checkable token</strong>. Since stack length equals current depth and a token is emitted at every level, processing a document of depth D costs <strong>O(D²)</strong>, not O(D).</p><p>It is triggered by <strong>structure, not byte volume</strong>: a tiny payload blocks the event loop for seconds to minutes. And this is not an exotic path — it is the README's flagship example, <code>pick({filter: 'data'})</code>. Fixed in <code>3.5.0</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-528h-pc64-c93x", "label": "github.com/advisories" }
+        },
+        {
+          "id": "toml-node-proto",
+          "tag": "security",
+          "date": "03 Sep 2026",
+          "title": {
+            "es": "toml-node: prototype pollution por desincronización de key-path",
+            "en": "toml-node: prototype pollution via key-path desynchronization",
+            "fr": "toml-node : prototype pollution par désynchronisation de key-path"
+          },
+          "body_html": {
+            "es": "<p>Otro parser de configuración que corrompe <code>Object.prototype</code> vía una key <code>__proto__</code>, esta vez por desincronización del key-path. Viene acompañado de un segundo advisory por recursión no controlada. Dos parsers distintos (<code>toml-node</code> y TOON) cayendo con el mismo bug el mismo día no es coincidencia: <strong>si escribís un parser que construye objetos desde input externo, <code>Object.create(null)</code> o un Map, siempre</strong>.</p>",
+            "en": "<p>Another config parser corrupting <code>Object.prototype</code> through a <code>__proto__</code> key, this time via key-path desynchronization, alongside a second advisory for uncontrolled recursion. Two different parsers (<code>toml-node</code> and TOON) falling to the same bug on the same day is not coincidence: <strong>if you write a parser that builds objects from external input, use <code>Object.create(null)</code> or a Map, always</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-v5mp-jgw5-2x6j", "label": "github.com/advisories" }
+        },
+        {
+          "id": "claude-code-templates-rce",
+          "tag": "security",
+          "date": "03 Sep 2026",
+          "title": {
+            "es": "Claude Code Templates: RCE sin autenticar en el server --studio",
+            "en": "Claude Code Templates: unauthenticated RCE in the --studio server",
+            "fr": "Claude Code Templates : RCE non authentifiée dans le serveur --studio"
+          },
+          "body_html": {
+            "es": "<p>Command injection de OS <strong>sin autenticación</strong> en el server de Claude Code Studio que levanta el flag <code>--studio</code>. Severidad alta. Es el recordatorio de siempre sobre tooling de desarrollo: un server que arrancás «solo local» para probar algo termina escuchando en una interfaz que no esperabas, y no tiene ninguna capa de auth porque nadie pensó que hacía falta.</p>",
+            "en": "<p>Unauthenticated OS command injection in the Claude Code Studio server started by the <code>--studio</code> flag. High severity. It is the standing reminder about developer tooling: a server you start «just locally» to try something ends up listening on an interface you did not expect, with no auth layer because nobody thought it needed one.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-79wm-x847-7cvg", "label": "github.com/advisories" }
+        },
+        {
+          "id": "liquidjs-strip-html",
+          "tag": "security",
+          "date": "03 Sep 2026",
+          "title": {
+            "es": "LiquidJS: loop infinito en el filtro strip_html",
+            "en": "LiquidJS: infinite loop in the strip_html filter",
+            "fr": "LiquidJS : boucle infinie dans le filtre strip_html"
+          },
+          "body_html": {
+            "es": "<p>CVSS 8.7. El filtro <code>strip_html</code> entra en loop infinito con input crafteado. Si renderizás templates Liquid con contenido que viene de usuarios —CMS, emails transaccionales, páginas de marketing— tenés un DoS de un solo request. Parcheá.</p>",
+            "en": "<p>CVSS 8.7. The <code>strip_html</code> filter spins into an infinite loop on crafted input. If you render Liquid templates over user-supplied content — CMS, transactional email, marketing pages — that is a single-request DoS. Patch it.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-m7fp-h3p4-hr49", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "aurora-mysql-848",
+      "updates": [
+        {
+          "id": "aurora-mysql-848",
+          "tag": "ga",
+          "date": "03 Sep 2026",
+          "title": {
+            "es": "Aurora MySQL 8.4.8 GA: TLS post-cuántico y transaction timeout",
+            "en": "Aurora MySQL 8.4.8 GA: post-quantum TLS and transaction timeout",
+            "fr": "Aurora MySQL 8.4.8 GA : TLS post-quantique et transaction timeout"
+          },
+          "body_html": {
+            "es": "<p>Lo grande es el <strong>key exchange PQ-TLS</strong>: cifrado resistente a cuántica para los datos en tránsito hacia tu base. Ya no es un tema de papers, está en un motor managed que podés prender.</p><p>Lo que te va a salvar el turno de guardia es más terrenal: <strong>transaction timeout</strong>, que corta operaciones largas antes de que te bloqueen el purge de InnoDB. Si alguna vez perseguiste una transacción zombie mientras el history list length se iba a la luna, sabés exactamente de qué hablo. Upgrade por minor version automático en la ventana de mantenimiento.</p>",
+            "en": "<p>The headline is <strong>PQ-TLS key exchange</strong>: quantum-resistant encryption for data in transit to your database. No longer a paper topic — it is a toggle on a managed engine.</p><p>What will actually save your on-call shift is more down-to-earth: <strong>transaction timeout</strong>, which stops long-running operations before they block InnoDB purge. If you have ever chased a zombie transaction while the history list length climbed to the moon, you know exactly what this is worth. Upgrade via automatic minor version during the maintenance window.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-aurora-mysql-848-available/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "aurora-multisource-replication",
+          "tag": "release",
+          "date": "03 Sep 2026",
+          "title": {
+            "es": "Aurora MySQL: replicación multi-source y delayed replication",
+            "en": "Aurora MySQL: multi-source and delayed replication",
+            "fr": "Aurora MySQL : réplication multi-source et delayed replication"
+          },
+          "body_html": {
+            "es": "<p>Multi-source permite consolidar datos de varios orígenes MySQL en una sola réplica — el caso de uso obvio es <strong>consolidación de shards</strong> y backups centralizados. Delayed replication te deja configurar un lag deliberado: es tu red de seguridad contra el <code>DELETE</code> sin <code>WHERE</code>, porque te da una ventana para frenar la réplica antes de que el error se propague.</p>",
+            "en": "<p>Multi-source lets you consolidate data from several MySQL origins into a single replica — the obvious use case is <strong>shard consolidation</strong> and centralized backups. Delayed replication lets you configure deliberate lag: it is your safety net against the <code>DELETE</code> with no <code>WHERE</code>, because it gives you a window to stop the replica before the mistake propagates.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-aurora-mysql-multisourcerep-delayedrep/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "redshift-rg-large",
+          "tag": "minor",
+          "date": "03 Sep 2026",
+          "title": {
+            "es": "Redshift habilita RG.large de un solo nodo",
+            "en": "Redshift enables single-node RG.large",
+            "fr": "Redshift active RG.large en nœud unique"
+          },
+          "body_html": {
+            "es": "<p>Opción de costo bajo para workloads chicos que no necesitan alta disponibilidad. Sirve para dev, staging y data marts departamentales — no lo pongas en producción crítica, que un solo nodo es un solo punto de falla.</p>",
+            "en": "<p>A low-cost option for smaller workloads that do not need high availability. Good for dev, staging, and departmental data marts — do not put it under critical production, since a single node is a single point of failure.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/redshift-rg-large-single-node", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "lambda-snapstart-container",
+      "updates": [
+        {
+          "id": "lambda-snapstart-container",
+          "tag": "ga",
+          "date": "02 Sep 2026",
+          "title": {
+            "es": "Lambda SnapStart llega a container images: de segundos a sub-segundo",
+            "en": "Lambda SnapStart reaches container images: seconds to sub-second",
+            "fr": "Lambda SnapStart arrive sur les container images : de secondes à sous-seconde"
+          },
+          "body_html": {
+            "es": "<p>SnapStart estaba limitado a runtimes managed (Python, .NET, Java). Ahora cubre <strong>funciones basadas en container images</strong>, que es donde el cold start más dolía: Lambda tiene que bajar layers de hasta 10 GB. El mecanismo es el de siempre — snapshot del entorno de ejecución ya inicializado al deployar, cacheado, y resume en la invocación en vez de arrancar de cero.</p><p>Si descartaste container images por el cold start en APIs interactivas o inferencia ML, <strong>volvé a medir</strong>. Disponible en casi todas las regiones (quedan afuera Asia Pacific New Zealand y Taipei).</p>",
+            "en": "<p>SnapStart was limited to managed runtimes (Python, .NET, Java). It now covers <strong>container image functions</strong>, which is exactly where cold start hurt most: Lambda has to pull layers up to 10 GB. Same mechanism as always — snapshot the initialized execution environment at deploy, cache it, and resume on invocation instead of initializing from scratch.</p><p>If you ruled out container images over cold start for interactive APIs or ML inference, <strong>go measure again</strong>. Available in most regions (Asia Pacific New Zealand and Taipei excluded).</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/07/aws-lambda-snapstart-container/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "ecs-managed-daemons-non-critical",
+          "tag": "notable",
+          "date": "03 Sep 2026",
+          "title": {
+            "es": "ECS: los managed daemons ya pueden marcarse como no críticos",
+            "en": "ECS: managed daemons can now be marked non-critical",
+            "fr": "ECS : les managed daemons peuvent être marqués non critiques"
+          },
+          "body_html": {
+            "es": "<p>Ahora un daemon puede fallar <strong>sin interrumpir las tasks de aplicación críticas</strong>. Es una decisión de diseño más importante de lo que parece: tu agente de observabilidad o tu sidecar de logs es infraestructura de soporte, no debería tumbarte el servicio que factura. Separar criticidad de co-ubicación es exactamente lo que uno espera de un scheduler maduro.</p>",
+            "en": "<p>A daemon can now fail <strong>without interrupting mission-critical application tasks</strong>. That is a more important design decision than it looks: your observability agent or log sidecar is supporting infrastructure and should not take down the service that makes money. Decoupling criticality from co-location is exactly what you want from a mature scheduler.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/ecs-managed-daemons-non-critical/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "workerd-20260904",
+          "tag": "release",
+          "date": "04 Sep 2026",
+          "title": {
+            "es": "workerd v1.20260904.1, el release diario del runtime de Workers",
+            "en": "workerd v1.20260904.1, the daily Workers runtime release",
+            "fr": "workerd v1.20260904.1, la release quotidienne du runtime Workers"
+          },
+          "body_html": {
+            "es": "<p>Cloudflare sigue con su cadencia diaria de releases del runtime de Workers. Vale la pena mirar el changelog si operás Durable Objects con conexiones de larga vida: la mayor parte del trabajo reciente viene siendo de correctitud alrededor de hibernación de WebSockets y retries de fetch al actor.</p>",
+            "en": "<p>Cloudflare keeps its daily release cadence for the Workers runtime. Worth reading the changelog if you run Durable Objects with long-lived connections: most of the recent work has been correctness around WebSocket hibernation and actor fetch retries.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workerd/releases/tag/v1.20260904.1", "label": "github.com/cloudflare" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "human-reviews-ai-era",
+      "updates": [
+        {
+          "id": "human-reviews-ai-era",
+          "tag": "notable",
+          "date": "03 Sep 2026",
+          "title": {
+            "es": "Reviews humanos sostenibles: saltear los PRs de bajo riesgo, profundizar en los que importan",
+            "en": "Sustainable human reviews: skip the low-risk PRs, go deep on the ones that matter",
+            "fr": "Des revues humaines soutenables : sauter les PR à faible risque, approfondir celles qui comptent"
+          },
+          "body_html": {
+            "es": "<p>Artie Shevchenko propone una estrategia de review por <strong>niveles de riesgo</strong>: los PRs de bajo riesgo pasan solo con aprobación de AI, y los cambios complejos reciben escrutinio humano profundo <em>después</em> de que el dev haya hecho un spike de la solución. La cita que ordena todo el argumento: «AI doesn't really understand anything; it generates tokens, creating an illusion of understanding».</p><p>El tradeoff está bien identificado y es el que casi nadie menciona: esto <strong>solo funciona con equipos chicos y ownership amplio del código</strong>. Si el review se concentra en tres personas, no ganaste velocidad — moviste el cuello de botella y le agregaste fatiga. Y ojo con lo que se pierde de verdad: el review humano no es solo control de calidad, es <strong>el loop de feedback por el que el conocimiento circula en el equipo</strong>. Si lo apagás para los cambios «rutinarios», estás decidiendo que los juniors no aprendan de ellos.</p>",
+            "en": "<p>Artie Shevchenko proposes a review strategy tiered by <strong>risk level</strong>: low-risk PRs pass on AI approval alone, while complex changes get deep human scrutiny <em>after</em> the developer has spiked the solution. The quote that anchors the argument: «AI doesn't really understand anything; it generates tokens, creating an illusion of understanding».</p><p>The tradeoff is correctly identified and it is the one almost nobody mentions: this <strong>only works with small teams and broad code ownership</strong>. If review concentrates on three people, you did not gain velocity — you moved the bottleneck and added fatigue. And mind what is genuinely lost: human review is not only quality control, it is <strong>the feedback loop through which knowledge circulates in a team</strong>. Switch it off for «routine» changes and you are deciding that juniors will not learn from them.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/human-reviews-AI-era/", "label": "infoq.com" }
+        },
+        {
+          "id": "pnpm-12-rust-numbers",
+          "tag": "notable",
+          "date": "03 Sep 2026",
+          "title": {
+            "es": "pnpm 12 en Rust: los números reales del rewrite",
+            "en": "pnpm 12 in Rust: the real numbers behind the rewrite",
+            "fr": "pnpm 12 en Rust : les vrais chiffres de la réécriture"
+          },
+          "body_html": {
+            "es": "<p>Ahora tenemos mediciones concretas del rewrite nativo: <strong>clean install de 8.2s a 5s, install cacheado de 472ms a 15ms</strong>, y en el workspace de Turborepo de Vercel reducciones de mediana <strong>del 64.4% al 90.5%</strong> en seis escenarios. La resolución de peer dependencies es 2–3x más rápida en workspaces con muchos ciclos, usando ~25% menos memoria.</p><p>El tradeoff honesto: el <strong>primer arranque sin cache es 11.1% más lento</strong>, aunque el cacheado mejora 74.7%. Y hay breaking changes que hay que leer: se va <code>pnpm install --resolution-only</code> (ahora <code>pnpm peers check</code>), las dependencias git resuelven por URL HTTPS canónica, en Linux se priorizan hardlinks antes que reflinks, y las claves desconocidas en <code>pnpm-workspace.yaml</code> ahora <strong>tiran error en vez de ignorarse en silencio</strong> — que es lo correcto, y probablemente lo que te rompa el CI.</p>",
+            "en": "<p>We now have concrete measurements for the native rewrite: <strong>clean install from 8.2s to 5s, cached install from 472ms to 15ms</strong>, and on Vercel's Turborepo workspace median reductions of <strong>64.4% to 90.5%</strong> across six scenarios. Peer dependency resolution is 2–3x faster in cycle-heavy workspaces using about 25% less memory.</p><p>The honest tradeoff: the <strong>first uncached startup is 11.1% slower</strong>, though cached startup improves 74.7%. And there are breaking changes worth reading: <code>pnpm install --resolution-only</code> is gone (now <code>pnpm peers check</code>), git dependencies resolve through canonical HTTPS URLs, Linux prioritizes hardlinks before reflinks, and unknown keys in <code>pnpm-workspace.yaml</code> now <strong>throw instead of being silently ignored</strong> — which is correct, and probably what breaks your CI.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/pnpm-12-rust/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "nx-2320",
+      "updates": [
+        {
+          "id": "nx-2320",
+          "tag": "release",
+          "date": "02 Sep 2026",
+          "title": {
+            "es": "Nx 23.2.0 estable: oxlint y oxfmt de primera clase, y Vitest por todos lados",
+            "en": "Nx 23.2.0 stable: first-class oxlint and oxfmt, and Vitest everywhere",
+            "fr": "Nx 23.2.0 stable : oxlint et oxfmt de première classe, et Vitest partout"
+          },
+          "body_html": {
+            "es": "<p>Sale el estable después de los RCs. Lo relevante: plugin <code>@nx/oxlint</code> propio, soporte built-in de <strong>oxfmt junto a prettier</strong>, y generación de Vitest ofrecida de forma consistente en todos los generators vía la opción <code>unitTestRunner</code> — incluyendo node, nest y express. La cadena de tooling en Rust ya no es experimento.</p><p>Suma también soporte de dependency catalogs de Bun, <code>nx migrate --run-migration</code> para correr una sola migración, confirmación antes de crear commits de migración en la branch default, y la posibilidad de que el daemon y los plugin workers corran dentro de sandboxes de agentes.</p>",
+            "en": "<p>Stable after the RCs. What matters: a dedicated <code>@nx/oxlint</code> plugin, built-in support for <strong>oxfmt alongside prettier</strong>, and Vitest generation offered consistently across generators through the <code>unitTestRunner</code> option — including node, nest, and express. The Rust tooling chain is no longer an experiment.</p><p>It also adds Bun dependency catalog support, <code>nx migrate --run-migration</code> to run a single migration, confirmation before creating migration commits on the default branch, and the ability to run the daemon and plugin workers inside agent sandboxes.</p>"
+          },
+          "source": { "url": "https://github.com/nrwl/nx/releases/tag/23.2.0", "label": "github.com/nrwl" }
+        },
+        {
+          "id": "pnpm-1230",
+          "tag": "release",
+          "date": "02 Sep 2026",
+          "title": {
+            "es": "pnpm 12.3: flags de supply chain en remove y update, y shims nativos en todas las plataformas",
+            "en": "pnpm 12.3: supply-chain flags on remove and update, native shims everywhere",
+            "fr": "pnpm 12.3 : flags supply-chain sur remove et update, shims natifs partout"
+          },
+          "body_html": {
+            "es": "<p><code>pnpm remove</code> y <code>pnpm update</code> ahora aceptan <code>--trust-lockfile</code>, <code>--trust-policy</code>, <code>--trust-policy-exclude</code> y <code>--trust-policy-ignore-after</code>, los mismos flags que ya tenían <code>install</code> y <code>add</code>. Importante: <strong><code>pnpm remove</code> verifica el lockfile contra las políticas activas igual que <code>install</code></strong>, así que quitar un paquete ya no es un agujero en tu control de supply chain.</p><p>Además, todos los comandos globales context-aware (<code>node</code>, <code>deno</code>, <code>bun</code> y los shims de <code>pnpm shim add</code>) pasan a ser ejecutables nativos en todas las plataformas — en Windows <code>&lt;name&gt;.exe</code> reemplaza los shims <code>.cmd</code> y <code>.ps1</code>. En 12.3.2 sumaron que <code>pnpm run</code> y <code>pnpm exec</code> ya no reinstalan en filesystems con mtimes sub-milisegundo como NTFS.</p>",
+            "en": "<p><code>pnpm remove</code> and <code>pnpm update</code> now accept <code>--trust-lockfile</code>, <code>--trust-policy</code>, <code>--trust-policy-exclude</code>, and <code>--trust-policy-ignore-after</code>, the same flags <code>install</code> and <code>add</code> already took. Important: <strong><code>pnpm remove</code> verifies the lockfile against active policies the way <code>install</code> does</strong>, so removing a package is no longer a hole in your supply-chain control.</p><p>Also, every context-aware global command (<code>node</code>, <code>deno</code>, <code>bun</code>, and shims from <code>pnpm shim add</code>) becomes a native executable on every platform — on Windows <code>&lt;name&gt;.exe</code> replaces the <code>.cmd</code> and <code>.ps1</code> shims. 12.3.2 adds that <code>pnpm run</code> and <code>pnpm exec</code> no longer reinstall on filesystems with sub-millisecond mtimes such as NTFS.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.3.0", "label": "github.com/pnpm" }
+        },
+        {
+          "id": "tanstack-solid-start-rc5",
+          "tag": "beta",
+          "date": "03 Sep 2026",
+          "title": {
+            "es": "TanStack Solid Start llega a 2.0.0-rc.5",
+            "en": "TanStack Solid Start reaches 2.0.0-rc.5",
+            "fr": "TanStack Solid Start atteint 2.0.0-rc.5"
+          },
+          "body_html": {
+            "es": "<p>Otro RC en la serie 2.0 de Solid Start, junto con <code>@tanstack/solid-start-server</code>. El ciclo de RCs viene largo y estable — si estás evaluando el stack fullstack de TanStack fuera de React, es buen momento para probarlo en una branch, todavía no para producción.</p>",
+            "en": "<p>Another RC in the Solid Start 2.0 series, alongside <code>@tanstack/solid-start-server</code>. The RC cycle has been long and steady — if you are evaluating TanStack's fullstack story outside React, this is a good moment to try it on a branch, not yet in production.</p>"
+          },
+          "source": { "url": "https://github.com/TanStack/router/releases/tag/release-2026-09-03-2013", "label": "github.com/TanStack" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Los doce advisories de Orval dicen algo incómodo sobre el codegen: <strong>tratamos los specs de OpenAPI como datos de configuración cuando en realidad son entrada a un compilador</strong>. Un backtick en un path se convierte en ejecución de código porque el generador construye strings en vez de construir AST. Si tu build corre codegen sobre un spec que no auditás vos, esa es una superficie de ataque con permisos de tu CI.",
+      "en": "Orval's twelve advisories say something uncomfortable about codegen: <strong>we treat OpenAPI specs as configuration data when they are really compiler input</strong>. A backtick in a path becomes code execution because the generator builds strings instead of building an AST. If your build runs codegen over a spec you do not audit yourself, that is an attack surface holding your CI's permissions.",
+      "fr": "Les douze advisories d'Orval disent quelque chose de gênant sur le codegen : <strong>nous traitons les specs OpenAPI comme des données de configuration alors qu'ils sont une entrée de compilateur</strong>. Un backtick dans un path devient de l'exécution de code parce que le générateur construit des chaînes au lieu d'un AST. Si votre build lance du codegen sur un spec que vous n'auditez pas, c'est une surface d'attaque dotée des permissions de votre CI."
+    },
+    {
+      "es": "TOON y toml-node cayeron con prototype pollution el mismo día, y stream-json con un filtro cuadrático. Los tres son <strong>parsers</strong>. La conclusión práctica: cuando escribís un parser, las dos preguntas obligatorias son «¿qué pasa si la key se llama <code>__proto__</code>?» y «¿cuánto cuesta esto en función de la profundidad, no del tamaño?». Casi nadie hace la segunda.",
+      "en": "TOON and toml-node fell to prototype pollution on the same day, and stream-json to a quadratic filter. All three are <strong>parsers</strong>. The practical takeaway: when you write a parser, the two mandatory questions are «what happens if the key is named <code>__proto__</code>?» and «what does this cost as a function of depth, not size?». Almost nobody asks the second one.",
+      "fr": "TOON et toml-node sont tombés le même jour pour prototype pollution, et stream-json pour un filtre quadratique. Les trois sont des <strong>parsers</strong>. La conclusion pratique : en écrivant un parser, les deux questions obligatoires sont «que se passe-t-il si la clé s'appelle <code>__proto__</code> ?» et «combien cela coûte-t-il en fonction de la profondeur, pas de la taille ?». Presque personne ne pose la seconde."
+    },
+    {
+      "es": "Vitest 5, Nx 23.2 con oxlint/oxfmt y pnpm 12 en Rust apuntan todos al mismo lugar: <strong>la cadena de tooling de JavaScript se está reescribiendo en lenguajes nativos y ya no es experimental</strong>. Los números de pnpm (install cacheado de 472ms a 15ms) explican por qué. El costo es que estos saltos traen breaking changes de verdad — Node 22 mínimo en Vitest, claves desconocidas que ahora tiran error en pnpm. Planificá la migración, no la improvises.",
+      "en": "Vitest 5, Nx 23.2 with oxlint/oxfmt, and pnpm 12 in Rust all point the same way: <strong>the JavaScript tooling chain is being rewritten in native languages and it is no longer experimental</strong>. pnpm's numbers (cached install from 472ms to 15ms) explain why. The cost is that these jumps carry real breaking changes — Node 22 minimum in Vitest, unknown keys now throwing in pnpm. Plan the migration, do not improvise it.",
+      "fr": "Vitest 5, Nx 23.2 avec oxlint/oxfmt et pnpm 12 en Rust pointent tous dans la même direction : <strong>la chaîne d'outillage JavaScript est réécrite en langages natifs et ce n'est plus expérimental</strong>. Les chiffres de pnpm (install caché de 472ms à 15ms) expliquent pourquoi. Le coût : ces sauts portent de vrais breaking changes — Node 22 minimum dans Vitest, clés inconnues qui lèvent une erreur dans pnpm. Planifiez la migration."
+    },
+    {
+      "es": "El bug de Cilium y el de amqp091-go comparten un patrón que vale internalizar: <strong>la garantía la rompe algo que vos considerabas confiable</strong>. En Cilium, tu YAML es correcto y el datapath no lo respeta por una config de clusterName. En amqp091-go, el atacante es el broker con el que ya negociaste. Threat modeling que solo mira «input del usuario» se pierde estas dos categorías enteras.",
+      "en": "The Cilium bug and the amqp091-go bug share a pattern worth internalizing: <strong>the guarantee is broken by something you considered trusted</strong>. In Cilium, your YAML is correct and the datapath does not honor it because of a clusterName setting. In amqp091-go, the attacker is the broker you already negotiated with. Threat modeling that only looks at «user input» misses both of these categories entirely.",
+      "fr": "Le bug Cilium et celui d'amqp091-go partagent un motif à intérioriser : <strong>la garantie est brisée par quelque chose que vous jugiez fiable</strong>. Dans Cilium, votre YAML est correct et le datapath ne le respecte pas à cause d'un réglage clusterName. Dans amqp091-go, l'attaquant est le broker avec lequel vous avez déjà négocié. Un threat modeling limité à «l'entrée utilisateur» rate entièrement ces deux catégories."
+    }
+  ]
+}

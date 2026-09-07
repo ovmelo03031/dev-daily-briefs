@@ -1,0 +1,392 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 7 de septiembre de 2026",
+    "en": "Backend & Fullstack — September 7, 2026",
+    "fr": "Backend & Fullstack — 7 septembre 2026"
+  },
+  "description": {
+    "es": "SurrealDB deja cruzar tenants por la URL, hono/jsx escupe strings sin escapar, SimpleWebAuthn acepta attestations que no llegan al trust anchor y vlt 1.0 sale como reemplazo de npm.",
+    "en": "SurrealDB lets you cross tenants through the URL, hono/jsx emits unescaped strings, SimpleWebAuthn accepts attestations that never reach a trust anchor, and vlt 1.0 ships as an npm replacement.",
+    "fr": "SurrealDB laisse franchir les tenants via l'URL, hono/jsx émet des chaînes non échappées, SimpleWebAuthn accepte des attestations sans trust anchor, et vlt 1.0 sort en remplacement de npm."
+  },
+  "pubDate": "2026-09-07",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "SurrealDB: la URL decide tu namespace",
+        "en": "SurrealDB: the URL decides your namespace",
+        "fr": "SurrealDB : l'URL décide de votre namespace"
+      },
+      "anchor": "surrealdb-custom-api-scope",
+      "icon": "lucide:database"
+    },
+    {
+      "text": {
+        "es": "hono/jsx: XSS en Suspense y ErrorBoundary",
+        "en": "hono/jsx: XSS in Suspense and ErrorBoundary",
+        "fr": "hono/jsx : XSS dans Suspense et ErrorBoundary"
+      },
+      "anchor": "hono-jsx-xss",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "SimpleWebAuthn acepta attestations falsas",
+        "en": "SimpleWebAuthn accepts forged attestations",
+        "fr": "SimpleWebAuthn accepte de fausses attestations"
+      },
+      "anchor": "simplewebauthn-attestation",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Bun 1.4.2 arregla un leak en AsyncLocalStorage",
+        "en": "Bun 1.4.2 fixes an AsyncLocalStorage leak",
+        "fr": "Bun 1.4.2 corrige une fuite AsyncLocalStorage"
+      },
+      "anchor": "bun-142",
+      "icon": "simple-icons:bun"
+    },
+    {
+      "text": {
+        "es": "vlt 1.0: nada se ejecuta por escribir install",
+        "en": "vlt 1.0: nothing runs just because you typed install",
+        "fr": "vlt 1.0 : rien ne s'exécute parce qu'on tape install"
+      },
+      "anchor": "vlt-1-0",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "better-auth valida el schema en producción",
+        "en": "better-auth validates the schema in production",
+        "fr": "better-auth valide le schéma en production"
+      },
+      "anchor": "better-auth-173",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Google publica Beyond Zero, sucesor de BeyondCorp",
+        "en": "Google publishes Beyond Zero, successor to BeyondCorp",
+        "fr": "Google publie Beyond Zero, successeur de BeyondCorp"
+      },
+      "anchor": "google-beyond-zero",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "surrealdb-custom-api-scope",
+      "updates": [
+        {
+          "id": "surrealdb-custom-api-scope",
+          "tag": "breaking",
+          "date": "04 Sep 2026",
+          "title": {
+            "es": "SurrealDB: cambiás el namespace en la URL y entrás al tenant de al lado",
+            "en": "SurrealDB: change the namespace in the URL and you are in the next tenant",
+            "fr": "SurrealDB : changez le namespace dans l'URL et vous êtes chez le voisin"
+          },
+          "body_html": {
+            "es": "<p>CVE-2026-63735. La ruta <code>/api/{namespace}/{database}/{endpoint}</code> tomaba namespace y database <strong>desde la URL y los aplicaba a la sesión del caller antes de buscar o ejecutar el endpoint</strong>, sin verificar que el scope autenticado los cubriera. Un usuario autenticado en un namespace podía invocar una custom API (<code>DEFINE API</code>) de otro.</p><p>Y acá viene lo que lo hace grave: un handler de custom API corre <strong>con permisos deshabilitados</strong> (definer's rights), así que la cláusula <code>PERMISSIONS</code> del propio endpoint era la única barrera. Si esa cláusula era abierta, no quedaba nada. Parcheado en <code>3.2.0</code>.</p><p>El patrón para llevarse: <strong>tomar el tenant de un parámetro de ruta y aplicarlo a la sesión antes de autorizar es la receta clásica del cross-tenant</strong>. El scope tiene que venir del token, nunca de la URL.</p>",
+            "en": "<p>CVE-2026-63735. The route <code>/api/{namespace}/{database}/{endpoint}</code> took namespace and database <strong>from the URL and applied them to the caller's session before the endpoint was looked up or run</strong>, without checking that the caller's authenticated scope covered them. A user authenticated in one namespace could invoke a custom API (<code>DEFINE API</code>) belonging to another.</p><p>Here is what makes it severe: a custom API handler runs <strong>with permissions disabled</strong> (definer's rights), so the endpoint's own <code>PERMISSIONS</code> clause was the only gate. If that clause was open, nothing remained. Fixed in <code>3.2.0</code>.</p><p>The pattern to take away: <strong>reading the tenant from a route parameter and applying it to the session before authorizing is the classic cross-tenant recipe</strong>. Scope must come from the token, never from the URL.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-848m-r628-vrxw", "label": "github.com/advisories" }
+        },
+        {
+          "id": "hono-jsx-xss",
+          "tag": "security",
+          "date": "04 Sep 2026",
+          "title": {
+            "es": "Hono 4.13.7: hono/jsx emite strings sin escapar en Suspense y ErrorBoundary",
+            "en": "Hono 4.13.7: hono/jsx emits unescaped strings in Suspense and ErrorBoundary",
+            "fr": "Hono 4.13.7 : hono/jsx émet des chaînes non échappées dans Suspense et ErrorBoundary"
+          },
+          "body_html": {
+            "es": "<p>GHSA-hxh3-vqpv-xpqv, CVSS 4.7. <code>hono/jsx</code> no escapaba un string plano puesto directamente como child o <code>fallback</code> de <code>Suspense</code> o <code>ErrorBoundary</code>, como único child de un <code>Context.Provider</code>, o como valor raíz de <code>renderToString()</code> / <code>renderToReadableStream()</code>. Esos caminos <strong>stringifican el input y tratan el resultado como HTML ya escapado</strong>, así que el string pasa tal cual.</p><p>El caso de streaming es el peor: un <code>fallback</code> string llega al browser <strong>en el primer chunk</strong>. El caso totalmente síncrono de <code>ErrorBoundary</code> ya se había arreglado en 4.11.7 — este es el hermano que se les escapó. Actualizá a <code>4.13.7</code> si renderizás contenido de usuarios ahí.</p>",
+            "en": "<p>GHSA-hxh3-vqpv-xpqv, CVSS 4.7. <code>hono/jsx</code> did not escape a plain string placed directly as a child or <code>fallback</code> of <code>Suspense</code> or <code>ErrorBoundary</code>, as the only child of a <code>Context.Provider</code>, or as the root value of <code>renderToString()</code> / <code>renderToReadableStream()</code>. Those paths <strong>stringify their input and treat the result as already-escaped HTML</strong>, so the string passes through unchanged.</p><p>The streaming case is the worst: a string <code>fallback</code> reaches the browser <strong>in the initial chunk</strong>. The all-synchronous <code>ErrorBoundary</code> case was already fixed in 4.11.7 — this is the sibling that slipped through. Upgrade to <code>4.13.7</code> if you render user content there.</p>"
+          },
+          "source": { "url": "https://github.com/honojs/hono/releases/tag/v4.13.7", "label": "github.com/honojs" }
+        },
+        {
+          "id": "simplewebauthn-attestation",
+          "tag": "security",
+          "date": "04 Sep 2026",
+          "title": {
+            "es": "SimpleWebAuthn: la cadena de attestation no llega al trust anchor",
+            "en": "SimpleWebAuthn: the attestation chain never reaches the trust anchor",
+            "fr": "SimpleWebAuthn : la chaîne d'attestation n'atteint pas le trust anchor"
+          },
+          "body_html": {
+            "es": "<p><code>validateCertificatePath()</code> no verificaba que la cadena de certificados de una attestation <strong>terminara realmente en un trust anchor configurado</strong>. Al recorrer la cadena frenaba en el primer certificado self-signed que encontrara —que puede venir del usuario— y salía temprano, <strong>antes</strong> de llegar al anchor de Apple/Google/Yubico que se concatena al final.</p><p>Resultado: alguien registra una credencial y el server la acepta como si estuviera respaldada por un authenticator genuino. Severidad baja (CVSS 2) porque no rompe la autenticación en sí, pero <strong>si tu lógica de negocio confía en la attestation</strong> —para exigir hardware certificado, o para dar más privilegios a passkeys de dispositivo— esa confianza no existía. Parcheado en <code>@simplewebauthn/server 13.3.2</code>.</p>",
+            "en": "<p><code>validateCertificatePath()</code> did not verify that an attestation's certificate chain <strong>actually terminates at a configured trust anchor</strong>. Walking the chain, it stopped at the first self-signed certificate it found — which can be user-supplied — and exited early, <strong>before</strong> reaching the Apple/Google/Yubico anchor concatenated at the end.</p><p>Result: someone registers a credential and the server accepts it as if backed by a genuine authenticator. Severity is low (CVSS 2) because it does not break authentication itself, but <strong>if your business logic trusts the attestation</strong> — to require certified hardware, or to grant more privilege to device-bound passkeys — that trust was never there. Fixed in <code>@simplewebauthn/server 13.3.2</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-6hxq-p678-4hr2", "label": "github.com/advisories" }
+        },
+        {
+          "id": "bun-142",
+          "tag": "release",
+          "date": "05 Sep 2026",
+          "title": {
+            "es": "Bun 1.4.2: se va un leak de AsyncLocalStorage que te comía el contexto por request",
+            "en": "Bun 1.4.2: an AsyncLocalStorage leak that held your per-request context is gone",
+            "fr": "Bun 1.4.2 : disparition d'une fuite AsyncLocalStorage retenant le contexte par requête"
+          },
+          "body_html": {
+            "es": "<p>El fix que importa en backend es el de <code>AsyncLocalStorage</code>: timers, immediates o promises pendientes creados dentro de <code>store.exit()</code> o de un <code>store.run()</code> anidado <strong>mantenían vivos los valores del store externo</strong>. Traducido: si guardabas contexto por request —trace id, user, tenant— y arrancabas un timer largo, ese contexto quedaba retenido todo lo que durara el timer. En un server con tráfico real eso es un leak que crece solo.</p><p>También arreglan una regresión de <code>bun build</code> donde un <code>var</code> anidado se renombraba igual que un <code>let</code> del mismo bloque (rompía Elysia), el orden del evento <code>'online'</code> de <code>worker_threads</code> para alinearse con Node —colgaba <code>@discordjs/ws</code>—, y suben JavaScriptCore con ~350 commits de WebKit.</p>",
+            "en": "<p>The fix that matters on the backend is <code>AsyncLocalStorage</code>: timers, immediates, or pending promises created inside <code>store.exit()</code> or a nested <code>store.run()</code> <strong>kept the outer store's values alive</strong>. Translated: if you stored per-request context — trace id, user, tenant — and started a long timer, that context stayed retained for the timer's whole lifetime. On a server with real traffic that is a leak that grows on its own.</p><p>They also fix a <code>bun build</code> regression where a nested <code>var</code> was renamed to match a <code>let</code> in the same block (it broke Elysia), the <code>worker_threads</code> <code>'online'</code> event order to match Node — it hung <code>@discordjs/ws</code> — and bump JavaScriptCore with ~350 WebKit commits.</p>"
+          },
+          "source": { "url": "https://bun.sh/blog/bun-v1.4.2", "label": "bun.sh" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "surrealdb-permissions-side-effects",
+      "updates": [
+        {
+          "id": "surrealdb-permissions-side-effects",
+          "tag": "security",
+          "date": "04 Sep 2026",
+          "title": {
+            "es": "SurrealDB: una cláusula PERMISSIONS puede escribir en tablas que no podés tocar",
+            "en": "SurrealDB: a PERMISSIONS clause can write to tables you cannot touch",
+            "fr": "SurrealDB : une clause PERMISSIONS peut écrire dans des tables interdites"
+          },
+          "body_html": {
+            "es": "<p>CVE-2026-63733. Una cláusula <code>PERMISSIONS ... WHERE</code> se evalúa <strong>con el enforcement de permisos apagado</strong> —lógico, si no recursaría sobre sí misma—. El problema es que esa cláusula también puede contener statements que modifican datos, y esos corrían igual con el enforcement apagado:</p><pre><code>DEFINE TABLE post PERMISSIONS FOR update\n    WHERE (CREATE log SET at = time::now()) OR true;</code></pre><p>Cualquiera que pueda hacer update de un <code>post</code> ahora crea registros en <code>log</code>, sin tener permiso sobre <code>log</code>. Y la cláusula se evalúa <strong>una vez por cada record que matchea</strong>, así que un solo statement amplifica. Parcheado en <code>surrealdb-core 3.2.0</code>.</p><p>Esto es un caso de manual de por qué un <strong>predicado de autorización debe ser puro</strong>. Si tu chequeo de permisos puede tener efectos de lado, dejó de ser un chequeo.</p>",
+            "en": "<p>CVE-2026-63733. A <code>PERMISSIONS ... WHERE</code> clause is evaluated <strong>with permission enforcement disabled</strong> — reasonably, or it would recurse into itself. The problem: that clause can also contain data-modifying statements, and those ran with enforcement still off:</p><pre><code>DEFINE TABLE post PERMISSIONS FOR update\n    WHERE (CREATE log SET at = time::now()) OR true;</code></pre><p>Anyone allowed to update a <code>post</code> now creates records in <code>log</code>, with no permission on <code>log</code>. And the clause is evaluated <strong>once per matched record</strong>, so a single statement amplifies. Fixed in <code>surrealdb-core 3.2.0</code>.</p><p>This is a textbook case for why an <strong>authorization predicate must be pure</strong>. If your permission check can have side effects, it stopped being a check.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-66r2-5gwj-gxm2", "label": "github.com/advisories" }
+        },
+        {
+          "id": "surrealdb-denynet-dns",
+          "tag": "security",
+          "date": "04 Sep 2026",
+          "title": {
+            "es": "SurrealDB: el deny-net se esquiva resolviendo DNS",
+            "en": "SurrealDB: deny-net is bypassed through DNS resolution",
+            "fr": "SurrealDB : le deny-net se contourne via la résolution DNS"
+          },
+          "body_html": {
+            "es": "<p>CVE-2025-71390, CVSS 5.8. Si arrancás con <code>surreal start --allow-net --deny-net 10.0.0.0/8</code>, un usuario autenticado puede usar las funciones <code>http::&lt;fn&gt;(&lt;url&gt;)</code> con un hostname que <strong>resuelve</strong> al bloque denegado en vez de escribirlo como IP. SSRF hacia tu red interna, con la ACL puesta.</p><p>Vale la pena notar que la propia doc de SurrealDB desaconseja la config de allow-all-con-denylist. Es el recordatorio de siempre: <strong>una denylist filtra lo que escribiste, no lo que el atacante puede alcanzar</strong>. Allowlist siempre que se pueda. Parcheado en 2.1.8, 2.2.6, 2.3.6 y 3.0.0-alpha.7.</p>",
+            "en": "<p>CVE-2025-71390, CVSS 5.8. If you start with <code>surreal start --allow-net --deny-net 10.0.0.0/8</code>, an authenticated user can call <code>http::&lt;fn&gt;(&lt;url&gt;)</code> with a hostname that <strong>resolves</strong> into the denied block instead of writing it as an IP. SSRF into your internal network with the ACL in place.</p><p>Worth noting SurrealDB's own docs advise against the allow-all-with-denylist configuration. The standing reminder: <strong>a denylist filters what you wrote down, not what the attacker can reach</strong>. Allowlist wherever you can. Fixed in 2.1.8, 2.2.6, 2.3.6, and 3.0.0-alpha.7.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-m3c3-78fh-w3w7", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "codewhale-agent-advisories",
+      "updates": [
+        {
+          "id": "codewhale-agent-advisories",
+          "tag": "security",
+          "date": "04 Sep 2026",
+          "title": {
+            "es": "CodeWhale: nueve advisories y un SSRF crítico por TOCTOU en el DNS pinning",
+            "en": "CodeWhale: nine advisories and a critical SSRF via TOCTOU in DNS pinning",
+            "fr": "CodeWhale : neuf advisories et un SSRF critique par TOCTOU sur le DNS pinning"
+          },
+          "body_html": {
+            "es": "<p>Nueve advisories el mismo día contra el agente de coding CodeWhale (antes <code>deepseek-tui</code>). El crítico es CVE-2026-75856, <strong>CVSS 9.2</strong>: el DNS pinning falla de forma insegura, y con un servidor DNS custom que falla las primeras consultas y responde las siguientes se puede saltear la lógica entera — TOCTOU clásico.</p><p>El resto dibuja un mapa muy claro de la superficie de ataque de un agente: <code>allow_shell</code> y <code>instructions</code> sobreescribibles <strong>desde el repo clonado</strong> (8.5 y 8.7), <code>rlm_eval</code> auto-aprobando ejecución arbitraria de Python, argument injection en <code>git_blame</code> y <code>git_show</code> para leer y escribir archivos sin approval, <code>js_execution</code> filtrando el environment del proceso padre al contexto del modelo, e <code>image_analyze</code> siguiendo symlinks fuera del workspace. Parcheado en <code>0.8.64</code>.</p><p>Si corrés agentes sobre repos que no son tuyos: <strong>la config del repo es input del atacante</strong>, igual que el <code>pnpm-workspace.yaml</code> de la semana pasada.</p>",
+            "en": "<p>Nine advisories on the same day against the CodeWhale coding agent (formerly <code>deepseek-tui</code>). The critical one is CVE-2026-75856, <strong>CVSS 9.2</strong>: DNS pinning fails unsafely, and a custom DNS server that fails the first requests and answers the later ones bypasses the whole logic — classic TOCTOU.</p><p>The rest draws a very clear map of an agent's attack surface: <code>allow_shell</code> and <code>instructions</code> overridable <strong>from the cloned repository</strong> (8.5 and 8.7), <code>rlm_eval</code> auto-approving arbitrary Python execution, argument injection in <code>git_blame</code> and <code>git_show</code> for approval-free file read and write, <code>js_execution</code> leaking the parent environment into model context, and <code>image_analyze</code> following symlinks outside the workspace. Fixed in <code>0.8.64</code>.</p><p>If you run agents over repositories that are not yours: <strong>the repo's config is attacker input</strong>, exactly like last week's <code>pnpm-workspace.yaml</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-6v2g-fpxh-pmmh", "label": "github.com/advisories" }
+        },
+        {
+          "id": "typespec-spector-shutdown",
+          "tag": "security",
+          "date": "04 Sep 2026",
+          "title": {
+            "es": "TypeSpec: un POST sin auth apaga el mock server de Spector",
+            "en": "TypeSpec: one unauthenticated POST shuts down the Spector mock server",
+            "fr": "TypeSpec : un POST non authentifié éteint le mock server Spector"
+          },
+          "body_html": {
+            "es": "<p><code>@typespec/spector</code> registra <code>POST /.admin/stop</code> <strong>sin autenticación, sin token, sin chequeo de Origin y sin restricción de IP de origen</strong>. Y como el server bindea a <code>0.0.0.0</code> por defecto, el endpoint queda expuesto a cualquier host que alcance el puerto, no solo a localhost. DoS completo con un request. CVSS 7.5, parcheado en <code>0.1.0-alpha.27</code>.</p><p>Es el mismo patrón del RCE en Claude Code Templates de la semana pasada: <strong>tooling de desarrollo que asume «esto corre solo en mi máquina» y bindea a todas las interfaces</strong>. Revisá a qué bindean tus mock servers y dev tools, sobre todo en CI compartido.</p>",
+            "en": "<p><code>@typespec/spector</code> registers <code>POST /.admin/stop</code> with <strong>no authentication, no token, no Origin check, and no source-IP restriction</strong>. And since the server binds to <code>0.0.0.0</code> by default, the endpoint is exposed to any host that can reach the port, not just localhost. Complete DoS in one request. CVSS 7.5, fixed in <code>0.1.0-alpha.27</code>.</p><p>Same pattern as last week's Claude Code Templates RCE: <strong>developer tooling that assumes «this only runs on my machine» and binds to every interface</strong>. Check what your mock servers and dev tools bind to, especially on shared CI.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-7q9c-hpx7-9cwm", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "ecs-early-success",
+      "updates": [
+        {
+          "id": "ecs-early-success",
+          "tag": "notable",
+          "date": "04 Sep 2026",
+          "title": {
+            "es": "ECS: declarar el deploy exitoso al 90% en vez de esperar el 100%",
+            "en": "ECS: call the deploy successful at 90% instead of waiting for 100%",
+            "fr": "ECS : déclarer le déploiement réussi à 90% au lieu d'attendre 100%"
+          },
+          "body_html": {
+            "es": "<p>Early Success Criteria te deja definir <strong>qué porcentaje de tasks sanas alcanza para dar el deploy por exitoso</strong>. Con 100 tasks deseadas y umbral 90%, ECS declara éxito con 90 sanas y sigue escalando el resto por separado. Sumale cleanup <code>BLOCKING</code> o <code>DEFERRED</code> según si querés esperar la limpieza del source o que corra asincrónica.</p><p>El beneficio real no es el deploy en sí, es <strong>destrabar el pipeline de CI/CD y todo lo que depende de él</strong> antes. Y es especialmente útil en workloads de inferencia con GPU, donde la capacidad está restringida y esperar el 100% puede ser eterno.</p>",
+            "en": "<p>Early Success Criteria lets you define <strong>what percentage of healthy tasks is enough to call a deployment successful</strong>. With 100 desired tasks and a 90% threshold, ECS declares success at 90 healthy and keeps scaling the rest separately. Add <code>BLOCKING</code> or <code>DEFERRED</code> cleanup depending on whether you want to wait for source cleanup or let it run asynchronously.</p><p>The real benefit is not the deployment itself, it is <strong>unblocking the CI/CD pipeline and everything downstream</strong> sooner. Especially useful on GPU inference workloads, where capacity is constrained and waiting for 100% can take forever.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-ecs-deployments-early-success/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "aws-mcp-serverless",
+          "tag": "ga",
+          "date": "04 Sep 2026",
+          "title": {
+            "es": "AWS MCP Server suma diagnóstico serverless con baseline de 7 días",
+            "en": "AWS MCP Server adds serverless diagnostics with a 7-day baseline",
+            "fr": "AWS MCP Server ajoute un diagnostic serverless avec baseline de 7 jours"
+          },
+          "body_html": {
+            "es": "<p>El AWS MCP Server ahora deja que un agente inspeccione funciones Lambda y sus recursos conectados —API Gateway, EventBridge, S3, DynamoDB, SNS, SQS, Step Functions— y, lo interesante, <strong>compare las señales de error contra un baseline de 7 días para identificar qué cambió</strong>, además de ver el timeline de cambios recientes y la latencia entre recursos.</p><p>Ese framing es el correcto para debugging distribuido: la pregunta útil casi nunca es «¿qué está fallando?» sino <strong>«¿qué es distinto respecto a cuando andaba?»</strong>. Sin costo adicional, corre en N. Virginia y Frankfurt accediendo a todas las regiones comerciales.</p>",
+            "en": "<p>The AWS MCP Server now lets an agent inspect Lambda functions and their connected resources — API Gateway, EventBridge, S3, DynamoDB, SNS, SQS, Step Functions — and, the interesting part, <strong>compare error signals against a 7-day baseline to identify what changed</strong>, plus recent change timelines and cross-resource latency.</p><p>That framing is the right one for distributed debugging: the useful question is almost never «what is failing?» but <strong>«what is different from when it worked?»</strong>. No additional cost, running in N. Virginia and Frankfurt against all commercial regions.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/aws-mcp-server-serverless/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "workerd-20260907",
+          "tag": "release",
+          "date": "07 Sep 2026",
+          "title": {
+            "es": "workerd v1.20260907.1 mantiene la cadencia diaria",
+            "en": "workerd v1.20260907.1 keeps the daily cadence",
+            "fr": "workerd v1.20260907.1 maintient la cadence quotidienne"
+          },
+          "body_html": {
+            "es": "<p>Tres releases del runtime de Workers durante el fin de semana (05, 06 y 07). Cloudflare no baja el ritmo ni en sábado. Si trackeás compatibility flags o operás Durable Objects, conviene revisar el changelog acumulado en vez de release por release.</p>",
+            "en": "<p>Three Workers runtime releases over the weekend (05, 06, and 07). Cloudflare does not slow down on Saturdays. If you track compatibility flags or run Durable Objects, read the accumulated changelog rather than release by release.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workerd/releases/tag/v1.20260907.1", "label": "github.com/cloudflare" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "google-beyond-zero",
+      "updates": [
+        {
+          "id": "google-beyond-zero",
+          "tag": "notable",
+          "date": "05 Sep 2026",
+          "title": {
+            "es": "Google publica Beyond Zero: BeyondCorp ya no alcanza",
+            "en": "Google publishes Beyond Zero: BeyondCorp is no longer enough",
+            "fr": "Google publie Beyond Zero : BeyondCorp ne suffit plus"
+          },
+          "body_html": {
+            "es": "<p>El paper es explícito sobre por qué el modelo de 2014 se quedó corto: sus supuestos —<strong>que quien accede es humano, que las acciones ocurren a velocidad humana, y que la aplicación es el límite correcto de confianza</strong>— ya no se sostienen. Beyond Zero mueve la decisión de autorización <strong>del nivel de aplicación al nivel de acción y recurso individual</strong>, sobre todas las interfaces.</p><p>Los cinco principios combinan políticas fijas con controles dinámicos para escenarios de riesgo alto, contexto enriquecido automáticamente, investigación automatizada disparada por señales, y verificación o contención adicional cuando hace falta.</p><p>La objeción de los expertos está bien puesta y vale tenerla presente: <strong>meter decisiones probabilísticas de AI en límites de seguridad que históricamente fueron determinísticos</strong> es un cambio de naturaleza, no de grado. Vale leer el modelo, pero el escepticismo sobre la parte dinámica es sano.</p>",
+            "en": "<p>The paper is explicit about why the 2014 model fell short: its assumptions — <strong>that accessors are human, that actions happen at human speed, and that applications are the right trust boundary</strong> — no longer hold. Beyond Zero moves the authorization decision <strong>from application level to individual actions and resources</strong>, across every interface.</p><p>Its five principles combine fixed policy with dynamic controls for higher-risk scenarios, automatically enriched context, automated investigation triggered by risk signals, and extra verification or containment when needed.</p><p>The experts' objection is well placed and worth holding onto: <strong>putting probabilistic AI decisions inside security boundaries that were historically deterministic</strong> is a change in kind, not degree. Read the model, but the skepticism about the dynamic half is healthy.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/google-beyond-zero/", "label": "infoq.com" }
+        },
+        {
+          "id": "cern-debian-migration",
+          "tag": "notable",
+          "date": "07 Sep 2026",
+          "title": {
+            "es": "CERN migra 2.200 máquinas de control a Debian por el baseline de microarquitectura",
+            "en": "CERN moves 2,200 control machines to Debian over the microarchitecture baseline",
+            "fr": "Le CERN migre 2 200 machines de contrôle vers Debian pour la baseline microarchitecture"
+          },
+          "body_html": {
+            "es": "<p>Caso de estudio hermoso sobre restricciones de larga vida. RHEL 9 exigió <code>x86-64-v2</code> (SSE4.2, POPCNT) y RHEL 10 apunta a <code>x86-64-v3</code>. CERN tiene nodos de control con procesadores de la era Core 2 y placas industriales custom <strong>diseñadas para ciclos de vida de 10 a 15 años</strong> que no llegan a ese baseline sin reemplazar el hardware. Debian mantiene <code>x86-64</code> v1, así que migran a Debian 13 para Q4 2026.</p><p>Lo que vale para nosotros: <strong>el horizonte temporal de tu hardware —o de tu contrato, o de tu compliance— es una restricción arquitectónica real</strong>, y a veces manda por encima de cualquier preferencia técnica. Ojo con el alcance: son 2.200 máquinas de control de aceleradores, nada más. Las granjas de cómputo y el grid Tier-0 siguen en AlmaLinux y RHEL.</p>",
+            "en": "<p>A lovely case study in long-lifetime constraints. RHEL 9 mandated <code>x86-64-v2</code> (SSE4.2, POPCNT) and RHEL 10 targets <code>x86-64-v3</code>. CERN runs control nodes on Core 2-era processors and custom industrial boards <strong>designed for 10-to-15-year lifecycles</strong> that cannot meet that baseline without replacing hardware. Debian keeps <code>x86-64</code> v1, so they move to Debian 13 by Q4 2026.</p><p>What it means for the rest of us: <strong>your hardware's time horizon — or your contract's, or your compliance regime's — is a real architectural constraint</strong>, and it sometimes outranks any technical preference. Mind the scope: this is 2,200 accelerator-control machines only. The compute farms and Tier-0 grid stay on AlmaLinux and RHEL.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/cern-debian-infra/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "vlt-1-0",
+      "updates": [
+        {
+          "id": "vlt-1-0",
+          "tag": "release",
+          "date": "07 Sep 2026",
+          "title": {
+            "es": "vlt 1.0: los fundadores de npm separan install de build",
+            "en": "vlt 1.0: npm's founders split install from build",
+            "fr": "vlt 1.0 : les fondateurs de npm séparent install et build"
+          },
+          "body_html": {
+            "es": "<p>La idea central la resume Darcy Clarke: está construido <strong>para que nada corra en tu máquina solo porque escribiste install</strong>. En vez del paso único de npm, vlt separa en dos: <code>vlt install</code> baja paquetes <strong>sin ejecutar scripts</strong>, y <code>vlt build</code> corre solo los scripts aprobados y bloquea malware conocido por defecto.</p><p>Lo segundo interesante es <code>vlt query</code>: trata el árbol de dependencias como un DOM, con más de 60 selectores tipo CSS —la mitad orientados a seguridad vía Socket— para auditar dependencias a escala. Y sus registries hosteados rechazan paquetes maliciosos antes de servirlos: llevan más de 275.000 versiones flaggeadas, <strong>un cuarto de las cuales sigue instalable desde npm</strong>.</p><p>En velocidad cruda pnpm y Bun siguen adelante; vlt reclama hasta 38% más rápido que npm. La diferencia real no es el benchmark, es <strong>dónde ataca el problema de supply chain</strong>: npm v12 desactiva scripts por defecto, pnpm pone en cuarentena los releases nuevos, vlt lo hace en el registry.</p>",
+            "en": "<p>Darcy Clarke sums up the core idea: it is built <strong>so nothing runs on your machine just because you typed install</strong>. Instead of npm's single step, vlt splits in two: <code>vlt install</code> downloads packages <strong>without executing scripts</strong>, and <code>vlt build</code> runs only approved scripts and blocks known malware by default.</p><p>The second interesting piece is <code>vlt query</code>: it treats the dependency tree like a DOM, with 60+ CSS-like selectors — about half security-oriented via Socket — to audit dependencies at scale. And its hosted registries reject malicious packages before serving them: over 275,000 flagged versions so far, <strong>a quarter of which remain installable from npm</strong>.</p><p>On raw speed pnpm and Bun still lead; vlt claims up to 38% faster than npm. The real difference is not the benchmark, it is <strong>where it attacks the supply-chain problem</strong>: npm v12 disables scripts by default, pnpm quarantines new releases, vlt does it at the registry.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/vlt-npm-replacement/", "label": "infoq.com" }
+        },
+        {
+          "id": "better-auth-173",
+          "tag": "release",
+          "date": "06 Sep 2026",
+          "title": {
+            "es": "better-auth 1.7.3: validación de schema en producción y revert del cambio de 1.7",
+            "en": "better-auth 1.7.3: schema validation in production and a revert of the 1.7 change",
+            "fr": "better-auth 1.7.3 : validation de schéma en production et revert du changement 1.7"
+          },
+          "body_html": {
+            "es": "<p>Dos cosas grandes. Primera: <strong>la validación de schema durante la inicialización queda activada por defecto, también en producción</strong>, y las requests de autenticación se rechazan si detecta un mismatch. Es la decisión correcta —un schema desalineado en auth es exactamente donde no querés fallar en silencio— pero verificá tus migraciones antes de bumpear.</p><p>Segunda: <strong>restauraron el core schema de accounts de 1.6</strong> para evitar un backfill disruptivo, identificando accounts por <code>(providerId, accountId)</code> en lugar de issuer. Si ya aplicaste el schema de issuer de 1.7, hay guía de upgrade con la limpieza necesaria (sin backfill). Reconocen el costo para quien ya migró y se comprometen a mantener estable el core schema durante toda la v1 — decisión sensata, aunque incómoda para los early adopters.</p><p>También suman Cloudflare como social provider built-in con PKCE, e <code>isPasswordCompromised</code> para chequear contra Have I Been Pwned en flows server-side propios.</p>",
+            "en": "<p>Two big things. First: <strong>schema validation during initialization is now on by default, including in production</strong>, and authentication requests are rejected on a detected mismatch. That is the right call — a misaligned auth schema is exactly where you do not want silent failure — but verify your migrations before bumping.</p><p>Second: <strong>they restored the 1.6 accounts core schema</strong> to avoid a disruptive backfill, identifying accounts by <code>(providerId, accountId)</code> instead of issuer. If you already applied the 1.7 issuer schema there is an upgrade guide with the required cleanup (no backfill needed). They acknowledge the cost to those who already migrated and commit to keeping the core schema stable throughout v1 — a sensible call, if an uncomfortable one for early adopters.</p><p>They also add Cloudflare as a built-in social provider with PKCE, and <code>isPasswordCompromised</code> for checking against Have I Been Pwned in your own server-side flows.</p>"
+          },
+          "source": { "url": "https://github.com/better-auth/better-auth/releases/tag/v1.7.3", "label": "github.com/better-auth" }
+        },
+        {
+          "id": "pnpm-11-26-0",
+          "tag": "patch",
+          "date": "06 Sep 2026",
+          "title": {
+            "es": "pnpm 11.26.0: la línea anterior sigue viva",
+            "en": "pnpm 11.26.0: the previous line is still alive",
+            "fr": "pnpm 11.26.0 : la ligne précédente reste vivante"
+          },
+          "body_html": {
+            "es": "<p>Mientras la línea 12 en Rust avanza a 12.3.4, pnpm sigue publicando en la serie 11. Buena señal para quien todavía no puede absorber los breaking changes del rewrite nativo —claves desconocidas que ahora tiran error, git deps por HTTPS canónico— y necesita fixes sin migrar todavía.</p>",
+            "en": "<p>While the Rust-based 12 line moves to 12.3.4, pnpm keeps publishing on the 11 series. A good signal for anyone who cannot yet absorb the native rewrite's breaking changes — unknown keys now throwing, git deps through canonical HTTPS — and needs fixes without migrating.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v11.26.0", "label": "github.com/pnpm" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Los tres advisories de SurrealDB comparten una raíz que trasciende la base: <strong>el enforcement de permisos se apaga en un punto por una razón legítima, y algo más se cuela por esa ventana</strong>. El handler de custom API corre con permisos apagados por definer's rights; la cláusula PERMISSIONS se evalúa con enforcement apagado para no recursar. En ambos casos el diseño es correcto y la implementación deja pasar de más. Cuando tengas que apagar una verificación, escribí explícitamente qué queda permitido adentro de esa ventana.",
+      "en": "SurrealDB's three advisories share a root that goes beyond the database: <strong>permission enforcement is switched off at one point for a legitimate reason, and something else slips through that window</strong>. The custom API handler runs with permissions off by definer's rights; the PERMISSIONS clause is evaluated with enforcement off so it does not recurse. In both cases the design is right and the implementation lets too much through. When you must switch off a check, write down explicitly what stays permitted inside that window.",
+      "fr": "Les trois advisories SurrealDB partagent une racine qui dépasse la base : <strong>l'enforcement des permissions est désactivé à un endroit pour une raison légitime, et autre chose se glisse par cette fenêtre</strong>. Le handler d'API custom tourne permissions désactivées par definer's rights ; la clause PERMISSIONS est évaluée sans enforcement pour ne pas récurser. Dans les deux cas le design est juste et l'implémentation laisse passer trop. Quand vous devez désactiver une vérification, écrivez explicitement ce qui reste permis dans cette fenêtre."
+    },
+    {
+      "es": "hono/jsx y SimpleWebAuthn fallan por lo mismo: <strong>una función que devuelve un valor «ya validado» sin haber validado del todo</strong>. En Hono, los paths de Suspense stringifican el input y lo tratan como HTML ya escapado. En SimpleWebAuthn, la validación de cadena corta en el primer self-signed y devuelve OK sin haber tocado el trust anchor. Ambos son <strong>éxitos silenciosos</strong>, que son mucho peores que un error: nadie audita un camino que nunca se queja.",
+      "en": "hono/jsx and SimpleWebAuthn fail for the same reason: <strong>a function returning an «already validated» value without having fully validated</strong>. In Hono, the Suspense paths stringify input and treat it as already-escaped HTML. In SimpleWebAuthn, chain validation stops at the first self-signed cert and returns OK without ever touching the trust anchor. Both are <strong>silent successes</strong>, which are far worse than errors: nobody audits a path that never complains.",
+      "fr": "hono/jsx et SimpleWebAuthn échouent pour la même raison : <strong>une fonction renvoyant une valeur «déjà validée» sans avoir validé entièrement</strong>. Dans Hono, les chemins Suspense stringifient l'entrée et la traitent comme du HTML déjà échappé. Dans SimpleWebAuthn, la validation de chaîne s'arrête au premier certificat auto-signé et renvoie OK sans jamais atteindre le trust anchor. Deux <strong>succès silencieux</strong>, bien pires que des erreurs : personne n'audite un chemin qui ne se plaint jamais."
+    },
+    {
+      "es": "vlt 1.0, los nueve advisories de CodeWhale y el <code>POST /.admin/stop</code> de TypeSpec cuentan la misma historia desde tres ángulos: <strong>el tooling de desarrollo es infraestructura de producción y hace rato dejamos de tratarlo así</strong>. Un install que ejecuta scripts, un agente que lee su config del repo clonado, un mock server bindeado a 0.0.0.0. La cifra de vlt es la que más incomoda: 275.000 versiones flaggeadas como maliciosas, un cuarto todavía instalables desde npm.",
+      "en": "vlt 1.0, CodeWhale's nine advisories, and TypeSpec's <code>POST /.admin/stop</code> tell the same story from three angles: <strong>developer tooling is production infrastructure and we stopped treating it that way long ago</strong>. An install that executes scripts, an agent reading its config from the cloned repo, a mock server bound to 0.0.0.0. vlt's number is the most uncomfortable: 275,000 versions flagged as malicious, a quarter still installable from npm.",
+      "fr": "vlt 1.0, les neuf advisories de CodeWhale et le <code>POST /.admin/stop</code> de TypeSpec racontent la même histoire sous trois angles : <strong>l'outillage de développement est une infrastructure de production et nous avons cessé de le traiter ainsi</strong>. Un install qui exécute des scripts, un agent lisant sa config depuis le dépôt cloné, un mock server bindé sur 0.0.0.0. Le chiffre de vlt est le plus gênant : 275 000 versions signalées comme malveillantes, un quart encore installables depuis npm."
+    }
+  ]
+}

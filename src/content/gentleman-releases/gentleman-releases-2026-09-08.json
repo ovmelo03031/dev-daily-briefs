@@ -1,0 +1,114 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 08 Sep 2026",
+    "en": "Gentleman Releases — 08 Sep 2026",
+    "fr": "Gentleman Releases — 08 Sep 2026"
+  },
+  "description": {
+    "es": "engram v2.0.0-rc.8: respuestas MCP compactas, entrega protegida de la respuesta final y arranque de TUI arreglado en Termux",
+    "en": "engram v2.0.0-rc.8: compact MCP responses, protected delivery of the final answer and a fixed TUI startup on Termux",
+    "fr": "engram v2.0.0-rc.8 : réponses MCP compactes, livraison protégée de la réponse finale et démarrage TUI corrigé sur Termux"
+  },
+  "pubDate": "2026-09-08",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "engram v2.0.0-rc.8 — 22 commits arriba de rc.6: milestone de MCP y confiabilidad",
+        "en": "engram v2.0.0-rc.8 — 22 commits ahead of rc.6: an MCP and reliability milestone",
+        "fr": "engram v2.0.0-rc.8 — 22 commits devant rc.6 : jalon MCP et fiabilité"
+      },
+      "anchor": "engram-v2-0-0-rc-8",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "mem_search ahora devuelve previews acotados y la observación completa queda en mem_get_observation",
+        "en": "mem_search now returns bounded previews, with the complete observation left to mem_get_observation",
+        "fr": "mem_search renvoie désormais des aperçus bornés, l observation complète restant dans mem_get_observation"
+      },
+      "anchor": "engram-mcp-compact-search",
+      "icon": "lucide:search"
+    },
+    {
+      "text": {
+        "es": "El clipboard se descubre recién al pegar: se cae el fallo de arranque de rc.6 en Termux y Linux ARM64",
+        "en": "Clipboard discovery is deferred until paste, killing the rc.6 startup failure on Termux and Linux ARM64",
+        "fr": "La découverte du presse-papiers est différée au collage, supprimant l échec de démarrage rc.6 sur Termux et Linux ARM64"
+      },
+      "anchor": "engram-termux-startup-fix",
+      "icon": "lucide:terminal"
+    }
+  ],
+  "tools": [
+    {
+      "id": "engram",
+      "name": "engram",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-engram",
+      "icon_emoji": "💋",
+      "anchor": "engram",
+      "version": "v2.0.0-rc.8",
+      "updates": [
+        {
+          "id": "engram-v2-0-0-rc-8",
+          "tag": "beta",
+          "title": {
+            "es": "v2.0.0-rc.8 — Milestone de MCP y confiabilidad",
+            "en": "v2.0.0-rc.8 — MCP and reliability milestone",
+            "fr": "v2.0.0-rc.8 — Jalon MCP et fiabilité"
+          },
+          "body_html": {
+            "es": "<p>RC8 llega con 22 commits arriba de rc.6 y va a lo concreto: respuestas de búsqueda MCP más compactas, la respuesta final al usuario protegida aunque el bookkeeping interno de memoria falle, mejor recuperación de la propiedad de sesión y operaciones de mantenimiento que fallan cerrado en vez de improvisar. Ojo con un detalle sano: los dry-runs de consolidación ahora exigen una selección confirmada antes de armar un plan de merge, así no te comés un merge que nunca pediste.</p><p>Sobre rc.7: el tag y la imagen cloud existen, pero el workflow de release frenó en el gate de tidy antes de GoReleaser, así que nunca hubo archives ni manifiesto de checksums. RC8 preserva esa historia inmutable y publica el set completo verificado. Sigue siendo prerelease: probalo, pero tené a mano una instalación conocida que funcione.</p>",
+            "en": "<p>RC8 lands 22 commits ahead of rc.6 and stays concrete: more compact MCP search responses, the user-facing reply preserved even when internal memory bookkeeping fails, better session-ownership recovery, and maintenance operations that fail closed instead of improvising. One healthy detail: consolidation dry-runs now require an explicit confirmed selection before they will produce a merge plan.</p><p>On rc.7: the tag and cloud image were published, but the release workflow stopped at the tidy gate before GoReleaser, so no archives or checksum manifest ever shipped. RC8 preserves that immutable history and publishes the complete verified artifact set. It is still a prerelease — test it, but keep a known-good installation around.</p>",
+            "fr": "<p>RC8 arrive avec 22 commits devant rc.6 et reste concret : réponses de recherche MCP plus compactes, réponse finale à l utilisateur préservée même quand la comptabilité interne de la mémoire échoue, meilleure récupération de la propriété de session, et opérations de maintenance qui échouent en mode fermé. Détail sain : les dry-runs de consolidation exigent désormais une sélection confirmée avant de produire un plan de fusion.</p><p>À propos de rc.7 : le tag et l image cloud ont été publiés, mais le workflow de release s est arrêté au gate tidy avant GoReleaser, donc aucune archive ni manifeste de checksums n a été publié. RC8 préserve cet historique immuable et publie l ensemble complet vérifié. C est toujours une préversion.</p>"
+          },
+          "date": "07 Sep 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v2.0.0-rc.8",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        },
+        {
+          "id": "engram-mcp-compact-search",
+          "tag": "feature",
+          "title": {
+            "es": "mem_search con previews acotados y respuesta compacta",
+            "en": "mem_search gets bounded previews and a compact response",
+            "fr": "mem_search obtient des aperçus bornés et une réponse compacte"
+          },
+          "body_html": {
+            "es": "<p>El PR #1068 mete proyecciones de preview acotadas y soporte de respuesta compacta en el <code>mem_search</code> de MCP. La observación completa no se pierde: queda detrás de <code>mem_get_observation</code>, que la traés recién cuando la necesitás. Es la jugada correcta para una herramienta de memoria: el listado no te tiene que quemar el contexto para después leer una sola entrada.</p>",
+            "en": "<p>PR #1068 adds bounded preview projections and compact response support to MCP <code>mem_search</code>. The complete observation is not lost — it sits behind <code>mem_get_observation</code>, fetched only when you actually need it. That is the right call for a memory tool: the listing should not burn your context just so you can read one entry.</p>",
+            "fr": "<p>La PR #1068 ajoute des projections d aperçu bornées et un support de réponse compacte à <code>mem_search</code> côté MCP. L observation complète reste accessible via <code>mem_get_observation</code>, récupérée seulement au besoin. C est le bon choix pour un outil de mémoire : le listing ne doit pas consommer tout le contexte.</p>"
+          },
+          "date": "07 Sep 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/pull/1068",
+            "label": "github.com/Gentleman-Programming/engram — PR #1068"
+          }
+        },
+        {
+          "id": "engram-termux-startup-fix",
+          "tag": "fix",
+          "title": {
+            "es": "Arranque de TUI arreglado en Termux y Linux ARM64",
+            "en": "TUI startup fixed on Termux and Linux ARM64",
+            "fr": "Démarrage TUI corrigé sur Termux et Linux ARM64"
+          },
+          "body_html": {
+            "es": "<p>rc.6 se caía al arrancar la TUI en Termux y Linux ARM64 porque el descubrimiento de clipboard pasaba en el boot. El PR #1069 lo difiere hasta el momento del paste, con lo cual el comportamiento de pegado y la seguridad del input quedan intactos y el arranque deja de depender de un clipboard que en esos entornos directamente no está. Si venías trabado en rc.6 desde el celular, esta es tu release.</p>",
+            "en": "<p>rc.6 crashed on TUI startup on Termux and Linux ARM64 because clipboard discovery happened at boot. PR #1069 defers it until paste, so paste behavior and input safety stay intact while startup stops depending on a clipboard those environments simply do not have.</p>",
+            "fr": "<p>rc.6 échouait au démarrage de la TUI sur Termux et Linux ARM64 car la découverte du presse-papiers se faisait au boot. La PR #1069 la diffère jusqu au collage : le comportement de collage et la sécurité de la saisie restent intacts, et le démarrage ne dépend plus d un presse-papiers absent.</p>"
+          },
+          "date": "07 Sep 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/pull/1069",
+            "label": "github.com/Gentleman-Programming/engram — PR #1069"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

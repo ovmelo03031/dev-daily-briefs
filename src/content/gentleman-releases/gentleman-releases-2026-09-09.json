@@ -1,0 +1,144 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 09 Sep 2026",
+    "en": "Gentleman Releases — 09 Sep 2026",
+    "fr": "Gentleman Releases — 09 Sep 2026"
+  },
+  "description": {
+    "es": "gentle-ai v2.7.0 estable con telemetría anunciada y review por nivel de riesgo, y engram v2.0.0-rc.9 alineando source y paquetes.",
+    "en": "gentle-ai v2.7.0 lands stable with announced telemetry and risk-tiered review, while engram v2.0.0-rc.9 aligns source and packages.",
+    "fr": "gentle-ai v2.7.0 arrive en stable avec télémétrie annoncée et revue par niveau de risque, et engram v2.0.0-rc.9 aligne source et paquets."
+  },
+  "pubDate": "2026-09-09",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "gentle-ai v2.7.0 — telemetría anónima opt-out y review por nivel de riesgo",
+        "en": "gentle-ai v2.7.0 — opt-out anonymous telemetry and risk-tiered review",
+        "fr": "gentle-ai v2.7.0 — télémétrie anonyme opt-out et revue par niveau de risque"
+      },
+      "anchor": "gentle-ai-v2-7-0",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-ai: menos callejones sin salida en el ciclo de review",
+        "en": "gentle-ai: fewer dead ends in the review lifecycle",
+        "fr": "gentle-ai : moins d'impasses dans le cycle de revue"
+      },
+      "anchor": "gentle-ai-review-dead-ends",
+      "icon": "lucide:route"
+    },
+    {
+      "text": {
+        "es": "engram v2.0.0-rc.9 — un solo commit fuente para binario, npm y setup",
+        "en": "engram v2.0.0-rc.9 — one source commit behind binary, npm and setup",
+        "fr": "engram v2.0.0-rc.9 — un seul commit source pour binaire, npm et setup"
+      },
+      "anchor": "engram-v2-0-0-rc-9",
+      "icon": "simple-icons:github"
+    }
+  ],
+  "tools": [
+    {
+      "id": "gentle-ai",
+      "name": "gentle-ai",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-gentle-ai",
+      "icon_emoji": "🎩",
+      "anchor": "gentle-ai",
+      "version": "v2.7.0",
+      "updates": [
+        {
+          "id": "gentle-ai-v2-7-0",
+          "tag": "feature",
+          "title": {
+            "es": "v2.7.0 — Telemetría anónima que se anuncia sola y se apaga con un comando",
+            "en": "v2.7.0 — Anonymous telemetry that announces itself and switches off with one command",
+            "fr": "v2.7.0 — Télémétrie anonyme qui s'annonce et se désactive en une commande"
+          },
+          "body_html": {
+            "es": "<p>El release estable corta en <code>main</code> a <code>4e4470b3</code>, 100 commits sin merges después de v2.6.0, promovido desde <code>v2.7.0-rc.1</code>. Dos merges posteriores (#4327, #4344) que tocan cómo los agentes corren comandos remotos quedaron deliberadamente afuera: salen en la próxima.</p><p>La novedad grande es telemetría. La primera vez que corrés <code>install</code>, <code>update</code> o <code>sync</code> después de actualizar, gentle-ai imprime una línea avisando y <em>no manda nada</em>. Recién después manda un evento de instalación y como mucho un heartbeat diario. Va la versión, el sistema operativo, el CPU, qué agentes instalaste, si tenés receipt-driven development prendido y unos contadores. No van paths, ni nombres de repos, ni usuarios, ni máquinas, ni tu IP —el collector ni siquiera la guarda. Todos los campos son opciones fijas de una lista, así que no hay por dónde filtrar texto libre.</p><p>Ojo con esto: se apaga con <code>gentle-ai telemetry disable</code>, o con <code>DO_NOT_TRACK</code>, <code>GENTLE_AI_TELEMETRY=0</code> o <code>CI=true</code>. El collector y el dashboard de Grafana viven en el mismo repo (<code>cmd/gentle-telemetry</code>, <code>deploy/telemetry/</code>), así que el camino entero es auditable. (#4309, #4310, #4317, #4313, #4319)</p>",
+            "en": "<p>The stable cut is <code>main</code> at <code>4e4470b3</code>, 100 non-merge commits after v2.6.0, promoted from <code>v2.7.0-rc.1</code>. Two later merges (#4327, #4344) touching how agents run remote commands were deliberately left out and ship next.</p><p>The headline change is telemetry. The first time you run <code>install</code>, <code>update</code> or <code>sync</code> after upgrading, gentle-ai prints one line saying it will send anonymous usage stats and sends nothing. From then on it sends one install event and at most one daily heartbeat. Events carry the version, OS and CPU type, which agents and components you installed, whether receipt-driven development is on, and a few counters. They never carry file paths, repository names, user names, machine names, or your IP, which the collector does not store at all. Every field is a fixed choice from a list, so free text has nowhere to leak in.</p><p>Turn it off with <code>gentle-ai telemetry disable</code>, or via <code>DO_NOT_TRACK</code>, <code>GENTLE_AI_TELEMETRY=0</code> or <code>CI=true</code>. The collector and Grafana dashboard live in the same repo (<code>cmd/gentle-telemetry</code>, <code>deploy/telemetry/</code>), so the whole path is auditable. (#4309, #4310, #4317, #4313, #4319)</p>",
+            "fr": "<p>La coupe stable est <code>main</code> à <code>4e4470b3</code>, 100 commits hors merge après v2.6.0, promue depuis <code>v2.7.0-rc.1</code>. Deux merges ultérieurs (#4327, #4344) touchant l'exécution de commandes distantes par les agents ont été volontairement exclus et sortiront ensuite.</p><p>La grande nouveauté est la télémétrie. Au premier <code>install</code>, <code>update</code> ou <code>sync</code> après la mise à jour, gentle-ai affiche une ligne annonçant l'envoi de statistiques anonymes et n'envoie rien. Ensuite, un événement d'installation et au plus un heartbeat quotidien. Les événements contiennent la version, l'OS et le type de CPU, les agents installés, l'état du receipt-driven development et quelques compteurs. Jamais de chemins de fichiers, de noms de dépôts, d'utilisateurs, de machines ni d'IP — que le collecteur ne stocke pas.</p><p>Désactivation avec <code>gentle-ai telemetry disable</code>, ou via <code>DO_NOT_TRACK</code>, <code>GENTLE_AI_TELEMETRY=0</code> ou <code>CI=true</code>. Le collecteur et le tableau de bord Grafana sont dans le même dépôt (<code>cmd/gentle-telemetry</code>, <code>deploy/telemetry/</code>). (#4309, #4310, #4317, #4313, #4319)</p>"
+          },
+          "date": "08 Sep 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v2.7.0",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        },
+        {
+          "id": "gentle-ai-risk-assess",
+          "tag": "feature",
+          "title": {
+            "es": "review assess — cuánto cuidado merece un cambio, antes de abrir nada",
+            "en": "review assess — how careful to be with a change, before opening anything",
+            "fr": "review assess — quel niveau de vigilance avant d'ouvrir quoi que ce soit"
+          },
+          "body_html": {
+            "es": "<p>Hasta ahora receipt-driven development era todo o nada: o corría el review de cuatro lentes completo, o no tenías nada. Ahora <code>gentle-ai review assess --json</code> mira el cambio y responde una sola pregunta —<em>¿cuánto cuidado merece esto?</em>— con <code>passive</code>, <code>medium</code> o <code>high</code>, sin abrir un review ni tocar nada (#4297, #4295).</p><p>La guía del orquestador en todos los agentes soportados usa esa respuesta para decidir cuánto checking merece una tarea delegada (#4298, #4296). Con el switch prendido y el review cerrado, el que escribió el código corre los checks y el review nativo es el par de ojos independiente. Con el switch apagado, o si dijiste «esta vez no» al prompt, el nivel de riesgo decide si corre un verificador aparte (#4305, #4304). Los cambios chicos dejan de pagar ceremonia que no necesitan.</p><p>Además, <code>gentle-ai sdd-archive-compose</code> ahora compone nativamente el spec canónico al archivar, así que lo que aterriza en <code>openspec/specs/</code> lo genera la herramienta, determinista, siempre (#4232).</p>",
+            "en": "<p>Receipt-driven development used to be all or nothing: either a full four-lens review ran, or you got nothing. Now <code>gentle-ai review assess --json</code> looks at a change and answers one question — <em>how careful should we be with this?</em> — with <code>passive</code>, <code>medium</code> or <code>high</code>, without opening a review or touching anything (#4297, #4295).</p><p>The orchestrator guidance in every supported agent uses that answer to decide how much checking a delegated task deserves (#4298, #4296). With the switch on and the review closed, the worker who wrote the code runs the checks and the native review is the independent pair of eyes. With the switch off, or after declining the review prompt, the risk tier decides whether a separate verifier runs at all (#4305, #4304). Small, harmless changes stop paying for ceremony they do not need.</p><p>Alongside it, <code>gentle-ai sdd-archive-compose</code> now composes the canonical spec natively during archive, so what lands in <code>openspec/specs/</code> is produced by the tool, deterministically, every time (#4232).</p>",
+            "fr": "<p>Le receipt-driven development était tout ou rien : soit une revue complète à quatre lentilles, soit rien. Désormais <code>gentle-ai review assess --json</code> examine un changement et répond à une seule question — <em>quelle vigilance mérite-t-il ?</em> — par <code>passive</code>, <code>medium</code> ou <code>high</code>, sans ouvrir de revue ni rien modifier (#4297, #4295).</p><p>La guidance de l'orchestrateur, dans chaque agent supporté, s'en sert pour décider du niveau de vérification d'une tâche déléguée (#4298, #4296). Switch activé et revue close, celui qui a écrit le code lance les checks et la revue native fournit le regard indépendant. Switch désactivé, le niveau de risque décide s'il faut un vérificateur séparé (#4305, #4304).</p><p>En parallèle, <code>gentle-ai sdd-archive-compose</code> compose nativement le spec canonique lors de l'archivage (#4232).</p>"
+          },
+          "date": "08 Sep 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/pull/4297",
+            "label": "github.com/Gentleman-Programming/gentle-ai#4297"
+          }
+        },
+        {
+          "id": "gentle-ai-review-dead-ends",
+          "tag": "fix",
+          "title": {
+            "es": "Se cierran varios callejones sin salida del ciclo de review",
+            "en": "Several review-lifecycle dead ends closed",
+            "fr": "Plusieurs impasses du cycle de revue fermées"
+          },
+          "body_html": {
+            "es": "<p>La queja recurrente era un review que se frena y te pide algo imposible. Varios de esos loops cerrados desaparecen: si tu host no puede correr uno de los roles de reviewer, ahora puede decirlo y el review sigue en vez de ofrecerte el mismo slot para siempre (#4274, #3442). Si un validador «no pudo decidir», eso ahora es un campo tipado que la herramienta lee, no una frase que intenta interpretar (#4273, #4266).</p><p>Cuando la causa de un hallazgo no se puede trazar a tu cambio se degrada por hallazgo, y si la evidencia misma está degradada el review falla cerrado en vez de adivinar (#4261). Un review arrancado sobre commits retoma bien después de que aterrizan commits nuevos (#4265, #4213), y si los assets manejados en disco son más viejos que el binario el status te lo dice y te imprime el <code>sync</code> exacto (#4242).</p><p>Bonus: renombrar un archivo ya no parece una reescritura gigante (#4249), agregar un logo no escala el review (#4207), y un método llamado <code>exec</code> dejó de contar como límite de proceso e inflar el riesgo (#4211).</p>",
+            "en": "<p>The recurring complaint was a review that stops and asks for something impossible. Several of those closed loops are gone: if your agent host cannot run one of the reviewer roles, it can now say so and the review moves on instead of offering the same slot forever (#4274, #3442). Whether a validator could not decide is now a typed field the tool reads, not a sentence it tries to interpret (#4273, #4266).</p><p>When a finding's cause cannot be traced to your change it is downgraded per finding, and when the evidence itself is degraded the review fails closed rather than guessing (#4261). A review started on committed changes resumes correctly after new commits land (#4265, #4213), and when managed assets on disk are older than the binary, status says so and prints the exact <code>sync</code> command (#4242).</p><p>Bonus fixes: a rename no longer looks like a giant rewrite (#4249), adding a logo no longer escalates a review (#4207), and a member call named <code>exec</code> stopped counting as a process boundary and inflating risk (#4211).</p>",
+            "fr": "<p>La plainte récurrente : une revue qui s'arrête et demande l'impossible. Plusieurs de ces boucles fermées disparaissent : si votre hôte ne peut pas exécuter un rôle de reviewer, il peut le dire et la revue avance au lieu de proposer le même slot indéfiniment (#4274, #3442). L'indécision d'un validateur est désormais un champ typé, pas une phrase à interpréter (#4273, #4266).</p><p>Quand la cause d'un constat n'est pas traçable à votre changement, il est dégradé constat par constat ; quand l'évidence elle-même est dégradée, la revue échoue en fermeture plutôt que de deviner (#4261). Une revue lancée sur des commits reprend correctement après l'arrivée de nouveaux commits (#4265, #4213), et si les assets gérés sont plus anciens que le binaire, le status l'indique avec la commande <code>sync</code> exacte (#4242).</p><p>Bonus : un renommage ne ressemble plus à une réécriture géante (#4249), ajouter un logo n'escalade plus la revue (#4207), et un appel nommé <code>exec</code> ne compte plus comme frontière de processus (#4211).</p>"
+          },
+          "date": "08 Sep 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/pull/4274",
+            "label": "github.com/Gentleman-Programming/gentle-ai#4274"
+          }
+        }
+      ]
+    },
+    {
+      "id": "engram",
+      "name": "engram",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-engram",
+      "icon_emoji": "🧠",
+      "anchor": "engram",
+      "version": "v2.0.0-rc.9",
+      "updates": [
+        {
+          "id": "engram-v2-0-0-rc-9",
+          "tag": "beta",
+          "title": {
+            "es": "v2.0.0-rc.9 — Binario, npm y setup apuntando al mismo commit",
+            "en": "v2.0.0-rc.9 — Binary, npm and setup pointing at the same commit",
+            "fr": "v2.0.0-rc.9 — Binaire, npm et setup sur le même commit"
+          },
+          "body_html": {
+            "es": "<p>Este RC no agrega features: alinea la fuente. Los tags del release y la provenance de npm identifican un solo commit fuente, <code>a51b80d</code>, y los contratos de binario, paquete, setup e instalación quedan alineados. Se verificó una instalación aislada real vía npm/Pi.</p><p>Ojo con la letra chica: esto es alineación de fuente y contrato de release, <em>no</em> una promesa de paridad funcional universal ni de soporte estable para el RC de Go. La sincronización de paquetes salió por el issue aprobado #1076 y el PR mergeado #1080, con <code>gentle-engram@0.1.12</code> publicado con provenance.</p><p>Quedaron explícitamente afuera los issues #783, #990, #774, #883 y #873.</p>",
+            "en": "<p>This RC adds no features: it aligns the source. The release tags and the npm provenance identify a single source commit, <code>a51b80d</code>, and the binary, package, setup and installation contracts are aligned. A real isolated npm/Pi installation was verified.</p><p>Read the small print: this is source and release-contract alignment, <em>not</em> a claim of universal functional parity or stable support for the Go RC. Package synchronization shipped through approved issue #1076 and merged PR #1080, with <code>gentle-engram@0.1.12</code> published with provenance.</p><p>Explicitly excluded: issues #783, #990, #774, #883 and #873.</p>",
+            "fr": "<p>Cette RC n'ajoute aucune fonctionnalité : elle aligne la source. Les tags de release et la provenance npm identifient un seul commit source, <code>a51b80d</code>, et les contrats binaire, paquet, setup et installation sont alignés. Une installation npm/Pi isolée réelle a été vérifiée.</p><p>Attention : il s'agit d'un alignement de source et de contrat de release, <em>pas</em> d'une parité fonctionnelle universelle ni d'un support stable pour la RC Go. La synchronisation des paquets est passée par l'issue approuvée #1076 et la PR mergée #1080, avec <code>gentle-engram@0.1.12</code> publié avec provenance.</p><p>Exclus explicitement : #783, #990, #774, #883 et #873.</p>"
+          },
+          "date": "08 Sep 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v2.0.0-rc.9",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

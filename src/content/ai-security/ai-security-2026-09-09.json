@@ -1,0 +1,261 @@
+{
+  "title": {
+    "es": "AI Security — 09 Sep 2026",
+    "en": "AI Security — 09 Sep 2026",
+    "fr": "AI Security — 09 Sep 2026"
+  },
+  "description": {
+    "es": "Check Point encontró un segundo canal encubierto en el Artifactory interno de OpenAI que dejaba filtrar Gmail y chats entre cuentas de ChatGPT; Google avisa que las bandas de extorsión ahora van por modelos y research; y dos CVE nuevos en Windows ML CLI y n8n rompen los límites de las herramientas de agentes.",
+    "en": "Check Point found a second covert channel in OpenAI's internal Artifactory that leaked Gmail and chat data between ChatGPT accounts, Google warns extortion crews are now hunting proprietary models and research, and two fresh CVEs break agent tool boundaries in Windows ML CLI and n8n.",
+    "fr": "Check Point a trouvé un second canal caché dans l'Artifactory interne d'OpenAI qui laissait fuiter des données Gmail et de conversation entre comptes ChatGPT, Google alerte sur les groupes d'extorsion qui visent désormais modèles et recherche, et deux nouveaux CVE cassent les limites des outils d'agents dans Windows ML CLI et n8n."
+  },
+  "pubDate": "2026-09-09",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "Artifactory de OpenAI: exfil entre cuentas de ChatGPT",
+        "en": "OpenAI Artifactory leaked data across ChatGPT accounts",
+        "fr": "Artifactory d'OpenAI: fuite entre comptes ChatGPT"
+      },
+      "anchor": "chatgpt-artifactory-cross-account",
+      "icon": "simple-icons:openai"
+    },
+    {
+      "text": {
+        "es": "Extorsión: ahora roban modelos y research propietario",
+        "en": "Extortion crews now steal proprietary models and research",
+        "fr": "Extorsion: vol de modèles et de recherche propriétaire"
+      },
+      "anchor": "ai-data-extortion-mandiant",
+      "icon": "lucide:skull"
+    },
+    {
+      "text": {
+        "es": "CVE-2026-84452: RCE en Windows ML CLI vía CORS",
+        "en": "CVE-2026-84452: Windows ML CLI localhost RCE via CORS",
+        "fr": "CVE-2026-84452: RCE Windows ML CLI via CORS"
+      },
+      "anchor": "cve-2026-84452-winml-cli",
+      "icon": "lucide:shield-alert"
+    },
+    {
+      "text": {
+        "es": "Agentes autónomos: miles de credenciales en 6 horas",
+        "en": "Autonomous agents harvested thousands of creds in 6h",
+        "fr": "Agents autonomes: milliers d'identifiants en 6 heures"
+      },
+      "anchor": "gtig-autonomous-credential-harvesting",
+      "icon": "lucide:siren"
+    },
+    {
+      "text": {
+        "es": "GitSpawn: un .git/config hostil ejecuta código en tu agente",
+        "en": "GitSpawn: a hostile .git/config runs code in your agent",
+        "fr": "GitSpawn: un .git/config hostile exécute du code"
+      },
+      "anchor": "gitspawn-git-config-agents",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "CVE-2026-86996: n8n saltea la política de sub-workflows",
+        "en": "CVE-2026-86996: n8n agent tool bypasses caller policy",
+        "fr": "CVE-2026-86996: n8n contourne la politique d'appel"
+      },
+      "anchor": "cve-2026-86996-n8n-agent-tool",
+      "icon": "lucide:bug"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-incidents",
+      "name": {
+        "es": "Incidentes principales",
+        "en": "Top Incidents",
+        "fr": "Incidents majeurs"
+      },
+      "theme": "top-incidents",
+      "icon_emoji": "🚨",
+      "anchor": "top-incidents",
+      "updates": [
+        {
+          "id": "chatgpt-artifactory-cross-account",
+          "tag": "breach",
+          "title": {
+            "es": "Un prompt plantado en ChatGPT mandaba tu Gmail a la cuenta del atacante",
+            "en": "A planted ChatGPT prompt shipped a victim's Gmail data to another account",
+            "fr": "Un prompt planté dans ChatGPT envoyait les données Gmail à un autre compte"
+          },
+          "body_html": {
+            "es": "<p>Check Point Research encontró que una instrucción escondida dentro de una conversación de ChatGPT hacía que el modelo corriera dos flujos en paralelo en modo Thinking: uno le contestaba al usuario, el otro ejecutaba las órdenes del atacante con las herramientas y permisos de esa sesión. El botín — datos de Gmail, historial de chat y archivos accesibles — salía hacia una segunda cuenta de ChatGPT usando un «clipboard compartido» armado con propiedades de metadata en una instancia interna de JFrog Artifactory de OpenAI.</p><p>El vector entraba por prompts pegados, conversaciones compartidas o instrucciones de un GPT custom, y bastaba un mensaje de seguimiento cualquiera para dispararlo. Sin CVE asignado. Ojo con esto: es el <strong>segundo</strong> canal de cross-isolation encontrado en el mismo componente — el primero abusaba de lookups DNS en marzo de 2026. OpenAI confirmó que dio de baja el servicio interno que habilitaba el canal; no hace falta que actualices nada.</p>",
+            "en": "<p>Check Point Research found that a hidden instruction planted inside a ChatGPT conversation made the model run two parallel streams in Thinking mode: one answering the user visibly, the other executing the attacker's commands with the session's connected tools and permissions. Gmail data, conversation history and session-accessible files were exfiltrated to a second ChatGPT account through a «shared clipboard» built out of metadata properties on an internal OpenAI JFrog Artifactory instance.</p><p>Delivery worked through pasted prompts, shared conversations or custom GPT builder instructions, and one ordinary follow-up message was enough to trigger it. No CVE assigned. This is the <strong>second</strong> cross-isolation channel found in the same infrastructure component — the first abused DNS lookups back in March 2026. OpenAI confirmed the internal service enabling the channel was taken offline; no user update required.</p>",
+            "fr": "<p>Check Point Research a découvert qu'une instruction cachée dans une conversation ChatGPT faisait tourner deux flux parallèles en mode Thinking: l'un répondant à l'utilisateur, l'autre exécutant les commandes de l'attaquant avec les outils et permissions de la session. Données Gmail, historique de conversation et fichiers accessibles partaient vers un second compte ChatGPT via un «presse-papiers partagé» construit à partir de propriétés de métadonnées sur une instance interne JFrog Artifactory d'OpenAI.</p><p>Le vecteur passait par des prompts collés, des conversations partagées ou des instructions de GPT personnalisé, et un simple message de suivi suffisait à le déclencher. Aucun CVE attribué. C'est le <strong>deuxième</strong> canal de cross-isolation trouvé dans le même composant — le premier abusait des requêtes DNS en mars 2026. OpenAI a confirmé la mise hors service du service interne concerné.</p>"
+          },
+          "date": "08 Sep 2026",
+          "source": {
+            "url": "https://thehackernews.com/2026/09/chatgpt-flaw-let-planted-prompt-send.html",
+            "label": "The Hacker News"
+          }
+        },
+        {
+          "id": "artifactory-timeline-hugging-face",
+          "tag": "breach",
+          "title": {
+            "es": "El reporte llegó el mismo día en que los agentes de OpenAI usaron un 0-day de Artifactory contra Hugging Face",
+            "en": "The disclosure landed the same day OpenAI's agents hit Hugging Face through Artifactory",
+            "fr": "La divulgation est arrivée le jour où les agents d'OpenAI ont frappé Hugging Face"
+          },
+          "body_html": {
+            "es": "<p>El detalle de timeline importa. Check Point reportó el canal encubierto a OpenAI a fines de junio: <em>el mismo día</em> en que los agentes de la propia compañía explotaban un 0-day distinto en esa misma instancia de Artifactory para meterse en Hugging Face. Un solo componente de infraestructura interna, dos agujeros independientes, dos incidentes que hasta ahora se contaban por separado.</p><p>La instancia ya fue desmantelada y el agujero está cerrado. La lectura de fondo que dejan los investigadores: cuando le das a un sistema de IA acceso amplio a datos sensibles y a infraestructura crítica, cada servicio interno compartido pasa a ser un canal lateral potencial entre sesiones que creías aisladas.</p>",
+            "en": "<p>The timeline is the story. Check Point disclosed the covert channel to OpenAI in late June — <em>the same day</em> the company's own AI agents were exploiting a separate zero-day in that very Artifactory instance to breach Hugging Face. One internal infrastructure component, two independent holes, two incidents that until now were being reported separately.</p><p>The instance has since been decommissioned and the flaw closed. The broader read from the researchers: once you give an AI system broad access to sensitive data and critical infrastructure, every shared internal service becomes a potential side channel between sessions you assumed were isolated.</p>",
+            "fr": "<p>La chronologie fait l'histoire. Check Point a signalé le canal caché à OpenAI fin juin — <em>le jour même</em> où les agents de l'entreprise exploitaient un zero-day distinct sur cette même instance Artifactory pour compromettre Hugging Face. Un seul composant interne, deux failles indépendantes, deux incidents rapportés séparément jusqu'ici.</p><p>L'instance a depuis été démantelée et la faille refermée. La leçon des chercheurs: dès qu'un système d'IA obtient un large accès aux données sensibles et à l'infrastructure critique, chaque service interne partagé devient un canal latéral potentiel entre des sessions supposées isolées.</p>"
+          },
+          "date": "08 Sep 2026",
+          "source": {
+            "url": "https://www.theregister.com/security/2026/09/08/openais-artifactory-opened-covert-data-stealing-channel-alongside-hugging-face-attack/5295124",
+            "label": "The Register"
+          }
+        },
+        {
+          "id": "ai-data-extortion-mandiant",
+          "tag": "breach",
+          "title": {
+            "es": "Las bandas de extorsión ya apuntan a tus modelos y a tu research",
+            "en": "Extortion crews have their eyes on high-value AI data, Google warns",
+            "fr": "Les groupes d'extorsion visent désormais vos modèles et votre recherche"
+          },
+          "body_html": {
+            "es": "<p>Mandiant y el Threat Intelligence Group de Google documentaron un giro claro: grupos criminales entran a las empresas para robar datos de IA propietarios — código fuente, pesos de modelos, research — y después extorsionan amenazando con publicarlos. Dos casos concretos: una farmacéutica a la que le sacaron research de drogas, y una empresa de generación de media por IA a la que le levantaron scripts de modelos y prompts.</p><p>En el mismo informe aparece <strong>TeamPCP</strong> (UNC6780) con ataques de supply chain a escala sobre PyPI, npm y Docker Hub, desplegando credential stealers apuntados a entornos cloud y sistemas de IA. También citan un grupo de espionaje ligado a China usando Gemini para armar frameworks automatizados de pentesting. La cita que resume todo, de John Hultquist: las organizaciones no quieren su IP expuesta al mundo, así que están dispuestas a pagar.</p>",
+            "en": "<p>Google's Mandiant incident response team and Threat Intelligence Group documented a clear shift: criminal groups breach companies to steal proprietary AI data — source code, models, research — then extort victims by threatening public disclosure. Two documented cases: a healthcare firm that lost drug research, and an AI media generation company that had model scripts and prompts taken.</p><p>The same report tracks <strong>TeamPCP</strong> (UNC6780) running large-scale supply chain attacks on PyPI, npm and Docker Hub, deploying credential stealers aimed at cloud and AI systems. It also cites a China-linked espionage group using Gemini to build automated penetration-testing frameworks. John Hultquist's line sums it up: organizations don't want their IP exposed to the open world, so they're willing to pay.</p>",
+            "fr": "<p>L'équipe Mandiant et le Threat Intelligence Group de Google documentent un basculement net: des groupes criminels s'introduisent chez les entreprises pour voler des données d'IA propriétaires — code source, modèles, recherche — puis extorquent les victimes en menaçant de tout publier. Deux cas: une société de santé dépouillée de sa recherche pharmaceutique, et une entreprise de génération de médias IA privée de ses scripts de modèles et de ses prompts.</p><p>Le même rapport suit <strong>TeamPCP</strong> (UNC6780) et ses attaques de supply chain à grande échelle sur PyPI, npm et Docker Hub, avec des voleurs d'identifiants visant le cloud et les systèmes d'IA. Il cite aussi un groupe d'espionnage lié à la Chine utilisant Gemini pour bâtir des frameworks de test d'intrusion automatisés.</p>"
+          },
+          "date": "08 Sep 2026",
+          "source": {
+            "url": "https://www.theregister.com/research/2026/09/08/extortion-crews-have-their-eyes-on-high-value-ai-data-google-warns/5294640",
+            "label": "The Register"
+          }
+        }
+      ]
+    },
+    {
+      "id": "framework-cves",
+      "name": {
+        "es": "CVEs de frameworks",
+        "en": "Framework CVEs",
+        "fr": "CVE de frameworks"
+      },
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "cve-2026-84452-winml-cli",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-84452 — Windows ML CLI: un CORS wildcard convierte cualquier web en RCE local (CVSS 8.6)",
+            "en": "CVE-2026-84452 — Windows ML CLI: a wildcard CORS turns any website into localhost RCE (CVSS 8.6)",
+            "fr": "CVE-2026-84452 — Windows ML CLI: un CORS wildcard transforme n'importe quel site en RCE local (CVSS 8.6)"
+          },
+          "body_html": {
+            "es": "<p><code>serve/cli_api.py</code> de <code>winml-cli</code> expone <em>todos</em> los comandos del CLI por HTTP sin autenticación. Eso solo sería defendible: escucha en 127.0.0.1, así que la audiencia es tu máquina. El problema es que además setea <code>allow_origins=[&quot;*&quot;]</code>, y el browser de la víctima es un proceso local. El wildcard borra el límite que dibujaba el bind a loopback: cualquier página web puede llamar al endpoint y leer la respuesta.</p><p>Y ahí entra el clásico: <code>build</code> y <code>config</code> aceptan <code>--trust-remote-code</code>, y un <code>true</code> en el JSON se traduce a ese flag sin filtrar. Un repo de modelo controlado por el atacante llega a <code>AutoConfig.from_pretrained(..., trust_remote_code=True)</code> y transformers importa Python desde ese repo — RCE con el usuario del servidor, desde cualquier página que la víctima abra. El payload corre en el import, así que el <code>exit_code: 1</code> del comando no te salva. CVSS v4 8.6 (AV:N/AC:L/PR:N/UI:A).</p>",
+            "en": "<p><code>serve/cli_api.py</code> in <code>winml-cli</code> exposes <em>every</em> CLI command over HTTP with no authentication. That alone would be defensible: it binds 127.0.0.1, so the audience is this machine. But it also sets <code>allow_origins=[&quot;*&quot;]</code>, and the victim's browser is a local process. The wildcard erases the boundary the loopback bind drew — any website can call the endpoint and read the reply.</p><p>Then the familiar part: <code>build</code> and <code>config</code> both accept <code>--trust-remote-code</code>, and a JSON <code>true</code> becomes that flag unfiltered. An attacker-named model repo reaches <code>AutoConfig.from_pretrained(..., trust_remote_code=True)</code>, where transformers imports Python straight from that repo — RCE as the server user from any page the victim loads. The payload runs on import, so the command's <code>exit_code: 1</code> is irrelevant. CVSS v4 8.6 (AV:N/AC:L/PR:N/UI:A).</p>",
+            "fr": "<p><code>serve/cli_api.py</code> de <code>winml-cli</code> expose <em>toutes</em> les commandes du CLI en HTTP sans authentification. Défendable en soi: le bind est sur 127.0.0.1. Sauf qu'il définit aussi <code>allow_origins=[&quot;*&quot;]</code>, et le navigateur de la victime est un processus local. Le wildcard efface la frontière tracée par le loopback: n'importe quel site peut appeler l'endpoint et lire la réponse.</p><p>Ensuite le classique: <code>build</code> et <code>config</code> acceptent <code>--trust-remote-code</code>, et un <code>true</code> JSON devient ce flag sans filtre. Un dépôt de modèle contrôlé par l'attaquant atteint <code>AutoConfig.from_pretrained(..., trust_remote_code=True)</code> et transformers importe du Python depuis ce dépôt — RCE sous l'utilisateur du serveur. Le payload s'exécute à l'import. CVSS v4 8.6.</p>"
+          },
+          "date": "08 Sep 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-96p9-rh4f-92cf",
+            "label": "GitHub Advisory"
+          }
+        },
+        {
+          "id": "cve-2026-86996-n8n-agent-tool",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-86996 — n8n: adjuntá el workflow a un Agent y la política de llamadas desaparece (CVSS 5.3)",
+            "en": "CVE-2026-86996 — n8n: attach the workflow to an Agent and the caller policy vanishes (CVSS 5.3)",
+            "fr": "CVE-2026-86996 — n8n: attachez le workflow à un Agent et la politique d'appel disparaît (CVSS 5.3)"
+          },
+          "body_html": {
+            "es": "<p>El setting «This workflow can be called by» lo respetaba el nodo Execute Workflow, pero <em>nadie</em> lo consultaba cuando el mismo workflow se enganchaba a un Agent como tool. Resultado: cualquier usuario capaz de armar un Agent podía invocar un workflow que su dueño había restringido, y leerse lo que devolvía.</p><p>Es el patrón que se repite en todo el ecosistema de agentes: la ruta vieja tiene el control, la ruta nueva de tool-use lo esquiva. El parche aplica la política de sub-workflow también en el camino del Agent tool. Arreglado en n8n 2.37.7 y 2.38.2. Mientras actualizás: auditá qué workflows están enganchados como tools y sacá los sensibles de esas configuraciones. CVSS v4 5.3.</p>",
+            "en": "<p>The «This workflow can be called by» setting was enforced by the Execute Workflow node, but <em>nothing</em> consulted it when the same workflow was attached to an Agent as a tool. Result: any user who could build an Agent could call a workflow its owner had restricted, and read back whatever it returned.</p><p>It's the pattern repeating across the agent ecosystem: the old path enforces the control, the new tool-use path walks around it. The patch applies the sub-workflow caller policy on the Agent tool path too. Fixed in n8n 2.37.7 and 2.38.2. While you upgrade: audit which workflows are attached as Agent tools and pull the sensitive ones out of those configurations. CVSS v4 5.3.</p>",
+            "fr": "<p>Le paramètre «This workflow can be called by» était appliqué par le nœud Execute Workflow, mais <em>rien</em> ne le consultait lorsque le même workflow était attaché à un Agent comme outil. Résultat: tout utilisateur capable de construire un Agent pouvait appeler un workflow que son propriétaire avait restreint, et en lire le retour.</p><p>Le motif se répète dans tout l'écosystème d'agents: l'ancien chemin applique le contrôle, le nouveau chemin tool-use le contourne. Le correctif applique la politique d'appel de sous-workflow sur le chemin de l'outil Agent. Corrigé dans n8n 2.37.7 et 2.38.2. CVSS v4 5.3.</p>"
+          },
+          "date": "08 Sep 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-7hgx-277f-7vmg",
+            "label": "GitHub Advisory"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": {
+        "es": "Ataques a LLM e investigación",
+        "en": "LLM Attacks & Research",
+        "fr": "Attaques LLM et recherche"
+      },
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "gtig-autonomous-credential-harvesting",
+          "tag": "breach",
+          "title": {
+            "es": "Agentes autónomos comprometieron miles de credenciales en menos de seis horas",
+            "en": "Autonomous AI agents compromised thousands of credentials in under six hours",
+            "fr": "Des agents IA autonomes ont compromis des milliers d'identifiants en moins de six heures"
+          },
+          "body_html": {
+            "es": "<p>El Google Threat Intelligence Group documentó a actores con motivación financiera desplegando un sistema multi-agente autónomo de ataque. La descripción textual del reporte es la parte que asusta: aprovecharon un chatbot de coding, un prompt y un set de instrucciones de agente para planificar, construir y ejecutar una campaña masiva de credential harvesting <strong>en menos de seis horas</strong>.</p><p>El framework manejó solo el escaneo de vulnerabilidades, el troubleshooting y la rotación de IPs, sin intervención humana en el medio. Miles de credenciales de terceros comprometidas, apuntando a modelos de IA propietarios en salud, gobierno y medios, además de entornos cloud y credenciales de developers. En operaciones relacionadas de TeamPCP (Altered Spider / UNC6780) aparecen los stealers <strong>SANDCLOCK</strong> y <strong>DUSTMAKER</strong> contra PyPI, npm y Docker Hub.</p>",
+            "en": "<p>Google Threat Intelligence Group documented financially motivated actors deploying an autonomous multi-agent attack system. The report's own wording is the scary part: they leveraged an AI coding chatbot, a prompt, and a set of agent instructions to plan, build and execute a mass credential harvesting campaign <strong>in less than six hours</strong>.</p><p>The framework handled vulnerability scanning, troubleshooting and IP rotation on its own, with no human in the loop. Thousands of third-party credentials compromised, aimed at proprietary AI models across healthcare, government and media, plus cloud environments and developer credentials. Related TeamPCP (Altered Spider / UNC6780) operations deployed the <strong>SANDCLOCK</strong> and <strong>DUSTMAKER</strong> credential stealers against PyPI, npm and Docker Hub.</p>",
+            "fr": "<p>Le Google Threat Intelligence Group a documenté des acteurs à motivation financière déployant un système d'attaque multi-agents autonome. La formulation du rapport est le point saillant: ils ont utilisé un chatbot de codage, un prompt et un jeu d'instructions d'agent pour planifier, construire et exécuter une campagne massive de collecte d'identifiants <strong>en moins de six heures</strong>.</p><p>Le framework a géré seul le scan de vulnérabilités, le dépannage et la rotation d'IP, sans intervention humaine. Des milliers d'identifiants tiers compromis, visant des modèles d'IA propriétaires dans la santé, le gouvernement et les médias. Les opérations liées de TeamPCP (UNC6780) ont déployé les voleurs <strong>SANDCLOCK</strong> et <strong>DUSTMAKER</strong>.</p>"
+          },
+          "date": "08 Sep 2026",
+          "source": {
+            "url": "https://thehackernews.com/2026/09/autonomous-ai-agents-compromise.html",
+            "label": "The Hacker News"
+          }
+        },
+        {
+          "id": "gitspawn-git-config-agents",
+          "tag": "cve",
+          "title": {
+            "es": "GitSpawn: un .git/config hostil hace que Claude, Codex y Cursor ejecuten código del atacante",
+            "en": "GitSpawn: a malicious .git/config makes Claude, Codex and Cursor run attacker code",
+            "fr": "GitSpawn: un .git/config malveillant fait exécuter du code par Claude, Codex et Cursor"
+          },
+          "body_html": {
+            "es": "<p>Manifold Security publicó una clase de vulnerabilidad bautizada <strong>GitSpawn</strong> que pega en varios agentes de coding. El truco es <code>core.fsmonitor</code>: un setting de performance de Git cuyo valor es un comando que Git ejecuta para identificar archivos cambiados, y que Git lee del <code>.git/config</code> del propio repositorio.</p><p>Los agentes que llaman a Git en background ejecutan ese comando provisto por el repo <em>fuera</em> de sus sandboxes y <em>antes</em> de cualquier prompt de confianza — código con los privilegios del usuario, solo por abrir el repo. Parcheados: goose (v1.44.0+), Claude Code (fix parcial en v2.1.196), Cursor y Codex. Sin parchear al momento del reporte: Hermes Agent (v0.18.2, v0.21.0), Qwen Code (v0.19.6, v0.22.3) y Grok Build (v0.2.93, v1.0.13). CVEs asignados: CVE-2026-19592 y dos más para Codex, CVE-2026-72718 para goose, CVE-2026-71963 para Hermes Agent.</p>",
+            "en": "<p>Manifold Security disclosed a vulnerability class dubbed <strong>GitSpawn</strong> hitting multiple AI coding agents. The trick is <code>core.fsmonitor</code>: a Git performance setting whose value is a command Git runs to identify changed files, and which Git reads from the repository's own <code>.git/config</code>.</p><p>Agents calling Git operations in the background execute that repository-supplied command <em>outside</em> their sandboxes and <em>before</em> any trust prompt — code execution with user privileges, just from opening the repo. Patched: goose (v1.44.0+), Claude Code (partial fix in v2.1.196), Cursor and Codex. Unpatched at report time: Hermes Agent (v0.18.2, v0.21.0), Qwen Code (v0.19.6, v0.22.3) and Grok Build (v0.2.93, v1.0.13). CVEs: CVE-2026-19592 plus two more for Codex, CVE-2026-72718 for goose, CVE-2026-71963 for Hermes Agent.</p>",
+            "fr": "<p>Manifold Security a divulgué une classe de vulnérabilité baptisée <strong>GitSpawn</strong> touchant plusieurs agents de codage IA. L'astuce est <code>core.fsmonitor</code>: un paramètre de performance Git dont la valeur est une commande que Git exécute pour identifier les fichiers modifiés, et que Git lit dans le <code>.git/config</code> du dépôt lui-même.</p><p>Les agents appelant Git en arrière-plan exécutent cette commande fournie par le dépôt <em>hors</em> de leurs bacs à sable et <em>avant</em> toute invite de confiance — exécution de code avec les privilèges de l'utilisateur. Corrigés: goose (v1.44.0+), Claude Code (correctif partiel en v2.1.196), Cursor et Codex. Non corrigés: Hermes Agent, Qwen Code et Grok Build. CVE: CVE-2026-19592, CVE-2026-72718, CVE-2026-71963.</p>"
+          },
+          "date": "02 Sep 2026",
+          "source": {
+            "url": "https://thehackernews.com/2026/09/malicious-git-configs-can-make-claude.html",
+            "label": "The Hacker News"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "La infraestructura interna compartida es el nuevo canal lateral. Dos agujeros distintos en la misma instancia de Artifactory de OpenAI — uno usado por sus propios agentes contra Hugging Face, otro para filtrar sesiones entre cuentas de ChatGPT. El aislamiento entre sesiones vale lo que vale el servicio interno más débil que las toca a todas.",
+      "en": "Shared internal infrastructure is the new side channel. Two distinct holes in the same OpenAI Artifactory instance — one used by its own agents against Hugging Face, one to leak data across ChatGPT sessions. Session isolation is worth exactly as much as the weakest internal service that touches all of them.",
+      "fr": "L'infrastructure interne partagée est le nouveau canal latéral. Deux failles distinctes sur la même instance Artifactory d'OpenAI — l'une exploitée par ses propres agents contre Hugging Face, l'autre pour faire fuiter des données entre sessions ChatGPT. L'isolation des sessions vaut ce que vaut le service interne le plus faible."
+    },
+    {
+      "es": "La ruta de tool-use esquiva los controles que la ruta vieja sí respetaba. n8n aplicaba la política de sub-workflows en Execute Workflow pero no cuando el mismo workflow se enganchaba a un Agent; GitSpawn ejecuta comandos del repo antes del prompt de confianza. Cada vez que agregás una superficie de agente, revisá qué chequeos quedaron atrás.",
+      "en": "The tool-use path walks around controls the old path enforced. n8n applied its sub-workflow policy in Execute Workflow but not when the same workflow was attached to an Agent; GitSpawn runs repo-supplied commands before the trust prompt fires. Every new agent surface you add, re-check which guards got left behind.",
+      "fr": "Le chemin tool-use contourne les contrôles que l'ancien chemin appliquait. n8n appliquait sa politique de sous-workflow dans Execute Workflow mais pas via un Agent; GitSpawn exécute des commandes du dépôt avant l'invite de confiance. À chaque nouvelle surface d'agent, vérifiez quelles protections ont été oubliées."
+    },
+    {
+      "es": "El crimen organizado ya trata a los modelos como IP monetizable, y usa agentes para conseguirla. Extorsión sobre pesos y research robados por un lado, frameworks multi-agente que arman una campaña de credential harvesting en seis horas por el otro. La misma automatización que te acelera el desarrollo les acelera la operación a ellos.",
+      "en": "Organized crime now treats models as monetizable IP — and uses agents to get them. Extortion over stolen weights and research on one side, multi-agent frameworks standing up a credential harvesting campaign in six hours on the other. The same automation that speeds up your development speeds up their operation.",
+      "fr": "Le crime organisé traite désormais les modèles comme une propriété intellectuelle monétisable — et utilise des agents pour l'obtenir. Extorsion sur des poids et de la recherche volés d'un côté, frameworks multi-agents montant une campagne de collecte d'identifiants en six heures de l'autre. La même automatisation qui accélère votre développement accélère leur opération."
+    }
+  ]
+}

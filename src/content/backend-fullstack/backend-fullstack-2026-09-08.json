@@ -1,0 +1,251 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 8 de septiembre de 2026",
+    "en": "Backend & Fullstack — September 8, 2026",
+    "fr": "Backend & Fullstack — 8 septembre 2026"
+  },
+  "description": {
+    "es": "Netflix se pasa al autoscaler open source de Flink y se ahorra 1,1 millones al año, Airbnb borra el 60% de su código de auth moviéndolo al server, y KYAML llega para sacarle la ambigüedad al YAML de Kubernetes.",
+    "en": "Netflix moves to the open-source Flink autoscaler and saves $1.1M a year, Airbnb deletes 60% of its auth code by moving it server-side, and KYAML arrives to strip the ambiguity out of Kubernetes YAML.",
+    "fr": "Netflix passe à l'autoscaler Flink open source et économise 1,1 M$ par an, Airbnb supprime 60% de son code d'auth en le déplaçant côté serveur, et KYAML arrive pour retirer l'ambiguïté du YAML Kubernetes."
+  },
+  "pubDate": "2026-09-08",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Netflix: 58% menos costo de Flink por operator",
+        "en": "Netflix: 58% less Flink cost, scaling per operator",
+        "fr": "Netflix : 58% de coût Flink en moins, par operator"
+      },
+      "anchor": "netflix-flink-autoscaler",
+      "icon": "lucide:layers"
+    },
+    {
+      "text": {
+        "es": "Airbnb borra el 60% del código de autenticación",
+        "en": "Airbnb deletes 60% of its authentication code",
+        "fr": "Airbnb supprime 60% de son code d'authentification"
+      },
+      "anchor": "airbnb-server-driven-auth",
+      "icon": "lucide:server"
+    },
+    {
+      "text": {
+        "es": "KYAML: beta por defecto en Kubernetes 1.35",
+        "en": "KYAML: beta by default in Kubernetes 1.35",
+        "fr": "KYAML : beta par défaut dans Kubernetes 1.35"
+      },
+      "anchor": "kyaml-kubernetes",
+      "icon": "simple-icons:kubernetes"
+    },
+    {
+      "text": {
+        "es": "PromQL descartaba valores en regex case-insensitive",
+        "en": "PromQL silently dropped case-insensitive regex matches",
+        "fr": "PromQL ignorait des valeurs en regex insensible à la casse"
+      },
+      "anchor": "prometheus-3133",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Azure APIM: zone redundancy a $700 en vez de $2.801",
+        "en": "Azure APIM: zone redundancy at $700 instead of $2,801",
+        "fr": "Azure APIM : zone redundancy à 700$ au lieu de 2 801$"
+      },
+      "anchor": "apim-zone-redundancy",
+      "icon": "lucide:cloud"
+    },
+    {
+      "text": {
+        "es": "Vite 8.3 beta integra devtools con el dev server",
+        "en": "Vite 8.3 beta wires devtools into the dev server",
+        "fr": "Vite 8.3 beta intègre les devtools au dev server"
+      },
+      "anchor": "vite-83-beta",
+      "icon": "lucide:rocket"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "netflix-flink-autoscaler",
+      "updates": [
+        {
+          "id": "netflix-flink-autoscaler",
+          "tag": "notable",
+          "date": "07 Sep 2026",
+          "title": {
+            "es": "Netflix tira su autoscaler propio y adopta el de Apache Flink: 1,1 millones menos por año",
+            "en": "Netflix drops its own autoscaler for Apache Flink's: $1.1M less per year",
+            "fr": "Netflix abandonne son autoscaler pour celui d'Apache Flink : 1,1 M$ de moins par an"
+          },
+          "body_html": {
+            "es": "<p>El autoscaler propietario de Netflix escalaba <strong>a nivel de cluster</strong>: aplicaba la misma decisión a todos los operators de un job. Eso funciona hasta que tenés pipelines con branches, joins y terabytes de estado, donde cada componente tiene necesidades de procesamiento distintas. El autoscaler de Apache Flink analiza <strong>vertex por vertex</strong>, calculando el paralelismo requerido de cada uno a partir de throughput y busy time.</p><p>Los números: un equipo bajó <strong>58% el gasto anualizado de cómputo Flink, ~1,1 millones de dólares al año</strong>. Netflix corre más de 30.000 streaming jobs en varias regiones de AWS.</p><p>Dos detalles de ingeniería que valen más que el titular. Primero, integraron el autoscaler con su control plane usando Spring Boot y workflows de Temporal <strong>para aislar las decisiones de escalado por job</strong>, y tuvieron que mejorar la recolección de métricas del JobManager para soportar jobs de hasta 3.000 subtasks, con filtrado de métricas del lado del server. Segundo, usan un target de utilización de <strong>0.45 en vez del 0.7 por defecto de la comunidad</strong>, justamente para no reescalar agresivamente aplicaciones stateful grandes — mover terabytes de estado cuesta más que la capacidad que ahorrás.</p>",
+            "en": "<p>Netflix's proprietary autoscaler scaled <strong>at cluster level</strong>: it applied one decision to every operator in a job. That works until you have pipelines with branches, joins, and terabytes of state, where each component has different processing needs. Apache Flink's autoscaler analyzes <strong>vertex by vertex</strong>, computing each one's required parallelism from throughput and busy time.</p><p>The numbers: one team cut <strong>58% of annualized Flink compute spend, roughly $1.1 million a year</strong>. Netflix runs over 30,000 streaming jobs across multiple AWS regions.</p><p>Two engineering details worth more than the headline. First, they integrated the autoscaler with their control plane using Spring Boot and Temporal workflows <strong>to isolate scaling decisions per job</strong>, and had to improve JobManager metric collection to support jobs with up to 3,000 subtasks, adding server-side metric filtering. Second, they run a utilization target of <strong>0.45 instead of the community default 0.7</strong>, precisely to avoid aggressively rescaling large stateful applications — moving terabytes of state costs more than the capacity you save.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/netflix-flink-autoscaler/", "label": "infoq.com" }
+        },
+        {
+          "id": "airbnb-server-driven-auth",
+          "tag": "notable",
+          "date": "04 Sep 2026",
+          "title": {
+            "es": "Airbnb mueve la autenticación al server y borra el 60% del código",
+            "en": "Airbnb moves authentication server-side and deletes 60% of the code",
+            "fr": "Airbnb déplace l'authentification côté serveur et supprime 60% du code"
+          },
+          "body_html": {
+            "es": "<p>La idea es simple de enunciar y difícil de aceptar: en vez de que el cliente decida qué método de autenticación mostrar, <strong>el server toma la decisión y el cliente renderiza la pantalla que el server devuelve</strong>. Eso les permite preferir OTP por WhatsApp en Brasil o proveedores de identidad locales en Corea del Sur <strong>sin shipear código nuevo de cliente</strong>.</p><p>El 60% menos de código sale de la centralización: web, iOS y Android renderizan pantallas estandarizadas definidas por el server en vez de embeber la lógica, y ninguno duplica la selección de challenge. Además <strong>los schemas del server generan las definiciones de tipos del cliente</strong>. Resultado: 100 KB menos de bundle web y ~11% de ahorro en costos de OTP.</p><p>Los números de producto son fuertes: la experimentación pasó de semanas a días (20+ experimentos en tres meses), 2,6% de mejora en éxito de autenticación y 27% menos cuentas duplicadas.</p><p>Ahora, <strong>los tradeoffs son reales y no los escondas</strong>: más complejidad del lado del server manejando policy engines y lógica regional, y el cliente queda dependiendo de la disponibilidad del server <strong>en cada paso del login</strong>. Eso último no es menor — te convertiste en un single point of failure para la puerta de entrada de tu producto. Si vas por este camino, el diseño de degradación es parte del diseño, no un extra.</p>",
+            "en": "<p>The idea is easy to state and hard to accept: instead of the client deciding which authentication method to show, <strong>the server makes that decision and the client renders the screen the server returns</strong>. That lets them prefer WhatsApp OTP in Brazil or local identity providers in South Korea <strong>without shipping new client code</strong>.</p><p>The 60% code reduction comes from centralization: web, iOS, and Android render standardized server-defined screens instead of embedding the logic, and none of them duplicates challenge selection. On top of that, <strong>server-side schemas generate the client type definitions</strong>. Result: 100 KB off the web bundle and roughly 11% savings in OTP costs.</p><p>The product numbers are strong: experimentation went from weeks to days (20+ experiments in three months), 2.6% improvement in authentication success, and 27% fewer duplicate accounts.</p><p>Now, <strong>the tradeoffs are real and you should not hide them</strong>: more server-side complexity managing policy engines and regional logic, and the client now depends on server availability <strong>at every step of login</strong>. That last one is not minor — you have become a single point of failure for your product's front door. If you go this way, degradation design is part of the design, not an extra.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/airbnb-server-driven-login/", "label": "infoq.com" }
+        },
+        {
+          "id": "kyaml-kubernetes",
+          "tag": "beta",
+          "date": "04 Sep 2026",
+          "title": {
+            "es": "KYAML: un subset estricto de YAML para dejar de adivinar tipos en Kubernetes",
+            "en": "KYAML: a strict YAML subset so you stop guessing types in Kubernetes",
+            "fr": "KYAML : un sous-ensemble strict de YAML pour cesser de deviner les types"
+          },
+          "body_html": {
+            "es": "<p>KYAML es <strong>un subset estricto de YAML</strong>: objetos con <code>{}</code>, arrays con <code>[]</code>, y strings con comillas dobles obligatorias. Conserva lo útil de YAML —los comentarios— y le saca la ambigüedad: estructura por indentación que se rompe sola, y valores sin comillas que se interpretan como otro tipo. Ese problema <strong>se multiplica cuando los manifests los genera un sistema de templating como Helm</strong>, que es donde más duele.</p><p>Alpha en 1.34, <strong>beta habilitado por defecto en 1.35</strong>. Y el detalle que lo hace adoptable de verdad: <strong>sigue siendo YAML válido</strong>, así que un kubectl viejo lo consume igual. No hace falta reescribir nada a mano — tenés <code>kubectl -o kyaml</code>, el yamlfmt de Kubernetes y el conversor de Google. No es el formato por defecto, así que se adopta de a poco conviviendo con el YAML de siempre.</p>",
+            "en": "<p>KYAML is <strong>a strict subset of YAML</strong>: objects use <code>{}</code>, arrays use <code>[]</code>, and string values require double quotes. It keeps what is useful about YAML — comments — and strips the ambiguity: indentation-based structure that breaks on its own, and unquoted values reinterpreted as another type. That problem <strong>compounds when manifests are generated by a templating system like Helm</strong>, which is where it hurts most.</p><p>Alpha in 1.34, <strong>beta enabled by default in 1.35</strong>. And the detail that makes it genuinely adoptable: <strong>it is still valid YAML</strong>, so an older kubectl consumes it fine. No manual rewriting needed — you have <code>kubectl -o kyaml</code>, Kubernetes' yamlfmt, and Google's converter. It is not the default format, so you adopt it gradually alongside conventional YAML.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/kubernetes-kyaml-manifests/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "prometheus-3133",
+      "updates": [
+        {
+          "id": "prometheus-3133",
+          "tag": "patch",
+          "date": "07 Sep 2026",
+          "title": {
+            "es": "Prometheus 3.13.3: un regex case-insensitive te estaba descartando valores en silencio",
+            "en": "Prometheus 3.13.3: a case-insensitive regex was silently dropping your values",
+            "fr": "Prometheus 3.13.3 : un regex insensible à la casse ignorait vos valeurs en silence"
+          },
+          "body_html": {
+            "es": "<p>El bugfix que más importa: <strong>los label matchers con regex case-insensitive en PromQL descartaban valores que sí matcheaban</strong>. Traducido al turno de guardia: una query que creías que cubría todo tu fleet devolvía menos series de las que hay, y una alerta basada en ese matcher <strong>simplemente no dispara</strong>. Los peores bugs de observabilidad no son los que rompen el dashboard, son los que te lo dejan verde.</p><p>Vienen varios más del mismo calibre: queries out-of-order bloqueando la compaction por horas con la memoria creciendo, series borradas que causaban samples faltantes y errores tras un restart, 100% de CPU en shutdown tanto en el scrape manager como en alerting —lo que demoraba el graceful shutdown hasta gatillar kills por timeout—, y leaks de goroutines y file handles al fallar al abrir un TSDB corrupto (en Windows el handle filtrado además impedía borrar el directorio). Sumale bumps de seguridad de <code>klauspost/compress</code> y <code>golang.org/x/crypto</code>.</p>",
+            "en": "<p>The bugfix that matters most: <strong>case-insensitive regex label matchers in PromQL were silently dropping matching values</strong>. Translated to your on-call shift: a query you believed covered your whole fleet returned fewer series than exist, and an alert built on that matcher <strong>simply does not fire</strong>. The worst observability bugs are not the ones that break the dashboard — they are the ones that leave it green.</p><p>Several more of the same caliber: out-of-order queries blocking compaction for hours while memory grew, deleted series causing missing samples and errors after restart, 100% CPU on shutdown in both the scrape manager and alerting — delaying graceful shutdown until timeout-based kills triggered — and goroutine and file handle leaks when opening a corrupt TSDB failed (on Windows the leaked handle also prevented directory removal). Plus security bumps for <code>klauspost/compress</code> and <code>golang.org/x/crypto</code>.</p>"
+          },
+          "source": { "url": "https://github.com/prometheus/prometheus/releases/tag/v3.13.3", "label": "github.com/prometheus" }
+        },
+        {
+          "id": "apim-zone-redundancy",
+          "tag": "notable",
+          "date": "07 Sep 2026",
+          "title": {
+            "es": "Azure APIM: zone redundancy baja a Standard v2, pero no la podés activar en lo que ya tenés",
+            "en": "Azure APIM: zone redundancy comes to Standard v2, but not on what you already run",
+            "fr": "Azure APIM : la zone redundancy arrive en Standard v2, mais pas sur l'existant"
+          },
+          "body_html": {
+            "es": "<p>La redundancia de zona deja de ser exclusiva de Premium: Standard v2 la soporta a <strong>$700/mes por unidad, contra $2.801 de Premium v2</strong>. Diferencia de SLA: 99,95% en Standard v2 contra 99,99% en Premium — aunque ese 99,99% exige desplegar en al menos dos zonas o regiones.</p><p>Ahora, la limitación que te arruina el plan: <strong>no se puede habilitar sobre una instancia Standard v2 existente</strong>. Hay que crear un deployment nuevo, con re-import de APIs, reconfiguración de policies, cambios de DNS y migración de subscription keys. Y si venís bajando de Premium, perdés multi-region, self-hosted gateways, VNET injection y workspaces, más el tope de 50 millones de requests mensuales contra ilimitado.</p><p>O sea: el ahorro es real pero el costo de migración también. Hacé la cuenta completa antes de festejar el número de la etiqueta.</p>",
+            "en": "<p>Zone redundancy stops being Premium-only: Standard v2 supports it at <strong>$700/month per unit versus $2,801 for Premium v2</strong>. SLA difference: 99.95% on Standard v2 against 99.99% on Premium — though that 99.99% requires deploying across at least two zones or regions.</p><p>Now the limitation that wrecks the plan: <strong>it cannot be enabled on an existing Standard v2 instance</strong>. You must create a new deployment, with API re-imports, policy reconfiguration, DNS changes, and subscription key migration. And if you are stepping down from Premium, you lose multi-region, self-hosted gateways, VNET injection, and workspaces, plus you cap at 50 million monthly requests versus unlimited.</p><p>So: the saving is real and so is the migration cost. Run the full sum before celebrating the sticker number.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/apim-standard-v2-zone-redundancy/", "label": "infoq.com" }
+        },
+        {
+          "id": "workerd-20260908",
+          "tag": "release",
+          "date": "08 Sep 2026",
+          "title": {
+            "es": "workerd v1.20260908.1: release de build, sin cambios de API",
+            "en": "workerd v1.20260908.1: a build release, no API changes",
+            "fr": "workerd v1.20260908.1 : release de build, sans changement d'API"
+          },
+          "body_html": {
+            "es": "<p>Día tranquilo en el runtime de Workers: tres PRs, todos de build. Optimizaciones internas de JSG —keyear los wrappers de campos por tipo en vez de por campo, y guardarlos en un array plano— más un fix del build interno para forks de miembros de la org. Nada que te toque el código. Lo anotamos para mantener la trazabilidad de la cadencia diaria.</p>",
+            "en": "<p>A quiet day in the Workers runtime: three PRs, all build-related. Internal JSG optimizations — keying struct field wrappers on the field type rather than the field, and storing them in a flat array — plus an internal build fix for forks of org members. Nothing that touches your code. Noted to keep the daily cadence traceable.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workerd/releases/tag/v1.20260908.1", "label": "github.com/cloudflare" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "vite-83-beta",
+      "updates": [
+        {
+          "id": "vite-83-beta",
+          "tag": "beta",
+          "date": "07 Sep 2026",
+          "title": {
+            "es": "Vite 8.3.0-beta.1: devtools integrados al dev server",
+            "en": "Vite 8.3.0-beta.1: devtools integrated into the dev server",
+            "fr": "Vite 8.3.0-beta.1 : devtools intégrés au dev server"
+          },
+          "body_html": {
+            "es": "<p>La feature del beta es la integración de <strong>devtools con el dev server</strong>. El resto son fixes de build que valen la pena si te mordieron: los placeholders de hash ahora se mantienen tal cual en el hook <code>resolveFileUrl</code>, ya no se inlinean los targets de preload link (bug abierto desde el #13355), y <code>findNearestMainPackageData</code> resuelve el root real del package cuando hay <code>package.json</code> anidados — clásico dolor de monorepo.</p>",
+            "en": "<p>The beta's feature is wiring <strong>devtools into the dev server</strong>. The rest are build fixes worth knowing if they bit you: hash placeholders now stay as-is in the <code>resolveFileUrl</code> hook, preload link targets are no longer inlined (an issue open since #13355), and <code>findNearestMainPackageData</code> resolves the actual package root with nested <code>package.json</code> files — a classic monorepo pain.</p>"
+          },
+          "source": { "url": "https://github.com/vitejs/vite/releases/tag/v8.3.0-beta.1", "label": "github.com/vitejs" }
+        },
+        {
+          "id": "pocketbase-4003",
+          "tag": "patch",
+          "date": "06 Sep 2026",
+          "title": {
+            "es": "PocketBase 0.40.3: cascade delete de relaciones auto-referenciadas y bugs reportados por bots",
+            "en": "PocketBase 0.40.3: self-referenced cascade deletes, and bugs reported by bots",
+            "fr": "PocketBase 0.40.3 : cascade delete auto-référencé et bugs signalés par des bots"
+          },
+          "body_html": {
+            "es": "<p>Arreglan el <strong>cascade delete anidado de records con relaciones auto-referenciadas</strong> —si modelás árboles o jerarquías en PocketBase, ese es tuyo—, el validador de índices ahora acepta expresiones con paréntesis en el <code>WHERE</code> opcional, y el validador del campo <code>json</code> se alineó con la semántica de <code>encoding/json/v2</code> permitiendo keys duplicadas al marshalizar para no romper datos viejos de jsonv1.</p><p>Detalle simpático del changelog: el maintainer agrupa varios de estos fixes como reportados por <strong>«2 usuarios LLM (¿bots?)»</strong>. Señal de los tiempos — y recordatorio de que el reporte automatizado encuentra cosas reales, aunque haya que filtrar el ruido.</p>",
+            "en": "<p>They fix <strong>nested cascade delete of self-referenced relation records</strong> — if you model trees or hierarchies in PocketBase, that one is yours — the index validator now accepts expressions with parentheses in the optional <code>WHERE</code> clause, and the <code>json</code> field validator was aligned with <code>encoding/json/v2</code> semantics, allowing duplicate keys on record marshaling so old jsonv1 data keeps working.</p><p>A nice changelog detail: the maintainer groups several of these fixes as reported by <strong>«2 LLM users (bots?)»</strong>. Sign of the times — and a reminder that automated reporting does find real things, even if you have to filter the noise.</p>"
+          },
+          "source": { "url": "https://github.com/pocketbase/pocketbase/releases/tag/v0.40.3", "label": "github.com/pocketbase" }
+        },
+        {
+          "id": "tanstack-solid-rc7",
+          "tag": "beta",
+          "date": "08 Sep 2026",
+          "title": {
+            "es": "TanStack Solid Start 2.0.0-rc.7: respeta el server flag en SSR de desarrollo",
+            "en": "TanStack Solid Start 2.0.0-rc.7: respects the server flag in development SSR",
+            "fr": "TanStack Solid Start 2.0.0-rc.7 : respecte le server flag en SSR de développement"
+          },
+          "body_html": {
+            "es": "<p>Un solo fix en el RC: <code>solid-router</code> ahora respeta el flag de server durante el SSR de desarrollo. Sigue avanzando el ciclo de RCs de la serie 2.0 —van siete— así que el stack de TanStack fuera de React se va acercando, de a un fix por vez.</p>",
+            "en": "<p>A single fix in this RC: <code>solid-router</code> now respects the server flag during development SSR. The 2.0 RC cycle keeps moving — seven and counting — so TanStack's non-React stack inches closer, one fix at a time.</p>"
+          },
+          "source": { "url": "https://github.com/TanStack/router/releases/tag/release-2026-09-08-0152", "label": "github.com/TanStack" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Netflix y Airbnb resolvieron problemas distintos con la misma jugada: <strong>mover la decisión al lugar que tiene el contexto para tomarla</strong>. Netflix bajó el escalado del cluster al operator individual porque el cluster no sabe qué necesita cada vertex. Airbnb subió la selección de método de auth del cliente al server porque el cliente no sabe qué funciona mejor en Brasil. En los dos casos la ganancia no vino de optimizar el algoritmo, sino de <strong>correr la frontera hasta donde vive la información</strong>.",
+      "en": "Netflix and Airbnb solved different problems with the same move: <strong>put the decision where the context to make it lives</strong>. Netflix pushed scaling down from the cluster to the individual operator because the cluster does not know what each vertex needs. Airbnb pushed auth method selection up from the client to the server because the client does not know what works best in Brazil. In both cases the win did not come from optimizing the algorithm, but from <strong>moving the boundary to where the information already is</strong>.",
+      "fr": "Netflix et Airbnb ont résolu des problèmes différents avec le même geste : <strong>placer la décision là où vit le contexte pour la prendre</strong>. Netflix a descendu le scaling du cluster vers l'operator individuel, car le cluster ignore ce dont chaque vertex a besoin. Airbnb a remonté la sélection de méthode d'auth du client vers le serveur, car le client ignore ce qui marche au Brésil. Dans les deux cas, le gain ne vient pas d'un meilleur algorithme mais du <strong>déplacement de la frontière là où l'information se trouve déjà</strong>."
+    },
+    {
+      "es": "El bug de PromQL y la existencia misma de KYAML apuntan al mismo enemigo: <strong>el fallo silencioso</strong>. Un regex que descarta matches no te tira error, te devuelve menos series. Un valor YAML sin comillas no te avisa que lo leyó como booleano, te aplica el manifest igual. Los dos casos comparten la propiedad más peligrosa que puede tener un sistema: <strong>que la respuesta incorrecta sea indistinguible de la correcta</strong>. Cuando diseñes una interfaz, preguntate qué pasa cuando alguien la usa mal — si la respuesta es «nada visible», rediseñala.",
+      "en": "The PromQL bug and KYAML's very existence point at the same enemy: <strong>silent failure</strong>. A regex that drops matches does not throw an error, it returns fewer series. An unquoted YAML value does not warn you it was read as a boolean, it applies the manifest anyway. Both share the most dangerous property a system can have: <strong>the wrong answer being indistinguishable from the right one</strong>. When you design an interface, ask what happens when someone misuses it — if the answer is «nothing visible», redesign it.",
+      "fr": "Le bug PromQL et l'existence même de KYAML visent le même ennemi : <strong>l'échec silencieux</strong>. Un regex qui écarte des correspondances ne lève pas d'erreur, il renvoie moins de séries. Une valeur YAML non quotée ne prévient pas qu'elle a été lue comme un booléen, elle applique quand même le manifest. Les deux partagent la propriété la plus dangereuse d'un système : <strong>une réponse incorrecte indiscernable de la correcte</strong>. En concevant une interface, demandez-vous ce qui arrive en cas de mauvais usage — si la réponse est «rien de visible», reconcevez-la."
+    },
+    {
+      "es": "Vale marcar el target de utilización 0.45 de Netflix contra el 0.7 por defecto de la comunidad: <strong>eligieron dejar capacidad sin usar porque reescalar les cuesta más que el desperdicio</strong>. Con terabytes de estado, cada rescale es mover datos. Es el mismo razonamiento que aplicás cuando decidís no autoescalar un servicio con warm-up caro. El default de una herramienta asume un workload promedio que probablemente no es el tuyo — <strong>si nunca tocaste ese número, no lo elegiste</strong>.",
+      "en": "Worth flagging Netflix's 0.45 utilization target against the community default of 0.7: <strong>they chose to leave capacity unused because rescaling costs them more than the waste</strong>. With terabytes of state, every rescale is a data move. Same reasoning you apply when you decide not to autoscale a service with an expensive warm-up. A tool's default assumes an average workload that is probably not yours — <strong>if you never touched that number, you did not choose it</strong>.",
+      "fr": "À noter : le target d'utilisation 0.45 de Netflix face au défaut communautaire de 0.7. <strong>Ils ont choisi de laisser de la capacité inutilisée parce que rescaler leur coûte plus que le gaspillage</strong>. Avec des téraoctets d'état, chaque rescale est un déplacement de données. Même raisonnement que lorsqu'on décide de ne pas autoscaler un service au warm-up coûteux. Le défaut d'un outil suppose une charge moyenne qui n'est probablement pas la vôtre — <strong>si vous n'avez jamais touché ce nombre, vous ne l'avez pas choisi</strong>."
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "title": {
+    "es": "Dev News — 8 de septiembre 2026",
+    "en": "Dev News — September 8, 2026",
+    "fr": "Dev News — 8 septembre 2026"
+  },
+  "description": {
+    "es": "typescript-eslint 8.70 suma una regla para tipos objeto vacíos generados, Oxlint 1.82 rompe una API del parser, y Electron escopea los permisos de File System Access al documento que los pide.",
+    "en": "typescript-eslint 8.70 adds a rule for generated empty object types, Oxlint 1.82 breaks a parser API, and Electron scopes File System Access permissions to the requesting document.",
+    "fr": "typescript-eslint 8.70 ajoute une règle pour les types objet vides générés, Oxlint 1.82 casse une API du parser, et Electron restreint les permissions File System Access au document demandeur."
+  },
+  "pubDate": "2026-09-08",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": {
+        "es": "typescript-eslint 8.70: regla nueva de object types",
+        "en": "typescript-eslint 8.70: new object-type rule",
+        "fr": "typescript-eslint 8.70 : nouvelle règle object types"
+      },
+      "anchor": "tseslint-8-70-0",
+      "icon": "simple-icons:typescript"
+    },
+    {
+      "text": {
+        "es": "Oxlint 1.82 renombra panicked a fatal_error",
+        "en": "Oxlint 1.82 renames panicked to fatal_error",
+        "fr": "Oxlint 1.82 renomme panicked en fatal_error"
+      },
+      "anchor": "oxlint-1-82-0",
+      "icon": "lucide:code"
+    },
+    {
+      "text": {
+        "es": "Electron escopea permisos de File System Access",
+        "en": "Electron scopes File System Access permissions",
+        "fr": "Electron restreint les permissions File System Access"
+      },
+      "anchor": "electron-45-alpha-5",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Lucide 1.42 deprecia los iconos de franco suizo",
+        "en": "Lucide 1.42 deprecates the Swiss franc icons",
+        "fr": "Lucide 1.42 déprécie les icônes du franc suisse"
+      },
+      "anchor": "lucide-1-42-0",
+      "icon": "lucide:sparkles"
+    },
+    {
+      "text": {
+        "es": "Wrangler 4.129.1 sube workerd a 1.20260904.1",
+        "en": "Wrangler 4.129.1 bumps workerd to 1.20260904.1",
+        "fr": "Wrangler 4.129.1 passe workerd en 1.20260904.1"
+      },
+      "anchor": "wrangler-4-129-1",
+      "icon": "lucide:package"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "tseslint-8-70-0",
+          "tag": "minor",
+          "date": "07 Sep 2026",
+          "title": {
+            "es": "typescript-eslint 8.70.0 estrena no-generated-empty-object-type y corrige tres falsos positivos",
+            "en": "typescript-eslint 8.70.0 adds no-generated-empty-object-type and fixes three false positives",
+            "fr": "typescript-eslint 8.70.0 ajoute no-generated-empty-object-type et corrige trois faux positifs"
+          },
+          "body_html": {
+            "es": "<p>Llega la regla <code>no-generated-empty-object-type</code>, que ataca los tipos objeto vacíos que aparecen sin querer al componer utilities — ese <code>{}</code> que no restringe nada y te deja pasar cualquier cosa. Del lado de los fixes: <code>member-ordering</code> deja de reportar campos que leen campos declarados antes que ellos, <code>no-unnecessary-condition</code> no marca más el lado derecho de una expresión lógica anidada, y <code>no-deprecated</code> ahora sí reporta valores importados deprecados usados en shorthand de objeto. Ojo con ese último: es cobertura nueva, así que puede aparecerte laburo en el próximo lint.</p>",
+            "en": "<p>The <code>no-generated-empty-object-type</code> rule lands, targeting empty object types that appear accidentally when composing utilities — that <code>{}</code> which constrains nothing and lets anything through. On the fix side: <code>member-ordering</code> stops reporting fields that read fields declared before them, <code>no-unnecessary-condition</code> no longer false-positives on the RHS of a nested logical expression, and <code>no-deprecated</code> now does report deprecated imported values used in object shorthand properties. Watch that last one — it's new coverage, so your next lint run may surface work.</p>",
+            "fr": "<p>La règle <code>no-generated-empty-object-type</code> arrive, visant les types objet vides apparaissant accidentellement lors de la composition d'utilities. Côté correctifs : <code>member-ordering</code> ne signale plus les champs qui lisent des champs déclarés avant eux, <code>no-unnecessary-condition</code> n'a plus de faux positif sur la partie droite d'une expression logique imbriquée, et <code>no-deprecated</code> signale désormais les valeurs importées dépréciées en shorthand d'objet.</p>"
+          },
+          "source": { "url": "https://github.com/typescript-eslint/typescript-eslint/releases/tag/v8.70.0", "label": "github.com/typescript-eslint" }
+        },
+        {
+          "id": "oxlint-1-82-0",
+          "tag": "breaking",
+          "date": "07 Sep 2026",
+          "title": {
+            "es": "Oxlint 1.82.0 renombra panicked a fatal_error en ParserReturn",
+            "en": "Oxlint 1.82.0 renames panicked to fatal_error in ParserReturn",
+            "fr": "Oxlint 1.82.0 renomme panicked en fatal_error dans ParserReturn"
+          },
+          "body_html": {
+            "es": "<p>Cambio breaking en el parser: <code>panicked</code> pasa a llamarse <code>fatal_error</code> en <code>ParserReturn</code>. Si consumís las crates de oxc directamente, esto te toca; si sólo usás el binario de oxlint, no. Suma la opción <code>checkConditionalExpressions</code> en <code>no-unmodified-loop-condition</code>, y una tanda de fixes que valen: <code>no-explicit-any</code> con rest parameters a <code>unknown[]</code>, <code>jsx-no-literals</code> chequeando literales en expresiones JSX anidadas, <code>anchor-has-content</code> permitiendo anchors pasados como props de componentes custom, e <code>id-length</code> exceptuando miembros de interface y type literal con <code>never</code>. Oxfmt sale en 0.67.0 junto con esto.</p>",
+            "en": "<p>Breaking parser change: <code>panicked</code> becomes <code>fatal_error</code> in <code>ParserReturn</code>. This hits you if you consume the oxc crates directly; not if you only use the oxlint binary. Adds a <code>checkConditionalExpressions</code> option to <code>no-unmodified-loop-condition</code>, plus a worthwhile batch of fixes: <code>no-explicit-any</code> with rest parameters typed <code>unknown[]</code>, <code>jsx-no-literals</code> checking nested JSX expression literals, <code>anchor-has-content</code> allowing anchors passed as custom component props, and <code>id-length</code> exempting interface and type-literal members typed <code>never</code>. Oxfmt 0.67.0 ships alongside.</p>",
+            "fr": "<p>Changement breaking dans le parser : <code>panicked</code> devient <code>fatal_error</code> dans <code>ParserReturn</code>. Cela concerne ceux qui consomment directement les crates oxc. Ajoute l'option <code>checkConditionalExpressions</code> à <code>no-unmodified-loop-condition</code>, et une série de correctifs sur <code>no-explicit-any</code>, <code>jsx-no-literals</code>, <code>anchor-has-content</code> et <code>id-length</code>. Oxfmt 0.67.0 sort en même temps.</p>"
+          },
+          "source": { "url": "https://github.com/oxc-project/oxc/releases/tag/apps_v1.82.0", "label": "github.com/oxc-project" }
+        }
+      ]
+    },
+    {
+      "id": "build-tools",
+      "name": "Build Tools & Runtimes",
+      "theme": "build-tools",
+      "icon_emoji": "🔧",
+      "anchor": "build-tools",
+      "updates": [
+        {
+          "id": "electron-45-alpha-5",
+          "tag": "beta",
+          "date": "07 Sep 2026",
+          "title": {
+            "es": "Electron 45.0.0-alpha.5 escopea los permisos de File System Access al documento que los pide",
+            "en": "Electron 45.0.0-alpha.5 scopes File System Access permissions to the requesting document",
+            "fr": "Electron 45.0.0-alpha.5 restreint les permissions File System Access au document demandeur"
+          },
+          "body_html": {
+            "es": "<p>Los pedidos de permiso de File System Access y el evento <code>file-system-access-restricted</code> pasan a estar escopeados al documento que los solicita, los grants se resetean cuando se cierra la última página del origin, y el acceso de escritura funciona en sesiones in-memory. Es un ajuste de modelo de permisos, no un fix cosmético — vale revisarlo si tu app expone FSA. Backporteado a 43. También arreglan los iconos de <code>Tray</code> que no aparecían dentro de sandboxes Flatpak o Snap en Linux, y <code>app.getGPUInfo('complete')</code> que colgaba el proceso GPU varios segundos en algunos Windows.</p>",
+            "en": "<p>File System Access permission requests and the <code>file-system-access-restricted</code> event are now scoped to the requesting document, grants reset when the origin's last page closes, and write access works in in-memory sessions. That's a permission-model change, not a cosmetic fix — worth reviewing if your app exposes FSA. Backported to 43. Also fixes <code>Tray</code> icons not appearing inside Flatpak or Snap sandboxes on Linux, and <code>app.getGPUInfo('complete')</code> stalling the GPU process for several seconds on some Windows systems.</p>",
+            "fr": "<p>Les demandes de permission File System Access et l'événement <code>file-system-access-restricted</code> sont désormais restreints au document demandeur, les autorisations sont réinitialisées à la fermeture de la dernière page de l'origine, et l'accès en écriture fonctionne dans les sessions in-memory. Rétroporté sur 43. Corrige aussi les icônes <code>Tray</code> invisibles dans les sandboxes Flatpak/Snap sous Linux.</p>"
+          },
+          "source": { "url": "https://github.com/electron/electron/releases/tag/v45.0.0-alpha.5", "label": "github.com/electron" }
+        },
+        {
+          "id": "wrangler-4-129-1",
+          "tag": "patch",
+          "date": "07 Sep 2026",
+          "title": {
+            "es": "Wrangler 4.129.1: workerd y workers-types al build del 4 de septiembre",
+            "en": "Wrangler 4.129.1: workerd and workers-types move to the September 4 build",
+            "fr": "Wrangler 4.129.1 : workerd et workers-types passent au build du 4 septembre"
+          },
+          "body_html": {
+            "es": "<p>Patch de dependencias en <code>wrangler</code> y <code>miniflare</code>: <code>workerd</code> pasa de <code>1.20260903.1</code> a <code>1.20260904.1</code> y <code>@cloudflare/workers-types</code> lo acompaña. Nada de API nueva — pero si tu runtime local se comporta distinto del deployado, alinear el build de workerd es lo primero que conviene mirar.</p>",
+            "en": "<p>Dependency patch across <code>wrangler</code> and <code>miniflare</code>: <code>workerd</code> moves from <code>1.20260903.1</code> to <code>1.20260904.1</code>, with <code>@cloudflare/workers-types</code> following. No new API — but when your local runtime behaves differently from the deployed one, aligning the workerd build is the first thing to check.</p>",
+            "fr": "<p>Patch de dépendances sur <code>wrangler</code> et <code>miniflare</code> : <code>workerd</code> passe de <code>1.20260903.1</code> à <code>1.20260904.1</code>, suivi par <code>@cloudflare/workers-types</code>. Aucune nouvelle API.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workers-sdk/releases/tag/wrangler%404.129.1", "label": "github.com/cloudflare" }
+        }
+      ]
+    },
+    {
+      "id": "dev-tools",
+      "name": "Developer Tools",
+      "theme": "dev-tools",
+      "icon_emoji": "🛠️",
+      "anchor": "dev-tools",
+      "updates": [
+        {
+          "id": "lucide-1-42-0",
+          "tag": "minor",
+          "date": "07 Sep 2026",
+          "title": {
+            "es": "Lucide 1.42.0: gap-horizontal, gap-vertical, trash-off y adiós al franco suizo",
+            "en": "Lucide 1.42.0: gap-horizontal, gap-vertical, trash-off, and goodbye Swiss franc",
+            "fr": "Lucide 1.42.0 : gap-horizontal, gap-vertical, trash-off et adieu au franc suisse"
+          },
+          "body_html": {
+            "es": "<p>Iconos nuevos: <code>gap-horizontal</code>, <code>gap-vertical</code>, <code>trash-off</code> y <code>circle-dashed-check</code>. Y quedan deprecados los iconos de franco suizo — si los tenés en un design system, este es el aviso antes de que desaparezcan en una major.</p>",
+            "en": "<p>New icons: <code>gap-horizontal</code>, <code>gap-vertical</code>, <code>trash-off</code> and <code>circle-dashed-check</code>. The Swiss franc icons are deprecated — if they live in your design system, this is the warning before they disappear in a major.</p>",
+            "fr": "<p>Nouvelles icônes : <code>gap-horizontal</code>, <code>gap-vertical</code>, <code>trash-off</code> et <code>circle-dashed-check</code>. Les icônes du franc suisse sont dépréciées — l'avertissement avant leur disparition dans une version majeure.</p>"
+          },
+          "source": { "url": "https://github.com/lucide-icons/lucide/releases/tag/1.42.0", "label": "github.com/lucide-icons" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Día flaco de verdad: cero releases de TypeScript, React, Vue, Svelte, Node, Deno, Bun o Vite, y WebKit sigue sin publicar nada después del post de Interop 2027. El movimiento quedó todo en linters.",
+      "en": "A genuinely thin day: no releases from TypeScript, React, Vue, Svelte, Node, Deno, Bun or Vite, and WebKit has published nothing since the Interop 2027 post. All the movement stayed in linters.",
+      "fr": "Journée vraiment creuse : aucune version de TypeScript, React, Vue, Svelte, Node, Deno, Bun ou Vite, et WebKit n'a rien publié depuis le billet Interop 2027. Tout le mouvement est resté chez les linters."
+    },
+    {
+      "es": "Los dos linters del día empujan para el mismo lado: reglas que atrapan tipos que no restringen nada. typescript-eslint va por los object types vacíos generados, oxlint afina no-explicit-any e id-length. El tipado laxo se está volviendo error de lint, no decisión de estilo.",
+      "en": "Both linters of the day push the same way: rules that catch types constraining nothing. typescript-eslint goes after generated empty object types, oxlint sharpens no-explicit-any and id-length. Loose typing is becoming a lint error, not a style choice.",
+      "fr": "Les deux linters du jour poussent dans le même sens : des règles qui attrapent les types ne contraignant rien. typescript-eslint vise les types objet vides générés, oxlint affine no-explicit-any et id-length."
+    },
+    {
+      "es": "Electron sigue apretando el modelo de permisos: los grants de File System Access ahora mueren cuando se cierra la última página del origin. Escopear por documento en vez de por app es la dirección correcta, aunque te obligue a revisar código que funcionaba.",
+      "en": "Electron keeps tightening the permission model: File System Access grants now die when the origin's last page closes. Scoping per document instead of per app is the right direction, even if it makes you revisit code that used to work.",
+      "fr": "Electron continue de resserrer le modèle de permissions : les autorisations File System Access expirent à la fermeture de la dernière page de l'origine. Restreindre par document plutôt que par application est la bonne direction."
+    }
+  ]
+}

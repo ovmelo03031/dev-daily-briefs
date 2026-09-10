@@ -1,0 +1,174 @@
+{
+  "title": {
+    "es": "IA para Devs: Claude Code v2.1.265 suma telemetría y carpetas de plugins",
+    "en": "AI for Devs: Claude Code v2.1.265 adds telemetry and plugin folders",
+    "fr": "IA pour Devs : Claude Code v2.1.265 ajoute la télémétrie et les dossiers de plugins"
+  },
+  "description": {
+    "es": "Claude Code publicó v2.1.265 (telemetría con user.email/user.groups, soporte de carpetas para --plugin-dir, tope de 1GB en resultados guardados) y v2.1.266 apenas horas después para corregir una regresión de gateway. GitHub Copilot para JetBrains sumó sandbox administrado por la empresa. Sin novedades en Codex, GPT, Gemini ni en los laboratorios de modelos entre el 7 y el 9 de septiembre.",
+    "en": "Claude Code shipped v2.1.265 (telemetry with user.email/user.groups, folder support for --plugin-dir, a 1GB cap on saved tool results) and v2.1.266 just hours later to fix a gateway regression. GitHub Copilot for JetBrains added enterprise-managed sandboxing. No news from Codex, GPT, Gemini, or the model labs between September 7-9.",
+    "fr": "Claude Code a publié la v2.1.265 (télémétrie avec user.email/user.groups, support de dossiers pour --plugin-dir, plafond de 1 Go sur les résultats d'outils sauvegardés) et la v2.1.266 quelques heures plus tard pour corriger une régression de gateway. GitHub Copilot pour JetBrains a ajouté un sandbox géré par l'entreprise. Aucune nouveauté de Codex, GPT, Gemini ni des laboratoires de modèles entre le 7 et le 9 septembre."
+  },
+  "pubDate": "2026-09-09",
+  "category": "ai-coding",
+  "highlights": [
+    {
+      "text": {
+        "es": "Claude Code v2.1.265: telemetría, --plugin-dir, tope de 1GB",
+        "en": "Claude Code v2.1.265: telemetry, --plugin-dir, 1GB cap",
+        "fr": "Claude Code v2.1.265 : télémétrie, --plugin-dir, plafond 1 Go"
+      },
+      "anchor": "claude-code",
+      "icon": "simple-icons:anthropic"
+    },
+    {
+      "text": {
+        "es": "Claude Code v2.1.266: corrige regresión de gateway",
+        "en": "Claude Code v2.1.266: fixes gateway regression",
+        "fr": "Claude Code v2.1.266 : corrige la régression de gateway"
+      },
+      "anchor": "claude-code-2-1-266",
+      "icon": "simple-icons:anthropic"
+    },
+    {
+      "text": {
+        "es": "Copilot para JetBrains suma sandbox administrado",
+        "en": "Copilot for JetBrains adds managed sandboxing",
+        "fr": "Copilot pour JetBrains ajoute un sandbox géré"
+      },
+      "anchor": "github-copilot",
+      "icon": "simple-icons:githubcopilot"
+    }
+  ],
+  "stats": {
+    "tools_tracked": 5,
+    "updates_found": "3",
+    "models_cataloged": 0,
+    "providers_covered": 0
+  },
+  "tools": [
+    {
+      "id": "claude-code",
+      "name": "Claude Code",
+      "publisher": "Anthropic",
+      "theme": "claude",
+      "icon_emoji": "🤖",
+      "version": "v2.1.266",
+      "anchor": "claude-code",
+      "updates": [
+        {
+          "id": "claude-code-2-1-266",
+          "tag": "fix",
+          "title": {
+            "es": "v2.1.266: corrige regresión de CLAUDE_CODE_USE_GATEWAY",
+            "en": "v2.1.266: fixes CLAUDE_CODE_USE_GATEWAY regression",
+            "fr": "v2.1.266 : corrige la régression de CLAUDE_CODE_USE_GATEWAY"
+          },
+          "body_html": {
+            "es": "<p>Corrige una regresión introducida en v2.1.265: la variable de entorno no documentada <code>CLAUDE_CODE_USE_GATEWAY</code> empezó a forzar el inicio de sesión en Cloud gateway por sí sola, rompiendo configuraciones que la combinaban con una API key, <code>apiKeyHelper</code> o headers de auth personalizados (todas las requests fallaban con «Not signed in to the Cloud gateway»). La variable vuelve a ignorarse por sí sola; no requiere cambios de configuración.</p>",
+            "en": "<p>Fixes a regression introduced in v2.1.265: the undocumented <code>CLAUDE_CODE_USE_GATEWAY</code> environment variable started forcing Cloud-gateway sign-in on its own, breaking configurations that set it alongside an API key, <code>apiKeyHelper</code>, or custom auth headers (every request failed with «Not signed in to the Cloud gateway»). The variable is ignored on its own again; no configuration change needed.</p>",
+            "fr": "<p>Corrige une régression introduite en v2.1.265 : la variable d'environnement non documentée <code>CLAUDE_CODE_USE_GATEWAY</code> a commencé à forcer la connexion Cloud gateway à elle seule, cassant les configurations qui la combinaient avec une clé API, <code>apiKeyHelper</code> ou des en-têtes d'authentification personnalisés (toutes les requêtes échouaient avec «Not signed in to the Cloud gateway»). La variable est de nouveau ignorée seule ; aucun changement de configuration requis.</p>"
+          },
+          "date": "8 sep 2026",
+          "source": {
+            "url": "https://code.claude.com/docs/en/changelog",
+            "label": "code.claude.com"
+          }
+        },
+        {
+          "id": "claude-code-2-1-265",
+          "tag": "feature",
+          "title": {
+            "es": "v2.1.265: telemetría de usuario, carpetas de plugins, tope de 1GB",
+            "en": "v2.1.265: user telemetry, plugin folders, 1GB cap",
+            "fr": "v2.1.265 : télémétrie utilisateur, dossiers de plugins, plafond 1 Go"
+          },
+          "body_html": {
+            "es": "<p>Suma <code>user.email</code> y <code>user.groups</code> a la telemetría que Claude Desktop y Cowork envían a través de un gateway de apps de Claude, soporte para apuntar <code>--plugin-dir</code> a una carpeta de plugins (cada subcarpeta con manifest se carga, y los cambios en caliente se detectan), y un tope de 1GB en los resultados de herramientas guardados en disco. Corrige varios problemas de reutilización de caché de prompt al resumir subagentes y agentes de equipo, <code>/model opusplan[1m]</code> siendo rechazado, servidores MCP configurados como <code>http</code> que solo hablan HTTP+SSE legado y nunca conectaban, y en Windows, Read/Write/Edit rechazando todo archivo dentro de un AppContainer o sandbox de token restringido.</p>",
+            "en": "<p>Adds <code>user.email</code> and <code>user.groups</code> to the telemetry Claude Desktop and Cowork send through a Claude apps gateway, support for pointing <code>--plugin-dir</code> at a folder of plugins (each child folder with a manifest loads, and hot changes are picked up), and a 1GB cap on tool results saved to disk. Fixes several prompt-cache reuse issues when resuming subagents and agent teammates, <code>/model opusplan[1m]</code> being rejected, MCP servers configured as <code>http</code> that only speak legacy HTTP+SSE never connecting, and on Windows, Read/Write/Edit refusing every file inside an AppContainer or restricted-token sandbox.</p>",
+            "fr": "<p>Ajoute <code>user.email</code> et <code>user.groups</code> à la télémétrie que Claude Desktop et Cowork envoient via une gateway d'apps Claude, le support pour pointer <code>--plugin-dir</code> vers un dossier de plugins (chaque sous-dossier avec un manifeste se charge, et les changements à chaud sont détectés), et un plafond de 1 Go sur les résultats d'outils sauvegardés sur disque. Corrige plusieurs problèmes de réutilisation du cache de prompt lors de la reprise de sous-agents et de coéquipiers agents, <code>/model opusplan[1m]</code> étant rejeté, des serveurs MCP configurés en <code>http</code> qui ne parlent que l'ancien HTTP+SSE et ne se connectaient jamais, et sous Windows, Read/Write/Edit refusant tout fichier dans un AppContainer ou un sandbox à jeton restreint.</p>"
+          },
+          "date": "8 sep 2026",
+          "source": {
+            "url": "https://code.claude.com/docs/en/changelog",
+            "label": "code.claude.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "openai-codex",
+      "name": "OpenAI Codex / Codex CLI",
+      "publisher": "OpenAI",
+      "theme": "openai",
+      "icon_emoji": "🧠",
+      "version": "",
+      "anchor": "openai-codex",
+      "updates": []
+    },
+    {
+      "id": "gpt-models",
+      "name": "GPT Models",
+      "publisher": "OpenAI",
+      "theme": "openai",
+      "icon_emoji": "✨",
+      "version": "",
+      "anchor": "gpt-models",
+      "updates": []
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini / Gemini Code Assist",
+      "publisher": "Google",
+      "theme": "gemini",
+      "icon_emoji": "♊",
+      "version": "",
+      "anchor": "gemini",
+      "updates": []
+    },
+    {
+      "id": "github-copilot",
+      "name": "GitHub Copilot",
+      "publisher": "Microsoft/GitHub",
+      "theme": "copilot",
+      "icon_emoji": "🐙",
+      "version": "",
+      "anchor": "github-copilot",
+      "updates": [
+        {
+          "id": "copilot-jetbrains-sandbox",
+          "tag": "feature",
+          "title": {
+            "es": "Sandbox administrado por la empresa en Copilot para JetBrains",
+            "en": "Enterprise-managed sandbox in Copilot for JetBrains",
+            "fr": "Sandbox géré par l'entreprise dans Copilot pour JetBrains"
+          },
+          "body_html": {
+            "es": "<p>Las organizaciones ahora pueden configurar centralmente el comportamiento del sandbox de Copilot en IDEs JetBrains, controlando acceso a filesystem, permisos de red, proxy y herramientas de desarrollo mediante políticas administradas. La misma actualización suma salto de cursor entre archivos para sugerencias de próxima edición, la posibilidad de agregar archivos y carpetas globales al contexto del chat, un comando <code>/ide</code> que conecta sesiones de terminal de Copilot CLI con el IDE, y disponibilidad general de la configuración de OpenTelemetry en Chat.</p>",
+            "en": "<p>Organizations can now centrally configure Copilot's sandbox behavior in JetBrains IDEs, controlling filesystem access, network permissions, proxy settings, and developer-tool access through managed policies. The same update adds cross-file cursor jumping for next-edit suggestions, the ability to add global files and folders to chat context, an <code>/ide</code> command connecting Copilot CLI terminal sessions to the IDE, and general availability of OpenTelemetry settings in Chat.</p>",
+            "fr": "<p>Les organisations peuvent désormais configurer de façon centralisée le comportement du sandbox de Copilot dans les IDE JetBrains, contrôlant l'accès au système de fichiers, les permissions réseau, les paramètres proxy et l'accès aux outils de développement via des politiques gérées. La même mise à jour ajoute le saut de curseur inter-fichiers pour les suggestions de prochaine édition, la possibilité d'ajouter des fichiers et dossiers globaux au contexte du chat, une commande <code>/ide</code> reliant les sessions de terminal Copilot CLI à l'IDE, et la disponibilité générale des réglages OpenTelemetry dans Chat.</p>"
+          },
+          "date": "8 sep 2026",
+          "source": {
+            "url": "https://github.blog/changelog/2026-09-08-enterprise-managed-sandbox-in-copilot-for-jetbrains/",
+            "label": "github.blog/changelog"
+          }
+        }
+      ]
+    }
+  ],
+  "models": [],
+  "model_timeline_anchor": "model-timeline",
+  "notable_trends": [
+    {
+      "es": "Sin lanzamientos de modelos verificados en toda la industria entre el 7 y el 9 de septiembre — la ventana de novedades sigue concentrada en el 1-4 de septiembre (Fable 5.1/Mythos 5.1, GPT-6 Astra, Gemini 3.8 Flash, Qwen3.8-Max-0902), y todos los ojos están puestos en el debut de Grok 4.7 anunciado para el 12 de septiembre.",
+      "en": "No verified model launches industry-wide between September 7-9 — the news window remains concentrated around September 1-4 (Fable 5.1/Mythos 5.1, GPT-6 Astra, Gemini 3.8 Flash, Qwen3.8-Max-0902), with all eyes on Grok 4.7's teased September 12 debut.",
+      "fr": "Aucun lancement de modèle vérifié dans toute l'industrie entre le 7 et le 9 septembre — la fenêtre d'actualité reste concentrée autour du 1er-4 septembre (Fable 5.1/Mythos 5.1, GPT-6 Astra, Gemini 3.8 Flash, Qwen3.8-Max-0902), tous les regards étant tournés vers les débuts annoncés de Grok 4.7 le 12 septembre."
+    },
+    {
+      "es": "Claude Code y GitHub Copilot siguen invirtiendo en controles de nivel empresa (sandboxing administrado, telemetría, políticas de plugins) más que en funcionalidades orientadas al usuario final esta semana.",
+      "en": "Claude Code and GitHub Copilot keep investing in enterprise-grade controls (managed sandboxing, telemetry, plugin policies) rather than end-user-facing features this week.",
+      "fr": "Claude Code et GitHub Copilot continuent d'investir cette semaine dans des contrôles de niveau entreprise (sandboxing géré, télémétrie, politiques de plugins) plutôt que dans des fonctionnalités orientées utilisateur final."
+    }
+  ]
+}

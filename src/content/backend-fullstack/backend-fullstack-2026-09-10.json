@@ -1,0 +1,427 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 10 Sep 2026",
+    "en": "Backend & Fullstack — Sep 10, 2026",
+    "fr": "Backend & Fullstack — 10 sept. 2026"
+  },
+  "description": {
+    "es": "containerd tira el nodo entero por un goroutine leak, HTTP estrena el método QUERY con RFC 10008, Lambda salta a 90 minutos de timeout y Node 26.8.2 trae OpenSSL 3.5.8.",
+    "en": "containerd can OOM a whole node via a goroutine leak, HTTP finally gets the QUERY method in RFC 10008, Lambda jumps to a 90-minute timeout, and Node 26.8.2 ships OpenSSL 3.5.8.",
+    "fr": "containerd peut faire tomber un nœud entier via une fuite de goroutines, HTTP obtient enfin la méthode QUERY avec la RFC 10008, Lambda passe à 90 minutes de timeout et Node 26.8.2 embarque OpenSSL 3.5.8."
+  },
+  "pubDate": "2026-09-10",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "containerd: goroutine leak tumba el nodo",
+        "en": "containerd goroutine leak kills the node",
+        "fr": "Fuite de goroutines containerd tue le nœud"
+      },
+      "anchor": "containerd-execsync-dos",
+      "icon": "simple-icons:kubernetes"
+    },
+    {
+      "text": {
+        "es": "RFC 10008: HTTP ya tiene método QUERY",
+        "en": "RFC 10008: HTTP now has a QUERY method",
+        "fr": "RFC 10008 : HTTP a enfin la méthode QUERY"
+      },
+      "anchor": "http-query-rfc10008",
+      "icon": "lucide:layers"
+    },
+    {
+      "text": {
+        "es": "Lambda: timeout de 90 minutos, 6x más",
+        "en": "Lambda timeout jumps to 90 minutes (6x)",
+        "fr": "Lambda : timeout à 90 minutes, 6x plus"
+      },
+      "anchor": "lambda-90min-timeout",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": {
+        "es": "Node 26.8.2 con OpenSSL 3.5.8 y undici 8.10.2",
+        "en": "Node 26.8.2 ships OpenSSL 3.5.8 + undici 8.10.2",
+        "fr": "Node 26.8.2 avec OpenSSL 3.5.8 et undici 8.10.2"
+      },
+      "anchor": "node-26-8-2",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": {
+        "es": "smol-toml: parse() en loop infinito, CVSS 8.2",
+        "en": "smol-toml parse() infinite loop, CVSS 8.2",
+        "fr": "smol-toml : parse() en boucle infinie, CVSS 8.2"
+      },
+      "anchor": "smol-toml-dos",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "nuxt-ollama filtra tu API key al browser",
+        "en": "nuxt-ollama leaks your API key to the browser",
+        "fr": "nuxt-ollama fuite ta clé API vers le navigateur"
+      },
+      "anchor": "nuxt-ollama-key-leak",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Prisma 8 RC.9 rompe el orden de enums en PG",
+        "en": "Prisma 8 RC.9 changes enum ordering on Postgres",
+        "fr": "Prisma 8 RC.9 change l ordre des enums sur PG"
+      },
+      "anchor": "prisma-8-rc9",
+      "icon": "simple-icons:prisma"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "containerd-execsync-dos",
+      "updates": [
+        {
+          "id": "containerd-execsync-dos",
+          "tag": "breaking",
+          "date": "09 Sep 2026",
+          "title": {
+            "es": "containerd: un exec probe te puede matar el nodo entero",
+            "en": "containerd: an exec probe can take down your whole node",
+            "fr": "containerd : une exec probe peut tuer tout le nœud"
+          },
+          "body_html": {
+            "es": "<p>Ojo con este, que es de los que duelen en producción. <code>GHSA-7jxh-36q5-gcqv</code> (<strong>CVSS 4.0 6.8</strong>) describe un bug en la implementación de <code>ExecSync</code> del plugin CRI: si tu exec probe o tu lifecycle hook lanza un proceso hijo en background, las goroutines que drenan stdio quedan bloqueadas <em>para siempre</em> — la fase de drenaje de I/O no tiene timeout por defecto ni maneja cancelación de contexto. Cada invocación repetida del probe filtra goroutines y memoria del host hasta que el OOM killer se lleva puesto al daemon de containerd, y ahí te quedaste sin nodo hasta reiniciar. Parcheado en <code>2.3.5</code>, <code>2.2.8</code>, <code>2.0.12</code> y <code>1.7.35</code>. Solo afecta Linux con el plugin CRI activo — o sea, cualquier cluster de Kubernetes normal. Actualizá YA.</p>",
+            "en": "<p>This one hurts in production. <code>GHSA-7jxh-36q5-gcqv</code> (<strong>CVSS 4.0 6.8</strong>) describes a bug in the CRI plugin&apos;s <code>ExecSync</code> implementation: if your exec probe or lifecycle hook spawns a background child process, the stdio-drain goroutines stay blocked <em>indefinitely</em> — the I/O drain phase has no default timeout and ignores context cancellation. Every repeated probe invocation leaks goroutines and host memory until the OOM killer takes out the containerd daemon, leaving the node unusable until restart. Patched in <code>2.3.5</code>, <code>2.2.8</code>, <code>2.0.12</code> and <code>1.7.35</code>. Only affects Linux with the CRI plugin enabled — i.e. any normal Kubernetes cluster.</p>",
+            "fr": "<p>Celui-là fait mal en production. <code>GHSA-7jxh-36q5-gcqv</code> (<strong>CVSS 4.0 6.8</strong>) décrit un bug dans l implémentation <code>ExecSync</code> du plugin CRI : si votre exec probe ou lifecycle hook lance un processus enfant en arrière-plan, les goroutines qui drainent stdio restent bloquées <em>indéfiniment</em> — la phase de drainage I/O n a ni timeout par défaut ni gestion de l annulation de contexte. Chaque invocation répétée fuite des goroutines et de la mémoire jusqu à ce que l OOM killer tue le daemon containerd. Corrigé dans <code>2.3.5</code>, <code>2.2.8</code>, <code>2.0.12</code> et <code>1.7.35</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-7jxh-36q5-gcqv",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "http-query-rfc10008",
+          "tag": "notable",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "RFC 10008: HTTP por fin tiene un método QUERY",
+            "en": "RFC 10008: HTTP finally has a QUERY method",
+            "fr": "RFC 10008 : HTTP a enfin une méthode QUERY"
+          },
+          "body_html": {
+            "es": "<p>La IETF publicó la <strong>RFC 10008</strong> y esto es un golazo para el diseño de APIs. <code>QUERY</code> es un verbo nuevo que permite mandar body en el request manteniendo semántica <em>safe</em>, <em>idempotente</em> y <strong>cacheable</strong>. Es la respuesta al dilema de toda la vida: GET es cacheable pero te comés el límite de longitud de URL, POST te da body pero perdés la cache. GraphQL y Elasticsearch vienen tuneleando queries complejas por POST hace años justamente por esto. Con QUERY la respuesta sigue siendo cacheable si la cache key incorpora el contenido del request. El crate <code>http</code> de Rust ya mergeó soporte, y hay tracking abierto en .NET, Axum, Quarkus y Bruno. Ahora, no te ilusiones: la spec lo define como opcional y la adopción real se mide en años, porque tiene que entenderlo toda la cadena — clientes, servidores, proxies y caches.</p>",
+            "en": "<p>The IETF published <strong>RFC 10008</strong>, and this is a big deal for API design. <code>QUERY</code> is a new verb that carries a request body while keeping <em>safe</em>, <em>idempotent</em> and <strong>cacheable</strong> semantics. It answers the long-standing dilemma: GET is cacheable but capped by URL length, POST gives you a body but loses caching. GraphQL and Elasticsearch have tunneled complex queries through POST for years for exactly this reason. With QUERY the response stays cacheable as long as the cache key incorporates request content. Rust&apos;s <code>http</code> crate already merged support, with tracking open in .NET, Axum, Quarkus and Bruno. Temper expectations though: the spec positions QUERY as optional, and real adoption is measured in years since clients, servers, proxies and caches all have to understand it.</p>",
+            "fr": "<p>L IETF a publié la <strong>RFC 10008</strong>, et c est majeur pour la conception d API. <code>QUERY</code> est un nouveau verbe qui transporte un body tout en gardant une sémantique <em>safe</em>, <em>idempotente</em> et <strong>cacheable</strong>. Il résout le vieux dilemme : GET est cacheable mais limité par la longueur d URL, POST offre un body mais perd le cache. GraphQL et Elasticsearch tunnelisent leurs requêtes via POST depuis des années pour cette raison. Le crate <code>http</code> de Rust a déjà mergé le support, avec du suivi ouvert côté .NET, Axum, Quarkus et Bruno. L adoption réelle se comptera en années.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/09/http-query-method/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "lambda-90min-timeout",
+          "tag": "release",
+          "date": "09 Sep 2026",
+          "title": {
+            "es": "AWS Lambda sube el timeout a 90 minutos",
+            "en": "AWS Lambda raises the function timeout to 90 minutes",
+            "fr": "AWS Lambda passe le timeout à 90 minutes"
+          },
+          "body_html": {
+            "es": "<p>Seis veces el límite anterior de 15 minutos. Aplica a invocaciones <strong>asíncronas</strong> y de <strong>event source mapping</strong> corriendo sobre <em>Lambda Managed Instances</em>; las durable function invocations asíncronas pueden llegar hasta un año. Las invocaciones síncronas siguen clavadas en 15 minutos en todos los instance types. Si venías partiendo jobs de transcoding, procesamiento de datos o inferencia en chunks con Step Functions solo para esquivar el timeout, revisá esa arquitectura — puede que ya no la necesites.</p>",
+            "en": "<p>Six times the previous 15-minute cap. It applies to <strong>asynchronous</strong> and <strong>event source mapping</strong> invocations running on <em>Lambda Managed Instances</em>; asynchronous durable function invocations can run up to a year. Synchronous invocations stay pinned at 15 minutes across all instance types. If you were chunking transcoding, data processing or inference jobs through Step Functions purely to dodge the timeout, revisit that architecture — you may not need it anymore.</p>",
+            "fr": "<p>Six fois la limite précédente de 15 minutes. Cela s applique aux invocations <strong>asynchrones</strong> et <strong>event source mapping</strong> sur <em>Lambda Managed Instances</em> ; les durable function invocations asynchrones peuvent aller jusqu à un an. Les invocations synchrones restent à 15 minutes sur tous les types d instances. Si vous découpiez vos jobs via Step Functions uniquement pour contourner le timeout, revoyez cette architecture.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/aws-lambda-90-minute-function/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "smol-toml-dos",
+          "tag": "security",
+          "date": "09 Sep 2026",
+          "title": {
+            "es": "smol-toml: seis caracteres y te clavan el CPU al 100%",
+            "en": "smol-toml: six characters pin your CPU at 100%",
+            "fr": "smol-toml : six caractères et le CPU est à 100%"
+          },
+          "body_html": {
+            "es": "<p><code>GHSA-7w5x-hrqm-74c2</code>, <strong>CVSS 8.2</strong>. El PoC es literalmente <code>parse('a=[1 #')</code> y nunca vuelve. Cuando un valor dentro de un array o inline table viene seguido de un comentario sin newline final, el parser no sale del loop interno y resetea el cursor al principio del string. Loop infinito, CPU al palo, servicio caído. Si aceptás TOML de usuarios — configs subidas, manifests de plugins, lo que sea — actualizá a <code>1.7.1</code> ya.</p>",
+            "en": "<p><code>GHSA-7w5x-hrqm-74c2</code>, <strong>CVSS 8.2</strong>. The PoC is literally <code>parse('a=[1 #')</code> and it never returns. When a value inside an array or inline table is followed by a comment with no trailing newline, the parser never exits its internal loop and resets the cursor to the start of the string. Infinite loop, CPU pinned, service down. If you accept user-supplied TOML — uploaded configs, plugin manifests, anything — upgrade to <code>1.7.1</code> now.</p>",
+            "fr": "<p><code>GHSA-7w5x-hrqm-74c2</code>, <strong>CVSS 8.2</strong>. Le PoC est littéralement <code>parse('a=[1 #')</code> et il ne revient jamais. Quand une valeur dans un tableau ou une inline table est suivie d un commentaire sans newline final, le parser ne sort jamais de sa boucle interne et remet le curseur au début. Boucle infinie, CPU saturé, service à terre. Mettez à jour vers <code>1.7.1</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-7w5x-hrqm-74c2",
+            "label": "github.com/advisories"
+          }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "node-26-8-2",
+      "updates": [
+        {
+          "id": "node-26-8-2",
+          "tag": "release",
+          "date": "09 Sep 2026",
+          "title": {
+            "es": "Node.js 26.8.2: OpenSSL 3.5.8, undici 8.10.2 y npm 11.19.1",
+            "en": "Node.js 26.8.2: OpenSSL 3.5.8, undici 8.10.2 and npm 11.19.1",
+            "fr": "Node.js 26.8.2 : OpenSSL 3.5.8, undici 8.10.2 et npm 11.19.1"
+          },
+          "body_html": {
+            "es": "<p>Release de mantenimiento con bumps que importan: <strong>OpenSSL 3.5.8</strong>, <strong>undici 8.10.2</strong>, npm 11.19.1, corepack 0.36.0, zlib y simdjson 4.6.9. Del lado de la API, se deprecó <code>Server.prototype._listen2</code> en <code>node:net</code> — si tocás internals de <code>net</code>, andá mirando. También refinaron la postura de seguridad para features experimentales, que en criollo significa que reportar un bug en algo marcado experimental ya no dispara el proceso de vuln completo.</p>",
+            "en": "<p>Maintenance release with dependency bumps that matter: <strong>OpenSSL 3.5.8</strong>, <strong>undici 8.10.2</strong>, npm 11.19.1, corepack 0.36.0, plus zlib and simdjson 4.6.9. On the API side, <code>Server.prototype._listen2</code> in <code>node:net</code> is now deprecated — worth a look if you touch <code>net</code> internals. They also refined the security vulnerability posture for experimental features, meaning a bug in something marked experimental no longer triggers the full vuln process.</p>",
+            "fr": "<p>Release de maintenance avec des montées de version qui comptent : <strong>OpenSSL 3.5.8</strong>, <strong>undici 8.10.2</strong>, npm 11.19.1, corepack 0.36.0, zlib et simdjson 4.6.9. Côté API, <code>Server.prototype._listen2</code> dans <code>node:net</code> est déprécié. La posture de sécurité pour les fonctionnalités expérimentales a aussi été précisée.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nodejs/node/releases/tag/v26.8.2",
+            "label": "github.com/nodejs"
+          }
+        },
+        {
+          "id": "workerd-20260910",
+          "tag": "minor",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "workerd 1.20260910.1: capnp-cpp v2 y compatibility-date expuesto",
+            "en": "workerd 1.20260910.1: capnp-cpp v2 and exposed compatibility-date",
+            "fr": "workerd 1.20260910.1 : capnp-cpp v2 et compatibility-date exposé"
+          },
+          "body_html": {
+            "es": "<p>El runtime de Cloudflare Workers sigue con su cadencia diaria. Esta build actualiza <code>capnp-cpp</code> a v2 head (ordering de <code>Executor::isCurrent</code> y <code>setRunnable</code>), mueve el routing de Sentry para SQLite a exception details, y expone <code>compatibility-date.capnp</code> junto con guías en <code>AGENTS.md</code> para agregar APIs nuevas. Nada que rompa, pero si mantenés un fork o compilás workerd vos mismo, el bump de capnp es el que te va a tocar.</p>",
+            "en": "<p>The Cloudflare Workers runtime keeps its daily cadence. This build updates <code>capnp-cpp</code> to v2 head (<code>Executor::isCurrent</code> and <code>setRunnable</code> ordering), moves SQLite Sentry routing into exception details, and exposes <code>compatibility-date.capnp</code> alongside <code>AGENTS.md</code> guidance for adding new APIs. Nothing breaking, but if you maintain a fork or build workerd yourself, the capnp bump is the one that touches you.</p>",
+            "fr": "<p>Le runtime Cloudflare Workers garde sa cadence quotidienne. Cette build met à jour <code>capnp-cpp</code> vers v2 head (ordering de <code>Executor::isCurrent</code> et <code>setRunnable</code>), déplace le routing Sentry SQLite vers les exception details, et expose <code>compatibility-date.capnp</code> avec des guides <code>AGENTS.md</code>. Rien de cassant.</p>"
+          },
+          "source": {
+            "url": "https://github.com/cloudflare/workerd/releases/tag/v1.20260910.1",
+            "label": "github.com/cloudflare"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "prisma-8-rc9",
+      "updates": [
+        {
+          "id": "prisma-8-rc9",
+          "tag": "breaking",
+          "date": "09 Sep 2026",
+          "title": {
+            "es": "Prisma 8.0.0-rc.9: el orden de enums en Postgres cambia",
+            "en": "Prisma 8.0.0-rc.9: enum ordering on Postgres changes",
+            "fr": "Prisma 8.0.0-rc.9 : l ordre des enums sur Postgres change"
+          },
+          "body_html": {
+            "es": "<p>Este RC endurece la validación de schema, suma tipos reutilizables de query filters y arregla diagnósticos del language server, pero lo que te va a morder son los breaking changes. El grande: <strong>los enums respaldados por texto ahora ordenan por valor almacenado</strong> — <code>ORDER BY</code> y <code>DISTINCT ON</code> en PostgreSQL ya no imponen el orden de declaración. Si tu ranking semántico dependía de eso, necesitás una expresión de ranking explícita o valores numéricos, y migrar storage existente a numérico requiere una migración que preserve datos (defaults y constraints incluidos), no reescribir el historial de migraciones aplicadas. También cambiaron los argumentos de índices de MongoDB para usar valores nativos del schema. Si estás en el tren del RC, leé la receta de upgrade antes de tocar nada.</p>",
+            "en": "<p>This RC tightens schema validation, adds reusable query-filter types and fixes language-server diagnostics — but the breaking changes are what will bite. The big one: <strong>text-backed enum ordering now follows stored values</strong> — PostgreSQL <code>ORDER BY</code> and <code>DISTINCT ON</code> no longer impose declaration order. If your semantic ranking relied on that, you need an explicit ranking expression or numeric enum values, and migrating existing storage to numeric requires a data-preserving migration (defaults and constraints included), not rewriting applied migration history. MongoDB index arguments also switched to native schema values. If you&apos;re riding the RC train, read the upgrade recipe before touching anything.</p>",
+            "fr": "<p>Ce RC durcit la validation du schéma, ajoute des types de query filters réutilisables et corrige des diagnostics du language server — mais ce sont les breaking changes qui piquent. Le principal : <strong>l ordre des enums stockés en texte suit désormais les valeurs stockées</strong> — <code>ORDER BY</code> et <code>DISTINCT ON</code> sur PostgreSQL n imposent plus l ordre de déclaration. Les arguments d index MongoDB passent aussi aux valeurs natives du schéma. Lisez la recette d upgrade avant de toucher à quoi que ce soit.</p>"
+          },
+          "source": {
+            "url": "https://github.com/prisma/prisma/releases/tag/v8.0.0-rc.9",
+            "label": "github.com/prisma"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "lambda-graviton5",
+      "updates": [
+        {
+          "id": "lambda-graviton5",
+          "tag": "release",
+          "date": "09 Sep 2026",
+          "title": {
+            "es": "Lambda Managed Instances ya corre sobre Graviton5",
+            "en": "Lambda Managed Instances now run on Graviton5",
+            "fr": "Lambda Managed Instances tourne sur Graviton5"
+          },
+          "body_html": {
+            "es": "<p>Los tipos <code>C9g</code>, <code>C9gd</code>, <code>M9g</code> y <code>M9gd</code> ya están disponibles en Lambda Managed Instances, con hasta <strong>25% mejor performance de cómputo</strong> contra Graviton4. Podés especificar el instance type al crear un capacity provider, o dejar que Lambda lo elija solo según los requisitos de la función. Disponible en todas las regiones donde coexisten LMI y esos EC2. Combinado con el timeout de 90 minutos, LMI se está poniendo interesante para workloads que antes ni mirabas para serverless.</p>",
+            "en": "<p><code>C9g</code>, <code>C9gd</code>, <code>M9g</code> and <code>M9gd</code> instance types are now available on Lambda Managed Instances, delivering up to <strong>25% better compute performance</strong> versus Graviton4. You can specify the instance type when creating a capacity provider, or let Lambda pick automatically based on function requirements. Available in every region where both LMI and those EC2 types exist. Paired with the 90-minute timeout, LMI is getting interesting for workloads you&apos;d never have considered serverless before.</p>",
+            "fr": "<p>Les types <code>C9g</code>, <code>C9gd</code>, <code>M9g</code> et <code>M9gd</code> sont disponibles sur Lambda Managed Instances, avec jusqu à <strong>25% de performance de calcul en plus</strong> face à Graviton4. Vous pouvez spécifier le type d instance à la création d un capacity provider, ou laisser Lambda choisir. Combiné au timeout de 90 minutes, LMI devient intéressant pour des workloads jamais envisagés en serverless.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/aws-lambda-graviton5-ec2/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "meta-second-brain",
+      "updates": [
+        {
+          "id": "meta-second-brain",
+          "tag": "notable",
+          "date": "09 Sep 2026",
+          "title": {
+            "es": "Meta: agentes como «segundo cerebro organizacional»",
+            "en": "Meta: agents as organizational second brains",
+            "fr": "Meta : des agents comme «second cerveau organisationnel»"
+          },
+          "body_html": {
+            "es": "<p>Más allá del hype de agentes, acá hay arquitectura de verdad para robar. Meta describe cuatro capas: un <strong>knowledge system</strong> con 200+ archivos estructurados por taxonomía, un <strong>reasoning pipeline</strong> que separa lo que el agente sabe de cómo razona vía «recipes» componibles, un framework de evaluación con benchmarks automatizados, y un loop de auto-mejora que compila correcciones de expertos en updates verificados y testeados <em>sin reentrenar el modelo</em>. La clave: en vez de meter todo en embeddings, guardan el expertise en archivos de texto versionados, accedidos por procedimientos de razonamiento explícitos — position files, routing indexes, gateway files con tests de seguridad, y recipes paso a paso. Para nosotros el takeaway es puro Clean Architecture: <strong>desacoplá el conocimiento de los pesos del modelo</strong>, hacelo auditable, y ponele tests de regresión. Resultado reportado: evaluaciones que tardaban días bajaron a minutos.</p>",
+            "en": "<p>Past the agent hype, there&apos;s real architecture here worth stealing. Meta describes four layers: a <strong>knowledge system</strong> of 200+ files organized by taxonomy, a <strong>reasoning pipeline</strong> that separates what the agent knows from how it reasons via composable recipes, an evaluation framework with automated benchmarks, and a self-improvement loop that compiles expert corrections into verified, tested updates <em>without retraining the model</em>. The key move: instead of dumping everything into embeddings, they store expertise in version-controlled text files accessed through explicit reasoning procedures — position files, routing indexes, gateway files with safety tests, and step-by-step recipes. The takeaway is pure Clean Architecture: <strong>decouple knowledge from model weights</strong>, keep it auditable, and cover it with regression tests. Reported result: assessments that took days now take minutes.</p>",
+            "fr": "<p>Au-delà du hype des agents, il y a ici une vraie architecture à voler. Meta décrit quatre couches : un <strong>knowledge system</strong> de 200+ fichiers organisés par taxonomie, un <strong>reasoning pipeline</strong> qui sépare ce que l agent sait de comment il raisonne via des recipes composables, un framework d évaluation avec benchmarks automatisés, et une boucle d auto-amélioration qui compile les corrections d experts en updates vérifiés <em>sans réentraîner le modèle</em>. L idée clé : stocker l expertise dans des fichiers texte versionnés plutôt que dans des embeddings. Le takeaway est du pur Clean Architecture : <strong>découplez la connaissance des poids du modèle</strong>.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/09/meta-organizational-agents/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "nuxt-ollama-key-leak",
+      "updates": [
+        {
+          "id": "nuxt-ollama-key-leak",
+          "tag": "security",
+          "date": "09 Sep 2026",
+          "title": {
+            "es": "nuxt-ollama publica tu API key en el HTML del SSR",
+            "en": "nuxt-ollama publishes your API key in the SSR HTML",
+            "fr": "nuxt-ollama publie ta clé API dans le HTML SSR"
+          },
+          "body_html": {
+            "es": "<p>Caso de manual de por qué hay que entender <code>runtimeConfig</code> antes de usarlo. <code>GHSA-fxg7-897c-57mp</code>: el módulo mergea <em>todas</em> las opciones — incluida <code>api_key</code> — dentro de <code>runtimeConfig.public.ollama</code>. Nuxt serializa <code>runtimeConfig.public</code> en la respuesta HTML del SSR dentro del payload <code>window.__NUXT__</code>, así que la key queda en texto plano para cualquier cliente HTTP sin autenticar. Un GET y te robaron la credencial. Afecta <code>>= 1.2.26, &lt; 1.3.1</code>, parcheado en <code>1.3.1</code>. Y ya que estás: revisá qué más metiste en <code>public</code> por comodidad.</p>",
+            "en": "<p>A textbook case for why you must understand <code>runtimeConfig</code> before using it. <code>GHSA-fxg7-897c-57mp</code>: the module merges <em>all</em> module options — <code>api_key</code> included — into <code>runtimeConfig.public.ollama</code>. Nuxt serializes <code>runtimeConfig.public</code> into the SSR HTML response inside the <code>window.__NUXT__</code> payload, leaving the key in plaintext for any unauthenticated HTTP client. One GET and the credential is gone. Affects <code>&gt;= 1.2.26, &lt; 1.3.1</code>, patched in <code>1.3.1</code>. While you&apos;re at it: audit what else you dropped into <code>public</code> for convenience.</p>",
+            "fr": "<p>Cas d école sur l importance de comprendre <code>runtimeConfig</code>. <code>GHSA-fxg7-897c-57mp</code> : le module fusionne <em>toutes</em> les options — <code>api_key</code> incluse — dans <code>runtimeConfig.public.ollama</code>. Nuxt sérialise <code>runtimeConfig.public</code> dans la réponse HTML SSR via <code>window.__NUXT__</code>, laissant la clé en clair pour n importe quel client HTTP non authentifié. Affecte <code>&gt;= 1.2.26, &lt; 1.3.1</code>, corrigé en <code>1.3.1</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-fxg7-897c-57mp",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "dotnet-69522-rce",
+          "tag": "security",
+          "date": "09 Sep 2026",
+          "title": {
+            "es": ".NET Patch Tuesday: RCE en el lector de PDBs",
+            "en": ".NET Patch Tuesday: RCE in the PDB reader",
+            "fr": ".NET Patch Tuesday : RCE dans le lecteur de PDB"
+          },
+          "body_html": {
+            "es": "<p>Martes de parches de Microsoft y cayeron varios sobre .NET y Visual Studio. El más feo es <strong>CVE-2026-69522</strong> (<code>GHSA-2j8r-3c22-8565</code>, severidad high): un out-of-bounds write al procesar archivos PDB en <code>Microsoft.DiaSymReader.Native</code>, con rango vulnerable desde <code>17.10.0-beta1</code> hasta <code>18.9.0-beta1.26405.1</code> y fix en <code>18.9.0-beta1.26405.2</code>. Acompañan CVE-2026-69439 (elevación de privilegios) y CVE-2026-71328 (otro RCE). Si tenés pipelines de CI que procesan símbolos de builds ajenas, ese es tu vector.</p>",
+            "en": "<p>Microsoft&apos;s Patch Tuesday dropped several .NET and Visual Studio fixes. The nastiest is <strong>CVE-2026-69522</strong> (<code>GHSA-2j8r-3c22-8565</code>, high severity): an out-of-bounds write when processing PDB files in <code>Microsoft.DiaSymReader.Native</code>, vulnerable from <code>17.10.0-beta1</code> through <code>18.9.0-beta1.26405.1</code>, fixed in <code>18.9.0-beta1.26405.2</code>. It ships alongside CVE-2026-69439 (elevation of privilege) and CVE-2026-71328 (another RCE). If your CI pipelines process symbols from builds you don&apos;t control, that&apos;s your vector.</p>",
+            "fr": "<p>Le Patch Tuesday de Microsoft a livré plusieurs correctifs .NET et Visual Studio. Le pire est <strong>CVE-2026-69522</strong> (<code>GHSA-2j8r-3c22-8565</code>, sévérité high) : une écriture hors limites lors du traitement de fichiers PDB dans <code>Microsoft.DiaSymReader.Native</code>, corrigé en <code>18.9.0-beta1.26405.2</code>. Accompagné de CVE-2026-69439 (élévation de privilèges) et CVE-2026-71328 (autre RCE).</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-2j8r-3c22-8565",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "aspnet-iis-decompression-dos",
+          "tag": "security",
+          "date": "09 Sep 2026",
+          "title": {
+            "es": "ASP.NET Core: DoS por descompresión sin límites en IIS",
+            "en": "ASP.NET Core: unbounded decompression DoS on IIS",
+            "fr": "ASP.NET Core : DoS par décompression non bornée sur IIS"
+          },
+          "body_html": {
+            "es": "<p><strong>CVE-2026-69304</strong> (<code>GHSA-8cp2-47hg-mfgh</code>): el middleware de IIS para ASP.NET Core no acotaba correctamente la descompresión de ciertos requests en hosting out-of-process, lo que deriva en consumo excesivo de memoria y denegación de servicio. Un clásico zip bomb sobre el request body. Parcheado en <code>8.0.31</code>, <code>9.0.20</code>, <code>10.0.12</code> y <code>11.0.0-rc.1</code>. Y sí, esto vale como recordatorio para cualquier stack: si aceptás <code>Content-Encoding: gzip</code>, poné un límite duro al tamaño descomprimido.</p>",
+            "en": "<p><strong>CVE-2026-69304</strong> (<code>GHSA-8cp2-47hg-mfgh</code>): the ASP.NET Core IIS middleware failed to properly constrain decompression of certain requests in out-of-process hosting, leading to excess memory consumption and denial of service. A classic zip bomb over the request body. Patched in <code>8.0.31</code>, <code>9.0.20</code>, <code>10.0.12</code> and <code>11.0.0-rc.1</code>. And yes, treat it as a reminder for any stack: if you accept <code>Content-Encoding: gzip</code>, put a hard cap on the decompressed size.</p>",
+            "fr": "<p><strong>CVE-2026-69304</strong> (<code>GHSA-8cp2-47hg-mfgh</code>) : le middleware IIS d ASP.NET Core ne bornait pas correctement la décompression de certaines requêtes en hosting out-of-process, causant une consommation mémoire excessive et un déni de service. Une zip bomb classique sur le body. Corrigé en <code>8.0.31</code>, <code>9.0.20</code>, <code>10.0.12</code> et <code>11.0.0-rc.1</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-8cp2-47hg-mfgh",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "functype-mcp-rce",
+          "tag": "security",
+          "date": "09 Sep 2026",
+          "title": {
+            "es": "MCP server con RCE por alias de paquete en pnpm",
+            "en": "MCP server RCE via pnpm package alias",
+            "fr": "RCE dans un serveur MCP via alias de paquet pnpm"
+          },
+          "body_html": {
+            "es": "<p><code>GHSA-wcjj-9m6g-2fr2</code>: la tool <code>set_functype_version</code> de <code>functype-mcp-server</code> acepta un string de versión sin restringir, lo interpola directo en un specifier <code>functype@&lt;version&gt;</code> y lo instala con <code>pnpm add</code> sin validar nada. Como los specifiers de npm/pnpm soportan <code>file:</code>, <code>npm:</code> y otras sintaxis de alias, cualquiera que pueda mandar un <code>tools/call</code> logra instalar un paquete arbitrario y ejecutarlo vía dynamic import. Parche en <code>1.4.4</code>. El patrón vale más que el paquete: <strong>nunca interpoles input de usuario en un package specifier</strong>. Los MCP servers son superficie de ataque nueva y muchos están escritos sin pensar en esto.</p>",
+            "en": "<p><code>GHSA-wcjj-9m6g-2fr2</code>: the <code>set_functype_version</code> tool in <code>functype-mcp-server</code> accepts an unconstrained version string, interpolates it straight into a <code>functype@&lt;version&gt;</code> specifier and installs it with <code>pnpm add</code> without validation. Since npm/pnpm specifiers support <code>file:</code>, <code>npm:</code> and other alias syntaxes, anyone who can send a <code>tools/call</code> can install an arbitrary package and execute it via dynamic import. Patched in <code>1.4.4</code>. The pattern matters more than the package: <strong>never interpolate user input into a package specifier</strong>. MCP servers are new attack surface and plenty of them were written without this in mind.</p>",
+            "fr": "<p><code>GHSA-wcjj-9m6g-2fr2</code> : la tool <code>set_functype_version</code> de <code>functype-mcp-server</code> accepte une chaîne de version non contrainte, l interpole dans un specifier <code>functype@&lt;version&gt;</code> et l installe via <code>pnpm add</code> sans validation. Les specifiers npm/pnpm supportant <code>file:</code>, <code>npm:</code> et autres alias, un <code>tools/call</code> suffit pour installer un paquet arbitraire. Corrigé en <code>1.4.4</code>. <strong>N interpolez jamais d input utilisateur dans un package specifier</strong>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-wcjj-9m6g-2fr2",
+            "label": "github.com/advisories"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "nx-23-2-1",
+      "updates": [
+        {
+          "id": "nx-23-2-1",
+          "tag": "patch",
+          "date": "09 Sep 2026",
+          "title": {
+            "es": "Nx 23.2.1: identidad del graph separada del env del daemon",
+            "en": "Nx 23.2.1: graph identity split from daemon runtime env",
+            "fr": "Nx 23.2.1 : identité du graph séparée de l env du daemon"
+          },
+          "body_html": {
+            "es": "<p>Patch con un fix que vale la pena si venís peleando cachés fantasma en monorepos: ahora Nx <strong>separa el runtime env del daemon de la identidad del graph</strong>, así que cambiar variables de entorno del daemon ya no te invalida ni te corrompe el graph. Suma reportar la ubicación de la caché junto al uso, valida el path de migraciones antes de extraer las migrations de un paquete, y arregla declaration maps y exports de librerías buildables en Angular. También salieron <code>22.7.10</code> y <code>22.7.11</code> en la línea LTS.</p>",
+            "en": "<p>A patch with one fix worth noting if you fight phantom caches in monorepos: Nx now <strong>separates the daemon runtime env from graph identity</strong>, so changing daemon environment variables no longer invalidates or corrupts the graph. It also reports cache location alongside usage, validates the migrations path before extracting package migrations, and fixes declaration maps and exports for Angular buildable libraries. <code>22.7.10</code> and <code>22.7.11</code> also shipped on the LTS line.</p>",
+            "fr": "<p>Un patch avec un correctif utile si vous luttez contre les caches fantômes en monorepo : Nx <strong>sépare désormais le runtime env du daemon de l identité du graph</strong>, donc changer les variables d environnement du daemon n invalide plus le graph. Il rapporte aussi l emplacement du cache, valide le chemin des migrations, et corrige les declaration maps des librairies buildables Angular. <code>22.7.10</code> et <code>22.7.11</code> sont aussi sortis en LTS.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nrwl/nx/releases/tag/23.2.1",
+            "label": "github.com/nrwl"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Los bugs de disponibilidad se comieron la semana: containerd filtrando goroutines hasta el OOM, smol-toml en loop infinito con seis caracteres, ASP.NET Core descomprimiendo sin límite. Ninguno es un RCE glamoroso, pero los tres te dejan el servicio caído. Si tenés un parser o un descompresor en el borde de tu sistema, ponele límites duros y timeouts — no alcanza con validar el schema después.",
+      "en": "Availability bugs owned this week: containerd leaking goroutines until OOM, smol-toml spinning forever on six characters, ASP.NET Core decompressing without bounds. None is a glamorous RCE, but all three leave your service down. If you have a parser or a decompressor at the edge of your system, give it hard caps and timeouts — validating the schema afterwards is not enough.",
+      "fr": "Les bugs de disponibilité ont dominé la semaine : containerd fuitant des goroutines jusqu à l OOM, smol-toml en boucle infinie sur six caractères, ASP.NET Core décompressant sans limite. Aucun n est un RCE glamour, mais les trois font tomber le service. Mettez des limites dures et des timeouts sur tout parser ou décompresseur en bordure de système."
+    },
+    {
+      "es": "RFC 10008 es el tipo de cambio que no vas a usar mañana pero que redefine cómo pensás el diseño de APIs a cinco años. Que exista un verbo safe, idempotente y cacheable con body significa que el patrón «POST para leer» — GraphQL, Elasticsearch, cualquier búsqueda con filtros complejos — por fin tiene una salida estándar. Empezá a mirarlo ahora, porque cuando tu proxy y tu CDN lo soporten vas a querer estar listo.",
+      "en": "RFC 10008 is the kind of change you won&apos;t use tomorrow but that reshapes how you think about API design over five years. A safe, idempotent, cacheable verb with a body means the read-via-POST pattern — GraphQL, Elasticsearch, any search with complex filters — finally has a standard way out. Start watching it now, because once your proxy and CDN support it you&apos;ll want to be ready.",
+      "fr": "La RFC 10008 est le genre de changement qu on n utilisera pas demain mais qui redéfinit la conception d API sur cinq ans. Un verbe safe, idempotent et cacheable avec un body signifie que le pattern «POST pour lire» — GraphQL, Elasticsearch, toute recherche à filtres complexes — a enfin une sortie standard. Surveillez-le dès maintenant."
+    },
+    {
+      "es": "Los MCP servers ya son superficie de ataque de primera clase. El RCE de functype-mcp-server via alias de pnpm es exactamente el mismo error que veníamos cometiendo en los años 2000 con shell injection, solo que ahora el intérprete es el resolver de paquetes. Si estás escribiendo tools MCP, tratá cada argumento como input hostil y validá contra una allowlist estricta.",
+      "en": "MCP servers are now first-class attack surface. The functype-mcp-server RCE via pnpm alias is the exact same mistake we were making in the 2000s with shell injection, except the interpreter is now the package resolver. If you write MCP tools, treat every argument as hostile input and validate against a strict allowlist.",
+      "fr": "Les serveurs MCP sont désormais une surface d attaque de premier plan. Le RCE de functype-mcp-server via alias pnpm est exactement la même erreur que le shell injection des années 2000, sauf que l interpréteur est maintenant le resolver de paquets. Traitez chaque argument comme un input hostile et validez contre une allowlist stricte."
+    }
+  ]
+}

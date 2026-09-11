@@ -1,0 +1,456 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 11 Sep 2026",
+    "en": "Backend & Fullstack — 11 Sep 2026",
+    "fr": "Backend & Fullstack — 11 sept. 2026"
+  },
+  "description": {
+    "es": "Día de auditorías masivas: 16 CVEs en n8n, 9 en rclone, 6 en Traefik (uno crítico 9.1) y XSS/SSRF en Angular SSR. Más Vite 8.3.0 estable y RabbitMQ 4.3 en Amazon MQ.",
+    "en": "Mass-audit day: 16 CVEs in n8n, 9 in rclone, 6 in Traefik (one critical 9.1) and XSS/SSRF in Angular SSR. Plus Vite 8.3.0 stable and RabbitMQ 4.3 on Amazon MQ.",
+    "fr": "Journée d'audits massifs : 16 CVE dans n8n, 9 dans rclone, 6 dans Traefik (dont une critique 9.1) et XSS/SSRF dans Angular SSR. Plus Vite 8.3.0 stable et RabbitMQ 4.3 sur Amazon MQ."
+  },
+  "pubDate": "2026-09-11",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Traefik: crítico 9.1, sesiones NTLM cruzadas en HTTP/3",
+        "en": "Traefik: critical 9.1, cross-session NTLM over HTTP/3",
+        "fr": "Traefik : critique 9.1, sessions NTLM croisées en HTTP/3"
+      },
+      "anchor": "traefik-http3-ntlm",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "n8n: 16 avisos en un día, dos escapes de sandbox",
+        "en": "n8n: 16 advisories in one day, two sandbox escapes",
+        "fr": "n8n : 16 avis en un jour, deux évasions de sandbox"
+      },
+      "anchor": "n8n-sandbox-escape",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Angular SSR: XSS 8.6 y SSRF con fuga de credenciales",
+        "en": "Angular SSR: 8.6 XSS and credential-leaking SSRF",
+        "fr": "Angular SSR : XSS 8.6 et SSRF fuitant des identifiants"
+      },
+      "anchor": "angular-ssr-xss",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "rclone: 9 CVEs, dos bypass totales de autenticación",
+        "en": "rclone: 9 CVEs, two full auth bypasses",
+        "fr": "rclone : 9 CVE, deux contournements d'auth complets"
+      },
+      "anchor": "rclone-auth-bypass",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Vite 8.3.0 estable: preload y proxy más rápidos",
+        "en": "Vite 8.3.0 stable: faster preload and proxy",
+        "fr": "Vite 8.3.0 stable : preload et proxy plus rapides"
+      },
+      "anchor": "vite-830",
+      "icon": "lucide:rocket"
+    },
+    {
+      "text": {
+        "es": "Amazon MQ ya soporta RabbitMQ 4.3",
+        "en": "Amazon MQ now supports RabbitMQ 4.3",
+        "fr": "Amazon MQ prend désormais en charge RabbitMQ 4.3"
+      },
+      "anchor": "amazonmq-rabbit43",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": {
+        "es": "TinyGo: panics recuperables y soporte UEFI",
+        "en": "TinyGo: recoverable panics and UEFI support",
+        "fr": "TinyGo : panics récupérables et support UEFI"
+      },
+      "anchor": "tinygo-embedded",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "traefik-http3-ntlm",
+      "updates": [
+        {
+          "id": "traefik-http3-ntlm",
+          "tag": "breaking",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "Traefik: crítico CVSS 9.1 — HTTP/3 reusa conexiones NTLM autenticadas de otro cliente",
+            "en": "Traefik: critical CVSS 9.1 — HTTP/3 reuses another client's authenticated NTLM connection",
+            "fr": "Traefik : critique CVSS 9.1 — HTTP/3 réutilise la connexion NTLM authentifiée d'un autre client"
+          },
+          "body_html": {
+            "es": "<p>El camino HTTP/3 de Traefik nunca llamaba a <code>service.AddTransportOnContext</code>, así que el <code>kerberosRoundTripper</code> caía al transport compartido en vez de un pool por conexión de frontend. Contra un backend que ata identidad a la conexión (NTLM o Negotiate/Kerberos), un cliente HTTP/3 cualquiera puede recibir una conexión ya autenticada como <strong>otro usuario</strong>. Parchado en <strong>3.7.13</strong> y <strong>2.11.57</strong>. Si tenés HTTP/3 habilitado en el entrypoint y auth por conexión detrás, actualizá YA.</p>",
+            "en": "<p>Traefik's HTTP/3 path never called <code>service.AddTransportOnContext</code>, so <code>kerberosRoundTripper</code> fell back to the shared backend transport instead of a per-frontend-connection pool. Against a backend that binds identity to a persistent connection via NTLM or Negotiate/Kerberos, an unrelated HTTP/3 client can be handed a connection already authenticated as <strong>someone else</strong>. Patched in <strong>3.7.13</strong> and <strong>2.11.57</strong>.</p>",
+            "fr": "<p>Le chemin HTTP/3 de Traefik n'appelait jamais <code>service.AddTransportOnContext</code>, donc <code>kerberosRoundTripper</code> retombait sur le transport partagé au lieu d'un pool par connexion frontale. Face à un backend liant l'identité à la connexion (NTLM ou Negotiate/Kerberos), un client HTTP/3 quelconque peut recevoir une connexion déjà authentifiée comme <strong>un autre utilisateur</strong>. Corrigé en <strong>3.7.13</strong> et <strong>2.11.57</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-qqjf-53cj-pwvv", "label": "github.com/advisories" }
+        },
+        {
+          "id": "n8n-sandbox-escape",
+          "tag": "breaking",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "n8n publica 16 avisos de seguridad el mismo día, incluidos dos escapes de sandbox con ejecución de código",
+            "en": "n8n ships 16 security advisories in one day, including two sandbox escapes with code execution",
+            "fr": "n8n publie 16 avis de sécurité le même jour, dont deux évasions de sandbox avec exécution de code"
+          },
+          "body_html": {
+            "es": "<p>Dieciséis avisos de una sola tanda: dos <strong>escapes del sandbox de expresiones</strong> (rebinding del sanitizer de class fields y tampering de builtins compartidos, ambos CVSS 7.7–8.7) que terminan en ejecución de código, agotamiento de storage sin autenticar vía el endpoint de <em>OAuth Dynamic Client Registration</em>, endpoints OIDC SSO que siguen emitiendo sesiones válidas aunque el SSO esté deshabilitado, y verificación de firma del GitHub Trigger que <em>fail-open</em>. Parchado en <strong>2.38.2</strong>, <strong>2.37.7</strong> y <strong>1.123.76</strong>. Esto no es un CVE suelto: es una auditoría completa cayendo de golpe.</p>",
+            "en": "<p>Sixteen advisories in one batch: two <strong>expression sandbox escapes</strong> (class-field sanitizer rebinding and shared-builtin tampering, CVSS 7.7–8.7) leading to code execution, unauthenticated persistent storage exhaustion via the <em>OAuth Dynamic Client Registration</em> endpoint, disabled OIDC SSO endpoints still issuing valid sessions, and GitHub Trigger signature verification failing open. Patched in <strong>2.38.2</strong>, <strong>2.37.7</strong> and <strong>1.123.76</strong>.</p>",
+            "fr": "<p>Seize avis d'un coup : deux <strong>évasions du sandbox d'expressions</strong> (rebinding du sanitizer de champs de classe et altération des builtins partagés, CVSS 7.7–8.7) menant à l'exécution de code, épuisement du stockage sans authentification via l'endpoint <em>OAuth Dynamic Client Registration</em>, endpoints OIDC SSO désactivés émettant toujours des sessions valides, et vérification de signature du GitHub Trigger en <em>fail-open</em>. Corrigé en <strong>2.38.2</strong>, <strong>2.37.7</strong> et <strong>1.123.76</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-hw8v-xxg5-vvvx", "label": "github.com/advisories" }
+        },
+        {
+          "id": "angular-ssr-xss",
+          "tag": "breaking",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "Angular SSR: XSS 8.6 al serializar <template> y SSRF que filtra credenciales cross-origin",
+            "en": "Angular SSR: 8.6 XSS in <template> serialization and SSRF leaking cross-origin credentials",
+            "fr": "Angular SSR : XSS 8.6 dans la sérialisation de <template> et SSRF fuitant des identifiants cross-origin"
+          },
+          "body_html": {
+            "es": "<p>Dos highs de <strong>8.6</strong> en <code>@angular/platform-server</code>. El primero: al serializar HTML en SSR, los tags de cierre dentro de un <code>&lt;template&gt;</code> anidado en un elemento raw-content (<code>&lt;noscript&gt;</code>, <code>&lt;iframe&gt;</code>, <code>&lt;noembed&gt;</code>) no se escapan, y el browser cierra el contenedor antes de tiempo → XSS. El segundo: discrepancia en la resolución de URLs durante SSR que habilita SSRF y exposición de credenciales cross-origin. Suman dos medium más en <code>@angular/core</code> (bypass de sanitización vía host bindings) y <code>@angular/common</code> (fuga por <code>HttpTransferCache</code> con <code>withRequestsMadeViaParent</code>). Parchado en <strong>22.1.4</strong>, <strong>21.2.22</strong> y <strong>20.3.30</strong>.</p>",
+            "en": "<p>Two <strong>8.6</strong> highs in <code>@angular/platform-server</code>. First: during SSR HTML serialization, closing tags inside a <code>&lt;template&gt;</code> nested in a raw-content element (<code>&lt;noscript&gt;</code>, <code>&lt;iframe&gt;</code>, <code>&lt;noembed&gt;</code>) are not escaped, so the browser closes the container early → XSS. Second: a URL-resolution discrepancy during SSR enabling SSRF and cross-origin credential disclosure. Two more mediums land in <code>@angular/core</code> (sanitization bypass via host bindings) and <code>@angular/common</code> (<code>HttpTransferCache</code> leak with <code>withRequestsMadeViaParent</code>). Patched in <strong>22.1.4</strong>, <strong>21.2.22</strong> and <strong>20.3.30</strong>.</p>",
+            "fr": "<p>Deux failles high à <strong>8.6</strong> dans <code>@angular/platform-server</code>. D'abord : lors de la sérialisation HTML en SSR, les balises fermantes dans un <code>&lt;template&gt;</code> imbriqué dans un élément raw-content (<code>&lt;noscript&gt;</code>, <code>&lt;iframe&gt;</code>, <code>&lt;noembed&gt;</code>) ne sont pas échappées, et le navigateur ferme le conteneur trop tôt → XSS. Ensuite : une divergence de résolution d'URL en SSR permettant SSRF et divulgation d'identifiants cross-origin. S'ajoutent deux medium dans <code>@angular/core</code> et <code>@angular/common</code>. Corrigé en <strong>22.1.4</strong>, <strong>21.2.22</strong> et <strong>20.3.30</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-v3p8-whq6-r5jg", "label": "github.com/advisories" }
+        },
+        {
+          "id": "rclone-auth-bypass",
+          "tag": "breaking",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "rclone: 9 CVEs de un saque, con dos bypass totales de autenticación en modo serve",
+            "en": "rclone: 9 CVEs at once, with two full authentication bypasses in serve mode",
+            "fr": "rclone : 9 CVE d'un coup, dont deux contournements d'authentification complets en mode serve"
+          },
+          "body_html": {
+            "es": "<p>Los dos críticos duelen: <code>rclone serve s3</code> con <code>--auth-proxy</code> pero sin <code>--auth-key</code> <strong>no autentica a nadie</strong> — bypass total de la firma SigV4. Y el auth-proxy por servidor del RC también se puede saltear. El resto: Zip Slip en <code>archive/zip</code>, symlinks que escapan del destino en <code>local --links</code>, headers de auth reenviados a otro host tras un redirect, y memory exhaustion vía multipart de S3. Parchado en <strong>1.75.1</strong>. Si exponés <code>rclone serve</code> a una red que no controlás, esto es prioridad uno.</p>",
+            "en": "<p>The two criticals sting: <code>rclone serve s3</code> with <code>--auth-proxy</code> but no <code>--auth-key</code> <strong>authenticates nobody</strong> — a full SigV4 signature bypass. The RC per-server auth-proxy can be bypassed too. The rest: Zip Slip in <code>archive/zip</code>, symlinks escaping the destination under <code>local --links</code>, auth headers forwarded to a different host on redirect, and S3 multipart memory exhaustion. Patched in <strong>1.75.1</strong>.</p>",
+            "fr": "<p>Les deux critiques font mal : <code>rclone serve s3</code> avec <code>--auth-proxy</code> mais sans <code>--auth-key</code> <strong>n'authentifie personne</strong> — contournement total de la signature SigV4. L'auth-proxy par serveur du RC est également contournable. Le reste : Zip Slip dans <code>archive/zip</code>, symlinks s'échappant de la destination sous <code>local --links</code>, en-têtes d'auth transférés à un autre hôte après redirection, et épuisement mémoire via multipart S3. Corrigé en <strong>1.75.1</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-xwwr-4h3p-r22c", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "traefik-path-routing",
+      "updates": [
+        {
+          "id": "traefik-path-routing",
+          "tag": "security",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "Traefik: request-target rootless enruta como / pero se reenvía tal cual, salteando middlewares y logs",
+            "en": "Traefik: rootless HTTP/1 request-target routes as / but is forwarded verbatim, bypassing middleware guards",
+            "fr": "Traefik : request-target sans racine routé comme / mais transmis tel quel, contournant les middlewares"
+          },
+          "body_html": {
+            "es": "<p>CVSS <strong>8.8</strong>. Un request-target HTTP/1 sin <code>/</code> inicial se enruta como si fuera <code>/</code> — así elige el router y los middlewares — pero se reenvía al backend <em>literal</em>. Resultado: routing por path, guards de middleware y access logging todos salteados. Suman otros tres avisos: HTTP request smuggling, bypass de sanitización de headers vía trailers, y spoofing de identidad en ForwardAuth con alias de header en dot-form (v2). Parchado en <strong>3.7.13</strong> / <strong>2.11.57</strong>.</p>",
+            "en": "<p>CVSS <strong>8.8</strong>. An HTTP/1 request-target without a leading <code>/</code> routes as if it were <code>/</code> — that's how the router and middlewares pick it — but is forwarded to the backend <em>verbatim</em>. Path-scoped routing, middleware guards and access logging are all bypassed. Three more advisories land alongside: HTTP request smuggling, header-name sanitization bypass via trailers, and ForwardAuth identity spoofing via dot-form header alias (v2). Patched in <strong>3.7.13</strong> / <strong>2.11.57</strong>.</p>",
+            "fr": "<p>CVSS <strong>8.8</strong>. Un request-target HTTP/1 sans <code>/</code> initial est routé comme <code>/</code> — c'est ainsi que le routeur et les middlewares le sélectionnent — mais transmis au backend <em>littéralement</em>. Routage par chemin, gardes de middleware et journalisation d'accès sont tous contournés. Trois autres avis suivent : smuggling de requêtes HTTP, contournement de la sanitisation d'en-têtes via trailers, et usurpation d'identité ForwardAuth (v2). Corrigé en <strong>3.7.13</strong> / <strong>2.11.57</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-f52w-8j3h-j724", "label": "github.com/advisories" }
+        },
+        {
+          "id": "omniroute-acp-rce",
+          "tag": "security",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "OmniRoute: RCE crítico CVSS 9.5 vía agentes custom ACP, todavía sin parche",
+            "en": "OmniRoute: critical CVSS 9.5 RCE via ACP custom agents, still unpatched",
+            "fr": "OmniRoute : RCE critique CVSS 9.5 via agents custom ACP, toujours sans correctif"
+          },
+          "body_html": {
+            "es": "<p>El paquete npm <code>omniroute</code> permite ejecución remota de código a través de la configuración de agentes custom del protocolo ACP. Crítico, <strong>9.5</strong>, y el aviso <strong>no lista versión parchada</strong>. Si lo tenés en un pipeline de agentes, sacalo hasta que salga el fix.</p>",
+            "en": "<p>The <code>omniroute</code> npm package allows remote code execution through ACP custom-agent configuration. Critical, <strong>9.5</strong>, and the advisory lists <strong>no patched version</strong>. If it's in an agent pipeline, pull it until a fix ships.</p>",
+            "fr": "<p>Le paquet npm <code>omniroute</code> permet l'exécution de code à distance via la configuration d'agents custom ACP. Critique, <strong>9.5</strong>, et l'avis <strong>ne mentionne aucune version corrigée</strong>. S'il est dans un pipeline d'agents, retirez-le en attendant.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-hf57-cqmx-p4gr", "label": "github.com/advisories" }
+        },
+        {
+          "id": "openwebui-batch",
+          "tag": "security",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "Open WebUI: 15 avisos, incluido login como otro usuario vía wildcards en el claim OAuth sobre SQLite",
+            "en": "Open WebUI: 15 advisories, including sign-in as another user via wildcards in the OAuth subject claim on SQLite",
+            "fr": "Open WebUI : 15 avis, dont connexion en tant qu'autre utilisateur via wildcards dans le claim OAuth sur SQLite"
+          },
+          "body_html": {
+            "es": "<p>Otra auditoría completa publicada de golpe. Lo peor: <strong>sign-in como otro usuario</strong> si el claim <code>sub</code> de OAuth lleva wildcards y el backend es SQLite; usuarios rechazados por la política de roles OAuth que igual entran vía token exchange; admins degradados por SSO role sync que conservan lectura y escritura sobre las notas de todos; y cookies de sesión enviadas a tool servers configurados con bearer auth. Sumá un DoS sin autenticar por fetches OIDC no cacheados en el back-channel logout.</p>",
+            "en": "<p>Another full audit dropped at once. The worst: <strong>sign-in as another user</strong> when the OAuth <code>sub</code> claim carries wildcards and the backend is SQLite; users denied by the OAuth role policy still signing in via token exchange; admins demoted through SSO role sync keeping read and write access to everyone's notes; and session cookies sent to tool servers configured for bearer auth. Plus an unauthenticated DoS from uncached OIDC fetches in back-channel logout.</p>",
+            "fr": "<p>Un autre audit complet publié d'un coup. Le pire : <strong>connexion en tant qu'autre utilisateur</strong> lorsque le claim OAuth <code>sub</code> contient des wildcards et que le backend est SQLite ; utilisateurs refusés par la politique de rôles OAuth qui se connectent quand même via token exchange ; admins rétrogradés par SSO role sync conservant lecture et écriture sur les notes de tous ; et cookies de session envoyés aux tool servers en bearer auth.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-wpmr-8h3q-fwj7", "label": "github.com/advisories" }
+        },
+        {
+          "id": "argos-ci-command-injection",
+          "tag": "security",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "@argos-ci/core: inyección de comandos del SO a través del nombre de branch en CI",
+            "en": "@argos-ci/core: OS command injection via CI branch name",
+            "fr": "@argos-ci/core : injection de commandes OS via le nom de branche CI"
+          },
+          "body_html": {
+            "es": "<p>Clásico que nunca muere: el nombre de la branch llega sin sanitizar a un shell. En un CI que corre sobre PRs de forks, eso es ejecución arbitraria en tu runner. Revisá si <code>@argos-ci/core</code> está en tu pipeline de visual testing.</p>",
+            "en": "<p>The classic that never dies: the branch name reaches a shell unsanitized. On CI that runs fork PRs, that's arbitrary execution on your runner. Check whether <code>@argos-ci/core</code> sits in your visual-testing pipeline.</p>",
+            "fr": "<p>Le classique qui ne meurt jamais : le nom de branche atteint un shell sans être assaini. Sur une CI exécutant des PR de forks, c'est de l'exécution arbitraire sur votre runner. Vérifiez si <code>@argos-ci/core</code> est dans votre pipeline de tests visuels.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-4x45-gxvp-6283", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "vite-830",
+      "updates": [
+        {
+          "id": "vite-830",
+          "tag": "release",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "Vite 8.3.0 estable: preload sin esperas de más y matchers de proxy pre-compilados",
+            "en": "Vite 8.3.0 stable: no extra waiting on preload deps, pre-compiled proxy matchers",
+            "fr": "Vite 8.3.0 stable : plus d'attente superflue sur les deps de preload, matchers proxy pré-compilés"
+          },
+          "body_html": {
+            "es": "<p>Sale de beta. En build, ya no se espera a resolver dependencias de preload ya vistas. En dev, los matchers de contexto del proxy se pre-compilan al crear el server. Y se arregla un bug viejo (#17467): solo se tratan como dependencias los segmentos <em>completos</em> de <code>node_modules</code> en el path — si tenías una carpeta que empezaba con ese prefijo, antes te la comía.</p>",
+            "en": "<p>Out of beta. In build, already-seen preload dependencies are no longer settled again. In dev, proxy context matchers are pre-compiled at server creation. And an old bug is fixed (#17467): only <em>whole</em> <code>node_modules</code> path segments count as dependencies — a folder merely starting with that prefix used to get swallowed.</p>",
+            "fr": "<p>Sortie de beta. Au build, les dépendances de preload déjà vues ne sont plus réattendues. En dev, les matchers de contexte du proxy sont pré-compilés à la création du serveur. Et un vieux bug est corrigé (#17467) : seuls les segments <em>complets</em> <code>node_modules</code> comptent comme dépendances.</p>"
+          },
+          "source": { "url": "https://github.com/vitejs/vite/releases/tag/v8.3.0", "label": "github.com/vitejs" }
+        },
+        {
+          "id": "better-auth-174",
+          "tag": "patch",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "better-auth 1.7.4 y 1.6.31: doble línea de patches",
+            "en": "better-auth 1.7.4 and 1.6.31: dual patch line",
+            "fr": "better-auth 1.7.4 et 1.6.31 : double ligne de patches"
+          },
+          "body_html": {
+            "es": "<p>Releases simultáneos en la línea actual y la anterior. Buena señal: significa que mantienen backports para quienes todavía no migraron a 1.7.</p>",
+            "en": "<p>Simultaneous releases on the current and previous lines. A good sign: backports are being maintained for those who haven't moved to 1.7 yet.</p>",
+            "fr": "<p>Releases simultanées sur la ligne actuelle et la précédente. Bon signe : les backports sont maintenus pour ceux qui n'ont pas encore migré vers 1.7.</p>"
+          },
+          "source": { "url": "https://github.com/better-auth/better-auth/releases/tag/v1.7.4", "label": "github.com/better-auth" }
+        },
+        {
+          "id": "tanstack-router-0910",
+          "tag": "minor",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "TanStack Router/Start: release train con Vue Start y Solid Start al día",
+            "en": "TanStack Router/Start: release train keeping Vue Start and Solid Start current",
+            "fr": "TanStack Router/Start : train de releases gardant Vue Start et Solid Start à jour"
+          },
+          "body_html": {
+            "es": "<p>Otra tanda del release train diario: <code>@tanstack/vue-start</code> 1.168.49, <code>solid-start</code> 1.168.50, <code>start-plugin-core</code> 1.171.42 y compañía. El framework-agnosticismo de Start ya no es promesa, es cadencia.</p>",
+            "en": "<p>Another batch from the daily release train: <code>@tanstack/vue-start</code> 1.168.49, <code>solid-start</code> 1.168.50, <code>start-plugin-core</code> 1.171.42 and friends. Start's framework-agnosticism isn't a promise any more, it's a cadence.</p>",
+            "fr": "<p>Un autre lot du train de releases quotidien : <code>@tanstack/vue-start</code> 1.168.49, <code>solid-start</code> 1.168.50, <code>start-plugin-core</code> 1.171.42 et consorts. L'agnosticisme de framework de Start n'est plus une promesse, c'est une cadence.</p>"
+          },
+          "source": { "url": "https://github.com/TanStack/router/releases/tag/release-2026-09-10-1817", "label": "github.com/TanStack" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "amazonmq-rabbit43",
+      "updates": [
+        {
+          "id": "amazonmq-rabbit43",
+          "tag": "notable",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "Amazon MQ ya soporta RabbitMQ 4.3",
+            "en": "Amazon MQ now supports RabbitMQ 4.3",
+            "fr": "Amazon MQ prend désormais en charge RabbitMQ 4.3"
+          },
+          "body_html": {
+            "es": "<p>Si venías atado a una versión vieja de RabbitMQ porque Amazon MQ no la ofrecía, el bloqueo se levantó. Planificá la ventana de upgrade: el salto de línea mayor en RabbitMQ suele traer cambios en quorum queues y políticas.</p>",
+            "en": "<p>If you were stuck on an old RabbitMQ version because Amazon MQ didn't offer newer, the block is lifted. Plan the upgrade window: major-line jumps in RabbitMQ usually bring quorum-queue and policy changes.</p>",
+            "fr": "<p>Si vous étiez bloqué sur une vieille version de RabbitMQ faute d'offre Amazon MQ, le verrou saute. Planifiez la fenêtre de mise à niveau : les sauts de ligne majeure apportent souvent des changements sur les quorum queues et les policies.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-mq-rabbitmq-43/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "apigw-1mb-logs",
+          "tag": "notable",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "API Gateway: logs de ejecución de hasta 1 MB y destinos de entrega configurables",
+            "en": "API Gateway: 1 MB execution logs with configurable delivery destinations",
+            "fr": "API Gateway : logs d'exécution jusqu'à 1 Mo et destinations de livraison configurables"
+          },
+          "body_html": {
+            "es": "<p>Adiós a los payloads truncados cuando debuggeás un request grande. Y ahora podés mandar los logs a destinos configurables en vez de comerte CloudWatch Logs sí o sí — cambia bastante el costo de una estrategia de observabilidad seria.</p>",
+            "en": "<p>No more truncated payloads when debugging a large request. And you can now route logs to configurable destinations instead of being forced into CloudWatch Logs — that materially changes the cost of a serious observability strategy.</p>",
+            "fr": "<p>Fini les payloads tronqués au débogage d'une grosse requête. Et vous pouvez router les logs vers des destinations configurables au lieu d'être contraint à CloudWatch Logs — cela change sensiblement le coût d'une stratégie d'observabilité sérieuse.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-api-gateway-1-mb-execution-logs/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "ecs-iam-condition-keys",
+          "tag": "notable",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "Amazon ECS amplía las condition keys de IAM para RunTask y StartTask",
+            "en": "Amazon ECS expands IAM condition key support for RunTask and StartTask",
+            "fr": "Amazon ECS étend les clés de condition IAM pour RunTask et StartTask"
+          },
+          "body_html": {
+            "es": "<p>Más granularidad para restringir <em>qué</em> tarea puede lanzar cada principal, no solo <em>si</em> puede lanzar tareas. Es exactamente la palanca que te faltaba para acotar el blast radius de un rol de CI que hace deploys a ECS.</p>",
+            "en": "<p>Finer control over <em>which</em> task a principal may launch, not just <em>whether</em> it may launch tasks. It's exactly the lever you needed to shrink the blast radius of a CI role that deploys to ECS.</p>",
+            "fr": "<p>Plus de granularité pour restreindre <em>quelle</em> tâche chaque principal peut lancer, pas seulement <em>s'il</em> peut en lancer. C'est précisément le levier qui manquait pour réduire le rayon d'impact d'un rôle CI déployant sur ECS.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-ecs-expands-condition-key-support/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "workerd-20260911",
+          "tag": "release",
+          "date": "11 Sep 2026",
+          "title": {
+            "es": "workerd v1.20260911.1: el runtime de Cloudflare sigue con cadencia diaria",
+            "en": "workerd v1.20260911.1: Cloudflare's runtime keeps its daily cadence",
+            "fr": "workerd v1.20260911.1 : le runtime de Cloudflare garde sa cadence quotidienne"
+          },
+          "body_html": {
+            "es": "<p>Nuevo corte del runtime open source de Workers. Si pineás <code>compatibility_date</code>, este es el tag que va a estar en el edge cuando la subas.</p>",
+            "en": "<p>A new cut of the open-source Workers runtime. If you pin <code>compatibility_date</code>, this is the tag that will be at the edge when you bump it.</p>",
+            "fr": "<p>Une nouvelle coupe du runtime open source Workers. Si vous épinglez <code>compatibility_date</code>, c'est ce tag qui sera à l'edge quand vous l'augmenterez.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workerd/releases/tag/v1.20260911.1", "label": "github.com/cloudflare" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "tinygo-embedded",
+      "updates": [
+        {
+          "id": "tinygo-embedded",
+          "tag": "notable",
+          "date": "11 Sep 2026",
+          "title": {
+            "es": "TinyGo avanza en embebidos: panics recuperables, UEFI, radio y un dev kit de hardware",
+            "en": "TinyGo advances embedded Go: recoverable panics, UEFI, radio and a hardware dev kit",
+            "fr": "TinyGo fait avancer le Go embarqué : panics récupérables, UEFI, radio et un dev kit matériel"
+          },
+          "body_html": {
+            "es": "<p>Los <em>panics recuperables</em> son lo interesante acá aunque no escribas firmware: es la discusión de siempre sobre manejo de errores en un entorno donde no podés simplemente reiniciar el proceso. Sumale soporte UEFI y el dev kit propio, y Go empieza a ser opción real fuera del servidor.</p>",
+            "en": "<p><em>Recoverable panics</em> are the interesting bit here even if you never write firmware: it's the recurring error-handling debate in an environment where you can't just restart the process. Add UEFI support and a first-party dev kit, and Go starts being a real option outside the server.</p>",
+            "fr": "<p>Les <em>panics récupérables</em> sont l'élément intéressant même si vous n'écrivez pas de firmware : c'est le débat récurrent sur la gestion d'erreurs dans un environnement où l'on ne peut pas simplement redémarrer le processus. Ajoutez le support UEFI et un dev kit maison, et Go devient une vraie option hors serveur.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/tinygo-devkit/", "label": "infoq.com" }
+        },
+        {
+          "id": "cpython-riscv-tier3",
+          "tag": "notable",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "CPython suma RISC-V como plataforma Tier 3 oficial",
+            "en": "CPython officially adds RISC-V as a Tier 3 platform",
+            "fr": "CPython ajoute officiellement RISC-V comme plateforme Tier 3"
+          },
+          "body_html": {
+            "es": "<p>Tier 3 significa que hay CI y un buildbot dedicado, no garantías de release. Igual importa: si tu stack de backend tiene servicios Python y estás mirando hardware RISC-V para reducir costo por core, el soporte upstream dejó de ser un experimento de terceros.</p>",
+            "en": "<p>Tier 3 means CI and a dedicated buildbot, not release guarantees. It still matters: if your backend stack has Python services and you're eyeing RISC-V hardware to cut cost per core, upstream support is no longer a third-party experiment.</p>",
+            "fr": "<p>Tier 3 signifie CI et buildbot dédié, pas de garanties de release. Cela compte tout de même : si votre stack backend comporte des services Python et que vous lorgnez le matériel RISC-V pour réduire le coût par cœur, le support upstream n'est plus une expérimentation tierce.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/riscv-cpython/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "pnpm-1241",
+      "updates": [
+        {
+          "id": "pnpm-1241",
+          "tag": "patch",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "pnpm 12.4.1: installs que fallaban en filesystems sin hard links, Android y nodeLinker hoisted",
+            "en": "pnpm 12.4.1: installs that failed on filesystems refusing hard links, on Android, and under hoisted nodeLinker",
+            "fr": "pnpm 12.4.1 : installs échouant sur filesystems sans hard links, sur Android et sous nodeLinker hoisted"
+          },
+          "body_html": {
+            "es": "<p>Tanda de fixes que le pega a casos reales de CI: <code>Operation not permitted</code> cuando el filesystem rechaza un hard link o un clone CoW — checkouts EdenFS y contenedores rootless caían acá, y ahora pnpm copia. También <code>Invalid cross-device link</code> preservando <code>node_modules</code> anidados en builds Docker, y un fix de seguridad silencioso: pnpm ya no escribe un archivo de paquete <em>a través</em> de un symlink dejado en el path destino, que sobrescribía lo que el link apuntara.</p>",
+            "en": "<p>A fix batch hitting real CI cases: <code>Operation not permitted</code> when the filesystem refuses a hard link or a CoW clone — EdenFS checkouts and rootless containers landed here, and pnpm now copies instead. Also <code>Invalid cross-device link</code> while preserving nested <code>node_modules</code> in Docker builds, and a quiet security fix: pnpm no longer writes a package file <em>through</em> a symlink left at the destination path, which used to overwrite whatever the link pointed at.</p>",
+            "fr": "<p>Lot de correctifs touchant de vrais cas CI : <code>Operation not permitted</code> quand le filesystem refuse un hard link ou un clone CoW — checkouts EdenFS et conteneurs rootless tombaient ici, pnpm copie désormais. Aussi <code>Invalid cross-device link</code> en préservant les <code>node_modules</code> imbriqués dans les builds Docker, et un correctif de sécurité discret : pnpm n'écrit plus un fichier de paquet <em>à travers</em> un symlink laissé au chemin de destination.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.4.1", "label": "github.com/pnpm" }
+        },
+        {
+          "id": "nx-22712",
+          "tag": "patch",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "Nx 22.7.12: patch en la línea LTS",
+            "en": "Nx 22.7.12: patch on the LTS line",
+            "fr": "Nx 22.7.12 : patch sur la ligne LTS"
+          },
+          "body_html": {
+            "es": "<p>Mientras la línea 23 avanza, la 22.7 sigue recibiendo patches. Si tu monorepo todavía no saltó a 23, no tenés apuro forzado.</p>",
+            "en": "<p>While the 23 line moves forward, 22.7 keeps getting patches. If your monorepo hasn't jumped to 23 yet, there's no forced rush.</p>",
+            "fr": "<p>Pendant que la ligne 23 avance, la 22.7 continue de recevoir des patches. Si votre monorepo n'est pas encore passé à 23, rien ne presse.</p>"
+          },
+          "source": { "url": "https://github.com/nrwl/nx/releases/tag/22.7.12", "label": "github.com/nrwl" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Tres auditorías completas publicadas el mismo día — n8n (16), Open WebUI (15) y rclone (9) — confirman el patrón: los proyectos maduros ya no publican CVEs sueltos, publican el resultado entero de un engagement. Para vos eso cambia el triage: no leas aviso por aviso, mirá qué versión los cubre a todos y actualizá una sola vez.",
+      "en": "Three complete audits published on the same day — n8n (16), Open WebUI (15) and rclone (9) — confirm the pattern: mature projects no longer ship isolated CVEs, they ship a whole engagement's results. That changes your triage: don't read advisory by advisory, find the version that covers them all and upgrade once.",
+      "fr": "Trois audits complets publiés le même jour — n8n (16), Open WebUI (15) et rclone (9) — confirment le schéma : les projets matures ne publient plus des CVE isolées mais le résultat entier d'un engagement. Cela change le triage : ne lisez pas avis par avis, trouvez la version qui les couvre tous et mettez à jour une fois."
+    },
+    {
+      "es": "El eje común de los avisos de hoy es el mismo bug conceptual repetido en cuatro proyectos: una identidad o un contexto de seguridad que se asume atado a la conexión, y un camino alternativo (HTTP/3 en Traefik, el auth-proxy en rclone, el token exchange en Open WebUI) que no lo reconstruye. Si tu sistema tiene estado por conexión, auditá cada transporte por separado.",
+      "en": "Today's advisories share one conceptual bug repeated across four projects: an identity or security context assumed to be bound to the connection, and an alternate path (HTTP/3 in Traefik, the auth-proxy in rclone, token exchange in Open WebUI) that never rebuilds it. If your system holds per-connection state, audit every transport separately.",
+      "fr": "Les avis du jour partagent un même bug conceptuel répété dans quatre projets : une identité ou un contexte de sécurité supposé lié à la connexion, et un chemin alternatif (HTTP/3 dans Traefik, l'auth-proxy dans rclone, le token exchange dans Open WebUI) qui ne le reconstruit jamais. Si votre système porte un état par connexion, auditez chaque transport séparément."
+    },
+    {
+      "es": "Angular SSR y Next.js vienen acumulando CVEs de serialización HTML en el servidor. No es casualidad: renderizar en el server significa que el escaping ya no lo hace el browser, y cada elemento raw-content (noscript, template, iframe) es una frontera de parsing que hay que replicar a mano. El SSR barato en DX es caro en superficie de ataque.",
+      "en": "Angular SSR and Next.js keep accumulating server-side HTML serialization CVEs. That's no accident: rendering on the server means the browser no longer does the escaping, and every raw-content element (noscript, template, iframe) is a parsing boundary you must replicate by hand. SSR that's cheap in DX is expensive in attack surface.",
+      "fr": "Angular SSR et Next.js accumulent les CVE de sérialisation HTML côté serveur. Ce n'est pas un hasard : rendre côté serveur signifie que le navigateur ne fait plus l'échappement, et chaque élément raw-content (noscript, template, iframe) est une frontière de parsing à répliquer à la main. Un SSR bon marché en DX est coûteux en surface d'attaque."
+    }
+  ]
+}

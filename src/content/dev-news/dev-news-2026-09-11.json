@@ -1,0 +1,275 @@
+{
+  "title": {
+    "es": "Dev News — HTTP estrena el verbo QUERY y Vite 8.3 sale estable",
+    "en": "Dev News — HTTP gets the QUERY verb, Vite 8.3 goes stable",
+    "fr": "Dev News — HTTP gagne le verbe QUERY, Vite 8.3 est stable"
+  },
+  "description": {
+    "es": "El IETF publica RFC 10008 y suma QUERY, el primer verbo HTTP nuevo desde 2010. Vite 8.3.0 sale estable, Biome 2.5.13 arregla una regresión de performance en lint con tipos, Astro endurece MDX contra XSS y Electron 43.7.0 corta una vía de captura de pantalla.",
+    "en": "The IETF published RFC 10008, adding QUERY — the first new standard HTTP verb since 2010. Vite 8.3.0 ships stable, Biome 2.5.13 fixes a type-aware lint performance regression, Astro hardens MDX against XSS and Electron 43.7.0 closes a screen-capture path.",
+    "fr": "L'IETF publie la RFC 10008 et ajoute QUERY, le premier nouveau verbe HTTP depuis 2010. Vite 8.3.0 est stable, Biome 2.5.13 corrige une régression de performance du lint typé, Astro durcit MDX contre le XSS et Electron 43.7.0 ferme une voie de capture d'écran."
+  },
+  "pubDate": "2026-09-11",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": { "es": "HTTP suma el verbo QUERY (RFC 10008)", "en": "HTTP gains the QUERY verb (RFC 10008)", "fr": "HTTP gagne le verbe QUERY (RFC 10008)" },
+      "anchor": "http-query-rfc",
+      "icon": "lucide:zap"
+    },
+    {
+      "text": { "es": "Vite 8.3.0 sale estable", "en": "Vite 8.3.0 ships stable", "fr": "Vite 8.3.0 est stable" },
+      "anchor": "vite-8-3-0",
+      "icon": "simple-icons:vite"
+    },
+    {
+      "text": { "es": "Biome recupera el lint con tipos", "en": "Biome restores type-aware lint speed", "fr": "Biome restaure la vitesse du lint typé" },
+      "anchor": "biome-2-5-13",
+      "icon": "lucide:code"
+    },
+    {
+      "text": { "es": "Astro escapa scripts dinámicos en MDX", "en": "Astro escapes dynamic MDX scripts", "fr": "Astro échappe les scripts MDX dynamiques" },
+      "anchor": "astro-7-3-2",
+      "icon": "simple-icons:astro"
+    },
+    {
+      "text": { "es": "pnpm 12.4.1 arregla installs rotos", "en": "pnpm 12.4.1 fixes broken installs", "fr": "pnpm 12.4.1 corrige des installs cassées" },
+      "anchor": "pnpm-12-4-1",
+      "icon": "lucide:package"
+    },
+    {
+      "text": { "es": "Electron corta una vía de captura", "en": "Electron closes a capture path", "fr": "Electron ferme une voie de capture" },
+      "anchor": "electron-43-7-0",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "next/image deja de compartir socket", "en": "next/image stops sharing its socket", "fr": "next/image ne partage plus son socket" },
+      "anchor": "next-canary-26",
+      "icon": "simple-icons:nextdotjs"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "http-query-rfc",
+          "tag": "breaking",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "El IETF publica RFC 10008: HTTP suma QUERY, el primer verbo nuevo desde 2010",
+            "en": "IETF publishes RFC 10008: HTTP gains QUERY, its first new verb since 2010",
+            "fr": "L'IETF publie la RFC 10008 : HTTP gagne QUERY, son premier verbe depuis 2010"
+          },
+          "body_html": {
+            "es": "<p>Esto es ENORME y no lo digo a la ligera: el último verbo estándar que entró a HTTP fue <code>PATCH</code>, en 2010. <code>QUERY</code> resuelve el dilema que todos venimos parcheando hace una década: <code>GET</code> te obliga a meter los filtros en la URL (límite de largo, y los filtros terminan en los logs del proxy), mientras que <code>POST</code> te da body pero perdés idempotencia y cacheabilidad. <code>QUERY</code> es <strong>safe, idempotente y cacheable</strong> pero acepta body. En vez de <code>GET /orders?select=email&amp;limit=10&amp;match=...</code> mandás un <code>QUERY /orders</code> con un JSON adentro. Ojo con la expectativa: el RFC lo posiciona como agregado opcional al lado de GET y POST, no como reemplazo, y el soporte recién arranca — ya está mergeado en el crate <code>http</code> de Rust y se está siguiendo en .NET, Axum, Quarkus y Bruno. Adopción real: años, no meses. Pero el estándar ya está.</p>",
+            "en": "<p>The last standard verb added to HTTP was <code>PATCH</code>, back in 2010. <code>QUERY</code> resolves the dilemma everyone has been working around for a decade: <code>GET</code> forces filters into the URL (length limits, and those filters leak into proxy logs), while <code>POST</code> gives you a body but costs you idempotency and cacheability. <code>QUERY</code> is <strong>safe, idempotent and cacheable</strong> yet carries a request body. Instead of <code>GET /orders?select=email&amp;limit=10&amp;match=...</code> you send <code>QUERY /orders</code> with JSON inside. Temper expectations: the RFC positions QUERY as an optional addition alongside GET and POST rather than a replacement, and support is only starting — merged into Rust's <code>http</code> crate, tracked across .NET, Axum, Quarkus and Bruno. Real adoption will take years. But the standard exists now.</p>",
+            "fr": "<p>Le dernier verbe standard ajouté à HTTP était <code>PATCH</code>, en 2010. <code>QUERY</code> résout un dilemme contourné depuis une décennie : <code>GET</code> impose les filtres dans l'URL (limites de longueur, fuites dans les logs proxy), tandis que <code>POST</code> offre un body mais perd idempotence et cacheabilité. <code>QUERY</code> est <strong>safe, idempotent et cacheable</strong> tout en portant un body. La RFC le présente comme un ajout optionnel à côté de GET et POST, et le support démarre à peine : mergé dans le crate <code>http</code> de Rust, suivi côté .NET, Axum, Quarkus et Bruno. L'adoption réelle prendra des années.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/http-query-method/", "label": "infoq.com" }
+        },
+        {
+          "id": "vite-8-3-0",
+          "tag": "release",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "Vite 8.3.0 sale estable con mejoras de performance en build y dev server",
+            "en": "Vite 8.3.0 ships stable with build and dev-server performance work",
+            "fr": "Vite 8.3.0 sort en stable avec des gains de performance"
+          },
+          "body_html": {
+            "es": "<p>Después de la beta que cubrimos la semana pasada, <strong>Vite 8.3.0</strong> llega a estable. El foco está en performance: el build ya no vuelve a resolver dependencias de preload que ya vio, y los matchers de contexto del proxy se pre-compilan al crear el server en vez de evaluarse por request. Del lado de bugs, dos que muerden en proyectos reales: posiciones mal calculadas en los code frames cuando el archivo usa CRLF, y el fix de un issue que arrastraba desde 2024 donde una ruta que contenía la cadena <code>node_modules</code> como parte de un segmento más largo se trataba como dependencia. Ahora solo cuentan los segmentos completos.</p>",
+            "en": "<p>Following the beta we covered last week, <strong>Vite 8.3.0</strong> is stable. The focus is performance: the build no longer re-settles preload dependencies it has already seen, and proxy context matchers are pre-compiled at server creation instead of being evaluated per request. On the bug side, two that bite real projects: wrong code-frame positions on files with CRLF line endings, and a fix for a 2024-era issue where a path containing <code>node_modules</code> as part of a longer segment was treated as a dependency. Only whole path segments count now.</p>",
+            "fr": "<p>Après la beta couverte la semaine dernière, <strong>Vite 8.3.0</strong> passe en stable. Priorité à la performance : le build ne re-résout plus les dépendances de preload déjà vues, et les matchers de contexte du proxy sont pré-compilés à la création du serveur. Côté bugs : positions erronées dans les code frames avec fins de ligne CRLF, et correction d'un problème de 2024 où un chemin contenant <code>node_modules</code> dans un segment plus long était traité comme une dépendance.</p>"
+          },
+          "source": { "url": "https://github.com/vitejs/vite/releases/tag/v8.3.0", "label": "github.com/vitejs" }
+        },
+        {
+          "id": "biome-2-5-13",
+          "tag": "notable",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "Biome 2.5.13 recupera la performance del lint con tipos y suma reglas de CSS layers",
+            "en": "Biome 2.5.13 restores type-aware lint performance and adds a CSS layers rule",
+            "fr": "Biome 2.5.13 restaure la performance du lint typé et ajoute une règle CSS layers"
+          },
+          "body_html": {
+            "es": "<p>El fix más importante es de performance: Biome ya no infiere por completo una declaración genérica importada solo para aplicarle sus type arguments. Si tenías el lint con tipos lento en proyectos con <strong>Zod</strong> u otra librería con genéricos pesados, esto es tu regalo del día — impacta <code>useRegexpExec</code>, <code>noFloatingPromises</code>, <code>noMisusedPromises</code>, <code>useNullishCoalescing</code> y <code>noUnsafePlusOperands</code>. Además entran dos reglas nursery: <code>useLayeredStyles</code>, que exige que las reglas de estilo vivan dentro de un <code>@layer</code> y que los <code>@import</code> declaren <code>layer()</code>; y <code>useBetterDomTraversing</code>, que te empuja a <code>.firstElementChild</code> y <code>.closest()</code> en vez de indexar <code>children[0]</code> o encadenar <code>parentElement.parentElement</code>.</p>",
+            "en": "<p>The headline fix is performance: Biome no longer fully infers an imported generic declaration just to apply its type arguments. If type-aware lint crawled on projects using <strong>Zod</strong> or other generics-heavy libraries, this is your fix — it affects <code>useRegexpExec</code>, <code>noFloatingPromises</code>, <code>noMisusedPromises</code>, <code>useNullishCoalescing</code> and <code>noUnsafePlusOperands</code>. Two nursery rules also land: <code>useLayeredStyles</code>, which requires style rules to live inside an <code>@layer</code> and <code>@import</code> to declare <code>layer()</code>; and <code>useBetterDomTraversing</code>, which pushes you toward <code>.firstElementChild</code> and <code>.closest()</code> instead of indexing <code>children[0]</code> or chaining <code>parentElement.parentElement</code>.</p>",
+            "fr": "<p>Le correctif clé est une question de performance : Biome n'infère plus entièrement une déclaration générique importée juste pour appliquer ses type arguments. Si le lint typé ramait sur des projets utilisant <strong>Zod</strong>, c'est réglé — cela touche <code>useRegexpExec</code>, <code>noFloatingPromises</code>, <code>noMisusedPromises</code>, <code>useNullishCoalescing</code> et <code>noUnsafePlusOperands</code>. Deux règles nursery arrivent aussi : <code>useLayeredStyles</code> et <code>useBetterDomTraversing</code>.</p>"
+          },
+          "source": { "url": "https://github.com/biomejs/biome/releases/tag/%40biomejs%2Fbiome%402.5.13", "label": "github.com/biomejs" }
+        }
+      ]
+    },
+    {
+      "id": "js-frameworks",
+      "name": "JS Frameworks",
+      "theme": "js-frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "js-frameworks",
+      "updates": [
+        {
+          "id": "astro-7-3-2",
+          "tag": "security",
+          "date": "08 Sep 2026",
+          "title": {
+            "es": "Astro 7.3.2 escapa valores dinámicos dentro de script y style en MDX",
+            "en": "Astro 7.3.2 escapes dynamic values inside script and style in MDX",
+            "fr": "Astro 7.3.2 échappe les valeurs dynamiques dans script et style en MDX"
+          },
+          "body_html": {
+            "es": "<p>Cambio de seguridad silencioso pero importante: en MDX, solo el contenido literal (incluyendo el que inyectan plugins de remark/rehype) se trata como markup confiable. Un valor dinámico pasado como hijo de un <code>&lt;script&gt;</code> o <code>&lt;style&gt;</code> — o sea <code>&lt;script&gt;{value}&lt;/script&gt;</code> — ahora se escapa como el contenido de cualquier otro elemento, en vez de renderizarse raw. Si dependías de ese comportamiento, tenés que optar explícitamente con <code>set:html</code>. Y esto es lo correcto: el default inseguro nunca debería haber existido. El release también arregla el 504 de «Outdated Optimize Dep» en la dev toolbar con paquetes linkeados del workspace, y un bug de i18n fallback que reemplazaba el primer substring coincidente en vez del segmento de locale, convirtiendo <code>/energy/en/about</code> en <code>/esergy/en/about</code>.</p>",
+            "en": "<p>A quiet but important security change: in MDX, only literal content (including content injected by remark/rehype plugins) is treated as trusted markup. A dynamic value passed as a child of <code>&lt;script&gt;</code> or <code>&lt;style&gt;</code> — that is, <code>&lt;script&gt;{value}&lt;/script&gt;</code> — is now escaped like any other element's content instead of being rendered raw. If you relied on that behavior, opt back in explicitly with <code>set:html</code>. The release also fixes the dev toolbar returning a 504 &quot;Outdated Optimize Dep&quot; with workspace-linked packages, and an i18n fallback bug that replaced the first matching substring instead of the actual locale segment, mangling <code>/energy/en/about</code> into <code>/esergy/en/about</code>.</p>",
+            "fr": "<p>Changement de sécurité discret mais important : en MDX, seul le contenu littéral est traité comme markup de confiance. Une valeur dynamique passée comme enfant de <code>&lt;script&gt;</code> ou <code>&lt;style&gt;</code> est désormais échappée au lieu d'être rendue en raw ; utilisez <code>set:html</code> pour le comportement précédent. La release corrige aussi le 504 « Outdated Optimize Dep » de la dev toolbar et un bug de fallback i18n transformant <code>/energy/en/about</code> en <code>/esergy/en/about</code>.</p>"
+          },
+          "source": { "url": "https://github.com/withastro/astro/releases/tag/astro%407.3.2", "label": "github.com/withastro" }
+        },
+        {
+          "id": "vue-3-6-rc8",
+          "tag": "beta",
+          "date": "11 Sep 2026",
+          "title": {
+            "es": "Vue 3.6.0-rc.8: la release candidate sigue avanzando",
+            "en": "Vue 3.6.0-rc.8: the release candidate keeps advancing",
+            "fr": "Vue 3.6.0-rc.8 : la release candidate progresse"
+          },
+          "body_html": {
+            "es": "<p>Octava RC de Vue 3.6 publicada hoy. Es la señal de que el ciclo se está estabilizando: si mantenés una librería del ecosistema Vue, este es el momento de probar contra la RC y reportar, no cuando salga el estable y te encuentres con la sorpresa. El changelog detallado vive en la rama <code>minor</code> del repo.</p>",
+            "en": "<p>The eighth release candidate for Vue 3.6 landed today — a sign the cycle is stabilizing. If you maintain a Vue ecosystem library, this is the moment to test against the RC and report, not after stable ships. The detailed changelog lives on the repo's <code>minor</code> branch.</p>",
+            "fr": "<p>La huitième release candidate de Vue 3.6 est sortie aujourd'hui, signe que le cycle se stabilise. Si vous maintenez une librairie de l'écosystème Vue, testez contre la RC dès maintenant. Le changelog détaillé se trouve sur la branche <code>minor</code> du dépôt.</p>"
+          },
+          "source": { "url": "https://github.com/vuejs/core/releases/tag/v3.6.0-rc.8", "label": "github.com/vuejs" }
+        }
+      ]
+    },
+    {
+      "id": "react",
+      "name": "React",
+      "theme": "react",
+      "icon_emoji": "⚛️",
+      "anchor": "react",
+      "updates": [
+        {
+          "id": "next-canary-26",
+          "tag": "notable",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "Next.js 16.4 canary.26: next/image deja de compartir el socket del request",
+            "en": "Next.js 16.4 canary.26: next/image stops sharing the requester's socket",
+            "fr": "Next.js 16.4 canary.26 : next/image ne partage plus le socket du requérant"
+          },
+          "body_html": {
+            "es": "<p>El cambio que más me llamó la atención: <code>next/image</code> ya no comparte el socket del request entrante con la respuesta interna de la imagen. Es el tipo de bug de aislamiento que no ves hasta que te muerde en producción bajo carga. También llegan el fix de revalidación en background duplicada con <code>'use cache'</code>, reportes de errores más estrictos en routing — slots de parallel routes incompatibles, rutas canónicas obligatorias para interception routes, y error explícito cuando una página de <code>app/</code> no matchea ninguna ruta — y un bundle-analyzer con vista de tabla y modo compare con diff de treemap.</p>",
+            "en": "<p>The change that stands out: <code>next/image</code> no longer shares the incoming request's socket with the internal image response. That is the kind of isolation bug you only meet in production under load. Also landing: a fix for duplicate background revalidation with <code>'use cache'</code>, stricter routing diagnostics — incompatible parallel route slots reported, canonical routes required for interception routes, and an explicit error when an <code>app/</code> page matches no route — plus a bundle-analyzer with table view and a compare mode with treemap diff.</p>",
+            "fr": "<p>Le changement marquant : <code>next/image</code> ne partage plus le socket de la requête entrante avec la réponse interne de l'image. Arrivent aussi un correctif de revalidation en arrière-plan dupliquée avec <code>'use cache'</code>, des diagnostics de routing plus stricts, et un bundle-analyzer avec vue tableau et mode comparaison avec diff treemap.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/next.js/releases/tag/v16.4.0-canary.26", "label": "github.com/vercel" }
+        },
+        {
+          "id": "tanstack-router-0910",
+          "tag": "minor",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "TanStack Router: menos hidratación repetida en el adaptador de Solid",
+            "en": "TanStack Router: less repeated hydration in the Solid adapter",
+            "fr": "TanStack Router : moins d'hydratation répétée dans l'adaptateur Solid"
+          },
+          "body_html": {
+            "es": "<p>Release del 10 de septiembre enfocada en performance del lado Solid: se evitan escaneos de hidratación repetidos y ejecución duplicada de scripts, y <code>solid-router</code> saltea el setup de cliente para todos los links de servidor. Del lado Start, un fix para iterar correctamente los headers de la respuesta en <code>start-server-core</code>.</p>",
+            "en": "<p>A September 10 release focused on Solid-side performance: repeated hydration scans and duplicated script execution are avoided, and <code>solid-router</code> skips client setup for all server links. On the Start side, a fix to correctly iterate response headers in <code>start-server-core</code>.</p>",
+            "fr": "<p>Release du 10 septembre axée sur la performance côté Solid : plus de scans d'hydratation répétés ni d'exécution de scripts dupliquée, et <code>solid-router</code> saute le setup client pour tous les liens serveur. Côté Start, correction de l'itération des headers de réponse dans <code>start-server-core</code>.</p>"
+          },
+          "source": { "url": "https://github.com/TanStack/router/releases/tag/release-2026-09-10-1817", "label": "github.com/TanStack" }
+        }
+      ]
+    },
+    {
+      "id": "build-tools",
+      "name": "Build Tools & Runtimes",
+      "theme": "build-tools",
+      "icon_emoji": "🔧",
+      "anchor": "build-tools",
+      "updates": [
+        {
+          "id": "pnpm-12-4-1",
+          "tag": "notable",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "pnpm 12.4.1 arregla installs que fallaban por hard links, Android y nodeLinker hoisted",
+            "en": "pnpm 12.4.1 fixes installs failing on hard links, Android and hoisted nodeLinker",
+            "fr": "pnpm 12.4.1 corrige les installs cassées par hard links, Android et nodeLinker hoisted"
+          },
+          "body_html": {
+            "es": "<p>Patch grande en cantidad de escenarios rotos que destraba. <code>pnpm install</code> ya no revienta con <em>Operation not permitted</em> cuando el filesystem rechaza un hard link o un clone copy-on-write: bajo <code>packageImportMethod: auto</code> copia el archivo. Eso desbloquea checkouts de EdenFS y contenedores rootless. También: ya no escribe a través de un symlink que quedó en el path de destino (esto pisaba lo que apuntara el link, y hasta lo creaba si apuntaba a la nada), arregla instalaciones en Android usando CAs bundleadas, y bajo <code>nodeLinker: hoisted</code> deja de re-importar paquetes que ya están en su lugar — antes un install repetido reemplazaba todo el árbol de <code>node_modules</code> y volvía a correr lifecycle scripts. Ojo con un cambio de comportamiento: ahora <code>ignoredOptionalDependencies</code> se aplica de verdad en <code>install</code>, <code>add</code> y <code>dedupe</code>.</p>",
+            "en": "<p>A big patch in terms of broken scenarios unblocked. <code>pnpm install</code> no longer dies with <em>Operation not permitted</em> when the filesystem refuses a hard link or a copy-on-write clone: under <code>packageImportMethod: auto</code> it copies the file instead. That unblocks EdenFS checkouts and rootless containers. Also: it no longer writes through a symlink left at the destination path (which overwrote whatever the link pointed at, and created that file when it pointed nowhere), installs on Android now work via bundled CAs, and under <code>nodeLinker: hoisted</code> it stops re-importing packages already in place — a repeat install used to replace the whole <code>node_modules</code> tree and re-run lifecycle scripts. Watch one behavior change: <code>ignoredOptionalDependencies</code> is now actually applied by <code>install</code>, <code>add</code> and <code>dedupe</code>.</p>",
+            "fr": "<p>Un patch important par le nombre de scénarios débloqués. <code>pnpm install</code> ne casse plus avec <em>Operation not permitted</em> quand le filesystem refuse un hard link ou un clone copy-on-write : sous <code>packageImportMethod: auto</code>, il copie le fichier. Cela débloque EdenFS et les conteneurs rootless. Aussi : plus d'écriture à travers un symlink resté au chemin de destination, installs Android réparées via des CA bundlées, et sous <code>nodeLinker: hoisted</code> plus de ré-import des paquets déjà en place. Attention : <code>ignoredOptionalDependencies</code> est désormais réellement appliqué.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.4.1", "label": "github.com/pnpm" }
+        },
+        {
+          "id": "wrangler-4-131",
+          "tag": "release",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "Wrangler 4.131.0 suma Containers manejados por Durable Object y saca preview settings",
+            "en": "Wrangler 4.131.0 adds Durable Object-managed Containers and removes preview settings",
+            "fr": "Wrangler 4.131.0 ajoute des Containers gérés par Durable Object et retire preview settings"
+          },
+          "body_html": {
+            "es": "<p>Wrangler acepta <code>scheduling_policy: &quot;durable_object&quot;</code> en el array top-level de <code>containers</code> y crea la aplicación respaldada por namespace después de que el upload del Worker resuelva el ID del namespace del Durable Object. Como ese ID es también el ID de aplicación, los deploys repetidos son idempotentes sin lookup por nombre. El soporte de desarrollo local para estas entradas queda para un follow-up. Además se eliminan los comandos de beta privada <code>wrangler preview settings</code> y <code>wrangler preview settings update</code>.</p>",
+            "en": "<p>Wrangler now accepts <code>scheduling_policy: &quot;durable_object&quot;</code> in the top-level <code>containers</code> array and creates its namespace-backed application after the Worker upload resolves the Durable Object namespace ID. Because that ID is also the application ID, repeated deploys are idempotent with no name-based lookup. Local development support for these entries is deferred to a follow-up. The private-beta <code>wrangler preview settings</code> and <code>wrangler preview settings update</code> commands are also removed.</p>",
+            "fr": "<p>Wrangler accepte désormais <code>scheduling_policy: &quot;durable_object&quot;</code> dans le tableau <code>containers</code> de premier niveau et crée l'application adossée au namespace après que l'upload du Worker ait résolu l'ID du namespace Durable Object. Cet ID étant aussi l'ID d'application, les déploiements répétés sont idempotents. Le support en développement local est reporté. Les commandes <code>wrangler preview settings</code> sont retirées.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workers-sdk/releases/tag/wrangler%404.131.0", "label": "github.com/cloudflare" }
+        }
+      ]
+    },
+    {
+      "id": "dev-tools",
+      "name": "Developer Tools",
+      "theme": "dev-tools",
+      "icon_emoji": "🛠️",
+      "anchor": "dev-tools",
+      "updates": [
+        {
+          "id": "electron-43-7-0",
+          "tag": "security",
+          "date": "10 Sep 2026",
+          "title": {
+            "es": "Electron 43.7.0: getUserMedia deja de aceptar IDs de WebContents como fuente de desktop",
+            "en": "Electron 43.7.0: getUserMedia no longer accepts WebContents source ids for desktop capture",
+            "fr": "Electron 43.7.0 : getUserMedia n'accepte plus d'IDs WebContents comme source desktop"
+          },
+          "body_html": {
+            "es": "<p>Ojo con esto si capturás pantalla en tu app: <code>getUserMedia</code> con <code>chromeMediaSource: 'desktop'</code> ya no acepta IDs de WebContents. Si capturabas un WebContents por esa vía, tenés que migrar a <code>chromeMediaSource: 'tab'</code> con <code>webContents.getMediaSourceId()</code>, o usar <code>setDisplayMediaRequestHandler</code>. En la misma línea de endurecimiento: los permisos de File System Access ahora están acotados al documento que los pide y se resetean cuando cierra la última página del origin, los IPC internos de <code>&lt;webview&gt;</code> y <code>executeJavaScript</code> se validan contra el frame emisor, y se reactivó el bloqueo de drag and drop entre frames cross-site de la misma página. Como feature útil para debug: <code>ELECTRON_DEBUG_DRAGGABLE_REGIONS</code> te visualiza y loguea las regiones arrastrables en apps sin empaquetar.</p>",
+            "en": "<p>Heads up if your app captures the screen: <code>getUserMedia</code> with <code>chromeMediaSource: 'desktop'</code> no longer accepts WebContents source ids. If you captured a WebContents that way, migrate to <code>chromeMediaSource: 'tab'</code> with <code>webContents.getMediaSourceId()</code>, or use <code>setDisplayMediaRequestHandler</code>. In the same hardening pass: File System Access permission requests are now scoped to the requesting document and grants reset when the origin's last page closes, internal <code>&lt;webview&gt;</code> and <code>executeJavaScript</code> IPCs are validated against the sending frame, and the browser-side block on drag and drop between cross-site frames of the same page was re-enabled. Handy for debugging: <code>ELECTRON_DEBUG_DRAGGABLE_REGIONS</code> visualizes and logs draggable regions in unpackaged apps.</p>",
+            "fr": "<p>Attention si votre app capture l'écran : <code>getUserMedia</code> avec <code>chromeMediaSource: 'desktop'</code> n'accepte plus les IDs de source WebContents. Migrez vers <code>chromeMediaSource: 'tab'</code> avec <code>webContents.getMediaSourceId()</code>, ou utilisez <code>setDisplayMediaRequestHandler</code>. Même passe de durcissement : permissions File System Access limitées au document demandeur, IPC internes validés contre le frame émetteur, et blocage du drag and drop entre frames cross-site réactivé.</p>"
+          },
+          "source": { "url": "https://github.com/electron/electron/releases/tag/v43.7.0", "label": "github.com/electron" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Tres releases del mismo día, tres fixes del mismo tipo: Astro escapando scripts dinámicos en MDX, Next.js dejando de compartir el socket del request en next/image, Electron cerrando la captura de WebContents por getUserMedia. Ninguno es un CVE ruidoso — son defaults inseguros que se están corrigiendo en silencio. Y eso es lo que más me interesa: el ecosistema está pagando deuda de seguridad estructural, no parcheando exploits.",
+      "en": "Three releases on the same day, three fixes of the same shape: Astro escaping dynamic scripts in MDX, Next.js no longer sharing the request socket in next/image, Electron closing WebContents capture via getUserMedia. None is a loud CVE — they are insecure defaults being quietly corrected. That is the interesting part: the ecosystem is paying down structural security debt rather than patching exploits.",
+      "fr": "Trois releases le même jour, trois correctifs de même nature : Astro échappant les scripts dynamiques en MDX, Next.js ne partageant plus le socket de requête dans next/image, Electron fermant la capture de WebContents via getUserMedia. Aucun CVE bruyant — ce sont des defaults non sûrs corrigés en silence. L'écosystème rembourse une dette de sécurité structurelle."
+    },
+    {
+      "es": "QUERY llegando a HTTP dieciséis años después de PATCH dice algo incómodo: el protocolo se mueve a escala geológica y nosotros lo venimos parcheando con convenciones. Cuántas APIs viste que mandan un POST a /search y después inventan su propia capa de caché encima. Ahora hay un verbo para eso — pero vas a esperar años a que proxies, CDNs y frameworks lo soporten de punta a punta. Conocé el estándar ahora, adoptalo cuando la infraestructura te acompañe.",
+      "en": "QUERY arriving in HTTP sixteen years after PATCH says something uncomfortable: the protocol moves at geological pace and we have been patching over it with conventions. How many APIs have you seen POST to /search and then invent their own caching layer on top? Now there is a verb for it — but you will wait years for proxies, CDNs and frameworks to support it end to end. Learn the standard now, adopt it when the infrastructure catches up.",
+      "fr": "L'arrivée de QUERY seize ans après PATCH dit quelque chose d'inconfortable : le protocole avance à une vitesse géologique et nous l'avons contourné par des conventions. Combien d'APIs font un POST vers /search puis réinventent leur couche de cache ? Il existe maintenant un verbe pour cela, mais il faudra des années pour que proxies, CDN et frameworks le supportent de bout en bout."
+    },
+    {
+      "es": "El fix de Biome sobre inferencia de genéricos importados es un recordatorio: el lint con tipos es potente pero paga el costo del type checker completo. Si tu CI se puso lento y no sabés por qué, mirá qué reglas type-aware tenés prendidas antes de culpar al runner.",
+      "en": "Biome's fix around imported generic inference is a reminder: type-aware linting is powerful but pays the full type-checker cost. If your CI got slow and you cannot explain why, audit which type-aware rules you have enabled before blaming the runner.",
+      "fr": "Le correctif de Biome sur l'inférence des génériques importés rappelle une chose : le lint typé est puissant mais paie le coût complet du type checker. Si votre CI ralentit sans explication, auditez les règles type-aware activées avant d'accuser le runner."
+    }
+  ]
+}

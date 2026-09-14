@@ -1,0 +1,187 @@
+---
+import { Icon } from 'astro-icon/components';
+import { CATEGORIES, isLivingCategory, type Category, type LangCode } from '../consts';
+import { getCategoryLabel } from '../utils/categoryCopy';
+import { getNavLabel } from '../utils/navCopy';
+import { localizePath } from '../utils/i18n';
+import CategoryIcon from './CategoryIcon.astro';
+
+interface Props {
+	lang: LangCode;
+	basePath: string;
+	class?: string;
+}
+
+const { lang, basePath, class: className } = Astro.props;
+
+const allSlugs = Object.keys(CATEGORIES) as Category[];
+const datedCategories = allSlugs.filter((slug) => !isLivingCategory(slug));
+const livingCategories = allSlugs.filter((slug) => isLivingCategory(slug));
+
+const isSectionActive = (slug: Category) => basePath === `/${slug}/` || basePath.startsWith(`/${slug}/`);
+const isTopicsActive = basePath === '/tags/' || basePath.startsWith('/tags/');
+
+const menuLabel = getNavLabel('menu', lang);
+const closeLabel = getNavLabel('close', lang);
+const dailyBriefsLabel = getNavLabel('dailyBriefs', lang);
+const topicsLabel = getNavLabel('topics', lang);
+---
+
+<details class:list={['mobile-nav', className]} id="mobile-nav">
+	<summary class="mobile-trigger" aria-label={menuLabel} data-label-menu={menuLabel} data-label-close={closeLabel}>
+		<Icon name="lucide:menu" width={20} height={20} class="mobile-trigger-icon icon-menu" />
+		<Icon name="lucide:x" width={20} height={20} class="mobile-trigger-icon icon-close" />
+	</summary>
+	<div class="mobile-sheet" role="menu">
+		<p class="mobile-section-label">{dailyBriefsLabel}</p>
+		{datedCategories.map((slug) => {
+			const cat = CATEGORIES[slug];
+			const label = getCategoryLabel(slug, lang);
+			const active = isSectionActive(slug);
+			return (
+				<a
+					href={localizePath(`/${slug}/`, lang)}
+					class="mobile-row mobile-row-indented"
+					class:list={{ 'mobile-row-active': active }}
+					aria-current={active ? 'page' : undefined}
+					role="menuitem"
+				>
+					<CategoryIcon category={slug} width={17} height={17} style={`color: ${cat.accent}`} />
+					<span>{label}</span>
+				</a>
+			);
+		})}
+		<div class="mobile-divider" role="separator"></div>
+		{livingCategories.map((slug) => {
+			const cat = CATEGORIES[slug];
+			const label = getCategoryLabel(slug, lang);
+			const active = isSectionActive(slug);
+			return (
+				<a
+					href={localizePath(`/${slug}/`, lang)}
+					class="mobile-row"
+					class:list={{ 'mobile-row-active': active }}
+					aria-current={active ? 'page' : undefined}
+					role="menuitem"
+				>
+					<CategoryIcon category={slug} width={17} height={17} style={`color: ${cat.accent}`} />
+					<span>{label}</span>
+				</a>
+			);
+		})}
+		<a
+			href="/tags/"
+			class="mobile-row"
+			class:list={{ 'mobile-row-active': isTopicsActive }}
+			aria-current={isTopicsActive ? 'page' : undefined}
+			role="menuitem"
+		>
+			<Icon name="lucide:tags" width={17} height={17} style="color: var(--color-accent)" />
+			<span>{topicsLabel}</span>
+		</a>
+	</div>
+</details>
+
+<style>
+	.mobile-nav {
+		position: static;
+	}
+
+	.mobile-trigger {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
+		border-radius: 8px;
+		color: var(--color-text-muted);
+		cursor: pointer;
+		user-select: none;
+		list-style: none;
+		transition: background 0.12s, color 0.12s;
+	}
+
+	.mobile-trigger::-webkit-details-marker {
+		display: none;
+	}
+
+	.mobile-trigger:hover {
+		background: var(--color-surface);
+		color: var(--color-text);
+	}
+
+	.mobile-trigger:focus-visible {
+		outline: 2px solid var(--color-accent);
+		outline-offset: 2px;
+	}
+
+	.icon-close {
+		display: none;
+	}
+
+	.mobile-nav[open] .icon-menu {
+		display: none;
+	}
+
+	.mobile-nav[open] .icon-close {
+		display: block;
+	}
+
+	.mobile-sheet {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		right: 0;
+		z-index: 40;
+		padding: 10px 12px 16px;
+		background: var(--color-surface);
+		border-top: 1px solid var(--color-border);
+		border-bottom: 1px solid var(--color-border);
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+		max-height: calc(100vh - 64px);
+		overflow-y: auto;
+	}
+
+	.mobile-section-label {
+		font-size: 11px;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-text-muted);
+		margin: 6px 0 4px;
+		padding: 0 10px;
+	}
+
+	.mobile-row {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		min-height: 46px;
+		padding: 0 10px;
+		border-radius: 8px;
+		font-size: 15px;
+		line-height: 21px;
+		color: var(--color-text);
+		text-decoration: none;
+	}
+
+	.mobile-row:hover,
+	.mobile-row:focus-visible {
+		background: var(--color-surface-2);
+		outline: none;
+	}
+
+	.mobile-row-active {
+		background: var(--color-surface-2);
+	}
+
+	.mobile-row-indented {
+		padding-left: 26px;
+	}
+
+	.mobile-divider {
+		height: 1px;
+		background: var(--color-border);
+		margin: 8px 4px;
+	}
+</style>

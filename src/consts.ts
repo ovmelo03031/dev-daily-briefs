@@ -21,6 +21,18 @@ export const DEFAULT_LANG = 'en';
 export type LangCode = keyof typeof LANGUAGES;
 
 export const CATEGORIES = {
+	'ai-toolbox': {
+		label: 'AI Toolbox',
+		label_es: 'Caja de herramientas IA',
+		label_fr: 'Boîte à outils IA',
+		description: 'What developers use to ship with AI — auto-ranked by signals, plus ecosystem news and community talk',
+		description_es: 'Lo que usan los desarrolladores para producir con IA — ranking automático por señales, más noticias del ecosistema y charla de la comunidad',
+		description_fr: 'Ce que les développeurs utilisent pour livrer avec l\'IA — classement automatique par signaux, plus actualités de l\'écosystème et discussions de la communauté',
+		emoji: '🧰',
+		icon: 'lucide:wrench',
+		accent: '#34d399',
+		kind: 'living',
+	},
 	'ai-coding': {
 		label: 'AI Coding',
 		label_es: 'Programación con IA',
@@ -80,3 +92,9 @@ export const CATEGORIES = {
 } as const;
 
 export type Category = keyof typeof CATEGORIES;
+
+/** True when the category renders as a single living page instead of dated briefs. */
+export function isLivingCategory(slug: string): boolean {
+	const cat = CATEGORIES[slug as Category] as { kind?: 'briefs' | 'living' } | undefined;
+	return cat?.kind === 'living';
+}

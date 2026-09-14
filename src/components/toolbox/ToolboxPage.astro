@@ -1,0 +1,55 @@
+---
+import { pickLang, type Lang } from '../brief/pickLang';
+import CategoryIcon from '../CategoryIcon.astro';
+import FormattedDate from '../FormattedDate.astro';
+import StackRanking from './StackRanking.astro';
+import EcosystemNews from './EcosystemNews.astro';
+import CommunityTalk from './CommunityTalk.astro';
+import Changelog from './Changelog.astro';
+import { CATEGORIES } from '../../consts';
+import type { ToolboxData } from './types';
+
+interface Props {
+	lang: Lang;
+	data: ToolboxData;
+}
+
+const { lang, data } = Astro.props;
+const cat = CATEGORIES['ai-toolbox'];
+
+const COPY: Record<Lang, { updated: string; method: string }> = {
+	en: { updated: 'Last updated', method: 'How the ranking is computed' },
+	es: { updated: 'Última actualización', method: 'Cómo se calcula el ranking' },
+	fr: { updated: 'Dernière mise à jour', method: 'Comment le classement est calculé' },
+};
+
+const copy = COPY[lang];
+const updatedDate = new Date(`${data.updated_at}T00:00:00Z`);
+---
+
+<link rel="stylesheet" href={`${import.meta.env.BASE_URL}styles/ai-toolbox.css`} />
+
+<section class="mx-auto max-w-5xl px-4 py-12 toolbox-page">
+	<div class="toolbox-hero">
+		<div class="toolbox-hero-icon" style={`color: ${cat.accent}`}>
+			<CategoryIcon category="ai-toolbox" width={32} height={32} />
+		</div>
+		<div class="toolbox-hero-content">
+			<h1 class="toolbox-hero-title">{pickLang(data.title, lang)}</h1>
+			<p class="toolbox-hero-description">{pickLang(data.description, lang)}</p>
+			<span class="toolbox-updated-badge">
+				{copy.updated}: <FormattedDate date={updatedDate} lang={lang} />
+			</span>
+		</div>
+	</div>
+
+	<details class="toolbox-method">
+		<summary>{copy.method}</summary>
+		<p>{pickLang(data.ranking.method, lang)}</p>
+	</details>
+
+	<StackRanking tools={data.tools} lang={lang} />
+	<EcosystemNews items={data.ecosystem} lang={lang} />
+	<CommunityTalk items={data.community} lang={lang} />
+	<Changelog entries={data.changelog} lang={lang} />
+</section>

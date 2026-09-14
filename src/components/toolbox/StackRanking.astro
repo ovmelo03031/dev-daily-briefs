@@ -1,0 +1,220 @@
+---
+import { pickLang, type Lang } from '../brief/pickLang';
+
+interface ToolIcon {
+	kind: 'mask' | 'image';
+	src: string;
+	color?: string;
+}
+
+interface Tool {
+	id: string;
+	name: string;
+	publisher: string;
+	kind: 'cli' | 'ide' | 'extension' | 'agent' | 'runtime' | 'platform';
+	group: 'oss' | 'closed';
+	url: string;
+	signals: {
+		stars: number | null;
+		hn_mentions_7d: number;
+		reddit_mentions_7d: number;
+	};
+	score?: number;
+	rank?: number;
+	rank_prev?: number;
+	why: Parameters<typeof pickLang>[0];
+	icon?: ToolIcon;
+	evidence?: Parameters<typeof pickLang>[0][];
+}
+
+interface Props {
+	tools: Tool[];
+	lang: Lang;
+}
+
+const { tools, lang } = Astro.props;
+const ossTools = tools.filter((t) => t.group === 'oss').sort((a, b) => (a.rank ?? 0) - (b.rank ?? 0));
+const closedTools = tools.filter((t) => t.group === 'closed');
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+const iconUrl = (src: string) => `${baseUrl}${src}`;
+
+const KIND_LABELS: Record<Lang, Record<Tool['kind'], string>> = {
+	en: { cli: 'CLI', ide: 'IDE', extension: 'Extension', agent: 'Agent', runtime: 'Runtime', platform: 'Platform' },
+	es: { cli: 'CLI', ide: 'IDE', extension: 'Extensión', agent: 'Agente', runtime: 'Runtime', platform: 'Plataforma' },
+	fr: { cli: 'CLI', ide: 'IDE', extension: 'Extension', agent: 'Agent', runtime: 'Runtime', platform: 'Plateforme' },
+};
+
+const COPY: Record<
+	Lang,
+	{
+		title: string;
+		subtitle: string;
+		noStars: string;
+		ossHeading: string;
+		closedHeading: string;
+		closedNote: string;
+	}
+> = {
+	en: {
+		title: 'Agent tooling, ranked and tracked',
+		subtitle:
+			'Open-source projects ranked by GitHub signals; closed-source and newly-launched platforms listed separately.',
+		noStars: 'No public repo',
+		ossHeading: 'Open source — scored and ranked',
+		closedHeading: 'Closed source — listed, not ranked',
+		closedNote: 'No public repository to measure. Listed by traction evidence instead of a score.',
+	},
+	es: {
+		title: 'Herramientas de agentes, rankeadas y seguidas',
+		subtitle:
+			'Proyectos open source rankeados por señales de GitHub; plataformas de código cerrado y de lanzamiento reciente, listadas aparte.',
+		noStars: 'Sin repo público',
+		ossHeading: 'Código abierto — puntuado y rankeado',
+		closedHeading: 'Código cerrado — listado, sin ranking',
+		closedNote: 'Sin repositorio público que medir. Se listan por evidencia de tracción en vez de un puntaje.',
+	},
+	fr: {
+		title: 'Outillage agent, classé et suivi',
+		subtitle:
+			'Projets open source classés par signaux GitHub ; plateformes propriétaires et récemment lancées listées séparément.',
+		noStars: 'Pas de dépôt public',
+		ossHeading: 'Open source — noté et classé',
+		closedHeading: 'Propriétaire — listé, non classé',
+		closedNote: 'Pas de dépôt public à mesurer. Listé par preuve de traction plutôt que par un score.',
+	},
+};
+
+function formatStars(stars: number | null): string {
+	if (stars === null) return '—';
+	if (stars >= 1000) return `${(stars / 1000).toFixed(1)}k`;
+	return String(stars);
+}
+
+function rankDelta(rank: number, rankPrev: number): { symbol: string; cls: string } {
+	if (rankPrev > rank) return { symbol: '▲', cls: 'rank-up' };
+	if (rankPrev < rank) return { symbol: '▼', cls: 'rank-down' };
+	return { symbol: '•', cls: 'rank-flat' };
+}
+
+const copy = COPY[lang];
+---
+
+<section class="toolbox-section stack-ranking" data-anchor="stack-ranking">
+	<div class="toolbox-section-head">
+		<h2>{copy.title}</h2>
+		<p class="toolbox-section-subtitle">{copy.subtitle}</p>
+	</div>
+
+	<h3 class="stack-ranking-group-title">{copy.ossHeading}</h3>
+	<div class="stack-ranking-table-wrapper">
+		<table class="stack-ranking-table">
+			<tbody>
+				{ossTools.map((tool) => {
+					const rank = tool.rank ?? 0;
+					const rankPrev = tool.rank_prev ?? rank;
+					const delta = rankDelta(rank, rankPrev);
+					const kindLabel = KIND_LABELS[lang][tool.kind];
+					return (
+						<tr class="stack-ranking-row">
+							<td class="rank-cell">
+								<span class="rank-number">{rank}</span>
+								<span class={`rank-delta ${delta.cls}`} title={`prev #${rankPrev}`}>{delta.symbol}</span>
+							</td>
+							<td class="tool-cell">
+								<div class="tool-cell-inner">
+									{tool.icon?.kind === 'mask' ? (
+										<span
+											class="tool-icon-chip tool-icon-mask"
+											style={`--tool-icon-src: url('${iconUrl(tool.icon.src)}'); --brand: ${tool.icon.color ?? 'var(--color-text-muted)'};`}
+											aria-hidden="true"
+										/>
+									) : tool.icon?.kind === 'image' ? (
+										<span class="tool-icon-chip tool-icon-image" aria-hidden="true">
+											<img src={iconUrl(tool.icon.src)} alt="" width={20} height={20} loading="lazy" decoding="async" />
+										</span>
+									) : (
+										<span class="tool-icon-chip tool-icon-placeholder" aria-hidden="true" />
+									)}
+									<div class="tool-cell-text">
+										<a href={tool.url} target="_blank" rel="noopener" class="tool-name">{tool.name}</a>
+										<span class="tool-publisher">{tool.publisher}</span>
+										<span class="kind-pill">{kindLabel}</span>
+									</div>
+								</div>
+							</td>
+							<td class="stars-cell">
+								<span class="stat-label">★</span>
+								<span>{formatStars(tool.signals.stars)}</span>
+							</td>
+							<td class="mentions-cell">
+								<span class="stat-label">HN+Reddit</span>
+								<span>{tool.signals.hn_mentions_7d + tool.signals.reddit_mentions_7d}</span>
+							</td>
+							<td class="score-cell">
+								<div class="score-bar-track">
+									<div class="score-bar-fill" style={`width: ${Math.round((tool.score ?? 0) * 100)}%`} />
+								</div>
+								<span class="score-value">{(tool.score ?? 0).toFixed(2)}</span>
+							</td>
+							<td class="why-cell">{pickLang(tool.why, lang)}</td>
+						</tr>
+					);
+				})}
+			</tbody>
+		</table>
+	</div>
+
+	<h3 class="stack-ranking-group-title stack-ranking-group-title-closed">{copy.closedHeading}</h3>
+	<p class="stack-ranking-closed-note">{copy.closedNote}</p>
+	<div class="stack-ranking-table-wrapper">
+		<table class="stack-ranking-table stack-ranking-table-closed">
+			<tbody>
+				{closedTools.map((tool) => {
+					const kindLabel = KIND_LABELS[lang][tool.kind];
+					return (
+						<tr class="stack-ranking-row">
+							<td class="tool-cell">
+								<div class="tool-cell-inner">
+									{tool.icon?.kind === 'mask' ? (
+										<span
+											class="tool-icon-chip tool-icon-mask"
+											style={`--tool-icon-src: url('${iconUrl(tool.icon.src)}'); --brand: ${tool.icon.color ?? 'var(--color-text-muted)'};`}
+											aria-hidden="true"
+										/>
+									) : tool.icon?.kind === 'image' ? (
+										<span class="tool-icon-chip tool-icon-image" aria-hidden="true">
+											<img src={iconUrl(tool.icon.src)} alt="" width={20} height={20} loading="lazy" decoding="async" />
+										</span>
+									) : (
+										<span class="tool-icon-chip tool-icon-placeholder" aria-hidden="true" />
+									)}
+									<div class="tool-cell-text">
+										<a href={tool.url} target="_blank" rel="noopener" class="tool-name">{tool.name}</a>
+										<span class="tool-publisher">{tool.publisher}</span>
+										<span class="kind-pill">{kindLabel}</span>
+									</div>
+								</div>
+							</td>
+							<td class="mentions-cell">
+								<span class="stat-label">HN+Reddit</span>
+								<span>{tool.signals.hn_mentions_7d + tool.signals.reddit_mentions_7d}</span>
+							</td>
+							<td class="evidence-cell">
+								{tool.evidence && tool.evidence.length > 0 ? (
+									<div class="evidence-chips">
+										{tool.evidence.map((item) => (
+											<span class="evidence-chip">{pickLang(item, lang)}</span>
+										))}
+									</div>
+								) : (
+									<span class="stat-label">{copy.noStars}</span>
+								)}
+							</td>
+							<td class="why-cell">{pickLang(tool.why, lang)}</td>
+						</tr>
+					);
+				})}
+			</tbody>
+		</table>
+	</div>
+</section>

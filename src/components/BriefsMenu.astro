@@ -1,0 +1,148 @@
+---
+import { Icon } from 'astro-icon/components';
+import { CATEGORIES, isLivingCategory, type Category, type LangCode } from '../consts';
+import { getCategoryLabel, getCategoryDescription } from '../utils/categoryCopy';
+import { getNavLabel } from '../utils/navCopy';
+import { localizePath } from '../utils/i18n';
+import CategoryIcon from './CategoryIcon.astro';
+
+interface Props {
+	lang: LangCode;
+	basePath: string;
+}
+
+const { lang, basePath } = Astro.props;
+
+const datedCategories = (Object.keys(CATEGORIES) as Category[]).filter((slug) => !isLivingCategory(slug));
+const isActive = datedCategories.some((slug) => basePath === `/${slug}/` || basePath.startsWith(`/${slug}/`));
+const triggerLabel = getNavLabel('dailyBriefs', lang);
+---
+
+<details class="briefs-dropdown" id="briefs-menu">
+	<summary
+		class="nav-link briefs-summary"
+		aria-current={isActive ? 'page' : undefined}
+		class:list={{ 'nav-link-active': isActive }}
+	>
+		<Icon name="lucide:book-open" width={14} height={14} style="color: var(--color-text-muted)" />
+		<span class="briefs-label">{triggerLabel}</span>
+		<svg class="briefs-chevron" width="11" height="11" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+	</summary>
+	<div class="briefs-panel" role="menu">
+		{datedCategories.map((slug) => {
+			const cat = CATEGORIES[slug];
+			const label = getCategoryLabel(slug, lang);
+			const description = getCategoryDescription(slug, lang);
+			const rowActive = basePath === `/${slug}/` || basePath.startsWith(`/${slug}/`);
+			return (
+				<a
+					href={localizePath(`/${slug}/`, lang)}
+					class="briefs-row"
+					class:list={{ 'briefs-row-active': rowActive }}
+					aria-current={rowActive ? 'page' : undefined}
+					role="menuitem"
+				>
+					<span class="briefs-row-icon" style={`background: color-mix(in oklab, ${cat.accent} 16%, var(--color-surface))`}>
+						<CategoryIcon category={slug} width={16} height={16} style={`color: ${cat.accent}`} />
+					</span>
+					<span class="briefs-row-copy">
+						<span class="briefs-row-label">{label}</span>
+						<span class="briefs-row-description">{description}</span>
+					</span>
+				</a>
+			);
+		})}
+	</div>
+</details>
+
+<style>
+	.briefs-dropdown {
+		position: relative;
+	}
+
+	.briefs-summary {
+		cursor: pointer;
+		user-select: none;
+		list-style: none;
+	}
+
+	.briefs-summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.briefs-chevron {
+		opacity: 0.7;
+		transition: transform 0.15s;
+	}
+
+	.briefs-dropdown[open] .briefs-chevron {
+		transform: rotate(180deg);
+	}
+
+	.briefs-panel {
+		position: absolute;
+		top: calc(100% + 6px);
+		left: 0;
+		width: 340px;
+		padding: 6px;
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: 10px;
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+		z-index: 100;
+	}
+
+	.briefs-row {
+		display: flex;
+		align-items: flex-start;
+		gap: 10px;
+		padding: 9px 10px;
+		border-radius: 6px;
+		text-decoration: none;
+		color: inherit;
+		transition: background 0.12s;
+	}
+
+	.briefs-row:hover,
+	.briefs-row:focus-visible {
+		background: var(--color-surface-2);
+		outline: none;
+	}
+
+	.briefs-row-active {
+		background: var(--color-surface-2);
+	}
+
+	.briefs-row-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+		width: 28px;
+		height: 28px;
+		border-radius: 8px;
+	}
+
+	.briefs-row-copy {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+		min-width: 0;
+	}
+
+	.briefs-row-label {
+		font-size: 14px;
+		line-height: 20px;
+		color: var(--color-text);
+	}
+
+	.briefs-row-description {
+		font-size: 12px;
+		line-height: 17px;
+		color: var(--color-text-muted);
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+</style>

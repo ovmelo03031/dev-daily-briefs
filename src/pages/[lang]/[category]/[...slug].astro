@@ -3,7 +3,7 @@ import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BlogPost from '../../../layouts/BlogPost.astro';
 import BriefStructured from '../../../components/brief/BriefStructured.astro';
 import { normalizeBrief } from '../../../components/brief/normalizeBrief';
-import { CATEGORIES, type Category, type LangCode } from '../../../consts';
+import { CATEGORIES, isLivingCategory, type Category, type LangCode } from '../../../consts';
 import { LOCALIZED_LANG_CODES } from '../../../utils/i18n';
 import { pickLang } from '../../../components/brief/pickLang';
 import { getBriefNeighbors } from '../../../utils/briefNav';
@@ -12,7 +12,9 @@ import { extractTags, getEntity } from '../../../utils/entityTags';
 type BriefEntry = CollectionEntry<'ai-coding' | 'backend-fullstack' | 'dev-news' | 'gentleman-releases'>;
 
 export async function getStaticPaths() {
-	const categoryKeys = Object.keys(CATEGORIES) as Category[];
+	const categoryKeys = (Object.keys(CATEGORIES) as Category[]).filter(
+		(c): c is Exclude<Category, 'ai-toolbox'> => !isLivingCategory(c),
+	);
 	const entries = await Promise.all(
 		categoryKeys.map(async (category) => ({ category, posts: await getCollection(category) })),
 	);

@@ -1,0 +1,90 @@
+---
+import { pickLang, type Lang } from '../brief/pickLang';
+
+interface EcosystemItem {
+	id: string;
+	date: string;
+	name: string;
+	category: 'mcp' | 'agents' | 'memory' | 'evals' | 'local-inference' | 'prompting' | 'ide' | 'other';
+	summary: Parameters<typeof pickLang>[0];
+	source: { url: string; label?: string };
+}
+
+interface Props {
+	items: EcosystemItem[];
+	lang: Lang;
+}
+
+const { items, lang } = Astro.props;
+
+const CATEGORY_LABELS: Record<Lang, Record<EcosystemItem['category'], string>> = {
+	en: {
+		mcp: 'MCP servers',
+		agents: 'Agent frameworks',
+		memory: 'Memory layers',
+		evals: 'Evals',
+		'local-inference': 'Local inference',
+		prompting: 'Prompt tooling',
+		ide: 'IDE extensions',
+		other: 'Other',
+	},
+	es: {
+		mcp: 'Servidores MCP',
+		agents: 'Frameworks de agentes',
+		memory: 'Capas de memoria',
+		evals: 'Evals',
+		'local-inference': 'Inferencia local',
+		prompting: 'Herramientas de prompting',
+		ide: 'Extensiones de IDE',
+		other: 'Otros',
+	},
+	fr: {
+		mcp: 'Serveurs MCP',
+		agents: "Frameworks d'agents",
+		memory: 'Couches de mémoire',
+		evals: 'Évaluations',
+		'local-inference': 'Inférence locale',
+		prompting: 'Outillage de prompts',
+		ide: "Extensions d'IDE",
+		other: 'Autres',
+	},
+};
+
+const COPY: Record<Lang, { title: string; subtitle: string }> = {
+	en: { title: 'Ecosystem news', subtitle: 'New tools and novelties for using AI in general, last 7 days.' },
+	es: { title: 'Noticias del ecosistema', subtitle: 'Herramientas y novedades nuevas para usar IA en general, últimos 7 días.' },
+	fr: { title: "Actualités de l'écosystème", subtitle: "Nouveaux outils et nouveautés pour utiliser l'IA en général, 7 derniers jours." },
+};
+
+const categoryOrder: EcosystemItem['category'][] = ['mcp', 'agents', 'memory', 'evals', 'local-inference', 'prompting', 'ide', 'other'];
+const grouped = categoryOrder
+	.map((category) => ({ category, items: items.filter((item) => item.category === category) }))
+	.filter((group) => group.items.length > 0);
+
+const copy = COPY[lang];
+const labels = CATEGORY_LABELS[lang];
+---
+
+<section class="toolbox-section ecosystem-news" data-anchor="ecosystem-news">
+	<div class="toolbox-section-head">
+		<h2>{copy.title}</h2>
+		<p class="toolbox-section-subtitle">{copy.subtitle}</p>
+	</div>
+	{grouped.map((group) => (
+		<div class="ecosystem-group">
+			<h3 class="ecosystem-group-title">{labels[group.category]}</h3>
+			<div class="ecosystem-cards">
+				{group.items.map((item) => (
+					<a href={item.source.url} target="_blank" rel="noopener" class="ecosystem-card">
+						<div class="ecosystem-card-head">
+							<span class="ecosystem-card-name">{item.name}</span>
+							<span class="ecosystem-card-date">{item.date}</span>
+						</div>
+						<p class="ecosystem-card-summary">{pickLang(item.summary, lang)}</p>
+						<span class="ecosystem-card-source">{item.source.label ?? item.source.url} →</span>
+					</a>
+				))}
+			</div>
+		</div>
+	))}
+</section>

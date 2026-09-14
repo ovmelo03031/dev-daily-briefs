@@ -1,0 +1,48 @@
+---
+import { pickLang, type Lang } from '../brief/pickLang';
+
+interface ChangelogEntry {
+	date: string;
+	kind: 'rank' | 'add' | 'remove' | 'note';
+	text: Parameters<typeof pickLang>[0];
+}
+
+interface Props {
+	entries: ChangelogEntry[];
+	lang: Lang;
+}
+
+const { entries, lang } = Astro.props;
+const sorted = [...entries].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 10);
+
+const KIND_LABELS: Record<Lang, Record<ChangelogEntry['kind'], string>> = {
+	en: { rank: 'Rank move', add: 'Added', remove: 'Removed', note: 'Note' },
+	es: { rank: 'Cambio de rank', add: 'Agregado', remove: 'Quitado', note: 'Nota' },
+	fr: { rank: 'Changement de rang', add: 'Ajouté', remove: 'Retiré', note: 'Note' },
+};
+
+const COPY: Record<Lang, { title: string; subtitle: string }> = {
+	en: { title: 'Changelog', subtitle: 'Last 10 changes to this page.' },
+	es: { title: 'Historial de cambios', subtitle: 'Últimos 10 cambios en esta página.' },
+	fr: { title: 'Journal des modifications', subtitle: 'Les 10 derniers changements de cette page.' },
+};
+
+const copy = COPY[lang];
+const labels = KIND_LABELS[lang];
+---
+
+<section class="toolbox-section toolbox-changelog" data-anchor="changelog">
+	<div class="toolbox-section-head">
+		<h2>{copy.title}</h2>
+		<p class="toolbox-section-subtitle">{copy.subtitle}</p>
+	</div>
+	<ul class="changelog-list">
+		{sorted.map((entry) => (
+			<li class="changelog-item">
+				<span class="changelog-date">{entry.date}</span>
+				<span class={`changelog-kind changelog-kind-${entry.kind}`}>{labels[entry.kind]}</span>
+				<span class="changelog-text">{pickLang(entry.text, lang)}</span>
+			</li>
+		))}
+	</ul>
+</section>

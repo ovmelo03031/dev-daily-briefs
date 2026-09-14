@@ -5,7 +5,8 @@ import CategoryList from '../../../components/CategoryList.astro';
 import Footer from '../../../components/Footer.astro';
 import Header from '../../../components/Header.astro';
 import StructuredData from '../../../components/StructuredData.astro';
-import { CATEGORIES, SITE_TITLE, type Category, type LangCode } from '../../../consts';
+import ToolboxPage from '../../../components/toolbox/ToolboxPage.astro';
+import { CATEGORIES, SITE_TITLE, isLivingCategory, type Category, type LangCode } from '../../../consts';
 import { getCategoryDescription, getCategoryLabel } from '../../../utils/categoryCopy';
 import { LOCALIZED_LANG_CODES, localizePath } from '../../../utils/i18n';
 import { buildBreadcrumbSchema } from '../../../utils/schema';
@@ -21,7 +22,9 @@ export async function getStaticPaths() {
 }
 
 const { lang, category } = Astro.props as { lang: LangCode; category: Category };
-const posts = await getCollection(category);
+const isLiving = isLivingCategory(category);
+const posts = isLiving ? [] : await getCollection(category as Exclude<Category, 'ai-toolbox'>);
+const toolboxEntry = isLiving ? (await getCollection('ai-toolbox'))[0] : undefined;
 const categoryLabel = getCategoryLabel(category, lang);
 const categoryDescription = getCategoryDescription(category, lang);
 const canonical = new URL(localizePath(Astro.url.pathname, lang), Astro.site);
@@ -41,7 +44,11 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 	<body>
 		<Header />
 		<main>
-			<CategoryList posts={posts} category={category} lang={lang} />
+			{isLiving && toolboxEntry ? (
+				<ToolboxPage lang={lang} data={toolboxEntry.data} />
+			) : (
+				<CategoryList posts={posts} category={category} lang={lang} />
+			)}
 		</main>
 		<Footer />
 	</body>

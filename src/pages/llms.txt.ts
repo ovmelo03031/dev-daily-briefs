@@ -1,12 +1,13 @@
 import { getCollection } from 'astro:content';
-import { CATEGORIES, SITE_DESCRIPTION, SITE_TITLE, type Category } from '../consts';
+import { CATEGORIES, SITE_DESCRIPTION, SITE_TITLE, isLivingCategory, type Category } from '../consts';
 import { pickLang } from '../components/brief/pickLang';
 
 const categories = Object.entries(CATEGORIES) as [Category, (typeof CATEGORIES)[Category]][];
+const briefCategories = categories.filter(([slug]) => !isLivingCategory(slug));
 
 export async function GET({ site }: { site?: URL }) {
 	const allPosts = (
-		await Promise.all(categories.map(([category]) => getCollection(category)))
+		await Promise.all(briefCategories.map(([category]) => getCollection(category as Exclude<Category, 'ai-toolbox'>)))
 	)
 		.flat()
 		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -23,6 +24,9 @@ export async function GET({ site }: { site?: URL }) {
 		'## Categories',
 		...categories.map(([slug, category]) => `- [${category.label}](${baseUrl}/${slug}/) — ${category.description}`),
 		'',
+		'## Living Pages',
+		`- [AI Toolbox](${baseUrl}/ai-toolbox/) — a single, continuously updated page (not dated briefs): stack ranking, ecosystem news, community talk, and a changelog.`,
+		'',
 		'## Latest Briefs',
 		...allPosts.map((post) => {
 			const title = pickLang(post.data.title, 'en');
@@ -32,7 +36,7 @@ export async function GET({ site }: { site?: URL }) {
 		'',
 		'## Feeds',
 		`- [All briefs RSS](${baseUrl}/rss.xml)`,
-		...categories.map(([slug, category]) => `- [${category.label} RSS](${baseUrl}/${slug}/rss.xml)`),
+		...briefCategories.map(([slug, category]) => `- [${category.label} RSS](${baseUrl}/${slug}/rss.xml)`),
 		'',
 		'## Usage Notes',
 		'- Prefer the linked brief page as the canonical source for each update.',

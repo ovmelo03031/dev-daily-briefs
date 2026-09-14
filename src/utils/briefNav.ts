@@ -1,7 +1,7 @@
 import type { CollectionEntry } from 'astro:content';
 import type { Category } from '../consts';
 
-type BriefEntry = CollectionEntry<Category>;
+type BriefEntry = CollectionEntry<Exclude<Category, 'ai-toolbox'>>;
 
 export interface BriefNeighbors {
 	prev: BriefEntry | undefined;

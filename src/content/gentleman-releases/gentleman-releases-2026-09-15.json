@@ -1,0 +1,104 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 15 Sep 2026",
+    "en": "Gentleman Releases — 15 Sep 2026",
+    "fr": "Gentleman Releases — 15 Sep 2026"
+  },
+  "description": {
+    "es": "Releases del día en proyectos de Gentleman-Programming",
+    "en": "Today's releases from Gentleman-Programming projects",
+    "fr": "Sorties du jour des projets Gentleman-Programming"
+  },
+  "pubDate": "2026-09-15",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "gentle-ai v2.9.0 — RTK entra como community tool opt-in y el ledger SDD deja de trabarse",
+        "en": "gentle-ai v2.9.0 — RTK lands as an opt-in community tool and the SDD ledger stops deadlocking",
+        "fr": "gentle-ai v2.9.0 — RTK arrive en outil communautaire opt-in et le ledger SDD se débloque"
+      },
+      "anchor": "gentle-ai-v2-9-0",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "v2.9.1 — hotfix: en Claude Code toda delegación sdd-* estaba denegada desde v2.8.0",
+        "en": "v2.9.1 — hotfix: every sdd-* delegation on Claude Code had been denied since v2.8.0",
+        "fr": "v2.9.1 — correctif : toute délégation sdd-* était refusée sur Claude Code depuis v2.8.0"
+      },
+      "anchor": "gentle-ai-v2-9-1",
+      "icon": "lucide:shield-alert"
+    },
+    {
+      "text": {
+        "es": "El consent de review en OpenCode ya no se cuelga cuando el schema no expone «custom»",
+        "en": "OpenCode review consent no longer stalls when the schema omits the «custom» control",
+        "fr": "Le consentement de review OpenCode ne bloque plus quand le schéma omet «custom»"
+      },
+      "anchor": "gentle-ai-v2-9-1",
+      "icon": "lucide:message-square-warning"
+    },
+    {
+      "text": {
+        "es": "Después de upgradear hay que correr gentle-ai sync sí o sí: el fix viaja en los assets manejados",
+        "en": "Run gentle-ai sync after upgrading — the fix ships inside the managed assets",
+        "fr": "Lancez gentle-ai sync après la mise à jour : le correctif voyage dans les assets gérés"
+      },
+      "anchor": "gentle-ai",
+      "icon": "lucide:refresh-cw"
+    }
+  ],
+  "tools": [
+    {
+      "id": "gentle-ai",
+      "name": "gentle-ai",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-gentle-ai",
+      "icon_emoji": "🎩",
+      "anchor": "gentle-ai",
+      "version": "v2.9.1",
+      "updates": [
+        {
+          "id": "gentle-ai-v2-9-0",
+          "tag": "feature",
+          "title": {
+            "es": "v2.9.0 — RTK entra al toolbox y la remediación encuentra la salida",
+            "en": "v2.9.0 — RTK joins the toolbox, remediation finds its exit",
+            "fr": "v2.9.0 — RTK rejoint la boîte à outils, la remédiation trouve sa sortie"
+          },
+          "body_html": {
+            "es": "<p>Minor con dos frentes. El primero: <strong>RTK (Rust Token Killer)</strong> ahora se ofrece como <em>Community Tool</em> opt-in en el instalador. Comprime la salida de comandos antes de que llegue al contexto del modelo, nunca lo selecciona un preset ni la detección automática, e instala el binario pinneado <code>v0.49.0</code> en <code>~/.local/bin/rtk</code> en macOS y Linux soportados. Configura sólo las instalaciones detectadas y elegidas de Claude Code, OpenCode, Codex CLI y Pi, y apaga la telemetría de RTK en todo proceso hijo. Windows queda explícitamente fuera y Gentle AI no te toca el <code>PATH</code> ni los perfiles de shell.</p><p>El segundo: cuatro callejones sin salida del <strong>attempt ledger de SDD</strong>. El status derivaba la revisión de remediación del archivo de verify mientras <code>sdd-attempt settle</code> la ataba al último intento fallido del ledger — los dos no se ponían de acuerdo nunca y te comías un <code>invalid_continuation</code> eterno. Ahora el status resuelve esa revisión por la cadena del ledger. Un settle que pasó verificación pero se excedió de <code>max_changed_lines</code> quedaba invisible para la cadena: ya es el intento no remediado que corresponde. Y un puntero <code>--remediates-evidence-revision</code> equivocado se rechaza por igualdad primero, nombrando el valor real de la cadena en vez de tirarte una pista de forma.</p><p>Bonus para los de dotfiles: <code>gentle-ai sync</code> ahora acepta un directorio de config de agente symlinkeado (stow, chezmoi, granjas de symlinks a mano). Antes abortaba el pipeline entero antes de refrescar un solo asset.</p>",
+            "en": "<p>A minor on two fronts. First: <strong>RTK (Rust Token Killer)</strong> is now offered as an opt-in <em>Community Tool</em> in the installer. It compresses command output before it reaches the model's context, is never selected by a preset or by detection, and installs the attested pinned <code>v0.49.0</code> binary at <code>~/.local/bin/rtk</code> on supported macOS and Linux architectures. It configures only the detected and selected Claude Code, OpenCode, Codex CLI and Pi installations, and disables RTK telemetry for every child process. Windows stays explicitly unavailable, and Gentle AI does not edit shell profiles or <code>PATH</code>.</p><p>Second: four dead ends in the <strong>SDD attempt ledger</strong>. Status derived the remediation revision from the verify-report file while <code>sdd-attempt settle</code> bound it to the ledger's newest failed attempt, so the two disagreed forever and consumers relaying the value were refused with <code>invalid_continuation</code>. Status now resolves that revision through the ledger chain. A settle that passed verification but exceeded <code>max_changed_lines</code> was hidden from the chain; it is now the chain's unremediated attempt, carrying the evidence the maintainer was told to reset over. And a wrong <code>--remediates-evidence-revision</code> pointer is decided by equality first, with every refusal naming the chain's actual value instead of a shape hint.</p><p>Bonus for dotfiles users: <code>gentle-ai sync</code> now accepts an agent config directory symlinked into a dotfiles repository (stow, chezmoi, plain symlink farms). Before, it aborted the whole pipeline before refreshing a single managed asset.</p>",
+            "fr": "<p>Une mineure sur deux fronts. D'abord : <strong>RTK (Rust Token Killer)</strong> est proposé comme <em>Community Tool</em> opt-in dans l'installeur. Il compresse la sortie des commandes avant qu'elle n'atteigne le contexte du modèle, n'est jamais sélectionné par un preset ni par la détection, et installe le binaire épinglé <code>v0.49.0</code> dans <code>~/.local/bin/rtk</code> sur les architectures macOS et Linux supportées. Il ne configure que les installations détectées et choisies de Claude Code, OpenCode, Codex CLI et Pi, et désactive la télémétrie RTK pour chaque processus enfant. Windows reste explicitement indisponible et Gentle AI ne modifie ni les profils shell ni le <code>PATH</code>.</p><p>Ensuite : quatre impasses du <strong>ledger de tentatives SDD</strong>. Le status dérivait la révision de remédiation du fichier de vérification tandis que <code>sdd-attempt settle</code> la liait à la dernière tentative échouée du ledger : les deux ne s'accordaient jamais et les consommateurs recevaient un <code>invalid_continuation</code> perpétuel. Le status résout désormais cette révision via la chaîne du ledger. Un settle ayant passé la vérification mais dépassé <code>max_changed_lines</code> était invisible pour la chaîne ; il en est maintenant la tentative non remédiée. Et un pointeur <code>--remediates-evidence-revision</code> erroné est tranché par égalité d'abord, chaque refus nommant la valeur réelle de la chaîne.</p><p>Bonus dotfiles : <code>gentle-ai sync</code> accepte désormais un répertoire de configuration d'agent en lien symbolique (stow, chezmoi, fermes de symlinks). Auparavant, tout le pipeline s'interrompait avant le moindre rafraîchissement.</p>"
+          },
+          "date": "14 Sep 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v2.9.0",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        },
+        {
+          "id": "gentle-ai-v2-9-1",
+          "tag": "fix",
+          "title": {
+            "es": "v2.9.1 — vuelve el dispatch SDD en Claude Code y el consent de OpenCode se destraba",
+            "en": "v2.9.1 — Claude Code SDD dispatch restored, OpenCode consent without custom control",
+            "fr": "v2.9.1 — dispatch SDD restauré sur Claude Code, consentement OpenCode débloqué"
+          },
+          "body_html": {
+            "es": "<p>Hotfix para dos runtimes, y el primero es gordo: <strong>en Claude Code toda delegación <code>sdd-*</code> venía denegada desde la v2.8.0</strong>. El guard <code>PreToolUse(Agent)</code> tenía un único camino de allow que acuñaba autoridad desde un registro <code>PostToolUse</code>, y como una copia del hook arrancada por el modelo podía falsificar ese registro, el guard no tenía otra que rechazar todo. Ojo con esto si venías peleándote con el SDD y no entendías por qué.</p><p>Ahora el preflight confirmado por el padre se deriva en tiempo de dispatch desde el transcript path y el session id que le pasa el hook runner: el último par canónico de <code>AskUserQuestion</code> en los registros raíz de esa sesión arma el bloque <code>## SDD Session Preflight</code> y se prepende al prompt del hijo. Claude Code sólo honra la invocación de hook que arrancó él mismo, así que una copia lanzada por el modelo no puede meter mano. Se fueron el minting por <code>PostToolUse</code>, el archivo persistido y la limpieza en <code>SessionEnd</code>. El scanner del transcript corta a 8 MiB y saltea líneas larguísimas sin abortar.</p><p>El segundo: las instrucciones del orquestador de OpenCode exigían el control <code>custom</code> del tool nativo <code>question</code> para presentar el envelope de consent de review — un runtime cuyo schema expone <code>multiple</code> pero no <code>custom</code> simplemente no podía relayear consent. Ahora las instrucciones son schema-aware: si <code>custom</code> no está soportado se omite en vez de inventarlo o tratarlo como bloqueo. Esta excepción aplica sólo a <code>gentle-ai.review-integration.consent/v3</code>.</p><p>Después de <code>brew upgrade</code>, correr <code>gentle-ai sync</code> no es opcional: el hook de dispatch reescrito y las instrucciones corregidas viajan en los assets manejados.</p>",
+            "en": "<p>A two-runtime hotfix, and the first one is big: <strong>every <code>sdd-*</code> delegation on Claude Code had been denied since v2.8.0</strong>. The <code>PreToolUse(Agent)</code> guard's only allow path minted authority from a <code>PostToolUse</code> record, and because a model-started copy of the hook command could forge that record, the guard had to refuse it outright.</p><p>Parent-confirmed preflight is now derived at dispatch time from the transcript path and session id the hook runner supplies: the last canonical <code>AskUserQuestion</code> pair in root records of that session builds the <code>## SDD Session Preflight</code> block, which is prepended to the child prompt. Claude Code only honors the hook invocation it started itself, so a model-started copy cannot influence the real dispatch. The <code>PostToolUse</code> minting, the persisted record file, and the <code>SessionEnd</code> cleanup are gone. The transcript scanner bounds lines at 8 MiB and skips overlong lines without aborting.</p><p>Second: the OpenCode orchestrator instructions required the <code>custom</code> control of the native <code>question</code> tool to present the review consent envelope, so a runtime whose active schema exposes <code>multiple</code> but not <code>custom</code> could not relay consent at all. The instructions are now schema-aware: an unsupported <code>custom</code> control is omitted rather than invented or treated as a blocker. This native-only exception applies exclusively to <code>gentle-ai.review-integration.consent/v3</code>.</p><p>After <code>brew upgrade</code>, running <code>gentle-ai sync</code> is not optional: the rewritten dispatch hook and the corrected orchestrator instructions ship inside the managed assets.</p>",
+            "fr": "<p>Un correctif pour deux runtimes, et le premier est majeur : <strong>toute délégation <code>sdd-*</code> sur Claude Code était refusée depuis la v2.8.0</strong>. L'unique chemin d'autorisation du guard <code>PreToolUse(Agent)</code> forgeait son autorité depuis un enregistrement <code>PostToolUse</code>, et comme une copie du hook lancée par le modèle pouvait falsifier cet enregistrement, le guard devait tout refuser.</p><p>Le préflight confirmé par le parent est désormais dérivé au moment du dispatch depuis le chemin de transcript et l'identifiant de session fournis par le hook runner : la dernière paire canonique <code>AskUserQuestion</code> dans les enregistrements racine de cette session construit le bloc <code>## SDD Session Preflight</code>, préfixé au prompt de l'enfant. Claude Code n'honore que l'invocation de hook qu'il a lui-même lancée. Le minting <code>PostToolUse</code>, le fichier persisté et le nettoyage <code>SessionEnd</code> disparaissent. Le scanner de transcript borne les lignes à 8 Mio.</p><p>Ensuite : les instructions de l'orchestrateur OpenCode exigeaient le contrôle <code>custom</code> du tool natif <code>question</code> pour présenter l'enveloppe de consentement de review ; un runtime dont le schéma expose <code>multiple</code> mais pas <code>custom</code> ne pouvait donc pas relayer le consentement. Les instructions sont maintenant conscientes du schéma : un contrôle <code>custom</code> non supporté est omis plutôt qu'inventé ou traité comme un blocage. Cette exception ne vaut que pour <code>gentle-ai.review-integration.consent/v3</code>.</p><p>Après <code>brew upgrade</code>, lancer <code>gentle-ai sync</code> n'est pas optionnel : le hook réécrit et les instructions corrigées voyagent dans les assets gérés.</p>"
+          },
+          "date": "14 Sep 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v2.9.1",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

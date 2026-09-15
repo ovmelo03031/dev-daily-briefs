@@ -1,0 +1,352 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 15 de septiembre de 2026",
+    "en": "Backend & Fullstack — September 15, 2026",
+    "fr": "Backend & Fullstack — 15 septembre 2026"
+  },
+  "description": {
+    "es": "Escalada de privilegios en el Token Exchange de ZITADEL, Agoda cambia 72 shards de SQL Server por DragonflyDB, Amazon Linux 2027 en preview con SELinux enforcing y un bypass de middleware en NestJS + Fastify.",
+    "en": "Privilege escalation in ZITADEL's OAuth2 Token Exchange, Agoda swaps 72 SQL Server shards for DragonflyDB, Amazon Linux 2027 preview ships SELinux enforcing, and a middleware bypass lands in NestJS + Fastify.",
+    "fr": "Élévation de privilèges dans le Token Exchange OAuth2 de ZITADEL, Agoda remplace 72 shards SQL Server par DragonflyDB, Amazon Linux 2027 en préversion avec SELinux enforcing et un contournement de middleware dans NestJS + Fastify."
+  },
+  "pubDate": "2026-09-15",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "ZITADEL: escalada de privilegios OAuth2 (8.1)",
+        "en": "ZITADEL: OAuth2 privilege escalation (8.1)",
+        "fr": "ZITADEL : élévation de privilèges OAuth2 (8.1)"
+      },
+      "anchor": "zitadel-token-exchange",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Agoda: 72 shards SQL → DragonflyDB",
+        "en": "Agoda: 72 SQL shards → DragonflyDB",
+        "fr": "Agoda : 72 shards SQL → DragonflyDB"
+      },
+      "anchor": "agoda-dragonflydb",
+      "icon": "lucide:database"
+    },
+    {
+      "text": {
+        "es": "Amazon Linux 2027: SELinux enforcing",
+        "en": "Amazon Linux 2027: SELinux enforcing",
+        "fr": "Amazon Linux 2027 : SELinux enforcing"
+      },
+      "anchor": "amazon-linux-2027",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": {
+        "es": "NestJS 11.2.4 tapa bypass de middleware",
+        "en": "NestJS 11.2.4 patches middleware bypass",
+        "fr": "NestJS 11.2.4 corrige un bypass de middleware"
+      },
+      "anchor": "nest-11-2-4",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Jotai 3.0: ESM-only, chau CommonJS",
+        "en": "Jotai 3.0: ESM-only, CommonJS dropped",
+        "fr": "Jotai 3.0 : ESM-only, CommonJS supprimé"
+      },
+      "anchor": "jotai-3",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "Turborepo 2.10.13 entiende workspaces uv",
+        "en": "Turborepo 2.10.13 understands uv workspaces",
+        "fr": "Turborepo 2.10.13 comprend les workspaces uv"
+      },
+      "anchor": "turborepo-21013",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "zitadel-token-exchange",
+      "updates": [
+        {
+          "id": "zitadel-token-exchange",
+          "tag": "security",
+          "date": "14 Sep 2026",
+          "title": {
+            "es": "ZITADEL: el Token Exchange deja escalar privilegios entre aplicaciones",
+            "en": "ZITADEL: Token Exchange lets you escalate privileges across applications",
+            "fr": "ZITADEL : le Token Exchange permet une élévation de privilèges entre applications"
+          },
+          "body_html": {
+            "es": "<p><strong>CVSS 8.1</strong>. El endpoint de Token Exchange (<code>urn:ietf:params:oauth:grant-type:token-exchange</code>) no valida que el access token entrante pertenezca al client que inicia el intercambio, ni que los scopes pedidos queden dentro de los del token original. Traducción: con un token de baja privilegio en una app cualquiera te llevás un token elevado para otra aplicación distinta, salteándote roles de proyecto y permisos de client. Si tenés ZITADEL self-hosted y habilitaste token exchange, actualizá YA.</p>",
+            "en": "<p><strong>CVSS 8.1</strong>. The Token Exchange endpoint (<code>urn:ietf:params:oauth:grant-type:token-exchange</code>) never validates that the incoming access token belongs to the client initiating the exchange, nor that requested scopes stay within the original token's boundaries. Net effect: a low-privilege token in one app can be traded for an elevated token at a completely different application, bypassing project roles and client permissions. Self-hosting ZITADEL with token exchange enabled? Patch now.</p>",
+            "fr": "<p><strong>CVSS 8.1</strong>. Le endpoint Token Exchange (<code>urn:ietf:params:oauth:grant-type:token-exchange</code>) ne vérifie ni que l'access token entrant appartient au client qui initie l'échange, ni que les scopes demandés restent dans les limites du token d'origine. Résultat : un token à faible privilège peut être échangé contre un token élevé sur une application totalement différente, contournant rôles projet et permissions client. ZITADEL auto-hébergé avec token exchange activé ? Patchez maintenant.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-vrh8-c9cm-wh8v",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "agoda-dragonflydb",
+          "tag": "notable",
+          "date": "14 Sep 2026",
+          "title": {
+            "es": "Agoda reemplaza 72 shards de SQL Server por DragonflyDB",
+            "en": "Agoda replaces a 72-shard SQL Server price cache with DragonflyDB",
+            "fr": "Agoda remplace un cache de prix SQL Server à 72 shards par DragonflyDB"
+          },
+          "body_html": {
+            "es": "<p>El Price Cache de Agoda vivía en 72 shards de SQL Server con remapeo manual cada vez que había que escalar. Migraron a DragonflyDB y reportan <strong>~8x mejor latencia P99 de lectura</strong>, ~300k req/s a ~8 ms P99 sobre 1,5 TB de datos de precios, y ~1,6 millones de escrituras por segundo a ~10 ms P99. El bonus arquitectónico: expiración de claves nativa (se borró todo el proceso de limpieza) y failover automático por detección de fallas descentralizada. Validaron con dual-read hasta >99,9% de paridad antes de cortar — así se migra un cache crítico, no a lo bruto.</p>",
+            "en": "<p>Agoda's Price Cache lived on 72 SQL Server shards with manual shard remapping every time it needed to scale. They moved to DragonflyDB and report <strong>~8x better P99 read latency</strong>, ~300k req/s at ~8 ms P99 over 1.5 TB of pricing data, and ~1.6 million writes per second at ~10 ms P99. The architectural bonus: built-in key expiration killed a whole cleanup pipeline, and decentralized failure detection gave them automatic failover. They ran dual-read validation to &gt;99.9% parity before cutting over — that is how you migrate a critical cache.</p>",
+            "fr": "<p>Le Price Cache d'Agoda reposait sur 72 shards SQL Server avec remappage manuel à chaque montée en charge. Après migration vers DragonflyDB : <strong>latence P99 en lecture ~8x meilleure</strong>, ~300k req/s à ~8 ms P99 sur 1,5 To de données de prix, et ~1,6 million d'écritures par seconde à ~10 ms P99. Bonus architectural : l'expiration native des clés supprime tout un pipeline de nettoyage, et la détection décentralisée des pannes apporte le failover automatique. Validation en dual-read jusqu'à &gt;99,9% de parité avant bascule.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/09/agoda-price-cache-dragonflydb/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "amazon-linux-2027",
+          "tag": "breaking",
+          "date": "15 Sep 2026",
+          "title": {
+            "es": "Amazon Linux 2027 entra en public preview con SELinux en enforcing por defecto",
+            "en": "Amazon Linux 2027 enters public preview with SELinux enforcing by default",
+            "fr": "Amazon Linux 2027 en préversion publique avec SELinux en mode enforcing par défaut"
+          },
+          "body_html": {
+            "es": "<p>Construido sobre AL2023, trae kernel 7.1+, AWS-LC para criptografía y soporte de AWS Neuron. Pero el cambio que te va a doler es <strong>SELinux en modo enforcing por defecto</strong> (AL2023 venía en permissive): las violaciones de política ahora se bloquean en vez de solo loguearse. Antes de migrar, validá contextos de archivos, puertos y patrones de acceso de tus apps — si no, tus containers van a morir en silencio. AMIs disponibles en todas las regiones comerciales (x86-64 y ARM) y base images en ECR Public Gallery. Todavía no hay fecha de GA ni de fin de soporte de AL2023, y tampoco confirmaron upgrades in-place.</p>",
+            "en": "<p>Built on AL2023, it ships kernel 7.1+, AWS-LC for crypto, and AWS Neuron support. The change that will actually bite you is <strong>SELinux in enforcing mode by default</strong> (AL2023 shipped permissive): policy violations are now blocked instead of merely logged. Validate your applications' file contexts, ports, and access patterns before migrating, or your containers will fail quietly. AMIs are available in all commercial regions (x86-64 and ARM) with container base images on ECR Public Gallery. No GA date, no AL2023 end-of-support date, and no confirmation on in-place upgrades.</p>",
+            "fr": "<p>Basé sur AL2023, avec kernel 7.1+, AWS-LC pour la cryptographie et le support d'AWS Neuron. Le changement qui fait mal : <strong>SELinux en mode enforcing par défaut</strong> (AL2023 était en permissive) — les violations de politique sont désormais bloquées et non plus seulement journalisées. Validez contextes de fichiers, ports et schémas d'accès avant de migrer, sinon vos containers échoueront silencieusement. AMIs dans toutes les régions commerciales (x86-64 et ARM), images de base sur ECR Public Gallery. Ni date de GA, ni fin de support AL2023, ni confirmation sur les upgrades in-place.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/09/amazon-linux-2027-preview/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "workerd-20260915",
+      "updates": [
+        {
+          "id": "workerd-20260915",
+          "tag": "release",
+          "date": "15 Sep 2026",
+          "title": {
+            "es": "workerd 1.20260915.1: IP del cliente en el handler de connect() TCP",
+            "en": "workerd 1.20260915.1: client IP exposed in the TCP connect() handler",
+            "fr": "workerd 1.20260915.1 : IP client exposée dans le handler connect() TCP"
+          },
+          "body_html": {
+            "es": "<p>El runtime de Cloudflare Workers ahora expone IP y puerto del cliente como <code>remoteAddress</code> en el handler de <code>connect()</code> TCP — útil si estás armando proxies o servicios TCP sobre Workers y necesitás rate limiting o logging por origen. Además, el isolate pasa a ser el namespace de puertos para los servidores <code>node:http</code> y <code>node:net</code>, lo que ordena bastante la compatibilidad con Node en edge. Los Python Workers también reemplazaron los parches de Pyodide basados en strings por parches AST.</p>",
+            "en": "<p>Cloudflare's Workers runtime now exposes client IP and port as <code>remoteAddress</code> in the TCP <code>connect()</code> handler — handy if you're building proxies or TCP services on Workers and need per-origin rate limiting or logging. The isolate also becomes the port namespace for <code>node:http</code> and <code>node:net</code> servers, which tidies up Node compatibility at the edge. Python Workers swapped string-based Pyodide patches for AST patches.</p>",
+            "fr": "<p>Le runtime Cloudflare Workers expose désormais l'IP et le port du client via <code>remoteAddress</code> dans le handler <code>connect()</code> TCP — pratique pour les proxies ou services TCP sur Workers nécessitant rate limiting ou logging par origine. L'isolate devient aussi le namespace de ports pour les serveurs <code>node:http</code> et <code>node:net</code>, ce qui clarifie la compatibilité Node en edge. Les Python Workers passent de patches Pyodide textuels à des patches AST.</p>"
+          },
+          "source": {
+            "url": "https://github.com/cloudflare/workerd/releases/tag/v1.20260915.1",
+            "label": "github.com/cloudflare/workerd"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "nest-11-2-4",
+      "updates": [
+        {
+          "id": "nest-11-2-4",
+          "tag": "security",
+          "date": "14 Sep 2026",
+          "title": {
+            "es": "NestJS 11.2.4 tapa un bypass de middleware en platform-fastify",
+            "en": "NestJS 11.2.4 patches a middleware bypass in platform-fastify",
+            "fr": "NestJS 11.2.4 corrige un contournement de middleware dans platform-fastify"
+          },
+          "body_html": {
+            "es": "<p>Parche en la línea 11.x: <code>platform-fastify</code> tenía un <strong>bypass de middleware vía absolute-form request target</strong> (una request con URL absoluta tipo <code>GET http://host/path</code> en vez de <code>GET /path</code> no matcheaba las rutas registradas del middleware). Si usás Nest con adapter Fastify y metés guards o auth en middleware, esto es un agujero de autorización, no un bug cosmético. También cayó un fix para patterns no serializables en microservices que tiraban la app abajo.</p>",
+            "en": "<p>Patch on the 11.x line: <code>platform-fastify</code> had an <strong>absolute-form request target middleware bypass</strong> (a request with an absolute URL such as <code>GET http://host/path</code> instead of <code>GET /path</code> failed to match registered middleware routes). If you run Nest on the Fastify adapter and put guards or auth logic in middleware, that's an authorization hole, not a cosmetic bug. It also fixes unserializable microservice patterns that crashed the app.</p>",
+            "fr": "<p>Correctif sur la ligne 11.x : <code>platform-fastify</code> présentait un <strong>contournement de middleware via absolute-form request target</strong> (une requête avec URL absolue comme <code>GET http://host/path</code> au lieu de <code>GET /path</code> ne correspondait pas aux routes de middleware enregistrées). Si vous utilisez Nest avec l'adapter Fastify et des guards ou de l'auth en middleware, c'est une faille d'autorisation. Corrige aussi les patterns non sérialisables en microservices qui faisaient planter l'app.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nestjs/nest/releases/tag/v11.2.4",
+            "label": "github.com/nestjs/nest"
+          }
+        },
+        {
+          "id": "nest-12-0-2",
+          "tag": "patch",
+          "date": "14 Sep 2026",
+          "title": {
+            "es": "NestJS 12.0.2: microservices y websockets más resilientes",
+            "en": "NestJS 12.0.2: sturdier microservices and websockets",
+            "fr": "NestJS 12.0.2 : microservices et websockets plus robustes"
+          },
+          "body_html": {
+            "es": "<p>La línea 12 sigue puliendo detalles que en producción se sienten: el stream de mensajes de <code>platform-socket.io</code> ya no se muere cuando un handler tira una excepción, los microservices ahora desenganchan sus signal listeners al desconectarse (adiós leaks en shutdown), y las requests cuya reply subscription es rechazada fallan explícitamente en vez de quedar colgadas esperando para siempre. Ese último es el clásico timeout fantasma que te come una tarde entera de debugging.</p>",
+            "en": "<p>The 12.x line keeps polishing things you actually feel in production: the <code>platform-socket.io</code> message stream no longer dies when a handler throws, microservices now detach their signal listeners on disconnect (no more shutdown leaks), and requests whose reply subscription is rejected fail explicitly instead of hanging forever. That last one is the classic phantom timeout that eats an entire afternoon of debugging.</p>",
+            "fr": "<p>La ligne 12.x continue de peaufiner ce qui compte en production : le flux de messages <code>platform-socket.io</code> ne meurt plus quand un handler lève une exception, les microservices détachent leurs signal listeners à la déconnexion (fini les fuites au shutdown), et les requêtes dont la reply subscription est rejetée échouent explicitement au lieu d'attendre indéfiniment. Ce dernier point, c'est le timeout fantôme classique.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nestjs/nest/releases/tag/v12.0.2",
+            "label": "github.com/nestjs/nest"
+          }
+        },
+        {
+          "id": "better-auth-175",
+          "tag": "minor",
+          "date": "14 Sep 2026",
+          "title": {
+            "es": "better-auth 1.7.5 agrega database.schemaName para PostgreSQL",
+            "en": "better-auth 1.7.5 adds database.schemaName for PostgreSQL",
+            "fr": "better-auth 1.7.5 ajoute database.schemaName pour PostgreSQL"
+          },
+          "body_html": {
+            "es": "<p>Novedad chica pero muy pedida: <code>database.schemaName</code> para conexiones directas a PostgreSQL, así podés aislar las tablas de auth en su propio schema en lugar de ensuciar <code>public</code>. También arreglaron migraciones que confundían tablas con views entre schemas, validación de índices MySQL sobre columnas string existentes, y sacaron el peer dependency opcional de <code>better-sqlite3</code> que rompía instalaciones.</p>",
+            "en": "<p>Small but long-requested: <code>database.schemaName</code> for direct PostgreSQL connections, so you can isolate auth tables in their own schema instead of polluting <code>public</code>. It also fixes migrations that confused tables with views across schemas, MySQL index validation on existing string columns, and drops the unused optional <code>better-sqlite3</code> peer dependency that was breaking installs.</p>",
+            "fr": "<p>Petit mais très demandé : <code>database.schemaName</code> pour les connexions PostgreSQL directes, afin d'isoler les tables d'auth dans leur propre schema plutôt que de polluer <code>public</code>. Corrige aussi les migrations confondant tables et views entre schemas, la validation d'index MySQL sur colonnes string existantes, et supprime la peer dependency optionnelle <code>better-sqlite3</code> qui cassait les installations.</p>"
+          },
+          "source": {
+            "url": "https://github.com/better-auth/better-auth/releases/tag/v1.7.5",
+            "label": "github.com/better-auth"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "bullmq-636",
+      "updates": [
+        {
+          "id": "bullmq-636",
+          "tag": "patch",
+          "date": "14 Sep 2026",
+          "title": {
+            "es": "BullMQ 6.3.6 arregla duplicate() anidado en el adapter lazy de Bun",
+            "en": "BullMQ 6.3.6 fixes nested duplicate() on the lazy Bun adapter",
+            "fr": "BullMQ 6.3.6 corrige duplicate() imbriqué sur l'adapter lazy de Bun"
+          },
+          "body_html": {
+            "es": "<p>Si estás corriendo colas BullMQ sobre Bun, este parche te interesa: el adapter lazy de Bun rompía cuando llamabas <code>duplicate()</code> de forma anidada sobre la conexión Redis — patrón habitual cuando creás workers y QueueEvents a partir de una conexión compartida. Chiquito, pero el tipo de bug que te deja workers zombies sin explicación aparente.</p>",
+            "en": "<p>If you run BullMQ queues on Bun, this one matters: the lazy Bun adapter broke on nested <code>duplicate()</code> calls against the Redis connection — a common pattern when you spin up workers and QueueEvents from a shared connection. Tiny patch, but exactly the kind of bug that leaves you with zombie workers and no obvious explanation.</p>",
+            "fr": "<p>Si vous exécutez des queues BullMQ sur Bun, ce correctif compte : l'adapter lazy de Bun échouait sur les appels <code>duplicate()</code> imbriqués sur la connexion Redis — un pattern courant quand on crée workers et QueueEvents depuis une connexion partagée. Petit patch, mais typiquement le bug qui laisse des workers zombies sans explication.</p>"
+          },
+          "source": {
+            "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.3.6",
+            "label": "github.com/taskforcesh/bullmq"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cpython-rust-optional",
+      "updates": [
+        {
+          "id": "cpython-rust-optional",
+          "tag": "notable",
+          "date": "14 Sep 2026",
+          "title": {
+            "es": "CPython da marcha atrás: Rust será opcional, no obligatorio",
+            "en": "CPython backs off: Rust will be optional, not mandatory",
+            "fr": "CPython fait marche arrière : Rust sera optionnel, pas obligatoire"
+          },
+          "body_html": {
+            "es": "<p>La propuesta original (noviembre 2025) era meter Rust como dependencia <em>obligatoria</em> de CPython. En mayo de 2026 la enmendaron a opcional, y ahora el plan apunta a Python 3.16 (octubre 2027) con la nueva API de Rust usando <code>zlib</code> como caso de prueba. Guido resumió el razonamiento: un rewrite completo en Rust no funciona, pero empezar por componentes menos esenciales y expandirse de a poco sí. Quedan pendientes soporte GCC en plataformas raras, verificación de memory safety cross-language y ajustes al trait <code>Drop</code>. Si mantenés imágenes de CI o build pipelines con Python, mirá esto de reojo — toca toda la cadena de build.</p>",
+            "en": "<p>The original November 2025 proposal made Rust a <em>mandatory</em> CPython dependency. It was amended to optional in May 2026, and the plan now targets Python 3.16 (October 2027) shipping the new Rust API with <code>zlib</code> as the test case. Guido summed up the reasoning: a full Rust rewrite won't work, but starting with less-essential components and expanding gradually will. Open problems: GCC support on obscure platforms, cross-language memory-safety verification, and changes to Rust's <code>Drop</code> trait. If you maintain CI images or Python build pipelines, keep an eye on this — it touches the whole build chain.</p>",
+            "fr": "<p>La proposition initiale (novembre 2025) faisait de Rust une dépendance <em>obligatoire</em> de CPython. Amendée en mai 2026 pour devenir optionnelle, elle vise désormais Python 3.16 (octobre 2027) avec la nouvelle API Rust et <code>zlib</code> comme cas de test. Guido résume : une réécriture complète en Rust ne marchera pas, mais commencer par des composants moins essentiels et étendre progressivement, si. Restent en suspens : le support GCC sur plateformes obscures, la vérification cross-langage de la memory safety et des ajustements au trait <code>Drop</code>.</p>"
+          },
+          "source": {
+            "url": "https://www.theregister.com/devops/2026/09/14/cpython-eases-rust-requirements-as-assimilation-continues/5296010",
+            "label": "theregister.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "turborepo-21013",
+      "updates": [
+        {
+          "id": "turborepo-21013",
+          "tag": "release",
+          "date": "14 Sep 2026",
+          "title": {
+            "es": "Turborepo 2.10.13 entiende workspaces de uv y virtualenvs de Python",
+            "en": "Turborepo 2.10.13 understands uv workspaces and Python virtual environments",
+            "fr": "Turborepo 2.10.13 comprend les workspaces uv et les virtualenvs Python"
+          },
+          "body_html": {
+            "es": "<p>Turborepo deja de ser estrictamente un orquestador JS/TS: esta release lee metadata de workspaces de <code>uv</code>, soporta virtualenvs de Python y scopea el lockfile de uv correctamente. Si tenés un monorepo mixto con servicios Node y workers Python (muy común en stacks con ML o data pipelines), esto es un golazo para la DX — ya no necesitás dos orquestadores peleando por el mismo grafo de tareas. También arreglaron selecciones del TUI copiadas localmente sobre SSH.</p>",
+            "en": "<p>Turborepo is no longer strictly a JS/TS orchestrator: this release reads <code>uv</code> workspace metadata, supports Python virtual environments, and scopes the uv lockfile correctly. If you run a mixed monorepo with Node services and Python workers (very common in ML or data-pipeline stacks), this is a serious DX win — you no longer need two orchestrators fighting over the same task graph. It also fixes TUI selections copying locally over SSH.</p>",
+            "fr": "<p>Turborepo n'est plus strictement un orchestrateur JS/TS : cette version lit les métadonnées de workspace <code>uv</code>, supporte les virtualenvs Python et scope correctement le lockfile uv. Pour un monorepo mixte avec services Node et workers Python (courant dans les stacks ML ou data pipelines), c'est un vrai gain de DX — plus besoin de deux orchestrateurs se disputant le même graphe de tâches. Corrige aussi la copie locale des sélections TUI via SSH.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vercel/turborepo/releases/tag/v2.10.13",
+            "label": "github.com/vercel/turborepo"
+          }
+        },
+        {
+          "id": "jotai-3",
+          "tag": "breaking",
+          "date": "14 Sep 2026",
+          "title": {
+            "es": "Jotai 3.0 es ESM-only y se saca de encima CommonJS, UMD y SystemJS",
+            "en": "Jotai 3.0 goes ESM-only, dropping CommonJS, UMD and SystemJS",
+            "fr": "Jotai 3.0 passe en ESM-only et abandonne CommonJS, UMD et SystemJS"
+          },
+          "body_html": {
+            "es": "<p>Sin APIs nuevas y sin cambios de comportamiento: Jotai 3.0 es puro trabajo de limpieza. Se van los builds CommonJS, UMD y SystemJS, se van <code>atomFamily</code> (migró al paquete <code>jotai-family</code> con la misma API), <code>loadable</code>, el argumento <code>setSelf</code> y el plugin <code>jotai/babel</code>. El target pasa a ES2020 y sube el piso de Node, React y TypeScript. Si tu SSR todavía hace <code>require()</code> de Jotai en algún lado, este upgrade te va a doler — revisá el bundler antes de tocar el package.json.</p>",
+            "en": "<p>No new APIs and no behavior changes: Jotai 3.0 is pure cleanup. CommonJS, UMD and SystemJS builds are gone, along with <code>atomFamily</code> (moved to the <code>jotai-family</code> package with an identical API), <code>loadable</code>, the <code>setSelf</code> argument and the <code>jotai/babel</code> plugin. The target moves to ES2020 and the Node, React and TypeScript floors go up. If your SSR layer still <code>require()</code>s Jotai anywhere, this upgrade will hurt — check your bundler before touching package.json.</p>",
+            "fr": "<p>Aucune nouvelle API, aucun changement de comportement : Jotai 3.0 est un pur travail de nettoyage. Exit les builds CommonJS, UMD et SystemJS, ainsi que <code>atomFamily</code> (déplacé vers le paquet <code>jotai-family</code> avec une API identique), <code>loadable</code>, l'argument <code>setSelf</code> et le plugin <code>jotai/babel</code>. La cible passe à ES2020 et les versions minimales de Node, React et TypeScript augmentent. Si votre SSR fait encore un <code>require()</code> de Jotai, la mise à jour sera douloureuse.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/09/jotai-3-released/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Semana de auth rota: ZITADEL escalando privilegios por Token Exchange y NestJS tapando un bypass de middleware en Fastify. Moraleja repetida: la autorización no se valida una sola vez en el borde, se valida en cada salto — y el absolute-form request target sigue siendo el clásico que rompe routers y middlewares por igual.",
+      "en": "A broken-auth week: ZITADEL escalating privileges through Token Exchange and NestJS patching a middleware bypass on Fastify. Same lesson twice: authorization isn't validated once at the edge, it's validated at every hop — and the absolute-form request target remains the classic that breaks routers and middleware alike.",
+      "fr": "Semaine d'auth cassée : ZITADEL avec une élévation de privilèges via Token Exchange et NestJS corrigeant un contournement de middleware sur Fastify. Même leçon deux fois : l'autorisation ne se valide pas une seule fois en périphérie, mais à chaque saut — et l'absolute-form request target reste le classique qui casse routers et middlewares."
+    },
+    {
+      "es": "El monorepo dejó de ser monolingüe. Turborepo leyendo workspaces de uv y virtualenvs de Python confirma la tendencia: los stacks reales mezclan servicios Node con workers Python, y la herramienta de build tiene que entender el grafo completo, no solo la mitad que le gusta.",
+      "en": "The monorepo stopped being monolingual. Turborepo reading uv workspaces and Python virtual environments confirms the trend: real stacks mix Node services with Python workers, and the build tool has to understand the whole graph, not just the half it likes.",
+      "fr": "Le monorepo n'est plus monolingue. Turborepo lisant les workspaces uv et les virtualenvs Python confirme la tendance : les stacks réelles mêlent services Node et workers Python, et l'outil de build doit comprendre le graphe entier, pas seulement la moitié qui l'arrange."
+    },
+    {
+      "es": "Migrar de SQL sharded a un cache in-memory no es magia, es método: Agoda validó con dual-read hasta >99,9% de paridad antes de cortar. Los números de DragonflyDB impresionan (~300k req/s a 8 ms P99), pero lo que hay que copiar es el proceso de validación, no el datastore.",
+      "en": "Migrating from sharded SQL to an in-memory cache isn't magic, it's method: Agoda ran dual-read validation to >99.9% parity before cutting over. DragonflyDB's numbers are impressive (~300k req/s at 8 ms P99), but the thing worth copying is the validation process, not the datastore.",
+      "fr": "Migrer d'un SQL shardé vers un cache in-memory n'est pas magique, c'est méthodique : Agoda a validé en dual-read jusqu'à >99,9% de parité avant de basculer. Les chiffres de DragonflyDB impressionnent (~300k req/s à 8 ms P99), mais ce qu'il faut copier, c'est le processus de validation, pas le datastore."
+    }
+  ]
+}

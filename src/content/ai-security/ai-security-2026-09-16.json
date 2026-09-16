@@ -1,0 +1,268 @@
+{
+  "title": {
+    "es": "AI Security — 16 Sep 2026",
+    "en": "AI Security — 16 Sep 2026",
+    "fr": "AI Security — 16 sept. 2026"
+  },
+  "description": {
+    "es": "Tres CVEs nuevos de DoS en vLLM, y el stack MCP bajo fuego: el servidor MCP de GitLab se come dos criticos 9.6 mas cinco bypasses de sus propios controles de seguridad.",
+    "en": "Three fresh denial-of-service CVEs in vLLM, and the MCP stack takes a beating: the GitLab MCP server ships two 9.6 criticals plus five bypasses of its own safety controls.",
+    "fr": "Trois nouveaux CVE de deni de service dans vLLM, et la pile MCP encaisse: le serveur MCP GitLab cumule deux critiques 9.6 et cinq contournements de ses propres garde-fous."
+  },
+  "pubDate": "2026-09-16",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "MCP de GitLab: SSRF roba credenciales",
+        "en": "GitLab MCP: SSRF steals credentials",
+        "fr": "MCP GitLab: SSRF vole des identifiants"
+      },
+      "anchor": "cve-2026-61559-mcp-gitlab-ssrf",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "DNS rebinding llega al MCP local",
+        "en": "DNS rebinding reaches the local MCP",
+        "fr": "DNS rebinding atteint le MCP local"
+      },
+      "anchor": "cve-2026-61568-mcp-gitlab-dns-rebinding",
+      "icon": "lucide:siren"
+    },
+    {
+      "text": {
+        "es": "Cinco bypasses del modo read-only",
+        "en": "Five bypasses of MCP read-only mode",
+        "fr": "Cinq contournements du mode lecture seule"
+      },
+      "anchor": "ghsa-5648-mcp-gitlab-safety-bypass",
+      "icon": "lucide:shield-alert"
+    },
+    {
+      "text": {
+        "es": "vLLM: tres DoS nuevos esta semana",
+        "en": "vLLM: three new DoS bugs this week",
+        "fr": "vLLM: trois nouveaux DoS cette semaine"
+      },
+      "anchor": "framework-cves",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": {
+        "es": "MCP Memory Keeper lee tus SSH keys",
+        "en": "MCP Memory Keeper reads your SSH keys",
+        "fr": "MCP Memory Keeper lit vos cles SSH"
+      },
+      "anchor": "cve-2026-54561-mcp-memory-keeper-traversal",
+      "icon": "lucide:lock"
+    },
+    {
+      "text": {
+        "es": "Flowise filtra credenciales entre workspaces",
+        "en": "Flowise leaks credentials across workspaces",
+        "fr": "Flowise fuit des identifiants entre espaces"
+      },
+      "anchor": "cve-2026-90534-flowise-confused-deputy",
+      "icon": "lucide:package"
+    }
+  ],
+  "tools": [
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "cve-2026-61559-mcp-gitlab-ssrf",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-61559 — el MCP de GitLab manda tu token de GitLab a donde le digan",
+            "en": "CVE-2026-61559 — the GitLab MCP server sends your GitLab token wherever it is told",
+            "fr": "CVE-2026-61559 — le serveur MCP GitLab envoie votre jeton GitLab ou on le lui demande"
+          },
+          "body_html": {
+            "es": "<p>Ojo con esto: cuando <code>@zereight/mcp-gitlab</code> corre con <code>ENABLE_DYNAMIC_API_URL=true</code>, el header <code>X-GitLab-API-URL</code> decide a que host se hace la llamada saliente — <strong>y el token de GitLab viaja igual</strong>. Eso es SSRF con robo de credenciales de una: el atacante apunta el header a su propio servidor y se lleva el PAT completo.</p><p>GitHub lo clasifico como <strong>critical</strong> (CVSS v3.1 9.6; el reporte original pedia 8.5). Afecta todas las versiones hasta el commit <code>74a8c83</code> y al momento del reporte <strong>no habia version parcheada</strong>. Si tenes ese MCP colgado de un agente, apaga la URL dinamica ya.</p>",
+            "en": "<p>When <code>@zereight/mcp-gitlab</code> runs with <code>ENABLE_DYNAMIC_API_URL=true</code>, the <code>X-GitLab-API-URL</code> header decides which host the outbound call hits — <strong>and the GitLab token rides along</strong>. That is SSRF with credential theft in one step: point the header at your own server and collect the full PAT.</p><p>GitHub rates it <strong>critical</strong> (CVSS v3.1 9.6; the original report argued for 8.5). All versions through commit <code>74a8c83</code> are affected, and <strong>no patched version existed at report time</strong>. If this MCP server is wired to an agent, turn dynamic API URLs off now.</p>",
+            "fr": "<p>Quand <code>@zereight/mcp-gitlab</code> tourne avec <code>ENABLE_DYNAMIC_API_URL=true</code>, l en-tete <code>X-GitLab-API-URL</code> choisit l hote de l appel sortant — <strong>et le jeton GitLab part avec</strong>. C est un SSRF doublé d un vol d identifiants: l attaquant pointe l en-tete vers son serveur et recupere le PAT complet.</p><p>GitHub le classe <strong>critique</strong> (CVSS v3.1 9.6). Toutes les versions jusqu au commit <code>74a8c83</code> sont touchees, et <strong>aucune version corrigee</strong> n existait au moment du rapport.</p>"
+          },
+          "date": "15 Sep 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-2h44-8472-frjj",
+            "label": "GHSA-2h44-8472-frjj"
+          }
+        },
+        {
+          "id": "cve-2026-61568-mcp-gitlab-dns-rebinding",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-61568 — una pagina web cualquiera puede hablarle a tu MCP local via DNS rebinding",
+            "en": "CVE-2026-61568 — any web page can talk to your local MCP via DNS rebinding",
+            "fr": "CVE-2026-61568 — n importe quelle page web peut parler a votre MCP local via DNS rebinding"
+          },
+          "body_html": {
+            "es": "<p>El mismo paquete expone su endpoint Streamable HTTP <strong>sin allowlist efectiva de <code>Host</code> ni <code>Origin</code></strong>. Una pagina maliciosa hace DNS rebinding, enruta el request del browser al listener MCP local del laburante y conserva un <code>Host</code>/<code>Origin</code> controlado por el atacante. El server los acepta y llega al path de inicializacion MCP en vez de rechazar en el borde HTTP.</p><p>Traduccion: el limite de confianza del MCP local — «solo yo puedo hablarle a localhost» — <strong>no existe</strong>. CVSS v3.1 9.6, critical.</p>",
+            "en": "<p>The same package exposes its Streamable HTTP MCP endpoint <strong>without an effective <code>Host</code> or <code>Origin</code> allowlist</strong>. A malicious page uses DNS rebinding to route browser requests to the victim's local MCP listener while preserving an attacker-controlled <code>Host</code> and <code>Origin</code>. The server accepts them and reaches the MCP initialization path instead of rejecting at the HTTP boundary.</p><p>Translation: the local-MCP trust boundary — <em>only I can talk to localhost</em> — <strong>does not exist here</strong>. CVSS v3.1 9.6, critical.</p>",
+            "fr": "<p>Le meme paquet expose son endpoint Streamable HTTP <strong>sans allowlist efficace de <code>Host</code> ou <code>Origin</code></strong>. Une page malveillante utilise le DNS rebinding pour router les requetes du navigateur vers le listener MCP local de la victime en conservant un <code>Host</code> et un <code>Origin</code> controles par l attaquant. Le serveur les accepte et atteint le chemin d initialisation MCP. CVSS v3.1 9.6, critique.</p>"
+          },
+          "date": "15 Sep 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-vmp7-252j-cwp7",
+            "label": "GHSA-vmp7-252j-cwp7"
+          }
+        },
+        {
+          "id": "ghsa-5648-mcp-gitlab-safety-bypass",
+          "tag": "high",
+          "title": {
+            "es": "Cinco defectos tumban el read-only, la allowlist y la auth del MCP de GitLab",
+            "en": "Five defects defeat read-only mode, the allow-list and transport auth in the GitLab MCP server",
+            "fr": "Cinq defauts mettent a terre le mode lecture seule, l allow-list et l auth du MCP GitLab"
+          },
+          "body_html": {
+            "es": "<p>Este es el que mas me interesa conceptualmente. <code>@zereight/mcp-gitlab</code> expone GitLab a un agente LLM y apoya toda su seguridad en tres controles: <strong>modo read-only</strong>, <strong>allowlist de proyectos</strong> y <strong>auth de transporte</strong>. El advisory documenta <strong>cinco defectos</strong> que los rompen: bypass del read-only y de la allowlist via <code>execute_graphql</code>, transportes sin autenticar y un DoS por agotamiento de sesiones.</p><p>Y aca esta la clave: el analisis se hace <strong>bajo el threat model de MCP</strong> — los argumentos y el contenido de una tool call pueden estar moldeados por input no confiable, o sea <strong>prompt injection</strong>, o por un cliente malicioso. Si tu unica defensa contra un agente comprometido es la bandera «read-only», no tenes una defensa. CVSS v3.1 8.1, high. Commit revisado: <code>60adcc0</code>.</p>",
+            "en": "<p>This is the conceptually interesting one. <code>@zereight/mcp-gitlab</code> exposes GitLab to an LLM agent and rests its entire security story on three controls: <strong>read-only mode</strong>, a <strong>project allow-list</strong>, and <strong>transport auth</strong>. The advisory documents <strong>five defects</strong> that defeat them: a read-only plus allow-list bypass through <code>execute_graphql</code>, unauthenticated transports, and a session-exhaustion DoS.</p><p>The key point: the analysis is explicitly done <strong>under the MCP threat model</strong> — tool-call arguments and content can be shaped by untrusted input, meaning <strong>prompt injection</strong>, or by a malicious client. If your only defense against a compromised agent is a read-only flag, you do not have a defense. CVSS v3.1 8.1, high. Reviewed commit: <code>60adcc0</code>.</p>",
+            "fr": "<p>Le plus interessant sur le plan conceptuel. <code>@zereight/mcp-gitlab</code> expose GitLab a un agent LLM et fait reposer toute sa securite sur trois controles: <strong>mode lecture seule</strong>, <strong>allow-list de projets</strong> et <strong>auth de transport</strong>. L advisory documente <strong>cinq defauts</strong> qui les contournent, dont un bypass lecture seule et allow-list via <code>execute_graphql</code>, des transports non authentifies et un DoS par epuisement de sessions.</p><p>L analyse est menee <strong>sous le modele de menace MCP</strong>: les arguments d appel d outil peuvent etre facconnes par une entree non fiable, donc par <strong>prompt injection</strong>. CVSS v3.1 8.1, eleve.</p>"
+          },
+          "date": "15 Sep 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-5648-rgj9-v224",
+            "label": "GHSA-5648-rgj9-v224"
+          }
+        },
+        {
+          "id": "cve-2026-54561-mcp-memory-keeper-traversal",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-54561 — MCP Memory Keeper deja que el agente lea cualquier archivo del host",
+            "en": "CVE-2026-54561 — MCP Memory Keeper lets the agent read any file on the host",
+            "fr": "CVE-2026-54561 — MCP Memory Keeper laisse l agent lire n importe quel fichier de l hote"
+          },
+          "body_html": {
+            "es": "<p><code>mcp-memory-keeper</code> anterior a <strong>0.13.0</strong> no valida rutas en su funcion <code>context_import</code>. Un cliente MCP — incluido <strong>un agente LLM inducido a llamar la tool</strong> — puede usar <code>../</code> o una ruta absoluta para apuntar a cualquier archivo legible por el proceso del server.</p><p>Fuga por dos caminos: el JSON que parsea bien, y <strong>los mensajes de error del JSON que parsea mal</strong>. Objetivos tipicos: credenciales, service accounts, variables de entorno y claves SSH. CVSS v3.1 6.2. <strong>Actualiza a 0.13.0</strong>.</p>",
+            "en": "<p><code>mcp-memory-keeper</code> before <strong>0.13.0</strong> does not validate paths in its <code>context_import</code> function. An MCP client — including <strong>an LLM agent induced to call the tool</strong> — can use <code>../</code> traversal or an absolute path to target any file readable by the server process.</p><p>Data leaks through two channels: JSON that parses successfully, and <strong>error messages from JSON that fails to parse</strong>. Typical targets are credentials, service accounts, environment variables and SSH keys. CVSS v3.1 6.2. <strong>Upgrade to 0.13.0</strong>.</p>",
+            "fr": "<p><code>mcp-memory-keeper</code> avant <strong>0.13.0</strong> ne valide pas les chemins dans sa fonction <code>context_import</code>. Un client MCP — y compris <strong>un agent LLM incite a appeler l outil</strong> — peut utiliser <code>../</code> ou un chemin absolu pour viser tout fichier lisible par le processus serveur.</p><p>La fuite passe par deux canaux: le JSON qui parse correctement, et <strong>les messages d erreur du JSON invalide</strong>. Cibles typiques: identifiants, comptes de service, variables d environnement et cles SSH. CVSS v3.1 6.2.</p>"
+          },
+          "date": "15 Sep 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-54561",
+            "label": "OpenCVE — CVE-2026-54561"
+          }
+        }
+      ]
+    },
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "cve-2026-92220-vllm-moriio-dos",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-92220 — un request_id manipulado hace que vLLM se coma los recursos, sin autenticar",
+            "en": "CVE-2026-92220 — a doctored request_id burns vLLM resources, no auth required",
+            "fr": "CVE-2026-92220 — un request_id manipule consume les ressources de vLLM, sans authentification"
+          },
+          "body_html": {
+            "es": "<p>Recien salido del horno: el <strong>MoRIIO Acknowledgement Handler</strong> de vLLM (<code>moriio_connector.py</code>) consume recursos sin control si manipulas los argumentos <code>request_id</code> o <code>kv_transfer_params</code>. Afecta <strong>0.26.0 y 0.27.0</strong>.</p><p>Lo que lo hace molesto no es el impacto — solo disponibilidad — sino el perfil de acceso: <strong>remoto, sin autenticacion y sin interaccion del usuario</strong>. CWE-400 mas CWE-404. CVSS v4.0 6.9 / v3.1 5.3, medium. Es la ruta de KV transfer distribuido, asi que pega donde menos querias: en el plano de datos entre nodos de inferencia.</p>",
+            "en": "<p>Fresh today: vLLM's <strong>MoRIIO Acknowledgement Handler</strong> (<code>moriio_connector.py</code>) consumes resources without bound when the <code>request_id</code> or <code>kv_transfer_params</code> arguments are manipulated. Affects <strong>0.26.0 and 0.27.0</strong>.</p><p>What makes it annoying is not the impact — availability only — but the access profile: <strong>remote, unauthenticated, no user interaction</strong>. CWE-400 plus CWE-404. CVSS v4.0 6.9 / v3.1 5.3, medium. This is the distributed KV-transfer path, so it lands exactly where you would rather it did not: the data plane between inference nodes.</p>",
+            "fr": "<p>Tout frais: le <strong>MoRIIO Acknowledgement Handler</strong> de vLLM (<code>moriio_connector.py</code>) consomme des ressources sans limite quand les arguments <code>request_id</code> ou <code>kv_transfer_params</code> sont manipules. Touche <strong>0.26.0 et 0.27.0</strong>.</p><p>Le probleme n est pas l impact — disponibilite seulement — mais le profil d acces: <strong>distant, non authentifie, sans interaction</strong>. CWE-400 et CWE-404. CVSS v4.0 6.9 / v3.1 5.3, moyen.</p>"
+          },
+          "date": "16 Sep 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-92220",
+            "label": "OpenCVE — CVE-2026-92220"
+          }
+        },
+        {
+          "id": "cve-2026-90555-vllm-flac-header",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-90555 — un header FLAC falso en el endpoint de transcripcion tumba el server para todos",
+            "en": "CVE-2026-90555 — a forged FLAC header on the transcription endpoint crashes the server for every tenant",
+            "fr": "CVE-2026-90555 — un en-tete FLAC falsifie sur l endpoint de transcription fait tomber le serveur pour tous"
+          },
+          "body_html": {
+            "es": "<p>vLLM anterior a <strong>0.28.0</strong> no valida bien el <strong>sample rate</strong> declarado en el header del audio que entra al endpoint de transcripcion. Un cliente autenticado manda un header FLAC forjado con un sample rate infladisimo, vLLM reserva memoria en base a ese numero y el API server se cae — <strong>arrastrando a todos los tenants</strong>, no solo al atacante.</p><p>CWE-409 (datos muy comprimidos) mas CWE-770 (asignacion sin limite). CVSS v4.0 <strong>7.1 high</strong> / v3.1 6.5. Requiere credenciales validas, pero en un deployment multi-tenant «autenticado» significa «cualquier cliente pago».</p>",
+            "en": "<p>vLLM before <strong>0.28.0</strong> fails to properly validate the <strong>sample rate</strong> declared in the audio header reaching the transcription endpoint. An authenticated client submits a forged FLAC header with a wildly inflated sample rate, vLLM allocates memory based on that number, and the API server crashes — <strong>taking down every tenant</strong>, not just the attacker.</p><p>CWE-409 (highly compressed data) plus CWE-770 (allocation without limits). CVSS v4.0 <strong>7.1 high</strong> / v3.1 6.5. It needs valid credentials, but in a multi-tenant deployment <em>authenticated</em> just means <em>any paying client</em>.</p>",
+            "fr": "<p>vLLM avant <strong>0.28.0</strong> ne valide pas correctement le <strong>sample rate</strong> declare dans l en-tete audio de l endpoint de transcription. Un client authentifie envoie un en-tete FLAC falsifie avec un sample rate demesure, vLLM alloue la memoire sur cette base et le serveur API tombe — <strong>entrainant tous les tenants</strong>.</p><p>CWE-409 et CWE-770. CVSS v4.0 <strong>7.1 eleve</strong> / v3.1 6.5.</p>"
+          },
+          "date": "12 Sep 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-90555",
+            "label": "OpenCVE — CVE-2026-90555"
+          }
+        },
+        {
+          "id": "cve-2026-90713-vllm-tiktoken",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-90713 — el handler de vocabulario tiktoken de vLLM se cuelga con un archivo mal formado",
+            "en": "CVE-2026-90713 — vLLM's tiktoken vocabulary handler hangs on a malformed file",
+            "fr": "CVE-2026-90713 — le handler de vocabulaire tiktoken de vLLM se bloque sur un fichier malforme"
+          },
+          "body_html": {
+            "es": "<p>Tercero de la semana en vLLM: <code>TiktokenTokenizer::new</code> maneja mal el archivo de vocabulario de <strong>tiktoken</strong> y termina en agotamiento de recursos o error no manejado — la app crashea o queda sin responder. Afecta <strong>todas las versiones hasta 0.29.0</strong>.</p><p>Requiere <strong>acceso local</strong>, lo que baja bastante el riesgo real (CVSS v4.0 4.8, medium). Pero hay <strong>PoC publico</strong>, y el EPSS sigue abajo del 1%. Lo anoto sobre todo por el patron: tres DoS distintos en vLLM en cinco dias, todos por validacion floja de input antes de reservar memoria.</p>",
+            "en": "<p>Third vLLM issue of the week: <code>TiktokenTokenizer::new</code> mishandles the <strong>tiktoken</strong> vocabulary file and ends in resource exhaustion or an unhandled error — the app crashes or stops responding. Affects <strong>all versions up to 0.29.0</strong>.</p><p>It requires <strong>local access</strong>, which takes real-world risk down a long way (CVSS v4.0 4.8, medium). But a <strong>public PoC exists</strong>, with EPSS still under 1%. Worth logging mostly for the pattern: three distinct vLLM DoS bugs in five days, all of them weak input validation before a memory allocation.</p>",
+            "fr": "<p>Troisieme cas vLLM de la semaine: <code>TiktokenTokenizer::new</code> gere mal le fichier de vocabulaire <strong>tiktoken</strong> et finit en epuisement de ressources ou erreur non geree. Touche <strong>toutes les versions jusqu a 0.29.0</strong>.</p><p>Necessite un <strong>acces local</strong>, ce qui reduit fortement le risque reel (CVSS v4.0 4.8, moyen). Mais un <strong>PoC public</strong> existe. A noter surtout pour le motif recurrent: trois DoS vLLM distincts en cinq jours.</p>"
+          },
+          "date": "14 Sep 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-90713",
+            "label": "OpenCVE — CVE-2026-90713"
+          }
+        }
+      ]
+    },
+    {
+      "id": "advisories",
+      "name": "Vendor Advisories",
+      "theme": "advisories",
+      "icon_emoji": "📢",
+      "anchor": "advisories",
+      "updates": [
+        {
+          "id": "cve-2026-90534-flowise-confused-deputy",
+          "tag": "patch",
+          "title": {
+            "es": "CVE-2026-90534 — Flowise 3.1.4 tapa un confused deputy que cruza credenciales entre workspaces",
+            "en": "CVE-2026-90534 — Flowise 3.1.4 closes a confused deputy that crosses workspace credentials",
+            "fr": "CVE-2026-90534 — Flowise 3.1.4 corrige un confused deputy entre espaces de travail"
+          },
+          "body_html": {
+            "es": "<p>En Flowise anterior a <strong>3.1.4</strong>, el endpoint <code>POST /api/v1/node-load-method/:name</code> esta montado <strong>sin ningun chequeo de permisos a nivel de ruta</strong> y encima no verifica que la credencial pertenezca al workspace de quien llama.</p><p>Resultado: un usuario autenticado de <strong>bajo privilegio</strong> en un workspace usa las credenciales de <strong>otro</strong> workspace — integraciones tipo Google Drive o AWS DynamoDB incluidas. Confused deputy clasico, y en una plataforma de agentes multi-tenant el impacto es exactamente el que te imaginas. CVSS v4.0 6.1 / v3.1 6.5, medium. <strong>Ya hay fix: 3.1.4</strong>.</p>",
+            "en": "<p>In Flowise before <strong>3.1.4</strong>, the <code>POST /api/v1/node-load-method/:name</code> endpoint is mounted <strong>without any route-level permission check</strong>, and on top of that it never verifies that the credential belongs to the caller's workspace.</p><p>Result: an authenticated <strong>low-privilege</strong> user in one workspace exercises <strong>another</strong> workspace's credentials — third-party integrations such as Google Drive and AWS DynamoDB included. A textbook confused deputy, and on a multi-tenant agent platform the impact is exactly what you would expect. CVSS v4.0 6.1 / v3.1 6.5, medium. <strong>Fixed in 3.1.4</strong>.</p>",
+            "fr": "<p>Dans Flowise avant <strong>3.1.4</strong>, l endpoint <code>POST /api/v1/node-load-method/:name</code> est monte <strong>sans aucun controle de permission au niveau de la route</strong> et ne verifie pas que l identifiant appartient a l espace de travail de l appelant.</p><p>Resultat: un utilisateur authentifie <strong>peu privilegie</strong> d un espace utilise les identifiants d un <strong>autre</strong> espace, integrations Google Drive et AWS DynamoDB comprises. CVSS v4.0 6.1 / v3.1 6.5, moyen. <strong>Corrige en 3.1.4</strong>.</p>"
+          },
+          "date": "12 Sep 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-90534",
+            "label": "OpenCVE — CVE-2026-90534"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El servidor MCP dejo de ser plumbing y paso a ser superficie de ataque de primera clase: tres advisories el mismo dia sobre un solo paquete, mas un path traversal en otro. Y el threat model que usan los reporters ya asume prompt injection como entrada normal.",
+      "en": "The MCP server has stopped being plumbing and become first-class attack surface: three advisories on a single package in one day, plus a path traversal in another. And the threat model the reporters use now assumes prompt injection as ordinary input.",
+      "fr": "Le serveur MCP n est plus de la plomberie mais une surface d attaque de premier plan: trois advisories sur un seul paquet en un jour, plus un path traversal dans un autre. Le modele de menace employe suppose desormais la prompt injection comme entree ordinaire."
+    },
+    {
+      "es": "Tres DoS nuevos en vLLM en cinco dias y todos comparten la misma raiz: confiar en un numero que viene del request — sample rate, request_id, archivo de vocabulario — antes de reservar memoria. No es un bug, es un patron de diseno que hay que auditar entero.",
+      "en": "Three new vLLM denial-of-service bugs in five days, all sharing one root cause: trusting a number that came from the request — sample rate, request_id, vocabulary file — before allocating memory. That is not a bug, it is a design pattern that needs auditing wholesale.",
+      "fr": "Trois nouveaux DoS vLLM en cinq jours, tous avec la meme racine: faire confiance a un nombre issu de la requete — sample rate, request_id, fichier de vocabulaire — avant d allouer la memoire. Ce n est pas un bug, c est un motif de conception a auditer en bloc."
+    },
+    {
+      "es": "Los controles de seguridad declarativos de las plataformas de agentes — modo read-only, allowlists, flags de permisos a nivel ruta — estan fallando en Flowise y en mcp-gitlab por la misma razon: se confia en la bandera y nadie verifica el limite real en el codigo.",
+      "en": "Declarative safety controls on agent platforms — read-only mode, allow-lists, route-level permission flags — are failing in both Flowise and mcp-gitlab for the same reason: the flag is trusted and nobody enforces the actual boundary in code.",
+      "fr": "Les controles de securite declaratifs des plateformes d agents — mode lecture seule, allow-lists, flags de permission au niveau des routes — echouent dans Flowise comme dans mcp-gitlab pour la meme raison: on fait confiance au flag et personne n applique la vraie frontiere dans le code."
+    }
+  ]
+}

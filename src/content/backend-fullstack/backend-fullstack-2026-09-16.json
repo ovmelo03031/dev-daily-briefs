@@ -1,0 +1,368 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 16 Sep 2026",
+    "en": "Backend & Fullstack — 16 Sep 2026",
+    "fr": "Backend & Fullstack — 16 sept. 2026"
+  },
+  "description": {
+    "es": "Http4s publica catorce advisories de golpe con request smuggling CVSS 9.2, el MCP de GitLab se come un SSRF crítico, pnpm 12.4.2 tapa un secuestro de bin shims, y NestJS blinda su transporte TCP.",
+    "en": "Http4s drops fourteen advisories at once including a CVSS 9.2 request smuggling, the GitLab MCP server takes a critical SSRF, pnpm 12.4.2 closes a bin-shim takeover, and NestJS hardens its TCP transport.",
+    "fr": "Http4s publie quatorze advisories d'un coup dont un request smuggling CVSS 9.2, le serveur MCP GitLab encaisse un SSRF critique, pnpm 12.4.2 colmate un détournement de bin shims, et NestJS blinde son transport TCP."
+  },
+  "pubDate": "2026-09-16",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "Http4s: 14 advisories, smuggling CVSS 9.2", "en": "Http4s: 14 advisories, CVSS 9.2 smuggling", "fr": "Http4s : 14 advisories, smuggling CVSS 9.2" },
+      "anchor": "http4s-clte",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "SSRF crítico en el MCP server de GitLab", "en": "Critical SSRF in the GitLab MCP server", "fr": "SSRF critique dans le serveur MCP GitLab" },
+      "anchor": "zereight-ssrf",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "pnpm 12.4.2 tapa secuestro de bin shims", "en": "pnpm 12.4.2 closes a bin-shim takeover", "fr": "pnpm 12.4.2 colmate un détournement de shims" },
+      "anchor": "pnpm-1242",
+      "icon": "lucide:package"
+    },
+    {
+      "text": { "es": "NestJS 11.2.5 blinda el transporte TCP", "en": "NestJS 11.2.5 hardens the TCP transport", "fr": "NestJS 11.2.5 blinde le transport TCP" },
+      "anchor": "nest-1125",
+      "icon": "lucide:blocks"
+    },
+    {
+      "text": { "es": "workerd suma node:net y node:stream web", "en": "workerd adds node:net and web streams", "fr": "workerd ajoute node:net et web streams" },
+      "anchor": "workerd-20260916",
+      "icon": "simple-icons:cloudflare"
+    },
+    {
+      "text": { "es": "Vitest 5.0.1 arregla el automocking recursivo", "en": "Vitest 5.0.1 fixes recursive automocking", "fr": "Vitest 5.0.1 corrige l'automocking récursif" },
+      "anchor": "vitest-501",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "http4s-clte",
+      "updates": [
+        {
+          "id": "http4s-clte",
+          "tag": "breaking",
+          "date": "15 Sep 2026",
+          "title": {
+            "es": "Http4s Ember acepta Transfer-Encoding junto a Content-Length: request smuggling CVSS 9.2",
+            "en": "Http4s Ember accepts Transfer-Encoding alongside Content-Length: CVSS 9.2 request smuggling",
+            "fr": "Http4s Ember accepte Transfer-Encoding avec Content-Length : request smuggling CVSS 9.2"
+          },
+          "body_html": {
+            "es": "<p>El parser HTTP/1.1 de Ember no rechaza mensajes que traen <code>Transfer-Encoding</code> y <code>Content-Length</code> a la vez, cuando la RFC 9112 §6.1 obliga a tratarlo como error de framing y cerrar la conexión. Detrás de un intermediario que priorice <code>Content-Length</code>, el atacante contrabandea una segunda request y se saltea los controles del front-end: <strong>CVSS v4 9.2</strong>, afecta a <code>http4s-ember-core</code> hasta 0.23.34 y a toda la serie 1.0.0-M1..M46.</p><p>Y no viene solo: es parte de un lote de <strong>catorce advisories</strong> publicados el mismo día contra Ember (HTTP/1 y HTTP/2), <code>DigestAuth</code> y <code>CookieJar</code>. Cuando un proyecto larga una auditoría entera de una sentada, la noticia no es el CVE — es el lote. Si tenés Scala en el borde, actualizá YA.</p>",
+            "en": "<p>Ember's HTTP/1.1 parser does not reject a message carrying both <code>Transfer-Encoding</code> and <code>Content-Length</code>, while RFC 9112 §6.1 requires treating that as a framing error and closing the connection. Behind an intermediary that frames by <code>Content-Length</code>, an attacker smuggles a second request and bypasses front-end security controls: <strong>CVSS v4 9.2</strong>, affecting <code>http4s-ember-core</code> up to 0.23.34 and the whole 1.0.0-M1..M46 line.</p><p>It does not come alone: it is part of a batch of <strong>fourteen advisories</strong> published the same day against Ember (HTTP/1 and HTTP/2), <code>DigestAuth</code> and <code>CookieJar</code>. When a project ships a whole audit at once, the story is the batch, not the single CVE.</p>",
+            "fr": "<p>Le parser HTTP/1.1 d'Ember ne rejette pas un message portant à la fois <code>Transfer-Encoding</code> et <code>Content-Length</code>, alors que la RFC 9112 §6.1 impose de traiter cela comme une erreur de framing et de fermer la connexion. Derrière un intermédiaire qui cadre selon <code>Content-Length</code>, un attaquant fait passer une seconde requête en douce et contourne les contrôles du front-end : <strong>CVSS v4 9.2</strong>, touchant <code>http4s-ember-core</code> jusqu'à 0.23.34 et toute la série 1.0.0-M1..M46.</p><p>Et ce n'est pas isolé : cela fait partie d'un lot de <strong>quatorze advisories</strong> publiés le même jour contre Ember (HTTP/1 et HTTP/2), <code>DigestAuth</code> et <code>CookieJar</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-8h4c-x2wg-6xp8", "label": "github.com/advisories" }
+        },
+        {
+          "id": "zereight-ssrf",
+          "tag": "security",
+          "date": "15 Sep 2026",
+          "title": {
+            "es": "El MCP server de GitLab más usado: SSRF crítico que roba el token vía header",
+            "en": "The most-used GitLab MCP server: critical SSRF that steals the token via header",
+            "fr": "Le serveur MCP GitLab le plus utilisé : SSRF critique volant le token via un header"
+          },
+          "body_html": {
+            "es": "<p>Con <code>ENABLE_DYNAMIC_API_URL=true</code>, <code>@zereight/mcp-gitlab</code> toma el header <code>X-GitLab-API-URL</code> y lo usa como base de todas las llamadas salientes. Valida que sea una URL bien formada con <code>new URL()</code> y nada más: sin allowlist, sin restricción de hostname. Resultado: el atacante redirige las requests a su propio host y se lleva el token de GitLab puesto. Afecta todas las versiones <code>&lt; 2.1.27</code>.</p><p>Ojo que vienen dos más en el mismo paquete: DNS rebinding contra el transporte Streamable HTTP local y un combo de bypasses de los controles de seguridad. Si conectás un MCP a tu GitLab corporativo, esto es exactamente el modelo de amenaza que nadie estaba mirando.</p>",
+            "en": "<p>With <code>ENABLE_DYNAMIC_API_URL=true</code>, <code>@zereight/mcp-gitlab</code> reads the <code>X-GitLab-API-URL</code> header and uses it as the base URL for every outbound call. It validates the value is a well-formed URL with <code>new URL()</code> and nothing else — no allowlist, no hostname restriction. An attacker redirects requests to their own host and walks away with the GitLab token. All versions <code>&lt; 2.1.27</code> are affected.</p><p>Two more land in the same batch: DNS rebinding against the local Streamable HTTP transport, and a set of safety-control bypasses. If you wire an MCP server into a corporate GitLab, this is exactly the threat model nobody was watching.</p>",
+            "fr": "<p>Avec <code>ENABLE_DYNAMIC_API_URL=true</code>, <code>@zereight/mcp-gitlab</code> lit le header <code>X-GitLab-API-URL</code> et l'utilise comme base de tous les appels sortants. Il vérifie seulement que la valeur est une URL bien formée via <code>new URL()</code> : aucune allowlist, aucune restriction de hostname. L'attaquant redirige les requêtes vers son propre hôte et repart avec le token GitLab. Toutes les versions <code>&lt; 2.1.27</code> sont touchées.</p><p>Deux autres arrivent dans le même lot : DNS rebinding sur le transport Streamable HTTP local, et une série de contournements des contrôles de sécurité.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-2h44-8472-frjj", "label": "github.com/advisories" }
+        },
+        {
+          "id": "pnpm-1242",
+          "tag": "security",
+          "date": "15 Sep 2026",
+          "title": {
+            "es": "pnpm 12.4.2: un ejecutable de dependencia podía secuestrar el bin shim de otro paquete",
+            "en": "pnpm 12.4.2: a dependency executable could hijack another package's bin shim",
+            "fr": "pnpm 12.4.2 : un exécutable de dépendance pouvait détourner le bin shim d'un autre paquet"
+          },
+          "body_html": {
+            "es": "<p>Los ejecutables de una dependencia ya no pueden apoderarse del shim POSIX de otro paquete a través de sus shell helpers. Requiere <strong>reinstalar dependencias</strong> para reemplazar los shims existentes — un <code>pnpm install</code> a secas no te salva. En Cygwin, MSYS2 y WSL los shims siguen usando <code>PATH</code> para la conversión de rutas Windows, así que ahí el vector sigue abierto.</p><p>El mismo parche corta otra fuga: los links de homepage de GitHub Actions ya no exponen credenciales del servidor, y las URLs de GitHub ahora exigen HTTPS salvo en loopback. Sumá arreglos de instalación en FreeBSD y en Windows al limpiar <code>node_modules</code> con dependencias linkeadas.</p>",
+            "en": "<p>Dependency executables can no longer take over another package's POSIX bin shim through its shell helpers. It requires a <strong>dependency reinstall</strong> to replace existing shims — a plain <code>pnpm install</code> will not save you. On Cygwin, MSYS2 and WSL, shims still use <code>PATH</code> for Windows path conversion, so the vector stays open there.</p><p>The same patch closes another leak: GitHub Actions homepage links no longer expose server credentials, and GitHub server URLs now require HTTPS except on loopback hosts. Add install fixes for FreeBSD and for Windows when clearing a <code>node_modules</code> holding linked dependencies.</p>",
+            "fr": "<p>Les exécutables d'une dépendance ne peuvent plus s'emparer du shim POSIX d'un autre paquet via ses shell helpers. Il faut <strong>réinstaller les dépendances</strong> pour remplacer les shims existants — un simple <code>pnpm install</code> ne suffit pas. Sur Cygwin, MSYS2 et WSL, les shims utilisent toujours <code>PATH</code> pour la conversion des chemins Windows : le vecteur y reste ouvert.</p><p>Le même patch colmate une autre fuite : les liens homepage de GitHub Actions n'exposent plus les credentials du serveur, et les URLs GitHub exigent HTTPS sauf en loopback.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.4.2", "label": "github.com/pnpm" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "workerd-20260916",
+      "updates": [
+        {
+          "id": "workerd-20260916",
+          "tag": "release",
+          "date": "16 Sep 2026",
+          "title": {
+            "es": "workerd 1.20260916.1: node:net, node:stream web-interop y retries de JS RPC",
+            "en": "workerd 1.20260916.1: node:net, node:stream web interop and JS RPC retries",
+            "fr": "workerd 1.20260916.1 : node:net, interop node:stream web et retries JS RPC"
+          },
+          "body_html": {
+            "es": "<p>El runtime de Cloudflare Workers sigue cerrando la brecha con Node: suite de <code>node:net</code>, suite de web-interop para <code>node:stream</code>, soporte de web streams en <code>stream.pipeline()</code> y validación de bounds de offset/length en lecturas y escrituras de <code>node:fs</code>. Nada de esto es glamoroso, pero es exactamente lo que hace que tu librería de npm deje de explotar en el edge.</p><p>Del lado de Durable Objects se preparan los planes de llamada JS RPC para retries, se reporta si un target de fetch soporta retry y se desactivan los retries en namespaces no elegibles. También cae un use-after-free en el canal de facets tras un timeout de alarm.</p>",
+            "en": "<p>The Cloudflare Workers runtime keeps closing the Node gap: a <code>node:net</code> suite, a <code>node:stream</code> web-interop suite, web streams support in <code>stream.pipeline()</code>, and offset/length bounds validation for <code>node:fs</code> buffer reads and writes. None of it is glamorous, but it is exactly what stops your npm library from blowing up at the edge.</p><p>On the Durable Objects side, JS RPC call plans are prepared for retries, a fetch target now reports whether it supports retries, and retries are disabled for ineligible actor namespaces. A use-after-free in the facet channel after an alarm timeout also gets fixed.</p>",
+            "fr": "<p>Le runtime Cloudflare Workers continue de combler l'écart avec Node : suite <code>node:net</code>, suite d'interop web pour <code>node:stream</code>, support des web streams dans <code>stream.pipeline()</code> et validation des bornes offset/length pour les lectures et écritures <code>node:fs</code>.</p><p>Côté Durable Objects, les plans d'appel JS RPC sont préparés pour les retries, une cible de fetch indique si elle les supporte, et les retries sont désactivés pour les namespaces non éligibles. Un use-after-free du canal de facets après un timeout d'alarm est aussi corrigé.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workerd/releases/tag/v1.20260916.1", "label": "github.com/cloudflare" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "nest-1125",
+      "updates": [
+        {
+          "id": "nest-1125",
+          "tag": "security",
+          "date": "15 Sep 2026",
+          "title": {
+            "es": "NestJS 11.2.5: el transporte TCP se blinda contra un peer hostil",
+            "en": "NestJS 11.2.5: the TCP transport hardens against a hostile peer",
+            "fr": "NestJS 11.2.5 : le transport TCP se blinde contre un peer hostile"
+          },
+          "body_html": {
+            "es": "<p>Parche de una sola línea en el changelog y de peso real: <code>@nestjs/microservices</code> endurece el transporte TCP frente a un peer hostil. Si exponés microservicios Nest por TCP en una red que no controlás del todo, este es el que subís hoy.</p>",
+            "en": "<p>A one-line changelog with real weight: <code>@nestjs/microservices</code> hardens the TCP transport against a hostile peer. If you expose Nest microservices over TCP on a network you do not fully control, this is the one to bump today.</p>",
+            "fr": "<p>Un changelog d'une ligne au poids bien réel : <code>@nestjs/microservices</code> durcit le transport TCP face à un peer hostile. Si vous exposez des microservices Nest en TCP sur un réseau que vous ne maîtrisez pas totalement, c'est la version à passer aujourd'hui.</p>"
+          },
+          "source": { "url": "https://github.com/nestjs/nest/releases/tag/v11.2.5", "label": "github.com/nestjs" }
+        },
+        {
+          "id": "nest-1203",
+          "tag": "notable",
+          "date": "15 Sep 2026",
+          "title": {
+            "es": "NestJS 12.0.3: memoria acotada por peer TCP y sockets que sí se cierran al apagar",
+            "en": "NestJS 12.0.3: bounded memory per TCP peer and sockets that actually close on shutdown",
+            "fr": "NestJS 12.0.3 : mémoire bornée par peer TCP et sockets réellement fermées à l'arrêt"
+          },
+          "body_html": {
+            "es": "<p>La rama 12 recibe el mismo trabajo de microservicios con más detalle: memoria acotada para cada peer TCP, sockets abiertos destruidos en el shutdown, requests pendientes que fallan cuando el cliente cierra, y el hook de fin de procesamiento de Kafka que ahora corre siempre. Eso último es el clásico que te deja lag fantasma en el consumer group.</p><p>En <code>common</code>, la validación de UUID ahora chequea versión y variante aunque no declares versión — si tu DTO aceptaba UUIDs raros, ahora los va a rechazar.</p>",
+            "en": "<p>The 12 branch gets the same microservices work in more detail: bounded memory per TCP peer, open sockets destroyed on shutdown, pending requests failing when the client closes, and the Kafka processing-end hook now always running. That last one is the classic that leaves phantom lag in your consumer group.</p><p>In <code>common</code>, UUID validation now checks version and variant even when no version is declared — if your DTO accepted odd UUIDs, it will start rejecting them.</p>",
+            "fr": "<p>La branche 12 reçoit le même travail sur les microservices en plus détaillé : mémoire bornée par peer TCP, sockets ouvertes détruites à l'arrêt, requêtes en attente qui échouent à la fermeture du client, et le hook de fin de traitement Kafka qui s'exécute désormais toujours.</p><p>Dans <code>common</code>, la validation d'UUID vérifie maintenant version et variante même sans version déclarée — si votre DTO acceptait des UUIDs douteux, il va les rejeter.</p>"
+          },
+          "source": { "url": "https://github.com/nestjs/nest/releases/tag/v12.0.3", "label": "github.com/nestjs" }
+        },
+        {
+          "id": "hono-4138",
+          "tag": "patch",
+          "date": "15 Sep 2026",
+          "title": {
+            "es": "Hono 4.13.8: backpressure en Lambda streaming y negociación de Accept que respeta q=0",
+            "en": "Hono 4.13.8: Lambda streaming backpressure and Accept negotiation that respects q=0",
+            "fr": "Hono 4.13.8 : backpressure en streaming Lambda et négociation Accept respectant q=0"
+          },
+          "body_html": {
+            "es": "<p>Tanda de correcciones finas de conformidad HTTP: el adaptador de <code>aws-lambda</code> ahora respeta el backpressure al streamear el body de la respuesta, y la negociación de <code>Accept</code> saltea las entradas con <code>q=0</code>, trata el nombre del parámetro <code>q</code> como case-insensitive y clampea un <code>q</code> negativo a 0 en vez de a 1. También se conserva el media type de la request al reusar un body cacheado.</p><p>Extra de performance: menos trabajo de lookup en updates keyed grandes de <code>jsx/dom</code>. Detallitos de RFC, sí — pero son los que separan un router que casi cumple de uno que cumple.</p>",
+            "en": "<p>A batch of fine-grained HTTP conformance fixes: the <code>aws-lambda</code> adapter now respects backpressure when streaming the response body, and <code>Accept</code> negotiation skips entries with <code>q=0</code>, treats the <code>q</code> parameter name as case-insensitive, and clamps a negative <code>q</code> to 0 rather than 1. The request media type is also kept when reusing a cached body.</p><p>Performance extra: less lookup work on large keyed updates in <code>jsx/dom</code>. RFC minutiae, yes — and exactly what separates a router that almost complies from one that does.</p>",
+            "fr": "<p>Un lot de corrections fines de conformité HTTP : l'adaptateur <code>aws-lambda</code> respecte désormais le backpressure lors du streaming du body, et la négociation <code>Accept</code> ignore les entrées à <code>q=0</code>, traite le nom du paramètre <code>q</code> comme insensible à la casse, et ramène un <code>q</code> négatif à 0 plutôt qu'à 1.</p><p>Bonus performance : moins de travail de lookup sur les gros updates keyed de <code>jsx/dom</code>.</p>"
+          },
+          "source": { "url": "https://github.com/honojs/hono/releases/tag/v4.13.8", "label": "github.com/honojs" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "kysely-0296",
+      "updates": [
+        {
+          "id": "kysely-0296",
+          "tag": "patch",
+          "date": "16 Sep 2026",
+          "title": {
+            "es": "Kysely 0.29.6: columnas inmutables permitidas en el where de doUpdateSet",
+            "en": "Kysely 0.29.6: immutable columns allowed in doUpdateSet's where",
+            "fr": "Kysely 0.29.6 : colonnes immuables autorisées dans le where de doUpdateSet"
+          },
+          "body_html": {
+            "es": "<p>Tanda chica de bugfixes en la línea estable: el <code>where</code> de <code>doUpdateSet()</code> ahora acepta columnas inmutables en PostgreSQL y SQLite. Si venías peleando con los tipos para escribir un upsert condicional sobre una columna generada, ya está.</p>",
+            "en": "<p>A small bugfix batch on the stable line: <code>doUpdateSet()</code>'s <code>where</code> now accepts immutable columns on PostgreSQL and SQLite. If you were fighting the types to write a conditional upsert over a generated column, that is settled.</p>",
+            "fr": "<p>Petit lot de correctifs sur la ligne stable : le <code>where</code> de <code>doUpdateSet()</code> accepte désormais les colonnes immuables sur PostgreSQL et SQLite. Si vous luttiez contre les types pour écrire un upsert conditionnel sur une colonne générée, c'est réglé.</p>"
+          },
+          "source": { "url": "https://github.com/kysely-org/kysely/releases/tag/v0.29.6", "label": "github.com/kysely-org" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "aws-dx-flat-rate",
+      "updates": [
+        {
+          "id": "aws-dx-flat-rate",
+          "tag": "notable",
+          "date": "15 Sep 2026",
+          "title": {
+            "es": "AWS Direct Connect pasa a pricing plano en conexiones dedicadas",
+            "en": "AWS Direct Connect moves to flat-rate pricing for dedicated connections",
+            "fr": "AWS Direct Connect passe à une tarification forfaitaire sur les connexions dédiées"
+          },
+          "body_html": {
+            "es": "<p>Las conexiones dedicadas de Direct Connect pasan a tarifa plana. Para cualquiera que esté modelando costo de red en híbrido, esto cambia la aritmética: el port-hour más data transfer variable deja de ser la única forma de presupuestar el link.</p>",
+            "en": "<p>Direct Connect dedicated connections move to flat-rate pricing. For anyone modelling hybrid network cost, the arithmetic changes: port-hour plus variable data transfer is no longer the only way to budget the link.</p>",
+            "fr": "<p>Les connexions dédiées Direct Connect passent à une tarification forfaitaire. Pour qui modélise le coût réseau en hybride, l'arithmétique change : port-heure plus transfert variable n'est plus la seule façon de budgéter le lien.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/aws-direct-connect-announces-flat-rate-pricing/", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "turnstile-solaris",
+      "updates": [
+        {
+          "id": "turnstile-solaris",
+          "tag": "notable",
+          "date": "15 Sep 2026",
+          "title": {
+            "es": "El turnstile de Solaris explica por qué los locks de Go, WebKit y parking_lot son diminutos",
+            "en": "Solaris' turnstile explains why locks in Go, WebKit and parking_lot are tiny",
+            "fr": "Le turnstile de Solaris explique pourquoi les locks de Go, WebKit et parking_lot sont minuscules"
+          },
+          "body_html": {
+            "es": "<p>La idea es de manual de arquitectura: sacá el estado de espera de adentro del lock y metelo en una hash table global. El lock sin contención queda mínimo — un par de bytes — y la herencia de prioridad sigue funcionando, al precio de contención en los buckets del hash cuando la concurrencia sube.</p><p>El mismo patrón vive hoy en Go, WebKit y el crate <code>parking_lot</code> de Rust. Si alguna vez te preguntaste por qué un <code>Mutex</code> moderno ocupa tan poco, acá está la respuesta, y es el tipo de tradeoff espacio-vs-sincronización que conviene tener internalizado antes de diseñar cualquier primitiva concurrente propia.</p>",
+            "en": "<p>The idea is straight out of an architecture textbook: pull the waiting state out of the lock and put it in a global hash table. The uncontended lock stays minimal — a couple of bytes — and priority inheritance still works, at the cost of contention on hash buckets as concurrency climbs.</p><p>The same pattern lives today in Go, WebKit and Rust's <code>parking_lot</code> crate. If you ever wondered why a modern <code>Mutex</code> is so small, here is the answer — and it is the kind of space-versus-synchronization tradeoff worth internalizing before designing any concurrency primitive of your own.</p>",
+            "fr": "<p>L'idée sort d'un manuel d'architecture : sortir l'état d'attente du lock et le placer dans une table de hachage globale. Le lock non contendu reste minimal — quelques octets — et l'héritage de priorité fonctionne toujours, au prix d'une contention sur les buckets quand la concurrence grimpe.</p><p>Le même pattern vit aujourd'hui dans Go, WebKit et le crate <code>parking_lot</code> de Rust.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/turnstile-system-design/", "label": "infoq.com" }
+        },
+        {
+          "id": "vitest-501",
+          "tag": "patch",
+          "date": "15 Sep 2026",
+          "title": {
+            "es": "Vitest 5.0.1: automocking sin prototipos recursivos y vitest list que falla con exit 1",
+            "en": "Vitest 5.0.1: automocking without recursive prototypes and vitest list exiting 1",
+            "fr": "Vitest 5.0.1 : automocking sans prototypes récursifs et vitest list sortant en 1"
+          },
+          "body_html": {
+            "es": "<p>Primer patch de la serie 5: se evita el prototipo recursivo en automocking, <code>vitest list</code> ahora sale con código 1 cuando falla la colección, y se conservan los detalles del error de parseo en la colección estática. Los dos últimos son oro para CI: un <code>list</code> que fallaba silencioso en verde es exactamente el bug que te deja tests sin correr sin que nadie se entere.</p><p>La UI suma un modo de vista de trace enfocada y mueve el selector de intentos al header del viewer.</p>",
+            "en": "<p>First patch of the 5 series: recursive prototypes are avoided in automocking, <code>vitest list</code> now exits 1 when collection fails, and parse error details are kept in static collection. The last two are gold for CI — a <code>list</code> that failed silently green is exactly the bug that leaves tests unrun with nobody noticing.</p><p>The UI adds a focused trace view layout mode and moves the attempts selector into the viewer header.</p>",
+            "fr": "<p>Premier patch de la série 5 : les prototypes récursifs sont évités en automocking, <code>vitest list</code> sort désormais en 1 quand la collecte échoue, et les détails d'erreur de parsing sont conservés en collecte statique. Les deux derniers sont précieux en CI.</p><p>L'UI ajoute un mode de vue de trace focalisée et déplace le sélecteur de tentatives dans le header du viewer.</p>"
+          },
+          "source": { "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.0.1", "label": "github.com/vitest-dev" }
+        },
+        {
+          "id": "dropbox-efficiency",
+          "tag": "minor",
+          "date": "16 Sep 2026",
+          "title": {
+            "es": "Dropbox: más de 50% de mejora en eficiencia energética midiendo watts por petabyte",
+            "en": "Dropbox: over 50% power efficiency improvement measured in watts per petabyte",
+            "fr": "Dropbox : plus de 50 % d'efficacité énergétique gagnée, mesurée en watts par pétaoctet"
+          },
+          "body_html": {
+            "es": "<p>Dropbox cuenta cómo hizo lugar para cargas de AI sin construir data centers nuevos: rebalanceo de workloads, densidad de storage con shingled magnetic recording y ciclos de vida de hardware más largos, con una métrica clara — <strong>watts por petabyte</strong>, más de 50% mejor desde 2020.</p><p>La lección transferible no es el hardware: es elegir la métrica correcta. Y el límite real que aparece es la entrega de potencia — duplicaron los PDUs por rack para la séptima generación de servidores.</p>",
+            "en": "<p>Dropbox describes how it made room for AI workloads without building new data centers: workload rebalancing, storage density via shingled magnetic recording, and longer hardware lifecycles, all against one clear metric — <strong>watts per petabyte</strong>, over 50% better since 2020.</p><p>The transferable lesson is not the hardware, it is picking the right metric. And the real ceiling that shows up is power delivery: they doubled PDUs per rack for seventh-generation servers.</p>",
+            "fr": "<p>Dropbox raconte comment libérer de la capacité pour l'AI sans construire de nouveaux data centers : rééquilibrage des workloads, densité de stockage via shingled magnetic recording et cycles de vie matériels allongés, avec une métrique claire — <strong>watts par pétaoctet</strong>, plus de 50 % de mieux depuis 2020.</p><p>La leçon transférable n'est pas le matériel, c'est le choix de la bonne métrique.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/dropbox-datacenter/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "http4s-h2-maxframe",
+      "updates": [
+        {
+          "id": "http4s-h2-maxframe",
+          "tag": "security",
+          "date": "15 Sep 2026",
+          "title": {
+            "es": "Http4s Ember HTTP/2 bufferea el payload declarado antes de chequear SETTINGS_MAX_FRAME_SIZE",
+            "en": "Http4s Ember HTTP/2 buffers a frame's declared payload before checking SETTINGS_MAX_FRAME_SIZE",
+            "fr": "Http4s Ember HTTP/2 bufferise le payload déclaré avant de vérifier SETTINGS_MAX_FRAME_SIZE"
+          },
+          "body_html": {
+            "es": "<p>Un peer declara un frame gigante y Ember reserva la memoria antes de validar contra <code>SETTINGS_MAX_FRAME_SIZE</code>. Es el patrón clásico de agotamiento de memoria: confiar en el largo declarado antes de aplicar el límite negociado. Viene acompañado de acumulación sin límite de frames CONTINUATION, cola de salida sin cota y falta de enforcement de <code>SETTINGS_MAX_CONCURRENT_STREAMS</code>.</p>",
+            "en": "<p>A peer declares a huge frame and Ember reserves the memory before validating against <code>SETTINGS_MAX_FRAME_SIZE</code>. It is the classic memory-exhaustion pattern: trusting the declared length before applying the negotiated limit. It ships alongside unbounded CONTINUATION frame accumulation, an unbounded outbound queue, and missing <code>SETTINGS_MAX_CONCURRENT_STREAMS</code> enforcement.</p>",
+            "fr": "<p>Un peer déclare un frame énorme et Ember réserve la mémoire avant de valider contre <code>SETTINGS_MAX_FRAME_SIZE</code>. C'est le pattern classique d'épuisement mémoire : faire confiance à la longueur déclarée avant d'appliquer la limite négociée.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-gq9p-f254-h286", "label": "github.com/advisories" }
+        },
+        {
+          "id": "zereight-rebinding",
+          "tag": "security",
+          "date": "15 Sep 2026",
+          "title": {
+            "es": "DNS rebinding contra el transporte Streamable HTTP local del MCP de GitLab",
+            "en": "DNS rebinding reaches the GitLab MCP local Streamable HTTP transport",
+            "fr": "DNS rebinding atteint le transport Streamable HTTP local du MCP GitLab"
+          },
+          "body_html": {
+            "es": "<p>Segundo crítico del mismo paquete: una página web cualquiera puede alcanzar tu transporte MCP corriendo en localhost vía DNS rebinding. El supuesto de que <em>escucha sólo en 127.0.0.1, entonces está seguro</em> se cae solo en cuanto el navegador de la víctima resuelve un dominio del atacante hacia loopback. Validá <code>Origin</code> y <code>Host</code> en todo transporte MCP local, sin excepción.</p>",
+            "en": "<p>Second critical in the same batch: any web page can reach your MCP transport running on localhost via DNS rebinding. The assumption that <em>it only listens on 127.0.0.1, so it is safe</em> collapses the moment the victim's browser resolves an attacker domain to loopback. Validate <code>Origin</code> and <code>Host</code> on every local MCP transport, no exceptions.</p>",
+            "fr": "<p>Deuxième critique du même lot : n'importe quelle page web peut atteindre votre transport MCP sur localhost via DNS rebinding. L'hypothèse « il n'écoute que sur 127.0.0.1, donc c'est sûr » s'effondre dès que le navigateur de la victime résout un domaine attaquant vers le loopback.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-vmp7-252j-cwp7", "label": "github.com/advisories" }
+        },
+        {
+          "id": "libp2p-quic-panic",
+          "tag": "security",
+          "date": "15 Sep 2026",
+          "title": {
+            "es": "libp2p-quic: panic remoto por carrera de expiración de certificado en el handshake (CVSS 8.2)",
+            "en": "libp2p-quic: remote panic via certificate expiry race during the QUIC handshake (CVSS 8.2)",
+            "fr": "libp2p-quic : panic distant via une course d'expiration de certificat pendant le handshake (CVSS 8.2)"
+          },
+          "body_html": {
+            "es": "<p>Un peer malicioso presenta un certificado TLS libp2p válido pero de vida corta y retrasa el último fragmento del handshake TLS 1.3 hasta que expire. Tras el handshake, <code>libp2p-quic</code> vuelve a parsear el mismo certificado asumiendo que no puede fallar — y ahí panickea. Crashea cualquier app con un listener QUIC expuesto; parcheado en <code>0.13.1</code>.</p><p>Moraleja de diseño: si validaste algo una vez, no asumas que sigue siendo válido cuando lo volvés a mirar. El tiempo también es entrada del atacante.</p>",
+            "en": "<p>A malicious peer presents a valid but short-lived libp2p TLS certificate and delays the final TLS 1.3 handshake fragment until it expires. After the handshake, <code>libp2p-quic</code> re-parses the same certificate assuming it cannot fail — and panics. It crashes any app exposing a QUIC listener; patched in <code>0.13.1</code>.</p><p>Design lesson: if you validated something once, do not assume it is still valid when you look again. Time is an attacker input too.</p>",
+            "fr": "<p>Un peer malveillant présente un certificat TLS libp2p valide mais à durée de vie courte et retarde le dernier fragment du handshake TLS 1.3 jusqu'à son expiration. Après le handshake, <code>libp2p-quic</code> reparse le même certificat en supposant que cela ne peut pas échouer — et panique. Corrigé en <code>0.13.1</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-5hq8-qhww-jm7q", "label": "github.com/advisories" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El lote de Http4s es un recordatorio incómodo: el request smuggling sigue vivo en 2026 porque la ambigüedad de framing entre proxy y origin nunca se resolvió del todo. Si tenés un intermediario adelante, tu servidor no decide solo cómo se parte el body.",
+      "en": "The Http4s batch is an uncomfortable reminder: request smuggling is alive in 2026 because framing ambiguity between proxy and origin was never fully resolved. With an intermediary in front, your server does not decide alone how the body is split.",
+      "fr": "Le lot Http4s est un rappel inconfortable : le request smuggling vit encore en 2026 parce que l'ambiguïté de framing entre proxy et origin n'a jamais été totalement résolue."
+    },
+    {
+      "es": "Los servidores MCP se están convirtiendo en la nueva superficie de ataque del backend. SSRF por header, DNS rebinding contra localhost, bypass de allow-lists: son bugs de 2010 apareciendo en infraestructura de 2026 porque el ecosistema se está escribiendo más rápido de lo que se audita.",
+      "en": "MCP servers are becoming the backend's new attack surface. Header-driven SSRF, DNS rebinding against localhost, allow-list bypasses: these are 2010 bugs showing up in 2026 infrastructure because the ecosystem is being written faster than it is audited.",
+      "fr": "Les serveurs MCP deviennent la nouvelle surface d'attaque du backend. SSRF par header, DNS rebinding contre localhost, contournements d'allow-list : des bugs de 2010 qui resurgissent dans l'infrastructure de 2026."
+    },
+    {
+      "es": "Tres releases del día (NestJS, workerd, libp2p) atacan el mismo tema: límites de recursos por conexión. Memoria acotada por peer TCP, retries con plan explícito, parseo que puede fallar dos veces. El backend maduro de 2026 asume que cada conexión es hostil hasta que demuestre lo contrario.",
+      "en": "Three of today's releases (NestJS, workerd, libp2p) attack the same theme: per-connection resource limits. Bounded memory per TCP peer, retries with an explicit plan, parsing that can fail twice. Mature 2026 backends assume every connection is hostile until proven otherwise.",
+      "fr": "Trois releases du jour (NestJS, workerd, libp2p) attaquent le même thème : les limites de ressources par connexion. Mémoire bornée par peer TCP, retries planifiés explicitement, parsing qui peut échouer deux fois."
+    }
+  ]
+}

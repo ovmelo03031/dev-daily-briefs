@@ -1,0 +1,85 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 16 Sep 2026",
+    "en": "Gentleman Releases — 16 Sep 2026",
+    "fr": "Gentleman Releases — 16 Sep 2026"
+  },
+  "description": {
+    "es": "Releases del día en proyectos de Gentleman-Programming",
+    "en": "Today's releases from Gentleman-Programming projects",
+    "fr": "Sorties du jour des projets Gentleman-Programming"
+  },
+  "pubDate": "2026-09-16",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "engram v2.0.0-rc.12 — el RC que pone el foco en integridad de sync",
+        "en": "engram v2.0.0-rc.12 — the RC that zeroes in on sync integrity",
+        "fr": "engram v2.0.0-rc.12 — la RC centrée sur l'intégrité de la synchro"
+      },
+      "anchor": "engram-v2-0-0-rc-12",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "Proyectos sin enrolar ya no acumulan un backlog de journal impusheable",
+        "en": "Unenrolled projects no longer pile up an unpushable Cloud journal backlog",
+        "fr": "Les projets non enrôlés n'accumulent plus un journal Cloud impossible à pousser"
+      },
+      "anchor": "engram-v2-0-0-rc-12",
+      "icon": "lucide:database"
+    },
+    {
+      "text": {
+        "es": "Ciclo de vida de agentes: sesiones de OpenCode, Codex y Pi que ahora cierran de verdad",
+        "en": "Agent lifecycle: OpenCode, Codex and Pi sessions that now actually close",
+        "fr": "Cycle de vie des agents : les sessions OpenCode, Codex et Pi se ferment enfin"
+      },
+      "anchor": "engram-v2-0-0-rc-12",
+      "icon": "lucide:refresh-cw"
+    },
+    {
+      "text": {
+        "es": "Nuevo comando engram init para workspaces ambiguos",
+        "en": "New engram init command for ambiguous workspaces",
+        "fr": "Nouvelle commande engram init pour les espaces de travail ambigus"
+      },
+      "anchor": "engram",
+      "icon": "lucide:terminal"
+    }
+  ],
+  "tools": [
+    {
+      "id": "engram",
+      "name": "engram",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-engram",
+      "icon_emoji": "🧠",
+      "anchor": "engram",
+      "version": "v2.0.0-rc.12",
+      "updates": [
+        {
+          "id": "engram-v2-0-0-rc-12",
+          "tag": "beta",
+          "title": {
+            "es": "v2.0.0-rc.12 — Integridad de sync, ciclo de vida de agentes y contratos MCP",
+            "en": "v2.0.0-rc.12 — Sync integrity, agent lifecycle and MCP contracts",
+            "fr": "v2.0.0-rc.12 — Intégrité de la synchro, cycle de vie des agents et contrats MCP"
+          },
+          "body_html": {
+            "es": "<p>Otro release candidate camino al v2.0.0 estable, y este va derecho al lugar donde más duele: la <strong>integridad del sync</strong>. Los proyectos que nunca se enrolaron en Cloud dejaban de golpe un backlog de journal que nunca se podía pushear; eso se cortó. Además se coalescen los upserts de sesión pendientes, se reparan targets de sync foráneos, se borran de verdad las observaciones soft-deleted cuando el ciclo de vida lo pide, y los endpoints de relaciones pulleados quedan scopeados por proyecto. Ojo con este otro detalle fino: ya no se pueden colisionar topic keys por Unicode.</p><p>El segundo bloque es <strong>ciclo de vida de agentes</strong>, que es donde más se notaba el ruido: sub-agentes de OpenCode y sesiones mal registradas ahora cierran con las señales de lifecycle, la identidad de sesión de runtime de Codex se propaga confirmada, los hooks de shell en Windows dejaron de ser interactivos, las sesiones de Pi cierran en shutdown y se frenaron las escrituras cruzadas entre proyectos. MCP ahora sale de forma graciosa cuando su pipe padre se cierra, y los workers de Windows mueren con su padre en lugar de quedar colgados.</p><p>En transporte y Cloud: recuperación de bootstrap tokens varados, rechazo de payloads de mutación que no son UTF-8, auditoría de intentos de autenticación denegados y aceptación de pushes gzip sin importar el <code>Content-Type</code>. Y del lado de CLI y contratos: llega <code>engram init</code> para workspaces ambiguos, <code>doctor</code> reporta truncado de save y saltea el chequeo de updates, los resultados de búsqueda MCP —normales y compactos— incluyen el <code>topic_key</code> cuando no está vacío, y la versión del paquete de hooks de Claude avanza para que las instalaciones existentes reciban el fix de SessionStart.</p><p>Es un prerelease, así que se usa para validar antes del v2.0.0 final. El propio release lista las limitaciones conocidas que siguen abiertas: upserts viejos pulleados que pueden resucitar entidades borradas, casos de hard-stop en import y pull dependency-safe, bases grandes en Windows que disparan syncs interminables y locks de SQLite con agentes concurrentes.</p>",
+            "en": "<p>Another release candidate on the road to stable v2.0.0, and this one goes straight where it hurts most: <strong>sync integrity</strong>. Projects that were never enrolled in Cloud used to accumulate a journal backlog that could never be pushed; that is fixed. On top of that, pending session upserts are coalesced, foreign sync targets are repaired, soft-deleted observations are hard-deleted when the sync lifecycle demands it, and pulled relation endpoints are scoped by project. One more fine detail: Unicode topic-key collisions are now prevented.</p><p>The second block is <strong>agent lifecycle</strong>, where the noise was most visible: OpenCode sub-agents and misregistered sessions now close across lifecycle signals, Codex runtime session identity is propagated once confirmed, Windows shell hooks became non-interactive, Pi sessions close on shutdown, and cross-project session writes are blocked. MCP now exits gracefully when its parent pipe closes, and Windows workers terminate with their parent instead of hanging around.</p><p>On transport and Cloud: stranded bootstrap tokens are recovered, non-UTF-8 mutation payloads are rejected, denied authentication attempts are audited, and gzip mutation pushes are accepted regardless of <code>Content-Type</code>. On the CLI and contracts side: <code>engram init</code> arrives for ambiguous workspaces, <code>doctor</code> reports save truncation and skips update checks, MCP search results — both normal and compact — include non-empty <code>topic_key</code> values, and the Claude hook package version identity advances so existing installs can receive the SessionStart fix.</p><p>This is a prerelease meant for validation before final v2.0.0. The release itself lists the limitations still open: older pulled upserts that can resurrect deleted entities, hard-stop cases in dependency-safe import and pull, large Windows databases triggering indefinitely running syncs, and SQLite lock failures with concurrent agents.</p>",
+            "fr": "<p>Une nouvelle release candidate sur la route de la v2.0.0 stable, et celle-ci vise là où ça fait mal : <strong>l'intégrité de la synchronisation</strong>. Les projets jamais enrôlés dans Cloud accumulaient un backlog de journal impossible à pousser ; c'est corrigé. S'y ajoutent la fusion des upserts de session en attente, la réparation des cibles de synchro étrangères, la suppression définitive des observations soft-deleted quand le cycle de vie l'exige, et le cadrage par projet des endpoints de relations récupérés. Autre détail fin : les collisions de topic keys en Unicode sont désormais empêchées.</p><p>Le deuxième bloc concerne le <strong>cycle de vie des agents</strong> : les sous-agents OpenCode et les sessions mal enregistrées se ferment enfin avec les signaux de cycle de vie, l'identité de session runtime de Codex est propagée une fois confirmée, les hooks shell Windows ne sont plus interactifs, les sessions Pi se ferment à l'arrêt et les écritures inter-projets sont bloquées. MCP sort proprement quand son pipe parent se ferme, et les workers Windows se terminent avec leur parent.</p><p>Côté transport et Cloud : récupération des jetons de bootstrap bloqués, rejet des payloads de mutation non UTF-8, audit des tentatives d'authentification refusées et acceptation des pushes gzip quel que soit le <code>Content-Type</code>. Côté CLI et contrats : <code>engram init</code> arrive pour les espaces de travail ambigus, <code>doctor</code> signale la troncature de sauvegarde et saute la vérification des mises à jour, les résultats de recherche MCP incluent le <code>topic_key</code> non vide, et la version du paquet de hooks Claude avance pour que les installations existantes reçoivent le correctif SessionStart.</p><p>Il s'agit d'une préversion destinée à la validation avant la v2.0.0 finale. La release liste elle-même les limitations encore ouvertes : anciens upserts pouvant ressusciter des entités supprimées, cas de blocage dans l'import et le pull dependency-safe, grosses bases Windows déclenchant des synchros interminables, et échecs de verrous SQLite avec des agents concurrents.</p>"
+          },
+          "date": "16 Sep 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v2.0.0-rc.12",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

@@ -1,0 +1,385 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 17 de septiembre de 2026",
+    "en": "Backend & Fullstack — September 17, 2026",
+    "fr": "Backend & Fullstack — 17 septembre 2026"
+  },
+  "description": {
+    "es": "Node.js 26.9.0 estrena node:bench y Web Workers, Fastify parchea un DoS en HTTP/2, djust se come 12 advisories en un día y Shopify abandona React Native.",
+    "en": "Node.js 26.9.0 ships node:bench and Web Workers, Fastify patches an HTTP/2 DoS, djust takes 12 advisories in a single day, and Shopify drops React Native.",
+    "fr": "Node.js 26.9.0 apporte node:bench et les Web Workers, Fastify corrige un DoS HTTP/2, djust encaisse 12 advisories en un jour et Shopify abandonne React Native."
+  },
+  "pubDate": "2026-09-17",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Node 26.9.0: node:bench y Web Workers",
+        "en": "Node 26.9.0: node:bench and Web Workers",
+        "fr": "Node 26.9.0 : node:bench et Web Workers"
+      },
+      "anchor": "node-26-9-0",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": {
+        "es": "Fastify: un request HTTP/2 tira el proceso",
+        "en": "Fastify: one HTTP/2 request kills the process",
+        "fr": "Fastify : une requête HTTP/2 tue le process"
+      },
+      "anchor": "fastify-5-12-5",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "djust: 12 advisories en un solo día",
+        "en": "djust: 12 advisories in a single day",
+        "fr": "djust : 12 advisories en une journée"
+      },
+      "anchor": "djust-advisory-batch",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Shopify deja React Native por Swift y Kotlin",
+        "en": "Shopify drops React Native for Swift and Kotlin",
+        "fr": "Shopify quitte React Native pour Swift et Kotlin"
+      },
+      "anchor": "shopify-drops-react-native",
+      "icon": "lucide:layers"
+    },
+    {
+      "text": {
+        "es": "Valkey 9.2 rc1: Path Hash y RDB sin fork",
+        "en": "Valkey 9.2 rc1: Path Hash and forkless RDB",
+        "fr": "Valkey 9.2 rc1 : Path Hash et RDB sans fork"
+      },
+      "anchor": "valkey-9-2-0-rc1",
+      "icon": "simple-icons:redis"
+    },
+    {
+      "text": {
+        "es": "MCP de GitLab: lectura de archivos y robo de PAT",
+        "en": "GitLab MCP: arbitrary file read, PAT theft",
+        "fr": "MCP GitLab : lecture de fichiers, vol de PAT"
+      },
+      "anchor": "gitlab-mcp-upload-markdown",
+      "icon": "lucide:shield"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "node-26-9-0",
+      "updates": [
+        {
+          "id": "node-26-9-0",
+          "tag": "breaking",
+          "date": "16 Sep 2026",
+          "title": {
+            "es": "Node.js 26.9.0: llega node:bench, Web Workers y el VFS enganchado al module loader",
+            "en": "Node.js 26.9.0: node:bench lands, plus Web Workers and VFS wired into the module loaders",
+            "fr": "Node.js 26.9.0 : node:bench arrive, avec Web Workers et VFS branché aux module loaders"
+          },
+          "body_html": {
+            "es": "<p>Release cargadísimo de la línea current: <code>node:bench</code> como módulo builtin para benchmarking, soporte de <strong>Web Workers</strong> (la API del browser, no solo <code>worker_threads</code>), el <strong>VFS integrado con los loaders CJS y ESM</strong>, el módulo <code>ffi</code> habilitado por defecto y una API DTLS experimental. Suma también una MAC API genérica en <code>crypto</code> y descubrimiento de ciphers y hashes desde los providers de OpenSSL. Ojo: es 26.x current, no LTS — para producción seguí en la línea 24.</p>",
+            "en": "<p>A heavy current-line release: <code>node:bench</code> as a builtin benchmarking module, <strong>Web Workers</strong> support (the browser API, not just <code>worker_threads</code>), the <strong>VFS integrated with both CJS and ESM loaders</strong>, the <code>ffi</code> module enabled by default, and an experimental DTLS API. It also adds a generic MAC API in <code>crypto</code> plus cipher and hash discovery from OpenSSL providers. Note this is 26.x current, not LTS — production stays on the 24 line.</p>",
+            "fr": "<p>Release très chargée sur la ligne current : <code>node:bench</code> comme module builtin de benchmarking, le support des <strong>Web Workers</strong> (l'API navigateur, pas seulement <code>worker_threads</code>), le <strong>VFS intégré aux loaders CJS et ESM</strong>, le module <code>ffi</code> activé par défaut et une API DTLS expérimentale. S'ajoutent une API MAC générique dans <code>crypto</code> et la découverte des ciphers et hashes depuis les providers OpenSSL. Attention : c'est du 26.x current, pas LTS — la production reste sur la ligne 24.</p>"
+          },
+          "source": { "url": "https://github.com/nodejs/node/releases/tag/v26.9.0", "label": "github.com/nodejs" }
+        },
+        {
+          "id": "fastify-5-12-5",
+          "tag": "security",
+          "date": "16 Sep 2026",
+          "title": {
+            "es": "Fastify 5.12.5: un solo request HTTP/2 con trailers mata el proceso",
+            "en": "Fastify 5.12.5: a single HTTP/2 request with trailers kills the process",
+            "fr": "Fastify 5.12.5 : une seule requête HTTP/2 avec trailers tue le process"
+          },
+          "body_html": {
+            "es": "<p>GHSA-4mh8-r7rc-xpvc, <strong>CVSS 5.9</strong>: si tenés <code>http2: true</code> y alguna ruta registra un trailer con <code>reply.trailer()</code>, Fastify agrega <code>Transfer-Encoding: chunked</code> — prohibido en HTTP/2 — y Node tira <code>ERR_HTTP2_INVALID_CONNECTION_HEADERS</code> sin catchear. Resultado: <code>uncaughtException</code> y proceso muerto, con un request sin autenticar, repetible. Parcheado en <code>5.12.5</code> y <code>4.29.2</code>. Actualizá YA.</p>",
+            "en": "<p>GHSA-4mh8-r7rc-xpvc, <strong>CVSS 5.9</strong>: with <code>http2: true</code> and any route registering a trailer via <code>reply.trailer()</code>, Fastify unconditionally adds <code>Transfer-Encoding: chunked</code> — forbidden on HTTP/2 — so Node throws an uncaught <code>ERR_HTTP2_INVALID_CONNECTION_HEADERS</code>. One unauthenticated request takes the process down, and it can be repeated to keep it down. Patched in <code>5.12.5</code> and <code>4.29.2</code>.</p>",
+            "fr": "<p>GHSA-4mh8-r7rc-xpvc, <strong>CVSS 5.9</strong> : avec <code>http2: true</code> et une route qui enregistre un trailer via <code>reply.trailer()</code>, Fastify ajoute <code>Transfer-Encoding: chunked</code> — interdit en HTTP/2 — et Node lève un <code>ERR_HTTP2_INVALID_CONNECTION_HEADERS</code> non capturé. Une requête non authentifiée suffit à tuer le process, et elle est répétable. Corrigé en <code>5.12.5</code> et <code>4.29.2</code>.</p>"
+          },
+          "source": { "url": "https://github.com/fastify/fastify/security/advisories/GHSA-4mh8-r7rc-xpvc", "label": "github.com/fastify" }
+        },
+        {
+          "id": "djust-advisory-batch",
+          "tag": "security",
+          "date": "16 Sep 2026",
+          "title": {
+            "es": "djust: 12 advisories publicados el mismo día, incluidos dos críticos de bypass de autorización",
+            "en": "djust: 12 advisories published the same day, including two critical authorization bypasses",
+            "fr": "djust : 12 advisories publiés le même jour, dont deux bypass d'autorisation critiques"
+          },
+          "body_html": {
+            "es": "<p>El framework de vistas en vivo para Django se comió <strong>12 advisories en una sola jornada</strong>. La historia no es un CVE: es el patrón. Bypass de autorización <em>crítico</em> en el mount de WebSocket/SSE, import arbitrario de módulos sin autenticar (CVSS 8.8), IDOR, mass assignment de atributos de vista, estado de cliente sin firmar restaurado como confiable, sesiones SSE no atadas al usuario autenticado y aislamiento multi-tenant que falla abierto. Si lo tenés en producción, el transporte en tiempo real nunca pasó por el pipeline de auth de Django. Auditá antes de parchear.</p>",
+            "en": "<p>The live-view framework for Django took <strong>12 advisories in a single day</strong>. The story isn't one CVE, it's the pattern. A <em>critical</em> authorization bypass on the WebSocket/SSE mount path, unauthenticated arbitrary module import (CVSS 8.8), IDOR, client mass-assignment of view attributes, unsigned client state restored as trusted, SSE sessions not bound to the authenticated user, and multi-tenant isolation that fails open. If you run it, the realtime transport never went through Django's auth pipeline. Audit before you patch.</p>",
+            "fr": "<p>Le framework de vues live pour Django a encaissé <strong>12 advisories en une seule journée</strong>. L'histoire n'est pas un CVE, c'est le motif. Bypass d'autorisation <em>critique</em> sur le mount WebSocket/SSE, import arbitraire de modules non authentifié (CVSS 8.8), IDOR, mass assignment d'attributs de vue, état client non signé restauré comme fiable, sessions SSE non liées à l'utilisateur authentifié et isolation multi-tenant qui échoue ouverte. Si vous l'utilisez, le transport temps réel n'est jamais passé par le pipeline d'auth de Django.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-xhhm-f6hp-2qwj", "label": "github.com/advisories" }
+        },
+        {
+          "id": "shopify-drops-react-native",
+          "tag": "notable",
+          "date": "16 Sep 2026",
+          "title": {
+            "es": "Shopify abandona React Native y reescribe sus apps en Swift y Kotlin",
+            "en": "Shopify drops React Native and rewrites its apps in Swift and Kotlin",
+            "fr": "Shopify abandonne React Native et réécrit ses apps en Swift et Kotlin"
+          },
+          "body_html": {
+            "es": "<p>Después de haber migrado todo a React Native para 2025, Shopify dio marcha atrás: seis ingenieros rehicieron la app Shop en <strong>12 semanas</strong> con SwiftUI y Jetpack Compose, apoyados en agentes de IA. Los números: arranque en frío 23% mejor en iOS y 50% en Android, estabilidad de sesión de 99,5% a 99,95%, builds de Android 75% más rápidos. El disparador no fue solo performance sino el refactor pendiente a la New Architecture más el hecho de que un rewrite greenfield ya no cuesta lo que costaba. La crítica obvia: pierden over-the-air updates y nadie probó que actualizar RN no daba lo mismo.</p>",
+            "en": "<p>After migrating everything to React Native by 2025, Shopify reversed course: six engineers rebuilt the Shop app in <strong>12 weeks</strong> with SwiftUI and Jetpack Compose, guided by AI agents. The numbers: 23% faster cold start on iOS and 50% on Android, session stability from 99.5% to 99.95%, 75% faster Android builds. The trigger wasn't only performance but the looming New Architecture refactor plus the fact that a greenfield rewrite no longer costs what it used to. The obvious counter: they lose over-the-air updates, and nobody proved upgrading RN wouldn't have gotten there too.</p>",
+            "fr": "<p>Après avoir tout migré vers React Native d'ici 2025, Shopify fait marche arrière : six ingénieurs ont refait l'app Shop en <strong>12 semaines</strong> avec SwiftUI et Jetpack Compose, épaulés par des agents IA. Les chiffres : démarrage à froid 23% plus rapide sur iOS et 50% sur Android, stabilité de session de 99,5% à 99,95%, builds Android 75% plus rapides. Le déclencheur : le refactor New Architecture à venir et le coût désormais réduit d'une réécriture greenfield. La critique évidente : plus de mises à jour over-the-air.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/shopify-drops-react-native/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "workerd-20260917",
+      "updates": [
+        {
+          "id": "workerd-20260917",
+          "tag": "minor",
+          "date": "17 Sep 2026",
+          "title": {
+            "es": "workerd 1.20260917.1: node:fs más fiel a POSIX y backpressure de pipes arreglada",
+            "en": "workerd 1.20260917.1: more POSIX-faithful node:fs and fixed pipe backpressure",
+            "fr": "workerd 1.20260917.1 : node:fs plus fidèle à POSIX et backpressure des pipes corrigée"
+          },
+          "body_html": {
+            "es": "<p>El runtime de Cloudflare Workers sigue con cadencia diaria. Hoy: <code>open</code> sin <code>O_CREAT</code> ahora devuelve <code>ENOENT</code> si el path no existe, <code>rename</code> y <code>copyFile</code> reemplazan el destino existente, fixes en streams BYOB y <code>tee</code>, y manejo correcto del drenaje de pipes con backpressure. Suma el conteo de WebSockets hibernables expuesto y los tipos del binding de Browser Run.</p>",
+            "en": "<p>The Cloudflare Workers runtime keeps its daily cadence. Today: <code>open</code> without <code>O_CREAT</code> now returns <code>ENOENT</code> for a missing path, <code>rename</code> and <code>copyFile</code> replace an existing destination, fixes for BYOB streams and <code>tee</code>, and correct pipe-drain backpressure handling. It also exposes the hibernatable WebSocket count and adds Browser Run binding types.</p>",
+            "fr": "<p>Le runtime Cloudflare Workers garde sa cadence quotidienne. Aujourd'hui : <code>open</code> sans <code>O_CREAT</code> renvoie <code>ENOENT</code> pour un chemin absent, <code>rename</code> et <code>copyFile</code> remplacent une destination existante, corrections des streams BYOB et <code>tee</code>, et gestion correcte du drainage des pipes. S'ajoutent le compteur de WebSockets hibernables et les types du binding Browser Run.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workerd/releases/tag/v1.20260917.1", "label": "github.com/cloudflare" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "trpc-11-19-0",
+      "updates": [
+        {
+          "id": "trpc-11-19-0",
+          "tag": "release",
+          "date": "16 Sep 2026",
+          "title": {
+            "es": "tRPC 11.19.0: los links ahora sí abortan el request al desuscribirse",
+            "en": "tRPC 11.19.0: links finally abort the request on unsubscribe",
+            "fr": "tRPC 11.19.0 : les links annulent enfin la requête au désabonnement"
+          },
+          "body_html": {
+            "es": "<p>Primer minor desde junio y viene a tapar fugas: <code>httpLink</code>, <code>httpBatchLink</code> y <code>httpBatchStreamLink</code> abortan de verdad al desuscribirse, el link de WebSocket ahora cablea el <code>AbortSignal</code> de la operación, y se limpia la entrada vieja de <code>clientSubscriptions</code> cuando una subscription falla. También arreglan el matching de routers lazy por límite de path en <code>getProcedureAtPath</code> y <code>subscriptionOptions(skipToken).enabled</code>, que devolvía <code>true</code> cuando no correspondía. De paso, el repo ya buildea con TypeScript 7.</p>",
+            "en": "<p>First minor since June, and it's mostly leak plugging: <code>httpLink</code>, <code>httpBatchLink</code> and <code>httpBatchStreamLink</code> now genuinely abort on unsubscribe, the WebSocket link wires the operation's <code>AbortSignal</code>, and stale <code>clientSubscriptions</code> entries are deleted when a subscription task rejects. Also fixed: lazy router key matching on a path boundary in <code>getProcedureAtPath</code>, and <code>subscriptionOptions(skipToken).enabled</code> incorrectly returning <code>true</code>. The repo itself now builds with TypeScript 7.</p>",
+            "fr": "<p>Premier minor depuis juin, surtout des fuites colmatées : <code>httpLink</code>, <code>httpBatchLink</code> et <code>httpBatchStreamLink</code> annulent vraiment au désabonnement, le link WebSocket câble l'<code>AbortSignal</code> de l'opération, et les entrées obsolètes de <code>clientSubscriptions</code> sont supprimées quand une subscription échoue. Corrigés aussi : le matching des routers lazy dans <code>getProcedureAtPath</code> et <code>subscriptionOptions(skipToken).enabled</code>. Le repo builde désormais avec TypeScript 7.</p>"
+          },
+          "source": { "url": "https://github.com/trpc/trpc/releases/tag/v11.19.0", "label": "github.com/trpc" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "valkey-9-2-0-rc1",
+      "updates": [
+        {
+          "id": "valkey-9-2-0-rc1",
+          "tag": "beta",
+          "date": "16 Sep 2026",
+          "title": {
+            "es": "Valkey 9.2.0-rc1: tipo Path Hash, snapshots RDB sin fork y roles de ACL",
+            "en": "Valkey 9.2.0-rc1: Path Hash type, forkless RDB snapshots and ACL roles",
+            "fr": "Valkey 9.2.0-rc1 : type Path Hash, snapshots RDB sans fork et rôles ACL"
+          },
+          "body_html": {
+            "es": "<p>El primer RC de 9.2 trae cosas gordas: <strong>Path Hash</strong>, un tipo nuevo sobre radix tree con comandos <code>PH*</code> para lookup exacto, longest-prefix y traversal por prefijo; <strong>snapshots RDB sin fork</strong> (opt-in, con el método y el progreso reportados en <code>INFO persistence</code>); roles de ACL reutilizables vía <code>ACL SETROLE</code>; detección de hot keys server-side con <code>HOTKEYS GET</code>; y los sorted sets grandes pasan de skiplist a <strong>B+ tree</strong>. Suma <code>XACKDEL</code>/<code>XDELEX</code> para streams, throttling de replicación y certificado TLS secundario para convivir con post-cuántica.</p>",
+            "en": "<p>The first 9.2 RC is loaded: <strong>Path Hash</strong>, a new radix-tree-backed type with <code>PH*</code> commands for exact lookup, longest-prefix matching and prefix traversal; <strong>forkless RDB snapshots</strong> (opt-in, with method and progress reported in <code>INFO persistence</code>); reusable ACL roles via <code>ACL SETROLE</code>; server-side hot key detection with <code>HOTKEYS GET</code>; and large sorted sets moving from skiplist to a <strong>B+ tree</strong>. Plus <code>XACKDEL</code>/<code>XDELEX</code> for streams, replication throttling, and a secondary TLS certificate so a post-quantum cert can sit alongside RSA.</p>",
+            "fr": "<p>Le premier RC de 9.2 est chargé : <strong>Path Hash</strong>, un nouveau type basé sur radix tree avec les commandes <code>PH*</code> pour lookup exact, longest-prefix et traversée par préfixe ; <strong>snapshots RDB sans fork</strong> (opt-in, méthode et progression dans <code>INFO persistence</code>) ; rôles ACL réutilisables via <code>ACL SETROLE</code> ; détection de hot keys côté serveur avec <code>HOTKEYS GET</code> ; et les grands sorted sets passent du skiplist au <strong>B+ tree</strong>. S'ajoutent <code>XACKDEL</code>/<code>XDELEX</code>, le throttling de réplication et un certificat TLS secondaire.</p>"
+          },
+          "source": { "url": "https://github.com/valkey-io/valkey/releases/tag/9.2.0-rc1", "label": "github.com/valkey-io" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "ecs-s3-files-ec2",
+      "updates": [
+        {
+          "id": "ecs-s3-files-ec2",
+          "tag": "notable",
+          "date": "16 Sep 2026",
+          "title": {
+            "es": "Amazon ECS extiende S3 Files al compute type EC2",
+            "en": "Amazon ECS extends S3 Files support to the EC2 compute type",
+            "fr": "Amazon ECS étend S3 Files au compute type EC2"
+          },
+          "body_html": {
+            "es": "<p>Lo que ya estaba en Fargate llega a EC2: montar S3 como filesystem compartido directamente en el container, sin sidecar ni sincronización manual. Para workloads que leen datasets grandes de solo lectura — modelos, assets, fixtures — te ahorra el patrón de copiar al arranque.</p>",
+            "en": "<p>What already worked on Fargate now reaches EC2: mounting S3 as a shared file system directly in the container, with no sidecar and no manual sync. For workloads reading large read-only datasets — models, assets, fixtures — it removes the copy-on-startup pattern.</p>",
+            "fr": "<p>Ce qui existait sur Fargate arrive sur EC2 : monter S3 comme système de fichiers partagé directement dans le conteneur, sans sidecar ni synchronisation manuelle. Pour les workloads qui lisent de gros datasets en lecture seule, cela supprime la copie au démarrage.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-ecs-s3-files-ec2/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "lyft-flink-k8s-operator",
+          "tag": "notable",
+          "date": "16 Sep 2026",
+          "title": {
+            "es": "Lyft jubila su operator propio de Flink y ahorra millones al año",
+            "en": "Lyft retires its homegrown Flink operator and reclaims millions a year",
+            "fr": "Lyft abandonne son operator Flink maison et récupère des millions par an"
+          },
+          "body_html": {
+            "es": "<p>Caso de estudio para cualquiera que mantenga infra propia por inercia. Lyft migró al Apache Flink Kubernetes Operator y ganó tres cosas: upgrades por <em>last-state</em> desde metadata de HA aunque el JobManager esté enfermo (adiós timeouts de savepoint), <code>FlinkBlueGreenDeployment</code> que reemplaza los 3 a 20 minutos de downtime del esquema anterior, y autoscaling in-place con autotuning que recuperó <strong>varios millones de dólares al año</strong> de infra sobreprovisionada. El detalle fino: separaron features por criticidad — los jobs críticos escalan sin restart, los demás aceptan restart.</p>",
+            "en": "<p>A case study for anyone maintaining homegrown infra out of inertia. Lyft moved to the Apache Flink Kubernetes Operator and got three things: <em>last-state</em> upgrades restoring from HA metadata even when the JobManager is unhealthy (no more savepoint timeouts), <code>FlinkBlueGreenDeployment</code> replacing the previous 3-to-20-minute downtime, and in-place autoscaling with autotuning that reclaimed <strong>a few million dollars a year</strong> of overprovisioned infrastructure. The nuance: they split features by criticality — critical jobs scale without restarts, the rest accept them.</p>",
+            "fr": "<p>Étude de cas pour qui maintient une infra maison par inertie. Lyft est passé à l'Apache Flink Kubernetes Operator et y gagne trois choses : upgrades <em>last-state</em> depuis les métadonnées HA même si le JobManager est malade, <code>FlinkBlueGreenDeployment</code> qui remplace les 3 à 20 minutes d'indisponibilité précédentes, et autoscaling in-place avec autotuning qui a récupéré <strong>plusieurs millions de dollars par an</strong> d'infrastructure surprovisionnée.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/lyft-flink-k8s-operator/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "pinterest-manas-spann",
+      "updates": [
+        {
+          "id": "pinterest-manas-spann",
+          "tag": "notable",
+          "date": "16 Sep 2026",
+          "title": {
+            "es": "Pinterest: de HNSW en RAM a SPANN cuantizado en SSD, con 20-30% menos de costo",
+            "en": "Pinterest: from memory-hungry HNSW to quantized SPANN on SSD, at 20-30% lower cost",
+            "fr": "Pinterest : de HNSW en RAM à SPANN quantifié sur SSD, 20-30% moins cher"
+          },
+          "body_html": {
+            "es": "<p>Lectura obligada si estás peleando con búsqueda vectorial a escala. Sobre decenas de miles de millones de embeddings, el índice HNSW base pesaba <strong>121 GB</strong> con 93,72% de Recall@100; con Scalar Quantization bajó a <strong>50 GB</strong> manteniendo 92,92%. Product Quantization recortó 74% del índice con 70-80% de recall. Y el combo SPANN + PQ servido desde SSD logró <strong>3x el QPS de DiskANN con un tercio de la latencia</strong>, perdiendo apenas 5% de recall. Traducción: 20-30% de ahorro de costo de serving en producción. La lección no es el algoritmo, es medir recall contra memoria antes de elegir.</p>",
+            "en": "<p>Required reading if you're fighting vector search at scale. Over tens of billions of embeddings, the baseline HNSW index was <strong>121 GB</strong> at 93.72% Recall@100; Scalar Quantization brought it to <strong>50 GB</strong> while holding 92.92%. Product Quantization cut the index by 74% at 70-80% recall. And SPANN + PQ served from SSD hit <strong>3x DiskANN's QPS at a third of the latency</strong> for a 5% recall drop — 20-30% serving cost savings in production. The lesson isn't the algorithm, it's measuring recall against memory before you pick one.</p>",
+            "fr": "<p>Lecture obligatoire si vous affrontez la recherche vectorielle à grande échelle. Sur des dizaines de milliards d'embeddings, l'index HNSW de base pesait <strong>121 Go</strong> à 93,72% de Recall@100 ; la Scalar Quantization l'a ramené à <strong>50 Go</strong> en conservant 92,92%. SPANN + PQ servi depuis SSD atteint <strong>3x le QPS de DiskANN avec un tiers de la latence</strong> pour 5% de recall perdu, soit 20-30% d'économies de serving en production.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/pinterest-search/", "label": "infoq.com" }
+        },
+        {
+          "id": "openfga-listusers-exclusion",
+          "tag": "security",
+          "date": "16 Sep 2026",
+          "title": {
+            "es": "OpenFGA: ListUsers devuelve un usuario explícitamente excluido",
+            "en": "OpenFGA: ListUsers returns a deliberately excluded user",
+            "fr": "OpenFGA : ListUsers renvoie un utilisateur explicitement exclu"
+          },
+          "body_html": {
+            "es": "<p>Bug de autorización, no de crash. Cuando una exclusión <code>but not</code> bajo un wildcard ligado a tipo se intersecta con <code>and</code> contra otra relación que también otorga a ese usuario, <code>ListUsers</code> lo devuelve igual. O sea: tu modelo dice «todos menos Juan» y la API te lista a Juan. Afecta hasta <code>1.18.0</code>, parcheado en <code>1.18.1</code>. Si construís listados de acceso sobre ListUsers, esto es un leak de datos con cara de feature.</p>",
+            "en": "<p>An authorization bug, not a crash. When a <code>but not</code> exclusion under a type-bound wildcard is intersected via <code>and</code> with another relation that also grants that user, <code>ListUsers</code> returns them anyway. Your model says «everyone except Juan» and the API lists Juan. Affects up to <code>1.18.0</code>, patched in <code>1.18.1</code>. If you build access listings on ListUsers, this is a data leak wearing a feature's face.</p>",
+            "fr": "<p>Un bug d'autorisation, pas un crash. Quand une exclusion <code>but not</code> sous un wildcard lié au type est intersectée via <code>and</code> avec une autre relation qui accorde aussi cet utilisateur, <code>ListUsers</code> le renvoie quand même. Affecte jusqu'à <code>1.18.0</code>, corrigé en <code>1.18.1</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-g3pg-frfm-pr2m", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "nuxtjs-mdc-xss",
+      "updates": [
+        {
+          "id": "nuxtjs-mdc-xss",
+          "tag": "security",
+          "date": "16 Sep 2026",
+          "title": {
+            "es": "@nuxtjs/mdc: XSS desde markdown no confiable en la configuración por defecto",
+            "en": "@nuxtjs/mdc: XSS from untrusted markdown at the default configuration",
+            "fr": "@nuxtjs/mdc : XSS depuis du markdown non fiable en configuration par défaut"
+          },
+          "body_html": {
+            "es": "<p>Severidad alta. El sanitizador de URLs del renderer de markdown de Nuxt no cubre <code>xlink:href</code> en SVG ni <code>data:text/html</code>, así que cualquier contenido markdown que venga de un usuario puede ejecutar script — <strong>sin configuración especial, con los defaults</strong>. Afecta <code>&lt; 0.22.1</code>. Si tu blog, docs o CMS renderiza markdown de terceros con Nuxt Content, subí ya.</p>",
+            "en": "<p>High severity. The URL sanitizer in Nuxt's markdown renderer misses SVG <code>xlink:href</code> and <code>data:text/html</code>, so any user-supplied markdown can execute script — <strong>with no special configuration, at the defaults</strong>. Affects <code>&lt; 0.22.1</code>. If your blog, docs or CMS renders third-party markdown through Nuxt Content, upgrade now.</p>",
+            "fr": "<p>Sévérité haute. Le sanitizer d'URL du renderer markdown de Nuxt ignore <code>xlink:href</code> dans les SVG et <code>data:text/html</code>, donc tout markdown fourni par un utilisateur peut exécuter du script — <strong>sans configuration particulière, par défaut</strong>. Affecte <code>&lt; 0.22.1</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-mxm6-v9r6-r94c", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "gitlab-mcp-upload-markdown",
+      "updates": [
+        {
+          "id": "gitlab-mcp-upload-markdown",
+          "tag": "breaking",
+          "date": "16 Sep 2026",
+          "title": {
+            "es": "@zereight/mcp-gitlab: lectura arbitraria de archivos sin auth y exfiltración del PAT",
+            "en": "@zereight/mcp-gitlab: unauthenticated arbitrary file read and PAT exfiltration",
+            "fr": "@zereight/mcp-gitlab : lecture arbitraire de fichiers non authentifiée et exfiltration du PAT"
+          },
+          "body_html": {
+            "es": "<p>Crítico, y el tercero de la misma semana para este servidor MCP. La herramienta <code>upload_markdown</code> permite leer cualquier archivo del host sin autenticar, lo que incluye el propio Personal Access Token de GitLab: <strong>toma de cuenta completa</strong>. Parcheado en <code>2.1.27</code>. Moraleja general: un servidor MCP corriendo local no es un binario inofensivo, es un endpoint HTTP con tus credenciales adentro. Tratalo como tal.</p>",
+            "en": "<p>Critical, and the third one this week for this MCP server. The <code>upload_markdown</code> tool allows unauthenticated arbitrary file read on the host, including the GitLab Personal Access Token itself: <strong>full account takeover</strong>. Patched in <code>2.1.27</code>. The broader lesson: a locally running MCP server is not a harmless binary, it's an HTTP endpoint holding your credentials. Treat it that way.</p>",
+            "fr": "<p>Critique, et le troisième de la semaine pour ce serveur MCP. L'outil <code>upload_markdown</code> permet la lecture arbitraire de fichiers sans authentification, y compris le Personal Access Token GitLab : <strong>prise de contrôle complète du compte</strong>. Corrigé en <code>2.1.27</code>. La leçon : un serveur MCP local est un endpoint HTTP qui détient vos credentials.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-cv3r-c5h8-f4g5", "label": "github.com/advisories" }
+        },
+        {
+          "id": "otel-resources-host-path-hijack",
+          "tag": "security",
+          "date": "16 Sep 2026",
+          "title": {
+            "es": "OpenTelemetry.Resources.Host: ejecución de código por PATH hijacking en macOS",
+            "en": "OpenTelemetry.Resources.Host: code execution via local PATH hijacking on macOS",
+            "fr": "OpenTelemetry.Resources.Host : exécution de code par PATH hijacking sur macOS"
+          },
+          "body_html": {
+            "es": "<p>Severidad alta. El detector de recursos de host invoca un binario externo sin path absoluto, así que en macOS un atacante local que controle el <code>PATH</code> logra ejecución arbitraria dentro de tu proceso instrumentado. Afecta <code>&lt; 1.16.0-beta.2</code>. Es el recordatorio de siempre: tu stack de observabilidad corre con los mismos privilegios que la app.</p>",
+            "en": "<p>High severity. The host resource detector invokes an external binary without an absolute path, so on macOS a local attacker controlling <code>PATH</code> gets arbitrary execution inside your instrumented process. Affects <code>&lt; 1.16.0-beta.2</code>. The usual reminder: your observability stack runs with the same privileges as the app.</p>",
+            "fr": "<p>Sévérité haute. Le détecteur de ressources host invoque un binaire externe sans chemin absolu : sur macOS, un attaquant local contrôlant le <code>PATH</code> obtient une exécution arbitraire dans votre process instrumenté. Affecte <code>&lt; 1.16.0-beta.2</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-v8pv-4842-x354", "label": "github.com/advisories" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Los servidores MCP se consolidaron como la nueva superficie de ataque del backend: tres advisories críticos en una semana sobre el mismo servidor de GitLab, todos por tratar un proceso local como si fuera confiable. Si corrés MCP en tu máquina de trabajo, auditá qué tokens tiene en memoria.",
+      "en": "MCP servers have settled in as the backend's new attack surface: three critical advisories in one week on the same GitLab server, all from treating a local process as trusted. If you run MCP on your work machine, audit which tokens it holds in memory.",
+      "fr": "Les serveurs MCP se sont imposés comme la nouvelle surface d'attaque du backend : trois advisories critiques en une semaine sur le même serveur GitLab, tous parce qu'un process local était considéré comme fiable."
+    },
+    {
+      "es": "Node.js 26 está absorbiendo herramientas que hasta ayer eran dependencias: test runner, watch mode y ahora benchmarking con node:bench. La pregunta ya no es qué librería usar sino cuántas podés borrar del package.json.",
+      "en": "Node.js 26 keeps absorbing tooling that used to be dependencies: test runner, watch mode, and now benchmarking with node:bench. The question is no longer which library to pick but how many you can delete from package.json.",
+      "fr": "Node.js 26 continue d'absorber l'outillage qui était hier des dépendances : test runner, watch mode, et maintenant le benchmarking avec node:bench."
+    },
+    {
+      "es": "El caso Shopify y el de Lyft cuentan la misma historia desde dos ángulos: con agentes de IA capaces, el costo de una reescritura greenfield cayó lo suficiente como para que mantener una capa de abstracción propia deje de compensar. Ojo, eso no significa reescribir todo — significa recalcular el trade-off que congelaste en 2020.",
+      "en": "The Shopify and Lyft stories tell the same thing from two angles: with capable AI agents, the cost of a greenfield rewrite dropped far enough that maintaining your own abstraction layer stops paying off. That doesn't mean rewrite everything — it means recompute the trade-off you froze in 2020.",
+      "fr": "Shopify et Lyft racontent la même chose sous deux angles : avec des agents IA performants, le coût d'une réécriture greenfield a assez baissé pour que maintenir sa propre couche d'abstraction cesse d'être rentable."
+    }
+  ]
+}

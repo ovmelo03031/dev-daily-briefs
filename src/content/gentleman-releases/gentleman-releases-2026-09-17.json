@@ -1,0 +1,132 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 17 Sep 2026",
+    "en": "Gentleman Releases — 17 Sep 2026",
+    "fr": "Gentleman Releases — 17 Sep 2026"
+  },
+  "description": {
+    "es": "Releases del día en proyectos de Gentleman-Programming",
+    "en": "Today's releases from Gentleman-Programming projects",
+    "fr": "Sorties du jour des projets Gentleman-Programming"
+  },
+  "pubDate": "2026-09-17",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "gentle-ai v3.0.0 — Organic Driven Development pasa a ser el protocolo por defecto",
+        "en": "gentle-ai v3.0.0 — Organic Driven Development becomes the default protocol",
+        "fr": "gentle-ai v3.0.0 — l'Organic Driven Development devient le protocole par défaut"
+      },
+      "anchor": "gentle-ai-v3-0-0",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "SDD adelgaza: research y verify pasan a ser opcionales y archive ya no pide attestation",
+        "en": "SDD slims down: research and verify go optional, archive no longer demands an attestation",
+        "fr": "SDD s'allège : research et verify deviennent optionnels, archive n'exige plus d'attestation"
+      },
+      "anchor": "gentle-ai-v3-0-0",
+      "icon": "lucide:list-checks"
+    },
+    {
+      "text": {
+        "es": "RDD sale del ciclo SDD pero sigue vivo como switch propio del usuario",
+        "en": "RDD leaves the SDD lifecycle but stays alive as a user-owned switch",
+        "fr": "RDD quitte le cycle SDD mais reste un interrupteur contrôlé par l'utilisateur"
+      },
+      "anchor": "gentle-ai-v3-0-0",
+      "icon": "lucide:toggle-right"
+    },
+    {
+      "text": {
+        "es": "v3.0.1 mueve el módulo Go a /v3 y desbloquea la instalación en Windows",
+        "en": "v3.0.1 moves the Go module to /v3 and unblocks installs on Windows",
+        "fr": "v3.0.1 déplace le module Go vers /v3 et débloque l'installation sous Windows"
+      },
+      "anchor": "gentle-ai-v3-0-1",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "v3.0.2 arregla los install scripts que todavía bajaban v2.9.1 en silencio",
+        "en": "v3.0.2 fixes the install scripts that were still silently pulling v2.9.1",
+        "fr": "v3.0.2 corrige les scripts d'installation qui récupéraient encore v2.9.1 en silence"
+      },
+      "anchor": "gentle-ai-v3-0-2",
+      "icon": "lucide:wrench"
+    }
+  ],
+  "tools": [
+    {
+      "id": "gentle-ai",
+      "name": "gentle-ai",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-gentle-ai",
+      "icon_emoji": "🎩",
+      "anchor": "gentle-ai",
+      "version": "v3.0.2",
+      "updates": [
+        {
+          "id": "gentle-ai-v3-0-0",
+          "tag": "breaking",
+          "title": {
+            "es": "v3.0.0 — Organic Driven Development como workflow por defecto",
+            "en": "v3.0.0 — Organic Driven Development as the default workflow",
+            "fr": "v3.0.0 — l'Organic Driven Development comme workflow par défaut"
+          },
+          "body_html": {
+            "es": "<p>Major de verdad. A partir de acá el orquestador arranca con <strong>Organic Driven Development (ODD)</strong> como protocolo obligatorio en los cuatro runtimes soportados (Claude Code, OpenCode, Codex y Pi): un pedido común de feature ya corre solo por explore, resolve, classify, track, implement y close, sin que vos pidas ningún workflow ni tracking de tareas.</p><p>Cuando el laburo autorizado es sustancial, te deja un documento durable en <code>odd/tasks/&lt;feature&gt;.md</code> con espejo completo en Engram, así sobrevive interrupciones y resume. Y la implementación respeta el modo TDD que tengas configurado en vez de adivinarlo.</p><p>Ojo con esto, que acá está la carne de los breaking: <strong>SDD adelgazó</strong>. Research pasa a ser una investigación opcional en vez de un certificado de admisión, verify es opcional y diagnóstico en lugar de precondición, y archive procede con el estado real de las tareas —trabajo sin terminar incluido— sin exigir attestation. Se retiró toda la maquinaria de attempt governance y las proyecciones de review de <code>internal/sddstatus</code> e <code>internal/cli</code>. Lo que sigue firme: integridad de grants vivos, locators de artefactos, ruteo de progreso de tareas y composición segura de archive.</p><p><strong>RDD</strong> sale del ciclo SDD, pero no se muere: sigue siendo el switch propio del usuario con <code>gentle-ai review mode enable|disable|status</code>, independiente de si el cambio salió por ODD o por SDD.</p><p>Tres fixes acompañan: los artefactos de agentes instalados en global ya no se filtran al working directory del proyecto actual, las skills de workflow para contributors dejan de viajar en el preset por defecto, y se resolvió un flake de test de CLI solo en Windows.</p><p>Un detalle que te va a morder si estás en Windows: esta major se cortó todavía desde el módulo <code>/v2</code>, así que <code>go install</code> la rechaza. Se arregla en el v3.0.1 de acá abajo. Después de actualizar, corré <code>gentle-ai sync</code> sí o sí.</p>",
+            "en": "<p>A real major. From here on the orchestrator opens with <strong>Organic Driven Development (ODD)</strong> as the mandatory protocol on all four supported runtimes (Claude Code, OpenCode, Codex and Pi): a plain feature request now runs through explore, resolve, classify, track, implement and close without you asking for a workflow or task tracking.</p><p>When authorized work is substantial, it leaves a durable document at <code>odd/tasks/&lt;feature&gt;.md</code> with a full Engram mirror, so it survives interruptions and resumes. Implementation honors your configured TDD mode instead of guessing it.</p><p>Here is where the breaking changes live: <strong>SDD got lighter</strong>. Research is now an optional investigation rather than an admission certificate, verification is optional and diagnostic rather than a precondition, and archive proceeds from the true task state — unfinished work included — without requiring an attestation. Attempt-governance machinery and retired review projections were removed from <code>internal/sddstatus</code> and <code>internal/cli</code>. Still enforced: live grant integrity, artifact locators, task-progress routing and safe archive composition.</p><p><strong>RDD</strong> leaves the SDD lifecycle but does not die: it stays a user-owned switch via <code>gentle-ai review mode enable|disable|status</code>, independent of whether the change came from ODD or SDD.</p><p>Three fixes ship alongside: globally installed agent artifacts no longer leak into the current project's working directory, contributor-only workflow skills stop travelling in the default preset, and a Windows-only CLI test flake is resolved.</p><p>One detail that bites on Windows: this major was still cut from the <code>/v2</code> module, so <code>go install</code> rejects it. Fixed in v3.0.1 below. After upgrading, run <code>gentle-ai sync</code>.</p>",
+            "fr": "<p>Une vraie version majeure. Désormais l'orchestrateur démarre avec l'<strong>Organic Driven Development (ODD)</strong> comme protocole obligatoire sur les quatre runtimes supportés (Claude Code, OpenCode, Codex et Pi) : une simple demande de fonctionnalité passe par explore, resolve, classify, track, implement et close sans que vous demandiez un workflow ou un suivi de tâches.</p><p>Quand le travail autorisé est conséquent, un document durable est créé dans <code>odd/tasks/&lt;feature&gt;.md</code> avec un miroir Engram complet, qui survit aux interruptions et aux reprises. L'implémentation respecte le mode TDD configuré au lieu de le deviner.</p><p>C'est ici que se trouvent les ruptures : <strong>SDD s'est allégé</strong>. Research devient une investigation optionnelle plutôt qu'un certificat d'admission, la vérification est optionnelle et diagnostique plutôt qu'une précondition, et archive procède depuis l'état réel des tâches — travail inachevé inclus — sans exiger d'attestation. La machinerie de gouvernance des tentatives et les projections de review retirées ont été supprimées de <code>internal/sddstatus</code> et <code>internal/cli</code>. Toujours appliqués : intégrité des grants vivants, locators d'artefacts, routage de progression des tâches et composition sûre de l'archive.</p><p><strong>RDD</strong> quitte le cycle SDD sans disparaître : il reste un interrupteur contrôlé par l'utilisateur via <code>gentle-ai review mode enable|disable|status</code>, indépendamment du workflow ayant produit le changement.</p><p>Trois correctifs accompagnent la version : les artefacts d'agents installés globalement ne fuient plus dans le répertoire de travail du projet courant, les skills de workflow réservées aux contributeurs ne voyagent plus dans le preset par défaut, et un flake de test CLI propre à Windows est résolu.</p><p>Un détail qui pique sous Windows : cette majeure a été coupée depuis le module <code>/v2</code>, donc <code>go install</code> la refuse. Corrigé en v3.0.1 ci-dessous. Après la mise à jour, lancez <code>gentle-ai sync</code>.</p>"
+          },
+          "date": "16 Sep 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v3.0.0",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        },
+        {
+          "id": "gentle-ai-v3-0-1",
+          "tag": "breaking",
+          "title": {
+            "es": "v3.0.1 — El módulo Go se muda a /v3 y vuelve a ser instalable en todas las plataformas",
+            "en": "v3.0.1 — Go module path /v3, installable again on every platform",
+            "fr": "v3.0.1 — Module Go /v3, de nouveau installable sur toutes les plateformes"
+          },
+          "body_html": {
+            "es": "<p>Hotfix directo al problema que dejó el v3.0.0: la major se cortó desde <code>github.com/gentleman-programming/gentle-ai/v2</code>, y Go rechaza cualquier versión <code>v3.x.y</code> para un path de módulo que termina en <code>/v2</code>. Resultado: <code>go install</code>, <code>install.ps1</code>, las instalaciones desde fuente, la instrucción de upgrade que imprimía el binario y el instalador de gentle-pi para Windows no podían instalar v3.0.0. Y como Windows no tiene archivos binarios, los usuarios de Windows quedaron directamente afuera.</p><p>El path del módulo ahora vive en <code>/v3</code>: <code>go.mod</code>, todos los imports Go, el símbolo de ldflags de GoReleaser, <code>scripts/install.sh</code>, <code>scripts/install.ps1</code>, la instrucción impresa por <code>gentle-ai upgrade</code> y la documentación. El path de self-upgrade del canal beta armaba su target con un <code>/v2</code> literal; ahora apunta a <code>/v3</code>.</p><p>El breaking es ese mismo: si importás el módulo o instalás desde fuente, tenés que usar <code>/v3</code>. Un binario v3.0.0 todavía imprime la instrucción vieja con <code>/v2</code>, así que a ese lo actualizás una vez a mano y listo. Todo lo que trajo el v3.0.0 queda intacto y el contrato de provider sigue congelado en <code>1.2.0</code>.</p>",
+            "en": "<p>A hotfix aimed straight at what v3.0.0 left behind: the major was cut from <code>github.com/gentleman-programming/gentle-ai/v2</code>, and Go refuses any <code>v3.x.y</code> version for a module path ending in <code>/v2</code>. The result: <code>go install</code>, <code>install.ps1</code>, source installs, the upgrade instruction printed by the binary and the gentle-pi Windows installer could not install v3.0.0. With no Windows binary archives, Windows users were locked out entirely.</p><p>The module path now lives at <code>/v3</code>: <code>go.mod</code>, every Go import, the GoReleaser ldflags symbol, <code>scripts/install.sh</code>, <code>scripts/install.ps1</code>, the instruction printed by <code>gentle-ai upgrade</code>, and the docs. The beta channel's self-upgrade path built its target with a literal <code>/v2</code>; it now appends <code>/v3</code>.</p><p>That is the breaking change: if you import the module or install from source, you must use <code>/v3</code>. A v3.0.0 binary still prints the old <code>/v2</code> instruction, so upgrade that one binary by hand once. Everything shipped in v3.0.0 is unchanged and the provider contract stays byte-frozen at <code>1.2.0</code>.</p>",
+            "fr": "<p>Un correctif visant directement ce que v3.0.0 a laissé derrière : la majeure a été coupée depuis <code>github.com/gentleman-programming/gentle-ai/v2</code>, et Go refuse toute version <code>v3.x.y</code> pour un chemin de module se terminant par <code>/v2</code>. Résultat : <code>go install</code>, <code>install.ps1</code>, les installations depuis les sources, l'instruction de mise à jour affichée par le binaire et l'installateur gentle-pi pour Windows ne pouvaient pas installer v3.0.0. Sans archives binaires Windows, ces utilisateurs étaient totalement bloqués.</p><p>Le chemin du module vit désormais en <code>/v3</code> : <code>go.mod</code>, tous les imports Go, le symbole ldflags de GoReleaser, <code>scripts/install.sh</code>, <code>scripts/install.ps1</code>, l'instruction affichée par <code>gentle-ai upgrade</code> et la documentation. Le chemin d'auto-mise à jour du canal beta construisait sa cible avec un <code>/v2</code> littéral ; il ajoute maintenant <code>/v3</code>.</p><p>Voilà la rupture : si vous importez le module ou installez depuis les sources, utilisez <code>/v3</code>. Un binaire v3.0.0 affiche encore l'ancienne instruction <code>/v2</code> : mettez à jour ce binaire une fois à la main. Tout ce qu'apportait v3.0.0 reste inchangé et le contrat de provider reste figé à <code>1.2.0</code>.</p>"
+          },
+          "date": "16 Sep 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v3.0.1",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        },
+        {
+          "id": "gentle-ai-v3-0-2",
+          "tag": "fix",
+          "title": {
+            "es": "v3.0.2 — Los install scripts por fin apuntan al módulo /v3",
+            "en": "v3.0.2 — Install scripts finally target the /v3 module",
+            "fr": "v3.0.2 — Les scripts d'installation ciblent enfin le module /v3"
+          },
+          "body_html": {
+            "es": "<p>Tercer release del mismo día y cierre de la migración a <code>/v3</code>. El v3.0.1 movió el módulo, pero <code>scripts/install.sh</code> e <code>install.ps1</code> seguían armando su target de <code>go install</code> por interpolación sobre el path <code>/v2</code>, así que la rewrite del string literal se los salteó.</p><p>El síntoma era feo justamente porque era silencioso: el fallback estable resolvía <code>/v2@latest</code> e instalaba <strong>v2.9.1</strong> sin tirar un solo error, y <code>GENTLE_AI_CHANNEL=beta</code> resolvía <code>/v2@main</code>, que falla porque <code>main</code> ya es un módulo <code>/v3</code>. Lo reportó alguien de la comunidad en Discord.</p><p>Ahora ambos scripts apuntan a <code>/v3/cmd/gentle-ai</code> y —esto es lo que más vale— hay un test de regresión que deriva el major esperado desde <code>go.mod</code>, así que la próxima migración se rompe en CI antes de llegar a producción. Como los scripts se sirven crudos desde <code>main</code>, el <code>curl ... | bash</code> y el one-liner de PowerShell ya venían arreglados; este release hace que el tag también los lleve corregidos. Ninguna feature nueva, ningún breaking.</p>",
+            "en": "<p>Third release of the same day, closing out the <code>/v3</code> migration. v3.0.1 moved the module, but <code>scripts/install.sh</code> and <code>install.ps1</code> still assembled their <code>go install</code> target by interpolating over the <code>/v2</code> path, so the literal-string rewrite skipped them.</p><p>The symptom was nasty precisely because it was silent: the stable fallback resolved <code>/v2@latest</code> and installed <strong>v2.9.1</strong> without a single error, while <code>GENTLE_AI_CHANNEL=beta</code> resolved <code>/v2@main</code>, which fails because <code>main</code> is already a <code>/v3</code> module. A community member reported it on Discord.</p><p>Both scripts now target <code>/v3/cmd/gentle-ai</code> and — the part that actually matters — a regression test derives the expected major from <code>go.mod</code>, so the next migration breaks in CI before it ships. Since the scripts are served raw from <code>main</code>, the <code>curl ... | bash</code> and PowerShell one-liners were already fixed; this release makes the tag carry the corrected scripts too. No new features, no breaking changes.</p>",
+            "fr": "<p>Troisième version du même jour, qui clôt la migration vers <code>/v3</code>. v3.0.1 avait déplacé le module, mais <code>scripts/install.sh</code> et <code>install.ps1</code> construisaient encore leur cible <code>go install</code> par interpolation sur le chemin <code>/v2</code> : la réécriture de la chaîne littérale les avait ignorés.</p><p>Le symptôme était pénible parce qu'il était silencieux : le fallback stable résolvait <code>/v2@latest</code> et installait <strong>v2.9.1</strong> sans la moindre erreur, tandis que <code>GENTLE_AI_CHANNEL=beta</code> résolvait <code>/v2@main</code>, qui échoue puisque <code>main</code> est déjà un module <code>/v3</code>. Un membre de la communauté l'a signalé sur Discord.</p><p>Les deux scripts ciblent désormais <code>/v3/cmd/gentle-ai</code> et — c'est le point essentiel — un test de régression dérive le major attendu depuis <code>go.mod</code>, donc la prochaine migration cassera en CI avant d'être publiée. Comme les scripts sont servis bruts depuis <code>main</code>, le <code>curl ... | bash</code> et le one-liner PowerShell étaient déjà corrigés ; cette version fait que le tag porte aussi les scripts corrigés. Aucune nouvelle fonctionnalité, aucune rupture.</p>"
+          },
+          "date": "16 Sep 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v3.0.2",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

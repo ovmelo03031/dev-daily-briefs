@@ -1,0 +1,418 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 18 de septiembre de 2026",
+    "en": "Backend & Fullstack — September 18, 2026",
+    "fr": "Backend & Fullstack — 18 septembre 2026"
+  },
+  "description": {
+    "es": "Fastify parchea un DoS por trailers en HTTP/2, CakePHP suma SQL injection con CVSS 9.2, OpenTelemetry-Go ignora los certificados de entorno y rompe mTLS, Karmada se gradúa en la CNCF y Deno 2.9.7 llega con una tanda enorme de fixes de compatibilidad con Node.",
+    "en": "Fastify patches an HTTP/2 trailer DoS, CakePHP ships a CVSS 9.2 SQL injection, OpenTelemetry-Go silently bypasses mTLS, Karmada graduates from the CNCF, and Deno 2.9.7 lands a large batch of Node compatibility fixes.",
+    "fr": "Fastify corrige un DoS lié aux trailers HTTP/2, CakePHP publie une injection SQL CVSS 9.2, OpenTelemetry-Go contourne silencieusement mTLS, Karmada est diplômé de la CNCF et Deno 2.9.7 apporte de nombreux correctifs de compatibilité Node."
+  },
+  "pubDate": "2026-09-18",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "CoreDNS: DoS de memoria sin autenticar",
+        "en": "CoreDNS: unauthenticated memory DoS",
+        "fr": "CoreDNS : DoS mémoire non authentifié"
+      },
+      "anchor": "coredns-transport-memory-exhaustion",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "CakePHP: SQL injection CVSS 9.2",
+        "en": "CakePHP: CVSS 9.2 SQL injection",
+        "fr": "CakePHP : injection SQL CVSS 9.2"
+      },
+      "anchor": "cakephp-functionsbuilder-sqli",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "OTel-Go ignora tus certs y rompe mTLS",
+        "en": "OTel-Go ignores env certs, breaks mTLS",
+        "fr": "OTel-Go ignore les certs et casse mTLS"
+      },
+      "anchor": "otel-go-log-grpc-mtls-bypass",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Karmada se gradúa en la CNCF",
+        "en": "Karmada graduates from the CNCF",
+        "fr": "Karmada est diplômé de la CNCF"
+      },
+      "anchor": "karmada-cncf-graduation",
+      "icon": "simple-icons:kubernetes"
+    },
+    {
+      "text": {
+        "es": "Deno 2.9.7: tanda grande de fixes Node",
+        "en": "Deno 2.9.7: big batch of Node fixes",
+        "fr": "Deno 2.9.7 : gros lot de correctifs Node"
+      },
+      "anchor": "deno-2-9-7",
+      "icon": "simple-icons:deno"
+    },
+    {
+      "text": {
+        "es": "Beanstalk Cluster Mode corre sobre EKS",
+        "en": "Beanstalk Cluster Mode now runs on EKS",
+        "fr": "Beanstalk Cluster Mode tourne sur EKS"
+      },
+      "anchor": "aws-beanstalk-cluster-mode",
+      "icon": "simple-icons:amazonwebservices"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "cakephp-functionsbuilder-sqli",
+      "updates": [
+        {
+          "id": "cakephp-functionsbuilder-sqli",
+          "tag": "security",
+          "date": "17 Sep 2026",
+          "title": {
+            "es": "CakePHP: SQL injection en FunctionsBuilder, CVSS 9.2",
+            "en": "CakePHP: SQL injection in FunctionsBuilder, CVSS 9.2",
+            "fr": "CakePHP : injection SQL dans FunctionsBuilder, CVSS 9.2"
+          },
+          "body_html": {
+            "es": "<p><code>FunctionsBuilder::cast()</code>, <code>extract()</code>, <code>datePart()</code> y <code>dateAdd()</code> interpolan sin escapar los parámetros <code>$dataType</code>, <code>$part</code> y <code>$unit</code>. Si alguno de esos llega desde el usuario, tenés SQL injection directo.</p><p>Fixes en 5.3.7, 5.2.14, 5.1.9, 4.6.5 y 4.5.12. El workaround mientras tanto es obvio pero vale decirlo: esos parámetros nunca deberían venir del request. La lección de diseño es vieja y sigue vigente — el query builder te protege los <em>valores</em>, no los <em>identificadores</em>.</p>",
+            "en": "<p><code>FunctionsBuilder::cast()</code>, <code>extract()</code>, <code>datePart()</code> and <code>dateAdd()</code> interpolate the <code>$dataType</code>, <code>$part</code> and <code>$unit</code> parameters without escaping. Any of them sourced from user input gives you direct SQL injection.</p><p>Fixed in 5.3.7, 5.2.14, 5.1.9, 4.6.5 and 4.5.12. The workaround is the obvious one, and worth restating as a design lesson: a query builder protects <em>values</em>, not <em>identifiers</em>.</p>",
+            "fr": "<p><code>FunctionsBuilder::cast()</code>, <code>extract()</code>, <code>datePart()</code> et <code>dateAdd()</code> interpolent <code>$dataType</code>, <code>$part</code> et <code>$unit</code> sans échappement. Si l'un vient de l'utilisateur, c'est une injection SQL directe.</p><p>Corrigé en 5.3.7, 5.2.14, 5.1.9, 4.6.5 et 4.5.12. La leçon reste : un query builder protège les <em>valeurs</em>, pas les <em>identifiants</em>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-vjqc-q4mp-2rvf",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "otel-go-log-grpc-mtls-bypass",
+          "tag": "security",
+          "date": "17 Sep 2026",
+          "title": {
+            "es": "OpenTelemetry-Go: el exporter de logs gRPC ignora tus certificados de entorno",
+            "en": "OpenTelemetry-Go: the log gRPC exporter ignores your env certificates",
+            "fr": "OpenTelemetry-Go : l'exporter de logs gRPC ignore vos certificats d'environnement"
+          },
+          "body_html": {
+            "es": "<p>El exporter OTLP de logs por gRPC lee <code>OTEL_EXPORTER_OTLP_LOGS_CERTIFICATE</code> y <code>OTEL_EXPORTER_OTLP_CERTIFICATE</code>… y después no las aplica al crear las credenciales de transporte. La conexión cae de vuelta a las CA del sistema y descarta el certificado de cliente.</p><p>O sea: creés que tenés mTLS y CA pinning, y tenés TLS común. Un atacante en la red con un cert firmado por cualquier CA del sistema lee o modifica tu telemetría de logs. CVSS 6.3, pero el problema de fondo es peor que el número: es una falla silenciosa de una garantía de seguridad que configuraste explícitamente. Revisá tu pipeline de observabilidad.</p>",
+            "en": "<p>The OTLP log gRPC exporter reads <code>OTEL_EXPORTER_OTLP_LOGS_CERTIFICATE</code> and <code>OTEL_EXPORTER_OTLP_CERTIFICATE</code> — and then never applies them when building the gRPC transport credentials. The connection silently falls back to system roots and drops the client certificate.</p><p>You believe you have mTLS and CA pinning; you have plain TLS. A network attacker holding any system-trusted certificate can read or alter your log telemetry. CVSS 6.3, but the shape of the bug is worse than the score: it is a silent failure of a security guarantee you explicitly configured.</p>",
+            "fr": "<p>L'exporter OTLP de logs en gRPC lit <code>OTEL_EXPORTER_OTLP_LOGS_CERTIFICATE</code> et <code>OTEL_EXPORTER_OTLP_CERTIFICATE</code> — puis ne les applique jamais aux credentials gRPC. La connexion retombe sur les racines système et abandonne le certificat client.</p><p>Vous croyez avoir mTLS et du CA pinning ; vous avez du TLS simple. CVSS 6.3, mais la nature du défaut est pire que le score : une garantie de sécurité explicitement configurée échoue en silence.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-w34q-cm8f-9c5x",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "coredns-transport-memory-exhaustion",
+          "tag": "security",
+          "date": "17 Sep 2026",
+          "title": {
+            "es": "CoreDNS: agotamiento de memoria sin autenticar en DoH, DoQ y gRPC",
+            "en": "CoreDNS: unauthenticated memory exhaustion over DoH, DoQ and gRPC",
+            "fr": "CoreDNS : épuisement mémoire non authentifié via DoH, DoQ et gRPC"
+          },
+          "body_html": {
+            "es": "<p>CoreDNS parsea los contadores de sección controlados por el atacante <em>antes</em> de validarlos en los listeners DoH, DoH3, DoQ y DNS-over-gRPC. Con compresión de nombres DNS, un solo request de 65.533 bytes puede reservar más de 10 MiB al desempaquetarse. Mandás varios en paralelo y el proceso se muere.</p><p>Si corrés CoreDNS como DNS de tu cluster con transportes custom expuestos, esto es prioritario. Y sumale <strong>GHSA-9gm5-9rfh-m6vx</strong>: esos mismos transportes se saltean el rechazo de UPDATE que sí se aplica en UDP y TCP.</p>",
+            "en": "<p>CoreDNS parses attacker-controlled DNS section counts <em>before</em> validating them on the DoH, DoH3, DoQ and DNS-over-gRPC listeners. Using DNS name compression, a single 65,533-byte request can allocate more than 10 MiB while unpacking. Send several concurrently and the process dies.</p><p>If you run CoreDNS as cluster DNS with custom transports exposed, treat this as priority. Pair it with <strong>GHSA-9gm5-9rfh-m6vx</strong>: those same transports bypass the UPDATE rejection that is enforced on UDP and TCP.</p>",
+            "fr": "<p>CoreDNS analyse les compteurs de section contrôlés par l'attaquant <em>avant</em> de les valider sur les listeners DoH, DoH3, DoQ et DNS-over-gRPC. Via la compression de noms DNS, une seule requête de 65 533 octets peut allouer plus de 10 Mio. Quelques requêtes concurrentes suffisent à tuer le process.</p><p>À coupler avec <strong>GHSA-9gm5-9rfh-m6vx</strong> : ces mêmes transports contournent le rejet des UPDATE appliqué en UDP et TCP.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-mrg3-qvqr-jw29",
+            "label": "github.com/advisories"
+          }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "deno-2-9-7",
+      "updates": [
+        {
+          "id": "deno-2-9-7",
+          "tag": "patch",
+          "date": "17 Sep 2026",
+          "title": {
+            "es": "Deno 2.9.7: tanda grande de fixes de compatibilidad con Node y permisos",
+            "en": "Deno 2.9.7: large batch of Node compatibility and permission fixes",
+            "fr": "Deno 2.9.7 : gros lot de correctifs de compatibilité Node et de permissions"
+          },
+          "body_html": {
+            "es": "<p>Patch cargadísimo. Lo que más importa para backend: <code>tcp_wrap</code> ahora verifica la IP resuelta contra la deny-list de red (antes se te escapaba por resolución DNS), se validan los paths de registry en los tarballs del lockfile al instalar, y se chequean permisos para membresías multicast. Tres agujeros de permisos tapados en una sola release.</p><p>Del lado de compatibilidad: <code>AsyncLocalStorage</code> preserva el contexto de salida, los prototipos del header map de <code>IncomingMessage</code> quedan alineados con Node, y <code>Deno.serve</code> extrae <code>traceparent</code> sin importar el casing del header — esto último es clave si estás instrumentando con OTel.</p>",
+            "en": "<p>A heavy patch release. The backend-relevant parts: <code>tcp_wrap</code> now checks the resolved IP against the net deny list (DNS resolution used to slip past it), lockfile tarball registry paths are validated on install, and multicast membership now requires permission checks. Three permission holes closed in one release.</p><p>On compatibility: <code>AsyncLocalStorage</code> preserves exit context, <code>IncomingMessage</code> header map prototypes align with Node, and <code>Deno.serve</code> extracts <code>traceparent</code> regardless of header case — that last one matters if you instrument with OTel.</p>",
+            "fr": "<p>Patch très chargé. Côté backend : <code>tcp_wrap</code> vérifie désormais l'IP résolue contre la deny-list réseau, les chemins de registry des tarballs du lockfile sont validés à l'installation, et les adhésions multicast exigent une vérification de permission.</p><p>Côté compatibilité : <code>AsyncLocalStorage</code> préserve le contexte de sortie, les prototypes du header map d'<code>IncomingMessage</code> s'alignent sur Node, et <code>Deno.serve</code> extrait <code>traceparent</code> quelle que soit la casse de l'en-tête.</p>"
+          },
+          "source": {
+            "url": "https://github.com/denoland/deno/releases/tag/v2.9.7",
+            "label": "github.com/denoland"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "fastify-6-alpha-4",
+      "updates": [
+        {
+          "id": "fastify-6-alpha-4",
+          "tag": "release",
+          "date": "17 Sep 2026",
+          "title": {
+            "es": "Fastify 6.0.0-alpha.4: release de seguridad con dos optimizaciones del hot path",
+            "en": "Fastify 6.0.0-alpha.4: security release plus two hot-path optimizations",
+            "fr": "Fastify 6.0.0-alpha.4 : release de sécurité et deux optimisations du hot path"
+          },
+          "body_html": {
+            "es": "<p>Además del fix del DoS por trailers en HTTP/2, esta alpha trae dos mejoras de performance que tocan el camino crítico de cada request: menos overhead en el parser de <code>content-type</code> y se eliminan lecturas redundantes de las partes del request durante la validación.</p><p>Si estás evaluando la migración a la 6.x, esto es señal de que la rama sigue recibiendo trabajo serio de performance y no solo de API. La 5.x recibió el backport de ambas optimizaciones.</p>",
+            "en": "<p>Beyond the HTTP/2 trailer DoS fix, this alpha carries two performance changes on the critical path of every request: reduced content-type parser overhead, and the removal of redundant request-part reads during validation.</p><p>If you are evaluating a move to 6.x, this signals the branch is still getting real performance work, not just API churn. Both optimizations were backported to 5.x.</p>",
+            "fr": "<p>Au-delà du correctif DoS sur les trailers HTTP/2, cette alpha apporte deux gains de performance sur le chemin critique de chaque requête : moins de surcoût dans le parser <code>content-type</code>, et suppression des lectures redondantes des parties de requête pendant la validation.</p><p>Les deux optimisations ont été backportées en 5.x.</p>"
+          },
+          "source": {
+            "url": "https://github.com/fastify/fastify/releases/tag/v6.0.0-alpha.4",
+            "label": "github.com/fastify"
+          }
+        },
+        {
+          "id": "fastify-5-12-5",
+          "tag": "patch",
+          "date": "16 Sep 2026",
+          "title": {
+            "es": "Fastify 5.12.5: el parche estable del DoS de HTTP/2",
+            "en": "Fastify 5.12.5: the stable patch for the HTTP/2 DoS",
+            "fr": "Fastify 5.12.5 : le correctif stable du DoS HTTP/2"
+          },
+          "body_html": {
+            "es": "<p>Si estás en producción con la 5.x, esta es la versión a la que tenés que saltar. Corrige GHSA-4mh8-r7rc-xpvc e incluye el backport de las dos optimizaciones de performance de la rama 6.</p><p>Es un patch: no hay breaking changes, no hay excusa para dejarlo para la semana que viene.</p>",
+            "en": "<p>If you are on 5.x in production, this is the version to jump to. It fixes GHSA-4mh8-r7rc-xpvc and includes the backport of both performance optimizations from the 6.x branch.</p><p>It is a patch release — no breaking changes, no reason to defer it.</p>",
+            "fr": "<p>Si vous êtes en 5.x en production, c'est la version à viser. Elle corrige GHSA-4mh8-r7rc-xpvc et inclut le backport des deux optimisations de la branche 6.x.</p><p>C'est un patch : aucun breaking change.</p>"
+          },
+          "source": {
+            "url": "https://github.com/fastify/fastify/releases/tag/v5.12.5",
+            "label": "github.com/fastify"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "karmada-cncf-graduation",
+      "updates": [
+        {
+          "id": "karmada-cncf-graduation",
+          "tag": "notable",
+          "date": "17 Sep 2026",
+          "title": {
+            "es": "Karmada se gradúa en la CNCF y llega a la v1.19",
+            "en": "Karmada graduates from the CNCF and ships v1.19",
+            "fr": "Karmada est diplômé de la CNCF et publie la v1.19"
+          },
+          "body_html": {
+            "es": "<p>Karmada, el orquestador multi-cluster de Kubernetes, alcanzó el nivel de madurez más alto de la CNCF. Entró al Sandbox en septiembre de 2021 y hoy tiene más de 1.214 contribuidores de 292 organizaciones, con Bloomberg, Alibaba Cloud y Trip.com en producción.</p><p>Lo que lo distingue: extiende las APIs estándar de Kubernetes entre clusters sin obligarte a aprender APIs federadas nuevas — usás <code>PropagationPolicy</code> y <code>OverridePolicy</code> sobre tus manifests de siempre. La v1.19 mejora el scheduling multi-componente para jobs de entrenamiento y pasa el priority-based scheduling a beta. Comparado con Open Cluster Management, Karmada apunta a colocación de workloads y scheduling dinámico; OCM apunta a governance y distribución de políticas.</p>",
+            "en": "<p>Karmada, the multi-cluster Kubernetes orchestrator, reached the CNCF's highest maturity tier. It entered the Sandbox in September 2021 and now counts over 1,214 contributors from 292 organizations, with Bloomberg, Alibaba Cloud and Trip.com running it in production.</p><p>What sets it apart: it extends standard Kubernetes APIs across clusters without forcing you to learn new federated resource APIs — you layer <code>PropagationPolicy</code> and <code>OverridePolicy</code> onto your existing manifests. v1.19 improves multi-component scheduling for AI training jobs and promotes priority-based scheduling to beta. Against Open Cluster Management, Karmada targets workload placement and dynamic scheduling; OCM targets governance and policy distribution.</p>",
+            "fr": "<p>Karmada, l'orchestrateur multi-cluster Kubernetes, atteint le plus haut niveau de maturité de la CNCF. Entré au Sandbox en septembre 2021, il compte plus de 1 214 contributeurs issus de 292 organisations, avec Bloomberg, Alibaba Cloud et Trip.com en production.</p><p>Sa particularité : il étend les APIs Kubernetes standard entre clusters sans nouvelles APIs fédérées — <code>PropagationPolicy</code> et <code>OverridePolicy</code> se posent sur vos manifests existants. La v1.19 améliore le scheduling multi-composant et passe le scheduling par priorité en beta.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/09/karmada-kubernetes-cncf/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "aws-beanstalk-cluster-mode",
+          "tag": "release",
+          "date": "17 Sep 2026",
+          "title": {
+            "es": "AWS Elastic Beanstalk estrena Cluster Mode sobre EKS",
+            "en": "AWS Elastic Beanstalk introduces Cluster Mode, backed by EKS",
+            "fr": "AWS Elastic Beanstalk lance Cluster Mode, propulsé par EKS"
+          },
+          "body_html": {
+            "es": "<p>Hasta ahora cada aplicación en Beanstalk necesitaba su propio environment dedicado. Cluster Mode te deja correr varias aplicaciones sobre infraestructura compartida en tu cuenta, con Amazon EKS por debajo — lo que baja el costo de cómputo por aplicación a medida que crecés.</p><p>Incluye autoscaling por eventos, observabilidad basada en OpenTelemetry integrada con CloudWatch y herramientas de terceros, soporte de Secrets Manager y HTTPS automático vía Certificate Manager. Que Beanstalk — el PaaS más viejo de AWS — termine siendo una capa de abstracción sobre EKS dice bastante de para dónde va la plataforma.</p>",
+            "en": "<p>Until now each Beanstalk application needed its own dedicated environment. Cluster Mode lets you run multiple applications on shared infrastructure in your account, powered by Amazon EKS underneath, which reduces per-application compute cost as deployments grow.</p><p>It ships with event-driven autoscaling, OpenTelemetry-based observability wired into CloudWatch and third-party tools, Secrets Manager support, and automatic HTTPS through Certificate Manager. Beanstalk — AWS's oldest PaaS — becoming an abstraction layer over EKS says a lot about where the platform is heading.</p>",
+            "fr": "<p>Jusqu'ici, chaque application Beanstalk exigeait son propre environnement dédié. Cluster Mode permet d'exécuter plusieurs applications sur une infrastructure partagée, propulsée par Amazon EKS, réduisant le coût de calcul par application.</p><p>Au programme : autoscaling événementiel, observabilité OpenTelemetry branchée sur CloudWatch, support de Secrets Manager et HTTPS automatique via Certificate Manager.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/elastic-beanstalk-cluster-mode/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "aws-ec2-t8i",
+          "tag": "minor",
+          "date": "17 Sep 2026",
+          "title": {
+            "es": "Amazon EC2 estrena instancias T8i en GA",
+            "en": "Amazon EC2 T8i instances reach GA",
+            "fr": "Les instances Amazon EC2 T8i sont en GA"
+          },
+          "body_html": {
+            "es": "<p>Nueva generación de instancias burstable de propósito general, con hasta 30% mejor relación precio-performance que las T3. Para la mayoría de los workloads de API en Node o Bun que no saturan CPU de forma sostenida, las burstable siguen siendo la opción sensata — y este salto de generación es de los que justifican revisar tu Compute Savings Plan.</p>",
+            "en": "<p>A new generation of general-purpose burstable instances, with up to 30% better price-performance than T3. For most Node or Bun API workloads that do not sustain full CPU, burstable remains the sensible choice — and a generation jump this size is worth a pass over your Compute Savings Plan.</p>",
+            "fr": "<p>Nouvelle génération d'instances burstable généralistes, jusqu'à 30 % de meilleur rapport prix-performance que les T3. Pour la plupart des charges API Node ou Bun, le burstable reste le choix raisonnable — et un tel saut mérite une revue de votre Compute Savings Plan.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/ec2-t8i-instances-ga/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "devalue-parse-quadratic-dos",
+      "updates": [
+        {
+          "id": "devalue-parse-quadratic-dos",
+          "tag": "security",
+          "date": "17 Sep 2026",
+          "title": {
+            "es": "Svelte devalue: DoS cuadrático en devalue.parse",
+            "en": "Svelte devalue: quadratic DoS in devalue.parse",
+            "fr": "Svelte devalue : DoS quadratique dans devalue.parse"
+          },
+          "body_html": {
+            "es": "<p><code>devalue.parse</code> antes de la 5.9.2 no rechaza índices fuera de rango. Un payload armado a mano hace que devalue alterne entre representaciones distintas de array, generando trabajo cuadrático respecto del tamaño del input.</p><p>Te afecta si le pasás datos no confiables a <code>devalue.parse</code>. Y acá está el detalle que mucha gente no registra: devalue es la capa de serialización de SvelteKit, así que probablemente lo tengas en el árbol de dependencias sin haberlo instalado vos. Fixed en <code>devalue@5.9.2</code>.</p>",
+            "en": "<p><code>devalue.parse</code> before 5.9.2 fails to reject out-of-bounds indices. A crafted payload makes devalue alternate between array representations, producing work quadratic in payload size.</p><p>You are affected if you call <code>devalue.parse</code> with untrusted data. The detail many teams miss: devalue is SvelteKit's serialization layer, so it is likely in your dependency tree without you installing it directly. Fixed in <code>devalue@5.9.2</code>.</p>",
+            "fr": "<p><code>devalue.parse</code> avant la 5.9.2 ne rejette pas les indices hors limites. Un payload forgé fait alterner devalue entre plusieurs représentations de tableau, générant un travail quadratique.</p><p>Détail souvent manqué : devalue est la couche de sérialisation de SvelteKit, donc probablement déjà dans votre arbre de dépendances. Corrigé dans <code>devalue@5.9.2</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-9rgm-9g3h-6x36",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "libp2p-peerstore-spoofing",
+          "tag": "security",
+          "date": "17 Sep 2026",
+          "title": {
+            "es": "libp2p: el PeerStore acepta PeerRecords firmados por otro peer",
+            "en": "libp2p: PeerStore accepts PeerRecords signed by a different peer",
+            "fr": "libp2p : le PeerStore accepte des PeerRecords signés par un autre peer"
+          },
+          "body_html": {
+            "es": "<p><code>@libp2p/peer-store</code> acepta un <code>PeerRecord</code> firmado cuyo sobre está firmado por un peer pero cuyo payload declara un peer ID distinto. <code>consumePeerRecord</code> verifica la firma del sobre, pero nunca comprueba que el firmante sea el mismo peer que el <code>PeerRecord.peerId</code> envuelto.</p><p>Resultado: un atacante firma con su propia clave, pone el peer ID de la víctima en el payload, y consigue que se almacenen direcciones suyas como certificadas para esa víctima. Clásico error de validación: verificaste la firma, pero no verificaste <em>a quién</em> pertenece.</p>",
+            "en": "<p><code>@libp2p/peer-store</code> accepts a signed <code>PeerRecord</code> whose envelope is signed by one peer but whose payload claims a different peer ID. <code>consumePeerRecord</code> verifies the envelope signature but never checks that the signer matches the wrapped <code>PeerRecord.peerId</code>.</p><p>The result: an attacker signs with their own key, puts the victim's peer ID in the payload, and gets attacker-controlled addresses stored as certified for that victim. A textbook validation gap — the signature was verified, the <em>identity behind it</em> was not.</p>",
+            "fr": "<p><code>@libp2p/peer-store</code> accepte un <code>PeerRecord</code> signé dont l'enveloppe est signée par un peer mais dont le payload déclare un autre peer ID. <code>consumePeerRecord</code> vérifie la signature de l'enveloppe, jamais la correspondance avec le <code>PeerRecord.peerId</code>.</p><p>Faille de validation classique : la signature est vérifiée, l'<em>identité derrière</em> ne l'est pas.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-vrf4-mx87-p53w",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "asynchttpclient-cross-origin-realm-leak",
+          "tag": "security",
+          "date": "17 Sep 2026",
+          "title": {
+            "es": "AsyncHttpClient reenvía credenciales del cliente a un redirect cross-origin",
+            "en": "AsyncHttpClient re-sends client-wide credentials to a cross-origin redirect",
+            "fr": "AsyncHttpClient renvoie les identifiants du client vers un redirect cross-origin"
+          },
+          "body_html": {
+            "es": "<p>Un cliente configurado con un realm a nivel de config (no por request) que sigue redirects puede reenviar esas credenciales a un destino de otro origen. El código de redirect sí borra el realm por intercambio, pero cuando el destino responde 401 las credenciales se vuelven a derivar de la config del cliente — y ahí le entregás Basic, Digest, Negotiate o NTLM a un origen controlado por el atacante.</p><p>Lo interesante es que es un residuo de advisories anteriores sobre fuga de credenciales cross-origin: el fix previo se saltea por este camino. Es el recordatorio de siempre — un parche puntual sobre una clase de bug rara vez cierra la clase entera.</p>",
+            "en": "<p>A client configured with a client-wide realm (set on the config builder rather than per request) that follows redirects can re-send those credentials to a target on a different origin. The redirect code does strip the per-exchange realm, but when the target answers 401 the credentials are re-derived from the client config — handing Basic, Digest, Negotiate or NTLM to an attacker-controlled origin.</p><p>What makes it notable: it is a residual of earlier cross-origin credential leak advisories, whose strip this path bypasses. The usual reminder — a point fix on a bug class rarely closes the whole class.</p>",
+            "fr": "<p>Un client configuré avec un realm global (défini sur le config builder plutôt que par requête) et suivant les redirects peut renvoyer ces identifiants vers une cible d'un autre origine. Le code de redirect retire bien le realm par échange, mais si la cible répond 401, les identifiants sont re-dérivés de la config du client.</p><p>Notable : c'est un résidu d'advisories antérieurs sur la fuite cross-origin, dont ce chemin contourne le correctif. Un patch ponctuel ferme rarement toute une classe de bugs.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-f8m2-889x-vw4x",
+            "label": "github.com/advisories"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "grav-sandbox-denylist-lesson",
+      "updates": [
+        {
+          "id": "grav-sandbox-denylist-lesson",
+          "tag": "breaking",
+          "date": "17 Sep 2026",
+          "title": {
+            "es": "Grav publica más de quince advisories en un día: el caso de estudio del denylist",
+            "en": "Grav publishes fifteen-plus advisories in one day: a denylist case study",
+            "fr": "Grav publie plus de quinze advisories en un jour : étude de cas du denylist"
+          },
+          "body_html": {
+            "es": "<p>Grav CMS publicó una tanda enorme de advisories el 17 de septiembre, y aunque no sea stack TypeScript, el patrón vale oro como material de arquitectura. Casi todas son la misma clase de falla: <strong>controles de seguridad basados en denylist</strong>.</p><p>El crítico de CVSS 9.3 (<code>GHSA-f8wv-xp27-6gq7</code>) es escritura arbitraria de archivos porque la rama de función pelada del blueprint está protegida por denylist y se olvidaron de incluir <code>error_log</code>. Otro: <code>config_denied_paths</code> no incluía <code>system</code>, así que se filtraba <code>system.cache.redis.password</code>. Otro más: un solo byte UTF-8 inválido desactiva <em>todas</em> las reglas de <code>Security::detectXss()</code>.</p><p>La lección se traslada tal cual a cualquier stack: si tu control de seguridad es una lista de lo prohibido, tu seguridad es exactamente tan buena como tu imaginación el día que la escribiste. Allowlist siempre, y falla cerrado ante entrada inválida — no la ignores.</p>",
+            "en": "<p>Grav CMS published a large batch of advisories on September 17, and while it is not a TypeScript stack, the pattern is excellent architecture material. Nearly all of them are the same class of failure: <strong>denylist-based security controls</strong>.</p><p>The CVSS 9.3 critical (<code>GHSA-f8wv-xp27-6gq7</code>) is arbitrary file write because the blueprint's bare-function branch is denylist-gated and omits <code>error_log</code>. Another: <code>config_denied_paths</code> did not include <code>system</code>, leaking <code>system.cache.redis.password</code>. Another: a single invalid UTF-8 byte disables <em>every</em> rule in <code>Security::detectXss()</code>.</p><p>The lesson transfers to any stack: if your security control is a list of what is forbidden, your security is exactly as good as your imagination on the day you wrote it. Allowlist by default, and fail closed on invalid input rather than skipping validation.</p>",
+            "fr": "<p>Grav CMS a publié un lot massif d'advisories le 17 septembre. Ce n'est pas une stack TypeScript, mais le motif est un excellent matériau d'architecture : presque toutes relèvent de la même classe — les <strong>contrôles de sécurité par denylist</strong>.</p><p>Le critique CVSS 9.3 (<code>GHSA-f8wv-xp27-6gq7</code>) est une écriture arbitraire de fichiers parce que la branche de fonction nue est protégée par denylist et omet <code>error_log</code>. Autre cas : <code>config_denied_paths</code> n'incluait pas <code>system</code>, exposant <code>system.cache.redis.password</code>.</p><p>La leçon vaut pour toute stack : une liste d'interdits ne vaut que votre imagination du jour où vous l'avez écrite. Allowlist par défaut, et échec fermé sur entrée invalide.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-f8wv-xp27-6gq7",
+            "label": "github.com/advisories"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "tanstack-charts-alpha",
+      "updates": [
+        {
+          "id": "tanstack-charts-alpha",
+          "tag": "beta",
+          "date": "17 Sep 2026",
+          "title": {
+            "es": "TanStack Charts: grammar of graphics agnóstica de framework para TypeScript",
+            "en": "TanStack Charts: framework-agnostic grammar of graphics for TypeScript",
+            "fr": "TanStack Charts : grammar of graphics agnostique pour TypeScript"
+          },
+          "body_html": {
+            "es": "<p>Nueva pieza del ecosistema TanStack, con el enfoque de grammar of graphics y soporte para React, Vue, Solid, Svelte, Angular, Lit y DOM plano, más server-side rendering. Un line chart básico en React pesa unos 29 KB minificado y gzipeado — menos que Chart.js y que Observable Plot.</p><p>Ya va por unas 160.000 descargas semanales en npm estando en <strong>alpha</strong>, y el proyecto avisa explícitamente que no está listo para producción: pinneá versiones exactas. Dato que va a dar que hablar: Tanner Linsley contó que casi toda la implementación la produjeron agentes de IA bajo su supervisión directa, con review antes del merge. MIT.</p>",
+            "en": "<p>A new piece of the TanStack ecosystem, taking a grammar-of-graphics approach with support for React, Vue, Solid, Svelte, Angular, Lit and vanilla DOM, plus server-side rendering. A basic React line chart lands around 29 KB minified and gzipped — smaller than Chart.js or Observable Plot.</p><p>It is already at roughly 160,000 weekly npm downloads while still in <strong>alpha</strong>, and the project explicitly warns it is not production-ready: pin exact versions. The detail that will generate discussion: Tanner Linsley stated almost all of the implementation was produced by AI coding agents under his direct supervision, reviewed before merge. MIT licensed.</p>",
+            "fr": "<p>Nouvelle pièce de l'écosystème TanStack : approche grammar of graphics, support React, Vue, Solid, Svelte, Angular, Lit et DOM natif, plus le rendu côté serveur. Un line chart React de base pèse environ 29 Ko minifié et gzippé — moins que Chart.js ou Observable Plot.</p><p>Déjà environ 160 000 téléchargements npm hebdomadaires en <strong>alpha</strong>, avec un avertissement explicite : pas prêt pour la production, épinglez les versions exactes. Tanner Linsley indique que la quasi-totalité de l'implémentation a été produite par des agents IA sous sa supervision directe. Licence MIT.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/09/tanstack-charts-alpha-introduced/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Tres de los bugs de hoy son la misma historia contada en tres lenguajes distintos: verificaste algo, pero no verificaste lo que importaba. OTel-Go lee los certificados y no los usa; libp2p valida la firma pero no el firmante; Grav filtra XSS con reglas que un byte inválido desactiva por completo. El control existía y estaba desactivado en silencio.",
+      "en": "Three of today's bugs are the same story told in three languages: something was verified, but not the thing that mattered. OTel-Go reads the certificates and never applies them; libp2p validates the signature but not the signer; Grav filters XSS with rules that a single invalid byte disables wholesale. The control existed and was silently off.",
+      "fr": "Trois des bugs du jour racontent la même histoire en trois langages : quelque chose a été vérifié, mais pas ce qui comptait. OTel-Go lit les certificats sans les appliquer ; libp2p valide la signature mais pas le signataire ; Grav filtre le XSS avec des règles qu'un seul octet invalide désactive entièrement."
+    },
+    {
+      "es": "El DoS de Fastify y el de CoreDNS comparten raíz: trabajo hecho antes de validar. CoreDNS reserva memoria según contadores que todavía no validó; Fastify serializa headers que sabe que son ilegales en HTTP/2. Validá primero, asigná recursos después — y envolvé el path de serialización, porque una uncaughtException en Node no es un bug de disponibilidad, es un kill switch.",
+      "en": "The Fastify and CoreDNS denial-of-service bugs share a root: work performed before validation. CoreDNS allocates memory from counts it has not validated yet; Fastify serializes headers it knows are illegal on HTTP/2. Validate first, allocate second — and guard the serialization path, because an uncaughtException in Node is not an availability bug, it is a kill switch.",
+      "fr": "Les DoS de Fastify et de CoreDNS partagent une racine : du travail effectué avant validation. CoreDNS alloue de la mémoire à partir de compteurs non validés ; Fastify sérialise des en-têtes illégaux en HTTP/2. Validez d'abord, allouez ensuite — et protégez le chemin de sérialisation : une uncaughtException en Node n'est pas un bug de disponibilité, c'est un kill switch."
+    },
+    {
+      "es": "Beanstalk sobre EKS y la graduación de Karmada apuntan al mismo lugar: Kubernetes dejó de ser la superficie con la que trabajás y pasó a ser el sustrato sobre el que se construyen otras abstracciones. Cada vez más equipos van a correr sobre K8s sin escribir un manifest.",
+      "en": "Beanstalk on EKS and Karmada's graduation point the same way: Kubernetes has stopped being the surface you work with and become the substrate other abstractions are built on. More teams will run on K8s without writing a manifest.",
+      "fr": "Beanstalk sur EKS et la graduation de Karmada pointent dans la même direction : Kubernetes cesse d'être la surface de travail pour devenir le substrat sur lequel d'autres abstractions se construisent. De plus en plus d'équipes tourneront sur K8s sans écrire un manifest."
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 18 Sep 2026",
+    "en": "Gentleman Releases — 18 Sep 2026",
+    "fr": "Gentleman Releases — 18 Sep 2026"
+  },
+  "description": {
+    "es": "Engram llega a 2.0.0 estable y gentle-ai 3.1.0 mete commits por unidad de trabajo en ODD",
+    "en": "Engram hits stable 2.0.0 and gentle-ai 3.1.0 brings work-unit commits to ODD",
+    "fr": "Engram atteint la 2.0.0 stable et gentle-ai 3.1.0 apporte les commits par unite de travail a ODD"
+  },
+  "pubDate": "2026-09-18",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "engram v2.0.0 — primer estable de la linea v2: 462 commits desde v1.20.0",
+        "en": "engram v2.0.0 — first stable of the v2 line: 462 commits since v1.20.0",
+        "fr": "engram v2.0.0 — premiere stable de la ligne v2 : 462 commits depuis v1.20.0"
+      },
+      "anchor": "engram-v2-0-0",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-ai v3.1.0 — cada tarea ODD cierra con un work-unit commit y review por commit o por slice",
+        "en": "gentle-ai v3.1.0 — every ODD task closes with a work-unit commit, reviewed per commit or per slice",
+        "fr": "gentle-ai v3.1.0 — chaque tache ODD se termine par un work-unit commit, revu par commit ou par tranche"
+      },
+      "anchor": "gentle-ai-v3-1-0",
+      "icon": "simple-icons:github"
+    }
+  ],
+  "tools": [
+    {
+      "id": "engram",
+      "name": "engram",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-engram",
+      "icon_emoji": "🧠",
+      "anchor": "engram",
+      "version": "v2.0.0",
+      "updates": [
+        {
+          "id": "engram-v2-0-0",
+          "tag": "breaking",
+          "title": {
+            "es": "v2.0.0 — primer estable de la linea v2",
+            "en": "v2.0.0 — first stable release of the v2 line",
+            "fr": "v2.0.0 — premiere version stable de la ligne v2"
+          },
+          "body_html": {
+            "es": "<p>Salio el estable: <strong>462 commits</strong> desde v1.20.0. La identidad de proyecto ahora se resuelve consistente desde config explicita, <code>ENGRAM_PROJECT</code>, metadata de Git y el directorio actual, y la atribucion de sesion queda atada al runtime asi no te escribe en el proyecto, worktree o agente equivocado.</p><p>Suma <code>mem_current_project</code>, merge y pruning de proyectos, rescate de ownership legacy, captura curada de prompts, upserts por topic-key, ciclos de review, pinning local y truncado seguro en UTF-8. La busqueda FTS5 se expande con filtros de proyecto y scope, match modes y soporte CJK/trigram. Ojo con lo copado: <code>mem_save</code> ahora te tira memorias que probablemente entren en conflicto, y <code>mem_judge</code> / <code>mem_compare</code> persisten veredictos <code>supersedes</code>, <code>conflicts_with</code>, <code>compatible</code> y <code>not_conflict</code>.</p><p>Tambien llega la replicacion Cloud opcional con <code>engram cloud serve</code> sobre Postgres, autosync opt-in con lease, retries acotados y backoff exponencial. El SQLite local sigue siendo la fuente de verdad. Antes de subir: backup de <code>~/.engram/engram.db</code>, corres <code>engram doctor</code>, y reinicias los MCP servers de larga vida para que carguen el binario v2. Si tenes proyectos enrolados en Cloud, segui la secuencia <code>doctor</code> → <code>repair</code> → <code>bootstrap</code>; no hay migracion remota implicita.</p><p>Nota de seguridad: los deployments autenticados exigen un <code>ENGRAM_JWT_SECRET</code> no default, los servidores Cloud requieren <code>ENGRAM_CLOUD_ALLOWED_PROJECTS</code>, y <code>ENGRAM_CLOUD_TOKEN_PEPPER</code> tiene que ser distinto del JWT secret.</p>",
+            "en": "<p>The stable line is here: <strong>462 commits</strong> since v1.20.0. Project identity now resolves consistently from explicit configuration, <code>ENGRAM_PROJECT</code>, Git metadata and the current directory, and session attribution is runtime-bound so writes stop landing on the wrong project, worktree or agent process.</p><p>New surface includes <code>mem_current_project</code>, project merging and pruning, legacy ownership rescue, curated prompt capture, topic-key upserts, review cycles, local pinning and UTF-8-safe truncation. FTS5 search gains project and scope filters, match modes and CJK/trigram support. The headline capability: <code>mem_save</code> can now surface likely conflicting memories, and <code>mem_judge</code> / <code>mem_compare</code> persist <code>supersedes</code>, <code>conflicts_with</code>, <code>compatible</code> and <code>not_conflict</code> verdicts that also participate in local, Git and Cloud sync.</p><p>Optional Cloud replication arrives via <code>engram cloud serve</code> on Postgres, with opt-in autosync carrying lease protection, bounded retries and exponential backoff. Local SQLite stays authoritative. Upgrade path: back up <code>~/.engram/engram.db</code>, run <code>engram doctor</code>, then restart long-running MCP servers and agent sessions so they load the v2 binary. Enrolled Cloud projects must follow <code>doctor</code> → <code>repair</code> → <code>bootstrap</code> — there is no implicit remote migration.</p><p>Security notes: authenticated deployments require a non-default <code>ENGRAM_JWT_SECRET</code>, Cloud servers require <code>ENGRAM_CLOUD_ALLOWED_PROJECTS</code>, and <code>ENGRAM_CLOUD_TOKEN_PEPPER</code> must be distinct from the JWT secret.</p>",
+            "fr": "<p>La ligne stable est la : <strong>462 commits</strong> depuis v1.20.0. L'identite de projet se resout desormais de maniere coherente a partir de la configuration explicite, de <code>ENGRAM_PROJECT</code>, des metadonnees Git et du repertoire courant, et l'attribution de session est liee au runtime, ce qui evite les ecritures sur le mauvais projet, worktree ou processus d'agent.</p><p>Nouveautes : <code>mem_current_project</code>, fusion et purge de projets, recuperation d'ownership legacy, capture de prompts curee, upserts par topic-key, cycles de revue, epinglage local et troncature compatible UTF-8. La recherche FTS5 gagne des filtres de projet et de portee, des modes de correspondance et le support CJK/trigram. Point fort : <code>mem_save</code> peut faire remonter les memoires potentiellement en conflit, et <code>mem_judge</code> / <code>mem_compare</code> persistent les verdicts <code>supersedes</code>, <code>conflicts_with</code>, <code>compatible</code> et <code>not_conflict</code>.</p><p>La replication Cloud optionnelle arrive avec <code>engram cloud serve</code> sur Postgres, plus un autosync opt-in avec protection par bail, retries bornes et backoff exponentiel. SQLite local reste la source de verite. Mise a niveau : sauvegardez <code>~/.engram/engram.db</code>, lancez <code>engram doctor</code>, puis redemarrez les serveurs MCP de longue duree. Pour les projets Cloud enroles, suivez <code>doctor</code> → <code>repair</code> → <code>bootstrap</code>.</p><p>Securite : les deploiements authentifies exigent un <code>ENGRAM_JWT_SECRET</code> non par defaut, les serveurs Cloud exigent <code>ENGRAM_CLOUD_ALLOWED_PROJECTS</code>, et <code>ENGRAM_CLOUD_TOKEN_PEPPER</code> doit etre distinct du secret JWT.</p>"
+          },
+          "date": "18 Sep 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v2.0.0",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gentle-ai",
+      "name": "gentle-ai",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-gentle-ai",
+      "icon_emoji": "🎩",
+      "anchor": "gentle-ai",
+      "version": "v3.1.0",
+      "updates": [
+        {
+          "id": "gentle-ai-v3-1-0",
+          "tag": "feature",
+          "title": {
+            "es": "v3.1.0 — work-unit commits y review por commit o por PR slice en ODD",
+            "en": "v3.1.0 — work-unit commits and per-commit or per-slice review in ODD",
+            "fr": "v3.1.0 — work-unit commits et revue par commit ou par tranche dans ODD"
+          },
+          "body_html": {
+            "es": "<p>Cambia como Organic Driven Development entrega el trabajo. El paso 6 del protocolo ODD ahora cierra cada tarea con al menos un <strong>work-unit commit</strong> en la feature branch (si estas en la default, branch primero), con tests y docs al lado del comportamiento, mensaje Conventional Commit, y la identidad del commit registrada en el feature document como evidencia. Traduccion: un feature de 24 tareas ya no le llega al reviewer como un unico candidato acumulado.</p><p>Despues de cada work-unit commit, con RDD habilitado, el orquestador corre <code>gentle-ai review assess --base-ref &lt;ultimo boundary revisado&gt; --committed-only</code>. Passive o low queda silencioso y el boundary avanza. High — o un assessment que falla o no esta disponible — hace que el commit mismo sea el candidato y arranca el review nativo ya. Medium defiere al PR slice: los commits acumulados desde el ultimo boundary, acotados por el presupuesto de entrega de ~400 lineas autoradas. Ojo con esto: la clasificacion de riesgo es evidence-only, asi que decide el tier el clasificador, nunca el modelo.</p><p>La estrategia de entrega y los chained PRs ahora aplican tambien al trabajo organico, no solo a SDD: al crear el feature document se forecastean las lineas autoradas y se lleva el conteo corriendo. Una estrategia por feature del vocabulario SDD (<code>ask-on-risk</code>, <code>auto-chain</code>, <code>single-pr</code>, <code>exception-ok</code>), y cuando el forecast o el conteo pasa las ~400 lineas, <code>ask-on-risk</code> pregunta una vez por la chain strategy. RDD sigue siendo el mismo switch del usuario; lo que cambio es el candidato que ve.</p>",
+            "en": "<p>This release changes how Organic Driven Development delivers work. Step 6 of the ODD protocol now closes each task with at least one <strong>work-unit commit</strong> on the feature branch (branch first when on the default branch), with tests and docs alongside the behavior, a Conventional Commit message, and the commit identity recorded in the feature document as evidence. The practical effect: a 24-task feature no longer reaches the reviewer as one accumulated candidate.</p><p>After each work-unit commit, when RDD is enabled, the orchestrator runs <code>gentle-ai review assess --base-ref &lt;last reviewed boundary&gt; --committed-only</code> on that commit. Passive or low stays silent and the boundary advances. High — or an unavailable or failed assessment — makes the commit itself the candidate and starts the native review immediately. Medium defers to the PR slice: the commits accumulated since the last reviewed boundary, bounded by the delivery budget of about 400 authored changed lines. Risk classification stays evidence-only, so the classifier decides the tier, never the model.</p><p>Delivery strategy and chained PRs now apply to organic work too, not only SDD: at feature-document creation the orchestrator forecasts authored changed lines and keeps a running count. One strategy per feature from the SDD vocabulary (<code>ask-on-risk</code>, <code>auto-chain</code>, <code>single-pr</code>, <code>exception-ok</code>), and once the forecast or running count exceeds ~400 authored changed lines, <code>ask-on-risk</code> asks once for the chain strategy. RDD remains the same user-owned switch — what changed is the candidate it sees.</p>",
+            "fr": "<p>Cette version change la maniere dont Organic Driven Development livre le travail. L'etape 6 du protocole ODD termine desormais chaque tache par au moins un <strong>work-unit commit</strong> sur la branche de feature (branchez d'abord si vous etes sur la branche par defaut), avec tests et docs aux cotes du comportement, un message Conventional Commit, et l'identite du commit enregistree dans le feature document comme preuve. Consequence : une feature de 24 taches n'arrive plus au relecteur comme un seul candidat accumule.</p><p>Apres chaque work-unit commit, si RDD est active, l'orchestrateur lance <code>gentle-ai review assess --base-ref &lt;dernier boundary revu&gt; --committed-only</code>. Passive ou low reste silencieux et le boundary avance. High — ou un assessment indisponible ou en echec — fait du commit lui-meme le candidat et declenche la revue native immediatement. Medium differe a la tranche de PR : les commits accumules depuis le dernier boundary revu, bornes par le budget de livraison d'environ 400 lignes modifiees.</p><p>La strategie de livraison et les PR chainees s'appliquent maintenant aussi au travail organique : a la creation du feature document, l'orchestrateur prevoit les lignes modifiees et tient un compte courant. Une strategie par feature issue du vocabulaire SDD (<code>ask-on-risk</code>, <code>auto-chain</code>, <code>single-pr</code>, <code>exception-ok</code>), et des que la prevision depasse ~400 lignes, <code>ask-on-risk</code> demande une fois la strategie de chainage. RDD reste le meme interrupteur controle par l'utilisateur.</p>"
+          },
+          "date": "17 Sep 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v3.1.0",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

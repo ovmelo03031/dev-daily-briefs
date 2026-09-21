@@ -1,0 +1,114 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 21 Sep 2026",
+    "en": "Gentleman Releases — 21 Sep 2026",
+    "fr": "Gentleman Releases — 21 Sep 2026"
+  },
+  "description": {
+    "es": "Releases del dia en proyectos de Gentleman-Programming",
+    "en": "Today's releases from Gentleman-Programming projects",
+    "fr": "Sorties du jour des projets Gentleman-Programming"
+  },
+  "pubDate": "2026-09-21",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "gentle-ai v3.4.0 — review assess ahora te dice el proximo paso exacto, y se retira la integracion RTK",
+        "en": "gentle-ai v3.4.0 — review assess now names the exact next move, and the RTK integration is retired",
+        "fr": "gentle-ai v3.4.0 — review assess indique la prochaine etape exacte, et l'integration RTK est retiree"
+      },
+      "anchor": "gentle-ai-v3-4-0",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-ai v3.3.0 — la integracion con OpenCode pasa a ser version-aware y reconoce instalaciones V2 beta",
+        "en": "gentle-ai v3.3.0 — the OpenCode integration becomes version-aware and recognizes V2 beta installs",
+        "fr": "gentle-ai v3.3.0 — l'integration OpenCode devient version-aware et reconnait les installations V2 beta"
+      },
+      "anchor": "gentle-ai-v3-3-0",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-ai v3.2.1 — telemetria runtime a VictoriaMetrics y delegacion obligatoria en ODD",
+        "en": "gentle-ai v3.2.1 — runtime telemetry moves to VictoriaMetrics and delegation becomes mandatory in ODD",
+        "fr": "gentle-ai v3.2.1 — telemetrie runtime vers VictoriaMetrics et delegation obligatoire dans ODD"
+      },
+      "anchor": "gentle-ai-v3-2-1",
+      "icon": "simple-icons:github"
+    }
+  ],
+  "tools": [
+    {
+      "id": "gentle-ai",
+      "name": "gentle-ai",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-gentle-ai",
+      "icon_emoji": "🎩",
+      "anchor": "gentle-ai",
+      "version": "v3.4.0",
+      "updates": [
+        {
+          "id": "gentle-ai-v3-4-0",
+          "tag": "breaking",
+          "title": {
+            "es": "v3.4.0 — review assess cierra el loop con los work-unit commits, y chau RTK",
+            "en": "v3.4.0 — review assess closes the loop with work-unit commits, and RTK is gone",
+            "fr": "v3.4.0 — review assess boucle avec les work-unit commits, et RTK disparait"
+          },
+          "body_html": {
+            "es": "<p>Este es el minor mas cargado de la tanda. Despues de cada work-unit commit, <code>gentle-ai review assess</code> ahora reporta <code>candidate.consumed</code>, <code>review_due</code> y un <code>review_due_reason</code> concreto: <code>high_risk</code>, <code>slice_budget_reached</code>, <code>passive</code>, <code>under_budget</code> o <code>already_reviewed</code>. Cuando hay review pendiente te devuelve ademas el <code>next_transition</code> con la invocacion exacta de <code>review status --next-transition</code> para los mismos selectores. Traduccion: el orquestador ya no reconstruye la regla desde prosa, la corre tal cual — una review que corresponde deja de ser algo que se puede saltear en silencio.</p><p>Los roles de reviewer en pi pasan a ser host-mediated. Antes Go spawneaba <code>pi --print --no-extensions</code> por su cuenta, que no veia los providers registrados por extensiones (<code>Model not found</code>) y se comia las API keys del entorno. Ahora <code>review status</code> renderiza <code>capture-refuter</code> y <code>capture-validation</code> como <code>--materialize=true</code> mas un descriptor <code>submission</code>, gentle-pi corre el modelo in-process con su propio registry y devuelve por <code>--input</code>. El adapter de pi en Go se elimina.</p><p>Y algo que dolia: el contexto del reviewer ahora se acota ANTES de que exista autoridad. START antes solo chequeaba el techo de 4 MiB de Git, asi que un candidate gigante congelaba autoridad y despues fallaba cada capture con <code>Prompt is too long</code>, sin salida. Ahora START prueba que la evidencia frozen entra en un presupuesto de 200 KiB por runtime para cada rol antes de persistir nada.</p><p><strong>Breaking:</strong> se retira la integracion RTK Community Tool de la superficie activa. Ojo con esto: los presets existentes ya no seleccionan community tools por default, y una seleccion RTK no soportada reporta la tool como no disponible en vez de intentar usarla. Tus binarios y config de RTK en disco no se tocan.</p><p>Entre los fixes: cap de scrape size en VictoriaMetrics (el 18/09 la exposicion de <code>/metrics</code> paso los 16 MiB en produccion y el dashboard runtime y el open-data publico leian 0), retencion propia para la tabla de dedup del collector (crecia como un millon de filas por dia), y el Gentle Logo que configuraba OpenCode aunque nunca lo hubieras seleccionado.</p>",
+            "en": "<p>The heaviest minor of the batch. After every work-unit commit, <code>gentle-ai review assess</code> now reports <code>candidate.consumed</code>, <code>review_due</code>, and a specific <code>review_due_reason</code>: <code>high_risk</code>, <code>slice_budget_reached</code>, <code>passive</code>, <code>under_budget</code>, or <code>already_reviewed</code>. When a review is due it also returns <code>next_transition</code> carrying the exact <code>review status --next-transition</code> invocation for the same selectors. The orchestrator runs that command verbatim instead of reconstructing the rule from prose, so a due review is no longer something it can silently skip.</p><p>Pi's reviewer roles become host-mediated. Go used to spawn <code>pi --print --no-extensions</code> itself, which could not see providers registered by pi extensions (<code>Model not found</code>) and stripped env-provided API keys. Now <code>review status</code> renders <code>capture-refuter</code> and <code>capture-validation</code> as <code>--materialize=true</code> plus a <code>submission</code> descriptor, gentle-pi runs the model in-process through its own live registry, and submits via <code>--input</code>. The Go-owned pi adapter is deleted.</p><p>Reviewer context is now bounded BEFORE authority exists. START previously checked only against the 4 MiB Git ceiling, so an oversized candidate could freeze review authority and then fail every capture with <code>Prompt is too long</code>, with no way out. START now proves the frozen evidence fits a 200 KiB per-runtime budget for every role before persisting anything.</p><p><strong>Breaking:</strong> the RTK Community Tool integration is removed from the active product surface. Two behavior changes follow: existing presets no longer select community tools by default, and an unsupported RTK selection reports the tool as unavailable instead of attempting to use it. User-owned RTK binaries and config on disk are untouched.</p><p>Among the fixes: a VictoriaMetrics scrape-size cap (on 2026-09-18 the collector's <code>/metrics</code> exposition crossed 16 MiB in production and the runtime dashboard plus the public open-data window read 0), dedicated retention for the collector's dedup table (growing roughly a million rows a day), and the Gentle Logo component that configured OpenCode even when it was never selected.</p>",
+            "fr": "<p>Le minor le plus charge du lot. Apres chaque work-unit commit, <code>gentle-ai review assess</code> rapporte desormais <code>candidate.consumed</code>, <code>review_due</code> et un <code>review_due_reason</code> precis : <code>high_risk</code>, <code>slice_budget_reached</code>, <code>passive</code>, <code>under_budget</code> ou <code>already_reviewed</code>. Quand une review est due, il renvoie aussi <code>next_transition</code> avec l'invocation exacte de <code>review status --next-transition</code> pour les memes selecteurs. L'orchestrateur execute cette commande telle quelle au lieu de reconstruire la regle depuis la prose.</p><p>Les roles de reviewer sur pi deviennent host-mediated. Go lancait auparavant <code>pi --print --no-extensions</code> lui-meme, ce qui ne voyait pas les providers enregistres par les extensions (<code>Model not found</code>) et supprimait les cles API de l'environnement. Desormais <code>review status</code> rend <code>capture-refuter</code> et <code>capture-validation</code> sous forme de <code>--materialize=true</code> plus un descripteur <code>submission</code>, et gentle-pi execute le modele in-process. L'adaptateur pi cote Go est supprime.</p><p>Le contexte du reviewer est maintenant borne AVANT que l'autorite n'existe. START ne verifiait que le plafond Git de 4 MiB, si bien qu'un candidate trop gros gelait l'autorite puis faisait echouer chaque capture avec <code>Prompt is too long</code>. START prouve maintenant que l'evidence gelee tient dans un budget de 200 KiB par runtime pour chaque role avant de rien persister.</p><p><strong>Breaking :</strong> l'integration RTK Community Tool est retiree de la surface active. Deux consequences : les presets existants ne selectionnent plus de community tools par defaut, et une selection RTK non supportee signale l'outil comme indisponible. Les binaires et configurations RTK sur disque ne sont pas touches.</p><p>Parmi les correctifs : un plafond de scrape size VictoriaMetrics (le 18/09 l'exposition <code>/metrics</code> a depasse 16 MiB en production et le dashboard runtime lisait 0), une retention dediee pour la table de dedup du collector, et le Gentle Logo qui configurait OpenCode sans qu'il soit selectionne.</p>"
+          },
+          "date": "19 Sep 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v3.4.0",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        },
+        {
+          "id": "gentle-ai-v3-3-0",
+          "tag": "feature",
+          "title": {
+            "es": "v3.3.0 — La integracion con OpenCode ahora es version-aware y soporta V2 beta",
+            "en": "v3.3.0 — The OpenCode integration is now version-aware with V2 beta support",
+            "fr": "v3.3.0 — L'integration OpenCode devient version-aware avec support V2 beta"
+          },
+          "body_html": {
+            "es": "<p>Minor con una sola feature, pero de las que importan si usas OpenCode: el componente ahora elige su comportamiento segun la major version que reporta el ejecutable <code>opencode</code> instalado. Las instalaciones V2 reciben manejo nativo de config, modelos y MCP con preservacion ordenada de permisos (o sea: tus restricciones de permisos sobreviven a las actualizaciones de reglas generadas), un set propio de plugins V2 gestionados (telemetria, catalog, registry, SDD y un relay opaco de review en staging), y un label <strong>OpenCode V2 (beta)</strong> en la TUI con aviso de integration testing.</p><p>Las instalaciones V1 siguen exactamente igual, los assets V1 se mantienen, y los plugins de comunidad no soportados se rechazan en V2. Ojo: esto es integracion beta parcial testeada contra el SDK 2.0.4 publicado, no coexistencia de primera clase con <code>opencode2</code> ni certificacion completa del runtime. Las versiones de runtime desconocidas fallan closed, y la review nativa en V2 sigue no disponible.</p><p>Honestidad del release notes, que se agradece: al momento de publicar, el Windows Full Suite falla en este commit en <code>TestOpenCodeV2CatalogAndRegistry</code>, introducido por el mismo PR y no verde cuando se empujo el tag. El fix llega en el release siguiente.</p>",
+            "en": "<p>A minor with a single feature, but one that matters if you use OpenCode: the component now selects its behavior by the major version the installed <code>opencode</code> executable reports. V2 installs get native config, model, and MCP handling with ordered permission preservation (your permission restrictions survive generated-rule updates), a separate set of managed V2 plugins (telemetry, catalog, registry, SDD, and a staged opaque review relay), and an <strong>OpenCode V2 (beta)</strong> label in the TUI with an integration-testing notice.</p><p>V1 installs keep working unchanged, V1 assets are retained, and unsupported community plugins are refused on V2. Note this is partial beta integration tested against the released 2.0.4 SDK, not first-class <code>opencode2</code> coexistence or complete runtime certification. Unknown runtime versions fail closed, and native V2 review remains unavailable.</p><p>Credit where it is due on honesty: at publication the Windows Full Suite fails on this commit in <code>TestOpenCodeV2CatalogAndRegistry</code>, introduced by the same PR and not green when the tag was pushed. The fix ships in the next release.</p>",
+            "fr": "<p>Un minor avec une seule fonctionnalite, mais qui compte si vous utilisez OpenCode : le composant choisit desormais son comportement selon la version majeure rapportee par l'executable <code>opencode</code> installe. Les installations V2 obtiennent une gestion native de la config, des modeles et de MCP avec preservation ordonnee des permissions, un ensemble dedie de plugins V2 geres (telemetrie, catalog, registry, SDD et un relais de review opaque en staging), et un label <strong>OpenCode V2 (beta)</strong> dans la TUI.</p><p>Les installations V1 restent inchangees et les plugins communautaires non supportes sont refuses sur V2. Il s'agit d'une integration beta partielle testee contre le SDK 2.0.4 publie, pas d'une coexistence de premier plan avec <code>opencode2</code>. Les versions de runtime inconnues echouent fermees et la review native V2 reste indisponible.</p><p>Note d'honnetete des release notes : a la publication, la Windows Full Suite echoue sur ce commit dans <code>TestOpenCodeV2CatalogAndRegistry</code>. Le correctif arrive au release suivant.</p>"
+          },
+          "date": "18 Sep 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v3.3.0",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        },
+        {
+          "id": "gentle-ai-v3-2-1",
+          "tag": "fix",
+          "title": {
+            "es": "v3.2.1 — Telemetria runtime en VictoriaMetrics y delegacion obligatoria en ODD",
+            "en": "v3.2.1 — VictoriaMetrics runtime telemetry and mandatory delegation in ODD",
+            "fr": "v3.2.1 — Telemetrie runtime VictoriaMetrics et delegation obligatoire dans ODD"
+          },
+          "body_html": {
+            "es": "<p>Primer estable desde v3.1.0. La telemetria de runtime ahora se expone como counters de Prometheus y se guarda en VictoriaMetrics con retencion ilimitada en vez de filas crudas de SQLite. El deploy kit instala VictoriaMetrics, provisiona el datasource de Grafana, hace backfill de las tablas existentes y mueve los paneles del dashboard runtime.</p><p>La parte que te toca si laburas con el orquestador: la delegacion en Organic Driven Development pasa de sugerida a <strong>obligatoria</strong>. Hay una tabla de triggers que elige la ruta de ejecucion — mapping a partir de 4 archivos, un writer a partir de 2 archivos no triviales, lecturas de preparacion delegadas junto con el write — cada task declara su ruta en el feature document (asi una delegacion salteada queda observable en vez de silenciosa), y hay un backstop de sesion larga que frena la ejecucion monolitica despues de unas 20 tool calls, 5 lecturas exploratorias o 2 ediciones no mecanicas sin delegar nada.</p><p>Ojo con esto: corre <code>gentle-ai sync</code> despues de actualizar. Los triggers viven en la guidance instalada del orquestador, asi que una instalacion sin sincronizar se queda con el texto viejo que decia que era opcional.</p><p>Del lado de los fixes, el collector de telemetria: base en WAL para que los lectores read-only (Grafana, el export de open data) no bloqueen al unico writer, mantenimiento diario anclado a las 00:05 UTC con catch-up al arrancar en vez de 24hs despues del start, y una base ocupada ahora reporta <code>storage_busy</code> en vez de un <code>storage_unavailable</code> generico. Ademas: produccion venia keyeando el rate limit de TODOS los clientes en el literal <code>(null)</code> porque el vhost renderizaba <code>X-Forwarded-For</code> desde una variable de entorno vacia. En review, dos arreglos: un target ya consumido ya no se puede re-reviewar (se rechaza con <code>target_already_acknowledged</code>), y el status activo ahora exige assets gestionados frescos.</p>",
+            "en": "<p>First stable since v3.1.0. Runtime telemetry is now exposed as Prometheus counters and stored in VictoriaMetrics with unlimited retention instead of raw SQLite rows. The deploy kit installs VictoriaMetrics, provisions its Grafana datasource, backfills the existing raw runtime tables, and moves the runtime dashboard panels over.</p><p>The part that touches you if you work with the orchestrator: delegation in Organic Driven Development goes from advisory to <strong>mandatory</strong>. A trigger table selects the execution route — mapping at 4+ files, one writer at 2+ non-trivial files, preparation reads delegated with the write — each task declares its route in the feature document so a skipped delegation is observable instead of silent, and a long-session backstop pauses monolithic execution after roughly 20 tool calls, 5 exploratory reads, or 2 non-mechanical edits without any delegation.</p><p>Run <code>gentle-ai sync</code> after upgrading: the triggers live in the installed orchestrator guidance, so an un-synced install keeps the old advisory wording.</p><p>On the fix side, the telemetry collector: the database runs in WAL so read-only consumers (Grafana, the open-data export) never block the single writer, daily maintenance is anchored to 00:05 UTC with catch-up on start instead of 24 hours after process start, and a busy database reports <code>storage_busy</code> instead of a generic <code>storage_unavailable</code>. Also: production had been keying every client's rate limit on the literal <code>(null)</code> because the vhost rendered <code>X-Forwarded-For</code> from an empty environment variable. Two review fixes: an already-acknowledged target can no longer be re-reviewed (refused with <code>target_already_acknowledged</code>), and active status now requires fresh managed assets.</p>",
+            "fr": "<p>Premiere stable depuis v3.1.0. La telemetrie runtime est desormais exposee en compteurs Prometheus et stockee dans VictoriaMetrics avec retention illimitee au lieu de lignes SQLite brutes. Le deploy kit installe VictoriaMetrics, provisionne son datasource Grafana et fait le backfill des tables existantes.</p><p>Le point qui vous concerne cote orchestrateur : la delegation dans Organic Driven Development passe d'indicative a <strong>obligatoire</strong>. Une table de declencheurs choisit la route d'execution — mapping a partir de 4 fichiers, un writer a partir de 2 fichiers non triviaux, lectures de preparation deleguees avec l'ecriture — chaque tache declare sa route dans le feature document, et un garde-fou de session longue interrompt l'execution monolithique apres environ 20 appels d'outils, 5 lectures exploratoires ou 2 editions non mecaniques sans delegation.</p><p>Executez <code>gentle-ai sync</code> apres la mise a jour : les declencheurs vivent dans la guidance installee de l'orchestrateur.</p><p>Cote correctifs, le collector de telemetrie : base en WAL pour que les lecteurs read-only ne bloquent pas l'unique writer, maintenance quotidienne ancree a 00:05 UTC avec rattrapage au demarrage, et une base occupee rapporte <code>storage_busy</code> au lieu d'un <code>storage_unavailable</code> generique. Par ailleurs, la production keyait la limite de debit de chaque client sur le litteral <code>(null)</code> car le vhost rendait <code>X-Forwarded-For</code> depuis une variable d'environnement vide. Deux correctifs review : un target deja acquitte ne peut plus etre re-review, et le statut actif exige des assets geres a jour.</p>"
+          },
+          "date": "18 Sep 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v3.2.1",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

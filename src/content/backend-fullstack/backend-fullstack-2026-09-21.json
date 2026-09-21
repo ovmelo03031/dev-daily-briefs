@@ -1,0 +1,515 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 21 Sep 2026",
+    "en": "Backend & Fullstack — 21 Sep 2026",
+    "fr": "Backend & Fullstack — 21 Sep 2026"
+  },
+  "description": {
+    "es": "Kubernetes 1.37 llega con Metrics API estable, Lambda estira el timeout a 90 minutos, Redis saca parche de seguridad y Bun reescribe 535K líneas de Zig a Rust.",
+    "en": "Kubernetes 1.37 lands with a stable Metrics API, Lambda stretches its timeout to 90 minutes, Redis ships a security patch, and Bun rewrites 535K lines of Zig into Rust.",
+    "fr": "Kubernetes 1.37 arrive avec une Metrics API stable, Lambda étend son timeout à 90 minutes, Redis publie un correctif de sécurité et Bun réécrit 535K lignes de Zig en Rust."
+  },
+  "pubDate": "2026-09-21",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "Kubernetes 1.37: Metrics API estable", "en": "Kubernetes 1.37: Metrics API goes stable", "fr": "Kubernetes 1.37 : Metrics API stable" },
+      "anchor": "k8s-1-37",
+      "icon": "simple-icons:kubernetes"
+    },
+    {
+      "text": { "es": "Lambda ahora corre hasta 90 minutos", "en": "Lambda now runs for up to 90 minutes", "fr": "Lambda tourne jusqu-à 90 minutes" },
+      "anchor": "lambda-90min",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": { "es": "Redis parchea ACL y cluster bus", "en": "Redis patches ACL and cluster bus", "fr": "Redis corrige ACL et cluster bus" },
+      "anchor": "redis-security",
+      "icon": "simple-icons:redis"
+    },
+    {
+      "text": { "es": "kcp: escalada a system:masters, CVSS 9.9", "en": "kcp: system:masters escalation, CVSS 9.9", "fr": "kcp : escalade system:masters, CVSS 9.9" },
+      "anchor": "kcp-cve",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Bun: 535K líneas de Zig migradas a Rust", "en": "Bun: 535K lines of Zig migrated to Rust", "fr": "Bun : 535K lignes de Zig migrées vers Rust" },
+      "anchor": "bun-rust-rewrite",
+      "icon": "simple-icons:bun"
+    },
+    {
+      "text": { "es": "adm-zip: zip bomb que revienta la RAM", "en": "adm-zip: zip bomb that blows up RAM", "fr": "adm-zip : zip bomb qui fait exploser la RAM" },
+      "anchor": "adm-zip-cve",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "pnpm 12.5 acepta Package URLs", "en": "pnpm 12.5 accepts Package URLs", "fr": "pnpm 12.5 accepte les Package URLs" },
+      "anchor": "pnpm-12-5",
+      "icon": "lucide:package"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "k8s-1-37",
+      "updates": [
+        {
+          "id": "k8s-1-37",
+          "tag": "breaking",
+          "date": "21 Sep 2026",
+          "title": {
+            "es": "Kubernetes 1.37 «Garhwal»: Metrics API estable y kubelet rootless en beta",
+            "en": "Kubernetes 1.37 «Garhwal»: stable Metrics API and rootless kubelet in beta",
+            "fr": "Kubernetes 1.37 «Garhwal» : Metrics API stable et kubelet rootless en bêta"
+          },
+          "body_html": {
+            "es": "<p>67 enhancements en total: <strong>16 llegan a stable</strong> y 23 pasan a beta. La <code>Metrics API</code> alcanza GA — o sea que el <code>HorizontalPodAutoscaler</code> y el monitoreo de pods ya no dependen de una API en beta eterna. El <strong>kubelet rootless</strong> entra en beta, corriendo los componentes de nodo como usuario no privilegiado para mitigar container escapes, y la inicialización resiliente del watchcache se vuelve stable, así el API server deja de ahogar a etcd cuando reinicia. Si venís posponiendo el upgrade, este release justifica el laburo.</p>",
+            "en": "<p>67 enhancements total: <strong>16 reach stable</strong> and 23 graduate to beta. The <code>Metrics API</code> hits GA, so <code>HorizontalPodAutoscaler</code> and pod monitoring no longer depend on a permanently-beta API. The <strong>rootless kubelet</strong> enters beta, running core node components as a non-root user to mitigate container escapes, and resilient watchcache initialization becomes stable so the API server stops overwhelming etcd on restart.</p>",
+            "fr": "<p>67 améliorations au total : <strong>16 passent en stable</strong> et 23 en bêta. La <code>Metrics API</code> atteint la GA, donc <code>HorizontalPodAutoscaler</code> et le monitoring des pods ne dépendent plus d-une API éternellement en bêta. Le <strong>kubelet rootless</strong> entre en bêta, exécutant les composants de nœud en utilisateur non privilégié, et l-initialisation résiliente du watchcache devient stable.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/kubernetes-1-37/", "label": "infoq.com" }
+        },
+        {
+          "id": "lambda-90min",
+          "tag": "breaking",
+          "date": "19 Sep 2026",
+          "title": {
+            "es": "AWS Lambda estira el timeout de 15 a 90 minutos en Managed Instances",
+            "en": "AWS Lambda stretches its timeout from 15 to 90 minutes on Managed Instances",
+            "fr": "AWS Lambda étend son timeout de 15 à 90 minutes sur Managed Instances"
+          },
+          "body_html": {
+            "es": "<p>Seis veces más tiempo de ejecución para funciones sobre <strong>Lambda Managed Instances</strong>. Esto abre serverless a workloads que antes te obligaban a irte a ECS o Step Functions: procesamiento de media, cálculos financieros, ETL, inferencia de IA y transferencias de archivos grandes. Ojo: el timeout de request <em>sincrónico</em> sigue clavado en 15 minutos. AWS avisa lo obvio pero crítico — asegurate de que conexiones y credenciales sigan válidas durante todo el run, y hacé tus handlers idempotentes porque los reintentos y las ejecuciones duplicadas siguen existiendo.</p>",
+            "en": "<p>A sixfold increase in execution time for functions on <strong>Lambda Managed Instances</strong>. This opens serverless to workloads that previously forced you onto ECS or Step Functions: media processing, financial calculations, ETL, AI inference, and large file transfers. Note the <em>synchronous</em> request timeout stays at 15 minutes. AWS warns that connections and credentials must remain valid for the full runtime, and handlers need idempotency because retries and duplicate executions still happen.</p>",
+            "fr": "<p>Six fois plus de temps d-exécution pour les fonctions sur <strong>Lambda Managed Instances</strong>. Cela ouvre le serverless aux workloads qui imposaient auparavant ECS ou Step Functions : traitement média, calculs financiers, ETL, inférence IA et transferts de fichiers. Le timeout de requête <em>synchrone</em> reste à 15 minutes, et les handlers doivent être idempotents.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/lambda-90-minute-timeout/", "label": "infoq.com" }
+        },
+        {
+          "id": "redis-security",
+          "tag": "security",
+          "date": "17 Sep 2026",
+          "title": {
+            "es": "Redis 8.10.2 y backports: parches de seguridad en ACL y cluster bus",
+            "en": "Redis 8.10.2 and backports: security fixes in ACL and cluster bus",
+            "fr": "Redis 8.10.2 et backports : correctifs de sécurité ACL et cluster bus"
+          },
+          "body_html": {
+            "es": "<p>Urgencia marcada como <strong>SECURITY</strong>, con backports simultáneos a 8.8.3, 8.6.7, 8.4.7 y 8.2.10. Dos agujeros feos: comandos encolados en una transacción podían acceder a keys cuyos permisos <code>ACL</code> ya habían sido revocados antes de ejecutarse; y el <strong>cluster bus no tiene autenticación propia</strong> salvo que actives <code>tls-cluster</code>, así que cualquier host que alcance el bus port podía sumarse al cluster. Ahora el nodo avisa al arrancar y la nueva opción <code>cluster-bus-port-protected-mode</code> te deja convertir eso en un fallo duro. Si exponés el bus port, actualizá YA.</p>",
+            "en": "<p>Urgency marked <strong>SECURITY</strong>, with simultaneous backports to 8.8.3, 8.6.7, 8.4.7 and 8.2.10. Two ugly holes: commands queued in a transaction could still access keys whose <code>ACL</code> permissions were revoked before execution; and the <strong>cluster bus has no authentication of its own</strong> unless <code>tls-cluster</code> is enabled, so any host able to reach the bus port could join the cluster. Nodes now warn at startup, and the new <code>cluster-bus-port-protected-mode</code> option turns that into a hard refusal to start.</p>",
+            "fr": "<p>Urgence marquée <strong>SECURITY</strong>, avec backports vers 8.8.3, 8.6.7, 8.4.7 et 8.2.10. Deux failles : des commandes en transaction pouvaient accéder à des clés dont les permissions <code>ACL</code> avaient été révoquées ; et le <strong>cluster bus n-a aucune authentification propre</strong> sans <code>tls-cluster</code>. La nouvelle option <code>cluster-bus-port-protected-mode</code> permet un refus explicite de démarrage.</p>"
+          },
+          "source": { "url": "https://github.com/redis/redis/releases/tag/8.10.2", "label": "github.com/redis" }
+        },
+        {
+          "id": "kcp-cve",
+          "tag": "security",
+          "date": "18 Sep 2026",
+          "title": {
+            "es": "kcp front-proxy: cualquier tenant autenticado puede impersonar system:masters (CVSS 9.9)",
+            "en": "kcp front-proxy: any authenticated tenant can impersonate system:masters (CVSS 9.9)",
+            "fr": "kcp front-proxy : tout tenant authentifié peut usurper system:masters (CVSS 9.9)"
+          },
+          "body_html": {
+            "es": "<p><strong>CVE-2026-61682</strong>, crítico. El front-proxy de kcp no limpia los headers de identidad que manda el cliente antes de reenviar a los shards, así que cualquier tenant autenticado puede inyectar sus propios <code>X-Remote-Group</code> y <code>X-Remote-Extra-*</code> — y el shard los trata como una identidad verificada. Resultado: un usuario de bajo privilegio escala a <code>system:masters</code> y lee, escribe o borra recursos en cualquier workspace. Parcheado en <strong>0.31.4</strong> y <strong>0.32.2</strong>. Esto es multi-tenancy rota de raíz: si corrés kcp, no hay mitigación elegante, actualizá.</p>",
+            "en": "<p><strong>CVE-2026-61682</strong>, critical. The kcp front-proxy fails to strip client-supplied identity headers before forwarding to shards, so any authenticated tenant can inject their own <code>X-Remote-Group</code> and <code>X-Remote-Extra-*</code> headers, which the shard trusts as a verified identity assertion. A low-privilege user escalates to <code>system:masters</code> and can read, write or delete resources in any workspace. Fixed in <strong>0.31.4</strong> and <strong>0.32.2</strong>.</p>",
+            "fr": "<p><strong>CVE-2026-61682</strong>, critique. Le front-proxy kcp ne supprime pas les en-têtes d-identité fournis par le client avant de les transmettre aux shards : tout tenant authentifié peut injecter ses propres <code>X-Remote-Group</code> et <code>X-Remote-Extra-*</code>, traités comme une identité vérifiée. Escalade vers <code>system:masters</code> dans n-importe quel workspace. Corrigé en <strong>0.31.4</strong> et <strong>0.32.2</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-c8w2-fgvx-vhv4", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "bun-rust-rewrite",
+      "updates": [
+        {
+          "id": "bun-rust-rewrite",
+          "tag": "breaking",
+          "date": "20 Sep 2026",
+          "title": {
+            "es": "Bun reescribe 535.496 líneas de Zig a Rust en cuatro meses",
+            "en": "Bun rewrites 535,496 lines of Zig into Rust in four months",
+            "fr": "Bun réécrit 535 496 lignes de Zig en Rust en quatre mois"
+          },
+          "body_html": {
+            "es": "<p>El equipo de Bun migró todo el codebase con asistencia de IA — 50 workflows dinámicos orquestando 64 instancias en paralelo, ~165.000 dólares en tokens — contra el año estimado que hubiera llevado a mano. Los números que importan al que corre Bun en producción: <strong>128 bugs longevos resueltos</strong>, memory leaks nativos eliminados, y el uso de memoria durante bundling bajó de <strong>6,7 GB a 609 MB</strong>. El throughput HTTP mejoró entre 2% y 5%. Más allá del debate sobre IA, el resultado de reemplazar un lenguaje sin ownership por uno que sí lo tiene está en esos números de memoria.</p>",
+            "en": "<p>The Bun team migrated the whole codebase with AI assistance — 50 dynamic workflows orchestrating 64 parallel instances, roughly $165,000 in API tokens — against an estimated year of manual work. The numbers that matter in production: <strong>128 longstanding bugs resolved</strong>, native memory leaks eliminated, and memory usage during bundling dropped from <strong>6.7 GB to 609 MB</strong>. HTTP throughput improved 2–5%.</p>",
+            "fr": "<p>L-équipe Bun a migré tout le codebase avec assistance IA — 50 workflows dynamiques orchestrant 64 instances en parallèle, environ 165 000 dollars de tokens — contre une année estimée en manuel. Les chiffres qui comptent : <strong>128 bugs anciens résolus</strong>, fuites mémoire natives éliminées, et l-usage mémoire pendant le bundling passé de <strong>6,7 Go à 609 Mo</strong>. Débit HTTP amélioré de 2 à 5 %.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/bun-AI-rewrite-zig-rust-4-months/", "label": "infoq.com" }
+        },
+        {
+          "id": "workerd-20260921",
+          "tag": "minor",
+          "date": "21 Sep 2026",
+          "title": {
+            "es": "workerd v1.20260921.1: cadencia diaria del runtime de Cloudflare Workers",
+            "en": "workerd v1.20260921.1: Cloudflare Workers runtime keeps its daily cadence",
+            "fr": "workerd v1.20260921.1 : cadence quotidienne du runtime Cloudflare Workers"
+          },
+          "body_html": {
+            "es": "<p>El runtime open source detrás de Cloudflare Workers siguió publicando builds diarios durante todo el fin de semana. Nada estructural — mantenimiento incremental — pero si pineás la versión de <code>workerd</code> en tu <code>wrangler.toml</code> o en un container local, tenés semana nueva de <code>compatibility_date</code> disponible.</p>",
+            "en": "<p>The open-source runtime behind Cloudflare Workers kept shipping daily builds through the weekend. Nothing structural — incremental maintenance — but if you pin a <code>workerd</code> version in <code>wrangler.toml</code> or a local container, a fresh week of <code>compatibility_date</code> is available.</p>",
+            "fr": "<p>Le runtime open source derrière Cloudflare Workers a continué ses builds quotidiens tout le week-end. Rien de structurel, mais si vous épinglez une version de <code>workerd</code>, une nouvelle semaine de <code>compatibility_date</code> est disponible.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workerd/releases/tag/v1.20260921.1", "label": "github.com/cloudflare" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "htmx-4",
+      "updates": [
+        {
+          "id": "htmx-4",
+          "tag": "breaking",
+          "date": "18 Sep 2026",
+          "title": {
+            "es": "htmx 4.0: reescritura sobre fetch, morphing swaps nativos y herencia explícita de atributos",
+            "en": "htmx 4.0: fetch-based rewrite, built-in morphing swaps, explicit attribute inheritance",
+            "fr": "htmx 4.0 : réécriture sur fetch, morphing swaps natifs, héritage d-attributs explicite"
+          },
+          "body_html": {
+            "es": "<p>La major que la gente de hypermedia venía esperando. htmx 4 abandona <code>XMLHttpRequest</code> y se apoya en <code>fetch</code>, incorpora <strong>morphing swaps</strong> de fábrica (antes necesitabas una extensión como idiomorph) y cambia la herencia de atributos a <strong>explícita</strong>. Ese último punto es el breaking change real: si tu app dependía de que <code>hx-*</code> se heredara implícitamente por el árbol DOM, vas a tener que declararlo. Si pensás migrar, leé la guía de upgrade antes de tocar una línea.</p>",
+            "en": "<p>The major release the hypermedia crowd was waiting for. htmx 4 drops <code>XMLHttpRequest</code> for <code>fetch</code>, ships <strong>morphing swaps</strong> built in (previously an extension like idiomorph) and switches attribute inheritance to <strong>explicit</strong>. That last one is the real breaking change: apps that relied on implicit <code>hx-*</code> inheritance down the DOM tree now need to declare it.</p>",
+            "fr": "<p>La version majeure attendue par la communauté hypermedia. htmx 4 abandonne <code>XMLHttpRequest</code> pour <code>fetch</code>, intègre les <strong>morphing swaps</strong> nativement et rend l-héritage d-attributs <strong>explicite</strong>. C-est le vrai breaking change : les applications qui comptaient sur l-héritage implicite de <code>hx-*</code> doivent désormais le déclarer.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/htmx-4-released/", "label": "infoq.com" }
+        },
+        {
+          "id": "solidstart-2",
+          "tag": "deprecation",
+          "date": "19 Sep 2026",
+          "title": {
+            "es": "SolidStart 2 sale y entra en mantenimiento el mismo día",
+            "en": "SolidStart 2 ships and enters maintenance the same day",
+            "fr": "SolidStart 2 sort et entre en maintenance le même jour"
+          },
+          "body_html": {
+            "es": "<p>SolidStart 2.0 reemplaza la capa de build Vinxi por la <strong>Environment API de Vite 8</strong>, mejorando compatibilidad de plugins y manejo de CSS. Pero el anuncio real es otro: el proyecto pasa a <strong>modo mantenimiento</strong> inmediatamente, porque Solid 2.0 absorbió server functions y file-system routing dentro del core. Como explicó Ryan Carniato, el <em>Start mode</em> reemplaza a SolidStart — cuando la librería base te da lo que el metaframework justificaba, el metaframework deja de tener razón de ser. Lección de arquitectura gratis.</p>",
+            "en": "<p>SolidStart 2.0 replaces the Vinxi build layer with <strong>Vite 8's Environment API</strong>, improving plugin compatibility and CSS handling. The real news is the other half: the project moves into <strong>maintenance mode</strong> immediately, because Solid 2.0 absorbed server functions and file-system routing into the core. As Ryan Carniato put it, Start mode replaces SolidStart — once the base library provides what justified the metaframework, the metaframework loses its reason to exist.</p>",
+            "fr": "<p>SolidStart 2.0 remplace la couche de build Vinxi par l-<strong>Environment API de Vite 8</strong>. Mais l-annonce réelle est ailleurs : le projet passe immédiatement en <strong>mode maintenance</strong>, car Solid 2.0 a absorbé les server functions et le routing fichier dans le core. Selon Ryan Carniato, le Start mode remplace SolidStart.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/solid-start-v2/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "mariadb-13",
+      "updates": [
+        {
+          "id": "mariadb-13",
+          "tag": "release",
+          "date": "18 Sep 2026",
+          "title": {
+            "es": "MariaDB 13 amplía compatibilidad Oracle y suma RETURNING en UPDATE",
+            "en": "MariaDB 13 expands Oracle compatibility and adds RETURNING on UPDATE",
+            "fr": "MariaDB 13 étend la compatibilité Oracle et ajoute RETURNING sur UPDATE"
+          },
+          "body_html": {
+            "es": "<p>Soporte nativo de tipos <code>REF CURSOR</code> y <code>RECORD</code> en parámetros de rutinas, lo que baja bastante la fricción de migrar aplicaciones PL/SQL. Lo que más va a usar el backend dev de todos los días es el <strong>RETURNING en UPDATE</strong>: te devuelve valores viejos y nuevos en un solo round trip a la base, así te ahorrás el SELECT previo y la race condition que venía con él. También mejora observabilidad con nuevas system variables y tablas de information schema que exponen roles de replicación y opciones por storage engine.</p>",
+            "en": "<p>Native support for <code>REF CURSOR</code> and <code>RECORD</code> types in routine parameters cuts friction when migrating Oracle PL/SQL applications. The feature everyday backend devs will actually reach for is <strong>RETURNING on UPDATE</strong>: it hands back both old and new values in a single database round trip, removing the preceding SELECT and the race condition that came with it. Observability also improves with new system variables and information schema tables exposing replication roles and storage-engine options.</p>",
+            "fr": "<p>Support natif des types <code>REF CURSOR</code> et <code>RECORD</code> dans les paramètres de routines, facilitant la migration des applications Oracle PL/SQL. La fonctionnalité la plus utile au quotidien : <strong>RETURNING sur UPDATE</strong>, qui renvoie anciennes et nouvelles valeurs en un seul aller-retour, supprimant le SELECT préalable et sa race condition.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/mariadb-13-released/", "label": "infoq.com" }
+        },
+        {
+          "id": "bullmq-6-3-8",
+          "tag": "patch",
+          "date": "18 Sep 2026",
+          "title": {
+            "es": "BullMQ 6.3.8 reintenta la conexión LISTEN de Postgres tras un connect fallido",
+            "en": "BullMQ 6.3.8 retries the Postgres LISTEN connection after a failed connect",
+            "fr": "BullMQ 6.3.8 réessaie la connexion LISTEN Postgres après un échec"
+          },
+          "body_html": {
+            "es": "<p>Fix chico pero de los que te salvan una guardia. En el backend de Postgres de BullMQ, si la conexión dedicada a <code>LISTEN</code> fallaba al conectar, quedaba muerta y los workers dejaban de recibir notificaciones de jobs nuevos sin tirar error visible. Ahora reintenta. Si migraste tus colas de Redis a Postgres y notaste jobs que se quedaban colgados después de un blip de red, este es tu parche.</p>",
+            "en": "<p>A small fix of the kind that saves an on-call shift. In BullMQ's Postgres backend, if the dedicated <code>LISTEN</code> connection failed to connect, it stayed dead and workers silently stopped receiving new-job notifications. It now retries. If you moved queues from Redis to Postgres and saw jobs hanging after a network blip, this is your patch.</p>",
+            "fr": "<p>Petit correctif mais précieux. Dans le backend Postgres de BullMQ, si la connexion dédiée au <code>LISTEN</code> échouait, elle restait morte et les workers cessaient silencieusement de recevoir les notifications de nouveaux jobs. Elle réessaie désormais.</p>"
+          },
+          "source": { "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.3.8", "label": "github.com/taskforcesh" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "aws-ecs-graviton",
+      "updates": [
+        {
+          "id": "aws-ecs-graviton",
+          "tag": "ga",
+          "date": "18 Sep 2026",
+          "title": {
+            "es": "Amazon ECS Express Mode ahora soporta Graviton (ARM64)",
+            "en": "Amazon ECS Express Mode now supports Graviton (ARM64)",
+            "fr": "Amazon ECS Express Mode supporte désormais Graviton (ARM64)"
+          },
+          "body_html": {
+            "es": "<p>Express Mode era la vía rápida para levantar un servicio en ECS sin pelearte con toda la configuración; ahora corre sobre ARM64. AWS declara hasta <strong>40% mejor price-performance</strong> para workloads containerizados. Si tu imagen ya buildea multi-arch — y en 2026 debería — esto es un cambio de una línea en la task definition a cambio de plata real por mes.</p>",
+            "en": "<p>Express Mode was the fast path to standing up an ECS service without fighting the full configuration; it now runs on ARM64. AWS claims up to <strong>40% better price-performance</strong> for containerized workloads. If your image already builds multi-arch — and in 2026 it should — this is a one-line task-definition change for real monthly savings.</p>",
+            "fr": "<p>Express Mode était la voie rapide pour lancer un service ECS ; il tourne désormais sur ARM64. AWS annonce jusqu-à <strong>40 % de meilleur rapport prix-performance</strong> pour les workloads conteneurisés. Si votre image build déjà en multi-arch, c-est un changement d-une ligne.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-ecs-express-mode-arm-architecture/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "aws-sns-1mib",
+          "tag": "notable",
+          "date": "18 Sep 2026",
+          "title": {
+            "es": "Amazon SNS sube el payload de 256 KiB a 1 MiB",
+            "en": "Amazon SNS raises message payloads from 256 KiB to 1 MiB",
+            "fr": "Amazon SNS porte les payloads de 256 Kio à 1 Mio"
+          },
+          "body_html": {
+            "es": "<p>Cuádruple de tamaño por mensaje. El patrón de <em>claim check</em> — mandar el mensaje a S3 y publicar solo el puntero — sigue siendo la arquitectura correcta para payloads grandes de verdad, pero este salto elimina un montón de casos borde donde un evento con un poco de contexto extra se pasaba de los 256 KiB y te obligaba a introducir S3 en el camino crítico por nada.</p>",
+            "en": "<p>Four times the size per message. The <em>claim check</em> pattern — push the body to S3 and publish only the pointer — is still the right architecture for genuinely large payloads, but this jump removes a pile of edge cases where an event carrying a bit of extra context blew past 256 KiB and forced S3 into the critical path for no good reason.</p>",
+            "fr": "<p>Quatre fois la taille par message. Le pattern <em>claim check</em> reste la bonne architecture pour les payloads vraiment volumineux, mais ce saut élimine de nombreux cas limites où un événement un peu enrichi dépassait 256 Kio.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-sns-1mib-support", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "aws-privatelink-tunnel",
+          "tag": "notable",
+          "date": "18 Sep 2026",
+          "title": {
+            "es": "AWS PrivateLink suma Tunnel Endpoints con encapsulado GENEVE",
+            "en": "AWS PrivateLink adds Tunnel Endpoints with GENEVE encapsulation",
+            "fr": "AWS PrivateLink ajoute des Tunnel Endpoints avec encapsulation GENEVE"
+          },
+          "body_html": {
+            "es": "<p>PrivateLink clásico te expone un servicio puntual; los nuevos <strong>Tunnel Endpoints</strong> te dan acceso privado a <em>segmentos de red enteros</em> cruzando límites de VPC y de cuenta, vía encapsulado <code>GENEVE</code>. Para arquitecturas multi-cuenta donde venías resolviendo esto con Transit Gateway y tablas de ruteo que nadie entiende, es una alternativa bastante más declarativa.</p>",
+            "en": "<p>Classic PrivateLink exposes one specific service; the new <strong>Tunnel Endpoints</strong> give private access to <em>whole network segments</em> across VPC and account boundaries via <code>GENEVE</code> encapsulation. For multi-account architectures that solved this with a Transit Gateway and route tables nobody understands, it is a far more declarative option.</p>",
+            "fr": "<p>PrivateLink classique expose un service précis ; les nouveaux <strong>Tunnel Endpoints</strong> donnent un accès privé à des <em>segments réseau entiers</em> à travers les frontières de VPC et de compte, via encapsulation <code>GENEVE</code>.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/9/privatelink-tunnel-endpoint/", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "cloudflare-tls",
+      "updates": [
+        {
+          "id": "cloudflare-tls",
+          "tag": "notable",
+          "date": "20 Sep 2026",
+          "title": {
+            "es": "Cloudflare mide preferencias TLS por origen y baja los retries de 52% a 3,7%",
+            "en": "Cloudflare measures per-origin TLS preferences, cutting retries from 52% to 3.7%",
+            "fr": "Cloudflare mesure les préférences TLS par origine et réduit les retries de 52 % à 3,7 %"
+          },
+          "body_html": {
+            "es": "<p>Caso de estudio hermoso sobre por qué medir le gana a adivinar. Al negociar TLS 1.3, el cliente <em>apuesta</em> a qué grupo de key exchange soporta el servidor; si falla, hay un <code>HelloRetryRequest</code> y un round trip extra. Cloudflare empezó a medir las preferencias reales de cada origen y las cacheó: los HelloRetryRequests cayeron de <strong>~52% a 3,7%</strong> y se fueron <strong>más de 150 ms del p90</strong> de latencia de handshake. La moraleja aplica a tu sistema también — cualquier default global es una apuesta sobre una distribución que podrías estar midiendo.</p>",
+            "en": "<p>A beautiful case study in why measuring beats guessing. Negotiating TLS 1.3, the client <em>bets</em> on which key exchange group the server supports; a wrong guess costs a <code>HelloRetryRequest</code> and an extra round trip. Cloudflare started measuring each origin's real preferences and caching them: HelloRetryRequests fell from <strong>~52% to 3.7%</strong> and <strong>over 150 ms came off p90</strong> handshake latency. The lesson generalizes — any global default is a bet about a distribution you could be measuring.</p>",
+            "fr": "<p>Une belle étude de cas sur la mesure contre la supposition. En TLS 1.3, le client <em>parie</em> sur le groupe d-échange de clés supporté ; une erreur coûte un <code>HelloRetryRequest</code>. Cloudflare a mesuré et caché les préférences réelles de chaque origine : les HelloRetryRequests sont passés de <strong>~52 % à 3,7 %</strong> et <strong>plus de 150 ms</strong> ont disparu du p90.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/cloudflare-automatic-key-exchang/", "label": "infoq.com" }
+        },
+        {
+          "id": "doordash-flags",
+          "tag": "notable",
+          "date": "18 Sep 2026",
+          "title": {
+            "es": "DoorDash limpia 60.000 feature flags con un sistema multi-agente",
+            "en": "DoorDash cleans up 60,000 feature flags with a multi-agent system",
+            "fr": "DoorDash nettoie 60 000 feature flags avec un système multi-agents"
+          },
+          "body_html": {
+            "es": "<p>Deuda técnica a escala industrial: 60.000 flags repartidos en <strong>623 repositorios</strong>. Construyeron un sistema multi-agente con git worktrees aislados y validación automatizada; de 50 flags evaluados salieron <strong>45 pull requests usables</strong>, a 13,8 minutos y 4,79 dólares de promedio cada uno, contra una a dos horas de trabajo manual. Tasa de limpieza en una sola pasada: 100% en flags simples, 94% en complejidad media, 85% en complejos. Lo interesante no es la IA — es que el problema era mecánico y repetitivo, exactamente el perfil donde delegar rinde.</p>",
+            "en": "<p>Technical debt at industrial scale: 60,000 flags across <strong>623 repositories</strong>. They built a multi-agent system with isolated git worktrees and automated validation; of 50 evaluated flags it produced <strong>45 usable pull requests</strong>, averaging 13.8 minutes and $4.79 each against one to two hours of manual work. Single-pass cleanup rates: 100% for simple flags, 94% medium, 85% complex. The interesting part is not the AI — it is that the problem was mechanical and repetitive, exactly the profile where delegation pays off.</p>",
+            "fr": "<p>Dette technique à l-échelle industrielle : 60 000 flags répartis sur <strong>623 dépôts</strong>. Un système multi-agents avec worktrees git isolés a produit <strong>45 pull requests utilisables</strong> sur 50 flags évalués, à 13,8 minutes et 4,79 dollars en moyenne. Taux de nettoyage en une passe : 100 % simple, 94 % moyen, 85 % complexe.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/doordash-feature-flag-cleanup/", "label": "infoq.com" }
+        },
+        {
+          "id": "copilot-rust-port",
+          "tag": "notable",
+          "date": "18 Sep 2026",
+          "title": {
+            "es": "Microsoft porta el runtime de Copilot a Rust por 120.000 dólares",
+            "en": "Microsoft agentically ports the Copilot runtime to Rust for $120K",
+            "fr": "Microsoft porte le runtime Copilot vers Rust pour 120 000 dollars"
+          },
+          "body_html": {
+            "es": "<p>Segunda migración masiva a Rust de la semana, después de la de Bun. La línea que mejor resume el asunto: el compilador de Rust se mantiene impertérrito ante las travesuras del LLM. Y ahí está el punto arquitectónico que vale la pena llevarse — estas migraciones asistidas funcionan porque el lenguaje destino tiene un verificador implacable que corta las alucinaciones antes de que lleguen a producción. Sin ese gate, no es migración, es ruleta.</p>",
+            "en": "<p>The week's second mass Rust migration, after Bun's. The line that sums it up: the Rust compiler remains unperturbed by the antics of the LLM. And that is the architectural takeaway — these assisted migrations work because the target language has an unforgiving verifier that cuts hallucinations off before they reach production. Without that gate, it is not migration, it is roulette.</p>",
+            "fr": "<p>Deuxième migration massive vers Rust de la semaine, après celle de Bun. L-enseignement architectural : ces migrations assistées fonctionnent parce que le langage cible dispose d-un vérificateur implacable qui bloque les hallucinations avant la production.</p>"
+          },
+          "source": { "url": "https://www.theregister.com/devops/2026/09/18/microsoft-agentically-ports-copilot-runtime-to-rust-for-120k/5297549", "label": "theregister.com" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "adm-zip-cve",
+      "updates": [
+        {
+          "id": "adm-zip-cve",
+          "tag": "security",
+          "date": "18 Sep 2026",
+          "title": {
+            "es": "adm-zip: un ZIP de 105 bytes te reserva gigabytes de RAM (CVE-2026-77301)",
+            "en": "adm-zip: a 105-byte ZIP reserves gigabytes of RAM (CVE-2026-77301)",
+            "fr": "adm-zip : un ZIP de 105 octets réserve des gigaoctets de RAM (CVE-2026-77301)"
+          },
+          "body_html": {
+            "es": "<p>CVSS 7,5. <code>adm-zip</code> reserva el buffer de salida de cada entrada usando el tamaño descomprimido <em>declarado</em> en el directorio central, antes de validarlo contra los datos reales. Un ZIP crafteado de <strong>105 bytes</strong> que declara 1.774.399.200 bytes fuerza una asignación multi-gigabyte y te tumba el proceso Node. Afecta a todas las versiones por debajo de <strong>0.6.1</strong>, incluida la 0.5.17. Si aceptás uploads de ZIP de usuarios, esto es DoS trivial de explotar — actualizá ya.</p>",
+            "en": "<p>CVSS 7.5. <code>adm-zip</code> allocates each entry's output buffer from the uncompressed size <em>declared</em> in the central directory, before validating it against the actual data. A crafted <strong>105-byte</strong> ZIP declaring 1,774,399,200 bytes forces a multi-gigabyte allocation and takes the Node process down. Affects everything below <strong>0.6.1</strong>, including 0.5.17. If you accept user-uploaded ZIPs, this is trivially exploitable DoS.</p>",
+            "fr": "<p>CVSS 7,5. <code>adm-zip</code> alloue le buffer de sortie de chaque entrée selon la taille décompressée <em>déclarée</em>, avant toute validation. Un ZIP de <strong>105 octets</strong> déclarant 1 774 399 200 octets force une allocation de plusieurs gigaoctets. Toutes les versions sous <strong>0.6.1</strong> sont affectées.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-7q85-xj36-vmfc", "label": "github.com/advisories" }
+        },
+        {
+          "id": "caddy-cve",
+          "tag": "security",
+          "date": "18 Sep 2026",
+          "title": {
+            "es": "Caddy 2.11.3: tres fallas en la capa de handlers y placeholders",
+            "en": "Caddy 2.11.3: three flaws in the handler and placeholder layer",
+            "fr": "Caddy 2.11.3 : trois failles dans la couche handlers et placeholders"
+          },
+          "body_html": {
+            "es": "<p>CVE-2026-77281, CVSS 6,5. Bundle de tres problemas independientes encontrados en la misma auditoría de código: re-expansión de placeholders en <code>rewrite</code>, buffer de body sin límite que habilita DoS, y un bypass de <code>fileHidden</code> por diferencia de mayúsculas y minúsculas. Ese último es el que más duele en la práctica — si escondías archivos sensibles con <code>file_server</code>, podían servirse cambiando el casing del path. Parcheado en <strong>2.11.4</strong>.</p>",
+            "en": "<p>CVE-2026-77281, CVSS 6.5. A bundle of three independent issues found in the same source review: placeholder re-expansion in <code>rewrite</code>, an unbounded body buffer enabling DoS, and a <code>fileHidden</code> case-sensitivity bypass. That last one hurts most in practice — sensitive files hidden from <code>file_server</code> could be served by changing the path casing. Fixed in <strong>2.11.4</strong>.</p>",
+            "fr": "<p>CVE-2026-77281, CVSS 6,5. Trois problèmes indépendants : ré-expansion de placeholders dans <code>rewrite</code>, buffer de body non borné permettant un DoS, et contournement de <code>fileHidden</code> par sensibilité à la casse. Corrigé en <strong>2.11.4</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-j8px-rmrx-76h9", "label": "github.com/advisories" }
+        },
+        {
+          "id": "anyio-cve",
+          "tag": "security",
+          "date": "18 Sep 2026",
+          "title": {
+            "es": "AnyIO: IDNA 2003 habilita spoofing de certificados TLS (CVSS 9,3)",
+            "en": "AnyIO: IDNA 2003 enables TLS certificate spoofing (CVSS 9.3)",
+            "fr": "AnyIO : IDNA 2003 permet l-usurpation de certificats TLS (CVSS 9,3)"
+          },
+          "body_html": {
+            "es": "<p>CVE-2026-63374, crítico. Los servicios que usan dominios internacionalizados (no ASCII) quedan expuestos en conexiones TLS hechas con <code>connect_tcp()</code> o <code>TLSStream.wrap()</code>: un atacante que ya haya redirigido la conexión puede obtener un certificado legítimo para la versión <strong>IDNA 2003</strong> del dominio y presentarlo como válido. Parcheado en <strong>4.14.2</strong>. Es Python, pero si tu stack TypeScript habla con servicios internos en FastAPI o similares, vale que lo pasés al equipo de al lado.</p>",
+            "en": "<p>CVE-2026-63374, critical. Services using internationalized (non-ASCII) domain names are exposed on TLS connections made via <code>connect_tcp()</code> or <code>TLSStream.wrap()</code>: an attacker who has already redirected the connection can obtain a legitimate certificate for the <strong>IDNA 2003</strong> encoding of the domain and present it as valid. Fixed in <strong>4.14.2</strong>. It is Python, but worth forwarding if your TypeScript stack talks to internal FastAPI services.</p>",
+            "fr": "<p>CVE-2026-63374, critique. Les services utilisant des noms de domaine internationalisés sont exposés sur les connexions TLS via <code>connect_tcp()</code> ou <code>TLSStream.wrap()</code> : un attaquant peut obtenir un certificat légitime pour l-encodage <strong>IDNA 2003</strong> du domaine. Corrigé en <strong>4.14.2</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-82r6-8w77-94w6", "label": "github.com/advisories" }
+        },
+        {
+          "id": "perses-cve",
+          "tag": "security",
+          "date": "18 Sep 2026",
+          "title": {
+            "es": "Perses: el proxy de datasources desencripta secretos sin chequear scope (CVSS 8,3)",
+            "en": "Perses: datasource proxy decrypts secrets without a scope check (CVSS 8.3)",
+            "fr": "Perses : le proxy de datasources déchiffre des secrets sans vérifier le scope (CVSS 8,3)"
+          },
+          "body_html": {
+            "es": "<p>CVE-2026-63199. El proxy autoriza al llamador sobre el scope <code>Datasource</code>, después resuelve y desencripta cualquier <code>Secret</code> nombrado en el body de la request — sin verificar el scope de Secret. Como son roles independientes y otorgables por separado, un operador con acceso a datasources pero no a secretos puede leer secretos de otro scope. Un recordatorio clásico de diseño de autorización: autorizar el <em>endpoint</em> no alcanza, hay que autorizar cada <em>recurso</em> que el endpoint termina tocando. Parcheado en <strong>0.54.0-rc.0</strong>.</p>",
+            "en": "<p>CVE-2026-63199. The proxy authorizes the caller on the <code>Datasource</code> scope, then resolves and decrypts any <code>Secret</code> named in the request body with no Secret-scope check. Since those are distinct, independently grantable roles, an operator granted datasource access without secret access can read cross-scope secrets. A classic authorization-design reminder: authorizing the <em>endpoint</em> is not enough, you authorize every <em>resource</em> the endpoint ends up touching. Fixed in <strong>0.54.0-rc.0</strong>.</p>",
+            "fr": "<p>CVE-2026-63199. Le proxy autorise l-appelant sur le scope <code>Datasource</code>, puis déchiffre tout <code>Secret</code> nommé dans le body sans vérifier le scope Secret. Rappel classique : autoriser l-<em>endpoint</em> ne suffit pas, il faut autoriser chaque <em>ressource</em> touchée. Corrigé en <strong>0.54.0-rc.0</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-4227-9989-jrhx", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "pnpm-12-5",
+      "updates": [
+        {
+          "id": "pnpm-12-5",
+          "tag": "release",
+          "date": "18 Sep 2026",
+          "title": {
+            "es": "pnpm 12.5: Python como ecosistema de primera y Package URLs en pnpm add",
+            "en": "pnpm 12.5: Python as a first-class ecosystem and Package URLs in pnpm add",
+            "fr": "pnpm 12.5 : Python en écosystème de première classe et Package URLs dans pnpm add"
+          },
+          "body_html": {
+            "es": "<p>pnpm sigue estirándose más allá de npm. Ahora <code>pnpm add</code> acepta un <strong>Package URL</strong> en lugar de un nombre: <code>pnpm add pkg:npm/express@4.18.2</code> escribe en <code>package.json</code>, <code>pkg:cargo/serde@1.0.188</code> en <code>Cargo.toml</code> y <code>pkg:pypi/requests@2.31.0</code> en <code>pyproject.toml</code>. Sumá que <code>supportedArchitectures</code> ahora nombra plataformas enteras y que las tasks tienen límites de concurrencia a nivel máquina. Y ojo al bugfix: había un install que podía reusar el tarball descargado de un paquete para otro — motivo suficiente para subir. El patch 12.5.1 salió el mismo día.</p>",
+            "en": "<p>pnpm keeps stretching past npm. <code>pnpm add</code> now accepts a <strong>Package URL</strong> instead of a name: <code>pnpm add pkg:npm/express@4.18.2</code> writes to <code>package.json</code>, <code>pkg:cargo/serde@1.0.188</code> to <code>Cargo.toml</code>, <code>pkg:pypi/requests@2.31.0</code> to <code>pyproject.toml</code>. Add whole-platform names in <code>supportedArchitectures</code> and machine-wide task concurrency limits. Note the bugfix too: an install could reuse one package's downloaded tarball for another — reason enough to upgrade. Patch 12.5.1 landed the same day.</p>",
+            "fr": "<p>pnpm continue de dépasser npm. <code>pnpm add</code> accepte désormais un <strong>Package URL</strong> : <code>pkg:npm/express@4.18.2</code> vers <code>package.json</code>, <code>pkg:cargo/serde@1.0.188</code> vers <code>Cargo.toml</code>, <code>pkg:pypi/requests@2.31.0</code> vers <code>pyproject.toml</code>. À noter le correctif : un install pouvait réutiliser le tarball d-un paquet pour un autre.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.5.0", "label": "github.com/pnpm" }
+        },
+        {
+          "id": "turborepo-2-11",
+          "tag": "release",
+          "date": "18 Sep 2026",
+          "title": {
+            "es": "Turborepo 2.11: devEngines.packageManager, prune --production y TUI sobre Ghostty",
+            "en": "Turborepo 2.11: devEngines.packageManager, prune --production and a Ghostty-backed TUI",
+            "fr": "Turborepo 2.11 : devEngines.packageManager, prune --production et TUI sur Ghostty"
+          },
+          "body_html": {
+            "es": "<p>Release cargada. Soporte de <code>devEngines.packageManager</code> a nivel raíz y de workspace — por fin una forma estándar de declarar qué gestor usa el monorepo. Llega el flag <strong><code>--production</code> en <code>turbo prune</code></strong>, que es exactamente lo que querés para adelgazar imágenes Docker. La TUI migró sus terminales virtuales de vt100 a <strong>Ghostty</strong>, con selección de tareas por click, toggle entre TUI y logs en stream, y copiado automático al clipboard. Cierra con una tanda de optimizaciones de hashing y scope filtering.</p>",
+            "en": "<p>A loaded release. <code>devEngines.packageManager</code> support at root and workspace level finally gives a standard way to declare which manager a monorepo uses. The <strong><code>--production</code> flag on <code>turbo prune</code></strong> is exactly what you want for slimming Docker images. The TUI migrated its virtual terminals from vt100 to <strong>Ghostty</strong>, with click-to-select tasks, a toggle between TUI and streamed logs, and automatic clipboard copy. Plus a batch of hashing and scope-filtering optimizations.</p>",
+            "fr": "<p>Une version chargée. Support de <code>devEngines.packageManager</code> à la racine et au niveau workspace. Le flag <strong><code>--production</code> sur <code>turbo prune</code></strong> est parfait pour alléger les images Docker. La TUI migre ses terminaux virtuels de vt100 vers <strong>Ghostty</strong>, avec sélection de tâches au clic et copie automatique.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/turborepo/releases/tag/v2.11.0", "label": "github.com/vercel" }
+        },
+        {
+          "id": "nx-23-3-beta",
+          "tag": "beta",
+          "date": "19 Sep 2026",
+          "title": {
+            "es": "Nx 23.3.0-beta.2: cachea capabilities de plugins y reusa el project graph en ESLint",
+            "en": "Nx 23.3.0-beta.2: caches plugin capabilities and reuses the project graph in ESLint",
+            "fr": "Nx 23.3.0-beta.2 : cache les capabilities de plugins et réutilise le project graph dans ESLint"
+          },
+          "body_html": {
+            "es": "<p>Beta orientada a performance del grafo. Las capabilities de plugins pasan a cachearse para que leerlas cueste como mucho una carga, y los workers de concurrencia de ESLint ahora <strong>reusan el project graph</strong> en lugar de reconstruirlo cada uno. También se arregló que el bundle de esbuild se escriba en un <code>outputPath</code> sobreescrito y que los errores subyacentes se muestren cuando falla el project graph — chico, pero cualquiera que haya debuggeado un grafo roto a ciegas lo agradece.</p>",
+            "en": "<p>A graph-performance beta. Plugin capabilities are now cached so reading them costs at most one load, and ESLint concurrency workers <strong>reuse the project graph</strong> instead of each rebuilding it. Also fixed: the esbuild bundle writes to an overridden <code>outputPath</code>, and underlying errors surface when the project graph fails — small, but anyone who has debugged a broken graph blind will appreciate it.</p>",
+            "fr": "<p>Une bêta axée performance du graphe. Les capabilities de plugins sont désormais cachées, et les workers de concurrence ESLint <strong>réutilisent le project graph</strong> au lieu de le reconstruire. Corrigé aussi : les erreurs sous-jacentes sont affichées quand le project graph échoue.</p>"
+          },
+          "source": { "url": "https://github.com/nrwl/nx/releases/tag/23.3.0-beta.2", "label": "github.com/nrwl" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Dos migraciones masivas a Rust en la misma semana — Bun con 535K líneas y el runtime de Copilot de Microsoft — y en ambas el patrón es el mismo: la asistencia de IA escala porque el compilador de Rust actúa como verificador implacable. El gate determinista es lo que hace viable la delegación, no el modelo.",
+      "en": "Two mass Rust migrations in the same week — Bun's 535K lines and Microsoft's Copilot runtime — and both follow the same pattern: AI assistance scales because the Rust compiler acts as an unforgiving verifier. The deterministic gate is what makes delegation viable, not the model.",
+      "fr": "Deux migrations massives vers Rust la même semaine — les 535K lignes de Bun et le runtime Copilot de Microsoft — suivant le même schéma : l-assistance IA passe à l-échelle parce que le compilateur Rust agit en vérificateur implacable. C-est le gate déterministe qui rend la délégation viable, pas le modèle."
+    },
+    {
+      "es": "El serverless se estira hacia lo que antes era territorio de contenedores: Lambda pasa a 90 minutos y ECS Express Mode suma ARM64. La frontera entre función y servicio de larga duración se está borrando, y con ella las razones para mantener dos modelos operativos distintos.",
+      "en": "Serverless keeps stretching into what used to be container territory: Lambda moves to 90 minutes and ECS Express Mode adds ARM64. The line between a function and a long-running service is blurring, and with it the reasons to maintain two separate operational models.",
+      "fr": "Le serverless s-étend vers le territoire des conteneurs : Lambda passe à 90 minutes et ECS Express Mode ajoute ARM64. La frontière entre fonction et service longue durée s-estompe, ainsi que les raisons de maintenir deux modèles opérationnels distincts."
+    },
+    {
+      "es": "Tres de las CVEs de la semana — kcp, Perses y el cluster bus de Redis — son la misma falla conceptual: confiar en una identidad o un canal que nunca se verificó. Autorizar el endpoint no alcanza; hay que autorizar cada recurso que el endpoint termina tocando y autenticar cada canal que el nodo termina escuchando.",
+      "en": "Three of this week's CVEs — kcp, Perses and the Redis cluster bus — are the same conceptual flaw: trusting an identity or a channel that was never verified. Authorizing the endpoint is not enough; you authorize every resource the endpoint ends up touching and authenticate every channel the node ends up listening on.",
+      "fr": "Trois des CVE de la semaine — kcp, Perses et le cluster bus de Redis — sont la même faille conceptuelle : faire confiance à une identité ou un canal jamais vérifié. Autoriser l-endpoint ne suffit pas ; il faut autoriser chaque ressource touchée et authentifier chaque canal écouté."
+    },
+    {
+      "es": "SolidStart entra en mantenimiento el día que sale su major, porque Solid 2.0 absorbió server functions y file-system routing en el core. Es el ciclo de vida natural de un metaframework bien hecho: existe para probar ideas que, si funcionan, terminan en la librería base y lo vuelven innecesario.",
+      "en": "SolidStart enters maintenance on the day its major ships, because Solid 2.0 absorbed server functions and file-system routing into the core. That is the natural life cycle of a well-made metaframework: it exists to prove ideas that, if they work, end up in the base library and render it unnecessary.",
+      "fr": "SolidStart entre en maintenance le jour de sa version majeure, car Solid 2.0 a absorbé les server functions et le routing fichier dans le core. C-est le cycle de vie naturel d-un métaframework réussi : il existe pour éprouver des idées qui, si elles fonctionnent, rejoignent la bibliothèque de base et le rendent superflu."
+    }
+  ]
+}

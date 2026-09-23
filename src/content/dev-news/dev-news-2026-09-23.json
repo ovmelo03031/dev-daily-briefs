@@ -1,0 +1,279 @@
+{
+  "title": {
+    "es": "Dev News — 23 de septiembre de 2026",
+    "en": "Dev News — September 23, 2026",
+    "fr": "Dev News — 23 septembre 2026"
+  },
+  "description": {
+    "es": "RCE crítico en next/og obliga a parchear Next.js, Node.js 26.10 suma throttle y debounce nativos, pnpm 12.6 dedupe automático y Astro migra React a Oxc.",
+    "en": "A critical RCE in next/og forces a Next.js patch, Node.js 26.10 adds native throttle and debounce, pnpm 12.6 lands auto-dedupe, and Astro moves React to Oxc.",
+    "fr": "Une RCE critique dans next/og impose un correctif Next.js, Node.js 26.10 ajoute throttle et debounce natifs, pnpm 12.6 introduit la déduplication automatique et Astro passe React à Oxc."
+  },
+  "pubDate": "2026-09-23",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": { "es": "RCE crítico en next/og: parcheá ya", "en": "Critical RCE in next/og: patch now", "fr": "RCE critique dans next/og : corrigez" },
+      "anchor": "next-og-rce",
+      "icon": "simple-icons:nextdotjs"
+    },
+    {
+      "text": { "es": "Node 26.10: throttle y debounce nativos", "en": "Node 26.10: native throttle and debounce", "fr": "Node 26.10 : throttle et debounce natifs" },
+      "anchor": "node-26-10",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": { "es": "pnpm 12.6 dedupea solo al instalar", "en": "pnpm 12.6 dedupes on install", "fr": "pnpm 12.6 déduplique à l'installation" },
+      "anchor": "pnpm-12-6",
+      "icon": "lucide:package"
+    },
+    {
+      "text": { "es": "Astro pasa React de Babel a Oxc", "en": "Astro swaps React Babel for Oxc", "fr": "Astro remplace Babel par Oxc pour React" },
+      "anchor": "astrojs-react-7",
+      "icon": "simple-icons:astro"
+    },
+    {
+      "text": { "es": "React Native 0.88 RC.2 revierte breaks", "en": "React Native 0.88 RC.2 reverts breaks", "fr": "React Native 0.88 RC.2 annule des ruptures" },
+      "anchor": "rn-088-rc2",
+      "icon": "simple-icons:react"
+    },
+    {
+      "text": { "es": "Rspack 2.2.7: bundles 9,9% más chicos", "en": "Rspack 2.2.7: 9.9% smaller bundles", "fr": "Rspack 2.2.7 : bundles 9,9 % plus légers" },
+      "anchor": "rspack-2-2-7",
+      "icon": "lucide:package"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "next-og-rce",
+          "tag": "security",
+          "date": "22 Sep 2026",
+          "title": {
+            "es": "RCE crítico (CVSS 9.5) en next/og ImageResponse",
+            "en": "Critical RCE (CVSS 9.5) in next/og ImageResponse",
+            "fr": "RCE critique (CVSS 9.5) dans next/og ImageResponse"
+          },
+          "body_html": {
+            "es": "<p>Vercel publicó <strong>GHSA-vcvr-r3jv-pc5j</strong>: si pasás valores controlados por el atacante a contenido, atributos o estilos SVG dentro de <code>ImageResponse</code>, hay ejecución remota de código. Cualquier route handler que genere OG images con un <code>searchParams</code> está expuesto. Parchado en <code>16.3.6</code> y <code>15.5.26</code>. Ojo con esto: es el tercer RCE crítico de Next.js en menos de un mes.</p>",
+            "en": "<p>Vercel published <strong>GHSA-vcvr-r3jv-pc5j</strong>: passing attacker-controlled values into SVG content, attributes or styles inside <code>ImageResponse</code> leads to remote code execution. Any route handler generating OG images from <code>searchParams</code> is exposed. Patched in <code>16.3.6</code> and <code>15.5.26</code>. This is the third critical Next.js RCE in under a month.</p>",
+            "fr": "<p>Vercel a publié <strong>GHSA-vcvr-r3jv-pc5j</strong> : passer des valeurs contrôlées par l'attaquant dans le contenu, les attributs ou les styles SVG d'<code>ImageResponse</code> mène à une exécution de code à distance. Tout route handler générant des OG images depuis <code>searchParams</code> est exposé. Corrigé dans <code>16.3.6</code> et <code>15.5.26</code>.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/next.js/security/advisories/GHSA-vcvr-r3jv-pc5j", "label": "github.com" }
+        },
+        {
+          "id": "node-26-10",
+          "tag": "release",
+          "date": "22 Sep 2026",
+          "title": {
+            "es": "Node.js 26.10.0 suma util.throttle, util.debounce y crypto.parsePKCS12()",
+            "en": "Node.js 26.10.0 adds util.throttle, util.debounce and crypto.parsePKCS12()",
+            "fr": "Node.js 26.10.0 ajoute util.throttle, util.debounce et crypto.parsePKCS12()"
+          },
+          "body_html": {
+            "es": "<p>Tanda grande de SEMVER-MINOR: <code>util.throttle</code> y <code>util.debounce</code> nativos (adiós a un lodash más en el bundle del server), <code>util.markPromiseAsHandled</code>, <code>fs.openAsBlobSync</code>, <code>crypto.parsePKCS12()</code>, un <code>SlidingWindowHistogram</code> en <code>perf_hooks</code>, FFI cargando librerías desde un VFS montado y <code>net.BoundSocket</code> transferible a threads y child processes.</p>",
+            "en": "<p>A heavy SEMVER-MINOR batch: native <code>util.throttle</code> and <code>util.debounce</code>, <code>util.markPromiseAsHandled</code>, <code>fs.openAsBlobSync</code>, <code>crypto.parsePKCS12()</code>, a <code>SlidingWindowHistogram</code> in <code>perf_hooks</code>, FFI loading libraries from a mounted VFS, and <code>net.BoundSocket</code> transferable to threads and child processes.</p>",
+            "fr": "<p>Grosse série SEMVER-MINOR : <code>util.throttle</code> et <code>util.debounce</code> natifs, <code>util.markPromiseAsHandled</code>, <code>fs.openAsBlobSync</code>, <code>crypto.parsePKCS12()</code>, un <code>SlidingWindowHistogram</code> dans <code>perf_hooks</code>, FFI chargeant des bibliothèques depuis un VFS monté, et <code>net.BoundSocket</code> transférable aux threads et processus enfants.</p>"
+          },
+          "source": { "url": "https://github.com/nodejs/node/releases/tag/v26.10.0", "label": "github.com" }
+        },
+        {
+          "id": "pnpm-12-6",
+          "tag": "release",
+          "date": "22 Sep 2026",
+          "title": {
+            "es": "pnpm 12.6.0: autoDedupe, node_modules relocalizable y --save-types",
+            "en": "pnpm 12.6.0: autoDedupe, relocatable node_modules and --save-types",
+            "fr": "pnpm 12.6.0 : autoDedupe, node_modules relocalisable et --save-types"
+          },
+          "body_html": {
+            "es": "<p><code>autoDedupe</code> unifica versiones compatibles durante la instalación (los frozen installs no tocan el lockfile). En macOS y Linux, mover o copiar un proyecto ya no rompe <code>node_modules/.bin</code>: la primera corrida reregistra la ubicación. Suma <code>--save-types</code>, edición de manifiestos <code>package.yaml</code> y catálogos con protocolos <code>file:</code> y <code>link:</code>.</p>",
+            "en": "<p><code>autoDedupe</code> collapses compatible versions during install (frozen installs leave the lockfile untouched). On macOS and Linux, moving or copying a project no longer breaks <code>node_modules/.bin</code>: the first command re-records its location. Plus <code>--save-types</code>, <code>package.yaml</code> manifest editing, and catalogs supporting <code>file:</code> and <code>link:</code> protocols.</p>",
+            "fr": "<p><code>autoDedupe</code> fusionne les versions compatibles pendant l'installation (les frozen installs ne touchent pas au lockfile). Sur macOS et Linux, déplacer un projet ne casse plus <code>node_modules/.bin</code>. S'ajoutent <code>--save-types</code>, l'édition de manifestes <code>package.yaml</code> et les catalogues avec protocoles <code>file:</code> et <code>link:</code>.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.6.0", "label": "github.com" }
+        }
+      ]
+    },
+    {
+      "id": "react",
+      "name": "React",
+      "theme": "react",
+      "icon_emoji": "⚛️",
+      "anchor": "react",
+      "updates": [
+        {
+          "id": "next-canary-39",
+          "tag": "notable",
+          "date": "22 Sep 2026",
+          "title": {
+            "es": "Next.js 16.4.0-canary.39 endurece la serialización SVG de next/og",
+            "en": "Next.js 16.4.0-canary.39 hardens next/og SVG serialization",
+            "fr": "Next.js 16.4.0-canary.39 durcit la sérialisation SVG de next/og"
+          },
+          "body_html": {
+            "es": "<p>El canary trae el hardening de <code>next/og</code> que acompaña al advisory, más un fix al loop de prefetch cuando una ruta predicha redirige, tracing de archivos estáticos en Turbopack y el scaffold de <code>unstable_ensureStatic</code> para PPF.</p>",
+            "en": "<p>The canary lands the <code>next/og</code> hardening that accompanies the advisory, plus a fix for the prefetch loop when a predicted route redirects, Turbopack static project file tracing, and the <code>unstable_ensureStatic</code> segment config scaffold for PPF.</p>",
+            "fr": "<p>Le canary apporte le durcissement de <code>next/og</code> lié à l'advisory, un correctif de la boucle de prefetch lorsqu'une route prédite redirige, le tracing des fichiers statiques dans Turbopack et le scaffold <code>unstable_ensureStatic</code> pour PPF.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/next.js/releases/tag/v16.4.0-canary.39", "label": "github.com" }
+        }
+      ]
+    },
+    {
+      "id": "react-native",
+      "name": "React Native",
+      "theme": "react-native",
+      "icon_emoji": "📱",
+      "anchor": "react-native",
+      "updates": [
+        {
+          "id": "rn-088-rc2",
+          "tag": "beta",
+          "date": "22 Sep 2026",
+          "title": {
+            "es": "React Native 0.88.0-rc.2 revierte los cambios de codegen que rompían TurboModules",
+            "en": "React Native 0.88.0-rc.2 reverts the codegen changes that broke TurboModules",
+            "fr": "React Native 0.88.0-rc.2 annule les changements de codegen cassant les TurboModules"
+          },
+          "body_html": {
+            "es": "<p>El equipo insiste en que 0.88 es un release no-breaking y revierte dos cambios de codegen: vuelve <code>NSMutableData *</code> para métodos ObjC TurboModule con <code>ArrayBuffer</code>, y se acepta de nuevo <code>EventEmitter&lt;ArrayBuffer&gt;</code> en TurboModules C++. También restaura el fallback <code>.js</code> para deep imports legacy y sube Metro mínimo a 0.87.1.</p>",
+            "en": "<p>The team is holding the line that 0.88 is a non-breaking release and reverts two codegen changes: <code>NSMutableData *</code> is back for ObjC TurboModule methods taking <code>ArrayBuffer</code>, and <code>EventEmitter&lt;ArrayBuffer&gt;</code> is accepted again in C++ TurboModules. It also restores the <code>.js</code> fallback for legacy deep imports and bumps minimum Metro to 0.87.1.</p>",
+            "fr": "<p>L'équipe maintient que 0.88 est une version non-breaking et annule deux changements de codegen : <code>NSMutableData *</code> revient pour les méthodes ObjC TurboModule avec <code>ArrayBuffer</code>, et <code>EventEmitter&lt;ArrayBuffer&gt;</code> est de nouveau accepté dans les TurboModules C++. Metro minimum passe à 0.87.1.</p>"
+          },
+          "source": { "url": "https://github.com/facebook/react-native/releases/tag/v0.88.0-rc.2", "label": "github.com" }
+        }
+      ]
+    },
+    {
+      "id": "js-frameworks",
+      "name": "JS Frameworks",
+      "theme": "js-frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "js-frameworks",
+      "updates": [
+        {
+          "id": "astrojs-react-7",
+          "tag": "breaking",
+          "date": "22 Sep 2026",
+          "title": {
+            "es": "@astrojs/react 7.0.0 saca Babel y mete Oxc, con React Compiler opt-in",
+            "en": "@astrojs/react 7.0.0 drops Babel for Oxc, with an opt-in React Compiler",
+            "fr": "@astrojs/react 7.0.0 abandonne Babel pour Oxc, avec React Compiler en option"
+          },
+          "body_html": {
+            "es": "<p>La integración migra a <code>@vitejs/plugin-react</code> v6 usando Oxc para JSX y Fast Refresh. La opción <code>babel</code> desaparece: si tenías transforms propios, ahora van en <code>@rolldown/plugin-babel</code> dentro de <code>vite.plugins</code>. Aparece <code>compiler: true</code> para el React Compiler basado en Oxc, que memoiza componentes cliente y hooks (el render de servidor no se compila).</p>",
+            "en": "<p>The integration migrates to <code>@vitejs/plugin-react</code> v6 using Oxc for JSX and Fast Refresh. The <code>babel</code> option is gone: custom transforms now go through <code>@rolldown/plugin-babel</code> under <code>vite.plugins</code>. A new <code>compiler: true</code> flag enables the Oxc-based React Compiler, memoizing client components and hooks (server rendering is not compiled).</p>",
+            "fr": "<p>L'intégration migre vers <code>@vitejs/plugin-react</code> v6 avec Oxc pour JSX et Fast Refresh. L'option <code>babel</code> disparaît : les transforms personnalisés passent par <code>@rolldown/plugin-babel</code> dans <code>vite.plugins</code>. Un nouveau <code>compiler: true</code> active le React Compiler basé sur Oxc.</p>"
+          },
+          "source": { "url": "https://github.com/withastro/astro/releases/tag/%40astrojs/react%407.0.0", "label": "github.com" }
+        },
+        {
+          "id": "astro-7-3-4",
+          "tag": "patch",
+          "date": "22 Sep 2026",
+          "title": {
+            "es": "Astro 7.3.4 arregla el dev server que reevaluaba todo el grafo en cada request",
+            "en": "Astro 7.3.4 fixes the dev server re-evaluating the whole module graph per request",
+            "fr": "Astro 7.3.4 corrige le dev server réévaluant tout le graphe à chaque requête"
+          },
+          "body_html": {
+            "es": "<p>El plugin <code>astro:head-metadata</code> invalidaba su propio módulo virtual desde su hook <code>transform</code>, encadenando reevaluaciones. Los adapters que corren fuera del module runner de Vite —como <code>@astrojs/cloudflare</code>— pagaban un re-eval completo del grafo de servidor en cada request. También frena builds incrementales que re-renderizaban páginas sin cambios.</p>",
+            "en": "<p>The <code>astro:head-metadata</code> plugin invalidated its own virtual module from its <code>transform</code> hook, chaining re-evaluations. Adapters running outside Vite's module runner — such as <code>@astrojs/cloudflare</code> — paid for a full server graph re-evaluation on every request. Incremental builds re-rendering unchanged pages are fixed too.</p>",
+            "fr": "<p>Le plugin <code>astro:head-metadata</code> invalidait son propre module virtuel depuis son hook <code>transform</code>, enchaînant les réévaluations. Les adapters hors du module runner de Vite — comme <code>@astrojs/cloudflare</code> — payaient une réévaluation complète du graphe serveur à chaque requête.</p>"
+          },
+          "source": { "url": "https://github.com/withastro/astro/releases/tag/astro%407.3.4", "label": "github.com" }
+        }
+      ]
+    },
+    {
+      "id": "build-tools",
+      "name": "Build Tools & Runtimes",
+      "theme": "build-tools",
+      "icon_emoji": "🔧",
+      "anchor": "build-tools",
+      "updates": [
+        {
+          "id": "rspack-2-2-7",
+          "tag": "release",
+          "date": "23 Sep 2026",
+          "title": {
+            "es": "Rspack 2.2.7: dedupDepth recorta 9,9% el tamaño de salida",
+            "en": "Rspack 2.2.7: dedupDepth cuts output size by 9.9%",
+            "fr": "Rspack 2.2.7 : dedupDepth réduit la taille de sortie de 9,9 %"
+          },
+          "body_html": {
+            "es": "<p>El nuevo <code>optimization.splitChunks.dedupDepth</code> te deja gastar más tiempo de build buscando código compartido: en una app con muchas rutas bajó el output total un <strong>9,9%</strong>. Default <code>1</code> en producción, <code>0</code> en desarrollo. Además reduce trabajo repetido al construir el chunk graph y al generar class names de CSS Modules.</p>",
+            "en": "<p>The new <code>optimization.splitChunks.dedupDepth</code> lets you spend more build time hunting for shared code: on a route-heavy app it cut total output by <strong>9.9%</strong>. Defaults to <code>1</code> in production, <code>0</code> in development. It also reduces repeated work in chunk graph construction and CSS Modules class name generation.</p>",
+            "fr": "<p>Le nouveau <code>optimization.splitChunks.dedupDepth</code> permet d'investir plus de temps de build pour trouver du code partagé : sur une app riche en routes, la sortie totale a baissé de <strong>9,9 %</strong>. Par défaut <code>1</code> en production, <code>0</code> en développement.</p>"
+          },
+          "source": { "url": "https://github.com/web-infra-dev/rspack/releases/tag/v2.2.7", "label": "github.com" }
+        },
+        {
+          "id": "changesets-v3",
+          "tag": "breaking",
+          "date": "22 Sep 2026",
+          "title": {
+            "es": "Changesets v3: solo ESM, instalación 88% más chica y peers en patch",
+            "en": "Changesets v3: ESM-only, 88% smaller install, peers bumped by patch",
+            "fr": "Changesets v3 : ESM uniquement, installation 88 % plus légère, peers en patch"
+          },
+          "body_html": {
+            "es": "<p>Primer major en siete años. El paquete baja de 16,1 MB a 2,1 MB y de 95 a 39 dependencias. El cambio de comportamiento que más duele —y que la comunidad venía pidiendo hace años— es que los dependientes de un peer actualizado ahora reciben un <strong>patch</strong> y no un major. Requiere Node 22.11+, <code>changeset tag</code> pasa a <code>git-tag</code> y llegan <code>pack</code> y <code>publish-plan</code>.</p>",
+            "en": "<p>First major in seven years. The package drops from 16.1 MB to 2.1 MB and from 95 to 39 dependencies. The behavioral shift the community had been asking for: dependents of an updated peer now get a <strong>patch</strong> bump instead of a major. Requires Node 22.11+, <code>changeset tag</code> becomes <code>git-tag</code>, and new <code>pack</code> and <code>publish-plan</code> commands land.</p>",
+            "fr": "<p>Premier major en sept ans. Le paquet passe de 16,1 Mo à 2,1 Mo et de 95 à 39 dépendances. Changement clé : les dépendants d'un peer mis à jour reçoivent désormais un <strong>patch</strong> et non un major. Node 22.11+ requis, <code>changeset tag</code> devient <code>git-tag</code>.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/changesets-v3-release/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "dev-tools",
+      "name": "Developer Tools",
+      "theme": "dev-tools",
+      "icon_emoji": "🛠️",
+      "anchor": "dev-tools",
+      "updates": [
+        {
+          "id": "electron-44-4-4",
+          "tag": "patch",
+          "date": "22 Sep 2026",
+          "title": {
+            "es": "Electron 44.4.4 arregla una tanda de bugs de DevTools en cuatro ramas",
+            "en": "Electron 44.4.4 fixes a batch of DevTools bugs across four branches",
+            "fr": "Electron 44.4.4 corrige une série de bugs DevTools sur quatre branches"
+          },
+          "body_html": {
+            "es": "<p>Se va el <code>Cannot read properties of undefined (reading 'startTime')</code> con las live metrics del panel Performance abiertas, el crash de <code>setIgnoreMenuShortcuts()</code> sobre DevTools y el error fantasma de <code>sandboxed_renderer.bundle.js</code>. Vuelve el cacheo de shaders Skia entre arranques y se arregla <code>ready-to-show</code> en ventanas ocultas de Windows y Linux.</p>",
+            "en": "<p>Gone: the <code>Cannot read properties of undefined (reading 'startTime')</code> thrown while Performance panel live metrics are active, the <code>setIgnoreMenuShortcuts()</code> crash on DevTools, and the spurious <code>sandboxed_renderer.bundle.js</code> console error. Skia shader caching between launches is back, and <code>ready-to-show</code> fires again for hidden Windows and Linux windows.</p>",
+            "fr": "<p>Disparus : le <code>Cannot read properties of undefined (reading 'startTime')</code> avec les live metrics du panneau Performance, le crash de <code>setIgnoreMenuShortcuts()</code> sur DevTools et l'erreur fantôme <code>sandboxed_renderer.bundle.js</code>. Le cache de shaders Skia entre lancements revient.</p>"
+          },
+          "source": { "url": "https://github.com/electron/electron/releases/tag/v44.4.4", "label": "github.com" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Tercer RCE crítico de Next.js en menos de un mes, y los tres entran por la superficie de generación de imágenes. Si tenés OG images dinámicas, esa route es tu perímetro: tratá cada searchParam como hostil.",
+      "en": "Third critical Next.js RCE in under a month, and all three come in through the image-generation surface. If you ship dynamic OG images, that route is your perimeter — treat every searchParam as hostile.",
+      "fr": "Troisième RCE critique de Next.js en moins d'un mois, et les trois passent par la surface de génération d'images. Si vous avez des OG images dynamiques, cette route est votre périmètre."
+    },
+    {
+      "es": "Babel sigue siendo desalojado pieza por pieza: Astro cambia a Oxc para JSX y Fast Refresh, y hasta el React Compiler llega en versión Oxc. La cadena de toolchain en Rust ya no es una promesa, es el default.",
+      "en": "Babel keeps getting evicted piece by piece: Astro swaps in Oxc for JSX and Fast Refresh, and even the React Compiler now ships in an Oxc flavor. The Rust toolchain is no longer a promise, it is the default.",
+      "fr": "Babel est évincé pièce par pièce : Astro passe à Oxc pour JSX et Fast Refresh, et même le React Compiler arrive en version Oxc. La chaîne d'outils Rust n'est plus une promesse, c'est le défaut."
+    },
+    {
+      "es": "Node se sigue comiendo a las utilidades chiquitas: throttle y debounce nativos son un lodash menos en cada backend. Y del otro lado, pnpm dedupea solo. El tooling está atacando el peso del node_modules desde los dos extremos.",
+      "en": "Node keeps absorbing the small utilities: native throttle and debounce mean one less lodash in every backend. Meanwhile pnpm dedupes on its own. Tooling is attacking node_modules weight from both ends.",
+      "fr": "Node continue d'absorber les petits utilitaires : throttle et debounce natifs, c'est un lodash de moins dans chaque backend. En parallèle, pnpm déduplique seul."
+    }
+  ]
+}

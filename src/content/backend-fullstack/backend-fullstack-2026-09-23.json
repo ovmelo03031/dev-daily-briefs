@@ -1,0 +1,427 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 23 de septiembre de 2026",
+    "en": "Backend & Fullstack — September 23, 2026",
+    "fr": "Backend & Fullstack — 23 septembre 2026"
+  },
+  "description": {
+    "es": "RCE crítico en next/og (CVSS 9.5), Node.js 26.10.0 con parsePKCS12 y util.throttle, OpenBao filtra el recovery token por timing, pnpm 12.6 trae autoDedupe y Changesets v3 adelgaza 88% la instalación.",
+    "en": "Critical RCE in next/og (CVSS 9.5), Node.js 26.10.0 lands parsePKCS12 and util.throttle, OpenBao leaks its recovery token through a timing attack, pnpm 12.6 ships autoDedupe and Changesets v3 cuts install size by 88%.",
+    "fr": "RCE critique dans next/og (CVSS 9.5), Node.js 26.10.0 ajoute parsePKCS12 et util.throttle, OpenBao fuit son recovery token par timing, pnpm 12.6 apporte autoDedupe et Changesets v3 réduit l'installation de 88%."
+  },
+  "pubDate": "2026-09-23",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "RCE en next/og: CVSS 9.5, parcheá ya",
+        "en": "RCE in next/og: CVSS 9.5, patch now",
+        "fr": "RCE dans next/og : CVSS 9.5, patchez"
+      },
+      "anchor": "next-og-rce",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Node 26.10.0: parsePKCS12 y util.throttle",
+        "en": "Node 26.10.0: parsePKCS12 and util.throttle",
+        "fr": "Node 26.10.0 : parsePKCS12 et util.throttle"
+      },
+      "anchor": "node-26-10-0",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": {
+        "es": "OpenBao filtra el recovery token por timing",
+        "en": "OpenBao leaks its recovery token by timing",
+        "fr": "OpenBao fuit son recovery token par timing"
+      },
+      "anchor": "openbao-recovery-timing",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Un await faltante rompe los permisos de Unleash",
+        "en": "A missing await breaks Unleash permissions",
+        "fr": "Un await manquant casse les permissions Unleash"
+      },
+      "anchor": "unleash-missing-await",
+      "icon": "lucide:layers"
+    },
+    {
+      "text": {
+        "es": "pnpm 12.6.0 suma autoDedupe al install",
+        "en": "pnpm 12.6.0 adds autoDedupe to install",
+        "fr": "pnpm 12.6.0 ajoute autoDedupe à l'install"
+      },
+      "anchor": "pnpm-12-6-0",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "Changesets v3: 88% menos peso de instalación",
+        "en": "Changesets v3: 88% smaller install",
+        "fr": "Changesets v3 : installation 88% plus légère"
+      },
+      "anchor": "changesets-v3",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "CloudWatch Omni GA: OTel multi-cloud",
+        "en": "CloudWatch Omni GA: multi-cloud OTel",
+        "fr": "CloudWatch Omni GA : OTel multi-cloud"
+      },
+      "anchor": "cloudwatch-omni",
+      "icon": "simple-icons:amazonwebservices"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "next-og-rce",
+      "updates": [
+        {
+          "id": "next-og-rce",
+          "tag": "breaking",
+          "date": "22 Sep 2026",
+          "title": {
+            "es": "Next.js: RCE crítico en next/og ImageResponse (CVSS 9.5)",
+            "en": "Next.js: critical RCE in next/og ImageResponse (CVSS 9.5)",
+            "fr": "Next.js : RCE critique dans next/og ImageResponse (CVSS 9.5)"
+          },
+          "body_html": {
+            "es": "<p>La implementación Node de <code>ImageResponse</code> en <code>next/og</code> arrastra una vulnerabilidad upstream: si metés valores controlados por el atacante dentro del contenido, atributos o estilos de un SVG que después renderizás como imagen, terminás con <strong>ejecución remota de código</strong>. Afecta de <code>16.2.0</code> hasta antes de <code>16.3.6</code>, con backport en <code>15.5.26</code>. La implementación Edge no está afectada, y si no pasás input del usuario al SVG tampoco. Ojo con este CVE: si tenés una ruta de OG images con <code>searchParams</code>, actualizá YA — y mientras tanto sanitizá o eliminá ese passthrough.</p>",
+            "en": "<p>The Node implementation of <code>ImageResponse</code> in <code>next/og</code> inherits an upstream vulnerability: pass attacker-controlled values into SVG content, attributes or styles during image generation and you get <strong>remote code execution</strong>. It affects <code>16.2.0</code> up to <code>16.3.6</code>, with a backport in <code>15.5.26</code>. The Edge implementation is not affected, nor are apps that never forward user input into the SVG. If you have an OG image route reading <code>searchParams</code>, patch now — and drop or sanitize that passthrough in the meantime.</p>",
+            "fr": "<p>L'implémentation Node d'<code>ImageResponse</code> dans <code>next/og</code> hérite d'une vulnérabilité amont : injecter des valeurs contrôlées par l'attaquant dans le contenu, les attributs ou les styles d'un SVG lors de la génération d'image mène à une <strong>exécution de code à distance</strong>. Versions <code>16.2.0</code> jusqu'à <code>16.3.6</code>, avec backport en <code>15.5.26</code>. L'implémentation Edge n'est pas concernée. Si vous avez une route d'images OG lisant <code>searchParams</code>, patchez immédiatement.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vercel/next.js/security/advisories/GHSA-vcvr-r3jv-pc5j",
+            "label": "github.com/vercel/next.js"
+          }
+        },
+        {
+          "id": "node-26-10-0",
+          "tag": "release",
+          "date": "22 Sep 2026",
+          "title": {
+            "es": "Node.js 26.10.0: parsePKCS12, util.throttle y sockets entre threads",
+            "en": "Node.js 26.10.0: parsePKCS12, util.throttle and cross-thread sockets",
+            "fr": "Node.js 26.10.0 : parsePKCS12, util.throttle et sockets inter-threads"
+          },
+          "body_html": {
+            "es": "<p>Tanda gorda de semver-minor: <code>crypto.parsePKCS12()</code> para leer bundles <code>.p12</code> sin shell-out a OpenSSL, <code>util.throttle()</code> y <code>util.markPromiseAsHandled()</code> en core, <code>fs.openAsBlobSync</code>, y el que más me gusta: <code>net.BoundSocket</code> ahora se puede mandar a <em>worker threads</em> y child processes, así que podés repartir accept() entre workers sin trucos de <code>cluster</code>. Además <code>perf_hooks</code> suma <code>SlidingWindowHistogram</code> — latencias p99 en ventana móvil sin librería externa. Golazo para la DX.</p>",
+            "en": "<p>A heavy semver-minor batch: <code>crypto.parsePKCS12()</code> to read <code>.p12</code> bundles without shelling out to OpenSSL, <code>util.throttle()</code> and <code>util.markPromiseAsHandled()</code> in core, <code>fs.openAsBlobSync</code>, and the best one: <code>net.BoundSocket</code> can now be sent to worker threads and child processes, so you can spread accept() across workers without <code>cluster</code> tricks. <code>perf_hooks</code> also gains <code>SlidingWindowHistogram</code> — rolling-window p99 latencies with no external library.</p>",
+            "fr": "<p>Grosse fournée semver-minor : <code>crypto.parsePKCS12()</code> pour lire des bundles <code>.p12</code> sans passer par OpenSSL, <code>util.throttle()</code> et <code>util.markPromiseAsHandled()</code> dans le core, <code>fs.openAsBlobSync</code>, et surtout <code>net.BoundSocket</code> transmissible aux worker threads et child processes. <code>perf_hooks</code> gagne aussi <code>SlidingWindowHistogram</code> pour des latences p99 en fenêtre glissante.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nodejs/node/releases/tag/v26.10.0",
+            "label": "github.com/nodejs/node"
+          }
+        },
+        {
+          "id": "openbao-recovery-timing",
+          "tag": "security",
+          "date": "22 Sep 2026",
+          "title": {
+            "es": "OpenBao: el recovery token se filtra por timing attack (CVSS 9.1)",
+            "en": "OpenBao: recovery token leaks via timing attack (CVSS 9.1)",
+            "fr": "OpenBao : le recovery token fuit par timing attack (CVSS 9.1)"
+          },
+          "body_html": {
+            "es": "<p>Corriendo en <em>recovery mode</em> —el modo más privilegiado que tiene— OpenBao comparaba el recovery token sin tiempo constante. Un atacante puede extraerlo carácter a carácter y después leer o modificar datos del vault. Parcheado en <code>v2.6.0</code>. En la misma tanda salieron tres más: escalada de privilegios vía wildcards en políticas templated (7.5), LIST que saltea una deny policy más estricta (6.0) y el agente escribiendo secretos a stdout (2.4). Si tenés OpenBao en producción, esta es tu tarde.</p>",
+            "en": "<p>Running in <em>recovery mode</em> — its most privileged state — OpenBao compared the single recovery token without constant time. An attacker can extract it and then read or modify vault data. Patched in <code>v2.6.0</code>. Three more shipped the same day: privilege escalation via wildcards in templated policies (7.5), LIST skipping a stricter deny policy (6.0), and the agent writing secrets to stdout (2.4).</p>",
+            "fr": "<p>En <em>recovery mode</em> — son état le plus privilégié — OpenBao comparait le recovery token sans temps constant. Un attaquant peut l'extraire puis lire ou modifier les données du vault. Corrigé en <code>v2.6.0</code>. Trois autres avis le même jour : escalade de privilèges via wildcards (7.5), LIST contournant une deny policy (6.0), et l'agent écrivant des secrets sur stdout (2.4).</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-34fc-gh42-pj53",
+            "label": "github.com/advisories"
+          }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "deno-2-9-7",
+      "updates": [
+        {
+          "id": "deno-2-9-7",
+          "tag": "patch",
+          "date": "17 Sep 2026",
+          "title": {
+            "es": "Deno 2.9.7: traceparent case-insensitive y CA stores respetados",
+            "en": "Deno 2.9.7: case-insensitive traceparent and honored CA stores",
+            "fr": "Deno 2.9.7 : traceparent insensible à la casse et CA stores respectés"
+          },
+          "body_html": {
+            "es": "<p>Patch chico pero con dos arreglos que duelen si te tocan: <code>Deno.serve</code> ahora extrae <code>traceparent</code> sin importar el casing del header —si tu gateway manda <code>TraceParent</code>, tu traza distribuida dejaba de encadenarse en silencio— y <code>deno audit</code> por fin honra los CA stores configurados, necesario detrás de proxy corporativo. También arregla completions de bash/zsh y el doble dash antes del entrypoint.</p>",
+            "en": "<p>Small patch with two fixes that hurt when they hit you: <code>Deno.serve</code> now extracts <code>traceparent</code> regardless of header casing — if your gateway sends <code>TraceParent</code>, your distributed trace silently stopped chaining — and <code>deno audit</code> finally honors configured CA stores, which matters behind a corporate proxy. Also fixes bash/zsh completions and the double dash before the entrypoint.</p>",
+            "fr": "<p>Petit patch avec deux correctifs sensibles : <code>Deno.serve</code> extrait désormais <code>traceparent</code> quelle que soit la casse de l'en-tête, et <code>deno audit</code> respecte enfin les CA stores configurés, indispensable derrière un proxy d'entreprise. Corrige aussi les complétions bash/zsh.</p>"
+          },
+          "source": {
+            "url": "https://github.com/denoland/deno/releases/tag/v2.9.7",
+            "label": "github.com/denoland/deno"
+          }
+        },
+        {
+          "id": "workerd-20260923",
+          "tag": "minor",
+          "date": "23 Sep 2026",
+          "title": {
+            "es": "workerd v1.20260923.1: el runtime de Cloudflare sigue con release diario",
+            "en": "workerd v1.20260923.1: Cloudflare's runtime keeps its daily cadence",
+            "fr": "workerd v1.20260923.1 : le runtime Cloudflare garde sa cadence quotidienne"
+          },
+          "body_html": {
+            "es": "<p>El runtime open source detrás de Cloudflare Workers publicó otro build diario. Si fijás <code>compatibility_date</code> en tu <code>wrangler.jsonc</code>, acordate de que ese pin es exactamente lo que te aísla de estos cambios: el runtime avanza todos los días, tu worker no. Revisá el diff antes de mover la fecha.</p>",
+            "en": "<p>The open-source runtime behind Cloudflare Workers shipped another daily build. If you pin <code>compatibility_date</code> in your <code>wrangler.jsonc</code>, remember that pin is exactly what isolates you from these changes: the runtime moves every day, your worker does not. Read the diff before bumping the date.</p>",
+            "fr": "<p>Le runtime open source derrière Cloudflare Workers publie un nouveau build quotidien. Si vous épinglez <code>compatibility_date</code> dans <code>wrangler.jsonc</code>, ce pin est précisément ce qui vous isole de ces changements. Lisez le diff avant de bouger la date.</p>"
+          },
+          "source": {
+            "url": "https://github.com/cloudflare/workerd/releases/tag/v1.20260923.1",
+            "label": "github.com/cloudflare/workerd"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "fastify-http2-trailer-dos",
+      "updates": [
+        {
+          "id": "fastify-http2-trailer-dos",
+          "tag": "security",
+          "date": "17 Sep 2026",
+          "title": {
+            "es": "Fastify: un request HTTP/2 con trailers voltea el proceso",
+            "en": "Fastify: one HTTP/2 request with trailers kills the process",
+            "fr": "Fastify : une requête HTTP/2 avec trailers tue le process"
+          },
+          "body_html": {
+            "es": "<p>Si una ruta registra un trailer con <code>reply.trailer()</code> y se sirve sobre HTTP/2, Fastify agrega incondicionalmente <code>Transfer-Encoding: chunked</code> —prohibido en HTTP/2— y Node tira <code>ERR_HTTP2_INVALID_CONNECTION_HEADERS</code>. La excepción no se captura, escala a <code>uncaughtException</code> y <strong>termina el proceso</strong>. Un solo request sin autenticar tira todas las requests en vuelo. Corregido en la línea 6.0 alpha; si usás trailers en v5, revisá tu versión.</p>",
+            "en": "<p>If a route registers a trailer via <code>reply.trailer()</code> and is served over HTTP/2, Fastify unconditionally adds <code>Transfer-Encoding: chunked</code> — forbidden on HTTP/2 — and Node throws <code>ERR_HTTP2_INVALID_CONNECTION_HEADERS</code>. The exception is never caught, escalates to <code>uncaughtException</code> and <strong>terminates the process</strong>. One unauthenticated request drops every in-flight request. Fixed in the 6.0 alpha line.</p>",
+            "fr": "<p>Si une route enregistre un trailer via <code>reply.trailer()</code> et est servie en HTTP/2, Fastify ajoute inconditionnellement <code>Transfer-Encoding: chunked</code>, interdit en HTTP/2, et Node lève <code>ERR_HTTP2_INVALID_CONNECTION_HEADERS</code>. L'exception non capturée devient un <code>uncaughtException</code> et <strong>termine le process</strong>. Corrigé dans la ligne 6.0 alpha.</p>"
+          },
+          "source": {
+            "url": "https://github.com/fastify/fastify/releases/tag/v6.0.0-alpha.4",
+            "label": "github.com/fastify/fastify"
+          }
+        },
+        {
+          "id": "traefik-basicauth-oracle",
+          "tag": "notable",
+          "date": "22 Sep 2026",
+          "title": {
+            "es": "Traefik: el singleflight de BasicAuth reintrodujo un oráculo de enumeración",
+            "en": "Traefik: BasicAuth singleflight reintroduced an enumeration oracle",
+            "fr": "Traefik : le singleflight de BasicAuth réintroduit un oracle d'énumération"
+          },
+          "body_html": {
+            "es": "<p>Caso de estudio precioso de cómo una optimización rompe seguridad. Traefik coalesce chequeos concurrentes de credenciales con un <code>singleflight.Group</code> para no hashear la misma password mil veces. Desde <code>3.6.11</code> la clave de deduplicación dependía del <strong>estado del servidor</strong>: un usuario inexistente colapsaba a una clave compartida (rápido), uno existente calculaba su propio hash (lento). Resultado: oráculo de timing para enumerar usuarios sin autenticarse. Arreglado en <code>3.7.13</code>. Moraleja: una cache cuya clave depende de datos secretos <em>es</em> un canal lateral.</p>",
+            "en": "<p>A beautiful case study in an optimization breaking security. Traefik coalesces concurrent credential checks through a <code>singleflight.Group</code> to avoid hashing the same password many times. Since <code>3.6.11</code> the dedup key depended on <strong>server state</strong>: a non-existent username collapsed onto one shared key (fast) while a configured one computed its own hash (slow). Result: an unauthenticated timing oracle for username enumeration. Fixed in <code>3.7.13</code>. The lesson: a cache whose key depends on secret data <em>is</em> a side channel.</p>",
+            "fr": "<p>Belle étude de cas d'une optimisation qui casse la sécurité. Traefik regroupe les vérifications concurrentes via un <code>singleflight.Group</code>. Depuis <code>3.6.11</code> la clé de déduplication dépendait de l'<strong>état du serveur</strong> : un utilisateur inexistant partageait une clé (rapide), un utilisateur existant calculait son propre hash (lent). D'où un oracle temporel d'énumération non authentifié. Corrigé en <code>3.7.13</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-8fcf-v89g-xpg6",
+            "label": "github.com/advisories"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "valkey-9-2-rc1",
+      "updates": [
+        {
+          "id": "valkey-9-2-rc1",
+          "tag": "beta",
+          "date": "16 Sep 2026",
+          "title": {
+            "es": "Valkey 9.2.0-rc1: snapshots RDB sin fork y ACL DIGEST",
+            "en": "Valkey 9.2.0-rc1: forkless RDB snapshots and ACL DIGEST",
+            "fr": "Valkey 9.2.0-rc1 : snapshots RDB sans fork et ACL DIGEST"
+          },
+          "body_html": {
+            "es": "<p>El RC trae la feature que muchos esperábamos: <strong>snapshots RDB sin fork</strong>, opt-in vía <code>forkless-infrastructure-enabled</code> y <code>bgsave-default-method</code>, con campos nuevos en <code>INFO persistence</code> reportando método y progreso. Adiós al pico de memoria copy-on-write en instancias grandes. Suma <code>ACL DIGEST</code> para verificar qué reglas quedaron aplicadas tras un <code>ACL LOAD</code>, y los comandos de stream <code>XACKDEL</code>/<code>XDELEX</code> con modos <code>KEEPREF</code>, <code>DELREF</code> y <code>ACKED</code>. Urgencia de upgrade: baja, es un RC.</p>",
+            "en": "<p>The RC brings the feature many were waiting for: <strong>forkless RDB snapshots</strong>, opt-in via <code>forkless-infrastructure-enabled</code> and <code>bgsave-default-method</code>, with new <code>INFO persistence</code> fields reporting method and progress. No more copy-on-write memory spikes on large instances. It also adds <code>ACL DIGEST</code> to verify which rules an <code>ACL LOAD</code> actually applied, plus the <code>XACKDEL</code>/<code>XDELEX</code> stream commands with <code>KEEPREF</code>, <code>DELREF</code> and <code>ACKED</code> modes. Upgrade urgency: low, it is an RC.</p>",
+            "fr": "<p>Le RC apporte les <strong>snapshots RDB sans fork</strong>, opt-in via <code>forkless-infrastructure-enabled</code> et <code>bgsave-default-method</code>, avec de nouveaux champs <code>INFO persistence</code>. Fini les pics mémoire copy-on-write sur les grosses instances. Ajoute aussi <code>ACL DIGEST</code> et les commandes de stream <code>XACKDEL</code>/<code>XDELEX</code>. Urgence de mise à jour : faible.</p>"
+          },
+          "source": {
+            "url": "https://github.com/valkey-io/valkey/releases/tag/9.2.0-rc1",
+            "label": "github.com/valkey-io/valkey"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloudwatch-omni",
+      "updates": [
+        {
+          "id": "cloudwatch-omni",
+          "tag": "ga",
+          "date": "23 Sep 2026",
+          "title": {
+            "es": "Amazon CloudWatch Omni GA: OpenTelemetry multi-cloud",
+            "en": "Amazon CloudWatch Omni GA: multi-cloud OpenTelemetry",
+            "fr": "Amazon CloudWatch Omni GA : OpenTelemetry multi-cloud"
+          },
+          "body_html": {
+            "es": "<p>AWS llevó a GA una plataforma de observabilidad que centraliza telemetría entre cuentas, regiones, Azure y otros proveedores sobre OpenTelemetry, con descubrimiento automático de servicios y mapeo de dependencias. Lo interesante para backend: extensiones locales para VS Code, Cursor y Kiro que funcionan <strong>sin cuenta de AWS</strong>, y observabilidad de agentes que instrumenta cada prompt, llamada al modelo e invocación de tool. Arranca en N. Virginia, Oregon e Irlanda.</p>",
+            "en": "<p>AWS took to GA an observability platform that centralizes telemetry across accounts, regions, Azure and other providers on top of OpenTelemetry, with automatic service discovery and dependency mapping. The interesting part for backend folks: local VS Code, Cursor and Kiro extensions that work <strong>without an AWS account</strong>, and agent observability instrumenting every prompt, model call and tool invocation. Launching in N. Virginia, Oregon and Ireland.</p>",
+            "fr": "<p>AWS met en GA une plateforme d'observabilité qui centralise la télémétrie entre comptes, régions, Azure et d'autres fournisseurs via OpenTelemetry, avec découverte automatique des services. Point notable : des extensions locales VS Code, Cursor et Kiro fonctionnant <strong>sans compte AWS</strong>. Disponible en N. Virginia, Oregon et Irlande.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-cloudwatch-omni-ai/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "google-ax-orchestrator",
+          "tag": "notable",
+          "date": "22 Sep 2026",
+          "title": {
+            "es": "Google libera AX, un orquestador estilo Kubernetes para agentes",
+            "en": "Google open-sources AX, a Kubernetes-style orchestrator for agents",
+            "fr": "Google ouvre AX, un orchestrateur façon Kubernetes pour agents"
+          },
+          "body_html": {
+            "es": "<p>Google publicó AX en abierto: un orquestador para cargas de agentes autónomos construido sobre primitivas al estilo Kubernetes. Más allá del hype de agentes, lo que vale mirar acá es el patrón: reconciliación declarativa aplicada a workloads no deterministas. Si te toca diseñar scheduling de tareas de larga duración, el modelo de recursos es la parte que te va a servir aunque nunca corras un agente.</p>",
+            "en": "<p>Google open-sourced AX: an orchestrator for autonomous agent workloads built on Kubernetes-style primitives. Past the agent hype, the pattern is what deserves a look: declarative reconciliation applied to non-deterministic workloads. If you design scheduling for long-running tasks, the resource model is the part worth stealing even if you never run an agent.</p>",
+            "fr": "<p>Google a ouvert AX : un orchestrateur pour charges d'agents autonomes bâti sur des primitives façon Kubernetes. Au-delà du battage médiatique, le motif mérite le détour : réconciliation déclarative appliquée à des charges non déterministes. Le modèle de ressources reste utile même sans agents.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/09/google-ax-orchestrator/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "unleash-missing-await",
+      "updates": [
+        {
+          "id": "unleash-missing-await",
+          "tag": "breaking",
+          "date": "22 Sep 2026",
+          "title": {
+            "es": "Un await faltante desactiva por completo un chequeo de permisos (CVSS 7.1)",
+            "en": "A missing await fully disables a permission check (CVSS 7.1)",
+            "fr": "Un await manquant désactive complètement un contrôle de permissions (CVSS 7.1)"
+          },
+          "body_html": {
+            "es": "<p>Este merece que pares cinco minutos. En Unleash, <code>POST /api/admin/segments/strategies</code> declara <code>permission: NONE</code> a nivel de ruta y hace el chequeo a mano con <code>this.accessService.hasPermission()</code>. Le faltaba el <code>await</code>. Como la función es async, la variable siempre recibe una <strong>Promise</strong> — que es truthy — y el <code>if (!hasPermission)</code> nunca dispara. Autorización completamente anulada, más un IDOR cross-project en la misma tanda. Parcheado en <code>8.0.3</code>.</p><p>¿Y sabés por qué pasa esto? Porque TypeScript te deja: <code>Promise&lt;boolean&gt;</code> en un contexto booleano compila sin chistar. La regla que atrapa esto es <code>@typescript-eslint/no-misused-promises</code> con <code>checksConditionals</code>, y su hermana <code>no-floating-promises</code>. Si no las tenés prendidas en tu backend, ponete las pilas: no es un lint cosmético, es tu capa de autorización.</p>",
+            "en": "<p>This one deserves five minutes of your attention. In Unleash, <code>POST /api/admin/segments/strategies</code> declares <code>permission: NONE</code> at the route level and does its own check via <code>this.accessService.hasPermission()</code>. The <code>await</code> was missing. Since the function is async, the variable always receives a <strong>Promise</strong> — which is truthy — so <code>if (!hasPermission)</code> never fires. Authorization fully bypassed, plus a cross-project IDOR in the same batch. Patched in <code>8.0.3</code>.</p><p>And why does this happen? Because TypeScript lets it: a <code>Promise&lt;boolean&gt;</code> in a boolean context compiles without complaint. The rule that catches it is <code>@typescript-eslint/no-misused-promises</code> with <code>checksConditionals</code>, alongside <code>no-floating-promises</code>. If those are off in your backend, turn them on — this is not cosmetic linting, this is your authorization layer.</p>",
+            "fr": "<p>Celui-ci mérite cinq minutes. Dans Unleash, <code>POST /api/admin/segments/strategies</code> déclare <code>permission: NONE</code> au niveau de la route et effectue son propre contrôle via <code>this.accessService.hasPermission()</code>. Le <code>await</code> manquait. La fonction étant async, la variable reçoit toujours une <strong>Promise</strong> truthy, et le <code>if</code> ne se déclenche jamais. Autorisation entièrement contournée, plus un IDOR inter-projets. Corrigé en <code>8.0.3</code>.</p><p>TypeScript le permet : une <code>Promise&lt;boolean&gt;</code> en contexte booléen compile sans broncher. La règle qui l'attrape est <code>@typescript-eslint/no-misused-promises</code> avec <code>checksConditionals</code>, aux côtés de <code>no-floating-promises</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-72h8-wp98-7hch",
+            "label": "github.com/advisories"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "pnpm-12-6-0",
+      "updates": [
+        {
+          "id": "pnpm-12-6-0",
+          "tag": "release",
+          "date": "22 Sep 2026",
+          "title": {
+            "es": "pnpm 12.6.0: autoDedupe, node_modules relocatable y --save-types",
+            "en": "pnpm 12.6.0: autoDedupe, relocatable node_modules and --save-types",
+            "fr": "pnpm 12.6.0 : autoDedupe, node_modules relocalisable et --save-types"
+          },
+          "body_html": {
+            "es": "<p>Tres cosas que te cambian el día. <code>autoDedupe</code> deduplica versiones compatibles durante el install (los installs frozen no tocan el lockfile, tranquilo). En macOS y Linux, <code>node_modules</code> y los bin shims ahora <strong>sobreviven a que muevas o copies el proyecto</strong>: el primer comando detecta la nueva ubicación y reescribe. Y <code>pnpm add --save-types</code> agrega el <code>@types/*</code> correspondiente a devDependencies, salteando paquetes que ya traen tipos. Encima, los manifests <code>package.yaml</code> por fin se pueden editar desde la CLI preservando comentarios y orden de claves.</p>",
+            "en": "<p>Three things that change your day. <code>autoDedupe</code> deduplicates compatible versions during install (frozen installs leave the lockfile untouched). On macOS and Linux, <code>node_modules</code> and bin shims now <strong>survive moving or copying the project</strong>: the first command detects the new location and records it. And <code>pnpm add --save-types</code> saves the matching <code>@types/*</code> into devDependencies, skipping packages that bundle their own. On top of that, <code>package.yaml</code> manifests can finally be edited from the CLI with comments and key order preserved.</p>",
+            "fr": "<p>Trois nouveautés marquantes. <code>autoDedupe</code> déduplique les versions compatibles pendant l'install (les installs frozen ne touchent pas au lockfile). Sur macOS et Linux, <code>node_modules</code> et les bin shims <strong>survivent au déplacement du projet</strong>. Et <code>pnpm add --save-types</code> enregistre le <code>@types/*</code> correspondant. Les manifests <code>package.yaml</code> sont enfin éditables depuis la CLI.</p>"
+          },
+          "source": {
+            "url": "https://github.com/pnpm/pnpm/releases/tag/v12.6.0",
+            "label": "github.com/pnpm/pnpm"
+          }
+        },
+        {
+          "id": "changesets-v3",
+          "tag": "breaking",
+          "date": "22 Sep 2026",
+          "title": {
+            "es": "Changesets v3: peer deps con patch bump, ESM-only y 88% menos peso",
+            "en": "Changesets v3: patch bumps for peer dependents, ESM-only, 88% lighter",
+            "fr": "Changesets v3 : patch bump pour les peer deps, ESM-only, 88% plus léger"
+          },
+          "body_html": {
+            "es": "<p>El cambio de comportamiento más importante: actualizar una peer dependency ahora da <strong>patch bump</strong> a los dependientes en vez de major. Años de reclamos de la comunidad por versionado inflado, resueltos. Además todo pasó a ESM (requiere Node 22.11+, pnpm 10, npm 10.9 o Yarn 4.5.2) y la limpieza bajó el install de 16.1MB a 2.1MB y de 95 a 39 dependencias. Nuevos comandos <code>pack</code> y <code>publish-plan</code>, y Prettier dejó de venir empaquetado: ahora lo detecta en tu proyecto.</p>",
+            "en": "<p>The headline behavioral change: a peer dependency update now gives dependents a <strong>patch bump</strong> instead of a major. Years of community complaints about inflated versioning, resolved. Everything moved to ESM too (requires Node 22.11+, pnpm 10, npm 10.9 or Yarn 4.5.2) and the cleanup cut install size from 16.1MB to 2.1MB and dependencies from 95 to 39. New <code>pack</code> and <code>publish-plan</code> commands, and Prettier is no longer bundled — it is detected in your project instead.</p>",
+            "fr": "<p>Le changement de comportement majeur : une mise à jour de peer dependency donne désormais un <strong>patch bump</strong> aux dépendants au lieu d'un major. Tout est passé en ESM (Node 22.11+, pnpm 10, npm 10.9 ou Yarn 4.5.2) et le nettoyage fait passer l'install de 16,1 Mo à 2,1 Mo et les dépendances de 95 à 39. Nouvelles commandes <code>pack</code> et <code>publish-plan</code>.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/09/changesets-v3-release/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "turborepo-2-11-3",
+          "tag": "patch",
+          "date": "22 Sep 2026",
+          "title": {
+            "es": "Turborepo 2.11.3: limpieza interna y crates separados",
+            "en": "Turborepo 2.11.3: internal cleanup and split crates",
+            "fr": "Turborepo 2.11.3 : nettoyage interne et crates séparés"
+          },
+          "body_html": {
+            "es": "<p>Release de mantenimiento, casi todo refactor: se extrajo <code>turborepo-tracing</code> a su propio crate, se movió el spawning de procesos hijos a <code>turborepo-process</code>, se removieron la cache de compilación experimental de Cargo y las Run boundaries. Nada que cambie tu <code>turbo.json</code>, pero vale registrar la dirección: están desacoplando el binario en piezas antes del próximo minor.</p>",
+            "en": "<p>Maintenance release, mostly refactor: <code>turborepo-tracing</code> extracted into its own crate, child-process spawning relocated to <code>turborepo-process</code>, and both the experimental Cargo compile cache and Run boundaries removed. Nothing changes in your <code>turbo.json</code>, but the direction is worth noting: they are decoupling the binary into pieces ahead of the next minor.</p>",
+            "fr": "<p>Version de maintenance, surtout du refactor : <code>turborepo-tracing</code> extrait dans son propre crate, le spawning des processus enfants déplacé vers <code>turborepo-process</code>, et suppression du cache de compilation Cargo expérimental. Rien ne change dans votre <code>turbo.json</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vercel/turborepo/releases/tag/v2.11.3",
+            "label": "github.com/vercel/turborepo"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Dos de los bugs de hoy son el mismo patrón: una optimización que introduce un canal lateral. El singleflight de Traefik cachea por clave derivada del estado del servidor, y OpenBao compara tokens sin tiempo constante. Cuando el camino rápido depende de un secreto, el atacante mide el reloj.",
+      "en": "Two of today's bugs are the same pattern: an optimization introducing a side channel. Traefik's singleflight caches under a key derived from server state, and OpenBao compares tokens without constant time. When the fast path depends on a secret, the attacker measures the clock.",
+      "fr": "Deux bugs du jour relèvent du même motif : une optimisation qui introduit un canal auxiliaire. Le singleflight de Traefik met en cache sous une clé dérivée de l'état du serveur, et OpenBao compare les tokens sans temps constant."
+    },
+    {
+      "es": "El await faltante de Unleash y el RCE de next/og comparten raíz: confiar en que el lenguaje o el framework te va a frenar. TypeScript acepta una Promise en un if, y next/og acepta lo que le pases al SVG. El tipo no es la validación, y el framework no es tu borde de confianza.",
+      "en": "Unleash's missing await and the next/og RCE share a root cause: trusting the language or the framework to stop you. TypeScript accepts a Promise inside an if, and next/og accepts whatever you hand its SVG. The type is not the validation, and the framework is not your trust boundary.",
+      "fr": "L'await manquant d'Unleash et le RCE de next/og partagent la même racine : faire confiance au langage ou au framework pour vous arrêter. TypeScript accepte une Promise dans un if, et next/og accepte ce qu'on passe à son SVG. Le type n'est pas la validation."
+    },
+    {
+      "es": "El tooling de monorepo se está adelgazando en serio: Changesets bajó 88% el install y 56 dependencias, y pnpm sumó deduplicación automática. Menos árbol de dependencias es menos superficie de ataque en supply chain — la misma semana en la que un RCE upstream se filtró hasta next/og.",
+      "en": "Monorepo tooling is getting seriously leaner: Changesets cut install size by 88% and dropped 56 dependencies, while pnpm added automatic deduplication. A smaller dependency tree is less supply-chain attack surface — in the same week an upstream RCE leaked all the way into next/og.",
+      "fr": "L'outillage monorepo s'allège sérieusement : Changesets réduit l'install de 88% et supprime 56 dépendances, tandis que pnpm ajoute la déduplication automatique. Un arbre de dépendances plus petit, c'est moins de surface d'attaque supply chain."
+    }
+  ]
+}

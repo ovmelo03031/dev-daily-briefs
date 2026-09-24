@@ -1,0 +1,125 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 24 Sep 2026",
+    "en": "Gentleman Releases — 24 Sep 2026",
+    "fr": "Gentleman Releases — 24 Sep 2026"
+  },
+  "description": {
+    "es": "Releases del dia en proyectos de Gentleman-Programming",
+    "en": "Today's releases from Gentleman-Programming projects",
+    "fr": "Sorties du jour des projets Gentleman-Programming"
+  },
+  "pubDate": "2026-09-24",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "engram v2.1.0 — reemplazo atomico de observaciones y locks de SQLite que cortan el SQLITE_BUSY_SNAPSHOT",
+        "en": "engram v2.1.0 — atomic observation replacement plus SQLite write locks that kill SQLITE_BUSY_SNAPSHOT",
+        "fr": "engram v2.1.0 — remplacement atomique des observations et verrous SQLite contre SQLITE_BUSY_SNAPSHOT"
+      },
+      "anchor": "engram-v2-1-0",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "engram: el paquete Pi gentle-engram 0.1.15 sale aparte del core y hay que instalarlo a mano",
+        "en": "engram: the Pi package gentle-engram 0.1.15 ships separately from the core tag and needs a manual install",
+        "fr": "engram : le paquet Pi gentle-engram 0.1.15 est publie separement du core et s'installe manuellement"
+      },
+      "anchor": "engram-pi-0-1-15",
+      "icon": "simple-icons:npm"
+    },
+    {
+      "text": {
+        "es": "gentle-ai v3.7.0 — modelos de reviewer configurables en Claude Code, OpenCode y Codex",
+        "en": "gentle-ai v3.7.0 — configurable reviewer models across Claude Code, OpenCode and Codex",
+        "fr": "gentle-ai v3.7.0 — modeles de reviewer configurables sur Claude Code, OpenCode et Codex"
+      },
+      "anchor": "gentle-ai-v3-7-0",
+      "icon": "simple-icons:github"
+    }
+  ],
+  "tools": [
+    {
+      "id": "engram",
+      "name": "engram",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-engram",
+      "icon_emoji": "🧠",
+      "anchor": "engram",
+      "version": "v2.1.0",
+      "updates": [
+        {
+          "id": "engram-v2-1-0",
+          "tag": "feature",
+          "title": {
+            "es": "v2.1.0 — Integridad de datos local y convergencia de sync",
+            "en": "v2.1.0 — Local data integrity and sync convergence",
+            "fr": "v2.1.0 — Integrite des donnees locales et convergence de la synchro"
+          },
+          "body_html": {
+            "es": "<p>Primer minor arriba de la base v2 y viene cargado por el lado de la integridad. Ahora podes hacer find-and-replace literal y atomico sobre observaciones que ya existen, via los contratos validados de MCP y HTTP (#1342): se termino el reescribir la observacion entera para cambiar una linea.</p><p>Lo grande para quien laburaba con sesiones concurrentes: SQLite ahora toma el write lock al arrancar la transaccion, asi que las transacciones read-then-write dejan de explotar con <code>SQLITE_BUSY_SNAPSHOT</code> (#1243), y ademas actualizaron el runtime de SQLite con el fix upstream de reset de WAL (#1308). Ojo con esto igual: el propio release aclara que esto NO vuelve seguro poner la base en un filesystem de red — NFS sigue pudiendo corromperte el WAL (#1292). Base en disco local y backup, punto.</p><p>Sumaron tambien un <code>doctor repair</code> local-only y confirmado para observaciones cuya sesion padre desaparecio, y el diagnostico ahora distingue hallazgos reparables de chequeos meramente informativos (#1268, #1265). Del lado Cloud: uploads de sesiones, observaciones y prompts materializados solo por mutacion, preservando los tombstones de hard-delete locales durante el export (#1312, #1313), y el pull de cambios remotos sigue andando aunque el enrollment bloquee el push (#1309).</p><p>En integraciones: hook nativo de user-prompt para Codex (#1356, #1354), writes de Claude Code atados a su sesion de runtime (#1352) y un adapter declarativo <code>engram setup kimi</code> para Kimi Code CLI (#793). Lo que NO entro: la activacion del adapter en Windows y la verificacion end-to-end del timeout quedan diferidas a la v2.2.0 (#1271).</p>",
+            "en": "<p>The first minor on top of the v2 foundation, and it leans hard on integrity. You can now run atomic literal find-and-replace against existing observations through the validated MCP and HTTP contracts (#1342) — no more rewriting a whole observation to change one line.</p><p>The big one for concurrent sessions: SQLite now acquires the write lock at transaction start, so read-then-write transactions stop failing with <code>SQLITE_BUSY_SNAPSHOT</code> (#1243), and the SQLite runtime was upgraded with the upstream WAL-reset integrity fix (#1308). Caveat straight from the release notes: this does NOT make network filesystems safe — NFS can still corrupt your WAL (#1292). Keep the database on local disk and keep backups.</p><p>There is also a confirmed, local-only <code>doctor repair</code> path for observations whose parent session went missing, and diagnostics now separate repairable findings from purely informational checks (#1268, #1265). On the Cloud side: mutation-only materialized uploads for sessions, observations and prompts, preserving local hard-delete tombstones during export (#1312, #1313), and remote pulls keep working even when enrollment blocks a push (#1309).</p><p>Integrations got a native Codex user-prompt hook command (#1356, #1354), Claude Code writes bound to their runtime session (#1352), and a declarative <code>engram setup kimi</code> adapter for Kimi Code CLI (#793). What did not land: Windows adapter activation and end-to-end timeout verification are deferred to v2.2.0 (#1271).</p>",
+            "fr": "<p>Premier mineur au-dessus de la base v2, tres oriente integrite. Le remplacement litteral atomique sur des observations existantes arrive via les contrats valides MCP et HTTP (#1342) : plus besoin de reecrire toute une observation pour changer une ligne.</p><p>Le point fort pour les sessions concurrentes : SQLite prend desormais le verrou d'ecriture au debut de la transaction, ce qui supprime les echecs <code>SQLITE_BUSY_SNAPSHOT</code> sur les transactions read-then-write (#1243), et le runtime SQLite integre le correctif amont de reset WAL (#1308). Attention : cela ne rend PAS les systemes de fichiers reseau surs — NFS peut toujours corrompre le WAL (#1292). Base sur disque local et sauvegardes.</p><p>S'ajoutent un <code>doctor repair</code> confirme et strictement local pour les observations dont la session parente a disparu, avec un diagnostic qui distingue les elements reparables des simples informations (#1268, #1265). Cote Cloud : uploads materialises uniquement sur mutation pour sessions, observations et prompts, en preservant les tombstones de suppression definitive lors de l'export (#1312, #1313), et le pull distant continue meme si l'enrolement bloque le push (#1309).</p><p>Cote integrations : commande de hook user-prompt native pour Codex (#1356, #1354), ecritures Claude Code liees a leur session runtime (#1352) et adaptateur declaratif <code>engram setup kimi</code> pour Kimi Code CLI (#793). Non inclus : l'activation de l'adaptateur Windows et la verification end-to-end du timeout sont reportees a la v2.2.0 (#1271).</p>"
+          },
+          "date": "23 Sep 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v2.1.0",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        },
+        {
+          "id": "engram-pi-0-1-15",
+          "tag": "fix",
+          "title": {
+            "es": "Pi gentle-engram 0.1.15 — release separado, instalacion manual",
+            "en": "Pi gentle-engram 0.1.15 — separate release, manual install",
+            "fr": "Pi gentle-engram 0.1.15 — publication separee, installation manuelle"
+          },
+          "body_html": {
+            "es": "<p>Ojo con este detalle porque se pasa facil: el tag core v2.1.0 <strong>sigue pineando Pi 0.1.14</strong> en su comando de setup bundleado. El paquete <code>gentle-engram</code> 0.1.15 se publico aparte, despues del tag core, y no viene en los archives de v2.1.0.</p><p>Lo que trae el 0.1.15 es manejo de timeouts de transporte para el #1272: retries de lectura acotados, un presupuesto de timeout de escritura que banca writes mas lentos, y outcomes explicitos de «desconocido» cuando una escritura pudo haberse aplicado igual. Esto ultimo es la parte importante — no reintenta en silencio escrituras inciertas, que es exactamente lo que no queres en una base de memoria.</p><p>Si usas Pi: <code>pi install npm:gentle-engram@0.1.15</code> y reinicia Pi.</p>",
+            "en": "<p>Easy detail to miss: the v2.1.0 core tag <strong>still pins Pi 0.1.14</strong> in its bundled setup command. The <code>gentle-engram</code> 0.1.15 package was published separately, after the core tag, and is not part of the v2.1.0 archives.</p><p>What 0.1.15 brings is transport timeout handling for #1272: bounded read retries, a write timeout budget that accommodates slower writes, and explicit unknown outcomes when a write may already have been applied. That last part is the important one — it does not silently retry uncertain writes, which is exactly what you do not want in a memory store.</p><p>If you use Pi: <code>pi install npm:gentle-engram@0.1.15</code>, then restart Pi.</p>",
+            "fr": "<p>Detail facile a rater : le tag core v2.1.0 <strong>epingle toujours Pi 0.1.14</strong> dans sa commande de setup fournie. Le paquet <code>gentle-engram</code> 0.1.15 a ete publie separement, apres le tag core, et ne fait pas partie des archives v2.1.0.</p><p>La 0.1.15 apporte la gestion des timeouts de transport pour #1272 : retries de lecture bornes, budget de timeout d'ecriture adapte aux ecritures lentes, et resultats explicitement inconnus quand une ecriture a pu deja etre appliquee. Ce dernier point est le plus important : aucun retry silencieux sur une ecriture incertaine, ce qui est exactement ce qu'il faut pour un magasin de memoire.</p><p>Si vous utilisez Pi : <code>pi install npm:gentle-engram@0.1.15</code>, puis redemarrez Pi.</p>"
+          },
+          "date": "23 Sep 2026",
+          "source": {
+            "url": "https://www.npmjs.com/package/gentle-engram/v/0.1.15",
+            "label": "npmjs.com/package/gentle-engram"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gentle-ai",
+      "name": "gentle-ai",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-gentle-ai",
+      "icon_emoji": "🎩",
+      "anchor": "gentle-ai",
+      "version": "v3.7.0",
+      "updates": [
+        {
+          "id": "gentle-ai-v3-7-0",
+          "tag": "feature",
+          "title": {
+            "es": "v3.7.0 — Seleccion nativa de modelos de reviewer en tres runtimes",
+            "en": "v3.7.0 — Native reviewer model selection across three runtimes",
+            "fr": "v3.7.0 — Selection native des modeles de reviewer sur trois runtimes"
+          },
+          "body_html": {
+            "es": "<p>Minor que te deja elegir que modelo corre cada agente y cada reviewer nativo. Claude Code ahora guarda y aplica seis asignaciones de modelo de reviewer; OpenCode expone los modelos <code>general</code> y <code>explore</code> editables; y Codex banca modelos custom para agente ODD y reviewer, presets de GPT-6 incluidos (#4912, issue #4911).</p><p>Lo bueno del diseno: la ejecucion del review mantiene su aislamiento de siempre y, si una asignacion guardada no esta disponible, cae de vuelta a los defaults soportados en lugar de romperse. Los pickers de modelo de Claude y Codex tambien andan bien en terminales cortas ahora.</p><p>Del lado de fixes: cuando el wait del lock de repositorio acotado expiraba pero otro actor ya habia publicado exactamente el mismo par receipt/result inmutable, el replay exacto reportaba un timeout espurio. Ahora revalida y converge (#4910, issue #3239). Autoridad faltante, divergente o corrupta sigue quedandose con el timeout tipado — la politica general de locks no cambio.</p><p>Sin breaking changes: el module path sigue en <code>/v3</code> y el provider contract sigue en 1.2.0. Igual corre <code>gentle-ai sync</code> despues de actualizar para que los assets manejados de model-picker y de agentes Codex queden alineados con el binario. Son 11 commits non-merge y 2 PRs desde la v3.6.1.</p>",
+            "en": "<p>A minor that lets you pick which model runs each native agent and reviewer. Claude Code now saves and applies six reviewer model assignments; OpenCode exposes editable <code>general</code> and <code>explore</code> models; Codex supports custom ODD agent and reviewer models, GPT-6 presets included (#4912, issue #4911).</p><p>The good design call: review execution keeps its existing isolation and falls back to supported defaults when a saved assignment is unavailable, instead of breaking. The Claude and Codex model pickers also behave in shorter terminals now.</p><p>On the fix side: when the bounded repository-lock wait expired but another actor had already published the exact same immutable receipt/result pair, exact replay reported a spurious timeout. It now revalidates and converges (#4910, issue #3239). Missing, divergent or corrupt authority still keeps the typed timeout — the general lock policy is unchanged.</p><p>No breaking changes: the module path stays at <code>/v3</code> and the provider contract stays at 1.2.0. Still run <code>gentle-ai sync</code> after upgrading so the managed model-picker and Codex agent assets match the installed binary. 11 non-merge commits and 2 merged PRs since v3.6.1.</p>",
+            "fr": "<p>Un mineur qui permet de choisir le modele de chaque agent et reviewer natif. Claude Code enregistre et applique six assignations de modele de reviewer ; OpenCode expose les modeles <code>general</code> et <code>explore</code> editables ; Codex accepte des modeles personnalises pour l'agent ODD et le reviewer, presets GPT-6 compris (#4912, issue #4911).</p><p>Bon choix de conception : l'execution du review conserve son isolation et retombe sur les defauts supportes lorsqu'une assignation enregistree est indisponible, au lieu d'echouer. Les selecteurs de modele Claude et Codex fonctionnent aussi dans les terminaux courts.</p><p>Cote correctif : quand l'attente bornee du verrou de depot expirait alors qu'un autre acteur avait deja publie exactement la meme paire receipt/result immuable, le replay exact signalait un timeout errone. Il revalide et converge desormais (#4910, issue #3239). Une autorite manquante, divergente ou corrompue conserve le timeout type — la politique generale de verrous est inchangee.</p><p>Aucun changement cassant : le module path reste en <code>/v3</code> et le contrat provider en 1.2.0. Executez tout de meme <code>gentle-ai sync</code> apres la mise a jour pour aligner les assets manages. 11 commits non-merge et 2 PR depuis la v3.6.1.</p>"
+          },
+          "date": "23 Sep 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v3.7.0",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

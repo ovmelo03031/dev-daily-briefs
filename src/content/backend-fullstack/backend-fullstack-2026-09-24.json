@@ -1,0 +1,328 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 24 Sep 2026",
+    "en": "Backend & Fullstack — 24 Sep 2026",
+    "fr": "Backend & Fullstack — 24 Sep 2026"
+  },
+  "description": {
+    "es": "Elysia con DoS cuadrático en FormData, NestJS 11.2.6 parchea multer, Node 22 LTS trae OpenSSL 3.5.8, Kubernetes parchea cuatro ramas el mismo día y Cloudflare libera 100 TB del cache de 1.1.1.1.",
+    "en": "Elysia hit by a quadratic FormData DoS, NestJS 11.2.6 patches multer, Node 22 LTS ships OpenSSL 3.5.8, Kubernetes patches four branches on the same day, and Cloudflare frees 100 TB from the 1.1.1.1 cache.",
+    "fr": "Elysia touché par un DoS quadratique sur FormData, NestJS 11.2.6 corrige multer, Node 22 LTS embarque OpenSSL 3.5.8, Kubernetes patche quatre branches le même jour et Cloudflare libère 100 To du cache 1.1.1.1."
+  },
+  "pubDate": "2026-09-24",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Elysia < 1.4.29: DoS cuadrático en FormData",
+        "en": "Elysia < 1.4.29: quadratic FormData DoS",
+        "fr": "Elysia < 1.4.29 : DoS quadratique sur FormData"
+      },
+      "anchor": "elysia-dos-cve",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "NestJS 11.2.6 parchea multer (CVE-2026-88932)",
+        "en": "NestJS 11.2.6 patches multer (CVE-2026-88932)",
+        "fr": "NestJS 11.2.6 corrige multer (CVE-2026-88932)"
+      },
+      "anchor": "nest-11-2-6-multer",
+      "icon": "lucide:blocks"
+    },
+    {
+      "text": {
+        "es": "Node 22 LTS: OpenSSL 3.5.8 y Undici 6.28.1",
+        "en": "Node 22 LTS: OpenSSL 3.5.8 and Undici 6.28.1",
+        "fr": "Node 22 LTS : OpenSSL 3.5.8 et Undici 6.28.1"
+      },
+      "anchor": "node-22-23-3",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": {
+        "es": "Cloudflare libera 100 TB del cache DNS",
+        "en": "Cloudflare frees 100 TB from its DNS cache",
+        "fr": "Cloudflare libère 100 To de son cache DNS"
+      },
+      "anchor": "cloudflare-dns-cache",
+      "icon": "simple-icons:cloudflare"
+    },
+    {
+      "text": {
+        "es": "Kubernetes parchea cuatro ramas el mismo día",
+        "en": "Kubernetes patches four branches the same day",
+        "fr": "Kubernetes patche quatre branches le même jour"
+      },
+      "anchor": "k8s-patch-batch",
+      "icon": "simple-icons:kubernetes"
+    },
+    {
+      "text": {
+        "es": "Hono 4.13.9 endurece JWT y AWS Lambda",
+        "en": "Hono 4.13.9 hardens JWT and AWS Lambda",
+        "fr": "Hono 4.13.9 renforce JWT et AWS Lambda"
+      },
+      "anchor": "hono-4-13-9",
+      "icon": "lucide:flame"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "elysia-dos-cve",
+      "updates": [
+        {
+          "id": "elysia-dos-cve",
+          "tag": "security",
+          "date": "23 Sep 2026",
+          "title": {
+            "es": "Elysia: DoS cuadrático al normalizar FormData (CVSS 7.5)",
+            "en": "Elysia: quadratic FormData normalization DoS (CVSS 7.5)",
+            "fr": "Elysia : DoS quadratique à la normalisation de FormData (CVSS 7.5)"
+          },
+          "body_html": {
+            "es": "<p>El normalizador de <code>FormData</code> de Elysia llama a <code>getAll</code> una vez por clave, y cada llamada recorre las <em>n</em> entradas: el costo es <strong>O(n²)</strong>. Cualquier endpoint que acepte <code>multipart/form-data</code> se puede tumbar con un solo request. Afecta a <code>&lt; 1.4.29</code>, <strong>CVSS 7.5</strong> (AV:N/AC:L/PR:N/UI:N, impacto total en disponibilidad). Si servís uploads con Elysia sobre Bun, actualizá YA a <code>1.4.29</code>.</p>",
+            "en": "<p>Elysia's <code>FormData</code> normalizer calls <code>getAll</code> once per key, and each call scans all <em>n</em> entries — the work is <strong>O(n²)</strong>. Any endpoint accepting <code>multipart/form-data</code> can be taken down with a single request. Affects <code>&lt; 1.4.29</code>, <strong>CVSS 7.5</strong> (AV:N/AC:L/PR:N/UI:N, full availability impact). If you serve uploads with Elysia on Bun, upgrade to <code>1.4.29</code> now.</p>",
+            "fr": "<p>Le normaliseur <code>FormData</code> d'Elysia appelle <code>getAll</code> une fois par clé, et chaque appel parcourt les <em>n</em> entrées : le coût est en <strong>O(n²)</strong>. Tout endpoint acceptant <code>multipart/form-data</code> peut tomber avec une seule requête. Concerne <code>&lt; 1.4.29</code>, <strong>CVSS 7.5</strong> (AV:N/AC:L/PR:N/UI:N, disponibilité totalement impactée). Mettez à jour vers <code>1.4.29</code> sans attendre.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-9643-4qgh-g8mx", "label": "github.com/advisories" }
+        },
+        {
+          "id": "nest-11-2-6-multer",
+          "tag": "security",
+          "date": "23 Sep 2026",
+          "title": {
+            "es": "NestJS 11.2.6 sube multer a 2.4.0 y tapa CVE-2026-88932",
+            "en": "NestJS 11.2.6 bumps multer to 2.4.0, closing CVE-2026-88932",
+            "fr": "NestJS 11.2.6 passe multer en 2.4.0 et corrige CVE-2026-88932"
+          },
+          "body_html": {
+            "es": "<p>La línea de mantenimiento <code>11.x</code> sube <code>multer</code> a <strong>2.4.0</strong> en <code>@nestjs/platform-express</code>, cerrando <strong>CVE-2026-88932</strong> (escrituras huérfanas en disco cuando se aborta un upload). De paso mapea los errores de multer por código en vez de por mensaje — o sea, tu manejo de errores deja de depender de strings frágiles. Si estás en Nest 11 y aceptás archivos, este es el parche del día.</p>",
+            "en": "<p>The <code>11.x</code> maintenance line bumps <code>multer</code> to <strong>2.4.0</strong> inside <code>@nestjs/platform-express</code>, closing <strong>CVE-2026-88932</strong> (orphaned disk writes on aborted uploads). It also maps multer errors by code instead of message, so your error handling stops depending on brittle strings. If you are on Nest 11 and accept files, this is today's patch.</p>",
+            "fr": "<p>La ligne de maintenance <code>11.x</code> passe <code>multer</code> en <strong>2.4.0</strong> dans <code>@nestjs/platform-express</code>, corrigeant <strong>CVE-2026-88932</strong> (écritures disque orphelines sur upload interrompu). Les erreurs multer sont désormais mappées par code plutôt que par message, ce qui libère votre gestion d'erreurs des chaînes fragiles.</p>"
+          },
+          "source": { "url": "https://github.com/nestjs/nest/releases/tag/v11.2.6", "label": "github.com/nestjs" }
+        },
+        {
+          "id": "node-22-23-3",
+          "tag": "release",
+          "date": "23 Sep 2026",
+          "title": {
+            "es": "Node.js 22.23.3 LTS: OpenSSL 3.5.8, Undici 6.28.1 y root certs NSS 3.125",
+            "en": "Node.js 22.23.3 LTS: OpenSSL 3.5.8, Undici 6.28.1 and NSS 3.125 root certs",
+            "fr": "Node.js 22.23.3 LTS : OpenSSL 3.5.8, Undici 6.28.1 et certificats NSS 3.125"
+          },
+          "body_html": {
+            "es": "<p>Patch de la línea LTS activa con el combo pesado de dependencias: <strong>OpenSSL 3.5.8</strong>, <strong>Undici 6.28.1</strong>, certificados raíz de <strong>NSS 3.125</strong>, <code>npm</code> 10.9.9, <code>corepack</code> 0.36.0 e ICU 78.3. Nada de features nuevas, pero es exactamente el tipo de release que tenés que meter en producción sin pensarlo mucho: la superficie criptográfica y de HTTP cliente se actualiza entera de una.</p>",
+            "en": "<p>An active-LTS patch carrying the heavy dependency combo: <strong>OpenSSL 3.5.8</strong>, <strong>Undici 6.28.1</strong>, <strong>NSS 3.125</strong> root certificates, <code>npm</code> 10.9.9, <code>corepack</code> 0.36.0 and ICU 78.3. No new features, but exactly the kind of release you ship to production without overthinking: your crypto and HTTP-client surface gets refreshed in one move.</p>",
+            "fr": "<p>Un patch LTS actif avec un gros lot de dépendances : <strong>OpenSSL 3.5.8</strong>, <strong>Undici 6.28.1</strong>, certificats racine <strong>NSS 3.125</strong>, <code>npm</code> 10.9.9, <code>corepack</code> 0.36.0 et ICU 78.3. Aucune nouveauté fonctionnelle, mais toute la surface crypto et client HTTP est rafraîchie d'un coup.</p>"
+          },
+          "source": { "url": "https://github.com/nodejs/node/releases/tag/v22.23.3", "label": "github.com/nodejs" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "workerd-20260924",
+      "updates": [
+        {
+          "id": "workerd-20260924",
+          "tag": "release",
+          "date": "24 Sep 2026",
+          "title": {
+            "es": "workerd v1.20260924.1 suma env.AI.websearch y grupos de isolate frescos",
+            "en": "workerd v1.20260924.1 adds env.AI.websearch and fresh isolate groups",
+            "fr": "workerd v1.20260924.1 ajoute env.AI.websearch et des groupes d'isolats frais"
+          },
+          "body_html": {
+            "es": "<p>El runtime de Cloudflare Workers expone <code>env.AI.websearch</code> como binding nativo, arranca con grupos de isolate frescos cuando están disponibles y arregla el <code>tee()</code> de un body nativo con una lectura abandonada en vuelo. También preserva las excepciones del VFS al abrir SQLite — detalle chico pero clave si debuggeás Durable Objects con storage SQL.</p>",
+            "en": "<p>The Cloudflare Workers runtime exposes <code>env.AI.websearch</code> as a native binding, starts with fresh isolate groups when available, and fixes <code>tee()</code> on a native body with an abandoned in-flight read. It also preserves VFS exceptions when opening SQLite — small, but key if you debug Durable Objects backed by SQL storage.</p>",
+            "fr": "<p>Le runtime Cloudflare Workers expose <code>env.AI.websearch</code> comme binding natif, démarre avec des groupes d'isolats frais quand c'est possible et corrige <code>tee()</code> sur un body natif avec une lecture abandonnée en vol. Les exceptions VFS sont aussi préservées à l'ouverture de SQLite.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workerd/releases/tag/v1.20260924.1", "label": "github.com/cloudflare" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "nest-12-1-0",
+      "updates": [
+        {
+          "id": "nest-12-1-0",
+          "tag": "minor",
+          "date": "23 Sep 2026",
+          "title": {
+            "es": "NestJS 12.1.0: middleware transient arreglado y reintentos de Redis en microservices",
+            "en": "NestJS 12.1.0: transient middleware fixed and Redis retries in microservices",
+            "fr": "NestJS 12.1.0 : middleware transient corrigé et reconnexion Redis dans microservices"
+          },
+          "body_html": {
+            "es": "<p>El fix más jugoso: un middleware <em>transient</em> ya no saltea los middlewares siguientes de la cadena. Suma herencia de parámetros opcionales del constructor cuando no se redeclara, nombres de handler de ruta preservados (adiós funciones anónimas en los logs), y en <code>microservices</code> el cliente Redis reintenta después de una conexión fallida y toda request pendiente falla cuando un callback tira excepción.</p>",
+            "en": "<p>The juiciest fix: a <em>transient</em> middleware no longer skips the middlewares that follow it in the chain. It also inherits optional constructor params when the ctor is not redeclared, preserves route handler names (goodbye anonymous functions in logs), and in <code>microservices</code> the Redis client now retries after a failed connect while every pending request fails when a callback throws.</p>",
+            "fr": "<p>Le correctif le plus notable : un middleware <em>transient</em> ne saute plus les middlewares suivants de la chaîne. S'ajoutent l'héritage des paramètres optionnels du constructeur, la préservation des noms de handlers de route, et côté <code>microservices</code> le client Redis réessaie après un échec de connexion.</p>"
+          },
+          "source": { "url": "https://github.com/nestjs/nest/releases/tag/v12.1.0", "label": "github.com/nestjs" }
+        },
+        {
+          "id": "hono-4-13-9",
+          "tag": "patch",
+          "date": "24 Sep 2026",
+          "title": {
+            "es": "Hono 4.13.9: JWT más estricto, linear-router y nueve fixes de AWS Lambda",
+            "en": "Hono 4.13.9: stricter JWT, linear-router and nine AWS Lambda fixes",
+            "fr": "Hono 4.13.9 : JWT plus strict, linear-router et neuf correctifs AWS Lambda"
+          },
+          "body_html": {
+            "es": "<p>El middleware <code>jwt</code> ahora tira <code>JwtTokenInvalid</code> cuando la firma no es base64url válido, en vez de fallar raro más adelante. El <code>linear-router</code> deja de matchear un segmento vacío como parámetro — ojo, eso puede cambiar rutas que hoy resuelven por accidente. Del lado serverless: media types <code>+xml</code> tratados como binarios, query params vacíos preservados y errores descriptivos ante eventos malformados en <code>lambda-edge</code>.</p>",
+            "en": "<p>The <code>jwt</code> middleware now throws <code>JwtTokenInvalid</code> when the signature is not valid base64url, instead of failing oddly further down. The <code>linear-router</code> stops matching an empty path segment as a param — watch out, that can change routes resolving by accident today. On the serverless side: <code>+xml</code> media types treated as binary, empty query params preserved, and descriptive errors on malformed <code>lambda-edge</code> events.</p>",
+            "fr": "<p>Le middleware <code>jwt</code> lève désormais <code>JwtTokenInvalid</code> quand la signature n'est pas du base64url valide. Le <code>linear-router</code> cesse de faire correspondre un segment vide à un paramètre — attention, cela peut modifier des routes qui résolvent par accident. Côté serverless : types <code>+xml</code> traités comme binaires et paramètres de requête vides préservés.</p>"
+          },
+          "source": { "url": "https://github.com/honojs/hono/releases/tag/v4.13.9", "label": "github.com/honojs" }
+        },
+        {
+          "id": "apollo-router-2-16-4-rc",
+          "tag": "beta",
+          "date": "21 Sep 2026",
+          "title": {
+            "es": "Apollo Router 2.16.4-rc.0 entra en release candidate",
+            "en": "Apollo Router 2.16.4-rc.0 enters release candidate",
+            "fr": "Apollo Router 2.16.4-rc.0 passe en release candidate"
+          },
+          "body_html": {
+            "es": "<p>El router de federación GraphQL publica su primer RC de la serie <code>2.16.4</code>. Si tenés un supergraph en producción, es la ventana para correrlo en staging contra tu schema real antes del stable: los RC del router suelen ser la única oportunidad de detectar regresiones de planificación de queries propias de tu federación.</p>",
+            "en": "<p>The GraphQL federation router ships its first RC in the <code>2.16.4</code> series. If you run a supergraph in production, this is the window to exercise it in staging against your real schema before stable: router RCs are usually the only chance to catch query-planning regressions specific to your federation.</p>",
+            "fr": "<p>Le routeur de fédération GraphQL publie sa première RC de la série <code>2.16.4</code>. Si vous exploitez un supergraph en production, c'est la fenêtre pour l'éprouver en staging contre votre schéma réel avant le stable.</p>"
+          },
+          "source": { "url": "https://github.com/apollographql/router/releases/tag/v2.16.4-rc.0", "label": "github.com/apollographql" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "bullmq-rs-1-3-0",
+      "updates": [
+        {
+          "id": "bullmq-rs-1-3-0",
+          "tag": "minor",
+          "date": "22 Sep 2026",
+          "title": {
+            "es": "BullMQ Rust 1.3.0 suma get_dependencies para flows",
+            "en": "BullMQ Rust 1.3.0 adds get_dependencies for flows",
+            "fr": "BullMQ Rust 1.3.0 ajoute get_dependencies pour les flows"
+          },
+          "body_html": {
+            "es": "<p>El port Rust de BullMQ incorpora <code>get_dependencies</code> en <code>Queue</code>, la pieza que faltaba para inspeccionar árboles de jobs padre-hijo desde Rust. Importa más de lo que parece: te deja correr workers Rust contra las mismas colas Redis que tu backend Node sin perder visibilidad de los flows.</p>",
+            "en": "<p>The Rust port of BullMQ gains <code>get_dependencies</code> on <code>Queue</code>, the missing piece for inspecting parent-child job trees from Rust. It matters more than it looks: you can run Rust workers against the same Redis queues as your Node backend without losing flow visibility.</p>",
+            "fr": "<p>Le port Rust de BullMQ gagne <code>get_dependencies</code> sur <code>Queue</code>, la pièce manquante pour inspecter les arbres de jobs parent-enfant depuis Rust, et faire tourner des workers Rust sur les mêmes files Redis que votre backend Node.</p>"
+          },
+          "source": { "url": "https://github.com/taskforcesh/bullmq/releases/tag/vrs1.3.0", "label": "github.com/taskforcesh" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "k8s-patch-batch",
+      "updates": [
+        {
+          "id": "k8s-patch-batch",
+          "tag": "patch",
+          "date": "23 Sep 2026",
+          "title": {
+            "es": "Kubernetes parchea 1.37.1, 1.36.5, 1.35.9 y 1.34.12 el mismo día",
+            "en": "Kubernetes patches 1.37.1, 1.36.5, 1.35.9 and 1.34.12 on the same day",
+            "fr": "Kubernetes patche 1.37.1, 1.36.5, 1.35.9 et 1.34.12 le même jour"
+          },
+          "body_html": {
+            "es": "<p>Cuatro ramas soportadas parchadas en simultáneo, con <code>1.37.1</code> llegando apenas dos días después del <code>1.37.0</code> que trajo la Metrics API estable y el kubelet rootless en beta. El changelog de <code>1.37.1</code> es de tipo <em>Bug or Regression</em> y <em>Failing Test</em>, sin notas de upgrade urgentes. Si ya subiste a 1.37 esta semana, el patch de seguimiento es prácticamente obligatorio.</p>",
+            "en": "<p>Four supported branches patched simultaneously, with <code>1.37.1</code> landing barely two days after <code>1.37.0</code> brought the stable Metrics API and rootless kubelet in beta. The <code>1.37.1</code> changelog is <em>Bug or Regression</em> and <em>Failing Test</em> work, with no urgent upgrade notes. If you already moved to 1.37 this week, the follow-up patch is effectively mandatory.</p>",
+            "fr": "<p>Quatre branches supportées patchées simultanément, <code>1.37.1</code> arrivant à peine deux jours après <code>1.37.0</code> et sa Metrics API stable. Le changelog relève du <em>Bug or Regression</em> sans note de mise à niveau urgente, mais le patch de suivi est de fait obligatoire si vous venez de passer en 1.37.</p>"
+          },
+          "source": { "url": "https://github.com/kubernetes/kubernetes/releases/tag/v1.37.1", "label": "github.com/kubernetes" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "cloudflare-dns-cache",
+      "updates": [
+        {
+          "id": "cloudflare-dns-cache",
+          "tag": "notable",
+          "date": "23 Sep 2026",
+          "title": {
+            "es": "Cloudflare recorta 56% por entrada del cache de 1.1.1.1 y libera 100 TB",
+            "en": "Cloudflare cuts 56% per cache entry in 1.1.1.1, freeing 100 TB",
+            "fr": "Cloudflare réduit de 56% chaque entrée du cache 1.1.1.1 et libère 100 To"
+          },
+          "body_html": {
+            "es": "<p>Clase magistral de optimización de memoria en Rust, en cinco pasos: cambiar <code>Vec</code> y <code>String</code> por <code>Box&lt;[T]&gt;</code> y <code>Box&lt;str&gt;</code> para datos inmutables tras la inserción (64 bytes por entrada), unificar answer, authority y additional en una sola lista con offsets compactos, empaquetar booleans en bitflags, omitir nombres redundantes reconstruyéndolos desde la clave del cache, y guardar los records en formato wire DNS en buffers contiguos.</p><p>Resultado: <strong>953 → 420 bytes</strong> por entrada, inserciones <strong>+43%</strong>, latencia de lookup <strong>-19%</strong> y memoria residente p99 de 9.3 GB a 5.3 GB. Si tenés un cache in-process grande, esto es lectura obligatoria — el patrón aplica igual en Go, Java o TypeScript.</p>",
+            "en": "<p>A masterclass in Rust memory optimization, in five steps: swap <code>Vec</code> and <code>String</code> for <code>Box&lt;[T]&gt;</code> and <code>Box&lt;str&gt;</code> for data immutable after insertion (64 bytes per entry), merge answer, authority and additional records into a single list with compact offsets, pack booleans into bitflags, omit redundant owner names by reconstructing them from the cache key, and store record data in DNS wire format in contiguous buffers.</p><p>The result: <strong>953 → 420 bytes</strong> per entry, insertion throughput <strong>+43%</strong>, lookup latency <strong>-19%</strong> and p99 resident memory down from 9.3 GB to 5.3 GB. If you run a large in-process cache, this is required reading — the pattern transfers to Go, Java or TypeScript.</p>",
+            "fr": "<p>Une masterclass d'optimisation mémoire en Rust, en cinq étapes : remplacer <code>Vec</code> et <code>String</code> par <code>Box&lt;[T]&gt;</code> et <code>Box&lt;str&gt;</code>, fusionner les enregistrements answer, authority et additional en une liste unique à offsets compacts, empaqueter les booléens en bitflags, omettre les noms redondants et stocker les données au format wire DNS dans des buffers contigus.</p><p>Résultat : <strong>953 → 420 octets</strong> par entrée, insertions <strong>+43%</strong>, latence de lookup <strong>-19%</strong> et mémoire résidente p99 passant de 9,3 Go à 5,3 Go.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/cloudflare-dns-cache/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "nx-23-3-0-beta-5",
+      "updates": [
+        {
+          "id": "nx-23-3-0-beta-5",
+          "tag": "beta",
+          "date": "23 Sep 2026",
+          "title": {
+            "es": "Nx 23.3.0-beta.5 baja el overhead de inferencia de package.json",
+            "en": "Nx 23.3.0-beta.5 reduces package.json inference overhead",
+            "fr": "Nx 23.3.0-beta.5 réduit le coût d'inférence des package.json"
+          },
+          "body_html": {
+            "es": "<p>La beta recorta el overhead de inferencia de <code>package.json</code> en el core — lo que se nota directo en el tiempo de arranque del grafo en monorepos grandes. Suma que las referencias internas de proyecto en <code>tsconfig</code> ya no se pierden en Windows, y que el plugin de Next.js usa <code>out/</code> como directorio de salida por defecto cuando el output es <code>export</code>.</p>",
+            "en": "<p>The beta trims <code>package.json</code> inference overhead in core — which shows up directly in graph startup time on large monorepos. It also stops losing internal tsconfig project references on Windows, and the Next.js plugin now defaults to <code>out/</code> as the output dir when output is <code>export</code>.</p>",
+            "fr": "<p>La beta réduit le coût d'inférence des <code>package.json</code> dans le core, ce qui se voit directement sur le temps de démarrage du graphe dans les gros monorepos. Les références de projet internes dans <code>tsconfig</code> ne sont plus perdues sous Windows.</p>"
+          },
+          "source": { "url": "https://github.com/nrwl/nx/releases/tag/23.3.0-beta.5", "label": "github.com/nrwl" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Dos de los tres items más urgentes del día son DoS por complejidad algorítmica en el parsing de entrada: Elysia con FormData cuadrático y multer con escrituras huérfanas. El parser de multipart sigue siendo el punto más blando del stack HTTP en Node.",
+      "en": "Two of the three most urgent items today are algorithmic-complexity DoS in input parsing: Elysia with quadratic FormData and multer with orphaned writes. The multipart parser remains the softest spot in the Node HTTP stack.",
+      "fr": "Deux des trois éléments les plus urgents du jour sont des DoS par complexité algorithmique dans le parsing d'entrée : Elysia avec un FormData quadratique et multer avec des écritures orphelines. Le parseur multipart reste le point le plus faible de la pile HTTP Node."
+    },
+    {
+      "es": "El caso de Cloudflare confirma algo que repetimos siempre: antes de escalar horizontalmente, medí el layout de memoria. Cinco cambios de representación dieron 56% menos por entrada y de paso +43% de throughput. Ningún nodo extra hacía falta.",
+      "en": "Cloudflare's case confirms something worth repeating: before scaling horizontally, measure your memory layout. Five representation changes delivered 56% less per entry and +43% throughput along the way. No extra nodes required.",
+      "fr": "Le cas Cloudflare confirme un principe : avant de scaler horizontalement, mesurez la disposition mémoire. Cinq changements de représentation ont donné 56% de moins par entrée et +43% de débit. Aucun nœud supplémentaire n'était nécessaire."
+    },
+    {
+      "es": "NestJS publicó 12.1.0 y 11.2.6 el mismo día, con la línea de mantenimiento cargando el fix de seguridad. Es la señal de que el ecosistema Nest ya opera con backports serios: quedarte en 11 sigue siendo una opción válida si tomás los patches.",
+      "en": "NestJS shipped 12.1.0 and 11.2.6 on the same day, with the maintenance line carrying the security fix. That signals the Nest ecosystem now runs serious backports: staying on 11 is still a valid option if you take the patches.",
+      "fr": "NestJS a publié 12.1.0 et 11.2.6 le même jour, la ligne de maintenance portant le correctif de sécurité. Le signe que l'écosystème Nest assure de vrais backports : rester en 11 reste une option valable si vous appliquez les patches."
+    }
+  ]
+}

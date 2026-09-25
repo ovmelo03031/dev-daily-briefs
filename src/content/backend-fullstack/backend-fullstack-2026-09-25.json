@@ -1,0 +1,371 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 25 Sep 2026",
+    "en": "Backend & Fullstack — 25 Sep 2026",
+    "fr": "Backend & Fullstack — 25 Sep 2026"
+  },
+  "description": {
+    "es": "DBHub con dos agujeros críticos en su servidor MCP, PgBouncer 1.26.0 cierra tres CVEs de DoS, Prisma 8 llega a rc.12 con cambios breaking, PostgreSQL 19 Beta 4 y better-auth 1.7.6.",
+    "en": "DBHub hit by two critical holes in its MCP server, PgBouncer 1.26.0 closes three DoS CVEs, Prisma 8 reaches rc.12 with breaking changes, PostgreSQL 19 Beta 4 and better-auth 1.7.6.",
+    "fr": "DBHub touché par deux failles critiques dans son serveur MCP, PgBouncer 1.26.0 corrige trois CVE de DoS, Prisma 8 atteint la rc.12 avec des changements cassants, PostgreSQL 19 Beta 4 et better-auth 1.7.6."
+  },
+  "pubDate": "2026-09-25",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "DBHub: DNS rebinding ejecuta SQL sin auth",
+        "en": "DBHub: DNS rebinding runs SQL without auth",
+        "fr": "DBHub : DNS rebinding exécute du SQL sans auth"
+      },
+      "anchor": "dbhub-dns-rebinding",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "PgBouncer 1.26.0 cierra tres CVEs de DoS",
+        "en": "PgBouncer 1.26.0 closes three DoS CVEs",
+        "fr": "PgBouncer 1.26.0 corrige trois CVE de DoS"
+      },
+      "anchor": "pgbouncer-1-26-0",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Prisma 8 rc.12: full-text search y breaking changes",
+        "en": "Prisma 8 rc.12: full-text search and breaking changes",
+        "fr": "Prisma 8 rc.12 : full-text search et ruptures"
+      },
+      "anchor": "prisma-8-rc-12",
+      "icon": "simple-icons:prisma"
+    },
+    {
+      "text": {
+        "es": "PostgreSQL 19 Beta 4 ya disponible",
+        "en": "PostgreSQL 19 Beta 4 is out",
+        "fr": "PostgreSQL 19 Beta 4 disponible"
+      },
+      "anchor": "postgres-19-beta-4",
+      "icon": "simple-icons:postgresql"
+    },
+    {
+      "text": {
+        "es": "better-auth 1.7.6 suma Vercel BotID",
+        "en": "better-auth 1.7.6 adds Vercel BotID",
+        "fr": "better-auth 1.7.6 ajoute Vercel BotID"
+      },
+      "anchor": "better-auth-1-7-6",
+      "icon": "lucide:server"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "dbhub-dns-rebinding",
+      "updates": [
+        {
+          "id": "dbhub-dns-rebinding",
+          "tag": "security",
+          "date": "24 Sep 2026",
+          "title": {
+            "es": "DBHub: DNS rebinding permite ejecutar SQL sin autenticación (crítico)",
+            "en": "DBHub: DNS rebinding allows unauthenticated SQL execution (critical)",
+            "fr": "DBHub : le DNS rebinding permet d'exécuter du SQL sans authentification (critique)"
+          },
+          "body_html": {
+            "es": "<p>El transporte HTTP de <code>@bytebase/dbhub</code> (<code>--transport http</code>) valida CSRF comparando el hostname de <code>Origin</code> contra el de <code>Host</code>. Con DNS rebinding, un dominio del atacante hace que ambos coincidan, así que <strong>cualquier sitio web</strong> que visite la víctima puede invocar las tools MCP contra su base, sin prompt injection de por medio. GitHub lo marca <strong>critical</strong>; se corrige en <code>0.22.5</code>. Si corrés un servidor MCP de base de datos en tu máquina, ojo: <code>localhost</code> no es una frontera de seguridad.</p>",
+            "en": "<p>The HTTP transport of <code>@bytebase/dbhub</code> (<code>--transport http</code>) enforces CSRF protection by comparing the <code>Origin</code> hostname against the <code>Host</code> hostname. DNS rebinding makes an attacker domain satisfy both, so <strong>any website</strong> the victim visits can invoke MCP tools against their database, no prompt injection needed. GitHub rates it <strong>critical</strong>; fixed in <code>0.22.5</code>. If you run a database MCP server locally, remember that <code>localhost</code> is not a security boundary.</p>",
+            "fr": "<p>Le transport HTTP de <code>@bytebase/dbhub</code> (<code>--transport http</code>) protège contre le CSRF en comparant le hostname de <code>Origin</code> à celui de <code>Host</code>. Le DNS rebinding permet à un domaine malveillant de satisfaire les deux : <strong>n'importe quel site</strong> visité par la victime peut invoquer les tools MCP sur sa base, sans prompt injection. GitHub le classe <strong>critical</strong> ; corrigé en <code>0.22.5</code>. <code>localhost</code> n'est pas une frontière de sécurité.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-fm8p-53ww-hf6w", "label": "github.com/advisories" }
+        },
+        {
+          "id": "pgbouncer-1-26-0",
+          "tag": "security",
+          "date": "23 Sep 2026",
+          "title": {
+            "es": "PgBouncer 1.26.0 corrige tres CVEs de denegación de servicio",
+            "en": "PgBouncer 1.26.0 fixes three denial-of-service CVEs",
+            "fr": "PgBouncer 1.26.0 corrige trois CVE de déni de service"
+          },
+          "body_html": {
+            "es": "<p>Dos se explotan <strong>sin autenticación</strong>: <code>CVE-2026-19888</code> tira el proceso con un SCRAM client-final-message sin nonce, y <code>CVE-2026-6668</code> mete un loop infinito por overflow de enteros al agrandar el buffer de paquetes. La tercera, <code>CVE-2026-6669</code>, permite a un Postgres upstream malicioso forzar trabajo ilimitado con un iteration count de SCRAM sin tope. De yapa suma <code>pool_idle_timeout</code> y <code>query_wait_timeout</code> por usuario/base. PgBouncer está delante de medio mundo: actualizá YA.</p>",
+            "en": "<p>Two are exploitable <strong>without authentication</strong>: <code>CVE-2026-19888</code> crashes the process with a SCRAM client-final-message missing its nonce, and <code>CVE-2026-6668</code> triggers an infinite loop through an integer overflow when growing the packet buffer. The third, <code>CVE-2026-6669</code>, lets a malicious upstream Postgres force unbounded work via an uncapped SCRAM iteration count. It also adds <code>pool_idle_timeout</code> and per-user/database <code>query_wait_timeout</code>. PgBouncer fronts a lot of production Postgres: upgrade now.</p>",
+            "fr": "<p>Deux sont exploitables <strong>sans authentification</strong> : <code>CVE-2026-19888</code> fait planter le processus via un SCRAM client-final-message sans nonce, et <code>CVE-2026-6668</code> provoque une boucle infinie par dépassement d'entier lors de l'agrandissement du buffer. La troisième, <code>CVE-2026-6669</code>, permet à un Postgres amont malveillant d'imposer un travail illimité via un iteration count SCRAM sans limite. Ajoute aussi <code>pool_idle_timeout</code> et <code>query_wait_timeout</code> par utilisateur/base.</p>"
+          },
+          "source": { "url": "https://www.postgresql.org/about/news/pgbouncer-1260-released-fixes-three-cves-3385/", "label": "postgresql.org" }
+        },
+        {
+          "id": "prisma-8-rc-12",
+          "tag": "breaking",
+          "date": "24 Sep 2026",
+          "title": {
+            "es": "Prisma ORM 8.0.0-rc.12: full-text search en Postgres y varios breaking changes",
+            "en": "Prisma ORM 8.0.0-rc.12: Postgres full-text search and several breaking changes",
+            "fr": "Prisma ORM 8.0.0-rc.12 : full-text search Postgres et plusieurs ruptures"
+          },
+          "body_html": {
+            "es": "<p>Suma full-text search en Postgres, lecturas y agregaciones preparadas, schemas multi-archivo y un camino para reusar el <code>schema.prisma</code> de Prisma 7 como contrato de Prisma 8. Lo que rompe: los modelos sin <code>@@map</code> usan su nombre literal como tabla, cada archivo de schema necesita <code>// use prisma-8</code> en la primera línea, <code>dbgenerated(...)</code> se reemplaza por literales <code>sql</code> y el toolchain pasa a <code>@prisma/cli-engine@0.6.1</code> (chau <code>defineConfig</code>). Si vas a migrar, empezá a probar ahora, no el día del GA.</p>",
+            "en": "<p>Adds Postgres full-text search, prepared reads and aggregates, multi-file schemas, and a path to reuse a Prisma 7 <code>schema.prisma</code> as the Prisma 8 contract. What breaks: models without <code>@@map</code> use their literal name as the table name, every schema file needs <code>// use prisma-8</code> as its first line, <code>dbgenerated(...)</code> is replaced by <code>sql</code> tagged literals, and the toolchain moves to <code>@prisma/cli-engine@0.6.1</code> (dropping <code>defineConfig</code>). Start testing the migration now, not on GA day.</p>",
+            "fr": "<p>Ajoute la recherche full-text Postgres, des lectures et agrégations préparées, des schémas multi-fichiers et un chemin pour réutiliser le <code>schema.prisma</code> de Prisma 7 comme contrat Prisma 8. Ce qui casse : les modèles sans <code>@@map</code> prennent leur nom littéral comme table, chaque fichier de schéma exige <code>// use prisma-8</code> en première ligne, <code>dbgenerated(...)</code> est remplacé par des littéraux <code>sql</code> et l'outillage passe à <code>@prisma/cli-engine@0.6.1</code> (sans <code>defineConfig</code>).</p>"
+          },
+          "source": { "url": "https://github.com/prisma/prisma/releases/tag/v8.0.0-rc.12", "label": "github.com/prisma" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "workerd-20260925",
+      "updates": [
+        {
+          "id": "workerd-20260925",
+          "tag": "release",
+          "date": "25 Sep 2026",
+          "title": {
+            "es": "workerd v1.20260925.1: filas SQLite de hasta 8 MiB y reintentos en RPC de Durable Objects",
+            "en": "workerd v1.20260925.1: 8 MiB SQLite rows and retried Durable Object RPC",
+            "fr": "workerd v1.20260925.1 : lignes SQLite de 8 Mio et RPC Durable Objects relancés"
+          },
+          "body_html": {
+            "es": "<p>El runtime de Cloudflare sube el límite de fila en SQLite a <strong>8 MiB</strong>, hace que las llamadas RPC a Durable Objects se reintenten, arregla backpressure en streams con <code>byobRequest</code> pendientes a través de <code>tee()</code> y agrega un hook para trackear la vida de las tareas <code>waitUntil</code> del actor.</p>",
+            "en": "<p>Cloudflare's runtime raises the SQLite row limit to <strong>8 MiB</strong>, makes Durable Object RPC calls retry, fixes backpressure for streams holding <code>byobRequest</code>s across <code>tee()</code>, and adds a hook to track the lifetime of actor <code>waitUntil</code> tasks.</p>",
+            "fr": "<p>Le runtime de Cloudflare porte la limite de ligne SQLite à <strong>8 Mio</strong>, relance les appels RPC vers les Durable Objects, corrige la backpressure des streams gardant des <code>byobRequest</code> à travers <code>tee()</code> et ajoute un hook de suivi des tâches <code>waitUntil</code> des acteurs.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workerd/releases/tag/v1.20260925.1", "label": "github.com/cloudflare" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "apollo-router-2-16-4",
+      "updates": [
+        {
+          "id": "apollo-router-2-16-4",
+          "tag": "patch",
+          "date": "24 Sep 2026",
+          "title": {
+            "es": "Apollo Router 2.16.4 arregla la regresión del parche de @defer",
+            "en": "Apollo Router 2.16.4 fixes the @defer security-patch regression",
+            "fr": "Apollo Router 2.16.4 corrige la régression du patch @defer"
+          },
+          "body_html": {
+            "es": "<p>El parche de seguridad <code>GHSA-gr6h-4wpf-xp52</code> validaba labels duplicados de <code>@defer</code> <em>después</em> de expandir fragments, y rechazaba queries válidas que spreadean dos veces un fragment con <code>@defer(label:)</code> (patrón que genera Relay). Ahora la unicidad se chequea antes de la expansión y el exploit original sigue bloqueado. Si usás Relay y te saltaron errores tras el patch, este es tu fix.</p>",
+            "en": "<p>The <code>GHSA-gr6h-4wpf-xp52</code> security patch validated duplicate <code>@defer</code> labels <em>after</em> fragment expansion, rejecting valid queries that spread a fragment containing <code>@defer(label:)</code> more than once (a pattern Relay generates). Uniqueness is now checked before expansion, and the original exploit stays blocked. If Relay queries started failing after the patch, this is your fix.</p>",
+            "fr": "<p>Le patch de sécurité <code>GHSA-gr6h-4wpf-xp52</code> validait les labels <code>@defer</code> dupliqués <em>après</em> l'expansion des fragments, rejetant des requêtes valides qui réutilisent un fragment contenant <code>@defer(label:)</code> (motif généré par Relay). L'unicité est désormais vérifiée avant l'expansion, l'exploit reste bloqué.</p>"
+          },
+          "source": { "url": "https://github.com/apollographql/router/releases/tag/v2.16.4", "label": "github.com/apollographql" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "postgres-19-beta-4",
+      "updates": [
+        {
+          "id": "postgres-19-beta-4",
+          "tag": "beta",
+          "date": "24 Sep 2026",
+          "title": {
+            "es": "PostgreSQL 19 Beta 4",
+            "en": "PostgreSQL 19 Beta 4",
+            "fr": "PostgreSQL 19 Beta 4"
+          },
+          "body_html": {
+            "es": "<p>Cuarta beta de la próxima major de Postgres, y ya está en el Database Preview Environment de Amazon RDS el mismo día. Buen momento para correr tu suite de integración contra 19 y reportar regresiones antes del GA.</p>",
+            "en": "<p>The fourth beta of the next Postgres major, available the same day in Amazon RDS's Database Preview Environment. A good moment to run your integration suite against 19 and report regressions before GA.</p>",
+            "fr": "<p>Quatrième bêta de la prochaine version majeure de Postgres, disponible le jour même dans le Database Preview Environment d'Amazon RDS. Bon moment pour lancer vos tests d'intégration sur la 19.</p>"
+          },
+          "source": { "url": "https://www.postgresql.org/about/news/postgresql-19-beta-4-released-3386/", "label": "postgresql.org" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "rds-pq-tls",
+      "updates": [
+        {
+          "id": "rds-pq-tls",
+          "tag": "ga",
+          "date": "24 Sep 2026",
+          "title": {
+            "es": "RDS for PostgreSQL suma intercambio de claves TLS post-cuántico",
+            "en": "RDS for PostgreSQL adds post-quantum TLS key exchange",
+            "fr": "RDS for PostgreSQL ajoute l'échange de clés TLS post-quantique"
+          },
+          "body_html": {
+            "es": "<p>RDS Postgres 18+ soporta key exchange post-cuántico en las conexiones TLS, la defensa contra el «harvest now, decrypt later» sobre tráfico de base de datos. Sin cambios de código si tu driver negocia el grupo híbrido.</p>",
+            "en": "<p>RDS Postgres 18+ supports post-quantum key exchange on TLS connections, the defense against harvest-now-decrypt-later on database traffic. No code changes if your driver negotiates the hybrid group.</p>",
+            "fr": "<p>RDS Postgres 18+ prend en charge l'échange de clés post-quantique sur TLS, la parade au « harvest now, decrypt later » sur le trafic base de données.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/postgresql-post-quantum-tls-key-exchange/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "lambda-durable-esc",
+          "tag": "minor",
+          "date": "24 Sep 2026",
+          "title": {
+            "es": "Lambda durable functions llegan a AWS European Sovereign Cloud",
+            "en": "Lambda durable functions arrive in AWS European Sovereign Cloud",
+            "fr": "Les durable functions Lambda arrivent dans AWS European Sovereign Cloud"
+          },
+          "body_html": {
+            "es": "<p>Las primitivas <code>step</code>/<code>wait</code> para checkpointear progreso, recuperarse de fallos y pausar sin pagar cómputo ya están en la región soberana europea, con Node.js 22/24, Python 3.13/3.14 y Java 17+.</p>",
+            "en": "<p>The <code>step</code>/<code>wait</code> primitives for checkpointing progress, recovering from failures and pausing without compute charges are now in the European sovereign region, for Node.js 22/24, Python 3.13/3.14 and Java 17+.</p>",
+            "fr": "<p>Les primitives <code>step</code>/<code>wait</code> (checkpoint, reprise après échec, pause sans facturation) sont disponibles dans la région souveraine européenne, pour Node.js 22/24, Python 3.13/3.14 et Java 17+.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/durablefunctions-european-sovereign-cloud/", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "modal-sandboxes",
+      "updates": [
+        {
+          "id": "modal-sandboxes",
+          "tag": "notable",
+          "date": "23 Sep 2026",
+          "title": {
+            "es": "Modal escala a 1M de sandboxes concurrentes dejando atrás el modelo de Kubernetes",
+            "en": "Modal scales to 1M concurrent sandboxes by moving past the Kubernetes model",
+            "fr": "Modal passe à 1M de sandboxes concurrentes en dépassant le modèle Kubernetes"
+          },
+          "body_html": {
+            "es": "<p>Mediana de arranque bajo <strong>0.5 s</strong> y más de <strong>50k creaciones por segundo</strong>: Modal reemplazó el estado centralizado en etcd por estado propiedad de cada worker, schedulers en paralelo escalados horizontalmente y RPC directo scheduler→worker. El único cuello restante es un stream compartido en Redis, validado hasta ~100k workers. Lectura obligada si estás pensando en orquestar agentes sobre K8s.</p>",
+            "en": "<p>Median startup under <strong>0.5 s</strong> and over <strong>50k creations per second</strong>: Modal replaced centralized etcd state with worker-owned state, horizontally scaled parallel schedulers and direct scheduler-to-worker RPC. The remaining bottleneck is a shared Redis state stream, load-tested to roughly 100k workers. Worth reading if you plan to orchestrate agents on K8s.</p>",
+            "fr": "<p>Démarrage médian sous <strong>0,5 s</strong> et plus de <strong>50k créations par seconde</strong> : Modal a remplacé l'état centralisé etcd par un état détenu par chaque worker, des schedulers parallèles scalés horizontalement et du RPC direct scheduler vers worker. Seul goulot restant : un stream Redis partagé, testé jusqu'à ~100k workers.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/modal-scaling-sandboxes/", "label": "infoq.com" }
+        },
+        {
+          "id": "reactpress-typeorm-sqli",
+          "tag": "security",
+          "date": "23 Sep 2026",
+          "title": {
+            "es": "ReactPress: SQL injection por nombres de columna en QueryBuilder de TypeORM (CVSS 7.5)",
+            "en": "ReactPress: SQL injection through TypeORM QueryBuilder column names (CVSS 7.5)",
+            "fr": "ReactPress : injection SQL via les noms de colonnes du QueryBuilder TypeORM (CVSS 7.5)"
+          },
+          "body_html": {
+            "es": "<p>Lección de manual: <code>@fecommunity/reactpress</code> interpolaba los <em>nombres</em> de query params como identificadores de columna (<code>article.${key}</code>). TypeORM parametriza valores, <strong>no identificadores</strong>, así que cinco endpoints quedaron con SQLi ciega sin auth (<code>CVE-2026-61685</code>). Arreglado en <code>3.7.0</code>. Si tenés filtros u ordenamiento dinámicos, usá una allowlist de columnas.</p>",
+            "en": "<p>A textbook lesson: <code>@fecommunity/reactpress</code> interpolated query-parameter <em>names</em> into column identifiers (<code>article.${key}</code>). TypeORM parameterizes values, <strong>not identifiers</strong>, leaving five endpoints open to unauthenticated blind SQLi (<code>CVE-2026-61685</code>). Fixed in <code>3.7.0</code>. For dynamic filters or sorting, use a column allowlist.</p>",
+            "fr": "<p>Cas d'école : <code>@fecommunity/reactpress</code> interpolait les <em>noms</em> de paramètres de requête comme identifiants de colonne (<code>article.${key}</code>). TypeORM paramètre les valeurs, <strong>pas les identifiants</strong> : cinq endpoints exposés à une SQLi aveugle sans auth (<code>CVE-2026-61685</code>). Corrigé en <code>3.7.0</code>. Utilisez une allowlist de colonnes.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-wmw4-mw6x-6vfm", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "better-auth-1-7-6",
+      "updates": [
+        {
+          "id": "better-auth-1-7-6",
+          "tag": "release",
+          "date": "24 Sep 2026",
+          "title": {
+            "es": "better-auth 1.7.6: Vercel BotID como captcha y fixes de hidratación",
+            "en": "better-auth 1.7.6: Vercel BotID as captcha and hydration fixes",
+            "fr": "better-auth 1.7.6 : Vercel BotID comme captcha et correctifs d'hydratation"
+          },
+          "body_html": {
+            "es": "<p>Suma <code>bannedUserMessage</code> para mostrar el motivo del ban y Vercel BotID como proveedor de captcha. Fixes importantes: las contraseñas que superan <code>maxPasswordLength</code> se rechazan <em>antes</em> de hashear, se van los hydration mismatches de React y las race conditions que pisaban respuestas nuevas, y se arregla la validación de schema en Cloudflare D1.</p>",
+            "en": "<p>Adds <code>bannedUserMessage</code> to surface ban reasons and Vercel BotID as a captcha provider. Key fixes: passwords over <code>maxPasswordLength</code> are rejected <em>before</em> hashing, React hydration mismatches and races overwriting newer auth responses are gone, and Cloudflare D1 schema validation works again.</p>",
+            "fr": "<p>Ajoute <code>bannedUserMessage</code> pour afficher le motif d'un bannissement et Vercel BotID comme fournisseur de captcha. Correctifs : les mots de passe au-delà de <code>maxPasswordLength</code> sont rejetés <em>avant</em> le hachage, fin des hydration mismatches React et des courses écrasant les réponses récentes, validation de schéma Cloudflare D1 réparée.</p>"
+          },
+          "source": { "url": "https://github.com/better-auth/better-auth/releases/tag/v1.7.6", "label": "github.com/better-auth" }
+        },
+        {
+          "id": "turborepo-2-11-4",
+          "tag": "patch",
+          "date": "24 Sep 2026",
+          "title": {
+            "es": "Turborepo 2.11.4 respeta dependencias globales negadas en affected",
+            "en": "Turborepo 2.11.4 honors negated global dependencies in affected detection",
+            "fr": "Turborepo 2.11.4 respecte les dépendances globales négées dans affected"
+          },
+          "body_html": {
+            "es": "<p>La detección de paquetes afectados ahora respeta los globs negados en <code>globalDependencies</code>, así un cambio excluido deja de disparar todo el pipeline de CI.</p>",
+            "en": "<p>Affected-package detection now honors negated globs in <code>globalDependencies</code>, so an excluded change no longer triggers the whole CI pipeline.</p>",
+            "fr": "<p>La détection des paquets affectés respecte désormais les globs négés dans <code>globalDependencies</code> : un changement exclu ne relance plus toute la CI.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/turborepo/releases/tag/v2.11.4", "label": "github.com/vercel" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "dbhub-readonly-bypass",
+      "updates": [
+        {
+          "id": "dbhub-readonly-bypass",
+          "tag": "security",
+          "date": "24 Sep 2026",
+          "title": {
+            "es": "DBHub: el modo read-only no impide escrituras",
+            "en": "DBHub: read-only mode does not prevent writes",
+            "fr": "DBHub : le mode read-only n'empêche pas les écritures"
+          },
+          "body_html": {
+            "es": "<p>Con <code>readonly=true</code>, <code>@bytebase/dbhub</code> nunca aplicaba <code>default_transaction_read_only=on</code>: el flag que lo habilita no se poblaba. Solo quedaba un clasificador por primera keyword, así que un <code>SELECT</code> con <code>lo_export</code>, <code>pg_read_file</code> o <code>COPY ... TO PROGRAM</code> vía <code>dblink</code> lo saltea; sumado al transporte HTTP sin auth en <code>0.0.0.0</code>, es RCE con un rol privilegiado. Severidad <strong>high</strong>, arreglado en <code>0.22.6</code>. Moraleja: el read-only se hace con un rol de base sin permisos, no con un regex.</p>",
+            "en": "<p>With <code>readonly=true</code>, <code>@bytebase/dbhub</code> never applied <code>default_transaction_read_only=on</code> because the gating flag was never populated. Only a leading-keyword classifier remained, so a <code>SELECT</code> calling <code>lo_export</code>, <code>pg_read_file</code> or <code>COPY ... TO PROGRAM</code> via <code>dblink</code> bypasses it; combined with the unauthenticated HTTP transport on <code>0.0.0.0</code>, that is RCE with a privileged role. Rated <strong>high</strong>, fixed in <code>0.22.6</code>. Enforce read-only with a least-privilege database role, not a regex.</p>",
+            "fr": "<p>Avec <code>readonly=true</code>, <code>@bytebase/dbhub</code> n'appliquait jamais <code>default_transaction_read_only=on</code> : le drapeau correspondant n'était jamais renseigné. Restait un classifieur sur le premier mot-clé, contourné par un <code>SELECT</code> appelant <code>lo_export</code>, <code>pg_read_file</code> ou <code>COPY ... TO PROGRAM</code> via <code>dblink</code> ; avec le transport HTTP non authentifié sur <code>0.0.0.0</code>, c'est une RCE. Sévérité <strong>high</strong>, corrigé en <code>0.22.6</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-mwwr-p57h-56pf", "label": "github.com/advisories" }
+        },
+        {
+          "id": "rsdoctor-api-leak",
+          "tag": "security",
+          "date": "24 Sep 2026",
+          "title": {
+            "es": "@rsdoctor/rspack-plugin: API sin auth filtra el código fuente compilado",
+            "en": "@rsdoctor/rspack-plugin: unauthenticated API leaks compiled source",
+            "fr": "@rsdoctor/rspack-plugin : une API non authentifiée divulgue le code compilé"
+          },
+          "body_html": {
+            "es": "<p>El servidor de reportes de Rsdoctor escucha en <code>0.0.0.0</code>, con CORS comodín y un <code>POST /api/data/key</code> sin allowlist: cualquiera en tu red puede bajarse el código compilado (<code>moduleCodeMap</code>), la config del build y los errores. Viene activo por defecto fuera de CI. Afecta <code>&lt;= 1.5.15</code>, arreglado en <code>1.5.16</code>.</p>",
+            "en": "<p>Rsdoctor's report server binds to <code>0.0.0.0</code> with wildcard CORS and an unauthenticated <code>POST /api/data/key</code> with no allowlist, so anyone on your network can pull compiled source (<code>moduleCodeMap</code>), build config and error details. Enabled by default outside CI. Affects <code>&lt;= 1.5.15</code>, fixed in <code>1.5.16</code>.</p>",
+            "fr": "<p>Le serveur de rapports de Rsdoctor écoute sur <code>0.0.0.0</code> avec un CORS joker et un <code>POST /api/data/key</code> non authentifié sans allowlist : n'importe qui sur le réseau récupère le code compilé (<code>moduleCodeMap</code>), la config de build et les erreurs. Actif par défaut hors CI. Concerne <code>&lt;= 1.5.15</code>, corrigé en <code>1.5.16</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-jmg2-rcxh-w8q3", "label": "github.com/advisories" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Tres de los cinco avisos de seguridad del día son dev tools que escuchan en la red sin autenticación: dos en el servidor MCP de DBHub y uno en Rsdoctor. El patrón se repite: una herramienta pensada para localhost termina expuesta en 0.0.0.0 o alcanzable por DNS rebinding.",
+      "en": "Three of today's five security advisories are dev tools listening on the network without authentication: two in DBHub's MCP server and one in Rsdoctor. The pattern keeps repeating: a tool meant for localhost ends up exposed on 0.0.0.0 or reachable through DNS rebinding.",
+      "fr": "Trois des cinq avis de sécurité du jour concernent des outils de dev qui écoutent sur le réseau sans authentification : deux dans le serveur MCP de DBHub et un dans Rsdoctor. Le schéma se répète : un outil pensé pour localhost finit exposé sur 0.0.0.0 ou joignable par DNS rebinding."
+    },
+    {
+      "es": "El ecosistema Postgres tuvo un día cargado: PgBouncer parchea tres DoS, Postgres 19 llega a Beta 4, RDS suma TLS post-cuántico y Prisma 8 se acerca al GA con full-text search nativo.",
+      "en": "A busy day for the Postgres ecosystem: PgBouncer patches three DoS bugs, Postgres 19 reaches Beta 4, RDS adds post-quantum TLS, and Prisma 8 nears GA with native full-text search.",
+      "fr": "Journée chargée pour l'écosystème Postgres : PgBouncer corrige trois DoS, Postgres 19 atteint la Beta 4, RDS ajoute le TLS post-quantique et Prisma 8 approche de la GA avec la recherche full-text native."
+    }
+  ]
+}

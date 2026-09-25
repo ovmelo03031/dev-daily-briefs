@@ -1,0 +1,67 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 25 Sep 2026",
+    "en": "Gentleman Releases — 25 Sep 2026",
+    "fr": "Gentleman Releases — 25 Sep 2026"
+  },
+  "description": {
+    "es": "Releases del dia en proyectos de Gentleman-Programming",
+    "en": "Today's releases from Gentleman-Programming projects",
+    "fr": "Sorties du jour des projets Gentleman-Programming"
+  },
+  "pubDate": "2026-09-25",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "engram v2.2.0 — rechaza arrancar SQLite WAL sobre filesystems remotos y suma engram setup commandcode",
+        "en": "engram v2.2.0 — refuses SQLite WAL startup on remote filesystems and adds engram setup commandcode",
+        "fr": "engram v2.2.0 — refuse le demarrage SQLite WAL sur systemes de fichiers distants et ajoute engram setup commandcode"
+      },
+      "anchor": "engram-v2-2-0",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "engram v2.2.0 — vuelven los hooks de Codex en Windows y engram doctor detecta paths de MCP rancios",
+        "en": "engram v2.2.0 — Codex Windows hooks restored and engram doctor flags stale MCP executable paths",
+        "fr": "engram v2.2.0 — hooks Codex Windows restaures et engram doctor signale les chemins MCP obsoletes"
+      },
+      "anchor": "engram",
+      "icon": "lucide:stethoscope"
+    }
+  ],
+  "tools": [
+    {
+      "id": "engram",
+      "name": "engram",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-engram",
+      "icon_emoji": "🧠",
+      "anchor": "engram",
+      "version": "v2.2.0",
+      "updates": [
+        {
+          "id": "engram-v2-2-0",
+          "tag": "feature",
+          "title": {
+            "es": "v2.2.0 — Seguridad de datos locales, setup de CommandCode y hooks de Windows",
+            "en": "v2.2.0 — Local data safety, CommandCode setup and Windows hooks",
+            "fr": "v2.2.0 — Securite des donnees locales, setup CommandCode et hooks Windows"
+          },
+          "body_html": {
+            "es": "<p>Segundo minor de la linea v2, a menos de dos dias de la v2.1.0, y otra vez el foco esta en no romperte la base. Lo mas importante: engram ahora se niega a arrancar SQLite en modo WAL cuando detecta que el filesystem es remoto, con deteccion especifica por plataforma y tests de regresion (#1364, #1365). Ojo con esto: solo rechaza los montajes que identifica positivamente como remotos; un montaje que no sabe clasificar NO queda certificado como seguro. El issue de NFS (#1292) sigue abierto, asi que base en disco local y backup, como siempre.</p><p>Por el lado de integridad tambien: las sesiones con directorio en blanco (y todo lo que cuelga de ellas) sobreviven al import local (#1298), las relaciones del mismo proyecto se respetan entre scopes de endpoint (#1374), y el export por proyecto ahora usa indices en vez de barrer todas las sesiones, observaciones y prompts (#1379). Hay ademas una resolucion canonica de identidad para repos Git hijos promovidos sin ambiguedad y un claim atomico de ownership para sesiones legacy terminadas sin dueno (#1395, #1400) — pero el release aclara que no es una reparacion general de sesiones (#1332 sigue abierto).</p><p>En setup y CLI: llega <code>engram setup commandcode</code> para configurar el MCP de usuario y el Memory Protocol de CommandCode (#1123). Para Codex vuelven los hooks de prompt y arranque en Windows, los writes de MCP quedan atados a la sesion de runtime y se preservan los session IDs en UTF-8 (#1377, #1367, #1366, #1363). <code>engram doctor</code> ahora te avisa cuando un registro de MCP apunta a un ejecutable de engram con path absoluto viejo y te dice que <code>engram setup &lt;agent&gt;</code> correr — no lo toca solo (#1394). Tambien acepta el registro implicito por stdio en Claude Code y elige explicitamente el entrypoint V1 del plugin de OpenCode (#1385, #1389).</p><p>Dashboard: los timestamps se muestran en <code>ENGRAM_TIMEZONE</code> (o en hora local) sin tocar los UTC guardados (#1384). El paquete Pi <code>gentle-engram</code> sigue en 0.1.15 por su propio canal de npm; el fix de writes al retomar una sesion de Pi cerrada (#1376) todavia no esta publicado. Antes de actualizar: backup, <code>engram doctor</code> y reinicia las sesiones de MCP largas.</p>",
+            "en": "<p>The second minor on the v2 line, less than two days after v2.1.0, and once again the focus is on not wrecking your database. The headline: engram now refuses to start SQLite in WAL mode when it detects a remote filesystem, with platform-specific detection and regression coverage (#1364, #1365). Important caveat: it only rejects mounts it positively identifies as remote; an unclassified mount is NOT certified safe. The NFS issue (#1292) remains open, so keep the database on local disk and keep backups.</p><p>More integrity work: blank-directory sessions and their dependent records now survive local import (#1298), same-project relation guards apply across endpoint scopes (#1374), and project-scoped exports use indexes instead of broadly scanning sessions, observations and prompts (#1379). There is also canonical identity resolution for unambiguous promoted child Git repositories and an atomic ownership claim for ended, unowned legacy sessions (#1395, #1400) — though the release stresses this is not a general session repair (#1332 stays open).</p><p>Setup and CLI: <code>engram setup commandcode</code> configures CommandCode's user-scope MCP and Memory Protocol (#1123). Codex gets its Windows prompt and startup hooks back, MCP writes bound to the runtime session, and preserved UTF-8 session IDs (#1377, #1367, #1366, #1363). <code>engram doctor</code> now diagnoses MCP registrations pointing at a stale absolute engram executable path and names the <code>engram setup &lt;agent&gt;</code> recovery step, without changing anything automatically (#1394). Claude Code implicit stdio MCP registration is accepted and the OpenCode V1 plugin entrypoint is selected explicitly (#1385, #1389).</p><p>Dashboard timestamps render in <code>ENGRAM_TIMEZONE</code> (falling back to local time) without altering stored UTC values (#1384). The Pi package <code>gentle-engram</code> stays at 0.1.15 on its own npm channel; the fix for writes after resuming a quit Pi session (#1376) is not published yet. Before upgrading: back up, run <code>engram doctor</code>, and restart long-running MCP sessions.</p>",
+            "fr": "<p>Deuxieme mineur de la ligne v2, moins de deux jours apres la v2.1.0, toujours centre sur la protection de la base. Point principal : engram refuse desormais de demarrer SQLite en mode WAL lorsqu'il detecte un systeme de fichiers distant, avec une detection propre a chaque plateforme et des tests de regression (#1364, #1365). Attention : seuls les montages identifies comme distants sont rejetes ; un montage non classe n'est PAS certifie sur. Le ticket NFS (#1292) reste ouvert : base sur disque local et sauvegardes.</p><p>Autres travaux d'integrite : les sessions a repertoire vide et leurs enregistrements dependants survivent a l'import local (#1298), les garde-fous de relations d'un meme projet s'appliquent entre scopes d'endpoint (#1374), et les exports par projet utilisent des index au lieu de parcourir sessions, observations et prompts (#1379). S'ajoutent une resolution canonique d'identite pour les depots Git enfants promus sans ambiguite et une revendication atomique de propriete pour les sessions legacy terminees sans proprietaire (#1395, #1400) — ce n'est pas une reparation generale des sessions (#1332 reste ouvert).</p><p>Setup et CLI : <code>engram setup commandcode</code> configure le MCP utilisateur et le Memory Protocol de CommandCode (#1123). Codex retrouve ses hooks de prompt et de demarrage sous Windows, avec des ecritures MCP liees a la session runtime et des identifiants de session UTF-8 preserves (#1377, #1367, #1366, #1363). <code>engram doctor</code> signale les enregistrements MCP pointant vers un chemin absolu obsolete de l'executable engram et indique la commande <code>engram setup &lt;agent&gt;</code> a lancer, sans rien modifier automatiquement (#1394). L'enregistrement MCP stdio implicite de Claude Code est accepte et le point d'entree V1 du plugin OpenCode est selectionne explicitement (#1385, #1389).</p><p>Les horodatages du dashboard s'affichent selon <code>ENGRAM_TIMEZONE</code> (ou l'heure locale) sans modifier les valeurs UTC stockees (#1384). Le paquet Pi <code>gentle-engram</code> reste en 0.1.15 sur son propre canal npm ; le correctif des ecritures apres reprise d'une session Pi quittee (#1376) n'est pas encore publie. Avant la mise a jour : sauvegarde, <code>engram doctor</code> et redemarrage des sessions MCP longues.</p>"
+          },
+          "date": "25 Sep 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v2.2.0",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

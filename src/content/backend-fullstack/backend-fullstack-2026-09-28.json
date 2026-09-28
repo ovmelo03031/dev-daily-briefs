@@ -1,0 +1,302 @@
+{
+  "title": {
+    "es": "Backend & Fullstack — 28 Sep 2026",
+    "en": "Backend & Fullstack — 28 Sep 2026",
+    "fr": "Backend & Fullstack — 28 Sep 2026"
+  },
+  "description": {
+    "es": "containerd parchea un DoS en el pull de imágenes, Aurora DSQL suma foreign keys, Vercel Labs muestra scriptc (TypeScript a binario nativo), Perplexity reemplaza DynamoDB con CobbleDB y MCP se vuelve stateless.",
+    "en": "containerd patches an image-pull DoS, Aurora DSQL adds foreign keys, Vercel Labs shows scriptc (TypeScript to native binary), Perplexity replaces DynamoDB with CobbleDB and MCP goes stateless.",
+    "fr": "containerd corrige un DoS au pull d'images, Aurora DSQL ajoute les clés étrangères, Vercel Labs présente scriptc (TypeScript vers binaire natif), Perplexity remplace DynamoDB par CobbleDB et MCP devient stateless."
+  },
+  "pubDate": "2026-09-28",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "containerd: DoS con un índice OCI malicioso",
+        "en": "containerd: DoS via a malicious OCI index",
+        "fr": "containerd : DoS via un index OCI malveillant"
+      },
+      "anchor": "containerd-oci-index-dos",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Aurora DSQL ya soporta foreign keys",
+        "en": "Aurora DSQL now supports foreign keys",
+        "fr": "Aurora DSQL prend en charge les clés étrangères"
+      },
+      "anchor": "aurora-dsql-foreign-keys",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": {
+        "es": "scriptc: TypeScript a binario nativo sin V8",
+        "en": "scriptc: TypeScript to native binary, no V8",
+        "fr": "scriptc : TypeScript vers binaire natif sans V8"
+      },
+      "anchor": "vercel-scriptc",
+      "icon": "simple-icons:typescript"
+    },
+    {
+      "text": {
+        "es": "Perplexity cambia DynamoDB por CobbleDB",
+        "en": "Perplexity swaps DynamoDB for CobbleDB",
+        "fr": "Perplexity remplace DynamoDB par CobbleDB"
+      },
+      "anchor": "perplexity-cobbledb",
+      "icon": "lucide:database"
+    },
+    {
+      "text": {
+        "es": "MCP stateless: adiós a la afinidad de sesión",
+        "en": "Stateless MCP: no more session affinity",
+        "fr": "MCP stateless : fini l'affinité de session"
+      },
+      "anchor": "stateless-mcp",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "containerd-oci-index-dos",
+      "updates": [
+        {
+          "id": "containerd-oci-index-dos",
+          "tag": "security",
+          "date": "25 Sep 2026",
+          "title": {
+            "es": "containerd: DoS en el pull de imágenes vía grafo de índice OCI amplificado",
+            "en": "containerd: image-pull DoS via amplified OCI index graph",
+            "fr": "containerd : DoS au pull d'images via un graphe d'index OCI amplifié"
+          },
+          "body_html": {
+            "es": "<p>Durante <code>PullImage</code>, containerd recorre los descriptores hijos de un índice OCI sin límites de profundidad ni de ancho, y sin deduplicar bien. Un índice armado con grafos anidados o muy abiertos dispara CPU y memoria sin techo y deja colgada la creación de containers. Severidad <strong>medium (CVSS 6.9)</strong>; parcheado en <code>1.7.36</code>, <code>2.0.13</code>, <code>2.2.9</code>, <code>2.3.6</code> y <code>2.4.1</code>. Si tus nodos de Kubernetes pueden pullear imágenes de registries que no controlás, actualizá el runtime.</p>",
+            "en": "<p>During <code>PullImage</code>, containerd walks an OCI index's child descriptors with no depth or breadth limit and weak deduplication. A crafted index with deeply nested or fanned-out graphs drives unbounded CPU and memory use and stalls container creation. Rated <strong>medium (CVSS 6.9)</strong>; fixed in <code>1.7.36</code>, <code>2.0.13</code>, <code>2.2.9</code>, <code>2.3.6</code> and <code>2.4.1</code>. If your Kubernetes nodes can pull from registries you don't control, update the runtime.</p>",
+            "fr": "<p>Pendant <code>PullImage</code>, containerd parcourt les descripteurs enfants d'un index OCI sans limite de profondeur ni de largeur, et déduplique mal. Un index forgé avec des graphes très imbriqués ou très larges provoque une consommation CPU et mémoire sans borne et bloque la création des containers. Sévérité <strong>medium (CVSS 6.9)</strong> ; corrigé en <code>1.7.36</code>, <code>2.0.13</code>, <code>2.2.9</code>, <code>2.3.6</code> et <code>2.4.1</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-pg57-6jwg-q645", "label": "github.com/advisories" }
+        },
+        {
+          "id": "aurora-dsql-foreign-keys",
+          "tag": "notable",
+          "date": "28 Sep 2026",
+          "title": {
+            "es": "Aurora DSQL agrega foreign keys sin locks de tabla",
+            "en": "Aurora DSQL adds foreign keys without table locks",
+            "fr": "Aurora DSQL ajoute les clés étrangères sans verrou de table"
+          },
+          "body_html": {
+            "es": "<p>La base distribuida de AWS ahora aplica integridad referencial (<code>CASCADE</code>, <code>SET NULL</code>, etc.). En vez de bloquear, verifica las constraints contra el snapshot de la transacción y detecta conflictos al commit con el mecanismo <code>KEY SHARE</code> de PostgreSQL; si hay choque, la transacción cae con error de serialización. Traducción: <strong>tu app necesita retry logic sí o sí</strong>, y AWS recomienda que las claves referenciadas no cambien seguido. Un golazo para quien no quería validar integridad a mano en la capa de aplicación.</p>",
+            "en": "<p>AWS's distributed database now enforces referential integrity (<code>CASCADE</code>, <code>SET NULL</code>, etc.). Instead of locking, it checks constraints against the transaction snapshot and detects conflicts at commit using PostgreSQL's <code>KEY SHARE</code> mechanism; conflicting transactions fail with a serialization error. In practice, <strong>your app must implement retry logic</strong>, and AWS advises keeping referenced keys stable.</p>",
+            "fr": "<p>La base distribuée d'AWS applique désormais l'intégrité référentielle (<code>CASCADE</code>, <code>SET NULL</code>, etc.). Sans verrou, elle vérifie les contraintes sur le snapshot de la transaction et détecte les conflits au commit via le mécanisme <code>KEY SHARE</code> de PostgreSQL ; en cas de conflit, erreur de sérialisation. Votre application <strong>doit gérer les retries</strong>, et AWS conseille de garder les clés référencées stables.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/aurora-dsql-foreign-keys/", "label": "infoq.com" }
+        },
+        {
+          "id": "vercel-scriptc",
+          "tag": "beta",
+          "tag_label": { "es": "Experimental", "en": "Experimental", "fr": "Expérimental" },
+          "date": "25 Sep 2026",
+          "title": {
+            "es": "Vercel Labs lanza scriptc: TypeScript compilado a binario nativo",
+            "en": "Vercel Labs ships scriptc: TypeScript compiled to a native binary",
+            "fr": "Vercel Labs publie scriptc : TypeScript compilé en binaire natif"
+          },
+          "body_html": {
+            "es": "<p>Compilador experimental que genera ejecutables sin Node, V8 ni motor JS. Tiene tres niveles: compilación estática por defecto, un <code>quickjs-ng</code> embebido (~620KB) para paquetes npm y código sin tipos, o rechazo en compile time con sugerencias de reescritura. Startup de <strong>1.78ms</strong> contra 21.29ms de Bun y 61.78ms de Node, y 1.9MiB en idle, a cambio de menos throughput. Ojo: diverge a propósito de la semántica estándar de JS; leé la guía de limitaciones antes de entusiasmarte. Para CLIs y funciones cortas, interesante.</p>",
+            "en": "<p>An experimental compiler that emits executables with no Node, V8 or JS engine. Three tiers: static compilation by default, an embedded <code>quickjs-ng</code> (~620KB) for npm packages and untyped code, or a compile-time rejection with rewrite hints. Startup is <strong>1.78ms</strong> vs 21.29ms for Bun and 61.78ms for Node, with 1.9MiB idle memory, traded against lower throughput. It deliberately diverges from standard JS semantics, so read the limitations guide first.</p>",
+            "fr": "<p>Compilateur expérimental qui produit des exécutables sans Node, V8 ni moteur JS. Trois niveaux : compilation statique par défaut, <code>quickjs-ng</code> embarqué (~620 Ko) pour les paquets npm et le code non typé, ou rejet à la compilation avec suggestions. Démarrage en <strong>1,78 ms</strong> contre 21,29 ms pour Bun et 61,78 ms pour Node, 1,9 MiB au repos, au prix d'un débit plus faible. Il diverge volontairement de la sémantique JS standard.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/vercel-scriptc-node/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "bullmq-6-3-9",
+      "updates": [
+        {
+          "id": "bullmq-6-3-9",
+          "tag": "patch",
+          "date": "25 Sep 2026",
+          "title": {
+            "es": "BullMQ 6.3.9: opciones de conexión tipadas por backend",
+            "en": "BullMQ 6.3.9: backend-specific connection options are now inferred",
+            "fr": "BullMQ 6.3.9 : options de connexion inférées par backend"
+          },
+          "body_html": {
+            "es": "<p>El fix de <code>connection</code> infiere las opciones específicas de cada backend en lugar de tapar los desajustes con casts. Parche chico, pero si tu config de conexión pasaba por un <code>as</code>, puede que TypeScript ahora te marque errores que antes estaban escondidos. Mejor así.</p>",
+            "en": "<p>The <code>connection</code> fix infers backend-specific options instead of hiding mismatches behind casts. Small patch, but if your connection config relied on an <code>as</code>, TypeScript may now surface errors that were previously hidden.</p>",
+            "fr": "<p>Le correctif <code>connection</code> infère les options propres à chaque backend au lieu de masquer les incohérences par des casts. Si votre configuration passait par un <code>as</code>, TypeScript peut désormais signaler des erreurs jusque-là cachées.</p>"
+          },
+          "source": { "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.3.9", "label": "github.com/taskforcesh/bullmq" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "perplexity-cobbledb",
+      "updates": [
+        {
+          "id": "perplexity-cobbledb",
+          "tag": "notable",
+          "date": "25 Sep 2026",
+          "title": {
+            "es": "Perplexity reemplaza DynamoDB con CobbleDB, un KV propio en Rust",
+            "en": "Perplexity replaces DynamoDB with CobbleDB, an in-house Rust KV store",
+            "fr": "Perplexity remplace DynamoDB par CobbleDB, un KV maison en Rust"
+          },
+          "body_html": {
+            "es": "<p>Separaron el almacenamiento en tres piezas: <strong>Pillar</strong> (estado durable sobre YTsaurus), <strong>Lorry</strong> (agregación batch stateless vía S3) y <strong>CobbleDB</strong> (serving de baja latencia con RocksDB, cache en NVMe y replicación asíncrona). Con routing por zona, hedging especulativo y <code>MultiGet</code>, la mediana de batch-read bajó de 31.4ms a 5.60ms, a hasta 500k req/s, y el costo de storage cayó al menos 20%. Buen caso de estudio de separar durabilidad de serving.</p>",
+            "en": "<p>Storage was split into three parts: <strong>Pillar</strong> (durable state on YTsaurus), <strong>Lorry</strong> (stateless batch aggregation via S3) and <strong>CobbleDB</strong> (low-latency serving on RocksDB with NVMe caching and async replication). Zone-affinity routing, speculative hedging and <code>MultiGet</code> cut median batch-read latency from 31.4ms to 5.60ms at up to 500k req/s, and storage cost dropped at least 20%.</p>",
+            "fr": "<p>Le stockage est découpé en trois : <strong>Pillar</strong> (état durable sur YTsaurus), <strong>Lorry</strong> (agrégation batch stateless via S3) et <strong>CobbleDB</strong> (service basse latence sur RocksDB, cache NVMe, réplication asynchrone). Routage par zone, hedging spéculatif et <code>MultiGet</code> font passer la latence médiane de 31,4 ms à 5,60 ms jusqu'à 500k req/s, avec au moins 20 % d'économie de stockage.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/cobbledb-perplexity/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "docker-cloud-sandboxes",
+      "updates": [
+        {
+          "id": "docker-cloud-sandboxes",
+          "tag": "notable",
+          "date": "26 Sep 2026",
+          "title": {
+            "es": "Docker Cloud Sandboxes: el mismo sandbox en tu laptop y en la nube",
+            "en": "Docker Cloud Sandboxes: the same sandbox on your laptop and in the cloud",
+            "fr": "Docker Cloud Sandboxes : le même sandbox en local et dans le cloud"
+          },
+          "body_html": {
+            "es": "<p>Sandboxes hosteados con aislamiento por microVM a nivel hardware, pensados para correr agentes de código. Usan el mismo modelo de aislamiento que los Docker Sandboxes locales y se mueven con <code>sbx move my-project --to cloud</code>. De yapa, Kits v3 empaqueta sandboxes preconfigurados como imágenes OCI estándar, compatibles con <code>build</code> y <code>pull</code>.</p>",
+            "en": "<p>Hosted sandboxes with hardware-enforced microVM isolation, aimed at running coding agents. They share the isolation model of local Docker Sandboxes and move with <code>sbx move my-project --to cloud</code>. Kits v3 also packages preconfigured sandboxes as standard OCI images that work with <code>build</code> and <code>pull</code>.</p>",
+            "fr": "<p>Sandboxes hébergés avec isolation microVM matérielle, conçus pour les agents de code. Même modèle d'isolation que les Docker Sandboxes locaux, déplaçables via <code>sbx move my-project --to cloud</code>. Kits v3 empaquette des sandboxes préconfigurés en images OCI standard compatibles <code>build</code> et <code>pull</code>.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/docker-cloud-sandboxes/", "label": "infoq.com" }
+        },
+        {
+          "id": "gke-pod-snapshots",
+          "tag": "notable",
+          "date": "27 Sep 2026",
+          "title": {
+            "es": "GKE Pod Snapshots recortan hasta 89% el arranque de modelos",
+            "en": "GKE Pod Snapshots cut model startup by up to 89%",
+            "fr": "GKE Pod Snapshots réduit jusqu'à 89 % le démarrage des modèles"
+          },
+          "body_html": {
+            "es": "<p>Checkpoint-restore basado en gVisor que captura memoria de CPU y GPU, file descriptors, threads y filesystem, y restaura el Pod salteando la inicialización: un modelo de 70B carga en 37 segundos. La compatibilidad se valida con un hash del spec del Pod (misma serie de máquina, arquitectura, kernel de gVisor y drivers de GPU); el modo rootfs-only afloja esas restricciones. El costo se muda a gestionar el ciclo de vida de los snapshots.</p>",
+            "en": "<p>gVisor-based checkpoint-restore that captures CPU and GPU memory, file descriptors, threads and filesystem state, then restores the Pod skipping initialization: a 70B model loads in 37 seconds. Compatibility is enforced by hashing the Pod's distilled spec (same machine series, architecture, gVisor kernel and GPU drivers); rootfs-only mode relaxes this. The work moves to snapshot lifecycle management.</p>",
+            "fr": "<p>Checkpoint-restore basé sur gVisor qui capture mémoire CPU et GPU, descripteurs, threads et système de fichiers, puis restaure le Pod sans phase d'initialisation : un modèle de 70B charge en 37 secondes. La compatibilité est vérifiée par hash du spec du Pod (même série de machine, architecture, noyau gVisor et pilotes GPU) ; le mode rootfs-only assouplit ces contraintes.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/gke-pod-snapshots-benchmarks/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "stateless-mcp",
+      "updates": [
+        {
+          "id": "stateless-mcp",
+          "tag": "notable",
+          "date": "25 Sep 2026",
+          "title": {
+            "es": "MCP stateless: sin handshake ni Mcp-Session-Id, detrás de cualquier load balancer",
+            "en": "Stateless MCP: no handshake, no Mcp-Session-Id, behind any load balancer",
+            "fr": "MCP stateless : sans handshake ni Mcp-Session-Id, derrière n'importe quel load balancer"
+          },
+          "body_html": {
+            "es": "<p>La spec actualizada elimina el handshake <code>initialize</code>/<code>initialized</code> y el header <code>Mcp-Session-Id</code>, así que cada request se puede rutear a cualquier instancia: Lambda y serverless pasan a ser opciones naturales. Suma <code>server/discover</code> opcional, MRTR para interacciones de varios pasos con respuestas <code>input_required</code>, y W3C Trace Context para tracing distribuido. El estado no desaparece: se muda a tu aplicación e infraestructura, que es donde siempre tuvo que estar.</p>",
+            "en": "<p>The updated spec drops the <code>initialize</code>/<code>initialized</code> handshake and the <code>Mcp-Session-Id</code> header, so each request can be routed to any instance, making Lambda and other serverless targets a natural fit. It adds an optional <code>server/discover</code>, MRTR for multi-step flows via <code>input_required</code> responses, and W3C Trace Context for distributed tracing. State doesn't vanish; it moves to the application and infrastructure layers.</p>",
+            "fr": "<p>La spec mise à jour supprime le handshake <code>initialize</code>/<code>initialized</code> et l'en-tête <code>Mcp-Session-Id</code> : chaque requête peut aller vers n'importe quelle instance, ce qui rend Lambda et le serverless naturels. Ajouts : <code>server/discover</code> optionnel, MRTR pour les échanges multi-étapes via <code>input_required</code>, et W3C Trace Context. L'état se déplace vers l'application et l'infrastructure.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/aws-stateless-mcp/", "label": "infoq.com" }
+        },
+        {
+          "id": "google-c-to-rust",
+          "tag": "notable",
+          "date": "27 Sep 2026",
+          "title": {
+            "es": "Google reescribe giflib de C a Rust con IA y fuzzing diferencial",
+            "en": "Google rewrites giflib from C to Rust with AI and differential fuzzing",
+            "fr": "Google réécrit giflib de C en Rust avec l'IA et le fuzzing différentiel"
+          },
+          "body_html": {
+            "es": "<p>Tres etapas: traducción con Gemini, refinamiento humano de la semántica de punteros en la frontera FFI, y motores de testing diferencial que devuelven las fallas al modelo. Resultado: paridad bit a bit sobre 30 millones de GIFs reales, 200 millones de iteraciones de fuzzing, y la versión Rust resultó inmune a un heap write sin parchear en el original. La lección para cualquier migración: la IA acelera, pero sin un oráculo de tests diferencial y gente que entienda lifetimes, no llegás.</p>",
+            "en": "<p>Three stages: Gemini translation, human refinement of pointer semantics at the FFI boundary, and differential testing engines that feed failures back to the model. The result reached bit-for-bit parity across 30 million real GIFs and 200 million fuzzing iterations, and the Rust version proved immune to an unpatched heap write in the original. The lesson for any migration: AI speeds it up, but you still need a differential test oracle and people who understand lifetimes.</p>",
+            "fr": "<p>Trois étapes : traduction par Gemini, affinage humain de la sémantique des pointeurs à la frontière FFI, puis tests différentiels qui renvoient les échecs au modèle. Parité bit à bit sur 30 millions de GIF réels, 200 millions d'itérations de fuzzing, et une version Rust immunisée contre un heap write non corrigé de l'original.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/c-rust-rewrite/", "label": "infoq.com" }
+        },
+        {
+          "id": "grafana-cypress-metrics",
+          "tag": "minor",
+          "date": "25 Sep 2026",
+          "title": {
+            "es": "Grafana convierte resultados de tests en métricas persistentes",
+            "en": "Grafana turns test results into persistent metrics",
+            "fr": "Grafana transforme les résultats de tests en métriques persistantes"
+          },
+          "body_html": {
+            "es": "<p>Hooks del ciclo de vida de Cypress capturan resultados, un Pushgateway de Prometheus los retiene mientras vive el job, y Grafana Alloy los scrapea. Así podés ver tendencias de duración, tasa de fallas y tests flaky en el tiempo, en vez de mirar cada corrida de CI aislada. El patrón aplica igual a Vitest o a tus suites de integración.</p>",
+            "en": "<p>Cypress lifecycle hooks capture results, a Prometheus Pushgateway holds them for short-lived jobs, and Grafana Alloy scrapes them. You get trends in duration, failure rate and flaky tests over time instead of isolated CI reports. The same pattern works for Vitest or integration suites.</p>",
+            "fr": "<p>Des hooks Cypress capturent les résultats, un Pushgateway Prometheus les conserve pour les jobs éphémères et Grafana Alloy les collecte. On suit ainsi durée, taux d'échec et tests instables dans le temps plutôt que rapport par rapport.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/grafana-cypress-observability/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "sveltekit-3-next-30",
+      "updates": [
+        {
+          "id": "sveltekit-3-next-30",
+          "tag": "beta",
+          "tag_label": { "es": "Pre-release", "en": "Pre-release", "fr": "Pré-version" },
+          "date": "27 Sep 2026",
+          "title": {
+            "es": "SvelteKit 3.0.0-next.30 sigue puliendo rumbo al major",
+            "en": "SvelteKit 3.0.0-next.30 keeps polishing toward the major",
+            "fr": "SvelteKit 3.0.0-next.30 continue d'affiner la version majeure"
+          },
+          "body_html": {
+            "es": "<p>Genera un tipo <code>Path</code> como <code>never</code> cuando no hay rutas, deja de filtrar un <code>hashchange</code> a los listeners al fijar el foco, y mantiene registrada una instancia de <code>form.for</code> cuando su derived se desconecta y reconecta. Salió junto a <code>adapter-node@6.0.0-next.15</code> y <code>adapter-bun@1.0.0-next.5</code>.</p>",
+            "en": "<p>Generates a <code>never</code> <code>Path</code> type when there are no routes, stops leaking a <code>hashchange</code> to app listeners when setting focus, and keeps a <code>form.for</code> instance registered when its derived disconnects and reconnects. Shipped alongside <code>adapter-node@6.0.0-next.15</code> and <code>adapter-bun@1.0.0-next.5</code>.</p>",
+            "fr": "<p>Génère un type <code>Path</code> <code>never</code> sans routes, ne fuit plus de <code>hashchange</code> vers les listeners lors du focus, et garde une instance <code>form.for</code> enregistrée quand son derived se reconnecte. Publié avec <code>adapter-node@6.0.0-next.15</code> et <code>adapter-bun@1.0.0-next.5</code>.</p>"
+          },
+          "source": { "url": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs%2Fkit%403.0.0-next.30", "label": "github.com/sveltejs/kit" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Fin de semana largo en releases y corto en noticias de runtimes: ni Node, ni Deno, ni Bun publicaron versiones desde el viernes. Lo que sí se movió es arquitectura: MCP tira las sesiones, Aurora DSQL empuja la validación de integridad al commit, y Perplexity separa durabilidad de serving. El hilo común es el mismo: el estado se saca de la conexión y se paga con retries e idempotencia.",
+      "en": "A quiet weekend for runtimes: neither Node, Deno nor Bun shipped since Friday. What moved was architecture: MCP drops sessions, Aurora DSQL pushes integrity checks to commit time, and Perplexity splits durability from serving. The common thread is pulling state out of the connection and paying for it with retries and idempotency.",
+      "fr": "Week-end calme côté runtimes : ni Node, ni Deno, ni Bun n'ont publié depuis vendredi. C'est l'architecture qui a bougé : MCP abandonne les sessions, Aurora DSQL déplace les contrôles d'intégrité au commit, et Perplexity sépare durabilité et service. Point commun : sortir l'état de la connexion, au prix de retries et d'idempotence."
+    }
+  ]
+}

@@ -1,0 +1,441 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 29 Sep 2026",
+    "en": "Backend & Fullstack Daily — 29 Sep 2026",
+    "fr": "Backend & Fullstack Daily — 29 sept. 2026"
+  },
+  "description": {
+    "es": "Lunes de advisories npm: fast-uri (dependencia de Fastify y Ajv), undici, multer, morgan y Angular SSR; Artifactory explotado activamente; Hono separa sus adapters; Prisma 8 rc.13; pnpm 12.8 avisa si publicás un .env.",
+    "en": "An npm advisory Monday: fast-uri (Fastify and Ajv dependency), undici, multer, morgan and Angular SSR; Artifactory under active exploitation; Hono splits out its adapters; Prisma 8 rc.13; pnpm 12.8 warns before you publish a .env.",
+    "fr": "Un lundi d'advisories npm : fast-uri (dépendance de Fastify et Ajv), undici, multer, morgan et Angular SSR ; Artifactory activement exploité ; Hono sépare ses adapters ; Prisma 8 rc.13 ; pnpm 12.8 prévient avant de publier un .env."
+  },
+  "pubDate": "2026-09-29",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "fast-uri: host confusion y authority injection",
+        "en": "fast-uri: host confusion and authority injection",
+        "fr": "fast-uri : confusion d'hôte et injection d'autorité"
+      },
+      "anchor": "fast-uri-authority-injection",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Artifactory: bypass de auth explotado en la calle",
+        "en": "Artifactory: auth bypass exploited in the wild",
+        "fr": "Artifactory : contournement d'auth exploité"
+      },
+      "anchor": "artifactory-auth-bypass",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Angular SSR: XSS con CVSS 8.6",
+        "en": "Angular SSR: XSS rated CVSS 8.6",
+        "fr": "Angular SSR : XSS noté CVSS 8.6"
+      },
+      "anchor": "angular-ssr-xss",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "undici: DoS en WebSocket permessage-deflate",
+        "en": "undici: DoS in WebSocket permessage-deflate",
+        "fr": "undici : DoS dans WebSocket permessage-deflate"
+      },
+      "anchor": "undici-websocket-deflate-dos",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": {
+        "es": "Hono separa los adapters en paquetes @hono/*",
+        "en": "Hono moves adapters to @hono/* packages",
+        "fr": "Hono déplace ses adapters vers @hono/*"
+      },
+      "anchor": "hono-4-13-10-adapters",
+      "icon": "lucide:blocks"
+    },
+    {
+      "text": {
+        "es": "Prisma 8 rc.13 acerca MongoDB a Postgres",
+        "en": "Prisma 8 rc.13 brings MongoDB closer to Postgres",
+        "fr": "Prisma 8 rc.13 rapproche MongoDB de Postgres"
+      },
+      "anchor": "prisma-8-rc13",
+      "icon": "simple-icons:prisma"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "fast-uri-authority-injection",
+      "updates": [
+        {
+          "id": "fast-uri-authority-injection",
+          "tag": "security",
+          "date": "28 Sep 2026",
+          "title": {
+            "es": "fast-uri: dos advisories high de host confusion y authority injection",
+            "en": "fast-uri: two high-severity advisories for host confusion and authority injection",
+            "fr": "fast-uri : deux advisories high pour confusion d'hôte et injection d'autorité"
+          },
+          "body_html": {
+            "es": "<p><code>fast-uri</code> es el parser de URIs que usan Fastify y Ajv, así que está en el árbol de medio ecosistema. <strong>CVE-2026-84292</strong>: <code>serialize</code> no valida el puerto y permite inyectar authority. <strong>CVE-2026-84394</strong>: un corchete sin cerrar en la authority confunde el host (introducido en 2.4.5 / 3.1.6 / 4.1.3). Ambos <strong>high</strong>, parcheados en <code>2.4.6</code>, <code>3.1.7</code> y <code>4.1.4</code>. Si validás allowlists de hosts con URIs parseadas, esto es SSRF servido: corré <code>pnpm why fast-uri</code> y actualizá YA.</p>",
+            "en": "<p><code>fast-uri</code> is the URI parser behind Fastify and Ajv, so it sits in half the ecosystem's dependency tree. <strong>CVE-2026-84292</strong>: <code>serialize</code> doesn't validate the port, enabling authority injection. <strong>CVE-2026-84394</strong>: an unclosed bracket in the authority causes host confusion (introduced in 2.4.5 / 3.1.6 / 4.1.3). Both <strong>high</strong>, fixed in <code>2.4.6</code>, <code>3.1.7</code> and <code>4.1.4</code>. If you check host allowlists against parsed URIs, this is SSRF material: run <code>pnpm why fast-uri</code> and update now.</p>",
+            "fr": "<p><code>fast-uri</code> est le parser d'URI utilisé par Fastify et Ajv, donc présent dans une grande partie de l'écosystème. <strong>CVE-2026-84292</strong> : <code>serialize</code> ne valide pas le port (injection d'autorité). <strong>CVE-2026-84394</strong> : un crochet non fermé provoque une confusion d'hôte. Les deux sont <strong>high</strong>, corrigés en <code>2.4.6</code>, <code>3.1.7</code> et <code>4.1.4</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-qw65-cvwx-89v3",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "artifactory-auth-bypass",
+          "tag": "breaking",
+          "date": "28 Sep 2026",
+          "title": {
+            "es": "Artifactory: tres CVEs encadenados, explotados activamente, dan admin en minutos",
+            "en": "Artifactory: three chained CVEs under active exploitation grant admin in minutes",
+            "fr": "Artifactory : trois CVE chaînées, activement exploitées, donnent l'accès admin en minutes"
+          },
+          "body_html": {
+            "es": "<p><strong>CVE-2026-42018</strong>, <strong>CVE-2026-42016</strong> y <strong>CVE-2026-82329</strong> permiten saltear la autenticación en Artifactory self-hosted expuesto a internet y tomar control de admin en menos de cinco minutos, con un puñado de requests HTTP sin autenticar. Los atacantes ya están subiendo artefactos maliciosos, cosechando credenciales y dejando backdoors. Fixes en <code>7.111.21</code>, <code>7.117.28</code>, <code>7.125.20</code>, <code>7.133.29</code>, <code>7.146.38</code>, <code>7.161.20</code> según la rama. Esto es supply chain puro: parcheá y auditá los artefactos publicados desde hace semanas.</p>",
+            "en": "<p><strong>CVE-2026-42018</strong>, <strong>CVE-2026-42016</strong> and <strong>CVE-2026-82329</strong> let attackers bypass authentication on internet-exposed self-hosted Artifactory and take admin control in under five minutes with a handful of unauthenticated HTTP requests. Attackers are already pushing malicious artifacts, harvesting credentials and planting backdoors. Fixed in <code>7.111.21</code>, <code>7.117.28</code>, <code>7.125.20</code>, <code>7.133.29</code>, <code>7.146.38</code> and <code>7.161.20</code> depending on the branch. This is a supply-chain issue: patch, then audit recently published artifacts.</p>",
+            "fr": "<p><strong>CVE-2026-42018</strong>, <strong>CVE-2026-42016</strong> et <strong>CVE-2026-82329</strong> permettent de contourner l'authentification d'Artifactory auto-hébergé exposé et d'obtenir l'accès admin en moins de cinq minutes. Les attaquants publient déjà des artefacts malveillants et installent des backdoors. Correctifs en <code>7.111.21</code> à <code>7.161.20</code> selon la branche.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/09/artifactory-vulnerabilities/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "angular-ssr-xss",
+          "tag": "security",
+          "date": "28 Sep 2026",
+          "title": {
+            "es": "Angular SSR: XSS vía processing instructions sin escapar (CVSS 8.6)",
+            "en": "Angular SSR: XSS via unescaped processing instructions (CVSS 8.6)",
+            "fr": "Angular SSR : XSS via des processing instructions non échappées (CVSS 8.6)"
+          },
+          "body_html": {
+            "es": "<p><code>@angular/platform-server</code> no escapa nodos <code>&lt;?...?&gt;</code> dentro de elementos de raw content en el fallback, así que contenido controlado por el usuario termina como HTML ejecutable en la respuesta SSR (<strong>CVE-2026-88058</strong>, <strong>CVSS 8.6</strong>). El mismo día salió otro advisory high: DoS por loop infinito con un DOCTYPE malformado. Parches en <code>22.1.4</code>, <code>21.2.22</code> y <code>20.3.30</code>; la rama 19 no tiene fix, así que si seguís ahí, ponete las pilas con el upgrade.</p>",
+            "en": "<p><code>@angular/platform-server</code> doesn't escape <code>&lt;?...?&gt;</code> nodes inside fallback raw-content elements, so user-controlled content ends up as executable HTML in the SSR response (<strong>CVE-2026-88058</strong>, <strong>CVSS 8.6</strong>). A second high-severity advisory landed the same day: an infinite-loop DoS on a malformed DOCTYPE. Fixed in <code>22.1.4</code>, <code>21.2.22</code> and <code>20.3.30</code>; the 19.x line gets no fix.</p>",
+            "fr": "<p><code>@angular/platform-server</code> n'échappe pas les nœuds <code>&lt;?...?&gt;</code> dans les éléments de contenu brut, ce qui produit du HTML exécutable côté SSR (<strong>CVE-2026-88058</strong>, <strong>CVSS 8.6</strong>). Un second advisory high (DoS sur DOCTYPE malformé) est sorti le même jour. Corrigé en <code>22.1.4</code>, <code>21.2.22</code> et <code>20.3.30</code> ; pas de correctif pour 19.x.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-j3r3-mxqp-r2p4",
+            "label": "github.com/advisories"
+          }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "undici-websocket-deflate-dos",
+      "updates": [
+        {
+          "id": "undici-websocket-deflate-dos",
+          "tag": "security",
+          "date": "28 Sep 2026",
+          "title": {
+            "es": "undici: DoS por error no manejado en la descompresión permessage-deflate de WebSocket",
+            "en": "undici: DoS via unhandled error in WebSocket permessage-deflate decompression",
+            "fr": "undici : DoS via une erreur non gérée dans la décompression WebSocket permessage-deflate"
+          },
+          "body_html": {
+            "es": "<p>Un frame WebSocket comprimido mal formado dispara un error que undici no atrapa y tira el proceso (<strong>CVE-2026-85024</strong>, medium). Afecta a <code>6.25.0</code>–<code>6.28.0</code>, <code>7.28.0</code>–<code>7.29.0</code> y <code>8.1.0</code>–<code>8.10.1</code>; fixes en <code>6.28.1</code>, <code>7.29.1</code> y <code>8.10.2</code>. Ojo: undici es el motor del <code>fetch</code> y del <code>WebSocket</code> global de Node, así que revisá también cuándo tu versión de Node trae el bump. Si tu backend abre WebSockets contra servidores de terceros, esto te pega.</p>",
+            "en": "<p>A malformed compressed WebSocket frame triggers an error undici doesn't catch, crashing the process (<strong>CVE-2026-85024</strong>, medium). Affects <code>6.25.0</code>–<code>6.28.0</code>, <code>7.28.0</code>–<code>7.29.0</code> and <code>8.1.0</code>–<code>8.10.1</code>; fixed in <code>6.28.1</code>, <code>7.29.1</code> and <code>8.10.2</code>. undici powers Node's global <code>fetch</code> and <code>WebSocket</code>, so also track when your Node line picks up the bump. Backends opening WebSockets to third-party servers are exposed.</p>",
+            "fr": "<p>Une trame WebSocket compressée malformée déclenche une erreur non capturée qui fait tomber le processus (<strong>CVE-2026-85024</strong>, medium). Corrigé en <code>6.28.1</code>, <code>7.29.1</code> et <code>8.10.2</code>. undici alimente <code>fetch</code> et <code>WebSocket</code> globaux de Node.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-3wwx-pv8p-q78v",
+            "label": "github.com/advisories"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "hono-4-13-10-adapters",
+      "updates": [
+        {
+          "id": "hono-4-13-10-adapters",
+          "tag": "deprecation",
+          "date": "28 Sep 2026",
+          "title": {
+            "es": "Hono 4.13.10: los adapters de runtime pasan a paquetes @hono/*",
+            "en": "Hono 4.13.10: runtime adapters move to @hono/* packages",
+            "fr": "Hono 4.13.10 : les adapters de runtime passent dans des paquets @hono/*"
+          },
+          "body_html": {
+            "es": "<p>Los adapters ahora se publican aparte: <code>@hono/bun</code>, <code>@hono/deno</code> (también en JSR), <code>@hono/cloudflare-workers</code>, <code>@hono/aws-lambda</code>, <code>@hono/lambda-edge</code>, <code>@hono/netlify</code>, <code>@hono/vercel</code> y <code>@hono/service-worker</code>. Los imports <code>hono/&lt;adapter&gt;</code> siguen andando en v4 pero están deprecados y se van en v5; <code>hono/cloudflare-pages</code> queda deprecado sin reemplazo. La migración es cambiar un import, así que hacela ahora y no el día que salga v5.</p>",
+            "en": "<p>Adapters are now published separately: <code>@hono/bun</code>, <code>@hono/deno</code> (also on JSR), <code>@hono/cloudflare-workers</code>, <code>@hono/aws-lambda</code>, <code>@hono/lambda-edge</code>, <code>@hono/netlify</code>, <code>@hono/vercel</code> and <code>@hono/service-worker</code>. <code>hono/&lt;adapter&gt;</code> imports still work in v4 but are deprecated and go away in v5; <code>hono/cloudflare-pages</code> is deprecated with no replacement. Migration is a one-line import change.</p>",
+            "fr": "<p>Les adapters sont désormais publiés à part (<code>@hono/bun</code>, <code>@hono/deno</code>, <code>@hono/cloudflare-workers</code>, <code>@hono/aws-lambda</code>, etc.). Les imports <code>hono/&lt;adapter&gt;</code> fonctionnent encore en v4 mais seront retirés en v5 ; <code>hono/cloudflare-pages</code> est déprécié sans remplaçant.</p>"
+          },
+          "source": {
+            "url": "https://github.com/honojs/hono/releases/tag/v4.13.10",
+            "label": "github.com/honojs/hono"
+          }
+        },
+        {
+          "id": "prisma-8-rc13",
+          "tag": "beta",
+          "date": "28 Sep 2026",
+          "title": {
+            "es": "Prisma 8.0.0-rc.13: más tipos de MongoDB, orderBy por relaciones y prisma contract print",
+            "en": "Prisma 8.0.0-rc.13: richer MongoDB types, relation orderBy and prisma contract print",
+            "fr": "Prisma 8.0.0-rc.13 : types MongoDB enrichis, orderBy par relation et prisma contract print"
+          },
+          "body_html": {
+            "es": "<p>Un schema de Mongo ahora puede declarar <code>Int64</code>, <code>Decimal128</code>, <code>Binary</code>, <code>Json</code> y <code>Bson</code> con timestamps automáticos, y un proyecto Prisma 6 sobre MongoDB puede usar su <code>schema.prisma</code> existente como fuente del contract. El client ordena por columnas de una relación, por conteo de relaciones y con posición explícita de nulls. Nuevo comando <code>prisma contract print</code>. Ojo: cambian las keys de defaults en <code>contract.json</code>, así que re-emití el contract al actualizar.</p>",
+            "en": "<p>A Mongo schema can now declare <code>Int64</code>, <code>Decimal128</code>, <code>Binary</code>, <code>Json</code> and <code>Bson</code> fields with automatic timestamps, and a Prisma 6 MongoDB project can use its existing <code>schema.prisma</code> as the contract source. The client can order by a related row's column, by relation count, and with explicit null placement. New <code>prisma contract print</code> command. Default keys in <code>contract.json</code> changed, so re-emit your contract after upgrading.</p>",
+            "fr": "<p>Un schéma Mongo peut déclarer <code>Int64</code>, <code>Decimal128</code>, <code>Binary</code>, <code>Json</code> et <code>Bson</code> avec timestamps automatiques. Le client trie par colonne d'une relation, par nombre de relations et avec placement explicite des nulls. Nouvelle commande <code>prisma contract print</code> ; ré-émettez le contract après mise à jour.</p>"
+          },
+          "source": {
+            "url": "https://github.com/prisma/orm/releases/tag/v8.0.0-rc.13",
+            "label": "github.com/prisma/orm"
+          }
+        },
+        {
+          "id": "nestjs-12-1-1",
+          "tag": "patch",
+          "date": "28 Sep 2026",
+          "title": {
+            "es": "NestJS 12.1.1: tanda de fixes de reconexión en microservices y del logger JSON",
+            "en": "NestJS 12.1.1: reconnection fixes across microservices and JSON logger fixes",
+            "fr": "NestJS 12.1.1 : correctifs de reconnexion des microservices et du logger JSON"
+          },
+          "body_html": {
+            "es": "<p>El patch arregla el logger (salida JSON, cambios de nivel, logs <code>fatal</code> y buffereados) y una serie de bugs de reconexión en <code>@nestjs/microservices</code>: el cliente MQTT ahora reintenta tras un connect fallido, TCP conserva sus listeners entre reconexiones e ignora eventos de sockets reemplazados, y NATS/Kafka ya no pisan una conexión nueva cuando falla una vieja. Si corrés transports con redes inestables, actualizá.</p>",
+            "en": "<p>The patch fixes the logger (JSON output, level changes, <code>fatal</code> and buffered logs) and a series of reconnection bugs in <code>@nestjs/microservices</code>: the MQTT client now retries after a failed connect, TCP keeps its listeners across reconnects and ignores events from replaced sockets, and NATS/Kafka no longer drop a newer connection when a stale one fails.</p>",
+            "fr": "<p>Ce patch corrige le logger (sortie JSON, niveaux, logs <code>fatal</code> et bufferisés) et plusieurs bugs de reconnexion de <code>@nestjs/microservices</code> : MQTT réessaie après un échec, TCP conserve ses listeners, NATS/Kafka ne remplacent plus une connexion récente par une ancienne.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nestjs/nest/releases/tag/v12.1.1",
+            "label": "github.com/nestjs/nest"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "documentdb-8-0-2",
+      "updates": [
+        {
+          "id": "documentdb-8-0-2",
+          "tag": "release",
+          "date": "28 Sep 2026",
+          "title": {
+            "es": "Amazon DocumentDB 8.0.2: retryable writes, $facet, $graphLookup e index-only scans",
+            "en": "Amazon DocumentDB 8.0.2: retryable writes, $facet, $graphLookup and index-only scans",
+            "fr": "Amazon DocumentDB 8.0.2 : retryable writes, $facet, $graphLookup et index-only scans"
+          },
+          "body_html": {
+            "es": "<p>DocumentDB suma cinco stages de agregación (<code>$setWindowFields</code>, <code>$bucketAuto</code>, <code>$facet</code>, <code>$graphLookup</code> y <code>$lookup</code> correlacionado), mejoras en change streams e index-only scans para <code>find</code> y agregaciones. Y en un anuncio aparte llegan las <strong>retryable writes</strong>: el driver de MongoDB reintenta una vez ante un error transitorio, algo clave durante failovers. Menos excusas para no migrar workloads Mongo compatibles.</p>",
+            "en": "<p>DocumentDB adds five aggregation stages (<code>$setWindowFields</code>, <code>$bucketAuto</code>, <code>$facet</code>, <code>$graphLookup</code> and correlated <code>$lookup</code>), change stream improvements and index-only scans for <code>find</code> and aggregations. A separate announcement adds <strong>retryable writes</strong>: the MongoDB driver retries once on transient errors, which matters during failovers.</p>",
+            "fr": "<p>DocumentDB ajoute cinq stages d'agrégation (<code>$setWindowFields</code>, <code>$bucketAuto</code>, <code>$facet</code>, <code>$graphLookup</code>, <code>$lookup</code> corrélé), des améliorations des change streams et des index-only scans. Les <strong>retryable writes</strong> arrivent aussi, utiles lors des failovers.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-documentdb-8-0-2/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "uber-kubernetes-servicescale",
+      "updates": [
+        {
+          "id": "uber-kubernetes-servicescale",
+          "tag": "notable",
+          "date": "28 Sep 2026",
+          "title": {
+            "es": "Uber separa la intención de escalar de su ejecución en Kubernetes",
+            "en": "Uber separates scaling intent from execution on Kubernetes",
+            "fr": "Uber sépare l'intention de scaling de son exécution sur Kubernetes"
+          },
+          "body_html": {
+            "es": "<p>El controller <strong>ServiceScale</strong> deja que varios orquestadores (su plataforma Up y los sistemas de failover) influyan en el escalado sin pisarse, sobre 100+ clusters, 3 millones de cores y 1,5 millones de pods por día. Tuvieron que meter chequeos read-your-own-write contra caches de informers desactualizados y healing automático del drift entre metadata y spec. Resultado: el aprovisionamiento steady-state para failover active-active baja de 2x a 1,3x. Lección para cualquier operator: lo difícil no son las APIs, es lo que pasa entre escrituras.</p>",
+            "en": "<p>The <strong>ServiceScale</strong> controller lets multiple orchestrators (the Up platform and failover systems) influence scaling without conflicts, across 100+ clusters, 3 million cores and 1.5 million daily pod launches. Uber added read-your-own-write checks against stale informer caches and automated healing for metadata/spec drift. Steady-state provisioning for active-active failover dropped from 2x to 1.3x.</p>",
+            "fr": "<p>Le controller <strong>ServiceScale</strong> permet à plusieurs orchestrateurs d'agir sur le scaling sans conflit, sur 100+ clusters et 3 millions de cœurs. Uber a ajouté des contrôles read-your-own-write face aux caches d'informers périmés. Le provisionnement pour le failover active-active passe de 2x à 1,3x.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/09/uber-kubernetes-scaling/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "meta-zgateway",
+      "updates": [
+        {
+          "id": "meta-zgateway",
+          "tag": "notable",
+          "date": "28 Sep 2026",
+          "title": {
+            "es": "Meta ZGateway: un proxy stateless que baja 19x las conexiones a ZippyDB",
+            "en": "Meta ZGateway: a stateless proxy that cuts ZippyDB connections 19x",
+            "fr": "Meta ZGateway : un proxy stateless qui divise par 19 les connexions à ZippyDB"
+          },
+          "body_html": {
+            "es": "<p>ZGateway maneja más de <strong>1.000 millones de ops/s</strong> (~40% del tráfico de ZippyDB) y centraliza auth, admission control por tenant, resolución de shards, cache local y batching/coalescing de requests. Reduce 19x las conexiones persistentes y ~97–98% las conexiones por host. El tradeoff es explícito: suman un hop de red para sacarle a los nodos de la base el costo de gestionar conexiones, y la latencia total mejora igual. Es el mismo razonamiento que PgBouncer o RDS Proxy, llevado a escala Meta.</p>",
+            "en": "<p>ZGateway serves over <strong>1 billion ops/s</strong> (~40% of ZippyDB traffic) and centralizes auth, per-tenant admission control, shard resolution, local caching and request batching/coalescing. It cuts persistent connections 19x and per-host connections by ~97–98%. The tradeoff is deliberate: an extra network hop moves connection management off the database nodes, and overall latency still improves. Same reasoning as PgBouncer or RDS Proxy, at Meta scale.</p>",
+            "fr": "<p>ZGateway traite plus d'<strong>un milliard d'ops/s</strong> (~40 % du trafic ZippyDB) et centralise auth, admission control par tenant, résolution de shards, cache local et batching. Il réduit les connexions persistantes par 19. Le compromis est assumé : un saut réseau de plus pour décharger les nœuds de la base.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/09/meta-zgateway-zippydb-proxy/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "multer-aborted-upload-dos",
+      "updates": [
+        {
+          "id": "multer-aborted-upload-dos",
+          "tag": "security",
+          "date": "28 Sep 2026",
+          "title": {
+            "es": "multer: DoS por escrituras huérfanas en disco al abortar uploads",
+            "en": "multer: DoS via orphaned disk writes on aborted uploads",
+            "fr": "multer : DoS via des écritures disque orphelines lors d'uploads interrompus"
+          },
+          "body_html": {
+            "es": "<p>Cuando un cliente aborta un upload, multer deja archivos a medio escribir en disco; repetido en loop, llena el volumen (<strong>CVE-2026-88932</strong>, medium). Afecta a <code>2.2.0</code>–<code>2.3.x</code>, fix en <code>2.4.0</code>. Si usás <code>diskStorage</code> en Express, actualizá y poné límites de tamaño y rate limiting en el endpoint.</p>",
+            "en": "<p>When a client aborts an upload, multer leaves half-written files on disk; repeated in a loop, it fills the volume (<strong>CVE-2026-88932</strong>, medium). Affects <code>2.2.0</code>–<code>2.3.x</code>, fixed in <code>2.4.0</code>. If you use <code>diskStorage</code> in Express, upgrade and add size limits and rate limiting on the endpoint.</p>",
+            "fr": "<p>Quand un client interrompt un upload, multer laisse des fichiers partiels sur le disque, ce qui peut saturer le volume (<strong>CVE-2026-88932</strong>, medium). Corrigé en <code>2.4.0</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-3pph-fpjx-jg34",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "morgan-log-injection",
+          "tag": "security",
+          "date": "28 Sep 2026",
+          "title": {
+            "es": "morgan: log injection por comillas sin escapar en campos entrecomillados",
+            "en": "morgan: log injection via unescaped double quotes in quoted fields",
+            "fr": "morgan : injection de logs via des guillemets non échappés"
+          },
+          "body_html": {
+            "es": "<p>Un <code>User-Agent</code> o <code>Referer</code> con comillas dobles rompe el formato combined de morgan y permite falsificar campos en la línea de log (<strong>CVE-2026-87859</strong>, medium). Fix en <code>1.12.1</code>. Parece menor, pero si tu SIEM parsea esos logs, un atacante puede plantar entradas falsas. Mismo día que multer: tarde movida para el middleware clásico de Express.</p>",
+            "en": "<p>A <code>User-Agent</code> or <code>Referer</code> containing double quotes breaks morgan's combined format and lets attackers forge fields in the log line (<strong>CVE-2026-87859</strong>, medium). Fixed in <code>1.12.1</code>. It looks minor, but if a SIEM parses those logs, attackers can plant fake entries.</p>",
+            "fr": "<p>Un <code>User-Agent</code> ou <code>Referer</code> contenant des guillemets casse le format combined de morgan et permet de forger des champs de log (<strong>CVE-2026-87859</strong>, medium). Corrigé en <code>1.12.1</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-9f6g-j8ch-79g4",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "nodemailer-tls-servername",
+          "tag": "security",
+          "date": "28 Sep 2026",
+          "title": {
+            "es": "Nodemailer: el cache DNS global reutiliza el servername TLS entre transports",
+            "en": "Nodemailer: process-global DNS cache reuses TLS servername across transports",
+            "fr": "Nodemailer : le cache DNS global réutilise le servername TLS entre transports"
+          },
+          "body_html": {
+            "es": "<p>En apps multi-tenant con varios transports SMTP, el cache DNS de proceso puede mandar la conexión de un tenant con el <code>servername</code> de otro y exponer credenciales SMTP entre tenants (medium). Afecta de <code>5.0.0</code> a <code>10.0.1</code>; fix en <code>10.0.2</code>. Si armás transports por cliente en un SaaS, actualizá ya.</p>",
+            "en": "<p>In multi-tenant apps with several SMTP transports, the process-wide DNS cache can send one tenant's connection with another tenant's <code>servername</code>, exposing SMTP credentials across tenants (medium). Affects <code>5.0.0</code> through <code>10.0.1</code>; fixed in <code>10.0.2</code>.</p>",
+            "fr": "<p>Dans les apps multi-tenant avec plusieurs transports SMTP, le cache DNS global peut réutiliser le <code>servername</code> d'un autre tenant et exposer des identifiants SMTP (medium). Corrigé en <code>10.0.2</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-6vj9-mwq6-2f5v",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "ip-address-link-local-ssrf",
+          "tag": "security",
+          "date": "28 Sep 2026",
+          "title": {
+            "es": "ip-address: isLinkLocal() solo reconoce fe80::/64 y abre bypass de SSRF",
+            "en": "ip-address: isLinkLocal() only matches fe80::/64, enabling SSRF bypass",
+            "fr": "ip-address : isLinkLocal() ne reconnaît que fe80::/64, ouvrant un contournement SSRF"
+          },
+          "body_html": {
+            "es": "<p><code>Address6.isLinkLocal()</code> chequea <code>fe80::/64</code> en vez de <code>fe80::/10</code>, así que un filtro anti-SSRF basado en esta lib deja pasar direcciones link-local (<strong>CVE-2026-101913</strong>, CVSS 6.3). Un segundo advisory: ningún clasificador reconoce el rango NAT64 local <code>64:ff9b:1::/48</code>. Fix en <code>10.5.1</code>. Si tu guard de SSRF confía en clasificar IPs, revisalo con IPv6.</p>",
+            "en": "<p><code>Address6.isLinkLocal()</code> checks <code>fe80::/64</code> instead of <code>fe80::/10</code>, so SSRF filters built on this library let link-local addresses through (<strong>CVE-2026-101913</strong>, CVSS 6.3). A second advisory: no classifier recognizes the NAT64 local-use range <code>64:ff9b:1::/48</code>. Fixed in <code>10.5.1</code>.</p>",
+            "fr": "<p><code>Address6.isLinkLocal()</code> teste <code>fe80::/64</code> au lieu de <code>fe80::/10</code>, ce qui permet de contourner les filtres anti-SSRF (<strong>CVE-2026-101913</strong>, CVSS 6.3). La plage NAT64 <code>64:ff9b:1::/48</code> n'est pas non plus reconnue. Corrigé en <code>10.5.1</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-rpw4-54j3-4h4q",
+            "label": "github.com/advisories"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "pnpm-12-8-0",
+      "updates": [
+        {
+          "id": "pnpm-12-8-0",
+          "tag": "release",
+          "date": "28 Sep 2026",
+          "title": {
+            "es": "pnpm 12.8.0: aviso si pack/publish van a subir un .env",
+            "en": "pnpm 12.8.0: warns when pack/publish would ship a .env file",
+            "fr": "pnpm 12.8.0 : avertit quand pack/publish embarquerait un fichier .env"
+          },
+          "body_html": {
+            "es": "<p><code>pnpm pack</code> y <code>pnpm publish</code> ahora avisan cuando el tarball incluye un <code>.env</code> o <code>.env.*</code> que no está listado en <code>files</code> (los templates como <code>.env.example</code> no cuentan). También instala en paralelo los workspaces con <code>sharedWorkspaceLockfile: false</code>, aplica todos los <code>--config.&lt;name&gt;</code> y <code>pack</code> respeta <code>--silent</code>. Un guardrail chiquito que evita filtrar secretos a npm: golazo.</p>",
+            "en": "<p><code>pnpm pack</code> and <code>pnpm publish</code> now warn when the tarball includes a <code>.env</code> or <code>.env.*</code> file not listed in <code>files</code> (templates like <code>.env.example</code> are ignored). It also installs <code>sharedWorkspaceLockfile: false</code> workspaces concurrently, applies every <code>--config.&lt;name&gt;</code> flag, and <code>pack</code> honors <code>--silent</code>. A small guardrail against leaking secrets to npm.</p>",
+            "fr": "<p><code>pnpm pack</code> et <code>pnpm publish</code> avertissent désormais quand le tarball contient un <code>.env</code> non listé dans <code>files</code>. Installation concurrente des workspaces avec <code>sharedWorkspaceLockfile: false</code> et prise en compte de tous les <code>--config.&lt;name&gt;</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/pnpm/pnpm/releases/tag/v12.8.0",
+            "label": "github.com/pnpm/pnpm"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El 28 de septiembre fue día de advisories para el stack Node clásico: fast-uri (Fastify/Ajv), undici, multer, morgan, nodemailer, ip-address y Angular SSR en la misma tanda. Varios son de parsing y clasificación (URIs, IPv6, logs), justo las piezas en las que confiamos para validar input. Si tu defensa contra SSRF depende de una lib que parsea URLs o clasifica IPs, testeala con casos raros de IPv6 y authorities malformadas.",
+      "en": "September 28 was advisory day for the classic Node stack: fast-uri (Fastify/Ajv), undici, multer, morgan, nodemailer, ip-address and Angular SSR in one batch. Several are parsing and classification bugs (URIs, IPv6, logs), the very pieces we trust to validate input. If your SSRF defense relies on a library that parses URLs or classifies IPs, test it with odd IPv6 cases and malformed authorities.",
+      "fr": "Le 28 septembre a été un jour d'advisories pour la stack Node classique : fast-uri (Fastify/Ajv), undici, multer, morgan, nodemailer, ip-address et Angular SSR. Plusieurs sont des bugs de parsing et de classification (URI, IPv6, logs), précisément les briques utilisées pour valider les entrées."
+    },
+    {
+      "es": "Meta y Uber cuentan la misma historia desde lados distintos: sacar el estado de conexión de la base (ZGateway) y separar la intención de la ejecución (ServiceScale). Agregar una capa de indirección cuesta un hop, pero compra consistencia y capacidad.",
+      "en": "Meta and Uber tell the same story from different angles: pull connection state off the database (ZGateway) and separate intent from execution (ServiceScale). An indirection layer costs a hop but buys consistency and capacity.",
+      "fr": "Meta et Uber racontent la même histoire : sortir l'état de connexion de la base (ZGateway) et séparer intention et exécution (ServiceScale). Une couche d'indirection coûte un saut réseau mais apporte cohérence et capacité."
+    }
+  ]
+}

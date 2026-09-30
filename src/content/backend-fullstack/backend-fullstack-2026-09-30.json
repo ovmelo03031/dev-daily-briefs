@@ -1,0 +1,328 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 30 Sep 2026",
+    "en": "Backend & Fullstack Daily — 30 Sep 2026",
+    "fr": "Backend & Fullstack Daily — 30 sept. 2026"
+  },
+  "description": {
+    "es": "Diez advisories de undici de una, NestJS microservices tumbable por un pattern anidado, bypass de middleware en serveStatic de Hono, SvelteKit 3 RC, Worker Previews por branch y Atlassian migrando 4.8B puntos/min a OpenTelemetry.",
+    "en": "Ten undici advisories in one batch, NestJS microservices crashable via a nested pattern, Hono serveStatic middleware bypass, SvelteKit 3 RC, per-branch Worker Previews and Atlassian moving 4.8B points/min to OpenTelemetry.",
+    "fr": "Dix advisories undici d'un coup, NestJS microservices plantable via un pattern imbriqué, contournement de middleware dans serveStatic de Hono, SvelteKit 3 RC, Worker Previews par branche et Atlassian migrant 4,8 Md de points/min vers OpenTelemetry."
+  },
+  "pubDate": "2026-09-30",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "undici: 10 advisories, bypass de TLS", "en": "undici: 10 advisories, TLS bypass", "fr": "undici : 10 advisories, contournement TLS" },
+      "anchor": "undici-advisory-batch",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "NestJS microservices: crash remoto", "en": "NestJS microservices: remote crash", "fr": "NestJS microservices : crash à distance" },
+      "anchor": "nestjs-microservices-dos",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Hono serveStatic: bypass de middleware", "en": "Hono serveStatic: middleware bypass", "fr": "Hono serveStatic : contournement de middleware" },
+      "anchor": "hono-servestatic-bypass",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "SvelteKit 3 llega a Release Candidate", "en": "SvelteKit 3 reaches Release Candidate", "fr": "SvelteKit 3 passe en Release Candidate" },
+      "anchor": "sveltekit-3-rc",
+      "icon": "lucide:server"
+    },
+    {
+      "text": { "es": "Worker Previews: un entorno por branch", "en": "Worker Previews: one environment per branch", "fr": "Worker Previews : un environnement par branche" },
+      "anchor": "cloudflare-worker-previews",
+      "icon": "simple-icons:cloudflare"
+    },
+    {
+      "text": { "es": "Atlassian: métricas sobre OpenTelemetry", "en": "Atlassian: metrics on OpenTelemetry", "fr": "Atlassian : métriques sur OpenTelemetry" },
+      "anchor": "atlassian-opentelemetry",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "undici-advisory-batch",
+      "updates": [
+        {
+          "id": "undici-advisory-batch",
+          "tag": "security",
+          "date": "29 Sep 2026",
+          "title": {
+            "es": "undici: diez advisories en una tanda, incluyendo bypass de validación TLS y cache poisoning cross-origin",
+            "en": "undici: ten advisories in one batch, including a TLS validation bypass and cross-origin cache poisoning",
+            "fr": "undici : dix advisories d'un coup, dont un contournement de validation TLS et un cache poisoning cross-origin"
+          },
+          "body_html": {
+            "es": "<p><code>undici</code> es el cliente HTTP detrás de <code>fetch</code> en Node, así que esto te toca aunque nunca lo hayas importado. Los más picantes: <strong>CVE-2026-84961</strong> (high, CVSS 7.4) — <code>BalancedPool</code> descarta las connect options y <strong>se saltea la validación del certificado TLS</strong>; <strong>CVE-2026-85152</strong> (high) — los interceptors de cache no aíslan por origin y habilitan cache poisoning cross-origin; <strong>CVE-2026-84933</strong> — cachea <code>Set-Cookie</code> en caches compartidos y filtra cookies entre usuarios. El resto son DoS (WebSocket, descompresión sin límite, RetryHandler) y un response splitting. Parcheado en <code>8.10.2</code> y <code>7.29.1</code>. Corré <code>pnpm why undici</code> y actualizá YA, sobre todo si usás el cache interceptor o pools balanceados.</p>",
+            "en": "<p><code>undici</code> is the HTTP client behind Node's <code>fetch</code>, so this affects you even if you never imported it. The worst: <strong>CVE-2026-84961</strong> (high, CVSS 7.4) — <code>BalancedPool</code> drops connect options and <strong>skips TLS certificate validation</strong>; <strong>CVE-2026-85152</strong> (high) — cache interceptors lack origin isolation, enabling cross-origin cache poisoning; <strong>CVE-2026-84933</strong> — <code>Set-Cookie</code> cached in shared caches leaks cookies across users. The rest are DoS (WebSocket, unbounded decompression, RetryHandler) plus a response splitting. Fixed in <code>8.10.2</code> and <code>7.29.1</code>. Run <code>pnpm why undici</code> and update now, especially if you use the cache interceptor or balanced pools.</p>",
+            "fr": "<p><code>undici</code> est le client HTTP derrière <code>fetch</code> dans Node. Les plus graves : <strong>CVE-2026-84961</strong> (high, CVSS 7.4) — <code>BalancedPool</code> ignore les options de connexion et <strong>saute la validation du certificat TLS</strong> ; <strong>CVE-2026-85152</strong> (high) — cache poisoning cross-origin ; <strong>CVE-2026-84933</strong> — fuite de cookies via <code>Set-Cookie</code> en cache partagé. Le reste : des DoS et un response splitting. Corrigé en <code>8.10.2</code> et <code>7.29.1</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-w293-vg96-wgc3", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "nestjs-microservices-dos",
+      "updates": [
+        {
+          "id": "nestjs-microservices-dos",
+          "tag": "security",
+          "date": "29 Sep 2026",
+          "title": {
+            "es": "NestJS: un message pattern anidado tira abajo el proceso de microservices",
+            "en": "NestJS: a deeply nested message pattern kills the microservices process",
+            "fr": "NestJS : un message pattern profondément imbriqué tue le processus microservices"
+          },
+          "body_html": {
+            "es": "<p><strong>CVE-2026-102281</strong> (high, CVSS 7.5) en <code>@nestjs/microservices</code>: un pattern de mensaje con anidamiento profundo termina el proceso de forma remota. Si tu transport (TCP, Redis, NATS, Kafka) recibe mensajes de clientes que no controlás, es un kill switch gratis. Parcheado en <code>12.0.2</code> y <code>11.2.4</code> — ojo que la línea 12 ya va por 12.1.x, así que si estás al día ya estás cubierto.</p>",
+            "en": "<p><strong>CVE-2026-102281</strong> (high, CVSS 7.5) in <code>@nestjs/microservices</code>: a deeply nested message pattern remotely terminates the process. If your transport (TCP, Redis, NATS, Kafka) receives messages from clients you don't control, that's a free kill switch. Fixed in <code>12.0.2</code> and <code>11.2.4</code> — the 12 line is already at 12.1.x, so current installs are covered.</p>",
+            "fr": "<p><strong>CVE-2026-102281</strong> (high, CVSS 7.5) dans <code>@nestjs/microservices</code> : un pattern de message profondément imbriqué termine le processus à distance. Corrigé en <code>12.0.2</code> et <code>11.2.4</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-m8vh-jmq9-5rjg", "label": "github.com/advisories" }
+        },
+        {
+          "id": "hono-servestatic-bypass",
+          "tag": "security",
+          "date": "29 Sep 2026",
+          "title": {
+            "es": "Hono 4.13.11: serveStatic decodificaba dos veces y salteaba middleware",
+            "en": "Hono 4.13.11: serveStatic decoded twice and skipped middleware",
+            "fr": "Hono 4.13.11 : serveStatic décodait deux fois et contournait le middleware"
+          },
+          "body_html": {
+            "es": "<p><code>serveStatic</code> decodificaba un path ya decodificado: un request armado se ruteaba como un path y se servía como otro, salteando el middleware montado sobre el prefijo estático (auth incluida). Advisory <strong>medium (CVSS 5.3)</strong>, afecta <code>hono/bun</code>, <code>hono/deno</code>, <code>hono/cloudflare-workers</code> y los <code>@hono/*</code>. Ahora rechaza paths con <code>%</code> tras decodificar; si servís archivos con <code>%</code> literal, activá <code>allowPercentInPath: true</code>. En Node el fix viene en <code>@hono/node-server</code> 2.1.3.</p>",
+            "en": "<p><code>serveStatic</code> decoded an already-decoded path: a crafted request could be routed as one path and served as another, skipping middleware mounted on a static prefix (auth included). <strong>Medium (CVSS 5.3)</strong>, affects <code>hono/bun</code>, <code>hono/deno</code>, <code>hono/cloudflare-workers</code> and the <code>@hono/*</code> adapters. It now rejects paths still containing <code>%</code> after decoding; set <code>allowPercentInPath: true</code> for literal <code>%</code> filenames. On Node the fix ships in <code>@hono/node-server</code> 2.1.3.</p>",
+            "fr": "<p><code>serveStatic</code> décodait un chemin déjà décodé, permettant de contourner le middleware monté sur un préfixe statique. <strong>Medium (CVSS 5.3)</strong>. Les chemins contenant encore <code>%</code> sont désormais rejetés (<code>allowPercentInPath: true</code> pour l'autoriser). Pour Node : <code>@hono/node-server</code> 2.1.3.</p>"
+          },
+          "source": { "url": "https://github.com/honojs/hono/releases/tag/v4.13.11", "label": "github.com/honojs" }
+        },
+        {
+          "id": "decompress-symlink-traversal",
+          "tag": "security",
+          "date": "29 Sep 2026",
+          "title": {
+            "es": "Archivos comprimidos, mala semana: decompress (crítico), adm-zip y brace-expansion",
+            "en": "Bad week for archive handling: decompress (critical), adm-zip and brace-expansion",
+            "fr": "Mauvaise semaine pour les archives : decompress (critique), adm-zip et brace-expansion"
+          },
+          "body_html": {
+            "es": "<p><strong>CVE-2026-101894</strong> (critical, CVSS 9.1): <code>@xhmikosr/decompress</code> permite path traversal con una cadena de symlinks — fix en <code>11.1.4</code>/<code>10.2.2</code>, y el <code>decompress</code> original <strong>no tiene parche</strong>, así que migrá. En la misma tanda, <code>adm-zip</code> sumó siete advisories: preserva bits SUID/SGID al extraer (<strong>CVE-2026-102282</strong>, escalada local), el anti zip-bomb se saltea declarando tamaño 0 y un error async crashea el proceso — actualizá a <code>0.6.1</code>. Y <code>brace-expansion</code> (dependencia transitiva de medio npm vía minimatch) tiene tres DoS por recursión; parches desde <code>1.1.19</code> hasta <code>5.0.10</code>. Si aceptás uploads comprimidos, esto no es opcional.</p>",
+            "en": "<p><strong>CVE-2026-101894</strong> (critical, CVSS 9.1): <code>@xhmikosr/decompress</code> allows path traversal via a symlink chain — fixed in <code>11.1.4</code>/<code>10.2.2</code>, and the original <code>decompress</code> has <strong>no patch</strong>, so migrate. Same batch: <code>adm-zip</code> got seven advisories — it preserves SUID/SGID bits on extraction (<strong>CVE-2026-102282</strong>, local privilege escalation), its zip-bomb guard is bypassed by declaring size 0, and an async error crashes the process; update to <code>0.6.1</code>. And <code>brace-expansion</code> (transitive in half of npm via minimatch) has three recursion DoS bugs, patched from <code>1.1.19</code> through <code>5.0.10</code>. If you accept compressed uploads, this is not optional.</p>",
+            "fr": "<p><strong>CVE-2026-101894</strong> (critique, CVSS 9.1) : path traversal via chaîne de symlinks dans <code>@xhmikosr/decompress</code> (corrigé en <code>11.1.4</code>/<code>10.2.2</code> ; <code>decompress</code> original sans correctif). <code>adm-zip</code> : sept advisories dont la préservation des bits SUID/SGID (<strong>CVE-2026-102282</strong>), corrigé en <code>0.6.1</code>. <code>brace-expansion</code> : trois DoS par récursion, corrigés de <code>1.1.19</code> à <code>5.0.10</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-hrh2-vp3x-79xf", "label": "github.com/advisories" }
+        },
+        {
+          "id": "engine-io-dos",
+          "tag": "security",
+          "date": "29 Sep 2026",
+          "title": {
+            "es": "Socket.IO / engine.io: DoS por mismatch de revisión de protocolo",
+            "en": "Socket.IO / engine.io: DoS via protocol revision mismatch",
+            "fr": "Socket.IO / engine.io : DoS via incohérence de révision de protocole"
+          },
+          "body_html": {
+            "es": "<p><strong>CVE-2026-102599</strong> (high, CVSS 7.5): un cliente que negocia una revisión de protocolo que no coincide puede tumbar el server <code>engine.io</code> 6.6.x. Fix en <code>6.6.10</code>. Si tenés sockets expuestos a Internet (chat, dashboards en vivo), revisá el lockfile — engine.io viene transitivo con <code>socket.io</code>.</p>",
+            "en": "<p><strong>CVE-2026-102599</strong> (high, CVSS 7.5): a client negotiating a mismatched protocol revision can take down an <code>engine.io</code> 6.6.x server. Fixed in <code>6.6.10</code>. If you expose sockets to the Internet (chat, live dashboards), check your lockfile — engine.io comes in transitively with <code>socket.io</code>.</p>",
+            "fr": "<p><strong>CVE-2026-102599</strong> (high, CVSS 7.5) : une révision de protocole incohérente peut faire tomber un serveur <code>engine.io</code> 6.6.x. Corrigé en <code>6.6.10</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-2gc4-cqfq-p2gv", "label": "github.com/advisories" }
+        },
+        {
+          "id": "joi-isodate-redos",
+          "tag": "security",
+          "date": "29 Sep 2026",
+          "title": {
+            "es": "joi: ReDoS en Joi.string().isoDate()",
+            "en": "joi: ReDoS in Joi.string().isoDate()",
+            "fr": "joi : ReDoS dans Joi.string().isoDate()"
+          },
+          "body_html": {
+            "es": "<p>Backtracking cuadrático en la regex de <code>isoDate()</code> (high). Es la validación que ponés justamente en el borde, contra input no confiable — o sea, el peor lugar. Parcheado en <code>17.13.7</code> y <code>18.2.6</code>. Mismo día: <code>webpack-dev-middleware</code> path traversal (high, fix <code>8.3.0</code>/<code>7.4.6</code>) — dev-only, pero ojo si exponés el dev server.</p>",
+            "en": "<p>Quadratic backtracking in the <code>isoDate()</code> regex (high). This is validation you put right at the edge, against untrusted input — the worst place for it. Fixed in <code>17.13.7</code> and <code>18.2.6</code>. Same day: <code>webpack-dev-middleware</code> path traversal (high, fixed in <code>8.3.0</code>/<code>7.4.6</code>) — dev-only, but careful if you expose the dev server.</p>",
+            "fr": "<p>Backtracking quadratique dans la regex de <code>isoDate()</code> (high). Corrigé en <code>17.13.7</code> et <code>18.2.6</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-6h2x-m376-mqjq", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "elasticache-valkey-public-endpoints",
+      "updates": [
+        {
+          "id": "elasticache-valkey-public-endpoints",
+          "tag": "notable",
+          "date": "29 Sep 2026",
+          "title": {
+            "es": "ElastiCache Serverless para Valkey suma endpoints públicos con IAM sobre TLS 1.3",
+            "en": "ElastiCache Serverless for Valkey adds public endpoints with IAM over TLS 1.3",
+            "fr": "ElastiCache Serverless pour Valkey ajoute des endpoints publics avec IAM sur TLS 1.3"
+          },
+          "body_html": {
+            "es": "<p>Con <strong>Valkey 9.0+</strong> ya podés pegarle al cache desde afuera de la VPC — tu laptop, una function en otro cloud — sin bastion ni túnel SSH. Auth por <strong>IAM sobre TLS 1.3</strong>, sin passwords, con Valkey GLIDE 2.2+. Sin costo extra y en todas las regiones comerciales. Golazo para la DX en prototipos; en prod, pensalo dos veces antes de sacar el cache de la red privada.</p>",
+            "en": "<p>With <strong>Valkey 9.0+</strong> you can now reach the cache from outside the VPC — your laptop, a function in another cloud — without a bastion or SSH tunnel. Auth via <strong>IAM over TLS 1.3</strong>, no passwords, using Valkey GLIDE 2.2+. No extra cost, all commercial regions. Great DX for prototyping; in production, think twice before moving your cache off the private network.</p>",
+            "fr": "<p>Avec <strong>Valkey 9.0+</strong>, le cache est accessible hors VPC sans bastion, via <strong>IAM sur TLS 1.3</strong> et Valkey GLIDE 2.2+. Sans surcoût, toutes régions commerciales.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-elasticache-serverless-public-endpoints/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "aurora-postgresql-minors",
+          "tag": "minor",
+          "date": "29 Sep 2026",
+          "title": {
+            "es": "Aurora PostgreSQL soporta 18.6, 17.11, 16.15, 15.19 y 14.24",
+            "en": "Aurora PostgreSQL supports 18.6, 17.11, 16.15, 15.19 and 14.24",
+            "fr": "Aurora PostgreSQL prend en charge 18.6, 17.11, 16.15, 15.19 et 14.24"
+          },
+          "body_html": {
+            "es": "<p>Aurora se pone al día con los últimos minors de la comunidad PostgreSQL en todas las ramas soportadas. Son bug fixes, pero agendá el upgrade en tu próxima ventana de mantenimiento.</p>",
+            "en": "<p>Aurora catches up with the latest PostgreSQL community minors across every supported branch. Bug fixes only, but schedule the upgrade in your next maintenance window.</p>",
+            "fr": "<p>Aurora rattrape les dernières versions mineures de PostgreSQL sur toutes les branches supportées.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-aurora-postgresql-18-6-17-11-16-15-15-19-14-24/", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloudflare-worker-previews",
+      "updates": [
+        {
+          "id": "cloudflare-worker-previews",
+          "tag": "ga",
+          "date": "29 Sep 2026",
+          "title": {
+            "es": "Cloudflare Worker Previews: un entorno aislado y con URL estable por cada branch",
+            "en": "Cloudflare Worker Previews: an isolated environment with a stable URL per branch",
+            "fr": "Cloudflare Worker Previews : un environnement isolé avec URL stable par branche"
+          },
+          "body_html": {
+            "es": "<p>Sale de beta privada: cada branch de Git tiene su entorno <em>production-like</em> con URL estable, vía <code>npx wrangler preview</code>. Lo interesante es el estado: Wrangler crea <strong>namespaces de Durable Objects y apps de Containers separadas por preview</strong>, así un cambio de schema no te rompe prod. Cientos de previews conviven bajo el mismo Worker. Esto es lo que Vercel te daba para el frontend, ahora para el backend en el edge.</p>",
+            "en": "<p>Out of private beta: every Git branch gets a production-like environment with a stable URL, via <code>npx wrangler preview</code>. The interesting part is state: Wrangler creates <strong>separate Durable Object namespaces and Container apps per preview</strong>, so a schema change can't break production. Hundreds of previews can run under one Worker. What Vercel gave you for the frontend, now for edge backends.</p>",
+            "fr": "<p>Fin de la bêta privée : chaque branche Git obtient un environnement proche de la prod avec URL stable (<code>npx wrangler preview</code>), avec des <strong>namespaces Durable Objects et apps Containers séparés par preview</strong>.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/cloudflare-worker-agent/", "label": "infoq.com" }
+        },
+        {
+          "id": "cloudflare-python-workers-ga",
+          "tag": "ga",
+          "date": "29 Sep 2026",
+          "title": {
+            "es": "Python Workers llega a GA en Cloudflare, con debate sobre cold starts",
+            "en": "Python Workers reach GA on Cloudflare, amid debate over cold starts",
+            "fr": "Python Workers en GA chez Cloudflare, sur fond de débat sur les cold starts"
+          },
+          "body_html": {
+            "es": "<p>Tras dos años de preview, Python queda a la par de JS/TS en Workers, sobre <strong>Pyodide</strong> (paquetes nativos compilados a WASM, estandarizado vía PEP 783). Anda con FastAPI, Django y Flask y bindings a D1, R2 y Hyperdrive. El punto flojo: Cloudflare reporta cold starts de ~1 s y la comunidad cuestiona el mantenimiento upstream de Pyodide. Para equipos mixtos TS/Python es interesante; para latencia crítica, medí antes.</p>",
+            "en": "<p>After two years in preview, Python joins JS/TS as a first-class Workers language, built on <strong>Pyodide</strong> (native packages cross-compiled to WASM, standardized via PEP 783). Works with FastAPI, Django and Flask, with bindings to D1, R2 and Hyperdrive. The weak spot: Cloudflare reports ~1 s cold starts, and the community questions upstream Pyodide maintenance funding. Interesting for mixed TS/Python teams; for latency-critical paths, measure first.</p>",
+            "fr": "<p>Après deux ans de preview, Python rejoint JS/TS sur Workers via <strong>Pyodide</strong> (PEP 783). Compatible FastAPI, Django, Flask. Point faible : cold starts d'environ 1 s et questions sur la maintenance amont de Pyodide.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/cloudflare-python-workers-ga/", "label": "infoq.com" }
+        },
+        {
+          "id": "cloudwatch-omni",
+          "tag": "notable",
+          "date": "29 Sep 2026",
+          "title": {
+            "es": "Amazon CloudWatch Omni: observabilidad para apps y agentes, OpenTelemetry nativo",
+            "en": "Amazon CloudWatch Omni: observability for apps and agents, native OpenTelemetry",
+            "fr": "Amazon CloudWatch Omni : observabilité pour apps et agents, OpenTelemetry natif"
+          },
+          "body_html": {
+            "es": "<p>AWS reposiciona CloudWatch para la era de los agentes: traces end-to-end que además <strong>evalúan</strong> correctitud, retrieval y selección de tools, con soporte nativo de OpenTelemetry, OpenInference y ADOT. Integra LangChain, LangGraph, CrewAI y evaluadores como Braintrust o Ragas. Si ya instrumentás con OTel, no tenés que reconfigurar nada — ese es el verdadero argumento de venta.</p>",
+            "en": "<p>AWS repositions CloudWatch for the agent era: end-to-end traces that also <strong>evaluate</strong> correctness, retrieval and tool selection, with native OpenTelemetry, OpenInference and ADOT support. Integrates LangChain, LangGraph, CrewAI and evaluators like Braintrust or Ragas. If you already instrument with OTel, there's nothing to reconfigure — that's the real selling point.</p>",
+            "fr": "<p>CloudWatch se repositionne pour les agents : traces de bout en bout avec <strong>évaluation</strong> (exactitude, retrieval, choix d'outils), support natif d'OpenTelemetry, OpenInference et ADOT.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/aws-cloudwatchomni-observability/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "atlassian-opentelemetry",
+      "updates": [
+        {
+          "id": "atlassian-opentelemetry",
+          "tag": "notable",
+          "date": "29 Sep 2026",
+          "title": {
+            "es": "Atlassian reconstruye su pipeline de métricas sobre OpenTelemetry: 4.8B puntos por minuto",
+            "en": "Atlassian rebuilds its metrics pipeline on OpenTelemetry: 4.8B points per minute",
+            "fr": "Atlassian reconstruit son pipeline de métriques sur OpenTelemetry : 4,8 Md de points par minute"
+          },
+          "body_html": {
+            "es": "<p>Migraron de <code>gostatsd</code> (UDP) al OpenTelemetry Collector con distribuciones propias para colección, ingesta, agregación y forwarding: ~100.000 hosts, 14 regiones, y la agregación recorta el almacenamiento un <strong>96%</strong>. Meter las métricas en el sidecar de tracing que ya existía bajó <strong>~30% de CPU</strong> en toda la flota. Dos lecciones de arquitectura de manual: <em>mantener la interfaz y reconstruir todo detrás</em> convirtió una migración de toda la org en una del equipo de plataforma (puertos y adaptadores, ¿vieron?), y los benchmarks chicos no alcanzaron — el profiling continuo en prod fue lo que marcó dónde optimizar.</p>",
+            "en": "<p>They moved from <code>gostatsd</code> (UDP) to the OpenTelemetry Collector with purpose-built distributions for collection, ingest, aggregation and forwarding: ~100,000 hosts, 14 regions, with aggregation cutting stored data by <strong>96%</strong>. Folding metrics into the existing tracing sidecar saved <strong>~30% CPU</strong> fleet-wide. Two textbook architecture lessons: <em>keep the interface and rebuild everything behind it</em> turned an org-wide migration into a platform-team one (ports and adapters, anyone?), and small benchmarks weren't enough — continuous profiling in production showed where to optimize.</p>",
+            "fr": "<p>Migration de <code>gostatsd</code> (UDP) vers l'OpenTelemetry Collector : ~100 000 hôtes, 14 régions, <strong>96 %</strong> de données stockées en moins, <strong>~30 %</strong> de CPU économisé. Leçon clé : garder l'interface et tout reconstruire derrière, et s'appuyer sur le profiling continu en production.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/atlassian-opentelemetry/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "sveltekit-3-rc",
+      "updates": [
+        {
+          "id": "sveltekit-3-rc",
+          "tag": "beta",
+          "tag_label": { "es": "RC", "en": "RC", "fr": "RC" },
+          "date": "30 Sep 2026",
+          "title": {
+            "es": "SvelteKit 3 llega a RC: la config se muda a Vite y $lib pasa a #lib",
+            "en": "SvelteKit 3 hits RC: config moves to Vite and $lib becomes #lib",
+            "fr": "SvelteKit 3 en RC : la config passe dans Vite et $lib devient #lib"
+          },
+          "body_html": {
+            "es": "<p>Chau <code>svelte.config.js</code>: la configuración vive en <code>vite.config.ts</code>. El alias <code>$lib</code> se reemplaza por <code>#lib</code> usando <strong>subpath imports nativos de Node</strong> — con extensión obligatoria (<code>#lib/foo.js</code>), así que preparate para un codemod. Todos los errores pasan por <code>handleError</code> con stack traces con sourcemaps, y requiere <strong>Vite 8 + Rolldown</strong>. Remote Functions (RPC type-safe cliente-servidor) siguen experimentales. Apostar a estándares de Node en vez de aliases mágicos es la decisión correcta.</p>",
+            "en": "<p>Goodbye <code>svelte.config.js</code>: configuration lives in <code>vite.config.ts</code>. The <code>$lib</code> alias is replaced by <code>#lib</code> using <strong>Node's native subpath imports</strong> — with mandatory extensions (<code>#lib/foo.js</code>), so expect a codemod. All errors flow through <code>handleError</code> with sourcemapped stack traces, and it requires <strong>Vite 8 + Rolldown</strong>. Remote Functions (type-safe client-server RPC) remain experimental. Betting on Node standards over magic aliases is the right call.</p>",
+            "fr": "<p>Fin de <code>svelte.config.js</code> : la config vit dans <code>vite.config.ts</code>. <code>$lib</code> devient <code>#lib</code> via les <strong>subpath imports natifs de Node</strong> (extension obligatoire). Requiert <strong>Vite 8 + Rolldown</strong> ; les Remote Functions restent expérimentales.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/sveltekit-3-vite/", "label": "infoq.com" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Semana de auditoría masiva en npm: undici, adm-zip, brace-expansion, nodemailer, fast-uri e ip-address recibieron tandas de advisories el mismo día. Parece un barrido coordinado de parsers y descompresores — revisá el lockfile completo, no solo tus dependencias directas.",
+      "en": "Mass-audit week on npm: undici, adm-zip, brace-expansion, nodemailer, fast-uri and ip-address all got advisory batches on the same day. It looks like a coordinated sweep of parsers and decompressors — review your whole lockfile, not just direct dependencies.",
+      "fr": "Semaine d'audit massif sur npm : undici, adm-zip, brace-expansion, nodemailer, fast-uri et ip-address ont reçu des séries d'advisories le même jour. Vérifiez tout le lockfile, pas seulement les dépendances directes."
+    },
+    {
+      "es": "El edge se vuelve plataforma completa: previews por branch con estado aislado y Python en GA acercan Workers a lo que antes solo daban los PaaS tradicionales.",
+      "en": "The edge is becoming a full platform: per-branch previews with isolated state and Python GA bring Workers closer to what only traditional PaaS offered.",
+      "fr": "L'edge devient une plateforme complète : previews par branche avec état isolé et Python en GA."
+    },
+    {
+      "es": "OpenTelemetry ya es el contrato por defecto: Atlassian migra métricas a escala masiva y AWS diseña CloudWatch Omni alrededor de OTel. Instrumentá contra el estándar, no contra el vendor.",
+      "en": "OpenTelemetry is now the default contract: Atlassian migrates metrics at massive scale and AWS builds CloudWatch Omni around OTel. Instrument against the standard, not the vendor.",
+      "fr": "OpenTelemetry devient le contrat par défaut : instrumentez contre le standard, pas contre le fournisseur."
+    }
+  ]
+}

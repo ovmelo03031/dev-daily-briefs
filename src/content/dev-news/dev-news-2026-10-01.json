@@ -1,0 +1,220 @@
+{
+  "title": {
+    "es": "Dev News — 1 Oct 2026: Next.js parchea 7 advisories, axios recibe 13 y SvelteKit 3 llega a RC",
+    "en": "Dev News — 1 Oct 2026: Next.js patches 7 advisories, axios gets 13, SvelteKit 3 hits RC",
+    "fr": "Dev News — 1 oct. 2026 : Next.js corrige 7 avis, axios en reçoit 13, SvelteKit 3 passe en RC"
+  },
+  "description": {
+    "es": "Día de parches de seguridad: Next.js 16.3.8/15.5.27, axios 1.20.0, Angular 22.2.1 y adapters de Astro. Además SvelteKit 3 RC, VS Code 1.140 y Vitest 5.0.3.",
+    "en": "Security patch day: Next.js 16.3.8/15.5.27, axios 1.20.0, Angular 22.2.1 and Astro adapters. Plus SvelteKit 3 RC, VS Code 1.140 and Vitest 5.0.3.",
+    "fr": "Journée de correctifs de sécurité : Next.js 16.3.8/15.5.27, axios 1.20.0, Angular 22.2.1 et adaptateurs Astro. Plus SvelteKit 3 RC, VS Code 1.140 et Vitest 5.0.3."
+  },
+  "pubDate": "2026-10-01",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": { "es": "Next.js: 7 advisories, incluye SSRF en imágenes", "en": "Next.js: 7 advisories, incl. image SSRF", "fr": "Next.js : 7 avis, dont un SSRF d'images" },
+      "anchor": "nextjs-security-batch",
+      "icon": "simple-icons:nextdotjs"
+    },
+    {
+      "text": { "es": "axios 1.20.0 cierra 13 advisories", "en": "axios 1.20.0 closes 13 advisories", "fr": "axios 1.20.0 corrige 13 avis" },
+      "anchor": "axios-advisory-batch",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "SvelteKit 3 RC: config en Vite, adiós $lib", "en": "SvelteKit 3 RC: config moves to Vite", "fr": "SvelteKit 3 RC : config dans Vite" },
+      "anchor": "sveltekit-3-rc",
+      "icon": "simple-icons:svelte"
+    },
+    {
+      "text": { "es": "Angular parchea DoS y open redirect en SSR", "en": "Angular patches SSR DoS and open redirect", "fr": "Angular corrige DoS et redirection en SSR" },
+      "anchor": "angular-ssr-advisories",
+      "icon": "simple-icons:angular"
+    },
+    {
+      "text": { "es": "VS Code 1.140: sesiones de agente multi-repo", "en": "VS Code 1.140: multi-repo agent sessions", "fr": "VS Code 1.140 : sessions d'agent multi-dépôts" },
+      "anchor": "vscode-1-140",
+      "icon": "simple-icons:visualstudiocode"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "nextjs-security-batch",
+          "tag": "security",
+          "date": "30 Sep 2026",
+          "title": {
+            "es": "Next.js 16.3.8 y 15.5.27: siete advisories, con un SSRF high en Image Optimization",
+            "en": "Next.js 16.3.8 and 15.5.27: seven advisories, led by a high-severity Image Optimization SSRF",
+            "fr": "Next.js 16.3.8 et 15.5.27 : sept avis, dont un SSRF de sévérité haute dans Image Optimization"
+          },
+          "body_html": {
+            "es": "<p>Vercel publicó en simultáneo <strong>16.3.8</strong> y <strong>15.5.27</strong>. El high es un <strong>SSRF en Image Optimization</strong>: si un host de <code>images.remotePatterns</code> controla su DNS, puede apuntar a IPs privadas. Hay cinco medium (cache poisoning de SSG/ISR, fugas de <code>use cache</code> entre Draft Mode y root params, bypass de <code>dynamicParams</code> en rutas de metadata) y un low en el endpoint MCP del dev server. Ojo con esto: si hosteás Next vos mismo, actualizá hoy y auditá tus <code>remotePatterns</code>.</p>",
+            "en": "<p>Vercel shipped <strong>16.3.8</strong> and <strong>15.5.27</strong> together. The high one is an <strong>Image Optimization SSRF</strong>: an allow-listed host in <code>images.remotePatterns</code> that controls its DNS can reach private IPs. Five mediums cover SSG/ISR cache poisoning, <code>use cache</code> leaks across Draft Mode and root params, and a <code>dynamicParams</code> bypass in metadata image routes; a low affects the dev server's MCP endpoint. Self-hosters should upgrade now and audit <code>remotePatterns</code>.</p>",
+            "fr": "<p>Vercel a publié <strong>16.3.8</strong> et <strong>15.5.27</strong> ensemble. L'avis haut est un <strong>SSRF dans Image Optimization</strong> : un hôte autorisé dans <code>images.remotePatterns</code> qui contrôle son DNS peut viser des IP privées. Cinq avis moyens touchent l'empoisonnement de cache SSG/ISR, des fuites <code>use cache</code> entre Draft Mode et root params, et un contournement de <code>dynamicParams</code> ; un avis bas concerne l'endpoint MCP du serveur de dev. Mettez à jour et auditez <code>remotePatterns</code>.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/next.js/releases/tag/v16.3.8", "label": "github.com/vercel/next.js" }
+        },
+        {
+          "id": "axios-advisory-batch",
+          "tag": "security",
+          "date": "30 Sep 2026",
+          "title": {
+            "es": "axios: 13 advisories en un día — prototype pollution, SSRF por redirects y ReDoS",
+            "en": "axios: 13 advisories in one day — prototype pollution, redirect SSRF and ReDoS",
+            "fr": "axios : 13 avis en un jour — pollution de prototype, SSRF par redirection et ReDoS"
+          },
+          "body_html": {
+            "es": "<p>La GitHub Advisory Database sumó <strong>13 advisories de axios</strong> el 30/09: gadgets de <strong>prototype pollution</strong> (incluido un secuestro del socket vía <code>createConnection</code> heredado), <code>maxRedirects: 0</code> ignorado por el fetch adapter (SSRF), el adapter HTTP/2 salteando DNS lookup y proxy, <code>NO_PROXY</code> con CIDR ignorado y dos ReDoS. El fix es <strong>axios 1.20.0</strong>. Es una locura cuántos proyectos frontend y BFF lo tienen como dependencia transitiva: corré <code>npm ls axios</code>.</p>",
+            "en": "<p>The GitHub Advisory Database added <strong>13 axios advisories</strong> on 30 Sep: <strong>prototype-pollution</strong> gadgets (including request socket hijack via an inherited <code>createConnection</code>), <code>maxRedirects: 0</code> not enforced by the fetch adapter (SSRF), the HTTP/2 adapter bypassing DNS lookup and proxy controls, CIDR <code>NO_PROXY</code> entries ignored, and two ReDoS bugs. The fix is <strong>axios 1.20.0</strong>. Check transitive usage with <code>npm ls axios</code>.</p>",
+            "fr": "<p>La GitHub Advisory Database a ajouté <strong>13 avis axios</strong> le 30 sept. : gadgets de <strong>pollution de prototype</strong> (dont un détournement de socket via <code>createConnection</code> hérité), <code>maxRedirects: 0</code> ignoré par l'adaptateur fetch (SSRF), l'adaptateur HTTP/2 contournant DNS et proxy, <code>NO_PROXY</code> en CIDR ignoré et deux ReDoS. Le correctif est <strong>axios 1.20.0</strong>. Vérifiez avec <code>npm ls axios</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-m8m8-qj5v-23w3", "label": "github.com/advisories" }
+        },
+        {
+          "id": "sveltekit-3-rc",
+          "tag": "beta",
+          "tag_label": { "es": "RC", "en": "RC", "fr": "RC" },
+          "date": "30 Sep 2026",
+          "title": {
+            "es": "SvelteKit 3 llega a release candidate: config en vite.config.ts y #lib reemplaza a $lib",
+            "en": "SvelteKit 3 reaches release candidate: config moves to vite.config.ts, #lib replaces $lib",
+            "fr": "SvelteKit 3 passe en release candidate : config dans vite.config.ts, #lib remplace $lib"
+          },
+          "body_html": {
+            "es": "<p>La configuración se muda de <code>svelte.config.js</code> a <code>vite.config.ts</code>, y el alias <code>$lib</code> se jubila a favor de los subpath imports nativos de Node (<code>#lib</code>, declarados en <code>package.json</code>) — con extensión obligatoria, tipo <code>#lib/foo.js</code>. Requiere <strong>Vite 8</strong> (Rolldown) y Svelte 5, y unifica el manejo de errores en <code>handleError</code>. Ojo con la migración: el find-and-replace de imports va a ser grande.</p>",
+            "en": "<p>Configuration moves from <code>svelte.config.js</code> to <code>vite.config.ts</code>, and the <code>$lib</code> alias is retired in favor of Node's native subpath imports (<code>#lib</code>, declared in <code>package.json</code>) — with required file extensions such as <code>#lib/foo.js</code>. It requires <strong>Vite 8</strong> (Rolldown) and Svelte 5, and routes all errors through <code>handleError</code>.</p>",
+            "fr": "<p>La configuration passe de <code>svelte.config.js</code> à <code>vite.config.ts</code>, et l'alias <code>$lib</code> est remplacé par les subpath imports natifs de Node (<code>#lib</code>, déclarés dans <code>package.json</code>) — avec extension obligatoire, comme <code>#lib/foo.js</code>. Requiert <strong>Vite 8</strong> (Rolldown) et Svelte 5, et unifie les erreurs dans <code>handleError</code>.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/sveltekit-3-vite/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "typescript",
+      "name": "TypeScript",
+      "theme": "typescript",
+      "icon_emoji": "🟦",
+      "anchor": "typescript",
+      "updates": [
+        {
+          "id": "vscode-typescript-1-0-1",
+          "tag": "minor",
+          "date": "30 Sep 2026",
+          "title": {
+            "es": "vscode-typescript v1.0.1 aparece en el repo de TypeScript, empaquetando TS 7.0.2",
+            "en": "vscode-typescript v1.0.1 lands in the TypeScript repo, bundling TS 7.0.2",
+            "fr": "vscode-typescript v1.0.1 publié dans le dépôt TypeScript, avec TS 7.0.2"
+          },
+          "body_html": {
+            "es": "<p>Primer release con tag <code>vscode-typescript/*</code> en <code>microsoft/TypeScript</code>: la extensión de VS Code trae embebido <strong>TypeScript 7.0.2</strong>, el compilador nativo. Las notas son de una línea, así que todavía no hay detalle de qué cambia frente al soporte built-in del editor.</p>",
+            "en": "<p>The first <code>vscode-typescript/*</code> tagged release in <code>microsoft/TypeScript</code>: a VS Code extension that bundles <strong>TypeScript 7.0.2</strong>, the native compiler. The notes are a single line, so there is no detail yet on how it differs from the editor's built-in support.</p>",
+            "fr": "<p>Première release taguée <code>vscode-typescript/*</code> dans <code>microsoft/TypeScript</code> : une extension VS Code qui embarque <strong>TypeScript 7.0.2</strong>, le compilateur natif. Les notes tiennent en une ligne, sans détail sur la différence avec le support intégré.</p>"
+          },
+          "source": { "url": "https://github.com/microsoft/TypeScript/releases/tag/vscode-typescript%2Fv1.0.1", "label": "github.com/microsoft/TypeScript" }
+        }
+      ]
+    },
+    {
+      "id": "js-frameworks",
+      "name": "JS Frameworks",
+      "theme": "js-frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "js-frameworks",
+      "updates": [
+        {
+          "id": "angular-ssr-advisories",
+          "tag": "security",
+          "date": "30 Sep 2026",
+          "title": {
+            "es": "Angular 22.2.1, 21.2.25 y 20.3.33: DoS y open redirect en el router con SSR",
+            "en": "Angular 22.2.1, 21.2.25 and 20.3.33: router DoS and open redirect under SSR",
+            "fr": "Angular 22.2.1, 21.2.25 et 20.3.33 : DoS et redirection ouverte du router en SSR"
+          },
+          "body_html": {
+            "es": "<p>Dos advisories nuevos en <code>@angular/router</code> con SSR: un <strong>DoS high</strong> por segmentos de outlet auxiliares vacíos que el router reevalúa sin fin, y un <strong>open redirect medium</strong> vía URLs protocol-relative. El patch también endurece el sanitizer de URLs (bloquea <code>data:</code> y <code>vbscript:</code> peligrosos). La 19.x quedó fuera de soporte y <strong>no se parchea</strong>.</p>",
+            "en": "<p>Two new <code>@angular/router</code> SSR advisories: a <strong>high DoS</strong> where unconfigured empty-path outlet segments make the router re-evaluate routes endlessly, and a <strong>medium open redirect</strong> via protocol-relative URLs. The patch also hardens the URL sanitizer against dangerous <code>data:</code> and <code>vbscript:</code> URLs. 19.x is out of support and <strong>will not be patched</strong>.</p>",
+            "fr": "<p>Deux nouveaux avis SSR pour <code>@angular/router</code> : un <strong>DoS haut</strong> où des segments d'outlet vides non configurés font boucler la reconnaissance de routes, et une <strong>redirection ouverte moyenne</strong> via des URL protocol-relative. Le patch durcit aussi le sanitizer contre <code>data:</code> et <code>vbscript:</code>. La 19.x n'est <strong>pas corrigée</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/angular/angular/security/advisories/GHSA-62vg-58rm-qff7", "label": "github.com/angular/angular" }
+        },
+        {
+          "id": "astro-adapter-advisories",
+          "tag": "security",
+          "date": "30 Sep 2026",
+          "title": {
+            "es": "Adapters de Astro: crash del Node adapter por Host header y SSRF en Netlify Image CDN",
+            "en": "Astro adapters: Node adapter crash via Host header and Netlify Image CDN SSRF",
+            "fr": "Adaptateurs Astro : crash de l'adaptateur Node via Host et SSRF Netlify Image CDN"
+          },
+          "body_html": {
+            "es": "<p>Un puerto malformado en el header <code>Host</code> puede tirar abajo <code>@astrojs/node</code> (high, fix en <strong>11.1.3</strong>), y un bypass del allowlist de Netlify Image CDN habilita SSRF en <code>@astrojs/netlify</code> (medium, fix en <strong>8.2.4</strong>). Si deployás Astro en modo server, actualizá el adapter.</p>",
+            "en": "<p>A malformed port in the <code>Host</code> header can crash <code>@astrojs/node</code> (high, fixed in <strong>11.1.3</strong>), and a Netlify Image CDN allowlist bypass enables SSRF in <code>@astrojs/netlify</code> (medium, fixed in <strong>8.2.4</strong>). Server-mode Astro deployments should bump their adapter.</p>",
+            "fr": "<p>Un port malformé dans l'en-tête <code>Host</code> peut faire planter <code>@astrojs/node</code> (haut, corrigé en <strong>11.1.3</strong>), et un contournement de l'allowlist Netlify Image CDN permet un SSRF dans <code>@astrojs/netlify</code> (moyen, corrigé en <strong>8.2.4</strong>).</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-qh8j-hqjv-7m4x", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "dev-tools",
+      "name": "Developer Tools",
+      "theme": "dev-tools",
+      "icon_emoji": "🛠️",
+      "anchor": "dev-tools",
+      "updates": [
+        {
+          "id": "vscode-1-140",
+          "tag": "release",
+          "date": "30 Sep 2026",
+          "title": {
+            "es": "VS Code 1.140: sesiones de agente multi-carpeta, delegación remota y node_modules compartido entre worktrees",
+            "en": "VS Code 1.140: multi-folder agent sessions, remote delegation and shared node_modules across worktrees",
+            "fr": "VS Code 1.140 : sessions d'agent multi-dossiers, délégation distante et node_modules partagé entre worktrees"
+          },
+          "body_html": {
+            "es": "<p>Una sesión de agente ahora coordina <strong>varios repos o worktrees</strong>, puede delegar tareas a hosts remotos, y los worktrees pueden <strong>compartir carpetas ignoradas como <code>node_modules</code></strong> vía symlinks — chau reinstalar por cada rama. Suma el «Copilot harness» unificado y controles enterprise para fijar versión mínima y el tier del modelo Auto.</p>",
+            "en": "<p>A single agent session can now coordinate <strong>multiple repos or worktrees</strong>, delegate work to remote hosts, and worktrees can <strong>share ignored folders like <code>node_modules</code></strong> via symlinks, so no reinstall per branch. It also brings a unified Copilot harness and enterprise controls for minimum versions and the default Auto model tier.</p>",
+            "fr": "<p>Une session d'agent peut coordonner <strong>plusieurs dépôts ou worktrees</strong> et déléguer à des hôtes distants, et les worktrees peuvent <strong>partager des dossiers ignorés comme <code>node_modules</code></strong> via des liens symboliques. S'y ajoutent un harness Copilot unifié et des contrôles entreprise.</p>"
+          },
+          "source": { "url": "https://code.visualstudio.com/updates/v1_140", "label": "code.visualstudio.com" }
+        },
+        {
+          "id": "vitest-5-0-3",
+          "tag": "patch",
+          "date": "30 Sep 2026",
+          "title": {
+            "es": "Vitest 5.0.3: fixes de browser mode, cache de módulos y pin de why-is-node-running",
+            "en": "Vitest 5.0.3: browser mode, module cache fixes and a why-is-node-running pin",
+            "fr": "Vitest 5.0.3 : correctifs du mode navigateur, du cache de modules et pin de why-is-node-running"
+          },
+          "body_html": {
+            "es": "<p>Patch grande: el cache revalida imports de módulos cacheados, <code>toMatchScreenshot</code> ya no usa la referencia equivocada en retries, y se pinea <code>why-is-node-running</code> a 3.2.1 para evitar <code>ERR_PNPM_TRUST_DOWNGRADE</code> con pnpm. Si usás pnpm 12 con trust policies, este fix te importa.</p>",
+            "en": "<p>A hefty patch: the cache now revalidates imports of cached modules, <code>toMatchScreenshot</code> no longer uses the wrong reference on retries, and <code>why-is-node-running</code> is pinned to 3.2.1 to avoid <code>ERR_PNPM_TRUST_DOWNGRADE</code> under pnpm.</p>",
+            "fr": "<p>Un patch costaud : le cache revalide les imports des modules mis en cache, <code>toMatchScreenshot</code> n'utilise plus la mauvaise référence lors des retries, et <code>why-is-node-running</code> est épinglé à 3.2.1 pour éviter <code>ERR_PNPM_TRUST_DOWNGRADE</code> avec pnpm.</p>"
+          },
+          "source": { "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.0.3", "label": "github.com/vitest-dev/vitest" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Semana de parches coordinados: Next.js, Angular, Astro y axios publicaron advisories el mismo 30/09 — y casi todos apuntan a SSR, cache y SSRF en el server.",
+      "en": "Coordinated patch day: Next.js, Angular, Astro and axios all published advisories on 30 Sep — nearly all targeting SSR, caching and server-side SSRF.",
+      "fr": "Journée de correctifs coordonnés : Next.js, Angular, Astro et axios ont publié des avis le 30 sept. — presque tous sur le SSR, le cache et le SSRF côté serveur."
+    },
+    {
+      "es": "El tooling se adapta a los worktrees: VS Code comparte node_modules entre ramas y las sesiones de agente abarcan varios repos.",
+      "en": "Tooling is adapting to worktree-heavy workflows: VS Code shares node_modules across branches and agent sessions span multiple repos.",
+      "fr": "L'outillage s'adapte aux worktrees : VS Code partage node_modules entre branches et les sessions d'agent couvrent plusieurs dépôts."
+    }
+  ]
+}

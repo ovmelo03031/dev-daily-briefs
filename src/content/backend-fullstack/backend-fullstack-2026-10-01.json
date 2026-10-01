@@ -1,0 +1,323 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 1 Oct 2026: better-auth ATO crítico, tanda de Fastify y RCE en next/og",
+    "en": "Backend & Fullstack Daily — 1 Oct 2026: critical better-auth takeover, Fastify batch and next/og RCE",
+    "fr": "Backend & Fullstack Daily — 1 oct. 2026 : prise de compte critique dans better-auth, série Fastify et RCE dans next/og"
+  },
+  "description": {
+    "es": "Día de parches: account takeover en better-auth (CVSS 9.1), cinco advisories en Fastify, RCE en next/og, bypass de middleware en NestJS + Fastify y doce advisories en Axios. Además: Aurora PostgreSQL consulta Iceberg sin ETL y Cursor escala Git sobre un WAL en S3.",
+    "en": "Patch day: account takeover in better-auth (CVSS 9.1), five Fastify advisories, RCE in next/og, a NestJS + Fastify middleware bypass and twelve Axios advisories. Plus: Aurora PostgreSQL queries Iceberg without ETL and Cursor scales Git on an S3 WAL.",
+    "fr": "Journée de correctifs : prise de compte dans better-auth (CVSS 9.1), cinq advisories Fastify, RCE dans next/og, contournement de middleware NestJS + Fastify et douze advisories Axios. Aussi : Aurora PostgreSQL interroge Iceberg sans ETL et Cursor fait évoluer Git sur un WAL S3."
+  },
+  "pubDate": "2026-10-01",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "better-auth: account takeover vía Magic Link", "en": "better-auth: Magic Link account takeover", "fr": "better-auth : prise de compte via Magic Link" },
+      "anchor": "better-auth-magic-link-ato",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Fastify: 5 advisories, bypass de auth", "en": "Fastify: 5 advisories, auth bypass", "fr": "Fastify : 5 advisories, contournement d'auth" },
+      "anchor": "fastify-advisory-batch",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Next.js: RCE en next/og (CVSS 9.5)", "en": "Next.js: RCE in next/og (CVSS 9.5)", "fr": "Next.js : RCE dans next/og (CVSS 9.5)" },
+      "anchor": "nextjs-og-rce",
+      "icon": "simple-icons:nextdotjs"
+    },
+    {
+      "text": { "es": "NestJS + Fastify: middleware salteado", "en": "NestJS + Fastify: middleware skipped", "fr": "NestJS + Fastify : middleware ignoré" },
+      "anchor": "nestjs-fastify-middleware-bypass",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Aurora PostgreSQL consulta Iceberg sin ETL", "en": "Aurora PostgreSQL queries Iceberg, no ETL", "fr": "Aurora PostgreSQL interroge Iceberg sans ETL" },
+      "anchor": "aurora-postgresql-iceberg",
+      "icon": "simple-icons:postgresql"
+    },
+    {
+      "text": { "es": "Cursor: Git sobre un WAL en S3", "en": "Cursor: Git on an S3 write-ahead log", "fr": "Cursor : Git sur un WAL S3" },
+      "anchor": "cursor-continuity-s3-wal",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "better-auth-magic-link-ato",
+      "updates": [
+        {
+          "id": "better-auth-magic-link-ato",
+          "tag": "security",
+          "date": "30 Sep 2026",
+          "title": {
+            "es": "better-auth: un state de OAuth sirve como Magic Link para loguearte como otro usuario (crítico, CVSS 9.1)",
+            "en": "better-auth: an OAuth state value works as a Magic Link to sign in as another user (critical, CVSS 9.1)",
+            "fr": "better-auth : une valeur state OAuth sert de Magic Link pour se connecter en tant qu'un autre utilisateur (critique, CVSS 9.1)"
+          },
+          "body_html": {
+            "es": "<p>Advisory crítico en <code>better-auth</code> desde <code>1.4.0-beta.18</code> hasta antes de <code>1.7.7</code>: el plugin de Magic Link acepta un <strong>state de sign-in OAuth como token de Magic Link</strong>, lo que habilita account takeover. Estás expuesto si tenés Magic Link con <code>storeToken: \"plain\"</code> (el default), algún provider social o Generic OAuth activo, y el state de OAuth guardado en base de datos (el default cuando configurás DB o secondary storage). El fix es <code>1.7.7</code>, sin migración, pero hay que <strong>actualizar todos los servers que comparten verification storage a la vez</strong>, pedir Magic Links nuevos y reiniciar los sign-ins OAuth/SAML pendientes. Si usás better-auth, esto va antes que el café.</p>",
+            "en": "<p>Critical advisory in <code>better-auth</code> from <code>1.4.0-beta.18</code> up to before <code>1.7.7</code>: the Magic Link plugin accepts an <strong>OAuth sign-in state value as a Magic Link token</strong>, enabling account takeover. You are exposed if Magic Link uses <code>storeToken: \"plain\"</code> (the default), at least one social or Generic OAuth provider is enabled, and OAuth state is stored in the database (the default when a database or secondary storage is configured). The fix is <code>1.7.7</code>, no migration required, but <strong>all servers sharing verification storage must upgrade together</strong>, users must request new Magic Links, and pending OAuth/SAML sign-ins must restart.</p>",
+            "fr": "<p>Advisory critique dans <code>better-auth</code> de <code>1.4.0-beta.18</code> jusqu'avant <code>1.7.7</code> : le plugin Magic Link accepte une <strong>valeur state OAuth comme token Magic Link</strong>, ce qui permet une prise de compte. Exposé si Magic Link utilise <code>storeToken: \"plain\"</code> (par défaut), qu'un provider social ou Generic OAuth est actif et que le state OAuth est stocké en base (par défaut). Correctif en <code>1.7.7</code>, sans migration, mais tous les serveurs partageant le stockage de vérification doivent être mis à jour ensemble.</p>"
+          },
+          "source": { "url": "https://github.com/better-auth/better-auth/security/advisories/GHSA-965c-763c-88jm", "label": "github.com/better-auth" }
+        },
+        {
+          "id": "fastify-advisory-batch",
+          "tag": "security",
+          "date": "30 Sep 2026",
+          "title": {
+            "es": "Fastify: cinco advisories de una — bypass de auth vía URLs malformadas, reemplazo de body y validación salteada",
+            "en": "Fastify: five advisories at once — auth bypass via malformed URLs, body replacement and skipped validation",
+            "fr": "Fastify : cinq advisories d'un coup — contournement d'auth via URLs malformées, remplacement du body et validation ignorée"
+          },
+          "body_html": {
+            "es": "<p>Cuatro high y un medium publicados juntos. El más jodido: <strong>CVE-2026-76169</strong> — una URL malformada bajo el prefix de un plugin termina en el <code>setNotFoundHandler()</code> de <em>otro</em> plugin hermano y <strong>saltea su <code>preHandler</code></strong>; si ahí ponés auth, se la saltean. <strong>CVE-2026-84504</strong>: con validadores JSON Schema <code>$async</code>, si el payload trae una propiedad <code>value</code>, Fastify <strong>reemplaza la parte del request entera</strong> por ese valor. Los otros dos high saltean la validación de headers (normalización de mayúsculas incompleta) y de schemas booleanos <code>false</code>; el medium es un DoS por trailers HTTP/2. Parcheado en <code>5.12.2</code> (latest <code>5.12.5</code>). El de URLs malformadas afecta desde 4.0.0 y no hay fix en la línea 4: si seguís en v4, migrá.</p>",
+            "en": "<p>Four high and one medium published together. The nastiest: <strong>CVE-2026-76169</strong> — a malformed URL under one plugin's prefix reaches the <code>setNotFoundHandler()</code> of a <em>sibling</em> plugin and <strong>skips its <code>preHandler</code></strong>; if your auth lives there, it gets bypassed. <strong>CVE-2026-84504</strong>: with <code>$async</code> JSON Schema validators, a payload carrying a <code>value</code> property makes Fastify <strong>replace the whole request part</strong> with that value. The other two highs skip header validation (incomplete case normalization) and boolean <code>false</code> schemas; the medium is an HTTP/2 trailer DoS. Fixed in <code>5.12.2</code> (latest <code>5.12.5</code>). The malformed-URL bug affects 4.0.0+ with no 4.x fix: if you are still on v4, migrate.</p>",
+            "fr": "<p>Quatre high et un medium publiés ensemble. Le pire : <strong>CVE-2026-76169</strong> — une URL malformée sous le préfixe d'un plugin atteint le <code>setNotFoundHandler()</code> d'un plugin voisin et <strong>saute son <code>preHandler</code></strong>. <strong>CVE-2026-84504</strong> : avec un validateur <code>$async</code>, une propriété <code>value</code> remplace toute la partie de la requête. Les autres contournent la validation des headers et des schémas <code>false</code> ; le medium est un DoS HTTP/2. Corrigé en <code>5.12.2</code> (dernière <code>5.12.5</code>) ; pas de correctif pour la v4.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-p68q-wchp-6fh7", "label": "github.com/advisories" }
+        },
+        {
+          "id": "nextjs-og-rce",
+          "tag": "security",
+          "date": "30 Sep 2026",
+          "title": {
+            "es": "Next.js: RCE en ImageResponse de next/og cuando metés input del usuario en el SVG (crítico, CVSS 9.5)",
+            "en": "Next.js: RCE in next/og ImageResponse when user input reaches the SVG (critical, CVSS 9.5)",
+            "fr": "Next.js : RCE dans ImageResponse de next/og quand une entrée utilisateur atteint le SVG (critique, CVSS 9.5)"
+          },
+          "body_html": {
+            "es": "<p>La implementación Node de <code>ImageResponse</code> en <code>next/og</code> hereda una vulnerabilidad upstream que permite <strong>ejecución remota de código</strong>. Te afecta si pasás valores controlados por el atacante (típico: un query param tipo <code>?title=</code> para OG images dinámicas) a contenido, atributos o estilos SVG. Rango: <code>next &gt;= 16.2.0, &lt; 16.3.6</code>. Actualizá a <code>16.3.6</code> o superior — y de paso, ¿realmente necesitás que cualquiera genere OG images arbitrarias? Validá y acotá ese input.</p>",
+            "en": "<p>The Node implementation of <code>ImageResponse</code> in <code>next/og</code> inherits an upstream vulnerability enabling <strong>remote code execution</strong>. You are affected if you pass attacker-controlled values (typically a query param like <code>?title=</code> for dynamic OG images) into SVG content, attributes or styles. Range: <code>next &gt;= 16.2.0, &lt; 16.3.6</code>. Upgrade to <code>16.3.6</code> or later — and validate and constrain that input regardless.</p>",
+            "fr": "<p>L'implémentation Node de <code>ImageResponse</code> dans <code>next/og</code> hérite d'une vulnérabilité amont permettant une <strong>exécution de code à distance</strong> si des valeurs contrôlées par l'attaquant atteignent le contenu, les attributs ou les styles SVG. Plage : <code>next &gt;= 16.2.0, &lt; 16.3.6</code>. Mettez à jour vers <code>16.3.6</code> ou plus.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-vcvr-r3jv-pc5j", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "nestjs-fastify-middleware-bypass",
+      "updates": [
+        {
+          "id": "nestjs-fastify-middleware-bypass",
+          "tag": "security",
+          "date": "30 Sep 2026",
+          "title": {
+            "es": "@nestjs/platform-fastify: un request target absoluto saltea el middleware con scope de path",
+            "en": "@nestjs/platform-fastify: an absolute-form request target skips path-scoped middleware",
+            "fr": "@nestjs/platform-fastify : une cible de requête en forme absolue ignore le middleware lié au chemin"
+          },
+          "body_html": {
+            "es": "<p>Advisory high en el adapter de Fastify de NestJS: un request con target absoluto (<code>GET http://host/path HTTP/1.1</code> en vez de <code>GET /path</code>) llega al handler <strong>sin pasar por el middleware de Nest bindeado a esa ruta</strong>. Si hacés auth o rate limiting con <code>consumer.apply(...).forRoutes(...)</code>, es un bypass directo. Parcheado en <code>12.0.2</code> y <code>11.2.4</code>; el advisory recomienda ir a <code>12.0.3</code> / <code>11.2.5</code>. Moraleja de arquitectura: la auth va en guards, no en middleware por path.</p>",
+            "en": "<p>High-severity advisory in NestJS's Fastify adapter: a request with an absolute-form target (<code>GET http://host/path HTTP/1.1</code> instead of <code>GET /path</code>) reaches the handler <strong>without running the Nest middleware bound to that route</strong>. If you do auth or rate limiting via <code>consumer.apply(...).forRoutes(...)</code>, that is a direct bypass. Fixed in <code>12.0.2</code> and <code>11.2.4</code>; the advisory recommends <code>12.0.3</code> / <code>11.2.5</code>. Architecture lesson: auth belongs in guards, not path-scoped middleware.</p>",
+            "fr": "<p>Advisory high dans l'adaptateur Fastify de NestJS : une requête en forme absolue (<code>GET http://host/path</code>) atteint le handler <strong>sans exécuter le middleware Nest lié à la route</strong>. Corrigé en <code>12.0.2</code> et <code>11.2.4</code> (recommandé : <code>12.0.3</code> / <code>11.2.5</code>).</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-9c5c-9qcx-q35q", "label": "github.com/advisories" }
+        },
+        {
+          "id": "grpc-js-auth-context",
+          "tag": "security",
+          "date": "30 Sep 2026",
+          "title": {
+            "es": "@grpc/grpc-js: getAuthContext no distingue certificados autorizados de no autorizados",
+            "en": "@grpc/grpc-js: getAuthContext does not distinguish authorized from unauthorized certificates",
+            "fr": "@grpc/grpc-js : getAuthContext ne distingue pas les certificats autorisés des non autorisés"
+          },
+          "body_html": {
+            "es": "<p><strong>CVE-2026-101916</strong> (high): con <code>requireClientCertificate: false</code>, <code>getAuthContext</code> devuelve lo mismo para certificados válidos y no válidos. Si autenticás en base a eso — y <code>@grpc/grpc-js-xds</code> lo hace — un cliente con un cert no autorizado pasa. Parcheado en <code>1.13.6</code> y <code>1.14.5</code>.</p>",
+            "en": "<p><strong>CVE-2026-101916</strong> (high): with <code>requireClientCertificate: false</code>, <code>getAuthContext</code> returns the same thing for authorized and unauthorized certificates. If you authenticate based on it — and <code>@grpc/grpc-js-xds</code> does — a client with an unauthorized cert gets through. Fixed in <code>1.13.6</code> and <code>1.14.5</code>.</p>",
+            "fr": "<p><strong>CVE-2026-101916</strong> (high) : avec <code>requireClientCertificate: false</code>, <code>getAuthContext</code> ne distingue pas les certificats autorisés. Corrigé en <code>1.13.6</code> et <code>1.14.5</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-m9gg-hp2v-232j", "label": "github.com/advisories" }
+        },
+        {
+          "id": "axios-advisory-batch",
+          "tag": "security",
+          "date": "30 Sep 2026",
+          "title": {
+            "es": "Axios: doce advisories el mismo día — gadgets de prototype pollution, ReDoS y bypass de proxy",
+            "en": "Axios: twelve advisories in one day — prototype-pollution gadgets, ReDoS and proxy bypasses",
+            "fr": "Axios : douze advisories en un jour — gadgets de prototype pollution, ReDoS et contournements de proxy"
+          },
+          "body_html": {
+            "es": "<p>Barrido grande sobre <code>axios</code>: varios <strong>gadgets de prototype pollution</strong> (por ejemplo <strong>CVE-2026-101909</strong>, CVSS 8.3, en las opciones de <code>toFormData</code>) que convierten una contaminación existente en requests alterados, dos <strong>ReDoS</strong> que congelan el event loop (parser de <code>data:</code> URIs y normalización de <code>NO_PROXY</code>), el adapter HTTP/2 que ignora tu DNS lookup y proxy, y <code>maxRedirects: 0</code> que el adapter fetch no respeta. Fix en <code>1.20.0</code> (y <code>0.34.0</code> para la rama vieja). Axios está en casi todo backend Node: <code>pnpm why axios</code> y actualizá.</p>",
+            "en": "<p>Big sweep over <code>axios</code>: several <strong>prototype-pollution gadgets</strong> (e.g. <strong>CVE-2026-101909</strong>, CVSS 8.3, in <code>toFormData</code> options) that turn existing pollution into altered requests, two <strong>ReDoS</strong> bugs that freeze the event loop (<code>data:</code> URI parser and <code>NO_PROXY</code> normalization), the HTTP/2 adapter ignoring your DNS lookup and proxy, and <code>maxRedirects: 0</code> not enforced by the fetch adapter. Fixed in <code>1.20.0</code> (and <code>0.34.0</code> for the legacy line). Run <code>pnpm why axios</code> and upgrade.</p>",
+            "fr": "<p>Grosse série sur <code>axios</code> : plusieurs <strong>gadgets de prototype pollution</strong> (dont <strong>CVE-2026-101909</strong>, CVSS 8.3), deux <strong>ReDoS</strong>, l'adaptateur HTTP/2 qui ignore DNS et proxy, et <code>maxRedirects: 0</code> non respecté par l'adaptateur fetch. Corrigé en <code>1.20.0</code> et <code>0.34.0</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-x97p-jq2g-jp4f", "label": "github.com/advisories" }
+        },
+        {
+          "id": "hono-jsx-xss",
+          "tag": "security",
+          "date": "30 Sep 2026",
+          "title": {
+            "es": "hono/jsx: strings planos sin escapar en Suspense, ErrorBoundary y renderToString (XSS)",
+            "en": "hono/jsx: plain strings rendered unescaped in Suspense, ErrorBoundary and renderToString (XSS)",
+            "fr": "hono/jsx : chaînes simples rendues sans échappement dans Suspense, ErrorBoundary et renderToString (XSS)"
+          },
+          "body_html": {
+            "es": "<p><strong>CVE-2026-93981</strong>: un string plano como hijo o <code>fallback</code> de <code>Suspense</code>/<code>ErrorBoundary</code>, como único hijo de un <code>Context.Provider</code>, o como raíz de <code>renderToString()</code> se emite como markup en vez de texto. Si ahí cae input del usuario, tenés XSS. Fix en <code>4.13.7</code>; la latest es <code>4.13.12</code>.</p>",
+            "en": "<p><strong>CVE-2026-93981</strong>: a plain string as the child or <code>fallback</code> of <code>Suspense</code>/<code>ErrorBoundary</code>, the only child of a <code>Context.Provider</code>, or the root of <code>renderToString()</code> is emitted as markup instead of text. If user input lands there, that is XSS. Fixed in <code>4.13.7</code>; latest is <code>4.13.12</code>.</p>",
+            "fr": "<p><strong>CVE-2026-93981</strong> : une chaîne simple dans <code>Suspense</code>, <code>ErrorBoundary</code>, un <code>Context.Provider</code> ou <code>renderToString()</code> est émise comme du HTML. Corrigé en <code>4.13.7</code> (dernière : <code>4.13.12</code>).</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-hxh3-vqpv-xpqv", "label": "github.com/advisories" }
+        },
+        {
+          "id": "angular-ssr-router-dos",
+          "tag": "security",
+          "date": "30 Sep 2026",
+          "title": {
+            "es": "Angular SSR: DoS con matrix params numéricos en la URL (CVSS 8.2)",
+            "en": "Angular SSR: DoS via numeric URL matrix parameters (CVSS 8.2)",
+            "fr": "Angular SSR : DoS via des paramètres matriciels numériques dans l'URL (CVSS 8.2)"
+          },
+          "body_html": {
+            "es": "<p><strong>CVE-2026-101896</strong> en <code>@angular/router</code> con SSR sobre Node: nombres numéricos de matrix params u outlets (<code>/a;990;2522</code>) hacen que V8 los trate como índices de array y el server se cae. Fix en <code>22.2.0</code>, <code>21.2.24</code> y <code>20.3.32</code>; la 19 no tiene parche.</p>",
+            "en": "<p><strong>CVE-2026-101896</strong> in <code>@angular/router</code> with SSR on Node: numeric matrix-parameter or outlet names (<code>/a;990;2522</code>) make V8 treat them as array indices and take the server down. Fixed in <code>22.2.0</code>, <code>21.2.24</code> and <code>20.3.32</code>; v19 has no patch.</p>",
+            "fr": "<p><strong>CVE-2026-101896</strong> dans <code>@angular/router</code> en SSR sur Node : des noms numériques de paramètres matriciels provoquent un DoS. Corrigé en <code>22.2.0</code>, <code>21.2.24</code> et <code>20.3.32</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-ff3f-86qr-9cv3", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "prisma-8-rc14",
+      "updates": [
+        {
+          "id": "prisma-8-rc14",
+          "tag": "beta",
+          "tag_label": { "es": "RC", "en": "RC", "fr": "RC" },
+          "date": "30 Sep 2026",
+          "title": {
+            "es": "Prisma 8.0.0-rc.14: el cliente serverless de Postgres iguala la API de postgres()",
+            "en": "Prisma 8.0.0-rc.14: the Postgres serverless client matches the postgres() API",
+            "fr": "Prisma 8.0.0-rc.14 : le client serverless Postgres aligne son API sur postgres()"
+          },
+          "body_html": {
+            "es": "<p><code>connect()</code> en el cliente serverless de Postgres ahora devuelve <code>db.orm</code>, <code>db.transaction(...)</code> y <code>db.prepare(...)</code>, igual que un cliente <code>postgres()</code>. Los defaults de fecha/hora se guardan en un texto canónico (el hash de storage ya no depende de cómo los escribiste), el ORM de Mongo pasa todo por el codec de cada campo, y los comandos CLI de Postgres funcionan con defaults de fecha en Node 24, que no trae <code>Temporal</code>. Seguimos en RC: probalo en staging, no en prod.</p>",
+            "en": "<p><code>connect()</code> on the Postgres serverless client now returns <code>db.orm</code>, <code>db.transaction(...)</code> and <code>db.prepare(...)</code>, same as a <code>postgres()</code> client. Date/time defaults are stored in one canonical text (storage hash no longer depends on how you wrote them), the Mongo ORM routes every value through its field codec, and Postgres CLI commands work with date defaults on Node 24, which lacks <code>Temporal</code>. Still an RC: try it in staging.</p>",
+            "fr": "<p><code>connect()</code> du client serverless Postgres renvoie désormais <code>db.orm</code>, <code>db.transaction(...)</code> et <code>db.prepare(...)</code>. Defaults de date canoniques, codecs systématiques pour Mongo et CLI Postgres compatible Node 24 sans <code>Temporal</code>.</p>"
+          },
+          "source": { "url": "https://github.com/prisma/orm/releases/tag/v8.0.0-rc.14", "label": "github.com/prisma" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "aurora-postgresql-iceberg",
+      "updates": [
+        {
+          "id": "aurora-postgresql-iceberg",
+          "tag": "ga",
+          "date": "30 Sep 2026",
+          "title": {
+            "es": "Aurora PostgreSQL consulta Apache Iceberg y Parquet en S3 con foreign tables, sin ETL",
+            "en": "Aurora PostgreSQL queries Apache Iceberg and Parquet on S3 via foreign tables, no ETL",
+            "fr": "Aurora PostgreSQL interroge Apache Iceberg et Parquet sur S3 via des foreign tables, sans ETL"
+          },
+          "body_html": {
+            "es": "<p>GA en Aurora PostgreSQL <strong>17.11, 18.6 y superiores</strong>, en todas las regiones comerciales y GovCloud, sin costo extra. Consultás datos Iceberg/Parquet en S3 o en el Glue Data Catalog (o cualquier catálogo compatible con Iceberg REST) con SQL estándar, o los materializás en tablas nativas. Para el clásico «necesito joinear la tabla transaccional con el data lake» te ahorra un pipeline entero. Ojo con la latencia: no es un reemplazo de tu warehouse.</p>",
+            "en": "<p>GA on Aurora PostgreSQL <strong>17.11, 18.6 and later</strong>, in all commercial and GovCloud regions, at no extra charge. Query Iceberg/Parquet data in S3 or the Glue Data Catalog (or any Iceberg REST-compatible catalog) with standard SQL, or materialize it into native tables. For the classic join-OLTP-with-the-lake case it removes a whole pipeline — just don't mistake it for a warehouse.</p>",
+            "fr": "<p>GA sur Aurora PostgreSQL <strong>17.11, 18.6 et plus</strong>, dans toutes les régions commerciales et GovCloud, sans surcoût. Requêtes SQL sur Iceberg/Parquet dans S3 ou Glue, ou matérialisation en tables natives.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/aurora-postgresql-query-apache-iceberg-and-parquet/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "aurora-serverless-16-acu",
+          "tag": "notable",
+          "date": "30 Sep 2026",
+          "title": {
+            "es": "Aurora Serverless escala hasta 16 ACUs en un segundo",
+            "en": "Aurora Serverless now adds up to 16 ACUs within a second",
+            "fr": "Aurora Serverless ajoute jusqu'à 16 ACU en une seconde"
+          },
+          "body_html": {
+            "es": "<p>Escala en saltos más grandes — hasta <strong>16 ACUs en un segundo</strong>, con tope de 256 — y viene activado solo en platform versions 3 y 4. Si estás en 1 o 2, podés saltar directo a la 4. Para picos bruscos de tráfico es una mejora real sobre el escalado gradual de antes.</p>",
+            "en": "<p>Scales in larger steps — up to <strong>16 ACUs within a second</strong>, up to a 256 ACU max — enabled automatically on platform versions 3 and 4. Clusters on 1 or 2 can upgrade straight to 4. A real improvement for spiky traffic.</p>",
+            "fr": "<p>Mise à l'échelle par paliers plus grands — jusqu'à <strong>16 ACU en une seconde</strong>, maximum 256 — activée automatiquement sur les versions de plateforme 3 et 4.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/aurora-serverless-instant-16-acu-scaling/", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloudflare-vary-header",
+      "updates": [
+        {
+          "id": "cloudflare-vary-header",
+          "tag": "notable",
+          "date": "29 Sep 2026",
+          "title": {
+            "es": "Cloudflare soporta el header Vary en el edge, con controles para evitar cache thrashing",
+            "en": "Cloudflare supports the Vary header at the edge, with controls to prevent cache thrashing",
+            "fr": "Cloudflare prend en charge l'en-tête Vary à l'edge, avec des contrôles contre le cache thrashing"
+          },
+          "body_html": {
+            "es": "<p>Soporte nativo de <code>Vary</code> en todos los planes vía Cache Rules, con tres acciones — <strong>normalize, pass through y bypass</strong> — para decidir cómo cada header del request impacta en la cache key. Por fin podés negociar idioma o formato de imagen desde el origin sin que el hit ratio se desplome por la variedad infinita de <code>Accept</code> y <code>Accept-Language</code>.</p>",
+            "en": "<p>Native <code>Vary</code> support on all plans via Cache Rules, with three actions — <strong>normalize, pass through and bypass</strong> — controlling how each request header affects the cache key. You can finally negotiate language or image format at the origin without hit ratios collapsing under endless <code>Accept</code> and <code>Accept-Language</code> variants.</p>",
+            "fr": "<p>Prise en charge native de <code>Vary</code> sur tous les plans via Cache Rules, avec trois actions — <strong>normalize, pass through et bypass</strong> — pour contrôler l'impact des en-têtes sur la clé de cache.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/cloudflare-http-vary/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "cursor-continuity-s3-wal",
+      "updates": [
+        {
+          "id": "cursor-continuity-s3-wal",
+          "tag": "notable",
+          "date": "30 Sep 2026",
+          "title": {
+            "es": "Cursor Continuity: Git sobre un write-ahead log en S3, más de 300 pushes por segundo",
+            "en": "Cursor Continuity: Git on an S3 write-ahead log, over 300 pushes per second",
+            "fr": "Cursor Continuity : Git sur un write-ahead log S3, plus de 300 pushes par seconde"
+          },
+          "body_html": {
+            "es": "<p>En vez de coordinar réplicas, Cursor usa un <strong>WAL respaldado en S3 como fuente de verdad</strong> y trata los repos en NVMe local como simple cache. Resultado: lecturas que escalan linealmente hasta 100 réplicas y más de <strong>300 pushes/s</strong> sobre S3 Express One Zone, donde el cuello de botella pasa a ser la compactación de Git. El trade-off es clásico y vale estudiarlo: movés el límite de consistencia de la sincronización entre réplicas al object storage durable, y pagás en ancho de banda lo que ahorrás en coordinación. Patrón aplicable a cualquier sistema con estado que quiera escalar lecturas sin Raft.</p>",
+            "en": "<p>Instead of coordinating replicas, Cursor uses an <strong>S3-backed WAL as the source of truth</strong> and treats local NVMe repos as caches. Result: reads scale linearly to 100 replicas and over <strong>300 pushes/s</strong> on S3 Express One Zone, where Git compaction becomes the bottleneck. A classic trade-off worth studying: the consistency boundary moves from replica sync to durable object storage, trading coordination overhead for bandwidth cost. Applicable to any stateful system that wants read scale without Raft.</p>",
+            "fr": "<p>Au lieu de coordonner des réplicas, Cursor utilise un <strong>WAL sur S3 comme source de vérité</strong> et traite les dépôts NVMe locaux comme des caches : lectures linéaires jusqu'à 100 réplicas et plus de <strong>300 pushes/s</strong> sur S3 Express One Zone. La cohérence passe de la synchronisation des réplicas au stockage objet durable.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/09/cursor-continuity-git-storage/", "label": "infoq.com" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "La capa de auth es el blanco de la semana: better-auth (Magic Link), Fastify (preHandler salteado), NestJS (middleware por path) y grpc-js (getAuthContext). Patrón común: la autorización depende de que el request siga el camino «feliz» del router. Poné auth en el punto más cercano al handler — guards, hooks por ruta — no en capas que un request malformado puede esquivar.",
+      "en": "The auth layer is this week's target: better-auth (Magic Link), Fastify (skipped preHandler), NestJS (path-scoped middleware) and grpc-js (getAuthContext). Common pattern: authorization relies on the request taking the router's happy path. Put auth as close to the handler as possible — guards, per-route hooks — not in layers a malformed request can route around.",
+      "fr": "La couche d'auth est la cible de la semaine : better-auth, Fastify, NestJS et grpc-js. Point commun : l'autorisation suppose que la requête suive le chemin nominal du routeur. Placez l'auth au plus près du handler."
+    },
+    {
+      "es": "Segundo día seguido de barridos masivos en npm: después de undici y compañía, ahora Axios (12), Fastify (5) y los parsers de Python (urllib3, tornado, PyJWT, GitPython). Esto ya parece auditoría asistida por IA a escala — preparate para que las tandas de advisories sean la norma.",
+      "en": "Second straight day of mass sweeps: after undici and friends, now Axios (12), Fastify (5) and the Python parsers (urllib3, tornado, PyJWT, GitPython). This looks like AI-assisted auditing at scale — expect advisory batches to become the norm.",
+      "fr": "Deuxième jour de balayages massifs : Axios (12), Fastify (5) et les parsers Python (urllib3, tornado, PyJWT, GitPython). Attendez-vous à ce que les séries d'advisories deviennent la norme."
+    }
+  ]
+}

@@ -1,0 +1,391 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 6 Oct 2026",
+    "en": "Backend & Fullstack Daily — Oct 6, 2026",
+    "fr": "Backend & Fullstack Daily — 6 oct. 2026"
+  },
+  "description": {
+    "es": "Avalancha de advisories npm: vm2 con CVSS 10, proxy-addr rompe req.ip en Express, tinypool con RCE. Nuxt 4.6 se vuelve server-agnostic, SvelteKit 3.0 sale GA y Cloudflare jubila Wrangler.",
+    "en": "npm advisory avalanche: vm2 at CVSS 10, proxy-addr breaks Express req.ip, tinypool RCE. Nuxt 4.6 goes server-agnostic, SvelteKit 3.0 ships GA, and Cloudflare sunsets Wrangler.",
+    "fr": "Avalanche d'advisories npm : vm2 en CVSS 10, proxy-addr casse req.ip dans Express, RCE dans tinypool. Nuxt 4.6 devient server-agnostic, SvelteKit 3.0 en GA et Cloudflare retire Wrangler."
+  },
+  "pubDate": "2026-10-06",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "vm2: escape de sandbox con CVSS 10", "en": "vm2: CVSS 10 sandbox escape", "fr": "vm2 : évasion de sandbox CVSS 10" },
+      "anchor": "vm2-sandbox-escape-batch",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "proxy-addr: req.ip falsificable en Express", "en": "proxy-addr: spoofable req.ip in Express", "fr": "proxy-addr : req.ip falsifiable dans Express" },
+      "anchor": "proxy-addr-ip-spoofing",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "tinypool: prototype pollution a RCE", "en": "tinypool: prototype pollution to RCE", "fr": "tinypool : prototype pollution vers RCE" },
+      "anchor": "tinypool-proto-pollution-rce",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Nuxt 4.6: nace nuxt/server", "en": "Nuxt 4.6: nuxt/server arrives", "fr": "Nuxt 4.6 : arrivée de nuxt/server" },
+      "anchor": "nuxt-4-6-server-agnostic",
+      "icon": "lucide:server"
+    },
+    {
+      "text": { "es": "SvelteKit 3.0 GA: Node 22 y TS 6", "en": "SvelteKit 3.0 GA: Node 22 and TS 6", "fr": "SvelteKit 3.0 GA : Node 22 et TS 6" },
+      "anchor": "sveltekit-3-0-ga",
+      "icon": "lucide:rocket"
+    },
+    {
+      "text": { "es": "Cloudflare lanza cf y jubila Wrangler", "en": "Cloudflare launches cf, sunsets Wrangler", "fr": "Cloudflare lance cf et retire Wrangler" },
+      "anchor": "cloudflare-cf-cli",
+      "icon": "simple-icons:cloudflare"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "vm2-sandbox-escape-batch",
+      "updates": [
+        {
+          "id": "vm2-sandbox-escape-batch",
+          "tag": "security",
+          "date": "05 Oct 2026",
+          "title": {
+            "es": "vm2: GitHub publica más de 15 advisories de golpe, incluido un escape de NodeVM con CVSS 10",
+            "en": "vm2: GitHub publishes 15+ advisories at once, including a CVSS 10 NodeVM escape",
+            "fr": "vm2 : GitHub publie plus de 15 advisories d'un coup, dont une évasion NodeVM en CVSS 10"
+          },
+          "body_html": {
+            "es": "<p>El 5 de octubre la GitHub Advisory Database cargó una tanda enorme de advisories para <code>vm2</code>: escape de sandbox en <code>NodeVM</code> (<strong>CVSS 10</strong>, todo <code>&lt;= 3.11.7</code>), RCE vía <code>AggregateError</code>, lectura/escritura de memoria del host a través del pool compartido de <code>Buffer</code>, <code>require.external</code> sin <code>require.root</code> con acceso total al filesystem, y bypass del <code>timeout</code> con <code>FinalizationRegistry</code>. Los fixes ya estaban en npm desde septiembre (la rama <code>3.12.x</code>), pero ahora Dependabot y <code>npm audit</code> los van a marcar. Mensaje claro: si corrés código no confiable con vm2, actualizá YA, y pensá seriamente en aislar con procesos, <code>isolated-vm</code> o microVMs. Un sandbox in-process en JS es una pared de durlock.</p>",
+            "en": "<p>On October 5 the GitHub Advisory Database loaded a huge batch of <code>vm2</code> advisories: a <code>NodeVM</code> sandbox escape (<strong>CVSS 10</strong>, everything <code>&lt;= 3.11.7</code>), RCE via <code>AggregateError</code>, host memory read/write through the shared <code>Buffer</code> pool, <code>require.external</code> without <code>require.root</code> granting full filesystem access, and a <code>timeout</code> bypass using <code>FinalizationRegistry</code>. The fixes have been on npm since September (the <code>3.12.x</code> line), but Dependabot and <code>npm audit</code> will now flag them. If you run untrusted code with vm2, upgrade now and seriously consider process, <code>isolated-vm</code>, or microVM isolation instead of an in-process JS sandbox.</p>",
+            "fr": "<p>Le 5 octobre, la GitHub Advisory Database a chargé un énorme lot d'advisories pour <code>vm2</code> : évasion de sandbox <code>NodeVM</code> (<strong>CVSS 10</strong>, tout <code>&lt;= 3.11.7</code>), RCE via <code>AggregateError</code>, lecture/écriture de la mémoire de l'hôte via le pool partagé de <code>Buffer</code>, <code>require.external</code> sans <code>require.root</code> donnant un accès complet au système de fichiers, et contournement du <code>timeout</code> avec <code>FinalizationRegistry</code>. Les correctifs sont sur npm depuis septembre (branche <code>3.12.x</code>), mais Dependabot et <code>npm audit</code> vont maintenant les signaler. Si vous exécutez du code non fiable avec vm2, mettez à jour et envisagez une isolation par processus, <code>isolated-vm</code> ou microVM.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-88hf-g992-jg85", "label": "github.com/advisories" }
+        },
+        {
+          "id": "proxy-addr-ip-spoofing",
+          "tag": "security",
+          "date": "05 Oct 2026",
+          "title": {
+            "es": "proxy-addr: una trust subnet IPv4-mapped mal escrita hace que req.ip en Express sea lo que mande el cliente (crítico)",
+            "en": "proxy-addr: a mis-written IPv4-mapped trust subnet makes Express req.ip whatever the client sends (critical)",
+            "fr": "proxy-addr : un sous-réseau de confiance IPv4-mapped mal écrit rend req.ip d'Express contrôlable par le client (critique)"
+          },
+          "body_html": {
+            "es": "<p><code>proxy-addr</code> (la dependencia detrás de <code>trust proxy</code> en Express) compilaba subnets como <code>::ffff:10.0.0.0/8</code> (lo correcto es <code>/104</code>) o <code>::/1</code> con bits iniciales en cero, y terminaban matcheando <strong>cualquier IPv4</strong>. Resultado: cualquier cliente es tratado como proxy confiable y <code>req.ip</code>/<code>req.ips</code> devuelven lo que venga en <code>X-Forwarded-For</code>. Chau rate limiting por IP, allowlists y logs de auditoría. Afecta <code>&gt;= 1.1.0, &lt; 2.0.8</code>; el fix <code>2.0.8</code> está en npm desde el 15 de septiembre y GitHub lo publicó el 5 de octubre. Revisá tu config de <code>trust proxy</code> hoy mismo.</p>",
+            "en": "<p><code>proxy-addr</code> (the dependency behind Express <code>trust proxy</code>) compiled subnets like <code>::ffff:10.0.0.0/8</code> (the correct form is <code>/104</code>) or <code>::/1</code> with all-zero leading bits, so they matched <strong>every IPv4 address</strong>. Every client is then a trusted proxy and <code>req.ip</code>/<code>req.ips</code> return whatever arrives in <code>X-Forwarded-For</code>, defeating IP rate limits, allowlists, and audit logs. Affects <code>&gt;= 1.1.0, &lt; 2.0.8</code>; the <code>2.0.8</code> fix has been on npm since September 15 and GitHub published the advisory on October 5. Audit your <code>trust proxy</code> settings.</p>",
+            "fr": "<p><code>proxy-addr</code> (la dépendance derrière <code>trust proxy</code> dans Express) compilait des sous-réseaux comme <code>::ffff:10.0.0.0/8</code> (la bonne forme est <code>/104</code>) ou <code>::/1</code> avec des bits de tête à zéro, qui correspondaient alors à <strong>toute adresse IPv4</strong>. Chaque client devient un proxy de confiance et <code>req.ip</code>/<code>req.ips</code> renvoient le contenu de <code>X-Forwarded-For</code>, ce qui neutralise rate limiting, allowlists et logs d'audit. Versions <code>&gt;= 1.1.0, &lt; 2.0.8</code> ; le correctif <code>2.0.8</code> est sur npm depuis le 15 septembre, advisory publié par GitHub le 5 octobre.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-jqcg-44mw-7w3h", "label": "github.com/advisories" }
+        },
+        {
+          "id": "tinypool-proto-pollution-rce",
+          "tag": "security",
+          "date": "05 Oct 2026",
+          "title": {
+            "es": "tinypool: un gadget de prototype pollution convierte las opciones del worker en RCE (CVSS 9.5)",
+            "en": "tinypool: a prototype pollution gadget turns worker options into RCE (CVSS 9.5)",
+            "fr": "tinypool : un gadget de prototype pollution transforme les options du worker en RCE (CVSS 9.5)"
+          },
+          "body_html": {
+            "es": "<p><code>tinypool</code> (el pool de workers que usa Vitest, entre otros) leía las opciones del <code>Worker</code> desde un objeto plano y las pasaba explícitas a <code>worker_threads</code>, rematerializando propiedades heredadas de <code>Object.prototype</code> que Node core ignora a propósito. Si algo en tu proceso permite polucionar el prototipo, <code>execArgv: ['--require', ...]</code> termina ejecutando código en cada worker. Dos advisories con <strong>CVSS 9.5</strong> para <code>&lt;= 2.1.0</code>; el fix está desde <code>2.1.1</code>. Si usás tinypool en producción (no solo en tests), revisá el lockfile.</p>",
+            "en": "<p><code>tinypool</code> (the worker pool used by Vitest, among others) read <code>Worker</code> options off a plain object and passed them explicitly to <code>worker_threads</code>, re-materializing properties inherited from <code>Object.prototype</code> that Node core deliberately ignores. If anything in your process allows prototype pollution, <code>execArgv: ['--require', ...]</code> ends up executing code in every worker. Two advisories at <strong>CVSS 9.5</strong> for <code>&lt;= 2.1.0</code>; fixed since <code>2.1.1</code>. If you run tinypool in production, not just tests, check your lockfile.</p>",
+            "fr": "<p><code>tinypool</code> (le pool de workers utilisé notamment par Vitest) lisait les options du <code>Worker</code> sur un objet simple et les passait explicitement à <code>worker_threads</code>, rematérialisant des propriétés héritées de <code>Object.prototype</code> que Node ignore volontairement. Si votre processus permet une prototype pollution, <code>execArgv: ['--require', ...]</code> exécute du code dans chaque worker. Deux advisories en <strong>CVSS 9.5</strong> pour <code>&lt;= 2.1.0</code> ; corrigé depuis <code>2.1.1</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-5gmw-xhrv-c9v3", "label": "github.com/advisories" }
+        },
+        {
+          "id": "nuxt-4-6-server-agnostic",
+          "tag": "release",
+          "date": "05 Oct 2026",
+          "title": {
+            "es": "Nuxt 4.6: nuxt/server desacopla Nuxt de Nitro/h3 y llega Nuxt CLI v4",
+            "en": "Nuxt 4.6: nuxt/server decouples Nuxt from Nitro/h3, plus Nuxt CLI v4",
+            "fr": "Nuxt 4.6 : nuxt/server découple Nuxt de Nitro/h3, et Nuxt CLI v4"
+          },
+          "body_html": {
+            "es": "<p>La jugada grande es arquitectónica: Nuxt ahora define <strong>sus propios tipos</strong> para el request event, route rules y <code>$fetch</code>, y expone <code>nuxt/server</code> como superficie pública. Código de server escrito contra <code>nuxt/server</code> en 4.6 corre sin cambios en Nuxt 5 (Nitro v3 + h3 v2), y aparece un builder experimental <code>@nuxt/vite-server</code> basado en la Environment API de Vite. Es un puerto/adaptador de libro: depender de tu propia abstracción y no del framework de abajo. Además, <code>@nuxt/cli</code> v4 trae TUI interactiva, 73% menos peso y primer paint de <code>nuxt dev</code> 6.6x más rápido; requiere Node 22.21+, 24.11+ o 26+.</p>",
+            "en": "<p>The big move is architectural: Nuxt now defines <strong>its own types</strong> for the request event, route rules, and <code>$fetch</code>, and exposes <code>nuxt/server</code> as a public surface. Server code written against <code>nuxt/server</code> on 4.6 runs unchanged on Nuxt 5 (Nitro v3 + h3 v2), and an experimental <code>@nuxt/vite-server</code> builder based on the Vite Environment API debuts. It is textbook ports-and-adapters: depend on your own abstraction, not the framework underneath. <code>@nuxt/cli</code> v4 also ships an interactive TUI, a 73% smaller install, and 6.6x faster first paint for <code>nuxt dev</code>; it requires Node 22.21+, 24.11+, or 26+.</p>",
+            "fr": "<p>Le changement majeur est architectural : Nuxt définit désormais <strong>ses propres types</strong> pour l'événement de requête, les route rules et <code>$fetch</code>, et expose <code>nuxt/server</code> comme surface publique. Le code serveur écrit contre <code>nuxt/server</code> en 4.6 tourne sans modification sur Nuxt 5 (Nitro v3 + h3 v2), et un builder expérimental <code>@nuxt/vite-server</code> basé sur l'Environment API de Vite apparaît. <code>@nuxt/cli</code> v4 apporte une TUI interactive, une installation 73 % plus légère et un premier rendu de <code>nuxt dev</code> 6,6x plus rapide ; Node 22.21+, 24.11+ ou 26+ requis.</p>"
+          },
+          "source": { "url": "https://github.com/nuxt/nuxt/releases/tag/v4.6.0", "label": "github.com/nuxt" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "compression-memory-leak-dos",
+      "updates": [
+        {
+          "id": "compression-memory-leak-dos",
+          "tag": "security",
+          "date": "05 Oct 2026",
+          "title": {
+            "es": "compression: cada respuesta abortada filtra memoria de zlib (DoS, alta)",
+            "en": "compression: every aborted response leaks zlib memory (DoS, high)",
+            "fr": "compression : chaque réponse interrompue fait fuir de la mémoire zlib (DoS, élevée)"
+          },
+          "body_html": {
+            "es": "<p>El middleware <code>compression</code> de Express no destruía el stream de zlib cuando el cliente cortaba la conexión antes de terminar la respuesta. Un atacante que abre y corta requests en loop te agota la memoria nativa. Afecta a <strong>todas</strong> las apps con <code>compression &lt; 1.8.2</code>; actualizá, y si podés, delegá la compresión al reverse proxy o CDN.</p>",
+            "en": "<p>The Express <code>compression</code> middleware never destroyed the zlib stream when a client disconnected mid-response, so an attacker opening and aborting requests in a loop exhausts native memory. Affects <strong>every</strong> app on <code>compression &lt; 1.8.2</code>; upgrade, and consider offloading compression to your reverse proxy or CDN.</p>",
+            "fr": "<p>Le middleware <code>compression</code> d'Express ne détruisait pas le flux zlib quand le client coupait la connexion en cours de réponse ; un attaquant qui ouvre et interrompt des requêtes en boucle épuise la mémoire native. Toutes les apps en <code>compression &lt; 1.8.2</code> sont concernées ; mettez à jour, ou déléguez la compression au reverse proxy ou au CDN.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-vc2v-76pw-4v95", "label": "github.com/advisories" }
+        },
+        {
+          "id": "fastify-busboy-advisories",
+          "tag": "security",
+          "date": "05 Oct 2026",
+          "title": {
+            "es": "@fastify/busboy: tres advisories en una semana (2 DoS + CRLF injection en multipart)",
+            "en": "@fastify/busboy: three advisories in a week (2 DoS + multipart CRLF injection)",
+            "fr": "@fastify/busboy : trois advisories en une semaine (2 DoS + injection CRLF multipart)"
+          },
+          "body_html": {
+            "es": "<p>El parser multipart que usan <code>@fastify/multipart</code> y <code>undici</code> recibió dos DoS el 2 de octubre (header de parte con nombre de prototipo y boundary gigante, fix en <code>3.2.1</code>) y una CRLF injection en <code>filename</code>/<code>name</code> de <code>Content-Disposition</code> el 5 (fix en <code>3.2.2</code>). Si aceptás uploads, subí a <code>3.2.2</code> directamente.</p>",
+            "en": "<p>The multipart parser behind <code>@fastify/multipart</code> and <code>undici</code> got two DoS advisories on October 2 (prototype-named part header and oversized boundary, fixed in <code>3.2.1</code>) and a CRLF injection in the <code>Content-Disposition</code> <code>filename</code>/<code>name</code> on October 5 (fixed in <code>3.2.2</code>). If you accept uploads, go straight to <code>3.2.2</code>.</p>",
+            "fr": "<p>Le parser multipart derrière <code>@fastify/multipart</code> et <code>undici</code> a reçu deux advisories DoS le 2 octobre (en-tête de partie nommé comme un prototype et boundary surdimensionné, corrigés en <code>3.2.1</code>) et une injection CRLF dans <code>filename</code>/<code>name</code> de <code>Content-Disposition</code> le 5 (corrigée en <code>3.2.2</code>). Si vous acceptez des uploads, passez directement en <code>3.2.2</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-gxm5-99cw-xjw9", "label": "github.com/advisories" }
+        },
+        {
+          "id": "graphql-tools-mergedeep",
+          "tag": "security",
+          "date": "05 Oct 2026",
+          "title": {
+            "es": "GraphQL Tools: prototype pollution en mergeDeep (CVSS 8.2)",
+            "en": "GraphQL Tools: prototype pollution in mergeDeep (CVSS 8.2)",
+            "fr": "GraphQL Tools : prototype pollution dans mergeDeep (CVSS 8.2)"
+          },
+          "body_html": {
+            "es": "<p><code>mergeDeep</code> de <code>@graphql-tools/utils</code> (base de Yoga, Mesh y medio ecosistema de schema stitching) permitía polucionar el prototipo. Fix en <code>12.0.1</code>. Combinalo con el caso tinypool de arriba y entendés por qué la prototype pollution nunca es un bug menor.</p>",
+            "en": "<p><code>mergeDeep</code> in <code>@graphql-tools/utils</code> (the base of Yoga, Mesh, and much of the schema-stitching ecosystem) allowed prototype pollution. Fixed in <code>12.0.1</code>. Pair it with the tinypool gadget above and it is clear why prototype pollution is never a minor bug.</p>",
+            "fr": "<p><code>mergeDeep</code> dans <code>@graphql-tools/utils</code> (base de Yoga, Mesh et d'une grande partie du schema stitching) permettait une prototype pollution. Corrigé en <code>12.0.1</code>. Combiné au gadget tinypool ci-dessus, on voit pourquoi la prototype pollution n'est jamais un bug mineur.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-7mx3-vvmw-hjmv", "label": "github.com/advisories" }
+        },
+        {
+          "id": "hono-4-13-13-mount",
+          "tag": "deprecation",
+          "date": "04 Oct 2026",
+          "title": {
+            "es": "Hono 4.13.13: app.mount() pasa a ser middleware hono/mount y queda deprecado",
+            "en": "Hono 4.13.13: app.mount() becomes the hono/mount middleware and is deprecated",
+            "fr": "Hono 4.13.13 : app.mount() devient le middleware hono/mount et est déprécié"
+          },
+          "body_html": {
+            "es": "<p>Para montar otro router (itty-router, etc.) ahora se usa <code>app.all('/x/*', mount(handler))</code>. <code>app.mount()</code> sigue andando en v4 pero se va en v5: migración de una línea, hacela ahora y te ahorrás el susto.</p>",
+            "en": "<p>Mounting another router (itty-router, etc.) now uses <code>app.all('/x/*', mount(handler))</code>. <code>app.mount()</code> still works in v4 but goes away in v5; it is a one-line migration.</p>",
+            "fr": "<p>Pour monter un autre routeur (itty-router, etc.), on utilise désormais <code>app.all('/x/*', mount(handler))</code>. <code>app.mount()</code> fonctionne encore en v4 mais disparaîtra en v5 ; migration d'une ligne.</p>"
+          },
+          "source": { "url": "https://github.com/honojs/hono/releases/tag/v4.13.13", "label": "github.com/honojs" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "dynamodb-filtered-export",
+      "updates": [
+        {
+          "id": "dynamodb-filtered-export",
+          "tag": "notable",
+          "date": "01 Oct 2026",
+          "title": {
+            "es": "DynamoDB: export filtrado a S3 con key conditions, filtros y projections",
+            "en": "DynamoDB: filtered export to S3 with key conditions, filters, and projections",
+            "fr": "DynamoDB : export filtré vers S3 avec key conditions, filtres et projections"
+          },
+          "body_html": {
+            "es": "<p>Los exports a S3 (full e incrementales) ahora aceptan <code>KeyConditionExpression</code>, <code>FilterExpression</code> y <code>ProjectionExpression</code>. Para single-table design esto es un golazo: exportás solo una entidad o un tenant sin pipelines intermedios, y sacás PII del dataset antes de que llegue al lake. Disponible en todas las regiones salvo GovCloud.</p>",
+            "en": "<p>S3 exports (full and incremental) now accept <code>KeyConditionExpression</code>, <code>FilterExpression</code>, and <code>ProjectionExpression</code>. For single-table designs you can export one entity type or one tenant without an intermediate pipeline, and strip PII before it reaches the lake. Available in all regions except GovCloud.</p>",
+            "fr": "<p>Les exports vers S3 (complets et incrémentaux) acceptent désormais <code>KeyConditionExpression</code>, <code>FilterExpression</code> et <code>ProjectionExpression</code>. En single-table design, on exporte un seul type d'entité ou un seul tenant sans pipeline intermédiaire, et on retire les données personnelles avant le lake. Disponible partout sauf GovCloud.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-dynamodb-introduces-filtered-export", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloudflare-cf-cli",
+      "updates": [
+        {
+          "id": "cloudflare-cf-cli",
+          "tag": "beta",
+          "date": "06 Oct 2026",
+          "title": {
+            "es": "Cloudflare lanza cf, un CLI pensado para agentes, y anuncia el fin de Wrangler",
+            "en": "Cloudflare launches cf, an agent-first CLI, and announces the end of Wrangler",
+            "fr": "Cloudflare lance cf, un CLI pensé pour les agents, et annonce la fin de Wrangler"
+          },
+          "body_html": {
+            "es": "<p><code>cf</code> entra en beta abierta: escrito en TypeScript, generado desde los schemas OpenAPI de Cloudflare, con más de <strong>3.000 operaciones</strong> (Wrangler cubre ~280), salida JSON por defecto, config tipada en <code>cloudflare.config.ts</code> y Vite como entorno de dev. Wrangler tendrá una última major que te manda a migrar y 18 meses de mantenimiento después de la beta. Si tenés scripts de CI atados a Wrangler, empezá a planificar.</p>",
+            "en": "<p><code>cf</code> enters open beta: written in TypeScript, generated from Cloudflare's OpenAPI schemas, with over <strong>3,000 operations</strong> (Wrangler covers ~280), JSON output by default, typed config in <code>cloudflare.config.ts</code>, and Vite as the dev environment. Wrangler gets a final major pointing users to migrate and 18 months of maintenance after the beta ends. If your CI scripts depend on Wrangler, start planning.</p>",
+            "fr": "<p><code>cf</code> passe en bêta ouverte : écrit en TypeScript, généré depuis les schémas OpenAPI de Cloudflare, avec plus de <strong>3 000 opérations</strong> (Wrangler en couvre ~280), sortie JSON par défaut, configuration typée dans <code>cloudflare.config.ts</code> et Vite comme environnement de dev. Wrangler aura une dernière version majeure incitant à migrer, puis 18 mois de maintenance après la bêta.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/cloudflare-cf-cli/", "label": "infoq.com" }
+        },
+        {
+          "id": "cloudflare-containers-cross-tenant",
+          "tag": "security",
+          "date": "05 Oct 2026",
+          "title": {
+            "es": "Cloudflare Containers: bloques de disco sin zerear exponían datos de otros tenants",
+            "en": "Cloudflare Containers: un-zeroed disk blocks exposed other tenants' data",
+            "fr": "Cloudflare Containers : des blocs disque non remis à zéro exposaient les données d'autres tenants"
+          },
+          "body_html": {
+            "es": "<p>El thin provisioning de device mapper corría con <code>skip_block_zeroing</code>, así que clientes pagos podían leer bloques residuales con páginas de base de datos y SQLite de otros clientes. El límite de Firecracker aguantó: el agujero estaba debajo, en storage. Cloudflare sacó la optimización y purgó discos e image caches entre el 4 y el 19 de septiembre, sin evidencia de explotación. Lección de arquitectura: la isolation es tan fuerte como la capa más baja que compartís.</p>",
+            "en": "<p>Device mapper thin provisioning ran with <code>skip_block_zeroing</code>, so paid customers could read residual blocks holding other customers' database pages and SQLite files. The Firecracker boundary held; the hole was beneath it, in storage. Cloudflare removed the optimization and purged affected disks and image caches between September 4 and 19, with no evidence of exploitation. Isolation is only as strong as the lowest shared layer.</p>",
+            "fr": "<p>Le thin provisioning de device mapper tournait avec <code>skip_block_zeroing</code> : des clients payants pouvaient lire des blocs résiduels contenant des pages de base de données et des fichiers SQLite d'autres clients. La frontière Firecracker a tenu ; la faille était en dessous, dans le stockage. Cloudflare a retiré l'optimisation et purgé disques et caches d'images entre le 4 et le 19 septembre, sans preuve d'exploitation.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/cloudflare-cross-tenant-exposure/", "label": "infoq.com" }
+        },
+        {
+          "id": "gitlab-cve-2026-85706",
+          "tag": "security",
+          "date": "03 Oct 2026",
+          "title": {
+            "es": "GitLab CVE-2026-85706 (CVSS 10) bajo explotación activa: path traversal sin auth",
+            "en": "GitLab CVE-2026-85706 (CVSS 10) under active exploitation: unauthenticated path traversal",
+            "fr": "GitLab CVE-2026-85706 (CVSS 10) activement exploitée : path traversal sans authentification"
+          },
+          "body_html": {
+            "es": "<p>En instancias self-managed con al menos un proyecto público, un atacante sin login lee archivos arbitrarios: variables de CI/CD, tokens de runners, llaves SSH. Afecta 18.7 a 19.3.1; fixes en <code>19.3.2</code>, <code>19.2.6</code>, <code>19.1.8</code> y backports a <code>19.0.9</code>/<code>18.11.12</code>. Si no parchaste desde el 11 de septiembre, actualizá y <strong>rotá todos los secretos de CI</strong>.</p>",
+            "en": "<p>On self-managed instances with at least one public project, an unauthenticated attacker can read arbitrary files: CI/CD variables, runner tokens, SSH keys. Affects 18.7 through 19.3.1; fixed in <code>19.3.2</code>, <code>19.2.6</code>, <code>19.1.8</code>, with backports to <code>19.0.9</code>/<code>18.11.12</code>. If you have not patched since September 11, upgrade and <strong>rotate every CI secret</strong>.</p>",
+            "fr": "<p>Sur les instances self-managed avec au moins un projet public, un attaquant non authentifié lit des fichiers arbitraires : variables CI/CD, tokens de runners, clés SSH. Versions 18.7 à 19.3.1 ; corrigé en <code>19.3.2</code>, <code>19.2.6</code>, <code>19.1.8</code>, avec backports en <code>19.0.9</code>/<code>18.11.12</code>. Si vous n'avez pas patché depuis le 11 septembre, mettez à jour et <strong>faites tourner tous les secrets CI</strong>.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/gitlab-critical-vulnerabilities/", "label": "infoq.com" }
+        },
+        {
+          "id": "docker-compose-5-6-jobs",
+          "tag": "minor",
+          "date": "02 Oct 2026",
+          "title": {
+            "es": "Docker Compose 5.6: soporte parcial de jobs y relay de red para provider services",
+            "en": "Docker Compose 5.6: partial jobs support and a network relay for provider services",
+            "fr": "Docker Compose 5.6 : support partiel des jobs et relais réseau pour les provider services"
+          },
+          "body_html": {
+            "es": "<p>Llegan los <strong>jobs</strong> (por ahora solo disparados a mano; los programados esperan soporte en Docker Engine), provider services con relay de red dedicado y distribución de imágenes on demand, y warnings para atributos no soportados del compose file. Ideal para migraciones y seeds como jobs de primera clase.</p>",
+            "en": "<p><strong>Jobs</strong> arrive (manually triggered only for now; scheduled jobs await Docker Engine support), plus provider services with a dedicated network relay and on-demand image distribution, and warnings for unsupported compose-file attributes. Handy for migrations and seeds as first-class jobs.</p>",
+            "fr": "<p>Arrivée des <strong>jobs</strong> (déclenchement manuel uniquement pour l'instant ; les jobs planifiés attendent le support du Docker Engine), des provider services avec relais réseau dédié et distribution d'images à la demande, et d'avertissements pour les attributs non supportés.</p>"
+          },
+          "source": { "url": "https://github.com/docker/compose/releases/tag/v5.6.0", "label": "github.com/docker" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "uber-eats-search-latency",
+      "updates": [
+        {
+          "id": "uber-eats-search-latency",
+          "tag": "notable",
+          "date": "02 Oct 2026",
+          "title": {
+            "es": "Uber Eats corta 50% la latencia de búsqueda haciendo menos trabajo, no más rápido",
+            "en": "Uber Eats halves search latency by doing less work, not faster work",
+            "fr": "Uber Eats divise par deux la latence de recherche en travaillant moins, pas plus vite"
+          },
+          "body_html": {
+            "es": "<p>Primero cambiaron la métrica: de latencia de API a <strong>Above-the-Fold completion</strong> (cuando la primera pantalla renderiza con imágenes). Después sumaron ganancias chicas: sacar estrategias de retrieval de bajo valor (~120 ms), embeddings a nivel producto (100x menos lookups), separar hydration de ranking de la de presentación (&gt;100 ms), request hedging, y datos de bids en formato columnar en memoria (~130 ms). Si optimizás la métrica equivocada, optimizás lo equivocado.</p>",
+            "en": "<p>They first changed the metric: from API latency to <strong>Above-the-Fold completion</strong> (when the first screen renders with images). Then they stacked small wins: dropping low-value retrieval strategies (~120 ms), product-level embeddings (100x fewer lookups), separating ranking hydration from presentation data (&gt;100 ms), request hedging, and in-memory columnar bid data (~130 ms). Optimize the wrong metric and you optimize the wrong thing.</p>",
+            "fr": "<p>D'abord, changer la métrique : de la latence API à l'<strong>Above-the-Fold completion</strong> (rendu du premier écran avec images). Ensuite, cumuler de petits gains : retirer les stratégies de retrieval peu utiles (~120 ms), embeddings au niveau produit (100x moins de lookups), séparer l'hydratation du ranking de celle de la présentation (&gt;100 ms), request hedging et données d'enchères en colonnes en mémoire (~130 ms).</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/uber-eats-search-latency/", "label": "infoq.com" }
+        },
+        {
+          "id": "nx-command-injection",
+          "tag": "security",
+          "date": "05 Oct 2026",
+          "title": {
+            "es": "Nx: command injection vía refs de git en affected y nx import (CVSS 8.5)",
+            "en": "Nx: command injection via git refs in affected and nx import (CVSS 8.5)",
+            "fr": "Nx : injection de commandes via les refs git dans affected et nx import (CVSS 8.5)"
+          },
+          "body_html": {
+            "es": "<p>Nx armaba comandos de git como strings de shell: <code>defaultBase</code>, <code>NX_BASE</code>/<code>NX_HEAD</code> o un nombre de branch de un remote en <code>nx import</code> terminaban parseados por <code>/bin/sh</code>. En el mismo lote: sockets del daemon accesibles a otros usuarios locales y path traversal en <code>nx migrate</code>. Fix en <code>22.7.8</code> y <code>23.1.1</code>. Recordatorio eterno: <code>execFile</code> con array de argumentos, nunca interpolación en shell.</p>",
+            "en": "<p>Nx built git commands as shell strings: <code>defaultBase</code>, <code>NX_BASE</code>/<code>NX_HEAD</code>, or a branch name from a remote in <code>nx import</code> got parsed by <code>/bin/sh</code>. Same batch: daemon sockets reachable by other local users and a path traversal in <code>nx migrate</code>. Fixed in <code>22.7.8</code> and <code>23.1.1</code>. Evergreen reminder: <code>execFile</code> with an argument array, never shell interpolation.</p>",
+            "fr": "<p>Nx construisait les commandes git comme des chaînes shell : <code>defaultBase</code>, <code>NX_BASE</code>/<code>NX_HEAD</code> ou un nom de branche distant dans <code>nx import</code> étaient interprétés par <code>/bin/sh</code>. Même lot : sockets du daemon accessibles aux autres utilisateurs locaux et path traversal dans <code>nx migrate</code>. Corrigé en <code>22.7.8</code> et <code>23.1.1</code>. Rappel : <code>execFile</code> avec un tableau d'arguments, jamais d'interpolation shell.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-w2vw-w76x-qr89", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "sveltekit-3-0-ga",
+      "updates": [
+        {
+          "id": "sveltekit-3-0-ga",
+          "tag": "breaking",
+          "date": "01 Oct 2026",
+          "title": {
+            "es": "SvelteKit 3.0 GA: Node 22, TypeScript 6, cookie v2 y getRequest/setResponse síncronos",
+            "en": "SvelteKit 3.0 GA: Node 22, TypeScript 6, cookie v2, and synchronous getRequest/setResponse",
+            "fr": "SvelteKit 3.0 GA : Node 22, TypeScript 6, cookie v2 et getRequest/setResponse synchrones"
+          },
+          "body_html": {
+            "es": "<p>La major sale con breaking changes que tocan el backend: <strong>Node 22+</strong>, <strong>TypeScript 6</strong> mínimo, tipos de remote functions movidos a <code>$app/server</code>, <code>cookie</code> v2 (nombres solo ASCII, <code>path</code> por defecto <code>'/'</code>), adiós a <code>@sveltejs/kit/node/polyfills</code> y <code>preloadStrategy</code>, y error explícito cuando el server no respeta una single-flight mutation pedida por el cliente. Los adapters (node 6, vercel 7, static 4) salieron el mismo día; ya hay <code>3.0.1</code>.</p>",
+            "en": "<p>The major ships breaking changes that touch the backend: <strong>Node 22+</strong>, <strong>TypeScript 6</strong> minimum, remote function types moved to <code>$app/server</code>, <code>cookie</code> v2 (ASCII-only names, <code>path</code> defaults to <code>'/'</code>), removal of <code>@sveltejs/kit/node/polyfills</code> and <code>preloadStrategy</code>, and an explicit error when the server ignores a client-requested single-flight mutation. Adapters (node 6, vercel 7, static 4) shipped the same day; <code>3.0.1</code> is already out.</p>",
+            "fr": "<p>La version majeure apporte des breaking changes côté backend : <strong>Node 22+</strong>, <strong>TypeScript 6</strong> minimum, types des remote functions déplacés vers <code>$app/server</code>, <code>cookie</code> v2 (noms ASCII uniquement, <code>path</code> par défaut à <code>'/'</code>), suppression de <code>@sveltejs/kit/node/polyfills</code> et de <code>preloadStrategy</code>, et erreur explicite quand le serveur ignore une single-flight mutation demandée par le client. Les adapters (node 6, vercel 7, static 4) sont sortis le même jour ; <code>3.0.1</code> est déjà disponible.</p>"
+          },
+          "source": { "url": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%403.0.0", "label": "github.com/sveltejs" }
+        },
+        {
+          "id": "pnpm-12-9",
+          "tag": "minor",
+          "date": "02 Oct 2026",
+          "title": {
+            "es": "pnpm 12.9: networkConcurrency por registry y fix de credenciales en pnpm login",
+            "en": "pnpm 12.9: per-registry networkConcurrency and a pnpm login credential fix",
+            "fr": "pnpm 12.9 : networkConcurrency par registry et correctif d'identifiants dans pnpm login"
+          },
+          "body_html": {
+            "es": "<p>Cada entrada de <code>registries</code> puede fijar <code>networkConcurrency</code> (útil con registries corporativos que hacen rate limiting), pnpm corre con WebAssembly en WebContainers de StackBlitz y el store registra todos los proyectos instalados. Ojo con el patch: <code>pnpm login</code> ya no reenvía credenciales a otro origen en redirects. Ya está <code>12.9.1</code>.</p>",
+            "en": "<p>Each <code>registries</code> entry can set <code>networkConcurrency</code> (useful for rate-limited corporate registries), pnpm runs via WebAssembly in StackBlitz WebContainers, and the store now records every installed project. Security patch: <code>pnpm login</code> no longer forwards credentials to another origin on redirects. <code>12.9.1</code> is already out.</p>",
+            "fr": "<p>Chaque entrée <code>registries</code> peut définir <code>networkConcurrency</code> (utile pour les registries d'entreprise limités en débit), pnpm tourne en WebAssembly dans les WebContainers StackBlitz et le store enregistre chaque projet installé. Correctif de sécurité : <code>pnpm login</code> ne transmet plus les identifiants à une autre origine lors des redirections.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.9.0", "label": "github.com/pnpm" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El 5 de octubre GitHub publicó de golpe decenas de advisories npm cuyos fixes ya estaban en septiembre (vm2, proxy-addr, compression, tinypool). Esperá una ola de PRs de Dependabot esta semana: priorizá lo que está en el camino del request.",
+      "en": "On October 5 GitHub published dozens of npm advisories whose fixes shipped in September (vm2, proxy-addr, compression, tinypool). Expect a wave of Dependabot PRs this week; prioritize whatever sits on the request path.",
+      "fr": "Le 5 octobre, GitHub a publié d'un coup des dizaines d'advisories npm dont les correctifs datent de septembre (vm2, proxy-addr, compression, tinypool). Attendez-vous à une vague de PRs Dependabot cette semaine ; priorisez ce qui est sur le chemin des requêtes."
+    },
+    {
+      "es": "Prototype pollution sigue siendo el gadget favorito: graphql-tools la habilita, tinypool la convierte en RCE. Object.create(null) y Map para datos de usuario, siempre.",
+      "en": "Prototype pollution remains the favorite gadget: graphql-tools enables it, tinypool turns it into RCE. Use Object.create(null) and Map for user-controlled data.",
+      "fr": "La prototype pollution reste le gadget favori : graphql-tools la permet, tinypool la transforme en RCE. Utilisez Object.create(null) et Map pour les données utilisateur."
+    },
+    {
+      "es": "Los frameworks se desacoplan de su capa de server (nuxt/server) y las herramientas se rediseñan para agentes (cf de Cloudflare, lock file de nuxt dev): la DX ahora también es AX.",
+      "en": "Frameworks are decoupling from their server layer (nuxt/server) and tooling is being redesigned for agents (Cloudflare cf, the nuxt dev lock file): DX now includes agent experience.",
+      "fr": "Les frameworks se découplent de leur couche serveur (nuxt/server) et l'outillage est repensé pour les agents (cf de Cloudflare, lock file de nuxt dev) : la DX inclut désormais l'expérience des agents."
+    }
+  ]
+}

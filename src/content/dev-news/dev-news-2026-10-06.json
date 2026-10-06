@@ -1,0 +1,274 @@
+{
+  "title": {
+    "es": "Dev News — 6 Oct 2026: tormenta de advisories (seroval, tinypool, Vue SSR) y Vite parchea cuatro ramas",
+    "en": "Dev News — Oct 6, 2026: advisory storm (seroval, tinypool, Vue SSR) and Vite patches four branches",
+    "fr": "Dev News — 6 oct. 2026 : avalanche d'advisories (seroval, tinypool, Vue SSR) et Vite corrige quatre branches"
+  },
+  "description": {
+    "es": "GitHub publicó un batch enorme de advisories npm el 5 de octubre: seroval crítico (Solid/TanStack), tinypool con RCE, XSS en Vue SSR, Capacitor y Angular SSR. Además Vite 8.3.3 con backports, pnpm 12.9 y Astro 7.4 beta.",
+    "en": "GitHub published a huge batch of npm advisories on October 5: critical seroval (Solid/TanStack), tinypool RCE, Vue SSR XSS, Capacitor and Angular SSR. Plus Vite 8.3.3 with backports, pnpm 12.9 and Astro 7.4 beta.",
+    "fr": "GitHub a publié un énorme lot d'advisories npm le 5 octobre : seroval critique (Solid/TanStack), RCE dans tinypool, XSS dans Vue SSR, Capacitor et Angular SSR. Plus Vite 8.3.3 avec backports, pnpm 12.9 et Astro 7.4 bêta."
+  },
+  "pubDate": "2026-10-06",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": { "es": "seroval crítico (9.8): Solid y TanStack", "en": "Critical seroval (9.8): Solid & TanStack", "fr": "seroval critique (9.8) : Solid et TanStack" },
+      "anchor": "seroval-critical",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "tinypool: RCE vía prototype pollution", "en": "tinypool: RCE via prototype pollution", "fr": "tinypool : RCE via prototype pollution" },
+      "anchor": "tinypool-rce",
+      "icon": "lucide:flame"
+    },
+    {
+      "text": { "es": "Vite 8.3.3 + backports a 8.2, 8.1 y 7.3", "en": "Vite 8.3.3 + backports to 8.2, 8.1, 7.3", "fr": "Vite 8.3.3 + backports vers 8.2, 8.1, 7.3" },
+      "anchor": "vite-8-3-3",
+      "icon": "simple-icons:vite"
+    },
+    {
+      "text": { "es": "XSS en @vue/server-renderer", "en": "XSS in @vue/server-renderer", "fr": "XSS dans @vue/server-renderer" },
+      "anchor": "vue-ssr-xss",
+      "icon": "simple-icons:vuedotjs"
+    },
+    {
+      "text": { "es": "Capacitor: advisory crítico en Android/iOS", "en": "Capacitor: critical Android/iOS advisory", "fr": "Capacitor : advisory critique Android/iOS" },
+      "anchor": "capacitor-critical",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "pnpm 12.9: WebContainers y fix en login", "en": "pnpm 12.9: WebContainers + login fix", "fr": "pnpm 12.9 : WebContainers et fix login" },
+      "anchor": "pnpm-12-9",
+      "icon": "lucide:package"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "seroval-critical",
+          "tag": "security",
+          "date": "05 Oct 2026",
+          "title": {
+            "es": "seroval: bypass crítico en fromJSON() (CVSS 9.8)",
+            "en": "seroval: critical fromJSON() bypass (CVSS 9.8)",
+            "fr": "seroval : contournement critique de fromJSON() (CVSS 9.8)"
+          },
+          "body_html": {
+            "es": "<p><strong>GHSA-p6vx-979v-rg4c</strong>: un Promise ya resuelto deserializado con <code>fromJSON()</code> puede disparar callables producidos por plugins vía thenable assimilation, saltándose un fix previo. Afecta <code>seroval</code> 0.12.0–1.6.0, parche en <strong>1.6.2</strong>. Ojo con esto: seroval es el serializador SSR de <strong>Solid</strong> y <strong>TanStack Router/Start</strong>. TanStack ya pide <code>^1.6.7</code>, pero <code>solid-js@latest</code> declara <code>~1.5.4</code>, fuera de la línea parcheada. Revisá tu lockfile y metele un <code>override</code> si hace falta.</p>",
+            "en": "<p><strong>GHSA-p6vx-979v-rg4c</strong>: a fulfilled Promise deserialized by <code>fromJSON()</code> can invoke plugin-produced callables through thenable assimilation, bypassing an earlier fix. Affects <code>seroval</code> 0.12.0–1.6.0, patched in <strong>1.6.2</strong>. seroval is the SSR serializer behind <strong>Solid</strong> and <strong>TanStack Router/Start</strong>. TanStack already requires <code>^1.6.7</code>, but <code>solid-js@latest</code> declares <code>~1.5.4</code>, outside the patched line. Check your lockfile and add an <code>override</code> if needed.</p>",
+            "fr": "<p><strong>GHSA-p6vx-979v-rg4c</strong> : un Promise résolu désérialisé par <code>fromJSON()</code> peut invoquer des callables produits par des plugins via l'assimilation de thenables, contournant un correctif antérieur. Touche <code>seroval</code> 0.12.0–1.6.0, corrigé en <strong>1.6.2</strong>. seroval est le sérialiseur SSR de <strong>Solid</strong> et <strong>TanStack Router/Start</strong>. TanStack exige déjà <code>^1.6.7</code>, mais <code>solid-js@latest</code> déclare <code>~1.5.4</code>, hors de la ligne corrigée. Vérifiez votre lockfile et ajoutez un <code>override</code> si besoin.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-p6vx-979v-rg4c", "label": "github.com/advisories" }
+        },
+        {
+          "id": "tinypool-rce",
+          "tag": "security",
+          "date": "05 Oct 2026",
+          "title": {
+            "es": "tinypool: prototype pollution a RCE en el pipeline de tests",
+            "en": "tinypool: prototype pollution to RCE in the test pipeline",
+            "fr": "tinypool : de la prototype pollution à la RCE dans le pipeline de tests"
+          },
+          "body_html": {
+            "es": "<p>Dos advisories críticos (<strong>GHSA-5gmw-xhrv-c9v3</strong> y <strong>GHSA-85c8-ppgw-ccpr</strong>): opciones de worker como <code>execArgv</code> o <code>env</code> leen propiedades contaminadas del prototipo, así que cualquier primitiva de prototype pollution en tu árbol de dependencias termina en ejecución de código. Afecta <code>tinypool</code> &lt;= 2.1.0, fix en <strong>2.1.1</strong>. Vitest 4/5 ya no lo usan directamente, pero <strong>Vitest 3.x</strong> sí: si seguís ahí, actualizá.</p>",
+            "en": "<p>Two critical advisories (<strong>GHSA-5gmw-xhrv-c9v3</strong> and <strong>GHSA-85c8-ppgw-ccpr</strong>): worker options such as <code>execArgv</code> or <code>env</code> read polluted prototype properties, so any prototype-pollution primitive in your dependency tree becomes code execution. Affects <code>tinypool</code> &lt;= 2.1.0, fixed in <strong>2.1.1</strong>. Vitest 4/5 no longer depend on it directly, but <strong>Vitest 3.x</strong> does — upgrade if you are still there.</p>",
+            "fr": "<p>Deux advisories critiques (<strong>GHSA-5gmw-xhrv-c9v3</strong> et <strong>GHSA-85c8-ppgw-ccpr</strong>) : les options de worker comme <code>execArgv</code> ou <code>env</code> lisent des propriétés polluées du prototype, donc toute primitive de prototype pollution dans l'arbre de dépendances devient une exécution de code. Touche <code>tinypool</code> &lt;= 2.1.0, corrigé en <strong>2.1.1</strong>. Vitest 4/5 n'en dépendent plus directement, mais <strong>Vitest 3.x</strong> oui : mettez à jour.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-5gmw-xhrv-c9v3", "label": "github.com/advisories" }
+        },
+        {
+          "id": "vite-8-3-3",
+          "tag": "patch",
+          "date": "06 Oct 2026",
+          "title": {
+            "es": "Vite 8.3.3, 8.2.4, 8.1.6 y 7.3.7 en la misma hora",
+            "en": "Vite 8.3.3, 8.2.4, 8.1.6 and 7.3.7 in the same hour",
+            "fr": "Vite 8.3.3, 8.2.4, 8.1.6 et 7.3.7 dans la même heure"
+          },
+          "body_html": {
+            "es": "<p>Cuatro ramas parcheadas en una hora es señal clara de fix de seguridad. Los cambios que importan: el dev server ahora chequea <code>fs.serve</code> para <code>?vite-wasm-instance</code> y guarda ids (no URLs) en <code>safeModulePaths</code>. Todavía no hay advisory publicado, pero si exponés el dev server en la red, actualizá ya.</p>",
+            "en": "<p>Four branches patched within an hour is a clear security-backport signal. The changes that matter: the dev server now checks <code>fs.serve</code> for <code>?vite-wasm-instance</code> and stores ids (not URLs) in <code>safeModulePaths</code>. No advisory is published yet, but if you expose the dev server on the network, upgrade now.</p>",
+            "fr": "<p>Quatre branches corrigées en une heure, c'est un signal clair de backport de sécurité. Changements clés : le dev server vérifie désormais <code>fs.serve</code> pour <code>?vite-wasm-instance</code> et stocke des ids (pas des URLs) dans <code>safeModulePaths</code>. Aucun advisory publié pour l'instant, mais si vous exposez le dev server sur le réseau, mettez à jour.</p>"
+          },
+          "source": { "url": "https://github.com/vitejs/vite/releases/tag/v8.3.3", "label": "github.com/vitejs" }
+        }
+      ]
+    },
+    {
+      "id": "js-frameworks",
+      "name": "JS Frameworks",
+      "theme": "js-frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "js-frameworks",
+      "updates": [
+        {
+          "id": "vue-ssr-xss",
+          "tag": "security",
+          "date": "05 Oct 2026",
+          "title": {
+            "es": "Vue: XSS en ssrRenderAttrs() por carriage return",
+            "en": "Vue: XSS in ssrRenderAttrs() via carriage return",
+            "fr": "Vue : XSS dans ssrRenderAttrs() via retour chariot"
+          },
+          "body_html": {
+            "es": "<p><strong>GHSA-g2v6-rqmx-r4w6</strong> (CVSS 7.2): <code>ssrRenderAttrs()</code> no filtra <code>U+000D</code> en nombres de atributo, y eso permite inyectar <code>onfocus</code> + <code>autofocus</code> que se ejecutan solos al cargar. Si renderizás atributos dinámicos con nombres que vienen del usuario, subí a <strong>3.5.42+</strong> o <strong>3.6.0-rc.6+</strong>.</p>",
+            "en": "<p><strong>GHSA-g2v6-rqmx-r4w6</strong> (CVSS 7.2): <code>ssrRenderAttrs()</code> does not filter <code>U+000D</code> in attribute names, allowing injected <code>onfocus</code> + <code>autofocus</code> that fire on load with no interaction. If you render dynamic attributes with user-controlled names, move to <strong>3.5.42+</strong> or <strong>3.6.0-rc.6+</strong>.</p>",
+            "fr": "<p><strong>GHSA-g2v6-rqmx-r4w6</strong> (CVSS 7.2) : <code>ssrRenderAttrs()</code> ne filtre pas <code>U+000D</code> dans les noms d'attributs, ce qui permet d'injecter <code>onfocus</code> + <code>autofocus</code> exécutés au chargement. Si vous rendez des attributs dynamiques aux noms contrôlés par l'utilisateur, passez en <strong>3.5.42+</strong> ou <strong>3.6.0-rc.6+</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-g2v6-rqmx-r4w6", "label": "github.com/advisories" }
+        },
+        {
+          "id": "angular-ssr-traversal",
+          "tag": "security",
+          "date": "05 Oct 2026",
+          "title": {
+            "es": "Angular SSR: path traversal en CommonEngine sobre Windows",
+            "en": "Angular SSR: path traversal in CommonEngine on Windows",
+            "fr": "Angular SSR : path traversal dans CommonEngine sous Windows"
+          },
+          "body_html": {
+            "es": "<p><strong>GHSA-7g7c-h8rr-7p6q</strong> (medium): <code>CommonEngine</code> puede leer directorios hermanos cuando corre en Windows. Parches en <code>@angular/ssr</code> <strong>22.1.7</strong>, <strong>21.2.23</strong> y <strong>20.3.36</strong>; la 19 queda sin fix.</p>",
+            "en": "<p><strong>GHSA-7g7c-h8rr-7p6q</strong> (medium): <code>CommonEngine</code> can read sibling directories when running on Windows. Patched in <code>@angular/ssr</code> <strong>22.1.7</strong>, <strong>21.2.23</strong> and <strong>20.3.36</strong>; v19 gets no fix.</p>",
+            "fr": "<p><strong>GHSA-7g7c-h8rr-7p6q</strong> (medium) : <code>CommonEngine</code> peut lire des répertoires voisins sous Windows. Corrigé dans <code>@angular/ssr</code> <strong>22.1.7</strong>, <strong>21.2.23</strong> et <strong>20.3.36</strong> ; la v19 n'a pas de correctif.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-7g7c-h8rr-7p6q", "label": "github.com/advisories" }
+        },
+        {
+          "id": "astro-7-4-beta",
+          "tag": "beta",
+          "date": "01 Oct 2026",
+          "title": {
+            "es": "Astro 7.4 beta: las integraciones controlan los directorios de salida",
+            "en": "Astro 7.4 beta: integrations control output directories",
+            "fr": "Astro 7.4 bêta : les intégrations contrôlent les dossiers de sortie"
+          },
+          "body_html": {
+            "es": "<p>Las integraciones ahora pueden decidir dónde escribe Astro el output de client, server y prerender, y los prerenderers custom reciben <code>outputDirectories</code>. Es la pieza que necesitaban los adapters de deploy (Cloudflare ya salió con 15.0.0-beta.1).</p>",
+            "en": "<p>Integrations can now control where Astro writes client, server and prerender output, and custom prerenderers receive a new <code>outputDirectories</code> context. That is the missing piece for deployment adapters (Cloudflare already shipped 15.0.0-beta.1).</p>",
+            "fr": "<p>Les intégrations peuvent désormais choisir où Astro écrit les sorties client, server et prerender, et les prerenderers custom reçoivent un contexte <code>outputDirectories</code>. La pièce manquante pour les adapters de déploiement (Cloudflare est déjà en 15.0.0-beta.1).</p>"
+          },
+          "source": { "url": "https://github.com/withastro/astro/releases/tag/astro%407.4.0-beta.0", "label": "github.com/withastro" }
+        }
+      ]
+    },
+    {
+      "id": "react-native",
+      "name": "React Native & Mobile",
+      "theme": "react-native",
+      "icon_emoji": "📱",
+      "anchor": "react-native",
+      "updates": [
+        {
+          "id": "capacitor-critical",
+          "tag": "security",
+          "date": "05 Oct 2026",
+          "title": {
+            "es": "Capacitor: contenido remoto cargado en el origin de la app",
+            "en": "Capacitor: remote content loaded at the app origin",
+            "fr": "Capacitor : contenu distant chargé sur l'origine de l'app"
+          },
+          "body_html": {
+            "es": "<p><strong>GHSA-rvm3-566m-v7fv</strong> (CVSS 9.3): el path del proxy HTTP interno deja cargar contenido remoto bajo el origin de la app, con acceso al bridge nativo. Fixes en <strong>6.2.2</strong>, <strong>7.6.9</strong>, <strong>8.4.3</strong> y <strong>8.5.1</strong>; ojo que 8.0.0–8.3.4 figura sin parche, así que saltá directo a 8.4.3+.</p>",
+            "en": "<p><strong>GHSA-rvm3-566m-v7fv</strong> (CVSS 9.3): the internal HTTP proxy path lets remote content load at the app origin, with access to the native bridge. Fixed in <strong>6.2.2</strong>, <strong>7.6.9</strong>, <strong>8.4.3</strong> and <strong>8.5.1</strong>; 8.0.0–8.3.4 is listed without a patch, so jump straight to 8.4.3+.</p>",
+            "fr": "<p><strong>GHSA-rvm3-566m-v7fv</strong> (CVSS 9.3) : le chemin du proxy HTTP interne permet de charger du contenu distant sur l'origine de l'app, avec accès au bridge natif. Corrigé en <strong>6.2.2</strong>, <strong>7.6.9</strong>, <strong>8.4.3</strong> et <strong>8.5.1</strong> ; 8.0.0–8.3.4 n'a pas de correctif, passez directement en 8.4.3+.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-rvm3-566m-v7fv", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "css",
+      "name": "CSS",
+      "theme": "css",
+      "icon_emoji": "🎨",
+      "anchor": "css",
+      "updates": [
+        {
+          "id": "postcss-selector-parser-dos",
+          "tag": "security",
+          "date": "05 Oct 2026",
+          "title": {
+            "es": "postcss-selector-parser: complejidad cuadrática en selectores planos",
+            "en": "postcss-selector-parser: quadratic complexity in flat selectors",
+            "fr": "postcss-selector-parser : complexité quadratique sur les sélecteurs plats"
+          },
+          "body_html": {
+            "es": "<p><strong>GHSA-rj75-hqrm-r3gf</strong> (CVSS 5.9): un selector armado a propósito dispara parseo cuadrático y te come la CPU. Está en el árbol de casi cualquier pipeline CSS (Tailwind, cssnano, Stylelint). Sólo pega fuerte si parseás CSS que no controlás, pero <strong>7.1.6</strong> es un bump trivial.</p>",
+            "en": "<p><strong>GHSA-rj75-hqrm-r3gf</strong> (CVSS 5.9): a crafted selector triggers quadratic parsing and CPU exhaustion. It sits in the tree of nearly every CSS pipeline (Tailwind, cssnano, Stylelint). It only really bites if you parse untrusted CSS, but <strong>7.1.6</strong> is a trivial bump.</p>",
+            "fr": "<p><strong>GHSA-rj75-hqrm-r3gf</strong> (CVSS 5.9) : un sélecteur forgé déclenche un parsing quadratique et épuise le CPU. Il est présent dans presque tous les pipelines CSS (Tailwind, cssnano, Stylelint). Le risque concerne surtout le CSS non fiable, mais <strong>7.1.6</strong> est une mise à jour triviale.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-rj75-hqrm-r3gf", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "build-tools",
+      "name": "Build Tools & Runtimes",
+      "theme": "build-tools",
+      "icon_emoji": "🔧",
+      "anchor": "build-tools",
+      "updates": [
+        {
+          "id": "pnpm-12-9",
+          "tag": "release",
+          "date": "02 Oct 2026",
+          "title": {
+            "es": "pnpm 12.9: WebContainers, networkConcurrency por registry y fix de seguridad",
+            "en": "pnpm 12.9: WebContainers, per-registry networkConcurrency and a security fix",
+            "fr": "pnpm 12.9 : WebContainers, networkConcurrency par registry et un correctif de sécurité"
+          },
+          "body_html": {
+            "es": "<p>pnpm corre en StackBlitz WebContainers vía WebAssembly, cada entrada de <code>registries</code> acepta <code>networkConcurrency</code>, y <code>pnpm login</code> ya no reenvía credenciales a otro origin en redirects. La <strong>12.9.1</strong> (3 Oct) mueve el build wasm a <code>@pnpm/wasm</code> y baja el paquete de ~55 MB a ~4 MB.</p>",
+            "en": "<p>pnpm now runs in StackBlitz WebContainers via WebAssembly, each <code>registries</code> entry accepts <code>networkConcurrency</code>, and <code>pnpm login</code> no longer forwards credentials to another origin on redirects. <strong>12.9.1</strong> (Oct 3) moves the wasm build to <code>@pnpm/wasm</code>, shrinking the package from ~55 MB back to ~4 MB.</p>",
+            "fr": "<p>pnpm tourne dans les WebContainers de StackBlitz via WebAssembly, chaque entrée <code>registries</code> accepte <code>networkConcurrency</code>, et <code>pnpm login</code> ne transmet plus les identifiants à une autre origine lors des redirections. La <strong>12.9.1</strong> (3 oct.) déplace le build wasm dans <code>@pnpm/wasm</code>, ramenant le paquet de ~55 Mo à ~4 Mo.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.9.0", "label": "github.com/pnpm" }
+        }
+      ]
+    },
+    {
+      "id": "dev-tools",
+      "name": "Developer Tools",
+      "theme": "dev-tools",
+      "icon_emoji": "🛠️",
+      "anchor": "dev-tools",
+      "updates": [
+        {
+          "id": "oxlint-1-87",
+          "tag": "minor",
+          "date": "05 Oct 2026",
+          "title": {
+            "es": "oxlint 1.87: más sugerencias autofix para React",
+            "en": "oxlint 1.87: more React autofix suggestions",
+            "fr": "oxlint 1.87 : plus de suggestions d'autofix React"
+          },
+          "body_html": {
+            "es": "<p>Nuevas sugerencias para <code>react/no-unescaped-entities</code>, <code>react/jsx-no-target-blank</code> y <code>unicorn/no-useless-switch-case</code>, más una tanda de fixes en reglas <code>jsx-a11y</code>. Sale junto con oxfmt 0.72.</p>",
+            "en": "<p>New suggestions for <code>react/no-unescaped-entities</code>, <code>react/jsx-no-target-blank</code> and <code>unicorn/no-useless-switch-case</code>, plus a batch of <code>jsx-a11y</code> rule fixes. Ships alongside oxfmt 0.72.</p>",
+            "fr": "<p>Nouvelles suggestions pour <code>react/no-unescaped-entities</code>, <code>react/jsx-no-target-blank</code> et <code>unicorn/no-useless-switch-case</code>, plus des correctifs sur les règles <code>jsx-a11y</code>. Publié avec oxfmt 0.72.</p>"
+          },
+          "source": { "url": "https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.87.0", "label": "github.com/oxc-project" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El 5 de octubre GitHub publicó decenas de advisories npm de un saque: el SSR (Vue, Angular, seroval) y las herramientas de build/test (tinypool, Nx, postcss) son la superficie de ataque frontend del momento.",
+      "en": "On October 5 GitHub published dozens of npm advisories at once: SSR (Vue, Angular, seroval) and build/test tooling (tinypool, Nx, postcss) are the frontend attack surface right now.",
+      "fr": "Le 5 octobre, GitHub a publié des dizaines d'advisories npm d'un coup : le SSR (Vue, Angular, seroval) et l'outillage build/test (tinypool, Nx, postcss) sont la surface d'attaque frontend du moment."
+    },
+    {
+      "es": "Patrón a vigilar: varios fixes ya estaban publicados hace semanas y el advisory llega recién ahora. Si actualizás seguido, probablemente ya estás cubierto; si no, el lockfile te delata.",
+      "en": "Pattern to watch: several fixes shipped weeks ago and the advisory only lands now. If you update regularly you are probably covered; if not, your lockfile gives you away.",
+      "fr": "Tendance à surveiller : plusieurs correctifs étaient publiés depuis des semaines et l'advisory n'arrive que maintenant. Si vous mettez à jour régulièrement, vous êtes sans doute couvert ; sinon, votre lockfile vous trahit."
+    }
+  ]
+}

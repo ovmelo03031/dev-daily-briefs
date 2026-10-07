@@ -1,0 +1,297 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 7 Oct 2026: Payload CMS publica 15 advisories (SQLi crítica), shell-quote y el SDK de MCP",
+    "en": "Backend & Fullstack Daily — Oct 7, 2026: Payload CMS drops 15 advisories (critical SQLi), shell-quote and the MCP SDK",
+    "fr": "Backend & Fullstack Daily — 7 oct. 2026 : Payload CMS publie 15 advisories (SQLi critique), shell-quote et le SDK MCP"
+  },
+  "description": {
+    "es": "Payload CMS con SQL injection y bypass de access control críticos, command injection en shell-quote, el SDK de MCP filtrando credenciales OAuth, sharp con RCE vía librsvg, Spanner Omni GA y el k8sattributes de OpenTelemetry estable.",
+    "en": "Payload CMS with critical SQL injection and access control bypasses, command injection in shell-quote, the MCP SDK leaking OAuth credentials, sharp RCE via librsvg, Spanner Omni GA, and OpenTelemetry's k8sattributes processor going stable.",
+    "fr": "Payload CMS avec SQL injection et contournements d'access control critiques, command injection dans shell-quote, le SDK MCP qui laisse fuiter des credentials OAuth, RCE sharp via librsvg, Spanner Omni GA et le processor k8sattributes d'OpenTelemetry stable."
+  },
+  "pubDate": "2026-10-07",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "Payload: 15 advisories, SQLi crítica", "en": "Payload: 15 advisories, critical SQLi", "fr": "Payload : 15 advisories, SQLi critique" },
+      "anchor": "payload-advisory-batch",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "shell-quote: command injection CVSS 9.2", "en": "shell-quote: CVSS 9.2 command injection", "fr": "shell-quote : command injection CVSS 9.2" },
+      "anchor": "shell-quote-command-injection",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "SDK de MCP manda tokens al AS equivocado", "en": "MCP SDK sends tokens to the wrong AS", "fr": "Le SDK MCP envoie les tokens au mauvais AS" },
+      "anchor": "mcp-sdk-oauth-credential-leak",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "sharp 0.35.5: RCE vía librsvg", "en": "sharp 0.35.5: RCE via librsvg", "fr": "sharp 0.35.5 : RCE via librsvg" },
+      "anchor": "sharp-librsvg-rce",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Spanner Omni GA: Spanner en cualquier lado", "en": "Spanner Omni GA: Spanner anywhere", "fr": "Spanner Omni GA : Spanner partout" },
+      "anchor": "spanner-omni-ga",
+      "icon": "lucide:database"
+    },
+    {
+      "text": { "es": "OTel k8sattributes v1.0 con breaking changes", "en": "OTel k8sattributes v1.0 with breaking changes", "fr": "OTel k8sattributes v1.0 avec breaking changes" },
+      "anchor": "otel-k8sattributes-stable",
+      "icon": "simple-icons:kubernetes"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "payload-advisory-batch",
+      "updates": [
+        {
+          "id": "payload-advisory-batch",
+          "tag": "security",
+          "date": "06 Oct 2026",
+          "title": {
+            "es": "Payload CMS: 15 advisories de una, con SQL injection en Postgres/SQLite y bypass de field access control (críticos)",
+            "en": "Payload CMS: 15 advisories at once, including SQL injection on Postgres/SQLite and a field access control bypass (critical)",
+            "fr": "Payload CMS : 15 advisories d'un coup, dont une SQL injection sur Postgres/SQLite et un contournement du field access control (critiques)"
+          },
+          "body_html": {
+            "es": "<p>El 6 de octubre se publicó una tanda enorme para <code>payload</code> y sus plugins. Lo más grave: <strong>SQL injection</strong> en los adapters de Postgres y SQLite cuando usuarios no confiables pueden mandar filtros dinámicos o joins (fix en <code>3.88.0</code>; MongoDB no está afectado), <strong>bypass del field access control en auth collections</strong> (CVSS 9.3, fix en <code>3.90.0</code>) y prototype pollution en <code>@payloadcms/plugin-import-export</code> (CVSS 9.3). Hay más: API keys que se filtran en lecturas normales de documentos, campos ocultos expuestos vía joins polimórficos y sort, ReDoS en el Content-Type multipart, control de acceso flojo en el plugin de MCP y en el proxy REST de Stripe, y PBKDF2 con pocas iteraciones. Si tenés Payload en producción, subí a <code>3.90.x</code> YA — los fixes ya estaban publicados, ahora Dependabot te va a empezar a gritar.</p>",
+            "en": "<p>On October 6 a huge batch landed for <code>payload</code> and its plugins. The worst: <strong>SQL injection</strong> in the Postgres and SQLite adapters when untrusted users can send dynamic filters or joins (fixed in <code>3.88.0</code>; MongoDB is not affected), a <strong>field access control bypass on auth collections</strong> (CVSS 9.3, fixed in <code>3.90.0</code>), and prototype pollution in <code>@payloadcms/plugin-import-export</code> (CVSS 9.3). There is more: API keys disclosed through ordinary document reads, hidden fields exposed via polymorphic joins and sort queries, ReDoS in multipart Content-Type validation, weak access control in the MCP plugin and the Stripe REST proxy, and too few PBKDF2 iterations. If you run Payload in production, move to <code>3.90.x</code> now — the fixes were already shipped, Dependabot is just catching up.</p>",
+            "fr": "<p>Le 6 octobre, un énorme lot est tombé pour <code>payload</code> et ses plugins. Le plus grave : une <strong>SQL injection</strong> dans les adapters Postgres et SQLite quand des utilisateurs non fiables peuvent envoyer des filtres dynamiques ou des joins (corrigé en <code>3.88.0</code> ; MongoDB n'est pas concerné), un <strong>contournement du field access control sur les auth collections</strong> (CVSS 9.3, corrigé en <code>3.90.0</code>) et une prototype pollution dans <code>@payloadcms/plugin-import-export</code> (CVSS 9.3). Et aussi : fuite d'API keys via des lectures ordinaires, champs cachés exposés par joins polymorphes et tris, ReDoS sur le Content-Type multipart, access control faible dans le plugin MCP et le proxy REST Stripe, et trop peu d'itérations PBKDF2. Passez en <code>3.90.x</code> sans attendre.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-v49j-62m6-pgrr", "label": "github.com/advisories" }
+        },
+        {
+          "id": "shell-quote-command-injection",
+          "tag": "security",
+          "date": "06 Oct 2026",
+          "title": {
+            "es": "shell-quote: quote() permite command injection con un salto de línea después de un token de comentario (CVSS 9.2)",
+            "en": "shell-quote: quote() allows command injection via a line terminator after a comment token (CVSS 9.2)",
+            "fr": "shell-quote : quote() permet une command injection via un saut de ligne après un token de commentaire (CVSS 9.2)"
+          },
+          "body_html": {
+            "es": "<p><code>quote()</code> emite un token <code>{ comment }</code> como <code>#</code> + texto, que comenta el resto de la línea — incluida la comilla de apertura del string siguiente. Si ese string trae un <code>\\n</code>, el comentario termina y el resto se ejecuta como shell. El caso peligroso real: <code>quote(parse(untrusted).concat(arg))</code>, porque <code>parse()</code> genera comentarios con cualquier <code>#</code> a mitad de palabra (pensá en una URL con fragmento). Es un residuo del fix de CVE-2026-9277. Afecta <code>1.8.4</code> a <code>1.10.x</code>; actualizá a <code>1.11.0</code>, que tira <code>TypeError</code>. Y de paso: si armás comandos de shell con strings, usá <code>execFile</code>/<code>spawn</code> con array de args y listo.</p>",
+            "en": "<p><code>quote()</code> emits a <code>{ comment }</code> token as <code>#</code> plus text, which comments out the rest of the line — including the opening quote of the next string. If that string contains a <code>\\n</code>, the comment ends and the rest runs as shell input. The realistic danger: <code>quote(parse(untrusted).concat(arg))</code>, since <code>parse()</code> emits comments for any mid-word <code>#</code> (think URLs with fragments). It is a residual of the CVE-2026-9277 fix. Affects <code>1.8.4</code> through <code>1.10.x</code>; upgrade to <code>1.11.0</code>, which throws a <code>TypeError</code>. Better yet, use <code>execFile</code>/<code>spawn</code> with an args array instead of building shell strings.</p>",
+            "fr": "<p><code>quote()</code> émet un token <code>{ comment }</code> sous la forme <code>#</code> + texte, ce qui commente le reste de la ligne — y compris le guillemet ouvrant de la chaîne suivante. Si cette chaîne contient un <code>\\n</code>, le commentaire se termine et la suite est exécutée par le shell. Le cas réaliste : <code>quote(parse(untrusted).concat(arg))</code>, car <code>parse()</code> produit des commentaires pour tout <code>#</code> en milieu de mot. Résidu du fix de CVE-2026-9277. Versions <code>1.8.4</code> à <code>1.10.x</code> ; passez en <code>1.11.0</code>, ou mieux, utilisez <code>execFile</code>/<code>spawn</code> avec un tableau d'arguments.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-pqg4-j6r4-53mv", "label": "github.com/advisories" }
+        },
+        {
+          "id": "mcp-sdk-oauth-credential-leak",
+          "tag": "security",
+          "date": "06 Oct 2026",
+          "title": {
+            "es": "SDK de MCP para TypeScript: un servidor MCP malicioso podía elegir a qué authorization server mandar tus refresh tokens",
+            "en": "MCP TypeScript SDK: a malicious MCP server could choose which authorization server receives your refresh tokens",
+            "fr": "SDK MCP TypeScript : un serveur MCP malveillant pouvait choisir l'authorization server qui reçoit vos refresh tokens"
+          },
+          "body_html": {
+            "es": "<p>En <code>@modelcontextprotocol/sdk</code> <code>1.12.0</code>–<code>1.30.1</code> las credenciales OAuth no estaban atadas al authorization server al que pertenecen. Un servidor MCP comprometido podía nombrar su propio AS y el cliente, sin interacción del usuario, le mandaba el <code>refresh_token</code> y el <code>client_secret</code> guardados. Te afecta si usás <code>authProvider</code>, <code>withOAuth()</code> o llamás a <code>auth()</code>/<code>fetchToken()</code> contra servidores que no controlás. Fix en <code>1.31.0</code> y <code>@modelcontextprotocol/client 2.2.0</code>. Lección de arquitectura: un token sin <em>issuer binding</em> es un cheque al portador.</p>",
+            "en": "<p>In <code>@modelcontextprotocol/sdk</code> <code>1.12.0</code>–<code>1.30.1</code>, OAuth credentials were not bound to the authorization server they belong to. A compromised MCP server could name its own AS and the client would, with no user interaction, send it the stored <code>refresh_token</code> and <code>client_secret</code>. You are affected if you use <code>authProvider</code>, <code>withOAuth()</code>, or call <code>auth()</code>/<code>fetchToken()</code> against servers you do not fully trust. Fixed in <code>1.31.0</code> and <code>@modelcontextprotocol/client 2.2.0</code>. Architecture lesson: a token without issuer binding is a bearer check.</p>",
+            "fr": "<p>Dans <code>@modelcontextprotocol/sdk</code> <code>1.12.0</code>–<code>1.30.1</code>, les credentials OAuth n'étaient pas liés à leur authorization server. Un serveur MCP compromis pouvait désigner son propre AS et le client lui envoyait, sans interaction, le <code>refresh_token</code> et le <code>client_secret</code> stockés. Concerné si vous utilisez <code>authProvider</code>, <code>withOAuth()</code> ou <code>auth()</code>/<code>fetchToken()</code> avec des serveurs non fiables. Corrigé en <code>1.31.0</code> et <code>@modelcontextprotocol/client 2.2.0</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-6qxp-vccf-f47h", "label": "github.com/advisories" }
+        },
+        {
+          "id": "sharp-librsvg-rce",
+          "tag": "security",
+          "date": "06 Oct 2026",
+          "title": {
+            "es": "sharp 0.35.5: bug de memoria en librsvg puede dar RCE en Linux glibc (CVSS 8.9)",
+            "en": "sharp 0.35.5: a librsvg memory bug can lead to RCE on glibc Linux (CVSS 8.9)",
+            "fr": "sharp 0.35.5 : un bug mémoire de librsvg peut mener à une RCE sur Linux glibc (CVSS 8.9)"
+          },
+          "body_html": {
+            "es": "<p>El upstream <code>librsvg</code> tenía un bug de memoria que, bajo ciertas condiciones, permite RCE en Linux con glibc. <code>sharp 0.35.5</code> trae <code>librsvg 2.63.2</code>. Si procesás SVGs subidos por usuarios (avatares, thumbnails, <code>next/image</code>), actualizá YA. Workaround: <code>sharp.block({ operation: ['VipsForeignLoadSvg'] })</code>. Ojo al detalle del advisory: los binarios oficiales de Node.js no se compilan como PIE, así que la mitigación de ASLR no te cubre.</p>",
+            "en": "<p>Upstream <code>librsvg</code> had a memory bug that, under certain runtime conditions, allows RCE on glibc-based Linux. <code>sharp 0.35.5</code> ships <code>librsvg 2.63.2</code>. If you process user-uploaded SVGs (avatars, thumbnails, <code>next/image</code>), upgrade now. Workaround: <code>sharp.block({ operation: ['VipsForeignLoadSvg'] })</code>. Note from the advisory: official Node.js binaries are not built as PIE, so ASLR hardening does not save you there.</p>",
+            "fr": "<p>Le <code>librsvg</code> upstream avait un bug mémoire permettant, sous certaines conditions, une RCE sur Linux glibc. <code>sharp 0.35.5</code> embarque <code>librsvg 2.63.2</code>. Si vous traitez des SVG fournis par les utilisateurs, mettez à jour. Contournement : <code>sharp.block({ operation: ['VipsForeignLoadSvg'] })</code>. À noter : les binaires officiels de Node.js ne sont pas compilés en PIE.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-wq5f-xc86-pv6w", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "socketio-cluster-engine-pollution",
+      "updates": [
+        {
+          "id": "socketio-cluster-engine-pollution",
+          "tag": "security",
+          "date": "05 Oct 2026",
+          "title": {
+            "es": "Socket.IO: prototype pollution en @socket.io/cluster-engine vía lookup de sesión del cliente (high)",
+            "en": "Socket.IO: prototype pollution in @socket.io/cluster-engine via client session lookup (high)",
+            "fr": "Socket.IO : prototype pollution dans @socket.io/cluster-engine via le lookup de session client (high)"
+          },
+          "body_html": {
+            "es": "<p>El engine para correr Socket.IO en cluster (Node cluster o multi-proceso) buscaba la sesión del cliente con una clave controlada por el request sin protegerse de <code>__proto__</code>. Si escalás websockets horizontalmente con <code>@socket.io/cluster-engine</code>, subí a <code>0.1.1</code>. Usá <code>Map</code> u objetos con <code>Object.create(null)</code> para cualquier lookup por clave del cliente: es la regla de siempre.</p>",
+            "en": "<p>The engine for running Socket.IO in a cluster (Node cluster or multi-process) looked up client sessions with a request-controlled key without guarding against <code>__proto__</code>. If you scale websockets horizontally with <code>@socket.io/cluster-engine</code>, upgrade to <code>0.1.1</code>. Use <code>Map</code> or <code>Object.create(null)</code> for any client-keyed lookup — the usual rule.</p>",
+            "fr": "<p>Le moteur pour faire tourner Socket.IO en cluster recherchait les sessions client avec une clé contrôlée par la requête, sans protection contre <code>__proto__</code>. Si vous utilisez <code>@socket.io/cluster-engine</code>, passez en <code>0.1.1</code>. Utilisez <code>Map</code> ou <code>Object.create(null)</code> pour tout lookup par clé client.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-wfpm-5gcm-94cg", "label": "github.com/advisories" }
+        },
+        {
+          "id": "pbkdf2-long-password-dos",
+          "tag": "security",
+          "date": "06 Oct 2026",
+          "title": {
+            "es": "pbkdf2: re-hashea passwords largos en cada iteración y abre la puerta a DoS",
+            "en": "pbkdf2: rehashes long passwords on every iteration, enabling DoS",
+            "fr": "pbkdf2 : re-hache les mots de passe longs à chaque itération, ouvrant la voie à un DoS"
+          },
+          "body_html": {
+            "es": "<p>El polyfill <code>pbkdf2</code> (el que usa <code>crypto-browserify</code> y mucho bundling legacy) re-hasheaba la password en cada iteración cuando superaba el block size del HMAC. Con passwords gigantes y muchas iteraciones, un endpoint de login se convierte en un ventilador de CPU. Fix en <code>3.1.7</code>. Igual, poné un límite de longitud a la password antes de hashear — siempre.</p>",
+            "en": "<p>The <code>pbkdf2</code> polyfill (used by <code>crypto-browserify</code> and plenty of legacy bundling) rehashed the password on every iteration when it exceeded the HMAC block size. With huge passwords and high iteration counts, a login endpoint becomes a CPU heater. Fixed in <code>3.1.7</code>. Regardless, cap password length before hashing — always.</p>",
+            "fr": "<p>Le polyfill <code>pbkdf2</code> (utilisé par <code>crypto-browserify</code>) re-hachait le mot de passe à chaque itération quand il dépassait la taille de bloc HMAC. Avec des mots de passe énormes, un endpoint de login devient un radiateur CPU. Corrigé en <code>3.1.7</code>. Limitez toujours la longueur du mot de passe avant hachage.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-477h-4r7f-fvrx", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "spanner-omni-ga",
+      "updates": [
+        {
+          "id": "spanner-omni-ga",
+          "tag": "ga",
+          "date": "07 Oct 2026",
+          "title": {
+            "es": "Spanner Omni llega a GA: Spanner on-prem, en otras clouds o en tu laptop, sin relojes atómicos",
+            "en": "Spanner Omni reaches GA: Spanner on-prem, on other clouds, or on your laptop, without atomic clocks",
+            "fr": "Spanner Omni en GA : Spanner on-prem, sur d'autres clouds ou sur votre laptop, sans horloges atomiques"
+          },
+          "body_html": {
+            "es": "<p>Google sacó a GA la versión deploy-anywhere de Spanner: corre en un solo server, una zona, multi-zona o multi-cluster. Reemplazaron TrueTime por sincronización de tiempo por software con error acotado y Colossus por file systems locales expuestos por red, con splitting y rebalanceo de shards automático. Soporta PostgreSQL además de GoogleSQL y Spanner Graph. Hay Developer Edition gratis para no-producción y una Commercial Edition por vCPU. Para quien necesitaba consistencia externa fuera de GCP, esto cambia la conversación frente a CockroachDB y YugabyteDB.</p>",
+            "en": "<p>Google made the deploy-anywhere Spanner generally available: it runs on a single server, single zone, multi-zone, or multi-cluster. TrueTime is replaced with software error-bounded time synchronization and Colossus with network-exposed local file systems, with automatic shard splitting and rebalancing. It supports PostgreSQL alongside GoogleSQL and Spanner Graph. There is a free Developer Edition for non-production and a vCPU-priced Commercial Edition. For teams needing external consistency outside GCP, it changes the comparison with CockroachDB and YugabyteDB.</p>",
+            "fr": "<p>Google a rendu disponible la version deploy-anywhere de Spanner : un serveur, une zone, multi-zone ou multi-cluster. TrueTime est remplacé par une synchronisation logicielle à erreur bornée et Colossus par des file systems locaux exposés sur le réseau, avec splitting et rééquilibrage automatiques. PostgreSQL est supporté aux côtés de GoogleSQL et Spanner Graph. Developer Edition gratuite hors production, Commercial Edition facturée au vCPU.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/spanner-omni-deploy-anywhere-ga/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "otel-k8sattributes-stable",
+      "updates": [
+        {
+          "id": "otel-k8sattributes-stable",
+          "tag": "breaking",
+          "date": "06 Oct 2026",
+          "title": {
+            "es": "OpenTelemetry: el Kubernetes Attributes Processor llega a v1.0.0 y renombra atributos",
+            "en": "OpenTelemetry: the Kubernetes Attributes Processor reaches v1.0.0 and renames attributes",
+            "fr": "OpenTelemetry : le Kubernetes Attributes Processor passe en v1.0.0 et renomme des attributs"
+          },
+          "body_html": {
+            "es": "<p>El processor que enriquece logs, métricas y traces con metadata de pods, namespaces, nodos y workloads es estable. El precio: adoptar las semantic conventions nuevas, con breaking changes como <code>k8s.pod.labels</code> → <code>k8s.pod.label</code> (y equivalentes en node y namespace). Revisá dashboards, alertas y queries ANTES de actualizar el Collector; hay feature gates para emitir ambos nombres durante la transición.</p>",
+            "en": "<p>The processor that enriches logs, metrics, and traces with pod, namespace, node, and workload metadata is now stable. The cost: adopting newer semantic conventions, with breaking changes such as <code>k8s.pod.labels</code> → <code>k8s.pod.label</code> (and equivalents for node and namespace). Audit dashboards, alerts, and queries before upgrading the Collector; feature gates let you emit both names during the transition.</p>",
+            "fr": "<p>Le processor qui enrichit logs, métriques et traces avec les métadonnées de pods, namespaces, nœuds et workloads est stable. Le prix : adopter les nouvelles semantic conventions, avec des breaking changes comme <code>k8s.pod.labels</code> → <code>k8s.pod.label</code>. Vérifiez dashboards, alertes et requêtes avant de mettre à jour le Collector ; des feature gates permettent d'émettre les deux noms pendant la transition.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/opentelemetry-kubernetes-observ/", "label": "infoq.com" }
+        },
+        {
+          "id": "acm-acme-privatelink",
+          "tag": "minor",
+          "date": "06 Oct 2026",
+          "title": {
+            "es": "AWS Certificate Manager: emisión ACME por PrivateLink",
+            "en": "AWS Certificate Manager: ACME issuance over PrivateLink",
+            "fr": "AWS Certificate Manager : émission ACME via PrivateLink"
+          },
+          "body_html": {
+            "es": "<p>El tráfico ACME hacia ACM ahora puede ir por VPC interface endpoints, sin tocar la config de tus clientes ACME existentes. Útil para workloads en subredes privadas sin salida a internet que renuevan certificados solos.</p>",
+            "en": "<p>ACME traffic to ACM can now flow through VPC interface endpoints, without reconfiguring existing ACME clients. Useful for workloads in private subnets with no internet egress that renew certificates automatically.</p>",
+            "fr": "<p>Le trafic ACME vers ACM peut désormais passer par des VPC interface endpoints, sans reconfigurer les clients ACME existants. Utile pour les workloads en sous-réseaux privés sans accès internet.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/AWS-Certificate-Manager-ACME-Privatelink", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "cloudflare-waf-ai-harness",
+      "updates": [
+        {
+          "id": "cloudflare-waf-ai-harness",
+          "tag": "notable",
+          "date": "07 Oct 2026",
+          "title": {
+            "es": "Cloudflare mete modelos frontier en un harness para atacar su propio WAF: 49 hallazgos validados",
+            "en": "Cloudflare puts frontier models in a harness to attack its own WAF: 49 validated findings",
+            "fr": "Cloudflare place des modèles frontier dans un harness pour attaquer son propre WAF : 49 découvertes validées"
+          },
+          "body_html": {
+            "es": "<p>1.107 intentos de mutación sobre 45 escenarios, 49 hallazgos validados por humanos y tres detecciones nuevas en el Managed Ruleset (SSRF ofuscado, manejo de protocolos restringidos). Lo valioso es el diseño: un harness en Python se queda con todo lo que no querían delegar — estado del escenario, límites de ejecución, construcción del request, reproducibilidad — y el modelo solo propone mutaciones. Separar exploración probabilística de validación determinística es el patrón que tenés que copiar si metés agentes en tu pipeline de seguridad.</p>",
+            "en": "<p>1,107 mutation attempts across 45 scenarios, 49 human-validated findings, and three new detections in the Managed Ruleset (obfuscated SSRF, restricted protocol handling). The valuable part is the design: a Python harness keeps everything they did not want to delegate — scenario state, execution limits, request construction, reproducibility — while the model only proposes mutations. Separating probabilistic exploration from deterministic validation is the pattern to copy if you put agents in your security pipeline.</p>",
+            "fr": "<p>1 107 tentatives de mutation sur 45 scénarios, 49 découvertes validées par des humains et trois nouvelles détections dans le Managed Ruleset. L'essentiel est le design : un harness Python garde tout ce qui n'est pas délégué — état du scénario, limites d'exécution, construction des requêtes, reproductibilité — et le modèle ne propose que des mutations. Séparer exploration probabiliste et validation déterministe est le pattern à reprendre.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/cloudflare-sec-harness/", "label": "infoq.com" }
+        },
+        {
+          "id": "simple-git-unsafe-guard-bypass",
+          "tag": "security",
+          "date": "05 Oct 2026",
+          "title": {
+            "es": "simple-git: el guard de operaciones inseguras no bloquea trailer.<token>.cmd ni includes de config (CVSS 9.2)",
+            "en": "simple-git: the unsafe-operations guard misses trailer.<token>.cmd and config includes (CVSS 9.2)",
+            "fr": "simple-git : le garde-fou des opérations dangereuses ignore trailer.<token>.cmd et les includes de config (CVSS 9.2)"
+          },
+          "body_html": {
+            "es": "<p>Cuatro advisories para <code>simple-git</code> y <code>@simple-git/argv-parser</code>: <code>trailer.&lt;token&gt;.cmd</code> no se considera inseguro, los includes de config de Git tampoco, <code>VISUAL</code> se escapa de la detección de editores y abreviaturas de long options (<code>--receive-p</code>) saltean el plugin — residuo de CVE-2026-28291. Si tu backend o tu CI deja que valores no confiables lleguen a <code>SimpleGitOptions.config</code> o a <code>-c key=value</code>, tenés RCE. Fix en <code>4.0.1</code>. Una denylist sobre argv de Git es una batalla perdida: no le pases config del usuario, punto.</p>",
+            "en": "<p>Four advisories for <code>simple-git</code> and <code>@simple-git/argv-parser</code>: <code>trailer.&lt;token&gt;.cmd</code> is not treated as unsafe, neither are Git config includes, <code>VISUAL</code> escapes editor detection, and long-option abbreviations (<code>--receive-p</code>) bypass the plugin — a residual of CVE-2026-28291. If your backend or CI lets untrusted values reach <code>SimpleGitOptions.config</code> or <code>-c key=value</code>, that is RCE. Fixed in <code>4.0.1</code>. A denylist over Git argv is a losing battle: do not pass user-controlled config at all.</p>",
+            "fr": "<p>Quatre advisories pour <code>simple-git</code> et <code>@simple-git/argv-parser</code> : <code>trailer.&lt;token&gt;.cmd</code> n'est pas considéré comme dangereux, pas plus que les includes de config Git, <code>VISUAL</code> échappe à la détection d'éditeurs et les abréviations d'options longues contournent le plugin — résidu de CVE-2026-28291. Si des valeurs non fiables atteignent <code>SimpleGitOptions.config</code>, c'est une RCE. Corrigé en <code>4.0.1</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-x6jw-m9v5-85vh", "label": "github.com/advisories" }
+        },
+        {
+          "id": "otel-js-2-12",
+          "tag": "minor",
+          "date": "06 Oct 2026",
+          "title": {
+            "es": "OpenTelemetry JS 2.12: StackContextManager en @opentelemetry/sdk-trace",
+            "en": "OpenTelemetry JS 2.12: StackContextManager in @opentelemetry/sdk-trace",
+            "fr": "OpenTelemetry JS 2.12 : StackContextManager dans @opentelemetry/sdk-trace"
+          },
+          "body_html": {
+            "es": "<p>Release chica pero útil: <code>StackContextManager</code> pasa a vivir en <code>@opentelemetry/sdk-trace</code>, y el proyecto ahora puede publicar desde ramas de mantenimiento sin pisar la documentación de <code>main</code>. Salió junto con los paquetes experimentales <code>0.223.0</code>.</p>",
+            "en": "<p>Small but useful: <code>StackContextManager</code> now ships in <code>@opentelemetry/sdk-trace</code>, and the project can release from maintenance branches without overwriting the <code>main</code> API docs. Released alongside experimental packages <code>0.223.0</code>.</p>",
+            "fr": "<p>Petite release utile : <code>StackContextManager</code> arrive dans <code>@opentelemetry/sdk-trace</code>, et le projet peut publier depuis des branches de maintenance sans écraser la doc de <code>main</code>. Publiée avec les paquets expérimentaux <code>0.223.0</code>.</p>"
+          },
+          "source": { "url": "https://github.com/open-telemetry/opentelemetry-js/releases/tag/v2.12.0", "label": "github.com" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Día de advisories masivos: Payload, simple-git y vm2 ayer muestran el mismo patrón — fixes publicados hace semanas, CVEs cargados todos juntos. Si dependés de Dependabot para enterarte, llegás tarde.",
+      "en": "Mass-advisory days: Payload, simple-git, and yesterday's vm2 share the same pattern — fixes shipped weeks ago, CVEs loaded all at once. If Dependabot is how you find out, you find out late.",
+      "fr": "Jours d'advisories massifs : Payload, simple-git et vm2 hier suivent le même schéma — fixes publiés il y a des semaines, CVE chargées d'un coup. Si Dependabot est votre seule alerte, vous arrivez tard."
+    },
+    {
+      "es": "Los fixes residuales (shell-quote, simple-git) confirman que las denylists sobre strings de shell o argv de Git no cierran nunca. Array de args y nada de input del usuario en la config.",
+      "en": "Residual fixes (shell-quote, simple-git) confirm that denylists over shell strings or Git argv never close. Use args arrays and keep user input out of config.",
+      "fr": "Les fixes résiduels (shell-quote, simple-git) confirment que les denylists sur chaînes shell ou argv Git ne se referment jamais. Tableaux d'arguments, et pas d'input utilisateur dans la config."
+    }
+  ]
+}

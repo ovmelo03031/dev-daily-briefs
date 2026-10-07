@@ -1,0 +1,76 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 07 Oct 2026",
+    "en": "Gentleman Releases — 07 Oct 2026",
+    "fr": "Gentleman Releases — 07 Oct 2026"
+  },
+  "description": {
+    "es": "Releases del día en proyectos de Gentleman-Programming",
+    "en": "Today's releases from Gentleman-Programming projects",
+    "fr": "Sorties du jour des projets Gentleman-Programming"
+  },
+  "pubDate": "2026-10-07",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "engram v3.2.1 — release de recuperación: v3.2.0 no llegó a publicar los binarios por checksums obsoletos de módulos",
+        "en": "engram v3.2.1 — recovery release: v3.2.0 never shipped its binaries due to obsolete module checksums",
+        "fr": "engram v3.2.1 — version de rattrapage : v3.2.0 n'a jamais publié ses binaires à cause de checksums de modules obsolètes"
+      },
+      "anchor": "engram-v3-2-1",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "engram v3.2.1 — diagnósticos opt-in: tiempos por etapa de mem_save y binding de caller en Pi",
+        "en": "engram v3.2.1 — opt-in diagnostics: per-stage mem_save timings and Pi caller-binding checks",
+        "fr": "engram v3.2.1 — diagnostics optionnels : temps par étape de mem_save et liaison d'appelant Pi"
+      },
+      "anchor": "engram-v3-2-1",
+      "icon": "lucide:activity"
+    },
+    {
+      "text": {
+        "es": "engram v3.2.1 — fixes de ownership en replicación Cloud, nombres de proyecto Unicode y escrituras en threads reanudados de Codex",
+        "en": "engram v3.2.1 — fixes for Cloud replication ownership, Unicode project names and Codex resumed-thread writes",
+        "fr": "engram v3.2.1 — correctifs pour la propriété en réplication Cloud, les noms de projet Unicode et les threads Codex repris"
+      },
+      "anchor": "engram-v3-2-1",
+      "icon": "lucide:wrench"
+    }
+  ],
+  "tools": [
+    {
+      "id": "engram",
+      "name": "engram",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-engram",
+      "icon_emoji": "💋",
+      "anchor": "engram",
+      "version": "v3.2.1",
+      "updates": [
+        {
+          "id": "engram-v3-2-1",
+          "tag": "fix",
+          "title": {
+            "es": "v3.2.1 — Recuperación de v3.2.0 + diagnósticos y fixes de confiabilidad",
+            "en": "v3.2.1 — v3.2.0 recovery + diagnostics and reliability fixes",
+            "fr": "v3.2.1 — Rattrapage de v3.2.0 + diagnostics et correctifs de fiabilité"
+          },
+          "body_html": {
+            "es": "<p>Ojo con esto: la publicación de los binarios de <strong>v3.2.0</strong> se trabó por checksums de módulos obsoletos (aunque la imagen Cloud sí salió). Este patch arregla el guard de module-tidiness sin tocar versiones de dependencias (#1700) y trae todo el contenido de 3.2.0. El tag v3.2.0 se conserva.</p><p><strong>Diagnósticos nuevos (opt-in):</strong></p><ul><li>Diagnóstico read-only de caller-binding en Pi, para separar evidencia de caller/sesión de la salud del proyecto (#1695).</li><li>Tiempos por etapa de <code>mem_save</code> del lado del servidor (guardado, búsqueda de candidatos, inserción de relaciones) sin loguear contenido (#1689). Sirven para investigar #1536; no son un fix de latencia.</li></ul><p><strong>Fixes destacados:</strong></p><ul><li>Se preserva el ownership al replicar sesiones aisladas por proyecto en Cloud (#1662, #1684, #1691).</li><li>Vuelven a andar las escrituras de memoria en threads reanudados de Codex (#1612).</li><li><code>directory</code> y <code>cwd</code> explícitos en el descubrimiento de proyecto vía MCP (#1656).</li><li>Normalización Unicode de nombres de proyecto y reparación de variantes legacy (#1694).</li><li>El registro MCP en OpenCode respeta comentarios JSONC, trailing commas y config ajena (#1685).</li><li>El handshake MCP reporta la versión real del binario (#1675).</li></ul><p>Antes de actualizar, hacé backup de tus datos y config: las correcciones de ownership pueden cambiar qué sesiones tienen permiso de escritura. El paquete npm de Pi va por otro canal y <strong>no</strong> sale con esta release.</p>",
+            "en": "<p>Heads up: binary publication for <strong>v3.2.0</strong> was blocked by obsolete module checksums (its Cloud image did ship). This patch fixes the module-tidiness guard without changing resolved dependency versions (#1700) and delivers all of the 3.2.0 content. The v3.2.0 tag is preserved.</p><p><strong>New opt-in diagnostics:</strong></p><ul><li>Read-only Pi caller-binding diagnostics that separate caller/session evidence from project health (#1695).</li><li>Server-side per-stage <code>mem_save</code> timings (save, candidate lookup, relation insertion) without logging memory content (#1689). They help investigate #1536; they are not a latency fix.</li></ul><p><strong>Notable fixes:</strong></p><ul><li>Ownership metadata is preserved when replicating isolated project-owned sessions to Cloud (#1662, #1684, #1691).</li><li>Codex resumed-thread memory writes work again (#1612).</li><li>Explicit <code>directory</code> and <code>cwd</code> in MCP current-project discovery (#1656).</li><li>Unicode project-name normalization and legacy-variant repair (#1694).</li><li>OpenCode MCP registration preserves JSONC comments, trailing commas and unrelated config (#1685).</li><li>The MCP handshake reports the actual binary version (#1675).</li></ul><p>Back up your data and configuration before upgrading: ownership corrections can change which sessions may write. The Pi npm package ships on a separate channel and is <strong>not</strong> published by this release.</p>",
+            "fr": "<p>Attention : la publication des binaires de <strong>v3.2.0</strong> a été bloquée par des checksums de modules obsolètes (l'image Cloud, elle, est sortie). Ce patch corrige la garde de module-tidiness sans changer les versions de dépendances (#1700) et livre tout le contenu de 3.2.0. Le tag v3.2.0 est conservé.</p><p><strong>Nouveaux diagnostics optionnels :</strong></p><ul><li>Diagnostics en lecture seule de liaison d'appelant Pi, séparant les preuves appelant/session de la santé du projet (#1695).</li><li>Temps par étape de <code>mem_save</code> côté serveur (sauvegarde, recherche de candidats, insertion de relations) sans journaliser le contenu (#1689). Utiles pour #1536 ; ce n'est pas un correctif de latence.</li></ul><p><strong>Correctifs notables :</strong></p><ul><li>Les métadonnées de propriété sont conservées lors de la réplication Cloud des sessions isolées par projet (#1662, #1684, #1691).</li><li>Les écritures mémoire dans les threads Codex repris fonctionnent à nouveau (#1612).</li><li><code>directory</code> et <code>cwd</code> explicites dans la découverte de projet MCP (#1656).</li><li>Normalisation Unicode des noms de projet et réparation des variantes héritées (#1694).</li><li>L'enregistrement MCP pour OpenCode préserve commentaires JSONC, virgules finales et configuration tierce (#1685).</li><li>Le handshake MCP indique la vraie version du binaire (#1675).</li></ul><p>Sauvegardez vos données et votre configuration avant la mise à jour : les corrections de propriété peuvent changer quelles sessions peuvent écrire. Le paquet npm Pi suit un canal séparé et n'est <strong>pas</strong> publié par cette version.</p>"
+          },
+          "date": "07 Oct 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v3.2.1",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

@@ -1,0 +1,315 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 8 Oct 2026: Next.js 16.4 y 6 advisories, Backstage con 38 de una, y vm2 deja pasar child_process",
+    "en": "Backend & Fullstack Daily — Oct 8, 2026: Next.js 16.4 plus 6 advisories, Backstage drops 38 at once, and vm2 lets child_process through",
+    "fr": "Backend & Fullstack Daily — 8 oct. 2026 : Next.js 16.4 et 6 advisories, Backstage en publie 38 d'un coup, et vm2 laisse passer child_process"
+  },
+  "description": {
+    "es": "SSRF y cache poisoning en Next.js, 38 advisories para Backstage (RCE vía TechDocs), sandbox escape trivial en vm2, Ghost y Quasar con tandas propias, Node.js 26.11, Next.js 16.4 con Cache Components recomendado, Nx 23.3 y Grab bajando 50% el P99.",
+    "en": "SSRF and cache poisoning in Next.js, 38 advisories for Backstage (RCE via TechDocs), a trivial vm2 sandbox escape, Ghost and Quasar with their own batches, Node.js 26.11, Next.js 16.4 recommending Cache Components, Nx 23.3, and Grab cutting P99 by 50%.",
+    "fr": "SSRF et cache poisoning dans Next.js, 38 advisories pour Backstage (RCE via TechDocs), une évasion de sandbox triviale dans vm2, Ghost et Quasar avec leurs propres lots, Node.js 26.11, Next.js 16.4 qui recommande Cache Components, Nx 23.3 et Grab qui réduit son P99 de 50 %."
+  },
+  "pubDate": "2026-10-08",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "Next.js: SSRF en Image Optimization", "en": "Next.js: SSRF in Image Optimization", "fr": "Next.js : SSRF dans Image Optimization" },
+      "anchor": "nextjs-advisories-oct7",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Backstage: 38 advisories, RCE en TechDocs", "en": "Backstage: 38 advisories, TechDocs RCE", "fr": "Backstage : 38 advisories, RCE TechDocs" },
+      "anchor": "backstage-advisory-batch",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "vm2: child_process fuera de la denylist", "en": "vm2: child_process missing from denylist", "fr": "vm2 : child_process absent de la denylist" },
+      "anchor": "vm2-child-process-escape",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Next.js 16.4: Cache Components para todos", "en": "Next.js 16.4: Cache Components for all", "fr": "Next.js 16.4 : Cache Components pour tous" },
+      "anchor": "nextjs-16-4",
+      "icon": "simple-icons:nextdotjs"
+    },
+    {
+      "text": { "es": "Node.js 26.11: Buffer.stringLength y más", "en": "Node.js 26.11: Buffer.stringLength and more", "fr": "Node.js 26.11 : Buffer.stringLength et plus" },
+      "anchor": "node-26-11",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": { "es": "Grab: −50% de P99 migrando a Aerospike", "en": "Grab: −50% P99 after moving to Aerospike", "fr": "Grab : −50 % de P99 en passant à Aerospike" },
+      "anchor": "grab-counter-aerospike",
+      "icon": "lucide:database"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "nextjs-advisories-oct7",
+      "updates": [
+        {
+          "id": "nextjs-advisories-oct7",
+          "tag": "security",
+          "date": "07 Oct 2026",
+          "title": {
+            "es": "Next.js: 6 advisories, con SSRF en Image Optimization (CVSS 8.3) y cache poisoning de SSG/ISR",
+            "en": "Next.js: 6 advisories, including SSRF in Image Optimization (CVSS 8.3) and SSG/ISR cache poisoning",
+            "fr": "Next.js : 6 advisories, dont une SSRF dans Image Optimization (CVSS 8.3) et du cache poisoning SSG/ISR"
+          },
+          "body_html": {
+            "es": "<p>Lo más serio: <strong>SSRF en Image Optimization</strong> (CVE-2026-94483) cuando un host de <code>images.remotePatterns</code> controla su DNS y te redirige a IPs privadas — fix en <code>16.3.8</code>; si no tenés <code>remotePatterns</code>, no te afecta. Además hay dos <strong>cache poisoning de SSG/ISR</strong> en self-hosted (sustitución de contenido entre usuarios y DoS persistente, también parcheado en <code>15.5.27</code>), un leak de Draft Mode vía <code>use cache</code>, disclosure en metadata image routes y en el endpoint MCP del dev server. Si hosteás Next vos mismo, actualizá YA y auditá tus <code>remotePatterns</code>.</p>",
+            "en": "<p>The serious one: <strong>SSRF in Image Optimization</strong> (CVE-2026-94483) when an <code>images.remotePatterns</code> host controls its DNS and points you at private IPs — fixed in <code>16.3.8</code>; no <code>remotePatterns</code>, no exposure. There are also two <strong>SSG/ISR cache poisoning</strong> bugs for self-hosted apps (cross-user content substitution and persistent DoS, also patched in <code>15.5.27</code>), a Draft Mode leak through <code>use cache</code>, and information disclosure in metadata image routes and the dev server's MCP endpoint. Self-hosting Next? Upgrade now and audit your <code>remotePatterns</code>.</p>",
+            "fr": "<p>Le plus sérieux : une <strong>SSRF dans Image Optimization</strong> (CVE-2026-94483) quand un hôte de <code>images.remotePatterns</code> contrôle son DNS et vous redirige vers des IP privées — corrigé en <code>16.3.8</code> ; sans <code>remotePatterns</code>, pas d'exposition. S'y ajoutent deux <strong>cache poisoning SSG/ISR</strong> en self-hosted (substitution de contenu entre utilisateurs et DoS persistant, aussi corrigés en <code>15.5.27</code>), une fuite du Draft Mode via <code>use cache</code> et des divulgations dans les metadata image routes et l'endpoint MCP du dev server. Mettez à jour et auditez vos <code>remotePatterns</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-cjq9-62q9-8jv4", "label": "github.com/advisories" }
+        },
+        {
+          "id": "backstage-advisory-batch",
+          "tag": "security",
+          "date": "07 Oct 2026",
+          "title": {
+            "es": "Backstage: 38 advisories en un día, con RCE vía markdown_extensions de TechDocs",
+            "en": "Backstage: 38 advisories in one day, including RCE via TechDocs markdown_extensions",
+            "fr": "Backstage : 38 advisories en une journée, dont une RCE via les markdown_extensions de TechDocs"
+          },
+          "body_html": {
+            "es": "<p>Tu developer portal también es superficie de ataque. El 7 de octubre salieron <strong>38 advisories</strong> para paquetes <code>@backstage/*</code>. Lo peor: <strong>RCE con un <code>mkdocs.yml</code> manipulado</strong> en <code>@backstage/plugin-techdocs-node</code> (fix en <code>1.15.4</code>), <strong>autenticación rota en el OIDC provider</strong> (fix en <code>0.4.20</code>), delegación de credenciales que no preserva restricciones en <code>backend-defaults</code>, validación de paths floja en acciones del scaffolder de Bitbucket/Sentry y fugas en el backend de Kubernetes. Si corrés TechDocs con build local sobre repos que no controlás, esto es urgente: subí todos los plugins con <code>backstage-cli versions:bump</code>.</p>",
+            "en": "<p>Your developer portal is attack surface too. On October 7, <strong>38 advisories</strong> landed for <code>@backstage/*</code> packages. The worst: <strong>RCE via a crafted <code>mkdocs.yml</code></strong> in <code>@backstage/plugin-techdocs-node</code> (fixed in <code>1.15.4</code>), <strong>broken authentication in the OIDC provider</strong> (fixed in <code>0.4.20</code>), credential delegation that drops access restrictions in <code>backend-defaults</code>, weak path validation in Bitbucket/Sentry scaffolder actions, and data leaks in the Kubernetes backend. If you run TechDocs local builds over repos you don't control, this is urgent: bump everything with <code>backstage-cli versions:bump</code>.</p>",
+            "fr": "<p>Votre developer portal est aussi une surface d'attaque. Le 7 octobre, <strong>38 advisories</strong> sont tombées pour les paquets <code>@backstage/*</code>. Le pire : une <strong>RCE via un <code>mkdocs.yml</code> forgé</strong> dans <code>@backstage/plugin-techdocs-node</code> (corrigé en <code>1.15.4</code>), une <strong>authentification cassée dans le provider OIDC</strong> (corrigé en <code>0.4.20</code>), une délégation de credentials qui perd les restrictions dans <code>backend-defaults</code>, une validation de chemins faible dans les actions scaffolder Bitbucket/Sentry et des fuites dans le backend Kubernetes. Mettez tout à jour avec <code>backstage-cli versions:bump</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-4488-j8vj-vqqv", "label": "github.com/advisories" }
+        },
+        {
+          "id": "vm2-child-process-escape",
+          "tag": "security",
+          "date": "07 Oct 2026",
+          "title": {
+            "es": "vm2 3.12.1: la denylist de NodeVM se olvidó de child_process (crítico)",
+            "en": "vm2 3.12.1: NodeVM's denylist forgot child_process (critical)",
+            "fr": "vm2 3.12.1 : la denylist de NodeVM a oublié child_process (critique)"
+          },
+          "body_html": {
+            "es": "<p>Después de la tanda de la semana pasada, otra más (CVE-2026-93605): <code>DANGEROUS_BUILTINS</code> bloquea <code>cluster</code>, <code>worker_threads</code> y hasta <code>os</code>, pero <strong>no <code>child_process</code></strong>. Con <code>builtin: ['*']</code> — incluso con el patrón de resta documentado — el sandbox hace <code>require('child_process').execSync()</code> contra el host. Fix en <code>3.12.1</code>. Ojo: a esta altura, vm2 no es una frontera de seguridad; si ejecutás código no confiable, pasate a aislamiento real (procesos, containers, isolates).</p>",
+            "en": "<p>After last week's batch, another one (CVE-2026-93605): <code>DANGEROUS_BUILTINS</code> blocks <code>cluster</code>, <code>worker_threads</code>, even <code>os</code>, but <strong>not <code>child_process</code></strong>. With <code>builtin: ['*']</code> — even using the documented subtract pattern — sandboxed code can <code>require('child_process').execSync()</code> on the host. Fixed in <code>3.12.1</code>. At this point vm2 is not a security boundary; if you run untrusted code, move to real isolation (processes, containers, isolates).</p>",
+            "fr": "<p>Après le lot de la semaine dernière, encore une (CVE-2026-93605) : <code>DANGEROUS_BUILTINS</code> bloque <code>cluster</code>, <code>worker_threads</code> et même <code>os</code>, mais <strong>pas <code>child_process</code></strong>. Avec <code>builtin: ['*']</code> — même avec le motif de soustraction documenté — le code du sandbox peut faire <code>require('child_process').execSync()</code> sur l'hôte. Corrigé en <code>3.12.1</code>. vm2 n'est plus une frontière de sécurité : pour du code non fiable, passez à une vraie isolation.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-pq68-rvw4-xp4r", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "node-26-11",
+      "updates": [
+        {
+          "id": "node-26-11",
+          "tag": "release",
+          "date": "07 Oct 2026",
+          "title": {
+            "es": "Node.js 26.11: Buffer.stringLength(), validadores de headers HTTP, --process-timeout y process.ref/unref estables",
+            "en": "Node.js 26.11: Buffer.stringLength(), HTTP header validators, --process-timeout, and stable process.ref/unref",
+            "fr": "Node.js 26.11 : Buffer.stringLength(), validateurs d'en-têtes HTTP, --process-timeout et process.ref/unref stables"
+          },
+          "body_html": {
+            "es": "<p>Release minor con cositas útiles para backend: <code>Buffer.stringLength()</code> y <code>buffer.isLatin1()</code>, <code>http.isValidHeaderName()</code>/<code>isValidHeaderValue()</code> para validar antes de setear, opción <code>connectionWindowSize</code> en HTTP/2, flag <code>--process-timeout=N</code>, <code>histogram.diff()</code>/<code>snapshot()</code> en <code>perf_hooks</code> y <code>process.ref</code>/<code>unref</code> graduados a stable. Ojo: <code>DatabaseSync</code>/<code>StatementSync</code> de <code>node:sqlite</code> se renombran, y Alpine pasa a tier 2. La <code>26.11.1</code> salió horas después solo para revertir cambios de docs/build.</p>",
+            "en": "<p>A minor release with handy backend bits: <code>Buffer.stringLength()</code> and <code>buffer.isLatin1()</code>, <code>http.isValidHeaderName()</code>/<code>isValidHeaderValue()</code> to validate before setting, a <code>connectionWindowSize</code> option for HTTP/2, a <code>--process-timeout=N</code> flag, <code>histogram.diff()</code>/<code>snapshot()</code> in <code>perf_hooks</code>, and <code>process.ref</code>/<code>unref</code> graduating to stable. Heads-up: <code>node:sqlite</code>'s <code>DatabaseSync</code>/<code>StatementSync</code> are renamed, and Alpine moves to tier 2. <code>26.11.1</code> followed hours later only to revert docs/build changes.</p>",
+            "fr": "<p>Une minor avec des ajouts utiles côté backend : <code>Buffer.stringLength()</code> et <code>buffer.isLatin1()</code>, <code>http.isValidHeaderName()</code>/<code>isValidHeaderValue()</code>, une option <code>connectionWindowSize</code> pour HTTP/2, un flag <code>--process-timeout=N</code>, <code>histogram.diff()</code>/<code>snapshot()</code> dans <code>perf_hooks</code> et <code>process.ref</code>/<code>unref</code> stables. Attention : <code>DatabaseSync</code>/<code>StatementSync</code> de <code>node:sqlite</code> sont renommés et Alpine passe en tier 2. La <code>26.11.1</code> n'a fait que revenir sur des changements docs/build.</p>"
+          },
+          "source": { "url": "https://github.com/nodejs/node/releases/tag/v26.11.0", "label": "github.com/nodejs" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "payload-second-wave",
+      "updates": [
+        {
+          "id": "payload-second-wave",
+          "tag": "security",
+          "date": "07 Oct 2026",
+          "title": {
+            "es": "Payload: segunda tanda de 14 advisories, con RCE en Form Builder y manejo de tokens de auth (CVSS 9.2)",
+            "en": "Payload: a second wave of 14 advisories, including Form Builder RCE and auth token handling (CVSS 9.2)",
+            "fr": "Payload : une deuxième vague de 14 advisories, dont une RCE dans Form Builder et la gestion des tokens d'auth (CVSS 9.2)"
+          },
+          "body_html": {
+            "es": "<p>Ayer contamos 15; hoy se suman 14 más. Críticos: <strong>manejo del campo de token de autenticación</strong> (CVSS 9.2), <strong>RCE en <code>@payloadcms/plugin-form-builder</code></strong> y updates no autorizados a documentos de colecciones. También RCE vía first-register, otra SQL injection en los adapters SQL, bypass de tenants en el plugin multi-tenant, uploads que pisan objetos de S3 y XML/SVG que ejecutan JS same-origin. El piso es <code>payload 3.90.0</code>.</p>",
+            "en": "<p>Yesterday we counted 15; today 14 more. Critical: <strong>authentication token field handling</strong> (CVSS 9.2), <strong>RCE in <code>@payloadcms/plugin-form-builder</code></strong>, and unauthorized updates to collection documents. Also RCE via first-register, another SQL injection in the SQL adapters, a tenant bypass in the multi-tenant plugin, uploads overwriting S3 objects, and XML/SVG uploads running same-origin JS. The floor is <code>payload 3.90.0</code>.</p>",
+            "fr": "<p>Hier, 15 ; aujourd'hui, 14 de plus. Critiques : <strong>gestion du champ de token d'authentification</strong> (CVSS 9.2), <strong>RCE dans <code>@payloadcms/plugin-form-builder</code></strong> et mises à jour non autorisées de documents. Aussi : RCE via first-register, une autre SQL injection, contournement des tenants, uploads qui écrasent des objets S3 et XML/SVG exécutant du JS same-origin. Le minimum : <code>payload 3.90.0</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-66wr-7vmr-p5jq", "label": "github.com/advisories" }
+        },
+        {
+          "id": "quasar-ssr-advisories",
+          "tag": "security",
+          "date": "07 Oct 2026",
+          "title": {
+            "es": "Quasar: 9 advisories en SSR, con XSS crítico en getHead() y ReDoS por User-Agent",
+            "en": "Quasar: 9 SSR advisories, including critical XSS in getHead() and a User-Agent ReDoS",
+            "fr": "Quasar : 9 advisories SSR, dont une XSS critique dans getHead() et un ReDoS sur le User-Agent"
+          },
+          "body_html": {
+            "es": "<p>Si renderizás Quasar en servidor: <strong>XSS stored/reflected</strong> por meta tags sin escapar en <code>getHead()</code> (fix en <code>quasar 2.22.0</code>), un <strong>ReDoS sobre el User-Agent</strong> que con un solo request clava el server SSR (CVSS 8.7), la página de error de dev que vuelca todo el entorno del shell, nonces sin restricción en <code>@quasar/app-vite</code> y claves TLS de desarrollo con permisos demasiado abiertos.</p>",
+            "en": "<p>If you server-render Quasar: <strong>stored/reflected XSS</strong> through unescaped meta tags in <code>getHead()</code> (fixed in <code>quasar 2.22.0</code>), a <strong>User-Agent ReDoS</strong> where one request stalls the SSR server (CVSS 8.7), a dev error page that dumps the whole shell environment, unconstrained nonces in <code>@quasar/app-vite</code>, and dev TLS keys cached with overly permissive file modes.</p>",
+            "fr": "<p>Si vous faites du SSR avec Quasar : <strong>XSS stockée/réfléchie</strong> via des meta tags non échappés dans <code>getHead()</code> (corrigé en <code>quasar 2.22.0</code>), un <strong>ReDoS sur le User-Agent</strong> où une seule requête bloque le serveur SSR (CVSS 8.7), une page d'erreur de dev qui expose tout l'environnement du shell, des nonces non contraints dans <code>@quasar/app-vite</code> et des clés TLS de dev aux permissions trop larges.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-pq96-jpmf-w254", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "ghost-advisory-batch",
+      "updates": [
+        {
+          "id": "ghost-advisory-batch",
+          "tag": "security",
+          "date": "07 Oct 2026",
+          "title": {
+            "es": "Ghost: 20 advisories, con RCE vía archivos de traducción de themes y bookmark cards",
+            "en": "Ghost: 20 advisories, including RCE via theme translation files and bookmark cards",
+            "fr": "Ghost : 20 advisories, dont des RCE via les fichiers de traduction des thèmes et les bookmark cards"
+          },
+          "body_html": {
+            "es": "<p>El CMS en Node más popular se comió su propia tanda: <strong>RCE vía archivos de traducción de themes</strong> (fix en <code>6.64.0</code>) y <strong>vía imágenes de bookmark cards</strong> (fix en <code>6.67.0</code>), más un montón de XSS stored (SVG, oEmbed, embeds), SSRF en el fetch de bookmarks con bypass de filtros IPv6, disclosure de invite tokens en la Admin API y escalada de rol para editores. Si self-hosteás Ghost, subí a <code>6.67.0</code> o más.</p>",
+            "en": "<p>The most popular Node CMS got its own batch: <strong>RCE via theme translation files</strong> (fixed in <code>6.64.0</code>) and <strong>via bookmark card images</strong> (fixed in <code>6.67.0</code>), plus a pile of stored XSS (SVG, oEmbed, embeds), SSRF in bookmark fetching with IPv6 filter bypasses, invite token disclosure in the Admin API, and role escalation for editors. Self-hosting Ghost? Go to <code>6.67.0</code> or later.</p>",
+            "fr": "<p>Le CMS Node le plus populaire a eu son lot : <strong>RCE via les fichiers de traduction des thèmes</strong> (corrigé en <code>6.64.0</code>) et <strong>via les images des bookmark cards</strong> (corrigé en <code>6.67.0</code>), plus de nombreuses XSS stockées (SVG, oEmbed, embeds), une SSRF dans la récupération des bookmarks avec contournement des filtres IPv6, une fuite des invite tokens dans l'Admin API et une escalade de rôle pour les éditeurs. Passez en <code>6.67.0</code> ou plus.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-jj74-hc2q-xrvm", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "grab-counter-aerospike",
+      "updates": [
+        {
+          "id": "grab-counter-aerospike",
+          "tag": "notable",
+          "date": "07 Oct 2026",
+          "title": {
+            "es": "Grab rediseña el storage de su Counter Service: −50% de P99 y de 3 TB a 1 TB",
+            "en": "Grab redesigns its Counter Service storage: −50% P99 and 3 TB down to 1 TB",
+            "fr": "Grab repense le stockage de son Counter Service : −50 % de P99 et de 3 To à 1 To"
+          },
+          "body_html": {
+            "es": "<p>Grab migró de una base wide-column a Aerospike y, clave, <strong>rediseñó el modelo de datos</strong>: los registros por time-bucket se consolidan en un único map con incrementos atómicos. Resultado: ~50% menos de P99 en lecturas, 3 TB → 1 TB en disco y 45–50% menos de costo por nodo, migrando detrás de una capa de abstracción con shadow traffic. La lección: modelá según los límites del motor destino (overhead por registro, acceso batch), no copies el esquema viejo.</p>",
+            "en": "<p>Grab moved from a wide-column store to Aerospike and, crucially, <strong>redesigned the data model</strong>: per-time-bucket records are consolidated into a single map with atomic increments. Result: ~50% lower read P99, 3 TB → 1 TB on disk, and 45–50% lower per-node cost, migrated behind a storage abstraction with shadow traffic. The lesson: model for the target engine's constraints (per-record overhead, batch access), don't port the old schema.</p>",
+            "fr": "<p>Grab est passé d'une base wide-column à Aerospike et surtout a <strong>repensé son modèle de données</strong> : les enregistrements par time-bucket sont regroupés dans une seule map avec incréments atomiques. Résultat : ~50 % de P99 en moins en lecture, 3 To → 1 To sur disque et 45–50 % de coût par nœud en moins, avec une migration derrière une couche d'abstraction et du shadow traffic. La leçon : modélisez selon les contraintes du moteur cible.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/grab-counter-aerospike-migration/", "label": "infoq.com" }
+        },
+        {
+          "id": "rabbitmq-java-client-dos",
+          "tag": "security",
+          "date": "07 Oct 2026",
+          "title": {
+            "es": "Cliente Java de RabbitMQ: UTF-8 malformado deja muertos para siempre a los consumers RPC",
+            "en": "RabbitMQ Java client: malformed UTF-8 permanently kills RPC consumers",
+            "fr": "Client Java RabbitMQ : de l'UTF-8 malformé désactive définitivement les consumers RPC"
+          },
+          "body_html": {
+            "es": "<p>Dos DoS en <code>com.rabbitmq:amqp-client</code>: un <code>shortstr</code> con UTF-8 malformado en las properties de un mensaje <strong>desactiva de forma permanente</strong> a los consumers RPC, y el <code>JSONReader</code> del mapper JSON-RPC por defecto entra en loop infinito con input truncado. Si tus servicios JVM hacen RPC sobre RabbitMQ con productores que no controlás, actualizá el cliente.</p>",
+            "en": "<p>Two DoS bugs in <code>com.rabbitmq:amqp-client</code>: a <code>shortstr</code> with malformed UTF-8 in message properties <strong>permanently disables</strong> RPC consumers, and the default JSON-RPC mapper's <code>JSONReader</code> never terminates on truncated input. If your JVM services do RPC over RabbitMQ with producers you don't control, update the client.</p>",
+            "fr": "<p>Deux DoS dans <code>com.rabbitmq:amqp-client</code> : un <code>shortstr</code> en UTF-8 malformé dans les properties d'un message <strong>désactive définitivement</strong> les consumers RPC, et le <code>JSONReader</code> du mapper JSON-RPC par défaut ne se termine jamais sur une entrée tronquée. Mettez le client à jour.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-7822-rcf6-97fx", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "ai-code-comprehension-gap",
+      "updates": [
+        {
+          "id": "ai-code-comprehension-gap",
+          "tag": "notable",
+          "date": "07 Oct 2026",
+          "title": {
+            "es": "Encuesta: el código generado por IA corre el cuello de botella al debugging (16,9 h/semana vs 9,8 h generando)",
+            "en": "Survey: AI-generated code shifts the bottleneck to debugging (16.9 h/week vs 9.8 h generating)",
+            "fr": "Enquête : le code généré par IA déplace le goulot vers le debugging (16,9 h/semaine contre 9,8 h de génération)"
+          },
+          "body_html": {
+            "es": "<p>Coleman Parkes encuestó a 300 líderes de ingeniería para Undo: se gastan <strong>16,9 horas por semana debuggeando</strong> contra 9,8 generando, el 35% del código de IA llega a producción antes de que el equipo lo entienda, y el 79% genera más rápido pero <strong>no libera más rápido</strong>. Es el argumento perfecto para lo que venimos diciendo: tests, arquitectura legible y límites claros (hexagonal, contratos) son lo que hace que la velocidad de generación se convierta en velocidad de entrega.</p>",
+            "en": "<p>Coleman Parkes surveyed 300 engineering leaders for Undo: teams spend <strong>16.9 hours a week debugging</strong> versus 9.8 generating, 35% of AI code reaches production before the team understands it, and 79% generate faster but <strong>don't ship faster</strong>. It's hard data for the old argument: tests, readable architecture, and clear boundaries (hexagonal, contracts) are what turn generation speed into delivery speed.</p>",
+            "fr": "<p>Coleman Parkes a interrogé 300 responsables d'ingénierie pour Undo : <strong>16,9 heures par semaine de debugging</strong> contre 9,8 de génération, 35 % du code IA arrive en production avant d'être compris par l'équipe, et 79 % génèrent plus vite sans <strong>livrer plus vite</strong>. Tests, architecture lisible et frontières claires restent ce qui transforme la vitesse de génération en vitesse de livraison.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/survey-complex-codebases-agents/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "nextjs-16-4",
+      "updates": [
+        {
+          "id": "nextjs-16-4",
+          "tag": "release",
+          "date": "06 Oct 2026",
+          "title": {
+            "es": "Next.js 16.4: Cache Components recomendado para toda app, ensureStatic, navigation() y next upgrade --agent",
+            "en": "Next.js 16.4: Cache Components recommended for every app, ensureStatic, navigation(), and next upgrade --agent",
+            "fr": "Next.js 16.4 : Cache Components recommandé pour toute app, ensureStatic, navigation() et next upgrade --agent"
+          },
+          "body_html": {
+            "es": "<p>Vercel ya recomienda <strong>Cache Components</strong> (<code>'use cache'</code> + Partial Prefetching) para cualquier app, y <code>create-next-app</code> lo activa por defecto; será el default en Next 17. Nuevo: <code>export const ensureStatic</code> rompe el build si un componente dinámico se cuela en una ruta, y <code>await navigation()</code>/<code>prefetch()</code> deciden qué se carga en cada etapa. Suma <code>next upgrade --agent</code>, React 19.3, 20–25% menos de disk cache en Turbopack y HMR de servidor lazy. Ojo, no confundas: esta versión no trae los fixes de seguridad — esos están en <code>16.3.8</code>.</p>",
+            "en": "<p>Vercel now recommends <strong>Cache Components</strong> (<code>'use cache'</code> + Partial Prefetching) for every app, and <code>create-next-app</code> enables it by default; it becomes the default in Next 17. New: <code>export const ensureStatic</code> fails the build if a dynamic component sneaks into a route, and <code>await navigation()</code>/<code>prefetch()</code> control what loads at each stage. Plus <code>next upgrade --agent</code>, React 19.3, 20–25% smaller Turbopack disk cache, and lazy server HMR. Note: the security fixes ship separately in <code>16.3.8</code>.</p>",
+            "fr": "<p>Vercel recommande désormais <strong>Cache Components</strong> (<code>'use cache'</code> + Partial Prefetching) pour toute app, activé par défaut dans <code>create-next-app</code> ; ce sera le défaut de Next 17. Nouveau : <code>export const ensureStatic</code> fait échouer le build si un composant dynamique se glisse dans une route, et <code>await navigation()</code>/<code>prefetch()</code> contrôlent ce qui se charge à chaque étape. Plus <code>next upgrade --agent</code>, React 19.3, un cache disque Turbopack 20–25 % plus petit et un HMR serveur lazy. Les correctifs de sécurité sont en <code>16.3.8</code>.</p>"
+          },
+          "source": { "url": "https://nextjs.org/blog/next-16-4", "label": "nextjs.org" }
+        },
+        {
+          "id": "nx-23-3",
+          "tag": "release",
+          "date": "07 Oct 2026",
+          "title": {
+            "es": "Nx 23.3: affected por tareas, --explain, ultracache y soporte para Vitest 5",
+            "en": "Nx 23.3: task-level affected, --explain, ultracache, and Vitest 5 support",
+            "fr": "Nx 23.3 : affected au niveau des tâches, --explain, ultracache et support de Vitest 5"
+          },
+          "body_html": {
+            "es": "<p>Para monorepos grandes: opt-in para seleccionar <strong>tareas afectadas en vez de proyectos</strong>, <code>--explain</code> para ver por qué algo quedó afectado, <strong>ultracache</strong> (hash de tareas a partir de snapshots de I/O de Nx Cloud), un executor batcheado <code>@nx/oxlint:lint</code>, soporte para Vitest 5 y Cypress 16, y migraciones orquestadas con agentes. Y trae el bump de <code>piscina</code> por una vulnerabilidad crítica.</p>",
+            "en": "<p>For big monorepos: opt-in selection of <strong>affected tasks instead of projects</strong>, <code>--explain</code> to see why something is affected, <strong>ultracache</strong> (hashing tasks from Nx Cloud I/O snapshots), a batched <code>@nx/oxlint:lint</code> executor, Vitest 5 and Cypress 16 support, and agent-orchestrated migrations. It also bumps <code>piscina</code> for the critical vulnerability.</p>",
+            "fr": "<p>Pour les gros monorepos : sélection optionnelle des <strong>tâches affectées plutôt que des projets</strong>, <code>--explain</code> pour savoir pourquoi, <strong>ultracache</strong> (hash des tâches depuis les snapshots I/O de Nx Cloud), un executor <code>@nx/oxlint:lint</code> batché, le support de Vitest 5 et Cypress 16, et des migrations orchestrées par agent. Inclut aussi la mise à jour de <code>piscina</code> pour la vulnérabilité critique.</p>"
+          },
+          "source": { "url": "https://github.com/nrwl/nx/releases/tag/23.3.0", "label": "github.com/nrwl" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Segundo día seguido de advisories en masa: Backstage (38), Payload (14 más), Ghost (20), Quasar (9) y Next.js (6). El patrón se repite — fixes publicados antes, CVEs cargados todos juntos. Automatizá los bumps de dependencias o vas a vivir apagando incendios.",
+      "en": "Second straight day of mass advisories: Backstage (38), Payload (14 more), Ghost (20), Quasar (9), and Next.js (6). Same pattern — fixes shipped earlier, CVEs loaded all at once. Automate dependency bumps or you'll live in firefighting mode.",
+      "fr": "Deuxième jour d'advisories en masse : Backstage (38), Payload (14 de plus), Ghost (20), Quasar (9) et Next.js (6). Même schéma — fixes publiés avant, CVE chargées d'un coup. Automatisez les mises à jour de dépendances."
+    },
+    {
+      "es": "Los frameworks se vuelven agent-aware: Next.js con next upgrade --agent y Nx con migraciones orquestadas por agentes. Al mismo tiempo, la encuesta de Undo muestra que generar más rápido no es entregar más rápido — la comprensión del código sigue siendo el cuello de botella.",
+      "en": "Frameworks are becoming agent-aware: Next.js with next upgrade --agent and Nx with agent-orchestrated migrations. Meanwhile the Undo survey shows faster generation isn't faster delivery — code comprehension is still the bottleneck.",
+      "fr": "Les frameworks deviennent agent-aware : Next.js avec next upgrade --agent et Nx avec des migrations orchestrées par agent. En parallèle, l'enquête Undo montre que générer plus vite n'est pas livrer plus vite."
+    }
+  ]
+}

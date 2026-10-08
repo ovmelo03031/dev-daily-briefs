@@ -1,0 +1,287 @@
+{
+  "title": {
+    "es": "AI Security — 08 OCT 2026",
+    "en": "AI Security — 08 OCT 2026",
+    "fr": "AI Security — 08 OCT 2026"
+  },
+  "description": {
+    "es": "Langflow suma un RCE 9.9 vía configuración de servidores MCP stdio, PraisonAI publica un code injection crítico y admite que su defensa anti prompt injection no bloqueaba casi nada, Hydra vuelve a parchear su blocklist de instantiate() y AWS lanza Strands Box para encerrar agentes en modo YOLO.",
+    "en": "Langflow adds a 9.9 RCE via MCP stdio server configuration, PraisonAI ships a critical code injection fix and admits its prompt-injection defense blocked almost nothing, Hydra patches its instantiate() blocklist again, and AWS launches Strands Box to fence in YOLO-mode agents.",
+    "fr": "Langflow ajoute une RCE 9.9 via la configuration des serveurs MCP stdio, PraisonAI corrige une injection de code critique et reconnaît que sa défense anti prompt injection ne bloquait presque rien, Hydra corrige encore sa blocklist instantiate() et AWS lance Strands Box pour encadrer les agents en mode YOLO."
+  },
+  "pubDate": "2026-10-08",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "Langflow: RCE 9.9 vía servidores MCP stdio",
+        "en": "Langflow: 9.9 RCE via MCP stdio servers",
+        "fr": "Langflow : RCE 9.9 via serveurs MCP stdio"
+      },
+      "anchor": "langflow-cve-2026-105697",
+      "icon": "lucide:skull"
+    },
+    {
+      "text": {
+        "es": "PraisonAI: code injection crítico en deploy",
+        "en": "PraisonAI: critical code injection in deploy",
+        "fr": "PraisonAI : injection de code critique"
+      },
+      "anchor": "praisonai-cve-2026-62176",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": {
+        "es": "Defensa anti prompt injection que no bloquea",
+        "en": "A prompt-injection defense that never blocks",
+        "fr": "Une défense anti-injection qui ne bloque pas"
+      },
+      "anchor": "praisonai-cve-2026-61439",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "Hydra: otra vez bypass del blocklist",
+        "en": "Hydra: instantiate() blocklist bypassed again",
+        "fr": "Hydra : blocklist instantiate() contournée"
+      },
+      "anchor": "hydra-cve-2026-106442",
+      "icon": "lucide:radiation"
+    },
+    {
+      "text": {
+        "es": "Webhooks falsos disparan agentes de PraisonAI",
+        "en": "Forged webhooks trigger PraisonAI agents",
+        "fr": "Des webhooks forgés déclenchent les agents"
+      },
+      "anchor": "praisonai-cve-2026-61436",
+      "icon": "lucide:siren"
+    },
+    {
+      "text": {
+        "es": "AWS lanza Strands Box para agentes",
+        "en": "AWS launches Strands Box agent sandbox",
+        "fr": "AWS lance le bac à sable Strands Box"
+      },
+      "anchor": "aws-strands-box-sandbox",
+      "icon": "lucide:lock"
+    }
+  ],
+  "tools": [
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "langflow-cve-2026-105697",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-105697: Langflow ejecuta cualquier comando configurado como servidor MCP stdio (CVSS 9.9)",
+            "en": "CVE-2026-105697: Langflow runs any command configured as an MCP stdio server (CVSS 9.9)",
+            "fr": "CVE-2026-105697 : Langflow exécute n'importe quelle commande déclarée comme serveur MCP stdio (CVSS 9.9)"
+          },
+          "body_html": {
+            "es": "<p>Antes de la 1.10.3, el transporte MCP stdio de Langflow lanzaba el <code>command</code>/<code>args</code> que el usuario pusiera en la configuración de un servidor MCP, sin allowlist y envuelto en <code>bash -c \"exec ...\"</code>. Cualquiera con acceso a <em>Settings → MCP Servers</em> (o a <code>POST/PATCH /api/v2/mcp/servers/{name}</code>), o que pudiera armar un flow con el componente MCP Tools, ejecuta comandos en el host apenas Langflow intenta conectarse, aunque la UI muestre que el servidor «falló». Ojo con esto: con el default <code>LANGFLOW_AUTO_LOGIN=true</code>, <code>/api/v1/auto_login</code> entrega un token sin credenciales, así que una instancia expuesta queda en RCE sin autenticación. Afecta <code>langflow</code> 1.1.2–1.10.2, <code>langflow-base</code> &lt; 0.10.3 y <code>lfx</code> &lt; 1.10.3. Es el tercer RCE crítico de Langflow en una semana.</p>",
+            "en": "<p>Before 1.10.3, Langflow's MCP stdio transport launched whatever <code>command</code>/<code>args</code> a user put in an MCP server configuration, with no allowlist and wrapped in <code>bash -c \"exec ...\"</code>. Anyone who can reach <em>Settings → MCP Servers</em> (or <code>POST/PATCH /api/v2/mcp/servers/{name}</code>), or build a flow with the MCP Tools component, gets commands executed on the host as soon as Langflow tries to connect — even when the UI reports the server «failed to start». With the default <code>LANGFLOW_AUTO_LOGIN=true</code>, <code>/api/v1/auto_login</code> hands out a token without credentials, so an exposed instance is effectively unauthenticated RCE. Affects <code>langflow</code> 1.1.2–1.10.2, <code>langflow-base</code> &lt; 0.10.3 and <code>lfx</code> &lt; 1.10.3. It is Langflow's third critical RCE in a week.</p>",
+            "fr": "<p>Avant la 1.10.3, le transport MCP stdio de Langflow lançait la <code>command</code>/<code>args</code> saisie dans la configuration d'un serveur MCP, sans allowlist et enveloppée dans <code>bash -c \"exec ...\"</code>. Toute personne ayant accès à <em>Settings → MCP Servers</em> (ou à <code>POST/PATCH /api/v2/mcp/servers/{name}</code>), ou pouvant construire un flow avec le composant MCP Tools, exécute des commandes sur l'hôte dès que Langflow tente de se connecter, même si l'UI indique un échec. Avec <code>LANGFLOW_AUTO_LOGIN=true</code> par défaut, <code>/api/v1/auto_login</code> délivre un jeton sans identifiants : une instance exposée devient une RCE non authentifiée. Corrigé en 1.10.3.</p>"
+          },
+          "date": "07 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-w794-rj3p-xv45",
+            "label": "GitHub Advisory"
+          }
+        },
+        {
+          "id": "praisonai-cve-2026-62176",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-62176: code injection en el generador de servidores de deploy de PraisonAI (CVSS 9.1)",
+            "en": "CVE-2026-62176: code injection in PraisonAI's deploy server generator (CVSS 9.1)",
+            "fr": "CVE-2026-62176 : injection de code dans le générateur de serveurs de déploiement de PraisonAI (CVSS 9.1)"
+          },
+          "body_html": {
+            "es": "<p>El módulo <code>deploy/api.py</code> de PraisonAI genera el código Python del servidor interpolando el parámetro <code>agents_file</code> directo en un f-string, lo escribe a disco y lo ejecuta con <code>subprocess.Popen()</code>. Un valor como <code>\"); import os; os.system(\"id\"); #</code> rompe el string y mete código arbitrario. Quien controle <code>agents_file</code> (CLI, config o una API upstream) ejecuta código en el host. Afecta PraisonAI ≤ 4.6.77; actualizá a 4.6.78, que salió en el mismo lote con otros cuatro advisories del framework.</p>",
+            "en": "<p>PraisonAI's <code>deploy/api.py</code> builds the server's Python code by interpolating the <code>agents_file</code> parameter straight into an f-string, writes it to disk and runs it via <code>subprocess.Popen()</code>. A value like <code>\"); import os; os.system(\"id\"); #</code> breaks out of the string and injects arbitrary code. Anyone controlling <code>agents_file</code> (CLI argument, configuration or an upstream API) gets code execution on the host. Affects PraisonAI ≤ 4.6.77; fixed in 4.6.78, shipped alongside four other advisories for the framework.</p>",
+            "fr": "<p>Le module <code>deploy/api.py</code> de PraisonAI génère le code Python du serveur en interpolant le paramètre <code>agents_file</code> directement dans une f-string, l'écrit sur disque puis l'exécute via <code>subprocess.Popen()</code>. Une valeur comme <code>\"); import os; os.system(\"id\"); #</code> sort de la chaîne et injecte du code arbitraire. Affecte PraisonAI ≤ 4.6.77 ; corrigé en 4.6.78.</p>"
+          },
+          "date": "07 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-g6j7-pffp-8whg",
+            "label": "GitHub Advisory"
+          }
+        },
+        {
+          "id": "hydra-cve-2026-106442",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-106442 y CVE-2026-106439: el blocklist de instantiate() de Hydra se vuelve a saltear",
+            "en": "CVE-2026-106442 and CVE-2026-106439: Hydra's instantiate() blocklist bypassed again",
+            "fr": "CVE-2026-106442 et CVE-2026-106439 : la blocklist instantiate() de Hydra de nouveau contournée"
+          },
+          "body_html": {
+            "es": "<p>Hydra, el framework de configuración de Meta que medio ecosistema de entrenamiento de modelos usa para resolver <code>_target_</code>, publicó dos bypasses del blocklist que había agregado para CVE-2026-68508. El primero (CVSS 7.8) se lo saltea con wrappers como <code>timeit.timeit</code>, <code>pickle.loads</code> o helpers que devuelven callables; se corrige en 1.3.6. El segundo (CVSS v4 8.5) es más elegante: como el blocklist vive en estado mutable a nivel de módulo, un nodo hermano de la config llama a <code>.discard()</code> para sacar una entrada y el siguiente instancia el target prohibido; se corrige en 1.3.7. El propio advisory lo dice: el blocklist es defense-in-depth, no una frontera de seguridad. Si cargás configs YAML de terceros (recetas de fine-tuning, checkpoints con config embebida), tratalas como código.</p>",
+            "en": "<p>Hydra, Meta's configuration framework that much of the model-training ecosystem relies on to resolve <code>_target_</code>, disclosed two bypasses of the blocklist it added for CVE-2026-68508. The first (CVSS 7.8) slips past it with wrappers such as <code>timeit.timeit</code>, <code>pickle.loads</code> or callable-returning helpers; fixed in 1.3.6. The second (CVSS v4 8.5) is subtler: because the blocklist lives in mutable module-level state, one sibling config node calls <code>.discard()</code> to remove an entry and the next instantiates the forbidden target; fixed in 1.3.7. The advisory itself says the blocklist is defense-in-depth, not a security boundary. If you load third-party YAML configs (fine-tuning recipes, checkpoints with embedded config), treat them as code.</p>",
+            "fr": "<p>Hydra, le framework de configuration de Meta utilisé par une bonne partie de l'écosystème d'entraînement pour résoudre <code>_target_</code>, publie deux contournements de la blocklist ajoutée pour CVE-2026-68508. Le premier (CVSS 7.8) passe via <code>timeit.timeit</code>, <code>pickle.loads</code> ou des helpers renvoyant des callables ; corrigé en 1.3.6. Le second (CVSS v4 8.5) exploite l'état mutable du module : un nœud voisin appelle <code>.discard()</code> puis le suivant instancie la cible interdite ; corrigé en 1.3.7. Traitez toute config YAML tierce comme du code.</p>"
+          },
+          "date": "07 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-rqx7-p7vv-w7hr",
+            "label": "GitHub Advisory"
+          }
+        },
+        {
+          "id": "langflow-cve-2026-105699",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-105699: el handler de recursos MCP de Langflow lee archivos de otros usuarios",
+            "en": "CVE-2026-105699: Langflow's MCP resource handler reads other users' files",
+            "fr": "CVE-2026-105699 : le gestionnaire de ressources MCP de Langflow lit les fichiers d'autres utilisateurs"
+          },
+          "body_html": {
+            "es": "<p>El transporte MCP por proyecto de Langflow autentica al caller para el <code>project_id</code> de la URL, pero la operación <code>resources/read</code> no autoriza la URI pedida. Un usuario autenticado se conecta a su propio endpoint MCP y pide un URI de descarga que apunta a un archivo de un flow ajeno: el server lo lee y lo devuelve sin chequear ownership. CVSS v4 7.1; afecta 1.6.8–1.9.0, corregido en 1.9.1.</p>",
+            "en": "<p>Langflow's project-scoped MCP transport authenticates the caller for the <code>project_id</code> in the URL, but the <code>resources/read</code> operation never authorizes the requested URI. An authenticated user connects to their own MCP endpoint and requests a download URI pointing at another user's flow-backed file; the server reads and returns it without checking ownership. CVSS v4 7.1; affects 1.6.8–1.9.0, fixed in 1.9.1.</p>",
+            "fr": "<p>Le transport MCP par projet de Langflow authentifie l'appelant pour le <code>project_id</code> de l'URL, mais <code>resources/read</code> n'autorise pas l'URI demandée. Un utilisateur authentifié peut ainsi lire les fichiers des flows d'autres utilisateurs. CVSS v4 7.1 ; versions 1.6.8–1.9.0, corrigé en 1.9.1.</p>"
+          },
+          "date": "07 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-4hmc-cfm3-w43c",
+            "label": "GitHub Advisory"
+          }
+        },
+        {
+          "id": "docling-cve-2026-105744",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-105744: un .tex malicioso lee y escribe archivos en Docling (y ejecuta comandos con shell-escape)",
+            "en": "CVE-2026-105744: a crafted .tex reads and writes files in Docling (and runs commands with shell-escape)",
+            "fr": "CVE-2026-105744 : un .tex piégé lit et écrit des fichiers dans Docling (et exécute des commandes avec shell-escape)"
+          },
+          "body_html": {
+            "es": "<p>Docling, el parser de documentos de IBM muy usado en pipelines RAG, compila TikZ con Tectonic sin restringir las primitivas de archivo de TeX cuando se configura <code>tikz_engine=\"tectonic\"</code>. Un <code>.tex</code> con <code>\\input{/ruta/absoluta}</code> o <code>\\openin</code> lee cualquier archivo accesible al proceso y puede escribir donde el proceso pueda; si además está <code>tikz_engine_allow_shell_escape=True</code>, <code>\\write18</code> ejecuta comandos. CVSS 7.5; afecta 2.94.0–2.131.x, corregido en 2.132.0. Llegó junto con otros cinco advisories de Docling el mismo día.</p>",
+            "en": "<p>Docling, IBM's document parser widely used in RAG ingestion pipelines, compiles TikZ with Tectonic without restricting TeX's file primitives when <code>tikz_engine=\"tectonic\"</code> is set. A <code>.tex</code> using <code>\\input{/abs/path}</code> or <code>\\openin</code> reads any file the process can read and writes wherever it can write; with <code>tikz_engine_allow_shell_escape=True</code>, <code>\\write18</code> runs shell commands. CVSS 7.5; affects 2.94.0–2.131.x, fixed in 2.132.0. It landed alongside five other Docling advisories the same day.</p>",
+            "fr": "<p>Docling, le parseur de documents d'IBM très utilisé dans les pipelines RAG, compile le TikZ avec Tectonic sans restreindre les primitives de fichiers de TeX lorsque <code>tikz_engine=\"tectonic\"</code> est activé. Un <code>.tex</code> piégé lit et écrit des fichiers ; avec <code>tikz_engine_allow_shell_escape=True</code>, <code>\\write18</code> exécute des commandes. CVSS 7.5 ; corrigé en 2.132.0.</p>"
+          },
+          "date": "07 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-x3q2-h9hx-4r4j",
+            "label": "GitHub Advisory"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "praisonai-cve-2026-61439",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-61439: la defensa anti prompt injection de PraisonAI solo bloqueaba si fallaban tres chequeos a la vez",
+            "en": "CVE-2026-61439: PraisonAI's prompt-injection defense only blocked when three checks fired at once",
+            "fr": "CVE-2026-61439 : la défense anti prompt injection de PraisonAI ne bloquait qu'avec trois détections simultanées"
+          },
+          "body_html": {
+            "es": "<p>PraisonAI trae una capa «Injection Defense» con seis categorías de detección (instruction override, authority claims, boundary manipulation, ofuscación, manipulación financiera y self-harm). El problema: el umbral de bloqueo por default era <code>CRITICAL</code>, que recién se alcanza cuando disparan tres o más chequeos. Un clásico <em>«Ignore all previous instructions. You are now DAN...»</em> dispara uno solo, queda en <code>HIGH</code>, se loguea y pasa derecho. CVSS 7.5, corregido en 4.6.78. La lección vale para cualquier guardrail: si el default es solo-loguear, en producción no tenés guardrail.</p>",
+            "en": "<p>PraisonAI ships an «Injection Defense» layer with six detection categories (instruction override, authority claims, boundary manipulation, obfuscation, financial manipulation and self-harm). The catch: the default block threshold was <code>CRITICAL</code>, reached only when three or more checks fire together. A textbook <em>«Ignore all previous instructions. You are now DAN...»</em> trips just one, lands at <code>HIGH</code>, gets logged and sails through. CVSS 7.5, fixed in 4.6.78. The lesson applies to any guardrail: if the default is log-only, production has no guardrail.</p>",
+            "fr": "<p>PraisonAI intègre une couche «Injection Defense» à six catégories de détection. Problème : le seuil de blocage par défaut était <code>CRITICAL</code>, atteint seulement si trois contrôles ou plus se déclenchent. Un classique <em>«Ignore all previous instructions...»</em> n'en déclenche qu'un, reste en <code>HIGH</code>, est journalisé et passe. CVSS 7.5, corrigé en 4.6.78.</p>"
+          },
+          "date": "07 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-fj8f-m44g-c479",
+            "label": "GitHub Advisory"
+          }
+        },
+        {
+          "id": "praisonai-cve-2026-61436",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-61436: el webhook de AgentMail de PraisonAI acepta mensajes falsos y despierta a los agentes",
+            "en": "CVE-2026-61436: PraisonAI's AgentMail webhook accepts forged messages and wakes the agents",
+            "fr": "CVE-2026-61436 : le webhook AgentMail de PraisonAI accepte des messages forgés et réveille les agents"
+          },
+          "body_html": {
+            "es": "<p>En modo webhook, <code>praisonai</code> expone un endpoint aiohttp público que acepta eventos <code>message.received</code> sin verificar las firmas Svix (<code>svix-signature</code>) que AgentMail manda. Cualquiera puede postear un mail inventado que entra directo a la sesión del agente y a su camino de respuesta: prompt injection sin siquiera tener que mandar un mail real. CVSS 8.6, corregido en 4.6.78 (hay un advisory gemelo, GHSA-qj9c-59p6-8cgx, para el mismo hueco).</p>",
+            "en": "<p>In webhook mode, <code>praisonai</code> exposes a public aiohttp endpoint that accepts <code>message.received</code> events without verifying the Svix signatures (<code>svix-signature</code>) AgentMail sends. Anyone can post a fabricated email that goes straight into the agent session and its reply path — prompt injection without even sending a real email. CVSS 8.6, fixed in 4.6.78 (a twin advisory, GHSA-qj9c-59p6-8cgx, covers the same gap).</p>",
+            "fr": "<p>En mode webhook, <code>praisonai</code> expose un endpoint aiohttp public qui accepte des événements <code>message.received</code> sans vérifier les signatures Svix d'AgentMail. N'importe qui peut injecter un faux e-mail directement dans la session de l'agent. CVSS 8.6, corrigé en 4.6.78.</p>"
+          },
+          "date": "07 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-7c92-x8vg-4258",
+            "label": "GitHub Advisory"
+          }
+        }
+      ]
+    },
+    {
+      "id": "advisories",
+      "name": "Vendor Advisories",
+      "theme": "advisories",
+      "icon_emoji": "📢",
+      "anchor": "advisories",
+      "updates": [
+        {
+          "id": "aws-strands-box-sandbox",
+          "tag": "advisory",
+          "title": {
+            "es": "AWS libera Strands Box, un sandbox open source para agentes en «modo YOLO»",
+            "en": "AWS open-sources Strands Box, a sandbox for agents running in «YOLO mode»",
+            "fr": "AWS publie Strands Box, un bac à sable open source pour les agents en «mode YOLO»"
+          },
+          "body_html": {
+            "es": "<p>AWS publicó Strands Box para contener agentes que aprueban cada acción sin revisión humana. Combina aislamiento a nivel de SO (containers y microVMs) con un motor de políticas con memoria temporal (Dogwood Local Engine), que evalúa no solo lo que el agente quiere hacer sino lo que ya hizo, por ejemplo «no más de tres posts a Slack cada diez minutos». Strands Shell y Monty para Python exponen borrados de archivos y requests de API al mismo motor. Por ahora solo corre en macOS; Linux está en desarrollo.</p>",
+            "en": "<p>AWS released Strands Box to contain agents that approve every action without human review. It pairs OS-level isolation (containers and microVMs) with a policy engine that has temporal awareness (Dogwood Local Engine), so rules can weigh what the agent already did, not just what it wants to do — e.g. «no more than three Slack posts every ten minutes». Strands Shell and Monty for Python route file deletions and API requests through the same engine. macOS only for now; Linux is in development.</p>",
+            "fr": "<p>AWS publie Strands Box pour encadrer les agents qui approuvent chaque action sans revue humaine. L'outil combine isolation au niveau OS (conteneurs et microVM) et un moteur de politiques à mémoire temporelle (Dogwood Local Engine) qui tient compte de ce que l'agent a déjà fait. macOS uniquement pour l'instant ; Linux en cours.</p>"
+          },
+          "date": "07 Oct 2026",
+          "source": {
+            "url": "https://www.theregister.com/ai-and-ml/2026/10/07/aws-launches-open-source-ai-agent-sandbox-to-prevent-yolo-mode-disasters/5301687",
+            "label": "The Register"
+          }
+        },
+        {
+          "id": "splunk-mcp-cve-2026-76286",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-76286: Splunk MCP Server mandaba el token del usuario a la URL de tools custom ajenas",
+            "en": "CVE-2026-76286: Splunk MCP Server sent the user's token to other users' custom tool URLs",
+            "fr": "CVE-2026-76286 : Splunk MCP Server envoyait le jeton de l'utilisateur à l'URL d'outils tiers"
+          },
+          "body_html": {
+            "es": "<p>En Splunk MCP Server &lt; 1.2.1, ejecutar una custom API tool enviaba el token de autenticación de Splunk de quien la corría a la URL configurada en la tool. Si otro usuario controla esa URL, captura el token y actúa como la víctima. Requiere el capability <code>mcp_tool_execute</code> y correr una tool configurada por otro. CVSS 5.3; actualizá a 1.2.1. Otro caso más de MCP como superficie de credenciales.</p>",
+            "en": "<p>In Splunk MCP Server &lt; 1.2.1, running a custom API tool sent the runner's Splunk authentication token to the URL configured for that tool. If another user controls that URL, they capture the token and act as the victim. Requires the <code>mcp_tool_execute</code> capability and running a tool configured by someone else. CVSS 5.3; upgrade to 1.2.1. One more case of MCP as a credential surface.</p>",
+            "fr": "<p>Dans Splunk MCP Server &lt; 1.2.1, l'exécution d'un outil API personnalisé envoyait le jeton Splunk de l'utilisateur à l'URL configurée pour cet outil, potentiellement contrôlée par un autre utilisateur. CVSS 5.3 ; corrigé en 1.2.1.</p>"
+          },
+          "date": "07 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-mgwr-9j5x-6w4x",
+            "label": "GitHub Advisory"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "La configuración es código: servidores MCP stdio en Langflow y _target_ en Hydra convierten un campo de config en RCE.",
+      "en": "Configuration is code: MCP stdio servers in Langflow and _target_ in Hydra turn a config field into RCE.",
+      "fr": "La configuration, c'est du code : serveurs MCP stdio dans Langflow et _target_ dans Hydra transforment un champ de config en RCE."
+    },
+    {
+      "es": "Los frameworks de agentes publican en lote: Langflow, PraisonAI y Docling sumaron más de 15 advisories en 72 horas.",
+      "en": "Agent frameworks disclose in batches: Langflow, PraisonAI and Docling added 15+ advisories in 72 hours.",
+      "fr": "Les frameworks d'agents publient par lots : Langflow, PraisonAI et Docling cumulent plus de 15 advisories en 72 heures."
+    },
+    {
+      "es": "Guardrails en modo solo-log no son guardrails: el default de PraisonAI dejaba pasar el jailbreak más conocido.",
+      "en": "Log-only guardrails are not guardrails: PraisonAI's default let the best-known jailbreak straight through.",
+      "fr": "Un garde-fou en mode journalisation seule n'en est pas un : le défaut de PraisonAI laissait passer le jailbreak le plus connu."
+    }
+  ]
+}

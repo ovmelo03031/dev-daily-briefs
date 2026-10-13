@@ -1,0 +1,338 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 9 Oct 2026: fast-jwt vuelve a caer, Handlebars crítico y Hono v5 RC",
+    "en": "Backend & Fullstack Daily — 9 Oct 2026: fast-jwt falls again, critical Handlebars and Hono v5 RC",
+    "fr": "Backend & Fullstack Daily — 9 oct. 2026 : fast-jwt retombe, Handlebars critique et Hono v5 RC"
+  },
+  "description": {
+    "es": "Siete advisories en fast-jwt (incluido un patch incompleto de RSA→HS256), dos JS injection críticas en Handlebars, SQLi en el conector MariaDB de Node, Hono v5.0.0-rc.0 ESM-only y Prisma 8 RC que ya no borra datos sin preguntar.",
+    "en": "Seven fast-jwt advisories (including an incomplete RSA→HS256 patch), two critical Handlebars JS injections, SQLi in the MariaDB Node connector, ESM-only Hono v5.0.0-rc.0 and a Prisma 8 RC that no longer drops data without asking.",
+    "fr": "Sept advisories fast-jwt (dont un correctif RSA→HS256 incomplet), deux injections JS critiques dans Handlebars, une SQLi dans le connecteur MariaDB Node, Hono v5.0.0-rc.0 ESM-only et une RC de Prisma 8 qui ne supprime plus de données sans demander."
+  },
+  "pubDate": "2026-10-09",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "fast-jwt: vuelve RSA→HS256 (CVSS 9.8)", "en": "fast-jwt: RSA→HS256 is back (CVSS 9.8)", "fr": "fast-jwt : RSA→HS256 revient (CVSS 9.8)" },
+      "anchor": "fastjwt-alg-confusion",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Handlebars: dos JS injection críticas", "en": "Handlebars: two critical JS injections", "fr": "Handlebars : deux injections JS critiques" },
+      "anchor": "handlebars-js-injection",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "MariaDB Connector/Node: SQL injection", "en": "MariaDB Connector/Node: SQL injection", "fr": "MariaDB Connector/Node : injection SQL" },
+      "anchor": "mariadb-node-sqli",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Hono v5 RC: ESM-only y adapters aparte", "en": "Hono v5 RC: ESM-only, adapters split out", "fr": "Hono v5 RC : ESM-only, adapters séparés" },
+      "anchor": "hono-v5-rc",
+      "icon": "lucide:blocks"
+    },
+    {
+      "text": { "es": "Prisma 8 RC: chau --confirm destructivo", "en": "Prisma 8 RC: no more destructive --confirm", "fr": "Prisma 8 RC : fini le --confirm destructeur" },
+      "anchor": "prisma-8-rc17",
+      "icon": "simple-icons:prisma"
+    },
+    {
+      "text": { "es": "pgx_bm25 1.0: BM25 nativo en Postgres", "en": "pgx_bm25 1.0: native BM25 in Postgres", "fr": "pgx_bm25 1.0 : BM25 natif dans Postgres" },
+      "anchor": "pgx-bm25",
+      "icon": "simple-icons:postgresql"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "fastjwt-alg-confusion",
+          "tag": "security",
+          "date": "08 Oct 2026",
+          "title": {
+            "es": "fast-jwt: 7 advisories, incluido un patch incompleto que reabre RSA→HS256 (CVSS 9.8)",
+            "en": "fast-jwt: 7 advisories, including an incomplete patch that reopens RSA→HS256 (CVSS 9.8)",
+            "fr": "fast-jwt : 7 advisories, dont un correctif incomplet qui rouvre RSA→HS256 (CVSS 9.8)"
+          },
+          "body_html": {
+            "es": "<p>El fix de CVE-2026-34950 solo hacía <code>key.trim()</code> antes de detectar el header PEM, así que cualquier byte inicial que no sea whitespace (zero-width, <code>#</code>, headers) manda la clave pública RSA al camino HMAC: <strong>algorithm confusion RSA→HS256 otra vez</strong> (CVE-2026-107722, CVSS 9.8). En el mismo lote: JWK público tratado como secreto HMAC, tokens sin firmar aceptados con key vacía, <code>clockTolerance: Infinity</code> que saltea <code>exp</code>/<code>nbf</code> y validators salteados si el payload es un array. Todo se arregla en <code>6.3.0</code>. Ojo que <code>fast-jwt</code> está debajo de <code>@fastify/jwt</code>: revisá tu lockfile y actualizá YA.</p>",
+            "en": "<p>The CVE-2026-34950 fix only called <code>key.trim()</code> before PEM header detection, so any non-whitespace leading byte (zero-width chars, <code>#</code>, headers) sends the RSA public key down the HMAC path: <strong>RSA→HS256 algorithm confusion all over again</strong> (CVE-2026-107722, CVSS 9.8). Same batch: public JWK treated as an HMAC secret, unsigned tokens accepted with an empty key, <code>clockTolerance: Infinity</code> bypassing <code>exp</code>/<code>nbf</code>, and claim validators skipped for array payloads. Everything is fixed in <code>6.3.0</code>. <code>fast-jwt</code> sits under <code>@fastify/jwt</code>, so check your lockfile and upgrade now.</p>",
+            "fr": "<p>Le correctif de CVE-2026-34950 se contentait d'un <code>key.trim()</code> avant la détection du header PEM : tout octet initial non blanc (zero-width, <code>#</code>, headers) envoie la clé publique RSA sur le chemin HMAC, d'où <strong>une nouvelle confusion d'algorithme RSA→HS256</strong> (CVE-2026-107722, CVSS 9.8). Dans le même lot : JWK publique traitée comme secret HMAC, tokens non signés acceptés avec une clé vide, <code>clockTolerance: Infinity</code> qui ignore <code>exp</code>/<code>nbf</code>, et validateurs ignorés pour un payload tableau. Tout est corrigé en <code>6.3.0</code>. <code>fast-jwt</code> est sous <code>@fastify/jwt</code> : vérifiez votre lockfile et mettez à jour.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-ww5h-9m49-7xx4", "label": "github.com/advisories" }
+        },
+        {
+          "id": "handlebars-js-injection",
+          "tag": "security",
+          "date": "08 Oct 2026",
+          "title": {
+            "es": "Handlebars 4.7.10: dos JavaScript injection críticas en compile (CVSS 9.2 y 9.8)",
+            "en": "Handlebars 4.7.10: two critical JavaScript injections in compile (CVSS 9.2 and 9.8)",
+            "fr": "Handlebars 4.7.10 : deux injections JavaScript critiques dans compile (CVSS 9.2 et 9.8)"
+          },
+          "body_html": {
+            "es": "<p>Toda la rama <code>4.0.0</code>–<code>4.7.9</code> es vulnerable: un bypass del own-property check (CVE-2026-106445, CVSS v4 9.2) y una <strong>AST type confusion en <code>compile</code></strong> que esquiva el fix de CVE-2026-33937 (CVE-2026-106446, CVSS 9.8), más una tercera media por embeber templates precompilados inline. Si compilás templates que vienen de usuarios (emails, CMS, reportes), esto es RCE en tu server. Actualizá a <code>4.7.10</code> y buscá Handlebars transitivo con <code>pnpm why handlebars</code>.</p>",
+            "en": "<p>The whole <code>4.0.0</code>–<code>4.7.9</code> line is affected: an own-property check bypass (CVE-2026-106445, CVSS v4 9.2) and an <strong>AST type confusion in <code>compile</code></strong> that bypasses the CVE-2026-33937 fix (CVE-2026-106446, CVSS 9.8), plus a medium one for inline-embedded precompiled templates. If you compile user-supplied templates (emails, CMS, reports), that is server-side RCE. Upgrade to <code>4.7.10</code> and hunt transitive copies with <code>pnpm why handlebars</code>.</p>",
+            "fr": "<p>Toute la branche <code>4.0.0</code>–<code>4.7.9</code> est touchée : un contournement du contrôle own-property (CVE-2026-106445, CVSS v4 9.2) et une <strong>confusion de type d'AST dans <code>compile</code></strong> qui contourne le correctif de CVE-2026-33937 (CVE-2026-106446, CVSS 9.8), plus une moyenne sur les templates précompilés intégrés inline. Si vous compilez des templates fournis par des utilisateurs, c'est du RCE côté serveur. Passez en <code>4.7.10</code> et traquez les copies transitives avec <code>pnpm why handlebars</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-p8wg-vrv2-v86f", "label": "github.com/advisories" }
+        },
+        {
+          "id": "hono-v5-rc",
+          "tag": "beta",
+          "date": "08 Oct 2026",
+          "title": {
+            "es": "Hono v5.0.0-rc.0: ESM-only, Node 22.12+ y los adapters se van a @hono/*",
+            "en": "Hono v5.0.0-rc.0: ESM-only, Node 22.12+ and adapters move to @hono/*",
+            "fr": "Hono v5.0.0-rc.0 : ESM-only, Node 22.12+ et adapters déplacés vers @hono/*"
+          },
+          "body_html": {
+            "es": "<p>Primera RC de la v5 con breaking changes en serio: <strong>se elimina el build CommonJS</strong> (en Node necesitás 22.12+, donde <code>require()</code> de ESM igual funciona), <code>hono/bun</code>, <code>hono/aws-lambda</code>, <code>hono/vercel</code> y compañía pasan a paquetes <code>@hono/*</code>, y <code>hono/cloudflare-pages</code> desaparece. En tipos: <code>c.req.json()</code> devuelve <code>unknown</code> y <code>c.req.query()</code> puede traer <code>undefined</code>. Además, un <code>throw</code> que no es <code>Error</code> ahora cae en <code>onError</code>. Golazo para el type safety; leé el migration guide antes de subir.</p>",
+            "en": "<p>The first v5 RC brings real breaking changes: <strong>the CommonJS build is gone</strong> (Node needs 22.12+, where <code>require()</code> of ESM still works), <code>hono/bun</code>, <code>hono/aws-lambda</code>, <code>hono/vercel</code> and friends move to <code>@hono/*</code> packages, and <code>hono/cloudflare-pages</code> is removed. On types: <code>c.req.json()</code> returns <code>unknown</code> and <code>c.req.query()</code> may hold <code>undefined</code>. Non-Error throws now land in <code>onError</code>. A clear type-safety win; read the migration guide before bumping.</p>",
+            "fr": "<p>Première RC de la v5 avec de vrais breaking changes : <strong>le build CommonJS disparaît</strong> (Node 22.12+ requis, où <code>require()</code> d'ESM fonctionne), <code>hono/bun</code>, <code>hono/aws-lambda</code>, <code>hono/vercel</code> et les autres passent dans des paquets <code>@hono/*</code>, et <code>hono/cloudflare-pages</code> est supprimé. Côté types : <code>c.req.json()</code> renvoie <code>unknown</code> et <code>c.req.query()</code> peut contenir <code>undefined</code>. Les throws non-Error vont désormais dans <code>onError</code>. Lisez le guide de migration avant de monter.</p>"
+          },
+          "source": { "url": "https://github.com/honojs/hono/releases/tag/v5.0.0-rc.0", "label": "github.com/honojs" }
+        },
+        {
+          "id": "prisma-8-rc17",
+          "tag": "beta",
+          "date": "08 Oct 2026",
+          "title": {
+            "es": "Prisma 8.0.0-rc.17: las migraciones ya no pierden datos sin que lo digas explícitamente",
+            "en": "Prisma 8.0.0-rc.17: migrations no longer lose data unless you say so",
+            "fr": "Prisma 8.0.0-rc.17 : les migrations ne perdent plus de données sans accord explicite"
+          },
+          "body_html": {
+            "es": "<p><code>--confirm</code> <strong>ya no consiente pérdida de datos</strong>: <code>prisma migration plan</code> y <code>prisma db update</code> preguntan por cada modelo o campo que se dropearía, y respondés con <code>--delete</code> o con el nuevo <code>--rename User.name:User.fullName</code> que conserva las filas. Bajar una policy de RLS también pide <code>--allow</code>; en CI falla con <code>CLI.CONSENT_REQUIRED</code>. Suma row locks en el client y renombra <code>apply</code>/<code>scope</code> a <code>with</code>/<code>fragment</code>. Si ya probás la 8, cambiá los <code>--confirm</code> de tus pipelines.</p>",
+            "en": "<p><code>--confirm</code> <strong>no longer consents to data loss</strong>: <code>prisma migration plan</code> and <code>prisma db update</code> ask about each model or field a plan would drop, answered with <code>--delete</code> or the new <code>--rename User.name:User.fullName</code>, which keeps the rows. Dropping an RLS policy needs <code>--allow</code>; in CI it fails with <code>CLI.CONSENT_REQUIRED</code>. The client also gains row locks, and <code>apply</code>/<code>scope</code> are renamed to <code>with</code>/<code>fragment</code>. Testing v8 already? Replace every <code>--confirm</code> in your pipelines.</p>",
+            "fr": "<p><code>--confirm</code> <strong>ne vaut plus consentement à la perte de données</strong> : <code>prisma migration plan</code> et <code>prisma db update</code> demandent pour chaque modèle ou champ supprimé, avec <code>--delete</code> ou le nouveau <code>--rename User.name:User.fullName</code> qui conserve les lignes. Supprimer une policy RLS exige <code>--allow</code> ; en CI, échec avec <code>CLI.CONSENT_REQUIRED</code>. Le client gagne des row locks, et <code>apply</code>/<code>scope</code> deviennent <code>with</code>/<code>fragment</code>.</p>"
+          },
+          "source": { "url": "https://github.com/prisma/prisma/releases/tag/v8.0.0-rc.17", "label": "github.com/prisma" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "mariadb-node-sqli",
+      "updates": [
+        {
+          "id": "mariadb-node-sqli",
+          "tag": "security",
+          "date": "08 Oct 2026",
+          "title": {
+            "es": "MariaDB Connector/Node.js: dos SQL injection y leak de memoria del proceso",
+            "en": "MariaDB Connector/Node.js: two SQL injections and a process memory leak",
+            "fr": "MariaDB Connector/Node.js : deux injections SQL et une fuite de mémoire du processus"
+          },
+          "body_html": {
+            "es": "<p>El paquete <code>mariadb</code> trae SQLi por <strong>keys de objetos en la expansión de <code>SET</code></strong> con <code>permitSetMultiParamEntries</code> (CVE-2026-107384, CVSS 8.1) y otra en el protocolo de texto cuando la sesión usa <code>NO_BACKSLASH_ESCAPES</code> (CVE-2026-107385). Encima, parámetros GeoJSON malformados exponen memoria no inicializada. Parches en <code>3.2.5</code>, <code>3.3.4</code>, <code>3.4.7</code> y <code>3.5.4</code>: placeholders no te salvan si el bug está en el driver.</p>",
+            "en": "<p>The <code>mariadb</code> package has SQLi through <strong>object keys in <code>SET</code> expansion</strong> with <code>permitSetMultiParamEntries</code> (CVE-2026-107384, CVSS 8.1) and another in the text protocol when the session uses <code>NO_BACKSLASH_ESCAPES</code> (CVE-2026-107385). Malformed GeoJSON parameters also expose uninitialized memory. Patched in <code>3.2.5</code>, <code>3.3.4</code>, <code>3.4.7</code> and <code>3.5.4</code>: placeholders do not save you when the bug lives in the driver.</p>",
+            "fr": "<p>Le paquet <code>mariadb</code> présente une SQLi via les <strong>clés d'objet dans l'expansion <code>SET</code></strong> avec <code>permitSetMultiParamEntries</code> (CVE-2026-107384, CVSS 8.1) et une autre dans le protocole texte quand la session utilise <code>NO_BACKSLASH_ESCAPES</code> (CVE-2026-107385). Des paramètres GeoJSON malformés exposent aussi de la mémoire non initialisée. Corrigé en <code>3.2.5</code>, <code>3.3.4</code>, <code>3.4.7</code> et <code>3.5.4</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-v6pj-gxxw-phfw", "label": "github.com/advisories" }
+        },
+        {
+          "id": "hazelcast-memory-access",
+          "tag": "security",
+          "date": "08 Oct 2026",
+          "title": {
+            "es": "Hazelcast: un client con pocos privilegios lee memoria arbitraria del miembro (CVSS 9.3)",
+            "en": "Hazelcast: low-privileged client can read arbitrary member memory (CVSS 9.3)",
+            "fr": "Hazelcast : un client peu privilégié peut lire la mémoire arbitraire d'un membre (CVSS 9.3)"
+          },
+          "body_html": {
+            "es": "<p>CVE-2026-107726 (CVSS v4 9.3) más un <strong>bypass de autorización en la Predicates API de IMap</strong> (8.7). Afecta 5.6.0, 5.5.x antes de 5.5.10 y anteriores a 5.4.5; el fix está en <code>5.7.0</code>. Si usás Hazelcast como cache distribuida con clients multi-tenant, esto es prioridad.</p>",
+            "en": "<p>CVE-2026-107726 (CVSS v4 9.3) plus an <strong>authorization bypass in the IMap Predicates API</strong> (8.7). Affects 5.6.0, 5.5.x before 5.5.10 and anything before 5.4.5; fixed in <code>5.7.0</code>. If Hazelcast is your distributed cache with multi-tenant clients, prioritize this.</p>",
+            "fr": "<p>CVE-2026-107726 (CVSS v4 9.3) plus un <strong>contournement d'autorisation dans l'API Predicates d'IMap</strong> (8.7). Touche 5.6.0, 5.5.x avant 5.5.10 et tout ce qui précède 5.4.5 ; corrigé en <code>5.7.0</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-6v25-8wq6-xq4j", "label": "github.com/advisories" }
+        },
+        {
+          "id": "jhipster-r2dbc-sqli",
+          "tag": "security",
+          "date": "08 Oct 2026",
+          "title": {
+            "es": "JHipster: SQLi en el parámetro sort de apps reactivas WebFlux + R2DBC generadas",
+            "en": "JHipster: SQLi in the sort parameter of generated WebFlux + R2DBC apps",
+            "fr": "JHipster : SQLi dans le paramètre sort des apps WebFlux + R2DBC générées"
+          },
+          "body_html": {
+            "es": "<p>CVE-2026-107375 (CVSS 8.8): el código que genera <code>generator-jhipster</code> 7.x–9.3 arma el <code>ORDER BY</code> con el parámetro <code>sort</code> sin whitelist. Actualizar el generador a <code>9.4.0</code> no arregla las apps que ya generaste: tenés que regenerar o parchear a mano. Lección de siempre: <strong>los nombres de columna nunca van parametrizados, van whitelisteados</strong>.</p>",
+            "en": "<p>CVE-2026-107375 (CVSS 8.8): code produced by <code>generator-jhipster</code> 7.x–9.3 builds <code>ORDER BY</code> from the <code>sort</code> parameter without a whitelist. Bumping the generator to <code>9.4.0</code> does not fix apps you already generated: regenerate or patch by hand. The usual lesson: <strong>column names cannot be parameterized, they must be whitelisted</strong>.</p>",
+            "fr": "<p>CVE-2026-107375 (CVSS 8.8) : le code produit par <code>generator-jhipster</code> 7.x–9.3 construit l'<code>ORDER BY</code> depuis le paramètre <code>sort</code> sans liste blanche. Passer le générateur en <code>9.4.0</code> ne corrige pas les apps déjà générées : régénérez ou patchez à la main.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-r223-96jv-q533", "label": "github.com/advisories" }
+        },
+        {
+          "id": "coraza-waf-bypass",
+          "tag": "security",
+          "date": "08 Oct 2026",
+          "title": {
+            "es": "Coraza WAF: 11 advisories, varios bypass de OWASP CRS",
+            "en": "Coraza WAF: 11 advisories, several OWASP CRS bypasses",
+            "fr": "Coraza WAF : 11 advisories, plusieurs contournements d'OWASP CRS"
+          },
+          "body_html": {
+            "es": "<p>El WAF en Go recibió un lote grande: <strong>colisión de keys JSON</strong> (propiedades con puntos que pisan otras en <code>ARGS_POST</code>), Content-Type urlencoded con parámetros que saltea la inspección del body, off-by-one en <code>jsDecode</code>, y varios DoS por recursión. Fix en <code>3.8.1</code>. Si tu WAF es la única defensa frente a una API vieja, este es un buen recordatorio de que no alcanza.</p>",
+            "en": "<p>The Go WAF got a big batch: <strong>JSON key collision</strong> (dotted property names overwriting others in <code>ARGS_POST</code>), urlencoded Content-Type parameters skipping body inspection, an off-by-one in <code>jsDecode</code>, and several recursion DoS bugs. Fixed in <code>3.8.1</code>. If a WAF is the only thing in front of a legacy API, this is your reminder that it is not enough.</p>",
+            "fr": "<p>Le WAF en Go reçoit un gros lot : <strong>collision de clés JSON</strong> (propriétés à points écrasant d'autres entrées dans <code>ARGS_POST</code>), paramètres de Content-Type urlencoded qui contournent l'inspection du body, off-by-one dans <code>jsDecode</code> et plusieurs DoS par récursion. Corrigé en <code>3.8.1</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-5gj4-9gm7-2fx2", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "adonisjs-open-redirect",
+      "updates": [
+        {
+          "id": "adonisjs-open-redirect",
+          "tag": "security",
+          "date": "08 Oct 2026",
+          "title": {
+            "es": "AdonisJS http-server: route params sin encodear generan open redirects",
+            "en": "AdonisJS http-server: unencoded route params produce open redirects",
+            "fr": "AdonisJS http-server : des paramètres de route non encodés créent des open redirects"
+          },
+          "body_html": {
+            "es": "<p>Si el primer segmento de una ruta es dinámico (<code>/:page</code>) y le pasás input del usuario al generar la URL, un valor que empieza con <code>/</code> produce una URL scheme-relative tipo <code>//evil.com</code> (CVE-2026-107718, CVSS 6.1). Fix en <code>9.3.0</code> y <code>8.2.3</code>.</p>",
+            "en": "<p>When a route's first segment is dynamic (<code>/:page</code>) and user input feeds URL generation, a value starting with <code>/</code> yields a scheme-relative URL like <code>//evil.com</code> (CVE-2026-107718, CVSS 6.1). Fixed in <code>9.3.0</code> and <code>8.2.3</code>.</p>",
+            "fr": "<p>Si le premier segment d'une route est dynamique (<code>/:page</code>) et que l'entrée utilisateur alimente la génération d'URL, une valeur commençant par <code>/</code> donne une URL scheme-relative comme <code>//evil.com</code> (CVE-2026-107718, CVSS 6.1). Corrigé en <code>9.3.0</code> et <code>8.2.3</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-2m6q-8v3h-jqww", "label": "github.com/advisories" }
+        },
+        {
+          "id": "drizzle-0454",
+          "tag": "patch",
+          "date": "08 Oct 2026",
+          "title": {
+            "es": "Drizzle ORM 0.45.4: postgres-js vuelve a usar prepared statements",
+            "en": "Drizzle ORM 0.45.4: postgres-js uses prepared statements again",
+            "fr": "Drizzle ORM 0.45.4 : postgres-js réutilise les prepared statements"
+          },
+          "body_html": {
+            "es": "<p>Patch chiquito pero con impacto en performance: con el driver <code>postgres-js</code>, un <code>.prepare(name)</code> explícito no estaba generando una prepared query real. Si contabas con eso para hot paths, actualizá.</p>",
+            "en": "<p>Small patch with a performance angle: with the <code>postgres-js</code> driver, an explicit <code>.prepare(name)</code> was not producing a real prepared query. If your hot paths relied on it, upgrade.</p>",
+            "fr": "<p>Petit patch avec un impact perf : avec le driver <code>postgres-js</code>, un <code>.prepare(name)</code> explicite ne produisait pas de vraie requête préparée. Si vos hot paths en dépendaient, mettez à jour.</p>"
+          },
+          "source": { "url": "https://github.com/drizzle-team/drizzle-orm/releases/tag/0.45.4", "label": "github.com/drizzle-team" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "pgx-bm25",
+      "updates": [
+        {
+          "id": "pgx-bm25",
+          "tag": "release",
+          "date": "07 Oct 2026",
+          "title": {
+            "es": "pgx_bm25 1.0: full-text search con ranking BM25 como índice nativo de PostgreSQL",
+            "en": "pgx_bm25 1.0: BM25-ranked full-text search as a native PostgreSQL index",
+            "fr": "pgx_bm25 1.0 : recherche plein texte classée BM25 comme index PostgreSQL natif"
+          },
+          "body_html": {
+            "es": "<p>La extensión de PGX guarda todo el índice en las páginas de la propia relación, así que <strong>hereda WAL, crash recovery y replicación física del core</strong>. Usa los diccionarios Snowball de Postgres por índice, y las queries complejas se arman con builders que generan un árbol <code>jsonb</code>, así el input del usuario nunca entra como sintaxis. Una alternativa seria a sumar Elasticsearch solo para búsqueda relevante.</p>",
+            "en": "<p>PGX's extension keeps the whole index inside the relation's own pages, so it <strong>inherits WAL, crash recovery and physical replication from core</strong>. It uses Postgres's Snowball dictionaries per index, and complex queries are composed with builders that emit a <code>jsonb</code> query tree, so user input never arrives as query syntax. A serious alternative to bolting on Elasticsearch just for relevance search.</p>",
+            "fr": "<p>L'extension de PGX stocke tout l'index dans les pages de la relation, et <strong>hérite donc du WAL, de la crash recovery et de la réplication physique du core</strong>. Elle utilise les dictionnaires Snowball de Postgres par index, et les requêtes complexes passent par des builders qui produisent un arbre <code>jsonb</code>. Une vraie alternative à Elasticsearch pour la recherche pertinente.</p>"
+          },
+          "source": { "url": "https://www.postgresql.org/about/news/pgx-bm25-10-bm25-ranked-full-text-search-as-a-native-postgresql-index-3396/", "label": "postgresql.org" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloudflare-clef",
+      "updates": [
+        {
+          "id": "cloudflare-clef",
+          "tag": "notable",
+          "date": "08 Oct 2026",
+          "title": {
+            "es": "Cloudflare Clef: modelos open-weight que deciden en vez de generar texto, en el edge",
+            "en": "Cloudflare Clef: open-weight models that decide instead of generating text, at the edge",
+            "fr": "Cloudflare Clef : des modèles open-weight qui décident au lieu de générer du texte, en edge"
+          },
+          "body_html": {
+            "es": "<p>Clef (27B) y Clef-Flash (9B) reciben un estado y un schema de preguntas tipadas y devuelven <strong>una probabilidad por opción permitida en un solo forward pass</strong>, sin parsear texto libre. Clef-Flash promedia 38.8 ms de mediana. Para backends con agentes, esto es routing/escalado tipado en el hot path desde Workers AI, sin el clásico <code>JSON.parse</code> rezando.</p>",
+            "en": "<p>Clef (27B) and Clef-Flash (9B) take a state plus a schema of typed questions and return <strong>a probability for each allowed option in a single forward pass</strong>, with no free-text parsing. Clef-Flash has a 38.8 ms median latency. For agent-heavy backends, that is typed routing/escalation in the hot path from Workers AI, without the hopeful <code>JSON.parse</code>.</p>",
+            "fr": "<p>Clef (27B) et Clef-Flash (9B) prennent un état et un schéma de questions typées et renvoient <strong>une probabilité par option autorisée en un seul forward pass</strong>, sans parsing de texte libre. Clef-Flash affiche 38,8 ms de latence médiane. Pour des backends à agents, c'est du routage typé dans le hot path via Workers AI.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/clef-decision-models/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "akka-spec-driven",
+      "updates": [
+        {
+          "id": "akka-spec-driven",
+          "tag": "notable",
+          "date": "05 Oct 2026",
+          "title": {
+            "es": "Akka probó delivery con IA guiada por specs en 65 proyectos open source",
+            "en": "Akka tested spec-driven AI delivery across 65 open-source projects",
+            "fr": "Akka a testé une livraison IA pilotée par specs sur 65 projets open source"
+          },
+          "body_html": {
+            "es": "<p>Portando 65 proyectos, Akka vio que <strong>specs estructuradas con claims, evidencia y comportamiento tipado</strong> mejoran la primera implementación, mientras que los context files fallan en decisiones cross-component. Validaron con los tests originales más auditores de serialización, seguridad, PII, idempotencia y límites arquitectónicos. Dato jugoso: el modelo chico seguía la spec y el grande improvisaba. Spec + tests > prompt largo, otra vez.</p>",
+            "en": "<p>Porting 65 projects, Akka found that <strong>structured specs with claims, evidence and typed behavior</strong> improve first-pass implementations, while context files fall short on cross-component decisions. Validation used the original tests plus auditors for serialization, security, PII, idempotency and architectural boundaries. Telling detail: the smaller model followed the spec while the larger one improvised. Spec plus tests beats a long prompt, again.</p>",
+            "fr": "<p>En portant 65 projets, Akka a constaté que des <strong>specs structurées avec affirmations, preuves et comportement typé</strong> améliorent la première implémentation, tandis que les context files échouent sur les décisions transverses. La validation combinait les tests d'origine et des auditeurs sérialisation, sécurité, PII, idempotence et frontières architecturales. Le petit modèle suivait la spec ; le grand improvisait.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/ai-spec-driven-delivery/", "label": "infoq.com" }
+        },
+        {
+          "id": "jwt-claim-validation-lesson",
+          "tag": "notable",
+          "date": "08 Oct 2026",
+          "title": {
+            "es": "Lección JWT: una firma válida no valida el payload",
+            "en": "JWT lesson: a valid signature does not validate the payload",
+            "fr": "Leçon JWT : une signature valide ne valide pas le payload"
+          },
+          "body_html": {
+            "es": "<p>Uno de los advisories de fast-jwt (CVE-2026-107723, CVSS 8.1) muestra el patrón: si el payload firmado es un <strong>array JSON</strong>, <code>createVerifier</code> saltea <code>exp</code>, <code>aud</code>, <code>iss</code> y compañía y reporta éxito. Buen recordatorio arquitectónico: <strong>fijá <code>algorithms</code> explícitos, separá las claves por algoritmo y validá la forma del payload con un schema</strong> en tu capa de auth, no confíes solo en la librería.</p>",
+            "en": "<p>One fast-jwt advisory (CVE-2026-107723, CVSS 8.1) shows the pattern: when the signed payload is a <strong>JSON array</strong>, <code>createVerifier</code> skips <code>exp</code>, <code>aud</code>, <code>iss</code> and friends and reports success. A good architectural reminder: <strong>pin explicit <code>algorithms</code>, keep keys separate per algorithm, and schema-validate the payload shape</strong> in your auth layer instead of trusting the library alone.</p>",
+            "fr": "<p>Un des advisories fast-jwt (CVE-2026-107723, CVSS 8.1) illustre le schéma : si le payload signé est un <strong>tableau JSON</strong>, <code>createVerifier</code> ignore <code>exp</code>, <code>aud</code>, <code>iss</code> et consorts et renvoie un succès. Rappel d'architecture : <strong>fixez des <code>algorithms</code> explicites, séparez les clés par algorithme et validez la forme du payload par schéma</strong> dans votre couche d'auth.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-5hjw-83fp-phq9", "label": "github.com/advisories" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Patches incompletos: fast-jwt y Handlebars publicaron hoy bypasses de CVEs que ya se habían arreglado. Cuando sale un fix de seguridad, mirá el diff, no solo el número de versión.",
+      "en": "Incomplete patches: fast-jwt and Handlebars both shipped bypasses of previously fixed CVEs today. When a security fix lands, read the diff, not just the version number.",
+      "fr": "Correctifs incomplets : fast-jwt et Handlebars publient tous deux des contournements de CVE déjà corrigées. Quand un correctif de sécurité sort, lisez le diff, pas seulement le numéro de version."
+    },
+    {
+      "es": "Las herramientas se vuelven más estrictas por defecto: Hono v5 tipa <code>json()</code> como <code>unknown</code> y Prisma 8 exige consentimiento explícito para perder datos.",
+      "en": "Tooling is getting stricter by default: Hono v5 types <code>json()</code> as <code>unknown</code> and Prisma 8 demands explicit consent before losing data.",
+      "fr": "Les outils deviennent plus stricts par défaut : Hono v5 type <code>json()</code> en <code>unknown</code> et Prisma 8 exige un consentement explicite avant toute perte de données."
+    }
+  ]
+}

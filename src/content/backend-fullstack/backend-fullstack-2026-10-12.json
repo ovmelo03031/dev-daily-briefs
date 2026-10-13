@@ -1,0 +1,416 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 12 Oct 2026",
+    "en": "Backend & Fullstack Daily — 12 Oct 2026",
+    "fr": "Backend & Fullstack Daily — 12 oct. 2026"
+  },
+  "description": {
+    "es": "Command injection en el repo-server de Argo CD, Bun 1.4.3 trae su propio type checker, Express 5.3.0 parchea qs y proxy-addr, pnpm 12.12 suma remote cache, y GitHub migró el runtime de Copilot de Node.js a Rust.",
+    "en": "Command injection in Argo CD's repo-server, Bun 1.4.3 ships its own type checker, Express 5.3.0 patches qs and proxy-addr, pnpm 12.12 adds a remote cache, and GitHub moved the Copilot runtime from Node.js to Rust.",
+    "fr": "Injection de commandes dans le repo-server d'Argo CD, Bun 1.4.3 embarque son propre type checker, Express 5.3.0 corrige qs et proxy-addr, pnpm 12.12 ajoute un remote cache, et GitHub a migré le runtime de Copilot de Node.js vers Rust."
+  },
+  "pubDate": "2026-10-12",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "Argo CD: command injection en repo-server", "en": "Argo CD: command injection in repo-server", "fr": "Argo CD : injection de commandes dans repo-server" },
+      "anchor": "argo-cd-proxy-command-injection",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Bun 1.4.3: bun check, type checker nativo", "en": "Bun 1.4.3: bun check, a native type checker", "fr": "Bun 1.4.3 : bun check, un type checker natif" },
+      "anchor": "bun-1-4-3",
+      "icon": "simple-icons:bun"
+    },
+    {
+      "text": { "es": "Express 5.3.0: fixes de CVE en qs y proxy-addr", "en": "Express 5.3.0: qs and proxy-addr CVE fixes", "fr": "Express 5.3.0 : correctifs CVE de qs et proxy-addr" },
+      "anchor": "express-5-3-0",
+      "icon": "simple-icons:express"
+    },
+    {
+      "text": { "es": "TinaCMS: admin confía en un iframe ajeno (9.3)", "en": "TinaCMS: admin trusts a foreign iframe (9.3)", "fr": "TinaCMS : l'admin fait confiance à un iframe tiers (9.3)" },
+      "anchor": "tinacms-preview-origin",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "pnpm 12.12: remote cache para tareas y builds", "en": "pnpm 12.12: remote cache for tasks and builds", "fr": "pnpm 12.12 : remote cache pour tâches et builds" },
+      "anchor": "pnpm-12-12",
+      "icon": "simple-icons:pnpm"
+    },
+    {
+      "text": { "es": "Copilot runtime: de TypeScript a Rust sin big bang", "en": "Copilot runtime: TypeScript to Rust, no big bang", "fr": "Runtime Copilot : de TypeScript à Rust sans big bang" },
+      "anchor": "copilot-runtime-rust-migration",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "argo-cd-proxy-command-injection",
+      "updates": [
+        {
+          "id": "argo-cd-proxy-command-injection",
+          "tag": "security",
+          "date": "09 Oct 2026",
+          "title": {
+            "es": "Argo CD: command injection en el repo-server vía la URL de proxy de repos SSH (CVSS 8.8)",
+            "en": "Argo CD: repo-server command injection via the proxy URL of SSH repositories (CVSS 8.8)",
+            "fr": "Argo CD : injection de commandes dans le repo-server via l'URL de proxy des dépôts SSH (CVSS 8.8)"
+          },
+          "body_html": {
+            "es": "<p><strong>CVE-2026-55797</strong>: cuando un repo SSH tiene proxy, Argo CD copia host y puerto dentro de un <code>ProxyCommand</code> de SSH sin sanitizar, así que metacaracteres de shell ejecutan código en el <strong>repo-server</strong> — que tiene a mano las credenciales de Git, Helm y OCI de todos los demás repos. Alcanza con permiso para crear o editar un repo o un credential template (incluso scoped a un proyecto). Afecta desde <code>v2.11.0</code>; fixes en <code>3.3.15</code>, <code>3.4.10</code> y <code>3.5.4</code>, y la rama v2 <strong>no tiene parche</strong>. Si seguís en Argo CD 2.x, ponete las pilas: migrá a v3 y revisá quién puede tocar repos.</p>",
+            "en": "<p><strong>CVE-2026-55797</strong>: when an SSH repository has a proxy, Argo CD copies the host and port into an SSH <code>ProxyCommand</code> unsanitized, so shell metacharacters execute code in the <strong>repo-server</strong> — which holds the Git, Helm and OCI credentials of every other repo. Permission to create or edit a repository or credential template (even project-scoped) is enough. Affects everything since <code>v2.11.0</code>; fixed in <code>3.3.15</code>, <code>3.4.10</code> and <code>3.5.4</code>, and the v2 line has <strong>no patch</strong>. Still on Argo CD 2.x? Move to v3 and audit who can manage repositories.</p>",
+            "fr": "<p><strong>CVE-2026-55797</strong> : quand un dépôt SSH a un proxy, Argo CD copie l'hôte et le port dans un <code>ProxyCommand</code> SSH sans les assainir, donc des métacaractères shell exécutent du code dans le <strong>repo-server</strong> — qui détient les identifiants Git, Helm et OCI de tous les autres dépôts. Il suffit de pouvoir créer ou modifier un dépôt ou un credential template (même limité à un projet). Touche tout depuis <code>v2.11.0</code> ; corrigé en <code>3.3.15</code>, <code>3.4.10</code> et <code>3.5.4</code>, et la branche v2 <strong>n'a pas de correctif</strong>. Encore en 2.x ? Passez en v3 et auditez qui gère les dépôts.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-j6cw-g6p4-7hch", "label": "github.com/advisories" }
+        },
+        {
+          "id": "express-5-3-0",
+          "tag": "release",
+          "date": "09 Oct 2026",
+          "title": {
+            "es": "Express 5.3.0: parches de qs y proxy-addr, y soporte de 304 para QUERY",
+            "en": "Express 5.3.0: qs and proxy-addr patches, plus 304 support for QUERY",
+            "fr": "Express 5.3.0 : correctifs qs et proxy-addr, et 304 pour QUERY"
+          },
+          "body_html": {
+            "es": "<p>Sube <code>qs</code> a <code>^6.16.0</code> (bypasses de <code>arrayLimit</code> en el parseo por comas y un DoS vía <code>isBuffer</code>, tres CVE) y <code>proxy-addr</code> a <code>^2.0.8</code> (CVE-2026-90711). Además <code>res.send()</code> ya no manda <code>Content-Length</code> junto a <code>Transfer-Encoding</code>, y <code>req.fresh</code> ahora valida requests <code>QUERY</code>, así que pueden devolver 304. Es un minor sin breaking changes: actualizá YA, que el parser de query strings es superficie de ataque pública.</p>",
+            "en": "<p>Bumps <code>qs</code> to <code>^6.16.0</code> (<code>arrayLimit</code> bypasses in comma parsing and an <code>isBuffer</code> DoS, three CVEs) and <code>proxy-addr</code> to <code>^2.0.8</code> (CVE-2026-90711). <code>res.send()</code> also stops sending <code>Content-Length</code> alongside <code>Transfer-Encoding</code>, and <code>req.fresh</code> now validates <code>QUERY</code> requests, so they can return 304. A minor with no breaking changes: upgrade now, the query-string parser is public attack surface.</p>",
+            "fr": "<p>Passe <code>qs</code> en <code>^6.16.0</code> (contournements d'<code>arrayLimit</code> dans le parsing par virgules et un DoS via <code>isBuffer</code>, trois CVE) et <code>proxy-addr</code> en <code>^2.0.8</code> (CVE-2026-90711). <code>res.send()</code> n'envoie plus <code>Content-Length</code> avec <code>Transfer-Encoding</code>, et <code>req.fresh</code> valide désormais les requêtes <code>QUERY</code>, qui peuvent donc renvoyer 304. Une mineure sans breaking change : mettez à jour, le parser de query strings est une surface d'attaque publique.</p>"
+          },
+          "source": { "url": "https://github.com/expressjs/express/releases/tag/v5.3.0", "label": "github.com/expressjs" }
+        },
+        {
+          "id": "tinacms-preview-origin",
+          "tag": "security",
+          "date": "09 Oct 2026",
+          "title": {
+            "es": "TinaCMS: el admin enmarca un origen del atacante y le da confianza total (CVSS 9.3)",
+            "en": "TinaCMS: the admin frames an attacker origin and fully trusts it (CVSS 9.3)",
+            "fr": "TinaCMS : l'admin encadre une origine de l'attaquant et lui fait entièrement confiance (CVSS 9.3)"
+          },
+          "body_html": {
+            "es": "<p><strong>CVE-2026-108261</strong>: un fragment como <code>#/~//attacker.example/p</code> se vuelve una URL protocol-relative, el admin la carga en el iframe de preview y además deriva de ahí el <code>expectedOrigin</code> del canal <code>postMessage</code>. Resultado: el sitio del atacante puede mandar GraphQL arbitrario con la sesión del editor. Fix en <code>tinacms 3.14.0</code> / <code>@tinacms/app 2.5.14</code>. Ojo también con <code>@tinacms/cli</code> (CVE-2026-108259, 8.2): un nombre de branch de Git inyecta JS en el <code>client.ts</code> generado; fix en <code>3.0.0</code>.</p>",
+            "en": "<p><strong>CVE-2026-108261</strong>: a fragment such as <code>#/~//attacker.example/p</code> becomes a protocol-relative URL, the admin loads it in the preview iframe and also derives the <code>postMessage</code> channel's <code>expectedOrigin</code> from it. Result: the attacker's site can send arbitrary GraphQL with the editor's session. Fixed in <code>tinacms 3.14.0</code> / <code>@tinacms/app 2.5.14</code>. Also watch <code>@tinacms/cli</code> (CVE-2026-108259, 8.2): a Git branch name injects JS into the generated <code>client.ts</code>; fixed in <code>3.0.0</code>.</p>",
+            "fr": "<p><strong>CVE-2026-108261</strong> : un fragment comme <code>#/~//attacker.example/p</code> devient une URL protocol-relative, l'admin la charge dans l'iframe de preview et en dérive aussi l'<code>expectedOrigin</code> du canal <code>postMessage</code>. Résultat : le site de l'attaquant peut envoyer du GraphQL arbitraire avec la session de l'éditeur. Corrigé en <code>tinacms 3.14.0</code> / <code>@tinacms/app 2.5.14</code>. Attention aussi à <code>@tinacms/cli</code> (CVE-2026-108259, 8.2) : un nom de branche Git injecte du JS dans le <code>client.ts</code> généré ; corrigé en <code>3.0.0</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-x34j-47hf-4xg7", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "bun-1-4-3",
+      "updates": [
+        {
+          "id": "bun-1-4-3",
+          "tag": "notable",
+          "date": "10 Oct 2026",
+          "title": {
+            "es": "Bun 1.4.3: bun check (port de typescript-go), Bun.FetchSession y TLS más estricto",
+            "en": "Bun 1.4.3: bun check (a typescript-go port), Bun.FetchSession and stricter TLS",
+            "fr": "Bun 1.4.3 : bun check (portage de typescript-go), Bun.FetchSession et TLS plus strict"
+          },
+          "body_html": {
+            "es": "<p><code>bun check</code> es un type checker integrado, port de typescript-go, que según sus benchmarks corre entre 3x y 6.4x más rápido que <code>tsc</code> 7.0.2; y con <code>--check</code> podés tipar antes de <code>run</code>, <code>test</code> o <code>build</code>. <code>Bun.FetchSession</code> le da a un grupo de requests su propio pool, TLS y proxy, aislado del <code>fetch()</code> global. En seguridad: certificados validados durante el handshake (CVE-2026-48618) y rate limit de resets en <code>node:http2</code>. Bonus: hasta 89% menos CPU en idle. Esto es un golazo para la DX.</p>",
+            "en": "<p><code>bun check</code> is a built-in type checker, a typescript-go port that its benchmarks put at 3x to 6.4x faster than <code>tsc</code> 7.0.2; <code>--check</code> type-checks before <code>run</code>, <code>test</code> or <code>build</code>. <code>Bun.FetchSession</code> gives a group of requests its own pool, TLS and proxy, isolated from global <code>fetch()</code>. Security: certificates are verified during the handshake (CVE-2026-48618) and <code>node:http2</code> rate-limits stream resets. Bonus: up to 89% less idle CPU.</p>",
+            "fr": "<p><code>bun check</code> est un type checker intégré, portage de typescript-go, que ses benchmarks placent 3x à 6,4x plus rapide que <code>tsc</code> 7.0.2 ; <code>--check</code> type-checke avant <code>run</code>, <code>test</code> ou <code>build</code>. <code>Bun.FetchSession</code> donne à un groupe de requêtes son propre pool, TLS et proxy, isolé du <code>fetch()</code> global. Sécurité : certificats vérifiés pendant le handshake (CVE-2026-48618) et rate limit des resets dans <code>node:http2</code>. Bonus : jusqu'à 89 % de CPU en moins au repos.</p>"
+          },
+          "source": { "url": "https://bun.com/blog/bun-v1.4.3", "label": "bun.com/blog" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "langchain-mongodb-query-injection",
+      "updates": [
+        {
+          "id": "langchain-mongodb-query-injection",
+          "tag": "security",
+          "date": "08 Oct 2026",
+          "title": {
+            "es": "@langchain/mongodb: un sessionId estructurado se vuelve query de MongoDB",
+            "en": "@langchain/mongodb: a structured sessionId turns into a MongoDB query",
+            "fr": "@langchain/mongodb : un sessionId structuré devient une requête MongoDB"
+          },
+          "body_html": {
+            "es": "<p><code>MongoDBChatMessageHistory</code> no validaba en runtime que el session id fuera string, así que un objeto tipo <code>{ $ne: null }</code> se interpreta como condición y deja leer o tocar historiales de otros usuarios en la misma colección (CVE-2026-106119). Fix en <code>1.3.1</code>. Lección clásica: un tipo de TypeScript no valida nada en runtime — validá el input en el borde.</p>",
+            "en": "<p><code>MongoDBChatMessageHistory</code> did not enforce at runtime that the session id is a string, so an object such as <code>{ $ne: null }</code> becomes a query condition and exposes other users' histories in the same collection (CVE-2026-106119). Fixed in <code>1.3.1</code>. Classic lesson: a TypeScript type validates nothing at runtime — validate input at the edge.</p>",
+            "fr": "<p><code>MongoDBChatMessageHistory</code> ne vérifiait pas au runtime que le session id soit une chaîne, donc un objet comme <code>{ $ne: null }</code> devient une condition de requête et expose les historiques d'autres utilisateurs de la même collection (CVE-2026-106119). Corrigé en <code>1.3.1</code>. Leçon classique : un type TypeScript ne valide rien au runtime — validez l'entrée en bordure.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-m6rx-h84q-8r95", "label": "github.com/advisories" }
+        },
+        {
+          "id": "msgpack5-advisories",
+          "tag": "security",
+          "date": "08 Oct 2026",
+          "title": {
+            "es": "msgpack5 6.1.0: 7 advisories, incluido un bypass de la protección de __proto__",
+            "en": "msgpack5 6.1.0: 7 advisories, including a __proto__ protection bypass",
+            "fr": "msgpack5 6.1.0 : 7 advisories, dont un contournement de la protection __proto__"
+          },
+          "body_html": {
+            "es": "<p>Pasar un objeto de opciones vacío o parcial desactivaba el default <code>protoAction: 'error'</code>, y un map con clave <code>__proto__</code> reemplazaba el prototipo del objeto decodificado (CVE-2026-107301). El resto del lote son DoS del decoder en streaming: stack exhaustion, parseo cuadrático y buffering sin límite. Si decodificás MessagePack de clientes, actualizá a <code>6.1.0</code>.</p>",
+            "en": "<p>Passing an empty or partial options object disabled the default <code>protoAction: 'error'</code>, so a map with a <code>__proto__</code> key replaced the decoded object's prototype (CVE-2026-107301). The rest of the batch is streaming-decoder DoS: stack exhaustion, quadratic parsing and unbounded buffering. Decoding MessagePack from clients? Upgrade to <code>6.1.0</code>.</p>",
+            "fr": "<p>Passer un objet d'options vide ou partiel désactivait le défaut <code>protoAction: 'error'</code>, donc une map avec une clé <code>__proto__</code> remplaçait le prototype de l'objet décodé (CVE-2026-107301). Le reste du lot concerne des DoS du décodeur en streaming : épuisement de pile, parsing quadratique et buffering illimité. Vous décodez du MessagePack venant de clients ? Passez en <code>6.1.0</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-8hq7-ggx2-cc6m", "label": "github.com/advisories" }
+        },
+        {
+          "id": "strawberry-permission-bypass",
+          "tag": "security",
+          "date": "09 Oct 2026",
+          "title": {
+            "es": "Strawberry GraphQL: un permiso sync que devuelve un awaitable siempre pasa",
+            "en": "Strawberry GraphQL: a sync permission returning an awaitable always passes",
+            "fr": "Strawberry GraphQL : une permission sync qui renvoie un awaitable passe toujours"
+          },
+          "body_html": {
+            "es": "<p><code>PermissionExtension</code> solo detecta permisos async si <code>has_permission</code> está declarado con <code>async def</code>; un <code>def</code> que devuelve una coroutine se evalúa por truthiness y autoriza siempre (CVSS 7.5). Fix en <code>0.326.1</code>. Es Python, pero el patrón aplica a cualquier stack: nunca evalúes una promesa como booleano en un guard de auth.</p>",
+            "en": "<p><code>PermissionExtension</code> only treats a permission as async when <code>has_permission</code> is declared with <code>async def</code>; a plain <code>def</code> returning a coroutine is checked for truthiness and always authorizes (CVSS 7.5). Fixed in <code>0.326.1</code>. It is Python, but the pattern applies to any stack: never evaluate a promise as a boolean in an auth guard.</p>",
+            "fr": "<p><code>PermissionExtension</code> ne traite une permission comme async que si <code>has_permission</code> est déclarée avec <code>async def</code> ; un <code>def</code> qui renvoie une coroutine est évalué en truthiness et autorise toujours (CVSS 7.5). Corrigé en <code>0.326.1</code>. C'est du Python, mais le motif vaut pour toute stack : n'évaluez jamais une promesse comme un booléen dans un guard d'auth.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-pfvf-fwfp-25mp", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "valkey-roadmap-oss-eu",
+      "updates": [
+        {
+          "id": "valkey-roadmap-oss-eu",
+          "tag": "notable",
+          "date": "09 Oct 2026",
+          "title": {
+            "es": "Valkey más allá del cache: tiered storage y replicación sincrónica en el roadmap",
+            "en": "Valkey beyond caching: tiered storage and synchronous replication on the roadmap",
+            "fr": "Valkey au-delà du cache : tiered storage et réplication synchrone sur la roadmap"
+          },
+          "body_html": {
+            "es": "<p>En OSS EU, los maintainers repasaron cómo el async I/O threading de 8.x llevó el throughput de ~250k a ~1M req/s por proceso, y cómo 9 sumó bases numeradas en cluster mode y migración atómica de slots. Lo que viene: <strong>tiered storage</strong> (datos fríos a SSD, incluso S3 o Postgres como backend) y replicación sincrónica para durabilidad. Si usás Valkey solo como cache, ojo que se está convirtiendo en otra cosa.</p>",
+            "en": "<p>At OSS EU, maintainers covered how 8.x async I/O threading took throughput from ~250k to ~1M req/s per process, and how 9 added numbered databases in cluster mode and atomic slot migration. Next up: <strong>tiered storage</strong> (cold data on SSD, possibly S3 or Postgres backends) and synchronous replication for durability. Valkey is growing well past a cache.</p>",
+            "fr": "<p>À OSS EU, les mainteneurs ont expliqué comment l'async I/O threading de 8.x a fait passer le débit de ~250k à ~1M req/s par processus, et comment la 9 a ajouté les bases numérotées en cluster mode et la migration atomique de slots. À venir : <strong>tiered storage</strong> (données froides sur SSD, voire S3 ou Postgres en backend) et réplication synchrone pour la durabilité. Valkey devient bien plus qu'un cache.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/valkey-evolution/", "label": "infoq.com" }
+        },
+        {
+          "id": "cloudflare-k2-streams",
+          "tag": "beta",
+          "date": "09 Oct 2026",
+          "title": {
+            "es": "Cloudflare K2: event log serverless sobre R2, con ~1s de latencia de produce",
+            "en": "Cloudflare K2: a serverless event log on R2, with ~1s produce latency",
+            "fr": "Cloudflare K2 : un event log serverless sur R2, avec ~1 s de latence de produce"
+          },
+          "body_html": {
+            "es": "<p>Public beta de un log durable construido sobre R2: <code>$0.04/GB</code> producido y lo mismo por consumidor, retención a <code>$0.02/GB</code>-mes, gratis durante la beta. No es compatible con la API de Kafka (está en el roadmap) y usa un consume basado en leases. Cloudflare cita ~1s de p99 en produce, pero un beta tester midió p99 end-to-end de 7.5s. Sirve para pipelines baratos, no para nada sensible a latencia.</p>",
+            "en": "<p>Public beta of a durable log built on R2: <code>$0.04/GB</code> produced and the same per consumer, retention at <code>$0.02/GB</code>-month, free during the beta. No Kafka API compatibility yet (on the roadmap); it uses a lease-based consume API. Cloudflare cites ~1s p99 produce latency, but one beta tester measured 7.5s p99 end to end. Good for cheap pipelines, not latency-sensitive work.</p>",
+            "fr": "<p>Public beta d'un log durable construit sur R2 : <code>0,04 $/Go</code> produit et autant par consommateur, rétention à <code>0,02 $/Go</code>-mois, gratuit pendant la beta. Pas encore compatible avec l'API Kafka (sur la roadmap) ; consommation par leases. Cloudflare annonce ~1 s de p99 en produce, mais un beta-testeur a mesuré 7,5 s de p99 de bout en bout. Bien pour des pipelines bon marché, pas pour la faible latence.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/cloudflare-k2-serverless-streams/", "label": "infoq.com" }
+        },
+        {
+          "id": "lambda-kafka-oauth",
+          "tag": "minor",
+          "date": "09 Oct 2026",
+          "title": {
+            "es": "AWS Lambda: OAuth para event source mappings de Kafka self-managed",
+            "en": "AWS Lambda: OAuth for self-managed Kafka event source mappings",
+            "fr": "AWS Lambda : OAuth pour les event source mappings Kafka self-managed"
+          },
+          "body_html": {
+            "es": "<p>Los consumers de Kafka en Lambda ya pueden autenticarse contra un IdP corporativo como Cognito u Okta, además de SASL/PLAIN, SASL/SCRAM y mTLS. Menos secretos estáticos rotando a mano.</p>",
+            "en": "<p>Lambda Kafka consumers can now authenticate through an enterprise identity provider such as Cognito or Okta, alongside SASL/PLAIN, SASL/SCRAM and mTLS. Fewer static secrets to rotate by hand.</p>",
+            "fr": "<p>Les consumers Kafka de Lambda peuvent désormais s'authentifier via un fournisseur d'identité d'entreprise comme Cognito ou Okta, en plus de SASL/PLAIN, SASL/SCRAM et mTLS. Moins de secrets statiques à faire tourner à la main.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-Lambda-supports-oauth-kafka-esm/", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "docker-29-9",
+      "updates": [
+        {
+          "id": "docker-29-9",
+          "tag": "security",
+          "date": "08 Oct 2026",
+          "title": {
+            "es": "Docker Engine 29.9.0: fixes de HTTP/2 en el daemon y lazy pull configurable",
+            "en": "Docker Engine 29.9.0: HTTP/2 daemon fixes and configurable lazy pull",
+            "fr": "Docker Engine 29.9.0 : correctifs HTTP/2 du daemon et lazy pull configurable"
+          },
+          "body_html": {
+            "es": "<p>El update de Go cierra cuatro CVE de HTTP/2 que permitían tirar el daemon o agotar memoria/CPU (HPACK, <code>Trailer</code>, flow control con resets) y uno de junctions en Windows; los mismos fixes llegan al endpoint <code>/grpc</code> y al gRPC de BuildKit. Además, la feature <code>lazy-pull</code> controla si <code>docker pull</code> salta capas que ya provee el snapshotter (nydus, soci, stargz). Si exponés el socket por TCP, no lo dejes para después.</p>",
+            "en": "<p>The Go update closes four HTTP/2 CVEs that could crash the daemon or exhaust memory/CPU (HPACK, <code>Trailer</code>, flow control via resets) plus a Windows junction issue; the same fixes reach the <code>/grpc</code> endpoint and BuildKit's gRPC server. The new <code>lazy-pull</code> feature controls whether <code>docker pull</code> skips layers the snapshotter already provides (nydus, soci, stargz). Exposing the daemon over TCP? Do not wait on this one.</p>",
+            "fr": "<p>La mise à jour de Go corrige quatre CVE HTTP/2 permettant de faire tomber le daemon ou d'épuiser mémoire/CPU (HPACK, <code>Trailer</code>, flow control via resets) et un problème de junctions sous Windows ; les mêmes correctifs touchent l'endpoint <code>/grpc</code> et le serveur gRPC de BuildKit. La nouvelle feature <code>lazy-pull</code> contrôle si <code>docker pull</code> saute les couches déjà fournies par le snapshotter (nydus, soci, stargz). Daemon exposé en TCP ? N'attendez pas.</p>"
+          },
+          "source": { "url": "https://github.com/moby/moby/releases/tag/docker-v29.9.0", "label": "github.com/moby" }
+        },
+        {
+          "id": "eventbridge-enhanced-buses",
+          "tag": "notable",
+          "date": "11 Oct 2026",
+          "title": {
+            "es": "EventBridge: custom event buses con orden, replay y deduplicación",
+            "en": "EventBridge: custom event buses with ordering, replay and deduplication",
+            "fr": "EventBridge : custom event buses avec ordre, replay et déduplication"
+          },
+          "body_html": {
+            "es": "<p>Los nuevos enhanced custom event buses se comparten entre cuentas y suman entrega ordenada, replay y deduplicación por contenido — lo que antes te obligaba a meter SQS FIFO o Kinesis en el medio. Cambia el pricing: se cobra por throughput de ingreso y egreso (se mencionan 18¢ por GB ingerido). Hacé números antes de migrar buses con mucho fan-out.</p>",
+            "en": "<p>The new enhanced custom event buses are shareable across accounts and add ordered delivery, replay and content-based deduplication — things that used to require SQS FIFO or Kinesis in the middle. Pricing changes too: you pay for ingress and egress throughput (18¢ per GB ingested is cited). Run the numbers before moving high fan-out buses.</p>",
+            "fr": "<p>Les nouveaux enhanced custom event buses se partagent entre comptes et ajoutent livraison ordonnée, replay et déduplication par contenu — ce qui exigeait auparavant SQS FIFO ou Kinesis au milieu. Le pricing change : facturation au débit d'entrée et de sortie (18 ¢ par Go ingéré cités). Faites le calcul avant de migrer des buses à fort fan-out.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/aws-enhanced-eventbridge-buses/", "label": "infoq.com" }
+        },
+        {
+          "id": "nginx-ui-advisories",
+          "tag": "security",
+          "date": "09 Oct 2026",
+          "title": {
+            "es": "Nginx UI: 10 advisories, incluido RCE autenticado vía restore de backup (CVSS 9.0)",
+            "en": "Nginx UI: 10 advisories, including authenticated RCE via backup restore (CVSS 9.0)",
+            "fr": "Nginx UI : 10 advisories, dont une RCE authentifiée via restauration de backup (CVSS 9.0)"
+          },
+          "body_html": {
+            "es": "<p>Restaurar un backup forjado pisa <code>app.ini</code>, incluido <code>TestConfigCmd</code>, y <code>POST /api/nginx/test</code> ejecuta lo que pongas (CVE-2026-107806). El lote suma un self-upgrade que corre binarios sin firma, bypass del segundo factor passkey, CSRF por fallback de cookie y leak de tokens de nodos del cluster. Si tenés este panel expuesto, sacalo de internet ya y actualizá.</p>",
+            "en": "<p>Restoring a forged backup overwrites <code>app.ini</code>, including <code>TestConfigCmd</code>, and <code>POST /api/nginx/test</code> runs whatever you put there (CVE-2026-107806). The batch also covers a self-upgrade that runs unsigned binaries, a passkey second-factor bypass, CSRF via cookie fallback and leaked cluster node tokens. If this panel is exposed, take it off the internet and upgrade.</p>",
+            "fr": "<p>Restaurer un backup forgé écrase <code>app.ini</code>, y compris <code>TestConfigCmd</code>, et <code>POST /api/nginx/test</code> exécute ce que vous y mettez (CVE-2026-107806). Le lot couvre aussi un self-upgrade exécutant des binaires non signés, un contournement du second facteur passkey, du CSRF via repli sur cookie et des fuites de tokens de nœuds du cluster. Panneau exposé ? Retirez-le d'internet et mettez à jour.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-p393-cf76-4jmr", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "copilot-runtime-rust-migration",
+      "updates": [
+        {
+          "id": "copilot-runtime-rust-migration",
+          "tag": "notable",
+          "date": "09 Oct 2026",
+          "title": {
+            "es": "GitHub migró ~800k líneas del runtime de Copilot de Node.js a Rust, componente por componente",
+            "en": "GitHub moved ~800k lines of the Copilot runtime from Node.js to Rust, one component at a time",
+            "fr": "GitHub a migré ~800k lignes du runtime Copilot de Node.js vers Rust, composant par composant"
+          },
+          "body_html": {
+            "es": "<p>Nada de rewrite paralelo con cutover: un strangler fig de manual con puentes <strong>N-API</strong> temporales (llegaron a 2.019 exports y 3.356 call sites antes de borrarlos) y los mismos tests end-to-end validando cada pieza, con 135 releases en el medio. Startup + sesión + un turno bajó de 5.25s a 292ms, y embeber vía C ABI elimina ~100 MB por cliente. Los agentes escribieron la mayoría del código, pero tests y review humano frenaron regresiones de estado y optimizaciones perdidas. Esto es arquitectura de verdad: la red de tests es lo que hace posible la migración, no el lenguaje.</p>",
+            "en": "<p>No parallel rewrite with a cutover: a textbook strangler fig with temporary <strong>N-API</strong> bridges (peaking at 2,019 exports and 3,356 call sites before removal) and the same end-to-end tests validating each piece, across 135 releases. Startup + session + one turn dropped from 5.25s to 292ms, and embedding through a C ABI removes ~100 MB per client. Agents wrote most of the code, but tests and human review caught state-handling regressions and lost optimizations. The test net is what made the migration possible, not the language.</p>",
+            "fr": "<p>Pas de réécriture parallèle avec bascule : un strangler fig d'école avec des ponts <strong>N-API</strong> temporaires (jusqu'à 2 019 exports et 3 356 call sites avant suppression) et les mêmes tests end-to-end validant chaque pièce, sur 135 releases. Démarrage + session + un tour est passé de 5,25 s à 292 ms, et l'intégration via C ABI supprime ~100 Mo par client. Les agents ont écrit l'essentiel du code, mais tests et revue humaine ont rattrapé des régressions d'état et des optimisations perdues. C'est le filet de tests qui a rendu la migration possible, pas le langage.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/github-copilot-rust-migration/", "label": "infoq.com" }
+        },
+        {
+          "id": "vikunja-advisory-batch",
+          "tag": "security",
+          "date": "09 Oct 2026",
+          "title": {
+            "es": "Vikunja: 29 advisories en un día — un catálogo de errores de autorización multi-tenant",
+            "en": "Vikunja: 29 advisories in one day — a catalog of multi-tenant authorization bugs",
+            "fr": "Vikunja : 29 advisories en un jour — un catalogue de bugs d'autorisation multi-tenant"
+          },
+          "body_html": {
+            "es": "<p>El peor (CVE-2026-68582, 9.3): el endpoint de tareas fija la query al proyecto del link-share pero toma la <em>view</em> del path sin revalidarla, así que cualquier share lee kanban de otros tenants. El resto es un manual de qué no hacer: scopes de API token salteados vía <code>expand</code>, OIDC que linkea cuentas ignorando <code>email_verified</code>, tokens de reset en texto plano, webhooks que sobreviven a la revocación. Fix en <code>2.4.0</code>. Usalo como checklist para tu propio SaaS: cada recurso del path se autoriza, no solo el principal.</p>",
+            "en": "<p>The worst (CVE-2026-68582, 9.3): the task endpoint pins the query to the link-share's project but takes the <em>view</em> from the path without revalidating it, so any share reads other tenants' kanban. The rest is a how-not-to manual: API token scopes bypassed via <code>expand</code>, OIDC account linking that ignores <code>email_verified</code>, plaintext reset tokens, webhooks surviving revocation. Fixed in <code>2.4.0</code>. Use it as a checklist for your own SaaS: authorize every resource in the path, not just the principal.</p>",
+            "fr": "<p>Le pire (CVE-2026-68582, 9.3) : l'endpoint des tâches fixe la requête sur le projet du link-share mais prend la <em>view</em> du path sans la revalider, donc n'importe quel partage lit le kanban d'autres tenants. Le reste est un manuel de ce qu'il ne faut pas faire : scopes de tokens API contournés via <code>expand</code>, liaison OIDC ignorant <code>email_verified</code>, tokens de reset en clair, webhooks survivant à la révocation. Corrigé en <code>2.4.0</code>. Servez-vous-en comme checklist : autorisez chaque ressource du path, pas seulement le principal.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-rj9j-8772-4h6c", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "pnpm-12-12",
+      "updates": [
+        {
+          "id": "pnpm-12-12",
+          "tag": "notable",
+          "date": "10 Oct 2026",
+          "title": {
+            "es": "pnpm 12.12: remote cache firmado para pnpm pipeline y addMissingPeerTypes",
+            "en": "pnpm 12.12: signed remote cache for pnpm pipeline and addMissingPeerTypes",
+            "fr": "pnpm 12.12 : remote cache signé pour pnpm pipeline et addMissingPeerTypes"
+          },
+          "body_html": {
+            "es": "<p><code>pnpm pipeline</code> ahora comparte resultados de tareas entre máquinas como artifacts firmados, en un server pnpr o cualquiera que hable la API de Turborepo Remote Cache (Vercel incluido), y el side-effects cache puede guardar builds de dependencias ahí. <code>addMissingPeerTypes</code> linkea los <code>@types</code> de peers con el global virtual store. Y un fix importante: <code>dangerouslyAllowAllBuilds</code> ya no ignora los <code>false</code> de <code>allowBuilds</code>. pnpm se está comiendo terreno de Turborepo, ojo.</p>",
+            "en": "<p><code>pnpm pipeline</code> now shares task results across machines as signed artifacts, on a pnpr server or anything speaking the Turborepo Remote Cache API (Vercel included), and the side-effects cache can store dependency builds there. <code>addMissingPeerTypes</code> links peers' <code>@types</code> with the global virtual store. Key fix: <code>dangerouslyAllowAllBuilds</code> no longer ignores <code>false</code> entries in <code>allowBuilds</code>. pnpm keeps eating into Turborepo's territory.</p>",
+            "fr": "<p><code>pnpm pipeline</code> partage désormais les résultats de tâches entre machines sous forme d'artifacts signés, sur un serveur pnpr ou tout serveur parlant l'API Turborepo Remote Cache (Vercel compris), et le side-effects cache peut y stocker les builds de dépendances. <code>addMissingPeerTypes</code> lie les <code>@types</code> des peers avec le global virtual store. Correctif clé : <code>dangerouslyAllowAllBuilds</code> n'ignore plus les <code>false</code> d'<code>allowBuilds</code>. pnpm empiète de plus en plus sur Turborepo.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.12.0", "label": "github.com/pnpm" }
+        },
+        {
+          "id": "nx-24-beta",
+          "tag": "beta",
+          "date": "09 Oct 2026",
+          "title": {
+            "es": "Nx 24.0.0-beta.0: se van Remix, plugin-v1 de Gradle y los shims de dependsOn",
+            "en": "Nx 24.0.0-beta.0: Remix, Gradle plugin-v1 and dependsOn shims are gone",
+            "fr": "Nx 24.0.0-beta.0 : Remix, le plugin-v1 Gradle et les shims de dependsOn disparaissent"
+          },
+          "body_html": {
+            "es": "<p>Primera beta del major con varios breaking: se eliminan generators y executors de Remix, <code>@nx/gradle/plugin-v1</code>, el alias <code>--includeDependentProjects</code> de <code>nx watch</code> y los magic strings <code>self</code>/<code>dependencies</code> en <code>dependsOn</code>; los custom hashers de executors quedan deprecados. Probalo en una rama antes de que llegue el GA.</p>",
+            "en": "<p>First beta of the major with several breaking changes: Remix generators and executors, <code>@nx/gradle/plugin-v1</code>, the <code>nx watch --includeDependentProjects</code> alias and the <code>self</code>/<code>dependencies</code> magic strings in <code>dependsOn</code> are removed; executor custom hashers are deprecated. Try it on a branch before GA lands.</p>",
+            "fr": "<p>Première beta de la majeure avec plusieurs breaking changes : suppression des generators et executors Remix, de <code>@nx/gradle/plugin-v1</code>, de l'alias <code>nx watch --includeDependentProjects</code> et des magic strings <code>self</code>/<code>dependencies</code> dans <code>dependsOn</code> ; les custom hashers d'executors sont dépréciés. Testez-la sur une branche avant la GA.</p>"
+          },
+          "source": { "url": "https://github.com/nrwl/nx/releases/tag/24.0.0-beta.0", "label": "github.com/nrwl" }
+        },
+        {
+          "id": "nuxt-4-6-1",
+          "tag": "patch",
+          "date": "09 Oct 2026",
+          "title": {
+            "es": "Nuxt 4.6.1: fixes de Nitro en dev y $fetch tipado con TypedFetch",
+            "en": "Nuxt 4.6.1: Nitro dev fixes and $fetch typed with TypedFetch",
+            "fr": "Nuxt 4.6.1 : correctifs Nitro en dev et $fetch typé avec TypedFetch"
+          },
+          "body_html": {
+            "es": "<p>Patch con foco en el server: los handlers de dev de Nitro se registran una sola vez y reciben <code>RequestEvent</code>, los tipos de <code>nitropack/types</code> resuelven bajo <code>nodenext</code>, y el <code>$fetch</code> global queda tipado con <code>TypedFetch</code>. Upgrade sin drama.</p>",
+            "en": "<p>A server-focused patch: Nitro dev handlers register once and receive <code>RequestEvent</code>, <code>nitropack/types</code> resolves under <code>nodenext</code>, and the global <code>$fetch</code> is typed with <code>TypedFetch</code>. A no-drama upgrade.</p>",
+            "fr": "<p>Un patch centré serveur : les handlers de dev Nitro s'enregistrent une seule fois et reçoivent <code>RequestEvent</code>, <code>nitropack/types</code> se résout sous <code>nodenext</code>, et le <code>$fetch</code> global est typé avec <code>TypedFetch</code>. Mise à jour sans drame.</p>"
+          },
+          "source": { "url": "https://github.com/nuxt/nuxt/releases/tag/v4.6.1", "label": "github.com/nuxt" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Los paneles de infraestructura (Argo CD, Nginx UI) siguen siendo el eslabón débil: quien puede editar config suele poder ejecutar comandos.",
+      "en": "Infrastructure panels (Argo CD, Nginx UI) remain the weak link: whoever can edit config can often run commands.",
+      "fr": "Les panneaux d'infrastructure (Argo CD, Nginx UI) restent le maillon faible : qui peut modifier la config peut souvent exécuter des commandes."
+    },
+    {
+      "es": "El type checking se mete en el runtime y el package manager absorbe el task runner: Bun con bun check, pnpm con remote cache.",
+      "en": "Type checking moves into the runtime and the package manager absorbs the task runner: Bun with bun check, pnpm with remote cache.",
+      "fr": "Le type checking entre dans le runtime et le gestionnaire de paquets absorbe le task runner : Bun avec bun check, pnpm avec le remote cache."
+    },
+    {
+      "es": "Las migraciones grandes asistidas por agentes funcionan cuando hay tests end-to-end como red: el caso Copilot en Rust lo confirma.",
+      "en": "Large agent-assisted migrations work when end-to-end tests act as the safety net: the Copilot-in-Rust case confirms it.",
+      "fr": "Les grandes migrations assistées par agents fonctionnent quand des tests end-to-end servent de filet : le cas Copilot en Rust le confirme."
+    }
+  ]
+}

@@ -1,0 +1,274 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 13 Oct 2026",
+    "en": "Backend & Fullstack Daily — 13 Oct 2026",
+    "fr": "Backend & Fullstack Daily — 13 oct. 2026"
+  },
+  "description": {
+    "es": "AWS lanza Lambda Web Functions (HTTP directo, Express/Hono sin adapters), TanStack Start sale estable, Cloudflare Traces en open beta, NestJS 12.1.3, Vitest 5.0.4 y pnpm suma OIDC para dist-tag.",
+    "en": "AWS launches Lambda Web Functions (direct HTTP, Express/Hono without adapters), TanStack Start goes stable, Cloudflare Traces enters open beta, NestJS 12.1.3, Vitest 5.0.4 and pnpm adds OIDC for dist-tag.",
+    "fr": "AWS lance Lambda Web Functions (HTTP direct, Express/Hono sans adaptateur), TanStack Start passe en stable, Cloudflare Traces en bêta ouverte, NestJS 12.1.3, Vitest 5.0.4 et pnpm ajoute OIDC pour dist-tag."
+  },
+  "pubDate": "2026-10-13",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "Lambda Web Functions: HTTP directo en Lambda", "en": "Lambda Web Functions: direct HTTP on Lambda", "fr": "Lambda Web Functions : HTTP direct sur Lambda" },
+      "anchor": "aws-lambda-web-functions",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": { "es": "TanStack Start ya es estable", "en": "TanStack Start is now stable", "fr": "TanStack Start est désormais stable" },
+      "anchor": "tanstack-start-stable",
+      "icon": "simple-icons:tanstack"
+    },
+    {
+      "text": { "es": "Cloudflare Traces: spans OTel sin instrumentar", "en": "Cloudflare Traces: OTel spans, zero instrumentation", "fr": "Cloudflare Traces : spans OTel sans instrumentation" },
+      "anchor": "cloudflare-traces-beta",
+      "icon": "simple-icons:cloudflare"
+    },
+    {
+      "text": { "es": "Spotify duplica cambios con IA y ajusta controles", "en": "Spotify doubles AI-driven changes, tightens controls", "fr": "Spotify double ses changements IA et renforce ses contrôles" },
+      "anchor": "spotify-ai-quality-controls",
+      "icon": "lucide:layers"
+    },
+    {
+      "text": { "es": "pnpm 12.12.1: OIDC en dist-tag y protocolo tool:", "en": "pnpm 12.12.1: OIDC dist-tag and tool: protocol", "fr": "pnpm 12.12.1 : OIDC pour dist-tag et protocole tool:" },
+      "anchor": "pnpm-12-12-1",
+      "icon": "lucide:package"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "aws-lambda-web-functions",
+          "tag": "breaking",
+          "date": "12 Oct 2026",
+          "title": {
+            "es": "AWS Lambda Web Functions: tu código atiende HTTP directo",
+            "en": "AWS Lambda Web Functions: your code handles HTTP directly",
+            "fr": "AWS Lambda Web Functions : votre code traite le HTTP directement"
+          },
+          "body_html": {
+            "es": "<p>Nuevo primitivo serverless: el código escucha en un puerto como cualquier servidor HTTP, así que <strong>Express o Hono corren sin adapters</strong>. Un entorno caliente atiende <strong>requests concurrentes</strong>, hay streaming HTTP nativo, routing multi-región y VPC. Pagás CPU activa y memoria, <strong>no el tiempo ocioso esperando la DB</strong>. Solo Node.js al lanzamiento y en 5 regiones; las Lambda clásicas pasan a llamarse <em>Event Functions</em> sin cambios de código. CloudFront ya las acepta como origin. Esto le pega de frente al modelo de Cloud Run y Fly: si tenías una API chica en containers, hacé la cuenta.</p>",
+            "en": "<p>A new serverless primitive: code listens on a port like any HTTP server, so <strong>Express or Hono run without adapters</strong>. One warm environment serves <strong>concurrent requests</strong>, with native HTTP streaming, multi-Region routing and VPC access. You pay for active CPU and memory, <strong>not idle time waiting on the database</strong>. Node.js only at launch, in 5 Regions; classic Lambdas are renamed <em>Event Functions</em> with no code changes. CloudFront already accepts them as an origin. This goes straight at the Cloud Run and Fly model: if you run a small API in containers, redo the math.</p>",
+            "fr": "<p>Nouvelle primitive serverless : le code écoute sur un port comme tout serveur HTTP, donc <strong>Express ou Hono tournent sans adaptateur</strong>. Un environnement chaud sert des <strong>requêtes concurrentes</strong>, avec streaming HTTP natif, routage multi-région et accès VPC. Vous payez le CPU actif et la mémoire, <strong>pas le temps d'attente de la base</strong>. Node.js uniquement au lancement, dans 5 régions ; les Lambda classiques deviennent des <em>Event Functions</em> sans changement de code. CloudFront les accepte déjà comme origine.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-lambda-web-functions/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "tanstack-start-stable",
+          "tag": "ga",
+          "date": "12 Oct 2026",
+          "title": {
+            "es": "TanStack Start sale estable (1.169) con breaking changes de RC",
+            "en": "TanStack Start goes stable (1.169) with RC breaking changes",
+            "fr": "TanStack Start passe en stable (1.169) avec des ruptures depuis la RC"
+          },
+          "body_html": {
+            "es": "<p><code>@tanstack/react-start@1.169.0</code> declara Start <strong>estable</strong>. Ojo al migrar desde la RC: se va <code>.inputValidator()</code> (usá <code>.validator()</code>), se elimina <code>transferResponseBodyOwnership</code> y <strong>desaparece el <code>useSession</code> built-in</strong>: elegís tu librería de sesiones (ej. iron-session) y las cookies existentes requieren migración o re-login. Hay guía oficial de migración. Golazo para el ecosistema fullstack fuera de Next.</p>",
+            "en": "<p><code>@tanstack/react-start@1.169.0</code> declares Start <strong>stable</strong>. Watch out when migrating from the RC: <code>.inputValidator()</code> is gone (use <code>.validator()</code>), <code>transferResponseBodyOwnership</code> is removed and <strong>the built-in <code>useSession</code> is dropped</strong>: you pick a session library (e.g. iron-session) and existing cookies need a migration or a fresh sign-in. An official migration guide is available.</p>",
+            "fr": "<p><code>@tanstack/react-start@1.169.0</code> déclare Start <strong>stable</strong>. Attention en migrant depuis la RC : <code>.inputValidator()</code> disparaît (utilisez <code>.validator()</code>), <code>transferResponseBodyOwnership</code> est supprimé et <strong>le <code>useSession</code> intégré est retiré</strong> : vous choisissez une bibliothèque de sessions et les cookies existants exigent une migration ou une reconnexion.</p>"
+          },
+          "source": { "url": "https://github.com/TanStack/router/releases/tag/%40tanstack/react-start%401.169.0", "label": "github.com/TanStack/router" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "nestjs-12-1-3",
+      "updates": [
+        {
+          "id": "nestjs-12-1-3",
+          "tag": "patch",
+          "date": "12 Oct 2026",
+          "title": {
+            "es": "NestJS 12.1.3: los enhancers globales request-scoped ya no se pierden en silencio",
+            "en": "NestJS 12.1.3: request-scoped global enhancers no longer silently dropped",
+            "fr": "NestJS 12.1.3 : les enhancers globaux request-scoped ne sont plus ignorés"
+          },
+          "body_html": {
+            "es": "<p>Patch con fixes que importan: los <strong>enhancers globales request-scoped</strong> se descartaban sin aviso y ahora fallan en el arranque; se vacían los logs bufferizados si falla la inicialización, y en <code>platform-express</code> se destruye la fuente de un <code>StreamableFile</code> cuando el cliente corta. Si tenías guards globales con scope REQUEST, revisalos: puede que nunca hayan corrido.</p>",
+            "en": "<p>A patch with fixes that matter: <strong>request-scoped global enhancers</strong> were silently discarded and now fail at startup; buffered logs flush when initialization fails, and <code>platform-express</code> destroys a <code>StreamableFile</code> source on client disconnect. If you had REQUEST-scoped global guards, check them: they may never have run.</p>",
+            "fr": "<p>Un patch aux correctifs importants : les <strong>enhancers globaux request-scoped</strong> étaient ignorés silencieusement et échouent désormais au démarrage ; les logs en tampon sont vidés si l'initialisation échoue, et <code>platform-express</code> détruit la source d'un <code>StreamableFile</code> à la déconnexion du client.</p>"
+          },
+          "source": { "url": "https://github.com/nestjs/nest/releases/tag/v12.1.3", "label": "github.com/nestjs/nest" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "elasticache-insights",
+      "updates": [
+        {
+          "id": "elasticache-insights",
+          "tag": "notable",
+          "date": "12 Oct 2026",
+          "title": {
+            "es": "ElastiCache Insights: dashboard OTel listo para clusters Valkey",
+            "en": "ElastiCache Insights: ready-made OTel dashboard for Valkey clusters",
+            "fr": "ElastiCache Insights : tableau de bord OTel prêt pour Valkey"
+          },
+          "body_html": {
+            "es": "<p>Dashboard prearmado en CloudWatch para clusters Valkey node-based: memoria, latencia, keyspace, errores y throughput a partir de <strong>métricas OpenTelemetry</strong> que ElastiCache publica solo, filtrable por shard, nodo o AZ. Monitoreo detallado cada 15 s con pricing de métricas OTel. Solo Valkey, no Redis OSS.</p>",
+            "en": "<p>A prebuilt CloudWatch dashboard for node-based Valkey clusters: memory, latency, keyspace, errors and throughput from <strong>OpenTelemetry metrics</strong> ElastiCache publishes automatically, filterable by shard, node or AZ. Detailed monitoring every 15 s at OTel metric pricing. Valkey only, not Redis OSS.</p>",
+            "fr": "<p>Un tableau de bord CloudWatch prêt à l'emploi pour les clusters Valkey : mémoire, latence, keyspace, erreurs et débit issus des <strong>métriques OpenTelemetry</strong> publiées automatiquement, filtrable par shard, nœud ou AZ. Supervision détaillée toutes les 15 s. Valkey uniquement.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-elasticache-valkey-elasticache-insights/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "bullmq-6-3-13",
+          "tag": "minor",
+          "date": "12 Oct 2026",
+          "title": {
+            "es": "BullMQ 6.3.13: retryJobs ya no deja huérfanos a los hijos de un flow",
+            "en": "BullMQ 6.3.13: retryJobs no longer orphans flow children",
+            "fr": "BullMQ 6.3.13 : retryJobs ne laisse plus d'enfants orphelins"
+          },
+          "body_html": {
+            "es": "<p>Los jobs hijos reintentados con <code>retryJobs</code> vuelven a las dependencias del padre. Si usás <strong>flows padre/hijo</strong>, este bug dejaba padres esperando para siempre.</p>",
+            "en": "<p>Children retried via <code>retryJobs</code> now move back into their parent's dependencies. If you use <strong>parent/child flows</strong>, this bug left parents waiting forever.</p>",
+            "fr": "<p>Les enfants relancés via <code>retryJobs</code> retournent dans les dépendances du parent. Avec des <strong>flows parent/enfant</strong>, ce bug bloquait les parents indéfiniment.</p>"
+          },
+          "source": { "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.3.13", "label": "github.com/taskforcesh/bullmq" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloudflare-traces-beta",
+      "updates": [
+        {
+          "id": "cloudflare-traces-beta",
+          "tag": "beta",
+          "date": "10 Oct 2026",
+          "title": {
+            "es": "Cloudflare Traces en open beta: todo el proxy como spans OpenTelemetry",
+            "en": "Cloudflare Traces in open beta: the whole proxy as OpenTelemetry spans",
+            "fr": "Cloudflare Traces en bêta ouverte : tout le proxy en spans OpenTelemetry"
+          },
+          "body_html": {
+            "es": "<p>El tracing automático sale de Workers y cubre reglas de seguridad, transformaciones, decisiones de caché, routing y origin como <strong>spans OTel sin escribir instrumentación</strong>. Pricing por volumen desde el 1 de diciembre, también para Workers Tracing. Por fin vas a ver si el cuello de botella es tu API o el edge.</p>",
+            "en": "<p>Automatic tracing extends beyond Workers to security rules, transformations, cache decisions, routing and origin handling as <strong>OTel spans with no instrumentation to write</strong>. Volume-based pricing starts December 1, including Workers Tracing.</p>",
+            "fr": "<p>Le traçage automatique dépasse Workers : règles de sécurité, transformations, décisions de cache, routage et origine deviennent des <strong>spans OTel sans instrumentation</strong>. Tarification au volume dès le 1er décembre, Workers Tracing compris.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/cloudflare-traces-open-beta/", "label": "infoq.com" }
+        },
+        {
+          "id": "gitlab-19-4-agents",
+          "tag": "notable",
+          "date": "12 Oct 2026",
+          "title": {
+            "es": "GitLab 19.4: agentes por objetivo y MCP para disparar pipelines",
+            "en": "GitLab 19.4: goal-driven agents and MCP tools to drive pipelines",
+            "fr": "GitLab 19.4 : agents par objectif et outils MCP pour les pipelines"
+          },
+          "body_html": {
+            "es": "<p>Duo CLI suma <code>/goal</code> (beta), y las nuevas tools MCP dejan que agentes externos <strong>disparen e inspeccionen pipelines</strong>: lectura por defecto, escritura con aprobación. Topes de créditos por usuario para que un flow atado a un trigger ruidoso no te funda la factura.</p>",
+            "en": "<p>Duo CLI adds <code>/goal</code> (beta), and new MCP tools let external agents <strong>trigger and inspect pipelines</strong>: read-only by default, writes need approval. Per-user credit caps keep a flow on a noisy trigger from blowing up the bill.</p>",
+            "fr": "<p>Duo CLI ajoute <code>/goal</code> (bêta) et de nouveaux outils MCP permettent aux agents externes de <strong>déclencher et inspecter les pipelines</strong> : lecture seule par défaut, écriture sur approbation. Des plafonds de crédits par utilisateur limitent les coûts.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/gitlab-19-4-goal-driven-agents/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "spotify-ai-quality-controls",
+      "updates": [
+        {
+          "id": "spotify-ai-quality-controls",
+          "tag": "notable",
+          "date": "12 Oct 2026",
+          "title": {
+            "es": "Spotify duplicó sus cambios mensuales con IA y rediseñó sus controles de calidad",
+            "en": "Spotify doubled monthly code changes with AI and reworked its quality controls",
+            "fr": "Spotify a doublé ses changements mensuels avec l'IA et revu ses contrôles qualité"
+          },
+          "body_html": {
+            "es": "<p>De ~8.100 a <strong>17.000 cambios mergeados por mes</strong> sobre ~3.000 servicios. Tras un upgrade automático que pasó CI pero rompió prod, endurecieron safeguards, ampliaron capacidad de rollback y <strong>programan los cambios automáticos en horario del equipo dueño</strong>. Lección para cualquier senior: si la IA sube el throughput, tu observabilidad y tu rollback tienen que escalar igual. Lectura obligada.</p>",
+            "en": "<p>From ~8,100 to <strong>17,000 merged changes a month</strong> across ~3,000 services. After an automated upgrade passed CI but broke production, Spotify hardened safeguards, expanded rollback capacity and <strong>schedules automated changes during the owning team's working hours</strong>. If AI raises throughput, observability and rollback must scale with it.</p>",
+            "fr": "<p>De ~8 100 à <strong>17 000 changements fusionnés par mois</strong> sur ~3 000 services. Après une mise à jour automatique validée par la CI mais cassée en production, Spotify a renforcé ses garde-fous, étendu sa capacité de rollback et <strong>planifie les changements automatiques pendant les heures de l'équipe propriétaire</strong>.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/spotify-ai-quality-controls/", "label": "infoq.com" }
+        },
+        {
+          "id": "vitest-5-0-4",
+          "tag": "release",
+          "date": "12 Oct 2026",
+          "title": {
+            "es": "Vitest 5.0.4: fsModuleCache por defecto y --changed con conteo de tests afectados",
+            "en": "Vitest 5.0.4: fsModuleCache on by default and --changed reports affected tests",
+            "fr": "Vitest 5.0.4 : fsModuleCache activé par défaut et --changed compte les tests"
+          },
+          "body_html": {
+            "es": "<p><code>fsModuleCache</code> pasa a estar activo por defecto, <code>--changed</code> imprime cuántos tests afectó, y la corrida <strong>falla ante errores de filtros git/location</strong> en vez de pasar en verde sin correr nada. Ojo en CI: si dependías de ese verde silencioso, ahora se rompe (y está bien que se rompa).</p>",
+            "en": "<p><code>fsModuleCache</code> is now on by default, <code>--changed</code> prints how many tests were affected, and the run <strong>fails on git/location filter errors</strong> instead of passing green with nothing executed. Watch CI if you relied on that silent green.</p>",
+            "fr": "<p><code>fsModuleCache</code> est activé par défaut, <code>--changed</code> affiche le nombre de tests concernés, et l'exécution <strong>échoue sur les erreurs de filtre git/emplacement</strong> au lieu de passer au vert sans rien lancer.</p>"
+          },
+          "source": { "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.0.4", "label": "github.com/vitest-dev/vitest" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "pnpm-12-12-1",
+      "updates": [
+        {
+          "id": "pnpm-12-12-1",
+          "tag": "notable",
+          "date": "11 Oct 2026",
+          "title": {
+            "es": "pnpm 12.12.1: OIDC para dist-tag, validación del aud y protocolo tool:",
+            "en": "pnpm 12.12.1: OIDC for dist-tag, aud validation and tool: protocol",
+            "fr": "pnpm 12.12.1 : OIDC pour dist-tag, validation aud et protocole tool:"
+          },
+          "body_html": {
+            "es": "<p><code>pnpm publish</code> solo usa un <code>NPM_ID_TOKEN</code> si su claim <code>aud</code> coincide con el registry, y <code>pnpm dist-tag</code> soporta <strong>OIDC en CI</strong>: un token npm guardado menos. Además, <code>tool:</code> (ej. <code>pnx node@tool:22</code>) reemplaza a <code>runtime:</code>, que queda como alias. Si todavía publicás con tokens long-lived, ponete las pilas.</p>",
+            "en": "<p><code>pnpm publish</code> only uses an <code>NPM_ID_TOKEN</code> when its <code>aud</code> claim matches the registry, and <code>pnpm dist-tag</code> supports <strong>OIDC in CI</strong>: one less stored npm token. Plus <code>tool:</code> (e.g. <code>pnx node@tool:22</code>) supersedes <code>runtime:</code>, which stays as an alias.</p>",
+            "fr": "<p><code>pnpm publish</code> n'utilise un <code>NPM_ID_TOKEN</code> que si son claim <code>aud</code> correspond au registre, et <code>pnpm dist-tag</code> prend en charge <strong>OIDC en CI</strong>. Le protocole <code>tool:</code> remplace <code>runtime:</code>, conservé comme alias.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.12.1", "label": "github.com/pnpm/pnpm" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Serverless converge con el servidor HTTP clásico: Lambda Web Functions corre Express/Hono tal cual y cobra solo CPU activa.",
+      "en": "Serverless converges with the classic HTTP server: Lambda Web Functions runs Express/Hono as-is and bills only active CPU.",
+      "fr": "Le serverless converge vers le serveur HTTP classique : Lambda Web Functions exécute Express/Hono tel quel et ne facture que le CPU actif."
+    },
+    {
+      "es": "OpenTelemetry sin instrumentar se vuelve el default: Cloudflare Traces y ElastiCache Insights emiten OTel solos.",
+      "en": "Zero-instrumentation OpenTelemetry becomes the default: Cloudflare Traces and ElastiCache Insights emit OTel on their own.",
+      "fr": "OpenTelemetry sans instrumentation devient la norme : Cloudflare Traces et ElastiCache Insights émettent de l'OTel automatiquement."
+    },
+    {
+      "es": "Con la IA duplicando el volumen de cambios, rollback y observabilidad pasan a ser la verdadera frontera de calidad.",
+      "en": "With AI doubling change volume, rollback and observability become the real quality frontier.",
+      "fr": "Avec l'IA qui double le volume de changements, rollback et observabilité deviennent la vraie frontière de la qualité."
+    }
+  ]
+}

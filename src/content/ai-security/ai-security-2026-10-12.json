@@ -1,0 +1,216 @@
+{
+  "title": {
+    "es": "AI Security — 12 OCT 2026",
+    "en": "AI Security — 12 OCT 2026",
+    "fr": "AI Security — 12 OCT 2026"
+  },
+  "description": {
+    "es": "Una campaña ClickFix usa anuncios de Google y redirects de Bing para colar un instalador falso de Claude en macOS, PraisonAI publica un RCE 9.9 en AICoder y admite que su SubprocessSandbox no aplicaba ninguna restricción, Zenity muestra cómo un solo prompt le robaba credenciales IAM a AWS AgentCore y Booz Allen pone a modelos frontier a mover un brazo robótico en un laboratorio OT.",
+    "en": "A ClickFix campaign uses Google ads and Bing redirects to push a fake Claude installer on macOS, PraisonAI ships a 9.9 RCE in AICoder and admits its SubprocessSandbox enforced no restrictions at all, Zenity shows how a single prompt stole IAM credentials from AWS AgentCore, and Booz Allen has frontier models move a robotic arm in an OT lab.",
+    "fr": "Une campagne ClickFix utilise des annonces Google et des redirections Bing pour pousser un faux installateur Claude sur macOS, PraisonAI corrige une RCE 9.9 dans AICoder et reconnaît que son SubprocessSandbox n'appliquait aucune restriction, Zenity montre comment un seul prompt volait des identifiants IAM dans AWS AgentCore, et Booz Allen fait bouger un bras robotique à des modèles frontier dans un labo OT."
+  },
+  "pubDate": "2026-10-12",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "ClickFix: instalador falso de Claude para macOS",
+        "en": "ClickFix: fake Claude installer for macOS",
+        "fr": "ClickFix : faux installateur Claude pour macOS"
+      },
+      "anchor": "claude-clickfix-adception",
+      "icon": "lucide:siren"
+    },
+    {
+      "text": {
+        "es": "PraisonAI AICoder: RCE 9.9 vía tool calls",
+        "en": "PraisonAI AICoder: 9.9 RCE via tool calls",
+        "fr": "PraisonAI AICoder : RCE 9.9 via tool calls"
+      },
+      "anchor": "praisonai-cve-2026-61445",
+      "icon": "lucide:skull"
+    },
+    {
+      "text": {
+        "es": "PraisonAI: el sandbox no aplicaba su política",
+        "en": "PraisonAI: the sandbox ignored its own policy",
+        "fr": "PraisonAI : le sandbox ignorait sa politique"
+      },
+      "anchor": "praisonai-cve-2026-60085",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "AWS AgentCore: un prompt roba credenciales IAM",
+        "en": "AWS AgentCore: one prompt steals IAM creds",
+        "fr": "AWS AgentCore : un prompt vole des clés IAM"
+      },
+      "anchor": "aws-agentcore-imds-ssrf",
+      "icon": "lucide:lock"
+    },
+    {
+      "text": {
+        "es": "Agentes IA toman una planta OT en 16 minutos",
+        "en": "AI agents take over an OT plant in 16 minutes",
+        "fr": "Des agents IA prennent une usine OT en 16 min"
+      },
+      "anchor": "booz-allen-ot-agents",
+      "icon": "lucide:radiation"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-incidents",
+      "name": "Top Incidents",
+      "theme": "top-incidents",
+      "icon_emoji": "🚨",
+      "anchor": "top-incidents",
+      "updates": [
+        {
+          "id": "claude-clickfix-adception",
+          "tag": "breach",
+          "title": {
+            "es": "«Adception»: anuncios de Google y redirects de Bing empujan un instalador falso de Claude para macOS",
+            "en": "«Adception»: Google ads and Bing redirects push a fake Claude installer for macOS",
+            "fr": "«Adception» : des annonces Google et des redirections Bing poussent un faux installateur Claude pour macOS"
+          },
+          "body_html": {
+            "es": "<p>Push Security encontró un anuncio de Google para la búsqueda «claude mac» que mostraba el dominio legítimo <code>bing.com</code>. El clic pasaba por el redirect de Google Ads, después por el endpoint de tracking <code>bing.com/ck/a</code>, aterrizaba en un WordPress comprometido de un retailer sudamericano y terminaba en <code>claude-desk-code[.]com</code>, una copia del instalador de Claude para macOS. La página muestra el comando real <code>curl -fsSL https://claude.ai/install.sh | bash</code>, pero el botón de copiar pone otro en el portapapeles: decodifica una URL en Base64 hacia <code>lake-90[.]com</code>, baja un <code>.dat</code> con curl y lo pasa a zsh. Hay cloaking en cada salto: si no venís desde Google o Bing, ves un 404. Push le dice AcSig al toolkit y encontró otros dominios con la misma estructura. Ojo con esto: instalá Claude Code solo desde <code>claude.ai</code> escrito a mano, nunca desde un anuncio, y pegá en la terminal únicamente comandos que puedas leer.</p>",
+            "en": "<p>Push Security found a Google ad for the search «claude mac» that displayed the legitimate <code>bing.com</code> domain. The click went through the Google Ads redirect, then Bing's <code>bing.com/ck/a</code> click-tracking endpoint, landed on a compromised WordPress site belonging to a South American retailer, and ended at <code>claude-desk-code[.]com</code>, a clone of the Claude for macOS installer. The page displays the real command <code>curl -fsSL https://claude.ai/install.sh | bash</code>, but its copy button puts a different one on the clipboard: it decodes a Base64 URL pointing to <code>lake-90[.]com</code>, downloads a <code>.dat</code> file with curl and pipes it into zsh. Every hop is cloaked, so visitors who don't arrive from Google or Bing get a 404. Push tracks the toolkit as AcSig and found related domains with the same structure. Install Claude Code only from a hand-typed <code>claude.ai</code>, never from an ad, and only paste terminal commands you can read.</p>",
+            "fr": "<p>Push Security a repéré une annonce Google pour la recherche «claude mac» qui affichait le domaine légitime <code>bing.com</code>. Le clic passait par la redirection Google Ads, puis par l'endpoint de suivi <code>bing.com/ck/a</code>, arrivait sur un WordPress compromis d'un commerçant sud-américain et aboutissait à <code>claude-desk-code[.]com</code>, une copie de l'installateur Claude pour macOS. La page affiche la vraie commande <code>curl -fsSL https://claude.ai/install.sh | bash</code>, mais le bouton copier place autre chose dans le presse-papiers : une URL Base64 vers <code>lake-90[.]com</code> dont le <code>.dat</code> est téléchargé puis exécuté par zsh. Chaque étape est masquée : sans arrivée depuis Google ou Bing, on obtient un 404. Installez Claude Code uniquement depuis <code>claude.ai</code> saisi à la main.</p>"
+          },
+          "date": "09 Oct 2026",
+          "source": {
+            "url": "https://www.bleepingcomputer.com/news/security/hackers-abuse-google-ads-bing-redirects-to-push-claude-clickfix-attacks/",
+            "label": "BleepingComputer"
+          }
+        }
+      ]
+    },
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "praisonai-cve-2026-61445",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-61445: AICoder de PraisonAI le da al LLM escritura de archivos y ejecución de comandos sin validar (CVSS 9.9)",
+            "en": "CVE-2026-61445: PraisonAI's AICoder hands the LLM unvalidated file write and command execution (CVSS 9.9)",
+            "fr": "CVE-2026-61445 : AICoder de PraisonAI donne au LLM l'écriture de fichiers et l'exécution de commandes sans validation (CVSS 9.9)"
+          },
+          "body_html": {
+            "es": "<p>El componente de UI <code>AICoder</code> expone al modelo las tools <code>write_to_file</code> y <code>execute_command</code>. <code>write_to_file</code> hace un <code>open(file_path, 'w')</code> sin validar el path, y los comandos tampoco se sanitizan. Con un prompt injection en el chat, un atacante escribe donde quiera (<code>/root/.ssh/authorized_keys</code>, <code>/etc/crontab</code>) o ejecuta comandos directamente. Las imágenes Docker corren como root, así que el impacto es total. Afecta <code>praisonai</code> ≤ 4.6.77; actualizá a 4.6.78.</p>",
+            "en": "<p>The <code>AICoder</code> UI component exposes <code>write_to_file</code> and <code>execute_command</code> tools to the model. <code>write_to_file</code> does a bare <code>open(file_path, 'w')</code> with no path validation, and commands are not sanitized either. With prompt injection in the chat, an attacker writes anywhere (<code>/root/.ssh/authorized_keys</code>, <code>/etc/crontab</code>) or simply runs commands. The Docker images run as root, so the impact is total. Affects <code>praisonai</code> ≤ 4.6.77; upgrade to 4.6.78.</p>",
+            "fr": "<p>Le composant d'UI <code>AICoder</code> expose au modèle les tools <code>write_to_file</code> et <code>execute_command</code>. <code>write_to_file</code> fait un simple <code>open(file_path, 'w')</code> sans valider le chemin, et les commandes ne sont pas filtrées. Par prompt injection dans le chat, un attaquant écrit n'importe où (<code>/root/.ssh/authorized_keys</code>, <code>/etc/crontab</code>) ou exécute des commandes. Les conteneurs Docker tournent en root. Affecte <code>praisonai</code> ≤ 4.6.77 ; corrigé en 4.6.78.</p>"
+          },
+          "date": "08 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-9mp3-24cc-77mg",
+            "label": "GitHub Advisory"
+          }
+        },
+        {
+          "id": "praisonai-cve-2026-60085",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-60085: el SubprocessSandbox por defecto de PraisonAI ignora toda la SecurityPolicy (CVSS v4 8.7)",
+            "en": "CVE-2026-60085: PraisonAI's default SubprocessSandbox ignores the entire SecurityPolicy (CVSS v4 8.7)",
+            "fr": "CVE-2026-60085 : le SubprocessSandbox par défaut de PraisonAI ignore toute la SecurityPolicy (CVSS v4 8.7)"
+          },
+          "body_html": {
+            "es": "<p><code>SecurityPolicy.strict()</code> está documentada como la política para «código no confiable»: <code>allow_subprocess=False</code>, <code>allow_file_write=False</code> y bloqueos sobre <code>~/.ssh</code>, <code>~/.aws</code>, <code>/etc/shadow</code>, <code>rm -rf</code> o <code>mkfs</code>. Pero el backend por defecto, <code>SubprocessSandbox</code>, escribe el input a un archivo temporal y lo ejecuta con <code>asyncio.create_subprocess_exec()</code> sin chequear ni uno de esos campos. La configuración existía; nadie la aplicaba. En el mismo lote, CVE-2026-61434 (CVSS 8.8) muestra que el allowlist de shell se saltea con <code>find ... -exec ... {} +</code> en cuatro implementaciones. Ambos se corrigen en <code>praisonai</code> 4.6.78.</p>",
+            "en": "<p><code>SecurityPolicy.strict()</code> is documented as the policy for «untrusted code»: <code>allow_subprocess=False</code>, <code>allow_file_write=False</code>, and blocks on <code>~/.ssh</code>, <code>~/.aws</code>, <code>/etc/shadow</code>, <code>rm -rf</code> or <code>mkfs</code>. But the default backend, <code>SubprocessSandbox</code>, writes the input to a temp file and runs it via <code>asyncio.create_subprocess_exec()</code> without checking a single one of those fields. The config existed; nothing enforced it. In the same batch, CVE-2026-61434 (CVSS 8.8) shows the shell allowlist is bypassed with <code>find ... -exec ... {} +</code> across four implementations. Both are fixed in <code>praisonai</code> 4.6.78.</p>",
+            "fr": "<p><code>SecurityPolicy.strict()</code> est documentée comme la politique pour du «code non fiable» : <code>allow_subprocess=False</code>, <code>allow_file_write=False</code> et blocages sur <code>~/.ssh</code>, <code>~/.aws</code>, <code>/etc/shadow</code>, <code>rm -rf</code> ou <code>mkfs</code>. Mais le backend par défaut, <code>SubprocessSandbox</code>, écrit l'entrée dans un fichier temporaire et l'exécute via <code>asyncio.create_subprocess_exec()</code> sans vérifier aucun de ces champs. Dans le même lot, CVE-2026-61434 (CVSS 8.8) contourne l'allowlist shell avec <code>find ... -exec ... {} +</code>. Corrigés en <code>praisonai</code> 4.6.78.</p>"
+          },
+          "date": "08 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-5r6c-gj4g-r697",
+            "label": "GitHub Advisory"
+          }
+        },
+        {
+          "id": "praisonai-cve-2026-61426",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-61426: AgentOS de PraisonAI escucha en 0.0.0.0 sin auth y filtra los system prompts (CVSS 8.6)",
+            "en": "CVE-2026-61426: PraisonAI's AgentOS listens on 0.0.0.0 with no auth and leaks system prompts (CVSS 8.6)",
+            "fr": "CVE-2026-61426 : AgentOS de PraisonAI écoute sur 0.0.0.0 sans auth et divulgue les system prompts (CVSS 8.6)"
+          },
+          "body_html": {
+            "es": "<p>El servidor AgentOS del paquete npm <code>praisonai</code> arranca en <code>0.0.0.0</code>, sin API key y con CORS <code>*</code> con credenciales. El middleware de API key solo se registra si configurás una key, así que el quickstart documentado (<code>new AgentOS({agents:[...]}).serve({port})</code>) deja expuestos sin autenticación <code>GET /api/agents</code>, que devuelve nombres, roles e instrucciones (o sea, los system prompts), y <code>POST /api/chat</code>, que invoca a los agentes. Cualquiera en la red lee tus prompts y maneja tus agentes. Corregido en 1.7.3.</p>",
+            "en": "<p>The AgentOS server in the <code>praisonai</code> npm package binds <code>0.0.0.0</code>, sets no API key and uses CORS <code>*</code> with credentials. The API-key middleware is only registered when a key is configured, so the documented quickstart (<code>new AgentOS({agents:[...]}).serve({port})</code>) exposes, unauthenticated, <code>GET /api/agents</code>, which returns agent names, roles and instructions (the system prompts), and <code>POST /api/chat</code>, which invokes the agents. Any network peer can read your prompts and drive your agents. Fixed in 1.7.3.</p>",
+            "fr": "<p>Le serveur AgentOS du paquet npm <code>praisonai</code> écoute sur <code>0.0.0.0</code>, sans clé d'API et avec CORS <code>*</code> et credentials. Le middleware de clé n'est enregistré que si une clé est configurée : le quickstart documenté expose donc sans authentification <code>GET /api/agents</code>, qui renvoie les instructions des agents (les system prompts), et <code>POST /api/chat</code>, qui les invoque. Corrigé en 1.7.3.</p>"
+          },
+          "date": "08 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-6wjp-v33h-5cvq",
+            "label": "GitHub Advisory"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "aws-agentcore-imds-ssrf",
+          "tag": "research",
+          "title": {
+            "es": "Zenity: un prompt le pedía a un agente de AWS AgentCore sus credenciales IAM, y las entregaba",
+            "en": "Zenity: one prompt asked an AWS AgentCore agent for its IAM credentials, and it handed them over",
+            "fr": "Zenity : un prompt demandait à un agent AWS AgentCore ses identifiants IAM, et il les livrait"
+          },
+          "body_html": {
+            "es": "<p>Zenity Labs mostró que, con solo acceso de chat a un agente expuesto, un prompt disparaba un SSRF contra el IMDS de la instancia (AgentCore todavía usaba IMDSv1 y la microVM Firecracker no aislaba bien la red) y devolvía las credenciales temporales del rol del agente. El rol por defecto estaba sobredimensionado: abarcaba todos los recursos AgentCore de la región. Con eso se podían lanzar otros agentes, leer sesiones, escribir memorias que cambian el comportamiento en sesiones futuras y leer secretos de Secrets Manager. AWS cerró el reporte como «informativo», dice que desde el 14 de febrero usa solo IMDSv2 y que el ataque requiere un error del developer; Zenity confirmó en su revisión del 29 de septiembre que los problemas restantes estaban resueltos. No hay CVE. La lección vale para cualquier plataforma de agentes: el rol IAM por defecto es parte de la superficie de prompt injection.</p>",
+            "en": "<p>Zenity Labs showed that, with only chat access to an exposed agent, a prompt could trigger SSRF against the instance's IMDS (AgentCore still used IMDSv1 and the Firecracker microVM lacked network isolation) and return the temporary credentials of the agent's role. The default role was overpermissioned, scoped to every AgentCore resource in the region. With it, an attacker could launch other agents, read sessions, write memories that persistently change behavior in future sessions, and read Secrets Manager secrets. AWS closed the report as «informative», says AgentCore has used IMDSv2 exclusively since February 14, and argues the attack requires developer error; Zenity's September 29 review found the remaining issues addressed. No CVE. The lesson applies to any agent platform: the default IAM role is part of the prompt-injection attack surface.</p>",
+            "fr": "<p>Zenity Labs a montré qu'avec un simple accès chat à un agent exposé, un prompt déclenchait une SSRF vers l'IMDS de l'instance (AgentCore utilisait encore IMDSv1 et la microVM Firecracker isolait mal le réseau) et renvoyait les identifiants temporaires du rôle de l'agent. Le rôle par défaut couvrait toutes les ressources AgentCore de la région : lancer d'autres agents, lire des sessions, écrire des mémoires persistantes, lire Secrets Manager. AWS a classé le rapport comme «informatif» et affirme utiliser uniquement IMDSv2 depuis le 14 février ; Zenity a constaté le 29 septembre que le reste était corrigé. Pas de CVE.</p>"
+          },
+          "date": "09 Oct 2026",
+          "source": {
+            "url": "https://www.theregister.com/security/2026/10/09/aws-agentcore-security-undone-by-prompt-requesting-credentials/5302436",
+            "label": "The Register"
+          }
+        },
+        {
+          "id": "booz-allen-ot-agents",
+          "tag": "research",
+          "title": {
+            "es": "Booz Allen: dos modelos frontier completan los 8 escenarios de ataque en un laboratorio OT, incluido mover un brazo robótico",
+            "en": "Booz Allen: two frontier models complete all 8 attack scenarios in an OT lab, including moving a robotic arm",
+            "fr": "Booz Allen : deux modèles frontier réussissent les 8 scénarios d'attaque d'un labo OT, dont bouger un bras robotique"
+          },
+          "body_html": {
+            "es": "<p>En un entorno multi-vendor que imita una planta de manufactura (PLCs, HMIs, SCADA, un variador de frecuencia y un brazo robótico), dos modelos frontier no identificados cumplieron los ocho objetivos: mapear activos, encadenar fallas, manipular controladores, cambiar la velocidad de un motor, tomar el SCADA y mover el brazo. Pasaron del perímetro a la red de control en poco más de 16 minutos, sin código fuente ni documentación OT, y con aprobación humana obligatoria antes de cada acción con impacto físico. Cuando falló el primer camino, editaron un proyecto SCADA exportado y empujaron una toma de pantalla completa a los HMIs; el gateway tenía sesiones preautenticadas a 14 dispositivos. Al brazo entraron con credenciales por defecto del fabricante. La conclusión del informe: como tantos equipos OT no tienen autenticación ni cifrado, el conocimiento especializado ya no frena a nadie.</p>",
+            "en": "<p>In a multi-vendor environment modeled on a manufacturing plant (PLCs, HMIs, SCADA, a variable-frequency drive and a robotic arm), two unnamed frontier models achieved all eight objectives: mapping assets, chaining weaknesses, manipulating controllers, changing motor speed, compromising SCADA and moving the arm. They went from perimeter to control network in just over 16 minutes, with no source code or OT documentation, and with mandatory human approval before any physical-impact action. When the first path failed, they edited an exported SCADA project and pushed a full-screen takeover to the operator HMIs; the gateway held pre-authenticated sessions to 14 devices. The arm fell to vendor default credentials. The report's takeaway: because so many OT devices lack authentication or encryption, specialist knowledge is no longer a real barrier.</p>",
+            "fr": "<p>Dans un environnement multi-fournisseurs imitant une usine (PLC, IHM, SCADA, variateur de fréquence, bras robotique), deux modèles frontier non nommés ont atteint les huit objectifs : cartographier, enchaîner les failles, manipuler les automates, changer la vitesse d'un moteur, compromettre le SCADA et bouger le bras. Du périmètre au réseau de contrôle en un peu plus de 16 minutes, sans code source ni documentation OT, avec approbation humaine avant toute action physique. Le bras est tombé avec les identifiants par défaut du fabricant. Conclusion : sans authentification ni chiffrement sur l'OT, l'expertise n'est plus une barrière.</p>"
+          },
+          "date": "11 Oct 2026",
+          "source": {
+            "url": "https://www.theregister.com/security/2026/10/11/ai-systems-are-fully-capable-of-carrying-out-nightmare-attacks-against-infrastructure-and-nobodys-ready/5302450",
+            "label": "The Register"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Política que nadie aplica: el SubprocessSandbox de PraisonAI y el rol por defecto de AgentCore prometían aislamiento que el runtime nunca hizo cumplir.",
+      "en": "Policy nobody enforces: PraisonAI's SubprocessSandbox and AgentCore's default role promised isolation the runtime never actually applied.",
+      "fr": "Une politique que personne n'applique : le SubprocessSandbox de PraisonAI et le rôle par défaut d'AgentCore promettaient une isolation jamais appliquée."
+    },
+    {
+      "es": "La marca de los asistentes de código ya es cebo: instaladores falsos de Claude se empujan con anuncios pagos de búsqueda.",
+      "en": "Coding-assistant brands are now bait: fake Claude installers are pushed through paid search ads.",
+      "fr": "Les marques d'assistants de code servent d'appât : de faux installateurs Claude sont poussés via des annonces payantes."
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 13 Oct 2026",
+    "en": "Gentleman Releases — 13 Oct 2026",
+    "fr": "Gentleman Releases — 13 Oct 2026"
+  },
+  "description": {
+    "es": "Releases del día en proyectos de Gentleman-Programming",
+    "en": "Today's releases from Gentleman-Programming projects",
+    "fr": "Sorties du jour des projets Gentleman-Programming"
+  },
+  "pubDate": "2026-10-13",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "gentle-ai v4.1.0 — review nativa proporcional: automática solo para cambios de alto riesgo, con lentes elegidas por el agente",
+        "en": "gentle-ai v4.1.0 — proportionate native review: automatic only for high-risk changes, with agent-selected lenses",
+        "fr": "gentle-ai v4.1.0 — revue native proportionnée : automatique seulement pour les changements à haut risque, avec des lentilles choisies par l'agent"
+      },
+      "anchor": "gentle-ai-v4-1-0",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-ai v4.1.1 — mismo código que v4.1.0, con un checksum de módulo Go consistente para go install",
+        "en": "gentle-ai v4.1.1 — same code as v4.1.0, with a consistent Go module checksum for go install",
+        "fr": "gentle-ai v4.1.1 — même code que v4.1.0, avec une somme de contrôle de module Go cohérente pour go install"
+      },
+      "anchor": "gentle-ai-v4-1-1",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "engram v3.4.0 — evidencia de compatibilidad read-only en el store y soporte de headers en modo WAL",
+        "en": "engram v3.4.0 — read-only compatibility evidence in the store and WAL-mode header support",
+        "fr": "engram v3.4.0 — preuves de compatibilité en lecture seule dans le store et prise en charge des en-têtes en mode WAL"
+      },
+      "anchor": "engram-v3-4-0",
+      "icon": "simple-icons:github"
+    }
+  ],
+  "tools": [
+    {
+      "id": "gentle-ai",
+      "name": "gentle-ai",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-gentle-ai",
+      "icon_emoji": "🎩",
+      "anchor": "gentle-ai",
+      "version": "v4.1.1",
+      "updates": [
+        {
+          "id": "gentle-ai-v4-1-1",
+          "tag": "fix",
+          "title": {
+            "es": "v4.1.1 — Checksum de módulo consistente para la línea v4.1",
+            "en": "v4.1.1 — Consistent module checksum for the v4.1 line",
+            "fr": "v4.1.1 — Somme de contrôle de module cohérente pour la ligne v4.1"
+          },
+          "body_html": {
+            "es": "<p>Hotfix con exactamente el mismo código que v4.1.0. El primer tag <code>v4.1.0</code> falló el preflight y se volvió a cortar, pero el proxy de módulos de Go y la checksum DB ya habían registrado el commit viejo, así que un <code>go install ...@v4.1.0</code> bajando directo de GitHub (por ejemplo con <code>GOPROXY=direct</code>) rompe la verificación de checksum. Ojo con esto: si instalás desde source, usá <code>@v4.1.1</code>. El provider contract se queda en <code>1.3.0</code>; corré <code>gentle-ai sync</code> después de actualizar.</p>",
+            "en": "<p>A hotfix with exactly the same code as v4.1.0. The first <code>v4.1.0</code> tag failed its preflight and was cut again, but the Go module proxy and checksum database had already recorded the old commit, so a <code>go install ...@v4.1.0</code> fetched straight from GitHub (e.g. with <code>GOPROXY=direct</code>) fails checksum verification. Source installs should use <code>@v4.1.1</code>. The provider contract stays at <code>1.3.0</code>; run <code>gentle-ai sync</code> after upgrading.</p>",
+            "fr": "<p>Un correctif avec exactement le même code que v4.1.0. Le premier tag <code>v4.1.0</code> a échoué au preflight et a été recoupé, mais le proxy de modules Go et la base de sommes de contrôle avaient déjà enregistré l'ancien commit : un <code>go install ...@v4.1.0</code> téléchargé directement depuis GitHub (par exemple avec <code>GOPROXY=direct</code>) échoue à la vérification. Les installations depuis les sources doivent utiliser <code>@v4.1.1</code>. Le contrat fournisseur reste en <code>1.3.0</code> ; lancez <code>gentle-ai sync</code> après la mise à jour.</p>"
+          },
+          "date": "12 Oct 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v4.1.1",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        },
+        {
+          "id": "gentle-ai-v4-1-0",
+          "tag": "feature",
+          "title": {
+            "es": "v4.1.0 — Review nativa proporcional y salida limpia de SDD",
+            "en": "v4.1.0 — Proportionate native review and a clean SDD exit",
+            "fr": "v4.1.0 — Revue native proportionnée et sortie propre de SDD"
+          },
+          "body_html": {
+            "es": "<p>Minor con mucha carne. La review nativa ahora escala con lo que cambiaste: <code>review assess</code> marca <code>review_due: true</code> solo para riesgo <code>high</code>, y un candidato <code>medium</code> queda como <code>under_budget</code> sin importar cuántas líneas toque, porque el tamaño es presupuesto de prompt, no riesgo. START y el preflight aceptan <code>--lenses</code> y <code>--lenses-reason</code>, así el agente elige qué lentes 4R corren según lo que tocó, y un delta pasivo ya reconocido no se vuelve a ofrecer.</p><p>El retiro de SDD ahora también limpia lo instalado: agentes, skills, comandos, hooks y perfiles de SDD propios de Gentle se borran en <code>sync</code> e <code>install</code>. Además llegan candidatos de instalador de Gentle Shell para Linux, Windows 11 x64 y macOS (todavía no calificados para release) y el pilot opt-in <code>--claude-orchestrator-modules</code>.</p><p>Breaking: se retiran los plugins comunitarios externos de OpenCode, el provider contract pasa de <code>1.2.0</code> a <code>1.3.0</code>, y <code>install</code>/<code>restore</code> validan flags más estricto. Si instalás desde source, andá directo a v4.1.1.</p>",
+            "en": "<p>A meaty minor. Native review now scales with what changed: <code>review assess</code> marks <code>review_due: true</code> only for <code>high</code> risk, and a <code>medium</code> candidate reports <code>under_budget</code> regardless of line count, because size is a prompt budget, not risk. START and the preflight accept <code>--lenses</code> and <code>--lenses-reason</code>, so the agent picks the 4R lenses that fit what it touched, and an acknowledged passive delta is no longer offered again.</p><p>The SDD retirement now also cleans up installed systems: Gentle-owned SDD agents, skills, commands, hooks, and profiles are removed on <code>sync</code> and <code>install</code>. Gentle Shell installer candidates arrive for Linux, Windows 11 x64, and macOS (not yet release-qualified), plus the opt-in <code>--claude-orchestrator-modules</code> pilot.</p><p>Breaking: OpenCode external community plugins are retired, the provider contract moves from <code>1.2.0</code> to <code>1.3.0</code>, and <code>install</code>/<code>restore</code> validate flags more strictly. Source installs should go straight to v4.1.1.</p>",
+            "fr": "<p>Une version mineure bien remplie. La revue native s'adapte désormais à ce qui a changé : <code>review assess</code> ne marque <code>review_due: true</code> que pour un risque <code>high</code>, et un candidat <code>medium</code> reste <code>under_budget</code> quel que soit le nombre de lignes, car la taille est un budget de prompt, pas un risque. START et le preflight acceptent <code>--lenses</code> et <code>--lenses-reason</code> : l'agent choisit les lentilles 4R adaptées à ce qu'il a touché, et un delta passif déjà validé n'est plus reproposé.</p><p>Le retrait de SDD nettoie aussi les installations : agents, skills, commandes, hooks et profils SDD propres à Gentle sont supprimés lors de <code>sync</code> et <code>install</code>. Des installateurs candidats de Gentle Shell arrivent pour Linux, Windows 11 x64 et macOS (pas encore qualifiés pour la release), ainsi que le pilote optionnel <code>--claude-orchestrator-modules</code>.</p><p>Changements cassants : les plugins communautaires externes d'OpenCode sont retirés, le contrat fournisseur passe de <code>1.2.0</code> à <code>1.3.0</code>, et <code>install</code>/<code>restore</code> valident les options plus strictement. Pour les installations depuis les sources, passez directement à v4.1.1.</p>"
+          },
+          "date": "12 Oct 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v4.1.0",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        }
+      ]
+    },
+    {
+      "id": "engram",
+      "name": "engram",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-engram",
+      "icon_emoji": "💋",
+      "anchor": "engram",
+      "version": "v3.4.0",
+      "updates": [
+        {
+          "id": "engram-v3-4-0",
+          "tag": "feature",
+          "title": {
+            "es": "v3.4.0 — Evidencia de compatibilidad read-only en el store",
+            "en": "v3.4.0 — Read-only compatibility evidence in the store",
+            "fr": "v3.4.0 — Preuves de compatibilité en lecture seule dans le store"
+          },
+          "body_html": {
+            "es": "<p>Minor enfocado en el store: suma evidencia de compatibilidad read-only para inspeccionar una base sin tocarla (#1792). El probe de compatibilidad ahora acepta headers de SQLite en modo WAL (#1794), y se revisan errores que antes se ignoraban en ese código (#1793). Si compartís la base entre versiones, este te viene bien.</p>",
+            "en": "<p>A store-focused minor: it adds read-only compatibility evidence to inspect a database without modifying it (#1792). The compatibility probe now accepts SQLite WAL-mode headers (#1794), and previously ignored errors in that code are now checked (#1793). Useful if you share a database across versions.</p>",
+            "fr": "<p>Une version mineure centrée sur le store : elle ajoute des preuves de compatibilité en lecture seule pour inspecter une base sans la modifier (#1792). La sonde de compatibilité accepte désormais les en-têtes SQLite en mode WAL (#1794), et les erreurs auparavant ignorées dans ce code sont maintenant vérifiées (#1793). Utile si vous partagez une base entre versions.</p>"
+          },
+          "date": "12 Oct 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v3.4.0",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

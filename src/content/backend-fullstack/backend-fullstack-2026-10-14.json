@@ -1,0 +1,270 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 14 Oct 2026: Patch Tuesday de .NET con smuggling en Kestrel, CVE en Fastify y Vite+ 1.0",
+    "en": "Backend & Fullstack Daily — 14 Oct 2026: .NET Patch Tuesday with Kestrel smuggling, a Fastify CVE and Vite+ 1.0",
+    "fr": "Backend & Fullstack Daily — 14 oct. 2026 : Patch Tuesday .NET avec smuggling dans Kestrel, CVE Fastify et Vite+ 1.0"
+  },
+  "description": {
+    "es": "40 advisories de .NET en un día (3 críticos: request smuggling en Kestrel y RCE en MsQuic), bypass de validación de headers en Fastify, CloudFront delante de Lambda Web Functions, Vite+ 1.0 y pnpm 12.13.",
+    "en": "40 .NET advisories in one day (3 critical: Kestrel request smuggling and an MsQuic RCE), a Fastify header-validation bypass, CloudFront in front of Lambda Web Functions, Vite+ 1.0 and pnpm 12.13.",
+    "fr": "40 advisories .NET en une journée (3 critiques : request smuggling dans Kestrel et RCE dans MsQuic), contournement de validation d'en-têtes dans Fastify, CloudFront devant Lambda Web Functions, Vite+ 1.0 et pnpm 12.13."
+  },
+  "pubDate": "2026-10-14",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "Kestrel: request smuggling CVSS 9.4", "en": "Kestrel: request smuggling, CVSS 9.4", "fr": "Kestrel : request smuggling, CVSS 9.4" },
+      "anchor": "aspnetcore-kestrel-smuggling",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "MsQuic: RCE sin auth vía HTTP/3", "en": "MsQuic: unauthenticated RCE via HTTP/3", "fr": "MsQuic : RCE sans auth via HTTP/3" },
+      "anchor": "msquic-rce",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Fastify 5.12.6 cierra bypass de headers", "en": "Fastify 5.12.6 closes a header bypass", "fr": "Fastify 5.12.6 corrige un contournement d'en-têtes" },
+      "anchor": "fastify-cve-2026-107832",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Vite+ 1.0: toolchain unificada estable", "en": "Vite+ 1.0: unified toolchain goes stable", "fr": "Vite+ 1.0 : la toolchain unifiée est stable" },
+      "anchor": "viteplus-1-0",
+      "icon": "lucide:rocket"
+    },
+    {
+      "text": { "es": "CloudFront como frente de Lambda Web Functions", "en": "CloudFront fronts Lambda Web Functions", "fr": "CloudFront devant les Lambda Web Functions" },
+      "anchor": "cloudfront-lambda-web-functions",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": { "es": "pnpm 12.13: store sobre NFS sin corromper", "en": "pnpm 12.13: network-share stores without corruption", "fr": "pnpm 12.13 : stores réseau sans corruption" },
+      "anchor": "pnpm-12-13-0",
+      "icon": "lucide:package"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "aspnetcore-kestrel-smuggling",
+          "tag": "security",
+          "date": "13 Oct 2026",
+          "title": {
+            "es": "CVE-2026-88092: request smuggling en Kestrel (CVSS 9.4) dentro de un Patch Tuesday de 40 advisories",
+            "en": "CVE-2026-88092: Kestrel request smuggling (CVSS 9.4) inside a 40-advisory Patch Tuesday",
+            "fr": "CVE-2026-88092 : request smuggling dans Kestrel (CVSS 9.4) au sein d'un Patch Tuesday de 40 advisories"
+          },
+          "body_html": {
+            "es": "<p>Una conexión HTTP/1 abortada en <code>Kestrel</code> puede volver a parsear los bytes no leídos del body como si fueran <strong>otro request</strong>: desync clásico, CWE-444, <strong>CVSS 9.4</strong>, en todas las plataformas. Parches: <code>8.0.32</code>, <code>9.0.21</code>, <code>10.0.13</code> y <code>11.0.0-rc.2</code>. Es uno de <strong>40 advisories de .NET</strong> publicados el mismo día (3 críticos, 29 high). Si tenés apps self-contained, ojo: hay que <strong>recompilar y redeployar</strong>, no alcanza con parchear el host. Actualizá YA.</p>",
+            "en": "<p>An aborted HTTP/1 connection in <code>Kestrel</code> can reparse unread request-body bytes as <strong>another request</strong>: a classic desync, CWE-444, <strong>CVSS 9.4</strong>, on every platform. Fixed in <code>8.0.32</code>, <code>9.0.21</code>, <code>10.0.13</code> and <code>11.0.0-rc.2</code>. It is one of <strong>40 .NET advisories</strong> published the same day (3 critical, 29 high). Self-contained apps must be <strong>recompiled and redeployed</strong>; patching the host is not enough.</p>",
+            "fr": "<p>Une connexion HTTP/1 interrompue dans <code>Kestrel</code> peut ré-analyser les octets non lus du body comme <strong>une autre requête</strong> : désynchronisation classique, CWE-444, <strong>CVSS 9.4</strong>, sur toutes les plateformes. Corrigé dans <code>8.0.32</code>, <code>9.0.21</code>, <code>10.0.13</code> et <code>11.0.0-rc.2</code>. C'est l'un des <strong>40 advisories .NET</strong> publiés le même jour (3 critiques, 29 high). Les apps self-contained doivent être <strong>recompilées et redéployées</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-rv87-ccxw-8ggf", "label": "github.com/advisories" }
+        },
+        {
+          "id": "msquic-rce",
+          "tag": "security",
+          "date": "13 Oct 2026",
+          "title": {
+            "es": "CVE-2026-105016: heap overflow en MsQuic permite RCE sin autenticación por HTTP/3 (CVSS 9.8)",
+            "en": "CVE-2026-105016: MsQuic heap overflow enables unauthenticated RCE over HTTP/3 (CVSS 9.8)",
+            "fr": "CVE-2026-105016 : un heap overflow dans MsQuic permet une RCE sans authentification via HTTP/3 (CVSS 9.8)"
+          },
+          "body_html": {
+            "es": "<p>Un paquete QUIC sobre IPv6 manipulado llega al path de <strong>HTTP/3</strong> y desborda el heap en <code>Microsoft.Native.Quic.MsQuic.Schannel</code>: <strong>RCE sin auth ni interacción</strong>, CVSS 9.8. Afecta builds de Windows usadas por .NET 8, 9, 10 y 11 RC2. Si exponés HTTP/3 en Kestrel sobre Windows, esto va primero en la cola; si no lo usás, es un buen momento para preguntarte por qué lo tenés habilitado.</p>",
+            "en": "<p>A crafted IPv6 QUIC packet reaches the <strong>HTTP/3</strong> path and overflows the heap in <code>Microsoft.Native.Quic.MsQuic.Schannel</code>: <strong>unauthenticated, no-interaction RCE</strong>, CVSS 9.8. It affects Windows builds used by .NET 8, 9, 10 and 11 RC2. If you expose HTTP/3 on Kestrel on Windows, this goes to the front of the queue.</p>",
+            "fr": "<p>Un paquet QUIC IPv6 forgé atteint le chemin <strong>HTTP/3</strong> et provoque un débordement de tas dans <code>Microsoft.Native.Quic.MsQuic.Schannel</code> : <strong>RCE sans authentification ni interaction</strong>, CVSS 9.8. Concerne les builds Windows utilisées par .NET 8, 9, 10 et 11 RC2. Si vous exposez HTTP/3 sur Kestrel sous Windows, c'est la priorité.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-5gjq-3f94-rcf7", "label": "github.com/advisories" }
+        },
+        {
+          "id": "viteplus-1-0",
+          "tag": "ga",
+          "date": "14 Oct 2026",
+          "title": {
+            "es": "Vite+ 1.0 sale estable bajo Cloudflare, con soporte para GitLab CI y migración desde tsup",
+            "en": "Vite+ 1.0 ships stable under Cloudflare, with GitLab CI support and tsup migration",
+            "fr": "Vite+ 1.0 passe en stable chez Cloudflare, avec GitLab CI et migration depuis tsup"
+          },
+          "body_html": {
+            "es": "<p>VoidZero (ahora de Cloudflare) liberó <strong>Vite+ 1.0</strong> bajo MIT, tres meses después de la beta. Trae <code>setup-vp</code> para GitLab CI, distribución por Homebrew y Docker, <code>vp migrate</code> para proyectos <code>tsup</code>, y nuevos <code>vp toolchain</code>, <code>vp env doctor</code>, <code>vp hooks</code> y <code>vp staged</code>. Empaqueta Vitest 5, Vite 8.1 y Oxc. Para librerías y servicios TS que hoy arman build + test + lint con cinco herramientas sueltas, esto es un golazo para la DX.</p>",
+            "en": "<p>VoidZero (now owned by Cloudflare) released <strong>Vite+ 1.0</strong> under MIT, three months after the beta. It adds <code>setup-vp</code> for GitLab CI, Homebrew and Docker distribution, <code>vp migrate</code> for <code>tsup</code> projects, and new <code>vp toolchain</code>, <code>vp env doctor</code>, <code>vp hooks</code> and <code>vp staged</code> commands. It bundles Vitest 5, Vite 8.1 and Oxc.</p>",
+            "fr": "<p>VoidZero (désormais chez Cloudflare) publie <strong>Vite+ 1.0</strong> sous MIT, trois mois après la bêta. Au menu : <code>setup-vp</code> pour GitLab CI, distribution Homebrew et Docker, <code>vp migrate</code> pour les projets <code>tsup</code>, et les commandes <code>vp toolchain</code>, <code>vp env doctor</code>, <code>vp hooks</code> et <code>vp staged</code>. Inclut Vitest 5, Vite 8.1 et Oxc.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/cloudflare-viteplus-stable/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "fastify-cve-2026-107832",
+      "updates": [
+        {
+          "id": "fastify-cve-2026-107832",
+          "tag": "security",
+          "date": "13 Oct 2026",
+          "title": {
+            "es": "Fastify 5.12.6: bypass de validación de headers vía propertyNames case-sensitive (CVE-2026-107832)",
+            "en": "Fastify 5.12.6: header validation bypass via case-sensitive propertyNames (CVE-2026-107832)",
+            "fr": "Fastify 5.12.6 : contournement de validation d'en-têtes via propertyNames sensible à la casse (CVE-2026-107832)"
+          },
+          "body_html": {
+            "es": "<p>Fastify pasa a minúsculas los nombres de header del schema, pero no los valores dentro de <code>enum</code>/<code>const</code> en un <code>propertyNames</code>. Resultado: un deny-list tipo <code>X-Debug-Override</code> <strong>nunca matchea</strong> y el header prohibido llega al handler. Severidad baja (<strong>CVSS 3.7</strong>), pero es un <strong>fix incompleto</strong> de CVE-2026-84428. Afecta <code>&gt;= 5.12.2, &lt; 5.12.6</code>; la 5.12.6 además trae mejoras de perf en parsing de bodies y content-types. Moraleja: no uses validación de schema como control de seguridad sin un test que lo pruebe.</p>",
+            "en": "<p>Fastify lowercases header names in the schema, but not the values inside <code>enum</code>/<code>const</code> in a <code>propertyNames</code> subschema. A deny-list like <code>X-Debug-Override</code> therefore <strong>never matches</strong> and the forbidden header reaches the handler. Low severity (<strong>CVSS 3.7</strong>), but an <strong>incomplete fix</strong> of CVE-2026-84428. Affects <code>&gt;= 5.12.2, &lt; 5.12.6</code>; 5.12.6 also ships body and content-type parsing perf work.</p>",
+            "fr": "<p>Fastify met en minuscules les noms d'en-têtes du schéma, mais pas les valeurs dans <code>enum</code>/<code>const</code> d'un <code>propertyNames</code>. Une deny-list comme <code>X-Debug-Override</code> <strong>ne correspond jamais</strong> et l'en-tête interdit atteint le handler. Sévérité faible (<strong>CVSS 3.7</strong>), mais <strong>correctif incomplet</strong> de CVE-2026-84428. Concerne <code>&gt;= 5.12.2, &lt; 5.12.6</code>.</p>"
+          },
+          "source": { "url": "https://github.com/fastify/fastify/releases/tag/v5.12.6", "label": "github.com/fastify" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloudfront-lambda-web-functions",
+      "updates": [
+        {
+          "id": "cloudfront-lambda-web-functions",
+          "tag": "notable",
+          "date": "12 Oct 2026",
+          "title": {
+            "es": "CloudFront ya acepta Lambda Web Functions como origin, con Origin Access Control",
+            "en": "CloudFront now accepts Lambda Web Functions as an origin, with Origin Access Control",
+            "fr": "CloudFront accepte désormais les Lambda Web Functions comme origin, avec Origin Access Control"
+          },
+          "body_html": {
+            "es": "<p>Horas después del lanzamiento de Lambda Web Functions, AWS habilitó ponerlas detrás de <strong>CloudFront</strong>: TLS en el edge, caché, dominios custom y <strong>OAC</strong> para que nadie le pegue directo a la función. Sin cambios de código y <strong>sin costo extra</strong>. Esto cierra el patrón obvio: si vas a servir HTTP desde Lambda, que el único camino de entrada sea el CDN con WAF.</p>",
+            "en": "<p>Hours after launching Lambda Web Functions, AWS lets you put them behind <strong>CloudFront</strong>: edge TLS, caching, custom domains and <strong>OAC</strong> so nothing reaches the function directly. No code changes and <strong>no extra fees</strong>. If you serve HTTP from Lambda, make the CDN plus WAF the only way in.</p>",
+            "fr": "<p>Quelques heures après le lancement des Lambda Web Functions, AWS permet de les placer derrière <strong>CloudFront</strong> : TLS en edge, cache, domaines personnalisés et <strong>OAC</strong> pour bloquer l'accès direct. Sans changement de code et <strong>sans frais supplémentaires</strong>.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/cloudfront-lambda-web-functions-origin/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "ecs-livetaskcount",
+          "tag": "minor",
+          "date": "13 Oct 2026",
+          "title": {
+            "es": "ECS suma la métrica gratuita LiveTaskCount y deja de cobrar RunningTaskCount",
+            "en": "ECS adds a free LiveTaskCount metric and stops charging for RunningTaskCount",
+            "fr": "ECS ajoute la métrique gratuite LiveTaskCount et ne facture plus RunningTaskCount"
+          },
+          "body_html": {
+            "es": "<p><code>LiveTaskCount</code> cuenta tasks en ACTIVATING, RUNNING y DEACTIVATING, incluidas las que están drenando en un scale-in, sin necesitar Container Insights. Es la métrica correcta para autoscaling; <code>RunningTaskCount</code> queda como señal de salud y ahora es gratis.</p>",
+            "en": "<p><code>LiveTaskCount</code> counts tasks in ACTIVATING, RUNNING and DEACTIVATING, including ones draining during scale-in, without Container Insights. It is the right metric for autoscaling; <code>RunningTaskCount</code> stays a health signal and is now free.</p>",
+            "fr": "<p><code>LiveTaskCount</code> compte les tasks en ACTIVATING, RUNNING et DEACTIVATING, y compris celles en drainage lors d'un scale-in, sans Container Insights. <code>RunningTaskCount</code> devient gratuit.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/ecs-service-metrics/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "backstage-1-55",
+          "tag": "notable",
+          "date": "13 Oct 2026",
+          "title": {
+            "es": "Backstage 1.55: recovery de tasks del scaffolder y remoción de APIs de catálogo deprecadas",
+            "en": "Backstage 1.55: scaffolder task recovery and removal of deprecated catalog APIs",
+            "fr": "Backstage 1.55 : reprise des tâches du scaffolder et suppression d'API de catalogue dépréciées"
+          },
+          "body_html": {
+            "es": "<p>Las tasks del scaffolder que crashean o hacen timeout ahora se <strong>reanudan solas</strong> (<code>scaffolder.taskRecovery</code>). Ojo con el upgrade: se van APIs de catálogo deprecadas y search pasa a requerir <strong>Elasticsearch 8.19+</strong>. Trae fixes de seguridad en siete paquetes.</p>",
+            "en": "<p>Scaffolder tasks that crash or time out now <strong>resume automatically</strong> (<code>scaffolder.taskRecovery</code>). Plan the upgrade: deprecated catalog APIs are removed and search now needs <strong>Elasticsearch 8.19+</strong>. Includes security fixes across seven packages.</p>",
+            "fr": "<p>Les tâches du scaffolder qui plantent ou expirent <strong>reprennent automatiquement</strong> (<code>scaffolder.taskRecovery</code>). Attention à la mise à jour : API de catalogue dépréciées supprimées et search exige <strong>Elasticsearch 8.19+</strong>.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/backstage-1-55-task-recovery/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "cloudflare-ohttp-gateway",
+      "updates": [
+        {
+          "id": "cloudflare-ohttp-gateway",
+          "tag": "beta",
+          "date": "13 Oct 2026",
+          "title": {
+            "es": "El OHTTP Gateway de Cloudflare se niega a descifrar requests que llegan por Cloudflare",
+            "en": "Cloudflare's OHTTP Gateway refuses to decrypt requests that arrive through Cloudflare",
+            "fr": "La passerelle OHTTP de Cloudflare refuse de déchiffrer les requêtes arrivant via Cloudflare"
+          },
+          "body_html": {
+            "es": "<p>Lindo caso de diseño: <strong>Oblivious HTTP</strong> solo protege la privacidad si relay y gateway los operan partes <strong>distintas y no coludidas</strong>. Por eso Cloudflare rechaza tráfico que venga de Workers o hosts proxied por ellos mismos, y no ofrece relay. Y recordá: oculta la identidad de red, no lo que mandes en el body. Si estás pensando telemetría privacy-preserving, leelo.</p>",
+            "en": "<p>A neat design case: <strong>Oblivious HTTP</strong> only preserves privacy when the relay and gateway are run by <strong>separate, non-colluding parties</strong>. So Cloudflare rejects traffic from its own Workers or proxied hosts and offers no relay. It hides network identity, not what you put in the body.</p>",
+            "fr": "<p>Un bon cas de conception : <strong>Oblivious HTTP</strong> ne protège la vie privée que si relais et passerelle sont opérés par des <strong>parties distinctes et non complices</strong>. Cloudflare rejette donc le trafic de ses propres Workers ou hôtes proxifiés et ne fournit pas de relais.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/cloudflare-ohttp-gateway/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "pnpm-12-13-0",
+      "updates": [
+        {
+          "id": "pnpm-12-13-0",
+          "tag": "release",
+          "date": "13 Oct 2026",
+          "title": {
+            "es": "pnpm 12.13: comandos profile y token, y storeIndexFormat para stores compartidos por red",
+            "en": "pnpm 12.13: profile and token commands, plus storeIndexFormat for network-shared stores",
+            "fr": "pnpm 12.13 : commandes profile et token, et storeIndexFormat pour les stores partagés en réseau"
+          },
+          "body_html": {
+            "es": "<p>Nuevos <code>pnpm profile</code> y <code>pnpm token</code> para gestionar el registry sin salir de pnpm. Lo importante para CI: <code>storeIndexFormat: files</code> guarda el índice como un archivo por paquete en vez del <code>index.db</code> de SQLite, cuyo locking <strong>no funciona entre máquinas</strong> y podía corromperse en un store sobre NFS. También agrupa la config de package maps en <code>nodePackageMap</code>.</p>",
+            "en": "<p>New <code>pnpm profile</code> and <code>pnpm token</code> commands manage the registry from pnpm. The CI-relevant bit: <code>storeIndexFormat: files</code> keeps one index file per package instead of the SQLite <code>index.db</code>, whose locking <strong>does not work across machines</strong> and could corrupt on network-filesystem stores. Package-map settings are grouped under <code>nodePackageMap</code>.</p>",
+            "fr": "<p>Nouvelles commandes <code>pnpm profile</code> et <code>pnpm token</code>. Pour la CI : <code>storeIndexFormat: files</code> conserve un fichier d'index par paquet au lieu de l'<code>index.db</code> SQLite, dont le verrouillage <strong>ne fonctionne pas entre machines</strong>. Les réglages de package map sont regroupés sous <code>nodePackageMap</code>.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.13.0", "label": "github.com/pnpm" }
+        },
+        {
+          "id": "turborepo-2-11-8",
+          "tag": "minor",
+          "date": "13 Oct 2026",
+          "title": {
+            "es": "Turborepo 2.11.8: flag experimental de setup y descargas con el package manager del repo",
+            "en": "Turborepo 2.11.8: experimental setup future flag and downloads via the repo's package manager",
+            "fr": "Turborepo 2.11.8 : flag expérimental setup et téléchargements via le gestionnaire de paquets du dépôt"
+          },
+          "body_html": {
+            "es": "<p>Patch chico: agrega un future flag experimental de <code>setup</code> y las descargas automáticas de Turbo ahora usan el <strong>package manager del repositorio</strong> en vez de asumir npm.</p>",
+            "en": "<p>Small patch: adds an experimental <code>setup</code> future flag, and automatic Turbo downloads now use the <strong>repository's package manager</strong> instead of assuming npm.</p>",
+            "fr": "<p>Petit patch : ajoute un future flag expérimental <code>setup</code>, et les téléchargements automatiques de Turbo utilisent le <strong>gestionnaire de paquets du dépôt</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/turborepo/releases/tag/v2.11.8", "label": "github.com/vercel" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Día de seguridad en el stack HTTP: request smuggling en Kestrel y un fix incompleto en Fastify muestran que la normalización de headers sigue siendo terreno minado.",
+      "en": "A security day for the HTTP stack: Kestrel request smuggling and an incomplete Fastify fix show header normalization is still a minefield.",
+      "fr": "Journée sécurité pour la pile HTTP : request smuggling dans Kestrel et correctif incomplet dans Fastify rappellent que la normalisation des en-têtes reste un terrain miné."
+    },
+    {
+      "es": "AWS completa en días el ecosistema de Lambda Web Functions: primero la primitiva, ahora CloudFront con OAC como puerta de entrada.",
+      "en": "AWS fills out Lambda Web Functions within days: first the primitive, now CloudFront with OAC as the front door.",
+      "fr": "AWS complète en quelques jours l'écosystème Lambda Web Functions : d'abord la primitive, puis CloudFront avec OAC comme point d'entrée."
+    },
+    {
+      "es": "La toolchain JS se consolida: Vite+ 1.0 empaqueta build, test, lint y hooks en un solo CLI respaldado por Cloudflare.",
+      "en": "JS tooling keeps consolidating: Vite+ 1.0 bundles build, test, lint and hooks in one Cloudflare-backed CLI.",
+      "fr": "L'outillage JS se consolide : Vite+ 1.0 réunit build, test, lint et hooks dans un seul CLI soutenu par Cloudflare."
+    }
+  ]
+}

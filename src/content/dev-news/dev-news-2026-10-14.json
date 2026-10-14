@@ -1,0 +1,249 @@
+{
+  "title": {
+    "es": "Dev News — 14 Oct 2026: pnpm 12.13, Vite+ 1.1 y Oxlint con breaking changes",
+    "en": "Dev News — 14 Oct 2026: pnpm 12.13, Vite+ 1.1 and a breaking Oxlint",
+    "fr": "Dev News — 14 oct. 2026 : pnpm 12.13, Vite+ 1.1 et un Oxlint cassant"
+  },
+  "description": {
+    "es": "pnpm suma profile/token y un store apto para NFS, Vite+ 1.1 arranca más rápido, Oxlint 1.88 rompe el AST, Vue 3.5.44 trae una tanda grande de fixes, Solid y Qwik 2.0 avanzan en RC y VS Code saca un parche de seguridad.",
+    "en": "pnpm adds profile/token commands and an NFS-safe store, Vite+ 1.1 starts faster, Oxlint 1.88 breaks the AST, Vue 3.5.44 lands a big batch of fixes, Solid and Qwik 2.0 move forward in RC, and VS Code ships a security patch.",
+    "fr": "pnpm ajoute profile/token et un store compatible NFS, Vite+ 1.1 démarre plus vite, Oxlint 1.88 casse l'AST, Vue 3.5.44 apporte de nombreux correctifs, Solid et Qwik 2.0 avancent en RC et VS Code publie un correctif de sécurité."
+  },
+  "pubDate": "2026-10-14",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": { "es": "pnpm 12.13: profile, token y store para NFS", "en": "pnpm 12.13: profile, token, NFS-safe store", "fr": "pnpm 12.13 : profile, token, store NFS" },
+      "anchor": "pnpm-12-13-0",
+      "icon": "lucide:package"
+    },
+    {
+      "text": { "es": "Vite+ 1.1: vp dev arranca 24% más rápido", "en": "Vite+ 1.1: vp dev starts 24% sooner", "fr": "Vite+ 1.1 : vp dev démarre 24 % plus tôt" },
+      "anchor": "vite-plus-1-1",
+      "icon": "simple-icons:vite"
+    },
+    {
+      "text": { "es": "Oxlint 1.88: breaking en comentarios del AST", "en": "Oxlint 1.88: breaking AST comment storage", "fr": "Oxlint 1.88 : stockage des commentaires cassant" },
+      "anchor": "oxlint-1-88",
+      "icon": "lucide:code"
+    },
+    {
+      "text": { "es": "Vue 3.5.44: más de 25 fixes de runtime y SSR", "en": "Vue 3.5.44: 25+ runtime and SSR fixes", "fr": "Vue 3.5.44 : plus de 25 correctifs" },
+      "anchor": "vue-3-5-44",
+      "icon": "simple-icons:vuedotjs"
+    },
+    {
+      "text": { "es": "Solid 2.0 RC.15 y Qwik 2.0 RC.3", "en": "Solid 2.0 RC.15 and Qwik 2.0 RC.3", "fr": "Solid 2.0 RC.15 et Qwik 2.0 RC.3" },
+      "anchor": "js-frameworks",
+      "icon": "lucide:blocks"
+    },
+    {
+      "text": { "es": "VS Code 1.141.1: parche de seguridad", "en": "VS Code 1.141.1: security patch", "fr": "VS Code 1.141.1 : correctif de sécurité" },
+      "anchor": "vscode-1-141-1",
+      "icon": "simple-icons:visualstudiocode"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "pnpm-12-13-0",
+          "tag": "notable",
+          "date": "13 Oct 2026",
+          "title": {
+            "es": "pnpm 12.13: pnpm profile, pnpm token y storeIndexFormat para stores compartidos",
+            "en": "pnpm 12.13: pnpm profile, pnpm token and storeIndexFormat for shared stores",
+            "fr": "pnpm 12.13 : pnpm profile, pnpm token et storeIndexFormat pour les stores partagés"
+          },
+          "body_html": {
+            "es": "<p>Llegan <code>pnpm profile</code> y <code>pnpm token</code> para gestionar perfil y tokens del registry sin salir de pnpm. Lo más jugoso es <code>storeIndexFormat: files</code>: guarda el índice del store como un archivo por paquete en vez del <code>index.db</code> de SQLite, porque el locking de SQLite no funciona entre máquinas y los installs concurrentes sobre un store en NFS podían corromperlo. Además, <code>nodePackageMap</code> agrupa la config del package map (<code>mode: write-only</code> o <code>load</code>). Si tenés CI con store compartido en red, <strong>ojo con esto</strong>.</p>",
+            "en": "<p>New <code>pnpm profile</code> and <code>pnpm token</code> commands manage registry profile and tokens from pnpm. The big one is <code>storeIndexFormat: files</code>: it keeps the store index as one file per package instead of the SQLite <code>index.db</code>, because SQLite locking does not work across machines and concurrent installs on a network-filesystem store could corrupt it. A new <code>nodePackageMap</code> setting also groups the package-map options (<code>mode: write-only</code> or <code>load</code>). If your CI shares a store over the network, <strong>this matters</strong>.</p>",
+            "fr": "<p>Nouvelles commandes <code>pnpm profile</code> et <code>pnpm token</code> pour gérer le profil et les tokens du registry. Le point clé est <code>storeIndexFormat: files</code> : l'index du store devient un fichier par paquet au lieu du <code>index.db</code> SQLite, car le verrouillage SQLite ne fonctionne pas entre machines et des installations concurrentes sur un store réseau pouvaient le corrompre. Le réglage <code>nodePackageMap</code> regroupe aussi les options de package map (<code>mode: write-only</code> ou <code>load</code>).</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.13.0", "label": "github.com/pnpm" }
+        },
+        {
+          "id": "vite-plus-1-1",
+          "tag": "release",
+          "date": "07 Oct 2026",
+          "title": {
+            "es": "Vite+ 1.1: vp dev llega a la URL local ~24% antes y usa ~30% menos memoria",
+            "en": "Vite+ 1.1: vp dev reaches its local URL ~24% sooner with ~30% less memory",
+            "fr": "Vite+ 1.1 : vp dev atteint son URL locale ~24 % plus tôt avec ~30 % de mémoire en moins"
+          },
+          "body_html": {
+            "es": "<p>Primer minor tras el 1.0 del toolchain unificado de VoidZero. <code>vp dev</code> ya no carga Vite ni Vitest en el proceso padre antes de levantar el dev server, y de ahí salen la mejora de arranque y de memoria. <code>vp run</code> ahora setea <code>npm_execpath</code> y <code>npm_config_user_agent</code>, así herramientas como npm-run-all2 usan el package manager del proyecto. También sube Vite 8.3.3, Vitest 5.0.3, Oxlint 1.87 y Oxfmt 0.72: <strong>ojo</strong>, los nuevos lint/format pueden marcar código que antes pasaba.</p>",
+            "en": "<p>First minor after the 1.0 of VoidZero's unified toolchain. <code>vp dev</code> no longer loads Vite and Vitest in the parent process before starting the dev server, which is where the startup and memory gains come from. <code>vp run</code> now sets <code>npm_execpath</code> and <code>npm_config_user_agent</code>, so tools like npm-run-all2 use the project's package manager. It also bumps Vite 8.3.3, Vitest 5.0.3, Oxlint 1.87 and Oxfmt 0.72 — the new lint and format versions can flag code that passed before.</p>",
+            "fr": "<p>Première version mineure après la 1.0 de la toolchain unifiée de VoidZero. <code>vp dev</code> ne charge plus Vite ni Vitest dans le processus parent avant de démarrer le serveur, d'où les gains de démarrage et de mémoire. <code>vp run</code> définit désormais <code>npm_execpath</code> et <code>npm_config_user_agent</code>. Mise à jour vers Vite 8.3.3, Vitest 5.0.3, Oxlint 1.87 et Oxfmt 0.72 : les nouvelles versions peuvent signaler du code qui passait avant.</p>"
+          },
+          "source": { "url": "https://github.com/voidzero-dev/vite-plus/releases/tag/v1.1.0", "label": "github.com/voidzero-dev" }
+        },
+        {
+          "id": "oxlint-1-88",
+          "tag": "breaking",
+          "date": "13 Oct 2026",
+          "title": {
+            "es": "Oxlint 1.88: nuevo almacenamiento de comentarios en el AST (breaking) y errores de config en el LSP",
+            "en": "Oxlint 1.88: new AST comment attachment storage (breaking) and config errors in the LSP",
+            "fr": "Oxlint 1.88 : nouveau stockage des commentaires dans l'AST (cassant) et erreurs de config dans le LSP"
+          },
+          "body_html": {
+            "es": "<p>Dos cambios <strong>breaking</strong> en el AST refactorizan cómo se adjuntan los comentarios a los nodos: si escribís plugins JS de Oxlint o consumís los crates de oxc, revisá antes de actualizar. Del lado del usuario, el LSP ahora muestra los errores de configuración en el editor, <code>sort-keys</code> compara en orden natural como ESLint y se evitan fixes de type imports que chocaban entre sí. Sale junto con Oxfmt 0.73, que ahora sigue configs symlinkeadas.</p>",
+            "en": "<p>Two <strong>breaking</strong> AST changes refactor how comments are attached to nodes: if you write Oxlint JS plugins or consume the oxc crates, check before upgrading. User-facing, the LSP now surfaces config errors in the editor, <code>sort-keys</code> compares natural order like ESLint, and conflicting type-import fixes are prevented. Ships alongside Oxfmt 0.73, which now follows symlinked configs.</p>",
+            "fr": "<p>Deux changements <strong>cassants</strong> de l'AST refondent l'attachement des commentaires aux nœuds : si vous écrivez des plugins JS Oxlint ou utilisez les crates oxc, vérifiez avant de mettre à jour. Côté utilisateur, le LSP affiche les erreurs de configuration, <code>sort-keys</code> compare en ordre naturel comme ESLint, et les correctifs d'imports de types conflictuels sont évités. Publié avec Oxfmt 0.73.</p>"
+          },
+          "source": { "url": "https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.88.0", "label": "github.com/oxc-project" }
+        }
+      ]
+    },
+    {
+      "id": "js-frameworks",
+      "name": "JS Frameworks",
+      "theme": "js-frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "js-frameworks",
+      "updates": [
+        {
+          "id": "vue-3-5-44",
+          "tag": "patch",
+          "date": "13 Oct 2026",
+          "title": {
+            "es": "Vue 3.5.44: tanda grande de fixes en reactivity, Suspense, Teleport y SSR",
+            "en": "Vue 3.5.44: a large batch of fixes across reactivity, Suspense, Teleport and SSR",
+            "fr": "Vue 3.5.44 : nombreux correctifs pour la réactivité, Suspense, Teleport et le SSR"
+          },
+          "body_html": {
+            "es": "<p>No es un patch cualquiera: más de 25 fixes. Destacan que los watchers ya no trackean deps cuando corren dentro de otro effect (cierra el viejo #5009), que los <code>once</code> watchers se detienen si el callback tira error, que el server renderer propaga errores de <code>setup</code> async y que <code>v-html</code> serializa bien <code>0</code> y <code>false</code>. Si estás en 3.5, actualizá sin miedo.</p>",
+            "en": "<p>Not a throwaway patch: 25+ fixes. Highlights include watchers no longer tracking deps when run inside another effect (closing the long-standing #5009), <code>once</code> watchers stopping when the callback throws, the server renderer propagating async <code>setup</code> errors, and <code>v-html</code> correctly stringifying <code>0</code> and <code>false</code>. Safe upgrade for anyone on 3.5.</p>",
+            "fr": "<p>Pas un simple patch : plus de 25 correctifs. Les watchers ne suivent plus les dépendances lorsqu'ils s'exécutent dans un autre effect (ferme le vieux #5009), les watchers <code>once</code> s'arrêtent si le callback lève une erreur, le rendu serveur propage les erreurs de <code>setup</code> async, et <code>v-html</code> sérialise correctement <code>0</code> et <code>false</code>.</p>"
+          },
+          "source": { "url": "https://github.com/vuejs/core/releases/tag/v3.5.44", "label": "github.com/vuejs" }
+        },
+        {
+          "id": "solid-2-0-rc-15",
+          "tag": "beta",
+          "date": "13 Oct 2026",
+          "title": {
+            "es": "Solid 2.0 RC.15: dynamicComponent pasa a solid-js y fixes de SSR/hidratación",
+            "en": "Solid 2.0 RC.15: dynamicComponent moves into solid-js, plus SSR and hydration fixes",
+            "fr": "Solid 2.0 RC.15 : dynamicComponent passe dans solid-js, correctifs SSR et hydratation"
+          },
+          "body_html": {
+            "es": "<p><code>dynamicComponent</code> se muda a <code>solid-js</code> (<code>@solidjs/web</code> lo re-exporta). Lo importante: un rechazo contenido por <code>&lt;Errored&gt;</code> durante SSR ya no se reporta como unhandled y no tumba el proceso de Node, y <code>lazy()</code> deja de cachear promesas creadas durante la traza de hidratación, un bug que pegaba con <code>__vitePreload</code> de Vite. La serie RC sigue puliendo bordes antes del GA.</p>",
+            "en": "<p><code>dynamicComponent</code> moves into <code>solid-js</code> (<code>@solidjs/web</code> re-exports it). More importantly, a rejection contained by <code>&lt;Errored&gt;</code> during SSR is no longer reported as unhandled and no longer exits Node, and <code>lazy()</code> stops caching loader promises created during the hydration trace — a bug that hit Vite's <code>__vitePreload</code>. The RC series keeps sanding edges before GA.</p>",
+            "fr": "<p><code>dynamicComponent</code> passe dans <code>solid-js</code> (réexporté par <code>@solidjs/web</code>). Surtout, un rejet contenu par <code>&lt;Errored&gt;</code> en SSR n'est plus signalé comme non géré et ne fait plus quitter Node, et <code>lazy()</code> ne met plus en cache les promesses créées pendant la trace d'hydratation, un bug touchant <code>__vitePreload</code> de Vite.</p>"
+          },
+          "source": { "url": "https://github.com/solidjs/solid/releases/tag/solid-js%402.0.0-rc.15", "label": "github.com/solidjs" }
+        },
+        {
+          "id": "qwik-2-0-rc-3",
+          "tag": "beta",
+          "date": "13 Oct 2026",
+          "title": {
+            "es": "Qwik 2.0 RC.3: el router serializa menos estado y routeLoader$ re-fetchea bien",
+            "en": "Qwik 2.0 RC.3: the router serializes less state and routeLoader$ re-fetches properly",
+            "fr": "Qwik 2.0 RC.3 : le routeur sérialise moins d'état et routeLoader$ se recharge correctement"
+          },
+          "body_html": {
+            "es": "<p>El router de <code>@qwik.dev/router</code> serializa menos estado en cada página, <code>invalidate()</code> y <code>usePoll</code> sobre señales de <code>routeLoader$</code> ahora re-fetchean respetando los cache headers (y tipan como computed signals), y matchean rutas que siguen después de un <code>[...rest]</code>. Un RC más cerca del 2.0 estable.</p>",
+            "en": "<p><code>@qwik.dev/router</code> serializes less state into every page, <code>invalidate()</code> and <code>usePoll</code> on <code>routeLoader$</code> signals now re-fetch while honoring cache headers (and are typed as computed signals), and routes continuing after a <code>[...rest]</code> segment now match. One more RC closer to a stable 2.0.</p>",
+            "fr": "<p><code>@qwik.dev/router</code> sérialise moins d'état dans chaque page, <code>invalidate()</code> et <code>usePoll</code> sur les signaux <code>routeLoader$</code> se rechargent en respectant les en-têtes de cache (et sont typés comme computed signals), et les routes après un segment <code>[...rest]</code> correspondent désormais.</p>"
+          },
+          "source": { "url": "https://github.com/QwikDev/qwik/releases/tag/%40qwik.dev/router%402.0.0-rc.3", "label": "github.com/QwikDev" }
+        }
+      ]
+    },
+    {
+      "id": "build-tools",
+      "name": "Build Tools & Runtimes",
+      "theme": "build-tools",
+      "icon_emoji": "🔧",
+      "anchor": "build-tools",
+      "updates": [
+        {
+          "id": "rspack-2-2-9",
+          "tag": "minor",
+          "date": "13 Oct 2026",
+          "title": {
+            "es": "Rspack 2.2.9: menos módulos duplicados entre chunks y binario 2 MB más liviano",
+            "en": "Rspack 2.2.9: fewer duplicate modules across chunks and a 2 MB lighter binary",
+            "fr": "Rspack 2.2.9 : moins de modules dupliqués entre chunks et un binaire allégé de 2 Mo"
+          },
+          "body_html": {
+            "es": "<p>El algoritmo de chunking ahora propaga el crecimiento de módulos disponibles durante el code splitting, así que hay menos código duplicado y bundles más chicos sin tocar config. Además, comprimir los datos de browserslist recorta 2.13 MB del binario nativo.</p>",
+            "en": "<p>The chunking algorithm now propagates available-module growth during code splitting, cutting duplicate code and shrinking bundles with no config changes. Compressing the browserslist data also trims 2.13 MB off the native binary.</p>",
+            "fr": "<p>L'algorithme de chunking propage désormais la croissance des modules disponibles pendant le code splitting, réduisant le code dupliqué et la taille des bundles sans changer la config. La compression des données browserslist retire aussi 2,13 Mo au binaire natif.</p>"
+          },
+          "source": { "url": "https://github.com/web-infra-dev/rspack/releases/tag/v2.2.9", "label": "github.com/web-infra-dev" }
+        }
+      ]
+    },
+    {
+      "id": "dev-tools",
+      "name": "Developer Tools",
+      "theme": "dev-tools",
+      "icon_emoji": "🛠️",
+      "anchor": "dev-tools",
+      "updates": [
+        {
+          "id": "vscode-1-141-1",
+          "tag": "security",
+          "date": "13 Oct 2026",
+          "title": {
+            "es": "VS Code 1.141.1: recovery release con fixes de seguridad",
+            "en": "VS Code 1.141.1: recovery release with security fixes",
+            "fr": "VS Code 1.141.1 : version corrective avec des correctifs de sécurité"
+          },
+          "body_html": {
+            "es": "<p>Microsoft sacó 1.141.1 el mismo día del Patch Tuesday; las release notes solo dicen que corrige problemas de seguridad, sin detallar CVEs. Dejá que el auto-update haga lo suyo o actualizá a mano, sobre todo si usás builds portables o gestionadas.</p>",
+            "en": "<p>Microsoft shipped 1.141.1 on Patch Tuesday; the release notes only say it addresses security issues, without listing CVEs. Let auto-update run or update manually, especially on portable or managed installs.</p>",
+            "fr": "<p>Microsoft a publié 1.141.1 le jour du Patch Tuesday ; les notes indiquent seulement des correctifs de sécurité, sans lister de CVE. Laissez la mise à jour automatique agir ou mettez à jour manuellement, surtout pour les installations portables ou gérées.</p>"
+          },
+          "source": { "url": "https://github.com/microsoft/vscode/releases/tag/1.141.1", "label": "github.com/microsoft" }
+        }
+      ]
+    },
+    {
+      "id": "quick-links",
+      "name": "Quick Links",
+      "theme": "quick-links",
+      "icon_emoji": "📌",
+      "anchor": "quick-links",
+      "updates": [
+        {
+          "id": "oxfmt-0-73",
+          "tag": "minor",
+          "date": "13 Oct 2026",
+          "title": {
+            "es": "Oxfmt 0.73 sigue configs symlinkeadas",
+            "en": "Oxfmt 0.73 follows symlinked configs",
+            "fr": "Oxfmt 0.73 suit les configs en lien symbolique"
+          },
+          "body_html": {
+            "es": "<p>Release hermano de Oxlint 1.88: el formatter ahora descubre configs symlinkeadas, útil en monorepos con config compartida.</p>",
+            "en": "<p>Sibling release to Oxlint 1.88: the formatter now discovers symlinked configs, handy in monorepos with shared config.</p>",
+            "fr": "<p>Publié avec Oxlint 1.88 : le formateur découvre désormais les configs en lien symbolique, pratique dans les monorepos.</p>"
+          },
+          "source": { "url": "https://github.com/oxc-project/oxc/releases/tag/oxfmt_v0.73.0", "label": "github.com/oxc-project" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Semana de RCs: Solid 2.0 y Qwik 2.0 siguen puliendo SSR e hidratación antes del GA. No hay apuro, pero conviene probarlos ya en una rama.",
+      "en": "RC week: Solid 2.0 and Qwik 2.0 keep polishing SSR and hydration ahead of GA. No rush, but worth trying on a branch now.",
+      "fr": "Semaine de RC : Solid 2.0 et Qwik 2.0 peaufinent le SSR et l'hydratation avant la GA. Pas d'urgence, mais à tester dès maintenant sur une branche."
+    },
+    {
+      "es": "El toolchain de VoidZero/Oxc se mueve rápido: Oxlint rompe el AST y Vite+ ya avisa que los nuevos lint/format pueden fallar código que antes pasaba. Fijá versiones en CI.",
+      "en": "The VoidZero/Oxc toolchain moves fast: Oxlint breaks its AST and Vite+ already warns that new lint/format versions can fail previously passing code. Pin versions in CI.",
+      "fr": "La toolchain VoidZero/Oxc évolue vite : Oxlint casse son AST et Vite+ prévient que les nouvelles versions de lint/format peuvent échouer sur du code qui passait. Figez les versions en CI."
+    }
+  ]
+}

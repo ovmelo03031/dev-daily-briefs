@@ -1,0 +1,427 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 15 Oct 2026: dos RCE críticos en Next.js, Node 26.12 y containerd parchado en Docker",
+    "en": "Backend & Fullstack Daily — Oct 15, 2026: two critical Next.js RCEs, Node 26.12 and containerd fixes in Docker",
+    "fr": "Backend & Fullstack Daily — 15 oct. 2026 : deux RCE critiques dans Next.js, Node 26.12 et correctifs containerd dans Docker"
+  },
+  "description": {
+    "es": "Next.js 16.4.1/15.5.28 cierra dos RCE sin autenticación (CVSS 9.5), Node.js 26.12 y 24.22 traen websocketMask y carga sincrónica de ESM, Docker 29.9.1 parcha tres fallas de containerd, EventBridge estrena buses compartidos con ordering y replay, y Prisma 8 rc.18 rompe el raw SQL en PSL.",
+    "en": "Next.js 16.4.1/15.5.28 closes two unauthenticated RCEs (CVSS 9.5), Node.js 26.12 and 24.22 add websocketMask and synchronous ESM loading, Docker 29.9.1 patches three containerd flaws, EventBridge ships shared buses with ordering and replay, and Prisma 8 rc.18 breaks raw SQL in PSL.",
+    "fr": "Next.js 16.4.1/15.5.28 corrige deux RCE non authentifiées (CVSS 9.5), Node.js 26.12 et 24.22 ajoutent websocketMask et le chargement ESM synchrone, Docker 29.9.1 corrige trois failles containerd, EventBridge lance des bus partagés avec ordering et replay, et Prisma 8 rc.18 casse le raw SQL en PSL."
+  },
+  "pubDate": "2026-10-15",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Next.js: dos RCE sin auth, CVSS 9.5",
+        "en": "Next.js: two unauthenticated RCEs, CVSS 9.5",
+        "fr": "Next.js : deux RCE sans auth, CVSS 9.5"
+      },
+      "anchor": "nextjs-16-4-1-security",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Node.js 26.12: websocketMask y ESM sincrónico",
+        "en": "Node.js 26.12: websocketMask and sync ESM",
+        "fr": "Node.js 26.12 : websocketMask et ESM synchrone"
+      },
+      "anchor": "node-26-12-0",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": {
+        "es": "Docker 29.9.1 parcha 3 fallas de containerd",
+        "en": "Docker 29.9.1 patches 3 containerd flaws",
+        "fr": "Docker 29.9.1 corrige 3 failles containerd"
+      },
+      "anchor": "docker-29-9-1",
+      "icon": "simple-icons:docker"
+    },
+    {
+      "text": {
+        "es": "EventBridge: bus compartido con ordering y replay",
+        "en": "EventBridge: shared bus with ordering and replay",
+        "fr": "EventBridge : bus partagé avec ordering et replay"
+      },
+      "anchor": "eventbridge-enhanced-bus",
+      "icon": "lucide:layers"
+    },
+    {
+      "text": {
+        "es": "Prisma 8 rc.18: raw SQL pasa a ser literal sql",
+        "en": "Prisma 8 rc.18: raw SQL becomes a sql literal",
+        "fr": "Prisma 8 rc.18 : le raw SQL devient un littéral sql"
+      },
+      "anchor": "prisma-8-rc-18",
+      "icon": "simple-icons:prisma"
+    },
+    {
+      "text": {
+        "es": "Lambda durable: 30.000 operaciones por ejecución",
+        "en": "Lambda durable: 30,000 operations per execution",
+        "fr": "Lambda durable : 30 000 opérations par exécution"
+      },
+      "anchor": "lambda-durable-limits",
+      "icon": "simple-icons:amazonwebservices"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "nextjs-16-4-1-security",
+          "tag": "security",
+          "date": "14 Oct 2026",
+          "title": {
+            "es": "Next.js 16.4.1 y 15.5.28: dos RCE críticos sin autenticación y un DoS en Server Actions",
+            "en": "Next.js 16.4.1 and 15.5.28: two critical unauthenticated RCEs and a Server Actions DoS",
+            "fr": "Next.js 16.4.1 et 15.5.28 : deux RCE critiques non authentifiées et un DoS des Server Actions"
+          },
+          "body_html": {
+            "es": "<p>Vercel sacó parches en las dos ramas el mismo minuto, y con razón: <strong>dos RCE críticos (CVSS v4 9.5)</strong> más un DoS high (8.2). Uno afecta a funciones <code>use cache</code> que devuelven varios typed arrays en <code>16.0.0–16.4.0</code>, <strong>sin workaround</strong>. El otro viene de <code>sharp</code> en la Image Optimization API con SVG sobre Linux glibc y pega desde <code>10.x</code> hasta <code>15.5.27</code>. Si tenés App Router con Server Actions, el DoS también te toca. Ojo, actualizá YA a <code>16.4.1</code> o <code>15.5.28</code>.</p>",
+            "en": "<p>Vercel shipped patches on both branches within the same minute, and for good reason: <strong>two critical RCEs (CVSS v4 9.5)</strong> plus a high-severity DoS (8.2). One hits <code>use cache</code> functions returning multiple typed arrays in <code>16.0.0–16.4.0</code>, with <strong>no workaround</strong>. The other comes from <code>sharp</code> in the Image Optimization API with SVG on glibc Linux and reaches back from <code>10.x</code> to <code>15.5.27</code>. App Router apps with Server Actions are also exposed to the DoS. Upgrade to <code>16.4.1</code> or <code>15.5.28</code> now.</p>",
+            "fr": "<p>Vercel a publié des correctifs sur les deux branches à la même minute, et pour cause : <strong>deux RCE critiques (CVSS v4 9.5)</strong> plus un DoS high (8.2). L'une touche les fonctions <code>use cache</code> qui renvoient plusieurs typed arrays en <code>16.0.0–16.4.0</code>, <strong>sans contournement</strong>. L'autre vient de <code>sharp</code> dans l'Image Optimization API avec des SVG sous Linux glibc et remonte de <code>10.x</code> à <code>15.5.27</code>. Les apps App Router avec Server Actions sont aussi exposées au DoS. Passez à <code>16.4.1</code> ou <code>15.5.28</code> immédiatement.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vercel/next.js/releases/tag/v16.4.1",
+            "label": "github.com/vercel/next.js"
+          }
+        },
+        {
+          "id": "node-26-12-0",
+          "tag": "release",
+          "date": "14 Oct 2026",
+          "title": {
+            "es": "Node.js 26.12.0: websocketMask(), ESM cargado de forma sincrónica y crypto sin locks",
+            "en": "Node.js 26.12.0: websocketMask(), synchronously loaded ESM and lock-free crypto",
+            "fr": "Node.js 26.12.0 : websocketMask(), ESM chargé de façon synchrone et crypto sans verrous"
+          },
+          "body_html": {
+            "es": "<p>Dos cambios semver-minor: <code>http.websocketMask()</code>/<code>websocketUnmask()</code> para quien arma frames WebSocket a mano, y un throw explícito cuando faltan WebAssembly o soporte RX. Lo jugoso está abajo: la mayoría de los <strong>módulos ES se cargan sincrónicamente</strong>, Filip Skokan sacó un montón de <strong>key locking</strong> de <code>crypto</code>, se arregla un leak en <code>AbortSignal.any()</code> anidado y llega <code>sqlite 3.54</code>. Esto es un golazo para la DX de librerías que mezclan <code>require</code> y ESM.</p>",
+            "en": "<p>Two semver-minor changes: <code>http.websocketMask()</code>/<code>websocketUnmask()</code> for hand-rolled WebSocket frames, and an explicit throw when WebAssembly or RX support is missing. The interesting part is below the fold: most <strong>ES modules now load synchronously</strong>, Filip Skokan removed a batch of <strong>key locking</strong> from <code>crypto</code>, a nested <code>AbortSignal.any()</code> leak is fixed and <code>sqlite 3.54</code> lands. Good news for libraries mixing <code>require</code> and ESM.</p>",
+            "fr": "<p>Deux changements semver-minor : <code>http.websocketMask()</code>/<code>websocketUnmask()</code> pour les frames WebSocket faites main, et un throw explicite quand WebAssembly ou le support RX manque. Le plus intéressant est plus bas : la plupart des <strong>modules ES se chargent désormais de façon synchrone</strong>, Filip Skokan a retiré une série de <strong>verrous de clés</strong> dans <code>crypto</code>, une fuite dans <code>AbortSignal.any()</code> imbriqué est corrigée et <code>sqlite 3.54</code> arrive.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nodejs/node/releases/tag/v26.12.0",
+            "label": "github.com/nodejs/node"
+          }
+        },
+        {
+          "id": "docker-29-9-1",
+          "tag": "security",
+          "date": "14 Oct 2026",
+          "title": {
+            "es": "Docker 29.9.1: containerd 2.4.2 cierra tres vectores desde registries maliciosos",
+            "en": "Docker 29.9.1: containerd 2.4.2 closes three malicious-registry vectors",
+            "fr": "Docker 29.9.1 : containerd 2.4.2 ferme trois vecteurs via des registries malveillants"
+          },
+          "body_html": {
+            "es": "<p>El bump a <code>containerd 2.4.2</code> arregla <strong>CVE-2026-95839</strong> (crash por un digest malformado en la anotación <code>io.containerd.manifest.subject</code>), un crash por <code>Content-Length</code> trucho con <code>concurrent_layer_fetch_buffer</code>, y el más feo: un registry malicioso podía <strong>llenarte el disco</strong> porque no se limitaba la capa al tamaño declarado. Si tus runners de CI hacen pull de imágenes de terceros, ponete las pilas.</p>",
+            "en": "<p>The bump to <code>containerd 2.4.2</code> fixes <strong>CVE-2026-95839</strong> (a crash from a malformed digest in the <code>io.containerd.manifest.subject</code> annotation), a crash from a crafted <code>Content-Length</code> with <code>concurrent_layer_fetch_buffer</code>, and the nastiest one: a malicious registry could <strong>exhaust host disk</strong> because layer data was not capped at its declared size. CI runners pulling third-party images should update first.</p>",
+            "fr": "<p>Le passage à <code>containerd 2.4.2</code> corrige <strong>CVE-2026-95839</strong> (crash via un digest malformé dans l'annotation <code>io.containerd.manifest.subject</code>), un crash via un <code>Content-Length</code> forgé avec <code>concurrent_layer_fetch_buffer</code>, et le pire : un registry malveillant pouvait <strong>saturer le disque</strong> faute de limiter la couche à sa taille déclarée. Les runners CI qui tirent des images tierces doivent mettre à jour en priorité.</p>"
+          },
+          "source": {
+            "url": "https://github.com/moby/moby/releases/tag/docker-v29.9.1",
+            "label": "github.com/moby/moby"
+          }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "nextjs-sharp-svg-rce",
+      "updates": [
+        {
+          "id": "nextjs-sharp-svg-rce",
+          "tag": "security",
+          "date": "14 Oct 2026",
+          "title": {
+            "es": "CVE-2026-96889: RCE en la Image Optimization API de Next.js vía sharp y SVG",
+            "en": "CVE-2026-96889: Next.js Image Optimization API RCE via sharp and SVG",
+            "fr": "CVE-2026-96889 : RCE dans l'Image Optimization API de Next.js via sharp et SVG"
+          },
+          "body_html": {
+            "es": "<p>Falla de memoria en la librería upstream que usa <code>next/image</code>, explotable sin auth en Linux glibc. El rango es enorme: <strong>desde Next 10</strong>. Si no podés subir de versión hoy, el workaround es forzar <code>sharp &gt;= 0.35.5</code> en tu lockfile. Tené en cuenta que cualquier proyecto que use <code>sharp</code> directo para procesar SVG de usuarios está en la misma.</p>",
+            "en": "<p>A memory bug in the upstream library behind <code>next/image</code>, exploitable without auth on glibc Linux. The range is huge: <strong>back to Next 10</strong>. If you cannot upgrade today, pin <code>sharp &gt;= 0.35.5</code> in your lockfile. Any service using <code>sharp</code> directly on user-supplied SVG is in the same boat.</p>",
+            "fr": "<p>Un bug mémoire dans la bibliothèque upstream derrière <code>next/image</code>, exploitable sans auth sous Linux glibc. La plage est énorme : <strong>depuis Next 10</strong>. Si vous ne pouvez pas mettre à jour aujourd'hui, forcez <code>sharp &gt;= 0.35.5</code> dans le lockfile. Tout service utilisant <code>sharp</code> directement sur des SVG fournis par les utilisateurs est concerné.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vercel/next.js/security/advisories/GHSA-2464-fhr4-w9xw",
+            "label": "github.com/vercel/next.js"
+          }
+        },
+        {
+          "id": "nextjs-use-cache-rce",
+          "tag": "security",
+          "date": "14 Oct 2026",
+          "title": {
+            "es": "GHSA-673q-mjm6-r5xr: RCE en funciones use cache que devuelven typed arrays",
+            "en": "GHSA-673q-mjm6-r5xr: RCE in use cache functions returning typed arrays",
+            "fr": "GHSA-673q-mjm6-r5xr : RCE dans les fonctions use cache renvoyant des typed arrays"
+          },
+          "body_html": {
+            "es": "<p>Afecta a App Router con Cache Components en <code>16.0.0–16.4.0</code>. La condición es una función <code>use cache</code> que devuelve <strong>varios typed arrays</strong>, pero Vercel pide subir aunque no tengas ese patrón. Es un recordatorio de que la serialización de caché es superficie de ataque, igual que cualquier deserializador.</p>",
+            "en": "<p>Affects App Router with Cache Components in <code>16.0.0–16.4.0</code>. The trigger is a <code>use cache</code> function returning <strong>multiple typed arrays</strong>, yet Vercel asks everyone to upgrade even without that pattern. A reminder that cache serialization is attack surface, just like any deserializer.</p>",
+            "fr": "<p>Touche l'App Router avec Cache Components en <code>16.0.0–16.4.0</code>. Le déclencheur est une fonction <code>use cache</code> renvoyant <strong>plusieurs typed arrays</strong>, mais Vercel demande à tous de mettre à jour. Rappel : la sérialisation du cache est une surface d'attaque, comme tout désérialiseur.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vercel/next.js/security/advisories/GHSA-673q-mjm6-r5xr",
+            "label": "github.com/vercel/next.js"
+          }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "node-24-22-0",
+      "updates": [
+        {
+          "id": "node-24-22-0",
+          "tag": "release",
+          "date": "14 Oct 2026",
+          "title": {
+            "es": "Node.js 24.22.0 LTS: parsePKCS12(), API genérica de MAC y GCM-SIV en crypto",
+            "en": "Node.js 24.22.0 LTS: parsePKCS12(), a generic MAC API and GCM-SIV in crypto",
+            "fr": "Node.js 24.22.0 LTS : parsePKCS12(), une API MAC générique et GCM-SIV dans crypto"
+          },
+          "body_html": {
+            "es": "<p>La LTS recibe una tanda grande de semver-minor: <code>crypto.parsePKCS12()</code>, una <strong>API genérica de MAC</strong>, modos <strong>SIV y GCM-SIV</strong> en Cipher/Decipher y descubrimiento de ciphers y hashes desde providers de OpenSSL. Además, <code>net.BoundSocket</code> se puede pasar a workers y child processes, y <code>perf_hooks</code> suma <code>SlidingWindowHistogram</code> y <code>meanCI</code>. Si estás en 24.x en producción, esta es la imagen base a apuntar.</p>",
+            "en": "<p>The LTS line gets a big semver-minor batch: <code>crypto.parsePKCS12()</code>, a <strong>generic MAC API</strong>, <strong>SIV and GCM-SIV</strong> modes in Cipher/Decipher and cipher/hash discovery from OpenSSL providers. Also, <code>net.BoundSocket</code> can be sent to workers and child processes, and <code>perf_hooks</code> adds <code>SlidingWindowHistogram</code> and <code>meanCI</code>. If you run 24.x in production, this is your next base image.</p>",
+            "fr": "<p>La ligne LTS reçoit un gros lot semver-minor : <code>crypto.parsePKCS12()</code>, une <strong>API MAC générique</strong>, les modes <strong>SIV et GCM-SIV</strong> dans Cipher/Decipher et la découverte de ciphers et hashes depuis les providers OpenSSL. <code>net.BoundSocket</code> peut être envoyé aux workers et child processes, et <code>perf_hooks</code> ajoute <code>SlidingWindowHistogram</code> et <code>meanCI</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nodejs/node/releases/tag/v24.22.0",
+            "label": "github.com/nodejs/node"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "prisma-8-rc-18",
+      "updates": [
+        {
+          "id": "prisma-8-rc-18",
+          "tag": "breaking",
+          "date": "14 Oct 2026",
+          "title": {
+            "es": "Prisma 8.0.0-rc.18: raw SQL como literal sql, mixins en PSL y whereUnique",
+            "en": "Prisma 8.0.0-rc.18: raw SQL as sql literals, PSL mixins and whereUnique",
+            "fr": "Prisma 8.0.0-rc.18 : raw SQL en littéraux sql, mixins PSL et whereUnique"
+          },
+          "body_html": {
+            "es": "<p>Breaking: en PSL, <code>@@index(where:)</code>, <code>@@check(expression:)</code> y las policies ahora exigen un <strong>literal <code>sql</code></strong>; un string común se rechaza con <code>PSL_VALUE_TYPE_INCOMPATIBLE</code> (hay script de migración en la receta). Además: índices full-text sobre varios campos con pesos, middleware que observa cada statement y transacción, mixins en PSL y <code>firstOrThrow</code>. Si estás probando la RC, leé la receta antes de subir: el storage hash cambia una vez.</p>",
+            "en": "<p>Breaking: in PSL, <code>@@index(where:)</code>, <code>@@check(expression:)</code> and policies now require a <strong><code>sql</code> literal</strong>; a plain string is refused with <code>PSL_VALUE_TYPE_INCOMPATIBLE</code> (the upgrade recipe ships a rewrite script). Also: weighted multi-field full-text indexes, middleware observing each statement and transaction, PSL mixins and <code>firstOrThrow</code>. Read the recipe before bumping: the storage hash changes once.</p>",
+            "fr": "<p>Breaking : en PSL, <code>@@index(where:)</code>, <code>@@check(expression:)</code> et les policies exigent un <strong>littéral <code>sql</code></strong> ; une simple chaîne est refusée avec <code>PSL_VALUE_TYPE_INCOMPATIBLE</code> (script de réécriture fourni). Aussi : index full-text pondérés multi-champs, middleware observant chaque statement et transaction, mixins PSL et <code>firstOrThrow</code>. Le storage hash change une fois.</p>"
+          },
+          "source": {
+            "url": "https://github.com/prisma/orm/releases/tag/v8.0.0-rc.18",
+            "label": "github.com/prisma/orm"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "valkey-roadmap",
+      "updates": [
+        {
+          "id": "valkey-roadmap",
+          "tag": "notable",
+          "date": "09 Oct 2026",
+          "title": {
+            "es": "Valkey a dos años del fork: replicación sincrónica y tiering a SSD en el horizonte",
+            "en": "Valkey two years after the fork: synchronous replication and SSD tiering on the horizon",
+            "fr": "Valkey deux ans après le fork : réplication synchrone et tiering SSD à l'horizon"
+          },
+          "body_html": {
+            "es": "<p>InfoQ entrevistó a mantenedores de Valkey en Open Source Summit Europe. La 9 ya trajo bases numeradas en cluster mode, <strong>migración atómica de slots</strong> y expiración por campo de hash. Lo que se discute ahora: <strong>replicación sincrónica</strong> para datos durables y mover datos fríos a SSD. Si usás Redis como algo más que caché, seguí esta hoja de ruta de cerca.</p>",
+            "en": "<p>InfoQ interviewed Valkey maintainers at Open Source Summit Europe. Version 9 already brought numbered databases in cluster mode, <strong>atomic slot migration</strong> and hash-field expiration. Now under discussion: <strong>synchronous replication</strong> for durable data and tiering cold data to SSD. Worth tracking if Redis is more than a cache for you.</p>",
+            "fr": "<p>InfoQ a interviewé des mainteneurs de Valkey à l'Open Source Summit Europe. La version 9 a apporté les bases numérotées en cluster mode, la <strong>migration atomique de slots</strong> et l'expiration par champ de hash. En discussion : <strong>réplication synchrone</strong> pour les données durables et tiering des données froides vers SSD.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/10/valkey-evolution/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "lambda-durable-limits",
+      "updates": [
+        {
+          "id": "lambda-durable-limits",
+          "tag": "notable",
+          "date": "13 Oct 2026",
+          "title": {
+            "es": "Lambda durable functions: de 3.000 a 30.000 operaciones y checkpoints de 1 MB",
+            "en": "Lambda durable functions: from 3,000 to 30,000 operations and 1 MB checkpoints",
+            "fr": "Lambda durable functions : de 3 000 à 30 000 opérations et checkpoints de 1 Mo"
+          },
+          "body_html": {
+            "es": "<p>El límite de operaciones durables por ejecución se multiplica por diez y el payload de checkpoint pasa de 256 KB a <strong>1 MB</strong>, igual que SQS y EventBridge. Traducción: loops más largos, polling más extenso y <strong>rollbacks tipo saga</strong> más completos sin partir el workflow en varias ejecuciones.</p>",
+            "en": "<p>The durable-operation limit per execution grows tenfold and the checkpoint payload goes from 256 KB to <strong>1 MB</strong>, matching SQS and EventBridge. In practice: longer loops, longer polling and fuller <strong>saga-style rollbacks</strong> without splitting a workflow across executions.</p>",
+            "fr": "<p>La limite d'opérations durables par exécution est multipliée par dix et le payload de checkpoint passe de 256 Ko à <strong>1 Mo</strong>, comme SQS et EventBridge. En pratique : boucles plus longues, polling prolongé et <strong>rollbacks de type saga</strong> plus complets sans découper le workflow.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-lambda-durable-gen-limit-increase/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "s3-vercel-marketplace",
+          "tag": "minor",
+          "date": "14 Oct 2026",
+          "title": {
+            "es": "Amazon S3 llega al Vercel Marketplace y a v0",
+            "en": "Amazon S3 lands on the Vercel Marketplace and v0",
+            "fr": "Amazon S3 arrive sur le Vercel Marketplace et v0"
+          },
+          "body_html": {
+            "es": "<p>Buckets de propósito general, <strong>S3 Tables</strong> (Iceberg) y <strong>S3 Vectors</strong> se provisionan desde Vercel. Las cuentas nuevas creadas por esa vía reciben 100 USD de crédito por seis meses; las existentes se pueden vincular. Menos fricción para fullstacks que hoy pelean con IAM para subir un archivo.</p>",
+            "en": "<p>General-purpose buckets, <strong>S3 Tables</strong> (Iceberg) and <strong>S3 Vectors</strong> can now be provisioned from Vercel. New AWS accounts created this way get USD 100 in credits for six months; existing accounts can be linked. Less IAM friction for fullstack teams.</p>",
+            "fr": "<p>Les buckets standard, <strong>S3 Tables</strong> (Iceberg) et <strong>S3 Vectors</strong> se provisionnent désormais depuis Vercel. Les nouveaux comptes AWS créés ainsi reçoivent 100 USD de crédits pour six mois ; les comptes existants peuvent être liés.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-s3-vercel-marketplace-v0/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "eventbridge-enhanced-bus",
+      "updates": [
+        {
+          "id": "eventbridge-enhanced-bus",
+          "tag": "notable",
+          "date": "13 Oct 2026",
+          "title": {
+            "es": "EventBridge Enhanced Custom Event Bus: un backbone de eventos compartido entre cuentas",
+            "en": "EventBridge Enhanced Custom Event Bus: a shared cross-account event backbone",
+            "fr": "EventBridge Enhanced Custom Event Bus : un backbone d'événements partagé entre comptes"
+          },
+          "body_html": {
+            "es": "<p>El nuevo bus se comparte vía <strong>Resource Access Manager</strong> y trae ordering nativo, retención y <strong>replay de 1 a 365 días</strong>, deduplicación por contenido en ventana de cinco minutos, un recurso <code>Subscriber</code> para cada consumidor e invocación sincrónica de Lambda. Arquitectónicamente es un cambio de modelo: el equipo de plataforma define el bus y los límites, y cada equipo maneja sus suscripciones, sin cadenas de forwarding entre cuentas. Ojo: la dedupe no reemplaza la <strong>idempotencia</strong> en tus handlers.</p>",
+            "en": "<p>The new bus is shared via <strong>Resource Access Manager</strong> and brings native ordering, retention and <strong>replay from 1 to 365 days</strong>, content-based dedup in a five-minute window, a <code>Subscriber</code> resource per consumer and synchronous Lambda invocation. Architecturally it changes ownership: the platform team owns the bus and its boundaries, each team owns its subscriptions, and cross-account forwarding chains go away. Dedup still does not replace <strong>idempotent</strong> handlers.</p>",
+            "fr": "<p>Le nouveau bus se partage via <strong>Resource Access Manager</strong> et apporte l'ordering natif, la rétention et le <strong>replay de 1 à 365 jours</strong>, la déduplication par contenu sur cinq minutes, une ressource <code>Subscriber</code> par consommateur et l'invocation Lambda synchrone. L'équipe plateforme possède le bus, chaque équipe ses abonnements, sans chaînes de forwarding entre comptes. La déduplication ne remplace pas des handlers <strong>idempotents</strong>.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/10/aws-eventbridge-scaling/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "sveltekit-3-1-0",
+      "updates": [
+        {
+          "id": "sveltekit-3-1-0",
+          "tag": "release",
+          "date": "14 Oct 2026",
+          "title": {
+            "es": "SvelteKit 3.1.0: spans de tracing para +server y hash-reporting en CSP",
+            "en": "SvelteKit 3.1.0: tracing spans for +server and CSP hash reporting",
+            "fr": "SvelteKit 3.1.0 : spans de tracing pour +server et hash reporting CSP"
+          },
+          "body_html": {
+            "es": "<p>Con server tracing activo, cada handler <code>+server</code> emite un span <code>sveltekit.endpoint</code>: tus endpoints ya aparecen solos en OpenTelemetry. También soporta las keywords <code>report-sha256</code>/<code>384</code>/<code>512</code> de CSP y arregla que todo módulo se tratara como server-only si el proyecto vivía dentro de un directorio <code>server</code>.</p>",
+            "en": "<p>With server tracing enabled, every <code>+server</code> handler emits a <code>sveltekit.endpoint</code> span, so endpoints show up in OpenTelemetry for free. It also supports the CSP <code>report-sha256</code>/<code>384</code>/<code>512</code> keywords and stops treating every module as server-only when the project lives inside a <code>server</code> directory.</p>",
+            "fr": "<p>Avec le server tracing activé, chaque handler <code>+server</code> émet un span <code>sveltekit.endpoint</code> : vos endpoints apparaissent dans OpenTelemetry sans effort. Prise en charge aussi des mots-clés CSP <code>report-sha256</code>/<code>384</code>/<code>512</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%403.1.0",
+            "label": "github.com/sveltejs/kit"
+          }
+        },
+        {
+          "id": "better-auth-1-7-8",
+          "tag": "patch",
+          "date": "14 Oct 2026",
+          "title": {
+            "es": "better-auth 1.7.8: cookies según RFC 6265bis y resets de contraseña que ya no queman el link",
+            "en": "better-auth 1.7.8: RFC 6265bis cookies and password resets that no longer burn the link",
+            "fr": "better-auth 1.7.8 : cookies RFC 6265bis et resets de mot de passe qui ne consomment plus le lien"
+          },
+          "body_html": {
+            "es": "<p>Parche cargado de fixes de auth: atributos de cookie alineados con <strong>RFC 6265bis</strong>, cookies viejas que persistían tras expirar o revocar un <code>customSession</code>, y resets fallidos que <strong>consumían el link u OTP</strong> antes de guardar la nueva contraseña. Suma SvelteKit 3 al rango de peer deps. Si manejás auth propio, actualizá.</p>",
+            "en": "<p>A patch dense with auth fixes: cookie attributes aligned with <strong>RFC 6265bis</strong>, stale cookies lingering after a <code>customSession</code> expired or was revoked, and failed resets that <strong>consumed the link or OTP</strong> before the new password was saved. SvelteKit 3 joins the peer range.</p>",
+            "fr": "<p>Un patch riche en correctifs d'auth : attributs de cookie alignés sur <strong>RFC 6265bis</strong>, cookies périmés après expiration ou révocation d'une <code>customSession</code>, et resets échoués qui <strong>consommaient le lien ou l'OTP</strong> avant l'enregistrement du nouveau mot de passe.</p>"
+          },
+          "source": {
+            "url": "https://github.com/better-auth/better-auth/releases/tag/v1.7.8",
+            "label": "github.com/better-auth"
+          }
+        },
+        {
+          "id": "nx-24-beta-2",
+          "tag": "beta",
+          "date": "14 Oct 2026",
+          "title": {
+            "es": "Nx 24.0.0-beta.2: @nx-depends-on, plugin de rolldown y migraciones para agentes",
+            "en": "Nx 24.0.0-beta.2: @nx-depends-on, a rolldown plugin and agent-driven migrations",
+            "fr": "Nx 24.0.0-beta.2 : @nx-depends-on, plugin rolldown et migrations pilotées par agents"
+          },
+          "body_html": {
+            "es": "<p>La beta suma <code>@nx-depends-on</code> para declarar dependencias de inputs (también en Jest), un <strong>plugin de rolldown</strong> con defaults para bundlear apps Node, el orquestador de migraciones como default en corridas manejadas por agentes, y la recolección de stats pasa a ser opt-in por tarea.</p>",
+            "en": "<p>The beta adds <code>@nx-depends-on</code> for declaring input dependencies (Jest included), a <strong>rolldown plugin</strong> with Node app bundling defaults, the migrate orchestrator as the default for agent-driven runs, and per-task opt-in stat collection.</p>",
+            "fr": "<p>La beta ajoute <code>@nx-depends-on</code> pour déclarer les dépendances d'inputs (Jest compris), un <strong>plugin rolldown</strong> avec des valeurs par défaut pour les apps Node, l'orchestrateur de migration par défaut pour les exécutions pilotées par agents, et la collecte de stats en opt-in par tâche.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nrwl/nx/releases/tag/24.0.0-beta.2",
+            "label": "github.com/nrwl/nx"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Las capas de caché y de imágenes son la nueva superficie de RCE: Next.js cayó por serialización de use cache y por sharp. Tratá todo deserializador y procesador de media como input no confiable.",
+      "en": "Cache and image layers are the new RCE surface: Next.js fell through use cache serialization and sharp. Treat every deserializer and media processor as untrusted input.",
+      "fr": "Les couches de cache et d'images deviennent la nouvelle surface de RCE : Next.js est tombé via la sérialisation use cache et sharp. Traitez tout désérialiseur et processeur média comme une entrée non fiable."
+    },
+    {
+      "es": "La supply chain de containers sigue siendo el eslabón débil: tres fallas de containerd explotables solo con apuntar a un registry malicioso.",
+      "en": "The container supply chain remains the weak link: three containerd flaws exploitable just by pulling from a malicious registry.",
+      "fr": "La supply chain des containers reste le maillon faible : trois failles containerd exploitables en tirant depuis un registry malveillant."
+    },
+    {
+      "es": "Event-driven a escala organizacional: EventBridge y Lambda durable empujan ordering, replay y sagas largas a servicios gestionados.",
+      "en": "Event-driven at organizational scale: EventBridge and Lambda durable push ordering, replay and long sagas into managed services.",
+      "fr": "L'event-driven à l'échelle de l'organisation : EventBridge et Lambda durable poussent ordering, replay et sagas longues vers des services managés."
+    }
+  ]
+}

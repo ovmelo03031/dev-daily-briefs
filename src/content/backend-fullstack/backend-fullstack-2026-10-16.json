@@ -1,0 +1,485 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 16 Oct 2026: XSS crítico en TanStack Start, Podman CVSS 10 y PgBouncer con auth bypass",
+    "en": "Backend & Fullstack Daily — 16 Oct 2026: critical TanStack Start XSS, Podman CVSS 10 and a PgBouncer auth bypass",
+    "fr": "Backend & Fullstack Daily — 16 oct. 2026 : XSS critique dans TanStack Start, Podman CVSS 10 et contournement d'auth PgBouncer"
+  },
+  "description": {
+    "es": "Lote masivo de advisories el 15/10: TanStack Start, Podman, Argo CD, KEDA, containerd y OpenNext. Además PostgreSQL 19 RC1, DynamoDB Streams con AT_TIMESTAMP, Lambda Durable para Go y better-auth 1.8 beta.",
+    "en": "A massive advisory batch on Oct 15: TanStack Start, Podman, Argo CD, KEDA, containerd and OpenNext. Plus PostgreSQL 19 RC1, DynamoDB Streams AT_TIMESTAMP, Lambda Durable for Go and better-auth 1.8 beta.",
+    "fr": "Énorme lot d'advisories le 15/10 : TanStack Start, Podman, Argo CD, KEDA, containerd et OpenNext. Plus PostgreSQL 19 RC1, DynamoDB Streams AT_TIMESTAMP, Lambda Durable pour Go et better-auth 1.8 bêta."
+  },
+  "pubDate": "2026-10-16",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "TanStack Start: XSS sin auth, CVSS 9.3",
+        "en": "TanStack Start: unauthenticated XSS, CVSS 9.3",
+        "fr": "TanStack Start : XSS sans auth, CVSS 9.3"
+      },
+      "anchor": "tanstack-start-xss",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Podman: checkpoints que apagan el sandbox, CVSS 10",
+        "en": "Podman: checkpoints disable the sandbox, CVSS 10",
+        "fr": "Podman : checkpoints sans sandbox, CVSS 10"
+      },
+      "anchor": "podman-checkpoint-cvss10",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "PgBouncer 1.26.1: login como cualquier usuario SCRAM",
+        "en": "PgBouncer 1.26.1: log in as any SCRAM user",
+        "fr": "PgBouncer 1.26.1 : connexion en tant que n'importe quel utilisateur SCRAM"
+      },
+      "anchor": "pgbouncer-1-26-1",
+      "icon": "simple-icons:postgresql"
+    },
+    {
+      "text": {
+        "es": "Argo CD y KEDA: escalada a cluster-admin, CVSS 9.9",
+        "en": "Argo CD and KEDA: cluster-admin escalation, CVSS 9.9",
+        "fr": "Argo CD et KEDA : escalade cluster-admin, CVSS 9.9"
+      },
+      "anchor": "keda-token-leak",
+      "icon": "simple-icons:kubernetes"
+    },
+    {
+      "text": {
+        "es": "PostgreSQL 19 RC1: GA el 19 de noviembre",
+        "en": "PostgreSQL 19 RC1: GA on November 19",
+        "fr": "PostgreSQL 19 RC1 : GA le 19 novembre"
+      },
+      "anchor": "postgresql-19-rc1",
+      "icon": "lucide:database"
+    },
+    {
+      "text": {
+        "es": "better-auth 1.8 beta: OAuth más estricto, con breaking changes",
+        "en": "better-auth 1.8 beta: stricter OAuth, breaking changes",
+        "fr": "better-auth 1.8 bêta : OAuth plus strict, breaking changes"
+      },
+      "anchor": "better-auth-1-8-beta",
+      "icon": "lucide:server"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "tanstack-start-xss",
+          "tag": "security",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "TanStack Start: XSS reflejado sin auth en respuestas de server functions (CVE-2026-102989)",
+            "en": "TanStack Start: unauthenticated reflected XSS in server-function responses (CVE-2026-102989)",
+            "fr": "TanStack Start : XSS réfléchi sans auth dans les réponses des server functions (CVE-2026-102989)"
+          },
+          "body_html": {
+            "es": "<p>Ojo con este, <strong>CVSS 9.3</strong>: un link armado hacia una server function hace que tu app devuelva HTML del atacante desde tu propio origin, con acceso a todo lo same-origin del usuario. Afecta <code>@tanstack/start-server-core</code> desde 1.143.12; actualizá YA a <code>1.169.39</code> (o <code>react-start 1.168.60</code>, <code>solid-start 1.168.57</code>, <code>vue-start 1.168.56</code>).</p>",
+            "en": "<p><strong>CVSS 9.3</strong>: a crafted link to a server function makes your app serve attacker-controlled HTML from its own origin, with access to everything same-origin for that visitor. Affects <code>@tanstack/start-server-core</code> from 1.143.12; upgrade to <code>1.169.39</code> (or <code>react-start 1.168.60</code>, <code>solid-start 1.168.57</code>, <code>vue-start 1.168.56</code>).</p>",
+            "fr": "<p><strong>CVSS 9.3</strong> : un lien forgé vers une server function fait servir du HTML de l'attaquant depuis votre propre origine. Concerne <code>@tanstack/start-server-core</code> depuis 1.143.12 ; passez à <code>1.169.39</code> (ou <code>react-start 1.168.60</code>, <code>solid-start 1.168.57</code>, <code>vue-start 1.168.56</code>).</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-qx66-fv34-fjm8",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "podman-checkpoint-cvss10",
+          "tag": "security",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "Podman: imágenes de checkpoint pueden desactivar casi todo el sandboxing (CVE-2026-94603)",
+            "en": "Podman: checkpoint images can disable almost all sandboxing (CVE-2026-94603)",
+            "fr": "Podman : des images de checkpoint peuvent désactiver presque tout le sandboxing (CVE-2026-94603)"
+          },
+          "body_html": {
+            "es": "<p><strong>CVSS 10</strong>. Desde 4.4.0, <code>podman run</code> acepta checkpoints distribuidos por registry OCI, y un checkpoint controla cómo se restaura el container: una imagen maliciosa apaga el sandbox. Parche en <code>5.8.8</code> y <code>6.1.3</code>. Si hacés <code>podman run</code> de imágenes de terceros, esto es prioridad uno.</p>",
+            "en": "<p><strong>CVSS 10</strong>. Since 4.4.0, <code>podman run</code> accepts checkpoints distributed via OCI registries, and a checkpoint controls how the container is restored, so a malicious image can switch the sandbox off. Fixed in <code>5.8.8</code> and <code>6.1.3</code>.</p>",
+            "fr": "<p><strong>CVSS 10</strong>. Depuis 4.4.0, <code>podman run</code> accepte des checkpoints distribués via registry OCI ; une image malveillante peut désactiver le sandbox. Corrigé en <code>5.8.8</code> et <code>6.1.3</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-2cvf-wqm6-wr9g",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "pgbouncer-1-26-1",
+          "tag": "security",
+          "date": "14 Oct 2026",
+          "title": {
+            "es": "PgBouncer 1.26.1 corrige tres CVE, incluido un auth bypass SCRAM",
+            "en": "PgBouncer 1.26.1 fixes three CVEs, including a SCRAM auth bypass",
+            "fr": "PgBouncer 1.26.1 corrige trois CVE, dont un contournement d'auth SCRAM"
+          },
+          "body_html": {
+            "es": "<p><code>CVE-2026-107350</code>: un cliente que conoce la password SCRAM de un usuario puede loguearse como cualquier otro, superusers incluidos, mandando un segundo StartupMessage contra una base inexistente. Los otros dos son loops infinitos en configs no default. Ojo: ahora <code>ignore_startup_parameters</code> pisa los parámetros trackeados; poné <code>search_path</code> ahí si querés el comportamiento de 1.25.</p>",
+            "en": "<p><code>CVE-2026-107350</code>: a client holding one SCRAM user's password can log in as any other user, superusers included, by sending a second StartupMessage against a non-existent database. The other two are infinite loops under non-default configs. Note that <code>ignore_startup_parameters</code> now takes precedence over tracked parameters; add <code>search_path</code> to keep 1.25 behavior.</p>",
+            "fr": "<p><code>CVE-2026-107350</code> : un client connaissant le mot de passe SCRAM d'un utilisateur peut se connecter en tant que n'importe quel autre, superusers compris. Les deux autres sont des boucles infinies en configuration non standard. <code>ignore_startup_parameters</code> prend désormais le pas sur les paramètres suivis.</p>"
+          },
+          "source": {
+            "url": "https://www.postgresql.org/about/news/pgbouncer-1261-released-fixes-three-cves-3403/",
+            "label": "postgresql.org"
+          }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "keda-token-leak",
+      "updates": [
+        {
+          "id": "keda-token-leak",
+          "tag": "security",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "KEDA: un namespace admin puede robar el token del operator y leer todos los Secrets (CVE-2026-77524)",
+            "en": "KEDA: a namespace admin can exfiltrate the operator token and read every Secret (CVE-2026-77524)",
+            "fr": "KEDA : un admin de namespace peut exfiltrer le token de l'opérateur et lire tous les Secrets (CVE-2026-77524)"
+          },
+          "body_html": {
+            "es": "<p><strong>CVSS 9.9</strong>. Con un <code>TriggerAuthentication</code> y un <code>ScaledObject</code> en su propio namespace, un tenant hace que el operator mande su ServiceAccount token a una URL suya; ese token tiene <code>get</code> cluster-wide sobre todo. Clusters multi-tenant: actualizá a <code>2.21.0</code> sin pensarlo.</p>",
+            "en": "<p><strong>CVSS 9.9</strong>. With a <code>TriggerAuthentication</code> and a <code>ScaledObject</code> in their own namespace, a tenant makes the operator send its ServiceAccount token to a URL they control; that token has cluster-wide <code>get</code> on everything. Upgrade to <code>2.21.0</code>.</p>",
+            "fr": "<p><strong>CVSS 9.9</strong>. Un tenant peut amener l'opérateur à envoyer son token de ServiceAccount vers une URL contrôlée ; ce token a un <code>get</code> global. Passez à <code>2.21.0</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-637c-6jxx-4rwm",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "argocd-delete-hooks",
+          "tag": "security",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "Argo CD: los hooks PreDelete/PostDelete se saltean las restricciones del AppProject (CVE-2026-77459)",
+            "en": "Argo CD: PreDelete/PostDelete hooks bypass AppProject restrictions (CVE-2026-77459)",
+            "fr": "Argo CD : les hooks PreDelete/PostDelete contournent les restrictions d'AppProject (CVE-2026-77459)"
+          },
+          "body_html": {
+            "es": "<p><strong>CVSS 9.9</strong>. El chequeo de destinos y allow/deny lists del AppProject no corre en los delete hooks, así que al borrar una Application se pueden crear recursos fuera de lo permitido. Parches en <code>3.3.15</code>, <code>3.4.10</code> y <code>3.5.4</code>; la rama 2.x queda sin fix.</p>",
+            "en": "<p><strong>CVSS 9.9</strong>. AppProject destination and allow/deny-list checks are skipped for delete hooks, so deleting an Application can create resources outside the project's limits. Fixed in <code>3.3.15</code>, <code>3.4.10</code> and <code>3.5.4</code>; 2.x gets no patch.</p>",
+            "fr": "<p><strong>CVSS 9.9</strong>. Les vérifications d'AppProject ne s'appliquent pas aux delete hooks. Corrigé en <code>3.3.15</code>, <code>3.4.10</code> et <code>3.5.4</code> ; pas de correctif pour 2.x.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-fmxq-cgp8-87wp",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "containerd-cri-checkpoint",
+          "tag": "security",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "containerd CRI: restaurar un checkpoint no confiable saltea el security context (CVE-2026-95837)",
+            "en": "containerd CRI: restoring an untrusted checkpoint bypasses the security context (CVE-2026-95837)",
+            "fr": "containerd CRI : restaurer un checkpoint non fiable contourne le security context (CVE-2026-95837)"
+          },
+          "body_html": {
+            "es": "<p>Mismo patrón que Podman: CRIU restaura credenciales y capabilities del checkpoint y el container corre con privilegios elevados. <strong>CVSS 7.8</strong>, fix en <code>2.2.7</code> y <code>2.3.4</code>. Los checkpoints son la superficie de ataque de la semana.</p>",
+            "en": "<p>Same pattern as Podman: CRIU restores credentials and capabilities from the checkpoint, so the container runs with elevated privileges. <strong>CVSS 7.8</strong>, fixed in <code>2.2.7</code> and <code>2.3.4</code>.</p>",
+            "fr": "<p>Même schéma que Podman : CRIU restaure les credentials du checkpoint. <strong>CVSS 7.8</strong>, corrigé en <code>2.2.7</code> et <code>2.3.4</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-p7v4-vr35-mj6f",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "opennext-cloudflare-bypass",
+          "tag": "security",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "OpenNext Cloudflare: paths percent-encoded saltean el middleware vía cache (CVE-2026-100409)",
+            "en": "OpenNext Cloudflare: percent-encoded paths bypass middleware through the cache (CVE-2026-100409)",
+            "fr": "OpenNext Cloudflare : des chemins encodés contournent le middleware via le cache (CVE-2026-100409)"
+          },
+          "body_html": {
+            "es": "<p>Con cache interception activa, el matcher del middleware y la cache key interpretan distinto un path encodeado: la request no matchea tu middleware de auth pero cae en la cache de la ruta protegida. <strong>CVSS 7.5</strong>, actualizá <code>@opennextjs/cloudflare</code> a <code>1.20.2</code>.</p>",
+            "en": "<p>With cache interception enabled, middleware matching and the cache key decode an encoded path differently: the request misses your auth middleware but lands on the protected route's cached response. <strong>CVSS 7.5</strong>, upgrade <code>@opennextjs/cloudflare</code> to <code>1.20.2</code>.</p>",
+            "fr": "<p>Avec la cache interception, un chemin encodé échappe au middleware d'auth mais tombe sur le cache de la route protégée. <strong>CVSS 7.5</strong>, passez à <code>1.20.2</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-2vc4-c4r6-p6v6",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "qwik-server-crash",
+          "tag": "security",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "Qwik: una sola request sin auth tumba el server (CVE-2026-84994)",
+            "en": "Qwik: one unauthenticated request crashes the server (CVE-2026-84994)",
+            "fr": "Qwik : une seule requête sans auth fait planter le serveur (CVE-2026-84994)"
+          },
+          "body_html": {
+            "es": "<p>Un thenable armado en el body qwik-json deja una promise rechazada huérfana y el proceso muere en la config default. <strong>CVSS 8.7</strong>, fix en <code>@builder.io/qwik 1.20.0</code> y <code>@qwik.dev/core 2.0.0-beta37</code>.</p>",
+            "en": "<p>A crafted thenable in the qwik-json body leaves an orphaned rejected promise that kills the process in the default configuration. <strong>CVSS 8.7</strong>, fixed in <code>@builder.io/qwik 1.20.0</code> and <code>@qwik.dev/core 2.0.0-beta37</code>.</p>",
+            "fr": "<p>Un thenable forgé dans le body qwik-json fait planter le processus. <strong>CVSS 8.7</strong>, corrigé en <code>1.20.0</code> et <code>2.0.0-beta37</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-x586-xvc8-g7q6",
+            "label": "github.com/advisories"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "postgresql-19-rc1",
+      "updates": [
+        {
+          "id": "postgresql-19-rc1",
+          "tag": "release",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "PostgreSQL 19 RC1: GA prevista para el 19 de noviembre",
+            "en": "PostgreSQL 19 RC1: GA planned for November 19",
+            "fr": "PostgreSQL 19 RC1 : GA prévue le 19 novembre"
+          },
+          "body_html": {
+            "es": "<p>Fixes en <code>REPACK (CONCURRENTLY)</code>, <code>pg_plan_advice</code>, autovacuum paralelo y en optimizaciones del planner basadas en nullability. Cambio a tener en cuenta: <code>COPY (query) TO ... (FORMAT json)</code> ahora usa los nombres de columna de la query, alias incluidos. RC2 el 12/11. Ya podés probarla también en el Preview Environment de RDS.</p>",
+            "en": "<p>Fixes to <code>REPACK (CONCURRENTLY)</code>, <code>pg_plan_advice</code>, parallel autovacuum and nullability-based planner optimizations. Behavior change: <code>COPY (query) TO ... (FORMAT json)</code> now uses the query's column names, aliases included. RC2 lands Nov 12, and RC1 is already in the RDS Preview Environment.</p>",
+            "fr": "<p>Corrections pour <code>REPACK (CONCURRENTLY)</code>, <code>pg_plan_advice</code> et l'autovacuum parallèle. <code>COPY (query) TO ... (FORMAT json)</code> utilise désormais les noms de colonnes de la requête. RC2 le 12/11.</p>"
+          },
+          "source": {
+            "url": "https://www.postgresql.org/about/news/postgresql-19-rc-1-released-3409/",
+            "label": "postgresql.org"
+          }
+        },
+        {
+          "id": "dynamodb-streams-at-timestamp",
+          "tag": "notable",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "DynamoDB Streams: leer desde un timestamp con AT_TIMESTAMP",
+            "en": "DynamoDB Streams: read from a point in time with AT_TIMESTAMP",
+            "fr": "DynamoDB Streams : lecture depuis un horodatage avec AT_TIMESTAMP"
+          },
+          "body_html": {
+            "es": "<p>Hasta ahora era «desde lo más viejo» o «desde ahora». Con el shard iterator <code>AT_TIMESTAMP</code> retomás tras una caída sin reprocesar 24 horas, hacés replay para debugging o te sincronizás después de un export PITR. Sin costo extra; funciona con KCL vía el adapter.</p>",
+            "en": "<p>Until now it was oldest record or new records only. The <code>AT_TIMESTAMP</code> shard iterator lets you resume after an outage without reprocessing 24 hours, replay for debugging, or sync after a PITR export. No extra charge; works with KCL through the adapter.</p>",
+            "fr": "<p>L'itérateur <code>AT_TIMESTAMP</code> permet de reprendre après une panne sans tout retraiter, ou de rejouer pour le debug. Sans surcoût ; compatible KCL.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-dynamodb-streams-timestamp-processing",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "lambda-durable-go",
+      "updates": [
+        {
+          "id": "lambda-durable-go",
+          "tag": "ga",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "Lambda Durable Execution SDK para Go llega a GA",
+            "en": "Lambda Durable Execution SDK for Go is generally available",
+            "fr": "Le SDK Lambda Durable Execution pour Go est disponible en GA"
+          },
+          "body_html": {
+            "es": "<p>Workflows con checkpoints que pueden pausar hasta un año, callbacks para aprobación humana y chaining de funciones, todo en un binario estático sobre <code>provided.al2023</code>. Lo mejor: <code>durabletest</code> para testear local sin credenciales y <code>durablelint</code> que marca código que rompería el replay.</p>",
+            "en": "<p>Checkpointed workflows that can pause for up to a year, callbacks for human approval and function chaining, shipped as one static binary on <code>provided.al2023</code>. The highlights: <code>durabletest</code> for local tests without credentials and <code>durablelint</code> to flag code that would break on resume.</p>",
+            "fr": "<p>Workflows avec checkpoints pouvant attendre jusqu'à un an, callbacks d'approbation humaine, binaire statique sur <code>provided.al2023</code>. <code>durabletest</code> pour les tests locaux et <code>durablelint</code> pour détecter le code non rejouable.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-lambda-durable-go-sdk-support/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "lambda-recursive-eventbridge",
+          "tag": "minor",
+          "date": "14 Oct 2026",
+          "title": {
+            "es": "Lambda detecta y corta loops recursivos con EventBridge Custom buses",
+            "en": "Lambda recursive loop detection now covers EventBridge Custom buses",
+            "fr": "Lambda détecte désormais les boucles récursives avec les Custom buses EventBridge"
+          },
+          "body_html": {
+            "es": "<p>Activado por default: si tu función publica en un Custom bus que la vuelve a invocar, Lambda frena el loop antes de que te llegue la factura. Un safety net barato para arquitecturas event-driven.</p>",
+            "en": "<p>On by default: if your function publishes to a Custom bus that invokes it again, Lambda stops the loop before it shows up on your bill. A cheap safety net for event-driven architectures.</p>",
+            "fr": "<p>Activé par défaut : Lambda stoppe la boucle avant qu'elle ne pèse sur la facture.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/lambda-recursive-loops-eventbridge-custom",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "kin-openapi-batch",
+      "updates": [
+        {
+          "id": "kin-openapi-batch",
+          "tag": "security",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "kin-openapi: nueve advisories, incluido un bypass de security requirements por path encodeado",
+            "en": "kin-openapi: nine advisories, including a security-requirement bypass via encoded paths",
+            "fr": "kin-openapi : neuf advisories, dont un contournement des security requirements via chemin encodé"
+          },
+          "body_html": {
+            "es": "<p>La lección de API design del día: el <code>ValidationHandler</code> elige la operación OpenAPI desde el path decodificado, pero un router con <code>UseEncodedPath()</code> rutea desde el encodeado, así que validás una operación y ejecutás otra (<strong>CVSS 7.4</strong>). Los otros ocho son panics y recursión infinita con specs hostiles. Fix en <code>0.147.0</code>. Validación y routing tienen que ver el mismo path, siempre; es el mismo bug que OpenNext esta semana.</p>",
+            "en": "<p>The API-design lesson of the day: <code>ValidationHandler</code> picks the OpenAPI operation from the decoded path, while a router with <code>UseEncodedPath()</code> routes on the encoded one, so you validate one operation and execute another (<strong>CVSS 7.4</strong>). The other eight are panics and unbounded recursion on hostile specs. Fixed in <code>0.147.0</code>. Validation and routing must see the same path, which is the same bug class as OpenNext this week.</p>",
+            "fr": "<p>Le <code>ValidationHandler</code> choisit l'opération depuis le chemin décodé, le router depuis le chemin encodé : on valide une opération et on en exécute une autre (<strong>CVSS 7.4</strong>). Corrigé en <code>0.147.0</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-23vg-4cjm-66q5",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "grafana-tempo-3-1",
+          "tag": "release",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "Grafana Tempo 3.1: redacción de trazas por TraceQL y métricas conscientes del sampling",
+            "en": "Grafana Tempo 3.1: TraceQL-based trace redaction and sampling-aware metrics",
+            "fr": "Grafana Tempo 3.1 : rédaction de traces via TraceQL et métriques tenant compte de l'échantillonnage"
+          },
+          "body_html": {
+            "es": "<p>Redactás trazas con una query TraceQL (con dry-run, porque no se deshace) y el hint <code>(extrapolate=true)</code> escala métricas según el sampling de <code>tracestate</code> de OpenTelemetry. Ojo: workers anteriores a 3.1 ignoran los flags de rango y borran todo lo que matchea; actualizá todo antes de usarlo.</p>",
+            "en": "<p>Redact traces with a TraceQL query (with dry-run, since it is irreversible), and the <code>(extrapolate=true)</code> hint scales metrics by the OpenTelemetry <code>tracestate</code> sampling rate. Caution: pre-3.1 workers ignore the time-range flags and delete every match, so upgrade everything first.</p>",
+            "fr": "<p>Rédaction de traces par requête TraceQL et hint <code>(extrapolate=true)</code> selon l'échantillonnage OpenTelemetry. Attention aux workers antérieurs à 3.1.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/10/grafana-tempo-31/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "vitest-5-0-5",
+          "tag": "patch",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "Vitest 5.0.5: cleanups de hooks, cancel que aborta todo y menos leaks de mocks",
+            "en": "Vitest 5.0.5: hook cleanups, cancel aborts everything, fewer mock leaks",
+            "fr": "Vitest 5.0.5 : nettoyage des hooks, annulation complète, moins de fuites de mocks"
+          },
+          "body_html": {
+            "es": "<p>Los cleanups de hooks ahora corren aunque falle un hook posterior, cancel aborta todos los tests en curso y se liberan los mocks de archivos terminados. También mantiene el <code>fs.deny</code> default de Vite con api token. Backport a <code>4.1.12</code> para los que siguen en v4.</p>",
+            "en": "<p>Hook cleanups now run even when a later hook fails, cancel aborts every running test, and mocks of finished files are released. It also keeps Vite's default <code>fs.deny</code> when an API token is set. Backported to <code>4.1.12</code>.</p>",
+            "fr": "<p>Les cleanups de hooks s'exécutent même si un hook suivant échoue, et l'annulation stoppe tous les tests. Rétroporté en <code>4.1.12</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.0.5",
+            "label": "github.com/vitest-dev"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "better-auth-1-8-beta",
+      "updates": [
+        {
+          "id": "better-auth-1-8-beta",
+          "tag": "beta",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "better-auth 1.8.0-beta.0: OAuth provider alineado a RFC 7009/7662, con breaking changes",
+            "en": "better-auth 1.8.0-beta.0: OAuth provider aligned with RFC 7009/7662, with breaking changes",
+            "fr": "better-auth 1.8.0-beta.0 : provider OAuth aligné sur RFC 7009/7662, avec breaking changes"
+          },
+          "body_html": {
+            "es": "<p>El device-code approval se mueve al flujo <code>/oauth2/authorize?user_code=</code>, revocación e introspección siguen los RFC, se rechazan parámetros de form repetidos y los <code>sub</code> pairwise quedan aislados para clientes nativos. Además los emails de sign-up corren después del commit en DB: para rechazar registros usá <code>databaseHooks.user.create.before</code>. Leé las migraciones antes de subir.</p>",
+            "en": "<p>Device-code approval moves into the <code>/oauth2/authorize?user_code=</code> flow, revocation and introspection follow the RFCs, repeated form parameters are rejected, and pairwise <code>sub</code> values are isolated for native clients. Sign-up emails now run after database work completes; use <code>databaseHooks.user.create.before</code> to reject sign-ups.</p>",
+            "fr": "<p>L'approbation device-code passe par <code>/oauth2/authorize?user_code=</code>, révocation et introspection suivent les RFC, paramètres répétés rejetés. Lisez les migrations avant la mise à jour.</p>"
+          },
+          "source": {
+            "url": "https://github.com/better-auth/better-auth/releases/tag/v1.8.0-beta.0",
+            "label": "github.com/better-auth"
+          }
+        },
+        {
+          "id": "pnpm-12-14-0",
+          "tag": "release",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "pnpm 12.14.0: sideEffectsCache.exclude y installs que no esperan el update check",
+            "en": "pnpm 12.14.0: sideEffectsCache.exclude and installs that skip waiting on the update check",
+            "fr": "pnpm 12.14.0 : sideEffectsCache.exclude et installations qui n'attendent plus le contrôle de mise à jour"
+          },
+          "body_html": {
+            "es": "<p>Nuevo <code>sideEffectsCache.exclude</code> para addons nativos cuyo build depende de libs del sistema. Además, una install no-op ya no toca el mtime del store (chau re-uploads de cache en GitLab CI) y <code>pnpm list | head -1</code> ya no hace core dump. Golazo para los monorepos.</p>",
+            "en": "<p>New <code>sideEffectsCache.exclude</code> for native addons whose build depends on system libraries. A no-op install no longer touches the store's mtime (no more GitLab CI cache re-uploads), and <code>pnpm list | head -1</code> no longer core dumps.</p>",
+            "fr": "<p>Nouveau <code>sideEffectsCache.exclude</code> pour les addons natifs ; une installation sans changement ne modifie plus le mtime du store.</p>"
+          },
+          "source": {
+            "url": "https://github.com/pnpm/pnpm/releases/tag/v12.14.0",
+            "label": "github.com/pnpm"
+          }
+        },
+        {
+          "id": "nextjs-16-4-2",
+          "tag": "patch",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "Next.js 16.4.2: fixes de Turbopack en la rama LTS activa",
+            "en": "Next.js 16.4.2: Turbopack fixes on the active LTS line",
+            "fr": "Next.js 16.4.2 : correctifs Turbopack sur la branche LTS active"
+          },
+          "body_html": {
+            "es": "<p>Backports de consistencia de snapshots en turbo-tasks, colisiones de chunks en dynamic imports lazy y errores de <code>realpath</code> que ahora se ignoran como en Node. Sin fixes de seguridad nuevos: si ya estás en 16.4.1 por las RCE, este es mantenimiento.</p>",
+            "en": "<p>Backports for turbo-tasks snapshot consistency, lazy dynamic-import chunk collisions, and <code>realpath</code> errors now ignored as Node does. No new security fixes: if you are already on 16.4.1 for the RCEs, this is maintenance.</p>",
+            "fr": "<p>Rétroportages Turbopack (snapshots, collisions de chunks, erreurs <code>realpath</code>). Pas de correctif de sécurité.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vercel/next.js/releases/tag/v16.4.2",
+            "label": "github.com/vercel/next.js"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Los checkpoints de containers son la superficie de ataque de la semana: Podman (CVSS 10) y containerd CRI restauran privilegios desde imágenes no confiables.",
+      "en": "Container checkpoints are this week's attack surface: Podman (CVSS 10) and containerd CRI both restore privileges from untrusted images.",
+      "fr": "Les checkpoints de containers sont la surface d'attaque de la semaine : Podman (CVSS 10) et containerd CRI."
+    },
+    {
+      "es": "Path decodificado vs. encodeado otra vez: OpenNext Cloudflare y kin-openapi validan un path y rutean otro. Normalizá una sola vez, al borde.",
+      "en": "Decoded vs encoded paths again: OpenNext Cloudflare and kin-openapi validate one path and route another. Normalize once, at the edge.",
+      "fr": "Chemin décodé contre encodé, encore : OpenNext Cloudflare et kin-openapi valident un chemin et en routent un autre."
+    },
+    {
+      "es": "El control plane de Kubernetes multi-tenant sigue frágil: KEDA y Argo CD, ambos CVSS 9.9, escalan de namespace a cluster.",
+      "en": "Multi-tenant Kubernetes control planes remain fragile: KEDA and Argo CD, both CVSS 9.9, escalate from namespace to cluster.",
+      "fr": "Les control planes Kubernetes multi-tenant restent fragiles : KEDA et Argo CD, tous deux CVSS 9.9."
+    }
+  ]
+}

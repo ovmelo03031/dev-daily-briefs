@@ -228,27 +228,28 @@ The Astro build parses these files with strict `JSON.parse`. Unescaped `"` insid
 - **NEVER** write a literal `"` inside any JSON string value (especially `body_html`, `title`, `description`, `notable_trends`).
 - For quoted phrases, use typographic quotes (`«...»` es/fr, `"..."` en) or HTML entities (`&quot;...&quot;`) or escape (`\"...\"`).
 - Same applies to `\` — use `\\` if you truly need a backslash.
-- **MANDATORY validation step before `git add`**:
+- **MANDATORY validation step before `git add`**: run
   ```bash
-  node -e "JSON.parse(require('fs').readFileSync('src/content/backend-fullstack/backend-fullstack-YYYY-MM-DD.json','utf8'))"
+  jq empty src/content/backend-fullstack/backend-fullstack-{YYYY-MM-DD}.json
   ```
-  If it errors, fix and re-validate. Do NOT commit unparseable JSON — it has broken production before (2026-04-20).
+  If it prints any error, fix the file and re-validate. Never leave an unparseable JSON file in the tree — it has broken production before (2026-04-20).
 
-### Auto-publish (MANDATORY)
+### Stage for publication (MANDATORY)
 
-> **Explicit authorization**: this skill is **authorized to run `git commit` and `git push` without asking the user**, overriding the general "never commit unless explicitly asked" rule. Auto-publishing IS the job of this scheduled skill.
+This skill does NOT commit or push. Publishing is handled by the `brief-publisher` scheduled task, which runs `./scripts/publish-briefs.sh` after all brief routines finish (it validates every brief with `jq`, commits each file individually, and pushes once).
+
+Run each command as its own Bash call (no `&&` chains), from the repository root:
 
 ```bash
-cd "$(git rev-parse --show-toplevel)"
-node -e "JSON.parse(require('fs').readFileSync('src/content/backend-fullstack/backend-fullstack-{YYYY-MM-DD}.json','utf8'))" || exit 1
-git pull --rebase --autostash
+jq empty src/content/backend-fullstack/backend-fullstack-{YYYY-MM-DD}.json
+```
+
+```bash
 git add src/content/backend-fullstack/backend-fullstack-{YYYY-MM-DD}.json
-git commit -m "brief(backend-fullstack): {YYYY-MM-DD}"
-git push
 ```
 
 Rules:
 - Stage ONLY the brief file — never use `git add -A` or `git add .`.
-- `git pull --rebase --autostash` prevents conflicts if local edits happened while the schedule was running.
-- Do NOT run `astro build` — the `deploy.yml` GitHub Actions workflow builds and deploys on push.
-- If `git push` fails (network, auth), report the failure clearly and STOP — do not retry in a loop. The local commit survives for the next run.
+- Do NOT run `git commit`, `git push`, `git pull`, `git rebase`, `rm -rf dist`, `pnpm build`, or `astro build`.
+- If nothing qualified for today's brief, write no file and stage nothing.
+- Final report: state that `src/content/backend-fullstack/backend-fullstack-{YYYY-MM-DD}.json` was written, validated with `jq empty`, and staged, pending publication by `brief-publisher`.

@@ -309,7 +309,8 @@ Example `tools` array:
 - `provider`: one of `anthropic`, `openai`, `google`, `meta`, `xai`, `mistral`, `alibaba`, `deepseek`, `moonshot`, `zhipu`, `bytedance`, `minimax`. Drives the badge color.
 - `tier`: one of `splus`, `s`, `aplus`, `a`, `bplus` (rendered as S+ / S / A+ / A / B+).
 - `weight`: one of `open` (open-weight), `proprietary`, `upcoming` (rumored / not yet released).
-- `row_kind`: optional. `recent` highlights the row; `upcoming` dims it. Defaults based on `weight`.
+- `row_kind`: optional. Allowed values are ONLY `"recent"` (highlights the row) or `"upcoming"` (dims it). For any other row, OMIT the key entirely. Never write `"default"`, `null` or any other value: the Astro schema rejects it and the whole site build (and every brief push) fails.
+- Before saving, run `jq -r '.models[].row_kind // empty' <file> | sort -u` and confirm it prints only `recent` / `upcoming`.
 - Sort chronologically, newest first. Upcoming/rumored rows at the bottom.
 
 ### Quality checks before saving
@@ -334,26 +335,26 @@ The Astro build parses these files with strict `JSON.parse`. Unescaped double qu
 - Same rule applies to backslashes — use `\\` if you truly need one.
 - **MANDATORY validation step before `git add`**: run
   ```bash
-  node -e "JSON.parse(require('fs').readFileSync('src/content/ai-coding/ai-coding-YYYY-MM-DD.json','utf8'))"
+  jq empty src/content/ai-coding/ai-coding-{YYYY-MM-DD}.json
   ```
-  If it prints any error, fix the file and re-validate. Do NOT commit an unparseable JSON file — this has broken production before (2026-04-20).
+  If it prints any error, fix the file and re-validate. Never leave an unparseable JSON file in the tree — it has broken production before (2026-04-20).
 
-### Auto-publish (MANDATORY)
+### Stage for publication (MANDATORY)
 
-> **Explicit authorization**: this skill is **authorized to run `git commit` and `git push` without asking the user**, overriding the general "never commit unless explicitly asked" rule. Auto-publishing IS the job of this scheduled skill.
+This skill does NOT commit or push. Publishing is handled by the `brief-publisher` scheduled task, which runs `./scripts/publish-briefs.sh` after all brief routines finish (it validates every brief with `jq`, commits each file individually, and pushes once).
+
+Run each command as its own Bash call (no `&&` chains), from the repository root:
 
 ```bash
-cd "$(git rev-parse --show-toplevel)"
-# Validate JSON before anything else — abort if it fails
-node -e "JSON.parse(require('fs').readFileSync('src/content/ai-coding/ai-coding-{YYYY-MM-DD}.json','utf8'))" || exit 1
-git pull --rebase --autostash
+jq empty src/content/ai-coding/ai-coding-{YYYY-MM-DD}.json
+```
+
+```bash
 git add src/content/ai-coding/ai-coding-{YYYY-MM-DD}.json
-git commit -m "brief(ai-coding): {YYYY-MM-DD}"
-git push
 ```
 
 Rules:
 - Stage ONLY the brief file — never use `git add -A` or `git add .`.
-- `git pull --rebase --autostash` prevents conflicts if local edits happened while the schedule was running.
-- Do NOT run `astro build` — the `deploy.yml` GitHub Actions workflow builds and deploys on push.
-- If `git push` fails (network, auth), report the failure clearly and STOP — do not retry in a loop. The local commit survives for the next run.
+- Do NOT run `git commit`, `git push`, `git pull`, `git rebase`, `rm -rf dist`, `pnpm build`, or `astro build`.
+- If nothing qualified for today's brief, write no file and stage nothing.
+- Final report: state that `src/content/ai-coding/ai-coding-{YYYY-MM-DD}.json` was written, validated with `jq empty`, and staged, pending publication by `brief-publisher`.

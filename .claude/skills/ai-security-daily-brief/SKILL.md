@@ -133,30 +133,31 @@ Every i18n field accepts a **string** or `{ es?, en, fr? }`. **`en` is required*
 - [ ] Severity tag reflects real CVSS — don't inflate
 - [ ] No literal `"` inside JSON string values — use `«...»`, `&quot;`, or `\"`
 - [ ] `es` uses Rioplatense Spanish (voseo: "ojo con esto", "es un quilombo"); keep security loanwords devs use (`RCE`, `prompt injection`, `payload`, `jailbreak`, `supply chain`)
-- [ ] Validate JSON before commit:
+- [ ] Validate JSON before staging:
   ```bash
-  node -e "JSON.parse(require('fs').readFileSync('src/content/ai-security/ai-security-YYYY-MM-DD.json','utf8'))"
+  jq empty src/content/ai-security/ai-security-YYYY-MM-DD.json
   ```
 
-## Auto-publish (MANDATORY when content exists)
+## Stage for publication (MANDATORY when content exists)
 
-> **Explicit authorization**: this scheduled skill is authorized to run `git commit` and `git push` without asking, overriding the general "never commit unless explicitly asked" rule. Auto-publishing IS the job.
+This skill does NOT commit or push. Publishing is handled by the `brief-publisher` scheduled task, which runs `./scripts/publish-briefs.sh` after all brief routines finish.
+
+Run each command as its own Bash call (no `&&` chains), from the repository root:
 
 ```bash
-cd "$(git rev-parse --show-toplevel)"
-FILE="src/content/ai-security/ai-security-$(date +%Y-%m-%d).json"
-node -e "JSON.parse(require('fs').readFileSync('$FILE','utf8'))" || exit 1
-git pull --rebase --autostash
-git add "$FILE"
-git commit -m "brief(ai-security): $(date +%Y-%m-%d)"
-git push
+jq empty src/content/ai-security/ai-security-{YYYY-MM-DD}.json
+```
+
+```bash
+git add src/content/ai-security/ai-security-{YYYY-MM-DD}.json
 ```
 
 Rules:
+- If `jq empty` errors, fix the file and re-validate — never leave an invalid JSON in the tree.
 - Stage ONLY the brief file. NEVER `git add -A` / `git add .`.
-- Skip the entire publish step if nothing qualified — do NOT commit empty briefs.
-- Do NOT run `astro build` — `deploy.yml` handles build on push.
-- On push failure: report and STOP. Do not retry in a loop.
+- Do NOT run `git commit`, `git push`, `git pull`, `git rebase`, `rm -rf dist`, `pnpm build`, or `astro build`.
+- If nothing qualified, write no file and stage nothing.
+- Final report: state that `src/content/ai-security/ai-security-{YYYY-MM-DD}.json` was written, validated with `jq empty`, and staged, pending publication by `brief-publisher`.
 
 ## Schedule
 

@@ -1,0 +1,228 @@
+{
+  "title": {
+    "es": "Dev News: React Native 0.88 estable y XSS crítico en TanStack Start",
+    "en": "Dev News: React Native 0.88 stable and a critical TanStack Start XSS",
+    "fr": "Dev News : React Native 0.88 stable et une XSS critique dans TanStack Start"
+  },
+  "description": {
+    "es": "React Native 0.88 sale estable sin breaking changes, TanStack Start parchea un XSS crítico, Qwik un crash de un request, y llegan Astro 7.4, pnpm 12.14 y Vitest 5.0.5.",
+    "en": "React Native 0.88 ships stable with no breaking changes, TanStack Start patches a critical XSS, Qwik fixes a one-request crash, plus Astro 7.4, pnpm 12.14 and Vitest 5.0.5.",
+    "fr": "React Native 0.88 sort en stable sans changements cassants, TanStack Start corrige une XSS critique, Qwik un crash en une requête, et arrivent Astro 7.4, pnpm 12.14 et Vitest 5.0.5."
+  },
+  "pubDate": "2026-10-16",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": { "es": "React Native 0.88 estable, sin breaking", "en": "React Native 0.88 stable, non-breaking", "fr": "React Native 0.88 stable, sans rupture" },
+      "anchor": "rn-0-88-stable",
+      "icon": "simple-icons:react"
+    },
+    {
+      "text": { "es": "XSS crítico en TanStack Start: actualizá", "en": "Critical XSS in TanStack Start: upgrade", "fr": "XSS critique dans TanStack Start : mettez à jour" },
+      "anchor": "tanstack-start-xss",
+      "icon": "simple-icons:tanstack"
+    },
+    {
+      "text": { "es": "Qwik: un request tira el server", "en": "Qwik: one request crashes the server", "fr": "Qwik : une requête fait planter le serveur" },
+      "anchor": "qwik-dos",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Astro 7.4 trae astro build --timings", "en": "Astro 7.4 adds astro build --timings", "fr": "Astro 7.4 ajoute astro build --timings" },
+      "anchor": "astro-7-4",
+      "icon": "simple-icons:astro"
+    },
+    {
+      "text": { "es": "pnpm 12.14: sideEffectsCache.exclude", "en": "pnpm 12.14: sideEffectsCache.exclude", "fr": "pnpm 12.14 : sideEffectsCache.exclude" },
+      "anchor": "pnpm-12-14",
+      "icon": "lucide:package"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "rn-0-88-stable",
+          "tag": "release",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "React Native 0.88 sale estable (y sin breaking changes)",
+            "en": "React Native 0.88 goes stable (with no breaking changes)",
+            "fr": "React Native 0.88 passe en stable (sans changements cassants)"
+          },
+          "body_html": {
+            "es": "<p>Después de cuatro RCs, sale <strong>0.88.0</strong>. El equipo la declara explícitamente <em>non-breaking</em>: hasta revirtieron el cambio de codegen de <code>RCTArrayBuffer</code> que rompía TurboModules adoptados en 0.87. Trae la API imperativa <code>EventTarget</code> en refs nativas (canary), inspección de WebSockets en el panel Network de DevTools (canary), bump de Hermes y deprecaciones: <code>InputAccessoryView</code> y <code>react-native/Libraries/Core/InitializeCore</code> (usá <code>react-native/setup-env</code>). Ojo: el post del blog todavía no salió, las notas están en el release de GitHub.</p>",
+            "en": "<p>After four RCs, <strong>0.88.0</strong> is out. The team explicitly calls it <em>non-breaking</em>: they even reverted the <code>RCTArrayBuffer</code> codegen change that broke TurboModules adopted in 0.87. It ships the imperative <code>EventTarget</code> API on native refs (canary), WebSocket inspection in the DevTools Network panel (canary), a Hermes bump, and deprecations: <code>InputAccessoryView</code> and <code>react-native/Libraries/Core/InitializeCore</code> (use <code>react-native/setup-env</code>). The blog post is not out yet; notes live in the GitHub release.</p>",
+            "fr": "<p>Après quatre RC, <strong>0.88.0</strong> est disponible. L'équipe la déclare explicitement <em>non-breaking</em> : elle a même annulé le changement de codegen <code>RCTArrayBuffer</code> qui cassait les TurboModules adoptés en 0.87. Au menu : l'API impérative <code>EventTarget</code> sur les refs natives (canary), l'inspection des WebSockets dans le panneau Network des DevTools (canary), une mise à jour de Hermes et des dépréciations : <code>InputAccessoryView</code> et <code>react-native/Libraries/Core/InitializeCore</code> (utilisez <code>react-native/setup-env</code>).</p>"
+          },
+          "source": { "url": "https://github.com/react/react-native/releases/tag/v0.88.0", "label": "github.com/react/react-native" }
+        },
+        {
+          "id": "tanstack-start-xss",
+          "tag": "security",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "TanStack Start: XSS reflejado crítico y sin auth en server functions",
+            "en": "TanStack Start: critical unauthenticated reflected XSS in server functions",
+            "fr": "TanStack Start : XSS réfléchie critique et non authentifiée dans les server functions"
+          },
+          "body_html": {
+            "es": "<p><strong>CVE-2026-102989</strong>, severidad crítica. Una URL armada hacia una server function hace que tu app devuelva HTML del atacante desde tu propio origin: el transporte dejaba pasar campos del payload al estado interno del middleware. Afecta desde <code>1.143.12</code>; parcheado en <code>@tanstack/start-server-core@1.169.39</code>, <code>@tanstack/react-start@1.168.60</code>, <code>solid-start@1.168.57</code> y <code>vue-start@1.168.56</code>. Si usás Start en producción, esto es para HOY.</p>",
+            "en": "<p><strong>CVE-2026-102989</strong>, critical severity. A crafted URL to a server function makes your app return attacker HTML from your own origin: the transport passed payload fields into internal middleware state. Affects <code>1.143.12</code> and later; patched in <code>@tanstack/start-server-core@1.169.39</code>, <code>@tanstack/react-start@1.168.60</code>, <code>solid-start@1.168.57</code> and <code>vue-start@1.168.56</code>.</p>",
+            "fr": "<p><strong>CVE-2026-102989</strong>, gravité critique. Une URL forgée vers une server function fait renvoyer à votre app du HTML de l'attaquant depuis votre propre origine : le transport laissait passer des champs du payload dans l'état interne du middleware. Concerne <code>1.143.12</code> et plus ; corrigé dans <code>@tanstack/start-server-core@1.169.39</code>, <code>@tanstack/react-start@1.168.60</code>, <code>solid-start@1.168.57</code> et <code>vue-start@1.168.56</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-qx66-fv34-fjm8", "label": "GitHub Advisory" }
+        },
+        {
+          "id": "qwik-dos",
+          "tag": "security",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "Qwik: un solo request sin auth crashea el server",
+            "en": "Qwik: a single unauthenticated request crashes the server",
+            "fr": "Qwik : une seule requête non authentifiée fait planter le serveur"
+          },
+          "body_html": {
+            "es": "<p><strong>CVE-2026-84994</strong> (CVSS 4.0: 8.7). Durante el parseo de qwik-json, un <code>Resource</code> con un <code>.then</code> que apunta a un QRL inexistente genera un rejection huérfano y Node mata el proceso. Configuración por defecto, un request, server caído. Actualizá a <code>@builder.io/qwik@1.20.0</code> o <code>@qwik.dev/core@2.0.0-beta37</code>.</p>",
+            "en": "<p><strong>CVE-2026-84994</strong> (CVSS 4.0: 8.7). During qwik-json parsing, a <code>Resource</code> whose <code>.then</code> points to an unregistered QRL creates an orphaned rejection and Node kills the process. Default config, one request, server down. Upgrade to <code>@builder.io/qwik@1.20.0</code> or <code>@qwik.dev/core@2.0.0-beta37</code>.</p>",
+            "fr": "<p><strong>CVE-2026-84994</strong> (CVSS 4.0 : 8.7). Lors du parsing qwik-json, une <code>Resource</code> dont le <code>.then</code> pointe vers un QRL inexistant crée un rejet orphelin et Node tue le processus. Configuration par défaut, une requête, serveur à terre. Passez à <code>@builder.io/qwik@1.20.0</code> ou <code>@qwik.dev/core@2.0.0-beta37</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-x586-xvc8-g7q6", "label": "GitHub Advisory" }
+        }
+      ]
+    },
+    {
+      "id": "react",
+      "name": "React",
+      "theme": "react",
+      "icon_emoji": "⚛️",
+      "anchor": "react",
+      "updates": [
+        {
+          "id": "opennext-cloudflare-cache-bypass",
+          "tag": "security",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "OpenNext Cloudflare: paths encodeados saltean el middleware vía caché",
+            "en": "OpenNext Cloudflare: encoded paths bypass middleware through the cache",
+            "fr": "OpenNext Cloudflare : des chemins encodés contournent le middleware via le cache"
+          },
+          "body_html": {
+            "es": "<p><strong>CVE-2026-100409</strong>. Con <code>enableCacheInterception</code> activado, un path percent-encoded no matchea el middleware de auth pero se decodifica a la cache key de una ruta protegida. Viene apagado por defecto, pero si lo prendiste, subí a <code>@opennextjs/cloudflare@1.20.2</code>.</p>",
+            "en": "<p><strong>CVE-2026-100409</strong>. With <code>enableCacheInterception</code> on, a percent-encoded path misses the auth middleware but decodes into a protected route's cache key. It is off by default; if you enabled it, upgrade to <code>@opennextjs/cloudflare@1.20.2</code>.</p>",
+            "fr": "<p><strong>CVE-2026-100409</strong>. Avec <code>enableCacheInterception</code> activé, un chemin percent-encodé échappe au middleware d'auth mais se décode vers la clé de cache d'une route protégée. Désactivé par défaut ; si vous l'avez activé, passez à <code>@opennextjs/cloudflare@1.20.2</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-2vc4-c4r6-p6v6", "label": "GitHub Advisory" }
+        },
+        {
+          "id": "nextjs-16-4-2",
+          "tag": "patch",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "Next.js 16.4.2: tanda de fixes de Turbopack",
+            "en": "Next.js 16.4.2: a batch of Turbopack fixes",
+            "fr": "Next.js 16.4.2 : une série de correctifs Turbopack"
+          },
+          "body_html": {
+            "es": "<p>Backports a la línea LTS activa: consistencia de snapshots en turbo-tasks, dos paths del GC que dejaban edges de dependencias a medio desarmar, colisiones de chunk-lists en dynamic imports lazy, y resolución de módulos que ahora ignora errores de <code>realpath</code> como hace Node.</p>",
+            "en": "<p>Backports to the active LTS line: turbo-tasks snapshot consistency, two GC paths that left half-torn-down dependency edges, lazy dynamic-import chunk-list collisions, and module resolution that now ignores <code>realpath</code> errors like Node does.</p>",
+            "fr": "<p>Backports vers la ligne LTS active : cohérence des snapshots turbo-tasks, deux chemins du GC qui laissaient des arêtes de dépendances à moitié démontées, collisions de chunk-lists pour les imports dynamiques lazy, et une résolution de modules qui ignore désormais les erreurs <code>realpath</code> comme Node.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/next.js/releases/tag/v16.4.2", "label": "github.com/vercel/next.js" }
+        }
+      ]
+    },
+    {
+      "id": "js-frameworks",
+      "name": "JS Frameworks",
+      "theme": "js-frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "js-frameworks",
+      "updates": [
+        {
+          "id": "astro-7-4",
+          "tag": "notable",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "Astro 7.4: astro build --timings y providers de fuentes más inteligentes",
+            "en": "Astro 7.4: astro build --timings and smarter font providers",
+            "fr": "Astro 7.4 : astro build --timings et des fournisseurs de polices plus malins"
+          },
+          "body_html": {
+            "es": "<p>El nuevo flag <code>astro build --timings</code> imprime un resumen de dónde se va el tiempo del build: integraciones, plugins de Markdown, imágenes, syntax highlighting. Además, los font providers suman <code>getFontProperties()</code> para avisarte si pedís un peso que la familia no tiene, y un <code>fetch()</code> con reintentos en el contexto de <code>init()</code>. Ojo si mantenés un provider custom: <code>getFontProperties()</code> será obligatorio en Astro 8.</p>",
+            "en": "<p>The new <code>astro build --timings</code> flag prints a summary of where build time goes: integrations, Markdown plugins, images, syntax highlighting. Font providers also gain <code>getFontProperties()</code> to warn when you request a weight a family lacks, plus a retrying <code>fetch()</code> in the <code>init()</code> context. If you maintain a custom provider, <code>getFontProperties()</code> becomes required in Astro 8.</p>",
+            "fr": "<p>Le nouveau flag <code>astro build --timings</code> affiche où part le temps de build : intégrations, plugins Markdown, images, coloration syntaxique. Les font providers gagnent <code>getFontProperties()</code> pour signaler un poids absent d'une famille, et un <code>fetch()</code> avec reprises dans le contexte <code>init()</code>. Si vous maintenez un provider custom, <code>getFontProperties()</code> deviendra obligatoire dans Astro 8.</p>"
+          },
+          "source": { "url": "https://github.com/withastro/astro/releases/tag/astro%407.4.0", "label": "github.com/withastro/astro" }
+        }
+      ]
+    },
+    {
+      "id": "build-tools",
+      "name": "Build Tools & Runtimes",
+      "theme": "build-tools",
+      "icon_emoji": "🔧",
+      "anchor": "build-tools",
+      "updates": [
+        {
+          "id": "pnpm-12-14",
+          "tag": "notable",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "pnpm 12.14: sideEffectsCache.exclude e installs que no esperan al update check",
+            "en": "pnpm 12.14: sideEffectsCache.exclude and installs that skip waiting on the update check",
+            "fr": "pnpm 12.14 : sideEffectsCache.exclude et des installs qui n'attendent plus le check de mise à jour"
+          },
+          "body_html": {
+            "es": "<p>Nuevo setting <code>sideEffectsCache.exclude</code> para paquetes nativos cuyo build depende de libs del sistema que pnpm no puede meter en la cache key: se rebuildean siempre, local y en <code>remoteCache</code>. Además, <code>pnpm install</code> ya no espera el chequeo diario de updates (en registries colgados tardaba minutos), y se reusa el lockfile aunque haya entradas de catalog sin usar.</p>",
+            "en": "<p>New <code>sideEffectsCache.exclude</code> setting for native packages whose build depends on system libraries pnpm cannot put in the cache key: they always rebuild, locally and on <code>remoteCache</code>. Also, <code>pnpm install</code> no longer waits on the daily update check (it took minutes against hung registries), and the lockfile is reused even with unused catalog entries.</p>",
+            "fr": "<p>Nouveau réglage <code>sideEffectsCache.exclude</code> pour les paquets natifs dont le build dépend de bibliothèques système que pnpm ne peut pas inclure dans la clé de cache : ils sont toujours reconstruits, en local comme sur <code>remoteCache</code>. Et <code>pnpm install</code> n'attend plus le check quotidien de mise à jour (des minutes face à un registry bloqué).</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.14.0", "label": "github.com/pnpm/pnpm" }
+        }
+      ]
+    },
+    {
+      "id": "dev-tools",
+      "name": "Developer Tools",
+      "theme": "dev-tools",
+      "icon_emoji": "🛠️",
+      "anchor": "dev-tools",
+      "updates": [
+        {
+          "id": "vitest-5-0-5",
+          "tag": "patch",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "Vitest 5.0.5: fs.deny respetado con el token de la API",
+            "en": "Vitest 5.0.5: fs.deny preserved alongside the API token",
+            "fr": "Vitest 5.0.5 : fs.deny préservé avec le jeton d'API"
+          },
+          "body_html": {
+            "es": "<p>Patch con un fix que importa: se mantiene el <code>fs.deny</code> por defecto de Vite cuando hay archivo de token de la API. Además corre cleanups de hooks aunque falle un hook posterior, libera mocks de archivos terminados y aborta todos los tests al cancelar. La línea 4.x recibe lo mismo en <code>v4.1.12</code>.</p>",
+            "en": "<p>A patch with one fix that matters: Vite's default <code>fs.deny</code> is kept when an API token file is present. It also runs hook cleanups when a later hook fails, releases mocks of finished files and aborts all tests on cancel. The 4.x line gets the same in <code>v4.1.12</code>.</p>",
+            "fr": "<p>Un patch avec un correctif qui compte : le <code>fs.deny</code> par défaut de Vite est conservé quand un fichier de jeton d'API est présent. Il exécute aussi les cleanups de hooks quand un hook ultérieur échoue, libère les mocks des fichiers terminés et annule tous les tests à l'arrêt.</p>"
+          },
+          "source": { "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.0.5", "label": "github.com/vitest-dev/vitest" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Otra vez los frameworks fullstack en la mira: TanStack Start, Qwik y OpenNext parchean el mismo día. Las server functions y los transportes de serialización son la superficie de ataque de 2026, ojo con eso.",
+      "en": "Fullstack frameworks are in the crosshairs again: TanStack Start, Qwik and OpenNext all patched on the same day. Server functions and serialization transports are 2026's attack surface.",
+      "fr": "Les frameworks fullstack sont encore visés : TanStack Start, Qwik et OpenNext corrigent le même jour. Les server functions et les transports de sérialisation sont la surface d'attaque de 2026."
+    },
+    {
+      "es": "React Native sigue la racha de releases sin breaking changes: revertir un cambio de codegen para no romper módulos de 0.87 muestra que la estabilidad ahora es prioridad.",
+      "en": "React Native keeps its streak of non-breaking releases: reverting a codegen change to avoid breaking 0.87 modules shows stability is now a priority.",
+      "fr": "React Native poursuit sa série de versions sans rupture : annuler un changement de codegen pour ne pas casser les modules 0.87 montre que la stabilité est désormais prioritaire."
+    }
+  ]
+}

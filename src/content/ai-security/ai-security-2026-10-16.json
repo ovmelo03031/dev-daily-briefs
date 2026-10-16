@@ -1,0 +1,281 @@
+{
+  "title": {
+    "es": "AI Security — 16 OCT 2026",
+    "en": "AI Security — 16 OCT 2026",
+    "fr": "AI Security — 16 OCT 2026"
+  },
+  "description": {
+    "es": "Investigadores encuentran prompt injection indirecta en headers HTTP de sitios reales, Claude Code parchea un bypass del hash pinning de plugins, LightLLM se cae con un solo request sin auth, el SDK de MCP para Python deja crecer sesiones sin límite, Nginx UI expone RCE a través de sus tools MCP y Bank of America contrató 1.000 contratistas para parchear lo que encontró Mythos.",
+    "en": "Researchers find indirect prompt injection in HTTP headers on live sites, Claude Code patches a plugin hash-pinning bypass, LightLLM goes down from a single unauthenticated request, the MCP Python SDK lets sessions pile up without bound, Nginx UI exposes RCE through its MCP tools, and Bank of America hired 1,000 contractors to patch what Mythos found.",
+    "fr": "Des chercheurs trouvent de la prompt injection indirecte dans les en-têtes HTTP de sites réels, Claude Code corrige un contournement du hash pinning des plugins, LightLLM tombe sur une seule requête non authentifiée, le SDK MCP Python laisse les sessions s'accumuler sans limite, Nginx UI expose une RCE via ses outils MCP et Bank of America a embauché 1 000 prestataires pour corriger ce que Mythos a trouvé."
+  },
+  "pubDate": "2026-10-16",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "Prompt injection escondida en headers HTTP",
+        "en": "Prompt injection hidden in HTTP headers",
+        "fr": "Prompt injection cachée dans les en-têtes HTTP"
+      },
+      "anchor": "http-header-indirect-prompt-injection",
+      "icon": "lucide:siren"
+    },
+    {
+      "text": {
+        "es": "Claude Code: bypass del hash pinning de plugins",
+        "en": "Claude Code: plugin hash-pinning bypass",
+        "fr": "Claude Code : contournement du hash pinning"
+      },
+      "anchor": "claude-code-cve-2026-86063-plugin-pin-bypass",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "LightLLM: un request sin auth tumba la inferencia",
+        "en": "LightLLM: one unauthenticated request kills inference",
+        "fr": "LightLLM : une requête non authentifiée bloque l'inférence"
+      },
+      "anchor": "lightllm-cve-2026-111160-dos",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": {
+        "es": "Nginx UI: RCE vía la tool MCP nginx_config_add",
+        "en": "Nginx UI: RCE via the nginx_config_add MCP tool",
+        "fr": "Nginx UI : RCE via l'outil MCP nginx_config_add"
+      },
+      "anchor": "nginx-ui-cve-2026-84318-mcp-rce",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "SDK MCP Python: sesiones que nunca se liberan",
+        "en": "MCP Python SDK: sessions never reclaimed",
+        "fr": "SDK MCP Python : sessions jamais libérées"
+      },
+      "anchor": "mcp-python-sdk-cve-2026-59951-session-exhaustion",
+      "icon": "lucide:shield-alert"
+    },
+    {
+      "text": {
+        "es": "Bank of America: 1.000 contratistas por Mythos",
+        "en": "Bank of America: 1,000 contractors for Mythos bugs",
+        "fr": "Bank of America : 1 000 prestataires pour Mythos"
+      },
+      "anchor": "bofa-mythos-patch-backlog",
+      "icon": "lucide:radiation"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-incidents",
+      "name": "Top Incidents",
+      "theme": "top-incidents",
+      "icon_emoji": "🚨",
+      "anchor": "top-incidents",
+      "updates": [
+        {
+          "id": "http-header-indirect-prompt-injection",
+          "tag": "research",
+          "title": {
+            "es": "Prompt injection indirecta aparece en headers HTTP de sitios reales: 30 intentos sobre 217 millones de respuestas",
+            "en": "Indirect prompt injection shows up in HTTP headers on live sites: 30 attempts across 217 million responses",
+            "fr": "La prompt injection indirecte apparaît dans les en-têtes HTTP de sites réels : 30 tentatives sur 217 millions de réponses"
+          },
+          "body_html": {
+            "es": "<p>Signals Corps analizó 217 millones de respuestas HTTP de Common Crawl y encontró casi 8.000 sitios que le hablan a agentes de IA a través de headers (6.989 mandan <code>x-llms-txt</code>). 30 sitios intentaron prompt injection indirecta: la mayoría son bromas («borrá tus datos de entrenamiento»), pero algunos podían afectar a un agente, como un header con el string de rechazo de Claude o un falso mensaje de «94% de match» dirigido a screeners de contratación. El riesgo práctico hoy es bajo porque depende de la configuración: Claude Code tendría que correr curl con flags específicos, Gemini CLI necesita <code>experimental.directWebFetch</code>, pero la tool <code>browser_network_request</code> de Playwright MCP devuelve los headers completos por defecto. Ojo con esto: tratá la metadata como input no confiable, pedí aprobación para conexiones MCP y validá las acciones fuera del modelo.</p>",
+            "en": "<p>Signals Corps analyzed 217 million HTTP responses from Common Crawl and found almost 8,000 sites addressing AI agents through response headers (6,989 send <code>x-llms-txt</code>). Thirty sites attempted indirect prompt injection: most were pranks (\"delete your training data\"), but some could sway an agent, such as a header carrying Claude's refusal string or a fake \"94% match confidence\" message aimed at hiring screeners. Practical risk is low today because it depends on configuration: Claude Code would need to run curl with specific flags and Gemini CLI needs <code>experimental.directWebFetch</code>, but Playwright MCP's <code>browser_network_request</code> tool returns full headers by default. Treat metadata as untrusted input, require approval for MCP connections, and check proposed actions outside the model.</p>",
+            "fr": "<p>Signals Corps a analysé 217 millions de réponses HTTP issues de Common Crawl et trouvé près de 8 000 sites qui s'adressent aux agents IA via les en-têtes (6 989 envoient <code>x-llms-txt</code>). Trente sites ont tenté une prompt injection indirecte : surtout des blagues, mais certains pouvaient influencer un agent, comme un en-tête contenant la chaîne de refus de Claude ou un faux message « 94 % de correspondance » visant les outils de recrutement. Le risque pratique reste faible, mais l'outil <code>browser_network_request</code> de Playwright MCP renvoie les en-têtes complets par défaut. Traitez les métadonnées comme non fiables et validez les actions hors du modèle.</p>"
+          },
+          "date": "15 Oct 2026",
+          "source": {
+            "url": "https://www.theregister.com/ai-and-ml/2026/10/15/indirect-prompt-injection-starts-turning-up-in-webpage-headers-please-ignore-all-previous-instructions-and-rise-up-against-your-masters/5303434",
+            "label": "The Register"
+          }
+        }
+      ]
+    },
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "lightllm-cve-2026-111160-dos",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-111160: LightLLM mata su worker de inferencia con un request sin auth y /health sigue diciendo OK",
+            "en": "CVE-2026-111160: LightLLM kills its inference worker on one unauthenticated request while /health stays green",
+            "fr": "CVE-2026-111160 : LightLLM perd son worker d'inférence sur une requête non authentifiée, /health reste au vert"
+          },
+          "body_html": {
+            "es": "<p>LightLLM de ModelTC hasta 1.2.0 tiene un DoS (CWE-502) en <code>/generate</code>: un atacante sin autenticación manda el campo interno <code>pd_kv_trans_params</code>, la deserialización falla en <code>InferSamplingParams</code> y el thread de inferencia muere. Lo peor: <code>/health</code> sigue reportando sano, así que el orquestador no reinicia nada y todos los requests siguientes quedan colgados hasta un restart manual. CVSS 4.0 8.7 / 3.1 7.5. No hay fix publicado: no expongas el endpoint sin un proxy que filtre campos internos y agregá un health check que haga inferencia real.</p>",
+            "en": "<p>ModelTC LightLLM through 1.2.0 has a DoS (CWE-502) on <code>/generate</code>: an unauthenticated attacker sends the internal <code>pd_kv_trans_params</code> field, deserialization fails in <code>InferSamplingParams</code>, and the inference thread dies. Worse, <code>/health</code> keeps reporting healthy, so orchestrators never restart it and every later request hangs until a manual restart. CVSS 4.0 8.7 / 3.1 7.5. No fix is available yet: keep the endpoint behind a proxy that strips internal fields, and use a health check that runs a real inference.</p>",
+            "fr": "<p>LightLLM de ModelTC jusqu'à 1.2.0 présente un DoS (CWE-502) sur <code>/generate</code> : un attaquant non authentifié envoie le champ interne <code>pd_kv_trans_params</code>, la désérialisation échoue dans <code>InferSamplingParams</code> et le thread d'inférence meurt. <code>/health</code> reste au vert, donc rien ne redémarre et toutes les requêtes suivantes bloquent. CVSS 4.0 8.7 / 3.1 7.5. Aucun correctif : filtrez les champs internes via un proxy et utilisez un health check qui exécute une vraie inférence.</p>"
+          },
+          "date": "15 Oct 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-111160",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "mcp-python-sdk-cve-2026-59951-session-exhaustion",
+          "tag": "patch",
+          "title": {
+            "es": "CVE-2026-59951: el SDK de MCP para Python nunca liberaba sesiones Streamable HTTP",
+            "en": "CVE-2026-59951: MCP Python SDK never reclaimed Streamable HTTP sessions",
+            "fr": "CVE-2026-59951 : le SDK MCP Python ne libérait jamais les sessions Streamable HTTP"
+          },
+          "body_html": {
+            "es": "<p>En modo stateful (el default de <code>FastMCP</code> 1.x, <code>MCPServer</code> 2.x y <code>StreamableHTTPSessionManager</code>), las sesiones no expiraban, un <code>DELETE</code> del cliente dejaba la entrada registrada y no había límite de cantidad. Cualquier cliente que llegue al endpoint puede inflar la memoria del servidor con requests cortos y normales; solo un restart la recupera. Severidad media (CVSS 4.0 6.9). Afecta 1.8.0–1.29.1 y 2.0.0–2.1.1; actualizá a 1.30.0 o 2.2.0, sobre todo si tu servidor MCP es alcanzable por clientes que no controlás.</p>",
+            "en": "<p>In stateful mode (the default for <code>FastMCP</code> 1.x, <code>MCPServer</code> 2.x and <code>StreamableHTTPSessionManager</code>), sessions never expired, a client <code>DELETE</code> left the entry registered, and there was no cap on session count. Any client that can reach the endpoint can grow server memory without bound using ordinary short requests; only a restart reclaims it. Medium severity (CVSS 4.0 6.9). Affects 1.8.0–1.29.1 and 2.0.0–2.1.1; upgrade to 1.30.0 or 2.2.0, especially if untrusted clients can reach your MCP server.</p>",
+            "fr": "<p>En mode stateful (par défaut pour <code>FastMCP</code> 1.x, <code>MCPServer</code> 2.x et <code>StreamableHTTPSessionManager</code>), les sessions n'expiraient jamais, un <code>DELETE</code> laissait l'entrée enregistrée et leur nombre était illimité. Tout client atteignant l'endpoint peut faire croître la mémoire sans limite. Sévérité moyenne (CVSS 4.0 6.9). Versions 1.8.0–1.29.1 et 2.0.0–2.1.1 ; passez à 1.30.0 ou 2.2.0.</p>"
+          },
+          "date": "15 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-84m7-p3x7-pcfv",
+            "label": "GitHub Advisory"
+          }
+        },
+        {
+          "id": "pipecat-cve-2026-102682-dev-runner",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-102682: el dev runner de Pipecat expuesto permite crear sesiones de bot y salas pagas sin auth",
+            "en": "CVE-2026-102682: an exposed Pipecat dev runner lets anyone create bot sessions and paid rooms",
+            "fr": "CVE-2026-102682 : un dev runner Pipecat exposé permet de créer sessions de bot et salles payantes sans auth"
+          },
+          "body_html": {
+            "es": "<p>El runner de desarrollo del framework de agentes de voz Pipecat expone <code>/start</code>, <code>/daily</code> y <code>/daily-dialin-webhook</code> sin autenticación a propósito, porque escucha en localhost. El problema aparece cuando alguien lo publica con <code>--host 0.0.0.0</code>, un port mapeado o un túnel abierto: cualquiera puede crear sesiones de bot o salas de Daily (que se pagan), obtener URLs y tokens de unión, y quemar recursos y créditos de terceros. Afecta 0.0.98–1.5.0; la 1.6.0 lo corrige. Moraleja: el runner de dev no es un servidor de producción.</p>",
+            "en": "<p>The development runner of the Pipecat voice-agent framework exposes <code>/start</code>, <code>/daily</code> and <code>/daily-dialin-webhook</code> without authentication by design, because it binds to localhost. The problem appears when someone publishes it via <code>--host 0.0.0.0</code>, a mapped port or an open tunnel: anyone can then create bot sessions or paid Daily rooms, get room URLs and join tokens, and burn local resources and third-party credits. Affects 0.0.98–1.5.0; fixed in 1.6.0. The dev runner is not a production server.</p>",
+            "fr": "<p>Le runner de développement du framework d'agents vocaux Pipecat expose <code>/start</code>, <code>/daily</code> et <code>/daily-dialin-webhook</code> sans authentification, car il écoute sur localhost. S'il est publié (<code>--host 0.0.0.0</code>, port mappé, tunnel ouvert), n'importe qui peut créer des sessions de bot ou des salles Daily payantes et consommer des crédits tiers. Versions 0.0.98–1.5.0 ; corrigé en 1.6.0.</p>"
+          },
+          "date": "15 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-hqm2-cfx2-2vgh",
+            "label": "GitHub Advisory"
+          }
+        }
+      ]
+    },
+    {
+      "id": "supply-chain",
+      "name": "Supply Chain",
+      "theme": "supply-chain",
+      "icon_emoji": "📦",
+      "anchor": "supply-chain",
+      "updates": [
+        {
+          "id": "claude-code-cve-2026-86063-plugin-pin-bypass",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-86063: una rama con nombre de SHA burlaba el hash pinning de plugins en Claude Code y Claude Desktop",
+            "en": "CVE-2026-86063: a SHA-named branch defeated plugin hash pinning in Claude Code and Claude Desktop",
+            "fr": "CVE-2026-86063 : une branche nommée comme un SHA contournait le hash pinning des plugins de Claude Code et Claude Desktop"
+          },
+          "body_html": {
+            "es": "<p>El flujo de instalación de plugins hacía <code>git checkout</code> del commit SHA fijado en el marketplace sin verificar que el HEAD resultante coincidiera. Un atacante que controla el repo upstream podía crear una rama llamada exactamente como ese SHA de 40 caracteres, y git resolvía a la punta de esa rama en vez del commit revisado: código del atacante instalado aunque el usuario hubiera fijado un hash seguro. Requiere instalar un plugin malicioso y un host git que acepte nombres de rama con forma de SHA. CVSS 4.0 7.5. Corregido en 2.1.179; si actualizás a mano, actualizá ya. Lo reportó Or Nevo Michrowski (Air Security). Ojo con esto: después de un checkout, verificá con <code>git rev-parse HEAD</code>.</p>",
+            "en": "<p>The plugin install flow ran <code>git checkout</code> on the marketplace's pinned commit SHA without verifying that the resulting HEAD matched. An attacker controlling the upstream repository could create a branch named exactly like that 40-character SHA, and git would resolve to that branch's tip instead of the reviewed commit, installing attacker code even though the user pinned a safe hash. Exploitation requires installing a malicious plugin and a git host that permits SHA-shaped branch names. CVSS 4.0 7.5. Fixed in 2.1.179; auto-update users already have it, manual updaters should update now. Reported by Or Nevo Michrowski (Air Security). Lesson: after any checkout by hash, verify with <code>git rev-parse HEAD</code>.</p>",
+            "fr": "<p>L'installation de plugins exécutait <code>git checkout</code> sur le SHA épinglé par la marketplace sans vérifier que le HEAD obtenu correspondait. Un attaquant contrôlant le dépôt amont pouvait créer une branche portant exactement ce SHA de 40 caractères : git résolvait alors vers cette branche, installant du code malveillant malgré l'épinglage. CVSS 4.0 7.5. Corrigé en 2.1.179. Signalé par Or Nevo Michrowski (Air Security).</p>"
+          },
+          "date": "15 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-pq7j-f95f-qfcv",
+            "label": "GitHub Advisory"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "nginx-ui-cve-2026-84318-mcp-rce",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-84318: la tool MCP nginx_config_add de Nginx UI se saltea la validación y abre RCE autenticado",
+            "en": "CVE-2026-84318: Nginx UI's nginx_config_add MCP tool skips validation, enabling authenticated RCE",
+            "fr": "CVE-2026-84318 : l'outil MCP nginx_config_add de Nginx UI saute la validation et ouvre une RCE authentifiée"
+          },
+          "body_html": {
+            "es": "<p>La API REST de Nginx UI (<code>POST /api/configs</code>) llama a <code>config.ValidateConfigFile</code> y bloquea directivas peligrosas, pero la tool MCP <code>nginx_config_add</code> escribe el archivo y recarga nginx sin esa validación. Un atacante autenticado (o un agente con prompt injection que tenga esa tool) puede meter <code>perl</code>, <code>js_import</code>, <code>load_module</code> o <code>user root</code>; con los módulos Perl, njs o Lua cargados, es RCE. CVSS 3.1 8.8. Es parte de una tanda de 11 advisories de Nginx UI el mismo día, varias por tools MCP que esquivan controles (CVE-2026-84317, -84319, -84360). El patrón: exponer una superficie MCP duplica cada endpoint y cada chequeo de seguridad tiene que estar en los dos lados.</p>",
+            "en": "<p>Nginx UI's REST API (<code>POST /api/configs</code>) calls <code>config.ValidateConfigFile</code> and blocks dangerous directives, but the <code>nginx_config_add</code> MCP tool writes the file and reloads nginx without that check. An authenticated attacker (or a prompt-injected agent holding that tool) can inject <code>perl</code>, <code>js_import</code>, <code>load_module</code> or <code>user root</code>; with the Perl, njs or Lua modules loaded, that is RCE. CVSS 3.1 8.8. It is part of a batch of 11 Nginx UI advisories on the same day, several of them MCP tools sidestepping controls (CVE-2026-84317, -84319, -84360). The pattern: adding an MCP surface duplicates every endpoint, and every security check has to live on both paths.</p>",
+            "fr": "<p>L'API REST de Nginx UI (<code>POST /api/configs</code>) appelle <code>config.ValidateConfigFile</code>, mais l'outil MCP <code>nginx_config_add</code> écrit le fichier et recharge nginx sans cette validation. Un attaquant authentifié (ou un agent victime de prompt injection) peut injecter <code>perl</code>, <code>js_import</code>, <code>load_module</code> ou <code>user root</code> : RCE si les modules Perl, njs ou Lua sont chargés. CVSS 3.1 8.8. Onze advisories Nginx UI publiés le même jour, dont plusieurs outils MCP contournant les contrôles (CVE-2026-84317, -84319, -84360).</p>"
+          },
+          "date": "15 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-9jww-cxg5-rj9m",
+            "label": "GitHub Advisory"
+          }
+        },
+        {
+          "id": "hiddenlayer-jev-decision-model-injection",
+          "tag": "research",
+          "title": {
+            "es": "HiddenLayer: los «decision models» como Jev también caen con prompt injection indirecta",
+            "en": "HiddenLayer: decision models like Jev still fall for indirect prompt injection",
+            "fr": "HiddenLayer : les « decision models » comme Jev restent vulnérables à la prompt injection indirecte"
+          },
+          "body_html": {
+            "es": "<p>TypeSafe AI vende Jev como un decision model que devuelve probabilidades y un score de confianza en vez de texto. HiddenLayer armó una tienda falsa y le pidió a un agente de browser basado en Jev que comprara el carrito sin modificarlo; un anuncio falso con un botón «Confirm Price» lo desvió seguido (clickjacking vía prompt injection indirecta). Jev cayó menos que Qwen3.8-27B ajustado para actuar como decision model, pero cayó. Además, adaptando TokenBreak lograron pasar prompts dañinos por Jev usado como verificador. Conclusión: un decision model sigue siendo un modelo de lenguaje, y sus outputs disparan acciones reales.</p>",
+            "en": "<p>TypeSafe AI markets Jev as a decision model that returns probabilities and a confidence score instead of text. HiddenLayer built a mock store and told a Jev-based browser agent to buy the cart without changing it; a fake sponsored ad with a \"Confirm Price\" button frequently diverted it (clickjacking via indirect prompt injection). Jev was fooled less often than Qwen3.8-27B tuned to act as a decision model, but it was still fooled. Adapting TokenBreak, they also slipped harmful prompts past Jev used as a prompt verifier. Bottom line: a decision model is still a language model, and its outputs trigger real actions.</p>",
+            "fr": "<p>TypeSafe AI présente Jev comme un decision model renvoyant des probabilités plutôt que du texte. HiddenLayer a monté une fausse boutique : un agent de navigation basé sur Jev, chargé d'acheter le panier sans le modifier, a souvent cliqué sur une fausse publicité « Confirm Price » (clickjacking par prompt injection indirecte). Jev a été trompé moins souvent que Qwen3.8-27B, mais l'a été. En adaptant TokenBreak, ils ont aussi contourné Jev utilisé comme vérificateur de prompts.</p>"
+          },
+          "date": "15 Oct 2026",
+          "source": {
+            "url": "https://www.theregister.com/ai-and-ml/2026/10/15/jev-and-other-decision-models-can-still-be-tricked-with-prompt-injection/5303184",
+            "label": "The Register"
+          }
+        }
+      ]
+    },
+    {
+      "id": "advisories",
+      "name": "Vendor Advisories",
+      "theme": "advisories",
+      "icon_emoji": "📢",
+      "anchor": "advisories",
+      "updates": [
+        {
+          "id": "bofa-mythos-patch-backlog",
+          "tag": "advisory",
+          "title": {
+            "es": "Bank of America sumó 1.000 contratistas para parchear las vulnerabilidades que encontró Mythos",
+            "en": "Bank of America brought in 1,000 contractors to patch the vulnerabilities Mythos found",
+            "fr": "Bank of America a fait appel à 1 000 prestataires pour corriger les vulnérabilités trouvées par Mythos"
+          },
+          "body_html": {
+            "es": "<p>En la call de resultados del Q3, el CEO Brian Moynihan contó que el banco incorporó 1.000 contratistas en el Q2 para remediar los hallazgos de Mythos, el modelo de Anthropic para cazar bugs, sumados a unos 3.000 técnicos propios. Los costos de remediación fueron «un par de cientos de millones y algo más», aunque esa cifra mezcla Mythos con la limpieza por órdenes anti lavado, así que la parte de IA no está aislada. Moynihan espera que bajen cuando se vacíe el backlog inicial. El dato que importa: el descubrimiento automatizado de vulnerabilidades genera un backlog de parches con costo real, y hay que presupuestarlo antes de prender el modelo.</p>",
+            "en": "<p>On the Q3 earnings call, CEO Brian Moynihan said the bank brought in 1,000 contractors in Q2 to remediate findings from Mythos, Anthropic's bug-hunting model, on top of about 3,000 in-house technical staff. Remediation costs were \"a couple of hundred million plus\", though that figure bundles Mythos work with anti-money-laundering cleanup, so the AI share is not broken out. Moynihan expects costs to drop as the initial backlog clears. The takeaway: automated vulnerability discovery produces a patch backlog with real cost, and it needs budgeting before the model is switched on.</p>",
+            "fr": "<p>Lors de la présentation des résultats du T3, le PDG Brian Moynihan a indiqué que la banque a fait appel à 1 000 prestataires au T2 pour corriger les découvertes de Mythos, le modèle de chasse aux bugs d'Anthropic, en plus d'environ 3 000 techniciens internes. Les coûts de remédiation, « quelques centaines de millions », incluent aussi des chantiers anti-blanchiment. La découverte automatisée de vulnérabilités crée un backlog de correctifs au coût bien réel.</p>"
+          },
+          "date": "15 Oct 2026",
+          "source": {
+            "url": "https://www.theregister.com/security/2026/10/15/bank-of-america-had-to-bring-in-1000-contractors-to-patch-all-the-bugs-mythos-identified/5303275",
+            "label": "The Register"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "MCP es la nueva superficie de bypass: Nginx UI tenía validación en la API REST pero no en sus tools MCP, y el SDK oficial de Python no liberaba sesiones. Cada tool MCP es un endpoint más que necesita los mismos controles.",
+      "en": "MCP is the new bypass surface: Nginx UI validated configs in its REST API but not in its MCP tools, and the official Python SDK never reclaimed sessions. Every MCP tool is one more endpoint that needs the same controls.",
+      "fr": "MCP devient la nouvelle surface de contournement : Nginx UI validait la configuration dans son API REST mais pas dans ses outils MCP, et le SDK Python officiel ne libérait jamais les sessions."
+    },
+    {
+      "es": "La prompt injection indirecta ya no es solo un PoC de laboratorio: aparece en headers HTTP en la web abierta y desvía incluso a modelos que no emiten texto.",
+      "en": "Indirect prompt injection is no longer just a lab PoC: it is showing up in HTTP headers on the open web and diverting even models that do not emit text.",
+      "fr": "La prompt injection indirecte n'est plus un simple PoC : elle apparaît dans les en-têtes HTTP du web ouvert et détourne même des modèles qui ne produisent pas de texte."
+    }
+  ]
+}

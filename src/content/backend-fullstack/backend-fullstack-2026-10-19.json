@@ -1,0 +1,301 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 19 Oct 2026: Amazon compra DuckDB, Kysely blinda transacciones y Nx 24 sigue rompiendo",
+    "en": "Backend & Fullstack Daily — 19 Oct 2026: Amazon buys DuckDB, Kysely hardens transactions and Nx 24 keeps breaking things",
+    "fr": "Backend & Fullstack Daily — 19 oct. 2026 : Amazon rachète DuckDB, Kysely sécurise ses transactions et Nx 24 continue de casser"
+  },
+  "description": {
+    "es": "Fin de semana tranquilo en advisories. Lo fuerte: Amazon adquiere DuckLabs y mete DuckDB en Aurora PostgreSQL, Kysely 0.29.7/0.28.18 arregla leaks de conexión en transacciones, Fastify v6 alpha.5, BullMQ, el ejercicio de desconexión del Sovereign Cloud de AWS y Nx 24 beta.3.",
+    "en": "A quiet weekend for advisories. The big ones: Amazon acquires DuckLabs and brings DuckDB into Aurora PostgreSQL, Kysely 0.29.7/0.28.18 fixes connection leaks in transactions, Fastify v6 alpha.5, BullMQ, AWS's European Sovereign Cloud disconnection exercise and Nx 24 beta.3.",
+    "fr": "Week-end calme côté advisories. À retenir : Amazon rachète DuckLabs et intègre DuckDB dans Aurora PostgreSQL, Kysely 0.29.7/0.28.18 corrige des fuites de connexions, Fastify v6 alpha.5, BullMQ, l'exercice de déconnexion du Sovereign Cloud d'AWS et Nx 24 beta.3."
+  },
+  "pubDate": "2026-10-19",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "Amazon compra DuckLabs: DuckDB en Aurora", "en": "Amazon buys DuckLabs: DuckDB in Aurora", "fr": "Amazon rachète DuckLabs : DuckDB dans Aurora" },
+      "anchor": "amazon-ducklabs",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": { "es": "Kysely: fixes de leaks en transacciones", "en": "Kysely: transaction connection-leak fixes", "fr": "Kysely : correctifs de fuites de transactions" },
+      "anchor": "kysely-0-29-7",
+      "icon": "lucide:database"
+    },
+    {
+      "text": { "es": "Nx 24 beta.3: affected por defecto", "en": "Nx 24 beta.3: affected tasks by default", "fr": "Nx 24 beta.3 : affected par défaut" },
+      "anchor": "nx-24-beta-3",
+      "icon": "lucide:package"
+    },
+    {
+      "text": { "es": "kin-openapi: panic en ValidateResponse", "en": "kin-openapi: ValidateResponse panic", "fr": "kin-openapi : panic dans ValidateResponse" },
+      "anchor": "kin-openapi-panic",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Uber mapea fail-open vs fail-close", "en": "Uber maps fail-open vs fail-close deps", "fr": "Uber classe ses dépendances fail-open/close" },
+      "anchor": "uber-dependency-analysis",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "amazon-ducklabs",
+          "tag": "breaking",
+          "date": "17 Oct 2026",
+          "title": {
+            "es": "Amazon adquiere DuckLabs y estrena DuckDB dentro de Aurora PostgreSQL",
+            "en": "Amazon acquires DuckLabs and debuts DuckDB inside Aurora PostgreSQL",
+            "fr": "Amazon rachète DuckLabs et intègre DuckDB dans Aurora PostgreSQL"
+          },
+          "body_html": {
+            "es": "<p>Movida grande: Amazon compró DuckLabs, la empresa detrás de <strong>DuckDB</strong>, y sus creadores siguen liderando el proyecto. DuckDB, DuckLake y Quack quedan bajo licencia MIT con la DuckDB Foundation al mando. Lo primero que sale: <strong>Aurora PostgreSQL</strong> ya te deja combinar en una sola query datos vivos de Aurora con históricos en Iceberg/Parquet sobre S3, en todas las regiones comerciales y sin cargo extra más allá del compute y los requests. Si tenías un pipeline ETL solo para analítica liviana, replanteátelo.</p>",
+            "en": "<p>Big move: Amazon acquired DuckLabs, the company behind <strong>DuckDB</strong>, with its creators still leading the project. DuckDB, DuckLake and Quack stay MIT-licensed under the DuckDB Foundation. First fruit: <strong>Aurora PostgreSQL</strong> can now combine live Aurora data with historical Iceberg/Parquet data in S3 in a single query, in all commercial regions, at no charge beyond incremental compute and S3 requests.</p>",
+            "fr": "<p>Gros mouvement : Amazon a racheté DuckLabs, la société derrière <strong>DuckDB</strong>, dont les créateurs restent aux commandes. DuckDB, DuckLake et Quack restent sous licence MIT. Première intégration : <strong>Aurora PostgreSQL</strong> combine dans une seule requête les données vivantes d'Aurora et l'historique Iceberg/Parquet sur S3, sans surcoût hors compute et requêtes S3.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/amazon-acquires-ducklabs/", "label": "infoq.com" }
+        },
+        {
+          "id": "kysely-0-29-7",
+          "tag": "notable",
+          "date": "17 Oct 2026",
+          "title": {
+            "es": "Kysely 0.29.7 y 0.28.18: se acabaron los leaks de conexión en transacciones controladas",
+            "en": "Kysely 0.29.7 and 0.28.18: no more connection leaks in controlled transactions",
+            "fr": "Kysely 0.29.7 et 0.28.18 : fin des fuites de connexions dans les transactions contrôlées"
+          },
+          "body_html": {
+            "es": "<p>Si usás <code>startTransaction()</code>, actualizá: commit, rollback y savepoints ahora esperan a que terminen queries y streams en curso, un rollback fallido libera la conexión y un <code>begin</code> fallido ya no la deja colgada del pool. En Postgres se libera el client si se destruye mientras adquiere conexión, y en MSSQL se escapan claves y JSON en <code>jsonBuildObject</code>. Ojo en 0.28.18: los migration locks pasan a nivel sesión, así que migrar a través de PgBouncer en transaction pooling requiere conexión directa o session pooling.</p>",
+            "en": "<p>If you use <code>startTransaction()</code>, upgrade: commit, rollback and savepoints now wait for in-flight queries and streams, a failed rollback releases its connection, and a failed <code>begin</code> no longer leaks from the pool. Postgres releases the client when destroyed mid-acquire, and MSSQL now escapes keys and JSON in <code>jsonBuildObject</code>. Heads-up on 0.28.18: migration locks become session-level, so migrating through PgBouncer transaction pooling needs a direct connection or session pooling.</p>",
+            "fr": "<p>Si vous utilisez <code>startTransaction()</code>, mettez à jour : commit, rollback et savepoints attendent les requêtes et streams en cours, et un rollback ou <code>begin</code> échoué ne fuit plus la connexion. MSSQL échappe désormais clés et JSON dans <code>jsonBuildObject</code>. En 0.28.18, les verrous de migration passent au niveau session : via PgBouncer en transaction pooling, il faut une connexion directe.</p>"
+          },
+          "source": { "url": "https://github.com/kysely-org/kysely/releases/tag/v0.29.7", "label": "github.com/kysely-org" }
+        },
+        {
+          "id": "nx-24-beta-3",
+          "tag": "beta",
+          "date": "18 Oct 2026",
+          "title": {
+            "es": "Nx 24.0.0-beta.3: affected por defecto y una tanda de breaking changes",
+            "en": "Nx 24.0.0-beta.3: affected tasks by default and a batch of breaking changes",
+            "fr": "Nx 24.0.0-beta.3 : tâches affected par défaut et une série de breaking changes"
+          },
+          "body_html": {
+            "es": "<p>Nx 24 se va perfilando: <strong>selecciona tareas affected por defecto</strong>, elimina el fallback legacy de caché por nombre de target, saca su module federation propio en favor de los plugins oficiales y borra executors deprecados. También soporta fallbacks <code>??</code> en tokens. Si tenés un monorepo grande con Nx, probá la beta en una rama antes de que te agarre el upgrade en frío.</p>",
+            "en": "<p>Nx 24 is taking shape: it <strong>selects affected tasks by default</strong>, drops the legacy target-name cache fallback, removes its own module federation in favour of the official plugins and deletes deprecated executors. Tokens now support <code>??</code> fallbacks. Try the beta on a branch before the upgrade catches you cold.</p>",
+            "fr": "<p>Nx 24 se précise : <strong>tâches affected sélectionnées par défaut</strong>, suppression du fallback de cache legacy, abandon de son module federation au profit des plugins officiels et retrait des executors dépréciés. Les tokens acceptent les fallbacks <code>??</code>.</p>"
+          },
+          "source": { "url": "https://github.com/nrwl/nx/releases/tag/24.0.0-beta.3", "label": "github.com/nrwl" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "frameworks",
+      "updates": [
+        {
+          "id": "fastify-v6-alpha-5",
+          "tag": "beta",
+          "date": "16 Oct 2026",
+          "title": {
+            "es": "Fastify v6.0.0-alpha.5: perf en bodies y headers, tipos más estrictos",
+            "en": "Fastify v6.0.0-alpha.5: body and header perf, stricter types",
+            "fr": "Fastify v6.0.0-alpha.5 : perf sur bodies et headers, types plus stricts"
+          },
+          "body_html": {
+            "es": "<p>Otra alpha de v6: los bodies string se decodifican una sola vez en vez de por chunk, los getters de trust proxy leen los headers mergeados una vez, y los child loggers de request ya no resetean su nivel. En tipos, se restringen los métodos de lookup de rutas y vuelve el <code>this</code> en hooks shorthand. Además, una request HTTP <code>QUERY</code> con body vacío ya no tira error.</p>",
+            "en": "<p>Another v6 alpha: string bodies are decoded once instead of per chunk, trust-proxy getters read merged headers once, and request child loggers no longer reset their level. Types restrict route lookup methods and restore <code>this</code> in shorthand hooks. An HTTP <code>QUERY</code> request with an empty body no longer errors.</p>",
+            "fr": "<p>Nouvelle alpha v6 : les bodies string sont décodés une seule fois, les getters trust proxy lisent les headers une fois, et les child loggers ne réinitialisent plus leur niveau. Les types restaurent <code>this</code> dans les hooks shorthand ; une requête <code>QUERY</code> au body vide ne lève plus d'erreur.</p>"
+          },
+          "source": { "url": "https://github.com/fastify/fastify/releases/tag/v6.0.0-alpha.5", "label": "github.com/fastify" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "databases",
+      "updates": [
+        {
+          "id": "bullmq-6-3-17",
+          "tag": "patch",
+          "date": "18 Oct 2026",
+          "title": {
+            "es": "BullMQ 6.3.16/6.3.17: workers que despiertan bien y Valkey GLIDE en cluster",
+            "en": "BullMQ 6.3.16/6.3.17: workers that wake up properly and Valkey GLIDE in cluster mode",
+            "fr": "BullMQ 6.3.16/6.3.17 : workers qui se réveillent et Valkey GLIDE en cluster"
+          },
+          "body_html": {
+            "es": "<p>6.3.17 arregla un bug molesto: al reanudar un worker tras <code>pause(true)</code>, el loop principal no se despertaba. 6.3.16 enruta <code>INFO</code> a un único nodo cuando usás <strong>valkey-glide</strong> en modo cluster. Si pausás workers en deploys, actualizá.</p>",
+            "en": "<p>6.3.17 fixes an annoying bug: resuming a worker after <code>pause(true)</code> did not wake its main loop. 6.3.16 routes <code>INFO</code> to a single node when using <strong>valkey-glide</strong> in cluster mode. If you pause workers during deploys, upgrade.</p>",
+            "fr": "<p>6.3.17 corrige un bug gênant : reprendre un worker après <code>pause(true)</code> ne réveillait pas sa boucle principale. 6.3.16 route <code>INFO</code> vers un seul nœud avec <strong>valkey-glide</strong> en cluster.</p>"
+          },
+          "source": { "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.3.17", "label": "github.com/taskforcesh" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloud",
+      "updates": [
+        {
+          "id": "aws-sovereign-cloud-exercise",
+          "tag": "notable",
+          "date": "18 Oct 2026",
+          "title": {
+            "es": "AWS va a desconectar su European Sovereign Cloud del backbone global por varias horas",
+            "en": "AWS will run its European Sovereign Cloud cut off from the global backbone for several hours",
+            "fr": "AWS va couper son European Sovereign Cloud du backbone mondial pendant plusieurs heures"
+          },
+          "body_html": {
+            "es": "<p>El 24 de octubre AWS apaga el backbone global y el canal dedicado de transferencias para la región soberana europea; el tráfico cae a internet pública vía ISPs europeos y un equipo residente en la UE la opera desde Brandeburgo. Es un ensayo de resiliencia alineado con el EU Cloud Sovereignty Framework y el C3A del BSI, sin certificación declarada. Si corrés cargas ahí, tené monitoreo de latencia listo ese día.</p>",
+            "en": "<p>On October 24 AWS switches off the global backbone and the dedicated transfer channel for its European sovereign region; traffic falls back to the public internet through European ISPs and an EU-resident team runs it from Brandenburg. It is a resilience exercise aligned with the EU Cloud Sovereignty Framework and BSI C3A, with no certification claimed.</p>",
+            "fr": "<p>Le 24 octobre, AWS coupe le backbone mondial et le canal de transfert dédié de sa région souveraine européenne ; le trafic bascule sur l'internet public via des FAI européens. Un exercice de résilience aligné sur l'EU Cloud Sovereignty Framework et le C3A du BSI, sans certification revendiquée.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/aws-sovereign-cloud-exercise/", "label": "infoq.com" }
+        },
+        {
+          "id": "lambda-durable-govcloud",
+          "tag": "minor",
+          "date": "16 Oct 2026",
+          "title": {
+            "es": "Lambda durable functions llega a AWS GovCloud (US)",
+            "en": "Lambda durable functions arrive in AWS GovCloud (US)",
+            "fr": "Les Lambda durable functions arrivent dans AWS GovCloud (US)"
+          },
+          "body_html": {
+            "es": "<p>Las funciones durables de Lambda, con checkpoints y ejecución de larga duración, ya están disponibles en las regiones GovCloud. Suma a la seguidilla de la semana pasada: SDK de Go GA y límites de payload más altos.</p>",
+            "en": "<p>Lambda durable functions, with checkpoints and long-running execution, are now available in the GovCloud Regions, following last week's Go SDK GA and higher payload limits.</p>",
+            "fr": "<p>Les durable functions de Lambda, avec checkpoints et exécution longue, sont disponibles dans les régions GovCloud, après le SDK Go GA de la semaine dernière.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/durablefunctions-govcloud/", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "architecture",
+      "updates": [
+        {
+          "id": "uber-dependency-analysis",
+          "tag": "notable",
+          "date": "16 Oct 2026",
+          "title": {
+            "es": "Uber clasifica automáticamente sus dependencias en fail-open, fail-close o unknown",
+            "en": "Uber automatically classifies its dependencies as fail-open, fail-close or unknown",
+            "fr": "Uber classe automatiquement ses dépendances en fail-open, fail-close ou unknown"
+          },
+          "body_html": {
+            "es": "<p>Esto es oro para quien diseña resiliencia: Uber usa middleware de entrada y salida en YARPC para correlacionar el resultado del caller con el del callee en tráfico real, y etiqueta cada dependencia según la probabilidad de que su falla se propague, tratando los retries por separado. Descartaron tracing distribuido porque el sampling tardaba demasiado en atrapar fallas raras. La lección: tu mapa de dependencias tiene que salir de producción, no de un diagrama.</p>",
+            "en": "<p>Gold for anyone designing resilience: Uber uses inbound and outbound middleware in YARPC to correlate caller and callee outcomes on real traffic and labels each dependency by the probability that its failure propagates, handling retries separately. They rejected distributed tracing because sampling was too slow to catch rare failures.</p>",
+            "fr": "<p>Uber utilise des middlewares entrants et sortants dans YARPC pour corréler les résultats appelant/appelé en production et étiquette chaque dépendance selon la probabilité de propagation de ses pannes. Le tracing distribué a été écarté : l'échantillonnage était trop lent pour les pannes rares.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/uber-automated-dependency/", "label": "infoq.com" }
+        },
+        {
+          "id": "grafana-slo-agents",
+          "tag": "notable",
+          "date": "16 Oct 2026",
+          "title": {
+            "es": "Grafana propone SLOs y error budgets para el comportamiento de agentes de IA",
+            "en": "Grafana applies SLOs and error budgets to AI agent behaviour",
+            "fr": "Grafana applique SLO et error budgets au comportement des agents IA"
+          },
+          "body_html": {
+            "es": "<p>Latencia y tokens no te dicen si la respuesta fue correcta. Grafana convierte groundedness, cumplimiento de tarea, toxicidad y costo en SLIs evaluados con LLM-as-judge o checks determinísticos (regex), con objetivos tipo <strong>95% de conversaciones resueltas en 30 días</strong>. El burn rate del budget delata el drift tras cambios de modelo, prompt o retrieval. Ojo: vale lo que valgan tus evaluadores.</p>",
+            "en": "<p>Latency and tokens don't tell you whether an answer was right. Grafana turns groundedness, task fulfilment, toxicity and cost into SLIs scored by LLM-as-judge or deterministic checks, with targets like <strong>95% of conversations fulfilled over 30 days</strong>. Budget burn rate exposes drift after model, prompt or retrieval changes; the approach is only as good as its evaluators.</p>",
+            "fr": "<p>Grafana transforme groundedness, réalisation de tâche, toxicité et coût en SLI évalués par LLM-as-judge ou contrôles déterministes, avec des objectifs comme <strong>95 % de conversations abouties sur 30 jours</strong>. Le burn rate révèle la dérive après un changement de modèle, de prompt ou de retrieval.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/grafana-slo-ai-agent/", "label": "infoq.com" }
+        },
+        {
+          "id": "kin-openapi-panic",
+          "tag": "security",
+          "date": "16 Oct 2026",
+          "title": {
+            "es": "kin-openapi: panic por nil pointer en ValidateResponse (CVE-2026-100349, CVSS 8.2)",
+            "en": "kin-openapi: nil-pointer panic in ValidateResponse (CVE-2026-100349, CVSS 8.2)",
+            "fr": "kin-openapi : panic nil pointer dans ValidateResponse (CVE-2026-100349, CVSS 8.2)"
+          },
+          "body_html": {
+            "es": "<p>Si validás respuestas contra OpenAPI en Go: un spec que declara un header de respuesta con <code>content</code> en vez de <code>schema</code> pasa <code>doc.Validate()</code> y después tumba <code>openapi3filter.ValidateResponse</code>. Afecta <code>&lt;= 0.145.0</code>; actualizá a <code>0.146.0</code>. Lección de API design: que el validador acepte tu spec no garantiza que el runtime lo soporte.</p>",
+            "en": "<p>If you validate responses against OpenAPI in Go: a spec declaring a response header with <code>content</code> instead of <code>schema</code> passes <code>doc.Validate()</code> and then crashes <code>openapi3filter.ValidateResponse</code>. Affects <code>&lt;= 0.145.0</code>; upgrade to <code>0.146.0</code>.</p>",
+            "fr": "<p>Un spec OpenAPI déclarant un header de réponse avec <code>content</code> au lieu de <code>schema</code> passe <code>doc.Validate()</code> puis fait planter <code>openapi3filter.ValidateResponse</code>. Concerne <code>&lt;= 0.145.0</code> ; passez à <code>0.146.0</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-74vm-87hj-r66f", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "fullstack",
+      "updates": [
+        {
+          "id": "better-auth-1-7-11",
+          "tag": "patch",
+          "date": "19 Oct 2026",
+          "title": {
+            "es": "better-auth 1.7.11: validación de ID tokens en Twitch/Paybin y fix de rate limit",
+            "en": "better-auth 1.7.11: ID token validation for Twitch/Paybin and a rate-limit fix",
+            "fr": "better-auth 1.7.11 : validation des ID tokens Twitch/Paybin et correctif de rate limit"
+          },
+          "body_html": {
+            "es": "<p>Arregla la validación de firma y claims del ID token en el sign-in con Twitch y Paybin (los issuers custom de Paybin deben publicar claves RS256 en <code>/.well-known/jwks.json</code>), el <code>X-Retry-After</code> desmedido del rate limiting en base de datos y los diffs de migración repetidos para columnas <code>int8</code> en Postgres.</p>",
+            "en": "<p>Fixes ID token signature and claim validation for Twitch and Paybin sign-in (custom Paybin issuers must publish RS256 keys at <code>/.well-known/jwks.json</code>), the oversized <code>X-Retry-After</code> from database-backed rate limiting, and repeated Postgres migration diffs for <code>int8</code> columns.</p>",
+            "fr": "<p>Corrige la validation de signature et des claims de l'ID token pour Twitch et Paybin (les issuers Paybin custom doivent publier des clés RS256 sur <code>/.well-known/jwks.json</code>), le <code>X-Retry-After</code> excessif du rate limiting en base et les diffs de migration <code>int8</code>.</p>"
+          },
+          "source": { "url": "https://github.com/better-auth/better-auth/releases/tag/v1.7.11", "label": "github.com/better-auth" }
+        },
+        {
+          "id": "turborepo-2-11-9",
+          "tag": "release",
+          "date": "16 Oct 2026",
+          "title": {
+            "es": "Turborepo 2.11.9: lockfiles de Berry y Bun mucho más rápidos",
+            "en": "Turborepo 2.11.9: much faster Berry and Bun lockfile handling",
+            "fr": "Turborepo 2.11.9 : lockfiles Berry et Bun bien plus rapides"
+          },
+          "body_html": {
+            "es": "<p>Release puramente de performance: calcula las closures de lockfiles de Yarn Berry y Bun una sola vez para todos los workspaces, parsea <code>bun.lock</code> sin armar un árbol JSON, chequea outputs de cache hits in place y reutiliza la config de <code>turbo.json</code> entre el shim y la CLI. En monorepos grandes se nota en el arranque.</p>",
+            "en": "<p>A pure performance release: Yarn Berry and Bun lockfile closures are computed once across workspaces, <code>bun.lock</code> is parsed without building a JSON tree, cache-hit outputs are checked in place, and <code>turbo.json</code> config is reused between the shim and the CLI.</p>",
+            "fr": "<p>Release de performance : closures des lockfiles Yarn Berry et Bun calculées une fois pour tous les workspaces, <code>bun.lock</code> parsé sans arbre JSON, et config <code>turbo.json</code> partagée entre le shim et la CLI.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/turborepo/releases/tag/v2.11.9", "label": "github.com/vercel" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El lakehouse se mete en la base OLTP: con DuckDB adentro de Aurora, consultar S3/Iceberg desde Postgres deja de ser un proyecto aparte.",
+      "en": "The lakehouse moves into the OLTP database: with DuckDB inside Aurora, querying S3/Iceberg from Postgres stops being a separate project.",
+      "fr": "Le lakehouse entre dans la base OLTP : avec DuckDB dans Aurora, interroger S3/Iceberg depuis Postgres n'est plus un projet à part."
+    },
+    {
+      "es": "Observabilidad de comportamiento: Uber y Grafana miden resultados (propagación de fallas, calidad de respuesta) en lugar de solo latencia y throughput.",
+      "en": "Behavioural observability: Uber and Grafana measure outcomes (failure propagation, answer quality) instead of just latency and throughput.",
+      "fr": "Observabilité comportementale : Uber et Grafana mesurent des résultats (propagation des pannes, qualité des réponses) plutôt que la seule latence."
+    }
+  ]
+}

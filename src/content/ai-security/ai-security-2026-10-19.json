@@ -1,0 +1,160 @@
+{
+  "title": {
+    "es": "AI Security — 19 OCT 2026",
+    "en": "AI Security — 19 OCT 2026",
+    "fr": "AI Security — 19 OCT 2026"
+  },
+  "description": {
+    "es": "Google Agent Mesh (SAM) publica dos CVE críticos que dejan a cualquiera enrolarse en la mesh e invocar tools MCP, LMCache tiene RCE sin auth por pickle en su transporte multiproceso y el Claude Agent SDK para Python parchea una argument injection que permitía colar un servidor MCP vía la opción resume.",
+    "en": "Google Agent Mesh (SAM) discloses two critical CVEs that let anyone enroll into the mesh and invoke MCP tools, LMCache has unauthenticated pickle RCE on its multiprocess transport, and the Claude Agent SDK for Python patches an argument injection that smuggled an MCP server in through the resume option.",
+    "fr": "Google Agent Mesh (SAM) publie deux CVE critiques permettant à n'importe qui de s'enrôler dans le mesh et d'invoquer des outils MCP, LMCache présente une RCE non authentifiée par pickle sur son transport multiprocessus, et le Claude Agent SDK Python corrige une injection d'arguments qui glissait un serveur MCP via l'option resume."
+  },
+  "pubDate": "2026-10-19",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "Google SAM: cualquiera se enrola en la mesh",
+        "en": "Google SAM: anyone can enroll into the mesh",
+        "fr": "Google SAM : n'importe qui rejoint le mesh"
+      },
+      "anchor": "google-sam-cve-2026-103091-open-enrollment",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "Google SAM: ingress libp2p sin autenticación",
+        "en": "Google SAM: unauthenticated libp2p ingress",
+        "fr": "Google SAM : ingress libp2p sans authentification"
+      },
+      "anchor": "google-sam-cve-2026-102503-libp2p-ingress",
+      "icon": "lucide:lock"
+    },
+    {
+      "text": {
+        "es": "LMCache: RCE sin auth por pickle (9.8)",
+        "en": "LMCache: unauthenticated pickle RCE (9.8)",
+        "fr": "LMCache : RCE non authentifiée par pickle (9.8)"
+      },
+      "anchor": "lmcache-cve-2026-105192-pickle-rce",
+      "icon": "lucide:radiation"
+    },
+    {
+      "text": {
+        "es": "Claude Agent SDK: argument injection vía resume",
+        "en": "Claude Agent SDK: argument injection via resume",
+        "fr": "Claude Agent SDK : injection d'arguments via resume"
+      },
+      "anchor": "claude-agent-sdk-cve-2026-96620-resume-injection",
+      "icon": "lucide:bug"
+    }
+  ],
+  "tools": [
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "google-sam-cve-2026-103091-open-enrollment",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-103091: Google Agent Mesh (SAM) deja que cualquier token OIDC se enrole y ejecute tools MCP",
+            "en": "CVE-2026-103091: Google Agent Mesh (SAM) lets any OIDC token holder enroll and run MCP tools",
+            "fr": "CVE-2026-103091 : Google Agent Mesh (SAM) laisse tout détenteur d'un jeton OIDC s'enrôler et exécuter des outils MCP"
+          },
+          "body_html": {
+            "es": "<p>SAM, la mesh open source de Google para conectar agentes, servidores MCP, A2A y endpoints de inferencia, tenía un default inseguro en el proxy MCP (<code>HandleStreamPassThrough</code>) y en el flujo de registro OIDC. <code>GET /info</code> expone la configuración OIDC y <code>POST /register</code> enrola a cualquiera con un token OIDC válido, sin filtrar claims ni chequear bans. Encima, la policy por defecto ata <code>sam:system:authenticated</code> a servicios y targets wildcard, así que el atacante sale con lectura, escritura y ejecución completas sobre los backends MCP conectados. CVSS v4 9.3. Afecta 0.1.0-alpha.1 a alpha.8; arreglado en <strong>0.1.0-alpha.9</strong>, que pasa a fail-closed y exige bindings de policy explícitos al enrolar. Ojo con esto: si lo corriste en alpha, revisá quién se enroló.</p>",
+            "en": "<p>SAM, Google's open-source mesh for wiring together agents, MCP servers, A2A and inference endpoints, shipped an insecure default in its MCP proxy (<code>HandleStreamPassThrough</code>) and OIDC registration flow. <code>GET /info</code> exposes the OIDC configuration and <code>POST /register</code> enrolls anyone holding a valid OIDC token, with no claim filtering or ban checks. On top of that, the default policy binds <code>sam:system:authenticated</code> to wildcard services and targets, so the attacker walks away with full read, write and execute access to connected MCP backends. CVSS v4 9.3. Affects 0.1.0-alpha.1 through alpha.8; fixed in <strong>0.1.0-alpha.9</strong>, which fails closed and requires explicit policy bindings at enrollment. If you ran an alpha build, audit who enrolled.</p>",
+            "fr": "<p>SAM, le mesh open source de Google reliant agents, serveurs MCP, A2A et endpoints d'inférence, avait un défaut non sécurisé dans son proxy MCP (<code>HandleStreamPassThrough</code>) et son flux d'enregistrement OIDC. <code>GET /info</code> expose la configuration OIDC et <code>POST /register</code> enrôle tout détenteur d'un jeton OIDC valide, sans filtrage des claims. La policy par défaut lie <code>sam:system:authenticated</code> à des services et cibles wildcard, donnant lecture, écriture et exécution complètes sur les backends MCP. CVSS v4 9.3. Versions 0.1.0-alpha.1 à alpha.8 ; corrigé en <strong>0.1.0-alpha.9</strong>.</p>"
+          },
+          "date": "19 Oct 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-103091",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "google-sam-cve-2026-102503-libp2p-ingress",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-102503: el ingress /libp2p-http de Google SAM se saltea la policy Biscuit",
+            "en": "CVE-2026-102503: Google SAM's /libp2p-http ingress skips Biscuit policy enforcement",
+            "fr": "CVE-2026-102503 : l'ingress /libp2p-http de Google SAM contourne la policy Biscuit"
+          },
+          "body_html": {
+            "es": "<p>Segundo CVE de SAM publicado el mismo día. El handler del stream MCP sí valida tokens Biscuit, pero la ruta paralela <code>/libp2p-http</code> no verificaba ni el token ni el enrolamiento en la mesh. Resultado: cualquier peer libp2p sin autenticar podía invocar servicios backend registrados, incluyendo servidores MCP con transporte command/stdio, A2A y endpoints de inferencia. CVSS v4 9.3. Afecta 0.1.0-alpha.1 a alpha.2; arreglado en <strong>0.1.0-alpha.3</strong>. Es el clásico control aplicado en una puerta y olvidado en la de al lado.</p>",
+            "en": "<p>SAM's second CVE published the same day. The MCP protocol stream handler enforces Biscuit auth, but the parallel <code>/libp2p-http</code> ingress route never checked a Biscuit token or mesh enrollment. Any unauthenticated libp2p peer could invoke registered backend services, including command/stdio-backed MCP servers, A2A and inference endpoints. CVSS v4 9.3. Affects 0.1.0-alpha.1 through alpha.2; fixed in <strong>0.1.0-alpha.3</strong>. A textbook case of a control enforced on one door and forgotten on the one next to it.</p>",
+            "fr": "<p>Deuxième CVE de SAM publiée le même jour. Le handler du flux MCP applique l'authentification Biscuit, mais la route parallèle <code>/libp2p-http</code> ne vérifiait ni jeton ni enrôlement. Tout pair libp2p non authentifié pouvait invoquer les services backend enregistrés, y compris des serveurs MCP stdio, A2A et des endpoints d'inférence. CVSS v4 9.3. Versions 0.1.0-alpha.1 à alpha.2 ; corrigé en <strong>0.1.0-alpha.3</strong>.</p>"
+          },
+          "date": "19 Oct 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-102503",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "lmcache-cve-2026-105192-pickle-rce",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-105192: LMCache ejecuta pickle.loads sobre mensajes ZMQ sin autenticar",
+            "en": "CVE-2026-105192: LMCache runs pickle.loads on unauthenticated ZMQ messages",
+            "fr": "CVE-2026-105192 : LMCache exécute pickle.loads sur des messages ZMQ non authentifiés"
+          },
+          "body_html": {
+            "es": "<p>LMCache, la capa de KV cache que se usa junto a vLLM, abre en modo multiproceso (distribuido) un socket ZeroMQ ROUTER sin CURVE, ZAP ni ningún tipo de autenticación. Los mensajes son msgpack, y el extension code 1 termina en <code>DeviceIPCWrapper.Deserialize</code>, que llama a <code>pickle.loads</code> mientras decodifica los argumentos de <code>REGISTER_KV_CACHE</code>, antes de que corra el handler. Un solo mensaje DEALER al puerto 5555 ejecuta código, y las imágenes oficiales corren como root. El 9.8 aplica cuando el operador bindea a una dirección enrutable con <code>--host</code> (el caso multi-nodo); el default en localhost y LMCache embebido en vLLM no abren ese puerto. Afecta 0.3.9 a 0.5.5; parcheado en <strong>0.5.6</strong>. Otra vez pickle sobre la red.</p>",
+            "en": "<p>LMCache, the KV-cache layer commonly deployed alongside vLLM, opens an unauthenticated ZeroMQ ROUTER in multiprocess (distributed) mode, with no CURVE, ZAP or message authentication. Messages are msgpack, and extension code 1 is routed to <code>DeviceIPCWrapper.Deserialize</code>, which calls <code>pickle.loads</code> while decoding <code>REGISTER_KV_CACHE</code> arguments, before the handler even runs. A single DEALER message to port 5555 executes code, and the official container images run as root. The 9.8 score covers a routable bind via <code>--host</code> (the multi-node setup); the default localhost bind and LMCache embedded inside vLLM do not open the port. Affects 0.3.9 through 0.5.5; patched in <strong>0.5.6</strong>. Pickle on the wire, again.</p>",
+            "fr": "<p>LMCache, la couche de KV cache souvent déployée avec vLLM, ouvre en mode multiprocessus (distribué) un socket ZeroMQ ROUTER sans CURVE, ZAP ni authentification. Les messages sont en msgpack, et le code d'extension 1 aboutit à <code>DeviceIPCWrapper.Deserialize</code>, qui appelle <code>pickle.loads</code> pendant le décodage des arguments de <code>REGISTER_KV_CACHE</code>. Un seul message DEALER vers le port 5555 exécute du code, et les images officielles tournent en root. Le score 9.8 vise un bind routable via <code>--host</code>. Versions 0.3.9 à 0.5.5 ; corrigé en <strong>0.5.6</strong>.</p>"
+          },
+          "date": "16 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-w5f2-9q9c-ff4h",
+            "label": "GitHub Advisory"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "claude-agent-sdk-cve-2026-96620-resume-injection",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-96620: el Claude Agent SDK para Python dejaba inyectar --mcp-config a través de resume",
+            "en": "CVE-2026-96620: Claude Agent SDK for Python allowed --mcp-config injection through resume",
+            "fr": "CVE-2026-96620 : le Claude Agent SDK Python permettait d'injecter --mcp-config via resume"
+          },
+          "body_html": {
+            "es": "<p>El SDK le pasaba la opción <code>resume</code> al CLI de Claude sin validar, así que un valor que empezaba con <code>-</code> se interpretaba como otro flag. Un atacante que controlara el ID de sesión podía inyectar <code>--mcp-config</code> con un servidor MCP stdio y lograr ejecución de comandos arbitrarios al arrancar el CLI, salteando los controles de permisos del SDK. Solo aplica si tu app pasa input no confiable como session ID a resume, que es justo lo que pasa cuando el ID viaja en un query param o un header. CVSS v4 9.2. Afecta <code>claude-agent-sdk</code> &lt; 0.2.121; actualizá a <strong>0.2.121</strong>. Reportado vía HackerOne.</p>",
+            "en": "<p>The SDK passed the <code>resume</code> option to the Claude CLI without validation, so a value starting with <code>-</code> was parsed as a separate flag. An attacker who controlled the session ID could inject <code>--mcp-config</code> defining a stdio MCP server and get arbitrary command execution at CLI startup, bypassing the SDK's permission controls. It only applies when your app passes untrusted input as the session ID to resume, which is exactly what happens when that ID travels in a query parameter or header. CVSS v4 9.2. Affects <code>claude-agent-sdk</code> &lt; 0.2.121; upgrade to <strong>0.2.121</strong>. Reported through HackerOne.</p>",
+            "fr": "<p>Le SDK transmettait l'option <code>resume</code> au CLI Claude sans validation : une valeur commençant par <code>-</code> était interprétée comme un autre flag. Un attaquant contrôlant l'ID de session pouvait injecter <code>--mcp-config</code> définissant un serveur MCP stdio et obtenir l'exécution de commandes arbitraires au démarrage du CLI, en contournant les contrôles de permissions du SDK. Ne concerne que les apps qui passent une entrée non fiable comme ID de session. CVSS v4 9.2. <code>claude-agent-sdk</code> &lt; 0.2.121 ; mettez à jour vers <strong>0.2.121</strong>.</p>"
+          },
+          "date": "16 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-h4mw-j7qp-8mwm",
+            "label": "GitHub Advisory"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "La capa que conecta agentes es el nuevo blanco: una mesh de agentes con defaults abiertos y un SDK que deja colar un servidor MCP vía un flag. En ambos casos el atacante no rompe el modelo, se mete por la plomería que decide qué tools corren.",
+      "en": "The layer that wires agents together is the new target: an agent mesh with open defaults and an SDK that let an MCP server slip in through a flag. In both cases the attacker never touches the model; they get in through the plumbing that decides which tools run.",
+      "fr": "La couche qui relie les agents devient la cible : un mesh d'agents aux défauts ouverts et un SDK qui laissait glisser un serveur MCP via un flag. Dans les deux cas, l'attaquant ne touche pas au modèle mais à la plomberie qui décide quels outils s'exécutent."
+    },
+    {
+      "es": "Pickle sobre la red sigue apareciendo en infra de inferencia: LMCache se suma a la lista de componentes distribuidos que deserializan antes de autenticar. Si un servicio de KV cache escucha fuera de localhost, asumí que necesita red aislada.",
+      "en": "Pickle over the network keeps turning up in inference infrastructure: LMCache joins the list of distributed components that deserialize before they authenticate. If a KV-cache service listens beyond localhost, assume it needs an isolated network.",
+      "fr": "Le pickle sur le réseau revient sans cesse dans l'infrastructure d'inférence : LMCache rejoint la liste des composants distribués qui désérialisent avant d'authentifier."
+    }
+  ]
+}

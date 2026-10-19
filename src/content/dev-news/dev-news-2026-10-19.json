@@ -1,0 +1,187 @@
+{
+  "title": {
+    "es": "Dev News — 19 Oct 2026: Nuxt parchea 5 advisories, Zod compila schemas y Chrome 158 mata XSLT",
+    "en": "Dev News — 19 Oct 2026: Nuxt patches 5 advisories, Zod compiles schemas, Chrome 158 kills XSLT",
+    "fr": "Dev News — 19 oct. 2026 : Nuxt corrige 5 advisories, Zod compile les schémas, Chrome 158 retire XSLT"
+  },
+  "description": {
+    "es": "Fin de semana tranquilo pero con lo importante: tanda de seguridad en Nuxt 4.6.2, z.compile() en Zod, la cuenta regresiva de XSLT en Chrome, JPEG XL vs AVIF y ESLint 10.13.",
+    "en": "A quiet weekend with what matters: a Nuxt 4.6.2 security batch, Zod's z.compile(), Chrome's XSLT countdown, JPEG XL vs AVIF, and ESLint 10.13.",
+    "fr": "Un week-end calme mais l'essentiel : lot de sécurité Nuxt 4.6.2, z.compile() de Zod, compte à rebours XSLT dans Chrome, JPEG XL vs AVIF et ESLint 10.13."
+  },
+  "pubDate": "2026-10-19",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": { "es": "Nuxt 4.6.2: 5 advisories, Nuxt 3 sin parche", "en": "Nuxt 4.6.2: 5 advisories, Nuxt 3 unpatched", "fr": "Nuxt 4.6.2 : 5 advisories, Nuxt 3 sans correctif" },
+      "anchor": "nuxt-advisories-oct16",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Zod z.compile(): parseo hasta 9x más rápido", "en": "Zod z.compile(): up to 9x faster parsing", "fr": "Zod z.compile() : parsing jusqu'à 9x plus rapide" },
+      "anchor": "zod-schema-compilation",
+      "icon": "simple-icons:typescript"
+    },
+    {
+      "text": { "es": "Chrome 158 apaga XSLT el 17 de noviembre", "en": "Chrome 158 turns off XSLT on 17 November", "fr": "Chrome 158 désactive XSLT le 17 novembre" },
+      "anchor": "chrome-xslt-removal",
+      "icon": "simple-icons:html5"
+    },
+    {
+      "text": { "es": "JPEG XL vs AVIF: AVIF sigue de default", "en": "JPEG XL vs AVIF: AVIF stays the default", "fr": "JPEG XL vs AVIF : AVIF reste le défaut" },
+      "anchor": "jpegxl-vs-avif",
+      "icon": "lucide:sparkles"
+    },
+    {
+      "text": { "es": "ESLint 10.13: reglas más estrictas con IIFEs", "en": "ESLint 10.13: stricter rules around IIFEs", "fr": "ESLint 10.13 : règles plus strictes autour des IIFE" },
+      "anchor": "eslint-10-13",
+      "icon": "lucide:code"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "nuxt-advisories-oct16",
+          "tag": "security",
+          "date": "16 Oct 2026",
+          "title": {
+            "es": "Nuxt publica 5 advisories de seguridad y los cierra en 4.6.2",
+            "en": "Nuxt publishes 5 security advisories, fixed in 4.6.2",
+            "fr": "Nuxt publie 5 advisories de sécurité, corrigés en 4.6.2"
+          },
+          "body_html": {
+            "es": "<p>Tanda de cinco advisories el mismo día: route rules (<code>redirect</code>, <code>headers</code>, <code>proxy</code>) que se saltean con paths en otra capitalización, un segmento percent-encoded que bypassea <code>appMiddleware</code> (CVSS 6.5), <code>useHeadSafe</code> sin sanitizar en server islands (5.4), <code>getRouterParam</code> devolviendo otro param con <code>%3F</code> y un fix incompleto de <code>javascript:</code> en <code>&lt;NuxtLink&gt;</code>. <strong>Ojo con esto:</strong> varias ramas 3.x figuran sin versión parcheada, así que si seguís en Nuxt 3 tenés que planear la migración a 4.6.2 ya.</p>",
+            "en": "<p>A same-day batch of five advisories: route rules (<code>redirect</code>, <code>headers</code>, <code>proxy</code>) skipped for case-variant paths, a percent-encoded segment bypassing <code>appMiddleware</code> (CVSS 6.5), unsanitized <code>useHeadSafe</code> input in server islands (5.4), <code>getRouterParam</code> returning a different param when the path contains <code>%3F</code>, and an incomplete <code>javascript:</code> fix in <code>&lt;NuxtLink&gt;</code>. Several Nuxt 3 ranges list no patched version, so 3.x users should plan the move to 4.6.2 now.</p>",
+            "fr": "<p>Un lot de cinq advisories le même jour : route rules (<code>redirect</code>, <code>headers</code>, <code>proxy</code>) ignorées pour des chemins à casse différente, un segment percent-encoded qui contourne <code>appMiddleware</code> (CVSS 6.5), entrée <code>useHeadSafe</code> non assainie dans les server islands (5.4), <code>getRouterParam</code> renvoyant un autre paramètre avec <code>%3F</code>, et un correctif <code>javascript:</code> incomplet dans <code>&lt;NuxtLink&gt;</code>. Plusieurs plages Nuxt 3 n'ont aucune version corrigée : prévoyez la migration vers 4.6.2.</p>"
+          },
+          "source": { "url": "https://github.com/nuxt/nuxt/security/advisories/GHSA-6gq8-jgmh-3ffp", "label": "github.com/nuxt" }
+        },
+        {
+          "id": "zod-schema-compilation",
+          "tag": "notable",
+          "date": "16 Oct 2026",
+          "title": {
+            "es": "Zod 4.5/4.6: z.compile() precompila schemas en proceso y baja 9x la memoria",
+            "en": "Zod 4.5/4.6: z.compile() precompiles schemas in-process with a 9x memory cut",
+            "fr": "Zod 4.5/4.6 : z.compile() précompile les schémas en mémoire, empreinte divisée par 9"
+          },
+          "body_html": {
+            "es": "<p>InfoQ repasa lo que trajeron Zod 4.5 y 4.6: <code>z.compile()</code> convierte cualquier schema en un validador que parsea entre 3x y 9x más rápido, <strong>sin build step</strong> porque compila en runtime. Además un <code>z.string()</code> pasa de ~7.5 KB a ~784 bytes. Si validás payloads grandes en el edge o en server functions, esto es plata en latencia y memoria.</p>",
+            "en": "<p>InfoQ reviews what Zod 4.5 and 4.6 shipped: <code>z.compile()</code> turns any schema into a validator that parses 3x to 9x faster, with <strong>no build step</strong> since it compiles at runtime. A bare <code>z.string()</code> also drops from ~7.5 KB to ~784 bytes. If you validate large payloads on the edge or in server functions, that is real latency and memory savings.</p>",
+            "fr": "<p>InfoQ revient sur Zod 4.5 et 4.6 : <code>z.compile()</code> transforme n'importe quel schéma en validateur 3x à 9x plus rapide, <strong>sans étape de build</strong> puisqu'il compile au runtime. Un simple <code>z.string()</code> passe d'environ 7,5 Ko à environ 784 octets. Gain net en latence et mémoire pour la validation sur l'edge ou dans les server functions.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/zod-schema-compliation/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "html",
+      "name": "HTML / Web Platform",
+      "theme": "html",
+      "icon_emoji": "🌐",
+      "anchor": "html",
+      "updates": [
+        {
+          "id": "chrome-xslt-removal",
+          "tag": "deprecation",
+          "date": "13 Oct 2026",
+          "title": {
+            "es": "Chrome 158 deja de ejecutar XSLT client-side el 17 de noviembre",
+            "en": "Chrome 158 stops running client-side XSLT on 17 November",
+            "fr": "Chrome 158 cesse d'exécuter XSLT côté client le 17 novembre"
+          },
+          "body_html": {
+            "es": "<p>Falta menos de un mes: con Chrome 158 estable (17 Nov 2026) el XSLT del lado del cliente deja de funcionar; la policy <code>XSLTEnabled</code> y el origin trial duran hasta Chrome 176 (agosto 2027). Edge todavía no tiene fecha y Firefox/Safari no publicaron timeline. Si tenés sitemaps o feeds XML con estilo, van a mostrarse como árbol crudo: <strong>transformalos en el server o en el build</strong>.</p>",
+            "en": "<p>Less than a month to go: when Chrome 158 hits stable (17 Nov 2026), client-side XSLT stops working; the <code>XSLTEnabled</code> policy and origin trial last until Chrome 176 (August 2027). Edge has no date yet and Firefox/Safari have published no timeline. Styled XML sitemaps and feeds will render as a raw tree, so <strong>move the transform to the server or build step</strong>.</p>",
+            "fr": "<p>Moins d'un mois : avec Chrome 158 en stable (17 nov. 2026), XSLT côté client ne fonctionnera plus ; la policy <code>XSLTEnabled</code> et l'origin trial tiennent jusqu'à Chrome 176 (août 2027). Edge n'a pas de date, Firefox et Safari aucun calendrier. Les sitemaps et flux XML stylés s'afficheront en arbre brut : <strong>faites la transformation côté serveur ou au build</strong>.</p>"
+          },
+          "source": { "url": "https://doctor-seo.net/en/blog/news/chrome-edge-removing-xslt/", "label": "doctor-seo.net" }
+        },
+        {
+          "id": "jpegxl-vs-avif",
+          "tag": "notable",
+          "date": "15 Oct 2026",
+          "title": {
+            "es": "Jake Archibald compara JPEG XL vs AVIF ahora que JPEG XL está en todos los browsers",
+            "en": "Jake Archibald compares JPEG XL vs AVIF now that JPEG XL ships in every major browser",
+            "fr": "Jake Archibald compare JPEG XL et AVIF maintenant que JPEG XL est dans tous les navigateurs"
+          },
+          "body_html": {
+            "es": "<p>Con JPEG XL ya en todos los browsers grandes, la pregunta era cuál usar. Veredicto: AVIF gana en lossy para fotos y por goleada en screenshots, ilustraciones y transparencias; JPEG XL gana en lossless y en recomprimir JPEGs existentes. Recomendación: <strong>AVIF 4:4:4 por default</strong> y probá JPEG XL cuando el AVIF salga raramente pesado. El preview progresivo de JPEG XL no anda en Safari.</p>",
+            "en": "<p>With JPEG XL now in every major browser, the question is which to use. Verdict: AVIF wins lossy photos and wins big on screenshots, illustrations, and transparency; JPEG XL wins lossless and recompressing existing JPEGs. Recommendation: <strong>default to AVIF 4:4:4</strong> and try JPEG XL when AVIF output looks unusually large. Progressive JPEG XL previews don't work in Safari.</p>",
+            "fr": "<p>JPEG XL étant désormais dans tous les grands navigateurs, lequel choisir ? Verdict : AVIF gagne en lossy pour les photos et largement pour captures, illustrations et transparence ; JPEG XL gagne en lossless et pour recompresser des JPEG existants. Recommandation : <strong>AVIF 4:4:4 par défaut</strong>, JPEG XL quand AVIF sort anormalement lourd. Les aperçus progressifs JPEG XL ne marchent pas dans Safari.</p>"
+          },
+          "source": { "url": "https://jakearchibald.com/2026/jpeg-xl-vs-avif/", "label": "jakearchibald.com" }
+        }
+      ]
+    },
+    {
+      "id": "js-frameworks",
+      "name": "JS Frameworks",
+      "theme": "js-frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "js-frameworks",
+      "updates": [
+        {
+          "id": "nuxt-4-6-2",
+          "tag": "patch",
+          "date": "16 Oct 2026",
+          "title": {
+            "es": "Nuxt 4.6.2: los fixes de seguridad más ~30 correcciones de Nitro y Vite",
+            "en": "Nuxt 4.6.2: the security fixes plus ~30 Nitro and Vite corrections",
+            "fr": "Nuxt 4.6.2 : les correctifs de sécurité et une trentaine de fixes Nitro et Vite"
+          },
+          "body_html": {
+            "es": "<p>Además de los advisories, el patch matchea route rules de forma case-insensitive salvo que el routing sea sensible, lee los params del path que matcheó h3, detecta vapor slots con <code>rawVaporSlotKey</code> de Vue y preserva el estado de error en navegaciones abortadas. Patch de los que se instalan sin pensarlo.</p>",
+            "en": "<p>Beyond the advisories, the patch matches route rules case-insensitively unless routing is sensitive, reads params from the path h3 matched, detects vapor slots via Vue's <code>rawVaporSlotKey</code>, and preserves error state on aborted navigations. An install-without-thinking patch.</p>",
+            "fr": "<p>Au-delà des advisories, le patch fait correspondre les route rules sans tenir compte de la casse (sauf routing sensible), lit les paramètres du chemin réellement matché par h3, détecte les vapor slots via <code>rawVaporSlotKey</code> de Vue et préserve l'état d'erreur lors des navigations annulées. À installer sans hésiter.</p>"
+          },
+          "source": { "url": "https://github.com/nuxt/nuxt/releases/tag/v4.6.2", "label": "github.com/nuxt" }
+        }
+      ]
+    },
+    {
+      "id": "dev-tools",
+      "name": "Developer Tools",
+      "theme": "dev-tools",
+      "icon_emoji": "🛠️",
+      "anchor": "dev-tools",
+      "updates": [
+        {
+          "id": "eslint-10-13",
+          "tag": "minor",
+          "date": "16 Oct 2026",
+          "title": {
+            "es": "ESLint 10.13: no-use-before-define mira dentro de IIFEs",
+            "en": "ESLint 10.13: no-use-before-define now checks inside IIFEs",
+            "fr": "ESLint 10.13 : no-use-before-define analyse désormais les IIFE"
+          },
+          "body_html": {
+            "es": "<p><code>no-use-before-define</code> ahora reporta referencias dentro de IIFEs, <code>no-obj-calls</code> suma <code>globalThis</code> y <code>no-unsafe-optional-chaining</code> chequea <code>yield*</code>. Ojo que puede aparecer algún warning nuevo en CI después de actualizar.</p>",
+            "en": "<p><code>no-use-before-define</code> now reports references inside IIFEs, <code>no-obj-calls</code> adds <code>globalThis</code>, and <code>no-unsafe-optional-chaining</code> checks <code>yield*</code>. Expect a few new reports in CI after upgrading.</p>",
+            "fr": "<p><code>no-use-before-define</code> signale désormais les références dans les IIFE, <code>no-obj-calls</code> ajoute <code>globalThis</code> et <code>no-unsafe-optional-chaining</code> vérifie <code>yield*</code>. Attendez-vous à quelques nouveaux signalements en CI.</p>"
+          },
+          "source": { "url": "https://github.com/eslint/eslint/releases/tag/v10.13.0", "label": "github.com/eslint" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Los advisories de frameworks llegan en tanda: Nuxt publicó cinco el mismo día, como Next.js y React la semana pasada. Actualizar rápido ya es parte del trabajo.",
+      "en": "Framework advisories arrive in batches: Nuxt published five on one day, as Next.js and React did last week. Fast upgrades are now part of the job.",
+      "fr": "Les advisories de frameworks arrivent par lots : Nuxt en a publié cinq le même jour, comme Next.js et React la semaine dernière."
+    },
+    {
+      "es": "La plataforma se poda: XSLT se va de Chrome mientras JPEG XL entra en todos los browsers. Menos legacy, más formatos modernos.",
+      "en": "The platform is pruning itself: XSLT leaves Chrome while JPEG XL lands everywhere. Less legacy, more modern formats.",
+      "fr": "La plateforme fait le ménage : XSLT quitte Chrome tandis que JPEG XL arrive partout."
+    }
+  ]
+}

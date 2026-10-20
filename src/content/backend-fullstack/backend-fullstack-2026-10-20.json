@@ -1,0 +1,319 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 20 Oct 2026: NestJS 12.2 pone límites por defecto, Prisma arregla transacciones cruzadas y pgBackRest se pone estricto",
+    "en": "Backend & Fullstack Daily — 20 Oct 2026: NestJS 12.2 ships safe default limits, Prisma fixes crossed transactions and pgBackRest gets strict",
+    "fr": "Backend & Fullstack Daily — 20 oct. 2026 : NestJS 12.2 impose des limites par défaut, Prisma corrige des transactions croisées et pgBackRest devient strict"
+  },
+  "description": {
+    "es": "NestJS 12.2 endurece defaults contra abuso de recursos, Prisma 7.10.1 corrige un bug que mezclaba transacciones, pgBackRest 2.60 frena restores con checksums inválidos, GuardDuty suma 50+ reglas de runtime y Vitest 5.1 beta trae --last-failed.",
+    "en": "NestJS 12.2 hardens defaults against resource abuse, Prisma 7.10.1 fixes a bug that mixed up transactions, pgBackRest 2.60 stops restores on invalid checksums, GuardDuty adds 50+ runtime rules and Vitest 5.1 beta brings --last-failed.",
+    "fr": "NestJS 12.2 durcit ses valeurs par défaut contre l'abus de ressources, Prisma 7.10.1 corrige un bug qui mélangeait les transactions, pgBackRest 2.60 bloque les restaurations sur checksums invalides, GuardDuty ajoute 50+ règles runtime et Vitest 5.1 bêta apporte --last-failed."
+  },
+  "pubDate": "2026-10-20",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "NestJS 12.2: límites por defecto en todos lados",
+        "en": "NestJS 12.2: default limits everywhere",
+        "fr": "NestJS 12.2 : des limites par défaut partout"
+      },
+      "anchor": "nestjs-12-2",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Prisma 7.10.1: transacciones que se cruzaban",
+        "en": "Prisma 7.10.1: transactions that crossed over",
+        "fr": "Prisma 7.10.1 : des transactions qui se croisaient"
+      },
+      "anchor": "prisma-7-10-1",
+      "icon": "simple-icons:prisma"
+    },
+    {
+      "text": {
+        "es": "pgBackRest 2.60 frena restores con páginas rotas",
+        "en": "pgBackRest 2.60 halts restores on bad pages",
+        "fr": "pgBackRest 2.60 stoppe les restaurations corrompues"
+      },
+      "anchor": "pgbackrest-2-60",
+      "icon": "simple-icons:postgresql"
+    },
+    {
+      "text": {
+        "es": "Zod compila schemas: hasta 9x más rápido",
+        "en": "Zod compiles schemas: up to 9x faster",
+        "fr": "Zod compile ses schémas : jusqu'à 9x plus rapide"
+      },
+      "anchor": "zod-compile",
+      "icon": "lucide:blocks"
+    },
+    {
+      "text": {
+        "es": "GuardDuty suma 50+ reglas para EKS/ECS",
+        "en": "GuardDuty adds 50+ rules for EKS/ECS",
+        "fr": "GuardDuty ajoute 50+ règles pour EKS/ECS"
+      },
+      "anchor": "guardduty-runtime-rules",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": {
+        "es": "Vitest 5.1 beta: --last-failed y --since-last-run",
+        "en": "Vitest 5.1 beta: --last-failed and --since-last-run",
+        "fr": "Vitest 5.1 bêta : --last-failed et --since-last-run"
+      },
+      "anchor": "vitest-5-1-beta",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "nestjs-12-2",
+          "tag": "breaking",
+          "date": "19 Oct 2026",
+          "title": {
+            "es": "NestJS 12.2.0: límites por defecto contra abuso de memoria y CPU",
+            "en": "NestJS 12.2.0: default limits against memory and CPU abuse",
+            "fr": "NestJS 12.2.0 : limites par défaut contre l'abus de mémoire et de CPU"
+          },
+          "body_html": {
+            "es": "<p>Es una minor, pero tratala como upgrade con lectura obligatoria. NestJS mete topes por defecto en casi todos los bordes: <code>fieldNestingDepth</code> 32 y <code>fieldArrayIndexLimit</code> 1000 en Express/Fastify, <code>maxConcurrentMessages</code> 1000 en WebSockets, 16 MiB por mensaje Kafka, <code>maxPendingDataLength</code> en SSE y <code>drainTimeout</code> de 30 s en TCP. Ojo con los cambios de comportamiento: <code>ValidationPipe</code> ya no expone <code>error.target</code> y responde 400 si mandás un array o un primitivo donde va una clase; <code>FileTypeValidator</code> deja de aceptar <code>font/woff2</code> para <code>font/woff</code>; y un enhancer global que falla al instanciarse ahora tumba el arranque. Si tenés un <code>exceptionFactory</code> custom, revisalo antes de actualizar.</p>",
+            "en": "<p>It is a minor, but treat it as a must-read upgrade. NestJS adds default caps on nearly every edge: <code>fieldNestingDepth</code> 32 and <code>fieldArrayIndexLimit</code> 1000 on Express/Fastify, <code>maxConcurrentMessages</code> 1000 on WebSockets, 16 MiB per Kafka message, <code>maxPendingDataLength</code> on SSE and a 30 s <code>drainTimeout</code> on TCP. Watch the behaviour changes: <code>ValidationPipe</code> no longer exposes <code>error.target</code> and returns 400 when an array or primitive is sent for a class; <code>FileTypeValidator</code> stops accepting <code>font/woff2</code> for <code>font/woff</code>; and a global enhancer that fails to instantiate now fails startup. Review any custom <code>exceptionFactory</code> before upgrading.</p>",
+            "fr": "<p>C'est une mineure, mais lisez les notes avant de mettre à jour. NestJS ajoute des plafonds par défaut presque partout : <code>fieldNestingDepth</code> 32 et <code>fieldArrayIndexLimit</code> 1000 sur Express/Fastify, <code>maxConcurrentMessages</code> 1000 sur WebSockets, 16 Mio par message Kafka, <code>maxPendingDataLength</code> sur SSE et un <code>drainTimeout</code> de 30 s en TCP. Attention aux changements : <code>ValidationPipe</code> n'expose plus <code>error.target</code> et répond 400 pour un tableau ou un primitif à la place d'une classe ; <code>FileTypeValidator</code> n'accepte plus <code>font/woff2</code> pour <code>font/woff</code> ; un enhancer global qui échoue fait désormais échouer le démarrage.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nestjs/nest/releases/tag/v12.2.0",
+            "label": "github.com/nestjs"
+          }
+        },
+        {
+          "id": "prisma-7-10-1",
+          "tag": "patch",
+          "date": "19 Oct 2026",
+          "title": {
+            "es": "Prisma 7.10.1: un $transaction anidado podía meter tus queries en la transacción de otro request",
+            "en": "Prisma 7.10.1: a nested $transaction could put your queries inside another request's transaction",
+            "fr": "Prisma 7.10.1 : un $transaction imbriqué pouvait placer vos requêtes dans la transaction d'une autre requête"
+          },
+          "body_html": {
+            "es": "<p>Bug feo y silencioso: si reusabas el mismo objeto de opciones (por ejemplo una constante <code>TX_OPTIONS</code>) en un <code>tx.$transaction()</code> anidado y después en uno top-level, Prisma escribía el id de la transacción externa en ese objeto. Resultado: las transacciones siguientes fallaban con <code>P2028</code> o, peor, corrían como savepoint dentro de la transacción de <strong>otro request</strong>. Además, Migrate ahora rechaza con <code>P3025</code> un shadow database que apunta a la base principal (antes te borraba el schema real) y se actualizan <code>mysql2</code>, <code>fast-uri</code> y <code>mariadb</code> por advisories. Actualizá YA si usás transacciones interactivas anidadas.</p>",
+            "en": "<p>Nasty, silent bug: if you reused the same options object (say a <code>TX_OPTIONS</code> constant) in a nested <code>tx.$transaction()</code> and later in a top-level one, Prisma wrote the outer transaction id into that object. Later transactions then failed with <code>P2028</code> or, worse, ran as a savepoint inside <strong>another request's</strong> transaction. Migrate now also refuses with <code>P3025</code> a shadow database pointing at the main database (it used to drop the real schema), and <code>mysql2</code>, <code>fast-uri</code> and <code>mariadb</code> are bumped for advisories. Upgrade now if you use nested interactive transactions.</p>",
+            "fr": "<p>Bug silencieux et sérieux : si vous réutilisiez le même objet d'options (une constante <code>TX_OPTIONS</code>) dans un <code>tx.$transaction()</code> imbriqué puis dans un appel de premier niveau, Prisma y écrivait l'id de la transaction externe. Les transactions suivantes échouaient avec <code>P2028</code> ou s'exécutaient comme savepoint dans la transaction <strong>d'une autre requête</strong>. Migrate refuse aussi avec <code>P3025</code> une shadow database identique à la base principale, et <code>mysql2</code>, <code>fast-uri</code> et <code>mariadb</code> sont mis à jour pour des advisories.</p>"
+          },
+          "source": {
+            "url": "https://github.com/prisma/orm/releases/tag/7.10.1",
+            "label": "github.com/prisma"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "frameworks",
+      "updates": [
+        {
+          "id": "nestjs-12-overview",
+          "tag": "notable",
+          "date": "19 Oct 2026",
+          "title": {
+            "es": "NestJS 12 en perspectiva: ESM, Standard Schema y observabilidad nativa",
+            "en": "NestJS 12 in perspective: ESM, Standard Schema and native observability",
+            "fr": "NestJS 12 en perspective : ESM, Standard Schema et observabilité native"
+          },
+          "body_html": {
+            "es": "<p>InfoQ hace el resumen de la major: los paquetes core pasan a <strong>ESM</strong>, pero las apps CommonJS siguen andando gracias a <code>require(esm)</code> de Node, y <code>nest new</code> te deja elegir. Los decoradores de body, query y params aceptan schemas de Zod, Valibot o ArkType vía Standard Schema, y llega <code>@nestjs/observe</code>, un SDK oficial que organiza traces por controllers y providers. Requiere Node 20.19+ o 22.12+. Es un golazo para la DX si venías peleando con class-validator.</p>",
+            "en": "<p>InfoQ recaps the major: core packages move to <strong>ESM</strong>, while CommonJS apps keep working through Node's <code>require(esm)</code>, and <code>nest new</code> lets you pick. Body, query and param decorators accept Zod, Valibot or ArkType schemas via Standard Schema, and <code>@nestjs/observe</code> arrives as an official SDK that groups traces by controllers and providers. Requires Node 20.19+ or 22.12+.</p>",
+            "fr": "<p>InfoQ résume la majeure : les paquets core passent en <strong>ESM</strong>, les applications CommonJS continuant de fonctionner grâce à <code>require(esm)</code> de Node, et <code>nest new</code> laisse le choix. Les décorateurs de body, query et params acceptent des schémas Zod, Valibot ou ArkType via Standard Schema, et <code>@nestjs/observe</code> arrive comme SDK officiel qui organise les traces par contrôleurs et providers. Node 20.19+ ou 22.12+ requis.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/10/nestjs-12-observability/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "zod-compile",
+          "tag": "notable",
+          "date": "16 Oct 2026",
+          "title": {
+            "es": "Zod 4.5/4.6: compilación de schemas en proceso y 9x menos memoria",
+            "en": "Zod 4.5/4.6: in-process schema compilation and 9x less memory",
+            "fr": "Zod 4.5/4.6 : compilation des schémas en processus et 9x moins de mémoire"
+          },
+          "body_html": {
+            "es": "<p><code>z.compile()</code> precompila schemas y hace el parseo entre 3 y 9 veces más rápido; un <code>z.string()</code> pelado pasa de 7.5 KB a unos 784 bytes de heap, y un <code>safeParse()</code> fallido sale 7.5 veces más barato. Zod 4.6 suma <code>.validate()</code>, booleano y hasta 35x más rápido que <code>.safeParse().success</code> con input inválido. Compilado, Zod llega a 47.5M ops/s en el benchmark de Moltar, apenas por encima de Typia. Si validás en hot paths de tu API, ponete las pilas y medilo.</p>",
+            "en": "<p><code>z.compile()</code> precompiles schemas and makes parsing 3 to 9 times faster; a bare <code>z.string()</code> drops from 7.5 KB to about 784 bytes of heap, and a failed <code>safeParse()</code> is 7.5 times cheaper. Zod 4.6 adds <code>.validate()</code>, boolean-only and up to 35x faster than <code>.safeParse().success</code> on invalid input. Compiled Zod reaches 47.5M ops/s on the Moltar benchmark, just ahead of Typia.</p>",
+            "fr": "<p><code>z.compile()</code> précompile les schémas et rend le parsing 3 à 9 fois plus rapide ; un simple <code>z.string()</code> passe de 7,5 Ko à environ 784 octets de heap, et un <code>safeParse()</code> en échec coûte 7,5 fois moins. Zod 4.6 ajoute <code>.validate()</code>, booléen et jusqu'à 35x plus rapide que <code>.safeParse().success</code> sur une entrée invalide. Compilé, Zod atteint 47,5M ops/s sur le benchmark Moltar, juste devant Typia.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/10/zod-schema-compliation/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "databases",
+      "updates": [
+        {
+          "id": "pgbackrest-2-60",
+          "tag": "release",
+          "date": "18 Oct 2026",
+          "title": {
+            "es": "pgBackRest 2.60.0: restore y expire se frenan ante checksums de página inválidos",
+            "en": "pgBackRest 2.60.0: restore and expire stop on invalid page checksums",
+            "fr": "pgBackRest 2.60.0 : restore et expire s'arrêtent sur des checksums de page invalides"
+          },
+          "body_html": {
+            "es": "<p>Cambio de comportamiento que te puede romper un runbook: <code>restore</code> y <code>expire</code> ahora <strong>cortan</strong> si encuentran checksums de página inválidos, salvo que pongas <code>checksum-page-error=n</code>. También suma Workload Identity Federation para GCS, prefetch de lecturas multi-archivo y por rango desde object stores, y soporte para OpenSSL 4. Probá un restore en staging antes de actualizar producción.</p>",
+            "en": "<p>A behaviour change that can break a runbook: <code>restore</code> and <code>expire</code> now <strong>stop</strong> when they hit invalid page checksums unless you set <code>checksum-page-error=n</code>. It also adds GCS Workload Identity Federation, prefetching of multi-file and range reads from object stores, and OpenSSL 4 support. Rehearse a restore in staging before upgrading production.</p>",
+            "fr": "<p>Un changement qui peut casser un runbook : <code>restore</code> et <code>expire</code> <strong>s'arrêtent</strong> désormais sur des checksums de page invalides, sauf avec <code>checksum-page-error=n</code>. La version ajoute aussi Workload Identity Federation pour GCS, le prefetch des lectures multi-fichiers et par plage depuis les object stores, et le support d'OpenSSL 4.</p>"
+          },
+          "source": {
+            "url": "https://www.postgresql.org/about/news/pgbackrest-2600-released-3416/",
+            "label": "postgresql.org"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloud",
+      "updates": [
+        {
+          "id": "guardduty-runtime-rules",
+          "tag": "notable",
+          "date": "19 Oct 2026",
+          "title": {
+            "es": "GuardDuty suma más de 50 reglas opcionales de Runtime Monitoring",
+            "en": "GuardDuty adds 50+ optional Runtime Monitoring rules",
+            "fr": "GuardDuty ajoute plus de 50 règles optionnelles de Runtime Monitoring"
+          },
+          "body_html": {
+            "es": "<p>Reglas que detectan actividad de procesos, archivos y red que es normal en un entorno pero sospechosa en otro, para EC2, EKS y ECS (en EC2 y Fargate), con 4 tipos de finding nuevos. Lo mejor: un modo <strong>dry-run</strong> para medir el ruido antes de activarlas en serio. Disponible en todas las regiones comerciales y GovCloud.</p>",
+            "en": "<p>Rules that flag process, file and network activity that is normal in one environment but suspicious in another, covering EC2, EKS and ECS (on EC2 and Fargate), with 4 new finding types. The best part: a <strong>dry-run</strong> mode to measure noise before turning them on for real. Available in all commercial Regions and GovCloud.</p>",
+            "fr": "<p>Des règles qui signalent une activité de processus, fichiers et réseau normale dans un environnement mais suspecte dans un autre, pour EC2, EKS et ECS (sur EC2 et Fargate), avec 4 nouveaux types de findings. Un mode <strong>dry-run</strong> permet de mesurer le bruit avant activation. Disponible dans toutes les régions commerciales et GovCloud.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/guardduty-runtime-optional-detection-rules/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "aws-well-architected-agent",
+          "tag": "beta",
+          "date": "18 Oct 2026",
+          "title": {
+            "es": "AWS lanza en preview un Well-Architected Agent que revisa tu IaC antes del deploy",
+            "en": "AWS previews a Well-Architected Agent that reviews your IaC before deploy",
+            "fr": "AWS lance en preview un Well-Architected Agent qui vérifie votre IaC avant le déploiement"
+          },
+          "body_html": {
+            "es": "<p>Un agente que contrasta tus entornos con las prácticas Well-Architected y prioriza recomendaciones de costo, seguridad, performance y confiabilidad; también revisa infrastructure-as-code antes de desplegar. Por ahora solo en tres regiones de EE.UU. y pide plan Business Support+ o superior.</p>",
+            "en": "<p>An agent that checks your environments against Well-Architected practices and ranks cost, security, performance and reliability recommendations; it can also review infrastructure-as-code before deployment. Limited to three US Regions for now and requires Business Support+ or higher.</p>",
+            "fr": "<p>Un agent qui compare vos environnements aux pratiques Well-Architected et priorise les recommandations de coût, sécurité, performance et fiabilité ; il peut aussi relire l'infrastructure-as-code avant le déploiement. Limité à trois régions américaines et réservé au plan Business Support+ ou supérieur.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/10/aws-well-architected-agent/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "buildkite-scoped-secrets",
+          "tag": "minor",
+          "date": "19 Oct 2026",
+          "title": {
+            "es": "Buildkite suma secrets por pipeline y herramientas MCP para CI",
+            "en": "Buildkite adds pipeline-scoped secrets and MCP tools for CI",
+            "fr": "Buildkite ajoute des secrets par pipeline et des outils MCP pour la CI"
+          },
+          "body_html": {
+            "es": "<p>Los secrets de cluster se pueden limitar a un pipeline y, además, por branch, queue, origen del build o autor: menos radio de explosión si un job se compromete. También hay tools MCP para validar YAML de pipelines, comparar builds fallidos con exitosos y agregar webhooks de GitHub faltantes, más soporte Linux arm64 en Agent v4.1.0.</p>",
+            "en": "<p>Cluster secrets can now be restricted to a single pipeline and further by branch, queue, build source or creator, shrinking the blast radius of a compromised job. New MCP tools validate pipeline YAML, diff failed builds against successful ones and add missing GitHub webhooks, plus Linux arm64 support in Agent v4.1.0.</p>",
+            "fr": "<p>Les secrets de cluster peuvent être limités à un pipeline, puis par branche, file, source du build ou auteur, ce qui réduit l'impact d'un job compromis. De nouveaux outils MCP valident le YAML des pipelines, comparent les builds en échec aux builds réussis et ajoutent les webhooks GitHub manquants, avec le support Linux arm64 dans Agent v4.1.0.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/10/buildkite-ci-secrets-agentic/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "architecture",
+      "updates": [
+        {
+          "id": "pinterest-event-time-watermarks",
+          "tag": "notable",
+          "date": "19 Oct 2026",
+          "title": {
+            "es": "Pinterest cierra particiones CDC por event time con watermarks en Iceberg",
+            "en": "Pinterest finalizes CDC partitions by event time with Iceberg watermarks",
+            "fr": "Pinterest finalise ses partitions CDC par event time avec des watermarks Iceberg"
+          },
+          "body_html": {
+            "es": "<p>Caso de estudio para cualquiera que alimente analítica desde CDC: Flink mide el progreso de event time en cada checkpoint y publica un watermark monótono «safe-to-read» como propiedad de la tabla Iceberg. Los jobs downstream esperan esa señal en vez de adivinar cuándo una partición está completa. Patrón simple y portable.</p>",
+            "en": "<p>A case study for anyone feeding analytics from CDC: Flink measures event-time progress at each checkpoint and publishes a monotonic “safe-to-read” watermark as an Iceberg table property. Downstream jobs wait for that signal instead of guessing when a partition is complete.</p>",
+            "fr": "<p>Une étude de cas pour qui alimente l'analytique depuis du CDC : Flink mesure la progression de l'event time à chaque checkpoint et publie un watermark monotone «safe-to-read» comme propriété de table Iceberg. Les jobs en aval attendent ce signal au lieu de deviner quand une partition est complète.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/10/pinterest-event-time-partition/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "vitest-5-1-beta",
+          "tag": "beta",
+          "date": "19 Oct 2026",
+          "title": {
+            "es": "Vitest 5.1.0-beta.1: --last-failed, --since-last-run y fake timers para node:timers",
+            "en": "Vitest 5.1.0-beta.1: --last-failed, --since-last-run and fake timers for node:timers",
+            "fr": "Vitest 5.1.0-beta.1 : --last-failed, --since-last-run et fake timers pour node:timers"
+          },
+          "body_html": {
+            "es": "<p>Para el loop TDD es oro: <code>--last-failed</code> corre solo lo que falló y <code>--since-last-run</code> lo que cambió desde la última corrida. Los fake timers ahora cubren <code>node:timers</code> y <code>node:timers/promises</code>, <code>vi.setSystemTime()</code> acepta <code>Temporal.Instant</code> y <code>ZonedDateTime</code>, y el trace view del modo browser deja de ser experimental. Ojo: el puerto por defecto del modo browser pasa a 23315.</p>",
+            "en": "<p>Gold for the TDD loop: <code>--last-failed</code> runs only what failed and <code>--since-last-run</code> runs what changed since the last run. Fake timers now cover <code>node:timers</code> and <code>node:timers/promises</code>, <code>vi.setSystemTime()</code> accepts <code>Temporal.Instant</code> and <code>ZonedDateTime</code>, and browser-mode trace view drops its experimental label. Note: the browser-mode default port moves to 23315.</p>",
+            "fr": "<p>Idéal pour la boucle TDD : <code>--last-failed</code> ne relance que les échecs et <code>--since-last-run</code> ce qui a changé depuis la dernière exécution. Les fake timers couvrent <code>node:timers</code> et <code>node:timers/promises</code>, <code>vi.setSystemTime()</code> accepte <code>Temporal.Instant</code> et <code>ZonedDateTime</code>, et le trace view du mode navigateur n'est plus expérimental. Le port par défaut du mode navigateur passe à 23315.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.1.0-beta.1",
+            "label": "github.com/vitest-dev"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Secure-by-default llega a los frameworks: NestJS 12.2 y pgBackRest 2.60 prefieren cortar antes que aceptar input o datos dudosos, aunque rompa setups viejos.",
+      "en": "Secure-by-default reaches frameworks: NestJS 12.2 and pgBackRest 2.60 prefer to fail rather than accept dubious input or data, even if it breaks old setups.",
+      "fr": "Le secure-by-default gagne les frameworks : NestJS 12.2 et pgBackRest 2.60 préfèrent échouer plutôt qu'accepter des entrées ou données douteuses, quitte à casser d'anciens setups."
+    },
+    {
+      "es": "La validación se vuelve agnóstica y rápida: Standard Schema en NestJS 12 y Zod compilado compiten de igual a igual con Typia.",
+      "en": "Validation is becoming library-agnostic and fast: Standard Schema in NestJS 12 and compiled Zod now trade blows with Typia.",
+      "fr": "La validation devient agnostique et rapide : Standard Schema dans NestJS 12 et Zod compilé rivalisent désormais avec Typia."
+    }
+  ]
+}

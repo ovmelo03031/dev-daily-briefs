@@ -1,0 +1,291 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 21 Oct 2026: OpenTelemetry JS 3.0 rompe todo, follow-redirects filtra credenciales y el SDK de MCP mezcla clientes",
+    "en": "Backend & Fullstack Daily — 21 Oct 2026: OpenTelemetry JS 3.0 breaks everything, follow-redirects leaks credentials and the MCP SDK mixes up clients",
+    "fr": "Backend & Fullstack Daily — 21 oct. 2026 : OpenTelemetry JS 3.0 casse tout, follow-redirects fuit des identifiants et le SDK MCP mélange les clients"
+  },
+  "description": {
+    "es": "OpenTelemetry JS 3.0 exige Node 22.15 y unifica el SDK de traces, follow-redirects 1.16.1 tapa dos fugas de credenciales, el SDK TypeScript de MCP publica cinco advisories, TypeScript 7.1 beta trae ES2026 y AWS lanza ECS Gateway.",
+    "en": "OpenTelemetry JS 3.0 requires Node 22.15 and unifies the trace SDK, follow-redirects 1.16.1 plugs two credential leaks, the MCP TypeScript SDK ships five advisories, TypeScript 7.1 beta brings ES2026 and AWS launches ECS Gateway.",
+    "fr": "OpenTelemetry JS 3.0 exige Node 22.15 et unifie le SDK de traces, follow-redirects 1.16.1 corrige deux fuites d'identifiants, le SDK TypeScript MCP publie cinq avis, TypeScript 7.1 bêta apporte ES2026 et AWS lance ECS Gateway."
+  },
+  "pubDate": "2026-10-21",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "OpenTelemetry JS 3.0: Node 22.15+ y adiós sdk-trace-node", "en": "OpenTelemetry JS 3.0: Node 22.15+ and goodbye sdk-trace-node", "fr": "OpenTelemetry JS 3.0 : Node 22.15+ et adieu sdk-trace-node" },
+      "anchor": "otel-js-3",
+      "icon": "simple-icons:opentelemetry"
+    },
+    {
+      "text": { "es": "follow-redirects: credenciales que cruzan de host", "en": "follow-redirects: credentials crossing hosts", "fr": "follow-redirects : des identifiants qui changent d'hôte" },
+      "anchor": "follow-redirects-cve",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "SDK de MCP: respuestas entregadas al cliente equivocado", "en": "MCP SDK: responses delivered to the wrong client", "fr": "SDK MCP : réponses livrées au mauvais client" },
+      "anchor": "mcp-sdk-advisories",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "TypeScript 7.1 beta: ES2026 y nueva API programática", "en": "TypeScript 7.1 beta: ES2026 and a new programmatic API", "fr": "TypeScript 7.1 bêta : ES2026 et nouvelle API programmatique" },
+      "anchor": "typescript-7-1-beta",
+      "icon": "simple-icons:typescript"
+    },
+    {
+      "text": { "es": "Hono serveStatic: bypass de middleware", "en": "Hono serveStatic: middleware bypass", "fr": "Hono serveStatic : contournement de middleware" },
+      "anchor": "hono-servestatic",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "AWS ECS Gateway: ingress administrado sin costo extra", "en": "AWS ECS Gateway: managed ingress at no extra cost", "fr": "AWS ECS Gateway : ingress géré sans surcoût" },
+      "anchor": "ecs-gateway",
+      "icon": "simple-icons:amazonwebservices"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "otel-js-3",
+          "tag": "breaking",
+          "date": "20 Oct 2026",
+          "title": { "es": "OpenTelemetry JS 3.0.0: Node 22.15+, un solo sdk-trace y exports estrictos", "en": "OpenTelemetry JS 3.0.0: Node 22.15+, one sdk-trace and strict exports", "fr": "OpenTelemetry JS 3.0.0 : Node 22.15+, un seul sdk-trace et des exports stricts" },
+          "body_html": {
+            "es": "<p>Major de las que duelen. El mínimo pasa a <strong>Node.js 22.15.0</strong> (chau 18 y 20), y <code>sdk-trace-base</code>, <code>sdk-trace-node</code> y <code>sdk-trace-web</code> se fusionan en <code>@opentelemetry/sdk-trace</code>. Se van el exporter y el propagator de Jaeger (usá OTLP y <code>W3CTraceContextPropagator</code>) y el shim de OpenTracing. El build migra a <code>tsdown</code> con mapa de <code>exports</code>: cualquier deep import a <code>build/src</code> ahora tira <code>ERR_PACKAGE_PATH_NOT_EXPORTED</code>. <code>sdk-logs</code> pasa a estable, pero <code>LoggerConfig.disabled</code> se reemplaza por <code>enabled</code>. Solo es compatible con los paquetes experimentales <code>0.300.x</code>: actualizá todo junto y leé la guía de migración antes.</p>",
+            "en": "<p>A painful major. The minimum becomes <strong>Node.js 22.15.0</strong> (18 and 20 dropped), and <code>sdk-trace-base</code>, <code>sdk-trace-node</code> and <code>sdk-trace-web</code> merge into <code>@opentelemetry/sdk-trace</code>. The Jaeger exporter and propagator (use OTLP and <code>W3CTraceContextPropagator</code>) and the OpenTracing shim are gone. Builds move to <code>tsdown</code> with an <code>exports</code> map: any deep import into <code>build/src</code> now throws <code>ERR_PACKAGE_PATH_NOT_EXPORTED</code>. <code>sdk-logs</code> becomes stable, but <code>LoggerConfig.disabled</code> is replaced by <code>enabled</code>. Only the experimental <code>0.300.x</code> packages are compatible: upgrade everything together and read the migration guide first.</p>",
+            "fr": "<p>Une majeure douloureuse. Le minimum passe à <strong>Node.js 22.15.0</strong> (18 et 20 abandonnés), et <code>sdk-trace-base</code>, <code>sdk-trace-node</code> et <code>sdk-trace-web</code> fusionnent dans <code>@opentelemetry/sdk-trace</code>. L'exporter et le propagator Jaeger (utilisez OTLP et <code>W3CTraceContextPropagator</code>) ainsi que le shim OpenTracing disparaissent. Le build passe à <code>tsdown</code> avec une table <code>exports</code> : tout import profond dans <code>build/src</code> lève <code>ERR_PACKAGE_PATH_NOT_EXPORTED</code>. <code>sdk-logs</code> devient stable, mais <code>LoggerConfig.disabled</code> est remplacé par <code>enabled</code>. Seuls les paquets expérimentaux <code>0.300.x</code> sont compatibles : mettez tout à jour ensemble.</p>"
+          },
+          "source": { "url": "https://github.com/open-telemetry/opentelemetry-js/releases/tag/v3.0.0", "label": "github.com/open-telemetry" }
+        },
+        {
+          "id": "follow-redirects-cve",
+          "tag": "security",
+          "date": "20 Oct 2026",
+          "title": { "es": "follow-redirects 1.16.1: dos CVEs (CVSS 8.2) filtran Authorization y Cookie en redirects", "en": "follow-redirects 1.16.1: two CVEs (CVSS 8.2) leak Authorization and Cookie on redirects", "fr": "follow-redirects 1.16.1 : deux CVE (CVSS 8.2) font fuiter Authorization et Cookie lors des redirections" },
+          "body_html": {
+            "es": "<p>Ojo, que esto está en el árbol de dependencias de medio npm vía <code>axios</code>. En la <strong>1.16.0</strong>, el borrado de headers sensibles antes de un redirect cross-origin fallaba con headers en forma de array (<strong>CVE-2026-111756</strong>) y con nombres de <code>sensitiveHeaders</code> mal escapados en la regex (<strong>CVE-2026-111755</strong>). Resultado: <code>Authorization</code>, <code>Cookie</code> o tus headers custom viajan al host al que te redirigen. Corré <code>npm ls follow-redirects</code> y forzá la <code>1.16.1</code> YA.</p>",
+            "en": "<p>Watch out: this sits in half of npm's dependency trees via <code>axios</code>. In <strong>1.16.0</strong>, stripping sensitive headers before a cross-origin redirect failed for array-form headers (<strong>CVE-2026-111756</strong>) and for <code>sensitiveHeaders</code> names poorly escaped in the regex (<strong>CVE-2026-111755</strong>). Result: <code>Authorization</code>, <code>Cookie</code> or your custom headers travel to the redirect target. Run <code>npm ls follow-redirects</code> and force <code>1.16.1</code> now.</p>",
+            "fr": "<p>Attention : ce paquet se trouve dans la moitié des arbres npm via <code>axios</code>. En <strong>1.16.0</strong>, la suppression des en-têtes sensibles avant une redirection cross-origin échouait pour les en-têtes sous forme de tableau (<strong>CVE-2026-111756</strong>) et pour des noms <code>sensitiveHeaders</code> mal échappés dans la regex (<strong>CVE-2026-111755</strong>). Résultat : <code>Authorization</code>, <code>Cookie</code> ou vos en-têtes personnalisés partent vers la cible de la redirection. Lancez <code>npm ls follow-redirects</code> et forcez la <code>1.16.1</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-q3jh-wrc6-jgq8", "label": "github.com/advisories" }
+        },
+        {
+          "id": "mcp-sdk-advisories",
+          "tag": "security",
+          "date": "20 Oct 2026",
+          "title": { "es": "SDK TypeScript de MCP: un transport compartido entrega mensajes de un cliente a otro", "en": "MCP TypeScript SDK: a shared transport delivers one client's messages to another", "fr": "SDK TypeScript MCP : un transport partagé livre les messages d'un client à un autre" },
+          "body_html": {
+            "es": "<p>Si exponés un server MCP por HTTP, frená y revisá. En <code>@modelcontextprotocol/server</code> 2.0–2.2, cuando varios clientes comparten un transport stateless o una única instancia de <code>McpServer</code>, las respuestas se emparejan solo por el <code>id</code> de JSON-RPC, y como todos los clientes arrancan en 0, <strong>las respuestas terminan en el cliente equivocado</strong>. El mismo día salieron otros advisories: un request de menos de 4 MiB que agota la memoria, bearer tokens emitidos para otro servicio que se aceptan igual, tasks no atadas a su sesión y redirects cross-origin que reenvían headers. Actualizá a <code>server 2.3.0</code> / <code>sdk 1.32.0</code> y creá un transport por sesión.</p>",
+            "en": "<p>If you expose an MCP server over HTTP, stop and check. In <code>@modelcontextprotocol/server</code> 2.0–2.2, when several clients share a stateless transport or a single <code>McpServer</code> instance, responses are matched only by the JSON-RPC <code>id</code>, and since every client starts at 0, <strong>responses land on the wrong client</strong>. Other advisories shipped the same day: a sub-4 MiB request that exhausts memory, bearer tokens issued for another service still accepted, tasks not bound to their session, and cross-origin redirects re-sending headers. Upgrade to <code>server 2.3.0</code> / <code>sdk 1.32.0</code> and create one transport per session.</p>",
+            "fr": "<p>Si vous exposez un serveur MCP en HTTP, vérifiez tout de suite. Dans <code>@modelcontextprotocol/server</code> 2.0–2.2, quand plusieurs clients partagent un transport stateless ou une seule instance <code>McpServer</code>, les réponses ne sont associées que par l'<code>id</code> JSON-RPC, et comme chaque client commence à 0, <strong>les réponses arrivent chez le mauvais client</strong>. D'autres avis sont sortis le même jour : une requête de moins de 4 Mio qui épuise la mémoire, des bearer tokens émis pour un autre service acceptés, des tasks non liées à leur session et des redirections cross-origin qui renvoient les en-têtes. Passez à <code>server 2.3.0</code> / <code>sdk 1.32.0</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-jm63-cq47-j5jp", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "runtimes",
+      "updates": [
+        {
+          "id": "typescript-7-1-beta",
+          "tag": "beta",
+          "date": "20 Oct 2026",
+          "title": { "es": "TypeScript 7.1 beta: target ES2026, import source y API programática nueva", "en": "TypeScript 7.1 beta: ES2026 target, import source and a new programmatic API", "fr": "TypeScript 7.1 bêta : cible ES2026, import source et nouvelle API programmatique" },
+          "body_html": {
+            "es": "<p>Primera minor grande del compilador nativo. <code>--target es2026</code> y <code>--lib es2026</code> pasan a estables (<code>Array.fromAsync()</code>, <code>Math.sumPrecise()</code>), llegan las <em>source phase imports</em> (<code>import source</code>) y los import attributes en módulos ambientales. Hay API nueva en <code>typescript/sync</code>, <code>typescript/fs</code> y <code>typescript/ast</code> con file systems virtuales, aunque no lee <code>tsconfig.json</code>. Ojo con el breaking: los chequeos distributivos en conditional types son más estrictos y algunos tipos utilitarios van a empezar a fallar.</p>",
+            "en": "<p>The first big minor of the native compiler. <code>--target es2026</code> and <code>--lib es2026</code> become stable (<code>Array.fromAsync()</code>, <code>Math.sumPrecise()</code>), <em>source phase imports</em> (<code>import source</code>) land, and import attributes work in ambient modules. A new API ships in <code>typescript/sync</code>, <code>typescript/fs</code> and <code>typescript/ast</code> with virtual file systems, though it does not read <code>tsconfig.json</code>. Watch the breaking change: distributive checks in conditional types are stricter, so some utility types will start erroring.</p>",
+            "fr": "<p>Première grosse mineure du compilateur natif. <code>--target es2026</code> et <code>--lib es2026</code> deviennent stables (<code>Array.fromAsync()</code>, <code>Math.sumPrecise()</code>), les <em>source phase imports</em> (<code>import source</code>) arrivent, et les import attributes fonctionnent dans les modules ambiants. Une nouvelle API arrive dans <code>typescript/sync</code>, <code>typescript/fs</code> et <code>typescript/ast</code> avec des systèmes de fichiers virtuels, sans lecture de <code>tsconfig.json</code>. Attention : les vérifications distributives des conditional types sont plus strictes.</p>"
+          },
+          "source": { "url": "https://devblogs.microsoft.com/typescript/announcing-typescript-7-1-beta/", "label": "devblogs.microsoft.com" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "frameworks",
+      "updates": [
+        {
+          "id": "hono-servestatic",
+          "tag": "security",
+          "date": "20 Oct 2026",
+          "title": { "es": "Hono 4.13.11: serveStatic decodificaba el path dos veces y salteaba middleware", "en": "Hono 4.13.11: serveStatic decoded the path twice and skipped middleware", "fr": "Hono 4.13.11 : serveStatic décodait le chemin deux fois et contournait le middleware" },
+          "body_html": {
+            "es": "<p>Hono decodifica el path antes de rutear, y <code>serveStatic</code> lo volvía a decodificar antes de resolver el archivo. Con un percent-encoding malformado, el request se rutea como un path y se sirve como otro, así que <strong>el middleware montado sobre un prefijo estático (auth, por ejemplo) no corre</strong>. Afecta <code>4.12.4</code> a <code>4.13.10</code>. Si protegés estáticos con middleware, actualizá a <code>4.13.11</code>.</p>",
+            "en": "<p>Hono decodes the path before routing, and <code>serveStatic</code> decoded it again before resolving the file. With malformed percent-encoding, a request is routed as one path and served as another, so <strong>middleware mounted on a static prefix (auth, for example) does not run</strong>. Affects <code>4.12.4</code> through <code>4.13.10</code>. If you protect static files with middleware, upgrade to <code>4.13.11</code>.</p>",
+            "fr": "<p>Hono décode le chemin avant le routage, et <code>serveStatic</code> le décodait une seconde fois avant de résoudre le fichier. Avec un percent-encoding malformé, une requête est routée comme un chemin et servie comme un autre, donc <strong>le middleware monté sur un préfixe statique (auth par exemple) ne s'exécute pas</strong>. Versions <code>4.12.4</code> à <code>4.13.10</code> concernées : passez à <code>4.13.11</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-5r4p-p66f-jhc7", "label": "github.com/advisories" }
+        },
+        {
+          "id": "bullmq-6-3-19",
+          "tag": "minor",
+          "date": "20 Oct 2026",
+          "title": { "es": "BullMQ 6.3.19: deduplicación más rápida con LPOS", "en": "BullMQ 6.3.19: faster deduplication with LPOS", "fr": "BullMQ 6.3.19 : déduplication plus rapide avec LPOS" },
+          "body_html": {
+            "es": "<p>Patch de performance: el chequeo de membresía de <code>keepLastIfActive</code> en deduplicación ahora usa <code>LPOS</code> de Redis, y el cambio se replica en los ports de Python, Elixir, PHP y Rust. Upgrade sin drama.</p>",
+            "en": "<p>A performance patch: the <code>keepLastIfActive</code> membership check in deduplication now uses Redis <code>LPOS</code>, and the change is mirrored in the Python, Elixir, PHP and Rust ports. A no-drama upgrade.</p>",
+            "fr": "<p>Patch de performance : la vérification d'appartenance <code>keepLastIfActive</code> de la déduplication utilise désormais <code>LPOS</code> de Redis, et le changement est répliqué dans les ports Python, Elixir, PHP et Rust.</p>"
+          },
+          "source": { "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.3.19", "label": "github.com/taskforcesh" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "databases",
+      "updates": [
+        {
+          "id": "elasticache-valkey-migration",
+          "tag": "notable",
+          "date": "20 Oct 2026",
+          "title": { "es": "ElastiCache Serverless for Valkey: migración online sin downtime", "en": "ElastiCache Serverless for Valkey: online migration with zero downtime", "fr": "ElastiCache Serverless for Valkey : migration en ligne sans interruption" },
+          "body_html": {
+            "es": "<p>Ahora podés mover un cluster Valkey o Redis OSS autogestionado en EC2 (cluster mode) a ElastiCache Serverless sin cortar el tráfico. El uso de la migración es gratis los primeros 180 días por cuenta: si venías postergando salir del Redis en EC2, no hay más excusas.</p>",
+            "en": "<p>You can now move a self-managed Valkey or Redis OSS cluster-mode cache on EC2 into ElastiCache Serverless without cutting traffic. Migration usage is free for the first 180 days per account: if you kept postponing leaving Redis on EC2, the excuses are gone.</p>",
+            "fr": "<p>Vous pouvez désormais migrer un cache Valkey ou Redis OSS autogéré en mode cluster sur EC2 vers ElastiCache Serverless sans couper le trafic. La migration est gratuite pendant les 180 premiers jours par compte.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-elasticache-serverless-valkey-online-migration/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "dynamodb-disassociate",
+          "tag": "minor",
+          "date": "20 Oct 2026",
+          "title": { "es": "DynamoDB global tables: desasociar réplicas sin copiar datos", "en": "DynamoDB global tables: disassociate replicas without copying data", "fr": "DynamoDB global tables : dissocier des réplicas sans copier les données" },
+          "body_html": {
+            "es": "<p>Podés cortar la replicación hacia una réplica de una global table MREC y seguir usando esa tabla como tabla de una sola región, sin copia de datos. Útil para salir de una región o separar un entorno.</p>",
+            "en": "<p>You can stop replication to a replica of an MREC global table and keep using that table as a single-Region table, with no data copy. Handy for leaving a Region or splitting off an environment.</p>",
+            "fr": "<p>Vous pouvez arrêter la réplication vers un réplica d'une global table MREC et continuer à utiliser cette table en mono-région, sans copie de données.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/dynamodb-global-tables-disassociate/", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloud",
+      "updates": [
+        {
+          "id": "ecs-gateway",
+          "tag": "ga",
+          "date": "20 Oct 2026",
+          "title": { "es": "Amazon ECS Gateway: ingress administrado para servicios ECS", "en": "Amazon ECS Gateway: managed ingress for ECS services", "fr": "Amazon ECS Gateway : ingress géré pour les services ECS" },
+          "body_html": {
+            "es": "<p>ECS Gateway provisiona y administra los Application Load Balancers de tus servicios ECS por vos. Está en todas las regiones comerciales sin cargo adicional: pagás solo la infraestructura subyacente. Menos Terraform de ALB y listeners copiado y pegado entre servicios.</p>",
+            "en": "<p>ECS Gateway provisions and manages the Application Load Balancers for your ECS services. It is available in all commercial Regions at no extra charge: you only pay for the underlying infrastructure. Less copy-pasted ALB and listener Terraform across services.</p>",
+            "fr": "<p>ECS Gateway provisionne et gère les Application Load Balancers de vos services ECS. Disponible dans toutes les régions commerciales sans frais supplémentaires : vous ne payez que l'infrastructure sous-jacente.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/announcing-amazon-ecs-gateway/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "arc-0-15",
+          "tag": "notable",
+          "date": "20 Oct 2026",
+          "title": { "es": "Actions Runner Controller 0.15: mucho menos tráfico a la API de Kubernetes", "en": "Actions Runner Controller 0.15: far less Kubernetes API traffic", "fr": "Actions Runner Controller 0.15 : beaucoup moins de trafic vers l'API Kubernetes" },
+          "body_html": {
+            "es": "<p>ARC pasa de updates completos a requests <code>patch</code>, mueve la agregación de estado de runners a métricas y filtra eventos para evitar reconciliaciones redundantes. Suma límites configurables de concurrencia y de rate del listener, así que si tenés runners self-hosted a escala, por fin podés tunear throughput contra la carga del API server.</p>",
+            "en": "<p>ARC switches from full updates to <code>patch</code> requests, moves runner status aggregation into metrics and filters events to avoid redundant reconciliation. It adds configurable concurrency and listener rate limits, so teams running self-hosted runners at scale can finally tune throughput against API server load.</p>",
+            "fr": "<p>ARC passe des mises à jour complètes aux requêtes <code>patch</code>, déplace l'agrégation de l'état des runners vers les métriques et filtre les événements pour éviter des réconciliations redondantes. Il ajoute des limites configurables de concurrence et de débit du listener.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/github-runner-controller-0-15/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "architecture",
+      "updates": [
+        {
+          "id": "emsign-ca-compromise",
+          "tag": "security",
+          "date": "20 Oct 2026",
+          "title": { "es": "certifi saca la raíz emSign: ocho intermedias con claves comprometidas", "en": "certifi drops the emSign root: eight intermediates with compromised keys", "fr": "certifi retire la racine emSign : huit intermédiaires aux clés compromises" },
+          "body_html": {
+            "es": "<p>Ocho CAs intermedias de eMudhra que encadenan a <code>emSign ECC Root CA - G3</code> tienen claves privadas comprometidas: con una, un atacante on-path puede emitir certificados válidos para cualquier host. <code>certifi</code> (y el CA store embebido de <code>uv</code>) la sacan en <strong>2026.10.19</strong>, CVSS 9.1. Lección de arquitectura: si tus servicios o containers traen un bundle de CAs pinneado, tenés que poder rotarlo rápido. Revisá tus imágenes base y cualquier trust store vendorizado.</p>",
+            "en": "<p>Eight eMudhra intermediate CAs chaining to <code>emSign ECC Root CA - G3</code> have compromised private keys: with one, an on-path attacker can issue valid certificates for any host. <code>certifi</code> (and <code>uv</code>'s bundled CA store) remove it in <strong>2026.10.19</strong>, CVSS 9.1. Architecture lesson: if your services or containers ship a pinned CA bundle, you must be able to rotate it fast. Check your base images and any vendored trust store.</p>",
+            "fr": "<p>Huit CA intermédiaires eMudhra rattachées à <code>emSign ECC Root CA - G3</code> ont des clés privées compromises : un attaquant on-path peut émettre des certificats valides pour n'importe quel hôte. <code>certifi</code> (et le magasin de CA intégré à <code>uv</code>) la retirent en <strong>2026.10.19</strong>, CVSS 9.1. Leçon : si vos services ou conteneurs embarquent un bundle de CA figé, vous devez pouvoir le faire tourner vite.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-6q48-6c7w-9gw2", "label": "github.com/advisories" }
+        },
+        {
+          "id": "markdown-it-redos",
+          "tag": "security",
+          "date": "20 Oct 2026",
+          "title": { "es": "markdown-it: render cuadrático con opciones por defecto, regresión desde 14.0", "en": "markdown-it: quadratic rendering with default options, a regression since 14.0", "fr": "markdown-it : rendu quadratique avec les options par défaut, régression depuis 14.0" },
+          "body_html": {
+            "es": "<p>Una link reference definition sin cerrar se procesa en O(n²) por concatenación de strings que fuerza a V8 a aplanar cons-strings. Si renderizás Markdown de usuarios en el server, es un DoS servido. Actualizá a <code>14.3.3</code> o <code>15.0.3</code>, y de paso: poné un límite de tamaño al input antes de parsear, siempre.</p>",
+            "en": "<p>An unclosed link reference definition is processed in O(n²) because string concatenation forces V8 to flatten cons-strings. If you render user Markdown on the server, that is a ready-made DoS. Upgrade to <code>14.3.3</code> or <code>15.0.3</code>, and while you are at it, always cap input size before parsing.</p>",
+            "fr": "<p>Une link reference definition non fermée est traitée en O(n²) car la concaténation de chaînes force V8 à aplatir des cons-strings. Si vous rendez du Markdown utilisateur côté serveur, c'est un DoS tout prêt. Passez à <code>14.3.3</code> ou <code>15.0.3</code>, et limitez toujours la taille de l'entrée avant parsing.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-gfr2-rv44-r23c", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "fullstack",
+      "updates": [
+        {
+          "id": "nx-24-rc",
+          "tag": "beta",
+          "date": "21 Oct 2026",
+          "title": { "es": "Nx 24.0.0-rc.0: espera dev servers por defecto y limpia deprecaciones", "en": "Nx 24.0.0-rc.0: waits for dev servers by default and removes deprecations", "fr": "Nx 24.0.0-rc.0 : attend les dev servers par défaut et supprime des dépréciations" },
+          "body_html": {
+            "es": "<p>Primer RC de Nx 24. Las tareas ahora esperan a que el dev server esté listo (timeout de 10 minutos) y las apps Node generadas reportan readiness con <code>emitReadySignal</code>. Se van los generadores SCAM de Angular, <code>NX_MIGRATE_SKIP_REGISTRY_FETCH</code> y <code>setParserOptionsProject</code>. También arregla cache hits viejos cuando inputs comparten hash key y pasa los comandos de publish como argv en vez de shell strings.</p>",
+            "en": "<p>First Nx 24 RC. Tasks now wait for the dev server to be ready (10-minute timeout) and generated Node apps report readiness with <code>emitReadySignal</code>. Angular SCAM generators, <code>NX_MIGRATE_SKIP_REGISTRY_FETCH</code> and <code>setParserOptionsProject</code> are removed. It also fixes stale cache hits when inputs share a hash key and passes publish commands as argv instead of shell strings.</p>",
+            "fr": "<p>Premier RC de Nx 24. Les tâches attendent que le dev server soit prêt (timeout de 10 minutes) et les apps Node générées signalent leur disponibilité via <code>emitReadySignal</code>. Les générateurs SCAM Angular, <code>NX_MIGRATE_SKIP_REGISTRY_FETCH</code> et <code>setParserOptionsProject</code> disparaissent. Corrige aussi des hits de cache obsolètes.</p>"
+          },
+          "source": { "url": "https://github.com/nrwl/nx/releases/tag/24.0.0-rc.0", "label": "github.com/nrwl" }
+        },
+        {
+          "id": "better-auth-1-7-12",
+          "tag": "patch",
+          "date": "20 Oct 2026",
+          "title": { "es": "better-auth 1.7.12: el JWT plugin deja de confiar en el alg del header", "en": "better-auth 1.7.12: the JWT plugin stops trusting the header's alg", "fr": "better-auth 1.7.12 : le plugin JWT ne fait plus confiance à l'alg de l'en-tête" },
+          "body_html": {
+            "es": "<p>Patch con acción requerida. El plugin JWT ahora verifica con el algoritmo de la clave guardada y no con el del header del token, y avisa si firmás sin issuer o audience. Los callbacks por el OAuth proxy corren las mismas validaciones de issuer y nonce. Si usás sign-in con ID token y un provider sin <code>clientId</code>, tenés que configurarlo con todos los client IDs de tus apps.</p>",
+            "en": "<p>A patch with required action. The JWT plugin now verifies with the stored key's algorithm instead of the token header's, and warns when signing without an issuer or audience. OAuth proxy callbacks now run the same issuer and nonce checks. If you use ID token sign-in with a provider lacking <code>clientId</code>, set it to every client ID your apps use.</p>",
+            "fr": "<p>Un patch avec action requise. Le plugin JWT vérifie désormais avec l'algorithme de la clé stockée et non celui de l'en-tête, et avertit en l'absence d'issuer ou d'audience. Les callbacks via le proxy OAuth appliquent les mêmes vérifications d'issuer et de nonce. Avec la connexion par ID token sans <code>clientId</code>, renseignez tous vos client IDs.</p>"
+          },
+          "source": { "url": "https://github.com/better-auth/better-auth/releases/tag/v1.7.12", "label": "github.com/better-auth" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El SDK de MCP vive su momento «Express 2012»: cinco advisories en un día muestran que los servers de agentes multi-tenant necesitan el mismo aislamiento por sesión que cualquier API HTTP.",
+      "en": "The MCP SDK is having its \"Express 2012\" moment: five advisories in one day show that multi-tenant agent servers need the same per-session isolation as any HTTP API.",
+      "fr": "Le SDK MCP vit son moment « Express 2012 » : cinq avis en une journée montrent que les serveurs d'agents multi-tenant exigent la même isolation par session que n'importe quelle API HTTP."
+    },
+    {
+      "es": "Node 20 se queda afuera: OpenTelemetry JS 3.0 exige 22.15+ y NestJS 12 ya pedía 20.19+/22.12+. Planificá el salto del runtime antes de que el ecosistema te arrastre.",
+      "en": "Node 20 is being left behind: OpenTelemetry JS 3.0 requires 22.15+ and NestJS 12 already asked for 20.19+/22.12+. Plan the runtime jump before the ecosystem drags you along.",
+      "fr": "Node 20 est laissé de côté : OpenTelemetry JS 3.0 exige 22.15+ et NestJS 12 demandait déjà 20.19+/22.12+. Planifiez la migration du runtime avant d'y être forcé."
+    }
+  ]
+}

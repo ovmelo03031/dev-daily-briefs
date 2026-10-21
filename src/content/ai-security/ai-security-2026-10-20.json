@@ -1,0 +1,244 @@
+{
+  "title": {
+    "es": "AI Security — 20 OCT 2026",
+    "en": "AI Security — 20 OCT 2026",
+    "fr": "AI Security — 20 OCT 2026"
+  },
+  "description": {
+    "es": "piflow deja que cualquiera le pida a su agente DeepAgents correr comandos de shell sin auth, OpenSRE tiene un approval gate que siempre dice que sí ante alertas con prompt injection, Mercury de MLJAR suma dos RCE sin auth vía Jupyter y el agent-router de Envoy AI Gateway permite secuestrar sesiones MCP.",
+    "en": "piflow lets anyone ask its DeepAgents agent to run shell commands without auth, OpenSRE ships an approval gate that always says yes to prompt-injected alerts, MLJAR Mercury gets two unauthenticated RCEs through Jupyter, and Envoy AI Gateway's agent-router allows MCP session hijacking.",
+    "fr": "piflow laisse n'importe qui demander à son agent DeepAgents d'exécuter des commandes shell sans authentification, l'approval gate d'OpenSRE dit toujours oui aux alertes piégées par prompt injection, MLJAR Mercury cumule deux RCE non authentifiées via Jupyter et l'agent-router d'Envoy AI Gateway permet le détournement de sessions MCP."
+  },
+  "pubDate": "2026-10-20",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "piflow: chat del agente sin auth = RCE",
+        "en": "piflow: unauthenticated agent chat = RCE",
+        "fr": "piflow : chat d'agent sans auth = RCE"
+      },
+      "anchor": "piflow-cve-2026-109442-deepagents-rce",
+      "icon": "lucide:skull"
+    },
+    {
+      "text": {
+        "es": "OpenSRE: el approval gate siempre aprueba",
+        "en": "OpenSRE: the approval gate always approves",
+        "fr": "OpenSRE : l'approval gate approuve toujours"
+      },
+      "anchor": "opensre-cve-2026-109444-approval-bypass",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "Mercury: dos RCE sin auth vía Jupyter",
+        "en": "Mercury: two unauthenticated RCEs via Jupyter",
+        "fr": "Mercury : deux RCE sans auth via Jupyter"
+      },
+      "anchor": "mercury-cve-2026-111057-111058-rce",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": {
+        "es": "Envoy AI Gateway: sesiones MCP secuestrables",
+        "en": "Envoy AI Gateway: hijackable MCP sessions",
+        "fr": "Envoy AI Gateway : sessions MCP détournables"
+      },
+      "anchor": "envoy-ai-gateway-mcp-session-hijack",
+      "icon": "lucide:lock"
+    },
+    {
+      "text": {
+        "es": "Graphify filtra archivos del host al grafo",
+        "en": "Graphify leaks host files into the graph",
+        "fr": "Graphify fuite des fichiers de l'hôte"
+      },
+      "anchor": "graphify-fortran-include-exfiltration",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "fastllm: overflow al cargar safetensors",
+        "en": "fastllm: overflow when loading safetensors",
+        "fr": "fastllm : overflow au chargement safetensors"
+      },
+      "anchor": "fastllm-cve-2026-112107-safetensors-overflow",
+      "icon": "lucide:radiation"
+    }
+  ],
+  "tools": [
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "piflow-cve-2026-109442-deepagents-rce",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-109442: el agente DeepAgents de piflow ejecuta comandos de shell para cualquiera, sin auth",
+            "en": "CVE-2026-109442: piflow's DeepAgents agent runs shell commands for anyone, no auth required",
+            "fr": "CVE-2026-109442 : l'agent DeepAgents de piflow exécute des commandes shell pour n'importe qui, sans authentification"
+          },
+          "body_html": {
+            "es": "<p>piflow (cas-bigdatalab) expone los endpoints <code>POST /chat</code> y <code>POST /chat/stream</code> de su agente DeepAgents sin ninguna autenticación (CWE-306). Basta con pedirle al agente que use su tool <code>exec_shell</code>, que llama a <code>subprocess.run</code> sin aprobación humana ni allow-list, para ejecutar comandos arbitrarios y llevarse los secretos del entorno: API keys de LLM y credenciales de base de datos. CVSS v3.1 9.8 / v4 9.3. Afecta 2.0.0 a 2.0.1 y <strong>todavía no hay fix</strong>. Ojo con esto: si lo tenés expuesto, sacalo de la red ya.</p>",
+            "en": "<p>piflow (cas-bigdatalab) exposes its DeepAgents agent's <code>POST /chat</code> and <code>POST /chat/stream</code> endpoints with no authentication at all (CWE-306). An attacker just asks the agent to use its <code>exec_shell</code> tool, which calls <code>subprocess.run</code> with no human approval or allow-list, to run arbitrary commands and walk off with environment secrets such as LLM API keys and database credentials. CVSS v3.1 9.8 / v4 9.3. Affects 2.0.0 through 2.0.1, and <strong>no fix is available yet</strong>. If it is network-reachable, take it offline now.</p>",
+            "fr": "<p>piflow (cas-bigdatalab) expose les endpoints <code>POST /chat</code> et <code>POST /chat/stream</code> de son agent DeepAgents sans aucune authentification (CWE-306). Il suffit de demander à l'agent d'utiliser son outil <code>exec_shell</code>, qui appelle <code>subprocess.run</code> sans approbation humaine ni allow-list, pour exécuter des commandes arbitraires et voler les secrets de l'environnement (clés API LLM, identifiants de base de données). CVSS v3.1 9.8 / v4 9.3. Versions 2.0.0 à 2.0.1, <strong>aucun correctif pour l'instant</strong>.</p>"
+          },
+          "date": "20 Oct 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-109442",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "opensre-cve-2026-109444-approval-bypass",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-109444: el approval gate de OpenSRE siempre devuelve True y deja correr shell vía prompt injection",
+            "en": "CVE-2026-109444: OpenSRE's approval gate always returns True, letting prompt injection run shell commands",
+            "fr": "CVE-2026-109444 : l'approval gate d'OpenSRE renvoie toujours True et laisse la prompt injection exécuter du shell"
+          },
+          "body_html": {
+            "es": "<p>OpenSRE, el agente SRE de Tracer-Cloud, tiene un presenter headless cuyo <code>execution_allowed()</code> siempre devuelve <code>True</code>, así que el gate de confirmación de la tool <code>shell_run</code> nunca pide nada. Un atacante mete instrucciones en una alerta o un mensaje de Slack que el agente procesa y consigue ejecución de comandos en el host, con acceso a credenciales de LLM, Slack y cloud (CWE-862). CVSS v4 8.7 / v3.1 8.8. Afecta hasta 0.1.2026.10.19, sin fix publicado. Es el caso de manual de prompt injection indirecta: el humano en el loop existía solo en el diseño.</p>",
+            "en": "<p>OpenSRE, Tracer-Cloud's SRE agent, ships a headless presenter whose <code>execution_allowed()</code> always returns <code>True</code>, so the confirmation gate on the <code>shell_run</code> tool never actually asks. An attacker plants instructions in an alert or Slack message the agent processes and gets command execution on the host, with access to LLM, Slack and cloud credentials (CWE-862). CVSS v4 8.7 / v3.1 8.8. Affects versions up to 0.1.2026.10.19, with no fix published. A textbook indirect prompt injection: the human in the loop only existed on paper.</p>",
+            "fr": "<p>OpenSRE, l'agent SRE de Tracer-Cloud, embarque un presenter headless dont <code>execution_allowed()</code> renvoie toujours <code>True</code> : la confirmation de l'outil <code>shell_run</code> n'est jamais demandée. Un attaquant glisse des instructions dans une alerte ou un message Slack traité par l'agent et obtient l'exécution de commandes sur l'hôte, avec accès aux identifiants LLM, Slack et cloud (CWE-862). CVSS v4 8.7 / v3.1 8.8. Jusqu'à 0.1.2026.10.19, sans correctif publié.</p>"
+          },
+          "date": "20 Oct 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-109444",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "envoy-ai-gateway-mcp-session-hijack",
+          "tag": "medium",
+          "title": {
+            "es": "Envoy AI Gateway / agent-router: el resume de sesiones MCP no verifica al usuario y el Helm trae una seed pública",
+            "en": "Envoy AI Gateway / agent-router: MCP session resume skips the user check, and the Helm chart ships a public seed",
+            "fr": "Envoy AI Gateway / agent-router : la reprise de session MCP ne vérifie pas l'utilisateur et le chart Helm livre une seed publique"
+          },
+          "body_html": {
+            "es": "<p>El proxy MCP embebe el <code>sub</code> del JWT en el <code>Mcp-Session-Id</code> justamente como discriminador anti-hijacking, como recomienda la spec de MCP, pero el camino de resume nunca lo compara con la identidad actual. Cualquiera que obtenga un session ID ajeno puede retomar esa sesión, leer estado de tool calls e invocar <code>tools/call</code> o <code>resources/read</code> en nombre de otro usuario. Peor: el chart oficial de Helm trae la seed literal <code>default-insecure-seed</code> para cifrar esos IDs, así que se pueden forjar. CVSS v4 6.8. Arreglado en <strong>1.2.0-rc1</strong>; rotá la seed sí o sí.</p>",
+            "en": "<p>The MCP proxy embeds the JWT <code>sub</code> in the <code>Mcp-Session-Id</code> precisely as an anti-hijacking discriminator, as the MCP spec recommends, but the resume path never compares it to the current caller. Anyone who gets hold of another user's session ID can resume that session, read tool-call state and invoke <code>tools/call</code> or <code>resources/read</code> as that user. Worse, the official Helm chart ships the literal seed <code>default-insecure-seed</code> for encrypting those IDs, so they can be forged outright. CVSS v4 6.8. Fixed in <strong>1.2.0-rc1</strong>; rotate the seed regardless.</p>",
+            "fr": "<p>Le proxy MCP intègre le <code>sub</code> du JWT dans le <code>Mcp-Session-Id</code> comme discriminant anti-détournement, comme le recommande la spec MCP, mais le chemin de reprise ne le compare jamais à l'appelant. Quiconque obtient l'ID de session d'un autre utilisateur peut la reprendre et invoquer <code>tools/call</code> ou <code>resources/read</code> en son nom. Le chart Helm officiel livre en plus la seed littérale <code>default-insecure-seed</code>, rendant les IDs falsifiables. CVSS v4 6.8. Corrigé en <strong>1.2.0-rc1</strong>.</p>"
+          },
+          "date": "19 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-953h-535j-jg2v",
+            "label": "GitHub Advisory"
+          }
+        },
+        {
+          "id": "loopx-cve-2026-108372-cors-leak",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-108372: LoopX serve-status con CORS abierto filtra estado del control plane de agentes",
+            "en": "CVE-2026-108372: LoopX serve-status with open CORS leaks agent control-plane state",
+            "fr": "CVE-2026-108372 : LoopX serve-status avec CORS ouvert fuite l'état du control plane d'agents"
+          },
+          "body_html": {
+            "es": "<p>LoopX, un control plane local para agentes de largo plazo, responde con <code>Access-Control-Allow-Origin: *</code> en todas las rutas GET sin auth de <code>serve-status</code>, en un puerto loopback fijo. Cualquier web que visites puede hacer <code>fetch()</code> a <code>127.0.0.1:8766</code> y leer goals, historial de runs, rutas absolutas y el contenido de Markdown de cada repo registrado. Los endpoints de escritura sí validan Origin. CVSS v4 7.1. Arreglado en <strong>0.4.5</strong>.</p>",
+            "en": "<p>LoopX, a local control plane for long-horizon agents, answers every unauthenticated GET route of <code>serve-status</code> with <code>Access-Control-Allow-Origin: *</code> on a fixed loopback port. Any website you visit can <code>fetch()</code> <code>127.0.0.1:8766</code> and read goals, run history, absolute paths and Markdown file contents from every registered repo. Write endpoints are correctly Origin-checked. CVSS v4 7.1. Fixed in <strong>0.4.5</strong>.</p>",
+            "fr": "<p>LoopX, un control plane local pour agents de longue durée, renvoie <code>Access-Control-Allow-Origin: *</code> sur toutes les routes GET non authentifiées de <code>serve-status</code>, sur un port loopback fixe. N'importe quel site peut faire un <code>fetch()</code> vers <code>127.0.0.1:8766</code> et lire objectifs, historique, chemins absolus et contenu Markdown des dépôts enregistrés. CVSS v4 7.1. Corrigé en <strong>0.4.5</strong>.</p>"
+          },
+          "date": "19 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-vx2m-gpq4-8j5q",
+            "label": "GitHub Advisory"
+          }
+        }
+      ]
+    },
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "mercury-cve-2026-111057-111058-rce",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-111057 / CVE-2026-111058: MLJAR Mercury, RCE sin auth vía /api/terminals y /api/kernels",
+            "en": "CVE-2026-111057 / CVE-2026-111058: MLJAR Mercury, unauthenticated RCE via /api/terminals and /api/kernels",
+            "fr": "CVE-2026-111057 / CVE-2026-111058 : MLJAR Mercury, RCE non authentifiée via /api/terminals et /api/kernels"
+          },
+          "body_html": {
+            "es": "<p>Mercury, que convierte notebooks de Jupyter en web apps, corre JupyterLab con acceso anónimo por defecto y se protege con una blocklist. Primer bug: una coma faltante en <code>BLOCKED_PATTERNS</code> concatena dos regex y deja <code>/api/terminals</code> sin bloquear, o sea una shell interactiva para cualquiera (CVSS v3 10). El fix en 3.2.4 fue incompleto: <code>/api/kernels</code> no puede bloquearse y nadie filtra los <code>execute_request</code>, así que crear un kernel y mandarle código sigue siendo RCE (CVSS v3 9.8). Actualizá a <strong>3.2.6</strong> y poné un token; una blocklist sobre Jupyter nunca va a alcanzar.</p>",
+            "en": "<p>Mercury, which turns Jupyter notebooks into web apps, runs JupyterLab with anonymous access by default and relies on a blocklist. First bug: a missing comma in <code>BLOCKED_PATTERNS</code> concatenates two regexes and leaves <code>/api/terminals</code> unblocked, handing anyone an interactive shell (CVSS v3 10). The 3.2.4 fix was incomplete: <code>/api/kernels</code> cannot be blocked and nothing filters <code>execute_request</code>, so creating a kernel and sending it code is still RCE (CVSS v3 9.8). Upgrade to <strong>3.2.6</strong> and set a token; a blocklist over Jupyter was never going to hold.</p>",
+            "fr": "<p>Mercury, qui transforme des notebooks Jupyter en apps web, lance JupyterLab en accès anonyme par défaut et s'appuie sur une blocklist. Premier bug : une virgule manquante dans <code>BLOCKED_PATTERNS</code> fusionne deux regex et laisse <code>/api/terminals</code> accessible, offrant un shell interactif à tous (CVSS v3 10). Le correctif 3.2.4 était incomplet : <code>/api/kernels</code> reste ouvert et <code>execute_request</code> n'est pas filtré, d'où une RCE (CVSS v3 9.8). Passez en <strong>3.2.6</strong> et définissez un token.</p>"
+          },
+          "date": "19 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-rv4m-xm3f-3ccq",
+            "label": "GitHub Advisory"
+          }
+        },
+        {
+          "id": "fastllm-cve-2026-112107-safetensors-overflow",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-112107: fastllm, buffer overflow al cargar pesos safetensors con data_offsets manipulados",
+            "en": "CVE-2026-112107: fastllm buffer overflow when loading safetensors weights with crafted data_offsets",
+            "fr": "CVE-2026-112107 : fastllm, buffer overflow au chargement de poids safetensors aux data_offsets manipulés"
+          },
+          "body_html": {
+            "es": "<p>El motor de inferencia fastllm (ztxz16) no valida <code>data_offsets</code> en <code>SafeTensorItem::CreateBuffer</code> (<code>src/model.cpp</code>), así que un modelo safetensors armado a mano provoca un buffer overflow (CWE-119/120). Hay PoC pública y el proyecto no respondió al reporte; afecta 1.8.0 a 1.8.2, sin fix. El mismo día salió un overflow parecido en el parser de strings GGUF (CVE-2026-112108). CVSS v3.1 6.3. Recordatorio: safetensors evita pickle, pero el loader igual tiene que validar el header.</p>",
+            "en": "<p>The fastllm inference engine (ztxz16) does not validate <code>data_offsets</code> in <code>SafeTensorItem::CreateBuffer</code> (<code>src/model.cpp</code>), so a hand-crafted safetensors model triggers a buffer overflow (CWE-119/120). A public PoC exists and the project did not respond to the report; versions 1.8.0 through 1.8.2 are affected with no fix. A similar overflow in GGUF string parsing (CVE-2026-112108) landed the same day. CVSS v3.1 6.3. Reminder: safetensors avoids pickle, but the loader still has to validate the header.</p>",
+            "fr": "<p>Le moteur d'inférence fastllm (ztxz16) ne valide pas <code>data_offsets</code> dans <code>SafeTensorItem::CreateBuffer</code> (<code>src/model.cpp</code>) : un modèle safetensors forgé provoque un buffer overflow (CWE-119/120). PoC publique, pas de réponse du projet ; versions 1.8.0 à 1.8.2, sans correctif. Un overflow similaire dans le parsing GGUF (CVE-2026-112108) est publié le même jour. CVSS v3.1 6.3.</p>"
+          },
+          "date": "19 Oct 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-112107",
+            "label": "OpenCVE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "supply-chain",
+      "name": "Supply Chain",
+      "theme": "supply-chain",
+      "icon_emoji": "📦",
+      "anchor": "supply-chain",
+      "updates": [
+        {
+          "id": "graphify-fortran-include-exfiltration",
+          "tag": "medium",
+          "title": {
+            "es": "Graphify: un repo no confiable con archivos Fortran filtra archivos del host al grafo que lee el agente",
+            "en": "Graphify: an untrusted repo with Fortran files leaks host files into the graph your agent reads",
+            "fr": "Graphify : un dépôt non fiable avec des fichiers Fortran fuite des fichiers de l'hôte dans le graphe lu par l'agent"
+          },
+          "body_html": {
+            "es": "<p>Graphify, la skill <code>/graphify</code> para Claude Code, Cursor, Codex y Gemini CLI que convierte un repo en knowledge graph, preprocesa archivos <code>.F/.F90</code> con <code>cpp</code>. Su hardening (<code>-nostdinc -I /dev/null</code>) no frena <code>#include</code> con rutas absolutas ni con path traversal, así que indexar un repo malicioso mete <code>/etc/passwd</code> o tu <code>~/.ssh/id_rsa</code> en el grafo, que después se le pasa al LLM y se escribe en <code>graph.json</code>, el wiki de Obsidian y los exports. CVSS v4 6.8. Arreglado en <strong>graphifyy 0.9.70</strong>.</p>",
+            "en": "<p>Graphify, the <code>/graphify</code> skill for Claude Code, Cursor, Codex and Gemini CLI that turns a repo into a knowledge graph, preprocesses <code>.F/.F90</code> files with <code>cpp</code>. Its hardening (<code>-nostdinc -I /dev/null</code>) does not stop <code>#include</code> with absolute paths or path traversal, so indexing a malicious repo pulls <code>/etc/passwd</code> or your <code>~/.ssh/id_rsa</code> into the graph, which is then fed to the LLM and written to <code>graph.json</code>, the Obsidian wiki and exports. CVSS v4 6.8. Fixed in <strong>graphifyy 0.9.70</strong>.</p>",
+            "fr": "<p>Graphify, la skill <code>/graphify</code> pour Claude Code, Cursor, Codex et Gemini CLI qui transforme un dépôt en knowledge graph, prétraite les fichiers <code>.F/.F90</code> avec <code>cpp</code>. Son durcissement (<code>-nostdinc -I /dev/null</code>) n'empêche pas les <code>#include</code> absolus ni le path traversal : indexer un dépôt malveillant injecte <code>/etc/passwd</code> ou <code>~/.ssh/id_rsa</code> dans le graphe transmis au LLM et écrit dans <code>graph.json</code> et les exports. CVSS v4 6.8. Corrigé en <strong>graphifyy 0.9.70</strong>.</p>"
+          },
+          "date": "19 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-pcc4-rvhr-2pr8",
+            "label": "GitHub Advisory"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El humano en el loop es decorativo: piflow directamente no tiene auth delante de una tool de shell, y OpenSRE tiene un gate de aprobación que siempre aprueba. En los dos casos, cualquier texto que llegue al agente (un chat, una alerta, un Slack) termina siendo un comando.",
+      "en": "Human-in-the-loop is decorative: piflow puts no auth at all in front of a shell tool, and OpenSRE has an approval gate that always approves. In both cases any text that reaches the agent, whether a chat, an alert or a Slack message, ends up as a command.",
+      "fr": "L'humain dans la boucle est décoratif : piflow n'a aucune authentification devant un outil shell, et OpenSRE a un gate d'approbation qui approuve toujours. Dans les deux cas, tout texte qui atteint l'agent devient une commande."
+    },
+    {
+      "es": "Las blocklists siguen fallando: Mercury necesitó dos advisories para aceptar que Jupyter anónimo no se puede tapar por regex, y Graphify descubrió que los flags de cpp no frenan includes absolutos. Allow-list y auth, no listas de lo prohibido.",
+      "en": "Blocklists keep failing: Mercury needed two advisories to accept that anonymous Jupyter cannot be patched with regexes, and Graphify learned that cpp flags do not stop absolute includes. Allow-lists and auth, not lists of what is forbidden.",
+      "fr": "Les blocklists échouent encore : Mercury a eu besoin de deux advisories pour admettre qu'un Jupyter anonyme ne se protège pas par regex, et Graphify a découvert que les flags de cpp n'arrêtent pas les includes absolus."
+    }
+  ]
+}

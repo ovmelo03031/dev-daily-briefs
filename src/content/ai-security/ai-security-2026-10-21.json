@@ -1,0 +1,225 @@
+{
+  "title": {
+    "es": "AI Security — 21 OCT 2026",
+    "en": "AI Security — 21 OCT 2026",
+    "fr": "AI Security — 21 OCT 2026"
+  },
+  "description": {
+    "es": "vLLM deja que el cliente elija qué revisión de código remoto cargar (RCE vía /tokenize) y publica nueve advisories más en 0.32.0, el SDK TypeScript de MCP saca seis fixes de una (incluido uno que mezcla respuestas entre clientes), el SDK Java de A2A trae autorización fail-open y SSRF, y un agente de trading lee /etc/shadow si se lo pedís.",
+    "en": "vLLM lets clients pick which remote-code revision gets loaded (RCE via /tokenize) and ships nine more advisories in 0.32.0, the MCP TypeScript SDK lands six fixes at once (including one that routes responses to the wrong client), the A2A Java SDK carries fail-open authorization and SSRF, and a trading agent reads /etc/shadow if you ask nicely.",
+    "fr": "vLLM laisse le client choisir la révision de code distant chargée (RCE via /tokenize) et publie neuf autres advisories dans 0.32.0, le SDK TypeScript de MCP livre six correctifs d'un coup (dont un qui envoie les réponses au mauvais client), le SDK Java d'A2A embarque une autorisation fail-open et une SSRF, et un agent de trading lit /etc/shadow sur simple demande."
+  },
+  "pubDate": "2026-10-21",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "vLLM: revisión elegida por el cliente = RCE",
+        "en": "vLLM: client-chosen revision = RCE",
+        "fr": "vLLM : révision choisie par le client = RCE"
+      },
+      "anchor": "vllm-cve-2026-114053-tokenize-revision-rce",
+      "icon": "lucide:skull"
+    },
+    {
+      "text": {
+        "es": "vLLM 0.32.0: nueve advisories, pickle incluido",
+        "en": "vLLM 0.32.0: nine advisories, pickle included",
+        "fr": "vLLM 0.32.0 : neuf advisories, pickle inclus"
+      },
+      "anchor": "vllm-0-32-0-advisory-batch",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": {
+        "es": "SDK TS de MCP: seis fixes en un día",
+        "en": "MCP TypeScript SDK: six fixes in one day",
+        "fr": "SDK TS de MCP : six correctifs en un jour"
+      },
+      "anchor": "mcp-typescript-sdk-six-advisories",
+      "icon": "lucide:shield-alert"
+    },
+    {
+      "text": {
+        "es": "A2A Java SDK: autorización fail-open",
+        "en": "A2A Java SDK: fail-open task authorization",
+        "fr": "A2A Java SDK : autorisation fail-open"
+      },
+      "anchor": "a2a-java-sdk-five-advisories",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "Vibe-Trading: el agente lee archivos del host",
+        "en": "Vibe-Trading: the agent reads host files",
+        "fr": "Vibe-Trading : l'agent lit les fichiers de l'hôte"
+      },
+      "anchor": "vibe-trading-cve-2026-114106-agent-path-traversal",
+      "icon": "lucide:lock"
+    },
+    {
+      "text": {
+        "es": "FCA: reportar fallas y near-misses de IA",
+        "en": "FCA: report AI failures and near-misses",
+        "fr": "FCA : signaler pannes et quasi-incidents IA"
+      },
+      "anchor": "fca-ai-near-miss-reporting",
+      "icon": "lucide:siren"
+    }
+  ],
+  "tools": [
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "vllm-cve-2026-114053-tokenize-revision-rce",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-114053: vLLM le pasa al AutoProcessor la revisión que elige el cliente, y /tokenize termina ejecutando Python",
+            "en": "CVE-2026-114053: vLLM forwards a client-chosen revision to AutoProcessor, and /tokenize ends up running Python",
+            "fr": "CVE-2026-114053 : vLLM transmet à AutoProcessor la révision choisie par le client, et /tokenize finit par exécuter du Python"
+          },
+          "body_html": {
+            "es": "<p>vLLM toma la <code>revision</code> que viene en los parámetros multimodales del request y se la pasa a <code>AutoProcessor.from_pretrained</code> de Transformers. Con <code>trust_remote_code</code> activado, el cliente decide qué versión del código dinámico del processor se carga: si el repo del modelo servido tiene una revisión maliciosa, un request multimodal sin auth a <code>/tokenize</code> ejecuta Python arbitrario en el proceso de la API (CWE-94). CVSS v4 9.2 / v3.1 8.1. Afecta 0.7.3 hasta antes de 0.31.0; fix en <strong>0.31.0</strong>. Es la clase de siempre, trust_remote_code, pero ahora con el pin de versión en manos del atacante.</p>",
+            "en": "<p>vLLM takes the <code>revision</code> from a request's multimodal parameters and hands it to Transformers' <code>AutoProcessor.from_pretrained</code>. With <code>trust_remote_code</code> enabled, the client decides which revision of the processor's dynamic code gets loaded: if the served model repository contains a malicious revision, an unauthenticated multimodal request to <code>/tokenize</code> runs arbitrary Python in the API process (CWE-94). CVSS v4 9.2 / v3.1 8.1. Affects 0.7.3 up to, but not including, 0.31.0; fixed in <strong>0.31.0</strong>. It is the usual trust_remote_code class, except the attacker now holds the version pin.</p>",
+            "fr": "<p>vLLM prend la <code>revision</code> fournie dans les paramètres multimodaux de la requête et la passe à <code>AutoProcessor.from_pretrained</code> de Transformers. Avec <code>trust_remote_code</code> activé, le client choisit quelle révision du code dynamique du processor est chargée : si le dépôt du modèle servi contient une révision malveillante, une requête multimodale non authentifiée sur <code>/tokenize</code> exécute du Python arbitraire dans le processus de l'API (CWE-94). CVSS v4 9.2 / v3.1 8.1. Versions 0.7.3 à 0.31.0 exclue ; corrigé en <strong>0.31.0</strong>.</p>"
+          },
+          "date": "21 Oct 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-114053",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "vllm-0-32-0-advisory-batch",
+          "tag": "high",
+          "title": {
+            "es": "vLLM 0.32.0 cierra nueve advisories: pickle.loads vía handles SHM forjados y Ghostscript vía imágenes EPS",
+            "en": "vLLM 0.32.0 closes nine advisories: pickle.loads via forged SHM handles and Ghostscript via EPS images",
+            "fr": "vLLM 0.32.0 corrige neuf advisories : pickle.loads via des handles SHM forgés et Ghostscript via des images EPS"
+          },
+          "body_html": {
+            "es": "<p>El 20 de octubre vLLM publicó nueve advisories, todos con fix en <strong>0.32.0</strong>. Los dos más pesados: con <code>--mm-processor-cache-type shm</code>, un caller autenticado puede forjar un handle de memoria compartida que apunta a bytes propios y el worker termina en <code>pickle.loads()</code>, aun sin <code>VLLM_ALLOW_INSECURE_SERIALIZATION</code> (GHSA-6757-hggm-hp2w, CVSS 8.8 en el advisory); y <code>ImageMediaIO</code> deja que Pillow autodetecte el formato, así que un EPS etiquetado como <code>image/png</code> llega a Ghostscript y, en hosts con CVE-2024-29510, ejecuta comandos (GHSA-h3rc-j82p-2c3h, 8.1). El resto son DoS de un solo request (imágenes DeepSeek-OCR con píxeles que suman 0, token ids fuera de vocabulario, Jinja2 sin límite), un bypass de <code>trust_request_chat_template</code> en la Responses API y CORS permisivo por defecto. Si servís multimodal, actualizá.</p>",
+            "en": "<p>On 20 October vLLM published nine advisories, all fixed in <strong>0.32.0</strong>. The two heaviest: with <code>--mm-processor-cache-type shm</code>, an authenticated caller can forge a shared-memory handle pointing at their own staged bytes and the worker reaches <code>pickle.loads()</code>, even without <code>VLLM_ALLOW_INSECURE_SERIALIZATION</code> (GHSA-6757-hggm-hp2w, CVSS 8.8 per the advisory body); and <code>ImageMediaIO</code> lets Pillow autodetect formats, so an EPS labelled <code>image/png</code> reaches Ghostscript and, on hosts with CVE-2024-29510, executes commands (GHSA-h3rc-j82p-2c3h, 8.1). The rest are single-request DoS bugs (DeepSeek-OCR images whose pixels sum to 0, out-of-vocabulary token ids, unbounded Jinja2 rendering), a <code>trust_request_chat_template</code> bypass in the Responses API, and permissive default CORS. If you serve multimodal models, upgrade.</p>",
+            "fr": "<p>Le 20 octobre, vLLM a publié neuf advisories, tous corrigés en <strong>0.32.0</strong>. Les deux plus graves : avec <code>--mm-processor-cache-type shm</code>, un appelant authentifié peut forger un handle de mémoire partagée pointant vers ses propres octets et le worker atteint <code>pickle.loads()</code>, même sans <code>VLLM_ALLOW_INSECURE_SERIALIZATION</code> (GHSA-6757-hggm-hp2w, CVSS 8.8) ; et <code>ImageMediaIO</code> laisse Pillow détecter le format, donc un EPS étiqueté <code>image/png</code> atteint Ghostscript et, sur les hôtes vulnérables à CVE-2024-29510, exécute des commandes (GHSA-h3rc-j82p-2c3h, 8.1). Le reste : des DoS en une requête, un contournement de <code>trust_request_chat_template</code> dans la Responses API et un CORS permissif par défaut.</p>"
+          },
+          "date": "20 Oct 2026",
+          "source": {
+            "url": "https://github.com/vllm-project/vllm/security/advisories/GHSA-6757-hggm-hp2w",
+            "label": "GitHub Security Advisory"
+          }
+        },
+        {
+          "id": "mcp-typescript-sdk-six-advisories",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-111770 y cinco más: el SDK TypeScript de MCP entregaba respuestas de un cliente a otro",
+            "en": "CVE-2026-111770 and five more: the MCP TypeScript SDK delivered one client's responses to another",
+            "fr": "CVE-2026-111770 et cinq autres : le SDK TypeScript de MCP livrait les réponses d'un client à un autre"
+          },
+          "body_html": {
+            "es": "<p>El 20 de octubre salieron seis advisories del SDK TypeScript de MCP. El principal (CVE-2026-111770, CVSS 7.7): si creás el transport o el <code>McpServer</code> una sola vez al arrancar, como mostraban los README de hono, express, fastify y node, los mensajes se asociaban a una conexión solo por el <code>id</code> JSON-RPC, y como los clientes numeran desde 0, un cliente recibía respuestas de otro. Los demás: un request de menos de 4 MiB que agota la memoria en la validación (CVE-2026-111768, 7.5; ojo, <strong>actualizar solo no alcanza</strong>, hay que configurar el nuevo límite), bearer auth que no chequea el <code>aud</code> del token (CVE-2026-111771), tasks experimentales sin atar a la sesión (CVE-2026-111767, 8.6) y transports cliente que siguen redirects cross-origin reenviando headers, <code>refresh_token</code> y <code>client_secret</code> (CVE-2026-111769). Fix en <code>@modelcontextprotocol/sdk</code> 1.32.0 y <code>@modelcontextprotocol/server</code>/<code>client</code> 2.3.0.</p>",
+            "en": "<p>Six MCP TypeScript SDK advisories landed on 20 October. The headline (CVE-2026-111770, CVSS 7.7): if you create the transport or the <code>McpServer</code> once at startup, as the hono, express, fastify and node READMEs showed, messages were matched to a connection by JSON-RPC <code>id</code> alone, and since clients number from 0, one client received another's responses. The rest: a sub-4 MiB request that exhausts memory during validation (CVE-2026-111768, 7.5; <strong>upgrading alone changes nothing</strong>, you must configure the new limit), bearer auth that never checked the token's <code>aud</code> (CVE-2026-111771), experimental tasks not tied to their session (CVE-2026-111767, 8.6), and client transports that followed cross-origin redirects while re-sending custom headers, <code>refresh_token</code> and <code>client_secret</code> (CVE-2026-111769). Fixed in <code>@modelcontextprotocol/sdk</code> 1.32.0 and <code>@modelcontextprotocol/server</code>/<code>client</code> 2.3.0.</p>",
+            "fr": "<p>Six advisories du SDK TypeScript de MCP ont été publiés le 20 octobre. Le principal (CVE-2026-111770, CVSS 7.7) : si vous créez le transport ou le <code>McpServer</code> une seule fois au démarrage, comme le montraient les README hono, express, fastify et node, les messages étaient associés à une connexion par le seul <code>id</code> JSON-RPC, et comme les clients numérotent à partir de 0, un client recevait les réponses d'un autre. Les autres : une requête de moins de 4 Mio qui épuise la mémoire (CVE-2026-111768, 7.5 ; la mise à jour seule ne suffit pas), un bearer auth sans vérification de l'<code>aud</code> (CVE-2026-111771), des tasks expérimentales non liées à la session (CVE-2026-111767, 8.6) et des redirections cross-origin qui renvoient headers et secrets OAuth (CVE-2026-111769). Corrigé en <code>@modelcontextprotocol/sdk</code> 1.32.0 et 2.3.0.</p>"
+          },
+          "date": "20 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-jm63-cq47-j5jp",
+            "label": "GitHub Advisory Database"
+          }
+        },
+        {
+          "id": "a2a-java-sdk-five-advisories",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-111764: el SDK Java de A2A trae un task store que no autoriza nada por defecto, más SSRF sin auth",
+            "en": "CVE-2026-111764: the A2A Java SDK ships a task store that authorizes nothing by default, plus unauthenticated SSRF",
+            "fr": "CVE-2026-111764 : le SDK Java d'A2A livre un task store qui n'autorise rien par défaut, plus une SSRF non authentifiée"
+          },
+          "body_html": {
+            "es": "<p>Cinco advisories del SDK Java del protocolo Agent2Agent el 20 de octubre. El constructor sin argumentos de <code>InMemoryTaskStore</code> deja <code>authorizationProvider = null</code>, así que cualquiera lee tasks ajenas (CVE-2026-111764, CVSS 7.5, CWE-1188). <code>BasePushNotificationSender</code> hace POST a la URL que manda el cliente, una SSRF sin credenciales hacia endpoints internos y de metadata cloud (CVE-2026-111761, 5.8). Completan la lista credenciales mandadas bajo un nombre de header que controla el servidor (CVE-2026-111763), credenciales de push logueadas en claro (CVE-2026-111762) y un fix de redirects incompleto en el cliente Android que reenvía <code>X-API-Key</code> a otro host (CVE-2026-111765). Fix en <strong>1.3.0.Final</strong> (1.3.2.Final para el cliente Android).</p>",
+            "en": "<p>Five advisories for the Agent2Agent protocol's Java SDK on 20 October. The no-arg <code>InMemoryTaskStore</code> constructor sets <code>authorizationProvider = null</code>, so anyone can read other users' tasks (CVE-2026-111764, CVSS 7.5, CWE-1188). <code>BasePushNotificationSender</code> POSTs to whatever URL the client supplies, an unauthenticated SSRF into internal and cloud-metadata endpoints (CVE-2026-111761, 5.8). The list is rounded out by credentials sent under a server-controlled header name (CVE-2026-111763), push credentials logged in cleartext (CVE-2026-111762), and an incomplete redirect fix in the Android client that forwards <code>X-API-Key</code> to another host (CVE-2026-111765). Fixed in <strong>1.3.0.Final</strong> (1.3.2.Final for the Android client).</p>",
+            "fr": "<p>Cinq advisories pour le SDK Java du protocole Agent2Agent le 20 octobre. Le constructeur sans argument d'<code>InMemoryTaskStore</code> fixe <code>authorizationProvider = null</code>, donc n'importe qui lit les tasks des autres (CVE-2026-111764, CVSS 7.5). <code>BasePushNotificationSender</code> envoie un POST vers l'URL fournie par le client, une SSRF non authentifiée vers les endpoints internes et de métadonnées cloud (CVE-2026-111761, 5.8). S'y ajoutent des identifiants envoyés sous un nom de header contrôlé par le serveur, des identifiants journalisés en clair et un correctif de redirection incomplet côté Android (CVE-2026-111765). Corrigé en <strong>1.3.0.Final</strong> (1.3.2.Final pour Android).</p>"
+          },
+          "date": "20 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-qw47-mcm5-934w",
+            "label": "GitHub Advisory Database"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "vibe-trading-cve-2026-114106-agent-path-traversal",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-114106: las tools de lectura del agente de HKUDS Vibe-Trading leen cualquier archivo del servidor",
+            "en": "CVE-2026-114106: HKUDS Vibe-Trading's agent file-read tools reach any file on the server",
+            "fr": "CVE-2026-114106 : les outils de lecture de l'agent HKUDS Vibe-Trading accèdent à n'importe quel fichier du serveur"
+          },
+          "body_html": {
+            "es": "<p>La tool <code>read_document</code> del agente LLM de Vibe-Trading (<code>vibe-trading-ai</code> en PyPI) no tiene ningún chequeo de sandbox, y algunas tools protegidas por <code>safe_user_path</code> también se escapan (CWE-22). Cualquiera que pueda prompt-ear al agente le pide <code>/etc/shadow</code>, el entorno del proceso con las API keys o las credenciales de root, sin privilegios ni interacción. CVSS v4 8.7 / v3.1 7.5. Afecta 0.1.0 hasta antes de 0.1.7; fix en <strong>0.1.7</strong>. Una tool de archivos sin sandbox es un exfiltrador que habla en lenguaje natural.</p>",
+            "en": "<p>The <code>read_document</code> tool in Vibe-Trading's LLM agent (<code>vibe-trading-ai</code> on PyPI) has no sandbox checks at all, and some tools guarded by <code>safe_user_path</code> can be escaped too (CWE-22). Anyone who can prompt the agent can ask for <code>/etc/shadow</code>, the process environment holding API keys, or root credentials, with no privileges or user interaction. CVSS v4 8.7 / v3.1 7.5. Affects 0.1.0 up to, but not including, 0.1.7; fixed in <strong>0.1.7</strong>. An unsandboxed file tool is an exfiltration channel that takes requests in plain English.</p>",
+            "fr": "<p>L'outil <code>read_document</code> de l'agent LLM de Vibe-Trading (<code>vibe-trading-ai</code> sur PyPI) n'a aucune vérification de sandbox, et certains outils protégés par <code>safe_user_path</code> peuvent aussi être contournés (CWE-22). Quiconque peut envoyer un prompt à l'agent peut lui demander <code>/etc/shadow</code>, l'environnement du processus contenant les clés API ou les identifiants root, sans privilège ni interaction. CVSS v4 8.7 / v3.1 7.5. Versions 0.1.0 à 0.1.7 exclue ; corrigé en <strong>0.1.7</strong>.</p>"
+          },
+          "date": "21 Oct 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-114106",
+            "label": "OpenCVE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "advisories",
+      "name": "Vendor Advisories",
+      "theme": "advisories",
+      "icon_emoji": "📢",
+      "anchor": "advisories",
+      "updates": [
+        {
+          "id": "fca-ai-near-miss-reporting",
+          "tag": "advisory",
+          "title": {
+            "es": "La FCA británica quiere que las financieras reporten fallas de IA y también los casi-incidentes",
+            "en": "The UK FCA wants financial firms to report AI failures, and the near-misses too",
+            "fr": "La FCA britannique veut que les établissements financiers signalent les pannes d'IA, et aussi les quasi-incidents"
+          },
+          "body_html": {
+            "es": "<p>Jessica Rusu, chief data officer de la FCA, dijo que el reporte de incidentes de las firmas financieras tiene que extenderse a fallas significativas de IA y near-misses, no solo a los incidentes mayores que ya cubren las reglas actuales. El argumento: la IA cada vez más autónoma necesita responsables claros, porque mal gobernada causa daño al consumidor, vulnerabilidades y fallas operativas a velocidad y escala. Los near-misses de IA agéntica pasan a ser prioridad regulatoria. Todavía no hay borrador, plazos ni consulta formal.</p>",
+            "en": "<p>Jessica Rusu, the FCA's chief data, information and intelligence officer, said financial firms' incident reporting must extend to significant AI failures and near-misses, not just the major incidents existing rules already cover. The reasoning: increasingly autonomous AI needs clear accountability, because poorly governed AI causes consumer harm, cyber vulnerabilities and operational failures at speed and scale. Near-miss reporting for agentic AI is now a regulatory priority. There is no draft rule, deadline or formal consultation yet.</p>",
+            "fr": "<p>Jessica Rusu, responsable des données de la FCA, a déclaré que le signalement d'incidents des établissements financiers doit s'étendre aux pannes significatives d'IA et aux quasi-incidents, et pas seulement aux incidents majeurs déjà couverts. L'argument : une IA de plus en plus autonome exige une responsabilité claire, car mal gouvernée elle cause des préjudices, des vulnérabilités et des pannes à grande vitesse et à grande échelle. Aucun projet de règle, calendrier ou consultation formelle pour l'instant.</p>"
+          },
+          "date": "20 Oct 2026",
+          "source": {
+            "url": "https://www.theregister.com/ai-and-ml/2026/10/20/uk-finance-watchdog-wants-firms-to-report-ai-failures-and-close-calls/5304078",
+            "label": "The Register"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Los protocolos de agentes tuvieron su día de parches: MCP (TypeScript) y A2A (Java) publicaron once advisories entre los dos el mismo 20 de octubre, y el patrón se repite en ambos: estado compartido sin atar a la sesión o al usuario, defaults que no autorizan nada y redirects que se llevan credenciales.",
+      "en": "Agent protocols had their patch day: MCP (TypeScript) and A2A (Java) published eleven advisories between them on 20 October, and the pattern repeats across both: shared state not tied to a session or user, defaults that authorize nothing, and redirects that carry credentials away.",
+      "fr": "Les protocoles d'agents ont eu leur journée de correctifs : MCP (TypeScript) et A2A (Java) ont publié onze advisories à eux deux le 20 octobre, avec le même schéma : état partagé non lié à la session ou à l'utilisateur, valeurs par défaut qui n'autorisent rien, et redirections qui emportent des identifiants."
+    },
+    {
+      "es": "El serving multimodal es la nueva superficie de ataque de vLLM: casi todo lo de esta semana entra por imágenes, audio, caches multimodales o parámetros de processor, no por el prompt de texto.",
+      "en": "Multimodal serving is vLLM's new attack surface: nearly everything this week comes in through images, audio, multimodal caches or processor parameters, not the text prompt.",
+      "fr": "Le serving multimodal est la nouvelle surface d'attaque de vLLM : presque tout cette semaine arrive par les images, l'audio, les caches multimodaux ou les paramètres de processor, pas par le prompt texte."
+    }
+  ]
+}

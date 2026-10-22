@@ -1,0 +1,58 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 22 Oct 2026",
+    "en": "Gentleman Releases — 22 Oct 2026",
+    "fr": "Gentleman Releases — 22 Oct 2026"
+  },
+  "description": {
+    "es": "Releases del día en proyectos de Gentleman-Programming",
+    "en": "Today's releases from Gentleman-Programming projects",
+    "fr": "Sorties du jour des projets Gentleman-Programming"
+  },
+  "pubDate": "2026-10-22",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "engram v3.5.2 — los binarios publicados dejan de reportar metadata VCS «dirty»",
+        "en": "engram v3.5.2 — published binaries no longer report «dirty» VCS metadata",
+        "fr": "engram v3.5.2 — les binaires publiés ne signalent plus de métadonnées VCS «dirty»"
+      },
+      "anchor": "engram-v3-5-2",
+      "icon": "simple-icons:github"
+    }
+  ],
+  "tools": [
+    {
+      "id": "engram",
+      "name": "engram",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-engram",
+      "icon_emoji": "💋",
+      "anchor": "engram",
+      "version": "v3.5.2",
+      "updates": [
+        {
+          "id": "engram-v3-5-2",
+          "tag": "fix",
+          "title": {
+            "es": "v3.5.2 — Binarios de release con procedencia limpia",
+            "en": "v3.5.2 — Release binaries with clean provenance",
+            "fr": "v3.5.2 — Binaires de release à provenance propre"
+          },
+          "body_html": {
+            "es": "<p>Patch de higiene de build. El ejecutable oficial de v3.5.1 para Windows amd64 reportaba <code>vcs.modified=true</code> y versión de módulo <code>v3.5.1+dirty</code>, aunque la revisión embebida coincidía exacto con el tag. Cualquier chequeo de procedencia de fuente limpia lo rechazaba.</p><p>La causa: la salida de GoReleaser en <code>/dist/</code> en la raíz no estaba ignorada, así que Go marcaba el árbol como modificado al compilar. El fix (#1959) agrega <code>/dist/</code> al <code>.gitignore</code>, solo en la raíz, y suma un test de regresión que verifica que los archivos de fuente normales y los directorios <code>dist</code> anidados siguen visibles.</p><p>Ojo: no hubo malfuncionamiento, corrupción ni modificación maliciosa; es puramente procedencia. Si validás binarios con <code>go version -m</code>, bajate v3.5.2.</p>",
+            "en": "<p>Build-hygiene patch. The official v3.5.1 Windows amd64 executable reported <code>vcs.modified=true</code> and module version <code>v3.5.1+dirty</code>, even though its embedded revision matched the tag exactly. Any clean-source provenance check rejected it.</p><p>Root cause: root-level GoReleaser output in <code>/dist/</code> was not ignored, so Go flagged the tree as modified at build time. The fix (#1959) adds <code>/dist/</code> to <code>.gitignore</code>, root only, plus a regression test confirming ordinary source files and nested <code>dist</code> directories stay visible.</p><p>No functional malfunction, corruption, or malicious modification was involved; this is purely provenance. If you verify binaries with <code>go version -m</code>, grab v3.5.2.</p>",
+            "fr": "<p>Patch d'hygiène de build. L'exécutable officiel v3.5.1 pour Windows amd64 signalait <code>vcs.modified=true</code> et la version de module <code>v3.5.1+dirty</code>, alors que sa révision embarquée correspondait exactement au tag. Tout contrôle de provenance de source propre le rejetait.</p><p>Cause : la sortie GoReleaser dans <code>/dist/</code> à la racine n'était pas ignorée, donc Go marquait l'arbre comme modifié au build. Le correctif (#1959) ajoute <code>/dist/</code> au <code>.gitignore</code>, racine uniquement, avec un test de régression qui garantit que les fichiers source ordinaires et les répertoires <code>dist</code> imbriqués restent visibles.</p><p>Aucun dysfonctionnement, corruption ni modification malveillante : c'est uniquement une question de provenance. Si vous vérifiez les binaires avec <code>go version -m</code>, passez à v3.5.2.</p>"
+          },
+          "date": "21 Oct 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v3.5.2",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

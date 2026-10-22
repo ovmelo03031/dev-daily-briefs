@@ -1,0 +1,233 @@
+{
+  "title": {
+    "es": "Dev News — 22 Oct 2026: Storybook crítico, Node.js security release y Vite/Vitest con fs.deny roto",
+    "en": "Dev News — 22 Oct 2026: critical Storybook flaw, Node.js security release and Vite/Vitest fs.deny bypasses",
+    "fr": "Dev News — 22 oct. 2026 : faille critique Storybook, release de sécurité Node.js et contournements fs.deny dans Vite/Vitest"
+  },
+  "description": {
+    "es": "Día de parches: Storybook (CVSS 9.4) deja que un sitio malicioso modifique tu proyecto, Node.js saca 11 CVEs en tres líneas, Vite 6 y Vitest 5 filtraban .env, y Deno 2.9.8 endurece permisos.",
+    "en": "Patch day: Storybook (CVSS 9.4) lets a malicious site modify your project, Node.js ships 11 CVEs across three lines, Vite 6 and Vitest 5 leaked .env files, and Deno 2.9.8 hardens permissions.",
+    "fr": "Journée de correctifs : Storybook (CVSS 9.4) permet à un site malveillant de modifier votre projet, Node.js corrige 11 CVE sur trois branches, Vite 6 et Vitest 5 exposaient les .env, et Deno 2.9.8 renforce les permissions."
+  },
+  "pubDate": "2026-10-22",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": { "es": "Storybook: CVE crítico en el dev server", "en": "Storybook: critical dev-server CVE", "fr": "Storybook : CVE critique du serveur de dev" },
+      "anchor": "storybook-origin-cve",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Node.js 26/24/22: 11 CVEs parcheados", "en": "Node.js 26/24/22: 11 CVEs patched", "fr": "Node.js 26/24/22 : 11 CVE corrigées" },
+      "anchor": "node-oct-security-release",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": { "es": "Vite 6.4.5 cierra bypass de fs.deny", "en": "Vite 6.4.5 closes fs.deny bypass", "fr": "Vite 6.4.5 corrige un contournement fs.deny" },
+      "anchor": "vite-fs-deny-v6",
+      "icon": "simple-icons:vite"
+    },
+    {
+      "text": { "es": "Vitest 5.0.5: UI y Browser Mode filtraban .env", "en": "Vitest 5.0.5: UI and Browser Mode leaked .env", "fr": "Vitest 5.0.5 : UI et Browser Mode exposaient .env" },
+      "anchor": "vitest-fs-deny",
+      "icon": "lucide:code"
+    },
+    {
+      "text": { "es": "Deno 2.9.8 endurece permisos y TLS", "en": "Deno 2.9.8 hardens permissions and TLS", "fr": "Deno 2.9.8 renforce permissions et TLS" },
+      "anchor": "deno-2-9-8",
+      "icon": "simple-icons:deno"
+    },
+    {
+      "text": { "es": "Solid 2.0 RC.17 pule teardown y forms", "en": "Solid 2.0 RC.17 polishes teardown and forms", "fr": "Solid 2.0 RC.17 peaufine teardown et formulaires" },
+      "anchor": "solid-2-rc17",
+      "icon": "lucide:blocks"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "storybook-origin-cve",
+          "tag": "security",
+          "date": "21 Oct 2026",
+          "title": {
+            "es": "Storybook CVE-2026-114125 (CVSS 9.4): un sitio malicioso puede tocar archivos de tu proyecto",
+            "en": "Storybook CVE-2026-114125 (CVSS 9.4): a malicious site can change files in your project",
+            "fr": "Storybook CVE-2026-114125 (CVSS 9.4) : un site malveillant peut modifier les fichiers de votre projet"
+          },
+          "body_html": {
+            "es": "<p>El preview de Storybook no validaba el origen, así que <strong>cualquier web que abras mientras corre el dev server</strong> puede provocar cambios no autorizados en archivos del proyecto, y bajo ciertas condiciones esos archivos terminan ejecutados por un runtime local con tus privilegios. Afecta 8.x, 9.x, 10.x y la 11 alpha, incluyendo <code>@storybook/addon-vitest</code> y <code>@storybook/addon-mcp</code>. Actualizá a <strong>8.6.19, 9.1.21 o 10.6.2</strong>. Los builds estáticos no están afectados. Ojo con esto: casi todo equipo con design system lo tiene corriendo todo el día.</p>",
+            "en": "<p>Storybook's preview lacked origin validation, so <strong>any website you open while the dev server runs</strong> can trigger unauthorized changes to project files, and under extra conditions those files can be executed by a local runtime with your privileges. It affects 8.x, 9.x, 10.x and the 11 alpha, including <code>@storybook/addon-vitest</code> and <code>@storybook/addon-mcp</code>. Upgrade to <strong>8.6.19, 9.1.21 or 10.6.2</strong>. Built Storybooks are not affected, and no in-the-wild exploitation is known.</p>",
+            "fr": "<p>Le preview de Storybook ne validait pas l'origine : <strong>n'importe quel site ouvert pendant que le serveur de dev tourne</strong> peut provoquer des modifications non autorisées de fichiers du projet, et sous certaines conditions ces fichiers peuvent être exécutés localement avec vos privilèges. Versions 8.x, 9.x, 10.x et 11 alpha concernées, y compris <code>@storybook/addon-vitest</code> et <code>@storybook/addon-mcp</code>. Mettez à jour vers <strong>8.6.19, 9.1.21 ou 10.6.2</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-f2ph-cmg5-wxc8", "label": "GitHub Advisory" }
+        },
+        {
+          "id": "node-oct-security-release",
+          "tag": "security",
+          "date": "21 Oct 2026",
+          "title": {
+            "es": "Node.js 26.12.1, 24.22.1 y 22.23.4: security release con 11 CVEs",
+            "en": "Node.js 26.12.1, 24.22.1 and 22.23.4: security release with 11 CVEs",
+            "fr": "Node.js 26.12.1, 24.22.1 et 22.23.4 : release de sécurité avec 11 CVE"
+          },
+          "body_html": {
+            "es": "<p>Release de seguridad coordinada en las tres líneas soportadas. Las <strong>High</strong>: TLS ahora rechaza IPs no canónicas y arregla una regresión de normalización de IP, <code>dns</code> valida null bytes en los inputs de <code>resolve</code>, y un fix de Brotli. Además: el guard de datos del HTTP agent, caches de random que se reseteaban mal entre snapshots, y varios agujeros del <strong>permission model</strong> (wildcards en fs, <code>realpathSync</code>). También trae undici 8.12.2, c-ares 1.34.9 y root certs NSS 3.131.1. Actualizá ya, no hay excusa.</p>",
+            "en": "<p>A coordinated security release across all three supported lines. The <strong>High</strong> ones: TLS now rejects non-canonical IP addresses and fixes an IP normalization regression, <code>dns</code> validates resolve inputs for null bytes, and a Brotli decoder fix. Also patched: the HTTP agent data guard, random caches reused across snapshots, and several <strong>permission model</strong> gaps (fs wildcard nodes, <code>realpathSync</code>). Bundles undici 8.12.2, c-ares 1.34.9 and NSS 3.131.1 root certificates.</p>",
+            "fr": "<p>Release de sécurité coordonnée sur les trois branches supportées. Les failles <strong>High</strong> : TLS rejette désormais les IP non canoniques et corrige une régression de normalisation, <code>dns</code> valide les octets nuls dans <code>resolve</code>, et un correctif Brotli. Également corrigés : le garde de données de l'agent HTTP, des caches aléatoires réutilisés entre snapshots et plusieurs failles du <strong>permission model</strong>. Inclut undici 8.12.2, c-ares 1.34.9 et les certificats NSS 3.131.1.</p>"
+          },
+          "source": { "url": "https://github.com/nodejs/node/releases/tag/v26.12.1", "label": "github.com/nodejs" }
+        }
+      ]
+    },
+    {
+      "id": "js-frameworks",
+      "name": "JS Frameworks",
+      "theme": "js-frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "js-frameworks",
+      "updates": [
+        {
+          "id": "solid-2-rc17",
+          "tag": "minor",
+          "date": "22 Oct 2026",
+          "title": {
+            "es": "Solid 2.0.0-rc.17: teardown robusto y warning para inputs pisados",
+            "en": "Solid 2.0.0-rc.17: robust teardown and a warning for overwritten inputs",
+            "fr": "Solid 2.0.0-rc.17 : teardown robuste et avertissement pour les inputs écrasés"
+          },
+          "body_html": {
+            "es": "<p>Un <code>onCleanup</code> que tira error ya no corta el resto del teardown: corren todas las cleanups y se relanza el primer error al final, sin dejar commits a medias. En dev aparece <code>UNCOMMITTED_INPUT_OVERWRITTEN</code> cuando un binding de <code>value</code>/<code>checked</code> está por pisar algo que el usuario tipeó. Producción queda byte a byte igual. El mismo día TanStack Solid Start pasó a 2.0.0-rc.9. La 2.0 se viene, eh.</p>",
+            "en": "<p>A throwing <code>onCleanup</code> no longer aborts the rest of teardown: every cleanup runs and the first error is rethrown afterwards, so commits are never left half-applied. Dev builds now warn with <code>UNCOMMITTED_INPUT_OVERWRITTEN</code> when a <code>value</code>/<code>checked</code> binding is about to overwrite an uncommitted user edit. Production output is byte-for-byte unchanged. TanStack Solid Start moved to 2.0.0-rc.9 the same day.</p>",
+            "fr": "<p>Un <code>onCleanup</code> qui lève une erreur n'interrompt plus le teardown : toutes les cleanups s'exécutent et la première erreur est relancée ensuite. En dev, <code>UNCOMMITTED_INPUT_OVERWRITTEN</code> avertit quand un binding <code>value</code>/<code>checked</code> va écraser une saisie non validée. La sortie de production est identique. TanStack Solid Start passe en 2.0.0-rc.9 le même jour.</p>"
+          },
+          "source": { "url": "https://github.com/solidjs/solid/releases/tag/solid-js%402.0.0-rc.17", "label": "github.com/solidjs" }
+        }
+      ]
+    },
+    {
+      "id": "build-tools",
+      "name": "Build Tools & Runtimes",
+      "theme": "build-tools",
+      "icon_emoji": "🔧",
+      "anchor": "build-tools",
+      "updates": [
+        {
+          "id": "vite-fs-deny-v6",
+          "tag": "security",
+          "date": "21 Oct 2026",
+          "title": {
+            "es": "Vite 6.4.5: bypass de server.fs.deny con queries (y 8.3.5 con fixes de bundled-dev)",
+            "en": "Vite 6.4.5: server.fs.deny bypass via queries (plus 8.3.5 with bundled-dev fixes)",
+            "fr": "Vite 6.4.5 : contournement de server.fs.deny via des queries (et 8.3.5 avec des correctifs bundled-dev)"
+          },
+          "body_html": {
+            "es": "<p>GHSA-8g5g-mxqh-grgj: en Vite <strong>6.4.4</strong>, archivos bloqueados por <code>server.fs.deny</code> (tipo <code>.env</code>) podían devolverse al browser agregando queries, una regresión del mismo bug de antes. Solo pega si exponés el dev server a la red con <code>--host</code>. Fix en <strong>6.4.5</strong>. En paralelo salió <strong>8.3.5</strong>, con una tanda de fixes para el modo <code>bundled-dev</code> (HMR, source maps, <code>server.origin</code>) y el optimizer.</p>",
+            "en": "<p>GHSA-8g5g-mxqh-grgj: in Vite <strong>6.4.4</strong>, files blocked by <code>server.fs.deny</code> (such as <code>.env</code>) could be returned to the browser by appending queries, a repeat of an earlier advisory. Only affects dev servers exposed with <code>--host</code>. Fixed in <strong>6.4.5</strong>. Vite <strong>8.3.5</strong> landed alongside with a batch of <code>bundled-dev</code> fixes (HMR propagation, source-mapped error stacks, <code>server.origin</code>) and optimizer lockfile tweaks.</p>",
+            "fr": "<p>GHSA-8g5g-mxqh-grgj : dans Vite <strong>6.4.4</strong>, des fichiers bloqués par <code>server.fs.deny</code> (comme <code>.env</code>) pouvaient être servis en ajoutant des paramètres de requête. Ne concerne que les serveurs de dev exposés avec <code>--host</code>. Corrigé en <strong>6.4.5</strong>. Vite <strong>8.3.5</strong> sort en parallèle avec des correctifs pour <code>bundled-dev</code> et l'optimizer.</p>"
+          },
+          "source": { "url": "https://github.com/vitejs/vite/security/advisories/GHSA-8g5g-mxqh-grgj", "label": "github.com/vitejs" }
+        },
+        {
+          "id": "deno-2-9-8",
+          "tag": "patch",
+          "date": "21 Oct 2026",
+          "title": {
+            "es": "Deno 2.9.8: permisos en deno compile, validación de npm links y CAs desconfiadas",
+            "en": "Deno 2.9.8: deno compile permissions, npm link validation and distrusted CAs",
+            "fr": "Deno 2.9.8 : permissions de deno compile, validation des liens npm et AC révoquées"
+          },
+          "body_html": {
+            "es": "<p>Patch con varios fixes de seguridad sin CVE: <code>deno compile</code> ahora chequea el permiso de lectura para imports dinámicos locales, se validan los nombres de links de paquetes npm, se desconfía de las CAs comprometidas de eMudhra y se acotan bounds en <code>napi_create_dataview</code>. Si distribuís binarios con <code>deno compile</code>, actualizá.</p>",
+            "en": "<p>A patch release carrying several security-flavored fixes: <code>deno compile</code> now checks read permission for dynamically imported local files, npm package link names are validated, compromised eMudhra certificate authorities are distrusted, and <code>napi_create_dataview</code> gets overflow bounds checks. Worth taking if you ship <code>deno compile</code> binaries.</p>",
+            "fr": "<p>Une version corrective avec plusieurs correctifs liés à la sécurité : <code>deno compile</code> vérifie la permission de lecture pour les imports dynamiques locaux, les noms de liens npm sont validés, les AC eMudhra compromises sont révoquées et <code>napi_create_dataview</code> vérifie les débordements.</p>"
+          },
+          "source": { "url": "https://github.com/denoland/deno/releases/tag/v2.9.8", "label": "github.com/denoland" }
+        }
+      ]
+    },
+    {
+      "id": "dev-tools",
+      "name": "Developer Tools",
+      "theme": "dev-tools",
+      "icon_emoji": "🛠️",
+      "anchor": "dev-tools",
+      "updates": [
+        {
+          "id": "vitest-fs-deny",
+          "tag": "security",
+          "date": "21 Oct 2026",
+          "title": {
+            "es": "Vitest: tres advisories, incluida la UI y Browser Mode sirviendo .env y claves privadas",
+            "en": "Vitest: three advisories, including UI and Browser Mode serving .env and private keys",
+            "fr": "Vitest : trois advisories, dont l'UI et le Browser Mode servant .env et clés privées"
+          },
+          "body_html": {
+            "es": "<p>CVE-2026-112948: en Vitest 5 los servers de <code>--ui</code>, Browser Mode o <code>api</code> no aplicaban <code>server.fs.deny</code>, así que se podían leer <code>.env</code>, claves, <code>.npmrc</code>, <code>.git</code> y hasta <code>.vitest-secret-token</code>; con <code>test.projects</code> una web maliciosa podía leer tu <code>.env</code> desde tu browser. Fix en <strong>5.0.5</strong> (y vite-plus 1.3.0). Además, <code>@vitest/mocker</code> aceptaba registros de mocks sin autenticación (fix en 4.1.12 / 5.0.3) y tenía un traversal con backslashes en Windows. <code>vitest run</code> pelado no abre puertos, tranqui.</p>",
+            "en": "<p>CVE-2026-112948: in Vitest 5, the <code>--ui</code>, Browser Mode and <code>api</code> servers did not apply <code>server.fs.deny</code>, exposing <code>.env</code>, private keys, <code>.npmrc</code>, <code>.git</code> and the <code>.vitest-secret-token</code> file; with <code>test.projects</code>, a malicious site could read <code>.env</code> through your browser. Fixed in <strong>5.0.5</strong> (and vite-plus 1.3.0). Separately, <code>@vitest/mocker</code> accepted unauthenticated manual mock registrations (fixed in 4.1.12 / 5.0.3) and had a Windows backslash traversal. Plain <code>vitest run</code> opens no port and is unaffected.</p>",
+            "fr": "<p>CVE-2026-112948 : dans Vitest 5, les serveurs <code>--ui</code>, Browser Mode et <code>api</code> n'appliquaient pas <code>server.fs.deny</code>, exposant <code>.env</code>, clés privées, <code>.npmrc</code>, <code>.git</code> et <code>.vitest-secret-token</code>. Corrigé en <strong>5.0.5</strong> (et vite-plus 1.3.0). Par ailleurs, <code>@vitest/mocker</code> acceptait des enregistrements de mocks non authentifiés (corrigé en 4.1.12 / 5.0.3). <code>vitest run</code> seul n'ouvre aucun port.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-p458-7748-mcp3", "label": "GitHub Advisory" }
+        }
+      ]
+    },
+    {
+      "id": "quick-links",
+      "name": "Quick Links",
+      "theme": "quick-links",
+      "icon_emoji": "📌",
+      "anchor": "quick-links",
+      "updates": [
+        {
+          "id": "vitest-mocker-injection",
+          "tag": "security",
+          "date": "21 Oct 2026",
+          "title": {
+            "es": "@vitest/mocker: inyección de código vía mocks sin autenticar",
+            "en": "@vitest/mocker: code injection via unauthenticated mock registration",
+            "fr": "@vitest/mocker : injection de code via des mocks non authentifiés"
+          },
+          "body_html": {
+            "es": "<p>El advisory completo del mocker (CVE-2026-112949): actualizá a 4.1.12 o 5.0.3.</p>",
+            "en": "<p>The full mocker advisory (CVE-2026-112949): upgrade to 4.1.12 or 5.0.3.</p>",
+            "fr": "<p>L'advisory complet du mocker (CVE-2026-112949) : mettez à jour vers 4.1.12 ou 5.0.3.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-qxg6-89mg-rqv8", "label": "GitHub Advisory" }
+        },
+        {
+          "id": "vite-8-3-5",
+          "tag": "patch",
+          "date": "21 Oct 2026",
+          "title": {
+            "es": "Vite 8.3.5 release notes",
+            "en": "Vite 8.3.5 release notes",
+            "fr": "Notes de version de Vite 8.3.5"
+          },
+          "body_html": {
+            "es": "<p>La lista completa de fixes de bundled-dev, CSS y optimizer.</p>",
+            "en": "<p>The full list of bundled-dev, CSS and optimizer fixes.</p>",
+            "fr": "<p>La liste complète des correctifs bundled-dev, CSS et optimizer.</p>"
+          },
+          "source": { "url": "https://github.com/vitejs/vite/releases/tag/v8.3.5", "label": "github.com/vitejs" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El dev server es la nueva superficie de ataque: Storybook, Vite y Vitest cayeron el mismo día por servir archivos u aceptar requests de cualquier origen. Si exponés algo con --host, revisalo.",
+      "en": "The dev server is the new attack surface: Storybook, Vite and Vitest all shipped fixes the same day for serving files or accepting requests from any origin. If you expose anything with --host, audit it.",
+      "fr": "Le serveur de dev est la nouvelle surface d'attaque : Storybook, Vite et Vitest ont tous publié des correctifs le même jour pour des fichiers servis ou des requêtes acceptées de n'importe quelle origine."
+    },
+    {
+      "es": "Node.js sigue tapando agujeros del permission model release tras release: todavía no lo trates como un sandbox.",
+      "en": "Node.js keeps patching permission model gaps release after release: don't treat it as a sandbox yet.",
+      "fr": "Node.js continue de corriger des failles du permission model à chaque release : ne le traitez pas encore comme un sandbox."
+    }
+  ]
+}

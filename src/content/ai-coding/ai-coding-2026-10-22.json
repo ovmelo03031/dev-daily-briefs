@@ -1,0 +1,347 @@
+{
+  "title": {
+    "es": "Brief diario de IA para coding — 22 de octubre de 2026",
+    "en": "Daily AI Coding Brief — October 22, 2026",
+    "fr": "Brief quotidien IA pour le code — 22 octobre 2026"
+  },
+  "description": {
+    "es": "Claude Code encadena dos releases más (2.1.307 y 2.1.308), OpenAI suma service tiers por proyecto, y Codex CLI sigue en alfas sin release estable. Semana floja para lanzamientos de modelos nuevos.",
+    "en": "Claude Code ships two more releases (2.1.307 and 2.1.308), OpenAI adds per-project service tiers, and Codex CLI keeps churning alphas with no stable release. A quiet week for brand-new model launches.",
+    "fr": "Claude Code enchaîne deux nouvelles releases (2.1.307 et 2.1.308), OpenAI ajoute des paliers de service par projet, et Codex CLI continue d'itérer en alpha sans release stable. Semaine calme pour les nouveaux modèles."
+  },
+  "pubDate": "2026-10-22",
+  "category": "ai-coding",
+  "highlights": [
+    {
+      "text": { "es": "Claude Code 2.1.308: timeouts de sandbox y retries", "en": "Claude Code 2.1.308: sandbox timeouts and retries", "fr": "Claude Code 2.1.308 : timeouts sandbox et retries" },
+      "anchor": "claude-code",
+      "icon": "simple-icons:anthropic"
+    },
+    {
+      "text": { "es": "Claude Code 2.1.307: evento de seguridad en OTel", "en": "Claude Code 2.1.307: safety event in OTel", "fr": "Claude Code 2.1.307 : événement de sécurité OTel" },
+      "anchor": "claude-code",
+      "icon": "simple-icons:anthropic"
+    },
+    {
+      "text": { "es": "OpenAI: service tiers por proyecto", "en": "OpenAI: per-project service tiers", "fr": "OpenAI : paliers de service par projet" },
+      "anchor": "gpt",
+      "icon": "simple-icons:openai"
+    },
+    {
+      "text": { "es": "Codex CLI: 16 alfas en 6 días, sin release estable", "en": "Codex CLI: 16 alphas in 6 days, no stable release", "fr": "Codex CLI : 16 alphas en 6 jours, pas de release stable" },
+      "anchor": "openai-codex",
+      "icon": "simple-icons:openai"
+    },
+    {
+      "text": { "es": "Sin modelos nuevos confirmados esta semana", "en": "No newly confirmed models this week", "fr": "Aucun nouveau modèle confirmé cette semaine" },
+      "anchor": "model-timeline",
+      "icon": "lucide:zap"
+    }
+  ],
+  "stats": { "tools_tracked": 5, "updates_found": "4+", "models_cataloged": 22, "providers_covered": 12 },
+  "tools": [
+    {
+      "id": "claude-code",
+      "name": "Claude Code",
+      "publisher": "Anthropic",
+      "theme": "claude",
+      "icon_emoji": "🤖",
+      "version": "v2.1.308",
+      "anchor": "claude-code",
+      "updates": [
+        {
+          "id": "claude-code-2-1-308",
+          "tag": "fix",
+          "title": { "es": "v2.1.308: timeouts de checkout hooks y más retries", "en": "v2.1.308: checkout-hook timeouts and more retries", "fr": "v2.1.308 : timeouts des hooks de checkout et plus de retries" },
+          "body_html": {
+            "es": "<p>Los <strong>checkout hooks</strong> en runners self-hosted ahora cortan a los 30 minutos por defecto (ajustable con <code>--checkout-hook-timeout-min</code>). Claude ahora reintenta hasta dos veces una tool call que no puede parsear antes de cerrar el turno con error, y el <code>setModel()</code> del Agent SDK espera hasta 15s (antes 5s) la confirmación de la API.</p>",
+            "en": "<p><strong>Self-hosted runner checkout hooks</strong> now stop after 30 minutes by default (tune with <code>--checkout-hook-timeout-min</code>). Claude now retries an unparseable tool call up to twice before ending the turn with an error, and the Agent SDK's <code>setModel()</code> waits up to 15s (up from 5s) for API confirmation.</p>",
+            "fr": "<p>Les <strong>hooks de checkout</strong> des runners self-hosted s'arrêtent désormais par défaut après 30 minutes (ajustable via <code>--checkout-hook-timeout-min</code>). Claude retente jusqu'à deux fois un appel d'outil non analysable avant de terminer le tour en erreur, et <code>setModel()</code> du Agent SDK attend jusqu'à 15s (contre 5s) la confirmation de l'API.</p>"
+          },
+          "date": "22 oct 2026",
+          "source": { "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.308", "label": "github.com/anthropics/claude-code" }
+        },
+        {
+          "id": "claude-code-2-1-307",
+          "tag": "security",
+          "title": { "es": "v2.1.307: evento de seguridad en OpenTelemetry y fixes de MCP", "en": "v2.1.307: OpenTelemetry safety event and MCP fixes", "fr": "v2.1.307 : événement de sécurité OpenTelemetry et correctifs MCP" },
+          "body_html": {
+            "es": "<p>Nuevo evento <code>claude_code.safety_event</code> en OpenTelemetry para tool calls detenidas por reglas de permisos, auto mode, safety checks, hooks o el sandbox. Corrige servidores MCP en macOS que mostraban «needs authentication» con el keychain bloqueado, y evita que las tool calls MCP sobre HTTP se enviaran dos veces si la conexión se cerraba a mitad de la llamada.</p>",
+            "en": "<p>A new <code>claude_code.safety_event</code> OpenTelemetry event covers tool calls stopped or prompted by permission rules, auto mode, safety checks, hooks, or the sandbox. Also fixes macOS MCP servers showing &quot;needs authentication&quot; with a locked keychain, and HTTP MCP tool calls being sent twice when a connection closed mid-call.</p>",
+            "fr": "<p>Un nouvel événement OpenTelemetry <code>claude_code.safety_event</code> couvre les appels d'outils arrêtés ou suspendus par des règles de permission, l'auto mode, les contrôles de sécurité, les hooks ou le sandbox. Corrige aussi les serveurs MCP macOS affichant « needs authentication » avec un trousseau verrouillé, et les appels d'outils MCP HTTP envoyés deux fois lors d'une coupure de connexion en cours d'appel.</p>"
+          },
+          "date": "21 oct 2026",
+          "source": { "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.307", "label": "github.com/anthropics/claude-code" }
+        }
+      ]
+    },
+    {
+      "id": "openai-codex",
+      "name": "OpenAI Codex / Codex CLI",
+      "publisher": "OpenAI",
+      "theme": "openai",
+      "icon_emoji": "🧠",
+      "version": "0.164.0-alpha.11",
+      "anchor": "openai-codex",
+      "updates": []
+    },
+    {
+      "id": "gpt",
+      "name": "GPT models",
+      "publisher": "OpenAI",
+      "theme": "openai",
+      "icon_emoji": "✨",
+      "version": "—",
+      "anchor": "gpt",
+      "updates": [
+        {
+          "id": "openai-service-tiers",
+          "tag": "feature",
+          "title": { "es": "Service tiers configurables por proyecto en la plataforma", "en": "Per-project service tiers on the platform", "fr": "Paliers de service configurables par projet" },
+          "body_html": {
+            "es": "<p>Los ajustes de la plataforma ahora permiten elegir qué <em>service tiers</em> puede usar cada proyecto; los ajustes de organización pueden restringir los tiers disponibles para todos los proyectos a la vez.</p>",
+            "en": "<p>Platform settings now let you choose which service tiers each project can use. Organization settings can restrict available tiers across all projects at once.</p>",
+            "fr": "<p>Les paramètres de la plateforme permettent désormais de choisir les paliers de service accessibles à chaque projet. Les paramètres d'organisation peuvent restreindre les paliers disponibles pour tous les projets à la fois.</p>"
+          },
+          "date": "21 oct 2026",
+          "source": { "url": "https://developers.openai.com/docs/changelog#2026-10-21", "label": "developers.openai.com" }
+        }
+      ]
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini / Gemini Code Assist",
+      "publisher": "Google",
+      "theme": "gemini",
+      "icon_emoji": "💎",
+      "version": "2.104.0",
+      "anchor": "gemini",
+      "updates": []
+    },
+    {
+      "id": "github-copilot",
+      "name": "GitHub Copilot",
+      "publisher": "Microsoft/GitHub",
+      "theme": "copilot",
+      "icon_emoji": "🐙",
+      "version": "—",
+      "anchor": "github-copilot",
+      "updates": []
+    }
+  ],
+  "models": [
+    {
+      "date": "2026-10-14",
+      "name": "Grok Voice 3.0",
+      "provider": "xai",
+      "provider_label": "xAI",
+      "tier": "a",
+      "weight": "proprietary",
+      "notes": { "es": "Modelo speech-to-speech; reemplaza a Grok Voice 2.0 por defecto en la Voice Agent API.", "en": "Speech-to-speech model; replaces Grok Voice 2.0 as the default in the Voice Agent API.", "fr": "Modèle speech-to-speech ; remplace Grok Voice 2.0 par défaut dans la Voice Agent API." },
+      "row_kind": "recent"
+    },
+    {
+      "date": "2026-10-13",
+      "name": "Gemini 4 Argon",
+      "provider": "google",
+      "provider_label": "Google",
+      "tier": "splus",
+      "weight": "proprietary",
+      "notes": { "es": "Lanzamiento confirmado, disponible en GitHub Copilot desde el 13 de octubre.", "en": "Confirmed launch, available in GitHub Copilot since October 13.", "fr": "Lancement confirmé, disponible dans GitHub Copilot depuis le 13 octobre." }
+    },
+    {
+      "date": "2026-10-08",
+      "name": "GPT-6.1 Sol Ultrafast",
+      "provider": "openai",
+      "provider_label": "OpenAI",
+      "tier": "a",
+      "weight": "proprietary",
+      "notes": { "es": "Modo Ultrafast confirmado y disponible en la Responses API.", "en": "Ultrafast mode confirmed and available in the Responses API.", "fr": "Mode Ultrafast confirmé et disponible dans la Responses API." }
+    },
+    {
+      "date": "2026-10-07",
+      "name": "Claude Haiku 5.5",
+      "provider": "anthropic",
+      "provider_label": "Anthropic",
+      "tier": "a",
+      "weight": "proprietary",
+      "notes": { "es": "Modelo rápido de Claude 5, con ventana de 1M de tokens.", "en": "Fast Claude 5 tier, with a 1M-token context window.", "fr": "Palier rapide de Claude 5, avec une fenêtre de 1M de tokens." }
+    },
+    {
+      "date": "2026-10-06",
+      "name": "Mistral Large 4 Preview",
+      "provider": "mistral",
+      "provider_label": "Mistral",
+      "tier": "aplus",
+      "weight": "proprietary",
+      "notes": { "es": "Primera vista previa de la línea Large 4.", "en": "First preview of the Large 4 line.", "fr": "Première preview de la gamme Large 4." }
+    },
+    {
+      "date": "2026-09-29",
+      "name": "GPT-6.1 Sol",
+      "provider": "openai",
+      "provider_label": "OpenAI",
+      "tier": "splus",
+      "weight": "proprietary",
+      "notes": { "es": "Modelo por defecto de Codex CLI y ChatGPT.", "en": "Default model for Codex CLI and ChatGPT.", "fr": "Modèle par défaut de Codex CLI et ChatGPT." }
+    },
+    {
+      "date": "2026-09-22",
+      "name": "Claude Opus 5.5",
+      "provider": "anthropic",
+      "provider_label": "Anthropic",
+      "tier": "splus",
+      "weight": "proprietary",
+      "notes": { "es": "Tope de la línea Claude 5, usado en HydraFusion de Copilot.", "en": "Top of the Claude 5 line, used inside Copilot's HydraFusion.", "fr": "Haut de gamme de la ligne Claude 5, utilisé dans HydraFusion de Copilot." }
+    },
+    {
+      "date": "2026-09-10",
+      "name": "DeepSeek V4.1-Flash",
+      "provider": "deepseek",
+      "provider_label": "DeepSeek",
+      "tier": "a",
+      "weight": "open",
+      "notes": { "es": "Variante rápida y económica de V4.1.", "en": "Fast, low-cost variant of V4.1.", "fr": "Variante rapide et économique de V4.1." }
+    },
+    {
+      "date": "2026-09-02",
+      "name": "Gemini 3.8 Flash",
+      "provider": "google",
+      "provider_label": "Google",
+      "tier": "a",
+      "weight": "proprietary",
+      "notes": { "es": "Reemplazo recomendado para Gemini 3.7 Flash, jubilado en Copilot.", "en": "Recommended replacement for Gemini 3.7 Flash, retired in Copilot.", "fr": "Remplacement recommandé pour Gemini 3.7 Flash, retiré de Copilot." }
+    },
+    {
+      "date": "2026-08-14",
+      "name": "GLM-5.3",
+      "provider": "zhipu",
+      "provider_label": "Z.ai / Zhipu",
+      "tier": "aplus",
+      "weight": "open",
+      "notes": { "es": "Líder de varios rankings open-source en coding agentic.", "en": "Leads several open-source agentic-coding leaderboards.", "fr": "En tête de plusieurs classements open source en codage agentique." }
+    },
+    {
+      "date": "2026-08-12",
+      "name": "Grok 4.6",
+      "provider": "xai",
+      "provider_label": "xAI",
+      "tier": "a",
+      "weight": "proprietary",
+      "notes": { "es": "Ya superado por Grok 4.7 como reemplazo de Grok 4.5 en Copilot.", "en": "Already superseded by Grok 4.7 as the Grok 4.5 replacement in Copilot.", "fr": "Déjà dépassé par Grok 4.7, remplaçant de Grok 4.5 dans Copilot." }
+    },
+    {
+      "date": "2026-08-03",
+      "name": "Qwen3.8-Max",
+      "provider": "alibaba",
+      "provider_label": "Alibaba / Qwen",
+      "tier": "aplus",
+      "weight": "open",
+      "notes": { "es": "Tope de línea no confirmado oficialmente por Alibaba.", "en": "Flagship not officially confirmed by Alibaba.", "fr": "Haut de gamme non officiellement confirmé par Alibaba." }
+    },
+    {
+      "date": "2026-07-31",
+      "name": "Seedance 2.5",
+      "provider": "bytedance",
+      "provider_label": "ByteDance",
+      "tier": "a",
+      "weight": "proprietary",
+      "notes": { "es": "Modelo de generación de video de Doubao-Seed.", "en": "Video-generation model from the Doubao-Seed family.", "fr": "Modèle de génération vidéo de la famille Doubao-Seed." }
+    },
+    {
+      "date": "2026-07-24",
+      "name": "Claude Opus 5",
+      "provider": "anthropic",
+      "provider_label": "Anthropic",
+      "tier": "s",
+      "weight": "proprietary",
+      "notes": { "es": "Precedió a Opus 5.5 en la línea Claude 5.", "en": "Preceded Opus 5.5 in the Claude 5 line.", "fr": "A précédé Opus 5.5 dans la ligne Claude 5." }
+    },
+    {
+      "date": "2026-07-16",
+      "name": "Kimi K3",
+      "provider": "moonshot",
+      "provider_label": "Moonshot AI / Kimi",
+      "tier": "s",
+      "weight": "open",
+      "notes": { "es": "2.8T de parámetros; superó a Claude Opus 4.8 en Artificial Analysis.", "en": "2.8T parameters; beat Claude Opus 4.8 on Artificial Analysis.", "fr": "2,8T de paramètres ; a dépassé Claude Opus 4.8 sur Artificial Analysis." }
+    },
+    {
+      "date": "2026-06-13",
+      "name": "GLM-5.2",
+      "provider": "zhipu",
+      "provider_label": "Z.ai / Zhipu",
+      "tier": "a",
+      "weight": "open",
+      "notes": { "es": "Antecesor de GLM-5.3.", "en": "Predecessor of GLM-5.3.", "fr": "Prédécesseur de GLM-5.3." }
+    },
+    {
+      "date": "2026-06-12",
+      "name": "Kimi K2.7 Code",
+      "provider": "moonshot",
+      "provider_label": "Moonshot AI / Kimi",
+      "tier": "a",
+      "weight": "open",
+      "notes": { "es": "Variante especializada en coding de K2.6.", "en": "Coding-specialized variant of K2.6.", "fr": "Variante spécialisée en codage de K2.6." }
+    },
+    {
+      "date": "2026-06-01",
+      "name": "MiniMax M2",
+      "provider": "minimax",
+      "provider_label": "MiniMax",
+      "tier": "bplus",
+      "weight": "open",
+      "notes": { "es": "Entrada de MiniMax en la serie M2.", "en": "MiniMax's entry in the M2 series.", "fr": "Entrée de MiniMax dans la série M2." }
+    },
+    {
+      "date": "2026-06-01",
+      "name": "Qwen3.7-Plus",
+      "provider": "alibaba",
+      "provider_label": "Alibaba / Qwen",
+      "tier": "a",
+      "weight": "open",
+      "notes": { "es": "Nivel medio de la familia Qwen3.7.", "en": "Mid-tier of the Qwen3.7 family.", "fr": "Palier intermédiaire de la famille Qwen3.7." }
+    },
+    {
+      "date": "2026-05-19",
+      "name": "Qwen3.7-Max",
+      "provider": "alibaba",
+      "provider_label": "Alibaba / Qwen",
+      "tier": "aplus",
+      "weight": "open",
+      "notes": { "es": "Tope de línea Qwen3.7.", "en": "Flagship of the Qwen3.7 line.", "fr": "Haut de gamme de la ligne Qwen3.7." }
+    },
+    {
+      "date": "2026-04-30",
+      "name": "Mistral Medium 5",
+      "provider": "mistral",
+      "provider_label": "Mistral",
+      "tier": "a",
+      "weight": "proprietary",
+      "notes": { "es": "Anterior a Mistral Large 4 Preview.", "en": "Predates Mistral Large 4 Preview.", "fr": "Antérieur à Mistral Large 4 Preview." }
+    },
+    {
+      "date": "2026-10-31",
+      "name": "Llama «Avocado»",
+      "provider": "meta",
+      "provider_label": "Meta",
+      "tier": "a",
+      "weight": "upcoming",
+      "notes": { "es": "Rumoreado, sin confirmación oficial de Meta.", "en": "Rumored, no official confirmation from Meta.", "fr": "Rumeur, sans confirmation officielle de Meta." },
+      "row_kind": "upcoming"
+    }
+  ],
+  "model_timeline_anchor": "model-timeline",
+  "notable_trends": [
+    {
+      "es": "Claude Code sigue encadenando releases diarios (2.1.307 y 2.1.308), pero el foco pasó de features a dureza operativa: timeouts más sensatos para hooks y retries, y un evento de seguridad dedicado en OpenTelemetry para auditar qué frena cada tool call.",
+      "en": "Claude Code keeps shipping daily releases (2.1.307 and 2.1.308), but the focus shifted from features to operational hardening: saner timeouts for hooks and retries, plus a dedicated OpenTelemetry safety event to audit what stops each tool call.",
+      "fr": "Claude Code continue d'enchaîner les releases quotidiennes (2.1.307 et 2.1.308), mais l'accent est passé des fonctionnalités au durcissement opérationnel : des timeouts plus sensés pour les hooks et les retries, plus un événement de sécurité OpenTelemetry dédié pour auditer ce qui arrête chaque appel d'outil."
+    },
+    {
+      "es": "Semana floja en lanzamientos de modelos: ningún proveedor de los 12 rastreados confirmó un modelo nuevo en los últimos 7 días. Codex CLI acumula 16 builds alfa de la rama 0.164.0 sin notas de cambios reales, y Copilot/Gemini no publicaron novedades de producto desde el brief anterior.",
+      "en": "A quiet week for model launches: none of the 12 tracked providers confirmed a new model in the last 7 days. Codex CLI racked up 16 alpha builds on the 0.164.0 branch with no real changelog, and Copilot/Gemini had no new product news since the previous brief.",
+      "fr": "Semaine calme pour les lancements de modèles : aucun des 12 fournisseurs suivis n'a confirmé de nouveau modèle ces 7 derniers jours. Codex CLI a accumulé 16 builds alpha sur la branche 0.164.0 sans réel changelog, et Copilot/Gemini n'ont publié aucune nouveauté produit depuis le brief précédent."
+    }
+  ]
+}

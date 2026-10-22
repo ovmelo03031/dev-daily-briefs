@@ -1,0 +1,225 @@
+{
+  "title": {
+    "es": "AI Security — 22 OCT 2026",
+    "en": "AI Security — 22 OCT 2026",
+    "fr": "AI Security — 22 OCT 2026"
+  },
+  "description": {
+    "es": "LiteLLM 1.107.0 salió envenenado en PyPI y Docker Hub con un infostealer que se lleva las API keys de todos tus proveedores de LLM, vLLM recibe CVEs para tres bugs de caché y memoria multimodal, Pillow publica 28 advisories (uno con RCE vía Ghostscript) que pegan en todo pipeline de visión, y Nvidia presenta OpenShell para ponerle límites a los agentes.",
+    "en": "LiteLLM 1.107.0 shipped poisoned on PyPI and Docker Hub with an infostealer that grabs the API keys for every LLM provider you use, vLLM gets CVEs for three multimodal cache and memory bugs, Pillow publishes 28 advisories (one with RCE via Ghostscript) that hit every vision pipeline, and Nvidia unveils OpenShell to put agents inside boundaries.",
+    "fr": "LiteLLM 1.107.0 a été publié vérolé sur PyPI et Docker Hub avec un infostealer qui récupère les clés d'API de tous vos fournisseurs de LLM, vLLM reçoit des CVE pour trois bugs de cache et de mémoire multimodaux, Pillow publie 28 advisories (dont une RCE via Ghostscript) qui touchent tout pipeline de vision, et Nvidia présente OpenShell pour encadrer les agents."
+  },
+  "pubDate": "2026-10-22",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "LiteLLM 1.107.0 comprometido: robo de secretos",
+        "en": "LiteLLM 1.107.0 compromised: secrets stolen",
+        "fr": "LiteLLM 1.107.0 compromis : secrets volés"
+      },
+      "anchor": "litellm-1-107-0-supply-chain-compromise",
+      "icon": "lucide:siren"
+    },
+    {
+      "text": {
+        "es": "vLLM: caché multimodal que filtra y crashea",
+        "en": "vLLM: multimodal cache leaks and crashes",
+        "fr": "vLLM : cache multimodal qui fuit et plante"
+      },
+      "anchor": "vllm-cve-2026-114054-cache-aliasing",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": {
+        "es": "Pillow: 28 advisories, RCE vía Ghostscript",
+        "en": "Pillow: 28 advisories, RCE via Ghostscript",
+        "fr": "Pillow : 28 advisories, RCE via Ghostscript"
+      },
+      "anchor": "pillow-cve-2026-112900-ghostscript-argument-injection",
+      "icon": "lucide:shield-alert"
+    },
+    {
+      "text": {
+        "es": "OpenClaw: CDP saltea la política de red",
+        "en": "OpenClaw: CDP discovery skips network policy",
+        "fr": "OpenClaw : la découverte CDP ignore la politique réseau"
+      },
+      "anchor": "openclaw-cve-2026-62197-cdp-discovery",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "Nvidia OpenShell: gobernanza para agentes",
+        "en": "Nvidia OpenShell: governance for agents",
+        "fr": "Nvidia OpenShell : gouvernance des agents"
+      },
+      "anchor": "nvidia-openshell-reference-architecture",
+      "icon": "lucide:lock"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-incidents",
+      "name": "Top Incidents",
+      "theme": "top-incidents",
+      "icon_emoji": "🚨",
+      "anchor": "top-incidents",
+      "updates": [
+        {
+          "id": "litellm-1-107-0-supply-chain-compromise",
+          "tag": "breach",
+          "title": {
+            "es": "LiteLLM 1.107.0 salió con un infostealer y un RAT: si lo instalaste, tus API keys de LLM y credenciales cloud ya no son tuyas",
+            "en": "LiteLLM 1.107.0 shipped with an infostealer and a RAT: if you installed it, your LLM API keys and cloud credentials are no longer yours",
+            "fr": "LiteLLM 1.107.0 a été livré avec un infostealer et un RAT : si vous l'avez installé, vos clés d'API LLM et vos identifiants cloud ne sont plus les vôtres"
+          },
+          "body_html": {
+            "es": "<p>El 21 de octubre, a las 11:39 UTC, atacantes que comprometieron el proceso de release de LiteLLM subieron la <strong>1.107.0</strong> a PyPI y la imagen <code>litellm/litellm:1.107.0</code> a Docker Hub (también te la comiste si pulleaste <code>latest</code>, <code>main-latest</code> o <code>main-stable</code>). Los commits maliciosos venían de <code>github.com/Berri-AI/litellm</code>, un typosquat con guion de la org real BerriAI. El paquete trae tres archivos: <code>cook.pth</code>, que se ejecuta cada vez que arranca Python; <code>cook.py</code>, el infostealer; y <code>sitecustomize.py</code>, un RAT que consulta la infraestructura del atacante cada hora. Se lleva credenciales y cookies de navegadores, credenciales de AWS/GCP/Azure, metadata de EC2/ECS, variables de entorno, claves SSH/GPG, historial de shell y las API keys de OpenAI, Anthropic, Cohere y demás proveedores, cifradas con AES-256 + RSA-4096. Lo detectaron Aikido, Wiz y Socket; PyPI lo puso en cuarentena en horas. Qué hacer: volvé a <strong>1.106.2</strong>, rotá todo secreto que haya tocado una máquina que corrió el paquete (CI y contenedores del proxy incluidos) y buscá <code>/tmp/.pc_once_*</code> (ya exfiltró) y <code>/tmp/remote_code_loader.lock</code> (el daemon de C2 corrió). Ojo con esto: un gateway de LLM concentra justamente las keys de todos los proveedores.</p>",
+            "en": "<p>On 21 October at 11:39 UTC, attackers who had compromised LiteLLM's release process pushed <strong>1.107.0</strong> to PyPI and the <code>litellm/litellm:1.107.0</code> image to Docker Hub (you also got it if you pulled <code>latest</code>, <code>main-latest</code> or <code>main-stable</code>). The malicious commits came from <code>github.com/Berri-AI/litellm</code>, a hyphenated lookalike of the real BerriAI organization. The package carries three files: <code>cook.pth</code>, which runs every time Python starts; <code>cook.py</code>, the infostealer; and <code>sitecustomize.py</code>, a RAT that polls attacker infrastructure hourly. It takes browser credentials and cookies, AWS/GCP/Azure credentials, EC2/ECS metadata, environment variables, SSH/GPG keys, shell history and API keys for OpenAI, Anthropic, Cohere and other providers, encrypted with AES-256 plus RSA-4096. Aikido, Wiz and Socket found it; PyPI quarantined it within hours. What to do: go back to <strong>1.106.2</strong>, rotate every secret on any machine that ran the package (CI runners and proxy containers included), and look for <code>/tmp/.pc_once_*</code> (exfiltration already ran) and <code>/tmp/remote_code_loader.lock</code> (the C2 daemon ran). An LLM gateway is exactly where the keys for every provider live.</p>",
+            "fr": "<p>Le 21 octobre à 11:39 UTC, des attaquants ayant compromis le processus de release de LiteLLM ont publié la <strong>1.107.0</strong> sur PyPI et l'image <code>litellm/litellm:1.107.0</code> sur Docker Hub (vous êtes aussi touché si vous avez tiré <code>latest</code>, <code>main-latest</code> ou <code>main-stable</code>). Les commits malveillants venaient de <code>github.com/Berri-AI/litellm</code>, un sosie avec tiret de l'organisation légitime BerriAI. Le paquet contient trois fichiers : <code>cook.pth</code>, exécuté à chaque démarrage de Python ; <code>cook.py</code>, l'infostealer ; et <code>sitecustomize.py</code>, un RAT qui interroge l'infrastructure de l'attaquant toutes les heures. Il récupère identifiants et cookies des navigateurs, identifiants AWS/GCP/Azure, métadonnées EC2/ECS, variables d'environnement, clés SSH/GPG, historique du shell et clés d'API OpenAI, Anthropic, Cohere et autres, chiffrés en AES-256 plus RSA-4096. Aikido, Wiz et Socket l'ont détecté ; PyPI l'a mis en quarantaine en quelques heures. À faire : revenir à <strong>1.106.2</strong>, faire tourner tous les secrets des machines qui ont exécuté le paquet (runners CI et conteneurs du proxy compris), et chercher <code>/tmp/.pc_once_*</code> (exfiltration effectuée) et <code>/tmp/remote_code_loader.lock</code> (le démon C2 a tourné).</p>"
+          },
+          "date": "21 Oct 2026",
+          "source": {
+            "url": "https://www.theregister.com/security/2026/10/21/litellm-supply-chain-attack-hoovers-up-passwords-and-secrets/5304548",
+            "label": "The Register"
+          }
+        }
+      ]
+    },
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "vllm-cve-2026-114054-cache-aliasing",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-114054, -114050 y -114055: vLLM confiaba en identificadores de caché que manda el cliente, y en sus kwargs de processor",
+            "en": "CVE-2026-114054, -114050 and -114055: vLLM trusted client-supplied cache identities, and client-supplied processor kwargs",
+            "fr": "CVE-2026-114054, -114050 et -114055 : vLLM faisait confiance aux identifiants de cache fournis par le client, et à ses kwargs de processor"
+          },
+          "body_html": {
+            "es": "<p>El 21 de octubre se asignaron CVEs a tres advisories de vLLM corregidos en <strong>0.31.0</strong>. El más feo es <strong>CVE-2026-114054</strong> (GHSA-rh6f-3x46-j33q, CVSS v4 7.1): un usuario autenticado fuerza colisiones de claves de caché con valores que controla, como el EXIF ImageID de una imagen o el <code>cache_salt</code>. Poné un UUID como ImageID y te devuelve la media procesada de otro request; poné como salt el nombre de un LoRA y reusás su estado KV. <strong>CVE-2026-114050</strong> (GHSA-p92p-rxj5-7p2x, v4 7.1) usa el UUID multimodal del cliente como identidad de caché sin chequear consistencia, desincroniza los caches P0/P1 y tira la instancia hasta que la reiniciés. <strong>CVE-2026-114055</strong> (GHSA-gx7p-2j49-hfq4, v4 8.7, sin auth) acepta <code>mm_processor_kwargs</code> por request sin validar: tamaños de imagen, patches o frames gigantes y chau memoria. Si servís modelos multimodales a varios tenants, actualizá.</p>",
+            "en": "<p>On 21 October, three vLLM advisories fixed in <strong>0.31.0</strong> received CVEs. The worst is <strong>CVE-2026-114054</strong> (GHSA-rh6f-3x46-j33q, CVSS v4 7.1): an authenticated user forces cache-key collisions with values they control, such as an image's EXIF ImageID or the <code>cache_salt</code>. Set a UUID as the ImageID and you get back another request's processed media; set the salt to a LoRA name and you reuse its first-block KV state. <strong>CVE-2026-114050</strong> (GHSA-p92p-rxj5-7p2x, v4 7.1) uses the client's multimodal UUID as a cache identity without checking consistency on hits, desynchronizes the P0/P1 caches and crashes the instance until restart. <strong>CVE-2026-114055</strong> (GHSA-gx7p-2j49-hfq4, v4 8.7, unauthenticated) accepts per-request <code>mm_processor_kwargs</code> without validation: oversized image sizes, patches or frame counts exhaust memory and kill the shared server. If you serve multimodal models to more than one tenant, upgrade.</p>",
+            "fr": "<p>Le 21 octobre, trois advisories de vLLM corrigées en <strong>0.31.0</strong> ont reçu des CVE. La pire est <strong>CVE-2026-114054</strong> (GHSA-rh6f-3x46-j33q, CVSS v4 7.1) : un utilisateur authentifié provoque des collisions de clés de cache avec des valeurs qu'il contrôle, comme l'EXIF ImageID d'une image ou le <code>cache_salt</code>. Un UUID en ImageID renvoie le média traité d'une autre requête ; le nom d'un LoRA en salt réutilise son état KV. <strong>CVE-2026-114050</strong> (GHSA-p92p-rxj5-7p2x, v4 7.1) utilise l'UUID multimodal du client comme identité de cache sans vérification, désynchronise les caches P0/P1 et fait planter l'instance jusqu'au redémarrage. <strong>CVE-2026-114055</strong> (GHSA-gx7p-2j49-hfq4, v4 8.7, sans authentification) accepte des <code>mm_processor_kwargs</code> par requête sans validation : tailles d'image, patches ou nombres de frames démesurés épuisent la mémoire du serveur partagé.</p>"
+          },
+          "date": "21 Oct 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-114054",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "pillow-cve-2026-112900-ghostscript-argument-injection",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-112900 y 27 más: Pillow 13.0.0 cierra un batch que incluye inyección de argumentos en Ghostscript con camino a RCE",
+            "en": "CVE-2026-112900 and 27 more: Pillow 13.0.0 closes a batch that includes Ghostscript argument injection with a path to RCE",
+            "fr": "CVE-2026-112900 et 27 autres : Pillow 13.0.0 corrige un lot qui inclut une injection d'arguments Ghostscript menant à une RCE"
+          },
+          "body_html": {
+            "es": "<p>Entre el 20 y el 21 de octubre, Pillow publicó 28 advisories, todos corregidos en <strong>13.0.0</strong>. No es un framework de ML, pero es la puerta de entrada de casi todo pipeline de visión: los image processors de Transformers y el <code>ImageMediaIO</code> de vLLM terminan en <code>Image.open</code> sobre imágenes que manda el usuario. El peor es <strong>CVE-2026-112900</strong> (GHSA-w889-685w-c8fh, CVSS v4 9.2): <code>EpsImagePlugin.Ghostscript()</code> pasa la ruta del archivo a Ghostscript sin sanitizar, así que un nombre que empieza con <code>-</code> se interpreta como opción, aun con <code>-dSAFER</code>, y se puede encadenar a RCE. El resto son overflows de heap en TIFF y JPEG (CVE-2026-112393 y CVE-2026-112403, 9.2), use-after-free, double free, fugas de memoria sin inicializar y una pila de DoS (decompression bombs que se saltean el chequeo, loops infinitos en PDF, ReDoS en XBM). Afecta desde 2.6.0. Si tu servicio de inferencia acepta imágenes, actualizá Pillow aunque no lo hayas instalado vos.</p>",
+            "en": "<p>Between 20 and 21 October, Pillow published 28 advisories, all fixed in <strong>13.0.0</strong>. It is not an ML framework, but it is the front door of nearly every vision pipeline: Transformers image processors and vLLM's <code>ImageMediaIO</code> end up in <code>Image.open</code> on user-supplied images. The worst is <strong>CVE-2026-112900</strong> (GHSA-w889-685w-c8fh, CVSS v4 9.2): <code>EpsImagePlugin.Ghostscript()</code> passes the file path to Ghostscript unsanitized, so a name starting with <code>-</code> is read as an option, even with <code>-dSAFER</code>, and can be chained to RCE. The rest are heap overflows in TIFF and JPEG handling (CVE-2026-112393 and CVE-2026-112403, 9.2), use-after-free, double free, uninitialized memory leaks and a stack of DoS bugs (decompression bombs that skip the check, infinite loops in PDF parsing, ReDoS in XBM). Versions from 2.6.0 are affected. If your inference service accepts images, upgrade Pillow even if you never installed it yourself.</p>",
+            "fr": "<p>Entre le 20 et le 21 octobre, Pillow a publié 28 advisories, toutes corrigées en <strong>13.0.0</strong>. Ce n'est pas un framework de ML, mais c'est la porte d'entrée de presque tout pipeline de vision : les image processors de Transformers et l'<code>ImageMediaIO</code> de vLLM finissent dans <code>Image.open</code> sur des images envoyées par l'utilisateur. La pire est <strong>CVE-2026-112900</strong> (GHSA-w889-685w-c8fh, CVSS v4 9.2) : <code>EpsImagePlugin.Ghostscript()</code> passe le chemin du fichier à Ghostscript sans le nettoyer, donc un nom commençant par <code>-</code> est lu comme une option, même avec <code>-dSAFER</code>, et peut mener à une RCE. Le reste : débordements de tas en TIFF et JPEG (CVE-2026-112393 et CVE-2026-112403, 9.2), use-after-free, double free, fuites de mémoire non initialisée et une série de DoS. Versions affectées depuis 2.6.0.</p>"
+          },
+          "date": "21 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-w889-685w-c8fh",
+            "label": "GitHub Advisory"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "openclaw-cve-2026-62197-cdp-discovery",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-62197: el discovery de CDP del navegador de OpenClaw aceptaba URLs de WebSocket que la política bloqueaba",
+            "en": "CVE-2026-62197: OpenClaw's browser CDP discovery accepted WebSocket URLs that policy should have blocked",
+            "fr": "CVE-2026-62197 : la découverte CDP du navigateur d'OpenClaw acceptait des URL WebSocket que la politique devait bloquer"
+          },
+          "body_html": {
+            "es": "<p>OpenClaw, el agente autónomo, maneja un navegador por Chrome DevTools Protocol. En las versiones afectadas, el discovery de CDP podía aceptar URLs de WebSocket bloqueadas, así que un caller de menor confianza o una entrada configurada llegaba a destinos de red que la política de OpenClaw tenía que frenar (CVSS v4 6.3). El advisory aclara que no cambia el modelo de confianza: los operadores autenticados del Gateway y los plugins instalados siguen siendo confiables. Lo importante es la clase: cuando un agente controla un navegador, el endpoint de CDP es un salto de red más, y la allowlist tiene que aplicarse también ahí.</p>",
+            "en": "<p>OpenClaw, the autonomous agent, drives a browser over the Chrome DevTools Protocol. In affected versions, CDP discovery could accept blocked WebSocket URLs, so a lower-trust caller or a configured input path could reach network destinations that OpenClaw policy should have stopped (CVSS v4 6.3). The advisory notes that this does not change the trust model: authenticated Gateway operators and installed plugins remain trusted. The class is what matters: when an agent controls a browser, the CDP endpoint is one more network hop, and the allowlist has to apply there too.</p>",
+            "fr": "<p>OpenClaw, l'agent autonome, pilote un navigateur via le Chrome DevTools Protocol. Dans les versions affectées, la découverte CDP pouvait accepter des URL WebSocket bloquées, si bien qu'un appelant moins fiable ou une entrée configurée atteignait des destinations réseau que la politique d'OpenClaw devait bloquer (CVSS v4 6.3). L'advisory précise que le modèle de confiance ne change pas : les opérateurs authentifiés du Gateway et les plugins installés restent de confiance. Quand un agent contrôle un navigateur, l'endpoint CDP est un saut réseau de plus, et la liste d'autorisation doit s'y appliquer aussi.</p>"
+          },
+          "date": "21 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-3x84-qq85-fj65",
+            "label": "GitHub Advisory"
+          }
+        }
+      ]
+    },
+    {
+      "id": "advisories",
+      "name": "Vendor Advisories",
+      "theme": "advisories",
+      "icon_emoji": "📢",
+      "anchor": "advisories",
+      "updates": [
+        {
+          "id": "nvidia-openshell-reference-architecture",
+          "tag": "advisory",
+          "title": {
+            "es": "Nvidia publica la arquitectura de referencia OpenShell para gobernar agentes: credenciales vía gateway, identidad y monitoreo",
+            "en": "Nvidia publishes the OpenShell reference architecture for governing agents: gateway-brokered credentials, identity and monitoring",
+            "fr": "Nvidia publie l'architecture de référence OpenShell pour gouverner les agents : identifiants via passerelle, identité et supervision"
+          },
+          "body_html": {
+            "es": "<p>OpenShell es un runtime de Nvidia que se ubica un nivel arriba de los sandboxes que ya usan Claude Code, Codex, OpenClaw u OpenCode, y le suma gobernanza. La arquitectura de referencia anunciada el 21 de octubre define sandboxing con credenciales brokereadas por un gateway (el agente no ve el secreto), límites de identidad y política, y monitoreo del comportamiento del agente con Nvidia Sentry sobre DPUs BlueField-4; los controles de ruteo y workflow llegan después. Está disponible para partners con Linux y Kubernetes (Canonical, SUSE, Red Hat) y requiere hardware de Nvidia. Dos cosas a tener en cuenta: OpenShell todavía tiene issues de seguridad abiertos en GitHub y manda telemetría por defecto (se puede desactivar).</p>",
+            "en": "<p>OpenShell is an Nvidia runtime that sits one level above the sandboxes Claude Code, Codex, OpenClaw and OpenCode already use, adding governance. The reference architecture announced on 21 October defines sandboxing with gateway-brokered credentials (the agent never sees the secret), identity and policy boundaries, and agent behavior monitoring via Nvidia Sentry on BlueField-4 DPUs; routing and workflow controls come later. It is available to partners running Linux and Kubernetes (Canonical, SUSE, Red Hat) and requires Nvidia hardware. Two caveats: OpenShell still has open security issues on GitHub, and it sends telemetry by default (you can opt out).</p>",
+            "fr": "<p>OpenShell est un runtime de Nvidia qui se place un niveau au-dessus des sandboxes déjà utilisés par Claude Code, Codex, OpenClaw et OpenCode, et y ajoute de la gouvernance. L'architecture de référence annoncée le 21 octobre prévoit un sandboxing avec des identifiants fournis par une passerelle (l'agent ne voit jamais le secret), des frontières d'identité et de politique, et une supervision du comportement des agents via Nvidia Sentry sur DPU BlueField-4 ; le routage et les contrôles de workflow viendront plus tard. Elle est proposée aux partenaires Linux et Kubernetes (Canonical, SUSE, Red Hat) et exige du matériel Nvidia. OpenShell a encore des problèmes de sécurité ouverts sur GitHub et envoie de la télémétrie par défaut (désactivable).</p>"
+          },
+          "date": "21 Oct 2026",
+          "source": {
+            "url": "https://www.theregister.com/ai-and-ml/2026/10/21/nvidia-picks-openshell-to-tame-ai-gents/5304319",
+            "label": "The Register"
+          }
+        },
+        {
+          "id": "dhs-deepseek-federal-ban",
+          "tag": "advisory",
+          "title": {
+            "es": "DHS prohíbe DeepSeek en todas las agencias civiles federales de EE.UU., incluidos productos de terceros construidos con él",
+            "en": "DHS bans DeepSeek across all US federal civilian agencies, including third-party products built with it",
+            "fr": "Le DHS interdit DeepSeek dans toutes les agences fédérales civiles américaines, y compris les produits tiers construits avec"
+          },
+          "body_html": {
+            "es": "<p>La orden del Department of Homeland Security del 19 de octubre (Federal Register 2026-21447) obliga a las agencias civiles federales a no usar productos de DeepSeek y a remover las implementaciones existentes. Alcanza a «todos los productos de DeepSeek y sus afiliadas» y también a productos de terceros «desarrollados usando» implementaciones de DeepSeek, una frase que nadie sabe bien cómo se interpreta. La orden solo dice que los modelos pueden contener malware o vulnerabilidades. El punto práctico para cualquier equipo con reglas parecidas: un gateway como OpenRouter o Vercel AI Gateway puede rutear a modelos de DeepSeek sin que te enteres, así que la política tiene que aplicarse en el gateway, no solo en el contrato.</p>",
+            "en": "<p>The Department of Homeland Security order of 19 October (Federal Register 2026-21447) requires federal civilian agencies to stop using DeepSeek products and remove existing implementations. It covers «all DeepSeek and DeepSeek-affiliate products» and also third-party products «developed using» DeepSeek implementations, a phrase nobody is sure how to read. The order only states that the models may contain malware or vulnerabilities. The practical point for any team with similar rules: a gateway such as OpenRouter or Vercel AI Gateway can route to DeepSeek models without you noticing, so the policy has to be enforced at the gateway, not just in the contract.</p>",
+            "fr": "<p>L'ordre du Department of Homeland Security du 19 octobre (Federal Register 2026-21447) impose aux agences fédérales civiles de cesser d'utiliser les produits DeepSeek et de retirer les implémentations existantes. Il couvre «tous les produits de DeepSeek et de ses affiliés» ainsi que les produits tiers «développés à l'aide» d'implémentations DeepSeek, une formule dont l'interprétation reste floue. L'ordre indique seulement que les modèles peuvent contenir des malwares ou des vulnérabilités. Point pratique : une passerelle comme OpenRouter ou Vercel AI Gateway peut router vers des modèles DeepSeek à votre insu, la politique doit donc s'appliquer au niveau de la passerelle.</p>"
+          },
+          "date": "20 Oct 2026",
+          "source": {
+            "url": "https://www.theregister.com/security/2026/10/20/deepseek-deep-sixed-at-all-us-federal-civilian-agencies/5304010",
+            "label": "The Register"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El gateway de LLM se volvió el blanco más rentable de la supply chain: LiteLLM concentra las API keys de todos los proveedores y las credenciales cloud del host, y un solo release envenenado alcanzó para llevarse todo. Tratá el proxy como infraestructura crítica: pineá versiones por hash y no deployes tags flotantes como latest.",
+      "en": "The LLM gateway has become the most profitable supply chain target: LiteLLM holds the API keys for every provider plus the host's cloud credentials, and one poisoned release was enough to take all of it. Treat the proxy as critical infrastructure: pin versions by hash and never deploy floating tags like latest.",
+      "fr": "La passerelle LLM est devenue la cible la plus rentable de la supply chain : LiteLLM concentre les clés d'API de tous les fournisseurs et les identifiants cloud de l'hôte, et une seule release vérolée a suffi pour tout emporter. Traitez le proxy comme une infrastructure critique : épinglez les versions par hash et ne déployez jamais de tags flottants comme latest."
+    },
+    {
+      "es": "Las entradas multimodales siguen abriendo superficie por debajo del modelo: los bugs de caché de vLLM y los 28 advisories de Pillow tienen el mismo origen, que es confiar en metadatos y formatos que el cliente controla (EXIF, UUIDs, kwargs, tipo de archivo).",
+      "en": "Multimodal inputs keep opening attack surface below the model: vLLM's cache bugs and Pillow's 28 advisories share a root cause, which is trusting metadata and formats the client controls (EXIF, UUIDs, kwargs, file type).",
+      "fr": "Les entrées multimodales continuent d'ouvrir de la surface d'attaque sous le modèle : les bugs de cache de vLLM et les 28 advisories de Pillow ont la même origine, à savoir la confiance accordée à des métadonnées et formats contrôlés par le client (EXIF, UUID, kwargs, type de fichier)."
+    }
+  ]
+}

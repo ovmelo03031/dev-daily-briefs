@@ -1,0 +1,240 @@
+{
+  "title": {
+    "es": "AI Security — 23 OCT 2026",
+    "en": "AI Security — 23 OCT 2026",
+    "fr": "AI Security — 23 OCT 2026"
+  },
+  "description": {
+    "es": "Microsoft cuenta cómo Storm-0940 usó agentes de IA y credenciales robadas de ConnectWise para ir contra más de 2.250 tenants de Microsoft 365, LiteLLM recibe un CVSS 9.9 por tokens de sesión falsificables que terminan en comandos vía MCP stdio, vLLM 0.31.0 cierra dos DoS sin autenticación, Jupyter Server y nbconvert parchean bugs que pegan en todo workflow de notebooks, y Goose y Flexible GraphRAG muestran cómo el LLM se vuelve el canal de la fuga o de la inyección.",
+    "en": "Microsoft details how Storm-0940 used AI agents and stolen ConnectWise credentials against more than 2,250 Microsoft 365 tenants, LiteLLM gets a CVSS 9.9 for forgeable session tokens that end in commands via MCP stdio, vLLM 0.31.0 closes two unauthenticated DoS bugs, Jupyter Server and nbconvert patch flaws that hit every notebook workflow, and Goose and Flexible GraphRAG show the LLM becoming the channel for the leak or the injection.",
+    "fr": "Microsoft détaille comment Storm-0940 a utilisé des agents d'IA et des identifiants ConnectWise volés contre plus de 2 250 tenants Microsoft 365, LiteLLM reçoit un CVSS 9.9 pour des tokens de session falsifiables qui mènent à des commandes via MCP stdio, vLLM 0.31.0 corrige deux DoS sans authentification, Jupyter Server et nbconvert corrigent des failles qui touchent tout workflow de notebooks, et Goose et Flexible GraphRAG montrent le LLM devenir le canal de la fuite ou de l'injection."
+  },
+  "pubDate": "2026-10-23",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "Storm-0940: agentes IA contra 2.250 tenants",
+        "en": "Storm-0940: AI agents against 2,250 tenants",
+        "fr": "Storm-0940 : agents IA contre 2 250 tenants"
+      },
+      "anchor": "storm-0940-artex-connectwise",
+      "icon": "lucide:siren"
+    },
+    {
+      "text": {
+        "es": "LiteLLM CVSS 9.9: admin forjado y MCP stdio",
+        "en": "LiteLLM CVSS 9.9: forged admin and MCP stdio",
+        "fr": "LiteLLM CVSS 9.9 : admin forgé et MCP stdio"
+      },
+      "anchor": "litellm-cve-2026-114612-forged-admin",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "vLLM 0.31.0: dos DoS sin autenticación",
+        "en": "vLLM 0.31.0: two unauthenticated DoS bugs",
+        "fr": "vLLM 0.31.0 : deux DoS sans authentification"
+      },
+      "anchor": "vllm-cve-2026-114051-114052-dos",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": {
+        "es": "Jupyter Server: el gateway saltea la autorización",
+        "en": "Jupyter Server: gateway skips authorization",
+        "fr": "Jupyter Server : le gateway saute l'autorisation"
+      },
+      "anchor": "jupyter-server-cve-2026-114135-gateway",
+      "icon": "lucide:lock"
+    },
+    {
+      "text": {
+        "es": "Goose manda tu historial de shell al LLM",
+        "en": "Goose sends your shell history to the LLM",
+        "fr": "Goose envoie votre historique shell au LLM"
+      },
+      "anchor": "goose-cve-2026-111079-history-leak",
+      "icon": "lucide:shield-alert"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-incidents",
+      "name": "Top Incidents",
+      "theme": "top-incidents",
+      "icon_emoji": "🚨",
+      "anchor": "top-incidents",
+      "updates": [
+        {
+          "id": "storm-0940-artex-connectwise",
+          "tag": "breach",
+          "title": {
+            "es": "Storm-0940 usó el framework de agentes ARTEX y credenciales de ConnectWise para ir contra más de 2.250 tenants de Microsoft 365",
+            "en": "Storm-0940 used the ARTEX agent framework and ConnectWise credentials to go after more than 2,250 Microsoft 365 tenants",
+            "fr": "Storm-0940 a utilisé le framework d'agents ARTEX et des identifiants ConnectWise contre plus de 2 250 tenants Microsoft 365"
+          },
+          "body_html": {
+            "es": "<p>Microsoft atribuye a <strong>Storm-0940</strong>, un grupo de espionaje vinculado a China activo desde 2021, una campaña que usó <strong>ARTEX</strong>: un framework open source de pentesting en Go que delega en agentes de IA el reconocimiento, el descubrimiento de vulnerabilidades, los ataques de credenciales y el robo de datos. Lo vienen usando desde septiembre, y en algunos casos pasaron de elegir el objetivo a tener acceso privilegiado en la nube en menos de tres horas. Entre el 10 y el 14 de octubre tiraron más de 151.000 logins fallidos contra 327 cuentas; después pivotearon a identidades de aplicación de ConnectWise comprometidas e intentaron autenticarse contra más de 2.250 tenants de Microsoft 365, con picos de 2.900 intentos por minuto. La mayoría falló, pero Microsoft dice que lograron acceso privilegiado persistente en numerosas organizaciones, y también vio reconocimiento y cambios de credenciales de aplicación vía Microsoft Graph acelerados por IA. ConnectWise apagó Cloud Backup, SaaS Security y Cloud Management y avisa que cortar esas conexiones no saca a un atacante que ya entró. Ojo con esto: si tenés apps de ConnectWise consentidas en tu tenant, revisá service principals, secretos de apps y roles asignados desde septiembre.</p>",
+            "en": "<p>Microsoft attributes to <strong>Storm-0940</strong>, a China-linked espionage group active since 2021, a campaign built on <strong>ARTEX</strong>: an open-source Go pentesting framework that hands reconnaissance, vulnerability discovery, credential attacks and data theft to AI agents. The group has used it since September, and in some cases went from picking a target to privileged cloud access in under three hours. Between 10 and 14 October it fired more than 151,000 failed sign-ins at 327 accounts; it then pivoted to compromised ConnectWise application identities and tried to authenticate against more than 2,250 Microsoft 365 tenants, peaking at 2,900 attempts per minute. Most attempts failed, but Microsoft says the attackers established persistent privileged access at numerous organizations, and it also observed AI-accelerated reconnaissance and application credential changes through Microsoft Graph. ConnectWise shut down Cloud Backup, SaaS Security and Cloud Management and warns that cutting those connections does not evict an attacker who is already in. If ConnectWise apps are consented in your tenant, review service principals, app secrets and role assignments back to September.</p>",
+            "fr": "<p>Microsoft attribue à <strong>Storm-0940</strong>, un groupe d'espionnage lié à la Chine actif depuis 2021, une campagne reposant sur <strong>ARTEX</strong> : un framework open source de pentest en Go qui confie à des agents d'IA la reconnaissance, la découverte de vulnérabilités, les attaques sur les identifiants et le vol de données. Le groupe l'utilise depuis septembre et, dans certains cas, est passé du choix de la cible à un accès cloud privilégié en moins de trois heures. Entre le 10 et le 14 octobre, plus de 151 000 connexions échouées ont visé 327 comptes ; le groupe a ensuite pivoté vers des identités d'application ConnectWise compromises et tenté de s'authentifier sur plus de 2 250 tenants Microsoft 365, avec des pics à 2 900 tentatives par minute. La plupart ont échoué, mais Microsoft indique un accès privilégié persistant dans de nombreuses organisations, ainsi qu'une reconnaissance et des modifications d'identifiants d'application via Microsoft Graph accélérées par l'IA. ConnectWise a coupé Cloud Backup, SaaS Security et Cloud Management et prévient que couper ces connexions n'expulse pas un attaquant déjà présent. Si des apps ConnectWise sont consenties dans votre tenant, revoyez service principals, secrets d'application et attributions de rôles depuis septembre.</p>"
+          },
+          "date": "22 Oct 2026",
+          "source": {
+            "url": "https://www.theregister.com/security/2026/10/22/microsoft-says-connectwise-breach-let-chinese-spies-loose-on-2250-cloud-tenants/5304687",
+            "label": "The Register"
+          }
+        }
+      ]
+    },
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "litellm-cve-2026-114612-forged-admin",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-114612 (CVSS 9.9): un usuario interno de LiteLLM puede forjar un token de admin y ejecutar comandos por el endpoint MCP stdio",
+            "en": "CVE-2026-114612 (CVSS 9.9): an internal LiteLLM user can forge an admin token and run commands through the MCP stdio endpoint",
+            "fr": "CVE-2026-114612 (CVSS 9.9) : un utilisateur interne de LiteLLM peut forger un token admin et exécuter des commandes via l'endpoint MCP stdio"
+          },
+          "body_html": {
+            "es": "<p>El proxy de LiteLLM usa <strong>el mismo contexto criptográfico</strong> para cifrar secretos en reposo y para los tokens de sesión. Un usuario autenticado con permisos bajos arma metadata con una credencial de admin falsa, el flujo de creación de API keys la cifra y se la devuelve, y ese ciphertext reproducido como bearer token hace que el proxy confíe en la identidad de admin forjada: acceso administrativo completo y comandos arbitrarios vía el endpoint <code>MCP stdio</code>. De 1.87.0 a 1.90.x solo es explotable con <code>EXPERIMENTAL_UI_LOGIN</code> activo; desde 1.91.0 lo es <strong>con la configuración por defecto</strong>. Parcheado en <strong>1.100.4, 1.101.3, 1.102.2, 1.103.1</strong> y 1.104.0-rc.2. Ojo con esto: es el segundo día seguido que LiteLLM aparece acá; si actualizás, no caigas en la 1.107.0 envenenada de esta semana.</p>",
+            "en": "<p>LiteLLM's proxy uses <strong>one cryptographic context</strong> both for at-rest secrets and for session tokens. A low-privileged authenticated user crafts metadata containing a forged admin credential, the API-key creation flow encrypts it and hands it back, and replaying that ciphertext as a bearer token makes the proxy trust the forged admin identity: full administrative access and arbitrary commands through the <code>MCP stdio</code> endpoint. Versions 1.87.0 to 1.90.x are exploitable only with <code>EXPERIMENTAL_UI_LOGIN</code> enabled; from 1.91.0 on it works <strong>in the default configuration</strong>. Fixed in <strong>1.100.4, 1.101.3, 1.102.2, 1.103.1</strong> and 1.104.0-rc.2. This is LiteLLM's second appearance here in two days; when you upgrade, stay away from this week's poisoned 1.107.0.</p>",
+            "fr": "<p>Le proxy LiteLLM utilise <strong>un seul contexte cryptographique</strong> pour les secrets au repos et pour les tokens de session. Un utilisateur authentifié peu privilégié fabrique des métadonnées contenant un faux identifiant admin, le flux de création de clés d'API les chiffre et les lui renvoie, et rejouer ce ciphertext comme bearer token fait accepter l'identité admin forgée : accès administrateur complet et commandes arbitraires via l'endpoint <code>MCP stdio</code>. Les versions 1.87.0 à 1.90.x ne sont exploitables qu'avec <code>EXPERIMENTAL_UI_LOGIN</code> ; à partir de 1.91.0, la faille fonctionne <strong>dans la configuration par défaut</strong>. Corrigé en <strong>1.100.4, 1.101.3, 1.102.2, 1.103.1</strong> et 1.104.0-rc.2. En mettant à jour, évitez la 1.107.0 vérolée de cette semaine.</p>"
+          },
+          "date": "22 Oct 2026",
+          "source": {
+            "url": "https://github.com/BerriAI/litellm/security/advisories/GHSA-7hp6-4w63-5g45",
+            "label": "GitHub Security Advisory"
+          }
+        },
+        {
+          "id": "vllm-cve-2026-114051-114052-dos",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-114051 y CVE-2026-114052: un solo request sin autenticación cuelga o tumba vLLM antes de 0.31.0",
+            "en": "CVE-2026-114051 and CVE-2026-114052: one unauthenticated request hangs or kills vLLM before 0.31.0",
+            "fr": "CVE-2026-114051 et CVE-2026-114052 : une seule requête sans authentification bloque ou fait tomber vLLM avant 0.31.0"
+          },
+          "body_html": {
+            "es": "<p>Dos DoS más en vLLM, distintos de los bugs de caché que cubrimos ayer. <strong>CVE-2026-114051</strong> (CVSS 3.1: 7.5): <code>/inference/v1/generate</code> no valida que <code>min_tokens</code> no supere a <code>max_tokens</code> cuando este último es null; el hilo de entrada de EngineCore crashea con una excepción no manejada, <code>/health</code> sigue respondiendo 200 y toda generación posterior queda colgada hasta reiniciar a mano. <strong>CVE-2026-114052</strong> (CVSS 4.0: 8.7): en el serving de MOSS-Audio, vLLM cachea un processor por cada valor distinto de <code>mm_processor_kwargs</code> sin límite, y como <code>/tokenize</code> saltea <code>--api-key</code>, alcanza con mandar muchos <code>mel_config</code> distintos para agotar la memoria. Fix: <strong>0.31.0</strong> (y si ya estás actualizando, andá directo a 0.32.0 por el batch de pickle y Ghostscript). Ojo con esto: si tu health check es tu única alarma, el primero no lo vas a ver.</p>",
+            "en": "<p>Two more vLLM DoS bugs, separate from the cache issues covered yesterday. <strong>CVE-2026-114051</strong> (CVSS 3.1: 7.5): <code>/inference/v1/generate</code> skips the check that <code>min_tokens</code> does not exceed <code>max_tokens</code> when the latter is null; the EngineCore input thread dies on an unhandled exception, <code>/health</code> keeps answering 200, and every later generation request hangs until a manual restart. <strong>CVE-2026-114052</strong> (CVSS 4.0: 8.7): when serving MOSS-Audio, vLLM caches one processor per distinct <code>mm_processor_kwargs</code> value without a bound, and because <code>/tokenize</code> bypasses <code>--api-key</code>, sending many distinct <code>mel_config</code> values exhausts host memory. Fix: <strong>0.31.0</strong> (and if you are upgrading anyway, go straight to 0.32.0 for the pickle and Ghostscript batch). If your health check is your only alarm, you will not see the first one.</p>",
+            "fr": "<p>Deux autres DoS dans vLLM, distincts des bugs de cache couverts hier. <strong>CVE-2026-114051</strong> (CVSS 3.1 : 7.5) : <code>/inference/v1/generate</code> ne vérifie pas que <code>min_tokens</code> ne dépasse pas <code>max_tokens</code> quand ce dernier est null ; le thread d'entrée d'EngineCore meurt sur une exception non gérée, <code>/health</code> continue de répondre 200 et toute génération ultérieure reste bloquée jusqu'à un redémarrage manuel. <strong>CVE-2026-114052</strong> (CVSS 4.0 : 8.7) : en servant MOSS-Audio, vLLM met en cache un processor par valeur distincte de <code>mm_processor_kwargs</code> sans limite, et comme <code>/tokenize</code> contourne <code>--api-key</code>, envoyer de nombreux <code>mel_config</code> différents épuise la mémoire. Correctif : <strong>0.31.0</strong> (ou directement 0.32.0 pour le lot pickle et Ghostscript).</p>"
+          },
+          "date": "21 Oct 2026",
+          "source": {
+            "url": "https://github.com/vllm-project/vllm/security/advisories/GHSA-4xqp-c3mv-qff7",
+            "label": "GitHub Security Advisory"
+          }
+        },
+        {
+          "id": "jupyter-server-cve-2026-114135-gateway",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-114135: el handler WebSocket del gateway de Jupyter Server se saltea la autorización de ejecución en kernels",
+            "en": "CVE-2026-114135: Jupyter Server's gateway WebSocket handler bypasses kernel execute authorization",
+            "fr": "CVE-2026-114135 : le handler WebSocket du gateway de Jupyter Server contourne l'autorisation d'exécution des kernels"
+          },
+          "body_html": {
+            "es": "<p>Cuando Jupyter Server está configurado contra un <strong>gateway de kernels remoto</strong> (el setup típico de JupyterHub y plataformas de notebooks para equipos de ML), el handler WebSocket del gateway no aplica el chequeo de autorización de <code>execute</code> sobre el kernel. Un usuario al que tu authorizer le permite ver un kernel pero no ejecutar código igual puede mandar código por el canal WebSocket. CVSS 3.1: <strong>8.8</strong>. Afecta <code>&gt;= 2.0.0, &lt; 2.6.0</code>; actualizá a <strong>2.6.0</strong>. Si dependés de un authorizer custom para separar roles de lectura y ejecución, este es el parche de la semana.</p>",
+            "en": "<p>When Jupyter Server runs against a <strong>remote kernel gateway</strong> (the usual JupyterHub and team notebook platform setup for ML groups), the gateway WebSocket handler does not apply the kernel <code>execute</code> authorization check. A user your authorizer lets view a kernel but not run code can still send code down the WebSocket channel. CVSS 3.1: <strong>8.8</strong>. Affects <code>&gt;= 2.0.0, &lt; 2.6.0</code>; upgrade to <strong>2.6.0</strong>. If you rely on a custom authorizer to separate read and execute roles, this is the patch of the week.</p>",
+            "fr": "<p>Quand Jupyter Server fonctionne avec un <strong>gateway de kernels distant</strong> (la configuration courante de JupyterHub et des plateformes de notebooks pour équipes ML), le handler WebSocket du gateway n'applique pas le contrôle d'autorisation <code>execute</code> du kernel. Un utilisateur que votre authorizer autorise à voir un kernel sans exécuter de code peut quand même envoyer du code par le canal WebSocket. CVSS 3.1 : <strong>8.8</strong>. Versions <code>&gt;= 2.0.0, &lt; 2.6.0</code> ; mettez à jour vers <strong>2.6.0</strong>.</p>"
+          },
+          "date": "22 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-354v-3q48-cv69",
+            "label": "GitHub Advisory Database"
+          }
+        },
+        {
+          "id": "nbconvert-cve-2026-114140-path-traversal",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-114140: convertir un .ipynb malicioso con nbconvert escribe archivos donde el autor del notebook quiera",
+            "en": "CVE-2026-114140: converting a malicious .ipynb with nbconvert writes files wherever the notebook author wants",
+            "fr": "CVE-2026-114140 : convertir un .ipynb malveillant avec nbconvert écrit des fichiers où l'auteur du notebook le souhaite"
+          },
+          "body_html": {
+            "es": "<p>En <code>ExtractOutputPreprocessor</code>, nbconvert une el atributo <code>filename</code> de la metadata de outputs de celdas con <code>output_files_dir</code> sin canonicalizar, así que un notebook armado con <code>../</code> escribe <strong>archivos arbitrarios</strong> al exportar con <code>--to markdown</code>, <code>latex</code>, <code>rst</code> o <code>asciidoc</code>. CVSS 4.0: <strong>8.8</strong>. Es un bug hermano de GHSA-4c99-qj7h-p3vg. Afecta <code>&gt;= 5.4.0, &lt;= 7.17.1</code>; fix en <strong>7.17.2</strong>. Ojo con esto: los pipelines que renderizan notebooks de terceros (model cards, docs de repos de Hugging Face, CI que publica notebooks) son exactamente quien corre nbconvert sobre input no confiable.</p>",
+            "en": "<p>In <code>ExtractOutputPreprocessor</code>, nbconvert joins the <code>filename</code> attribute from cell output metadata onto <code>output_files_dir</code> with no canonicalization, so a notebook crafted with <code>../</code> writes <strong>arbitrary files</strong> when exported with <code>--to markdown</code>, <code>latex</code>, <code>rst</code> or <code>asciidoc</code>. CVSS 4.0: <strong>8.8</strong>. It is a sibling of GHSA-4c99-qj7h-p3vg. Affects <code>&gt;= 5.4.0, &lt;= 7.17.1</code>; fixed in <strong>7.17.2</strong>. Pipelines that render third-party notebooks (model cards, docs for Hugging Face repos, CI that publishes notebooks) are exactly the ones running nbconvert on untrusted input.</p>",
+            "fr": "<p>Dans <code>ExtractOutputPreprocessor</code>, nbconvert joint l'attribut <code>filename</code> des métadonnées de sortie des cellules à <code>output_files_dir</code> sans canonicalisation : un notebook contenant <code>../</code> écrit des <strong>fichiers arbitraires</strong> lors d'un export <code>--to markdown</code>, <code>latex</code>, <code>rst</code> ou <code>asciidoc</code>. CVSS 4.0 : <strong>8.8</strong>. C'est une variante de GHSA-4c99-qj7h-p3vg. Versions <code>&gt;= 5.4.0, &lt;= 7.17.1</code> ; corrigé en <strong>7.17.2</strong>. Les pipelines qui rendent des notebooks tiers sont précisément ceux qui exécutent nbconvert sur des entrées non fiables.</p>"
+          },
+          "date": "22 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-pjvx-prjx-h659",
+            "label": "GitHub Advisory Database"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "goose-cve-2026-111079-history-leak",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-111079: con la integración de terminal activa, Goose manda tu historial de shell, secretos incluidos, al proveedor de LLM",
+            "en": "CVE-2026-111079: with terminal integration on, Goose sends your shell history, secrets included, to the LLM provider",
+            "fr": "CVE-2026-111079 : avec l'intégration terminal activée, Goose envoie votre historique shell, secrets compris, au fournisseur de LLM"
+          },
+          "body_html": {
+            "es": "<p>Cuando la integración de terminal del agente <strong>Goose</strong> está habilitada, captura el historial de comandos del shell y lo manda <strong>sin sanitizar</strong> a los endpoints del proveedor de LLM configurado en cada consulta. Si alguna vez pegaste un token, una password o hiciste <code>export</code> de una variable con credenciales, eso cruza la frontera de confianza y puede terminar en el proveedor y en sus logs (CWE-497). CVSS 3.1: <strong>7.4</strong>; Red Hat lo califica Important y lo trackea para el paquete <code>goose</code> en RHEL 9 y 10, todavía sin fix publicado. Mientras tanto: desactivá la integración de terminal o limpiá el historial antes de usarla, y asumí rotar todo secreto que haya pasado por ese shell.</p>",
+            "en": "<p>When the <strong>Goose</strong> agent's terminal integration is enabled, it captures your shell command history and sends it <strong>unsanitized</strong> to the configured LLM provider endpoints with every query. If you ever pasted a token or password, or ran <code>export</code> on a variable holding credentials, that crosses a trust boundary and can land at the provider and in its logs (CWE-497). CVSS 3.1: <strong>7.4</strong>; Red Hat rates it Important and tracks it for the <code>goose</code> package on RHEL 9 and 10, with no fix published yet. Until then: turn terminal integration off or clear your history before using it, and plan to rotate any secret that went through that shell.</p>",
+            "fr": "<p>Quand l'intégration terminal de l'agent <strong>Goose</strong> est activée, elle capture l'historique des commandes du shell et l'envoie <strong>sans nettoyage</strong> aux endpoints du fournisseur de LLM configuré à chaque requête. Si vous avez déjà collé un token ou un mot de passe, ou fait un <code>export</code> d'une variable contenant des identifiants, cela franchit une frontière de confiance et peut finir chez le fournisseur et dans ses logs (CWE-497). CVSS 3.1 : <strong>7.4</strong> ; Red Hat la classe Important pour le paquet <code>goose</code> sur RHEL 9 et 10, sans correctif publié. En attendant : désactivez l'intégration terminal ou videz l'historique, et prévoyez de faire tourner les secrets passés par ce shell.</p>"
+          },
+          "date": "22 Oct 2026",
+          "source": {
+            "url": "https://access.redhat.com/security/cve/CVE-2026-111079",
+            "label": "Red Hat"
+          }
+        },
+        {
+          "id": "flexible-graphrag-cve-2026-114510-cypher-injection",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-114510: en Flexible GraphRAG, un documento malicioso que pasa por el modelo de extracción inyecta Cypher en FalkorDB",
+            "en": "CVE-2026-114510: in Flexible GraphRAG, a malicious document passed through the extraction model injects Cypher into FalkorDB",
+            "fr": "CVE-2026-114510 : dans Flexible GraphRAG, un document malveillant traité par le modèle d'extraction injecte du Cypher dans FalkorDB"
+          },
+          "body_html": {
+            "es": "<p>El helper <code>_escape()</code> del adapter de FalkorDB escapa comillas <strong>antes</strong> que backslashes, así que un escape inyectado se duplica y una comilla cierra el string antes de tiempo. Resultado: contenido de documentos controlado por el atacante, procesado por el LLM de extracción de entidades, termina como <strong>Cypher inyectado</strong> que puede modificar o borrar el grafo, y filtrar datos si los resultados vuelven al usuario o al LLM. Además, los nombres dinámicos de nodos y relaciones van a posiciones entre backticks sin parametrizar. CVSS 3.1: <strong>7.1</strong>. Solo afecta deployments con <code>GRAPH_BACKEND=langchain</code> y <code>GRAPH_DB=falkordb</code>, versiones <code>&gt;= 0.6.0, &lt; 0.8.2</code>; fix en <strong>0.8.2</strong>. Es el patrón de siempre en RAG: el output del modelo es input no confiable, y hay que parametrizar como si lo hubiera escrito el atacante.</p>",
+            "en": "<p>The FalkorDB adapter's <code>_escape()</code> helper escapes quotes <strong>before</strong> backslashes, so an injected escape gets doubled and a quote can end the string early. The result: attacker-controlled document content, processed by the entity-extraction LLM, ends up as <strong>injected Cypher</strong> that can modify or delete the graph, and leak data if query results reach the user or the LLM. Dynamic node and relationship type names also go into backtick-quoted positions without parameterization. CVSS 3.1: <strong>7.1</strong>. Only deployments with <code>GRAPH_BACKEND=langchain</code> and <code>GRAPH_DB=falkordb</code> are affected, versions <code>&gt;= 0.6.0, &lt; 0.8.2</code>; fixed in <strong>0.8.2</strong>. The usual RAG lesson: model output is untrusted input, so parameterize it as if the attacker wrote it.</p>",
+            "fr": "<p>Le helper <code>_escape()</code> de l'adaptateur FalkorDB échappe les guillemets <strong>avant</strong> les backslashes : un échappement injecté est doublé et un guillemet peut terminer la chaîne trop tôt. Résultat : du contenu de document contrôlé par l'attaquant, traité par le LLM d'extraction d'entités, devient du <strong>Cypher injecté</strong> capable de modifier ou supprimer le graphe, et de fuiter des données si les résultats reviennent à l'utilisateur ou au LLM. Les noms dynamiques de nœuds et de relations sont aussi insérés entre backticks sans paramétrage. CVSS 3.1 : <strong>7.1</strong>. Seuls les déploiements avec <code>GRAPH_BACKEND=langchain</code> et <code>GRAPH_DB=falkordb</code> sont touchés, versions <code>&gt;= 0.6.0, &lt; 0.8.2</code> ; corrigé en <strong>0.8.2</strong>.</p>"
+          },
+          "date": "22 Oct 2026",
+          "source": {
+            "url": "https://github.com/stevereiner/flexible-graphrag/security/advisories/GHSA-vqrg-773h-4wxc",
+            "label": "GitHub Security Advisory"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Los agentes ofensivos ya no son un paper: Storm-0940 usó un framework open source de agentes para pasar de objetivo a acceso privilegiado en menos de tres horas, a escala de miles de tenants. La defensa tiene que asumir velocidad de máquina: alertas sobre cambios de credenciales de apps y consentimientos OAuth, no solo sobre logins humanos.",
+      "en": "Offensive agents are no longer a research paper: Storm-0940 used an open-source agent framework to go from target to privileged access in under three hours, at the scale of thousands of tenants. Defense has to assume machine speed: alert on app credential changes and OAuth consents, not just human sign-ins.",
+      "fr": "Les agents offensifs ne sont plus un sujet de recherche : Storm-0940 a utilisé un framework d'agents open source pour passer de la cible à un accès privilégié en moins de trois heures, à l'échelle de milliers de tenants. La défense doit supposer une vitesse machine : alerter sur les changements d'identifiants d'application et les consentements OAuth, pas seulement sur les connexions humaines."
+    },
+    {
+      "es": "El LLM como canal de datos no confiables se repite en ambas direcciones: Goose filtra secretos del host hacia el proveedor, y Flexible GraphRAG deja que contenido de documentos atraviese el modelo y llegue como Cypher a la base. Lo que entra al modelo y lo que sale de él necesitan el mismo tratamiento que cualquier input externo.",
+      "en": "The LLM as a channel for untrusted data shows up in both directions: Goose leaks host secrets out to the provider, and Flexible GraphRAG lets document content pass through the model and reach the database as Cypher. What goes into a model and what comes out of it both deserve the same handling as any external input.",
+      "fr": "Le LLM comme canal de données non fiables apparaît dans les deux sens : Goose fait fuiter des secrets de l'hôte vers le fournisseur, et Flexible GraphRAG laisse du contenu de documents traverser le modèle pour atteindre la base sous forme de Cypher. Ce qui entre dans un modèle et ce qui en sort méritent le même traitement que toute entrée externe."
+    },
+    {
+      "es": "La infraestructura de serving sigue acumulando DoS triviales: un parámetro null o un cache sin límite alcanzan para tumbar vLLM, y endpoints auxiliares como /tokenize que saltean --api-key amplían la superficie. No expongas el servidor de inferencia directo a internet: ponelo detrás de un gateway que autentique y limite.",
+      "en": "Serving infrastructure keeps piling up trivial DoS bugs: a null parameter or an unbounded cache is enough to take vLLM down, and side endpoints like /tokenize that bypass --api-key widen the surface. Do not expose the inference server directly to the internet: put it behind a gateway that authenticates and rate-limits.",
+      "fr": "L'infrastructure de serving continue d'accumuler des DoS triviaux : un paramètre null ou un cache sans limite suffit à faire tomber vLLM, et des endpoints annexes comme /tokenize qui contournent --api-key élargissent la surface. N'exposez pas le serveur d'inférence directement sur internet : placez-le derrière un gateway qui authentifie et limite le débit."
+    }
+  ]
+}

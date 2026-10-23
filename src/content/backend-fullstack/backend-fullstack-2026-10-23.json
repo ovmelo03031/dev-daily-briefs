@@ -1,0 +1,318 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 23 Oct 2026",
+    "en": "Backend & Fullstack Daily — 23 Oct 2026",
+    "fr": "Backend & Fullstack Daily — 23 oct. 2026"
+  },
+  "description": {
+    "es": "Bypass crítico de middleware en @sentry/nextjs, prototype pollution en GraphQL Tools y toml-node, Bun 1.4.4 con bun fmt, GraphQL Yoga 6 y una ola de advisories en Nuxt, DOMPurify y Fastify.",
+    "en": "Critical middleware bypass in @sentry/nextjs, prototype pollution in GraphQL Tools and toml-node, Bun 1.4.4 with bun fmt, GraphQL Yoga 6 and a wave of advisories in Nuxt, DOMPurify and Fastify.",
+    "fr": "Contournement critique du middleware dans @sentry/nextjs, prototype pollution dans GraphQL Tools et toml-node, Bun 1.4.4 avec bun fmt, GraphQL Yoga 6 et une vague d'avis pour Nuxt, DOMPurify et Fastify."
+  },
+  "pubDate": "2026-10-23",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "@sentry/nextjs: bypass de middleware (CVSS 9.1)", "en": "@sentry/nextjs: middleware bypass (CVSS 9.1)", "fr": "@sentry/nextjs : contournement du middleware (9.1)" },
+      "anchor": "sentry-nextjs-tunnel-bypass",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "GraphQL Tools: prototype pollution (8.4)", "en": "GraphQL Tools: prototype pollution (8.4)", "fr": "GraphQL Tools : prototype pollution (8.4)" },
+      "anchor": "graphql-tools-prototype-pollution",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Bun 1.4.4: bun fmt y COPY en Bun.SQL", "en": "Bun 1.4.4: bun fmt and COPY in Bun.SQL", "fr": "Bun 1.4.4 : bun fmt et COPY dans Bun.SQL" },
+      "anchor": "bun-1-4-4",
+      "icon": "simple-icons:bun"
+    },
+    {
+      "text": { "es": "GraphQL Yoga 6: logging por request", "en": "GraphQL Yoga 6: per-request logging", "fr": "GraphQL Yoga 6 : logs par requête" },
+      "anchor": "graphql-yoga-6",
+      "icon": "lucide:blocks"
+    },
+    {
+      "text": { "es": "Nuxt: cuatro advisories en route rules", "en": "Nuxt: four advisories around route rules", "fr": "Nuxt : quatre avis sur les route rules" },
+      "anchor": "nuxt-route-rules-batch",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Estudio: la IA infla PRs, no entregas", "en": "Study: AI inflates PRs, not delivery", "fr": "Étude : l'IA gonfle les PR, pas la livraison" },
+      "anchor": "ai-productivity-study",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "sentry-nextjs-tunnel-bypass",
+      "updates": [
+        {
+          "id": "sentry-nextjs-tunnel-bypass",
+          "tag": "security",
+          "date": "22 Oct 2026",
+          "title": {
+            "es": "CVE-2026-114139: el tunnelRoute de @sentry/nextjs saltea tu middleware (CVSS 9.1)",
+            "en": "CVE-2026-114139: @sentry/nextjs tunnelRoute skips your middleware (CVSS 9.1)",
+            "fr": "CVE-2026-114139 : le tunnelRoute de @sentry/nextjs contourne votre middleware (CVSS 9.1)"
+          },
+          "body_html": {
+            "es": "<p>Con <code>tunnelRoute</code> activado, el SDK excluye del middleware las requests al túnel (por ejemplo <code>/monitoring</code>), pero esa exclusión era más amplia que el rewrite: rutas que no son el túnel también se salteaban tu middleware de auth. Afecta <code>@sentry/nextjs</code> 9.36.0–9.47.1 y 10.x antes de <strong>10.75.2</strong>. Si tu auth vive en el middleware, actualizá YA.</p>",
+            "en": "<p>With <code>tunnelRoute</code> enabled, the SDK excludes tunnel requests (for example <code>/monitoring</code>) from middleware, but that exclusion was wider than the rewrite, so non-tunnel paths also skipped your auth middleware. Affects <code>@sentry/nextjs</code> 9.36.0–9.47.1 and 10.x before <strong>10.75.2</strong>. If your auth lives in middleware, upgrade now.</p>",
+            "fr": "<p>Avec <code>tunnelRoute</code> activé, le SDK exclut du middleware les requêtes du tunnel (par exemple <code>/monitoring</code>), mais l'exclusion était plus large que le rewrite : des chemins hors tunnel contournaient aussi le middleware d'authentification. Concerne <code>@sentry/nextjs</code> 9.36.0–9.47.1 et 10.x avant <strong>10.75.2</strong>. Mettez à jour sans attendre.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-mchm-gjx6-7h55", "label": "github.com/advisories" }
+        },
+        {
+          "id": "graphql-tools-prototype-pollution",
+          "tag": "security",
+          "date": "22 Oct 2026",
+          "title": {
+            "es": "CVE-2026-114604: prototype pollution en mergeIncrementalResult de @graphql-tools/utils",
+            "en": "CVE-2026-114604: prototype pollution in @graphql-tools/utils mergeIncrementalResult",
+            "fr": "CVE-2026-114604 : prototype pollution dans mergeIncrementalResult de @graphql-tools/utils"
+          },
+          "body_html": {
+            "es": "<p>Segmentos de <code>path</code> no primitivos en respuestas incrementales (<code>@defer</code>/<code>@stream</code>) llegan a <code>setObjectKeyPath</code> sin validar y pueden escribir en <code>Object.prototype</code>. <strong>CVSS 8.4</strong>, afecta 10.10.1–12.0.1, parche en <strong>12.0.2</strong>. Ojo si tenés un gateway que mergea respuestas de subgraphs que no controlás.</p>",
+            "en": "<p>Non-primitive <code>path</code> segments in incremental (<code>@defer</code>/<code>@stream</code>) results reach <code>setObjectKeyPath</code> unvalidated and can write to <code>Object.prototype</code>. <strong>CVSS 8.4</strong>, affects 10.10.1–12.0.1, fixed in <strong>12.0.2</strong>. Watch out if your gateway merges responses from subgraphs you don't control.</p>",
+            "fr": "<p>Des segments de <code>path</code> non primitifs dans les résultats incrémentaux (<code>@defer</code>/<code>@stream</code>) atteignent <code>setObjectKeyPath</code> sans validation et peuvent écrire dans <code>Object.prototype</code>. <strong>CVSS 8.4</strong>, versions 10.10.1–12.0.1, corrigé en <strong>12.0.2</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-c4qx-w738-7hr3", "label": "github.com/advisories" }
+        },
+        {
+          "id": "bun-1-4-4",
+          "tag": "release",
+          "date": "22 Oct 2026",
+          "title": {
+            "es": "Bun 1.4.4: bun fmt compatible con Prettier, COPY en Bun.SQL y migración de lockfiles Yarn Berry",
+            "en": "Bun 1.4.4: Prettier-compatible bun fmt, COPY in Bun.SQL and Yarn Berry lockfile migration",
+            "fr": "Bun 1.4.4 : bun fmt compatible Prettier, COPY dans Bun.SQL et migration des lockfiles Yarn Berry"
+          },
+          "body_html": {
+            "es": "<p>Llega <code>bun fmt</code>, que lee configs de Prettier/oxfmt (59.7 ms vs 17.1 s de Prettier en su propio repo). <code>Bun.SQL</code> suma <code>query.cancel()</code> real en Postgres, streaming de <code>COPY</code> y <code>transform: SQL.camel</code>; <code>bun:sqlite</code> agrega <code>db.function()</code>, <code>db.aggregate()</code> y hooks <code>onInsert/onUpdate/onDelete</code>. Y <code>bun install</code> ya migra <code>yarn.lock</code> de Berry sin re-resolver todo. Un golazo para la DX.</p>",
+            "en": "<p>Adds <code>bun fmt</code>, which reads Prettier/oxfmt configs (59.7 ms vs Prettier's 17.1 s on Prettier's own repo). <code>Bun.SQL</code> gains a real Postgres <code>query.cancel()</code>, streaming <code>COPY</code> and <code>transform: SQL.camel</code>; <code>bun:sqlite</code> adds <code>db.function()</code>, <code>db.aggregate()</code> and <code>onInsert/onUpdate/onDelete</code> hooks. <code>bun install</code> now migrates Yarn Berry lockfiles without re-resolving everything.</p>",
+            "fr": "<p>Arrivée de <code>bun fmt</code>, qui lit les configs Prettier/oxfmt (59.7 ms contre 17.1 s pour Prettier sur son propre dépôt). <code>Bun.SQL</code> gagne un vrai <code>query.cancel()</code> Postgres, le streaming <code>COPY</code> et <code>transform: SQL.camel</code> ; <code>bun:sqlite</code> ajoute <code>db.function()</code>, <code>db.aggregate()</code> et des hooks de modification. <code>bun install</code> migre désormais les lockfiles Yarn Berry.</p>"
+          },
+          "source": { "url": "https://bun.com/blog/bun-v1.4.4", "label": "bun.com/blog" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "nuxt-route-rules-batch",
+      "updates": [
+        {
+          "id": "nuxt-route-rules-batch",
+          "tag": "security",
+          "date": "22 Oct 2026",
+          "title": {
+            "es": "Nuxt: route rules salteables por mayúsculas y percent-encoding (CVE-2026-114132 y tres más)",
+            "en": "Nuxt: route rules bypassable via letter case and percent-encoding (CVE-2026-114132 and three more)",
+            "fr": "Nuxt : route rules contournables par la casse et le percent-encoding (CVE-2026-114132 et trois autres)"
+          },
+          "body_html": {
+            "es": "<p>El router de páginas resuelve <code>/Admin</code> igual que <code>/admin</code>, pero Nitro matcheaba las route rules (<code>headers</code>, <code>redirect</code>, <code>proxy</code>, <code>ssr</code>) case-sensitive y contra el path crudo, así que un segmento con otra capitalización o percent-encoded se las saltea. Se suman XSS vía <code>useHeadSafe</code> en server islands y un fix incompleto de <code>javascript:</code> URLs. Parche en <strong>4.6.2</strong> (y 3.21.4 para la línea 3). Si usás route rules como control de acceso, esto te pega.</p>",
+            "en": "<p>The page router resolves <code>/Admin</code> like <code>/admin</code>, but Nitro matched route rules (<code>headers</code>, <code>redirect</code>, <code>proxy</code>, <code>ssr</code>) case-sensitively and against the raw path, so a differently-cased or percent-encoded segment skips them. Also: XSS via <code>useHeadSafe</code> in server islands and an incomplete <code>javascript:</code> URL fix. Fixed in <strong>4.6.2</strong> (3.21.4 for the v3 line).</p>",
+            "fr": "<p>Le routeur de pages résout <code>/Admin</code> comme <code>/admin</code>, mais Nitro faisait correspondre les route rules (<code>headers</code>, <code>redirect</code>, <code>proxy</code>, <code>ssr</code>) en tenant compte de la casse et sur le chemin brut : un segment à casse différente ou percent-encodé les contourne. S'ajoutent un XSS via <code>useHeadSafe</code> et un correctif incomplet des URL <code>javascript:</code>. Corrigé en <strong>4.6.2</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-vjh5-4x84-xrqp", "label": "github.com/advisories" }
+        },
+        {
+          "id": "toml-node-prototype-pollution",
+          "tag": "security",
+          "date": "22 Oct 2026",
+          "title": {
+            "es": "toml-node: prototype pollution que esquiva el fix anterior, más tres DoS (CVSS 8.8)",
+            "en": "toml-node: prototype pollution that dodges the earlier fix, plus three DoS bugs (CVSS 8.8)",
+            "fr": "toml-node : prototype pollution qui contourne l'ancien correctif, plus trois DoS (CVSS 8.8)"
+          },
+          "body_html": {
+            "es": "<p>El fix de CVE-2026-63376 (4.1.2) se puede esquivar escribiendo el key path con comillas en vez de puntos: un TOML de cuatro líneas escribe en <code>Object.prototype</code>. En el mismo lote salieron DoS cuadráticos por headers de array-of-tables y dotted keys largos. Parche en <strong>5.0.1</strong>. Si parseás TOML que sube el usuario, ponete las pilas.</p>",
+            "en": "<p>The CVE-2026-63376 fix (4.1.2) can be dodged by spelling the key path with quotes instead of dots: a four-line TOML document writes to <code>Object.prototype</code>. The same batch adds quadratic DoS via array-of-tables headers and long dotted keys. Fixed in <strong>5.0.1</strong>.</p>",
+            "fr": "<p>Le correctif de CVE-2026-63376 (4.1.2) se contourne en écrivant le chemin de clé avec des guillemets plutôt que des points : un document TOML de quatre lignes écrit dans <code>Object.prototype</code>. Le même lot ajoute des DoS quadratiques. Corrigé en <strong>5.0.1</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-h895-cgqg-jf52", "label": "github.com/advisories" }
+        },
+        {
+          "id": "dompurify-safe-for-templates",
+          "tag": "security",
+          "date": "22 Oct 2026",
+          "title": {
+            "es": "DOMPurify 3.4.17: bypass de SAFE_FOR_TEMPLATES en shadow roots (CVSS 9.2)",
+            "en": "DOMPurify 3.4.17: SAFE_FOR_TEMPLATES bypass in shadow roots (CVSS 9.2)",
+            "fr": "DOMPurify 3.4.17 : contournement de SAFE_FOR_TEMPLATES dans les shadow roots (CVSS 9.2)"
+          },
+          "body_html": {
+            "es": "<p>Expresiones de template partidas sobreviven dentro de shadow roots adjuntos cuando usás <code>SAFE_FOR_TEMPLATES</code>; además, un hook que remueve padre o hermano en modo <code>IN_PLACE</code> deja handlers vivos (7.6). Afecta 3.4.4–3.4.16. Relevante si sanitizás HTML en el server con jsdom para renderizar con un motor de templates.</p>",
+            "en": "<p>Split template expressions survive inside attached shadow roots when using <code>SAFE_FOR_TEMPLATES</code>; separately, a hook that removes a parent or sibling in <code>IN_PLACE</code> mode leaves event handlers alive (7.6). Affects 3.4.4–3.4.16. Relevant if you sanitize HTML server-side with jsdom before feeding a template engine.</p>",
+            "fr": "<p>Des expressions de template scindées survivent dans les shadow roots avec <code>SAFE_FOR_TEMPLATES</code> ; par ailleurs, un hook retirant un parent ou un frère en mode <code>IN_PLACE</code> laisse des gestionnaires actifs (7.6). Versions 3.4.4–3.4.16.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-cg2g-xh64-v4q7", "label": "github.com/advisories" }
+        },
+        {
+          "id": "fastify-header-propertynames",
+          "tag": "minor",
+          "date": "22 Oct 2026",
+          "title": {
+            "es": "Fastify 5.12.6: deny-lists de headers con propertyNames no matcheaban (CVE-2026-107832)",
+            "en": "Fastify 5.12.6: header deny-lists via propertyNames never matched (CVE-2026-107832)",
+            "fr": "Fastify 5.12.6 : les deny-lists d'en-têtes via propertyNames ne correspondaient jamais (CVE-2026-107832)"
+          },
+          "body_html": {
+            "es": "<p>Fastify pasa a minúsculas los nombres de headers del schema, pero no los valores de <code>enum</code>/<code>const</code> dentro de <code>propertyNames</code>: una deny-list escrita como <code>X-Debug-Override</code> nunca matchea. Severidad baja (2.3), afecta 5.12.2–5.12.5. Lección de schema: escribí header names en minúscula siempre.</p>",
+            "en": "<p>Fastify lowercases header names in the schema but not the <code>enum</code>/<code>const</code> values inside <code>propertyNames</code>, so a deny-list written as <code>X-Debug-Override</code> never matches. Low severity (2.3), affects 5.12.2–5.12.5. Schema lesson: always write header names in lowercase.</p>",
+            "fr": "<p>Fastify met en minuscules les noms d'en-têtes du schéma, mais pas les valeurs <code>enum</code>/<code>const</code> de <code>propertyNames</code> : une deny-list écrite <code>X-Debug-Override</code> ne correspond jamais. Sévérité faible (2.3), versions 5.12.2–5.12.5.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-389g-gv7q-r4x8", "label": "github.com/advisories" }
+        },
+        {
+          "id": "nodemailer-dkim-dos",
+          "tag": "security",
+          "date": "22 Oct 2026",
+          "title": {
+            "es": "Nodemailer 10.0.10: DoS cuadrático al desplegar headers en DKIM (CVE-2026-110871)",
+            "en": "Nodemailer 10.0.10: quadratic DoS when unfolding headers for DKIM (CVE-2026-110871)",
+            "fr": "Nodemailer 10.0.10 : DoS quadratique au dépliage des en-têtes DKIM (CVE-2026-110871)"
+          },
+          "body_html": {
+            "es": "<p>Un header plegado muy largo dispara unfolding O(n²) al firmar con DKIM y bloquea el event loop. Afecta 3.0.0–10.0.9. Si armás mails con input del usuario (asunto, reply-to), actualizá.</p>",
+            "en": "<p>A very large folded header triggers O(n²) unfolding during DKIM signing and blocks the event loop. Affects 3.0.0–10.0.9. Upgrade if user input reaches your mail headers.</p>",
+            "fr": "<p>Un en-tête plié très long déclenche un dépliage O(n²) lors de la signature DKIM et bloque l'event loop. Versions 3.0.0–10.0.9.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-39m8-27wv-hr27", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "graphql-yoga-6",
+      "updates": [
+        {
+          "id": "graphql-yoga-6",
+          "tag": "breaking",
+          "date": "22 Oct 2026",
+          "title": {
+            "es": "GraphQL Yoga 6.0: logger por request con requestId y adiós a @graphql-yoga/logger",
+            "en": "GraphQL Yoga 6.0: per-request logger with requestId, goodbye @graphql-yoga/logger",
+            "fr": "GraphQL Yoga 6.0 : logger par requête avec requestId, adieu @graphql-yoga/logger"
+          },
+          "body_html": {
+            "es": "<p>Cada request trae su <code>context.log</code> etiquetado con un <code>requestId</code> (tomado de Fastify, del header <code>x-request-id</code> o generado) y devuelto en la respuesta; los errores enmascarados se loguean con ese id. Breaking: <code>@graphql-yoga/logger</code> desaparece en favor de <code>@graphql-hive/logger</code>, <code>createLogger</code> ya no se exporta y <code>logging</code> cambia de tipo. Configurá <code>requestId.trustHeader: false</code> si los clientes llegan directo al server.</p>",
+            "en": "<p>Every request gets a <code>context.log</code> tagged with a <code>requestId</code> (from Fastify, the <code>x-request-id</code> header, or generated) and echoed in the response; masked errors are logged with that id. Breaking: <code>@graphql-yoga/logger</code> is removed in favor of <code>@graphql-hive/logger</code>, <code>createLogger</code> is gone and <code>logging</code> changes type. Set <code>requestId.trustHeader: false</code> when clients reach the server directly.</p>",
+            "fr": "<p>Chaque requête reçoit un <code>context.log</code> étiqueté d'un <code>requestId</code> (Fastify, en-tête <code>x-request-id</code> ou généré) renvoyé dans la réponse. Rupture : <code>@graphql-yoga/logger</code> est supprimé au profit de <code>@graphql-hive/logger</code> et <code>createLogger</code> n'est plus exporté.</p>"
+          },
+          "source": { "url": "https://github.com/graphql-hive/graphql-yoga/releases/tag/graphql-yoga%406.0.0", "label": "github.com/graphql-hive" }
+        },
+        {
+          "id": "prisma-8-rc-20",
+          "tag": "beta",
+          "date": "22 Oct 2026",
+          "title": {
+            "es": "Prisma 8.0.0-rc.20: salida tabulada en pipes y migraciones de namespaces en Postgres",
+            "en": "Prisma 8.0.0-rc.20: tab-separated piped output and Postgres namespace migrations",
+            "fr": "Prisma 8.0.0-rc.20 : sortie tabulée en pipe et migrations de namespaces Postgres"
+          },
+          "body_html": {
+            "es": "<p>Los comandos del ORM corren sobre <code>@prisma/cli-engine</code> 0.9.0: en un pipe o CI imprimen líneas tabuladas y el JSON pide <code>--json</code> explícito (rompe scripts que parseaban la salida). Los type alias en PSL aceptan <code>@default</code>, <code>@onCreate</code> y <code>@onUpdate</code>, y las migraciones Postgres ya renombran/mueven namespaces y cambian primary keys.</p>",
+            "en": "<p>ORM commands now run on <code>@prisma/cli-engine</code> 0.9.0: in a pipe or CI they print tab-separated lines and JSON requires an explicit <code>--json</code> (breaks scripts that parsed the output). PSL type aliases accept <code>@default</code>, <code>@onCreate</code> and <code>@onUpdate</code>, and Postgres migrations can rename/move namespaces and change primary keys.</p>",
+            "fr": "<p>Les commandes ORM tournent sur <code>@prisma/cli-engine</code> 0.9.0 : en pipe ou en CI, sortie tabulée, et le JSON exige <code>--json</code>. Les type alias PSL acceptent <code>@default</code>, <code>@onCreate</code> et <code>@onUpdate</code> ; les migrations Postgres gèrent les namespaces et les clés primaires.</p>"
+          },
+          "source": { "url": "https://github.com/prisma/orm/releases/tag/v8.0.0-rc.20", "label": "github.com/prisma" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "harbor-docker-sandboxes",
+      "updates": [
+        {
+          "id": "harbor-docker-sandboxes",
+          "tag": "notable",
+          "date": "22 Oct 2026",
+          "title": {
+            "es": "Harbor + Docker Sandboxes: cada eval de agente en su propia microVM",
+            "en": "Harbor + Docker Sandboxes: each agent eval in its own microVM",
+            "fr": "Harbor + Docker Sandboxes : chaque éval d'agent dans sa propre microVM"
+          },
+          "body_html": {
+            "es": "<p>Docker integró Harbor con Docker Sandboxes: cada tarea corre en una microVM con kernel propio en vez de compartir container, con políticas de red que permiten bajar dependencias en el setup y cortan internet mientras el agente trabaja (probaron 64 tareas concurrentes). Se invoca con <code>harbor run ... -e sbx</code>. El patrón container-compartido para código no confiable se está quedando corto.</p>",
+            "en": "<p>Docker integrated Harbor with Docker Sandboxes: each task runs in a microVM with its own kernel instead of a shared container, with network policies that allow dependency downloads during setup and cut internet while the agent works (64 concurrent tasks tested). Invoked with <code>harbor run ... -e sbx</code>.</p>",
+            "fr": "<p>Docker a intégré Harbor à Docker Sandboxes : chaque tâche tourne dans une microVM avec son propre noyau, avec des politiques réseau qui autorisent les dépendances au setup puis coupent Internet (64 tâches concurrentes testées). Lancement via <code>harbor run ... -e sbx</code>.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/ai-agents-harbor-docker/", "label": "infoq.com" }
+        },
+        {
+          "id": "lambda-microvms-regions",
+          "tag": "minor",
+          "date": "22 Oct 2026",
+          "title": {
+            "es": "AWS Lambda MicroVMs llega a 4 regiones más (14 en total)",
+            "en": "AWS Lambda MicroVMs expands to 4 more Regions (14 total)",
+            "fr": "AWS Lambda MicroVMs arrive dans 4 nouvelles régions (14 au total)"
+          },
+          "body_html": {
+            "es": "<p>El primitivo serverless con aislamiento a nivel VM suma Hong Kong, Malasia, Tailandia y España. Cada MicroVM tiene endpoint HTTPS propio con HTTP/2, gRPC y WebSockets, y puede preservar estado entre ejecuciones: candidato natural para correr código generado por IA por usuario.</p>",
+            "en": "<p>The serverless primitive with VM-level isolation adds Hong Kong, Malaysia, Thailand and Spain. Each MicroVM gets its own HTTPS endpoint with HTTP/2, gRPC and WebSockets and can preserve state between runs.</p>",
+            "fr": "<p>La primitive serverless à isolation VM ajoute Hong Kong, la Malaisie, la Thaïlande et l'Espagne. Chaque MicroVM dispose de son endpoint HTTPS (HTTP/2, gRPC, WebSockets) et peut conserver son état.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/lambda-microvms-4-additional-regions", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "ai-productivity-study",
+      "updates": [
+        {
+          "id": "ai-productivity-study",
+          "tag": "notable",
+          "date": "22 Oct 2026",
+          "title": {
+            "es": "Estudio de Harvard con datos de Jellyfish: la IA sube el código, el cuello de botella pasa al review",
+            "en": "Harvard study on Jellyfish data: AI raises code output, the bottleneck moves to review",
+            "fr": "Étude de Harvard sur les données Jellyfish : l'IA augmente le code, le goulot passe à la revue"
+          },
+          "body_html": {
+            "es": "<p>718 empresas, ~700.000 devs: los agentes suben líneas un 30% y PRs un 23%, pero los issues resueltos solo un 12%; el tiempo de review por PR crece un 49% y se duplica la proporción de PRs que piden cambios. Lectura de arquitecto: si no invertís en límites claros, tests y PRs chicos, la IA solo te mueve el embudo de lugar.</p>",
+            "en": "<p>718 firms, ~700,000 developers: agents raise lines of code 30% and PRs 23%, but resolved issues only 12%; review time per PR rises 49% and the share of PRs needing changes doubles. Architect's takeaway: without clear boundaries, tests and small PRs, AI just moves the bottleneck.</p>",
+            "fr": "<p>718 entreprises, ~700 000 développeurs : les agents augmentent les lignes de 30 % et les PR de 23 %, mais les tickets résolus de 12 % seulement ; le temps de revue par PR grimpe de 49 %. Sans frontières claires, tests et petites PR, l'IA déplace simplement le goulot.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/jellyfish-ai-productivity/", "label": "infoq.com" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Bypasses por normalización de paths (mayúsculas, percent-encoding, propertyNames): el control de acceso en el edge/middleware sigue siendo frágil — validá en la capa de dominio también.",
+      "en": "Path-normalization bypasses (letter case, percent-encoding, propertyNames): edge/middleware access control remains fragile — enforce it in the domain layer too.",
+      "fr": "Contournements par normalisation des chemins (casse, percent-encoding, propertyNames) : le contrôle d'accès en middleware reste fragile — appliquez-le aussi dans la couche domaine."
+    },
+    {
+      "es": "Prototype pollution vuelve por la puerta de atrás en parsers (TOML, GraphQL incremental): usá Object.create(null) o Map al construir objetos desde input externo.",
+      "en": "Prototype pollution keeps returning through parsers (TOML, incremental GraphQL): use Object.create(null) or Map when building objects from external input.",
+      "fr": "La prototype pollution revient par les parseurs (TOML, GraphQL incrémental) : utilisez Object.create(null) ou Map pour les objets construits depuis une entrée externe."
+    },
+    {
+      "es": "MicroVMs como unidad de aislamiento (Lambda MicroVMs, Docker Sandboxes) reemplazan al container compartido para ejecutar código no confiable.",
+      "en": "MicroVMs as the isolation unit (Lambda MicroVMs, Docker Sandboxes) are replacing shared containers for running untrusted code.",
+      "fr": "Les microVM comme unité d'isolation (Lambda MicroVMs, Docker Sandboxes) remplacent le conteneur partagé pour le code non fiable."
+    }
+  ]
+}

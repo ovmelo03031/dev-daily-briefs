@@ -1,0 +1,399 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 26 Oct 2026",
+    "en": "Backend & Fullstack Daily — 26 Oct 2026",
+    "fr": "Backend & Fullstack Daily — 26 oct. 2026"
+  },
+  "description": {
+    "es": "php2shell explotado antes del parche, brecha en PingCAP, body-parser y multer caen con una sola request, bypass de auth en Laravel y Echo, y Cloudflare recupera 100 TB de RAM.",
+    "en": "php2shell exploited before the patch, a PingCAP breach, body-parser and multer crash on a single request, auth bypasses in Laravel and Echo, and Cloudflare reclaims 100 TB of RAM.",
+    "fr": "php2shell exploité avant le correctif, fuite chez PingCAP, body-parser et multer plantent sur une seule requête, contournements d'auth dans Laravel et Echo, et Cloudflare récupère 100 To de RAM."
+  },
+  "pubDate": "2026-10-26",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "php2shell: dos RCE en PHP ya explotadas",
+        "en": "php2shell: two PHP RCEs already exploited",
+        "fr": "php2shell : deux RCE PHP déjà exploitées"
+      },
+      "anchor": "php2shell-rce",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "PingCAP: brecha en TiDB Cloud, rotá tus keys",
+        "en": "PingCAP: TiDB Cloud breach, rotate your keys",
+        "fr": "PingCAP : fuite TiDB Cloud, changez vos clés"
+      },
+      "anchor": "pingcap-breach",
+      "icon": "lucide:database"
+    },
+    {
+      "text": {
+        "es": "body-parser: una request tumba el proceso",
+        "en": "body-parser: one request kills the process",
+        "fr": "body-parser : une requête tue le processus"
+      },
+      "anchor": "body-parser-dos",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Laravel TokenGuard: bypass de auth (9.2)",
+        "en": "Laravel TokenGuard: auth bypass (9.2)",
+        "fr": "Laravel TokenGuard : contournement d'auth (9.2)"
+      },
+      "anchor": "laravel-tokenguard-bypass",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "NestJS 11.2.8: endurece validación y rutas",
+        "en": "NestJS 11.2.8: hardens validation and routes",
+        "fr": "NestJS 11.2.8 : validation et routes durcies"
+      },
+      "anchor": "nestjs-11-2-8",
+      "icon": "lucide:blocks"
+    },
+    {
+      "text": {
+        "es": "Cloudflare: 100 TB de RAM con mejor hashing",
+        "en": "Cloudflare: 100 TB of RAM from better hashing",
+        "fr": "Cloudflare : 100 To de RAM grâce au hashing"
+      },
+      "anchor": "cloudflare-consistent-hashing",
+      "icon": "simple-icons:cloudflare"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "php2shell-rce",
+      "updates": [
+        {
+          "id": "php2shell-rce",
+          "tag": "breaking",
+          "date": "25 Oct 2026",
+          "title": {
+            "es": "php2shell: dos RCE en PHP (CVSS 9.2) explotadas antes del parche",
+            "en": "php2shell: two PHP RCEs (CVSS 9.2) exploited before the patch",
+            "fr": "php2shell : deux RCE PHP (CVSS 9.2) exploitées avant le correctif"
+          },
+          "body_html": {
+            "es": "<p><strong>CVE-2026-109618</strong> y <strong>CVE-2026-109619</strong> son bugs de memoria en el ciclo de vida del request (manejo de out-of-memory y estado de sesión que sobrevive a su memoria). Amazon vio un intento de explotación el 17 de octubre, cuatro días antes del fix. Corregido en <strong>8.5.12, 8.4.27, 8.3.36 y 8.2.35</strong>; con Apache <code>mod_php</code> el RCE está confirmado con límites por defecto. Ojo: un tercero, CVE-2026-115560, sigue sin parche; mitigalo con <code>session.upload_progress.enabled=0</code>. Actualizá y reiniciá TODOS los workers.</p>",
+            "en": "<p><strong>CVE-2026-109618</strong> and <strong>CVE-2026-109619</strong> are memory-safety bugs in the request lifecycle (out-of-memory handling and session state outliving its memory). Amazon saw an exploitation attempt on October 17, four days before the fix. Fixed in <strong>8.5.12, 8.4.27, 8.3.36 and 8.2.35</strong>; with Apache <code>mod_php</code>, RCE is confirmed under default limits. A third bug, CVE-2026-115560, is still unpatched; mitigate with <code>session.upload_progress.enabled=0</code>. Upgrade and restart every worker.</p>",
+            "fr": "<p><strong>CVE-2026-109618</strong> et <strong>CVE-2026-109619</strong> sont des bugs mémoire du cycle de vie des requêtes (gestion du manque de mémoire et état de session qui survit à sa mémoire). Amazon a vu une tentative d'exploitation le 17 octobre, quatre jours avant le correctif. Corrigé en <strong>8.5.12, 8.4.27, 8.3.36 et 8.2.35</strong> ; avec Apache <code>mod_php</code>, la RCE est confirmée avec les limites par défaut. Un troisième bug, CVE-2026-115560, reste sans correctif : désactivez <code>session.upload_progress.enabled</code>. Mettez à jour et redémarrez tous les workers.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/php-critical-rce-patches/", "label": "infoq.com" }
+        },
+        {
+          "id": "pingcap-breach",
+          "tag": "breaking",
+          "date": "25 Oct 2026",
+          "title": {
+            "es": "Brecha en PingCAP: registros del control plane de TiDB Cloud y código fuente expuestos",
+            "en": "PingCAP breach: TiDB Cloud control-plane records and source code exposed",
+            "fr": "Fuite chez PingCAP : données du control plane TiDB Cloud et code source exposés"
+          },
+          "body_html": {
+            "es": "<p>PingCAP confirmó la exportación de nombres, emails, asociaciones de organización y proyecto, y texto del SQL editor; dice que no hay evidencia de impacto en los datos guardados en TiDB. El atacante (FulcrumSec) reclama 10,6 TB, unas 115K API keys de consola y 413 repos privados, todavía sin verificar. Si usás TiDB Cloud, rotá YA las management API keys y esperá phishing dirigido con datos muy creíbles.</p>",
+            "en": "<p>PingCAP confirmed the export of names, emails, organization and project associations, and SQL editor text; it says there is no evidence that data stored in TiDB was affected. The attacker (FulcrumSec) claims 10.6 TB, about 115K console API keys and 413 private repos, still unverified. If you use TiDB Cloud, rotate your management API keys now and expect very convincing targeted phishing.</p>",
+            "fr": "<p>PingCAP a confirmé l'export de noms, e-mails, rattachements organisation/projet et texte de l'éditeur SQL ; l'entreprise dit n'avoir aucune preuve d'impact sur les données stockées dans TiDB. L'attaquant (FulcrumSec) revendique 10,6 To, environ 115K clés API de console et 413 dépôts privés, non vérifiés. Si vous utilisez TiDB Cloud, changez vos clés API de gestion et attendez-vous à du phishing ciblé.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/pingcap-cloud-data-breach/", "label": "infoq.com" }
+        },
+        {
+          "id": "body-parser-dos",
+          "tag": "security",
+          "date": "23 Oct 2026",
+          "title": {
+            "es": "CVE-2026-111181: body-parser se cae con un solo request comprimido",
+            "en": "CVE-2026-111181: body-parser crashes on a single compressed request",
+            "fr": "CVE-2026-111181 : body-parser plante sur une seule requête compressée"
+          },
+          "body_html": {
+            "es": "<p>Un frame gzip válido seguido de bytes extra deja el stream de descompresión sin error listener; el error termina como excepción no capturada y mata el proceso. Afecta la config <strong>por defecto</strong>, sin auth y antes del routing, así que todo Express expuesto es candidato. Fix en <strong>body-parser 2.4.0 / 1.20.9</strong>; si no aceptás bodies comprimidos, <code>inflate: false</code> como workaround.</p>",
+            "en": "<p>One valid gzip frame followed by trailing bytes leaves the decompression stream without an error listener; the error surfaces as an uncaught exception and kills the process. It hits the <strong>default</strong> config, unauthenticated and before routing, so every exposed Express app qualifies. Fixed in <strong>body-parser 2.4.0 / 1.20.9</strong>; if you don't accept compressed bodies, <code>inflate: false</code> is the workaround.</p>",
+            "fr": "<p>Une trame gzip valide suivie d'octets en trop laisse le flux de décompression sans écouteur d'erreur ; l'erreur devient une exception non interceptée et tue le processus. Cela touche la config <strong>par défaut</strong>, sans authentification et avant le routage. Corrigé en <strong>body-parser 2.4.0 / 1.20.9</strong> ; sinon, <code>inflate: false</code> si vous n'acceptez pas de corps compressés.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-27r3-jxmh-p828", "label": "github.com/advisories" }
+        },
+        {
+          "id": "laravel-tokenguard-bypass",
+          "tag": "security",
+          "date": "23 Oct 2026",
+          "title": {
+            "es": "CVE-2026-114509: bypass de TokenGuard en Laravel (CVSS 9.2)",
+            "en": "CVE-2026-114509: Laravel TokenGuard authentication bypass (CVSS 9.2)",
+            "fr": "CVE-2026-114509 : contournement de TokenGuard dans Laravel (CVSS 9.2)"
+          },
+          "body_html": {
+            "es": "<p>Con un guard de API basado en token y MySQL/MariaDB, mandar una credencial que no es string hace que la query matchee otro usuario: account takeover sin conocer el token. Corregido en <strong>laravel/framework 13.29.0 y 12.68.0</strong>. Si tenés APIs con <code>TokenGuard</code>, esto es prioridad uno.</p>",
+            "en": "<p>With a token-based API guard on MySQL/MariaDB, sending a non-string credential makes the lookup match another user: account takeover without knowing the token. Fixed in <strong>laravel/framework 13.29.0 and 12.68.0</strong>. If your APIs use <code>TokenGuard</code>, this is priority one.</p>",
+            "fr": "<p>Avec un guard d'API à token sur MySQL/MariaDB, une valeur d'identifiant non textuelle fait correspondre la requête à un autre utilisateur : prise de compte sans connaître le token. Corrigé en <strong>laravel/framework 13.29.0 et 12.68.0</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-f9x3-7vq9-cph6", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "multer-async-filter-dos",
+      "updates": [
+        {
+          "id": "multer-async-filter-dos",
+          "tag": "security",
+          "date": "23 Oct 2026",
+          "title": {
+            "es": "CVE-2026-113872: multer con fileFilter async se cae con un request abortado",
+            "en": "CVE-2026-113872: multer with an async fileFilter crashes on an aborted request",
+            "fr": "CVE-2026-113872 : multer avec un fileFilter asynchrone plante sur une requête interrompue"
+          },
+          "body_html": {
+            "es": "<p>Si un request se aborta mientras otro <code>fileFilter</code> asíncrono sigue pendiente, el callback reanuda un stream ya destruido y busboy emite un <code>'error'</code> sin listener: proceso muerto. Un request sin auth alcanza. Actualizá a <strong>multer 2.5.0</strong> o pasá a un <code>fileFilter</code> síncrono.</p>",
+            "en": "<p>If a request is aborted while another async <code>fileFilter</code> is still pending, the callback resumes a torn-down stream and busboy emits an unhandled <code>'error'</code>: the process exits. One unauthenticated request is enough. Upgrade to <strong>multer 2.5.0</strong> or switch to a synchronous <code>fileFilter</code>.</p>",
+            "fr": "<p>Si une requête est interrompue pendant qu'un <code>fileFilter</code> asynchrone est en attente, le callback reprend un flux déjà détruit et busboy émet un <code>'error'</code> non géré : le processus s'arrête. Passez à <strong>multer 2.5.0</strong> ou à un <code>fileFilter</code> synchrone.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-q7qp-rjg7-q26m", "label": "github.com/advisories" }
+        },
+        {
+          "id": "fast-uri-batch",
+          "tag": "security",
+          "date": "23 Oct 2026",
+          "title": {
+            "es": "fast-uri: cuatro advisories, incluido scheme spoofing con percent-encoding",
+            "en": "fast-uri: four advisories, including scheme spoofing via percent-encoding",
+            "fr": "fast-uri : quatre avis, dont l'usurpation de schéma par percent-encoding"
+          },
+          "body_html": {
+            "es": "<p><code>normalize('%6Aavascript:alert(1)')</code> devolvía <code>javascript:alert(1)</code>: si validás el input crudo y después guardás o renderizás el normalizado, el filtro no sirve. Los otros tres cubren host confusion, equivalencia de paths y scheme injection. Es dependencia transitiva de Fastify y Ajv; subí a <strong>4.2.3 / 3.1.9 / 2.4.8</strong> y revisá el lockfile.</p>",
+            "en": "<p><code>normalize('%6Aavascript:alert(1)')</code> returned <code>javascript:alert(1)</code>: if you screen the raw input and then store or render the normalized value, the filter is useless. The other three cover host confusion, path equivalence and scheme injection. It's a transitive dependency of Fastify and Ajv; move to <strong>4.2.3 / 3.1.9 / 2.4.8</strong> and check your lockfile.</p>",
+            "fr": "<p><code>normalize('%6Aavascript:alert(1)')</code> renvoyait <code>javascript:alert(1)</code> : filtrer l'entrée brute puis stocker la valeur normalisée ne protège plus. Les trois autres avis touchent la confusion d'hôte, l'équivalence de chemins et l'injection de schéma. Dépendance transitive de Fastify et Ajv ; passez à <strong>4.2.3 / 3.1.9 / 2.4.8</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-w74x-v6f9-j3xg", "label": "github.com/advisories" }
+        },
+        {
+          "id": "echo-websocket-proxy-bypass",
+          "tag": "security",
+          "date": "23 Oct 2026",
+          "title": {
+            "es": "Echo (Go): el proxy WebSocket se saltea los middlewares de ruta (CVSS 9.1)",
+            "en": "Echo (Go): the WebSocket proxy skips route middleware (CVSS 9.1)",
+            "fr": "Echo (Go) : le proxy WebSocket contourne les middlewares de route (CVSS 9.1)"
+          },
+          "body_html": {
+            "es": "<p>El Proxy middleware abría un túnel crudo antes de saber si el upstream aceptaba el upgrade; si el upstream respondía HTTP normal con keep-alive, los requests siguientes iban directo, sin pasar por tu auth. Parte de un batch de seis advisories de Echo (gzip sin límite, BodyDump, X-Real-IP). Fix en <strong>v4.16.1 y v5.4.1</strong>.</p>",
+            "en": "<p>The Proxy middleware opened a raw tunnel before checking whether the upstream accepted the upgrade; if the upstream answered plain HTTP with keep-alive, subsequent requests went straight through, skipping your auth. Part of a six-advisory Echo batch (unbounded gzip, BodyDump, X-Real-IP). Fixed in <strong>v4.16.1 and v5.4.1</strong>.</p>",
+            "fr": "<p>Le middleware Proxy ouvrait un tunnel brut avant de vérifier que l'upstream acceptait l'upgrade ; avec une réponse HTTP keep-alive, les requêtes suivantes passaient sans votre auth. Fait partie d'un lot de six avis Echo. Corrigé en <strong>v4.16.1 et v5.4.1</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-cxf3-9h37-7rr8", "label": "github.com/advisories" }
+        },
+        {
+          "id": "msal-node-auth-code",
+          "tag": "security",
+          "date": "23 Oct 2026",
+          "title": {
+            "es": "CVE-2026-109461: MSAL Node puede filtrar parámetros del auth code flow",
+            "en": "CVE-2026-109461: MSAL Node can leak auth code flow parameters",
+            "fr": "CVE-2026-109461 : MSAL Node peut divulguer des paramètres du flux auth code"
+          },
+          "body_html": {
+            "es": "<p>Falta de validación de origen en <code>@azure/msal-node</code> permite que parámetros del authorization code flow lleguen a un endpoint del atacante. Severidad alta; fix en <strong>7.1.0</strong>. Mientras tanto, pasale a <code>acquireTokenByCode</code> solo el <code>code</code>, no el objeto entero del callback.</p>",
+            "en": "<p>Missing origin validation in <code>@azure/msal-node</code> lets authorization code flow parameters reach an attacker-controlled endpoint. High severity; fixed in <strong>7.1.0</strong>. Until then, pass only the <code>code</code> to <code>acquireTokenByCode</code>, not the whole callback object.</p>",
+            "fr": "<p>Un défaut de validation d'origine dans <code>@azure/msal-node</code> peut envoyer des paramètres du flux authorization code vers un endpoint contrôlé par l'attaquant. Corrigé en <strong>7.1.0</strong> ; d'ici là, ne passez que le <code>code</code> à <code>acquireTokenByCode</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-xcx6-jx8p-x3h5", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "nestjs-11-2-8",
+      "updates": [
+        {
+          "id": "nestjs-11-2-8",
+          "tag": "notable",
+          "date": "23 Oct 2026",
+          "title": {
+            "es": "NestJS 11.2.8: validación más estricta y rutas excluidas como el router",
+            "en": "NestJS 11.2.8: stricter validation and excluded routes matched like the router",
+            "fr": "NestJS 11.2.8 : validation plus stricte et routes exclues alignées sur le routeur"
+          },
+          "body_html": {
+            "es": "<p>Un patch con olor a hardening: los errores de validación ya no exponen el objeto validado y limitan su largo, <code>ParseArrayPipe</code> rechaza items no numéricos y arrays anidados, y las rutas excluidas de middleware matchean igual que el router (nunca targets con <code>#</code> o en forma absoluta). Si dependés de exclusiones de middleware para auth, probá antes y después.</p>",
+            "en": "<p>A patch that smells like hardening: validation errors no longer expose the validated object and are length-limited, <code>ParseArrayPipe</code> rejects non-numeric items and nested arrays, and middleware-excluded routes now match like the router does (never targets with <code>#</code> or in absolute form). If auth relies on middleware exclusions, test before and after.</p>",
+            "fr": "<p>Un patch de durcissement : les erreurs de validation n'exposent plus l'objet validé et sont limitées en taille, <code>ParseArrayPipe</code> rejette les éléments non numériques et les tableaux imbriqués, et les routes exclues du middleware sont désormais résolues comme par le routeur.</p>"
+          },
+          "source": { "url": "https://github.com/nestjs/nest/releases/tag/v11.2.8", "label": "github.com/nestjs" }
+        },
+        {
+          "id": "hono-4-13-14",
+          "tag": "minor",
+          "date": "25 Oct 2026",
+          "title": {
+            "es": "Hono 4.13.14: serve-static solo GET/HEAD y peer range listo para v5",
+            "en": "Hono 4.13.14: serve-static limited to GET/HEAD and a peer range ready for v5",
+            "fr": "Hono 4.13.14 : serve-static limité à GET/HEAD et peer range prêt pour v5"
+          },
+          "body_html": {
+            "es": "<p><code>serve-static</code> ahora solo atiende GET y HEAD y respeta los q-values de <code>Accept-Encoding</code>; el trie-router se queda con el primer valor en params duplicados y <code>bearer-auth</code> permite devolver un <code>Response</code> propio. Los adapters ya aceptan prereleases de Hono v5: señal de que la major está cerca.</p>",
+            "en": "<p><code>serve-static</code> now only serves GET and HEAD and honors <code>Accept-Encoding</code> q-values; the trie router keeps the first value for duplicate params and <code>bearer-auth</code> can return a custom <code>Response</code>. Adapters now accept Hono v5 prereleases, a sign the major is close.</p>",
+            "fr": "<p><code>serve-static</code> ne sert plus que GET et HEAD et respecte les q-values de <code>Accept-Encoding</code> ; <code>bearer-auth</code> peut renvoyer une <code>Response</code> personnalisée. Les adapters acceptent déjà les préversions de Hono v5.</p>"
+          },
+          "source": { "url": "https://github.com/honojs/hono/releases/tag/v4.13.14", "label": "github.com/honojs" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "emr-eks-price-cut",
+      "updates": [
+        {
+          "id": "emr-eks-price-cut",
+          "tag": "minor",
+          "date": "23 Oct 2026",
+          "title": {
+            "es": "Amazon EMR on EKS baja un 30% su cargo de EMR",
+            "en": "Amazon EMR on EKS cuts its EMR charge by 30 percent",
+            "fr": "Amazon EMR on EKS réduit de 30 % ses frais EMR"
+          },
+          "body_html": {
+            "es": "<p>La rebaja aplica tanto al cargo por vCPU-hora como al de GB-hora. Si corrés Spark sobre tus clusters de Kubernetes en AWS, es plata gratis sin tocar una línea.</p>",
+            "en": "<p>The cut applies to both the per-vCPU-hour and the per-GB-hour charge. If you run Spark on your Kubernetes clusters in AWS, it's free money without touching a line.</p>",
+            "fr": "<p>La baisse s'applique au tarif par vCPU-heure et par Go-heure. Pour Spark sur vos clusters Kubernetes AWS, c'est une économie immédiate.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/emr-eks-reduces-emr-charge-30-percent/", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "cloudflare-consistent-hashing",
+      "updates": [
+        {
+          "id": "cloudflare-consistent-hashing",
+          "tag": "notable",
+          "date": "24 Oct 2026",
+          "title": {
+            "es": "Cloudflare recupera más de 100 TB de RAM optimizando consistent hashing",
+            "en": "Cloudflare reclaims over 100 TB of RAM by optimizing consistent hashing",
+            "fr": "Cloudflare récupère plus de 100 To de RAM en optimisant le consistent hashing"
+          },
+          "body_html": {
+            "es": "<p>En <code>pingora-ketama</code> usaron teoría de probabilidad para calcular el mínimo de puntos de hash que mantiene la distribución de carga: ~90% menos hashes por backend y cada punto de 8 a 6 bytes. Lección para llevarse: los últimos 90.000 hashes mejoraban el error apenas 0,7%, y cambiar el ring de golpe invalida caché, así que lo rotaron en paralelo con el viejo. Medí antes de sumar réplicas virtuales.</p>",
+            "en": "<p>In <code>pingora-ketama</code> they used probability theory to compute the minimum number of hash points that keeps load distribution: ~90% fewer hashes per backend and each point down from 8 to 6 bytes. Takeaway: the last 90,000 hashes improved error by just 0.7%, and switching the ring at once invalidates cache, so they rolled it out alongside the old one. Measure before adding virtual nodes.</p>",
+            "fr": "<p>Dans <code>pingora-ketama</code>, Cloudflare a calculé le nombre minimal de points de hash qui préserve la répartition : ~90 % de hashes en moins par backend et des points de 8 à 6 octets. Les 90 000 derniers hashes n'amélioraient l'erreur que de 0,7 %, et le nouvel anneau a été déployé en parallèle de l'ancien pour ne pas invalider le cache.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/cloudflare-hashing-optimization/", "label": "infoq.com" }
+        },
+        {
+          "id": "csiro-serverless-variants",
+          "tag": "notable",
+          "date": "23 Oct 2026",
+          "title": {
+            "es": "CSIRO: consultas genómicas serverless sin base central, indexando en vez de copiar",
+            "en": "CSIRO: serverless genomic queries without a central database, indexing instead of copying",
+            "fr": "CSIRO : requêtes génomiques serverless sans base centrale, en indexant au lieu de copier"
+          },
+          "body_html": {
+            "es": "<p>Los VCF comprimidos se quedan en S3; API Gateway y Lambda ubican la región y leen solo lo necesario con byte-range requests, con metadata aparte en Athena y DynamoDB. Una consulta de 10.000 pares de bases tarda 1,52 s y cuesta USD 0,00013. El patrón vale para cualquier dataset gigante: indexá en lugar de mover, consultá comprimido y separá datos de metadata.</p>",
+            "en": "<p>Compressed VCF files stay in S3; API Gateway and Lambda locate the region and read only what's needed via byte-range requests, with metadata indexed separately in Athena and DynamoDB. A 10,000 base-pair query takes 1.52 s and costs USD 0.00013. The pattern fits any huge dataset: index instead of moving, query compressed data and separate data from metadata.</p>",
+            "fr": "<p>Les fichiers VCF compressés restent dans S3 ; API Gateway et Lambda lisent uniquement la région utile via des requêtes byte-range, la métadonnée étant indexée à part dans Athena et DynamoDB. Une requête de 10 000 paires de bases prend 1,52 s pour 0,00013 USD.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/csiro-serverless-genomic-variant/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "nx-24-0-1",
+      "updates": [
+        {
+          "id": "nx-24-0-1",
+          "tag": "patch",
+          "date": "23 Oct 2026",
+          "title": {
+            "es": "Nx 24.0.1: primer patch de la 24 con fixes de daemon y pnpm",
+            "en": "Nx 24.0.1: first 24.x patch with daemon and pnpm fixes",
+            "fr": "Nx 24.0.1 : premier patch de la 24 avec correctifs daemon et pnpm"
+          },
+          "body_html": {
+            "es": "<p>Resuelve dependencias con alias de pnpm a su propio snapshot, mantiene vivo el daemon cuando falla <code>PROCESS_IN_BACKGROUND</code>, deja fuera de los commits de <code>migrate</code> el <code>migrations.json</code> y sale con 1 (no 130) cuando se saltean dependientes de una tarea fallida. Si migraste a la 24, este patch va sí o sí.</p>",
+            "en": "<p>Resolves pnpm-aliased dependencies to their own snapshot, keeps the daemon alive when <code>PROCESS_IN_BACKGROUND</code> fails, keeps <code>migrations.json</code> out of <code>migrate</code> commits and exits 1 (not 130) when dependents of a failed task are skipped. If you moved to 24, take this patch.</p>",
+            "fr": "<p>Résout les dépendances pnpm aliasées vers leur propre snapshot, garde le daemon actif si <code>PROCESS_IN_BACKGROUND</code> échoue et renvoie 1 (et non 130) quand des dépendants d'une tâche échouée sont ignorés.</p>"
+          },
+          "source": { "url": "https://github.com/nrwl/nx/releases/tag/24.0.1", "label": "github.com/nrwl" }
+        },
+        {
+          "id": "better-auth-1-7-13",
+          "tag": "minor",
+          "date": "25 Oct 2026",
+          "title": {
+            "es": "better-auth 1.7.13: private key JWT para Vercel y Stripe SDK v23",
+            "en": "better-auth 1.7.13: private key JWT for Vercel and Stripe SDK v23",
+            "fr": "better-auth 1.7.13 : private key JWT pour Vercel et Stripe SDK v23"
+          },
+          "body_html": {
+            "es": "<p>El provider de Vercel suma autenticación del token endpoint con tokens OIDC dinámicos y client assertions <code>private_key_jwt</code>; Cloudflare pasa a <code>tokenEndpointAuth: { method }</code> (el viejo campo queda deprecado). Además, los exports type-only ya no figuran como valores, así que un import erróneo falla en el type check y no en runtime.</p>",
+            "en": "<p>The Vercel provider adds token endpoint authentication with dynamic OIDC tokens and <code>private_key_jwt</code> client assertions; Cloudflare moves to <code>tokenEndpointAuth: { method }</code> (the old field is deprecated). Type-only exports are no longer listed as values, so a bad import fails type checking instead of at runtime.</p>",
+            "fr": "<p>Le provider Vercel ajoute l'authentification du token endpoint avec des tokens OIDC dynamiques et des assertions <code>private_key_jwt</code> ; Cloudflare passe à <code>tokenEndpointAuth: { method }</code>. Les exports purement typés ne sont plus listés comme valeurs.</p>"
+          },
+          "source": { "url": "https://github.com/better-auth/better-auth/releases/tag/v1.7.13", "label": "github.com/better-auth" }
+        },
+        {
+          "id": "pnpm-10-34-9",
+          "tag": "patch",
+          "date": "25 Oct 2026",
+          "title": {
+            "es": "pnpm 10.34.9: el pin de packageManager ya no rompe --frozen-lockfile",
+            "en": "pnpm 10.34.9: the packageManager pin no longer breaks --frozen-lockfile",
+            "fr": "pnpm 10.34.9 : l'épinglage packageManager ne casse plus --frozen-lockfile"
+          },
+          "body_html": {
+            "es": "<p>Cuando pnpm 10 cambiaba a la versión fijada en <code>packageManager</code>, el lockfile nuevo no registraba ese pin y el <code>pnpm install --frozen-lockfile</code> siguiente fallaba en CI. Arreglado: si te pasaba esto en pipelines, actualizá.</p>",
+            "en": "<p>When pnpm 10 switched to the version pinned in <code>packageManager</code>, the fresh lockfile didn't record that pin and the next <code>pnpm install --frozen-lockfile</code> failed in CI. Fixed: if you hit this in pipelines, upgrade.</p>",
+            "fr": "<p>Quand pnpm 10 basculait vers la version épinglée dans <code>packageManager</code>, le nouveau lockfile ne l'enregistrait pas et <code>pnpm install --frozen-lockfile</code> échouait en CI. Corrigé.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v10.34.9", "label": "github.com/pnpm" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El viernes fue día de DoS en el stack HTTP de Node: body-parser, multer y undici comparten la misma raíz, streams que emiten errores sin listener. Revisá tus pipes.",
+      "en": "Friday was DoS day for the Node HTTP stack: body-parser, multer and undici share the same root cause, streams emitting errors with no listener. Audit your pipes.",
+      "fr": "Vendredi, journée DoS pour la pile HTTP de Node : body-parser, multer et undici partagent la même cause, des flux qui émettent des erreurs sans écouteur."
+    },
+    {
+      "es": "Los bypass de auth vienen de los bordes: proxy WebSocket en Echo, credenciales no-string en Laravel, exclusiones de middleware en NestJS. Autorizá también en el upstream.",
+      "en": "Auth bypasses come from the edges: Echo's WebSocket proxy, non-string credentials in Laravel, middleware exclusions in NestJS. Authorize at the upstream too.",
+      "fr": "Les contournements d'auth viennent des bords : proxy WebSocket d'Echo, identifiants non textuels dans Laravel, exclusions de middleware dans NestJS."
+    },
+    {
+      "es": "PingCAP y php2shell recuerdan lo de siempre: rotá credenciales y parcheá rápido; la explotación arrancó días antes del fix.",
+      "en": "PingCAP and php2shell repeat the old lesson: rotate credentials and patch fast; exploitation started days before the fix.",
+      "fr": "PingCAP et php2shell rappellent la leçon : changez les identifiants et corrigez vite ; l'exploitation a commencé avant le correctif."
+    }
+  ]
+}

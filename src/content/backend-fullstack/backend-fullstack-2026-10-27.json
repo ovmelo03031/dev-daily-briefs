@@ -1,0 +1,279 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 27 Oct 2026: Valkey y Redis parchean un heap overflow en Pub/Sub",
+    "en": "Backend & Fullstack Daily — 27 Oct 2026: Valkey and Redis patch a Pub/Sub heap overflow",
+    "fr": "Backend & Fullstack Daily — 27 oct. 2026 : Valkey et Redis corrigent un heap overflow Pub/Sub"
+  },
+  "description": {
+    "es": "Parche de seguridad en todas las ramas de Valkey y Redis, crash remoto en undici fetch, cinco advisories en Nuxt 4.6.3, Wasmtime CVSS 9.9, ML-KEM en AWS KMS y OpenTofu 1.13.",
+    "en": "Security patches across every Valkey and Redis branch, a remote crash in undici fetch, five Nuxt 4.6.3 advisories, Wasmtime CVSS 9.9, ML-KEM in AWS KMS and OpenTofu 1.13.",
+    "fr": "Correctifs de sécurité sur toutes les branches de Valkey et Redis, crash distant dans undici fetch, cinq advisories Nuxt 4.6.3, Wasmtime CVSS 9.9, ML-KEM dans AWS KMS et OpenTofu 1.13."
+  },
+  "pubDate": "2026-10-27",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "Valkey: heap overflow en Pub/Sub de cluster", "en": "Valkey: cluster Pub/Sub heap overflow", "fr": "Valkey : heap overflow Pub/Sub en cluster" },
+      "anchor": "valkey-ghsa-f4q9",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Redis parchea 6 ramas por el mismo bug", "en": "Redis patches 6 branches for the same bug", "fr": "Redis corrige 6 branches pour le même bug" },
+      "anchor": "redis-8-10-3",
+      "icon": "simple-icons:redis"
+    },
+    {
+      "text": { "es": "undici fetch tira abajo el proceso Node", "en": "undici fetch can kill the Node process", "fr": "undici fetch peut tuer le processus Node" },
+      "anchor": "undici-cve-2026-109869",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Nuxt 4.6.3 cierra cinco advisories", "en": "Nuxt 4.6.3 closes five advisories", "fr": "Nuxt 4.6.3 corrige cinq advisories" },
+      "anchor": "nuxt-4-6-3",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Wasmtime: escape del sandbox, CVSS 9.9", "en": "Wasmtime: sandbox escape, CVSS 9.9", "fr": "Wasmtime : évasion du sandbox, CVSS 9.9" },
+      "anchor": "wasmtime-cve-2026-115889",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "AWS KMS suma ML-KEM post-cuántico", "en": "AWS KMS adds post-quantum ML-KEM", "fr": "AWS KMS ajoute ML-KEM post-quantique" },
+      "anchor": "aws-kms-ml-kem",
+      "icon": "simple-icons:amazonwebservices"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "valkey-ghsa-f4q9",
+      "updates": [
+        {
+          "id": "valkey-ghsa-f4q9",
+          "tag": "security",
+          "date": "26 Oct 2026",
+          "title": {
+            "es": "Valkey GHSA-f4q9-j22m-xqq9: heap overflow en Pub/Sub de cluster (CVSS 8.8)",
+            "en": "Valkey GHSA-f4q9-j22m-xqq9: cluster Pub/Sub heap overflow (CVSS 8.8)",
+            "fr": "Valkey GHSA-f4q9-j22m-xqq9 : heap overflow Pub/Sub en cluster (CVSS 8.8)"
+          },
+          "body_html": {
+            "es": "<p>Un cliente <strong>autenticado</strong> que publica un mensaje gigante en modo cluster puede desbordar el heap al armar el mensaje del cluster bus y, potencialmente, <strong>ejecutar código</strong>. Valkey sacó el fix en todas las ramas el 26/10: <code>9.1.3</code>, <code>9.0.7</code>, <code>8.1.11</code>, <code>8.0.12</code> y <code>7.2.15</code>. Si corrés Valkey en cluster con usuarios que pueden hacer <code>PUBLISH</code>/<code>SPUBLISH</code>, actualizá YA. Ojo que la 9.1.3 también arregla una incompatibilidad de listpack entre 9.0 y 9.1.x que rompía la replicación.</p>",
+            "en": "<p>An <strong>authenticated</strong> client publishing an oversized message in cluster mode can overflow the heap while the cluster bus message is built, potentially leading to <strong>code execution</strong>. Valkey shipped the fix on every branch on Oct 26: <code>9.1.3</code>, <code>9.0.7</code>, <code>8.1.11</code>, <code>8.0.12</code> and <code>7.2.15</code>. If you run Valkey in cluster mode with users allowed to <code>PUBLISH</code>/<code>SPUBLISH</code>, upgrade now. 9.1.3 also fixes a listpack incompatibility between 9.0 and 9.1.x that broke replication.</p>",
+            "fr": "<p>Un client <strong>authentifié</strong> qui publie un message énorme en mode cluster peut provoquer un débordement de tas lors de la construction du message du cluster bus, avec une possible <strong>exécution de code</strong>. Valkey a publié le correctif sur toutes les branches le 26 octobre : <code>9.1.3</code>, <code>9.0.7</code>, <code>8.1.11</code>, <code>8.0.12</code> et <code>7.2.15</code>. Si vous exploitez Valkey en cluster avec des utilisateurs autorisés à <code>PUBLISH</code>/<code>SPUBLISH</code>, mettez à jour maintenant. La 9.1.3 corrige aussi une incompatibilité listpack entre 9.0 et 9.1.x qui cassait la réplication.</p>"
+          },
+          "source": { "url": "https://github.com/valkey-io/valkey/security/advisories/GHSA-f4q9-j22m-xqq9", "label": "github.com/valkey-io" }
+        },
+        {
+          "id": "redis-8-10-3",
+          "tag": "security",
+          "date": "26 Oct 2026",
+          "title": {
+            "es": "Redis 8.10.3 y cinco ramas más: mismo overflow con PUBLISH de más de 4 GB",
+            "en": "Redis 8.10.3 and five more branches: same overflow with PUBLISH over 4 GB",
+            "fr": "Redis 8.10.3 et cinq autres branches : même overflow avec PUBLISH de plus de 4 Go"
+          },
+          "body_html": {
+            "es": "<p>Redis publicó el mismo día <code>8.10.3</code>, <code>8.8.4</code>, <code>8.6.8</code>, <code>8.4.8</code>, <code>8.2.11</code> y <code>7.4.12</code>, todas marcadas <strong>SECURITY</strong>: heap buffer overflow al propagar un <code>PUBLISH</code>/<code>SPUBLISH</code> de más de 4 GB por el cluster bus. Es el bug heredado del fork común, así que no importa si estás del lado Redis o Valkey: parcheá. Si usás ElastiCache o MemoryDB, revisá cuándo te llega la versión parcheada.</p>",
+            "en": "<p>Redis released <code>8.10.3</code>, <code>8.8.4</code>, <code>8.6.8</code>, <code>8.4.8</code>, <code>8.2.11</code> and <code>7.4.12</code> on the same day, all flagged <strong>SECURITY</strong>: a heap buffer overflow when propagating a <code>PUBLISH</code>/<code>SPUBLISH</code> message larger than 4 GB over the cluster bus. It is a bug inherited from the shared codebase, so it does not matter whether you run Redis or Valkey: patch. On ElastiCache or MemoryDB, check when the patched engine reaches you.</p>",
+            "fr": "<p>Redis a publié le même jour <code>8.10.3</code>, <code>8.8.4</code>, <code>8.6.8</code>, <code>8.4.8</code>, <code>8.2.11</code> et <code>7.4.12</code>, toutes marquées <strong>SECURITY</strong> : heap buffer overflow lors de la propagation d'un <code>PUBLISH</code>/<code>SPUBLISH</code> de plus de 4 Go sur le cluster bus. Le bug vient du code commun, donc Redis ou Valkey, il faut corriger. Sur ElastiCache ou MemoryDB, vérifiez quand le moteur corrigé sera disponible.</p>"
+          },
+          "source": { "url": "https://github.com/redis/redis/releases/tag/8.10.3", "label": "github.com/redis" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "undici-cve-2026-109869",
+      "updates": [
+        {
+          "id": "undici-cve-2026-109869",
+          "tag": "security",
+          "date": "23 Oct 2026",
+          "title": {
+            "es": "undici CVE-2026-109869: un servidor malicioso tumba tu proceso Node con un solo response",
+            "en": "undici CVE-2026-109869: a malicious server kills your Node process with one response",
+            "fr": "undici CVE-2026-109869 : un serveur malveillant tue votre processus Node en une réponse"
+          },
+          "body_html": {
+            "es": "<p>Si un servidor devuelve más de cinco <code>content-encoding</code> y corta la conexión antes del body, <code>fetch()</code> de undici deja un stream interno sin listener de error y Node lo trata como <strong>unhandled error</strong>: el proceso muere aunque vos hayas atrapado el rechazo. Afecta 6.x, 7.x y 8.x; parches en <code>6.29.1</code>, <code>7.30.1</code> y <code>8.12.2</code>. Ojo: si tu backend hace fetch a URLs que controla un usuario (webhooks, previews, SSRF-adjacent), esto es un DoS remoto de manual.</p>",
+            "en": "<p>If a server returns more than five <code>content-encoding</code> codings and closes the connection before the body, undici's <code>fetch()</code> leaves an internal stream without an error listener and Node treats it as an <strong>unhandled error</strong>: the process dies even if you caught the rejection. Affects 6.x, 7.x and 8.x; fixed in <code>6.29.1</code>, <code>7.30.1</code> and <code>8.12.2</code>. If your backend fetches user-controlled URLs (webhooks, link previews), this is a textbook remote DoS.</p>",
+            "fr": "<p>Si un serveur renvoie plus de cinq <code>content-encoding</code> et ferme la connexion avant le body, le <code>fetch()</code> d'undici laisse un stream interne sans écouteur d'erreur et Node le traite comme une <strong>unhandled error</strong> : le processus s'arrête même si le rejet est intercepté. Versions 6.x, 7.x et 8.x touchées ; corrigé en <code>6.29.1</code>, <code>7.30.1</code> et <code>8.12.2</code>. Si votre backend récupère des URL contrôlées par l'utilisateur (webhooks, aperçus de liens), c'est un DoS distant classique.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-xjj6-f33q-929c", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "bullmq-6-5-0",
+      "updates": [
+        {
+          "id": "bullmq-6-5-0",
+          "tag": "minor",
+          "date": "26 Oct 2026",
+          "title": {
+            "es": "BullMQ 6.5.0: imports de built-ins con prefijo node:",
+            "en": "BullMQ 6.5.0: built-in imports now use the node: prefix",
+            "fr": "BullMQ 6.5.0 : imports des modules intégrés avec le préfixe node:"
+          },
+          "body_html": {
+            "es": "<p>Release chica pero útil si empaquetás para runtimes alternativos: BullMQ ahora fuerza el protocolo <code>node:</code> en todos los imports de módulos built-in, lo que facilita correrlo sobre Bun o Deno sin shims. Con el parche de Redis/Valkey de arriba, buen momento para actualizar el stack de colas completo.</p>",
+            "en": "<p>A small release, but useful if you bundle for alternative runtimes: BullMQ now enforces the <code>node:</code> protocol for every built-in module import, which makes running it on Bun or Deno easier without shims. With the Redis/Valkey patch above, it is a good moment to update the whole queue stack.</p>",
+            "fr": "<p>Petite version, mais utile si vous empaquetez pour d'autres runtimes : BullMQ impose désormais le protocole <code>node:</code> pour tous les imports de modules intégrés, ce qui facilite l'exécution sur Bun ou Deno sans shims. Avec le correctif Redis/Valkey ci-dessus, c'est le moment de mettre à jour toute la pile de files.</p>"
+          },
+          "source": { "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.5.0", "label": "github.com/taskforcesh" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "aws-kms-ml-kem",
+      "updates": [
+        {
+          "id": "aws-kms-ml-kem",
+          "tag": "ga",
+          "date": "26 Oct 2026",
+          "title": {
+            "es": "AWS KMS soporta ML-KEM para key encapsulation post-cuántica",
+            "en": "AWS KMS supports ML-KEM for post-quantum key encapsulation",
+            "fr": "AWS KMS prend en charge ML-KEM pour l'encapsulation de clés post-quantique"
+          },
+          "body_html": {
+            "es": "<p>KMS suma los key specs <code>ML-KEM-512</code>, <code>ML-KEM-768</code> y <code>ML-KEM-1024</code> (FIPS 203) con las APIs <code>Encapsulate</code>, <code>Decapsulate</code> y <code>GetPublicKey</code>; la clave privada nunca sale de HSMs FIPS 140-3 nivel 3. Disponible en todas las regiones de KMS salvo Emiratos, Bahréin y China. Si tenés datos con vida larga (harvest now, decrypt later), ya podés empezar a probar esquemas híbridos sin montar crypto propia.</p>",
+            "en": "<p>KMS adds the <code>ML-KEM-512</code>, <code>ML-KEM-768</code> and <code>ML-KEM-1024</code> key specs (FIPS 203) with the <code>Encapsulate</code>, <code>Decapsulate</code> and <code>GetPublicKey</code> APIs; private keys never leave FIPS 140-3 Level 3 HSMs. Available in every KMS Region except UAE, Bahrain and China. If you hold long-lived data (harvest now, decrypt later), you can start testing hybrid schemes without rolling your own crypto.</p>",
+            "fr": "<p>KMS ajoute les key specs <code>ML-KEM-512</code>, <code>ML-KEM-768</code> et <code>ML-KEM-1024</code> (FIPS 203) avec les API <code>Encapsulate</code>, <code>Decapsulate</code> et <code>GetPublicKey</code> ; les clés privées restent dans des HSM FIPS 140-3 niveau 3. Disponible dans toutes les régions KMS sauf Émirats, Bahreïn et Chine. Pour les données à longue durée de vie (harvest now, decrypt later), vous pouvez tester des schémas hybrides sans cryptographie maison.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/kms-ml-kem-post-quantum/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "wasmtime-cve-2026-115889",
+          "tag": "security",
+          "date": "23 Oct 2026",
+          "title": {
+            "es": "Wasmtime CVE-2026-115889: overflow en Cranelift permite escapar del sandbox (CVSS 9.9)",
+            "en": "Wasmtime CVE-2026-115889: Cranelift overflow allows sandbox escape (CVSS 9.9)",
+            "fr": "Wasmtime CVE-2026-115889 : un overflow dans Cranelift permet de sortir du sandbox (CVSS 9.9)"
+          },
+          "body_html": {
+            "es": "<p>Antes de v43, Cranelift empaquetaba los índices SSA de forma que en builds release podían desbordarse en silencio y producir <strong>miscompilación arbitraria</strong>: una función Wasm enorme o armada a propósito puede forzar type confusion y salir del sandbox. Afecta la configuración por defecto; parches en <code>36.0.19</code> y <code>43.0.0</code>. Si corrés código Wasm de terceros en el edge o en plugins, esto es crítico de verdad.</p>",
+            "en": "<p>Before v43, Cranelift bit-packed SSA value indices in a way that could silently overflow in release builds and cause <strong>arbitrary miscompilation</strong>: a huge or crafted Wasm function can force type confusion and escape the sandbox. Default settings are affected; fixed in <code>36.0.19</code> and <code>43.0.0</code>. If you run third-party Wasm at the edge or as plugins, this one is genuinely critical.</p>",
+            "fr": "<p>Avant la v43, Cranelift compactait les index de valeurs SSA d'une façon qui pouvait déborder silencieusement en build release et provoquer une <strong>mauvaise compilation arbitraire</strong> : une fonction Wasm énorme ou conçue pour cela peut forcer une confusion de types et sortir du sandbox. La configuration par défaut est concernée ; corrigé en <code>36.0.19</code> et <code>43.0.0</code>. Si vous exécutez du Wasm tiers en edge ou en plugins, c'est vraiment critique.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-897f-g5gm-fmxm", "label": "github.com/advisories" }
+        },
+        {
+          "id": "opentofu-1-13",
+          "tag": "release",
+          "date": "26 Oct 2026",
+          "title": {
+            "es": "OpenTofu 1.13: menos valores unknown en plan y linting experimental",
+            "en": "OpenTofu 1.13: fewer unknown values at plan time and experimental linting",
+            "fr": "OpenTofu 1.13 : moins de valeurs inconnues au plan et linting expérimental"
+          },
+          "body_html": {
+            "es": "<p>Nuevas funciones como <code>convert</code> con <code>assumenotnull</code> permiten resolver <code>count</code> y <code>for_each</code> en el plan aunque otros atributos sigan unknown hasta el apply: chau a muchos <code>-target</code> en dos pasadas. Suma linting experimental con <code>-lint=all</code> y Symbol Libraries en archivos <code>*.sym.hcl</code>. Ojo con los breaking: se va WinRM de los provisioners, pide macOS 13+ y es la última serie con builds de 32 bits.</p>",
+            "en": "<p>New functions such as <code>convert</code> with <code>assumenotnull</code> let module authors resolve <code>count</code> and <code>for_each</code> during plan even while other attributes stay unknown until apply, removing many two-pass <code>-target</code> workflows. It adds experimental linting via <code>-lint=all</code> and Symbol Libraries in <code>*.sym.hcl</code> files. Breaking changes: WinRM leaves the provisioners, macOS 13+ is required, and this is the last series with 32-bit builds.</p>",
+            "fr": "<p>De nouvelles fonctions comme <code>convert</code> avec <code>assumenotnull</code> permettent de résoudre <code>count</code> et <code>for_each</code> au plan même si d'autres attributs restent inconnus jusqu'à l'apply, ce qui évite beaucoup de <code>-target</code> en deux passes. Ajout d'un linting expérimental via <code>-lint=all</code> et des Symbol Libraries dans les fichiers <code>*.sym.hcl</code>. Changements cassants : WinRM disparaît des provisioners, macOS 13+ requis, dernière série avec builds 32 bits.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/opentofu-1-13-unknown-values/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "readyon-eks-isolation",
+      "updates": [
+        {
+          "id": "readyon-eks-isolation",
+          "tag": "notable",
+          "date": "26 Oct 2026",
+          "title": {
+            "es": "Aislamiento multi-tenant en EKS en cuatro capas: el caso ReadyOn",
+            "en": "Four-layer multi-tenant isolation on EKS: the ReadyOn case",
+            "fr": "Isolation multi-tenant sur EKS en quatre couches : le cas ReadyOn"
+          },
+          "body_html": {
+            "es": "<p>ReadyOn apila cuatro controles que se solapan: namespaces por tenant con RBAC y network policies default-deny, node pools dedicados de Karpenter con doble taint, security groups por tenant que limitan el acceso a la base, y clusters Aurora dedicados con secrets acotados al tenant. La lección: <strong>un namespace no es una frontera de seguridad</strong>, porque no evita que los workloads compartan nodo. Y sin observabilidad que siga la identidad del workload hasta la base, no podés probar que el aislamiento funciona. Lectura obligada si diseñás SaaS multi-tenant.</p>",
+            "en": "<p>ReadyOn stacks four overlapping controls: per-tenant namespaces with RBAC and default-deny network policies, dedicated Karpenter node pools enforced by dual taints, per-tenant security groups restricting database access, and dedicated Aurora clusters with tenant-scoped secrets. The lesson: <strong>a namespace is not a security boundary</strong>, because it does not stop workloads from sharing nodes. Without observability that traces workload identity down to the database, you cannot prove the isolation works. A must-read if you design multi-tenant SaaS.</p>",
+            "fr": "<p>ReadyOn empile quatre contrôles qui se recouvrent : namespaces par tenant avec RBAC et network policies default-deny, node pools Karpenter dédiés imposés par double taint, security groups par tenant limitant l'accès à la base, et clusters Aurora dédiés avec secrets limités au tenant. La leçon : <strong>un namespace n'est pas une frontière de sécurité</strong>, car il n'empêche pas les workloads de partager un nœud. Sans observabilité qui suit l'identité du workload jusqu'à la base, impossible de prouver que l'isolation fonctionne. À lire si vous concevez un SaaS multi-tenant.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/readyon-four-layer-isolation/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "nuxt-4-6-3",
+      "updates": [
+        {
+          "id": "nuxt-4-6-3",
+          "tag": "security",
+          "date": "27 Oct 2026",
+          "title": {
+            "es": "Nuxt 4.6.3: cinco advisories, incluido bypass de server middleware con dot segments",
+            "en": "Nuxt 4.6.3: five advisories, including a server middleware bypass via dot segments",
+            "fr": "Nuxt 4.6.3 : cinq advisories, dont un contournement du server middleware par dot segments"
+          },
+          "body_html": {
+            "es": "<p>El que más importa en producción es <strong>GHSA-9v7c-q64q-vv33</strong>: los dot segments en el path saltean los chequeos de <code>server/middleware</code> y las route rules en rutas de páginas, o sea que si protegés rutas con middleware por prefijo, revisalo. Los otros tres medium son del dev server (lectura de archivos vía reportes de error del cliente, runtime config privada en el bundle de Nitro y el <code>appSecret</code> generado servido por Vite), más un low sobre redirects en server islands. Actualizá y no expongas el dev server a la red.</p>",
+            "en": "<p>The one that matters most in production is <strong>GHSA-9v7c-q64q-vv33</strong>: dot segments in the request path bypass <code>server/middleware</code> path checks and route rules on page routes, so if you guard routes with prefix-based middleware, review it. The other three mediums hit the dev server (file read through client error reports, private runtime config in the Nitro dev bundle, and the generated <code>appSecret</code> served by Vite), plus a low about redirects on server islands. Upgrade and never expose the dev server to the network.</p>",
+            "fr": "<p>Le plus important en production est <strong>GHSA-9v7c-q64q-vv33</strong> : les dot segments dans le chemin contournent les vérifications de <code>server/middleware</code> et les route rules des pages ; si vous protégez des routes par middleware sur préfixe, vérifiez-le. Les trois autres de niveau medium touchent le serveur de dev (lecture de fichiers via les rapports d'erreur client, runtime config privée dans le bundle Nitro, <code>appSecret</code> généré servi par Vite), plus un low sur les redirects des server islands. Mettez à jour et n'exposez jamais le serveur de dev au réseau.</p>"
+          },
+          "source": { "url": "https://github.com/nuxt/nuxt/releases/tag/v4.6.3", "label": "github.com/nuxt" }
+        },
+        {
+          "id": "pnpm-12-16-0",
+          "tag": "release",
+          "date": "27 Oct 2026",
+          "title": {
+            "es": "pnpm 12.16.0: flag global --env-file y dos fixes de seguridad",
+            "en": "pnpm 12.16.0: global --env-file flag and two security fixes",
+            "fr": "pnpm 12.16.0 : option globale --env-file et deux correctifs de sécurité"
+          },
+          "body_html": {
+            "es": "<p>Nuevo <code>--env-file</code> global y repetible para cargar dotenv antes de cualquier comando, soporte para <code>pnpm-lock.yaml</code> como symlink y <code>pnpm setup --no-modify-path</code>. Del lado seguridad: fix de exposición de memoria al descomprimir zstd y firma sin aritmética que filtraba la clave privada por timing (<code>RUSTSEC-2026-0387</code>), que cubre tokens OCI y estado de login OIDC. También corrige pérdida de filas del índice del store en installs concurrentes del workspace. La 11.28.9 salió en paralelo para la rama anterior.</p>",
+            "en": "<p>A new repeatable global <code>--env-file</code> loads dotenv files before any command, plus support for a symlinked <code>pnpm-lock.yaml</code> and <code>pnpm setup --no-modify-path</code>. On security: a fix for memory exposure in zstd decompression and signing that no longer leaks the private key through timing (<code>RUSTSEC-2026-0387</code>), covering OCI registry tokens and OIDC login state. It also fixes lost store-index rows during concurrent workspace installs. 11.28.9 shipped alongside for the previous line.</p>",
+            "fr": "<p>Nouvelle option globale et répétable <code>--env-file</code> pour charger des fichiers dotenv avant toute commande, prise en charge d'un <code>pnpm-lock.yaml</code> en lien symbolique et <code>pnpm setup --no-modify-path</code>. Côté sécurité : correctif d'exposition mémoire en décompression zstd et signature qui ne fuit plus la clé privée par timing (<code>RUSTSEC-2026-0387</code>), couvrant les jetons OCI et l'état de connexion OIDC. Corrige aussi la perte de lignes de l'index du store lors d'installations concurrentes. La 11.28.9 est sortie en parallèle pour la branche précédente.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.16.0", "label": "github.com/pnpm" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Parches en todas las ramas el mismo día: Valkey (5 ramas) y Redis (6) cerraron el mismo overflow de Pub/Sub. Cuando ves eso, es seguridad aunque el changelog no lo grite.",
+      "en": "Same-day patches on every branch: Valkey (5 branches) and Redis (6) closed the same Pub/Sub overflow. When you see that pattern, it is security even if the changelog does not shout it.",
+      "fr": "Correctifs le même jour sur toutes les branches : Valkey (5) et Redis (6) ont corrigé le même overflow Pub/Sub. Ce schéma signale la sécurité, même si le changelog ne le dit pas."
+    },
+    {
+      "es": "El dev server sigue siendo superficie de ataque: Nuxt cerró tres advisories solo del dev server. No lo bindees a 0.0.0.0.",
+      "en": "The dev server is still attack surface: Nuxt closed three dev-server-only advisories. Do not bind it to 0.0.0.0.",
+      "fr": "Le serveur de dev reste une surface d'attaque : Nuxt a corrigé trois advisories propres au serveur de dev. Ne le liez pas à 0.0.0.0."
+    },
+    {
+      "es": "Post-cuántico aterriza en servicios gestionados: ML-KEM en KMS baja la barrera para probar esquemas híbridos sin crypto propia.",
+      "en": "Post-quantum lands in managed services: ML-KEM in KMS lowers the barrier to trying hybrid schemes without custom crypto.",
+      "fr": "Le post-quantique arrive dans les services managés : ML-KEM dans KMS facilite l'essai de schémas hybrides sans cryptographie maison."
+    }
+  ]
+}

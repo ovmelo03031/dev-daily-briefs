@@ -1,0 +1,338 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 28 Oct 2026",
+    "en": "Backend & Fullstack Daily — 28 Oct 2026",
+    "fr": "Backend & Fullstack Daily — 28 oct. 2026"
+  },
+  "description": {
+    "es": "Día de advisories: better-auth crítico, undici, MCP TypeScript SDK y Authlib. Aurora serverless llega a 384 ACU, Valkey cambia durabilidad en caliente, y Uber y Anthropic muestran arquitectura a escala.",
+    "en": "Advisory day: critical better-auth, undici, the MCP TypeScript SDK and Authlib. Aurora serverless reaches 384 ACUs, Valkey changes durability in place, and Uber and Anthropic show architecture at scale.",
+    "fr": "Journée d'advisories : better-auth critique, undici, le SDK MCP TypeScript et Authlib. Aurora serverless passe à 384 ACU, Valkey change de durabilité à chaud, et Uber et Anthropic montrent l'architecture à grande échelle."
+  },
+  "pubDate": "2026-10-28",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "better-auth crítico: el state OAuth sirve de magic link", "en": "Critical better-auth: OAuth state works as a magic link", "fr": "better-auth critique : le state OAuth sert de magic link" },
+      "anchor": "better-auth-cve-2026-114607",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "undici: bypass de TLS y cache poisoning", "en": "undici: TLS bypass and cache poisoning", "fr": "undici : contournement TLS et cache poisoning" },
+      "anchor": "undici-tls-bypass",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": { "es": "MCP TypeScript SDK sin límite de body", "en": "MCP TypeScript SDK had no body size limit", "fr": "SDK MCP TypeScript sans limite de body" },
+      "anchor": "mcp-ts-sdk-body-limit",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Aurora serverless sube a 384 ACU", "en": "Aurora serverless goes up to 384 ACUs", "fr": "Aurora serverless monte à 384 ACU" },
+      "anchor": "aurora-serverless-384-acu",
+      "icon": "simple-icons:postgresql"
+    },
+    {
+      "text": { "es": "Anthropic deja Git por Scion en su monorepo", "en": "Anthropic swaps Git for Scion in its monorepo", "fr": "Anthropic remplace Git par Scion pour son monorepo" },
+      "anchor": "anthropic-scion",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "better-auth-cve-2026-114607",
+      "updates": [
+        {
+          "id": "better-auth-cve-2026-114607",
+          "tag": "security",
+          "date": "27 Oct 2026",
+          "title": {
+            "es": "better-auth CVE-2026-114607 (CVSS 9.1): el state de OAuth se usa como magic link para entrar como otro usuario",
+            "en": "better-auth CVE-2026-114607 (CVSS 9.1): OAuth state can be used as a magic link to sign in as another user",
+            "fr": "better-auth CVE-2026-114607 (CVSS 9.1) : le state OAuth peut servir de magic link pour se connecter en tant qu'un autre utilisateur"
+          },
+          "body_html": {
+            "es": "<p>Advisory <strong>crítico</strong> en <code>better-auth</code> (desde <code>1.4.0-beta.18</code>): el parámetro <code>state</code> del flujo OAuth puede reutilizarse como magic link y abrir sesión con la cuenta de otra persona. El mismo día salió otro (GHSA-r4xp, CVSS 7.4) donde el <strong>OAuth Proxy</strong> también deja suplantar usuarios. Los dos se arreglan en <code>1.7.7</code>. Si venís siguiendo la serie 1.7.x ya estás cubierto, pero chequeá el lockfile: ojo con este CVE, actualizá YA.</p>",
+            "en": "<p><strong>Critical</strong> advisory in <code>better-auth</code> (from <code>1.4.0-beta.18</code>): the OAuth flow's <code>state</code> parameter can be reused as a magic link, signing the attacker in as someone else. A second advisory the same day (GHSA-r4xp, CVSS 7.4) lets the <strong>OAuth Proxy</strong> impersonate users too. Both are fixed in <code>1.7.7</code>. If you track the 1.7.x line you are covered, but check the lockfile.</p>",
+            "fr": "<p>Advisory <strong>critique</strong> dans <code>better-auth</code> (depuis <code>1.4.0-beta.18</code>) : le paramètre <code>state</code> du flux OAuth peut être réutilisé comme magic link pour se connecter en tant qu'un autre utilisateur. Un second advisory le même jour (GHSA-r4xp, CVSS 7.4) permet aussi à l'<strong>OAuth Proxy</strong> d'usurper des comptes. Les deux sont corrigés en <code>1.7.7</code>. Vérifiez le lockfile.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-965c-763c-88jm", "label": "github.com/advisories" }
+        },
+        {
+          "id": "undici-tls-bypass",
+          "tag": "security",
+          "date": "27 Oct 2026",
+          "title": {
+            "es": "undici: seis advisories, incluido un bypass de validación TLS cuando el Agent pierde las opciones tls",
+            "en": "undici: six advisories, including a TLS certificate validation bypass when the Agent drops tls options",
+            "fr": "undici : six advisories, dont un contournement de la validation TLS quand l'Agent perd les options tls"
+          },
+          "body_html": {
+            "es": "<p>El cliente HTTP que está debajo de <code>fetch</code> en Node recibió seis advisories en la base global: <strong>bypass de validación de certificados TLS</strong> porque el <code>Agent</code> descarta las opciones <code>tls</code> (CVSS 7.4), <strong>cache poisoning con fuga entre usuarios</strong> vía redirects cross-origin (7.4), DoS por renegociación TLS 1.2, DoS en el handshake HTTP/2 de WebSocket, buffer de PONG sin límite y una excepción sin manejar en el interceptor de descompresión. Fixes: <code>6.29.1</code>, <code>7.30.1</code> y <code>8.12.2</code> (mejor <code>8.12.3</code>). Si tenés <code>undici</code> como dependencia directa, subí la versión; el <code>fetch</code> de Node trae su propia copia y se actualiza con el runtime.</p>",
+            "en": "<p>The HTTP client under Node's <code>fetch</code> got six advisories in the global database: a <strong>TLS certificate validation bypass</strong> because the <code>Agent</code> drops <code>tls</code> options (CVSS 7.4), <strong>cache poisoning with cross-user disclosure</strong> via cross-origin redirects (7.4), DoS through TLS 1.2 renegotiation, DoS on a failed HTTP/2 WebSocket handshake, an unbounded PONG buffer and an unhandled exception in the decompress interceptor. Fixes: <code>6.29.1</code>, <code>7.30.1</code> and <code>8.12.2</code> (prefer <code>8.12.3</code>). If <code>undici</code> is a direct dependency, bump it; Node's built-in <code>fetch</code> ships its own copy and updates with the runtime.</p>",
+            "fr": "<p>Le client HTTP sous le <code>fetch</code> de Node a reçu six advisories : un <strong>contournement de la validation des certificats TLS</strong> car l'<code>Agent</code> ignore les options <code>tls</code> (CVSS 7.4), du <strong>cache poisoning avec fuite entre utilisateurs</strong> via des redirections cross-origin (7.4), un DoS par renégociation TLS 1.2, un DoS sur le handshake HTTP/2 WebSocket, un buffer PONG non borné et une exception non gérée dans l'intercepteur de décompression. Correctifs : <code>6.29.1</code>, <code>7.30.1</code> et <code>8.12.2</code> (préférez <code>8.12.3</code>).</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-2m5v-pch6-74hx", "label": "github.com/advisories" }
+        },
+        {
+          "id": "mcp-ts-sdk-body-limit",
+          "tag": "security",
+          "date": "27 Oct 2026",
+          "title": {
+            "es": "MCP TypeScript SDK: los transports HTTP del server no limitaban el tamaño del body",
+            "en": "MCP TypeScript SDK: HTTP server transports did not limit request body size",
+            "fr": "SDK MCP TypeScript : les transports HTTP serveur ne limitaient pas la taille du body"
+          },
+          "body_html": {
+            "es": "<p>Advisory <strong>high</strong> (CVSS 7.5) en <code>@modelcontextprotocol/sdk</code>: los transports y handlers HTTP aceptaban requests sin límite de tamaño, o sea DoS por memoria con un solo POST. Afecta <code>1.10.0</code> a <code>1.30.0</code> y los paquetes v2 <code>@modelcontextprotocol/server</code>, <code>/node</code> y <code>/hono</code>. Fixes: <code>1.30.1</code>, <code>server</code>/<code>node</code> <code>2.1.0</code> y <code>hono</code> <code>2.0.1</code>. Si exponés un MCP server por HTTP, ponete las pilas y además limitá el body en el proxy.</p>",
+            "en": "<p><strong>High</strong> advisory (CVSS 7.5) in <code>@modelcontextprotocol/sdk</code>: HTTP transports and handlers accepted requests with no size limit, so a single POST can exhaust memory. It affects <code>1.10.0</code> through <code>1.30.0</code> plus the v2 packages <code>@modelcontextprotocol/server</code>, <code>/node</code> and <code>/hono</code>. Fixes: <code>1.30.1</code>, <code>server</code>/<code>node</code> <code>2.1.0</code> and <code>hono</code> <code>2.0.1</code>. If you expose an MCP server over HTTP, also cap the body at the proxy.</p>",
+            "fr": "<p>Advisory <strong>high</strong> (CVSS 7.5) dans <code>@modelcontextprotocol/sdk</code> : les transports et handlers HTTP acceptaient des requêtes sans limite de taille, donc un seul POST peut épuiser la mémoire. Concerne <code>1.10.0</code> à <code>1.30.0</code> et les paquets v2 <code>@modelcontextprotocol/server</code>, <code>/node</code> et <code>/hono</code>. Correctifs : <code>1.30.1</code>, <code>server</code>/<code>node</code> <code>2.1.0</code> et <code>hono</code> <code>2.0.1</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-f897-62hf-6gxq", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "authlib-empty-signature",
+      "updates": [
+        {
+          "id": "authlib-empty-signature",
+          "tag": "security",
+          "date": "27 Oct 2026",
+          "title": {
+            "es": "Authlib: lote de 10 advisories, con validación de firmas vacías en JWS (crítico) y HMAC con clave vacía",
+            "en": "Authlib: batch of 10 advisories, including empty-signature JWS validation (critical) and empty HMAC keys",
+            "fr": "Authlib : lot de 10 advisories, dont la validation de signatures JWS vides (critique) et des clés HMAC vides"
+          },
+          "body_html": {
+            "es": "<p>La librería OAuth/JOSE de Python más usada recibió un lote completo: <strong>CVE-2026-96760</strong> (crítico) acepta firmas vacías al deserializar JWS JSON, otra acepta una <strong>clave HMAC vacía</strong> y permite falsificar JWT HS256/384/512, y un fix incompleto de algorithm confusion sigue dejando forjar HMAC con claves públicas con prefijo. Además: audience incorrecta aceptada en el JWT bearer grant y un ID token que puede apagar su propia validación de nonce. Aunque tu backend sea TypeScript, si tenés servicios Python validando tokens, esto te toca.</p>",
+            "en": "<p>Python's most used OAuth/JOSE library got a full batch: <strong>CVE-2026-96760</strong> (critical) accepts empty signatures in JWS JSON deserialization, another accepts an <strong>empty HMAC key</strong> and allows HS256/384/512 JWT forgery, and an incomplete algorithm-confusion fix still allows HMAC forgery with prefixed public keys. Also: wrong-audience assertions accepted in the JWT bearer grant and an ID token that can disable its own nonce validation. Even with a TypeScript backend, any Python service validating tokens is in scope.</p>",
+            "fr": "<p>La bibliothèque OAuth/JOSE Python la plus utilisée reçoit un lot complet : <strong>CVE-2026-96760</strong> (critique) accepte des signatures vides en désérialisation JWS JSON, une autre accepte une <strong>clé HMAC vide</strong> et permet de forger des JWT HS256/384/512, et un correctif incomplet de confusion d'algorithme permet encore de forger du HMAC avec des clés publiques préfixées. Tout service Python qui valide des tokens est concerné.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-6v38-4h7w-rj9h", "label": "github.com/advisories" }
+        },
+        {
+          "id": "go-jose-jwk-dos",
+          "tag": "security",
+          "date": "27 Oct 2026",
+          "title": {
+            "es": "Go JOSE v4: DoS al parsear JWKs con claves RSA",
+            "en": "Go JOSE v4: DoS when parsing JWKs containing RSA keys",
+            "fr": "Go JOSE v4 : DoS lors du parsing de JWK contenant des clés RSA"
+          },
+          "body_html": {
+            "es": "<p>Advisory <strong>high</strong> (CVE-2026-116587) en <code>github.com/go-jose/go-jose/v4</code>: un JWK con una clave RSA armada a propósito tumba el proceso. Le pega a cualquier gateway o servicio Go que descargue JWKS de un emisor que no controla, como validadores OIDC multi-tenant.</p>",
+            "en": "<p><strong>High</strong> advisory (CVE-2026-116587) in <code>github.com/go-jose/go-jose/v4</code>: a crafted JWK with an RSA key can take the process down. It hits any Go gateway or service that fetches JWKS from an issuer it does not control, such as multi-tenant OIDC validators.</p>",
+            "fr": "<p>Advisory <strong>high</strong> (CVE-2026-116587) dans <code>github.com/go-jose/go-jose/v4</code> : un JWK forgé contenant une clé RSA peut faire tomber le processus. Touche toute passerelle ou service Go qui récupère des JWKS d'un émetteur qu'il ne contrôle pas.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-mgcc-cww5-fp2q", "label": "github.com/advisories" }
+        },
+        {
+          "id": "dd-trace-redos",
+          "tag": "security",
+          "date": "27 Oct 2026",
+          "title": {
+            "es": "dd-trace (Node): ReDoS en la ofuscación del query string de URLs",
+            "en": "dd-trace (Node): ReDoS in URL query string obfuscation",
+            "fr": "dd-trace (Node) : ReDoS dans l'obfuscation des query strings d'URL"
+          },
+          "body_html": {
+            "es": "<p>El tracer de Datadog para Node (<strong>CVSS v4 8.7</strong>) usa una regex que un query string armado puede trabar, y como corre en cada request instrumentado, bloquea el event loop. Fixes: <code>5.131.1</code> y <code>6.20.1</code>. La versión Python (<code>ddtrace</code>) tiene el mismo bug. Tu herramienta de observabilidad también es superficie de ataque.</p>",
+            "en": "<p>Datadog's Node tracer (<strong>CVSS v4 8.7</strong>) uses a regex that a crafted query string can stall, and since it runs on every instrumented request it blocks the event loop. Fixes: <code>5.131.1</code> and <code>6.20.1</code>. The Python tracer (<code>ddtrace</code>) has the same bug. Your observability tooling is attack surface too.</p>",
+            "fr": "<p>Le tracer Node de Datadog (<strong>CVSS v4 8.7</strong>) utilise une regex qu'une query string forgée peut bloquer ; comme elle s'exécute sur chaque requête instrumentée, elle bloque l'event loop. Correctifs : <code>5.131.1</code> et <code>6.20.1</code>. Le tracer Python (<code>ddtrace</code>) a le même bug.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-x94g-w73q-hpcw", "label": "github.com/advisories" }
+        },
+        {
+          "id": "nodemailer-smtp-redos",
+          "tag": "patch",
+          "date": "27 Oct 2026",
+          "title": {
+            "es": "Nodemailer 10.0.13: tres advisories de backtracking cuadrático y parsing de direcciones",
+            "en": "Nodemailer 10.0.13: three advisories on quadratic backtracking and address parsing",
+            "fr": "Nodemailer 10.0.13 : trois advisories sur du backtracking quadratique et le parsing d'adresses"
+          },
+          "body_html": {
+            "es": "<p>Tres advisories <strong>medium</strong>: regex cuadrática en la detección del mecanismo SMTP AUTH (pre-auth), parsing O(n²) de las respuestas del servidor SMTP (un server malicioso o un MITM te cuelga el worker) y comentarios RFC 5322 dentro de una dirección entre ángulos que nunca se eliminan. Todo arreglado en <code>10.0.13</code>; si tu worker de mails habla con relays de terceros, actualizá.</p>",
+            "en": "<p>Three <strong>medium</strong> advisories: a quadratic regex in SMTP AUTH mechanism detection (pre-auth), O(n²) parsing of SMTP server replies (a malicious server or MITM can hang the worker) and RFC 5322 comments inside angle-bracket addresses that are never stripped. All fixed in <code>10.0.13</code>.</p>",
+            "fr": "<p>Trois advisories <strong>medium</strong> : une regex quadratique dans la détection du mécanisme SMTP AUTH (pré-auth), un parsing O(n²) des réponses du serveur SMTP (un serveur malveillant ou un MITM peut bloquer le worker) et des commentaires RFC 5322 dans des adresses entre chevrons jamais supprimés. Tout est corrigé en <code>10.0.13</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-4ffr-jq9g-5ffx", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "aurora-serverless-384-acu",
+      "updates": [
+        {
+          "id": "aurora-serverless-384-acu",
+          "tag": "notable",
+          "date": "27 Oct 2026",
+          "title": {
+            "es": "Aurora serverless sube el techo de 256 a 384 ACU (768 GiB de memoria)",
+            "en": "Aurora serverless raises its ceiling from 256 to 384 ACUs (768 GiB of memory)",
+            "fr": "Aurora serverless relève son plafond de 256 à 384 ACU (768 Gio de mémoire)"
+          },
+          "body_html": {
+            "es": "<p>Un <strong>50% más</strong> de capacidad máxima por instancia: hasta <code>384</code> ACU, unos 768 GiB de RAM. Solo para <strong>Aurora PostgreSQL</strong> 18.4, 17.10, 16.14, 15.18 y 14.23 sobre Platform Version 4. Si tu workload pegaba contra el techo y te obligaba a pasar a provisioned, ahora tenés margen sin perder el autoscaling.</p>",
+            "en": "<p>A <strong>50% higher</strong> maximum per instance: up to <code>384</code> ACUs, about 768 GiB of RAM. Only for <strong>Aurora PostgreSQL</strong> 18.4, 17.10, 16.14, 15.18 and 14.23 on Platform Version 4. If your workload hit the ceiling and pushed you to provisioned, you now have headroom without giving up autoscaling.</p>",
+            "fr": "<p>Un maximum par instance <strong>50 % plus élevé</strong> : jusqu'à <code>384</code> ACU, environ 768 Gio de RAM. Uniquement pour <strong>Aurora PostgreSQL</strong> 18.4, 17.10, 16.14, 15.18 et 14.23 sur Platform Version 4.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/aurora-serverless-supports-384-acu/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "elasticache-valkey-durability",
+          "tag": "notable",
+          "date": "27 Oct 2026",
+          "title": {
+            "es": "ElastiCache for Valkey ya permite cambiar la durabilidad de un cluster existente",
+            "en": "ElastiCache for Valkey can now change durability on existing clusters",
+            "fr": "ElastiCache for Valkey permet désormais de changer la durabilité d'un cluster existant"
+          },
+          "body_html": {
+            "es": "<p>Con <strong>Valkey 9.0+</strong> podés activar o desactivar la durabilidad sin recrear el cluster. Escrituras <strong>síncronas</strong>: se persisten en al menos dos AZ antes de responder, cero pérdida y latencia de un dígito de milisegundos. <strong>Asíncronas</strong>: latencia de microsegundos, pero podés perder hasta 10 s de datos en una falla rara. Pasar de cache puro a datos persistentes ya no implica migrar. AWS no dice si el cambio tiene downtime: probalo en staging primero.</p>",
+            "en": "<p>With <strong>Valkey 9.0+</strong> you can turn durability on or off without recreating the cluster. <strong>Synchronous</strong> writes persist across at least two AZs before responding, with zero data loss and single-digit millisecond latency. <strong>Asynchronous</strong> writes keep microsecond latency but can lose up to 10 s of data in a rare failure. Moving from pure cache to persistent data no longer means a migration. AWS does not say whether the change causes downtime, so test it in staging first.</p>",
+            "fr": "<p>Avec <strong>Valkey 9.0+</strong>, on active ou désactive la durabilité sans recréer le cluster. Écritures <strong>synchrones</strong> : persistées sur au moins deux AZ avant la réponse, zéro perte et latence de quelques millisecondes. <strong>Asynchrones</strong> : latence en microsecondes, mais jusqu'à 10 s de données perdues lors d'une panne rare. AWS ne précise pas s'il y a une interruption.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/elasticache-changing-durability/", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "kubernetes-patch-releases",
+      "updates": [
+        {
+          "id": "kubernetes-patch-releases",
+          "tag": "patch",
+          "date": "28 Oct 2026",
+          "title": {
+            "es": "Kubernetes 1.37.2, 1.36.6, 1.35.10 y 1.34.13: patch releases mensuales",
+            "en": "Kubernetes 1.37.2, 1.36.6, 1.35.10 and 1.34.13: monthly patch releases",
+            "fr": "Kubernetes 1.37.2, 1.36.6, 1.35.10 et 1.34.13 : patch releases mensuels"
+          },
+          "body_html": {
+            "es": "<p>Salieron los patches de las cuatro ramas soportadas. Las notas de la release solo remiten al CHANGELOG, así que revisalo antes de planificar el upgrade de tus clusters. Si estás en 1.34, empezá a mirar el fin de soporte de esa rama.</p>",
+            "en": "<p>Patches for all four supported branches are out. The release notes only point to the CHANGELOG, so read it before planning your cluster upgrades. If you are on 1.34, start watching that branch's end of support.</p>",
+            "fr": "<p>Les patches des quatre branches supportées sont sortis. Les notes renvoient seulement au CHANGELOG, à lire avant de planifier la mise à jour des clusters.</p>"
+          },
+          "source": { "url": "https://github.com/kubernetes/kubernetes/releases/tag/v1.37.2", "label": "github.com/kubernetes" }
+        },
+        {
+          "id": "ecs-gpu-mps",
+          "tag": "minor",
+          "date": "27 Oct 2026",
+          "title": {
+            "es": "Amazon ECS ahora comparte GPUs entre tasks con NVIDIA MPS",
+            "en": "Amazon ECS now supports GPU sharing with NVIDIA Multi-Process Service (MPS)",
+            "fr": "Amazon ECS prend en charge le partage de GPU avec NVIDIA MPS"
+          },
+          "body_html": {
+            "es": "<p>Varias tasks de ECS pueden usar la misma GPU a la vez con <strong>NVIDIA MPS</strong>. Sirve para servicios de inferencia chicos que dejaban una GPU entera ociosa.</p>",
+            "en": "<p>Several ECS tasks can now share one GPU at the same time through <strong>NVIDIA MPS</strong>. It helps small inference services that used to leave a whole GPU idle.</p>",
+            "fr": "<p>Plusieurs tâches ECS peuvent partager un même GPU grâce à <strong>NVIDIA MPS</strong>, utile pour de petits services d'inférence.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-ecs-gpu-sharing-nvidia-mps/", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "anthropic-scion",
+      "updates": [
+        {
+          "id": "anthropic-scion",
+          "tag": "notable",
+          "date": "27 Oct 2026",
+          "title": {
+            "es": "Anthropic reemplazó Git por Scion: de 2.500 a 30.000 merges diarios y 25 millones de checkouts de CI",
+            "en": "Anthropic replaced Git with Scion: from 2,500 to 30,000 daily merges and 25 million CI checkouts",
+            "fr": "Anthropic a remplacé Git par Scion : de 2 500 à 30 000 merges par jour et 25 millions de checkouts CI"
+          },
+          "body_html": {
+            "es": "<p>El monorepo pasó de unos 2.500 cambios mergeados por día en mayo a más de 30.000 en septiembre, con ~100 GB de historia. Scion corre commits, merges y blame <strong>del lado del servidor</strong>, guarda changesets content-addressed y usa checkouts virtualizados con tres niveles de cache (daemon local, regional y servidores autoritativos sobre Spanner). Dicen tener más de 99% de cache hit y un footprint 200 veces menor que los mirrors de Git. Ellos mismos aclaran que no es un reemplazo general de Git: lo que conviene copiar son las ideas (APIs server-side, mejores protocolos de fetch).</p>",
+            "en": "<p>The monorepo went from about 2,500 merged changes per day in May to more than 30,000 in September, with ~100 GB of history. Scion runs commits, merges and blame <strong>server-side</strong>, stores content-addressed changesets and uses virtualised checkouts behind three cache tiers (local daemon, regional, authoritative servers on Spanner). They report cache-hit rates above 99% and a footprint 200x smaller than the Git mirrors. Anthropic says it is not a general Git replacement: the ideas worth borrowing are server-side APIs and better fetch protocols.</p>",
+            "fr": "<p>Le monorepo est passé d'environ 2 500 changements mergés par jour en mai à plus de 30 000 en septembre, avec ~100 Go d'historique. Scion exécute commits, merges et blame <strong>côté serveur</strong>, stocke des changesets content-addressed et utilise des checkouts virtualisés derrière trois niveaux de cache. Plus de 99 % de cache hit et une empreinte 200 fois plus faible annoncés. Ce n'est pas un remplaçant général de Git.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/anthropic-source-control/", "label": "infoq.com" }
+        },
+        {
+          "id": "uber-normalized-compute-units",
+          "tag": "notable",
+          "date": "27 Oct 2026",
+          "title": {
+            "es": "Uber deja de contar cores: Normalized Compute Units para workloads stateful",
+            "en": "Uber stops counting cores: Normalized Compute Units for stateful workloads",
+            "fr": "Uber arrête de compter les cœurs : Normalized Compute Units pour les workloads stateful"
+          },
+          "body_html": {
+            "es": "<p>Odin, la plataforma stateful de Uber (~5 millones de cores en x86 y ARM), le asigna a cada tipo de server un factor de rendimiento (base 100, el hardware nuevo llega a ~190) y traduce el requerimiento de compute a cores según el host. En Kafka, la diferencia de utilización entre tipos de hardware bajó de ~8 a ~3 puntos y la asignación total de CPU cayó ~8%. Lo importante: los factores salen de mediciones en producción por tecnología, no de benchmarks sintéticos. Un golazo para quien hace capacity planning en flotas mixtas.</p>",
+            "en": "<p>Odin, Uber's stateful platform (~5 million cores across x86 and ARM), gives each server type a performance factor (baseline 100, new hardware near 190) and maps compute requirements to cores per host. For Kafka, the utilization spread between hardware types dropped from ~8 to ~3 points and total CPU allocation fell ~8%. The key point: factors come from per-technology production measurements, not synthetic benchmarks.</p>",
+            "fr": "<p>Odin, la plateforme stateful d'Uber (~5 millions de cœurs x86 et ARM), attribue à chaque type de serveur un facteur de performance (base 100, le matériel récent approche 190) et convertit le besoin de calcul en cœurs selon l'hôte. Pour Kafka, l'écart d'utilisation est passé de ~8 à ~3 points et l'allocation CPU totale a baissé d'environ 8 %.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/uber-cpu-stateful-workloads/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "quick-links",
+      "name": "Quick Links",
+      "theme": "quick-links",
+      "icon_emoji": "📌",
+      "anchor": "quick-links",
+      "updates": [
+        {
+          "id": "quick-links-symfony",
+          "tag": "security",
+          "date": "27 Oct 2026",
+          "title": {
+            "es": "Symfony: ReDoS en HeaderUtils::split() vía Cache-Control y recursión sin límite en el lexer YAML",
+            "en": "Symfony: ReDoS in HeaderUtils::split() via Cache-Control and unbounded recursion in the YAML lexer",
+            "fr": "Symfony : ReDoS dans HeaderUtils::split() via Cache-Control et récursion non bornée dans le lexer YAML"
+          },
+          "body_html": {
+            "es": "<p>Dos advisories <strong>CVSS v4 8.7</strong>: un header <code>Cache-Control</code> armado traba <code>http-foundation</code>, y un solo documento YAML tumba el proceso. Si tenés servicios PHP al lado de tu stack Node, actualizá.</p>",
+            "en": "<p>Two <strong>CVSS v4 8.7</strong> advisories: a crafted <code>Cache-Control</code> header stalls <code>http-foundation</code>, and a single YAML document crashes the process.</p>",
+            "fr": "<p>Deux advisories <strong>CVSS v4 8.7</strong> : un en-tête <code>Cache-Control</code> forgé bloque <code>http-foundation</code>, et un seul document YAML fait planter le processus.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-r925-mgvr-h9cc", "label": "github.com/advisories" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Auth bajo fuego: better-auth, Authlib y go-jose recibieron advisories el mismo día. Los bugs están en los bordes del flujo (state, claves vacías, JWKs de terceros), no en la criptografía.",
+      "en": "Auth under fire: better-auth, Authlib and go-jose all got advisories on the same day. The bugs sit at the edges of the flow (state, empty keys, third-party JWKs), not in the cryptography.",
+      "fr": "L'authentification sous pression : better-auth, Authlib et go-jose ont reçu des advisories le même jour. Les bugs sont aux bords du flux (state, clés vides, JWK tiers), pas dans la cryptographie."
+    },
+    {
+      "es": "El DoS es la clase dominante: body sin límite en MCP, ReDoS en dd-trace, Nodemailer y Symfony, renegociación TLS en undici. Poné límites de tamaño y timeouts en cada borde.",
+      "en": "DoS is the dominant class: unbounded bodies in MCP, ReDoS in dd-trace, Nodemailer and Symfony, TLS renegotiation in undici. Put size limits and timeouts on every edge.",
+      "fr": "Le DoS domine : body non borné dans MCP, ReDoS dans dd-trace, Nodemailer et Symfony, renégociation TLS dans undici. Mettez des limites de taille et des timeouts à chaque frontière."
+    },
+    {
+      "es": "Capacidad medida, no supuesta: Uber normaliza CPU por rendimiento real y Anthropic rediseña source control por el volumen de merges de agentes.",
+      "en": "Measured capacity, not assumed: Uber normalizes CPU by real performance and Anthropic redesigns source control around agent-driven merge volume.",
+      "fr": "Capacité mesurée, pas supposée : Uber normalise le CPU selon la performance réelle et Anthropic repense le contrôle de source autour du volume de merges des agents."
+    }
+  ]
+}

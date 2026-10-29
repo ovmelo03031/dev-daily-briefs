@@ -1,0 +1,416 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 29 Oct 2026: Node.js 26 pasa a LTS, Seroval y GraphQL Tools con CVEs",
+    "en": "Backend & Fullstack Daily — 29 Oct 2026: Node.js 26 goes LTS, Seroval and GraphQL Tools CVEs",
+    "fr": "Backend & Fullstack Daily — 29 oct. 2026 : Node.js 26 passe en LTS, CVE dans Seroval et GraphQL Tools"
+  },
+  "description": {
+    "es": "Node.js 26 «Lithium» entra en LTS, cinco advisories en Seroval (serializador de SolidStart y TanStack Start), fuga de auth en GraphQL Tools, NestJS 12.3 con adapter HTTP nativo y EKS Auto Mode con Gateway API.",
+    "en": "Node.js 26 'Lithium' enters LTS, five Seroval advisories (the SolidStart and TanStack Start serializer), an auth leak in GraphQL Tools, NestJS 12.3 with a native HTTP adapter and EKS Auto Mode with Gateway API.",
+    "fr": "Node.js 26 « Lithium » passe en LTS, cinq avis de sécurité pour Seroval (le sérialiseur de SolidStart et TanStack Start), une fuite d'authentification dans GraphQL Tools, NestJS 12.3 avec un adaptateur HTTP natif et EKS Auto Mode avec la Gateway API."
+  },
+  "pubDate": "2026-10-29",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "Node.js 26 «Lithium» ya es LTS", "en": "Node.js 26 'Lithium' is now LTS", "fr": "Node.js 26 « Lithium » passe en LTS" },
+      "anchor": "node-26-lts",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": { "es": "Seroval: 5 advisories, actualizá a 1.6.8", "en": "Seroval: 5 advisories, upgrade to 1.6.8", "fr": "Seroval : 5 avis, passez à 1.6.8" },
+      "anchor": "seroval-deserialization",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "GraphQL Tools filtra auth entre usuarios WS", "en": "GraphQL Tools leaks auth across WS users", "fr": "GraphQL Tools : fuite d'auth entre utilisateurs WS" },
+      "anchor": "graphql-tools-legacy-ws",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "NestJS 12.3 trae adapter HTTP nativo de Node", "en": "NestJS 12.3 ships a native Node HTTP adapter", "fr": "NestJS 12.3 ajoute un adaptateur HTTP Node natif" },
+      "anchor": "nestjs-12-3",
+      "icon": "lucide:blocks"
+    },
+    {
+      "text": { "es": "Echo v4/v5: 10 advisories, bypass de guards", "en": "Echo v4/v5: 10 advisories, guard bypass", "fr": "Echo v4/v5 : 10 avis, contournement des guards" },
+      "anchor": "echo-static-bypass",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "EKS Auto Mode soporta Gateway API", "en": "EKS Auto Mode supports Gateway API", "fr": "EKS Auto Mode prend en charge la Gateway API" },
+      "anchor": "eks-auto-gateway-api",
+      "icon": "simple-icons:kubernetes"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "node-26-lts",
+          "tag": "release",
+          "date": "28 Oct 2026",
+          "title": {
+            "es": "Node.js 26.13.0 marca la entrada de la línea 26.x en LTS («Lithium»)",
+            "en": "Node.js 26.13.0 moves the 26.x line into LTS ('Lithium')",
+            "fr": "Node.js 26.13.0 fait passer la branche 26.x en LTS (« Lithium »)"
+          },
+          "body_html": {
+            "es": "<p>Node.js 26 pasa a <strong>Long Term Support</strong> con soporte hasta <strong>fines de abril de 2029</strong>. La release no trae cambios funcionales respecto de 26.12.1: solo actualiza metadata como <code>process.release</code>. Ojo si migrás desde 24 o 22: desde Node 25 los binarios oficiales de Linux linkean contra <code>libatomic</code>, que en algunas distros (imágenes slim/alpine) tenés que instalar aparte. Revisá tus Dockerfiles antes de bumpear la base.</p>",
+            "en": "<p>Node.js 26 enters <strong>Long Term Support</strong>, supported until <strong>the end of April 2029</strong>. The release has no functional changes over 26.12.1; it only updates metadata such as <code>process.release</code>. If you are coming from 24 or 22, note that since Node 25 the official Linux binaries link against <code>libatomic</code>, which some distributions (slim/alpine images) need to install separately. Check your Dockerfiles before bumping the base image.</p>",
+            "fr": "<p>Node.js 26 passe en <strong>Long Term Support</strong>, avec un support jusqu'à <strong>fin avril 2029</strong>. La version n'apporte aucun changement fonctionnel par rapport à 26.12.1 : elle met seulement à jour les métadonnées comme <code>process.release</code>. Si vous venez de 24 ou 22, depuis Node 25 les binaires Linux officiels sont liés à <code>libatomic</code>, à installer séparément sur certaines distributions (images slim/alpine). Vérifiez vos Dockerfiles avant de changer d'image de base.</p>"
+          },
+          "source": { "url": "https://github.com/nodejs/node/releases/tag/v26.13.0", "label": "github.com/nodejs" }
+        },
+        {
+          "id": "seroval-deserialization",
+          "tag": "security",
+          "date": "28 Oct 2026",
+          "title": {
+            "es": "Seroval ≤ 1.6.7: deserialización que invoca callables elegidos por el atacante (CVE-2026-116580)",
+            "en": "Seroval ≤ 1.6.7: deserialization invokes attacker-chosen callables (CVE-2026-116580)",
+            "fr": "Seroval ≤ 1.6.7 : la désérialisation invoque des fonctions choisies par l'attaquant (CVE-2026-116580)"
+          },
+          "body_html": {
+            "es": "<p>Cinco advisories juntos en <code>seroval</code>, el serializador que usan SolidStart y TanStack Start para mover estado entre server y cliente. El peor (<strong>high</strong>): al reconstruir un async iterator, <code>fromJSON</code> llamaba <code>on()</code> sobre una fuente que no validaba, así que un payload armado podía apuntar a cualquier función de la app. Se suman DoS por longitud de array no validada en <code>fromJSON</code>/<code>fromCrossJSON</code> e inyección de script vía RegExp y typed arrays. Si deserializás input del cliente, actualizá YA a <strong>1.6.8</strong> (directa o transitiva: <code>pnpm why seroval</code>).</p>",
+            "en": "<p>Five advisories landed together for <code>seroval</code>, the serializer SolidStart and TanStack Start use to move state between server and client. The worst (<strong>high</strong>): when rebuilding an async iterator, <code>fromJSON</code> called <code>on()</code> on an unvalidated source, so a crafted payload could point it at any application function. They also cover DoS through an unvalidated array length in <code>fromJSON</code>/<code>fromCrossJSON</code> and script injection through RegExp sources and typed arrays. If you deserialize client input, upgrade to <strong>1.6.8</strong> now (direct or transitive: <code>pnpm why seroval</code>).</p>",
+            "fr": "<p>Cinq avis publiés ensemble pour <code>seroval</code>, le sérialiseur utilisé par SolidStart et TanStack Start pour transférer l'état entre serveur et client. Le plus grave (<strong>high</strong>) : en reconstruisant un async iterator, <code>fromJSON</code> appelait <code>on()</code> sur une source non validée, si bien qu'un payload forgé pouvait viser n'importe quelle fonction de l'application. S'y ajoutent un DoS par longueur de tableau non validée dans <code>fromJSON</code>/<code>fromCrossJSON</code> et une injection de script via RegExp et typed arrays. Si vous désérialisez des entrées client, passez à <strong>1.6.8</strong> (dépendance directe ou transitive : <code>pnpm why seroval</code>).</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-7rv5-mrxv-xcr9", "label": "github.com/advisories" }
+        },
+        {
+          "id": "graphql-tools-legacy-ws",
+          "tag": "security",
+          "date": "28 Oct 2026",
+          "title": {
+            "es": "GraphQL Tools: connectionParams de un request terminan en el connection_init de otro usuario (CVSS 8.2)",
+            "en": "GraphQL Tools: one request's connectionParams end up in another user's connection_init (CVSS 8.2)",
+            "fr": "GraphQL Tools : les connectionParams d'une requête finissent dans le connection_init d'un autre utilisateur (CVSS 8.2)"
+          },
+          "body_html": {
+            "es": "<p><code>@graphql-tools/executor-legacy-ws</code> ≤ 1.1.35 guardaba los <code>extensions.connectionParams</code> por request en el estado del closure del executor, y los reenviaba en el <code>connection_init</code> de un caller posterior: estado de autenticación que se filtra entre usuarios (CVE-2026-118665, <strong>CVSS 8.2</strong>). Un segundo advisory (CVSS 6) rutea resultados de una suscripción a otro caller. Si tenés un gateway que comparte el executor legacy entre requests, actualizá a <strong>1.1.36</strong>.</p>",
+            "en": "<p><code>@graphql-tools/executor-legacy-ws</code> ≤ 1.1.35 kept per-request <code>extensions.connectionParams</code> in the executor's closure state and replayed them in a later caller's <code>connection_init</code>: authentication state leaking across users (CVE-2026-118665, <strong>CVSS 8.2</strong>). A second advisory (CVSS 6) routes one subscription's results to a different caller. If a gateway shares the legacy executor across requests, upgrade to <strong>1.1.36</strong>.</p>",
+            "fr": "<p><code>@graphql-tools/executor-legacy-ws</code> ≤ 1.1.35 conservait les <code>extensions.connectionParams</code> de chaque requête dans l'état de closure de l'executor et les rejouait dans le <code>connection_init</code> d'un appelant ultérieur : un état d'authentification qui fuit entre utilisateurs (CVE-2026-118665, <strong>CVSS 8.2</strong>). Un second avis (CVSS 6) envoie les résultats d'une souscription à un autre appelant. Si une gateway partage l'executor legacy entre requêtes, passez à <strong>1.1.36</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-434m-5hcj-pxf3", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "runtimes",
+      "updates": [
+        {
+          "id": "node-24-22-2",
+          "tag": "patch",
+          "date": "28 Oct 2026",
+          "title": {
+            "es": "Node.js 24.22.2: backports de V8 y fix de async context en streams",
+            "en": "Node.js 24.22.2: V8 backports and a stream async-context fix",
+            "fr": "Node.js 24.22.2 : backports V8 et correctif de contexte async dans les streams"
+          },
+          "body_html": {
+            "es": "<p>Patch chico para la LTS 24: varios backports y un cherry-pick de V8, más un fix de Matteo Collina para que <code>stream</code> <strong>conserve el async context de las escrituras estacionadas</strong>. Si usás <code>AsyncLocalStorage</code> para request IDs o tracing y veías contexto perdido en writes con backpressure, este es tu patch.</p>",
+            "en": "<p>A small patch for the 24 LTS: several V8 backports and a cherry-pick, plus a fix from Matteo Collina so <code>stream</code> <strong>keeps the async context of parked writes</strong>. If you use <code>AsyncLocalStorage</code> for request IDs or tracing and saw context disappear on writes under backpressure, this is your patch.</p>",
+            "fr": "<p>Un petit patch pour la LTS 24 : plusieurs backports V8 et un cherry-pick, plus un correctif de Matteo Collina pour que <code>stream</code> <strong>conserve le contexte async des écritures en attente</strong>. Si vous utilisez <code>AsyncLocalStorage</code> pour les request IDs ou le tracing et perdiez le contexte sur des écritures sous backpressure, c'est votre patch.</p>"
+          },
+          "source": { "url": "https://github.com/nodejs/node/releases/tag/v24.22.2", "label": "github.com/nodejs" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "frameworks",
+      "updates": [
+        {
+          "id": "nestjs-12-3",
+          "tag": "release",
+          "date": "28 Oct 2026",
+          "title": {
+            "es": "NestJS 12.3: nuevo adapter de plataforma sobre el HTTP nativo de Node",
+            "en": "NestJS 12.3: a new platform adapter on Node's native HTTP server",
+            "fr": "NestJS 12.3 : un nouvel adaptateur de plateforme sur le serveur HTTP natif de Node"
+          },
+          "body_html": {
+            "es": "<p>Kamil Mysliwiec sumó <code>platform-node</code>, un adapter que corre Nest directo sobre <code>node:http</code>, sin Express ni Fastify en el medio. Además vienen fixes útiles: los middlewares ya no se ejecutan dos veces en rutas que solo difieren en versión, y <code>StreamableFile</code> aborta la respuesta si el stream falla a mitad de camino. Menos dependencias en el request path: esto es un golazo para quien quiere un servicio liviano.</p>",
+            "en": "<p>Kamil Mysliwiec added <code>platform-node</code>, an adapter that runs Nest directly on <code>node:http</code> with no Express or Fastify in between. Useful fixes ship too: middleware no longer runs twice for routes that differ only by version, and <code>StreamableFile</code> aborts the response when the stream fails midway. Fewer dependencies in the request path is a win for lightweight services.</p>",
+            "fr": "<p>Kamil Mysliwiec a ajouté <code>platform-node</code>, un adaptateur qui fait tourner Nest directement sur <code>node:http</code>, sans Express ni Fastify. Des correctifs utiles suivent : les middlewares ne s'exécutent plus deux fois pour des routes qui ne diffèrent que par la version, et <code>StreamableFile</code> interrompt la réponse quand le stream échoue en cours de route. Moins de dépendances sur le chemin de la requête, c'est un gain pour les services légers.</p>"
+          },
+          "source": { "url": "https://github.com/nestjs/nest/releases/tag/v12.3.0", "label": "github.com/nestjs" }
+        },
+        {
+          "id": "hono-node-server-static",
+          "tag": "security",
+          "date": "28 Oct 2026",
+          "title": {
+            "es": "@hono/node-server: serveStatic decodifica dos veces y saltea middlewares (CVE-2026-118663)",
+            "en": "@hono/node-server: serveStatic double-decodes and skips middleware (CVE-2026-118663)",
+            "fr": "@hono/node-server : serveStatic décode deux fois et contourne les middlewares (CVE-2026-118663)"
+          },
+          "body_html": {
+            "es": "<p><code>serveStatic</code> volvía a decodificar el path que Hono ya había decodificado para el routing: un request armado se rutea como un path y se sirve como otro, y el middleware montado sobre el prefijo estático no corre. Afecta <code>&gt;= 1.19.10, &lt; 2.1.3</code>. Si protegés archivos con auth middleware sobre un prefijo, pasá a <strong>2.1.3</strong>.</p>",
+            "en": "<p><code>serveStatic</code> decoded the path a second time after Hono had already decoded it for routing: a crafted request is routed as one path and served as another, so middleware mounted on the static prefix does not run. Affects <code>&gt;= 1.19.10, &lt; 2.1.3</code>. If you guard files with auth middleware on a prefix, move to <strong>2.1.3</strong>.</p>",
+            "fr": "<p><code>serveStatic</code> décodait une seconde fois le chemin déjà décodé par Hono pour le routage : une requête forgée est routée comme un chemin et servie comme un autre, et le middleware monté sur le préfixe statique ne s'exécute pas. Concerne <code>&gt;= 1.19.10, &lt; 2.1.3</code>. Si vous protégez des fichiers par un middleware d'auth sur un préfixe, passez à <strong>2.1.3</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-rmxm-3fg6-px4f", "label": "github.com/advisories" }
+        },
+        {
+          "id": "graphql-scalars-redos",
+          "tag": "security",
+          "date": "28 Oct 2026",
+          "title": {
+            "es": "graphql-scalars: ReDoS exponencial en el scalar PhoneNumber",
+            "en": "graphql-scalars: exponential ReDoS in the PhoneNumber scalar",
+            "fr": "graphql-scalars : ReDoS exponentiel dans le scalaire PhoneNumber"
+          },
+          "body_html": {
+            "es": "<p>La regex de <code>GraphQLPhoneNumber</code> (desde 1.24.1) hace backtracking exponencial: 30 dígitos más un carácter inválido bloquean el event loop por segundos, y cada dígito extra duplica el tiempo (CVE-2026-115887, <strong>high</strong>). Es input directo del cliente, así que no esperes: <strong>2.0.1</strong>.</p>",
+            "en": "<p>The <code>GraphQLPhoneNumber</code> regex (since 1.24.1) backtracks exponentially: 30 digits plus one invalid character block the event loop for seconds, and each extra digit doubles the time (CVE-2026-115887, <strong>high</strong>). It is direct client input, so do not wait: <strong>2.0.1</strong>.</p>",
+            "fr": "<p>La regex de <code>GraphQLPhoneNumber</code> (depuis 1.24.1) fait un backtracking exponentiel : 30 chiffres suivis d'un caractère invalide bloquent l'event loop pendant des secondes, et chaque chiffre supplémentaire double le temps (CVE-2026-115887, <strong>high</strong>). C'est une entrée client directe : passez à <strong>2.0.1</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-x8rm-f576-gq67", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "databases",
+      "updates": [
+        {
+          "id": "bullmq-6-5-1",
+          "tag": "patch",
+          "date": "28 Oct 2026",
+          "title": {
+            "es": "BullMQ 6.5.1: el padre de un flow espera a que se agreguen todos los hijos",
+            "en": "BullMQ 6.5.1: a flow parent waits until all children are added",
+            "fr": "BullMQ 6.5.1 : le parent d'un flow attend que tous les enfants soient ajoutés"
+          },
+          "body_html": {
+            "es": "<p>Fix de race condition en flows: el parent job se liberaba antes de que terminaran de agregarse todos los children, así que podía procesarse con dependencias incompletas. El fix se publicó en paralelo en los clientes de Python, Elixir, Rust y .NET. Si usás <code>FlowProducer</code> con muchos hijos, actualizá.</p>",
+            "en": "<p>A race fix for flows: the parent job could be released before all children finished being added, so it could run with incomplete dependencies. The fix shipped at the same time in the Python, Elixir, Rust and .NET clients. If you use <code>FlowProducer</code> with many children, upgrade.</p>",
+            "fr": "<p>Correctif de race condition dans les flows : le job parent pouvait être libéré avant que tous les enfants soient ajoutés, et donc s'exécuter avec des dépendances incomplètes. Le correctif est sorti en même temps pour les clients Python, Elixir, Rust et .NET. Si vous utilisez <code>FlowProducer</code> avec beaucoup d'enfants, mettez à jour.</p>"
+          },
+          "source": { "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.5.1", "label": "github.com/taskforcesh" }
+        },
+        {
+          "id": "mysqlconnector-tls-password",
+          "tag": "security",
+          "date": "28 Oct 2026",
+          "title": {
+            "es": "MySqlConnector: password en claro ante un MITM con VerifyCA/VerifyFull sin CA",
+            "en": "MySqlConnector: clear-text password to a MITM with VerifyCA/VerifyFull and no CA",
+            "fr": "MySqlConnector : mot de passe en clair face à un MITM avec VerifyCA/VerifyFull sans CA"
+          },
+          "body_html": {
+            "es": "<p>Con <code>SslMode</code> en <code>VerifyCA</code> o <code>VerifyFull</code> pero sin CA configurada, el driver .NET trataba la conexión TLS no validada como segura y podía mandar el password antes de chequear el certificado (CVSS 6.9). Arreglado en <strong>2.6.1</strong>. Lección general: un modo verify sin CA no verifica nada.</p>",
+            "en": "<p>With <code>SslMode</code> set to <code>VerifyCA</code> or <code>VerifyFull</code> but no CA configured, the .NET driver treated an unvalidated TLS connection as secure and could send the password before checking the certificate (CVSS 6.9). Fixed in <strong>2.6.1</strong>. General lesson: a verify mode without a CA verifies nothing.</p>",
+            "fr": "<p>Avec <code>SslMode</code> à <code>VerifyCA</code> ou <code>VerifyFull</code> mais sans CA configurée, le driver .NET considérait une connexion TLS non validée comme sûre et pouvait envoyer le mot de passe avant de vérifier le certificat (CVSS 6.9). Corrigé en <strong>2.6.1</strong>. Leçon générale : un mode verify sans CA ne vérifie rien.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-473q-m89c-ghf8", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloud",
+      "updates": [
+        {
+          "id": "eks-auto-gateway-api",
+          "tag": "ga",
+          "date": "28 Oct 2026",
+          "title": {
+            "es": "EKS Auto Mode soporta Kubernetes Gateway API",
+            "en": "EKS Auto Mode supports the Kubernetes Gateway API",
+            "fr": "EKS Auto Mode prend en charge la Kubernetes Gateway API"
+          },
+          "body_html": {
+            "es": "<p>Ahora podés declarar load balancing con recursos <code>Gateway</code> y <code>HTTPRoute</code> y EKS gestiona la infraestructura de AWS por debajo. Incluye routing HTTP y gRPC, rutas cross-namespace, traffic splitting ponderado, routing por headers y descubrimiento automático de certificados en ACM. Los Ingress existentes siguen andando en paralelo, así que la migración puede ser gradual.</p>",
+            "en": "<p>You can now declare load balancing with <code>Gateway</code> and <code>HTTPRoute</code> resources and EKS manages the AWS infrastructure underneath. It covers HTTP and gRPC routing, cross-namespace routes, weighted traffic splitting, header-based routing and automatic ACM certificate discovery. Existing Ingress resources keep working alongside it, so migration can be gradual.</p>",
+            "fr": "<p>Vous pouvez désormais déclarer le load balancing avec des ressources <code>Gateway</code> et <code>HTTPRoute</code>, et EKS gère l'infrastructure AWS sous-jacente. Cela couvre le routage HTTP et gRPC, les routes cross-namespace, le traffic splitting pondéré, le routage par en-têtes et la découverte automatique des certificats ACM. Les Ingress existants continuent de fonctionner, la migration peut donc être progressive.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-eks-auto-mode-kubernetes-gateway-api/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "lambda-soci",
+          "tag": "notable",
+          "date": "28 Oct 2026",
+          "title": {
+            "es": "Lambda Managed Instances suma lazy loading con SOCI",
+            "en": "Lambda Managed Instances adds SOCI lazy loading",
+            "fr": "Lambda Managed Instances ajoute le lazy loading SOCI"
+          },
+          "body_html": {
+            "es": "<p>Las funciones con imagen de container en Lambda Managed Instances pueden usar <strong>Seekable OCI</strong>: en el arranque se baja solo la parte de la imagen que hace falta en cada etapa, no la imagen completa. AWS habla de hasta <strong>70% menos</strong> de startup del container.</p>",
+            "en": "<p>Container-image functions on Lambda Managed Instances can use <strong>Seekable OCI</strong>: startup fetches only the parts of the image each stage needs, not the full image. AWS cites up to <strong>70% faster</strong> container startup.</p>",
+            "fr": "<p>Les fonctions à image de container sur Lambda Managed Instances peuvent utiliser <strong>Seekable OCI</strong> : au démarrage, seules les parties de l'image nécessaires à chaque étape sont récupérées. AWS annonce jusqu'à <strong>70 % de démarrage en moins</strong>.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-lambda-seekable-oci-soci/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "workers-kv-instant",
+          "tag": "beta",
+          "date": "28 Oct 2026",
+          "title": {
+            "es": "Cloudflare abre Quicksilver como Workers KV Instant: lecturas p99 de 1,62 ms",
+            "en": "Cloudflare opens Quicksilver as Workers KV Instant: 1.62 ms p99 reads",
+            "fr": "Cloudflare ouvre Quicksilver sous le nom Workers KV Instant : lectures p99 à 1,62 ms"
+          },
+          "body_html": {
+            "es": "<p>Nuevo modo de Workers KV montado sobre el store de configuración interno de Cloudflare: lecturas p99 de <strong>1,62 ms</strong> (vs 287 ms del KV clásico) y replicación de escrituras con p99 de 256 ms en más de 300 PoPs. El sobre es chico a propósito: 10.000 keys y 1 MB por namespace, una escritura por segundo, y el modo no se puede cambiar después. Ideal para feature flags. Está en beta privada, sin fecha de GA.</p>",
+            "en": "<p>A new Workers KV mode built on Cloudflare's internal configuration store: p99 reads of <strong>1.62 ms</strong> (vs 287 ms for classic KV) and writes replicating with a 256 ms p99 across 300+ locations. The envelope is deliberately small: 10,000 keys and 1 MB per namespace, one write per second, and the mode cannot be changed later. Ideal for feature flags. It is in private beta with no GA date.</p>",
+            "fr": "<p>Un nouveau mode de Workers KV bâti sur le store de configuration interne de Cloudflare : lectures p99 à <strong>1,62 ms</strong> (contre 287 ms pour le KV classique) et réplication des écritures avec un p99 de 256 ms sur plus de 300 sites. L'enveloppe est volontairement réduite : 10 000 clés et 1 Mo par namespace, une écriture par seconde, et le mode ne peut pas être modifié ensuite. Idéal pour les feature flags. En bêta privée, sans date de GA.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/workers-kv-instant/", "label": "infoq.com" }
+        },
+        {
+          "id": "wrangler-4-155",
+          "tag": "minor",
+          "date": "28 Oct 2026",
+          "title": {
+            "es": "Wrangler 4.155: bindings remotos de Analytics Engine en dev local",
+            "en": "Wrangler 4.155: remote Analytics Engine bindings in local dev",
+            "fr": "Wrangler 4.155 : bindings Analytics Engine distants en dev local"
+          },
+          "body_html": {
+            "es": "<p>Con <code>remote: true</code> en un dataset de Analytics Engine, <code>writeDataPoint()</code> desde <code>wrangler dev</code> y el plugin de Vite escribe al dataset real (sin el flag, se siguen descartando local). También escapa caracteres de control en la salida de <code>wrangler tail</code>, un detalle de seguridad para logs con input de usuario.</p>",
+            "en": "<p>With <code>remote: true</code> on an Analytics Engine dataset, <code>writeDataPoint()</code> from <code>wrangler dev</code> and the Vite plugin writes to the real dataset (without the flag, writes are still dropped locally). It also escapes control characters in <code>wrangler tail</code> output, a small security detail for logs carrying user input.</p>",
+            "fr": "<p>Avec <code>remote: true</code> sur un dataset Analytics Engine, <code>writeDataPoint()</code> depuis <code>wrangler dev</code> et le plugin Vite écrit dans le vrai dataset (sans le flag, les écritures restent ignorées en local). Les caractères de contrôle sont aussi échappés dans la sortie de <code>wrangler tail</code>, un détail de sécurité pour les logs contenant des entrées utilisateur.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workers-sdk/releases/tag/wrangler%404.155.0", "label": "github.com/cloudflare" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "architecture",
+      "updates": [
+        {
+          "id": "airbnb-chronon-nrt",
+          "tag": "notable",
+          "date": "28 Oct 2026",
+          "title": {
+            "es": "Airbnb baja la staleness de sus embeddings de 2 días a segundos con Chronon",
+            "en": "Airbnb cuts embedding staleness from 2 days to seconds with Chronon",
+            "fr": "Airbnb réduit la fraîcheur de ses embeddings de 2 jours à quelques secondes avec Chronon"
+          },
+          "body_html": {
+            "es": "<p>Caso de estudio de arquitectura batch-a-streaming bien hecho: un job de streaming publica una notificación cuando se commitea un feature, el encoder ya desplegado corre dentro del flujo, y el resultado se escribe en <strong>el mismo store de baja latencia</strong> que usaba el batch. El path online casi no cambia. Staleness de casi dos días a 10-30 segundos. La lección: cambiá el productor, no el contrato del consumidor.</p>",
+            "en": "<p>A well-executed batch-to-streaming architecture case study: a streaming job publishes a notification when a feature is committed, the already-deployed encoder runs inside the flow, and the result goes to <strong>the same low-latency store</strong> the batch job used. The online path barely changes. Staleness went from nearly two days to 10-30 seconds. The lesson: change the producer, not the consumer's contract.</p>",
+            "fr": "<p>Une étude de cas réussie de passage du batch au streaming : un job de streaming publie une notification quand une feature est committée, l'encodeur déjà déployé tourne dans le flux, et le résultat est écrit dans <strong>le même store à faible latence</strong> que le batch. Le chemin online change à peine. La fraîcheur passe de près de deux jours à 10-30 secondes. La leçon : changez le producteur, pas le contrat du consommateur.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/airbnb-chronon-recommendation/", "label": "infoq.com" }
+        },
+        {
+          "id": "otel-java-tracestate",
+          "tag": "security",
+          "date": "28 Oct 2026",
+          "title": {
+            "es": "OpenTelemetry Java: CPU cuadrática al parsear headers tracestate",
+            "en": "OpenTelemetry Java: quadratic CPU when parsing tracestate headers",
+            "fr": "OpenTelemetry Java : CPU quadratique lors du parsing des en-têtes tracestate"
+          },
+          "body_html": {
+            "es": "<p>El propagador W3C de <code>opentelemetry-api</code> ≤ 1.66.0 hace backtracking cuadrático con <code>tracestate</code> armados con muchos espacios o tabs (CVE-2026-118259). Recordatorio incómodo: tu capa de observabilidad parsea headers de cualquiera que te pegue. Actualizá a <strong>1.67.0</strong>, y si tenés un edge, considerá limitar el tamaño de esos headers.</p>",
+            "en": "<p>The W3C propagator in <code>opentelemetry-api</code> ≤ 1.66.0 backtracks quadratically on crafted <code>tracestate</code> headers with long runs of spaces or tabs (CVE-2026-118259). An uncomfortable reminder: your observability layer parses headers from anyone who hits you. Upgrade to <strong>1.67.0</strong>, and consider capping those headers at your edge.</p>",
+            "fr": "<p>Le propagateur W3C de <code>opentelemetry-api</code> ≤ 1.66.0 fait un backtracking quadratique sur des en-têtes <code>tracestate</code> forgés avec de longues suites d'espaces ou de tabulations (CVE-2026-118259). Rappel gênant : votre couche d'observabilité parse les en-têtes de n'importe qui. Passez à <strong>1.67.0</strong> et pensez à limiter la taille de ces en-têtes en bordure.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-ccrj-gw8r-854m", "label": "github.com/advisories" }
+        },
+        {
+          "id": "happy-dom-ssrf",
+          "tag": "security",
+          "date": "28 Oct 2026",
+          "title": {
+            "es": "happy-dom hace requests reales al parsear HTML no confiable (SSRF, high)",
+            "en": "happy-dom makes real requests when parsing untrusted HTML (SSRF, high)",
+            "fr": "happy-dom effectue de vraies requêtes en parsant du HTML non fiable (SSRF, high)"
+          },
+          "body_html": {
+            "es": "<p>Por default, <code>happy-dom</code> carga <code>&lt;iframe&gt;</code> y <code>&lt;link rel=stylesheet&gt;</code> con requests HTTP reales desde el server (CVE-2026-118660). En tests no pasa nada, pero si lo usás en producción para sanitizar o renderizar HTML de usuarios, es SSRF directo. Fix en <strong>21.0.0</strong> (major); mientras tanto, seteá <code>disableIframePageLoading</code> y <code>disableCSSFileLoading</code> en <code>true</code>.</p>",
+            "en": "<p>By default, <code>happy-dom</code> loads <code>&lt;iframe&gt;</code> and <code>&lt;link rel=stylesheet&gt;</code> with real server-side HTTP requests (CVE-2026-118660). Harmless in tests, but if you use it in production to sanitize or render user HTML, it is straight SSRF. Fixed in <strong>21.0.0</strong> (major); until then, set <code>disableIframePageLoading</code> and <code>disableCSSFileLoading</code> to <code>true</code>.</p>",
+            "fr": "<p>Par défaut, <code>happy-dom</code> charge <code>&lt;iframe&gt;</code> et <code>&lt;link rel=stylesheet&gt;</code> via de vraies requêtes HTTP côté serveur (CVE-2026-118660). Sans danger en test, mais si vous l'utilisez en production pour assainir ou rendre du HTML utilisateur, c'est du SSRF direct. Corrigé en <strong>21.0.0</strong> (majeure) ; d'ici là, mettez <code>disableIframePageLoading</code> et <code>disableCSSFileLoading</code> à <code>true</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-c8p4-j97h-3vg8", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "security",
+      "updates": [
+        {
+          "id": "echo-static-bypass",
+          "tag": "security",
+          "date": "28 Oct 2026",
+          "title": {
+            "es": "Echo (Go): 10 advisories, incluido bypass de guards con %2F en middleware.Static",
+            "en": "Echo (Go): 10 advisories, including a %2F guard bypass in middleware.Static",
+            "fr": "Echo (Go) : 10 avis, dont un contournement de guards via %2F dans middleware.Static"
+          },
+          "body_html": {
+            "es": "<p>Tanda grande para <code>labstack/echo</code>: con <code>middleware.Static</code> global, un path con <code>%2F</code> esquiva guards de ruta o grupo y el archivo se sirve igual (CVE-2026-118650, <strong>high</strong>). Se suman path traversal por doble unescape, rate limiter y HSTS burlables con <code>X-Forwarded-*</code> falsos, bypass de CSRF vía MethodOverride y XSS en JSONP. Fixes en <strong>v5.4.0</strong> y <strong>v4.16.0</strong>. Patrón repetido del día (Hono, Echo): nunca decodifiques un path dos veces.</p>",
+            "en": "<p>A big batch for <code>labstack/echo</code>: with a global <code>middleware.Static</code>, a <code>%2F</code>-encoded path bypasses route or group guards while the file is still served (CVE-2026-118650, <strong>high</strong>). Also: double-unescape path traversal, rate limiter and HSTS defeated by spoofed <code>X-Forwarded-*</code>, CSRF bypass through MethodOverride and JSONP XSS. Fixed in <strong>v5.4.0</strong> and <strong>v4.16.0</strong>. The day's repeated pattern (Hono, Echo): never decode a path twice.</p>",
+            "fr": "<p>Une grosse série pour <code>labstack/echo</code> : avec un <code>middleware.Static</code> global, un chemin encodé en <code>%2F</code> contourne les guards de route ou de groupe et le fichier est quand même servi (CVE-2026-118650, <strong>high</strong>). S'y ajoutent un path traversal par double unescape, un rate limiter et HSTS contournés via de faux <code>X-Forwarded-*</code>, un contournement CSRF via MethodOverride et un XSS JSONP. Corrigé en <strong>v5.4.0</strong> et <strong>v4.16.0</strong>. Motif récurrent du jour (Hono, Echo) : ne jamais décoder un chemin deux fois.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-375p-5qhx-8wq4", "label": "github.com/advisories" }
+        },
+        {
+          "id": "go-jose-panics",
+          "tag": "security",
+          "date": "28 Oct 2026",
+          "title": {
+            "es": "go-jose v4: panics por JSON muy anidado y en CBC-HMAC",
+            "en": "go-jose v4: panics on deeply nested JSON and in CBC-HMAC",
+            "fr": "go-jose v4 : panics sur du JSON profondément imbriqué et en CBC-HMAC"
+          },
+          "body_html": {
+            "es": "<p>Dos DoS (CVSS 6.9) en la librería JOSE más usada de Go: JSON profundamente anidado agota el stack y el procesamiento CBC-HMAC puede paniquear. Cualquier servicio que parsee JWT/JWE no confiables está expuesto. Fix en <strong>4.1.5</strong>; la rama v3 no tiene patch, así que es momento de migrar.</p>",
+            "en": "<p>Two DoS issues (CVSS 6.9) in Go's most used JOSE library: deeply nested JSON exhausts the stack, and CBC-HMAC processing can panic. Any service parsing untrusted JWT/JWE is exposed. Fixed in <strong>4.1.5</strong>; the v3 line has no patch, so it is time to migrate.</p>",
+            "fr": "<p>Deux DoS (CVSS 6.9) dans la bibliothèque JOSE la plus utilisée en Go : du JSON profondément imbriqué épuise la pile, et le traitement CBC-HMAC peut provoquer un panic. Tout service qui parse des JWT/JWE non fiables est exposé. Corrigé en <strong>4.1.5</strong> ; la branche v3 n'a pas de correctif, il est temps de migrer.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-vvm8-gf78-28g4", "label": "github.com/advisories" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Doble decodificación de paths como clase de bug: Hono y Echo cayeron el mismo día por servir un path distinto del que rutearon. Si escribís middleware estático, decodificá una sola vez.",
+      "en": "Double path decoding as a bug class: Hono and Echo both fell the same day by serving a different path from the one they routed. If you write static middleware, decode exactly once.",
+      "fr": "Le double décodage des chemins comme classe de bug : Hono et Echo sont tombés le même jour en servant un chemin différent de celui routé. Si vous écrivez un middleware statique, décodez une seule fois."
+    },
+    {
+      "es": "Los serializadores de estado server-cliente (Seroval) son superficie de ataque real: tratá todo lo que vuelve del cliente como input no confiable, aunque lo hayas serializado vos.",
+      "en": "Server-client state serializers (Seroval) are real attack surface: treat everything coming back from the client as untrusted input, even if you serialized it yourself.",
+      "fr": "Les sérialiseurs d'état serveur-client (Seroval) sont une vraie surface d'attaque : traitez tout ce qui revient du client comme une entrée non fiable, même si vous l'avez sérialisé vous-même."
+    },
+    {
+      "es": "Node.js 26 LTS + NestJS sobre node:http nativo: el stack backend TypeScript sigue soltando capas intermedias.",
+      "en": "Node.js 26 LTS plus NestJS on native node:http: the TypeScript backend stack keeps shedding intermediate layers.",
+      "fr": "Node.js 26 LTS et NestJS sur node:http natif : la stack backend TypeScript continue de se débarrasser des couches intermédiaires."
+    }
+  ]
+}

@@ -1,0 +1,329 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 30 Oct 2026",
+    "en": "Backend & Fullstack Daily — Oct 30, 2026",
+    "fr": "Backend & Fullstack Daily — 30 oct. 2026"
+  },
+  "description": {
+    "es": "Node.js 27 alpha con V8 15.6, ReDoS cuadrático en decode-uri-component, bypass total de autorización en Keycloak, Redis 8.12 RC con bitmaps comprimidos y TTL por miembro, y Google adopta DPoP.",
+    "en": "Node.js 27 alpha with V8 15.6, quadratic DoS in decode-uri-component, full authorization bypass in Keycloak, Redis 8.12 RC with compressed bitmaps and per-member TTL, and Google adopts DPoP.",
+    "fr": "Node.js 27 alpha avec V8 15.6, DoS quadratique dans decode-uri-component, contournement total d'autorisation dans Keycloak, Redis 8.12 RC avec bitmaps compressés et TTL par membre, et Google adopte DPoP."
+  },
+  "pubDate": "2026-10-30",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "Node.js 27 alpha: V8 15.6 y OpenSSL 3 obligatorio", "en": "Node.js 27 alpha: V8 15.6, OpenSSL 3 required", "fr": "Node.js 27 alpha : V8 15.6, OpenSSL 3 requis" },
+      "anchor": "node-27-alpha",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": { "es": "decode-uri-component: 224 KB bloquean 20 s", "en": "decode-uri-component: 224 KB blocks 20 s", "fr": "decode-uri-component : 224 Ko bloquent 20 s" },
+      "anchor": "cve-2026-118664",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Keycloak: bypass total del Policy Enforcer", "en": "Keycloak: full Policy Enforcer bypass", "fr": "Keycloak : contournement total du Policy Enforcer" },
+      "anchor": "cve-2026-9800",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Redis 8.12 RC: roaring bitmaps y TTL por miembro", "en": "Redis 8.12 RC: roaring bitmaps, per-member TTL", "fr": "Redis 8.12 RC : bitmaps roaring, TTL par membre" },
+      "anchor": "redis-8-12-rc1",
+      "icon": "simple-icons:redis"
+    },
+    {
+      "text": { "es": "Google OAuth adopta DPoP para refresh tokens", "en": "Google OAuth adopts DPoP for refresh tokens", "fr": "Google OAuth adopte DPoP pour les refresh tokens" },
+      "anchor": "google-dpop-oauth",
+      "icon": "lucide:layers"
+    },
+    {
+      "text": { "es": "Step Functions como tools de agentes vía MCP", "en": "Step Functions as agent tools via MCP", "fr": "Step Functions comme outils d'agents via MCP" },
+      "anchor": "step-functions-agent-tools",
+      "icon": "simple-icons:amazonwebservices"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "cve-2026-118664",
+          "tag": "security",
+          "date": "29 Oct 2026",
+          "title": {
+            "es": "decode-uri-component CVE-2026-118664: DoS cuadrático (CVSS 8.2)",
+            "en": "decode-uri-component CVE-2026-118664: quadratic DoS (CVSS 8.2)",
+            "fr": "decode-uri-component CVE-2026-118664 : DoS quadratique (CVSS 8.2)"
+          },
+          "body_html": {
+            "es": "<p>El fallback de <code>decodeUriComponent()</code> tarda tiempo cuadrático con input malformado lleno de secuencias percent-encoded: <strong>un request de ~224 KB sin autenticación bloquea el event loop ~20 segundos</strong>. Afecta hasta <code>0.5.0</code> (justo la versión que parchó el CVE anterior); el fix es <code>0.5.1</code>. Ojo: es dependencia transitiva de <code>query-string</code> y medio ecosistema, así que corré <code>pnpm why decode-uri-component</code> y forzá el override YA.</p>",
+            "en": "<p>The <code>decodeUriComponent()</code> fallback runs in quadratic time on malformed input with many percent-encoded runs: <strong>a single unauthenticated ~224 KB request blocks the event loop for ~20 seconds</strong>. Affects up to <code>0.5.0</code> (the very release that fixed the previous CVE); fixed in <code>0.5.1</code>. It is a transitive dependency of <code>query-string</code> and much of the ecosystem, so check <code>pnpm why decode-uri-component</code> and add an override now.</p>",
+            "fr": "<p>Le fallback de <code>decodeUriComponent()</code> s'exécute en temps quadratique sur une entrée malformée remplie de séquences percent-encoded : <strong>une seule requête non authentifiée de ~224 Ko bloque l'event loop ~20 secondes</strong>. Touche jusqu'à <code>0.5.0</code> (la version qui corrigeait le CVE précédent) ; corrigé en <code>0.5.1</code>. Dépendance transitive de <code>query-string</code> et d'une bonne partie de l'écosystème : vérifiez avec <code>pnpm why decode-uri-component</code> et forcez un override.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-qr28-fpjm-wq7f", "label": "github.com/advisories" }
+        },
+        {
+          "id": "cve-2026-9800",
+          "tag": "security",
+          "date": "29 Oct 2026",
+          "title": {
+            "es": "Keycloak CVE-2026-9800: cualquier usuario autenticado saltea el Policy Enforcer (CVSS 8.1)",
+            "en": "Keycloak CVE-2026-9800: any authenticated user bypasses the Policy Enforcer (CVSS 8.1)",
+            "fr": "Keycloak CVE-2026-9800 : tout utilisateur authentifié contourne le Policy Enforcer (CVSS 8.1)"
+          },
+          "body_html": {
+            "es": "<p>Metiendo la ruta de la página de access-denied configurada dentro de la URL (como segmento o query param), <strong>se saltean todas las políticas: roles, scopes y permisos UMA</strong>. Parche en <code>keycloak-services 26.6.4</code> y <code>keycloak-policy-enforcer 26.0.10</code>. Vino en un batch de 5 advisories el mismo día (XSS por validación de URI case-insensitive, bypass de UMA tickets, takeover de clientes deshabilitados). Si tu Node/Nest delega authz en Keycloak, actualizá hoy.</p>",
+            "en": "<p>By including the configured access-denied page path in the request URL (as a path segment or query parameter), <strong>an attacker bypasses every policy: roles, scopes and UMA permissions</strong>. Fixed in <code>keycloak-services 26.6.4</code> and <code>keycloak-policy-enforcer 26.0.10</code>. It landed in a batch of 5 advisories the same day (XSS via case-insensitive URI validation, UMA ticket bypass, takeover of disabled clients). If your Node/Nest services delegate authz to Keycloak, upgrade today.</p>",
+            "fr": "<p>En incluant le chemin de la page access-denied configurée dans l'URL (segment ou paramètre de requête), <strong>un attaquant contourne toutes les politiques : rôles, scopes et permissions UMA</strong>. Corrigé dans <code>keycloak-services 26.6.4</code> et <code>keycloak-policy-enforcer 26.0.10</code>. Publié dans un lot de 5 advisories le même jour (XSS via validation d'URI insensible à la casse, contournement des tickets UMA, prise de contrôle de clients désactivés). Mettez à jour aujourd'hui.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-f5p5-6xmx-p252", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "runtimes",
+      "updates": [
+        {
+          "id": "node-27-alpha",
+          "tag": "beta",
+          "tag_label": { "es": "Alpha", "en": "Alpha", "fr": "Alpha" },
+          "date": "29 Oct 2026",
+          "title": {
+            "es": "Node.js 27.0.0 alpha: V8 15.6, OpenSSL 3 obligatorio y nuevo formato de serialización",
+            "en": "Node.js 27.0.0 alpha: V8 15.6, OpenSSL 3 required and a new serialization format",
+            "fr": "Node.js 27.0.0 alpha : V8 15.6, OpenSSL 3 requis et nouveau format de sérialisation"
+          },
+          "body_html": {
+            "es": "<p>Primera alpha de la próxima major. Trae <code>Iterator.zip()</code>, <code>Iterator.prototype.join()</code> y <code>Math.sumPrecise()</code>; <code>import defer</code> detrás de flag. Los breaking que importan en backend: <strong>el heap por defecto pasa a ser la mitad de la RAM física (256 MB–4 GB) y los <code>Buffer</code> cuentan contra ese límite</strong>, <code>structuredClone()</code>/<code>v8.serialize()</code> usan un formato que versiones viejas no leen (ojo con caches compartidos entre versiones), se requiere OpenSSL 3, se eliminan engines y código legacy de crypto, e Intel macOS baja a experimental. Probalo en CI ahora, no en abril.</p>",
+            "en": "<p>First alpha of the next major. Adds <code>Iterator.zip()</code>, <code>Iterator.prototype.join()</code> and <code>Math.sumPrecise()</code>; <code>import defer</code> behind a flag. Backend-relevant breaking changes: <strong>the default heap limit becomes half of physical memory (256 MB–4 GB) and <code>Buffer</code> memory now counts toward it</strong>, <code>structuredClone()</code>/<code>v8.serialize()</code> use a format older releases cannot read (watch caches shared across versions), OpenSSL 3 is required, OpenSSL engines and legacy crypto paths are removed, and Intel macOS drops to experimental.</p>",
+            "fr": "<p>Première alpha de la prochaine majeure. Ajoute <code>Iterator.zip()</code>, <code>Iterator.prototype.join()</code> et <code>Math.sumPrecise()</code> ; <code>import defer</code> derrière un flag. Changements cassants côté backend : <strong>la limite de heap par défaut devient la moitié de la mémoire physique (256 Mo–4 Go) et la mémoire des <code>Buffer</code> y est comptée</strong>, <code>structuredClone()</code>/<code>v8.serialize()</code> utilisent un format illisible par les anciennes versions, OpenSSL 3 est requis, les engines OpenSSL et le code crypto legacy sont supprimés, et macOS Intel passe en expérimental.</p>"
+          },
+          "source": { "url": "https://github.com/nodejs/node/releases/tag/v27.0.0-alpha.0.0.0", "label": "github.com/nodejs/node" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "databases",
+      "updates": [
+        {
+          "id": "redis-8-12-rc1",
+          "tag": "beta",
+          "tag_label": { "es": "RC", "en": "RC", "fr": "RC" },
+          "date": "29 Oct 2026",
+          "title": {
+            "es": "Redis 8.12 RC1: roaring bitmaps en core, TTL por miembro de set y BLESS",
+            "en": "Redis 8.12 RC1: roaring bitmaps in core, per-member set TTL and BLESS",
+            "fr": "Redis 8.12 RC1 : bitmaps roaring dans le core, TTL par membre de set et BLESS"
+          },
+          "body_html": {
+            "es": "<p>Integra <strong>redis-roaring</strong> al core (bitmaps comprimidos, menos memoria) con el nuevo <code>BITRANGEINTARRAY</code>, y agrega <strong>expiración por miembro de set</strong> (<code>SEXPIRE</code>, <code>STTL</code> y familia). <code>BLESS</code> protege keys de la eviction, <code>tls-groups</code> permite configurar grupos TLS y RediSearch suma compresión SQ8 para HNSW. También corrige un HashDoS en el indexado. Lo de TTL por miembro es un golazo para sets de sesiones o rate limiting sin hacks con sorted sets.</p>",
+            "en": "<p>Integrates <strong>redis-roaring</strong> into core (compressed bitmaps, lower memory) with the new <code>BITRANGEINTARRAY</code>, and adds <strong>per-member set expiration</strong> (<code>SEXPIRE</code>, <code>STTL</code> and friends). <code>BLESS</code> shields keys from eviction, <code>tls-groups</code> configures TLS named groups, and RediSearch gains SQ8 compression for HNSW. It also fixes a HashDoS in indexing. Per-member TTL removes the sorted-set workaround for session sets and rate limiting.</p>",
+            "fr": "<p>Intègre <strong>redis-roaring</strong> au core (bitmaps compressés, moins de mémoire) avec la nouvelle commande <code>BITRANGEINTARRAY</code>, et ajoute <strong>l'expiration par membre de set</strong> (<code>SEXPIRE</code>, <code>STTL</code>…). <code>BLESS</code> protège des clés contre l'éviction, <code>tls-groups</code> configure les groupes TLS, et RediSearch ajoute la compression SQ8 pour HNSW. Corrige aussi un HashDoS dans l'indexation.</p>"
+          },
+          "source": { "url": "https://github.com/redis/redis/releases/tag/8.12-rc1", "label": "github.com/redis/redis" }
+        },
+        {
+          "id": "aurora-pq-tls",
+          "tag": "notable",
+          "date": "29 Oct 2026",
+          "title": {
+            "es": "Aurora PostgreSQL soporta key exchange TLS post-cuántico",
+            "en": "Aurora PostgreSQL supports post-quantum TLS key exchange",
+            "fr": "Aurora PostgreSQL prend en charge l'échange de clés TLS post-quantique"
+          },
+          "body_html": {
+            "es": "<p>Para <strong>PostgreSQL 18+</strong> en Aurora, ahora podés elegir grupos criptográficos post-cuánticos ajustando el parámetro <code>ssl_groups</code> dentro de la allow list de AWS. Protección contra «harvest now, decrypt later» para datos en tránsito sin tocar la app.</p>",
+            "en": "<p>On Aurora <strong>PostgreSQL 18+</strong>, you can now pick post-quantum cryptographic groups by setting the <code>ssl_groups</code> parameter from AWS's allow list. Protection against harvest-now-decrypt-later for data in transit with no app changes.</p>",
+            "fr": "<p>Sur Aurora <strong>PostgreSQL 18+</strong>, vous pouvez choisir des groupes cryptographiques post-quantiques via le paramètre <code>ssl_groups</code> parmi la liste autorisée d'AWS. Protection contre « harvest now, decrypt later » sans changement applicatif.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/aurora-postgresql-post-quantum-tls-key-exchange/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "msk-connect-update",
+          "tag": "minor",
+          "date": "29 Oct 2026",
+          "title": {
+            "es": "MSK Connect permite actualizar plugins y config de workers",
+            "en": "MSK Connect can now update connector plugins and worker configurations",
+            "fr": "MSK Connect permet de mettre à jour plugins et configuration des workers"
+          },
+          "body_html": {
+            "es": "<p>Ya no hace falta recrear un connector de Kafka Connect en Amazon MSK para cambiar la versión del plugin o la configuración de workers. Menos downtime y menos scripts frágiles en tus pipelines de CDC.</p>",
+            "en": "<p>You no longer need to recreate a Kafka Connect connector on Amazon MSK to change its plugin version or worker configuration. Less downtime and fewer fragile scripts in CDC pipelines.</p>",
+            "fr": "<p>Plus besoin de recréer un connecteur Kafka Connect sur Amazon MSK pour changer la version du plugin ou la configuration des workers. Moins d'interruptions dans les pipelines CDC.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-msk-connect-update-plugin-worker-configurations", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloud",
+      "updates": [
+        {
+          "id": "step-functions-agent-tools",
+          "tag": "notable",
+          "date": "29 Oct 2026",
+          "title": {
+            "es": "Step Functions: tus workflows ahora son tools de agentes vía AgentCore Gateway (MCP)",
+            "en": "Step Functions: workflows become agent tools via AgentCore Gateway (MCP)",
+            "fr": "Step Functions : les workflows deviennent des outils d'agents via AgentCore Gateway (MCP)"
+          },
+          "body_html": {
+            "es": "<p>Los workflows Standard y Express existentes se exponen como tools a través de <strong>Amazon Bedrock AgentCore Gateway</strong>, que habla MCP. El agente decide cuándo correrlos y con qué input, pero <strong>los pasos se ejecutan en el orden definido</strong>. Es el patrón correcto: el LLM orquesta la intención, la lógica de negocio crítica queda determinística y auditable.</p>",
+            "en": "<p>Existing Standard and Express workflows are exposed as tools through <strong>Amazon Bedrock AgentCore Gateway</strong>, which speaks MCP. The agent decides when to run them and with what input, but <strong>steps still execute in the defined order</strong>. The right pattern: the LLM handles intent, critical business logic stays deterministic and auditable.</p>",
+            "fr": "<p>Les workflows Standard et Express existants sont exposés comme outils via <strong>Amazon Bedrock AgentCore Gateway</strong>, qui parle MCP. L'agent décide quand les lancer et avec quelle entrée, mais <strong>les étapes s'exécutent dans l'ordre défini</strong>. La logique métier critique reste déterministe et auditable.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/step-functions-workflows-ai-agent-tools/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "cve-2026-62290",
+          "tag": "security",
+          "date": "29 Oct 2026",
+          "title": {
+            "es": "cert-manager CVE-2026-62290: Challenges directos saltean la política DNS01 del Issuer (CVSS 7.3)",
+            "en": "cert-manager CVE-2026-62290: direct Challenges bypass Issuer DNS01 solver policy (CVSS 7.3)",
+            "fr": "cert-manager CVE-2026-62290 : des Challenges directs contournent la politique DNS01 de l'Issuer (CVSS 7.3)"
+          },
+          "body_html": {
+            "es": "<p>Un usuario con permisos en un namespace puede crear recursos <code>Challenge</code> directamente, sin <code>Order</code> ni owner reference, y cert-manager usa su <code>spec.solver</code> como config DNS01, pudiendo apuntar a credenciales de DNS que no le corresponden. Fix en <code>1.19.6</code> y <code>1.20.3</code>; mientras tanto, restringí el RBAC sobre <code>challenges.acme.cert-manager.io</code>.</p>",
+            "en": "<p>A namespace user can create <code>Challenge</code> resources directly, with no <code>Order</code> or owner reference, and cert-manager uses their <code>spec.solver</code> as the DNS01 configuration, potentially reaching DNS credentials they should not use. Fixed in <code>1.19.6</code> and <code>1.20.3</code>; meanwhile, tighten RBAC on <code>challenges.acme.cert-manager.io</code>.</p>",
+            "fr": "<p>Un utilisateur d'un namespace peut créer des ressources <code>Challenge</code> directement, sans <code>Order</code> ni owner reference, et cert-manager utilise leur <code>spec.solver</code> comme configuration DNS01. Corrigé en <code>1.19.6</code> et <code>1.20.3</code> ; en attendant, restreignez le RBAC sur <code>challenges.acme.cert-manager.io</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-8rvj-mm4h-c258", "label": "github.com/advisories" }
+        },
+        {
+          "id": "cve-2026-115893",
+          "tag": "security",
+          "date": "28 Oct 2026",
+          "title": {
+            "es": "Wasmtime CVE-2026-115893: br_table gigante en aarch64 permite escapar del sandbox (CVSS 9.9)",
+            "en": "Wasmtime CVE-2026-115893: huge br_table on aarch64 enables sandbox escape (CVSS 9.9)",
+            "fr": "Wasmtime CVE-2026-115893 : un br_table géant sur aarch64 permet de sortir du sandbox (CVSS 9.9)"
+          },
+          "body_html": {
+            "es": "<p>Segundo escape crítico de Cranelift en una semana: con más de ~256k targets en un solo <code>br_table</code>, el backend aarch64 genera un salto condicional a un offset controlado por el atacante. Si corrés Wasm no confiable en Graviton o Apple Silicon, actualizá a <code>36.0.19</code>, <code>48.0.7</code> o <code>49.0.4</code>.</p>",
+            "en": "<p>Second critical Cranelift escape in a week: with more than ~256k targets on one <code>br_table</code>, the aarch64 backend emits a conditional branch to an attacker-controlled offset. If you run untrusted Wasm on Graviton or Apple Silicon, upgrade to <code>36.0.19</code>, <code>48.0.7</code> or <code>49.0.4</code>.</p>",
+            "fr": "<p>Deuxième évasion critique de Cranelift en une semaine : avec plus de ~256k cibles sur un seul <code>br_table</code>, le backend aarch64 émet un saut conditionnel vers un offset contrôlé par l'attaquant. Si vous exécutez du Wasm non fiable sur Graviton ou Apple Silicon, passez à <code>36.0.19</code>, <code>48.0.7</code> ou <code>49.0.4</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-mghf-wjfp-p5xm", "label": "github.com/advisories" }
+        },
+        {
+          "id": "wrangler-4-156",
+          "tag": "minor",
+          "date": "29 Oct 2026",
+          "title": {
+            "es": "Wrangler 4.156: d1 insights a nivel cuenta y autoconfig más seguro en CI",
+            "en": "Wrangler 4.156: account-wide d1 insights and safer autoconfig in CI",
+            "fr": "Wrangler 4.156 : d1 insights à l'échelle du compte et autoconfig plus sûr en CI"
+          },
+          "body_html": {
+            "es": "<p><code>wrangler d1 insights</code> (experimental) ya no exige nombre de base: devuelve las queries más pesadas de todas las D1 de la cuenta. Y autoconfig ahora frena con error en runs no interactivos (CI o agentes) cuando el root mezcla estáticos y un directorio <code>functions</code> de Pages, en vez de deployar sin tus API routes.</p>",
+            "en": "<p><code>wrangler d1 insights</code> (experimental) no longer needs a database name: it returns the top queries across every D1 database in the account. Autoconfig now stops with an error in non-interactive runs (CI or agents) when the root mixes static files and a Pages <code>functions</code> directory, instead of silently deploying without your API routes.</p>",
+            "fr": "<p><code>wrangler d1 insights</code> (expérimental) n'exige plus de nom de base : il renvoie les requêtes les plus coûteuses de toutes les bases D1 du compte. L'autoconfig s'arrête désormais en erreur en mode non interactif (CI ou agents) quand la racine mélange fichiers statiques et dossier <code>functions</code> de Pages, au lieu de déployer sans vos routes API.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workers-sdk/releases/tag/wrangler%404.156.0", "label": "github.com/cloudflare/workers-sdk" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "architecture",
+      "updates": [
+        {
+          "id": "google-dpop-oauth",
+          "tag": "notable",
+          "date": "29 Oct 2026",
+          "title": {
+            "es": "Google OAuth adopta DPoP: refresh tokens atados a la clave del cliente",
+            "en": "Google OAuth adopts DPoP: refresh tokens bound to the client's key",
+            "fr": "Google OAuth adopte DPoP : refresh tokens liés à la clé du client"
+          },
+          "body_html": {
+            "es": "<p>Google soporta <strong>Demonstrating Proof-of-Possession</strong>: el token queda ligado a un par de claves generado por el cliente, así que robarlo no alcanza sin la privada. Lo aplica <strong>solo a refresh tokens</strong> (el vector de impersonación persistente) y deja los access tokens como Bearer. El cliente tiene que generar claves, manejar nonces y firmar proof JWTs. Si diseñás tu propio authorization server, este es el benchmark: bearer-only para refresh tokens de larga vida ya huele a deuda técnica.</p>",
+            "en": "<p>Google now supports <strong>Demonstrating Proof-of-Possession</strong>: tokens are bound to a client-generated key pair, so a stolen token is useless without the private key. It applies <strong>only to refresh tokens</strong> (the persistent impersonation vector) and keeps access tokens as Bearer. Clients must generate keys, handle nonces and sign proof JWTs. If you run your own authorization server, this is the new benchmark: bearer-only long-lived refresh tokens are now tech debt.</p>",
+            "fr": "<p>Google prend en charge <strong>Demonstrating Proof-of-Possession</strong> : le token est lié à une paire de clés générée par le client, donc un token volé est inutile sans la clé privée. Appliqué <strong>uniquement aux refresh tokens</strong>, les access tokens restant Bearer. Le client doit générer des clés, gérer les nonces et signer des proof JWT. Pour votre propre serveur d'autorisation, c'est la nouvelle référence.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/google-dpop-oauth2/", "label": "infoq.com" }
+        },
+        {
+          "id": "cve-2026-115905",
+          "tag": "security",
+          "date": "28 Oct 2026",
+          "title": {
+            "es": "zip (Rust) CVE-2026-115905: parser differential entre lectores (CVSS 10)",
+            "en": "zip (Rust) CVE-2026-115905: parser differential between readers (CVSS 10)",
+            "fr": "zip (Rust) CVE-2026-115905 : différentiel de parsing entre lecteurs (CVSS 10)"
+          },
+          "body_html": {
+            "es": "<p><code>ZipArchive</code> confía en el Central Directory y <code>ZipStreamReader</code> en el Local File Header: un ZIP con nombres distintos en cada header pasa el escáner con un nombre y se extrae con otro. Fix en <code>9.0.5</code>. La lección de arquitectura vale para cualquier stack: <strong>si validás con un parser y procesás con otro, tu control de seguridad es decorativo</strong>. Aplica igual a uploads en Node con libs distintas para inspección y extracción.</p>",
+            "en": "<p><code>ZipArchive</code> trusts the Central Directory while <code>ZipStreamReader</code> trusts the Local File Header: an archive with different names in each header passes the scanner under one name and extracts under another. Fixed in <code>9.0.5</code>. The architectural lesson applies to any stack: <strong>if you validate with one parser and process with another, your security control is decorative</strong>, the same goes for Node upload pipelines mixing libraries.</p>",
+            "fr": "<p><code>ZipArchive</code> fait confiance au Central Directory et <code>ZipStreamReader</code> au Local File Header : une archive avec des noms différents dans chaque en-tête passe le scanner sous un nom et s'extrait sous un autre. Corrigé en <code>9.0.5</code>. Leçon d'architecture valable partout : <strong>valider avec un parser et traiter avec un autre rend le contrôle de sécurité décoratif</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-m665-v7pm-7grj", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "fullstack",
+      "updates": [
+        {
+          "id": "sveltekit-3-1-1",
+          "tag": "patch",
+          "date": "29 Oct 2026",
+          "title": {
+            "es": "SvelteKit 3.1.1: remote forms en tiempo lineal y fix de query.batch",
+            "en": "SvelteKit 3.1.1: linear-time remote form parsing and a query.batch fix",
+            "fr": "SvelteKit 3.1.1 : parsing linéaire des remote forms et correctif query.batch"
+          },
+          "body_html": {
+            "es": "<p>Parsea los envíos de remote forms en tiempo lineal (cierra un vector de DoS), devuelve 400 en vez de tirar excepción cuando <code>reroute</code> genera un pathname malformado, y evita que funciones <code>query.batch</code> no exportadas compartan batch. Salió junto con patches de los adapters node, vercel, cloudflare y static.</p>",
+            "en": "<p>Parses remote form submissions in linear time (closing a DoS vector), returns a 400 instead of throwing when <code>reroute</code> produces a malformed pathname, and stops separate non-exported <code>query.batch</code> functions from sharing a batch. Shipped alongside patches for the node, vercel, cloudflare and static adapters.</p>",
+            "fr": "<p>Parse les soumissions de remote forms en temps linéaire (fermant un vecteur de DoS), renvoie un 400 au lieu de lever une exception quand <code>reroute</code> produit un pathname malformé, et empêche des fonctions <code>query.batch</code> non exportées de partager un batch. Publié avec des correctifs des adapters node, vercel, cloudflare et static.</p>"
+          },
+          "source": { "url": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%403.1.1", "label": "github.com/sveltejs/kit" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El DoS algorítmico es el CVE de la semana: decode-uri-component, SvelteKit remote forms y RediSearch corrigen complejidad cuadrática o HashDoS. Un solo request basta para tirar un event loop.",
+      "en": "Algorithmic DoS is the CVE of the week: decode-uri-component, SvelteKit remote forms and RediSearch all fixed quadratic complexity or HashDoS. One request is enough to stall an event loop.",
+      "fr": "Le DoS algorithmique domine la semaine : decode-uri-component, les remote forms de SvelteKit et RediSearch corrigent tous une complexité quadratique ou un HashDoS."
+    },
+    {
+      "es": "La autorización por comparación de URIs sigue rompiéndose: Keycloak cae por la ruta de access-denied, igual que Echo y Hono cayeron esta semana por doble decodificación de paths.",
+      "en": "URI-comparison authorization keeps breaking: Keycloak fell to its access-denied path, just as Echo and Hono fell this week to double path decoding.",
+      "fr": "L'autorisation par comparaison d'URI continue de céder : Keycloak tombe via sa page access-denied, comme Echo et Hono cette semaine via le double décodage des chemins."
+    },
+    {
+      "es": "La criptografía post-cuántica y la proof-of-possession llegan a la infra de todos los días: Aurora con PQ-TLS y Google con DPoP muestran hacia dónde va el baseline.",
+      "en": "Post-quantum crypto and proof-of-possession are reaching everyday infrastructure: Aurora PQ-TLS and Google DPoP show where the baseline is heading.",
+      "fr": "La cryptographie post-quantique et la preuve de possession arrivent dans l'infrastructure courante : Aurora PQ-TLS et Google DPoP montrent la nouvelle norme."
+    }
+  ]
+}

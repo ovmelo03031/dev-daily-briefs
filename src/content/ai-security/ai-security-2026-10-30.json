@@ -1,0 +1,225 @@
+{
+  "title": {
+    "es": "AI Security — 30 OCT 2026",
+    "en": "AI Security — 30 OCT 2026",
+    "fr": "AI Security — 30 OCT 2026"
+  },
+  "description": {
+    "es": "Vuelve la campaña de cryptominers en Hugging Face vía trust_remote_code con más de 32.000 descargas, Forever Security encuentra bugs en los navegadores embebidos de cinco herramientas de IA (Codex y VS Code sin parche), el sandbox AST de PraisonAI permite import os, un MCP de PDFs ignoraba su propia API key, volto-chatbot hace de proxy con credenciales de Danswer y vLLM desactivaba la protección contra decompression bombs.",
+    "en": "The Hugging Face cryptominer campaign returns through trust_remote_code with 32,000+ downloads, Forever Security finds bugs in the embedded browsers of five AI developer tools (Codex and VS Code unpatched), PraisonAI's AST sandbox allows import os, a PDF MCP server ignored its own API key, volto-chatbot proxies Danswer with server credentials, and vLLM switched off Pillow's decompression-bomb guard.",
+    "fr": "La campagne de cryptominers sur Hugging Face revient via trust_remote_code avec plus de 32 000 téléchargements, Forever Security trouve des failles dans les navigateurs intégrés de cinq outils IA (Codex et VS Code non corrigés), le sandbox AST de PraisonAI autorise import os, un serveur MCP PDF ignorait sa propre clé d'API, volto-chatbot relaie Danswer avec les identifiants du serveur et vLLM désactivait la protection anti-decompression bomb."
+  },
+  "pubDate": "2026-10-30",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "Hugging Face: cryptominers vía trust_remote_code",
+        "en": "Hugging Face: cryptominers via trust_remote_code",
+        "fr": "Hugging Face : cryptominers via trust_remote_code"
+      },
+      "anchor": "hf-trust-remote-code-miners",
+      "icon": "simple-icons:huggingface"
+    },
+    {
+      "text": {
+        "es": "5 herramientas IA con bugs en su navegador embebido",
+        "en": "5 AI dev tools with embedded-browser bugs",
+        "fr": "5 outils IA avec un navigateur intégré faillible"
+      },
+      "anchor": "forever-embrace-ai-dev-tools",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": {
+        "es": "PraisonAI: el sandbox AST deja pasar import os",
+        "en": "PraisonAI: AST sandbox lets import os through",
+        "fr": "PraisonAI : le sandbox AST laisse passer import os"
+      },
+      "anchor": "praisonai-cve-2026-61438",
+      "icon": "lucide:skull"
+    },
+    {
+      "text": {
+        "es": "pdf-reader-mcp ignoraba su MCP_API_KEY",
+        "en": "pdf-reader-mcp never checked its MCP_API_KEY",
+        "fr": "pdf-reader-mcp ne vérifiait pas sa MCP_API_KEY"
+      },
+      "anchor": "pdf-reader-mcp-cve-2026-62264",
+      "icon": "lucide:lock"
+    },
+    {
+      "text": {
+        "es": "volto-chatbot: proxy Danswer sin autenticación",
+        "en": "volto-chatbot: unauthenticated Danswer proxy",
+        "fr": "volto-chatbot : proxy Danswer sans authentification"
+      },
+      "anchor": "volto-chatbot-danswer-proxy",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "vLLM: decompression bomb tumba el worker",
+        "en": "vLLM: decompression bomb OOM-kills workers",
+        "fr": "vLLM : une decompression bomb tue le worker"
+      },
+      "anchor": "vllm-cve-2026-116177",
+      "icon": "lucide:shield-alert"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-incidents",
+      "name": "Top Incidents",
+      "theme": "top-incidents",
+      "icon_emoji": "🚨",
+      "anchor": "top-incidents",
+      "updates": [
+        {
+          "id": "hf-trust-remote-code-miners",
+          "tag": "breach",
+          "title": {
+            "es": "Vuelve la campaña de malware en Hugging Face: 31 repos usan trust_remote_code para minar cripto con tus GPUs",
+            "en": "The Hugging Face malware campaign returns: 31 repos abuse trust_remote_code to mine crypto on your GPUs",
+            "fr": "La campagne de malware sur Hugging Face revient : 31 dépôts abusent de trust_remote_code pour miner sur vos GPU"
+          },
+          "body_html": {
+            "es": "<p>Pluto Security encontró <strong>31 repositorios maliciosos en siete cuentas</strong> de Hugging Face, con el modelo insignia <code>MENXIANGYU/qwen2-tiny</code> y un clon casi idéntico, <code>htt0118/qwen2-tiny</code>. No hay pickle ni pesos envenenados: el código Python que viene con el modelo se ejecuta cuando lo cargás con <code>trust_remote_code=True</code>. El payload es un <strong>cryptominer disfrazado de proceso del sistema</strong> que se reinicia si lo matás y elimina mineros rivales; algunas versiones abren una reverse shell y un modelo posterior trae un script de container escape. Suman <strong>más de 32.000 descargas</strong> (descargas, no infecciones confirmadas). Hugging Face bajó la primera ola, pero una segunda de 19 repos siguió online ocho días, y los escáneres de la plataforma (antivirus, Protect AI, JFrog) no detectaron el código. En la misma nota, Air Security describe un falso <em>solana-starter-kit</em> en GitHub que los agentes de código encuentran primero y cuyo único paso de instalación es un one-liner de PowerShell que instala NetSupport Manager. Ojo con esto: nunca habilites <code>trust_remote_code</code> en modelos que no auditaste, y fijá revisiones por hash.</p>",
+            "en": "<p>Pluto Security found <strong>31 malicious repositories across seven accounts</strong> on Hugging Face, led by <code>MENXIANGYU/qwen2-tiny</code> and a near-identical copy, <code>htt0118/qwen2-tiny</code>. There is no pickle exploit and no poisoned weights: Python code shipped with the model runs when you load it with <code>trust_remote_code=True</code>. The payload is a <strong>cryptominer disguised as a system process</strong> that restarts when killed and removes competing miners; some versions open a reverse shell, and a later model carries a container-escape script. The repos total <strong>more than 32,000 downloads</strong> (downloads, not confirmed infections). Hugging Face removed the first wave, but a second wave of 19 repos stayed live for eight days, and the platform's scanners (antivirus, Protect AI, JFrog) missed the code. The same report covers Air Security's fake <em>solana-starter-kit</em> on GitHub, which AI coding agents find first and whose only install step is a PowerShell one-liner that deploys NetSupport Manager. Never enable <code>trust_remote_code</code> on models you have not audited, and pin revisions by hash.</p>",
+            "fr": "<p>Pluto Security a trouvé <strong>31 dépôts malveillants répartis sur sept comptes</strong> Hugging Face, menés par <code>MENXIANGYU/qwen2-tiny</code> et une copie quasi identique, <code>htt0118/qwen2-tiny</code>. Ni pickle ni poids empoisonnés : le code Python livré avec le modèle s'exécute au chargement avec <code>trust_remote_code=True</code>. Le payload est un <strong>cryptominer déguisé en processus système</strong> qui redémarre si on le tue et supprime les mineurs concurrents ; certaines versions ouvrent un reverse shell, et un modèle plus récent embarque un script d'évasion de conteneur. Les dépôts cumulent <strong>plus de 32 000 téléchargements</strong> (des téléchargements, pas des infections confirmées). Hugging Face a supprimé la première vague, mais une seconde de 19 dépôts est restée en ligne huit jours, et les scanners de la plateforme (antivirus, Protect AI, JFrog) n'ont rien vu. Le même article décrit le faux <em>solana-starter-kit</em> repéré par Air Security sur GitHub : les agents de code le trouvent en premier et sa seule étape d'installation est un one-liner PowerShell qui déploie NetSupport Manager. N'activez jamais <code>trust_remote_code</code> sur un modèle non audité et épinglez les révisions par hash.</p>"
+          },
+          "date": "29 Oct 2026",
+          "source": {
+            "url": "https://www.bleepingcomputer.com/news/security/hugging-face-malware-campaign-returns-to-hijack-gpus-for-crypto-mining/",
+            "label": "BleepingComputer"
+          }
+        }
+      ]
+    },
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "praisonai-cve-2026-61438",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-61438 (CVSS 7.3): el sandbox AST de PraisonAI permite import os y ejecuta comandos desde un workflow YAML",
+            "en": "CVE-2026-61438 (CVSS 7.3): PraisonAI's AST sandbox allows import os and runs commands from a YAML workflow",
+            "fr": "CVE-2026-61438 (CVSS 7.3) : le sandbox AST de PraisonAI autorise import os et exécute des commandes depuis un workflow YAML"
+          },
+          "body_html": {
+            "es": "<p><code>JobWorkflowExecutor._exec_inline_python()</code> valida los pasos <code>script:</code> de los workflows YAML con un allowlist de nodos AST y un <code>__builtins__</code> recortado. El problema: el allowlist de módulos incluye <code>os</code> y se permiten <code>Import</code>, <code>Call</code> y <code>Attribute</code>, así que <code>import os; os.system(...)</code> pasa la validación. Cualquiera que aporte un workflow <code>type: job</code> consigue RCE con los privilegios del proceso cuando un usuario o un pipeline de CI con <code>PRAISONAI_ALLOW_JOB_WORKFLOWS=true</code> lo corre. Arreglado en <strong>praisonai 4.6.78</strong>. Ojo con esto en CI multi-tenant: un sandbox hecho con allowlists de AST casi nunca es un sandbox.</p>",
+            "en": "<p><code>JobWorkflowExecutor._exec_inline_python()</code> validates YAML workflow <code>script:</code> steps with an AST node allowlist and a trimmed <code>__builtins__</code>. The catch: the module allowlist includes <code>os</code>, and <code>Import</code>, <code>Call</code> and <code>Attribute</code> nodes are permitted, so <code>import os; os.system(...)</code> passes validation. Anyone who contributes a <code>type: job</code> workflow gets RCE with the process's privileges when a user or a CI pipeline with <code>PRAISONAI_ALLOW_JOB_WORKFLOWS=true</code> runs it. Fixed in <strong>praisonai 4.6.78</strong>. Watch multi-tenant CI: an AST-allowlist sandbox is rarely a sandbox.</p>",
+            "fr": "<p><code>JobWorkflowExecutor._exec_inline_python()</code> valide les étapes <code>script:</code> des workflows YAML avec une liste blanche de nœuds AST et des <code>__builtins__</code> réduits. Le hic : la liste des modules autorisés inclut <code>os</code>, et les nœuds <code>Import</code>, <code>Call</code> et <code>Attribute</code> sont permis, donc <code>import os; os.system(...)</code> passe la validation. Quiconque fournit un workflow <code>type: job</code> obtient une RCE avec les privilèges du processus dès qu'un utilisateur ou une CI avec <code>PRAISONAI_ALLOW_JOB_WORKFLOWS=true</code> l'exécute. Corrigé dans <strong>praisonai 4.6.78</strong>. Prudence en CI multi-tenant : un sandbox à base de liste blanche AST n'en est presque jamais un.</p>"
+          },
+          "date": "29 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-26mh-57q7-jfvr",
+            "label": "GitHub Advisory"
+          }
+        },
+        {
+          "id": "pdf-reader-mcp-cve-2026-62264",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-62264 (CVSS 7.5): pdf-reader-mcp anunciaba autenticación por API key en el log pero nunca validaba el header",
+            "en": "CVE-2026-62264 (CVSS 7.5): pdf-reader-mcp logged that API key auth was enabled but never checked the header",
+            "fr": "CVE-2026-62264 (CVSS 7.5) : pdf-reader-mcp annonçait l'authentification par clé d'API mais ne vérifiait jamais l'en-tête"
+          },
+          "body_html": {
+            "es": "<p>Con el transporte HTTP (<code>MCP_TRANSPORT=http</code>), <code>@sylphx/pdf-reader-mcp</code> leía <code>MCP_API_KEY</code> y logueaba «API key authentication enabled», pero <strong>nunca validaba <code>X-API-Key</code></strong>. Como además escucha por defecto en <code>0.0.0.0</code>, cualquiera que llegara al puerto podía invocar todas las herramientas y leer cualquier PDF accesible para el proceso, con un SSRF limitado vía fuentes por URL. Lo peor es el log engañoso: el operador creía estar protegido. Afecta de 2.2.0 a 3.0.0; arreglado en <strong>3.0.1</strong>. El transporte <code>stdio</code> por defecto no está afectado.</p>",
+            "en": "<p>On the HTTP transport (<code>MCP_TRANSPORT=http</code>), <code>@sylphx/pdf-reader-mcp</code> read <code>MCP_API_KEY</code> and logged «API key authentication enabled», but <strong>never validated <code>X-API-Key</code></strong>. Because it also binds to <code>0.0.0.0</code> by default, anyone who could reach the port could invoke every tool and read any PDF the process could open, with limited SSRF through URL sources. The misleading log is the worst part: operators believed they were protected. Versions 2.2.0 through 3.0.0 are affected; fixed in <strong>3.0.1</strong>. The default <code>stdio</code> transport is unaffected.</p>",
+            "fr": "<p>Avec le transport HTTP (<code>MCP_TRANSPORT=http</code>), <code>@sylphx/pdf-reader-mcp</code> lisait <code>MCP_API_KEY</code> et journalisait «API key authentication enabled», mais <strong>ne validait jamais <code>X-API-Key</code></strong>. Comme il écoute par défaut sur <code>0.0.0.0</code>, toute personne atteignant le port pouvait appeler tous les outils et lire n'importe quel PDF accessible au processus, avec un SSRF limité via les sources URL. Le log trompeur est le pire : l'opérateur se croyait protégé. Versions 2.2.0 à 3.0.0 touchées ; corrigé en <strong>3.0.1</strong>. Le transport <code>stdio</code> par défaut n'est pas concerné.</p>"
+          },
+          "date": "29 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-q344-5v34-gm84",
+            "label": "GitHub Advisory"
+          }
+        },
+        {
+          "id": "volto-chatbot-danswer-proxy",
+          "tag": "high",
+          "title": {
+            "es": "volto-chatbot (CVSS 8.2): un proxy sin autenticación reenvía cualquier llamada a Danswer con las credenciales del servidor",
+            "en": "volto-chatbot (CVSS 8.2): an unauthenticated proxy forwards any call to Danswer with the server's credentials",
+            "fr": "volto-chatbot (CVSS 8.2) : un proxy sans authentification relaie tout appel vers Danswer avec les identifiants du serveur"
+          },
+          "body_html": {
+            "es": "<p><code>@eeacms/volto-chatbot</code> registra <code>middleware.all('**/_v1_da/**', proxyMiddleware)</code>: cualquier método, cualquier subruta, sin autenticación, y le agrega al request upstream el <code>DANSWER_API_KEY</code> o la cookie de sesión del servidor. Un atacante anónimo puede invocar <strong>cualquier operación de la API de Danswer, incluidos los endpoints de admin</strong>, como la cuenta de servicio: un confused deputy de manual frente a tu backend RAG. Afecta hasta 2.0.3; arreglado en <strong>2.0.4</strong>. Sin CVE asignado todavía.</p>",
+            "en": "<p><code>@eeacms/volto-chatbot</code> registers <code>middleware.all('**/_v1_da/**', proxyMiddleware)</code>: every method, every sub-path, no authentication, and it attaches the server's <code>DANSWER_API_KEY</code> or session cookie to the upstream request. An anonymous attacker can invoke <strong>any Danswer API operation, admin endpoints included</strong>, as the service account: a textbook confused deputy in front of your RAG backend. Versions up to 2.0.3 are affected; fixed in <strong>2.0.4</strong>. No CVE assigned yet.</p>",
+            "fr": "<p><code>@eeacms/volto-chatbot</code> enregistre <code>middleware.all('**/_v1_da/**', proxyMiddleware)</code> : toutes les méthodes, tous les sous-chemins, sans authentification, en ajoutant à la requête amont le <code>DANSWER_API_KEY</code> ou le cookie de session du serveur. Un attaquant anonyme peut appeler <strong>n'importe quelle opération de l'API Danswer, endpoints d'administration compris</strong>, en tant que compte de service : un confused deputy d'école devant votre backend RAG. Versions jusqu'à 2.0.3 touchées ; corrigé en <strong>2.0.4</strong>. Pas encore de CVE.</p>"
+          },
+          "date": "29 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-w9x9-j56r-h98r",
+            "label": "GitHub Advisory"
+          }
+        },
+        {
+          "id": "vllm-cve-2026-116177",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-116177 (CVSS 7.5): los procesadores Nemotron-VL de vLLM desactivan globalmente la protección de Pillow contra decompression bombs",
+            "en": "CVE-2026-116177 (CVSS 7.5): vLLM's Nemotron-VL processors globally disable Pillow's decompression-bomb guard",
+            "fr": "CVE-2026-116177 (CVSS 7.5) : les processeurs Nemotron-VL de vLLM désactivent globalement la protection de Pillow contre les decompression bombs"
+          },
+          "body_html": {
+            "es": "<p>Los procesadores Nemotron-VL ponen <code>Image.MAX_IMAGE_PIXELS = None</code> <strong>a nivel global</strong>, lo que apaga la defensa de Pillow para todo el proceso. Un atacante sin autenticación manda una imagen-bomba a <code>/v1/chat/completions</code>, agota la memoria y el worker muere por OOM, tirando el servicio para todos los tenants del deployment (CVSS v4 8.7). Afecta de 0.10.2 a antes de 0.25.0; arreglado en <strong>vLLM 0.25.0</strong>. Si todavía no actualizaste, limitá el tamaño de request y el conteo de píxeles antes de que la imagen llegue al modelo.</p>",
+            "en": "<p>The Nemotron-VL processors set <code>Image.MAX_IMAGE_PIXELS = None</code> <strong>globally</strong>, switching off Pillow's defence for the whole process. An unauthenticated attacker sends a decompression-bomb image to <code>/v1/chat/completions</code>, exhausts memory and gets the worker OOM-killed, taking down service for every tenant on the deployment (CVSS v4 8.7). Versions 0.10.2 up to 0.25.0 are affected; fixed in <strong>vLLM 0.25.0</strong>. If you have not upgraded, cap request size and pixel count before images reach the model.</p>",
+            "fr": "<p>Les processeurs Nemotron-VL fixent <code>Image.MAX_IMAGE_PIXELS = None</code> <strong>globalement</strong>, ce qui désactive la défense de Pillow pour tout le processus. Un attaquant non authentifié envoie une image piégée à <code>/v1/chat/completions</code>, épuise la mémoire et fait tuer le worker par l'OOM killer, ce qui coupe le service pour tous les tenants du déploiement (CVSS v4 8.7). Versions 0.10.2 à 0.25.0 exclue touchées ; corrigé dans <strong>vLLM 0.25.0</strong>. Sans mise à jour, limitez la taille des requêtes et le nombre de pixels avant le modèle.</p>"
+          },
+          "date": "25 Oct 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-116177",
+            "label": "OpenCVE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "forever-embrace-ai-dev-tools",
+          "tag": "research",
+          "title": {
+            "es": "Forever Security encuentra bugs en los navegadores embebidos de Cursor, Copilot, Claude Desktop, Codex y VS Code; los de OpenAI y Microsoft siguen sin parche",
+            "en": "Forever Security finds bugs in the embedded browsers of Cursor, Copilot, Claude Desktop, Codex and VS Code; OpenAI's and Microsoft's remain unpatched",
+            "fr": "Forever Security trouve des failles dans les navigateurs intégrés de Cursor, Copilot, Claude Desktop, Codex et VS Code ; celles d'OpenAI et Microsoft restent non corrigées"
+          },
+          "body_html": {
+            "es": "<p>El investigador Gal Weizman llama «Embrace» a la clase de bug: el navegador embebido de cada herramienta tiene <strong>más capacidades que un navegador normal</strong>. En <strong>Cursor</strong>, un prompt injection vía ese navegador lograba ejecución de código en el host (parcheado en silencio el 1 de octubre, sin advisory). <strong>GitHub Copilot</strong> permitía spoofear la barra de direcciones (arreglado en 1.1.29). <strong>Claude Desktop</strong> y <strong>VS Code</strong> tenían lectura arbitraria de archivos saltando el sandbox de web workers; Anthropic primero rechazó el reporte y Microsoft lo calificó de problema de workspace trust inválido. <strong>Codex</strong> también permite leer archivos y sigue sin parche desde el reporte del 27 de julio; OpenAI dice que está trabajando en un fix. No hay CVEs asignados. Ojo con esto: el panel de navegador de tu agente es superficie de ataque, no un iframe inocente.</p>",
+            "en": "<p>Researcher Gal Weizman calls the bug class «Embrace»: each tool's embedded browser has <strong>more capabilities than a normal browser</strong>. In <strong>Cursor</strong>, prompt injection through that browser reached code execution on the host (silently patched on 1 October, no advisory). <strong>GitHub Copilot</strong> allowed address-bar spoofing (fixed in 1.1.29). <strong>Claude Desktop</strong> and <strong>VS Code</strong> had arbitrary file reads through a web-worker sandbox bypass; Anthropic first rejected the report, and Microsoft labelled it an invalid workspace-trust issue. <strong>Codex</strong> also allows file reads and is still unpatched after a 27 July report; OpenAI says it is working on a fix. No CVEs have been assigned. Your agent's browser pane is attack surface, not a harmless iframe.</p>",
+            "fr": "<p>Le chercheur Gal Weizman appelle cette classe de bug «Embrace» : le navigateur intégré de chaque outil a <strong>plus de capacités qu'un navigateur normal</strong>. Dans <strong>Cursor</strong>, une prompt injection via ce navigateur menait à l'exécution de code sur l'hôte (corrigé discrètement le 1er octobre, sans avis). <strong>GitHub Copilot</strong> permettait d'usurper la barre d'adresse (corrigé en 1.1.29). <strong>Claude Desktop</strong> et <strong>VS Code</strong> permettaient la lecture arbitraire de fichiers en contournant le sandbox des web workers ; Anthropic a d'abord rejeté le rapport et Microsoft l'a jugé hors périmètre (workspace trust). <strong>Codex</strong> permet aussi la lecture de fichiers et reste non corrigé depuis un signalement du 27 juillet ; OpenAI dit travailler à un correctif. Aucun CVE attribué. Le panneau navigateur de votre agent est une surface d'attaque, pas un iframe anodin.</p>"
+          },
+          "date": "29 Oct 2026",
+          "source": {
+            "url": "https://www.theregister.com/security/2026/10/29/researchers-find-bugs-in-5-ai-developer-tools-with-openai-and-microsoft-flaws-still-unpatched/5306508",
+            "label": "The Register"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "La confianza mal ubicada es el hilo del día: trust_remote_code ejecuta lo que traiga el modelo, un sandbox AST deja pasar os, un MCP loguea que autentica sin hacerlo y un proxy de chatbot presta sus credenciales a cualquiera. Ningún escáner de hub ni mensaje de log reemplaza verificar qué código corre y quién puede llamarlo.",
+      "en": "Misplaced trust is the thread of the day: trust_remote_code runs whatever the model ships, an AST sandbox lets os through, an MCP server logs that it authenticates without doing so, and a chatbot proxy lends its credentials to anyone. No hub scanner or log line replaces checking what code runs and who can call it.",
+      "fr": "La confiance mal placée relie tout : trust_remote_code exécute ce que livre le modèle, un sandbox AST laisse passer os, un serveur MCP annonce une authentification inexistante et un proxy de chatbot prête ses identifiants à n'importe qui. Aucun scanner de hub ni ligne de log ne remplace la vérification du code exécuté et de qui peut l'appeler."
+    },
+    {
+      "es": "Las herramientas de desarrollo con IA son el nuevo navegador: paneles web embebidos, READMEs que los agentes ejecutan al pie de la letra y repos que rankean para búsquedas de agentes. La superficie de ataque es lo que el agente lee y abre, no solo lo que vos tipeás.",
+      "en": "AI developer tools are the new browser: embedded web panes, READMEs agents execute literally, and repos that rank for agent searches. The attack surface is whatever the agent reads and opens, not just what you type.",
+      "fr": "Les outils de développement IA deviennent le nouveau navigateur : panneaux web intégrés, README exécutés à la lettre par les agents et dépôts optimisés pour leurs recherches. La surface d'attaque, c'est tout ce que l'agent lit et ouvre, pas seulement ce que vous tapez."
+    }
+  ]
+}

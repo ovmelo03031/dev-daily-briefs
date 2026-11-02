@@ -1,0 +1,239 @@
+{
+  "title": {
+    "es": "AI Security — 02 NOV 2026",
+    "en": "AI Security — 02 NOV 2026",
+    "fr": "AI Security — 02 NOV 2026"
+  },
+  "description": {
+    "es": "Una copia adulterada de la extensión de Claude Code en el marketplace de Cursor instaló un backdoor SSH en hasta 5.000 equipos, el sandbox de Generative UI de Prefab expone el filesystem vía Deno (CVE-2026-120338, CVSS 10), LiteLLM Enterprise filtraba la master key sin autenticación, llama.cpp corrige un heap OOB write en el tokenizer PLaMo2, Kubeflow Pipelines cierra lectura de logs sin autorización, Claude Code arregla un TOCTOU del Edit tool y SOCRadar expone a un ransomware que gastó más de 7.000 dólares en IA.",
+    "en": "A tampered copy of the Claude Code extension on Cursor's marketplace dropped an SSH backdoor on up to 5,000 machines, Prefab's Generative UI sandbox exposes the filesystem through Deno (CVE-2026-120338, CVSS 10), LiteLLM Enterprise leaked its master key without authentication, llama.cpp fixes a heap OOB write in the PLaMo2 tokenizer, Kubeflow Pipelines closes unauthorized log reads, Claude Code fixes an Edit tool TOCTOU, and SOCRadar exposes a ransomware crew that spent more than $7,000 on AI.",
+    "fr": "Une copie altérée de l'extension Claude Code sur le marketplace de Cursor a installé une backdoor SSH sur jusqu'à 5 000 machines, le sandbox Generative UI de Prefab expose le système de fichiers via Deno (CVE-2026-120338, CVSS 10), LiteLLM Enterprise divulguait sa master key sans authentification, llama.cpp corrige une écriture hors limites dans le tokenizer PLaMo2, Kubeflow Pipelines ferme la lecture de logs sans autorisation, Claude Code corrige un TOCTOU de l'Edit tool et SOCRadar expose un groupe ransomware ayant dépensé plus de 7 000 dollars en IA."
+  },
+  "pubDate": "2026-11-02",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "Cursor: extensión de Claude Code con backdoor SSH",
+        "en": "Cursor: Claude Code extension with SSH backdoor",
+        "fr": "Cursor : extension Claude Code avec backdoor SSH"
+      },
+      "anchor": "cursor-claude-code-extension-backdoor",
+      "icon": "lucide:skull"
+    },
+    {
+      "text": {
+        "es": "Prefab UI: escape del sandbox, CVSS 10",
+        "en": "Prefab UI: sandbox escape, CVSS 10",
+        "fr": "Prefab UI : évasion du sandbox, CVSS 10"
+      },
+      "anchor": "prefab-ui-cve-2026-120338",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "LiteLLM Enterprise filtraba la master key",
+        "en": "LiteLLM Enterprise leaked its master key",
+        "fr": "LiteLLM Enterprise divulguait sa master key"
+      },
+      "anchor": "litellm-enterprise-master-key-leak",
+      "icon": "lucide:lock"
+    },
+    {
+      "text": {
+        "es": "llama.cpp: GGUF malicioso corrompe el heap",
+        "en": "llama.cpp: malicious GGUF corrupts the heap",
+        "fr": "llama.cpp : un GGUF malveillant corrompt le tas"
+      },
+      "anchor": "llama-cpp-cve-2026-116816",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": {
+        "es": "Kubeflow Pipelines: logs ajenos sin autorización",
+        "en": "Kubeflow Pipelines: other users' logs, no authz",
+        "fr": "Kubeflow Pipelines : logs d'autrui sans autorisation"
+      },
+      "anchor": "kubeflow-pipelines-cve-2026-118759",
+      "icon": "lucide:shield-alert"
+    },
+    {
+      "text": {
+        "es": "Ransomware n0n gastó 7.216 dólares en IA",
+        "en": "n0n ransomware spent $7,216 on AI",
+        "fr": "Le ransomware n0n a dépensé 7 216 $ en IA"
+      },
+      "anchor": "n0n-ransomware-ai-spend",
+      "icon": "lucide:siren"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-incidents",
+      "name": "Top Incidents",
+      "theme": "top-incidents",
+      "icon_emoji": "🚨",
+      "anchor": "top-incidents",
+      "updates": [
+        {
+          "id": "cursor-claude-code-extension-backdoor",
+          "tag": "breach",
+          "title": {
+            "es": "Una copia adulterada de la extensión de Claude Code en el marketplace de Cursor instaló un backdoor SSH persistente",
+            "en": "A tampered copy of the Claude Code extension on Cursor's marketplace installed a persistent SSH backdoor",
+            "fr": "Une copie altérée de l'extension Claude Code sur le marketplace de Cursor a installé une backdoor SSH persistante"
+          },
+          "body_html": {
+            "es": "<p>La versión <strong>2.1.313</strong> de la extensión de Claude Code distribuida por el marketplace de Cursor estuvo online unas <strong>11 horas el 29 de octubre</strong> (02:27–13:35 PT) y, según reportes, infectó a <strong>hasta 5.000 developers</strong>. La detectó el vendor de EDR Phorion. El payload, para Windows, macOS y Linux, recolecta usuario, email de Git configurado e IP pública, deja la SSH key del atacante, instala persistencia e intenta abrir un reverse SSH tunnel (que en macOS y Windows suele fallar por falta de permisos de admin, aunque el resto del payload igual corre). Anthropic niega que sus sistemas o laptops de empleados estén comprometidos: dice que alguien con acceso al marketplace de Cursor publicó una «copia adulterada» que Anthropic no construyó y que sus canales oficiales no se vieron afectados. Cursor bajó la versión, apagó el marketplace por precaución, rotó sus keys y todavía no explicó cómo entró el paquete. Ojo con esto: <strong>actualizar la extensión no borra la persistencia</strong>; usá los scripts de remoción del aviso de Cursor y buscá señales de que el túnel se haya creado.</p>",
+            "en": "<p>Version <strong>2.1.313</strong> of the Claude Code extension served by Cursor's marketplace was live for about <strong>11 hours on 29 October</strong> (02:27–13:35 PT) and reportedly infected <strong>up to 5,000 developers</strong>. EDR vendor Phorion spotted it first. The payload, for Windows, macOS and Linux, collects the username, configured Git email and public IP, drops the attacker's SSH key, installs persistence and tries to open a reverse SSH tunnel (which usually fails on macOS and Windows without admin rights, though the rest of the payload still runs). Anthropic denies that its systems or employee laptops were compromised: it says someone with access to Cursor's marketplace published a «tampered copy» Anthropic did not build, and that official Anthropic channels were not affected. Cursor removed the version, shut the marketplace down as a precaution, rotated its keys and has not yet explained how the package got in. <strong>Updating the extension does not remove the persistence</strong>; run the removal scripts in Cursor's notice and hunt for signs the tunnel was created.</p>",
+            "fr": "<p>La version <strong>2.1.313</strong> de l'extension Claude Code distribuée par le marketplace de Cursor est restée en ligne environ <strong>11 heures le 29 octobre</strong> (02h27–13h35 PT) et aurait infecté <strong>jusqu'à 5 000 développeurs</strong>. L'éditeur d'EDR Phorion l'a repérée. Le payload, pour Windows, macOS et Linux, collecte le nom d'utilisateur, l'email Git configuré et l'IP publique, dépose la clé SSH de l'attaquant, installe une persistance et tente d'ouvrir un reverse SSH tunnel (qui échoue souvent sur macOS et Windows faute de droits admin, le reste du payload s'exécutant quand même). Anthropic nie toute compromission de ses systèmes ou des portables de ses employés : quelqu'un ayant accès au marketplace de Cursor aurait publié une «copie altérée» qu'Anthropic n'a pas construite, et ses canaux officiels ne sont pas touchés. Cursor a retiré la version, fermé le marketplace par précaution, fait tourner ses clés et n'a pas encore expliqué comment le paquet est entré. <strong>Mettre à jour l'extension ne supprime pas la persistance</strong> : utilisez les scripts de suppression de l'avis de Cursor et cherchez des traces du tunnel.</p>"
+          },
+          "date": "30 Oct 2026",
+          "source": {
+            "url": "https://www.theregister.com/cyber-crime/2026/10/30/anthropic-that-claude-code-extension-compromise-couldnt-be-us/5306682",
+            "label": "The Register"
+          }
+        }
+      ]
+    },
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "prefab-ui-cve-2026-120338",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-120338 (CVSS 10): el sandbox de Generative UI de Prefab deja que el Python del caller lea y escriba archivos vía Deno",
+            "en": "CVE-2026-120338 (CVSS 10): Prefab's Generative UI sandbox lets caller-supplied Python read and write files through Deno",
+            "fr": "CVE-2026-120338 (CVSS 10) : le sandbox Generative UI de Prefab laisse le Python de l'appelant lire et écrire des fichiers via Deno"
+          },
+          "body_html": {
+            "es": "<p>Prefab UI (PrefectHQ) corre el Python de su Generative UI, documentado como aislamiento para código no confiable incluido el UI escrito por LLMs, dentro de Pyodide en un subproceso de Deno. Desde <strong>0.14.0 hasta 0.20.2</strong> el launcher arranca Deno con <code>--allow-read</code>, <code>--allow-write</code> y <code>--allow-net</code> sin restricción y deja la API de Deno en el objeto global; el módulo <code>js</code> de Pyodide la proxea, así que el código llama a <code>Deno.readTextFileSync</code> y <code>Deno.writeTextFileSync</code> como el usuario del server, y puede persistir escribiendo un <code>.pth</code> en el site-packages. El camino remoto típico es el provider GenerativeUI de <strong>FastMCP</strong>: la tool MCP <code>generate_prefab_ui</code> manda su argumento <code>code</code> directo a este sandbox, y en un server sin autenticación cualquier cliente puede llamarla. Es opt-in y requiere Deno instalado. Actualizá a <strong>0.21.0</strong>.</p>",
+            "en": "<p>Prefab UI (PrefectHQ) runs its Generative UI Python, documented as isolation for untrusted code including LLM-written UI, inside Pyodide in a Deno subprocess. From <strong>0.14.0 through 0.20.2</strong> the launcher starts Deno with unrestricted <code>--allow-read</code>, <code>--allow-write</code> and <code>--allow-net</code> and leaves the Deno API on the global object; Pyodide's <code>js</code> module proxies it, so the code calls <code>Deno.readTextFileSync</code> and <code>Deno.writeTextFileSync</code> as the server user and can persist by writing a <code>.pth</code> file into site-packages. The usual remote path is <strong>FastMCP</strong>'s GenerativeUI provider: the MCP tool <code>generate_prefab_ui</code> forwards its <code>code</code> argument straight into this sandbox, and on a server without authentication any client can call it. The feature is opt-in and needs Deno installed. Upgrade to <strong>0.21.0</strong>.</p>",
+            "fr": "<p>Prefab UI (PrefectHQ) exécute le Python de son Generative UI, présenté comme une isolation pour du code non fiable y compris l'UI écrite par des LLM, dans Pyodide au sein d'un sous-processus Deno. De la <strong>0.14.0 à la 0.20.2</strong>, le lanceur démarre Deno avec <code>--allow-read</code>, <code>--allow-write</code> et <code>--allow-net</code> sans restriction et laisse l'API Deno sur l'objet global ; le module <code>js</code> de Pyodide la relaie, donc le code appelle <code>Deno.readTextFileSync</code> et <code>Deno.writeTextFileSync</code> avec les droits du serveur et peut persister via un fichier <code>.pth</code> dans site-packages. Le chemin distant habituel est le provider GenerativeUI de <strong>FastMCP</strong> : la tool MCP <code>generate_prefab_ui</code> transmet son argument <code>code</code> directement à ce sandbox, et sur un serveur sans authentification n'importe quel client peut l'appeler. Fonction opt-in, Deno requis. Passez en <strong>0.21.0</strong>.</p>"
+          },
+          "date": "01 Nov 2026",
+          "source": {
+            "url": "https://github.com/PrefectHQ/prefab/security/advisories/GHSA-595q-jv4r-q7j9",
+            "label": "GitHub Advisory (PrefectHQ/prefab)"
+          }
+        },
+        {
+          "id": "litellm-enterprise-master-key-leak",
+          "tag": "critical",
+          "title": {
+            "es": "LiteLLM (crítica): un request sin autenticación a cualquier ruta LLM del proxy Enterprise filtra la master key",
+            "en": "LiteLLM (critical): an unauthenticated request to any LLM route on the Enterprise proxy leaks the master key",
+            "fr": "LiteLLM (critique) : une requête non authentifiée sur n'importe quelle route LLM du proxy Enterprise divulgue la master key"
+          },
+          "body_html": {
+            "es": "<p>En un proxy de LiteLLM con <strong>licencia Enterprise</strong>, un request sin autenticación a cualquier ruta LLM podía hacer que el proxy leyera un archivo local y mandara su contenido a una URL elegida por el atacante. Leyendo <code>/proc/self/environ</code> salen <code>LITELLM_MASTER_KEY</code> y las API keys de los providers, o sea admin total del proxy, y en algunas configuraciones ejecución de Python arbitrario como root. Los deployments open source sin licencia no están afectados porque esos code paths solo cargan con la licencia activa. Versiones con fix: <strong>1.103.10, 1.104.8, 1.105.6 y 1.106.5</strong>. Como defensa en profundidad, LiteLLM recomienda cargar la master key desde un secret manager, setear un <code>LITELLM_SALT_KEY</code> separado y limitar el tráfico saliente del proxy a los endpoints de los providers. Es el segundo susto grave de LiteLLM en dos semanas, después del compromiso de supply chain de la 1.107.0.</p>",
+            "en": "<p>On a LiteLLM proxy with an <strong>Enterprise license</strong>, an unauthenticated request to any LLM route could make the proxy read a local file and send its contents to an attacker-chosen URL. Reading <code>/proc/self/environ</code> exposes <code>LITELLM_MASTER_KEY</code> and provider API keys, which means full proxy admin, and in some configurations arbitrary Python execution as root. Open source deployments without a license are not affected because those code paths only load with an active license. Fixed versions: <strong>1.103.10, 1.104.8, 1.105.6 and 1.106.5</strong>. As defense in depth, LiteLLM recommends loading the master key from a secret manager, setting a separate <code>LITELLM_SALT_KEY</code> and restricting the proxy's outbound traffic to provider endpoints. It is LiteLLM's second serious scare in two weeks, after the 1.107.0 supply chain compromise.</p>",
+            "fr": "<p>Sur un proxy LiteLLM avec <strong>licence Enterprise</strong>, une requête non authentifiée sur n'importe quelle route LLM pouvait amener le proxy à lire un fichier local et à envoyer son contenu vers une URL choisie par l'attaquant. Lire <code>/proc/self/environ</code> expose <code>LITELLM_MASTER_KEY</code> et les clés d'API des providers, soit l'admin complet du proxy, et dans certaines configurations l'exécution de Python arbitraire en root. Les déploiements open source sans licence ne sont pas concernés, ces chemins de code ne se chargeant qu'avec une licence active. Versions corrigées : <strong>1.103.10, 1.104.8, 1.105.6 et 1.106.5</strong>. En défense en profondeur, LiteLLM recommande de charger la master key depuis un gestionnaire de secrets, de définir un <code>LITELLM_SALT_KEY</code> distinct et de limiter le trafic sortant du proxy aux endpoints des providers. Deuxième alerte sérieuse pour LiteLLM en deux semaines, après la compromission supply chain de la 1.107.0.</p>"
+          },
+          "date": "27 Oct 2026",
+          "source": {
+            "url": "https://github.com/BerriAI/litellm/security/advisories/GHSA-w4c7-34wj-hqm8",
+            "label": "GitHub Advisory (BerriAI/litellm)"
+          }
+        },
+        {
+          "id": "llama-cpp-cve-2026-116816",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-116816 (CVSS 8.5): un GGUF malicioso escribe fuera del buffer en el tokenizer PLaMo2 de llama.cpp",
+            "en": "CVE-2026-116816 (CVSS 8.5): a malicious GGUF writes out of bounds in llama.cpp's PLaMo2 tokenizer",
+            "fr": "CVE-2026-116816 (CVSS 8.5) : un GGUF malveillant écrit hors limites dans le tokenizer PLaMo2 de llama.cpp"
+          },
+          "body_html": {
+            "es": "<p>Entre <strong>b5899 y antes de b10261</strong>, <code>llm_tokenizer_plamo2::build</code> de llama.cpp acepta tokens de tipo BYTE con texto como <code>&lt;0x-1&gt;</code>; el valor negativo parseado escribe token ids <strong>antes del buffer <code>bytes_</code></strong> durante la carga del modelo. Resultado: corrupción de heap con un GGUF armado, crashes o potencial ejecución de código. El vector es local con interacción (cargar el modelo), que es exactamente lo que hace cualquiera que baja GGUFs de un hub. Actualizá a <strong>b10261</strong> o posterior, y lo mismo para todo lo que embebe llama.cpp (Ollama, LM Studio, bindings) cuando saquen release.</p>",
+            "en": "<p>From <strong>b5899 up to before b10261</strong>, llama.cpp's <code>llm_tokenizer_plamo2::build</code> accepts BYTE-typed tokens with text like <code>&lt;0x-1&gt;</code>; the negative parsed value writes token ids <strong>before the <code>bytes_</code> buffer</strong> while the model loads. The result is heap corruption from a crafted GGUF, crashes or potential code execution. The vector is local with user interaction (loading the model), which is exactly what anyone pulling GGUFs from a hub does. Upgrade to <strong>b10261</strong> or later, and do the same for anything that embeds llama.cpp (Ollama, LM Studio, bindings) once they ship a release.</p>",
+            "fr": "<p>De <strong>b5899 jusqu'avant b10261</strong>, <code>llm_tokenizer_plamo2::build</code> de llama.cpp accepte des tokens de type BYTE avec un texte comme <code>&lt;0x-1&gt;</code> ; la valeur négative analysée écrit des ids de token <strong>avant le buffer <code>bytes_</code></strong> pendant le chargement du modèle. Résultat : corruption du tas avec un GGUF forgé, plantages ou exécution de code potentielle. Le vecteur est local avec interaction (charger le modèle), soit exactement ce que fait quiconque récupère des GGUF sur un hub. Passez en <strong>b10261</strong> ou plus, et faites de même pour tout ce qui embarque llama.cpp (Ollama, LM Studio, bindings) dès leur release.</p>"
+          },
+          "date": "27 Oct 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-116816",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "kubeflow-pipelines-cve-2026-118759",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-118759 y CVE-2026-118761 (CVSS 7.5): Kubeflow Pipelines leía logs de runs ajenos sin autorización y descomprimía bombas antes de chequear permisos",
+            "en": "CVE-2026-118759 and CVE-2026-118761 (CVSS 7.5): Kubeflow Pipelines read other runs' logs without authorization and decompressed bombs before checking permissions",
+            "fr": "CVE-2026-118759 et CVE-2026-118761 (CVSS 7.5) : Kubeflow Pipelines lisait les logs d'autres runs sans autorisation et décompressait des bombes avant de vérifier les droits"
+          },
+          "body_html": {
+            "es": "<p>Dos fallas en el API server de Kubeflow Pipelines antes de <strong>2.18.0</strong>. En <strong>CVE-2026-118759</strong>, <code>GET /apis/v1alpha1/runs/{run_id}/nodes/{node_id}/log</code> devolvía logs sin autorizar al caller contra el run: con un run ID y un identificador de pod podés leer logs vivos o archivados con los permisos del API server, y en logs vivos el node ID se aceptaba como nombre de pod sin verificar que perteneciera al run. En <strong>CVE-2026-118761</strong>, los uploads de pipelines (ZIP o tar.gz) se descomprimían sin límite <em>antes</em> de la autorización por namespace, así que un archivo chico agota la memoria del server sin necesidad de permiso para crear pipelines. Ojo con esto: los logs de training suelen tener rutas de datasets, tokens y credenciales. Actualizá a <strong>2.18.0</strong>.</p>",
+            "en": "<p>Two flaws in the Kubeflow Pipelines API server before <strong>2.18.0</strong>. In <strong>CVE-2026-118759</strong>, <code>GET /apis/v1alpha1/runs/{run_id}/nodes/{node_id}/log</code> returned logs without authorizing the caller against the run: with a run ID and a pod identifier you can read live or archived logs with the API server's permissions, and for live logs the node ID was accepted as a pod name without checking it belonged to the run. In <strong>CVE-2026-118761</strong>, pipeline uploads (ZIP or tar.gz) were decompressed without bounds <em>before</em> namespace authorization, so a small archive exhausts server memory with no pipeline-create permission needed. Training logs often carry dataset paths, tokens and credentials. Upgrade to <strong>2.18.0</strong>.</p>",
+            "fr": "<p>Deux failles dans l'API server de Kubeflow Pipelines avant la <strong>2.18.0</strong>. Avec <strong>CVE-2026-118759</strong>, <code>GET /apis/v1alpha1/runs/{run_id}/nodes/{node_id}/log</code> renvoyait les logs sans autoriser l'appelant sur le run : avec un run ID et un identifiant de pod, on lit des logs en direct ou archivés avec les droits de l'API server, et pour les logs en direct le node ID était accepté comme nom de pod sans vérifier son appartenance au run. Avec <strong>CVE-2026-118761</strong>, les uploads de pipelines (ZIP ou tar.gz) étaient décompressés sans limite <em>avant</em> l'autorisation par namespace : une petite archive épuise la mémoire du serveur sans droit de création de pipeline. Les logs d'entraînement contiennent souvent chemins de datasets, tokens et identifiants. Passez en <strong>2.18.0</strong>.</p>"
+          },
+          "date": "29 Oct 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-wg5q-x4j9-qm54",
+            "label": "GitHub Advisory"
+          }
+        },
+        {
+          "id": "claude-code-cve-2026-88968",
+          "tag": "patch",
+          "title": {
+            "es": "CVE-2026-88968: un TOCTOU en el Edit tool de Claude Code permitía escribir fuera del workspace desde el sandbox de Bash",
+            "en": "CVE-2026-88968: a TOCTOU in Claude Code's Edit tool allowed writes outside the workspace from the Bash sandbox",
+            "fr": "CVE-2026-88968 : un TOCTOU dans l'Edit tool de Claude Code permettait d'écrire hors du workspace depuis le sandbox Bash"
+          },
+          "body_html": {
+            "es": "<p>Claude Code validaba los targets del Edit tool resolviendo rutas y symlinks en un momento dado, sin atarlos a los inodos o file descriptors reales. En <strong>macOS</strong>, un proceso dentro del sandbox de Bash podía aprovechar la ventana entre el check y el uso cambiando atómicamente un directorio padre del workspace por un symlink, y el Edit tool (que corre fuera del sandbox) terminaba pisando un archivo del usuario fuera del workspace elegido por el atacante. Hace falta poder correr código dentro del sandbox, por ejemplo con un repo o un script de dependencia maliciosos. Severidad alta según el advisory; corregido en <strong>2.1.251</strong>. Es el segundo bug de escritura fuera del workspace por symlinks en Claude Code este mes, después de CVE-2026-103435: el patrón es que el sandbox no protege si una tool sin sandbox confía en rutas que el sandbox puede mover.</p>",
+            "en": "<p>Claude Code validated Edit tool targets with point-in-time path and symlink resolution that was not bound to the underlying inodes or file descriptors. On <strong>macOS</strong>, a process inside the Bash sandbox could exploit the window between check and use by atomically swapping an in-workspace parent directory for a symlink, and the Edit tool (which runs outside the sandbox) would overwrite an attacker-chosen user file outside the workspace. Exploitation requires running code inside the sandbox, for example through a malicious repository or dependency script. Rated high by the advisory; fixed in <strong>2.1.251</strong>. It is the second symlink-based out-of-workspace write bug in Claude Code this month, after CVE-2026-103435: the pattern is that the sandbox does not protect you if an unsandboxed tool trusts paths the sandbox can move.</p>",
+            "fr": "<p>Claude Code validait les cibles de l'Edit tool par une résolution ponctuelle des chemins et symlinks, sans lien avec les inodes ou descripteurs de fichiers réels. Sur <strong>macOS</strong>, un processus dans le sandbox Bash pouvait exploiter la fenêtre entre vérification et utilisation en remplaçant atomiquement un répertoire parent du workspace par un symlink, et l'Edit tool (qui tourne hors sandbox) écrasait un fichier utilisateur choisi par l'attaquant hors du workspace. Il faut pouvoir exécuter du code dans le sandbox, par exemple via un dépôt ou un script de dépendance malveillant. Sévérité haute selon l'avis ; corrigé en <strong>2.1.251</strong>. Deuxième bug d'écriture hors workspace par symlink dans Claude Code ce mois-ci, après CVE-2026-103435 : le sandbox ne protège pas si un outil hors sandbox fait confiance à des chemins que le sandbox peut déplacer.</p>"
+          },
+          "date": "26 Oct 2026",
+          "source": {
+            "url": "https://github.com/anthropics/claude-code/security/advisories/GHSA-5xjx-9qx6-jcrv",
+            "label": "GitHub Advisory (anthropics/claude-code)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "n0n-ransomware-ai-spend",
+          "tag": "research",
+          "title": {
+            "es": "SOCRadar expone al ransomware n0n: OpenCode con 154 modelos, más de 7.216 dólares en IA y el workspace abierto en internet",
+            "en": "SOCRadar exposes the n0n ransomware crew: OpenCode with 154 models, over $7,216 in AI spend and its workspace open to the internet",
+            "fr": "SOCRadar expose le groupe ransomware n0n : OpenCode avec 154 modèles, plus de 7 216 $ d'IA et un espace de travail ouvert sur Internet"
+          },
+          "body_html": {
+            "es": "<p>SOCRadar encontró el workspace del operador de <strong>n0n</strong> en un file server HTTP de Python público, hosteado en Suecia en el puerto 8877, con <strong>1.719 archivos</strong>: scripts de ataque, código del ransomware, infraestructura de extorsión y un entorno de agente de código. El operador usaba <strong>OpenCode</strong> con <strong>154 entradas de modelos de siete providers</strong> (Gemini, Mistral, Claude, GPT-5.x, Grok, Llama, DeepSeek, Qwen), algunos sin safety training o vendidos como «uncensored», y gastó <strong>más de 7.216 dólares</strong> para escribir y debuggear cientos de scripts. El acceso inicial fue de lo más básico: RDP, credential stuffing contra SSL-VPN de FortiGate y AWS keys expuestas; vació 40 buckets S3, borró datos en 12 y filtró de una sola vez a 38 empresas marítimas el 12 de octubre, con pedidos de 400.000 a 28 millones de dólares. El locker trae claves de cifrado hardcodeadas y reusadas. La IA acelera la operación, pero no reemplaza el opsec: el atacante dejó su propio laboratorio a la vista.</p>",
+            "en": "<p>SOCRadar found the <strong>n0n</strong> operator's workspace on a public Python HTTP file server hosted in Sweden on port 8877, holding <strong>1,719 files</strong>: attack scripts, ransomware source, extortion infrastructure and an AI coding agent environment. The operator ran <strong>OpenCode</strong> with <strong>154 model entries from seven providers</strong> (Gemini, Mistral, Claude, GPT-5.x, Grok, Llama, DeepSeek, Qwen), some with safety training removed or sold as «uncensored», and spent <strong>more than $7,216</strong> writing and debugging hundreds of scripts. Initial access was basic: RDP, credential stuffing against FortiGate SSL-VPN and exposed AWS keys; the crew emptied 40 S3 buckets, deleted data in 12 and leaked 38 maritime firms in one batch on 12 October, with demands from $400,000 to $28 million. The locker ships hardcoded, reused encryption keys. AI speeds up the operation but does not replace opsec: the attacker left its own lab in plain view.</p>",
+            "fr": "<p>SOCRadar a trouvé l'espace de travail de l'opérateur de <strong>n0n</strong> sur un serveur de fichiers HTTP Python public, hébergé en Suède sur le port 8877, avec <strong>1 719 fichiers</strong> : scripts d'attaque, code du ransomware, infrastructure d'extorsion et un environnement d'agent de code. L'opérateur utilisait <strong>OpenCode</strong> avec <strong>154 modèles de sept providers</strong> (Gemini, Mistral, Claude, GPT-5.x, Grok, Llama, DeepSeek, Qwen), certains sans safety training ou vendus comme «uncensored», et a dépensé <strong>plus de 7 216 $</strong> pour écrire et déboguer des centaines de scripts. L'accès initial était basique : RDP, credential stuffing contre les SSL-VPN FortiGate et clés AWS exposées ; le groupe a vidé 40 buckets S3, supprimé des données dans 12 et publié d'un coup 38 entreprises maritimes le 12 octobre, avec des demandes de 400 000 à 28 millions de dollars. Le locker embarque des clés de chiffrement codées en dur et réutilisées. L'IA accélère l'opération mais ne remplace pas l'opsec : l'attaquant a laissé son propre labo à la vue de tous.</p>"
+          },
+          "date": "30 Oct 2026",
+          "source": {
+            "url": "https://www.theregister.com/security/2026/10/30/crim-spent-7k-on-ai-services-in-extortion-attacks-then-left-evidence-for-all-to-see/5306754",
+            "label": "The Register"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El canal de distribución es el nuevo perímetro: una extensión legítima republicada en un marketplace ajeno, una tool MCP que manda código directo a un sandbox con permisos abiertos y un tokenizer que confía en el GGUF que bajaste. En los tres casos el código o el dato venía de un lugar que el usuario asumía confiable, y ese supuesto nunca se verificó.",
+      "en": "The distribution channel is the new perimeter: a legitimate extension republished on someone else's marketplace, an MCP tool that pipes code straight into a sandbox with open permissions, and a tokenizer that trusts the GGUF you downloaded. In all three cases the code or data came from a place the user assumed was trusted, and nobody checked that assumption.",
+      "fr": "Le canal de distribution devient le périmètre : une extension légitime republiée sur le marketplace d'un tiers, une tool MCP qui envoie du code directement dans un sandbox aux permissions ouvertes, et un tokenizer qui fait confiance au GGUF téléchargé. Dans les trois cas, le code ou la donnée venait d'un endroit supposé fiable, et personne n'a vérifié cette hypothèse."
+    }
+  ]
+}

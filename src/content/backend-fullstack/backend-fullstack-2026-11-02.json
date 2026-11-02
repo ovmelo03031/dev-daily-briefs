@@ -1,0 +1,368 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 2 Nov 2026: Hono parcha 5 bypasses de middleware y el driver de MongoDB mata timeoutMS",
+    "en": "Backend & Fullstack Daily — Nov 2, 2026: Hono patches 5 middleware bypasses and the MongoDB driver kills timeoutMS",
+    "fr": "Backend & Fullstack Daily — 2 nov. 2026 : Hono corrige 5 contournements de middleware et le driver MongoDB enterre timeoutMS"
+  },
+  "description": {
+    "es": "Hono 4.13.16 con cinco fixes de seguridad, MongoDB Node driver 7.8.0 con fuga de datos por timeoutMS y SRV, pypi-publish revoca una CA, DoS en joi y @hapi/content, Kysely arregla transacciones de Postgres y AWS suma TLS 1.3 en MSK.",
+    "en": "Hono 4.13.16 ships five security fixes, MongoDB Node driver 7.8.0 fixes a timeoutMS data leak and SRV host validation, pypi-publish drops a revoked CA, joi and @hapi/content get DoS fixes, Kysely fixes Postgres transactions and AWS adds TLS 1.3 to MSK.",
+    "fr": "Hono 4.13.16 publie cinq correctifs de sécurité, le driver Node MongoDB 7.8.0 corrige une fuite de données via timeoutMS et la validation SRV, pypi-publish retire une CA révoquée, joi et @hapi/content corrigent des DoS, Kysely répare les transactions Postgres et AWS ajoute TLS 1.3 à MSK."
+  },
+  "pubDate": "2026-11-02",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "Hono 4.13.16: 5 fixes de seguridad", "en": "Hono 4.13.16: 5 security fixes", "fr": "Hono 4.13.16 : 5 correctifs de sécurité" },
+      "anchor": "hono-4-13-16-security",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "MongoDB driver 7.8: timeoutMS ahora es no-op", "en": "MongoDB driver 7.8: timeoutMS is now a no-op", "fr": "Driver MongoDB 7.8 : timeoutMS devient no-op" },
+      "anchor": "mongodb-node-driver-7-8-0",
+      "icon": "simple-icons:mongodb"
+    },
+    {
+      "text": { "es": "pypi-publish saca una CA revocada", "en": "pypi-publish drops a revoked root CA", "fr": "pypi-publish retire une CA racine révoquée" },
+      "anchor": "pypi-publish-ca-revocation",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "DoS cuadrático en joi y @hapi/content", "en": "Quadratic DoS in joi and @hapi/content", "fr": "DoS quadratique dans joi et @hapi/content" },
+      "anchor": "joi-hapi-content-dos",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Kysely arregla commits que eran rollbacks", "en": "Kysely fixes commits that were rollbacks", "fr": "Kysely corrige les commits qui étaient des rollbacks" },
+      "anchor": "kysely-0-29-8",
+      "icon": "simple-icons:postgresql"
+    },
+    {
+      "text": { "es": "Amazon MSK suma TLS 1.3", "en": "Amazon MSK adds TLS 1.3", "fr": "Amazon MSK ajoute TLS 1.3" },
+      "anchor": "amazon-msk-tls-1-3",
+      "icon": "simple-icons:apachekafka"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "hono-4-13-16-security",
+      "updates": [
+        {
+          "id": "hono-4-13-16-security",
+          "tag": "security",
+          "date": "01 Nov 2026",
+          "title": {
+            "es": "Hono 4.13.16: cinco fixes de seguridad, varios para saltar middleware",
+            "en": "Hono 4.13.16: five security fixes, several of them middleware bypasses",
+            "fr": "Hono 4.13.16 : cinq correctifs de sécurité, dont plusieurs contournements de middleware"
+          },
+          "body_html": {
+            "es": "<p>Ojo, porque esto pega justo donde ponés la auth. <code>app.mount()</code> con un prefijo dinámico tipo <code>/api/:tenant/*</code> podía reenviar un path que salteaba el middleware del prefijo (GHSA-4m76-xfj5-7975). El <code>RegExpRouter</code> (y por ende el <code>SmartRouter</code> default) no aplicaba middleware wildcard en tres casos, incluido un path con un salto de línea encodeado (GHSA-h7mg-cq63-vhpq). Además: <code>validator('form')</code> veía un objeto vacío en <code>multipart/form-data</code> con un parámetro extra como <code>charset</code>, el helper <code>css</code> permitía inyectar HTML con un <code>&lt;/style&gt;</code> partido, y <code>csrf()</code> no revisaba los POST de <code>&lt;a ping&gt;</code>. Rutas como <code>/assets*</code> y nombres de parámetro duplicados ahora tiran error, y tenés que regenerar los datos de <code>PreparedRegExpRouter</code>. Actualizá YA.</p>",
+            "en": "<p>This hits exactly where you put auth. <code>app.mount()</code> with a dynamic prefix such as <code>/api/:tenant/*</code> could forward a path that skipped middleware scoped inside the prefix (GHSA-4m76-xfj5-7975). <code>RegExpRouter</code> (and so the default <code>SmartRouter</code>) skipped wildcard middleware in three cases, including a path with an encoded line terminator (GHSA-h7mg-cq63-vhpq). Also fixed: <code>validator('form')</code> saw an empty object for <code>multipart/form-data</code> with an extra parameter such as <code>charset</code>, the <code>css</code> helper allowed HTML injection through a split <code>&lt;/style&gt;</code>, and <code>csrf()</code> did not check POSTs sent by <code>&lt;a ping&gt;</code>. Routes like <code>/assets*</code> and duplicate parameter names now throw, and <code>PreparedRegExpRouter</code> data must be regenerated.</p>",
+            "fr": "<p>Cela touche précisément l'endroit où vous placez l'auth. <code>app.mount()</code> avec un préfixe dynamique comme <code>/api/:tenant/*</code> pouvait transmettre un chemin qui contournait le middleware du préfixe (GHSA-4m76-xfj5-7975). <code>RegExpRouter</code> (donc le <code>SmartRouter</code> par défaut) ignorait le middleware wildcard dans trois cas, dont un chemin avec un saut de ligne encodé (GHSA-h7mg-cq63-vhpq). Également corrigés : <code>validator('form')</code> voyait un objet vide pour un <code>multipart/form-data</code> avec un paramètre supplémentaire comme <code>charset</code>, le helper <code>css</code> permettait une injection HTML via un <code>&lt;/style&gt;</code> scindé, et <code>csrf()</code> ne vérifiait pas les POST envoyés par <code>&lt;a ping&gt;</code>. Les routes comme <code>/assets*</code> et les noms de paramètres dupliqués lèvent désormais une erreur, et les données de <code>PreparedRegExpRouter</code> doivent être régénérées.</p>"
+          },
+          "source": { "url": "https://github.com/honojs/hono/releases/tag/v4.13.16", "label": "github.com/honojs/hono" }
+        },
+        {
+          "id": "mongodb-node-driver-7-8-0",
+          "tag": "breaking",
+          "date": "30 Oct 2026",
+          "title": {
+            "es": "MongoDB Node driver 7.8.0: fuga de datos con timeoutMS, fix de SRV y timeoutMS pasa a no-op",
+            "en": "MongoDB Node driver 7.8.0: timeoutMS data leak, SRV fix, and timeoutMS becomes a no-op",
+            "fr": "Driver Node MongoDB 7.8.0 : fuite de données via timeoutMS, correctif SRV et timeoutMS devient no-op"
+          },
+          "body_html": {
+            "es": "<p>Dos avisos de seguridad en una sola release. Desde la 6.11.0, el <code>timeoutMS</code> experimental podía desincronizar el connection pool después de un timeout y <strong>exponer datos de otros usuarios</strong>. Y desde la 3.3.3 el driver no validaba bien los hosts que devuelve un lookup SRV, así que alguien que controle la respuesta DNS te podía mandar a un host fuera de tu dominio. La solución es drástica: <code>timeoutMS</code> y <code>timeoutMode</code> quedan deprecados y <strong>no hacen nada</strong> (no tiran error, pero las operaciones ya no cortan). Pasate a <code>serverSelectionTimeoutMS</code>, <code>waitQueueTimeoutMS</code>, <code>socketTimeoutMS</code> y <code>maxTimeMS</code>, o te quedás sin timeouts sin darte cuenta.</p>",
+            "en": "<p>Two security warnings in one release. Since 6.11.0, the experimental <code>timeoutMS</code> could desynchronize the connection pool after an operation timeout and <strong>expose other users' data</strong>. Since 3.3.3, the driver did not properly verify host names returned by SRV lookups, so an attacker controlling the DNS response could redirect it outside your domain. The fix is drastic: <code>timeoutMS</code> and <code>timeoutMode</code> are deprecated and <strong>have no effect</strong> (they don't throw, but operations no longer time out). Move to <code>serverSelectionTimeoutMS</code>, <code>waitQueueTimeoutMS</code>, <code>socketTimeoutMS</code> and <code>maxTimeMS</code>, or you silently lose your timeouts.</p>",
+            "fr": "<p>Deux avertissements de sécurité dans une seule release. Depuis la 6.11.0, le <code>timeoutMS</code> expérimental pouvait désynchroniser le pool de connexions après un timeout et <strong>exposer les données d'autres utilisateurs</strong>. Depuis la 3.3.3, le driver ne vérifiait pas correctement les noms d'hôte renvoyés par les lookups SRV, permettant à un attaquant contrôlant la réponse DNS de rediriger hors de votre domaine. La correction est radicale : <code>timeoutMS</code> et <code>timeoutMode</code> sont dépréciés et <strong>n'ont plus d'effet</strong> (sans erreur, mais les opérations n'expirent plus). Passez à <code>serverSelectionTimeoutMS</code>, <code>waitQueueTimeoutMS</code>, <code>socketTimeoutMS</code> et <code>maxTimeMS</code>.</p>"
+          },
+          "source": { "url": "https://github.com/mongodb/node-mongodb-native/releases/tag/v7.8.0", "label": "github.com/mongodb" }
+        },
+        {
+          "id": "pypi-publish-ca-revocation",
+          "tag": "security",
+          "date": "30 Oct 2026",
+          "title": {
+            "es": "pypi-publish 1.14.2 saca la CA emSign del trust store de Trusted Publishing",
+            "en": "pypi-publish 1.14.2 removes the emSign CA from the Trusted Publishing trust store",
+            "fr": "pypi-publish 1.14.2 retire la CA emSign du trust store de Trusted Publishing"
+          },
+          "body_html": {
+            "es": "<p>Advisory <strong>crítico</strong> para el pipeline de CI: las versiones de la action <code>pypa/gh-action-pypi-publish</code> anteriores a la 1.14.2 traían el certificado raíz <code>emSign</code> vía <code>certifi</code>, el mismo trust store que usa Sigstore para Trusted Publishing y attestations. Esa CA se revocó por un compromiso externo. Si publicás paquetes Python desde GitHub Actions (aunque tu backend sea TS, más de un monorepo tiene un SDK en Python), pineá la 1.14.2 ya.</p>",
+            "en": "<p>A <strong>critical</strong> advisory for CI pipelines: <code>pypa/gh-action-pypi-publish</code> versions before 1.14.2 bundled the <code>emSign</code> root CA through <code>certifi</code>, the same trust store Sigstore uses for Trusted Publishing and digital attestations. That CA was revoked after an external compromise. If you publish Python packages from GitHub Actions (plenty of TS monorepos ship a Python SDK), pin 1.14.2 now.</p>",
+            "fr": "<p>Advisory <strong>critique</strong> pour la CI : les versions de <code>pypa/gh-action-pypi-publish</code> antérieures à 1.14.2 embarquaient la CA racine <code>emSign</code> via <code>certifi</code>, le trust store utilisé par Sigstore pour Trusted Publishing et les attestations. Cette CA a été révoquée après une compromission externe. Si vous publiez des paquets Python depuis GitHub Actions, épinglez la 1.14.2 dès maintenant.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-5xjx-3w67-w9x9", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "kysely-0-29-8",
+      "updates": [
+        {
+          "id": "kysely-0-29-8",
+          "tag": "patch",
+          "date": "01 Nov 2026",
+          "title": {
+            "es": "Kysely 0.29.8 y 0.28.19: dos fixes de transacciones en PostgreSQL",
+            "en": "Kysely 0.29.8 and 0.28.19: two PostgreSQL transaction fixes",
+            "fr": "Kysely 0.29.8 et 0.28.19 : deux correctifs de transactions PostgreSQL"
+          },
+          "body_html": {
+            "es": "<p>Patch chico pero importante, con backport a la 0.28. Un commit que PostgreSQL convierte en rollback (transacción abortada) ahora tira <code>AbortedTransactionError</code> en vez de reportar éxito, o sea que antes podías creer que guardaste algo que nunca se guardó. Y los clientes cuyo rollback falla se descartan en vez de volver al pool sucios. Si usás Kysely con Postgres, actualizá.</p>",
+            "en": "<p>A small but important patch, backported to 0.28. A commit that PostgreSQL turns into a rollback (aborted transaction) now throws <code>AbortedTransactionError</code> instead of reporting success, which means you could previously believe you saved data that never was. Clients whose rollback fails are now discarded instead of returned dirty to the pool.</p>",
+            "fr": "<p>Un petit patch important, rétroporté sur la 0.28. Un commit que PostgreSQL transforme en rollback (transaction abandonnée) lève désormais <code>AbortedTransactionError</code> au lieu de signaler un succès. Les clients dont le rollback échoue sont désormais écartés au lieu de retourner dans le pool.</p>"
+          },
+          "source": { "url": "https://github.com/kysely-org/kysely/releases/tag/v0.29.8", "label": "github.com/kysely-org" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "amazon-msk-tls-1-3",
+      "updates": [
+        {
+          "id": "amazon-msk-tls-1-3",
+          "tag": "notable",
+          "date": "30 Oct 2026",
+          "title": {
+            "es": "Amazon MSK soporta TLS 1.3 para datos en tránsito",
+            "en": "Amazon MSK supports TLS 1.3 for data in transit",
+            "fr": "Amazon MSK prend en charge TLS 1.3 pour les données en transit"
+          },
+          "body_html": {
+            "es": "<p>Los clusters MSK Provisioned pueden activar TLS 1.3 mediante encryption policies (es opt-in). AWS lo vende como requisito previo para criptografía post-cuántica contra ataques de tipo «harvest now, decrypt later», y cada vez más frameworks de compliance lo exigen. Revisá que tus clientes Kafka lo soporten antes de activarlo.</p>",
+            "en": "<p>MSK Provisioned clusters can opt in to TLS 1.3 through encryption policies. AWS frames it as a prerequisite for post-quantum cryptography against harvest-now-decrypt-later attacks, and compliance frameworks increasingly require it. Check that your Kafka clients support it before enabling.</p>",
+            "fr": "<p>Les clusters MSK Provisioned peuvent activer TLS 1.3 via des encryption policies (opt-in). AWS le présente comme un prérequis à la cryptographie post-quantique contre les attaques «harvest now, decrypt later». Vérifiez que vos clients Kafka le supportent avant de l'activer.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-msk-tls/", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloudfront-viewer-tls-details",
+      "updates": [
+        {
+          "id": "cloudfront-viewer-tls-details",
+          "tag": "notable",
+          "date": "30 Oct 2026",
+          "title": {
+            "es": "CloudFront reenvía al origen el ISP del viewer y si la conexión usó cripto post-cuántica",
+            "en": "CloudFront forwards the viewer ISP and post-quantum TLS details to your origin",
+            "fr": "CloudFront transmet à l'origine le FAI du viewer et les détails TLS post-quantiques"
+          },
+          "body_html": {
+            "es": "<p>Dos headers opcionales nuevos: <code>CloudFront-Viewer-ISP</code> (el proveedor de internet del cliente) y <code>CloudFront-Viewer-TLS-Details</code> (key exchange, esquema de firma y tipo de clave de cada conexión). Útil para aislar tráfico raro de un solo ISP y para medir cuánto de tu tráfico ya va por PQC sin instrumentar nada en el edge.</p>",
+            "en": "<p>Two new optional headers: <code>CloudFront-Viewer-ISP</code> (the viewer's internet provider) and <code>CloudFront-Viewer-TLS-Details</code> (key exchange, signature scheme and public key type per connection). Handy for isolating odd traffic from a single ISP and for measuring how much of your traffic already uses PQC.</p>",
+            "fr": "<p>Deux nouveaux headers optionnels : <code>CloudFront-Viewer-ISP</code> (le FAI du client) et <code>CloudFront-Viewer-TLS-Details</code> (échange de clés, schéma de signature et type de clé par connexion). Pratique pour isoler un trafic anormal d'un FAI et mesurer la part de trafic déjà en PQC.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/cloudfront-viewer-isp-post-quantum-visbility/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "netflix-single-tenant-titus",
+          "tag": "notable",
+          "date": "30 Oct 2026",
+          "title": {
+            "es": "Netflix agrega Titus single-tenant: una task sola en su propia instancia EC2",
+            "en": "Netflix adds single-tenant Titus: one task alone on its own EC2 instance",
+            "fr": "Netflix ajoute Titus single-tenant : une tâche seule sur sa propre instance EC2"
+          },
+          "body_html": {
+            "es": "<p>Netflix sumó un modo en su plataforma de containers que corre una task sola en una instancia EC2 del tamaño justo, mientras el equipo de plataforma sigue siendo dueño del host y lo parchea. Los equipos de aplicación mantienen la misma experiencia. Buen caso de estudio sobre aislamiento vs. densidad en plataformas internas.</p>",
+            "en": "<p>Netflix added a mode to its container platform that runs one task alone on a right-sized EC2 instance, while the platform team still owns and patches the host, so application teams keep the same experience. A good case study in isolation versus density for internal platforms.</p>",
+            "fr": "<p>Netflix a ajouté à sa plateforme de conteneurs un mode qui exécute une tâche seule sur une instance EC2 dimensionnée, l'équipe plateforme gardant la main sur l'hôte et ses correctifs. Une bonne étude de cas sur l'isolation face à la densité.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/netflix-titus-kubernetes-microvm/", "label": "infoq.com" }
+        },
+        {
+          "id": "localstack-azure-preview",
+          "tag": "beta",
+          "date": "31 Oct 2026",
+          "title": {
+            "es": "LocalStack abre su emulador de Azure en preview pública gratuita",
+            "en": "LocalStack opens its Azure emulator as a free public preview",
+            "fr": "LocalStack ouvre son émulateur Azure en preview publique gratuite"
+          },
+          "body_html": {
+            "es": "<p>Servicios de Azure corriendo local, aceptando ARM, Bicep y Terraform existentes sin reescribir. La propia doc reconoce cobertura parcial, así que es para tests de integración y dev loop, no para reemplazar un entorno de staging.</p>",
+            "en": "<p>Azure services running locally, accepting existing ARM, Bicep and Terraform without rewrites. Its own docs report partial coverage, so think integration tests and dev loop, not a staging replacement.</p>",
+            "fr": "<p>Des services Azure exécutés en local, acceptant ARM, Bicep et Terraform existants sans réécriture. La documentation reconnaît une couverture partielle : idéal pour les tests d'intégration, pas pour remplacer un staging.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/localstack-azure-preview/", "label": "infoq.com" }
+        },
+        {
+          "id": "aws-capacity-sold-out",
+          "tag": "minor",
+          "date": "01 Nov 2026",
+          "title": {
+            "es": "Jassy: la capacidad comprometida de AWS está casi vendida hasta 2027",
+            "en": "Jassy: AWS committed capacity is largely sold out through 2027",
+            "fr": "Jassy : la capacité engagée d'AWS est presque vendue jusqu'en 2027"
+          },
+          "body_html": {
+            "es": "<p>Según Andy Jassy, la capacidad comprometida grande de AWS está prácticamente vendida hasta 2027, con parte de 2028 ya asignada, aunque reservan margen para On-Demand. Si planeás un crecimiento fuerte de cómputo (sobre todo GPU), negociá reservas temprano.</p>",
+            "en": "<p>Per Andy Jassy, AWS's large committed capacity is largely sold out through 2027, with part of 2028 already allocated, while headroom is kept for On-Demand. If you plan big compute growth (especially GPUs), negotiate reservations early.</p>",
+            "fr": "<p>Selon Andy Jassy, la capacité engagée d'AWS est quasiment vendue jusqu'en 2027, une partie de 2028 étant déjà allouée, avec une marge pour l'On-Demand. Si vous prévoyez une forte croissance de calcul, négociez vos réservations tôt.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/11/aws-capacity-sold-out/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "joi-hapi-content-dos",
+      "updates": [
+        {
+          "id": "joi-hapi-content-dos",
+          "tag": "security",
+          "date": "30 Oct 2026",
+          "title": {
+            "es": "joi y @hapi/content: DoS de tiempo cuadrático que bloquea el event loop",
+            "en": "joi and @hapi/content: quadratic-time DoS that blocks the event loop",
+            "fr": "joi et @hapi/content : DoS en temps quadratique qui bloque l'event loop"
+          },
+          "body_html": {
+            "es": "<p><code>Joi.string().email({ multiple: true })</code> tarda tiempo cuadrático en partir un valor con mucho whitespace: un request con 100 KB de espacios bloquea el event loop varios segundos (CVE-2026-118772, fix en <code>joi</code> 17.13.9 y 18.3.1). En paralelo, <code>@hapi/content</code> tenía el mismo problema parseando parámetros de <code>Content-Disposition</code> (CVE-2026-119202, fix en 6.0.3). joi está en medio mundo de backends Node, revisá tu lockfile.</p>",
+            "en": "<p><code>Joi.string().email({ multiple: true })</code> takes quadratic time to split a value with a long whitespace run: one request with 100 KB of spaces blocks the event loop for seconds (CVE-2026-118772, fixed in <code>joi</code> 17.13.9 and 18.3.1). <code>@hapi/content</code> had the same class of bug parsing <code>Content-Disposition</code> parameters (CVE-2026-119202, fixed in 6.0.3). joi sits in a huge share of Node backends, so check your lockfile.</p>",
+            "fr": "<p><code>Joi.string().email({ multiple: true })</code> met un temps quadratique à découper une valeur contenant beaucoup d'espaces : une requête de 100 Ko d'espaces bloque l'event loop plusieurs secondes (CVE-2026-118772, corrigé dans <code>joi</code> 17.13.9 et 18.3.1). <code>@hapi/content</code> présentait le même problème sur les paramètres <code>Content-Disposition</code> (CVE-2026-119202, corrigé en 6.0.3).</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-4528-x5fx-h6hg", "label": "github.com/advisories" }
+        },
+        {
+          "id": "sigstore-oci-auth-leak",
+          "tag": "security",
+          "date": "30 Oct 2026",
+          "title": {
+            "es": "@sigstore/oci filtraba el header Authorization a otro host",
+            "en": "@sigstore/oci leaked the Authorization header to another host",
+            "fr": "@sigstore/oci divulguait le header Authorization à un autre hôte"
+          },
+          "body_html": {
+            "es": "<p>Al hacer sign-in, <code>@sigstore/oci</code> instalaba la credencial como header default del cliente compartido, así que se la mandaba también al <code>Location</code> de blob-upload aunque apuntara a otro host (CVE-2026-118763). Afecta a quien firma y empuja attestations a registries OCI desde Node. Fix en 0.7.2.</p>",
+            "en": "<p>On sign-in, <code>@sigstore/oci</code> installed the credential as a default header on its shared client, so it was also sent to a blob-upload <code>Location</code> pointing at a different host (CVE-2026-118763). It affects anyone signing and pushing attestations to OCI registries from Node. Fixed in 0.7.2.</p>",
+            "fr": "<p>Lors du sign-in, <code>@sigstore/oci</code> installait la credential comme header par défaut du client partagé, l'envoyant aussi vers un <code>Location</code> de blob-upload pointant sur un autre hôte (CVE-2026-118763). Corrigé en 0.7.2.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-j63v-mwhm-56jx", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "cloudflare-pq-geokey-manager",
+      "updates": [
+        {
+          "id": "cloudflare-pq-geokey-manager",
+          "tag": "notable",
+          "date": "31 Oct 2026",
+          "title": {
+            "es": "Cloudflare reconstruye GeoKey Manager con ML-KEM-768 + X25519",
+            "en": "Cloudflare rebuilds GeoKey Manager with hybrid ML-KEM-768 + X25519",
+            "fr": "Cloudflare reconstruit GeoKey Manager avec ML-KEM-768 + X25519 hybride"
+          },
+          "body_html": {
+            "es": "<p>La versión post-cuántica de GeoKey Manager entró en beta cerrada: protege claves geo-restringidas con el híbrido ML-KEM-768 + X25519 en lugar del cifrado basado en atributos que usaban desde 2022. Junto con TLS 1.3 en MSK y los headers PQC de CloudFront, queda clarísimo hacia dónde va la semana: migrar a PQC dejó de ser teoría.</p>",
+            "en": "<p>The post-quantum rebuild of GeoKey Manager is in closed beta, guarding geo-fenced keys with hybrid ML-KEM-768 + X25519 instead of the attribute-based encryption used since 2022. Together with TLS 1.3 on MSK and CloudFront's PQC headers, the week's direction is clear: PQC migration is no longer theory.</p>",
+            "fr": "<p>La refonte post-quantique de GeoKey Manager est en bêta fermée et protège les clés géo-restreintes avec l'hybride ML-KEM-768 + X25519 au lieu du chiffrement par attributs utilisé depuis 2022. Avec TLS 1.3 sur MSK et les headers PQC de CloudFront, la tendance est claire.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/cf-pq-geokey-manager/", "label": "infoq.com" }
+        },
+        {
+          "id": "bug0-qa-agent-cached-replay",
+          "tag": "minor",
+          "date": "29 Oct 2026",
+          "title": {
+            "es": "QA Agent: tests de regresión agénticos sobre Playwright con replay cacheado",
+            "en": "QA Agent: agentic regression testing on Playwright with cached replay",
+            "fr": "QA Agent : tests de régression agentiques sur Playwright avec replay en cache"
+          },
+          "body_html": {
+            "es": "<p>Librería source-available que traduce instrucciones de test en lenguaje natural a acciones de UI y cachea esas acciones para reproducirlas sin volver a llamar al modelo. Es la idea correcta para tener tests agénticos deterministas y baratos en CI; vale la pena mirarla aunque sigas con E2E tradicional.</p>",
+            "en": "<p>A source-available library that maps natural-language test instructions to UI actions and caches them for replay without calling the model again. The right idea for deterministic, cheap agentic tests in CI, worth a look even if you stick with classic E2E.</p>",
+            "fr": "<p>Une bibliothèque source-available qui associe des instructions de test en langage naturel à des actions UI et les met en cache pour les rejouer sans rappeler le modèle. La bonne approche pour des tests agentiques déterministes et peu coûteux en CI.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/bug0-agent-testing-cached-replay/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "pnpm-12-17-0",
+      "updates": [
+        {
+          "id": "pnpm-12-17-0",
+          "tag": "release",
+          "date": "30 Oct 2026",
+          "title": {
+            "es": "pnpm 12.17.0: selectores por grupo y wildcards en overrides",
+            "en": "pnpm 12.17.0: dependency-group selectors and wildcards in overrides",
+            "fr": "pnpm 12.17.0 : sélecteurs par groupe et wildcards dans overrides"
+          },
+          "body_html": {
+            "es": "<p>Los <code>overrides</code> ahora aceptan <code>:prod</code>, <code>:optional</code> y <code>:peer</code> para apuntar a un solo grupo, más wildcards <code>*</code> en nombres de paquetes. <code>pnpm outdated</code>/<code>update</code> también miran <code>packageManager</code>, <code>devEngines.runtime</code> y, opt-in, dependencias de Cargo y Python. Y arregla archivos ilegibles para otros usuarios en imágenes Docker, un clásico cuando corrés como non-root. Golazo para monorepos.</p>",
+            "en": "<p><code>overrides</code> now accept <code>:prod</code>, <code>:optional</code> and <code>:peer</code> to target a single dependency group, plus <code>*</code> wildcards on package names. <code>pnpm outdated</code>/<code>update</code> also inspect <code>packageManager</code>, <code>devEngines.runtime</code> and, opt-in, Cargo and Python deps. It also fixes files other users could not read in Docker images, a classic when running as non-root.</p>",
+            "fr": "<p>Les <code>overrides</code> acceptent désormais <code>:prod</code>, <code>:optional</code> et <code>:peer</code> pour cibler un seul groupe, ainsi que des wildcards <code>*</code>. <code>pnpm outdated</code>/<code>update</code> inspectent aussi <code>packageManager</code>, <code>devEngines.runtime</code> et, en opt-in, les dépendances Cargo et Python. Corrige aussi les fichiers illisibles par d'autres utilisateurs dans les images Docker.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.17.0", "label": "github.com/pnpm" }
+        },
+        {
+          "id": "better-auth-1-7-15",
+          "tag": "patch",
+          "date": "01 Nov 2026",
+          "title": {
+            "es": "better-auth 1.7.15: endurece el plugin admin y las sesiones de usuarios baneados",
+            "en": "better-auth 1.7.15: hardens the admin plugin and banned-user sessions",
+            "fr": "better-auth 1.7.15 : renforce le plugin admin et les sessions des utilisateurs bannis"
+          },
+          "body_html": {
+            "es": "<p>El endpoint admin <code>update-user</code> ahora rechaza <code>data.id</code> con un 400 en vez de intentar cambiar la primary key, y el plugin admin bloquea usuarios baneados aunque la sesión se cree fuera de un endpoint (vía <code>internalAdapter.createSession</code>). Los errores de <code>BETTER_AUTH_SECRETS</code> ya no incluyen el valor del secreto. Backport también en 1.6.34.</p>",
+            "en": "<p>The admin <code>update-user</code> endpoint now rejects <code>data.id</code> with a 400 instead of trying to change the primary key, and the admin plugin rejects banned users even when a session is created outside an endpoint (via <code>internalAdapter.createSession</code>). <code>BETTER_AUTH_SECRETS</code> errors no longer include the entry value. Also backported to 1.6.34.</p>",
+            "fr": "<p>L'endpoint admin <code>update-user</code> rejette désormais <code>data.id</code> avec un 400 au lieu de modifier la clé primaire, et le plugin admin bloque les utilisateurs bannis même quand la session est créée hors endpoint. Les erreurs <code>BETTER_AUTH_SECRETS</code> n'incluent plus la valeur du secret. Rétroporté en 1.6.34.</p>"
+          },
+          "source": { "url": "https://github.com/better-auth/better-auth/releases/tag/v1.7.15", "label": "github.com/better-auth" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Semana de bypasses de middleware: Hono parcha cinco caminos para saltear auth y validación; si confiás en middleware por prefijo, testeá paths con encoding raro.",
+      "en": "A week of middleware bypasses: Hono patched five ways around auth and validation; if you rely on prefix-scoped middleware, test oddly encoded paths.",
+      "fr": "Une semaine de contournements de middleware : Hono a corrigé cinq façons d'éviter l'auth et la validation ; testez les chemins à l'encodage inhabituel."
+    },
+    {
+      "es": "La criptografía post-cuántica llega a la infra de todos los días: TLS 1.3 en MSK, headers PQC en CloudFront y ML-KEM en Cloudflare.",
+      "en": "Post-quantum crypto reaches everyday infrastructure: TLS 1.3 on MSK, PQC headers on CloudFront and ML-KEM at Cloudflare.",
+      "fr": "La cryptographie post-quantique gagne l'infrastructure courante : TLS 1.3 sur MSK, headers PQC sur CloudFront et ML-KEM chez Cloudflare."
+    },
+    {
+      "es": "Fin de semana tranquilo en releases: ni Node, ni Deno, ni Bun publicaron versiones nuevas desde el último brief.",
+      "en": "A quiet weekend for runtimes: no new Node, Deno or Bun release since the last brief.",
+      "fr": "Week-end calme côté runtimes : aucune nouvelle version de Node, Deno ou Bun depuis le dernier brief."
+    }
+  ]
+}

@@ -1,0 +1,246 @@
+{
+  "title": {
+    "es": "Dev News 2 Nov 2026: node-forge parcha 11 advisories, Nuxt destapa 4 CVEs del dev server y Vue 3.6 rc.14 pule Vapor",
+    "en": "Dev News Nov 2 2026: node-forge patches 11 advisories, Nuxt discloses 4 dev-server CVEs, Vue 3.6 rc.14 polishes Vapor",
+    "fr": "Dev News 2 nov. 2026 : node-forge corrige 11 advisories, Nuxt dévoile 4 CVE du dev server, Vue 3.6 rc.14 peaufine Vapor"
+  },
+  "description": {
+    "es": "Fin de semana tranquilo en releases, pero el viernes llegó una tanda de seguridad: node-forge 1.4.1, Nuxt 4.6.3, minimatch, glob, follow-redirects y Nx. Además Vue 3.6.0-rc.14, ESLint 10.14 y el agente PageBreak de Google.",
+    "en": "A quiet weekend for releases, but Friday brought a security batch: node-forge 1.4.1, Nuxt 4.6.3, minimatch, glob, follow-redirects and Nx. Plus Vue 3.6.0-rc.14, ESLint 10.14 and Google's PageBreak agent.",
+    "fr": "Week-end calme côté releases, mais vendredi a apporté une vague sécurité : node-forge 1.4.1, Nuxt 4.6.3, minimatch, glob, follow-redirects et Nx. Plus Vue 3.6.0-rc.14, ESLint 10.14 et l'agent PageBreak de Google."
+  },
+  "pubDate": "2026-11-02",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": { "es": "node-forge 1.4.1: 11 advisories, forja de MAC PKCS#12", "en": "node-forge 1.4.1: 11 advisories, PKCS#12 MAC forgery", "fr": "node-forge 1.4.1 : 11 advisories, MAC PKCS#12 forgé" },
+      "anchor": "node-forge-1-4-1",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Nuxt 4.6.3 tapaba 4 CVEs del dev server", "en": "Nuxt 4.6.3 quietly fixed 4 dev-server CVEs", "fr": "Nuxt 4.6.3 corrigeait 4 CVE du dev server" },
+      "anchor": "nuxt-4-6-3-cves",
+      "icon": "lucide:flame"
+    },
+    {
+      "text": { "es": "Vue 3.6.0-rc.14: hidratación Vapor más robusta", "en": "Vue 3.6.0-rc.14: sturdier Vapor hydration", "fr": "Vue 3.6.0-rc.14 : hydratation Vapor plus solide" },
+      "anchor": "vue-3-6-rc-14",
+      "icon": "simple-icons:vuedotjs"
+    },
+    {
+      "text": { "es": "minimatch y glob: DoS y bypass de AbortSignal", "en": "minimatch and glob: DoS and AbortSignal bypass", "fr": "minimatch et glob : DoS et contournement d'AbortSignal" },
+      "anchor": "minimatch-glob-advisories",
+      "icon": "lucide:package"
+    },
+    {
+      "text": { "es": "Nx: inyección de comandos vía nx.json", "en": "Nx: command injection through nx.json", "fr": "Nx : injection de commandes via nx.json" },
+      "anchor": "nx-maven-gradle-injection",
+      "icon": "lucide:code"
+    },
+    {
+      "text": { "es": "PageBreak de Google: 500+ XSS encontrados por IA", "en": "Google PageBreak: 500+ XSS bugs found by AI", "fr": "PageBreak de Google : 500+ XSS trouvées par IA" },
+      "anchor": "google-pagebreak",
+      "icon": "lucide:sparkles"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "node-forge-1-4-1",
+          "tag": "security",
+          "date": "30 Oct 2026",
+          "title": {
+            "es": "node-forge 1.4.1 cierra 11 advisories: forja de MAC PKCS#12, bypass del tag AES-GCM y basicConstraints X.509",
+            "en": "node-forge 1.4.1 closes 11 advisories: PKCS#12 MAC forgery, AES-GCM tag bypass and X.509 basicConstraints",
+            "fr": "node-forge 1.4.1 corrige 11 advisories : MAC PKCS#12 forgé, contournement du tag AES-GCM et basicConstraints X.509"
+          },
+          "body_html": {
+            "es": "<p>Once advisories de golpe para <code>node-forge</code> (todo <code>&lt;= 1.4.0</code>). Lo más grave: <strong>CVE-2026-118782</strong> (CVSS 7.5), un conteo de iteraciones en cero que permite forjar el MAC de PKCS#12; un <code>tagLength</code> sin validar en AES-GCM que rompe la autenticación; y <code>verifyCertificateChain()</code> salteando <code>basicConstraints</code> vía una extensión deprecada. Suma varios DoS en TLS y PEM. Ojo: forge vive escondido como dependencia transitiva en un montón de tooling de certificados y dev servers HTTPS. Corré <code>npm ls node-forge</code> y subí a <strong>1.4.1</strong>.</p>",
+            "en": "<p>Eleven advisories at once for <code>node-forge</code> (everything <code>&lt;= 1.4.0</code>). The worst: <strong>CVE-2026-118782</strong> (CVSS 7.5), a zero iteration count that allows PKCS#12 MAC forgery; an unvalidated AES-GCM <code>tagLength</code> that breaks authentication; and <code>verifyCertificateChain()</code> skipping <code>basicConstraints</code> via a deprecated extension. Several TLS and PEM DoS bugs round it out. forge hides as a transitive dependency in plenty of certificate tooling and HTTPS dev servers, so run <code>npm ls node-forge</code> and move to <strong>1.4.1</strong>.</p>",
+            "fr": "<p>Onze advisories d'un coup pour <code>node-forge</code> (tout <code>&lt;= 1.4.0</code>). Le pire : <strong>CVE-2026-118782</strong> (CVSS 7.5), un nombre d'itérations à zéro qui permet de forger le MAC PKCS#12 ; un <code>tagLength</code> AES-GCM non validé qui casse l'authentification ; et <code>verifyCertificateChain()</code> qui ignore <code>basicConstraints</code> via une extension obsolète. S'y ajoutent plusieurs DoS TLS et PEM. forge se cache en dépendance transitive dans beaucoup d'outils de certificats et de dev servers HTTPS : lancez <code>npm ls node-forge</code> et passez en <strong>1.4.1</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-jc66-7q78-782g", "label": "github.com/advisories" }
+        },
+        {
+          "id": "nuxt-4-6-3-cves",
+          "tag": "security",
+          "date": "30 Oct 2026",
+          "title": {
+            "es": "Nuxt destapa 4 CVEs que 4.6.3 ya arreglaba: appSecret, runtime config privado y bypass de middleware",
+            "en": "Nuxt discloses 4 CVEs that 4.6.3 already fixed: appSecret, private runtime config and middleware bypass",
+            "fr": "Nuxt dévoile 4 CVE déjà corrigées par 4.6.3 : appSecret, runtime config privé et contournement de middleware"
+          },
+          "body_html": {
+            "es": "<p>La 4.6.3 que salió el 27 de octubre venía con sorpresa: el viernes se publicaron los advisories. <strong>CVE-2026-119200</strong> (CVSS 6.5) deja que segmentos <code>..</code> en el path esquiven los chequeos de <code>server/middleware</code> en producción. Las otras tres pegan en el dev server vía <code>@nuxt/vite-builder</code>: expone el <code>appSecret</code> generado, permite leer archivos arbitrarios con reportes de error del cliente y filtra el <strong>runtime config privado</strong> (este último afecta desde Nuxt 3.0.0). Si exponés el dev server en la red, esto es urgente.</p>",
+            "en": "<p>The 4.6.3 release from October 27 came with a surprise: the advisories went public on Friday. <strong>CVE-2026-119200</strong> (CVSS 6.5) lets <code>..</code> segments in the path bypass <code>server/middleware</code> checks in production. The other three hit the dev server via <code>@nuxt/vite-builder</code>: it exposes the generated <code>appSecret</code>, allows arbitrary file reads through client error reports, and leaks <strong>private runtime config</strong> (that one affects everything back to Nuxt 3.0.0). If your dev server is reachable on the network, treat this as urgent.</p>",
+            "fr": "<p>La 4.6.3 du 27 octobre cachait une surprise : les advisories sont sortis vendredi. <strong>CVE-2026-119200</strong> (CVSS 6.5) laisse des segments <code>..</code> dans le chemin contourner les contrôles de <code>server/middleware</code> en production. Les trois autres touchent le dev server via <code>@nuxt/vite-builder</code> : exposition de l'<code>appSecret</code> généré, lecture de fichiers arbitraires via les rapports d'erreur client et fuite du <strong>runtime config privé</strong> (celle-ci touche tout depuis Nuxt 3.0.0). Si votre dev server est joignable sur le réseau, c'est urgent.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-9v7c-q64q-vv33", "label": "github.com/advisories" }
+        },
+        {
+          "id": "vue-3-6-rc-14",
+          "tag": "beta",
+          "tag_label": { "es": "RC", "en": "RC", "fr": "RC" },
+          "date": "30 Oct 2026",
+          "title": {
+            "es": "Vue 3.6.0-rc.14: Vapor recupera mismatches de hidratación y suma hooks de devtools",
+            "en": "Vue 3.6.0-rc.14: Vapor recovers from hydration mismatches and gains devtools hooks",
+            "fr": "Vue 3.6.0-rc.14 : Vapor récupère les mismatches d'hydratation et gagne des hooks devtools"
+          },
+          "body_html": {
+            "es": "<p>Otra RC enfocada en <strong>Vapor Mode</strong>, y se nota hacia dónde va: casi todo es hidratación. Ahora un mismatch en la raíz termina el bloque como client render, una cadena <code>v-if</code> se hidrata según la rama que renderizó el server y los rangos del server se tratan como unidad al recuperarse. Suma <strong>hooks de devtools para componentes Vapor</strong> y una docena de optimizaciones del compilador. Ya es RC 14: el estable está cerca, así que probalo en una rama.</p>",
+            "en": "<p>Another RC focused on <strong>Vapor Mode</strong>, and the direction is clear: it is almost all hydration. A root mismatch now finishes the block as a client render, a <code>v-if</code> chain hydrates by the branch the server rendered, and server ranges are treated as one unit during recovery. It also adds <strong>devtools hooks for Vapor components</strong> and a dozen compiler performance trims. This is RC 14, so stable is close: try it on a branch.</p>",
+            "fr": "<p>Encore une RC centrée sur le <strong>Vapor Mode</strong>, et la direction est claire : presque tout concerne l'hydratation. Un mismatch à la racine termine désormais le bloc en rendu client, une chaîne <code>v-if</code> s'hydrate selon la branche rendue par le serveur, et les plages serveur sont traitées comme une unité lors de la récupération. Elle ajoute aussi des <strong>hooks devtools pour les composants Vapor</strong> et une douzaine d'optimisations du compilateur. C'est la RC 14, la stable approche : testez-la sur une branche.</p>"
+          },
+          "source": { "url": "https://github.com/vuejs/core/releases/tag/v3.6.0-rc.14", "label": "github.com/vuejs/core" }
+        }
+      ]
+    },
+    {
+      "id": "js-frameworks",
+      "name": "JS Frameworks",
+      "theme": "js-frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "js-frameworks",
+      "updates": [
+        {
+          "id": "tanstack-solid-start-rc-10",
+          "tag": "minor",
+          "date": "31 Oct 2026",
+          "title": {
+            "es": "TanStack Solid Start 2.0.0-rc.10 se alinea con solid-js 2.0.0-rc.20",
+            "en": "TanStack Solid Start 2.0.0-rc.10 lines up with solid-js 2.0.0-rc.20",
+            "fr": "TanStack Solid Start 2.0.0-rc.10 s'aligne sur solid-js 2.0.0-rc.20"
+          },
+          "body_html": {
+            "es": "<p>Release chico pero útil: <code>@tanstack/solid-router</code> y <code>@tanstack/solid-start</code> pasan a <strong>2.0.0-rc.10</strong>, ahora sobre <code>solid-js 2.0.0-rc.20</code> y <code>@solidjs/vite-plugin 3.0.0-next.54</code>. Si estás probando Solid 2 con Start, actualizá todo junto para no mezclar RCs.</p>",
+            "en": "<p>A small but useful release: <code>@tanstack/solid-router</code> and <code>@tanstack/solid-start</code> move to <strong>2.0.0-rc.10</strong>, now on <code>solid-js 2.0.0-rc.20</code> and <code>@solidjs/vite-plugin 3.0.0-next.54</code>. If you are trying Solid 2 with Start, upgrade everything together to avoid mixing RCs.</p>",
+            "fr": "<p>Petite release mais utile : <code>@tanstack/solid-router</code> et <code>@tanstack/solid-start</code> passent en <strong>2.0.0-rc.10</strong>, désormais sur <code>solid-js 2.0.0-rc.20</code> et <code>@solidjs/vite-plugin 3.0.0-next.54</code>. Si vous testez Solid 2 avec Start, mettez tout à jour ensemble pour ne pas mélanger les RC.</p>"
+          },
+          "source": { "url": "https://github.com/TanStack/router/releases/tag/release-2026-10-31-1936", "label": "github.com/TanStack/router" }
+        }
+      ]
+    },
+    {
+      "id": "build-tools",
+      "name": "Build Tools & Runtimes",
+      "theme": "build-tools",
+      "icon_emoji": "🔧",
+      "anchor": "build-tools",
+      "updates": [
+        {
+          "id": "minimatch-glob-advisories",
+          "tag": "security",
+          "date": "30 Oct 2026",
+          "title": {
+            "es": "minimatch 11.0.1 y glob 14.0.2: amplificación de globparts y un AbortSignal que no corta",
+            "en": "minimatch 11.0.1 and glob 14.0.2: globparts amplification and an AbortSignal that doesn't stop",
+            "fr": "minimatch 11.0.1 et glob 14.0.2 : amplification de globparts et un AbortSignal qui n'arrête rien"
+          },
+          "body_html": {
+            "es": "<p>Dos paquetes que están en <strong>todos</strong> los node_modules. <code>minimatch &lt; 11.0.1</code> tiene un DoS por amplificación de globparts (CVE-2026-118764, CVSS v4 6.9): un patrón armado puede explotar el trabajo de matching. Y <code>glob</code> 9.0.0 a 14.0.1 sigue recorriendo el filesystem después de que el <code>AbortSignal</code> venció (CVE-2026-118773, CVSS v4 6.3). Importa si aceptás patrones de usuarios o usás timeouts como frontera de seguridad. Mirá con <code>npm ls minimatch glob</code> qué versiones te arrastran.</p>",
+            "en": "<p>Two packages that live in <strong>every</strong> node_modules. <code>minimatch &lt; 11.0.1</code> has a globparts amplification DoS (CVE-2026-118764, CVSS v4 6.9): a crafted pattern can blow up matching work. And <code>glob</code> 9.0.0 through 14.0.1 keeps traversing the filesystem after the <code>AbortSignal</code> fired (CVE-2026-118773, CVSS v4 6.3). It matters if you accept user-supplied patterns or rely on timeouts as a safety boundary. Check <code>npm ls minimatch glob</code> to see which versions you pull in.</p>",
+            "fr": "<p>Deux paquets présents dans <strong>tous</strong> les node_modules. <code>minimatch &lt; 11.0.1</code> a un DoS par amplification de globparts (CVE-2026-118764, CVSS v4 6.9) : un motif forgé peut faire exploser le travail de matching. Et <code>glob</code> 9.0.0 à 14.0.1 continue de parcourir le système de fichiers après le déclenchement de l'<code>AbortSignal</code> (CVE-2026-118773, CVSS v4 6.3). Important si vous acceptez des motifs fournis par l'utilisateur ou comptez sur les timeouts comme garde-fou. Vérifiez avec <code>npm ls minimatch glob</code>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-g3hv-75wg-m249", "label": "github.com/advisories" }
+        },
+        {
+          "id": "follow-redirects-1-16-2",
+          "tag": "security",
+          "date": "30 Oct 2026",
+          "title": {
+            "es": "follow-redirects 1.16.2: un instanceof Array dejaba escapar headers de credenciales en redirects",
+            "en": "follow-redirects 1.16.2: an instanceof Array check leaked credential headers on redirects",
+            "fr": "follow-redirects 1.16.2 : un instanceof Array laissait fuiter des en-têtes d'identifiants lors des redirections"
+          },
+          "body_html": {
+            "es": "<p>Lindo bug de libro (CVE-2026-116689, CVSS v4 8.2). La opción <code>sensitiveHeaders</code> de las versiones 1.16.0 y 1.16.1 se validaba con <code>instanceof Array</code>; un array creado en <strong>otro realm</strong> (iframe, <code>vm</code>, worker) se reemplazaba en silencio por una lista vacía, y tu header de auth custom viajaba a un redirect cross-origin del atacante. La lección para todos: usá <code>Array.isArray</code>. follow-redirects llega vía axios a medio ecosistema, así que actualizá a <strong>1.16.2</strong>.</p>",
+            "en": "<p>A textbook bug (CVE-2026-116689, CVSS v4 8.2). The <code>sensitiveHeaders</code> option in 1.16.0 and 1.16.1 was validated with <code>instanceof Array</code>, so an array created in <strong>another realm</strong> (iframe, <code>vm</code>, worker) was silently replaced with an empty list, and your custom auth header was forwarded to an attacker's cross-origin redirect. The lesson for everyone: use <code>Array.isArray</code>. follow-redirects reaches half the ecosystem through axios, so move to <strong>1.16.2</strong>.</p>",
+            "fr": "<p>Un bug d'école (CVE-2026-116689, CVSS v4 8.2). L'option <code>sensitiveHeaders</code> des versions 1.16.0 et 1.16.1 était validée avec <code>instanceof Array</code> : un tableau créé dans <strong>un autre realm</strong> (iframe, <code>vm</code>, worker) était remplacé silencieusement par une liste vide, et votre en-tête d'auth personnalisé partait vers une redirection cross-origin de l'attaquant. Leçon pour tous : utilisez <code>Array.isArray</code>. follow-redirects arrive dans la moitié de l'écosystème via axios, passez en <strong>1.16.2</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-mrwp-f3q8-3g9p", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "dev-tools",
+      "name": "Developer Tools",
+      "theme": "dev-tools",
+      "icon_emoji": "🛠️",
+      "anchor": "dev-tools",
+      "updates": [
+        {
+          "id": "nx-maven-gradle-injection",
+          "tag": "security",
+          "date": "30 Oct 2026",
+          "title": {
+            "es": "@nx/maven y @nx/gradle: opciones de nx.json ejecutadas como comandos de shell",
+            "en": "@nx/maven and @nx/gradle: nx.json options executed as shell commands",
+            "fr": "@nx/maven et @nx/gradle : options de nx.json exécutées comme commandes shell"
+          },
+          "body_html": {
+            "es": "<p>Los plugins de Nx para Maven y Gradle interpolaban opciones de <code>nx.json</code> directo en una línea de shell (CVE-2026-119282, CVSS v4 7.3). Cualquier comando que arme el project graph ejecuta lo que haya ahí. El propio advisory es honesto: el riesgo real nuevo es acotado, por ejemplo <strong>CI buildeando PRs de forks</strong> donde <code>nx.json</code> es editable pero los build files no. Parche en <strong>22.7.9</strong> y <strong>23.1.2</strong>.</p>",
+            "en": "<p>Nx's Maven and Gradle plugins interpolated <code>nx.json</code> options straight into a shell command line (CVE-2026-119282, CVSS v4 7.3). Any command that builds the project graph runs whatever is there. The advisory is candid: the genuinely new exposure is narrow, for example <strong>CI building fork PRs</strong> where <code>nx.json</code> is writable but the build files are not. Fixed in <strong>22.7.9</strong> and <strong>23.1.2</strong>.</p>",
+            "fr": "<p>Les plugins Nx pour Maven et Gradle interpolaient les options de <code>nx.json</code> directement dans une ligne de commande shell (CVE-2026-119282, CVSS v4 7.3). Toute commande qui construit le project graph exécute ce qui s'y trouve. L'advisory est franc : l'exposition réellement nouvelle est étroite, par exemple une <strong>CI qui build des PR de forks</strong> où <code>nx.json</code> est modifiable mais pas les fichiers de build. Corrigé en <strong>22.7.9</strong> et <strong>23.1.2</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-qm8w-vx34-5j9j", "label": "github.com/advisories" }
+        },
+        {
+          "id": "eslint-10-14",
+          "tag": "release",
+          "date": "30 Oct 2026",
+          "title": {
+            "es": "ESLint 10.14.0: exige minimatch 10.2.6 y arregla autofixes rotos",
+            "en": "ESLint 10.14.0: requires minimatch 10.2.6 and fixes broken autofixes",
+            "fr": "ESLint 10.14.0 : exige minimatch 10.2.6 et corrige des autofixes cassés"
+          },
+          "body_html": {
+            "es": "<p>Release de mantenimiento con un detalle de seguridad: ESLint ahora pide <code>minimatch 10.2.6</code> para evitar un <code>brace-expansion</code> vulnerable (un problema distinto al advisory de minimatch de esta semana). También arregla autofixes inválidos de <code>yoda</code> y <code>object-shorthand</code> con métodos <code>super</code>, y crashes de <code>no-invalid-this</code> con campos <code>accessor</code>. Bonus: los docs reemplazan <code>--rulesdir</code> por un plugin virtual.</p>",
+            "en": "<p>A maintenance release with a security detail: ESLint now requires <code>minimatch 10.2.6</code> to avoid a vulnerable <code>brace-expansion</code> (a different issue from this week's minimatch advisory). It also fixes invalid <code>yoda</code> and <code>object-shorthand</code> autofixes with <code>super</code> methods, plus <code>no-invalid-this</code> crashes on <code>accessor</code> fields. Bonus: the docs replace <code>--rulesdir</code> with a virtual plugin.</p>",
+            "fr": "<p>Release de maintenance avec un détail sécurité : ESLint exige désormais <code>minimatch 10.2.6</code> pour éviter un <code>brace-expansion</code> vulnérable (un problème distinct de l'advisory minimatch de cette semaine). Elle corrige aussi des autofixes invalides de <code>yoda</code> et <code>object-shorthand</code> avec des méthodes <code>super</code>, ainsi que des crashs de <code>no-invalid-this</code> sur les champs <code>accessor</code>. Bonus : la doc remplace <code>--rulesdir</code> par un plugin virtuel.</p>"
+          },
+          "source": { "url": "https://github.com/eslint/eslint/releases/tag/v10.14.0", "label": "github.com/eslint" }
+        },
+        {
+          "id": "google-pagebreak",
+          "tag": "notable",
+          "date": "31 Oct 2026",
+          "title": {
+            "es": "PageBreak: el agente de Google que encontró más de 500 XSS en sus propias apps",
+            "en": "PageBreak: Google's agent that found 500+ XSS bugs in its own apps",
+            "fr": "PageBreak : l'agent de Google qui a trouvé plus de 500 XSS dans ses propres apps"
+          },
+          "body_html": {
+            "es": "<p>Google contó cómo usa <strong>PageBreak</strong>, un agente con Gemini que formula hipótesis de XSS y las prueba contra la app corriendo, con un validador determinístico que ejecuta JavaScript para confirmar el exploit antes de reportar. Más de 500 XSS desde enero con una tasa de falsos positivos casi nula, según su paper (sin validación independiente). Es interno, no está disponible, pero ojo: el patrón agente + validador determinístico es exactamente lo que vas a ver llegar a las herramientas de testing de frontend.</p>",
+            "en": "<p>Google described <strong>PageBreak</strong>, a Gemini-powered agent that forms XSS hypotheses and tests them against the running app, using a deterministic validator that executes JavaScript to confirm the exploit before reporting it. Over 500 XSS bugs since January with a near-zero false-positive rate, per its paper (not independently validated). It is internal and not available, but the agent plus deterministic validator pattern is exactly what you should expect to reach frontend testing tools next.</p>",
+            "fr": "<p>Google a présenté <strong>PageBreak</strong>, un agent basé sur Gemini qui formule des hypothèses de XSS et les teste contre l'application en cours d'exécution, avec un validateur déterministe qui exécute du JavaScript pour confirmer l'exploit avant de le signaler. Plus de 500 XSS depuis janvier avec un taux de faux positifs quasi nul, selon son article (sans validation indépendante). L'outil est interne, mais le schéma agent plus validateur déterministe devrait bientôt gagner les outils de test frontend.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/10/google-pagebreak-security-agent/", "label": "infoq.com" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Viernes de advisories: node-forge, Nuxt, minimatch, glob, follow-redirects y Nx en un solo día. El fin de semana no trajo releases grandes, así que la tarea del lunes es npm ls y actualizar.",
+      "en": "Advisory Friday: node-forge, Nuxt, minimatch, glob, follow-redirects and Nx in a single day. The weekend brought no major releases, so Monday's job is npm ls and upgrades.",
+      "fr": "Vendredi des advisories : node-forge, Nuxt, minimatch, glob, follow-redirects et Nx le même jour. Le week-end n'a apporté aucune grosse release, donc le travail du lundi, c'est npm ls et les mises à jour."
+    },
+    {
+      "es": "El dev server sigue siendo superficie de ataque: después de Vite, Vitest y Storybook en octubre, ahora Nuxt. No lo expongas en 0.0.0.0 sin pensarlo.",
+      "en": "The dev server keeps being attack surface: after Vite, Vitest and Storybook in October, now Nuxt. Don't bind it to 0.0.0.0 without thinking.",
+      "fr": "Le dev server reste une surface d'attaque : après Vite, Vitest et Storybook en octobre, voici Nuxt. Ne l'exposez pas sur 0.0.0.0 sans réfléchir."
+    },
+    {
+      "es": "Vue 3.6 va por la RC 14 y casi todo el trabajo es hidratación de Vapor: señal de que el estable está cerca.",
+      "en": "Vue 3.6 is on RC 14 and nearly all the work is Vapor hydration, a sign that stable is close.",
+      "fr": "Vue 3.6 en est à la RC 14 et presque tout le travail porte sur l'hydratation Vapor, signe que la stable approche."
+    }
+  ]
+}

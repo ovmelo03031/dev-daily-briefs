@@ -1,0 +1,384 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 3 Nov 2026",
+    "en": "Backend & Fullstack Daily — 3 Nov 2026",
+    "fr": "Backend & Fullstack Daily — 3 nov. 2026"
+  },
+  "description": {
+    "es": "Nuxt 4.6.4 tapa 11 advisories, Next.js publica hoy su release de seguridad, Fastify 5.12.8 corrige un DoS y el driver de MongoDB 6.22 apaga timeoutMS.",
+    "en": "Nuxt 4.6.4 patches 11 advisories, Next.js ships its security release today, Fastify 5.12.8 fixes a DoS and MongoDB driver 6.22 turns timeoutMS off.",
+    "fr": "Nuxt 4.6.4 corrige 11 avis, Next.js publie aujourd'hui sa version de sécurité, Fastify 5.12.8 corrige un DoS et le pilote MongoDB 6.22 désactive timeoutMS."
+  },
+  "pubDate": "2026-11-03",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "Nuxt 4.6.4: 8 advisories + 3 de Nitro", "en": "Nuxt 4.6.4: 8 advisories + 3 in Nitro", "fr": "Nuxt 4.6.4 : 8 avis + 3 dans Nitro" },
+      "anchor": "nuxt-4-6-4-security",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Next.js: release de seguridad HOY (7 vulns)", "en": "Next.js: security release TODAY (7 vulns)", "fr": "Next.js : version de sécurité AUJOURD'HUI (7 vulns)" },
+      "anchor": "nextjs-november-security-release",
+      "icon": "simple-icons:nextdotjs"
+    },
+    {
+      "text": { "es": "Fastify 5.12.8: DoS con handlerTimeout", "en": "Fastify 5.12.8: handlerTimeout DoS fixed", "fr": "Fastify 5.12.8 : DoS via handlerTimeout corrigé" },
+      "anchor": "fastify-cve-2026-120216",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "MongoDB driver 6.22: timeoutMS ahora es no-op", "en": "MongoDB driver 6.22: timeoutMS is now a no-op", "fr": "Pilote MongoDB 6.22 : timeoutMS devient un no-op" },
+      "anchor": "mongodb-driver-6-22",
+      "icon": "simple-icons:mongodb"
+    },
+    {
+      "text": { "es": "Lambda + Kafka: modo queue con share groups", "en": "Lambda + Kafka: queue mode via share groups", "fr": "Lambda + Kafka : mode file via share groups" },
+      "anchor": "lambda-kafka-queue-mode",
+      "icon": "simple-icons:apachekafka"
+    },
+    {
+      "text": { "es": "@sd-jwt/decode descarta disclosures adulteradas", "en": "@sd-jwt/decode silently drops tampered disclosures", "fr": "@sd-jwt/decode ignore les disclosures falsifiées" },
+      "anchor": "sd-jwt-decode-ghsa",
+      "icon": "lucide:shield"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "nuxt-4-6-4-security",
+      "updates": [
+        {
+          "id": "nuxt-4-6-4-security",
+          "tag": "security",
+          "date": "02 Nov 2026",
+          "title": {
+            "es": "Nuxt 4.6.4: release de seguridad con 8 advisories propios y 3 de Nitro",
+            "en": "Nuxt 4.6.4: security release fixing 8 Nuxt and 3 Nitro advisories",
+            "fr": "Nuxt 4.6.4 : version de sécurité corrigeant 8 avis Nuxt et 3 avis Nitro"
+          },
+          "body_html": {
+            "es": "<p>Nuxt 4.6.4 corrige <strong>ocho advisories</strong> (dos son fixes incompletos de CVEs previos: <code>%2F</code> y <code>//</code> que saltean route rules y <code>server/middleware</code>) y trae <code>nitropack</code> 2.13.6 con tres más. Ojo con los cambios de comportamiento: los errores no creados con <code>createError</code> ya no viajan al payload en producción, los dev servers de webpack/rspack chequean el <code>Host</code> (sumá tu túnel a <code>devServer.allowedHosts</code>) y las route rules <code>swr</code>/<code>isr</code> solo cachean GET/HEAD sin cookies. Actualizá YA.</p>",
+            "en": "<p>Nuxt 4.6.4 fixes <strong>eight advisories</strong> (two are incomplete fixes of earlier CVEs: <code>%2F</code> and leading <code>//</code> paths bypassing route rules and <code>server/middleware</code>) and pulls in <code>nitropack</code> 2.13.6 with three more. Watch the behavior changes: errors not created with <code>createError</code> no longer reach the production payload, webpack/rspack dev servers now check <code>Host</code> (add tunnels to <code>devServer.allowedHosts</code>), and <code>swr</code>/<code>isr</code> rules only cache cookie-free GET/HEAD. Upgrade now.</p>",
+            "fr": "<p>Nuxt 4.6.4 corrige <strong>huit avis</strong> (dont deux correctifs incomplets de CVE antérieures : chemins <code>%2F</code> et <code>//</code> contournant les route rules et <code>server/middleware</code>) et embarque <code>nitropack</code> 2.13.6 avec trois de plus. Attention aux changements de comportement : les erreurs non créées via <code>createError</code> ne sont plus exposées en production, les serveurs de dev webpack/rspack vérifient le <code>Host</code> et les règles <code>swr</code>/<code>isr</code> ne mettent en cache que GET/HEAD sans cookie.</p>"
+          },
+          "source": { "url": "https://github.com/nuxt/nuxt/releases/tag/v4.6.4", "label": "github.com/nuxt" }
+        },
+        {
+          "id": "nextjs-november-security-release",
+          "tag": "security",
+          "date": "27 Oct 2026",
+          "title": {
+            "es": "Next.js publica hoy su release de seguridad de noviembre: 7 vulnerabilidades medias",
+            "en": "Next.js ships its November security release today: seven medium vulnerabilities",
+            "fr": "Next.js publie aujourd'hui sa version de sécurité de novembre : sept vulnérabilités moyennes"
+          },
+          "body_html": {
+            "es": "<p>Vercel avisó que el <strong>martes 3 de noviembre</strong> salen los parches para <strong>siete vulnerabilidades de severidad media</strong>, con los advisories completos el mismo día. La 16.4.4 de ayer solo trae backports (incluye el cambio de <code>jsonwebtoken</code> a <code>fast-jwt</code>), no los fixes. Agendá el bump para hoy y no te duermas.</p>",
+            "en": "<p>Vercel announced that patches for <strong>seven medium-severity vulnerabilities</strong> ship on <strong>Tuesday, November 3</strong>, with full advisories published alongside. Yesterday's 16.4.4 only carries backports (including the <code>jsonwebtoken</code> to <code>fast-jwt</code> swap), not the fixes. Schedule the bump for today.</p>",
+            "fr": "<p>Vercel a annoncé que les correctifs de <strong>sept vulnérabilités de sévérité moyenne</strong> sortent le <strong>mardi 3 novembre</strong>, avec les avis complets. La 16.4.4 d'hier ne contient que des backports (dont le passage de <code>jsonwebtoken</code> à <code>fast-jwt</code>), pas les correctifs.</p>"
+          },
+          "source": { "url": "https://nextjs.org/blog/upcoming-nextjs-security-release-november-2026", "label": "nextjs.org" }
+        },
+        {
+          "id": "fastify-cve-2026-120216",
+          "tag": "security",
+          "date": "02 Nov 2026",
+          "title": {
+            "es": "Fastify CVE-2026-120216: un solo request tumba el proceso con handlerTimeout y streams",
+            "en": "Fastify CVE-2026-120216: one request crashes the process with handlerTimeout and streams",
+            "fr": "Fastify CVE-2026-120216 : une seule requête fait planter le processus avec handlerTimeout et streams"
+          },
+          "body_html": {
+            "es": "<p>Con <code>handlerTimeout</code> distinto de cero y una ruta que devuelve un stream, si los headers ya salieron y el stream sigue abierto, el timeout intenta mandar otra respuesta y explota un <code>ERR_HTTP_HEADERS_SENT</code> no capturado que <strong>mata el proceso Node</strong> (CVSS 4.0 <strong>5.9</strong>, sin auth). El default <code>0</code> no está afectado. Fix en <strong>5.12.8</strong> y en <code>v6.0.0-alpha.6</code>, que además trae <code>routerOptions.compile</code> y validación sin stack trace.</p>",
+            "en": "<p>With a nonzero <code>handlerTimeout</code> and a streaming route, once headers are sent and the stream stays open, the timeout tries to send a second response and an uncaught <code>ERR_HTTP_HEADERS_SENT</code> <strong>kills the Node process</strong> (CVSS 4.0 <strong>5.9</strong>, unauthenticated). The default <code>0</code> is not affected. Fixed in <strong>5.12.8</strong> and <code>v6.0.0-alpha.6</code>, which also adds <code>routerOptions.compile</code> and stackless validation errors.</p>",
+            "fr": "<p>Avec un <code>handlerTimeout</code> non nul et une route en streaming, une fois les en-têtes envoyés, le timeout tente une seconde réponse et un <code>ERR_HTTP_HEADERS_SENT</code> non intercepté <strong>tue le processus Node</strong> (CVSS 4.0 <strong>5.9</strong>, sans authentification). Le défaut <code>0</code> n'est pas concerné. Corrigé en <strong>5.12.8</strong> et <code>v6.0.0-alpha.6</code>.</p>"
+          },
+          "source": { "url": "https://github.com/fastify/fastify/security/advisories/GHSA-3qgw-9275-xf8w", "label": "github.com/fastify" }
+        },
+        {
+          "id": "mongodb-driver-6-22",
+          "tag": "breaking",
+          "date": "02 Nov 2026",
+          "title": {
+            "es": "Driver MongoDB 6.22: timeoutMS deprecado y convertido en no-op en la rama 6.x",
+            "en": "MongoDB driver 6.22: timeoutMS deprecated and turned into a no-op on the 6.x line",
+            "fr": "Pilote MongoDB 6.22 : timeoutMS déprécié et rendu inopérant sur la branche 6.x"
+          },
+          "body_html": {
+            "es": "<p>Después de la 7.8.0, ahora la rama 6.x recibe el mismo fix: desde la 6.11 el <code>timeoutMS</code> experimental podía <strong>desincronizar el pool de conexiones y exponer datos de otros usuarios</strong>. En 6.22 <code>timeoutMS</code> y <code>timeoutMode</code> se aceptan pero <strong>ya no hacen nada</strong>: tus queries no van a cortar por timeout. Migrá a <code>serverSelectionTimeoutMS</code>, <code>waitQueueTimeoutMS</code>, <code>socketTimeoutMS</code> y <code>maxTimeMS</code>.</p>",
+            "en": "<p>After 7.8.0, the 6.x line now gets the same fix: since 6.11 the experimental <code>timeoutMS</code> could <strong>desynchronize the connection pool and expose other users' data</strong>. In 6.22 <code>timeoutMS</code> and <code>timeoutMode</code> are accepted but <strong>do nothing</strong>, so operations no longer time out through them. Move to <code>serverSelectionTimeoutMS</code>, <code>waitQueueTimeoutMS</code>, <code>socketTimeoutMS</code> and <code>maxTimeMS</code>.</p>",
+            "fr": "<p>Après la 7.8.0, la branche 6.x reçoit le même correctif : depuis la 6.11, le <code>timeoutMS</code> expérimental pouvait <strong>désynchroniser le pool de connexions et exposer les données d'autres utilisateurs</strong>. En 6.22, <code>timeoutMS</code> et <code>timeoutMode</code> sont acceptés mais <strong>sans effet</strong>. Passez à <code>serverSelectionTimeoutMS</code>, <code>waitQueueTimeoutMS</code>, <code>socketTimeoutMS</code> et <code>maxTimeMS</code>.</p>"
+          },
+          "source": { "url": "https://github.com/mongodb/node-mongodb-native/releases/tag/v6.22.0", "label": "github.com/mongodb" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "trpc-11-23",
+      "updates": [
+        {
+          "id": "trpc-11-23",
+          "tag": "release",
+          "date": "02 Nov 2026",
+          "title": {
+            "es": "tRPC 11.23: localLink sale de unstable y llegan los query handles con helpers $",
+            "en": "tRPC 11.23: localLink drops unstable_ and query handles get $ helpers",
+            "fr": "tRPC 11.23 : localLink perd son préfixe unstable_ et les query handles gagnent des helpers $"
+          },
+          "body_html": {
+            "es": "<p><code>unstable_localLink</code> pasa a <code>localLink</code>, y la integración TanStack suma query handles con <code>unstable_$prefetch</code>, <code>unstable_$ensure</code> y <code>unstable_$fetch</code>. Del lado server: header <code>Allow</code> en los 405 y <code>basePath</code> sin barra final. Buen bump para la DX.</p>",
+            "en": "<p><code>unstable_localLink</code> becomes <code>localLink</code>, and the TanStack integration adds query handles with <code>unstable_$prefetch</code>, <code>unstable_$ensure</code> and <code>unstable_$fetch</code>. Server side: an <code>Allow</code> header on 405s and <code>basePath</code> without a trailing slash.</p>",
+            "fr": "<p><code>unstable_localLink</code> devient <code>localLink</code>, et l'intégration TanStack ajoute des query handles avec <code>unstable_$prefetch</code>, <code>unstable_$ensure</code> et <code>unstable_$fetch</code>. Côté serveur : en-tête <code>Allow</code> sur les 405 et <code>basePath</code> sans slash final.</p>"
+          },
+          "source": { "url": "https://github.com/trpc/trpc/releases/tag/v11.23.0", "label": "github.com/trpc" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "aurora-mysql-8-4-10",
+      "updates": [
+        {
+          "id": "aurora-mysql-8-4-10",
+          "tag": "ga",
+          "date": "02 Nov 2026",
+          "title": {
+            "es": "Aurora MySQL 8.4.10 y Aurora MySQL 3.14 (MySQL 8.0.46) disponibles en GA",
+            "en": "Aurora MySQL 8.4.10 and Aurora MySQL 3.14 (MySQL 8.0.46) are generally available",
+            "fr": "Aurora MySQL 8.4.10 et Aurora MySQL 3.14 (MySQL 8.0.46) disponibles en GA"
+          },
+          "body_html": {
+            "es": "<p>AWS publicó en el mismo día los dos trenes de Aurora MySQL: la línea LTS 8.4 y la 3.14 compatible con 8.0.46. Si seguís en 8.0, ponete las pilas con el plan de migración a 8.4.</p>",
+            "en": "<p>AWS shipped both Aurora MySQL trains the same day: the 8.4 LTS line and 3.14, compatible with MySQL 8.0.46. If you are still on 8.0, start planning the move to 8.4.</p>",
+            "fr": "<p>AWS a publié le même jour les deux branches d'Aurora MySQL : la LTS 8.4 et la 3.14, compatible MySQL 8.0.46.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-aurora-mysql-8410-available/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "bullmq-6-5-4",
+          "tag": "security",
+          "date": "02 Nov 2026",
+          "title": {
+            "es": "BullMQ 6.5.4 sube msgpackr a 2.1.3 por seguridad",
+            "en": "BullMQ 6.5.4 bumps msgpackr to 2.1.3 for a security fix",
+            "fr": "BullMQ 6.5.4 met à jour msgpackr en 2.1.3 pour un correctif de sécurité"
+          },
+          "body_html": {
+            "es": "<p>Patch chico pero importante: la dependencia <code>msgpackr</code>, que BullMQ usa para serializar jobs, pasa a 2.1.3 con un fix de seguridad. Si tenés colas en producción, actualizá.</p>",
+            "en": "<p>Small but important patch: <code>msgpackr</code>, which BullMQ uses to serialize jobs, moves to 2.1.3 with a security fix.</p>",
+            "fr": "<p>Petit correctif important : <code>msgpackr</code>, utilisé par BullMQ pour sérialiser les jobs, passe en 2.1.3 avec un correctif de sécurité.</p>"
+          },
+          "source": { "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.5.4", "label": "github.com/taskforcesh" }
+        },
+        {
+          "id": "redis-8-12-rc2",
+          "tag": "beta",
+          "date": "01 Nov 2026",
+          "title": {
+            "es": "Redis 8.12-rc2 completa el contenido de Search que faltó en la RC1",
+            "en": "Redis 8.12-rc2 adds the Search content that was missing from RC1",
+            "fr": "Redis 8.12-rc2 ajoute le contenu Search absent de la RC1"
+          },
+          "body_html": {
+            "es": "<p>Segunda release candidate: el módulo Search ahora incluye todo lo de RediSearch que debía estar en la RC1. Sigue sin ser para producción.</p>",
+            "en": "<p>Second release candidate: the Search module now includes all the RediSearch content intended for RC1. Still not for production.</p>",
+            "fr": "<p>Deuxième release candidate : le module Search inclut désormais tout le contenu RediSearch prévu pour la RC1. Pas encore pour la production.</p>"
+          },
+          "source": { "url": "https://github.com/redis/redis/releases/tag/8.12-rc2", "label": "github.com/redis" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "lambda-kafka-queue-mode",
+      "updates": [
+        {
+          "id": "lambda-kafka-queue-mode",
+          "tag": "notable",
+          "date": "02 Nov 2026",
+          "title": {
+            "es": "Lambda suma modo queue para Kafka self-managed: el paralelismo ya no depende de las particiones",
+            "en": "Lambda adds queue mode for self-managed Kafka: parallelism no longer capped by partitions",
+            "fr": "Lambda ajoute un mode file pour Kafka autogéré : le parallélisme n'est plus limité par les partitions"
+          },
+          "body_html": {
+            "es": "<p>Basado en <strong>Kafka share groups</strong>, el nuevo modo deja que varios pollers consuman la misma partición a la vez, sin tocar producers, topics ni el código de la función. Esto es un golazo para workloads donde el orden por partición no importa y te quedabas corto de particiones.</p>",
+            "en": "<p>Built on <strong>Kafka share groups</strong>, the new mode lets multiple pollers consume the same partition concurrently, with no changes to producers, topics or function code. Great for workloads where per-partition ordering does not matter.</p>",
+            "fr": "<p>Basé sur les <strong>share groups Kafka</strong>, ce mode permet à plusieurs pollers de consommer la même partition en parallèle, sans modifier producteurs, topics ni code de la fonction.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/aws-lambda-queue-kafka-esm/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "docker-compose-5-7",
+          "tag": "release",
+          "date": "02 Nov 2026",
+          "title": {
+            "es": "Docker Compose 5.7: up corre Create y Start como un único plan",
+            "en": "Docker Compose 5.7: up runs Create and Start as a single plan",
+            "fr": "Docker Compose 5.7 : up exécute Create et Start comme un plan unique"
+          },
+          "body_html": {
+            "es": "<p>El CLI se comporta igual, pero si usás Compose como librería ojo: <code>api.Compose.Up</code> ahora valida opciones incompatibles (devuelve <code>ErrIncompatibleOptions</code> donde antes las ignoraba en silencio) y trabaja sobre un solo snapshot del daemon.</p>",
+            "en": "<p>The CLI behaves the same, but library users take note: <code>api.Compose.Up</code> now validates incompatible options (returning <code>ErrIncompatibleOptions</code> where they were silently ignored) and works over a single daemon snapshot.</p>",
+            "fr": "<p>Le CLI ne change pas, mais en usage bibliothèque <code>api.Compose.Up</code> valide désormais les options incompatibles (<code>ErrIncompatibleOptions</code>) et travaille sur un seul instantané du daemon.</p>"
+          },
+          "source": { "url": "https://github.com/docker/compose/releases/tag/v5.7.0", "label": "github.com/docker" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "sd-jwt-decode-ghsa",
+      "updates": [
+        {
+          "id": "sd-jwt-decode-ghsa",
+          "tag": "security",
+          "date": "02 Nov 2026",
+          "title": {
+            "es": "@sd-jwt/decode acepta presentaciones con disclosures adulteradas y devuelve menos claims",
+            "en": "@sd-jwt/decode accepts presentations with tampered disclosures and returns fewer claims",
+            "fr": "@sd-jwt/decode accepte des présentations aux disclosures falsifiées et renvoie moins de claims"
+          },
+          "body_html": {
+            "es": "<p>En 0.19.0, una disclosure cuyo digest no matchea el <code>_sd</code> firmado se descarta en silencio en vez de rechazar la presentación (CVSS 4.0 <strong>7.1</strong>). El holder puede omitir claims y el verifier lo toma como válido. Si validás credenciales verificables, revisá esto ya.</p>",
+            "en": "<p>In 0.19.0, a disclosure whose digest does not match the signed <code>_sd</code> array is silently dropped instead of rejecting the presentation (CVSS 4.0 <strong>7.1</strong>). A holder can omit claims and the relying party reports success.</p>",
+            "fr": "<p>En 0.19.0, une disclosure dont le digest ne correspond pas au tableau <code>_sd</code> signé est ignorée au lieu de rejeter la présentation (CVSS 4.0 <strong>7.1</strong>).</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-f9j6-8p6x-r9j6", "label": "github.com/advisories" }
+        },
+        {
+          "id": "nitro-cache-advisory",
+          "tag": "security",
+          "date": "02 Nov 2026",
+          "title": {
+            "es": "Nitro: handlers cacheados podían compartir entradas entre métodos y repetir Set-Cookie",
+            "en": "Nitro: cached handlers could share entries across methods and replay Set-Cookie",
+            "fr": "Nitro : les handlers en cache pouvaient partager des entrées entre méthodes et rejouer Set-Cookie"
+          },
+          "body_html": {
+            "es": "<p>Uno de los tres advisories de Nitro (con bypass de scope en <code>proxy</code> y open redirect en <code>redirect</code>): un handler cacheado podía <strong>servirle a un usuario el Set-Cookie de otro</strong>. Lo corrige <code>nitropack</code> 2.13.6, que también usás fuera de Nuxt.</p>",
+            "en": "<p>One of three Nitro advisories (alongside a <code>proxy</code> scope bypass and a <code>redirect</code> open redirect): a cached handler could <strong>replay one user's Set-Cookie to another</strong>. Fixed in <code>nitropack</code> 2.13.6, relevant outside Nuxt too.</p>",
+            "fr": "<p>L'un des trois avis Nitro : un handler en cache pouvait <strong>rejouer le Set-Cookie d'un utilisateur à un autre</strong>. Corrigé dans <code>nitropack</code> 2.13.6.</p>"
+          },
+          "source": { "url": "https://github.com/nitrojs/nitro/security/advisories/GHSA-39r7-wfcx-99xg", "label": "github.com/nitrojs" }
+        },
+        {
+          "id": "dbhub-readonly-bypass",
+          "tag": "security",
+          "date": "02 Nov 2026",
+          "title": {
+            "es": "DBHub: comentarios MySQL/MariaDB saltean la validación de SQL read-only",
+            "en": "DBHub: MySQL/MariaDB comments bypass read-only SQL validation",
+            "fr": "DBHub : les commentaires MySQL/MariaDB contournent la validation SQL en lecture seule"
+          },
+          "body_html": {
+            "es": "<p>El MCP server <code>@bytebase/dbhub</code> interpretaba mal los comentarios ejecutables de MySQL, así que una query «solo lectura» podía escribir (CVSS 4.0 <strong>6.1</strong>). Lección: no confíes en un parser de SQL como guard; usá un usuario de DB con permisos de solo lectura.</p>",
+            "en": "<p>The <code>@bytebase/dbhub</code> MCP server misread MySQL executable comments, so a read-only query could write (CVSS 4.0 <strong>6.1</strong>). Lesson: do not rely on a SQL parser as a guard; use a read-only database user.</p>",
+            "fr": "<p>Le serveur MCP <code>@bytebase/dbhub</code> interprétait mal les commentaires exécutables MySQL : une requête en lecture seule pouvait écrire (CVSS 4.0 <strong>6.1</strong>).</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-j656-3hf2-fvjc", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "uber-mcp-gateway",
+      "updates": [
+        {
+          "id": "uber-mcp-gateway",
+          "tag": "notable",
+          "date": "02 Nov 2026",
+          "title": {
+            "es": "Uber arma un MCP Gateway para gobernar 800+ servers y 5.000+ tools de agentes",
+            "en": "Uber builds an MCP Gateway to govern 800+ servers and 5,000+ agent tools",
+            "fr": "Uber construit une MCP Gateway pour gouverner 800+ serveurs et 5 000+ outils d'agents"
+          },
+          "body_html": {
+            "es": "<p>Separa un <strong>registry</strong> (schemas, ownership, enablement) de un <strong>proxy</strong> que traduce MCP a HTTP, gRPC o TChannel. Chequea acceso a nivel server y tool, scrubbea PII en las respuestas, intercambia tokens internos por tokens de terceros y deja cada tool nueva deshabilitada hasta que su equipo la active. Un caso de manual de control plane vs data plane.</p>",
+            "en": "<p>It separates a <strong>registry</strong> (schemas, ownership, enablement) from a <strong>proxy</strong> that translates MCP to HTTP, gRPC or TChannel. Access is checked per server and per tool, responses are scrubbed of PII, internal tokens are exchanged for third-party ones, and new tools stay disabled until their owners enable them. A textbook control plane versus data plane split.</p>",
+            "fr": "<p>Elle sépare un <strong>registry</strong> (schémas, ownership, activation) d'un <strong>proxy</strong> traduisant MCP vers HTTP, gRPC ou TChannel, avec contrôle d'accès par serveur et par outil, nettoyage des données personnelles et outils désactivés par défaut.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/11/uber-mcp-gateway-ai-agents/", "label": "infoq.com" }
+        },
+        {
+          "id": "vitest-5-1",
+          "tag": "release",
+          "date": "02 Nov 2026",
+          "title": {
+            "es": "Vitest 5.1 estable: --last-failed, --since-last-run y fake timers para node:timers",
+            "en": "Vitest 5.1 stable: --last-failed, --since-last-run and fake timers for node:timers",
+            "fr": "Vitest 5.1 stable : --last-failed, --since-last-run et faux timers pour node:timers"
+          },
+          "body_html": {
+            "es": "<p>Lo que vimos en beta ya es estable: <code>--last-failed</code>, <code>--since-last-run</code>, review interactivo de snapshots fallidos, <code>Temporal</code> en <code>vi.setSystemTime()</code> y fake timers para <code>node:timers</code>. Para suites de backend, lo de los timers de Node es lo que más suma.</p>",
+            "en": "<p>What shipped in beta is now stable: <code>--last-failed</code>, <code>--since-last-run</code>, interactive review of failed snapshots, <code>Temporal</code> in <code>vi.setSystemTime()</code> and fake timers for <code>node:timers</code>, the most useful one for backend suites.</p>",
+            "fr": "<p>Ce qui était en beta est désormais stable : <code>--last-failed</code>, <code>--since-last-run</code>, revue interactive des snapshots, <code>Temporal</code> dans <code>vi.setSystemTime()</code> et faux timers pour <code>node:timers</code>.</p>"
+          },
+          "source": { "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.1.0", "label": "github.com/vitest-dev" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "nextjs-16-4-4",
+      "updates": [
+        {
+          "id": "nextjs-16-4-4",
+          "tag": "patch",
+          "date": "02 Nov 2026",
+          "title": {
+            "es": "Next.js 16.4.4: backports y cambio de jsonwebtoken a fast-jwt",
+            "en": "Next.js 16.4.4: backports and a switch from jsonwebtoken to fast-jwt",
+            "fr": "Next.js 16.4.4 : backports et passage de jsonwebtoken à fast-jwt"
+          },
+          "body_html": {
+            "es": "<p>Patch previo a la release de seguridad: revierte una optimización de chunks de Turbopack, emite el bootstrap del runtime con el nonce de CSP en PPR y reemplaza <code>jsonwebtoken</code> por <code>fast-jwt</code>. No es la de seguridad: esa sale hoy.</p>",
+            "en": "<p>A patch ahead of the security release: it reverts a Turbopack chunk optimization, emits the runtime bootstrap with the CSP nonce in PPR resumes and replaces <code>jsonwebtoken</code> with <code>fast-jwt</code>. The security fixes come today.</p>",
+            "fr": "<p>Correctif précédant la version de sécurité : revert d'une optimisation Turbopack, nonce CSP pour le bootstrap en PPR et remplacement de <code>jsonwebtoken</code> par <code>fast-jwt</code>.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/next.js/releases/tag/v16.4.4", "label": "github.com/vercel" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Semana de fixes incompletos: dos advisories de Nuxt reabren bypasses de route rules ya parcheados con %2F y //. Normalizá paths antes de matchear reglas.",
+      "en": "A week of incomplete fixes: two Nuxt advisories reopen already-patched route-rule bypasses via %2F and //. Normalize paths before matching rules.",
+      "fr": "Semaine de correctifs incomplets : deux avis Nuxt rouvrent des contournements de route rules via %2F et //. Normalisez les chemins avant de les comparer."
+    },
+    {
+      "es": "Los timeouts globales del cliente están en retirada: MongoDB apaga timeoutMS en 6.x y 7.x y vuelve a los timeouts por etapa.",
+      "en": "Client-wide timeouts are in retreat: MongoDB turns off timeoutMS on 6.x and 7.x and returns to per-stage timeouts.",
+      "fr": "Les timeouts globaux côté client reculent : MongoDB désactive timeoutMS en 6.x et 7.x au profit de timeouts par étape."
+    },
+    {
+      "es": "Gateways para MCP: Uber y el advisory de DBHub muestran que el guard tiene que estar en la capa de permisos, no en el parser.",
+      "en": "MCP gateways: Uber and the DBHub advisory both show the guard belongs in the permission layer, not the parser.",
+      "fr": "Passerelles MCP : Uber et l'avis DBHub montrent que la protection doit vivre dans la couche de permissions, pas dans le parseur."
+    }
+  ]
+}

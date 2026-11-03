@@ -1,0 +1,163 @@
+{
+  "title": {
+    "es": "IA para programar: Claude Code 2.1.317 refuerza la seguridad de red y Copilot CLI ajusta Gemini",
+    "en": "AI Coding Digest: Claude Code 2.1.317 Hardens Network Safety, Copilot CLI Tunes Gemini",
+    "fr": "Veille IA dev : Claude Code 2.1.317 renforce la sécurité réseau, Copilot CLI ajuste Gemini"
+  },
+  "description": {
+    "es": "Claude Code suma confirmaciones antes de enviar el email de la cuenta por la red y endurece los scheduled tasks en la nube; GitHub Copilot CLI corrige el modo ACP y el límite de funciones de Gemini.",
+    "en": "Claude Code adds a confirmation before any tool call can send the account's email over the network and tightens cloud scheduled tasks; GitHub Copilot CLI fixes ACP mode and Gemini's function-limit handling.",
+    "fr": "Claude Code ajoute une confirmation avant qu'un appel d'outil n'envoie l'e-mail du compte sur le réseau et renforce les tâches planifiées cloud ; GitHub Copilot CLI corrige le mode ACP et la gestion de la limite de fonctions de Gemini."
+  },
+  "pubDate": "2026-11-03",
+  "category": "ai-coding",
+  "highlights": [
+    {
+      "text": { "es": "Claude Code pide confirmar antes de enviar tu email por la red", "en": "Claude Code now confirms before sending your email over the network", "fr": "Claude Code confirme avant d'envoyer votre e-mail sur le réseau" },
+      "anchor": "claude-code-network-safety",
+      "icon": "simple-icons:anthropic"
+    },
+    {
+      "text": { "es": "Aviso si un scheduled task en la nube pide conectores extra", "en": "Warning when a cloud scheduled task requests extra connectors", "fr": "Alerte si une tâche planifiée cloud demande des connecteurs en plus" },
+      "anchor": "claude-code-network-safety",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Nuevo endpoint admin para reportes de costo de la gateway", "en": "New admin API cost-report endpoint for the Claude apps gateway", "fr": "Nouveau point d'API admin pour les rapports de coûts de la gateway" },
+      "anchor": "claude-code-admin-tooling",
+      "icon": "lucide:terminal"
+    },
+    {
+      "text": { "es": "GitHub Copilot CLI corrige el modo ACP y rutas con ~/", "en": "GitHub Copilot CLI fixes ACP mode and ~/ path resolution", "fr": "GitHub Copilot CLI corrige le mode ACP et la résolution des chemins ~/" },
+      "anchor": "github-copilot",
+      "icon": "simple-icons:githubcopilot"
+    },
+    {
+      "text": { "es": "Gemini en Copilot CLI ahora difiere herramientas tras el límite de 512 funciones", "en": "Gemini in Copilot CLI now defers tools past the 512-function limit", "fr": "Gemini dans Copilot CLI diffère désormais les outils au-delà de la limite de 512 fonctions" },
+      "anchor": "github-copilot",
+      "icon": "lucide:blocks"
+    }
+  ],
+  "stats": {
+    "tools_tracked": 5,
+    "updates_found": "3",
+    "models_cataloged": 0,
+    "providers_covered": 0
+  },
+  "tools": [
+    {
+      "id": "claude-code",
+      "name": "Claude Code",
+      "publisher": "Anthropic",
+      "theme": "claude",
+      "icon_emoji": "🤖",
+      "version": "v2.1.317",
+      "anchor": "claude-code",
+      "updates": [
+        {
+          "id": "claude-code-network-safety",
+          "tag": "security",
+          "title": {
+            "es": "v2.1.317: confirmación antes de enviar tu email por la red y aviso de conectores en scheduled tasks",
+            "en": "v2.1.317: confirmation before sending your email over the network, warning on scheduled-task connectors",
+            "fr": "v2.1.317 : confirmation avant l'envoi de votre e-mail sur le réseau, alerte sur les connecteurs des tâches planifiées"
+          },
+          "body_html": {
+            "es": "<p>Dos cambios de seguridad en esta release: ahora se pide <strong>confirmación</strong> antes de que cualquier llamada a una tool de red o shell pueda enviar el email de la cuenta; y <code>/schedule</code> muestra un <strong>aviso</strong> cuando una tarea programada en la nube tiene permisos sobre conectores que el usuario no pidió explícitamente.</p>",
+            "en": "<p>Two security changes in this release: any web or shell tool call that could send the account's email address over the network now asks for <strong>confirmation</strong> first, and <code>/schedule</code> shows a <strong>warning</strong> when a cloud scheduled task is granted connectors the user didn't explicitly request.</p>",
+            "fr": "<p>Deux changements de sécurité dans cette version : tout appel d'outil web ou shell susceptible d'envoyer l'e-mail du compte sur le réseau demande désormais une <strong>confirmation</strong> au préalable, et <code>/schedule</code> affiche une <strong>alerte</strong> lorsqu'une tâche planifiée cloud se voit accorder des connecteurs que l'utilisateur n'a pas explicitement demandés.</p>"
+          },
+          "date": "3 nov 2026",
+          "source": { "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.317", "label": "github.com/anthropics/claude-code" }
+        },
+        {
+          "id": "claude-code-admin-tooling",
+          "tag": "feature",
+          "title": {
+            "es": "v2.1.317: hook onFailure: \"block\" en el Agent SDK y endpoint admin de costos",
+            "en": "v2.1.317: Agent SDK onFailure: \"block\" hook option and admin cost-report endpoint",
+            "fr": "v2.1.317 : option de hook onFailure: \"block\" dans l'Agent SDK et point d'API admin de coûts"
+          },
+          "body_html": {
+            "es": "<p>El Agent SDK suma <code>onFailure: \"block\"</code> para que un hook callback pueda detener la ejecución cuando falla. Además, la Claude apps gateway agrega un endpoint admin nuevo, <code>GET /v1/organizations/analytics/cost</code>, para reportes de costo a nivel organización.</p>",
+            "en": "<p>The Agent SDK adds an <code>onFailure: \"block\"</code> option so a hook callback can halt execution on failure. The Claude apps gateway also adds a new admin API endpoint, <code>GET /v1/organizations/analytics/cost</code>, for organization-level cost reporting.</p>",
+            "fr": "<p>L'Agent SDK ajoute une option <code>onFailure: \"block\"</code> permettant à un callback de hook d'arrêter l'exécution en cas d'échec. La Claude apps gateway ajoute aussi un nouveau point d'API admin, <code>GET /v1/organizations/analytics/cost</code>, pour les rapports de coûts au niveau de l'organisation.</p>"
+          },
+          "date": "3 nov 2026",
+          "source": { "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.317", "label": "github.com/anthropics/claude-code" }
+        }
+      ]
+    },
+    {
+      "id": "openai-codex",
+      "name": "OpenAI Codex / Codex CLI",
+      "publisher": "OpenAI",
+      "theme": "openai",
+      "icon_emoji": "🧩",
+      "version": "rust-v0.167.0-alpha.4",
+      "anchor": "openai-codex",
+      "updates": []
+    },
+    {
+      "id": "gpt",
+      "name": "GPT models",
+      "publisher": "OpenAI",
+      "theme": "openai",
+      "icon_emoji": "🧠",
+      "version": "GPT-6 Rosalind",
+      "anchor": "gpt",
+      "updates": []
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini / Gemini Code Assist",
+      "publisher": "Google",
+      "theme": "gemini",
+      "icon_emoji": "💎",
+      "version": "",
+      "anchor": "gemini",
+      "updates": []
+    },
+    {
+      "id": "github-copilot",
+      "name": "GitHub Copilot",
+      "publisher": "Microsoft/GitHub",
+      "theme": "copilot",
+      "icon_emoji": "🐙",
+      "version": "Copilot CLI v1.0.106-5",
+      "anchor": "github-copilot",
+      "updates": [
+        {
+          "id": "copilot-cli-1-0-106-5",
+          "tag": "fix",
+          "title": {
+            "es": "Copilot CLI v1.0.106-4/5: fixes de ACP, rutas ~/ y límite de funciones de Gemini",
+            "en": "Copilot CLI v1.0.106-4/5: ACP, ~/ path, and Gemini function-limit fixes",
+            "fr": "Copilot CLI v1.0.106-4/5 : correctifs ACP, chemin ~/ et limite de fonctions Gemini"
+          },
+          "body_html": {
+            "es": "<p>Dos pre-releases seguidas de Copilot CLI: respeta <code>includeCoAuthoredBy: false</code> en modo ACP, rechaza nombres vacíos en <code>copilot sessions import --name</code>, corrige la resolución de rutas con <code>~/</code> en la configuración de carpetas de skills/instructions, y cuando una request a modelos Gemini supera el límite de 512 funciones, ahora las herramientas extra se difieren detrás de una búsqueda en lugar de fallar. También se evita que sesiones vacías parpadeen en el selector, se puede adjuntar menciones <code>@file</code> escritas entre paréntesis o comillas, y se suma soporte para servidores MCP remotos por HTTP detrás de proxies Kerberos (Negotiate).</p>",
+            "en": "<p>Two back-to-back Copilot CLI pre-releases: ACP mode now honors <code>includeCoAuthoredBy: false</code>, <code>copilot sessions import --name</code> rejects empty names, <code>~/</code> path resolution in skill/instruction directory settings is fixed, and when a request to Gemini models exceeds the 512-function limit, extra tools are now deferred behind a search instead of failing outright. It also stops empty sessions from flashing in the session picker, attaches <code>@file</code> mentions written inside brackets or quotes, and adds support for remote HTTP MCP servers behind Kerberos (Negotiate) proxies.</p>",
+            "fr": "<p>Deux pré-versions successives de Copilot CLI : le mode ACP respecte désormais <code>includeCoAuthoredBy: false</code>, <code>copilot sessions import --name</code> rejette les noms vides, la résolution des chemins <code>~/</code> dans les paramètres de dossiers skills/instructions est corrigée, et lorsqu'une requête vers les modèles Gemini dépasse la limite de 512 fonctions, les outils supplémentaires sont désormais différés derrière une recherche plutôt que de provoquer un échec. Elle empêche aussi les sessions vides de clignoter dans le sélecteur, rattache les mentions <code>@file</code> écrites entre crochets ou guillemets, et ajoute la prise en charge des serveurs MCP distants en HTTP derrière des proxys Kerberos (Negotiate).</p>"
+          },
+          "date": "3 nov 2026",
+          "source": { "url": "https://github.com/github/copilot-cli/releases/tag/v1.0.106-5", "label": "github.com/github/copilot-cli" }
+        }
+      ]
+    }
+  ],
+  "models": [],
+  "model_timeline_anchor": "model-timeline",
+  "notable_trends": [
+    {
+      "es": "La seguridad de red y los permisos siguen siendo el foco de Claude Code: después de los presupuestos de grupo y las políticas en capas, ahora suma confirmaciones explícitas antes de que cualquier tool pueda filtrar datos de la cuenta por la red.",
+      "en": "Network safety and permissions remain Claude Code's focus: after pooled budgets and layered policies, it now adds explicit confirmations before any tool call can leak account data over the network.",
+      "fr": "La sécurité réseau et les permissions restent la priorité de Claude Code : après les budgets mutualisés et les politiques en couches, il ajoute désormais des confirmations explicites avant qu'un appel d'outil ne puisse divulguer des données du compte sur le réseau."
+    },
+    {
+      "es": "Día tranquilo para lanzamientos de modelos: no se pudo verificar ningún release nuevo de GPT, Gemini ni de los laboratorios chinos (Qwen, DeepSeek, Kimi, GLM, Doubao, MiniMax) contra una fuente primaria dentro de la ventana, así que el timeline de modelos queda vacío esta vez en lugar de publicar datos sin confirmar.",
+      "en": "A quiet day for model launches: no new GPT, Gemini, or Chinese-lab release (Qwen, DeepSeek, Kimi, GLM, Doubao, MiniMax) could be verified against a primary source within the window, so the model timeline is left empty this run rather than publishing unconfirmed data.",
+      "fr": "Une journée calme côté lancements de modèles : aucune nouvelle version de GPT, Gemini ou des laboratoires chinois (Qwen, DeepSeek, Kimi, GLM, Doubao, MiniMax) n'a pu être vérifiée auprès d'une source primaire dans la fenêtre, la chronologie des modèles reste donc vide pour cette édition plutôt que de publier des données non confirmées."
+    }
+  ]
+}

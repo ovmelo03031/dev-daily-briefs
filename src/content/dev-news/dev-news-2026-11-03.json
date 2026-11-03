@@ -1,0 +1,171 @@
+{
+  "title": {
+    "es": "Dev News — 3 Nov 2026: Nuxt 4.6.4 tapa 11 advisories, Next.js prepara su release de seguridad y Vitest 5.1",
+    "en": "Dev News — 3 Nov 2026: Nuxt 4.6.4 closes 11 advisories, Next.js readies its security release and Vitest 5.1",
+    "fr": "Dev News — 3 nov. 2026 : Nuxt 4.6.4 corrige 11 advisories, Next.js prépare sa release de sécurité et Vitest 5.1"
+  },
+  "description": {
+    "es": "Release de seguridad de Nuxt con cambios de comportamiento, Next.js 16.4.4 como antesala del parche de hoy, Tailwind con loader nativo para Turbopack, Vitest 5.1 con --last-failed y Astro 7.4.5 endureciendo el render de tags dinámicos.",
+    "en": "A Nuxt security release with behaviour changes, Next.js 16.4.4 ahead of today's patch, Tailwind's native Turbopack loader, Vitest 5.1 with --last-failed and Astro 7.4.5 hardening dynamic tag rendering.",
+    "fr": "Une release de sécurité Nuxt avec des changements de comportement, Next.js 16.4.4 avant le correctif du jour, le loader Turbopack natif de Tailwind, Vitest 5.1 avec --last-failed et Astro 7.4.5 qui durcit le rendu des balises dynamiques."
+  },
+  "pubDate": "2026-11-03",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": { "es": "Nuxt 4.6.4: 8 advisories + 3 de Nitro", "en": "Nuxt 4.6.4: 8 advisories + 3 in Nitro", "fr": "Nuxt 4.6.4 : 8 advisories + 3 dans Nitro" },
+      "anchor": "nuxt-4-6-4-security",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Next.js: 7 CVEs medium salen hoy", "en": "Next.js: 7 medium CVEs ship today", "fr": "Next.js : 7 CVE medium publiées aujourd'hui" },
+      "anchor": "nextjs-16-4-4",
+      "icon": "simple-icons:nextdotjs"
+    },
+    {
+      "text": { "es": "Vitest 5.1: --last-failed y fake node:timers", "en": "Vitest 5.1: --last-failed and node:timers fakes", "fr": "Vitest 5.1 : --last-failed et faux node:timers" },
+      "anchor": "vitest-5-1",
+      "icon": "lucide:code"
+    },
+    {
+      "text": { "es": "Tailwind 4.3.4 suma @tailwindcss/turbopack", "en": "Tailwind 4.3.4 adds @tailwindcss/turbopack", "fr": "Tailwind 4.3.4 ajoute @tailwindcss/turbopack" },
+      "anchor": "tailwind-4-3-4",
+      "icon": "simple-icons:tailwindcss"
+    },
+    {
+      "text": { "es": "Astro 7.4.5 endurece tags dinámicos", "en": "Astro 7.4.5 hardens dynamic tags", "fr": "Astro 7.4.5 durcit les balises dynamiques" },
+      "anchor": "astro-7-4-5",
+      "icon": "simple-icons:astro"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "nuxt-4-6-4-security",
+          "tag": "security",
+          "date": "02 Nov 2026",
+          "title": {
+            "es": "Nuxt 4.6.4 es release de seguridad: 8 advisories propios, 3 de Nitro y cinco cambios de comportamiento",
+            "en": "Nuxt 4.6.4 is a security release: 8 Nuxt advisories, 3 in Nitro and five behaviour changes",
+            "fr": "Nuxt 4.6.4 est une release de sécurité : 8 advisories Nuxt, 3 dans Nitro et cinq changements de comportement"
+          },
+          "body_html": {
+            "es": "<p>Ojo con esto: varios advisories son <strong>fixes incompletos</strong> de lo que 4.6.3 ya había parchado — un <code>//</code> al inicio del path seguía salteando <code>server/middleware</code> y las route rules (GHSA-r99w), y las props de islands podían colisionar en el mismo <code>/__nuxt_island</code>. Además trae <code>nitropack</code> 2.13.6. Los cambios que te pueden romper algo: en producción solo se exponen message/data de errores creados con <code>createError</code>, los dev servers de webpack/rspack ahora rechazan <code>Host</code> desconocidos (sumá tu túnel a <code>devServer.allowedHosts</code>) y las reglas <code>cache</code>/<code>swr</code>/<code>isr</code> solo cachean <code>GET</code>/<code>HEAD</code> sin cookies. Actualizá ya.</p>",
+            "en": "<p>Several advisories are <strong>incomplete fixes</strong> of what 4.6.3 already patched — a leading <code>//</code> in the path still bypassed <code>server/middleware</code> and route rules (GHSA-r99w), and island props could collide on one <code>/__nuxt_island</code> path. It also pulls in <code>nitropack</code> 2.13.6. Behaviour changes to watch: production error pages now only carry message/data of <code>createError</code> errors, webpack/rspack dev servers reject unexpected <code>Host</code> headers (add tunnels to <code>devServer.allowedHosts</code>), and <code>cache</code>/<code>swr</code>/<code>isr</code> rules only cache cookie-free <code>GET</code>/<code>HEAD</code> responses. Upgrade now.</p>",
+            "fr": "<p>Plusieurs advisories sont des <strong>correctifs incomplets</strong> de ce que 4.6.3 avait déjà corrigé — un <code>//</code> en début de chemin contournait encore <code>server/middleware</code> et les route rules (GHSA-r99w), et les props d'islands pouvaient partager le même chemin <code>/__nuxt_island</code>. La version embarque aussi <code>nitropack</code> 2.13.6. Changements à surveiller : en production seules les erreurs <code>createError</code> exposent message/data, les dev servers webpack/rspack rejettent les en-têtes <code>Host</code> inattendus (ajoutez vos tunnels à <code>devServer.allowedHosts</code>) et les règles <code>cache</code>/<code>swr</code>/<code>isr</code> ne mettent en cache que les <code>GET</code>/<code>HEAD</code> sans cookie. Mettez à jour.</p>"
+          },
+          "source": { "url": "https://github.com/nuxt/nuxt/releases/tag/v4.6.4", "label": "github.com/nuxt" }
+        },
+        {
+          "id": "nextjs-16-4-4",
+          "tag": "notable",
+          "date": "02 Nov 2026",
+          "title": {
+            "es": "Next.js 16.4.4 sale como backport y deja la puerta lista para el release de seguridad de hoy",
+            "en": "Next.js 16.4.4 ships as a backport, clearing the way for today's security release",
+            "fr": "Next.js 16.4.4 sort en backport et prépare la release de sécurité du jour"
+          },
+          "body_html": {
+            "es": "<p>16.4.4 es un backport de fixes (CSP nonce para el bootstrap de Turbopack en el resume de PPR, reload ante updates de CSS perdidos al arrancar y el cambio de <code>jsonwebtoken</code> a <code>fast-jwt</code>), pero lo importante está en la nota: el release de seguridad de noviembre, anunciado para el <strong>3 de noviembre</strong> con <strong>siete vulnerabilidades medium</strong>, sale hoy. Dejá el PR de upgrade preparado y los advisories completos llegan junto al parche.</p>",
+            "en": "<p>16.4.4 is a bug-fix backport (CSP nonce for the Turbopack bootstrap in the PPR resume, reloads on missed startup CSS updates and a switch from <code>jsonwebtoken</code> to <code>fast-jwt</code>), but the headline is the note: the November security release, scheduled for <strong>November 3</strong> with <strong>seven medium vulnerabilities</strong>, lands today. Have the upgrade PR ready; full advisories ship with the patch.</p>",
+            "fr": "<p>16.4.4 est un backport de correctifs (nonce CSP pour le bootstrap Turbopack dans le resume PPR, rechargement sur les mises à jour CSS manquées au démarrage et passage de <code>jsonwebtoken</code> à <code>fast-jwt</code>), mais l'essentiel est dans la note : la release de sécurité de novembre, prévue le <strong>3 novembre</strong> avec <strong>sept vulnérabilités medium</strong>, sort aujourd'hui. Préparez la PR de mise à jour ; les advisories complets arrivent avec le correctif.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/next.js/releases/tag/v16.4.4", "label": "github.com/vercel" }
+        }
+      ]
+    },
+    {
+      "id": "css",
+      "name": "CSS",
+      "theme": "css",
+      "icon_emoji": "🎨",
+      "anchor": "css",
+      "updates": [
+        {
+          "id": "tailwind-4-3-4",
+          "tag": "notable",
+          "date": "02 Nov 2026",
+          "title": {
+            "es": "Tailwind CSS 4.3.4: loader nativo para Turbopack y @scope que por fin respeta su semántica",
+            "en": "Tailwind CSS 4.3.4: a native Turbopack loader and @scope that keeps its semantics",
+            "fr": "Tailwind CSS 4.3.4 : un loader Turbopack natif et un @scope qui garde sa sémantique"
+          },
+          "body_html": {
+            "es": "<p>La novedad es <code>@tailwindcss/turbopack</code>, un loader dedicado para usar Tailwind con Next.js sin pasar por PostCSS. Del lado de fixes: las variantes con <code>@scope</code> envuelven las utilities en vez de anidarse adentro, las declaraciones directas en <code>@scope</code> se envuelven en <code>:where(:scope)</code>, <code>@tailwindcss/oxide</code> cae a WASM donde no hay bindings nativos y <code>@tailwindcss/vite</code> deja de crashear con el <code>bundledDev</code> experimental de Vite.</p>",
+            "en": "<p>The headline is <code>@tailwindcss/turbopack</code>, a dedicated loader for using Tailwind with Next.js without going through PostCSS. Fixes: <code>@scope</code> variants now wrap utilities instead of nesting inside them, declarations directly inside <code>@scope</code> are wrapped in <code>:where(:scope)</code>, <code>@tailwindcss/oxide</code> falls back to WASM where native bindings are missing, and <code>@tailwindcss/vite</code> no longer crashes under Vite's experimental <code>bundledDev</code>.</p>",
+            "fr": "<p>La nouveauté est <code>@tailwindcss/turbopack</code>, un loader dédié pour utiliser Tailwind avec Next.js sans passer par PostCSS. Côté correctifs : les variantes <code>@scope</code> enveloppent les utilities au lieu de s'y imbriquer, les déclarations directes dans <code>@scope</code> sont enveloppées dans <code>:where(:scope)</code>, <code>@tailwindcss/oxide</code> bascule sur WASM sans bindings natifs, et <code>@tailwindcss/vite</code> ne plante plus avec le <code>bundledDev</code> expérimental de Vite.</p>"
+          },
+          "source": { "url": "https://github.com/tailwindlabs/tailwindcss/releases/tag/v4.3.4", "label": "github.com/tailwindlabs" }
+        }
+      ]
+    },
+    {
+      "id": "js-frameworks",
+      "name": "JS Frameworks",
+      "theme": "js-frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "js-frameworks",
+      "updates": [
+        {
+          "id": "astro-7-4-5",
+          "tag": "minor",
+          "date": "02 Nov 2026",
+          "title": {
+            "es": "Astro 7.4.5: tags dinámicos más estrictos y import.meta.env sin valores corruptos",
+            "en": "Astro 7.4.5: stricter dynamic tags and no more corrupted import.meta.env values",
+            "fr": "Astro 7.4.5 : balises dynamiques plus strictes et import.meta.env sans valeurs corrompues"
+          },
+          "body_html": {
+            "es": "<p>Parche chico pero con dientes: el render de tag names como string ahora es estricto y consistente entre <code>.astro</code>, JSX y MDX — caracteres como <code>/</code> o <code>=</code> ya no pueden alterar el markup, y un string inválido tira error. También arregla valores de <code>import.meta.env</code> con <code>$$</code> o <code>$&amp;</code> que se corrompían en <code>astro build</code>, y los paths con percent-encoding inválido ahora devuelven <code>400</code>.</p>",
+            "en": "<p>A small patch with teeth: rendering string tag names is now strict and consistent across <code>.astro</code>, JSX and MDX — characters like <code>/</code> or <code>=</code> can no longer change the markup, and an invalid string throws. It also fixes <code>import.meta.env</code> values containing <code>$$</code> or <code>$&amp;</code> being corrupted in <code>astro build</code>, and paths with invalid percent-encoding now return <code>400</code>.</p>",
+            "fr": "<p>Un petit patch qui a du mordant : le rendu des noms de balise en chaîne est désormais strict et cohérent entre <code>.astro</code>, JSX et MDX — des caractères comme <code>/</code> ou <code>=</code> ne peuvent plus modifier le markup, et une chaîne invalide lève une erreur. Il corrige aussi les valeurs <code>import.meta.env</code> contenant <code>$$</code> ou <code>$&amp;</code> corrompues par <code>astro build</code>, et les chemins au percent-encoding invalide renvoient maintenant <code>400</code>.</p>"
+          },
+          "source": { "url": "https://github.com/withastro/astro/releases/tag/astro%407.4.5", "label": "github.com/withastro" }
+        }
+      ]
+    },
+    {
+      "id": "dev-tools",
+      "name": "Developer Tools",
+      "theme": "dev-tools",
+      "icon_emoji": "🛠️",
+      "anchor": "dev-tools",
+      "updates": [
+        {
+          "id": "vitest-5-1",
+          "tag": "release",
+          "date": "02 Nov 2026",
+          "title": {
+            "es": "Vitest 5.1: --last-failed, --since-last-run, fake timers para node:timers y review interactivo de snapshots",
+            "en": "Vitest 5.1: --last-failed, --since-last-run, node:timers fakes and interactive snapshot review",
+            "fr": "Vitest 5.1 : --last-failed, --since-last-run, faux node:timers et revue interactive des snapshots"
+          },
+          "body_html": {
+            "es": "<p>Minor cargadísimo: <code>--last-failed</code> corre solo lo que falló y <code>--since-last-run</code> lo que cambió desde la última corrida, los fake timers ahora cubren <code>node:timers</code> y <code>node:timers/promises</code>, <code>vi.setSystemTime()</code> acepta <code>Temporal.Instant</code> y <code>ZonedDateTime</code>, y podés revisar snapshots fallidos de forma interactiva. En browser mode, el trace view pierde el label experimental, captura aria snapshots y se mockean módulos vía import map. Esto es ENORME para el loop de desarrollo diario.</p>",
+            "en": "<p>A packed minor: <code>--last-failed</code> reruns only failures and <code>--since-last-run</code> what changed since the last run, fake timers now cover <code>node:timers</code> and <code>node:timers/promises</code>, <code>vi.setSystemTime()</code> accepts <code>Temporal.Instant</code> and <code>ZonedDateTime</code>, and failed snapshots can be reviewed interactively. In browser mode the trace view drops its experimental label and captures aria snapshots, and modules are mocked through an import map.</p>",
+            "fr": "<p>Une mineure bien remplie : <code>--last-failed</code> ne relance que les échecs et <code>--since-last-run</code> ce qui a changé depuis le dernier run, les faux timers couvrent <code>node:timers</code> et <code>node:timers/promises</code>, <code>vi.setSystemTime()</code> accepte <code>Temporal.Instant</code> et <code>ZonedDateTime</code>, et les snapshots en échec se revoient de façon interactive. En browser mode, le trace view perd son label expérimental et capture les aria snapshots, et les modules se mockent via une import map.</p>"
+          },
+          "source": { "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.1.0", "label": "github.com/vitest-dev" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Día de parches encadenados: Nuxt publica fixes incompletos de su release anterior y Next.js abre su ventana de seguridad mensual. Si usás meta-frameworks SSR, noviembre arranca con upgrades obligatorios.",
+      "en": "A chained-patch day: Nuxt ships fixes for its own incomplete previous patches and Next.js opens its monthly security window. If you run an SSR meta-framework, November starts with mandatory upgrades.",
+      "fr": "Une journée de correctifs en chaîne : Nuxt corrige ses propres patchs incomplets et Next.js ouvre sa fenêtre de sécurité mensuelle. Si vous utilisez un méta-framework SSR, novembre commence par des mises à jour obligatoires."
+    },
+    {
+      "es": "El tooling sigue apostando a Turbopack como ciudadano de primera: Tailwind ya tiene loader propio, sin PostCSS de por medio.",
+      "en": "Tooling keeps treating Turbopack as first-class: Tailwind now ships its own loader, no PostCSS in between.",
+      "fr": "L'outillage traite Turbopack comme un citoyen de première classe : Tailwind livre désormais son propre loader, sans PostCSS."
+    }
+  ]
+}

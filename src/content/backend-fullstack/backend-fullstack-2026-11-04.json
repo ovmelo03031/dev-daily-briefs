@@ -1,0 +1,285 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 4 Nov 2026",
+    "en": "Backend & Fullstack Daily — 4 Nov 2026",
+    "fr": "Backend & Fullstack Daily — 4 nov. 2026"
+  },
+  "description": {
+    "es": "Next.js publica 5 CVEs de cache, Docker 29.9.3 parchea Swarm y BuildKit, better-auth cierra un critical en Expo, tRPC 11.24 y BullMQ 6.6.",
+    "en": "Next.js discloses 5 cache CVEs, Docker 29.9.3 patches Swarm and BuildKit, better-auth fixes a critical Expo bug, plus tRPC 11.24 and BullMQ 6.6.",
+    "fr": "Next.js publie 5 CVE liées au cache, Docker 29.9.3 corrige Swarm et BuildKit, better-auth corrige une faille critique Expo, plus tRPC 11.24 et BullMQ 6.6."
+  },
+  "pubDate": "2026-11-04",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "Next.js: 5 CVEs de cache y proxy", "en": "Next.js: 5 cache and proxy CVEs", "fr": "Next.js : 5 CVE de cache et proxy" },
+      "anchor": "nextjs-nov-security-release",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Docker 29.9.3: 4 CVEs + BuildKit", "en": "Docker 29.9.3: 4 CVEs + BuildKit", "fr": "Docker 29.9.3 : 4 CVE + BuildKit" },
+      "anchor": "docker-29-9-3",
+      "icon": "simple-icons:docker"
+    },
+    {
+      "text": { "es": "better-auth: critical 9.1 en Expo", "en": "better-auth: critical 9.1 in Expo", "fr": "better-auth : faille critique 9.1 Expo" },
+      "anchor": "better-auth-1-7-16",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "tRPC 11.24: pathSeparator y SSE", "en": "tRPC 11.24: pathSeparator and SSE", "fr": "tRPC 11.24 : pathSeparator et SSE" },
+      "anchor": "trpc-11-24",
+      "icon": "lucide:blocks"
+    },
+    {
+      "text": { "es": "LinkedIn: OTel del tap al backend", "en": "LinkedIn: OTel from tap to backend", "fr": "LinkedIn : OTel du tap au backend" },
+      "anchor": "linkedin-otel-journey",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "nextjs-nov-security-release",
+      "updates": [
+        {
+          "id": "nextjs-nov-security-release",
+          "tag": "security",
+          "date": "03 Nov 2026",
+          "title": {
+            "es": "Next.js 16.4.5 / 15.5.29: llegó el security release de noviembre con 5 CVEs",
+            "en": "Next.js 16.4.5 / 15.5.29: the November security release lands with 5 CVEs",
+            "fr": "Next.js 16.4.5 / 15.5.29 : la release de sécurité de novembre arrive avec 5 CVE"
+          },
+          "body_html": {
+            "es": "<p>El release preanunciado el 27/10 salió con cinco advisories (CVSS 6.3–6.9): <strong>cache cruzada entre usuarios</strong> en <code>use cache</code> con argumentos binarios (CVE-2026-119349), envenenamiento de fallback shells en Cache Components, fuga entre root params vía <code>unstable_cache()</code>, inyección de respuestas en apps self-hosted que reenvían fetches y bypass del rechazo de SVG en el image optimizer. Si hacés self-hosting con Cache Components, actualizá YA.</p>",
+            "en": "<p>The release pre-announced on Oct 27 shipped with five advisories (CVSS 6.3–6.9): <strong>cross-user cache disclosure</strong> in <code>use cache</code> with binary arguments (CVE-2026-119349), fallback-shell poisoning in Cache Components, root-param leakage via <code>unstable_cache()</code>, response injection in self-hosted apps forwarding fetches, and an SVG-rejection bypass in the image optimizer. Self-hosting with Cache Components? Upgrade now.</p>",
+            "fr": "<p>La release annoncée le 27/10 est sortie avec cinq avis (CVSS 6.3–6.9) : <strong>fuite de cache entre utilisateurs</strong> dans <code>use cache</code> avec arguments binaires (CVE-2026-119349), empoisonnement des fallback shells de Cache Components, fuite entre root params via <code>unstable_cache()</code>, injection de réponses en self-hosting et contournement du rejet SVG de l'optimiseur d'images.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/next.js/security/advisories/GHSA-rhh4-g77r-r9qj", "label": "github.com/vercel/next.js" }
+        },
+        {
+          "id": "docker-29-9-3",
+          "tag": "security",
+          "date": "03 Nov 2026",
+          "title": {
+            "es": "Docker Engine 29.9.3: cuatro CVEs, Swarm overlay sin cifrado y BuildKit 0.34.2",
+            "en": "Docker Engine 29.9.3: four CVEs, unencrypted Swarm overlays and BuildKit 0.34.2",
+            "fr": "Docker Engine 29.9.3 : quatre CVE, overlays Swarm non chiffrés et BuildKit 0.34.2"
+          },
+          "body_html": {
+            "es": "<p>Ojo con Swarm: después de un flush de <code>firewalld</code>, las overlay networks perdían cifrado y protección anti-spoofing (CVE-2026-115538), y un worker con su cert válido podía conseguir un <strong>certificado de manager</strong> tras un cambio de líder (CVE-2026-115539). Suma fixes de DoS (RSA, zstd) y BuildKit 0.34.2 con un crash por cache poisoning del resolver Git.</p>",
+            "en": "<p>Swarm users, pay attention: after a <code>firewalld</code> flush, overlay networks lost encryption and anti-spoofing (CVE-2026-115538), and a worker with a valid cert could obtain a <strong>manager certificate</strong> after a leader change (CVE-2026-115539). Also DoS fixes (RSA, zstd) and BuildKit 0.34.2 fixing a Git resolver cache-poisoning crash.</p>",
+            "fr": "<p>Après un flush de <code>firewalld</code>, les overlays Swarm perdaient chiffrement et anti-spoofing (CVE-2026-115538), et un worker avec un certificat valide pouvait obtenir un <strong>certificat de manager</strong> après un changement de leader (CVE-2026-115539). Plus des correctifs DoS (RSA, zstd) et BuildKit 0.34.2.</p>"
+          },
+          "source": { "url": "https://github.com/moby/moby/releases/tag/docker-v29.9.3", "label": "github.com/moby/moby" }
+        },
+        {
+          "id": "better-auth-1-7-16",
+          "tag": "security",
+          "date": "03 Nov 2026",
+          "title": {
+            "es": "better-auth 1.7.16: critical 9.1 en el plugin Expo y una tanda de fixes de sesión",
+            "en": "better-auth 1.7.16: critical 9.1 in the Expo plugin plus a batch of session fixes",
+            "fr": "better-auth 1.7.16 : faille critique 9.1 dans le plugin Expo et correctifs de session"
+          },
+          "body_html": {
+            "es": "<p>El endpoint público de <code>expo()</code> firmaba valores del request con el <strong>mismo secret</strong> que usan los links de verificación y el cookie cache, más un open redirect con <code>trustedOrigins</code> wildcard (GHSA-4wq4, CVSS 9.1). La release además arregla sesiones revocadas que seguían vivas, OTP con race, <code>email_verified: &quot;false&quot;</code> tomado como verdadero y un bug de IDs en el adapter Kysely/MySQL. Si usás Expo, esto no espera.</p>",
+            "en": "<p>The public <code>expo()</code> endpoint signed request-supplied values with the <strong>same secret</strong> used for verification links and the cookie cache, plus an open redirect with wildcard <code>trustedOrigins</code> (GHSA-4wq4, CVSS 9.1). The release also fixes revoked sessions staying usable, a raceable OTP limit, <code>email_verified: &quot;false&quot;</code> treated as true, and an ID mix-up in the Kysely/MySQL adapter.</p>",
+            "fr": "<p>L'endpoint public <code>expo()</code> signait des valeurs de la requête avec le <strong>même secret</strong> que les liens de vérification et le cookie cache, plus une open redirect avec <code>trustedOrigins</code> wildcard (GHSA-4wq4, CVSS 9.1). La release corrige aussi des sessions révoquées encore valides, une limite OTP contournable et <code>email_verified: &quot;false&quot;</code> traité comme vrai.</p>"
+          },
+          "source": { "url": "https://github.com/better-auth/better-auth/security/advisories/GHSA-4wq4-2ppv-q3hg", "label": "github.com/better-auth" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "trpc-11-24",
+      "updates": [
+        {
+          "id": "trpc-11-24",
+          "tag": "release",
+          "date": "03 Nov 2026",
+          "title": {
+            "es": "tRPC 11.24: pathSeparator opt-in, cache tags jerárquicos y backoff en WebSocket",
+            "en": "tRPC 11.24: opt-in pathSeparator, hierarchical cache tags and WebSocket backoff",
+            "fr": "tRPC 11.24 : pathSeparator optionnel, cache tags hiérarchiques et backoff WebSocket"
+          },
+          "body_html": {
+            "es": "<p>Nuevo <code>pathSeparator</code> opt-in para las URLs HTTP, cache tags con subpaths jerárquicos en el App Router y el cliente ahora hace backoff cuando el server rechaza el WebSocket. También prueba primero el parser sync en schemas tipo zod (perf) y por fin expone errores de decodificación SSE.</p>",
+            "en": "<p>New opt-in <code>pathSeparator</code> for HTTP URLs, hierarchical App Router cache tags, and the client now backs off when the server rejects a WebSocket. It also tries the sync parser first for zod-like schemas and finally surfaces SSE decoding errors.</p>",
+            "fr": "<p>Nouveau <code>pathSeparator</code> optionnel pour les URLs HTTP, cache tags hiérarchiques dans l'App Router et backoff du client quand le serveur refuse le WebSocket. Le parser sync est tenté d'abord pour les schémas type zod.</p>"
+          },
+          "source": { "url": "https://github.com/trpc/trpc/releases/tag/v11.24.0", "label": "github.com/trpc/trpc" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "bullmq-6-6",
+      "updates": [
+        {
+          "id": "bullmq-6-6",
+          "tag": "minor",
+          "date": "04 Nov 2026",
+          "title": {
+            "es": "BullMQ 6.6: deduplicación con opción schedule en todos los SDKs",
+            "en": "BullMQ 6.6: deduplication schedule option across every SDK",
+            "fr": "BullMQ 6.6 : option schedule de déduplication dans tous les SDK"
+          },
+          "body_html": {
+            "es": "<p>La opción <code>schedule</code> de deduplicación llega en simultáneo a Python, Elixir, PHP, Rust y .NET. Si tenés workers políglotas sobre la misma cola Redis, ahora se comportan igual.</p>",
+            "en": "<p>The deduplication <code>schedule</code> option ships simultaneously for Python, Elixir, PHP, Rust and .NET, so polyglot workers on the same Redis queue now behave the same.</p>",
+            "fr": "<p>L'option <code>schedule</code> de déduplication arrive en même temps pour Python, Elixir, PHP, Rust et .NET.</p>"
+          },
+          "source": { "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.6.0", "label": "github.com/taskforcesh/bullmq" }
+        },
+        {
+          "id": "rds-per-snapshot-billing",
+          "tag": "notable",
+          "date": "02 Nov 2026",
+          "title": {
+            "es": "Amazon RDS pasa a facturación por snapshot",
+            "en": "Amazon RDS moves to per-snapshot billing",
+            "fr": "Amazon RDS passe à la facturation par snapshot"
+          },
+          "body_html": {
+            "es": "<p>RDS ahora factura cada snapshot por separado, así que podés ver qué backup te está costando plata en vez de un total opaco. Buen momento para auditar retenciones.</p>",
+            "en": "<p>RDS now bills each snapshot individually, so you can see which backup costs what instead of an opaque total. Good moment to audit retention policies.</p>",
+            "fr": "<p>RDS facture désormais chaque snapshot séparément : on voit enfin quel backup coûte quoi.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-rds-per-snapshot-billing/", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "eks-argocd-notifications",
+      "updates": [
+        {
+          "id": "eks-argocd-notifications",
+          "tag": "minor",
+          "date": "03 Nov 2026",
+          "title": {
+            "es": "EKS Capabilities suma Argo CD Notifications",
+            "en": "EKS Capabilities adds Argo CD Notifications",
+            "fr": "EKS Capabilities ajoute Argo CD Notifications"
+          },
+          "body_html": {
+            "es": "<p>El Argo CD administrado de EKS ahora soporta Notifications: avisos de sync y health a Slack, webhooks y demás sin operar el controller vos mismo.</p>",
+            "en": "<p>EKS managed Argo CD now supports Notifications: sync and health alerts to Slack, webhooks and more without running the controller yourself.</p>",
+            "fr": "<p>L'Argo CD géré d'EKS prend en charge Notifications : alertes de sync et de santé sans gérer le contrôleur.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-eks-argo-cd-notifications", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "wrangler-4-157",
+          "tag": "minor",
+          "date": "03 Nov 2026",
+          "title": {
+            "es": "Wrangler 4.157: capas zstd para Containers y delete que ya no deja facturando",
+            "en": "Wrangler 4.157: zstd container layers and a delete that stops leaving bills behind",
+            "fr": "Wrangler 4.157 : couches zstd pour Containers et un delete qui ne laisse plus de factures"
+          },
+          "body_html": {
+            "es": "<p>Opt-in a compresión zstd con <code>WRANGLER_CONTAINER_IMAGE_COMPRESSION=zstd</code>, y <code>wrangler delete</code> ahora ofrece borrar las Container applications que antes quedaban corriendo (y facturando) después de eliminar el Worker.</p>",
+            "en": "<p>Opt into zstd layers with <code>WRANGLER_CONTAINER_IMAGE_COMPRESSION=zstd</code>, and <code>wrangler delete</code> now offers to remove Container applications that previously kept running (and billing) after the Worker was deleted.</p>",
+            "fr": "<p>Compression zstd via <code>WRANGLER_CONTAINER_IMAGE_COMPRESSION=zstd</code>, et <code>wrangler delete</code> propose de supprimer les Container applications qui restaient actives.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workers-sdk/releases/tag/wrangler@4.157.0", "label": "github.com/cloudflare/workers-sdk" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "linkedin-otel-journey",
+      "updates": [
+        {
+          "id": "linkedin-otel-journey",
+          "tag": "notable",
+          "date": "03 Nov 2026",
+          "title": {
+            "es": "LinkedIn traza el journey del usuario con OpenTelemetry, del tap al backend",
+            "en": "LinkedIn traces the member journey with OpenTelemetry, from tap to backend",
+            "fr": "LinkedIn trace le parcours membre avec OpenTelemetry, du tap au backend"
+          },
+          "body_html": {
+            "es": "<p>LinkedIn armó una plataforma OTel que une acciones en mobile y web con los servicios backend en un solo trace. Si tu observabilidad termina en el API gateway, esto te muestra lo que te estás perdiendo: latencia percibida real, no solo p99 de servidor.</p>",
+            "en": "<p>LinkedIn built an OTel platform linking mobile and web actions to backend services in a single trace. If your observability stops at the API gateway, this shows what you are missing: real perceived latency, not just server p99.</p>",
+            "fr": "<p>LinkedIn a construit une plateforme OTel reliant les actions mobile et web aux services backend dans une seule trace : la latence perçue réelle, pas seulement le p99 serveur.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/11/linkedin-opentelemetry-journey/", "label": "infoq.com" }
+        },
+        {
+          "id": "shopify-overexposed",
+          "tag": "notable",
+          "date": "02 Nov 2026",
+          "title": {
+            "es": "Shopify Overexposed: escanear Ingresses de GKE y Cloud Run expuestos sin auth",
+            "en": "Shopify Overexposed: scanning GKE Ingresses and Cloud Run exposed without auth",
+            "fr": "Shopify Overexposed : scanner les Ingresses GKE et Cloud Run exposés sans auth"
+          },
+          "body_html": {
+            "es": "<p>Shopify construyó un scanner interno que encuentra Ingresses y servicios Cloud Run alcanzables desde internet sin autenticación. El patrón vale oro: tratá la exposición accidental como un inventario continuo, no como una auditoría anual.</p>",
+            "en": "<p>Shopify built an internal scanner that finds GKE Ingresses and Cloud Run services reachable from the internet without authentication. The takeaway: treat accidental exposure as continuous inventory, not a yearly audit.</p>",
+            "fr": "<p>Shopify a créé un scanner interne qui repère les Ingresses et services Cloud Run accessibles sans authentification : l'exposition accidentelle comme inventaire continu.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/11/shopify-kubernetes-ingresses/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "nx-24-0-4",
+      "updates": [
+        {
+          "id": "nx-24-0-4",
+          "tag": "patch",
+          "date": "03 Nov 2026",
+          "title": {
+            "es": "Nx 24.0.4: patch con varios fixes de hardening",
+            "en": "Nx 24.0.4: a patch full of hardening fixes",
+            "fr": "Nx 24.0.4 : un patch plein de durcissements"
+          },
+          "body_html": {
+            "es": "<p>Parece un patch más, pero trae seguridad: el graph solo se sirve a requests locales same-origin, las credenciales de Nx Cloud salen de analytics y URLs, se endurece el git de <code>nx import</code>, y <code>init</code> pinnea y verifica las versiones que instala. Actualizá aunque no veas un CVE.</p>",
+            "en": "<p>Looks like a routine patch, but it is security-heavy: the graph is only served to local same-origin requests, Nx Cloud credentials stay out of analytics and URLs, <code>nx import</code> git handling is hardened, and <code>init</code> pins and verifies the versions it installs.</p>",
+            "fr": "<p>Patch orienté sécurité : le graph n'est servi qu'aux requêtes locales same-origin, les identifiants Nx Cloud sortent des analytics et des URLs, et <code>init</code> épingle et vérifie les versions installées.</p>"
+          },
+          "source": { "url": "https://github.com/nrwl/nx/releases/tag/24.0.4", "label": "github.com/nrwl/nx" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Semana de auth y cache: Next.js y better-auth publicaron tandas de advisories el mismo día, y casi todos son bugs de aislamiento entre usuarios, no RCEs.",
+      "en": "Auth and cache week: Next.js and better-auth shipped advisory batches the same day, and nearly all are cross-user isolation bugs rather than RCEs.",
+      "fr": "Semaine auth et cache : Next.js et better-auth ont publié des lots d'avis le même jour, presque tous des problèmes d'isolation entre utilisateurs."
+    },
+    {
+      "es": "El tooling (Nx, Wrangler) se endurece en silencio: fixes de seguridad sin CVE dentro de patches comunes. Leé los changelogs.",
+      "en": "Tooling (Nx, Wrangler) is quietly hardening: security fixes without CVEs inside ordinary patches. Read the changelogs.",
+      "fr": "L'outillage (Nx, Wrangler) se durcit discrètement : correctifs de sécurité sans CVE dans des patches ordinaires."
+    }
+  ]
+}

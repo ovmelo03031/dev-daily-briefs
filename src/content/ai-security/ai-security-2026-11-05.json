@@ -1,0 +1,192 @@
+{
+  "title": {
+    "es": "AI Security — 05 NOV 2026",
+    "en": "AI Security — 05 NOV 2026",
+    "fr": "AI Security — 05 NOV 2026"
+  },
+  "description": {
+    "es": "Google y Mandiant describen dos clusters de LLMjacking que ya le pasaron cerca de un millón de dólares en tokens a una sola víctima, Yuxi deja que un usuario común salte de su sandbox Docker a PostgreSQL y Neo4j (CVSS 9.9), DeepSeek Harness expone un control plane RPC sin autenticación, vLLM 0.33.0 cierra tres advisories, y AIlice carga modelos PEFT desde rutas no confiables.",
+    "en": "Google and Mandiant describe two LLMjacking clusters that passed nearly a million dollars in token costs to a single victim, Yuxi lets an ordinary user jump from its Docker sandbox to PostgreSQL and Neo4j (CVSS 9.9), DeepSeek Harness exposes an unauthenticated RPC control plane, vLLM 0.33.0 closes three advisories, and AIlice loads PEFT models from untrusted paths.",
+    "fr": "Google et Mandiant décrivent deux clusters de LLMjacking qui ont fait payer près d'un million de dollars de tokens à une seule victime, Yuxi laisse un simple utilisateur sortir de sa sandbox Docker vers PostgreSQL et Neo4j (CVSS 9,9), DeepSeek Harness expose un control plane RPC sans authentification, vLLM 0.33.0 corrige trois advisories, et AIlice charge des modèles PEFT depuis des chemins non fiables."
+  },
+  "pubDate": "2026-11-05",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "Google: LLMjacking de casi USD 1 millón",
+        "en": "Google: LLMjacking nears $1M in charges",
+        "fr": "Google : LLMjacking à près d'1 M$"
+      },
+      "anchor": "google-gtig-llmjacking",
+      "icon": "lucide:siren"
+    },
+    {
+      "text": {
+        "es": "Yuxi: escape de sandbox con CVSS 9.9",
+        "en": "Yuxi: CVSS 9.9 sandbox escape",
+        "fr": "Yuxi : évasion de sandbox CVSS 9,9"
+      },
+      "anchor": "yuxi-cve-2026-97693",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "DeepSeek Harness: RPC sin auth ejecuta shell",
+        "en": "DeepSeek Harness: unauth RPC runs shell",
+        "fr": "DeepSeek Harness : RPC sans auth, shell"
+      },
+      "anchor": "deepseek-harness-cve-2026-82033",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": {
+        "es": "vLLM 0.33.0 cierra tres advisories",
+        "en": "vLLM 0.33.0 closes three advisories",
+        "fr": "vLLM 0.33.0 corrige trois advisories"
+      },
+      "anchor": "vllm-0-33-advisories",
+      "icon": "lucide:shield-alert"
+    },
+    {
+      "text": {
+        "es": "AIlice carga PEFT desde rutas no confiables",
+        "en": "AIlice loads PEFT from untrusted paths",
+        "fr": "AIlice charge du PEFT non fiable"
+      },
+      "anchor": "ailice-cve-2026-122160",
+      "icon": "simple-icons:huggingface"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-incidents",
+      "name": "Top Incidents",
+      "theme": "top-incidents",
+      "icon_emoji": "🚨",
+      "anchor": "top-incidents",
+      "updates": [
+        {
+          "id": "google-gtig-llmjacking",
+          "tag": "breach",
+          "title": {
+            "es": "Google y Mandiant: dos clusters de LLMjacking revenden acceso a LLMs empresariales y una víctima absorbió casi un millón de dólares en tokens",
+            "en": "Google and Mandiant: two LLMjacking clusters resell access to enterprise LLMs, and one victim absorbed nearly a million dollars in tokens",
+            "fr": "Google et Mandiant : deux clusters de LLMjacking revendent l'accès à des LLM d'entreprise, et une victime a encaissé près d'un million de dollars de tokens"
+          },
+          "body_html": {
+            "es": "<p>El <strong>Google Threat Intelligence Group</strong> y <strong>Mandiant</strong> describen dos clusters coordinados: uno escanea endpoints de LLM expuestos y el otro roba API keys válidas de máquinas desprotegidas. Después revenden el acceso a través de «LLM mixers» que reenvían prompts a los servicios secuestrados, con picos de más de <strong>1.000 requests por segundo</strong> que el proveedor le factura a la víctima como uso normal. Algunas organizaciones vieron más de <strong>100.000 dólares en un solo día</strong>; según Google, el servicio <strong>Jet Night</strong> (que vende planes «ilimitados» a 60 dólares por mes) le trasladó casi un millón de dólares en tokens a una sola víctima. Los atacantes buscan credenciales cloud, service account keys, tokens de GitHub y API keys de LLM en logs, bases de datos y secret managers, y uno explotó <strong>CVE-2026-40217</strong> en el endpoint de testing de guardrails de LiteLLM. Ojo con esto: rotá keys, poné límites de gasto y uso por API, y monitoreá los logs de inferencia.</p>",
+            "en": "<p>The <strong>Google Threat Intelligence Group</strong> and <strong>Mandiant</strong> describe two coordinated clusters: one scans for exposed LLM endpoints and the other steals valid API keys from unprotected machines. They then resell access through «LLM mixers» that relay prompts to the hijacked services, with spikes above <strong>1,000 requests per second</strong> that the provider bills to the victim as normal usage. Some organizations saw more than <strong>$100,000 in a single day</strong>; per Google, the <strong>Jet Night</strong> service (which sells «unlimited» plans for $60 a month) passed nearly a million dollars in token costs to one victim. The actors hunt for cloud credentials, service account keys, GitHub tokens and LLM API keys in logs, databases and secret managers, and one exploited <strong>CVE-2026-40217</strong> in LiteLLM's guardrail testing endpoint. Rotate keys, set per-API spend and usage limits, and monitor inference logs.</p>",
+            "fr": "<p>Le <strong>Google Threat Intelligence Group</strong> et <strong>Mandiant</strong> décrivent deux clusters coordonnés : l'un scanne les endpoints LLM exposés, l'autre vole des API keys valides sur des machines non protégées. L'accès est ensuite revendu via des «LLM mixers» qui relaient les prompts vers les services détournés, avec des pics de plus de <strong>1 000 requêtes par seconde</strong> facturés à la victime comme un usage normal. Certaines organisations ont vu plus de <strong>100 000 dollars en une seule journée</strong> ; selon Google, le service <strong>Jet Night</strong> (qui vend des forfaits «illimités» à 60 dollars par mois) a fait payer près d'un million de dollars de tokens à une seule victime. Les attaquants cherchent identifiants cloud, clés de service accounts, tokens GitHub et API keys LLM dans les logs, bases de données et secret managers, et l'un a exploité <strong>CVE-2026-40217</strong> dans l'endpoint de test des guardrails de LiteLLM. Faites tourner les clés, fixez des plafonds de dépense par API et surveillez les logs d'inférence.</p>"
+          },
+          "date": "03 Nov 2026",
+          "source": {
+            "url": "https://www.bleepingcomputer.com/news/security/google-llmjacking-attacks-rack-up-1-million-in-cloud-ai-charges/",
+            "label": "BleepingComputer"
+          }
+        }
+      ]
+    },
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "yuxi-cve-2026-97693",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-97693: los sandboxes Docker de Yuxi no están aislados de PostgreSQL, Neo4j y MinIO (CVSS 9.9)",
+            "en": "CVE-2026-97693: Yuxi's Docker sandboxes are not isolated from PostgreSQL, Neo4j and MinIO (CVSS 9.9)",
+            "fr": "CVE-2026-97693 : les sandboxes Docker de Yuxi ne sont pas isolées de PostgreSQL, Neo4j et MinIO (CVSS 9,9)"
+          },
+          "body_html": {
+            "es": "<p><strong>Yuxi</strong>, una plataforma de knowledge base y desarrollo de agentes basada en LLMs, no aísla sus sandboxes Docker de los servicios de confianza desde <strong>0.6.0.beta1</strong> y antes de <strong>0.7.1</strong>. Un usuario autenticado con pocos privilegios puede llegar a las APIs y archivos de los sandboxes de otros tenants, y también a <strong>PostgreSQL, Neo4j o MinIO</strong> usando las credenciales por defecto que trae el Compose. El advisory agrega que la cuenta superuser de PostgreSQL puede dar ejecución de comandos en el contenedor de la base. CVSS v3.1 <strong>9.9</strong> con scope changed. Ojo con esto: actualizar a 0.7.1 no alcanza, porque el upgrade de Compose <strong>no rota</strong> las credenciales ya persistidas; tenés que cambiarlas a mano.</p>",
+            "en": "<p><strong>Yuxi</strong>, an LLM-based knowledge base and agent development platform, does not isolate its Docker sandboxes from trusted services from <strong>0.6.0.beta1</strong> up to (not including) <strong>0.7.1</strong>. An authenticated low-privileged user can reach other tenants' sandbox APIs and files, and also <strong>PostgreSQL, Neo4j or MinIO</strong> using the default credentials shipped in the Compose file. The advisory adds that the PostgreSQL superuser account can yield command execution in the database container. CVSS v3.1 <strong>9.9</strong> with changed scope. Upgrading to 0.7.1 is not enough: the Compose upgrade <strong>does not rotate</strong> already-persisted credentials, so change them by hand.</p>",
+            "fr": "<p><strong>Yuxi</strong>, plateforme de knowledge base et de développement d'agents basée sur des LLM, n'isole pas ses sandboxes Docker des services de confiance de la <strong>0.6.0.beta1</strong> jusqu'à la <strong>0.7.1</strong> exclue. Un utilisateur authentifié peu privilégié peut atteindre les APIs et fichiers des sandboxes d'autres tenants, ainsi que <strong>PostgreSQL, Neo4j ou MinIO</strong> avec les identifiants par défaut fournis dans le Compose. L'advisory ajoute que le compte superuser PostgreSQL peut mener à l'exécution de commandes dans le conteneur de la base. CVSS v3.1 <strong>9,9</strong>, scope changed. Passer en 0.7.1 ne suffit pas : la mise à jour du Compose <strong>ne fait pas tourner</strong> les identifiants déjà persistés, il faut les changer à la main.</p>"
+          },
+          "date": "04 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-97693",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "deepseek-harness-cve-2026-82033",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-82033: el control plane RPC de DeepSeek Harness no tiene autenticación y cualquier proceso local puede ejecutar shell como la víctima",
+            "en": "CVE-2026-82033: DeepSeek Harness's RPC control plane has no authentication, so any local process can run shell commands as the victim",
+            "fr": "CVE-2026-82033 : le control plane RPC de DeepSeek Harness n'a pas d'authentification, n'importe quel processus local peut lancer des commandes shell comme la victime"
+          },
+          "body_html": {
+            "es": "<p>En <strong>deepseek-harness</strong>, el agente de coding de deepseek-ai, el perfil web levanta un control plane RPC por HTTP y WebSocket <strong>sin autenticación</strong>. Cualquier proceso local, incluso de otro usuario del sistema, puede llamar a <code>session.create</code> y <code>session.prompt</code>: eso ejecuta comandos de shell como el usuario víctima con sus credenciales de modelo, permite leer el tráfico de las sesiones y saltea los chequeos de aprobación de tools. CVSS v3.1 <strong>8.4</strong> (v4.0 8.6). Corregido en <code>0.1.2-alpha.2</code> (tag <code>dsh-v0.1.2-alpha.2</code>). Ojo con esto en máquinas compartidas y servidores de desarrollo multiusuario.</p>",
+            "en": "<p>In <strong>deepseek-harness</strong>, deepseek-ai's coding agent, the web profile starts an HTTP and WebSocket RPC control plane with <strong>no authentication</strong>. Any local process, including one running as another OS user, can call <code>session.create</code> and <code>session.prompt</code>: that runs shell commands as the victim user with their model credentials, exposes session traffic and bypasses tool-approval checks. CVSS v3.1 <strong>8.4</strong> (v4.0 8.6). Fixed in <code>0.1.2-alpha.2</code> (tag <code>dsh-v0.1.2-alpha.2</code>). Watch out on shared machines and multi-user dev servers.</p>",
+            "fr": "<p>Dans <strong>deepseek-harness</strong>, l'agent de code de deepseek-ai, le profil web démarre un control plane RPC HTTP et WebSocket <strong>sans authentification</strong>. N'importe quel processus local, y compris sous un autre utilisateur, peut appeler <code>session.create</code> et <code>session.prompt</code> : cela exécute des commandes shell en tant que victime avec ses identifiants de modèle, expose le trafic des sessions et contourne l'approbation des tools. CVSS v3.1 <strong>8,4</strong> (v4.0 8,6). Corrigé en <code>0.1.2-alpha.2</code> (tag <code>dsh-v0.1.2-alpha.2</code>). Prudence sur les machines partagées et les serveurs de dev multi-utilisateurs.</p>"
+          },
+          "date": "04 Nov 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-h3m7-c9pq-7995",
+            "label": "GitHub Advisory"
+          }
+        },
+        {
+          "id": "vllm-0-33-advisories",
+          "tag": "patch",
+          "title": {
+            "es": "vLLM 0.33.0 cierra un crash de EngineCore sin autenticación, agotamiento por media y un directory traversal en Speculators",
+            "en": "vLLM 0.33.0 closes an unauthenticated EngineCore crash, media resource exhaustion and a Speculators directory traversal",
+            "fr": "vLLM 0.33.0 corrige un crash d'EngineCore sans authentification, un épuisement via les médias et un directory traversal dans Speculators"
+          },
+          "body_html": {
+            "es": "<p>El proyecto <strong>vLLM</strong> publicó tres advisories, todos corregidos en <strong>0.33.0</strong>. <code>GHSA-q9v9-qpjp-fc24</code> (CVSS 7.5) permite tumbar el <strong>EngineCore</strong> sin autenticación con un token id fuera de rango cuando corre con <code>skip_tokenizer_init</code>; es un fix incompleto de un advisory anterior. <code>GHSA-5r3c-5x4v-8gjh</code> (CVSS 7.5) agota los recursos del frontend con un solo request porque no hay presupuesto de media por request. <code>GHSA-qrj2-j723-m6w8</code> (CVSS 5.4) es un directory traversal vía <code>verifier.name_or_path</code> en la config de Speculators que filtra información. Si exponés vLLM a clientes no confiables, actualizá ya.</p>",
+            "en": "<p>The <strong>vLLM</strong> project published three advisories, all fixed in <strong>0.33.0</strong>. <code>GHSA-q9v9-qpjp-fc24</code> (CVSS 7.5) lets an unauthenticated client crash the <strong>EngineCore</strong> with an out-of-range prompt token id when running with <code>skip_tokenizer_init</code>; it is an incomplete fix of an earlier advisory. <code>GHSA-5r3c-5x4v-8gjh</code> (CVSS 7.5) exhausts frontend resources with a single request because there is no request-wide media budget. <code>GHSA-qrj2-j723-m6w8</code> (CVSS 5.4) is a directory traversal through <code>verifier.name_or_path</code> in the Speculators config that discloses information. If you expose vLLM to untrusted clients, upgrade now.</p>",
+            "fr": "<p>Le projet <strong>vLLM</strong> a publié trois advisories, tous corrigés en <strong>0.33.0</strong>. <code>GHSA-q9v9-qpjp-fc24</code> (CVSS 7,5) permet à un client non authentifié de faire planter l'<strong>EngineCore</strong> avec un token id hors limites quand <code>skip_tokenizer_init</code> est actif ; c'est un correctif incomplet d'un advisory précédent. <code>GHSA-5r3c-5x4v-8gjh</code> (CVSS 7,5) épuise les ressources du frontend en une seule requête faute de budget média par requête. <code>GHSA-qrj2-j723-m6w8</code> (CVSS 5,4) est un directory traversal via <code>verifier.name_or_path</code> dans la config Speculators qui divulgue des informations. Si vous exposez vLLM à des clients non fiables, mettez à jour.</p>"
+          },
+          "date": "02 Nov 2026",
+          "source": {
+            "url": "https://github.com/vllm-project/vllm/security/advisories/GHSA-q9v9-qpjp-fc24",
+            "label": "vLLM GitHub Advisory"
+          }
+        }
+      ]
+    },
+    {
+      "id": "supply-chain",
+      "name": "Supply Chain",
+      "theme": "supply-chain",
+      "icon_emoji": "📦",
+      "anchor": "supply-chain",
+      "updates": [
+        {
+          "id": "ailice-cve-2026-122160",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-122160: AIlice carga adaptadores PEFT desde un base_model_name_or_path no confiable, con exploit público y sin fix",
+            "en": "CVE-2026-122160: AIlice loads PEFT adapters from an untrusted base_model_name_or_path, with a public exploit and no fix",
+            "fr": "CVE-2026-122160 : AIlice charge des adaptateurs PEFT depuis un base_model_name_or_path non fiable, exploit public et pas de correctif"
+          },
+          "body_html": {
+            "es": "<p>En <strong>AIlice</strong> de myshell-ai hasta la <strong>0.4.0</strong>, la función <code>LoadModel_PEFT</code> de <code>ailice/core/llm/AModelCausalLM.py</code> usa el <code>base_model_name_or_path</code> del adaptador para cargar funcionalidad desde una fuente no confiable (CWE-829), lo que habilita RCE si el modelo viene de un repo del hub controlado por el atacante. Es la clase de siempre: la config de un modelo decide qué código corre. CVSS v3.1 <strong>6.3</strong> (requiere interacción del usuario). Hay exploit público y el vendor no respondió al reporte, así que no hay versión corregida. Cargá solo adaptadores de orígenes que controlás.</p>",
+            "en": "<p>In myshell-ai's <strong>AIlice</strong> through <strong>0.4.0</strong>, the <code>LoadModel_PEFT</code> function in <code>ailice/core/llm/AModelCausalLM.py</code> uses the adapter's <code>base_model_name_or_path</code> to load functionality from an untrusted control sphere (CWE-829), enabling RCE when the model comes from an attacker-controlled hub repo. It is the usual class: a model's config decides what code runs. CVSS v3.1 <strong>6.3</strong> (requires user interaction). A public exploit exists and the vendor did not respond to the report, so there is no fixed version. Only load adapters from sources you control.</p>",
+            "fr": "<p>Dans <strong>AIlice</strong> de myshell-ai jusqu'à la <strong>0.4.0</strong>, la fonction <code>LoadModel_PEFT</code> de <code>ailice/core/llm/AModelCausalLM.py</code> utilise le <code>base_model_name_or_path</code> de l'adaptateur pour charger des fonctionnalités depuis une source non fiable (CWE-829), ce qui permet une RCE si le modèle vient d'un dépôt du hub contrôlé par l'attaquant. Classe habituelle : la config d'un modèle décide du code exécuté. CVSS v3.1 <strong>6,3</strong> (interaction utilisateur requise). Un exploit public existe et l'éditeur n'a pas répondu, donc aucune version corrigée. Ne chargez que des adaptateurs de sources que vous contrôlez.</p>"
+          },
+          "date": "05 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-122160",
+            "label": "OpenCVE"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Las plataformas de agentes siguen cayendo por lo mismo: el control plane. Yuxi deja el sandbox hablar con la base, DeepSeek Harness deja cualquier proceso local mandar prompts, y el LLMjacking que describe Google vive de endpoints y keys expuestas. El modelo no es el problema; el problema es quién puede hablarle al runtime que lo rodea.",
+      "en": "Agent platforms keep falling for the same reason: the control plane. Yuxi lets the sandbox talk to the database, DeepSeek Harness lets any local process send prompts, and the LLMjacking Google describes lives on exposed endpoints and keys. The model is not the problem; the problem is who can talk to the runtime around it.",
+      "fr": "Les plateformes d'agents tombent toujours pour la même raison : le control plane. Yuxi laisse la sandbox parler à la base, DeepSeek Harness laisse n'importe quel processus local envoyer des prompts, et le LLMjacking décrit par Google vit d'endpoints et de clés exposés. Le modèle n'est pas le problème ; le problème, c'est qui peut parler au runtime qui l'entoure."
+    }
+  ]
+}

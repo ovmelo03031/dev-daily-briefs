@@ -1,0 +1,283 @@
+{
+  "title": {
+    "es": "Dev News — 6 Nov 2026: Playwright 1.65 corre sobre Bun y React Native 0.89 entra en RC",
+    "en": "Dev News — 6 Nov 2026: Playwright 1.65 runs on Bun and React Native 0.89 hits RC",
+    "fr": "Dev News — 6 nov. 2026 : Playwright 1.65 tourne sur Bun et React Native 0.89 passe en RC"
+  },
+  "description": {
+    "es": "Playwright 1.65 con soporte para Bun y varios breaking changes, React Native 0.89.0-rc.0 limpia APIs del bridge, Rolldown 1.3 suma import attributes, SvelteKit 2.70.4 cierra agujeros de seguridad y VS Code 1.145 trae agentes remotos.",
+    "en": "Playwright 1.65 with Bun support and several breaking changes, React Native 0.89.0-rc.0 removing bridge-era APIs, Rolldown 1.3 adding import attributes, SvelteKit 2.70.4 closing security holes and VS Code 1.145 shipping remote agents.",
+    "fr": "Playwright 1.65 avec le support de Bun et plusieurs breaking changes, React Native 0.89.0-rc.0 qui retire les API du bridge, Rolldown 1.3 qui ajoute les import attributes, SvelteKit 2.70.4 qui corrige des failles et VS Code 1.145 avec des agents distants."
+  },
+  "pubDate": "2026-11-06",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": { "es": "Playwright 1.65: tests sobre Bun + breaking changes", "en": "Playwright 1.65: tests on Bun + breaking changes", "fr": "Playwright 1.65 : tests sur Bun + breaking changes" },
+      "anchor": "playwright-1-65",
+      "icon": "lucide:flame"
+    },
+    {
+      "text": { "es": "React Native 0.89.0-rc.0: chau APIs del bridge", "en": "React Native 0.89.0-rc.0: bridge APIs removed", "fr": "React Native 0.89.0-rc.0 : API du bridge retirées" },
+      "anchor": "react-native-0-89-rc0",
+      "icon": "simple-icons:react"
+    },
+    {
+      "text": { "es": "Rolldown 1.3: import attributes experimentales", "en": "Rolldown 1.3: experimental import attributes", "fr": "Rolldown 1.3 : import attributes expérimentaux" },
+      "anchor": "rolldown-1-3",
+      "icon": "lucide:package"
+    },
+    {
+      "text": { "es": "SvelteKit 2.70.4: cinco fixes de seguridad", "en": "SvelteKit 2.70.4: five security fixes", "fr": "SvelteKit 2.70.4 : cinq correctifs de sécurité" },
+      "anchor": "sveltekit-2-70-4",
+      "icon": "simple-icons:svelte"
+    },
+    {
+      "text": { "es": "VS Code 1.145: agentes remotos y automations", "en": "VS Code 1.145: remote agents and automations", "fr": "VS Code 1.145 : agents distants et automations" },
+      "anchor": "vscode-1-145",
+      "icon": "simple-icons:visualstudiocode"
+    },
+    {
+      "text": { "es": "Safari TP 256: tanda grande de fixes CSS", "en": "Safari TP 256: a big batch of CSS fixes", "fr": "Safari TP 256 : un gros lot de correctifs CSS" },
+      "anchor": "safari-tp-256",
+      "icon": "simple-icons:css"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "playwright-1-65",
+          "tag": "breaking",
+          "date": "05 Nov 2026",
+          "title": {
+            "es": "Playwright 1.65: el test runner corre sobre Bun, reporter de solo fallos y una lista de breaking changes para leer",
+            "en": "Playwright 1.65: the test runner runs on Bun, a failures-only reporter and a breaking-changes list worth reading",
+            "fr": "Playwright 1.65 : le test runner tourne sur Bun, un reporter dédié aux échecs et des breaking changes à lire"
+          },
+          "body_html": {
+            "es": "<p>Con <code>bunx --bun playwright test</code> el runner ahora corre sobre <strong>Bun</strong>, que transpila el TypeScript solo (sin Babel). Eso sí: no hay watch mode, <code>--tsconfig</code> no aplica y los stack traces pierden frames async. Suma un reporter <code>failures</code>, la opción <code>onlyFailures</code> para HTML/JSON/JUnit y un lock <code>-exclusive-</code> para tests que tienen que correr solos.</p><p>Ojo con los breaking changes: las class fields siguen <code>useDefineForClassFields</code> (un page object que inicializa <code>this.page.getByRole(...)</code> como field ahora tira <code>TypeError</code>), las acciones esperan a que el elemento no sea <code>inert</code>, el matching de cookies sigue RFC 6265, las credenciales del <code>proxy</code> ya no se mandan a los sitios y se cae el soporte de Node.js 20. Leé las notas antes de subir la versión en CI.</p>",
+            "en": "<p>With <code>bunx --bun playwright test</code> the runner now executes on <strong>Bun</strong>, which transpiles TypeScript itself (no Babel). Caveats: no watch mode, <code>--tsconfig</code> has no effect and stack traces lose async frames. It also adds a <code>failures</code> reporter, an <code>onlyFailures</code> option for HTML/JSON/JUnit and an <code>-exclusive-</code> lock for tests that must run alone.</p><p>Mind the breaking changes: class fields now follow <code>useDefineForClassFields</code> (a page object initialising <code>this.page.getByRole(...)</code> as a field now throws a <code>TypeError</code>), actions wait for elements to stop being <code>inert</code>, cookie matching follows RFC 6265, <code>proxy</code> credentials are no longer sent to websites, and Node.js 20 is no longer tested. Read the notes before bumping it in CI.</p>",
+            "fr": "<p>Avec <code>bunx --bun playwright test</code>, le runner tourne désormais sur <strong>Bun</strong>, qui transpile lui-même le TypeScript (sans Babel). Limites : pas de watch mode, <code>--tsconfig</code> sans effet et des stack traces sans frames async. On gagne aussi un reporter <code>failures</code>, l'option <code>onlyFailures</code> pour HTML/JSON/JUnit et un verrou <code>-exclusive-</code> pour les tests qui doivent tourner seuls.</p><p>Attention aux breaking changes : les class fields suivent <code>useDefineForClassFields</code> (un page object qui initialise <code>this.page.getByRole(...)</code> en field lève une <code>TypeError</code>), les actions attendent que l'élément ne soit plus <code>inert</code>, le matching des cookies suit la RFC 6265, les identifiants du <code>proxy</code> ne partent plus vers les sites et Node.js 20 n'est plus testé.</p>"
+          },
+          "source": { "url": "https://github.com/microsoft/playwright/releases/tag/v1.65.0", "label": "github.com/microsoft/playwright" }
+        },
+        {
+          "id": "rolldown-1-3",
+          "tag": "notable",
+          "date": "05 Nov 2026",
+          "title": {
+            "es": "Rolldown 1.3: import attributes experimentales y un build report pensado para agentes",
+            "en": "Rolldown 1.3: experimental import attributes and an agent-friendly build report",
+            "fr": "Rolldown 1.3 : import attributes expérimentaux et un build report pensé pour les agents"
+          },
+          "body_html": {
+            "es": "<p>Con <code>experimental.importAttributes</code>, Rolldown entiende <code>with { type: 'json' }</code>, <code>'text'</code> y <code>'bytes'</code> sin plugins, y el mismo archivo importado con atributos distintos pasa a ser módulos distintos (diseño alineado con Rollup 5). También estrena <code>devtools: { mode: 'report' }</code>, que escribe Markdown y JSON con tiempos, chunks y paquetes duplicados en <code>node_modules/.rolldown/report/</code>.</p><p>Ojo con esto: <strong>no fuerces <code>rolldown@1.3.0</code> en Vite</strong> con <code>overrides</code>; Vite 8.3.6 y anteriores todavía no lo soportan. Además trae cambios de comportamiento por defecto respecto de la 1.2.16.</p>",
+            "en": "<p>With <code>experimental.importAttributes</code>, Rolldown handles <code>with { type: 'json' }</code>, <code>'text'</code> and <code>'bytes'</code> without plugins, and the same file imported with different attributes becomes different modules (design aligned with Rollup 5). It also debuts <code>devtools: { mode: 'report' }</code>, which writes Markdown and JSON about timings, chunks and duplicated packages to <code>node_modules/.rolldown/report/</code>.</p><p>Heads up: <strong>do not force <code>rolldown@1.3.0</code> into Vite</strong> via <code>overrides</code>; Vite 8.3.6 and earlier do not support it yet. The release also changes some default behaviour compared to 1.2.16.</p>",
+            "fr": "<p>Avec <code>experimental.importAttributes</code>, Rolldown gère <code>with { type: 'json' }</code>, <code>'text'</code> et <code>'bytes'</code> sans plugin, et un même fichier importé avec des attributs différents devient des modules distincts (conception alignée sur Rollup 5). Nouveauté aussi : <code>devtools: { mode: 'report' }</code>, qui écrit du Markdown et du JSON sur les temps, chunks et paquets dupliqués dans <code>node_modules/.rolldown/report/</code>.</p><p>Attention : <strong>ne forcez pas <code>rolldown@1.3.0</code> dans Vite</strong> via <code>overrides</code> ; Vite 8.3.6 et antérieurs ne le supportent pas encore.</p>"
+          },
+          "source": { "url": "https://github.com/rolldown/rolldown/releases/tag/v1.3.0", "label": "github.com/rolldown/rolldown" }
+        }
+      ]
+    },
+    {
+      "id": "react-native",
+      "name": "React Native",
+      "theme": "react-native",
+      "icon_emoji": "📱",
+      "anchor": "react-native",
+      "updates": [
+        {
+          "id": "react-native-0-89-rc0",
+          "tag": "beta",
+          "date": "04 Nov 2026",
+          "title": {
+            "es": "React Native 0.89.0-rc.0: se van los flags del bridge, llegan useAppState y structuredClone",
+            "en": "React Native 0.89.0-rc.0: bridge flags removed, useAppState and structuredClone arrive",
+            "fr": "React Native 0.89.0-rc.0 : adieu les flags du bridge, bonjour useAppState et structuredClone"
+          },
+          "body_html": {
+            "es": "<p>Primer RC de la 0.89 con limpieza fuerte: se eliminan <code>bridgelessEnabled</code>, <code>fabricEnabled</code> y los inicializadores viejos en Android e iOS (bridgeless ya es lo único), se borra <code>RCTNativeAnimatedModule</code> legacy, <code>react-native/assets-registry</code> desaparece y <code>community-cli-plugin</code> tiene que ir explícito en <code>devDependencies</code>.</p><p>Lo nuevo: hook <code>useAppState()</code>, <code>structuredClone</code> y <code>DOMException</code> como globals, props <code>lineBreak</code>/<code>wordBreak</code> en <code>Text</code> para Android 13+. Ojo si mantenés librerías nativas: el codegen JNI pre-generado tiene que regenerarse con el de la 0.89 o no compila.</p>",
+            "en": "<p>The first 0.89 RC is a heavy cleanup: <code>bridgelessEnabled</code>, <code>fabricEnabled</code> and the old initialisers are removed on Android and iOS (bridgeless is now the only mode), the legacy <code>RCTNativeAnimatedModule</code> is gone, <code>react-native/assets-registry</code> is removed and <code>community-cli-plugin</code> must now be listed in <code>devDependencies</code>.</p><p>New: a <code>useAppState()</code> hook, <code>structuredClone</code> and <code>DOMException</code> as globals, and <code>lineBreak</code>/<code>wordBreak</code> props on <code>Text</code> for Android 13+. Library maintainers: pre-generated JNI codegen must be regenerated with 0.89's codegen or it will not build.</p>",
+            "fr": "<p>Le premier RC de la 0.89 fait le ménage : <code>bridgelessEnabled</code>, <code>fabricEnabled</code> et les anciens initialiseurs disparaissent sur Android et iOS (bridgeless est désormais le seul mode), l'ancien <code>RCTNativeAnimatedModule</code> est supprimé, <code>react-native/assets-registry</code> aussi, et <code>community-cli-plugin</code> doit figurer dans les <code>devDependencies</code>.</p><p>Nouveautés : un hook <code>useAppState()</code>, <code>structuredClone</code> et <code>DOMException</code> en globals, et les props <code>lineBreak</code>/<code>wordBreak</code> sur <code>Text</code> pour Android 13+. Le codegen JNI pré-généré des librairies doit être regénéré avec celui de la 0.89.</p>"
+          },
+          "source": { "url": "https://github.com/facebook/react-native/releases/tag/v0.89.0-rc.0", "label": "github.com/facebook/react-native" }
+        }
+      ]
+    },
+    {
+      "id": "css",
+      "name": "CSS",
+      "theme": "css",
+      "icon_emoji": "🎨",
+      "anchor": "css",
+      "updates": [
+        {
+          "id": "safari-tp-256",
+          "tag": "minor",
+          "date": "04 Nov 2026",
+          "title": {
+            "es": "Safari Technology Preview 256: line-clamp, grid y font-palette-mix() pulidos",
+            "en": "Safari Technology Preview 256: line-clamp, grid and font-palette-mix() polished",
+            "fr": "Safari Technology Preview 256 : line-clamp, grid et font-palette-mix() peaufinés"
+          },
+          "body_html": {
+            "es": "<p>La STP 256 llega para macOS Golden Gate y Tahoe con una lista larga de fixes, mayormente de CSS: <code>line-clamp</code>, grid y <code>font-palette-mix()</code>, más arreglos en estilos de texto de canvas y en WebCodecs. Nada rompedor, pero es el adelanto de lo que viene en el próximo Safari.</p>",
+            "en": "<p>STP 256 ships for macOS Golden Gate and Tahoe with a long list of fixes, mostly CSS: <code>line-clamp</code>, grid and <code>font-palette-mix()</code>, plus canvas text styling and WebCodecs fixes. Nothing breaking, but it previews what lands in the next Safari.</p>",
+            "fr": "<p>La STP 256 sort pour macOS Golden Gate et Tahoe avec une longue liste de correctifs, surtout CSS : <code>line-clamp</code>, grid et <code>font-palette-mix()</code>, plus des corrections sur le style de texte canvas et WebCodecs.</p>"
+          },
+          "source": { "url": "https://webkit.org/blog/18602/release-notes-for-safari-technology-preview-256/", "label": "webkit.org" }
+        }
+      ]
+    },
+    {
+      "id": "js-frameworks",
+      "name": "JS Frameworks",
+      "theme": "js-frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "js-frameworks",
+      "updates": [
+        {
+          "id": "sveltekit-2-70-4",
+          "tag": "security",
+          "date": "05 Nov 2026",
+          "title": {
+            "es": "SvelteKit 2.70.4: path traversal en Windows, rutas con // y self-fetch que seguía redirects",
+            "en": "SvelteKit 2.70.4: Windows path traversal, // pathnames and self-fetch following redirects",
+            "fr": "SvelteKit 2.70.4 : path traversal sous Windows, chemins en // et self-fetch qui suivait les redirects"
+          },
+          "body_html": {
+            "es": "<p>Un único PR (#17620) trae cinco fixes con olor a seguridad: evita que la resolución de rutas en el server cargue código de otro origen con pathnames que empiezan con <code>//</code>, impide que los self-fetch del server sigan redirects, cierra un path traversal en <code>preview</code> de páginas prerenderizadas en Windows, escapa headers <code>cache-control</code> en el HTML prerenderizado y devuelve 400 cuando <code>reroute</code> recibe un pathname malformado. Actualizá junto con los adapters, que salieron el mismo día.</p>",
+            "en": "<p>A single PR (#17620) bundles five security-flavoured fixes: server-side route resolution can no longer load code from another origin for pathnames starting with <code>//</code>, server self-fetch fallbacks no longer follow redirects, a Windows path traversal in <code>preview</code> of prerendered pages is closed, <code>cache-control</code> headers in prerendered HTML are escaped, and <code>reroute</code> returns a 400 on malformed pathnames. Upgrade alongside the adapters released the same day.</p>",
+            "fr": "<p>Une seule PR (#17620) regroupe cinq correctifs de sécurité : la résolution de routes côté serveur ne charge plus de code d'une autre origine pour les chemins commençant par <code>//</code>, les self-fetch serveur ne suivent plus les redirects, un path traversal Windows dans le <code>preview</code> des pages prérendues est corrigé, les headers <code>cache-control</code> du HTML prérendu sont échappés et <code>reroute</code> renvoie un 400 sur un chemin malformé.</p>"
+          },
+          "source": { "url": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs%2Fkit%402.70.4", "label": "github.com/sveltejs/kit" }
+        },
+        {
+          "id": "astro-7-4-6",
+          "tag": "patch",
+          "date": "05 Nov 2026",
+          "title": {
+            "es": "Astro 7.4.6: astro check ahora falla en CI si falta TypeScript, y arreglos de fallback i18n",
+            "en": "Astro 7.4.6: astro check now fails CI when TypeScript is missing, plus i18n fallback fixes",
+            "fr": "Astro 7.4.6 : astro check échoue en CI si TypeScript manque, et correctifs de fallback i18n"
+          },
+          "body_html": {
+            "es": "<p>Un cambio chiquito con impacto en pipelines: <code>astro check</code> salía con código 0 si no estaban instalados <code>@astrojs/check</code> o <code>typescript</code>, así que el type checking se salteaba en silencio. Ahora sale con 1. También corrige el fallback i18n en páginas on-demand (antes devolvía 302 sin <code>Location</code>) y un <code>EPIPE</code> al pipear la salida de <code>astro check</code>.</p>",
+            "en": "<p>A small change with pipeline impact: <code>astro check</code> exited 0 when <code>@astrojs/check</code> or <code>typescript</code> was missing, silently skipping type checking. It now exits 1. It also fixes i18n fallback for on-demand pages (previously a 302 with no <code>Location</code>) and an <code>EPIPE</code> crash when piping <code>astro check</code> output.</p>",
+            "fr": "<p>Petit changement, gros effet sur les pipelines : <code>astro check</code> sortait en 0 sans <code>@astrojs/check</code> ou <code>typescript</code>, sautant le type checking en silence. Il sort désormais en 1. Corrige aussi le fallback i18n des pages on-demand (un 302 sans <code>Location</code>) et un crash <code>EPIPE</code>.</p>"
+          },
+          "source": { "url": "https://github.com/withastro/astro/releases/tag/astro%407.4.6", "label": "github.com/withastro/astro" }
+        }
+      ]
+    },
+    {
+      "id": "build-tools",
+      "name": "Build Tools & Runtimes",
+      "theme": "build-tools",
+      "icon_emoji": "🔧",
+      "anchor": "build-tools",
+      "updates": [
+        {
+          "id": "vite-8-3-6",
+          "tag": "patch",
+          "date": "05 Nov 2026",
+          "title": {
+            "es": "Vite 8.3.6: escape de atributos HTML en el dev server y fixes del bundled dev",
+            "en": "Vite 8.3.6: HTML attribute escaping in the dev server and bundled-dev fixes",
+            "fr": "Vite 8.3.6 : échappement des attributs HTML dans le dev server et correctifs du bundled dev"
+          },
+          "body_html": {
+            "es": "<p>Patch con una veintena de fixes: el server ahora escapa atributos HTML, <code>server.forwardConsole</code> escapa secuencias ANSI, el optimizer resuelve subpath imports (<code>#</code>) con el resolver de Vite y el modo bundled dev permite named imports de built-ins de Node. Es la versión a la que apunta el aviso de Rolldown 1.3: todavía no lo soporta.</p>",
+            "en": "<p>A patch with around twenty fixes: the server now escapes HTML attributes, <code>server.forwardConsole</code> escapes ANSI sequences, the optimizer resolves subpath imports (<code>#</code>) with Vite's resolver, and bundled dev mode allows named imports from Node built-ins. It is the version Rolldown 1.3's warning refers to: it does not support 1.3 yet.</p>",
+            "fr": "<p>Un patch d'une vingtaine de correctifs : le serveur échappe désormais les attributs HTML, <code>server.forwardConsole</code> échappe les séquences ANSI, l'optimizer résout les subpath imports (<code>#</code>) avec le resolver de Vite et le bundled dev accepte les named imports des built-ins Node.</p>"
+          },
+          "source": { "url": "https://github.com/vitejs/vite/releases/tag/v8.3.6", "label": "github.com/vitejs/vite" }
+        }
+      ]
+    },
+    {
+      "id": "dev-tools",
+      "name": "Developer Tools",
+      "theme": "dev-tools",
+      "icon_emoji": "🛠️",
+      "anchor": "dev-tools",
+      "updates": [
+        {
+          "id": "vscode-1-145",
+          "tag": "release",
+          "date": "04 Nov 2026",
+          "title": {
+            "es": "VS Code 1.145: agentes remotos en preview, automations con cron y files.exclude con negación",
+            "en": "VS Code 1.145: remote agents in preview, cron automations and negated files.exclude",
+            "fr": "VS Code 1.145 : agents distants en preview, automations cron et files.exclude avec négation"
+          },
+          "body_html": {
+            "es": "<p>El navegador integrado de la ventana de Agents puede cargar páginas a través de un host de agente remoto, las automations locales aceptan cron de cinco campos y custom agents del workspace, y Chat suma modos Conversation/Verbose/Compact. El detalle más útil para el día a día: un prefijo <code>!</code> en <code>files.exclude</code> mantiene visibles archivos que de otro modo quedarían ocultos. El 1.145.1 salió el 6 de noviembre como patch.</p>",
+            "en": "<p>The Agents window's integrated browser can load pages through a remote agent host, local automations accept five-field cron schedules and workspace custom agents, and Chat gains Conversation/Verbose/Compact modes. The most useful everyday detail: a <code>!</code> prefix in <code>files.exclude</code> keeps matching files visible. 1.145.1 followed on 6 November as a patch.</p>",
+            "fr": "<p>Le navigateur intégré de la fenêtre Agents peut charger des pages via un hôte d'agent distant, les automations locales acceptent un cron à cinq champs et les custom agents du workspace, et Chat gagne les modes Conversation/Verbose/Compact. Détail pratique : un préfixe <code>!</code> dans <code>files.exclude</code> garde les fichiers visibles.</p>"
+          },
+          "source": { "url": "https://code.visualstudio.com/updates/v1_145", "label": "code.visualstudio.com" }
+        }
+      ]
+    },
+    {
+      "id": "quick-links",
+      "name": "Quick Links",
+      "theme": "quick-links",
+      "icon_emoji": "📌",
+      "anchor": "quick-links",
+      "updates": [
+        {
+          "id": "biome-2-6-5",
+          "tag": "minor",
+          "date": "04 Nov 2026",
+          "title": {
+            "es": "Biome 2.6.5: reglas nursery noArrayForEach, noAwaitInPromiseMethods y noChainedComparison",
+            "en": "Biome 2.6.5: nursery rules noArrayForEach, noAwaitInPromiseMethods and noChainedComparison",
+            "fr": "Biome 2.6.5 : règles nursery noArrayForEach, noAwaitInPromiseMethods et noChainedComparison"
+          },
+          "body_html": {
+            "es": "<p><code>noAwaitInPromiseMethods</code> caza el clásico <code>Promise.all([await a, b])</code> que serializa lo que querías en paralelo.</p>",
+            "en": "<p><code>noAwaitInPromiseMethods</code> catches the classic <code>Promise.all([await a, b])</code> that serialises what you meant to run in parallel.</p>",
+            "fr": "<p><code>noAwaitInPromiseMethods</code> repère le classique <code>Promise.all([await a, b])</code> qui sérialise ce que vous vouliez paralléliser.</p>"
+          },
+          "source": { "url": "https://github.com/biomejs/biome/releases/tag/%40biomejs%2Fbiome%402.6.5", "label": "github.com/biomejs/biome" }
+        },
+        {
+          "id": "astro-7-4-7",
+          "tag": "patch",
+          "date": "05 Nov 2026",
+          "title": {
+            "es": "Astro 7.4.7: fix del image endpoint con directorios que difieren solo en mayúsculas",
+            "en": "Astro 7.4.7: image endpoint fix for directories differing only by case",
+            "fr": "Astro 7.4.7 : correctif de l'image endpoint pour les dossiers ne différant que par la casse"
+          },
+          "body_html": {
+            "es": "<p>El endpoint de imágenes trataba como internos al build output directorios que solo cambiaban de mayúsculas en filesystems case-sensitive.</p>",
+            "en": "<p>The image endpoint treated directories differing only by letter case as inside the build output on case-sensitive filesystems.</p>",
+            "fr": "<p>L'image endpoint considérait comme internes au build output des dossiers ne différant que par la casse.</p>"
+          },
+          "source": { "url": "https://github.com/withastro/astro/releases/tag/astro%407.4.7", "label": "github.com/withastro/astro" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Las herramientas se acomodan a los agentes: Rolldown escribe un build report en Markdown para que lo lea un coding agent y VS Code mete agentes remotos y automations con cron.",
+      "en": "Tooling is adapting to agents: Rolldown writes a Markdown build report for coding agents to read, and VS Code adds remote agents and cron automations.",
+      "fr": "Les outils s'adaptent aux agents : Rolldown écrit un build report en Markdown lisible par un coding agent et VS Code ajoute agents distants et automations cron."
+    },
+    {
+      "es": "Bun sigue ganando terreno como runtime de testing: Playwright 1.65 ya corre su runner encima, aunque sin watch mode.",
+      "en": "Bun keeps gaining ground as a test runtime: Playwright 1.65 now runs its runner on top of it, albeit without watch mode.",
+      "fr": "Bun continue de gagner du terrain comme runtime de test : Playwright 1.65 y fait tourner son runner, sans watch mode toutefois."
+    }
+  ]
+}

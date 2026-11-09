@@ -1,0 +1,381 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 9 Nov 2026",
+    "en": "Backend & Fullstack Daily — 9 Nov 2026",
+    "fr": "Backend & Fullstack Daily — 9 nov. 2026"
+  },
+  "description": {
+    "es": "Diez advisories de LXD (seis críticos) por imágenes y proyectos restringidos, NestJS 12.4 con un montón de fixes de microservicios, tRPC 11.25 blinda WebSockets, Docker 29.10 rc.1 trae jobs nativos y OpenTelemetry estabiliza las convenciones RPC.",
+    "en": "Ten LXD advisories (six critical) around malicious images and restricted projects, NestJS 12.4 with a wave of microservices fixes, tRPC 11.25 hardens WebSockets, Docker 29.10 rc.1 adds native jobs, and OpenTelemetry stabilizes RPC conventions.",
+    "fr": "Dix avis LXD (six critiques) autour d'images malveillantes et de projets restreints, NestJS 12.4 avec une vague de correctifs microservices, tRPC 11.25 durcit les WebSockets, Docker 29.10 rc.1 ajoute des jobs natifs et OpenTelemetry stabilise les conventions RPC."
+  },
+  "pubDate": "2026-11-09",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "LXD: 10 advisories, 6 críticos (hasta 9.9)",
+        "en": "LXD: 10 advisories, 6 critical (up to 9.9)",
+        "fr": "LXD : 10 avis, dont 6 critiques (jusqu'à 9.9)"
+      },
+      "anchor": "lxd-advisory-batch",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "NestJS 12.4: microservicios y adapter Node",
+        "en": "NestJS 12.4: microservices and Node adapter fixes",
+        "fr": "NestJS 12.4 : microservices et adaptateur Node"
+      },
+      "anchor": "nestjs-12-4",
+      "icon": "lucide:blocks"
+    },
+    {
+      "text": {
+        "es": "tRPC 11.25: WebSockets que ya no se caen",
+        "en": "tRPC 11.25: WebSockets that stop crashing",
+        "fr": "tRPC 11.25 : des WebSockets qui ne plantent plus"
+      },
+      "anchor": "trpc-11-25",
+      "icon": "lucide:blocks"
+    },
+    {
+      "text": {
+        "es": "Docker 29.10 rc.1: jobs y cron en el daemon",
+        "en": "Docker 29.10 rc.1: jobs and cron in the daemon",
+        "fr": "Docker 29.10 rc.1 : jobs et cron dans le daemon"
+      },
+      "anchor": "docker-29-10-rc1",
+      "icon": "simple-icons:docker"
+    },
+    {
+      "text": {
+        "es": "OTel semconv 1.45: RPC pasa a estable",
+        "en": "OTel semconv 1.45: RPC goes stable",
+        "fr": "OTel semconv 1.45 : RPC passe en stable"
+      },
+      "anchor": "otel-semconv-1-45",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "lxd-advisory-batch",
+      "updates": [
+        {
+          "id": "lxd-advisory-batch",
+          "tag": "security",
+          "date": "06 Nov 2026",
+          "title": {
+            "es": "LXD publica 10 advisories de una: seis críticos, con ejecución de comandos desde proyectos restringidos (CVSS 9.9)",
+            "en": "LXD publishes 10 advisories at once: six critical, including command execution from restricted projects (CVSS 9.9)",
+            "fr": "LXD publie 10 avis d'un coup : six critiques, dont l'exécution de commandes depuis des projets restreints (CVSS 9.9)"
+          },
+          "body_html": {
+            "es": "<p>El viernes a la tarde cayó un batch de <strong>10 advisories para <code>github.com/canonical/lxd</code></strong>, varios portados desde Incus. El peor (<strong>CVSS 9.9</strong>): los snapshots de instancias ignoran <code>restricted.containers.lowlevel=block</code>, así que un usuario armando una instancia+snapshot en otro server, moviéndola a un proyecto restringido y restaurándola, ejecuta comandos en el host vía <code>raw.lxc</code> / <code>raw.qemu</code>. Los otros cinco críticos son lectura/escritura arbitraria en el host a través de <strong>imágenes maliciosas</strong> (symlinks en <code>rootfs/</code>, <code>templates/</code> y <code>exec-output</code>), un hash de imagen confiado sin verificar y argument injection en el algoritmo de compresión de backups. Suman dos highs de copia entre proyectos, un SSRF en import de imágenes por URL y un nil-pointer. Si ofrecés LXD multi-tenant o importás imágenes de terceros, actualizá al último snap de tu canal YA: el modelo de proyectos restringidos no aguantaba.</p>",
+            "en": "<p>A batch of <strong>10 advisories for <code>github.com/canonical/lxd</code></strong> landed Friday afternoon, several reported from Incus. The worst (<strong>CVSS 9.9</strong>): instance snapshots ignore <code>restricted.containers.lowlevel=block</code>, so a user who crafts an instance+snapshot elsewhere, moves it into a restricted project and restores it runs commands on the host through <code>raw.lxc</code> / <code>raw.qemu</code>. The other five criticals are arbitrary host file read/write via <strong>malicious images</strong> (symlinks in <code>rootfs/</code>, <code>templates/</code> and <code>exec-output</code>), a trusted-but-unverified image hash, and argument injection in the backup compression algorithm. Add two highs on cross-project copies, an SSRF in image import from URL and a nil-pointer crash. If you run multi-tenant LXD or import third-party images, move to the latest snap in your channel now: the restricted-project model did not hold.</p>",
+            "fr": "<p>Vendredi après-midi, un lot de <strong>10 avis pour <code>github.com/canonical/lxd</code></strong> est tombé, plusieurs signalés depuis Incus. Le pire (<strong>CVSS 9.9</strong>) : les snapshots d'instance ignorent <code>restricted.containers.lowlevel=block</code>, si bien qu'un utilisateur qui fabrique une instance+snapshot ailleurs, la déplace dans un projet restreint et la restaure exécute des commandes sur l'hôte via <code>raw.lxc</code> / <code>raw.qemu</code>. Les cinq autres critiques sont des lectures/écritures arbitraires sur l'hôte via des <strong>images malveillantes</strong> (symlinks dans <code>rootfs/</code>, <code>templates/</code> et <code>exec-output</code>), un hash d'image accepté sans vérification et une injection d'argument dans l'algorithme de compression des backups. S'y ajoutent deux highs sur la copie entre projets, un SSRF à l'import d'images par URL et un nil-pointer. Si vous exploitez LXD multi-tenant ou importez des images tierces, passez au dernier snap de votre canal : le modèle des projets restreints ne tenait pas.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-47w9-6r3f-938g",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "nestjs-12-4",
+          "tag": "release",
+          "date": "06 Nov 2026",
+          "title": {
+            "es": "NestJS 12.4.0: locals para todas las vistas y una tanda de fixes en microservicios y el adapter Node",
+            "en": "NestJS 12.4.0: locals for every view plus a wave of microservices and Node adapter fixes",
+            "fr": "NestJS 12.4.0 : des locals pour chaque vue et une vague de correctifs microservices et adaptateur Node"
+          },
+          "body_html": {
+            "es": "<p>La única feature es que el adapter <code>platform-node</code> ahora puede setear <strong>locals para todas las vistas</strong>, pero lo jugoso son los fixes. En <strong>microservicios</strong>: un server MQTT ya no se escucha sus propias respuestas bajo wildcards, los handlers con un pattern string que parece JSON vuelven a matchear, gRPC reenvía las call options en request streams y el cliente MQTT espera el close y resetea su estado. En el adapter Node: cada ruta con la misma forma de path tiene sus propios params, no se manda <code>Content-Length</code> junto a <code>Transfer-Encoding</code> y se agrega el charset al content type. Fastify devuelve <strong>403</strong> cuando el plugin estático rechaza un path, y <code>ParseArrayPipe</code> conserva los campos de los errores agrupados. Si usás MQTT o el adapter Node, actualizá.</p>",
+            "en": "<p>The one feature is that the <code>platform-node</code> adapter can now set <strong>locals for every view</strong>, but the fixes are the real payload. In <strong>microservices</strong>: an MQTT server no longer receives its own replies under wildcards, handlers whose string pattern reads as JSON are reachable again, gRPC forwards call options on request streams, and the MQTT client awaits close and resets its state. In the Node adapter: routes that share a path shape get their own params, <code>Content-Length</code> is no longer sent alongside <code>Transfer-Encoding</code>, and the charset is added to an app-set content type. Fastify answers <strong>403</strong> when the static plugin refuses a path, and <code>ParseArrayPipe</code> keeps the fields of grouped item errors. Upgrade if you run MQTT or the Node adapter.</p>",
+            "fr": "<p>La seule nouveauté : l'adaptateur <code>platform-node</code> peut définir des <strong>locals pour toutes les vues</strong>, mais l'essentiel est dans les correctifs. Côté <strong>microservices</strong> : un serveur MQTT ne reçoit plus ses propres réponses sous wildcards, les handlers dont le pattern string ressemble à du JSON sont de nouveau atteints, gRPC transmet les call options sur les request streams et le client MQTT attend la fermeture et réinitialise son état. Côté adaptateur Node : les routes de même forme ont chacune leurs params, plus de <code>Content-Length</code> avec <code>Transfer-Encoding</code>, et le charset est ajouté au content type. Fastify répond <strong>403</strong> quand le plugin statique refuse un chemin, et <code>ParseArrayPipe</code> conserve les champs des erreurs groupées.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nestjs/nest/releases/tag/v12.4.0",
+            "label": "github.com/nestjs"
+          }
+        },
+        {
+          "id": "trpc-11-25",
+          "tag": "notable",
+          "date": "06 Nov 2026",
+          "title": {
+            "es": "tRPC 11.25.0: subscribe() sin callbacks devuelve un async iterable y los WebSockets dejan de tirar el server",
+            "en": "tRPC 11.25.0: subscribe() without callbacks returns an async iterable, and WebSockets stop taking the server down",
+            "fr": "tRPC 11.25.0 : subscribe() sans callbacks renvoie un async iterable et les WebSockets ne font plus tomber le serveur"
+          },
+          "body_html": {
+            "es": "<p>Release de robustez pura. En <code>@trpc/server</code>: un <code>onError</code>, <code>errorFormatter</code> o encoder que tira excepción <strong>ya no crashea el server WS</strong>, los adapters de Node siguen vivos si falla un body streameado, y un teardown de subscription que tira en el abort no rompe nada. En <code>@trpc/client</code>, <code>subscribe()</code> sin callbacks ahora devuelve un <strong>async iterable</strong> (<code>for await</code> y listo), y <code>wsLink</code>/<code>wsClient</code> reciben una docena de fixes: ids por intento para que <code>retryLink</code> no se confunda, reconexión que sobrevive a handlers que tiran y batches que se rechazan si falla el send. Ya salieron 11.25.1 (handles como funciones planas en <code>unstable-handles</code>) y 11.25.2 (body POST vacío = input <code>undefined</code>). Si tenés subscriptions en producción, esto es un golazo.</p>",
+            "en": "<p>A pure robustness release. In <code>@trpc/server</code>: a throwing <code>onError</code>, <code>errorFormatter</code> or encoder <strong>no longer crashes the WS server</strong>, the Node adapters keep running when a streamed body fails, and a subscription teardown that throws on abort is contained. In <code>@trpc/client</code>, <code>subscribe()</code> without callbacks now returns an <strong>async iterable</strong> (just <code>for await</code> it), and <code>wsLink</code>/<code>wsClient</code> get a dozen fixes: per-attempt wire ids so <code>retryLink</code> is not confused, reconnection that survives throwing handlers, and batches that reject when sending fails. 11.25.1 (handles as plain functions in <code>unstable-handles</code>) and 11.25.2 (an empty POST body is <code>undefined</code> input) followed over the weekend.</p>",
+            "fr": "<p>Une release de pure robustesse. Dans <code>@trpc/server</code> : un <code>onError</code>, <code>errorFormatter</code> ou encoder qui lève une exception <strong>ne fait plus planter le serveur WS</strong>, les adaptateurs Node tiennent quand un body streamé échoue, et un teardown de subscription qui lève à l'abort est contenu. Dans <code>@trpc/client</code>, <code>subscribe()</code> sans callbacks renvoie un <strong>async iterable</strong> (un <code>for await</code> suffit), et <code>wsLink</code>/<code>wsClient</code> reçoivent une douzaine de correctifs : ids par tentative pour <code>retryLink</code>, reconnexion qui survit aux handlers qui lèvent, batches rejetés si l'envoi échoue. 11.25.1 et 11.25.2 (body POST vide = input <code>undefined</code>) ont suivi ce week-end.</p>"
+          },
+          "source": {
+            "url": "https://github.com/trpc/trpc/releases/tag/v11.25.0",
+            "label": "github.com/trpc"
+          }
+        },
+        {
+          "id": "docker-29-10-rc1",
+          "tag": "beta",
+          "date": "06 Nov 2026",
+          "title": {
+            "es": "Docker Engine 29.10.0-rc.1: jobs one-shot y cron nativos en el daemon, y la spec de la API pasa a OpenAPI 3.2",
+            "en": "Docker Engine 29.10.0-rc.1: native one-shot and cron jobs in the daemon, and the API spec moves to OpenAPI 3.2",
+            "fr": "Docker Engine 29.10.0-rc.1 : jobs one-shot et cron natifs dans le daemon, et la spec de l'API passe à OpenAPI 3.2"
+          },
+          "body_html": {
+            "es": "<p>La novedad grande es <strong>soporte experimental de jobs</strong>: workloads one-shot y programados con cron, manejados por el daemon, como extensión opt-in con <code>--enable-extension org.mobyproject.jobs.v0</code>. Para el que hoy tiene un cron del host llamando a <code>docker run</code>, es para probar. Además, la spec de la Engine API ahora se escribe en <strong>OpenAPI 3.2</strong> (sigue habiendo un Swagger 2.0 generado para compatibilidad), la API sube a <strong>1.57</strong>, el containerd embebido se configura con archivos en <code>/etc/docker/containerd.d/</code>, hay paquetes para AlmaLinux, Oracle Linux y Rocky, y los perfiles por defecto de AppArmor y seccomp bloquean familias de sockets obsoletas. Es RC: probalo en staging, no en prod.</p>",
+            "en": "<p>The headline is <strong>experimental jobs support</strong>: one-shot and cron-scheduled workloads managed natively by the daemon, as an opt-in extension enabled with <code>--enable-extension org.mobyproject.jobs.v0</code>. If you have a host cron calling <code>docker run</code>, this is worth a test. The Engine API spec is now authored in <strong>OpenAPI 3.2</strong> (a generated Swagger 2.0 spec stays for compatibility), the API moves to <strong>1.57</strong>, the embedded containerd can be configured with files in <code>/etc/docker/containerd.d/</code>, packages ship for AlmaLinux, Oracle Linux and Rocky Linux, and the default AppArmor and seccomp profiles block obsolete socket families. It is an RC: staging only.</p>",
+            "fr": "<p>La grande nouveauté est le <strong>support expérimental des jobs</strong> : des workloads one-shot et planifiés par cron, gérés nativement par le daemon, via l'extension opt-in <code>--enable-extension org.mobyproject.jobs.v0</code>. Si un cron de l'hôte appelle <code>docker run</code> chez vous, ça vaut un essai. La spec de l'Engine API est désormais écrite en <strong>OpenAPI 3.2</strong> (un Swagger 2.0 généré reste disponible), l'API passe en <strong>1.57</strong>, le containerd embarqué se configure via <code>/etc/docker/containerd.d/</code>, des paquets sortent pour AlmaLinux, Oracle Linux et Rocky Linux, et les profils AppArmor et seccomp par défaut bloquent les familles de sockets obsolètes. C'est une RC : staging uniquement.</p>"
+          },
+          "source": {
+            "url": "https://github.com/moby/moby/releases/tag/docker-v29.10.0-rc.1",
+            "label": "github.com/moby"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "hono-4-13-17",
+      "updates": [
+        {
+          "id": "hono-4-13-17",
+          "tag": "patch",
+          "date": "07 Nov 2026",
+          "title": {
+            "es": "Hono 4.13.17: escape de atributos en JSX, nonce CSP en ErrorBoundary y prefijos de cookies seguras",
+            "en": "Hono 4.13.17: JSX attribute escaping, CSP nonce in ErrorBoundary and secure cookie prefixes",
+            "fr": "Hono 4.13.17 : échappement des attributs JSX, nonce CSP dans ErrorBoundary et préfixes de cookies sécurisés"
+          },
+          "body_html": {
+            "es": "<p>Un patch con 16 fixes, y varios tocan seguridad. El JSX de Hono ahora <strong>escapa los valores de atributos</strong> de elementos y objetos, y agrega el <strong>nonce CSP</strong> a todos los scripts que genera <code>ErrorBoundary</code>. Los prefijos <code>__Secure-</code> y <code>__Host-</code> de cookies se matchean sin importar mayúsculas (también en <code>CookieConstraint</code>), la utilidad de URL ya no matchea una query key a través de separadores, Server-Timing escapa comillas y backslashes, y el adapter de AWS Lambda sanitiza headers no ASCII en eventos de API Gateway v2. Si renderizás JSX server-side con Hono, actualizá.</p>",
+            "en": "<p>A 16-fix patch, several of them security-adjacent. Hono's JSX now <strong>escapes element and object attribute values</strong> and adds the <strong>CSP nonce</strong> to every script <code>ErrorBoundary</code> generates. The <code>__Secure-</code> and <code>__Host-</code> cookie prefixes are matched case-insensitively (also in <code>CookieConstraint</code>), the URL utility no longer matches a query key across separators, Server-Timing escapes quotes and backslashes, and the AWS Lambda adapter sanitizes non-ASCII header values in API Gateway v2 events. Upgrade if you render JSX server-side with Hono.</p>",
+            "fr": "<p>Un patch de 16 correctifs, dont plusieurs touchent la sécurité. Le JSX de Hono <strong>échappe désormais les valeurs d'attributs</strong> d'éléments et d'objets et ajoute le <strong>nonce CSP</strong> à tous les scripts générés par <code>ErrorBoundary</code>. Les préfixes de cookies <code>__Secure-</code> et <code>__Host-</code> sont reconnus sans tenir compte de la casse, l'utilitaire d'URL ne fait plus correspondre une clé de query à travers les séparateurs, Server-Timing échappe guillemets et backslashes, et l'adaptateur AWS Lambda assainit les en-têtes non ASCII des événements API Gateway v2.</p>"
+          },
+          "source": {
+            "url": "https://github.com/honojs/hono/releases/tag/v4.13.17",
+            "label": "github.com/honojs"
+          }
+        },
+        {
+          "id": "prisma-8-rc23",
+          "tag": "beta",
+          "date": "06 Nov 2026",
+          "title": {
+            "es": "Prisma 8.0.0-rc.23: índices de MongoDB con nombre, writes en MySQL y db sign que adopta bases de Supabase",
+            "en": "Prisma 8.0.0-rc.23: named MongoDB indexes, MySQL writes, and db sign adopting Supabase databases",
+            "fr": "Prisma 8.0.0-rc.23 : index MongoDB nommés, écritures MySQL et db sign qui adopte les bases Supabase"
+          },
+          "body_html": {
+            "es": "<p>Otra RC de Prisma 8 con <strong>breaking changes</strong>: cada índice de un contrato MongoDB registra su nombre (los sin nombre se llaman como sus keys, tipo <code>email_1</code>), así que todos esos contratos cambian de storage hash y las migraciones crean y borran índices por nombre. En PostgreSQL, <code>Int</code>, <code>BigInt</code>, <code>Float</code>, <code>Decimal</code>, <code>String</code>, <code>Boolean</code> y <code>Bytes</code> pasan a convenience types; <strong>MySQL ya tiene writes del ORM</strong>; los packs de pgvector, PostGIS, ParadeDB y citext encuentran su extensión por el search path, con lo que <code>db sign</code> adopta una base de Supabase. Y Prisma deja de negarse a arrancar si se carga desde más de una copia. Después de upgradear, corré <code>prisma contract emit</code> una vez, como indican las recetas.</p>",
+            "en": "<p>Another Prisma 8 RC with <strong>breaking changes</strong>: every MongoDB contract index records its name (unnamed ones are named after their keys, like <code>email_1</code>), so those contracts get a new storage hash and migrations create and drop indexes by name. On PostgreSQL, <code>Int</code>, <code>BigInt</code>, <code>Float</code>, <code>Decimal</code>, <code>String</code>, <code>Boolean</code> and <code>Bytes</code> become convenience types; <strong>MySQL gets ORM writes</strong>; the pgvector, PostGIS, ParadeDB and citext packs find their extension through the search path, so <code>db sign</code> adopts a Supabase database. Prisma also no longer refuses to start when loaded from more than one copy. After upgrading, run <code>prisma contract emit</code> once, as the upgrade recipes say.</p>",
+            "fr": "<p>Encore une RC de Prisma 8 avec des <strong>breaking changes</strong> : chaque index d'un contrat MongoDB enregistre son nom (les index sans nom prennent celui de leurs clés, comme <code>email_1</code>), donc ces contrats changent de storage hash et les migrations créent et suppriment les index par nom. Sur PostgreSQL, <code>Int</code>, <code>BigInt</code>, <code>Float</code>, <code>Decimal</code>, <code>String</code>, <code>Boolean</code> et <code>Bytes</code> deviennent des convenience types ; <strong>MySQL obtient les écritures de l'ORM</strong> ; les packs pgvector, PostGIS, ParadeDB et citext trouvent leur extension via le search path, et <code>db sign</code> adopte une base Supabase. Après la mise à jour, lancez une fois <code>prisma contract emit</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/prisma/orm/releases/tag/v8.0.0-rc.23",
+            "label": "github.com/prisma"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "bullmq-6-7-2",
+      "updates": [
+        {
+          "id": "bullmq-6-7-2",
+          "tag": "security",
+          "date": "07 Nov 2026",
+          "title": {
+            "es": "BullMQ 6.7.1 y 6.7.2: semver a 7.8.6 y dependencias pineadas por seguridad",
+            "en": "BullMQ 6.7.1 and 6.7.2: semver bumped to 7.8.6 and dependencies pinned for security",
+            "fr": "BullMQ 6.7.1 et 6.7.2 : semver passe en 7.8.6 et dépendances épinglées pour la sécurité"
+          },
+          "body_html": {
+            "es": "<p>Dos patches seguidos, sin cambios de API: <strong>6.7.1</strong> (6 nov) sube <code>semver</code> a <strong>7.8.6</strong> por un fix de seguridad, y <strong>6.7.2</strong> (7 nov) <strong>pinea las dependencias</strong> a versiones exactas, también marcado como security. Son upgrades sin riesgo para cualquier worker que esté en 6.x; pasá directo a 6.7.2.</p>",
+            "en": "<p>Two back-to-back patches with no API changes: <strong>6.7.1</strong> (Nov 6) bumps <code>semver</code> to <strong>7.8.6</strong> for a security fix, and <strong>6.7.2</strong> (Nov 7) <strong>pins dependencies</strong> to exact versions, also flagged as security. Both are no-risk upgrades for any 6.x worker; go straight to 6.7.2.</p>",
+            "fr": "<p>Deux patches à la suite, sans changement d'API : <strong>6.7.1</strong> (6 nov.) passe <code>semver</code> en <strong>7.8.6</strong> pour un correctif de sécurité, et <strong>6.7.2</strong> (7 nov.) <strong>épingle les dépendances</strong> en versions exactes, également marqué sécurité. Mises à jour sans risque pour tout worker 6.x ; passez directement en 6.7.2.</p>"
+          },
+          "source": {
+            "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.7.2",
+            "label": "github.com/taskforcesh"
+          }
+        },
+        {
+          "id": "redshift-super-16mb",
+          "tag": "minor",
+          "date": "06 Nov 2026",
+          "title": {
+            "es": "Amazon Redshift: strings de hasta 16 millones de bytes dentro de SUPER",
+            "en": "Amazon Redshift: strings up to 16 million bytes inside SUPER",
+            "fr": "Amazon Redshift : chaînes jusqu'à 16 millions d'octets dans SUPER"
+          },
+          "body_html": {
+            "es": "<p>Los strings individuales dentro de <code>SUPER</code> pasan de un límite de <strong>65.535 bytes</strong> a <strong>16 millones</strong>, con opt-in por parámetro de base. Aplica al ingerir JSON, Parquet, TEXT y CSV y en procesos ELT, así que documentos largos (contratos, términos) entran sin transformaciones previas y se consultan con PartiQL.</p>",
+            "en": "<p>Individual strings inside <code>SUPER</code> go from a <strong>65,535-byte</strong> limit to <strong>16 million bytes</strong>, opted in through a database parameter. It applies when ingesting JSON, Parquet, TEXT and CSV and in ELT processes, so long documents (contracts, terms) load without pre-processing and stay queryable with PartiQL.</p>",
+            "fr": "<p>Les chaînes individuelles dans <code>SUPER</code> passent d'une limite de <strong>65 535 octets</strong> à <strong>16 millions</strong>, sur opt-in via un paramètre de base. Cela s'applique à l'ingestion JSON, Parquet, TEXT et CSV et aux processus ELT : les longs documents se chargent sans prétraitement et restent interrogeables en PartiQL.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-redshift-expands-super-to-16-million-bytes/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "ssm-parameter-data-types",
+      "updates": [
+        {
+          "id": "ssm-parameter-data-types",
+          "tag": "notable",
+          "date": "05 Nov 2026",
+          "title": {
+            "es": "SSM Parameter Store valida valores con 13 data types nuevos: IPs, account IDs, JSON, URLs y más",
+            "en": "SSM Parameter Store validates values with 13 new data types: IPs, account IDs, JSON, URLs and more",
+            "fr": "SSM Parameter Store valide les valeurs avec 13 nouveaux data types : IP, account IDs, JSON, URL et plus"
+          },
+          "body_html": {
+            "es": "<p>Parameter Store ahora rechaza en el <code>PutParameter</code> cualquier valor que no cumpla su tipo: <code>aws:region</code>, <code>aws:account:id</code>, <code>boolean</code>, <code>integer</code>, <code>float</code>, <code>binary</code>, <code>hostname</code>, <code>email</code>, <code>ipv4-address</code> e <code>ipv6-address</code> para parámetros standard y advanced, más <code>url</code>, <code>json</code> y <code>jsonc</code> solo en advanced. Funciona con <code>String</code> y <code>SecureString</code>, valida cada ítem en varios <code>StringList</code> y se combina con <code>AllowedPattern</code>. Es validar config en el borde en vez de en cada servicio que la lee: si no estás tipando tus parámetros, ponete las pilas.</p>",
+            "en": "<p>Parameter Store now rejects at <code>PutParameter</code> any value that does not match its type: <code>aws:region</code>, <code>aws:account:id</code>, <code>boolean</code>, <code>integer</code>, <code>float</code>, <code>binary</code>, <code>hostname</code>, <code>email</code>, <code>ipv4-address</code> and <code>ipv6-address</code> for standard and advanced parameters, plus <code>url</code>, <code>json</code> and <code>jsonc</code> for advanced ones. It works with <code>String</code> and <code>SecureString</code>, validates each item for several <code>StringList</code> types and combines with <code>AllowedPattern</code>. Config validation moves to the write path instead of every service that reads it.</p>",
+            "fr": "<p>Parameter Store rejette désormais au <code>PutParameter</code> toute valeur qui ne correspond pas à son type : <code>aws:region</code>, <code>aws:account:id</code>, <code>boolean</code>, <code>integer</code>, <code>float</code>, <code>binary</code>, <code>hostname</code>, <code>email</code>, <code>ipv4-address</code> et <code>ipv6-address</code> pour les paramètres standard et advanced, plus <code>url</code>, <code>json</code> et <code>jsonc</code> en advanced. Compatible <code>String</code> et <code>SecureString</code>, valide chaque élément de plusieurs <code>StringList</code> et se combine avec <code>AllowedPattern</code>.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/aws-ssm-parameter-store-allows-organization-validation-with-new-data-types/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "ec2-imdsv1-metric",
+          "tag": "security",
+          "date": "05 Nov 2026",
+          "title": {
+            "es": "EC2 publica la métrica ImdsV1Enabled en CloudWatch para cazar instancias con IMDSv1",
+            "en": "EC2 publishes an ImdsV1Enabled CloudWatch metric to find instances still on IMDSv1",
+            "fr": "EC2 publie la métrique CloudWatch ImdsV1Enabled pour repérer les instances encore en IMDSv1"
+          },
+          "body_html": {
+            "es": "<p>Nueva métrica <code>ImdsV1Enabled</code> en CloudWatch, gratis y en todas las regiones, que marca qué instancias todavía permiten <strong>IMDSv1</strong>. Con dashboards y alarmas podés seguir la migración a IMDSv2 entre cuentas y regiones sin tooling propio. IMDSv1 es el vector clásico de robo de credenciales por SSRF: armá la alarma hoy.</p>",
+            "en": "<p>A new <code>ImdsV1Enabled</code> CloudWatch metric, free in every Region, flags which instances still allow <strong>IMDSv1</strong>. Dashboards and alarms can now track the IMDSv2 migration across accounts and Regions without custom tooling. IMDSv1 is the classic SSRF-to-credentials vector, so set up the alarm today.</p>",
+            "fr": "<p>Une nouvelle métrique CloudWatch <code>ImdsV1Enabled</code>, gratuite dans toutes les régions, signale les instances qui autorisent encore <strong>IMDSv1</strong>. Tableaux de bord et alarmes suivent la migration vers IMDSv2 entre comptes et régions sans outillage maison. IMDSv1 reste le vecteur classique SSRF vers credentials.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/ec2-imdsv1enabled-cloudwatch-metric/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "otel-semconv-1-45",
+      "updates": [
+        {
+          "id": "otel-semconv-1-45",
+          "tag": "notable",
+          "date": "06 Nov 2026",
+          "title": {
+            "es": "OpenTelemetry semconv 1.45: las convenciones RPC pasan a estable en @opentelemetry/semantic-conventions",
+            "en": "OpenTelemetry semconv 1.45: RPC conventions go stable in @opentelemetry/semantic-conventions",
+            "fr": "OpenTelemetry semconv 1.45 : les conventions RPC passent en stable dans @opentelemetry/semantic-conventions"
+          },
+          "body_html": {
+            "es": "<p>El paquete JS de semantic conventions sube a <strong>v1.45.0</strong> y suma 8 exports al entrypoint <strong>estable</strong>, todos de RPC: <code>rpc.method</code>, <code>rpc.method_original</code>, <code>rpc.status_code</code>, <code>rpc.system.name</code> (con valores <code>grpc</code> y <code>dubbo</code>) y las métricas <code>rpc.client.call.duration</code> y <code>rpc.server.call.duration</code>. En <code>/incubating</code> hay 124 exports nuevos y 38 deprecados. Traducido: si instrumentás gRPC a mano, ya podés apoyarte en nombres que no van a cambiar bajo tus dashboards; si importás desde <code>incubating</code>, revisá las deprecaciones.</p>",
+            "en": "<p>The JS semantic-conventions package moves to <strong>v1.45.0</strong> and adds 8 exports to the <strong>stable</strong> entry point, all RPC: <code>rpc.method</code>, <code>rpc.method_original</code>, <code>rpc.status_code</code>, <code>rpc.system.name</code> (with <code>grpc</code> and <code>dubbo</code> values) and the <code>rpc.client.call.duration</code> and <code>rpc.server.call.duration</code> metrics. The <code>/incubating</code> entry point gains 124 exports and deprecates 38. If you hand-instrument gRPC, you can now build dashboards on names that will not shift under you; if you import from <code>incubating</code>, check the deprecations.</p>",
+            "fr": "<p>Le paquet JS des semantic conventions passe en <strong>v1.45.0</strong> et ajoute 8 exports au point d'entrée <strong>stable</strong>, tous RPC : <code>rpc.method</code>, <code>rpc.method_original</code>, <code>rpc.status_code</code>, <code>rpc.system.name</code> (valeurs <code>grpc</code> et <code>dubbo</code>) et les métriques <code>rpc.client.call.duration</code> et <code>rpc.server.call.duration</code>. <code>/incubating</code> gagne 124 exports et en déprécie 38. Si vous instrumentez gRPC à la main, vos dashboards peuvent s'appuyer sur des noms stables.</p>"
+          },
+          "source": {
+            "url": "https://github.com/open-telemetry/opentelemetry-js/releases/tag/semconv/v1.45.0",
+            "label": "github.com/open-telemetry"
+          }
+        },
+        {
+          "id": "bumpy-changesets",
+          "tag": "notable",
+          "date": "07 Nov 2026",
+          "title": {
+            "es": "Bumpy gana tracción como sucesor de changesets para versionar monorepos",
+            "en": "Bumpy gains traction as a changesets successor for monorepo versioning",
+            "fr": "Bumpy gagne du terrain comme successeur de changesets pour versionner les monorepos"
+          },
+          "body_html": {
+            "es": "<p>InfoQ le dedica una nota a <strong>Bumpy</strong> (<code>@varlock/bumpy</code>), que mantiene el flujo de changesets (un bump file en <code>.bumpy/</code> por PR, release PR armado en CI) pero dice resolver más de 120 issues abiertos del original. Lo que lo distingue: soporte completo de los protocolos <code>workspace:</code> y <code>catalog:</code> en npm, pnpm, Yarn y Bun, comandos de publish por paquete (extensiones de VS Code, imágenes Docker, JSR), un algoritmo configurable de propagación de bumps de peer deps, CI con solo <code>bumpy ci check</code> y <code>bumpy ci release</code> sin GitHub App, y desde la 1.14 canales de prerelease por branch que nunca se commitean. Si el pre mode de changesets te viene sacando canas, vale la pena mirarlo.</p>",
+            "en": "<p>InfoQ covers <strong>Bumpy</strong> (<code>@varlock/bumpy</code>), which keeps the changesets workflow (one bump file in <code>.bumpy/</code> per PR, a release PR assembled in CI) but claims to address more than 120 open issues from the original. What sets it apart: full <code>workspace:</code> and <code>catalog:</code> protocol support across npm, pnpm, Yarn and Bun, per-package publish commands (VS Code extensions, Docker images, JSR), a configurable peer-dependency bump propagation algorithm, CI with just <code>bumpy ci check</code> and <code>bumpy ci release</code> and no GitHub App, and since 1.14 branch-based prerelease channels that are never committed. Worth a look if changesets' pre mode has been hurting.</p>",
+            "fr": "<p>InfoQ présente <strong>Bumpy</strong> (<code>@varlock/bumpy</code>), qui garde le flux de changesets (un bump file dans <code>.bumpy/</code> par PR, une release PR assemblée en CI) mais affirme régler plus de 120 issues ouvertes de l'original. Ses atouts : support complet des protocoles <code>workspace:</code> et <code>catalog:</code> sur npm, pnpm, Yarn et Bun, commandes de publication par paquet (extensions VS Code, images Docker, JSR), propagation configurable des bumps de peer deps, CI réduite à <code>bumpy ci check</code> et <code>bumpy ci release</code> sans GitHub App, et depuis la 1.14 des canaux de prerelease par branche jamais commités.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/11/bumpy-changesets-alternative/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "nx-24-0-5",
+      "updates": [
+        {
+          "id": "nx-24-0-5",
+          "tag": "patch",
+          "date": "06 Nov 2026",
+          "title": {
+            "es": "Nx 24.0.5: chequeo de ownership en los sockets del daemon y metadata de migraciones validada",
+            "en": "Nx 24.0.5: ownership checks on daemon sockets and validated migration metadata",
+            "fr": "Nx 24.0.5 : vérification de propriété des sockets du daemon et métadonnées de migration validées"
+          },
+          "body_html": {
+            "es": "<p>Sigue la racha de hardening en Nx: ahora se <strong>chequea el ownership</strong> de los directorios de sockets del daemon y del pseudo-terminal, <code>nx migrate</code> <strong>valida la metadata</strong> de migraciones que descarga, y las carpetas bin de Yarn Berry quedan fuera del path del daemon. Además, una tarea continua iniciadora que sale con código distinto de cero ahora hace fallar la corrida, y la migración de Vitest preserva los paths de coverage del project root. Upgrade tranqui para cualquier workspace en 24.x.</p>",
+            "en": "<p>Nx keeps up its hardening streak: it now <strong>checks ownership</strong> of the daemon and pseudo-terminal socket directories, <code>nx migrate</code> <strong>validates the migration metadata</strong> it fetches, and Yarn Berry bin folders stay off the daemon path. An initiating continuous task that exits non-zero now fails the run, and the Vitest migration preserves project-root coverage paths. An easy upgrade for any 24.x workspace.</p>",
+            "fr": "<p>Nx poursuit son durcissement : il <strong>vérifie la propriété</strong> des répertoires de sockets du daemon et du pseudo-terminal, <code>nx migrate</code> <strong>valide les métadonnées</strong> de migration téléchargées, et les dossiers bin de Yarn Berry restent hors du path du daemon. Une tâche continue initiatrice qui sort en erreur fait désormais échouer le run, et la migration Vitest préserve les chemins de coverage du project root.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nrwl/nx/releases/tag/24.0.5",
+            "label": "github.com/nrwl"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Fin de semana tranquilo en runtimes: ni Node, ni Deno, ni Bun sacaron release desde el viernes. Lo que se movió fue robustez: tRPC, NestJS y Hono pasaron la semana cerrando crashes, headers mal formados y escapes faltantes.",
+      "en": "A quiet weekend for runtimes: no Node, Deno or Bun release since Friday. What moved was robustness: tRPC, NestJS and Hono spent the week closing crashes, malformed headers and missing escapes.",
+      "fr": "Week-end calme côté runtimes : aucune release de Node, Deno ou Bun depuis vendredi. Ce qui a bougé, c'est la robustesse : tRPC, NestJS et Hono ont passé la semaine à fermer des crashs, des en-têtes mal formés et des échappements manquants."
+    },
+    {
+      "es": "El batch de LXD repite un patrón que ya vimos con kaniko y Docker: el artefacto (imagen, snapshot, Dockerfile) es el vector. Si tu plataforma acepta imágenes de usuarios, tratalas como input no confiable.",
+      "en": "The LXD batch repeats a pattern already seen with kaniko and Docker: the artifact (image, snapshot, Dockerfile) is the attack vector. If your platform accepts user images, treat them as untrusted input.",
+      "fr": "Le lot LXD répète un schéma déjà vu avec kaniko et Docker : l'artefact (image, snapshot, Dockerfile) est le vecteur. Si votre plateforme accepte des images d'utilisateurs, traitez-les comme une entrée non fiable."
+    },
+    {
+      "es": "Validar en el borde: los data types de Parameter Store y las convenciones RPC estables de OTel empujan la misma idea, contratos tipados donde se escribe el dato, no en cada consumidor.",
+      "en": "Validate at the edge: Parameter Store data types and OTel's stable RPC conventions push the same idea, typed contracts where data is written rather than in every consumer.",
+      "fr": "Valider à la frontière : les data types de Parameter Store et les conventions RPC stables d'OTel portent la même idée, des contrats typés là où la donnée est écrite plutôt que chez chaque consommateur."
+    }
+  ]
+}

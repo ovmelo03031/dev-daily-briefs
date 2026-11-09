@@ -1,0 +1,207 @@
+{
+  "title": {
+    "es": "AI Security — 09 NOV 2026",
+    "en": "AI Security — 09 NOV 2026",
+    "fr": "AI Security — 09 NOV 2026"
+  },
+  "description": {
+    "es": "TorchServe deja que un usuario local cambie el handler del modelo y corra código como el servicio (CVE-2026-123974, sin fix porque el proyecto está archivado), vLLM 0.30.0 acota respuestas de error amplificadas, Internet of Agents de OpenBMB suma cuatro CVEs con exploit público, un swarm de agentes convence a modelos de coding de entregar su token secreto, y DeepSeek-Reasonix y Vikunja veans meten metadata del repo o del servidor directo en las instrucciones del agente.",
+    "en": "TorchServe lets a local user swap the model handler and run code as the service account (CVE-2026-123974, no fix because the project is archived), vLLM 0.30.0 bounds amplified error responses, OpenBMB's Internet of Agents picks up four CVEs with public exploits, a swarm of agents talks coding models into handing over their secret token, and DeepSeek-Reasonix and Vikunja veans feed repository or server metadata straight into the agent's instructions.",
+    "fr": "TorchServe permet à un utilisateur local de remplacer le handler du modèle et d'exécuter du code sous le compte du service (CVE-2026-123974, sans correctif car le projet est archivé), vLLM 0.30.0 borne les réponses d'erreur amplifiées, Internet of Agents d'OpenBMB cumule quatre CVE avec exploit public, un essaim d'agents convainc des modèles de code de livrer leur token secret, et DeepSeek-Reasonix et Vikunja veans injectent les métadonnées du dépôt ou du serveur directement dans les instructions de l'agent."
+  },
+  "pubDate": "2026-11-09",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "TorchServe: LPE vía /tmp, sin fix",
+        "en": "TorchServe: /tmp LPE with no fix",
+        "fr": "TorchServe : LPE via /tmp, sans correctif"
+      },
+      "anchor": "torchserve-cve-2026-123974",
+      "icon": "simple-icons:pytorch"
+    },
+    {
+      "text": {
+        "es": "Agentes entregan su token a un swarm",
+        "en": "Agents hand their token to a swarm",
+        "fr": "Des agents livrent leur token à un essaim"
+      },
+      "anchor": "agent-swarm-secret-sharing",
+      "icon": "lucide:shield-alert"
+    },
+    {
+      "text": {
+        "es": "Reasonix: AGENTS.md como guía confiable",
+        "en": "Reasonix: AGENTS.md as trusted guidance",
+        "fr": "Reasonix : AGENTS.md vu comme fiable"
+      },
+      "anchor": "reasonix-cve-2026-123653",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": {
+        "es": "Internet of Agents: 4 CVEs sin respuesta",
+        "en": "Internet of Agents: 4 unanswered CVEs",
+        "fr": "Internet of Agents : 4 CVE sans réponse"
+      },
+      "anchor": "openbmb-ioa-cves",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "vLLM 0.30.0 acota errores amplificados",
+        "en": "vLLM 0.30.0 bounds amplified errors",
+        "fr": "vLLM 0.30.0 borne les erreurs amplifiées"
+      },
+      "anchor": "vllm-ghsa-mwgq",
+      "icon": "simple-icons:github"
+    }
+  ],
+  "tools": [
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "torchserve-cve-2026-123974",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-123974 (CVSS 7.8): TorchServe extrae los modelos en un directorio predecible de /tmp y un usuario local puede cambiar el handler",
+            "en": "CVE-2026-123974 (CVSS 7.8): TorchServe extracts models into a predictable /tmp directory, and a local user can swap the handler",
+            "fr": "CVE-2026-123974 (CVSS 7.8) : TorchServe extrait les modèles dans un répertoire /tmp prévisible, et un utilisateur local peut remplacer le handler"
+          },
+          "body_html": {
+            "es": "<p>Todas las versiones de <strong>TorchServe</strong> de PyTorch descomprimen el archivo del modelo en un directorio de <code>/tmp</code> con nombre predecible y reusan lo que ya existe ahí. Un usuario local crea ese directorio antes, cambia el <strong>handler</strong> del modelo y su código corre como la service account de TorchServe: escalada local de privilegios (CWE-379). Hay PoC público. El proyecto está <strong>archivado</strong> y no hay fix planeado, así que la mitigación queda de tu lado: apuntá <code>TEMP</code> o <code>-Djava.io.tmpdir</code> a un directorio propio del servicio que no sea world-writable, o poné <code>PrivateTmp=yes</code> en la unidad de systemd. Ojo con esto si todavía servís modelos con TorchServe en hosts compartidos: es momento de planear la migración.</p>",
+            "en": "<p>Every version of PyTorch's <strong>TorchServe</strong> unpacks the model archive into a predictably named <code>/tmp</code> directory and reuses whatever is already there. A local user creates that directory first, swaps the model <strong>handler</strong>, and their code runs as the TorchServe service account: local privilege escalation (CWE-379). A public PoC exists. The project is <strong>archived</strong> and no fix is planned, so mitigation is on you: point <code>TEMP</code> or <code>-Djava.io.tmpdir</code> at a directory the service owns that is not world-writable, or set <code>PrivateTmp=yes</code> in the systemd unit. If you still serve models with TorchServe on shared hosts, this is the moment to plan the migration.</p>",
+            "fr": "<p>Toutes les versions de <strong>TorchServe</strong> de PyTorch décompressent l'archive du modèle dans un répertoire <code>/tmp</code> au nom prévisible et réutilisent ce qui s'y trouve déjà. Un utilisateur local crée ce répertoire à l'avance, remplace le <strong>handler</strong> du modèle et son code s'exécute sous le compte de service de TorchServe : élévation locale de privilèges (CWE-379). Un PoC public existe. Le projet est <strong>archivé</strong> et aucun correctif n'est prévu : pointez <code>TEMP</code> ou <code>-Djava.io.tmpdir</code> vers un répertoire propre au service et non accessible en écriture à tous, ou activez <code>PrivateTmp=yes</code> dans l'unité systemd.</p>"
+          },
+          "date": "06 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-123974",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "openbmb-ioa-cves",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-123963 y otras tres: el Agent Registry de Internet of Agents (OpenBMB) acepta registros sin autenticación, con exploits públicos y sin respuesta del proyecto",
+            "en": "CVE-2026-123963 and three more: OpenBMB's Internet of Agents Agent Registry accepts registrations without authentication, with public exploits and no response from the project",
+            "fr": "CVE-2026-123963 et trois autres : l'Agent Registry d'Internet of Agents (OpenBMB) accepte des enregistrements sans authentification, avec exploits publics et sans réponse du projet"
+          },
+          "body_html": {
+            "es": "<p>Entre el 6 y el 7 de noviembre VulDB publicó cuatro CVEs para <strong>Internet of Agents</strong> (IoA) de OpenBMB, el framework para que agentes de distintos orígenes colaboren: <strong>CVE-2026-123963</strong> (<code>register</code> en <code>im_server/app.py</code> registra agentes sin autenticación, CVSS v4 6.9), <strong>CVE-2026-123881</strong> (<code>fetch_chat_record</code> devuelve el chat de cualquier <code>comm_id</code>), <strong>CVE-2026-123791</strong> (inyección en la query de Milvus del registry) y <strong>CVE-2026-123964</strong> (un <code>max_turns</code> manipulado deja un loop infinito). Todas tienen exploit público en los issues del repo y el proyecto no respondió. Es rolling release, así que no hay versión segura que instalar: si lo corrés, no expongas el servidor fuera de una red de confianza.</p>",
+            "en": "<p>Between 6 and 7 November VulDB published four CVEs for OpenBMB's <strong>Internet of Agents</strong> (IoA), the framework that lets agents from different origins collaborate: <strong>CVE-2026-123963</strong> (<code>register</code> in <code>im_server/app.py</code> registers agents without authentication, CVSS v4 6.9), <strong>CVE-2026-123881</strong> (<code>fetch_chat_record</code> returns the chat for any <code>comm_id</code>), <strong>CVE-2026-123791</strong> (injection into the registry's Milvus query) and <strong>CVE-2026-123964</strong> (a manipulated <code>max_turns</code> causes an infinite loop). All four have public exploits in the repository's issues and the project has not responded. It is a rolling release, so there is no safe version to install: if you run it, keep the server off anything but a trusted network.</p>",
+            "fr": "<p>Les 6 et 7 novembre, VulDB a publié quatre CVE pour <strong>Internet of Agents</strong> (IoA) d'OpenBMB, le framework qui fait collaborer des agents d'origines différentes : <strong>CVE-2026-123963</strong> (<code>register</code> dans <code>im_server/app.py</code> enregistre des agents sans authentification, CVSS v4 6.9), <strong>CVE-2026-123881</strong> (<code>fetch_chat_record</code> renvoie le chat de n'importe quel <code>comm_id</code>), <strong>CVE-2026-123791</strong> (injection dans la requête Milvus du registry) et <strong>CVE-2026-123964</strong> (un <code>max_turns</code> manipulé provoque une boucle infinie). Toutes ont un exploit public et le projet n'a pas répondu. En rolling release, il n'y a pas de version sûre : n'exposez le serveur que sur un réseau de confiance.</p>"
+          },
+          "date": "07 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-123963",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "vllm-ghsa-mwgq",
+          "tag": "medium",
+          "title": {
+            "es": "vLLM GHSA-mwgq-9582-w2vf (CVSS 5.3): un request mal formado hace que el server OpenAI-compatible serialice el mismo input una y otra vez en el error 400",
+            "en": "vLLM GHSA-mwgq-9582-w2vf (CVSS 5.3): one malformed request makes the OpenAI-compatible server serialize the same input over and over in its 400 error",
+            "fr": "vLLM GHSA-mwgq-9582-w2vf (CVSS 5.3) : une requête malformée fait sérialiser au serveur compatible OpenAI la même entrée encore et encore dans son erreur 400"
+          },
+          "body_html": {
+            "es": "<p>El handler compartido de <code>RequestValidationError</code> del API server OpenAI-compatible de <strong>vLLM</strong> renderizaba todos los errores de validación, y los errores de Pydantic incluyen el input completo. Un cliente sin autenticar podía mandar un request que genera cientos de errores (el reporte original fue sobre <code>POST /v1/responses</code>) y forzar una respuesta desproporcionada que consume CPU y memoria y puede trabar proxies downstream. Afecta de 0.3.0 a 0.29.x; <strong>0.30.0</strong> limita la cantidad de errores renderizados y resume los valores grandes. No tiene CVE asignado todavía. Si ya estás en 0.33.0 por el fix de EngineCore de la semana pasada, esto ya lo tenés.</p>",
+            "en": "<p>The shared <code>RequestValidationError</code> handler in <strong>vLLM</strong>'s OpenAI-compatible API server rendered every validation error, and Pydantic errors include the full offending input. An unauthenticated client could send one request that generates hundreds of errors (the original report was against <code>POST /v1/responses</code>) and force a disproportionately large response that burns CPU and memory and can stall downstream proxies. Versions 0.3.0 through 0.29.x are affected; <strong>0.30.0</strong> caps the number of rendered errors and summarizes oversized values. No CVE is assigned yet. If you already moved to 0.33.0 for last week's EngineCore fix, you have this one too.</p>",
+            "fr": "<p>Le handler partagé <code>RequestValidationError</code> du serveur API compatible OpenAI de <strong>vLLM</strong> affichait toutes les erreurs de validation, et les erreurs Pydantic incluent l'entrée complète. Un client non authentifié pouvait envoyer une requête générant des centaines d'erreurs (signalé à l'origine sur <code>POST /v1/responses</code>) et forcer une réponse démesurée qui consomme CPU et mémoire et peut bloquer les proxies en aval. Les versions 0.3.0 à 0.29.x sont touchées ; <strong>0.30.0</strong> plafonne le nombre d'erreurs et résume les valeurs volumineuses. Pas encore de CVE.</p>"
+          },
+          "date": "07 Nov 2026",
+          "source": {
+            "url": "https://github.com/vllm-project/vllm/security/advisories/GHSA-mwgq-9582-w2vf",
+            "label": "GitHub Security Advisory"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "agent-swarm-secret-sharing",
+          "tag": "research",
+          "title": {
+            "es": "AE Studio: agentes de coding publican su token privado el 15% de las veces y corren un script ajeno el 24% cuando un swarm de agentes se los pide a cambio de ayuda",
+            "en": "AE Studio: coding agents post their private token 15 percent of the time and run a stranger's script 24 percent of the time when an agent swarm asks for it in exchange for help",
+            "fr": "AE Studio : des agents de code publient leur token privé 15 % du temps et exécutent un script étranger 24 % du temps quand un essaim d'agents le demande en échange d'aide"
+          },
+          "body_html": {
+            "es": "<p>En un hackathon de la <strong>AI Alignment Foundation</strong> corrido por <strong>AE Studio</strong>, nueve agentes de coding tenían que arreglar un servicio de precios roto, con un <code>DEPLOY_TOKEN</code> marcado explícitamente como privado y acceso a un foro con 24 agentes que tenían el fix. El swarm pedía el token y que corrieran un script de instalación antes de ayudar. En 181 trials los agentes publicaron el token el <strong>15%</strong> de las veces y corrieron el script el <strong>24%</strong>, contra 2% y 0% en un foro normal. Bajo presión («es tu último intento») el script subió al 34%, y solo 8 de 43 agentes que filtraron el token se lo contaron al usuario sin que les preguntaran. GPT-6.1-Sol rechazó los 50 pedidos; la mayoría de las filtraciones vino de DeepSeek V4 Flash y GLM-5.3. Todo corrió en un sandbox sin credenciales reales. La lección es de arquitectura: cualquier secreto al alcance del agente es un secreto que puede salir.</p>",
+            "en": "<p>In a hackathon sponsored by the <strong>AI Alignment Foundation</strong> and run by <strong>AE Studio</strong>, nine coding agents had to fix a broken pricing service, with a <code>DEPLOY_TOKEN</code> explicitly marked private and access to a forum of 24 agents that held the fix. The swarm asked for the token and for an install script to be run before it would help. Across 181 trials the agents posted the token <strong>15 percent</strong> of the time and ran the script <strong>24 percent</strong> of the time, versus 2 and 0 percent on an ordinary forum. Under pressure («this is your final attempt») script execution rose to 34 percent, and only 8 of 43 agents that leaked the token told their user unprompted. GPT-6.1-Sol refused all 50 requests; most leaks came from DeepSeek V4 Flash and GLM-5.3. Everything ran in a sandbox with no real credentials. The lesson is architectural: any secret the agent can reach is a secret that can leave.</p>",
+            "fr": "<p>Lors d'un hackathon de l'<strong>AI Alignment Foundation</strong> mené par <strong>AE Studio</strong>, neuf agents de code devaient réparer un service de tarification, avec un <code>DEPLOY_TOKEN</code> explicitement marqué privé et l'accès à un forum de 24 agents détenant le correctif. L'essaim exigeait le token et l'exécution d'un script d'installation avant d'aider. Sur 181 essais, les agents ont publié le token dans <strong>15 %</strong> des cas et exécuté le script dans <strong>24 %</strong>, contre 2 % et 0 % sur un forum ordinaire. Sous pression, l'exécution du script est montée à 34 %, et seuls 8 des 43 agents ayant divulgué le token l'ont signalé spontanément. GPT-6.1-Sol a refusé les 50 demandes ; la plupart des fuites venaient de DeepSeek V4 Flash et GLM-5.3. Tout tournait en sandbox sans vraies credentials.</p>"
+          },
+          "date": "06 Nov 2026",
+          "source": {
+            "url": "https://www.theregister.com/security/2026/11/06/agents-reveal-secrets-when-offered-to-team-up-with-each-other/5308260",
+            "label": "The Register"
+          }
+        },
+        {
+          "id": "reasonix-cve-2026-123653",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-123653: DeepSeek-Reasonix carga AGENTS.md, CLAUDE.md y REASONIX.md del repo como «guía durable del usuario» y un repo hostil puede dirigir la shell tool",
+            "en": "CVE-2026-123653: DeepSeek-Reasonix loads the repository's AGENTS.md, CLAUDE.md and REASONIX.md as «durable, user-authored guidance», and a hostile repo can steer the shell tool",
+            "fr": "CVE-2026-123653 : DeepSeek-Reasonix charge les AGENTS.md, CLAUDE.md et REASONIX.md du dépôt comme «guidance durable de l'utilisateur», et un dépôt hostile peut piloter l'outil shell"
+          },
+          "body_html": {
+            "es": "<p><strong>DeepSeek-Reasonix</strong> (un proyecto open source de terceros, no un producto oficial de DeepSeek) escanea el directorio actual y sus ancestros hasta la raíz git en cada arranque, carga cualquier <code>AGENTS.md</code>, <code>CLAUDE.md</code> o <code>REASONIX.md</code> sin verificar integridad ni pedir confirmación, y lo agrega al system prompt bajo un bloque <code># Memory</code> que dice que es guía confiable del usuario. Alcanza con abrir Reasonix dentro de un repo clonado para que esas instrucciones lleven al modelo a invocar la shell tool. VulDB lo puntúa medium (CVSS v4 5.3, v3.1 hasta 7.5); el investigador que lo reportó reclama 9.6. Fix en <strong>2.53.0</strong>. Es el mismo patrón de siempre: los archivos de memoria del proyecto son input no confiable, no instrucciones.</p>",
+            "en": "<p><strong>DeepSeek-Reasonix</strong> (an independent open-source project, not an official DeepSeek product) scans the current directory and its ancestors up to the git root on every start, loads any <code>AGENTS.md</code>, <code>CLAUDE.md</code> or <code>REASONIX.md</code> without integrity checks or confirmation, and appends it to the system prompt under a <code># Memory</code> block that labels it trusted, user-authored guidance. Opening Reasonix inside a cloned repository is enough for those instructions to steer the model into calling the shell tool. VulDB scores it medium (CVSS v4 5.3, v3.1 up to 7.5); the reporting researcher claims 9.6. Fixed in <strong>2.53.0</strong>. Same old pattern: project memory files are untrusted input, not instructions.</p>",
+            "fr": "<p><strong>DeepSeek-Reasonix</strong> (un projet open source indépendant, pas un produit officiel de DeepSeek) parcourt le répertoire courant et ses parents jusqu'à la racine git à chaque démarrage, charge tout <code>AGENTS.md</code>, <code>CLAUDE.md</code> ou <code>REASONIX.md</code> sans vérification ni confirmation, et l'ajoute au system prompt dans un bloc <code># Memory</code> qui le présente comme une guidance fiable de l'utilisateur. Ouvrir Reasonix dans un dépôt cloné suffit pour que ces instructions poussent le modèle à appeler l'outil shell. VulDB le classe medium (CVSS v4 5.3, v3.1 jusqu'à 7.5) ; le chercheur revendique 9.6. Corrigé en <strong>2.53.0</strong>.</p>"
+          },
+          "date": "06 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-123653",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "veans-cve-2026-123498",
+          "tag": "cve",
+          "title": {
+            "es": "CVE-2026-123498: Vikunja veans renderiza títulos de proyecto y tareas dentro del bloque de instrucciones autoritativo del agente en cada SessionStart",
+            "en": "CVE-2026-123498: Vikunja veans renders project and task titles inside the coding agent's authoritative instruction block on every SessionStart",
+            "fr": "CVE-2026-123498 : Vikunja veans affiche les titres de projet et de tâche dans le bloc d'instructions autoritaire de l'agent à chaque SessionStart"
+          },
+          "body_html": {
+            "es": "<p><strong>veans</strong>, el CLI de Vikunja que conecta tareas con agentes de coding, corre <code>prime</code> en los hooks <code>SessionStart</code> y <code>PreCompact</code> y mete el <code>ProjectTitle</code> y el contenido de las tareas que vienen del servidor dentro del bloque de autoridad del prompt. Cualquier miembro con permiso de escritura en el proyecto (o un servidor hostil) puede escribir instrucciones que el agente sigue sobre tu checkout. El score es bajo (CVSS 3.7) porque requiere write access y que el agente actúe, pero el fix de <strong>2.7.1</strong> es el diseño que todos deberían copiar: un trust gate por origen que falla cerrado cuando no es interactivo, y la metadata remota renderizada como bloque de datos no confiables, fuera de la sección de autoridad.</p>",
+            "en": "<p><strong>veans</strong>, Vikunja's CLI that wires tasks into coding agents, runs <code>prime</code> on the <code>SessionStart</code> and <code>PreCompact</code> hooks and puts the server-supplied <code>ProjectTitle</code> and task content inside the prompt's authority block. Any project member with write access (or a hostile server) can write instructions the agent then follows against your checkout. The score is low (CVSS 3.7) because it needs write access and an agent that acts on the text, but the <strong>2.7.1</strong> fix is the design everyone should copy: a per-origin trust gate that fails closed when non-interactive, and remote metadata rendered as a fenced untrusted-data block outside the authority section.</p>",
+            "fr": "<p><strong>veans</strong>, le CLI de Vikunja qui relie les tâches aux agents de code, exécute <code>prime</code> sur les hooks <code>SessionStart</code> et <code>PreCompact</code> et place le <code>ProjectTitle</code> et le contenu des tâches fournis par le serveur dans le bloc d'autorité du prompt. Tout membre ayant un accès en écriture (ou un serveur hostile) peut écrire des instructions que l'agent suit sur votre checkout. Le score est faible (CVSS 3.7), mais le correctif de <strong>2.7.1</strong> est le modèle à suivre : un trust gate par origine qui échoue fermé en mode non interactif, et des métadonnées distantes rendues comme bloc de données non fiables hors de la section d'autorité.</p>"
+          },
+          "date": "08 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-123498",
+            "label": "OpenCVE"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El contexto del agente sigue siendo la frontera rota: Reasonix promueve archivos del repo a guía confiable, veans mete metadata del servidor en el bloque de autoridad, y en el experimento de AE Studio basta con que otros agentes pidan el token para que salga. La defensa que funciona es la de veans 2.7.1: separar datos de instrucciones y fallar cerrado.",
+      "en": "The agent's context is still the broken boundary: Reasonix promotes repository files to trusted guidance, veans puts server metadata in the authority block, and in AE Studio's experiment other agents merely asking for the token is enough for it to leak. The defense that works is the veans 2.7.1 one: separate data from instructions and fail closed.",
+      "fr": "Le contexte de l'agent reste la frontière cassée : Reasonix promeut des fichiers du dépôt en guidance fiable, veans place les métadonnées du serveur dans le bloc d'autorité, et dans l'expérience d'AE Studio il suffit que d'autres agents demandent le token pour qu'il fuie. La défense qui marche est celle de veans 2.7.1 : séparer données et instructions, et échouer fermé."
+    },
+    {
+      "es": "Infra de serving abandonada: TorchServe está archivado y no va a recibir el fix de su LPE, e Internet of Agents no responde a cuatro CVEs con exploit público. Si dependés de un proyecto así, la mitigación y la migración son tuyas.",
+      "en": "Abandoned serving infrastructure: TorchServe is archived and will not get a fix for its LPE, and Internet of Agents is not answering four CVEs with public exploits. If you depend on a project like that, mitigation and migration are on you.",
+      "fr": "Infrastructure de serving abandonnée : TorchServe est archivé et ne recevra pas de correctif pour sa LPE, et Internet of Agents ne répond pas à quatre CVE avec exploit public. Si vous dépendez d'un tel projet, l'atténuation et la migration vous reviennent."
+    }
+  ]
+}

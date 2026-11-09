@@ -1,0 +1,97 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 09 Nov 2026",
+    "en": "Gentleman Releases — 09 Nov 2026",
+    "fr": "Gentleman Releases — 09 Nov 2026"
+  },
+  "description": {
+    "es": "Releases del fin de semana en proyectos de Gentleman-Programming",
+    "en": "Weekend releases from Gentleman-Programming projects",
+    "fr": "Sorties du week-end des projets Gentleman-Programming"
+  },
+  "pubDate": "2026-11-09",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "engram v3.7.0 — memoria con scope de organización, modo daemon para engram serve y un store y sync bastante más rápidos",
+        "en": "engram v3.7.0 — org-scoped memory, daemon mode for engram serve and a faster store and sync path",
+        "fr": "engram v3.7.0 — mémoire par organisation, mode démon pour engram serve et stockage et synchronisation plus rapides"
+      },
+      "anchor": "engram-v3-7-0",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "gentle-ai v4.4.0 — paridad con Antigravity 1.4, Gentle Shell arranca en una fracción del tiempo y restores que andan con %APPDATA% redirigido",
+        "en": "gentle-ai v4.4.0 — Antigravity 1.4 parity, much faster Gentle Shell launches and restores that work with a redirected %APPDATA%",
+        "fr": "gentle-ai v4.4.0 — parité avec Antigravity 1.4, lancements de Gentle Shell bien plus rapides et restaurations compatibles avec un %APPDATA% redirigé"
+      },
+      "anchor": "gentle-ai-v4-4-0",
+      "icon": "simple-icons:github"
+    }
+  ],
+  "tools": [
+    {
+      "id": "engram",
+      "name": "engram",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-engram",
+      "icon_emoji": "💋",
+      "anchor": "engram",
+      "version": "v3.7.0",
+      "updates": [
+        {
+          "id": "engram-v3-7-0",
+          "tag": "feature",
+          "title": {
+            "es": "v3.7.0 — Memoria por organización, modo daemon y store más rápido",
+            "en": "v3.7.0 — Org-scoped memory, daemon mode and a faster store",
+            "fr": "v3.7.0 — Mémoire par organisation, mode démon et stockage plus rapide"
+          },
+          "body_html": {
+            "es": "<p>Minor que viene cargado. Se empareja con <strong>gentle-engram 0.7.0</strong>, el companion de Pi.</p><ul><li><strong>Memoria con scope de org:</strong> las observaciones pueden llevar un campo opcional <code>org</code>, tomado del label de agrupación en <code>.engram/config.json</code>, que agrupa proyectos por organización. Viaja por todos los caminos de escritura, sale en búsquedas y previews, y filtra FTS, LIKE y topic-key. Lo aceptan <code>mem_save</code>, <code>mem_search</code>, <code>mem_current_project</code>, <code>mem_list_projects</code> y <code>mem_session_summary</code>, y el exportador de Obsidian suma <code>--org</code>. La dedupe por hash incluye <code>org</code>, así que el mismo contenido en dos orgs se guarda por separado. Es opcional en todos lados: lo existente se comporta igual (#1151, gracias @Deyvis17GY).</li><li><strong>Filtro <code>org</code> en <code>GET /search</code>:</strong> vacío o ausente devuelve todo, igual que <code>/projects</code> y <code>mem_search</code> por MCP (#2327).</li><li><strong>Modo daemon:</strong> comandos estilo docker: <code>engram run -d</code>, <code>engram ps</code>, <code>engram stop</code>, <code>engram logs [-f]</code> y <code>engram restart</code>. Y <code>engram serve</code> ahora sale con código distinto de cero si la misma instancia ya tiene el puerto, en vez del crash loop silencioso con exit 0 (#2229, gracias @carolitascl).</li><li><strong>Versión del server vs CLI:</strong> <code>engram cloud status</code> y <code>engram ps</code> muestran la versión del server corriendo al lado de la del CLI y avisan si falta un restart. No reinicia solo (#2311).</li><li><strong>Opt-in de escrituras en Claude Code:</strong> <code>engram setup claude-code --allow-memory-writes</code> habilita doce tools de memoria fijas para setups desatendidos; las de borrado y merge de proyectos quedan afuera (#2314).</li><li><strong>Fixes:</strong> el sync preserva ediciones locales detrás de timestamps de chunks ajenos (#2309), <code>engram doctor</code> detecta proyectos inválidos en el journal cloud pendiente (#2308), <code>migrate-copy</code> acepta el catálogo de v3.6.0 (#2252), y Claude Code deja de capturar prompts sintéticos del desktop (#2246).</li><li><strong>Performance:</strong> arranque del store con introspección de columnas y triggers FTS en batch, contexto con presupuesto de bytes, y sync que difiere lecturas de payload históricas.</li></ul><p>Ojo con esto: si tenés un server corriendo, reinicialo con el supervisor que lo levantó y confirmá la versión con <code>engram ps</code>. Si usás Pi, después del core corré <code>engram setup pi</code> (o <code>pi install npm:gentle-engram@0.7.0</code>) y reiniciá Pi. Backup antes del <code>brew upgrade engram</code>, como siempre.</p>",
+            "en": "<p>A loaded minor release, paired with <strong>gentle-engram 0.7.0</strong>, the Pi companion.</p><ul><li><strong>Org-scoped memory:</strong> observations can carry an optional <code>org</code> field, set from the grouping label in <code>.engram/config.json</code>, that groups projects by organization. It flows through every write path, appears in search results and previews, and filters FTS, LIKE and topic-key lookups. <code>mem_save</code>, <code>mem_search</code>, <code>mem_current_project</code>, <code>mem_list_projects</code> and <code>mem_session_summary</code> accept it, and the Obsidian exporter gains <code>--org</code>. Content-hash dedupe includes <code>org</code>, so identical content in different orgs is kept separately. It is optional everywhere (#1151, thanks @Deyvis17GY).</li><li><strong><code>org</code> filter on <code>GET /search</code>:</strong> a blank or missing value keeps unfiltered results, matching <code>/projects</code> and MCP <code>mem_search</code> (#2327).</li><li><strong>Daemon mode:</strong> docker-style lifecycle commands: <code>engram run -d</code>, <code>engram ps</code>, <code>engram stop</code>, <code>engram logs [-f]</code> and <code>engram restart</code>. <code>engram serve</code> now exits non-zero when the same instance already owns the port, instead of a silent exit-0 crash loop (#2229, thanks @carolitascl).</li><li><strong>Server version skew:</strong> <code>engram cloud status</code> and <code>engram ps</code> show the running server version next to the installed CLI and report a pending restart. No automatic restart (#2311).</li><li><strong>Claude Code memory-write opt-in:</strong> <code>engram setup claude-code --allow-memory-writes</code> grants twelve fixed memory tools for unattended setups; delete and project-merge tools are excluded (#2314).</li><li><strong>Fixes:</strong> sync preserves local edits behind unrelated chunk timestamps (#2309), <code>engram doctor</code> detects invalid pending cloud journal projects (#2308), <code>migrate-copy</code> admits the v3.6.0 catalog (#2252), and Claude Code stops capturing desktop synthetic prompts (#2246).</li><li><strong>Performance:</strong> batched column and FTS trigger introspection at startup, byte-budgeted context work, and sync that defers historical payload reads.</li></ul><p>If a server is already running, restart it with its supervisor and confirm the version with <code>engram ps</code>. Pi users: after upgrading the core, run <code>engram setup pi</code> (or <code>pi install npm:gentle-engram@0.7.0</code>) and restart Pi. Back up your data before <code>brew upgrade engram</code>.</p>",
+            "fr": "<p>Une version mineure bien remplie, associée à <strong>gentle-engram 0.7.0</strong>, le compagnon Pi.</p><ul><li><strong>Mémoire par organisation :</strong> les observations peuvent porter un champ optionnel <code>org</code>, issu du libellé de regroupement de <code>.engram/config.json</code>, qui regroupe les projets par organisation. Il traverse tous les chemins d'écriture, apparaît dans les résultats et aperçus, et filtre les recherches FTS, LIKE et topic-key. <code>mem_save</code>, <code>mem_search</code>, <code>mem_current_project</code>, <code>mem_list_projects</code> et <code>mem_session_summary</code> l'acceptent, et l'export Obsidian gagne <code>--org</code>. La déduplication par hash inclut <code>org</code> : un même contenu dans deux organisations est conservé séparément. Le champ reste optionnel partout (#1151, merci @Deyvis17GY).</li><li><strong>Filtre <code>org</code> sur <code>GET /search</code> :</strong> une valeur vide ou absente renvoie tout, comme <code>/projects</code> et <code>mem_search</code> via MCP (#2327).</li><li><strong>Mode démon :</strong> commandes à la docker : <code>engram run -d</code>, <code>engram ps</code>, <code>engram stop</code>, <code>engram logs [-f]</code> et <code>engram restart</code>. <code>engram serve</code> sort désormais avec un code non nul si la même instance occupe déjà le port, au lieu d'une boucle de crash silencieuse en code 0 (#2229, merci @carolitascl).</li><li><strong>Écart de version serveur :</strong> <code>engram cloud status</code> et <code>engram ps</code> affichent la version du serveur à côté de celle du CLI et signalent un redémarrage en attente, sans redémarrer automatiquement (#2311).</li><li><strong>Écritures mémoire dans Claude Code :</strong> <code>engram setup claude-code --allow-memory-writes</code> autorise douze outils mémoire fixes pour les installations sans surveillance ; suppression et fusion de projets sont exclues (#2314).</li><li><strong>Correctifs :</strong> la synchronisation préserve les modifications locales derrière des horodatages de chunks sans rapport (#2309), <code>engram doctor</code> détecte les projets invalides du journal cloud en attente (#2308), <code>migrate-copy</code> accepte le catalogue v3.6.0 (#2252), et Claude Code ne capture plus les prompts synthétiques du desktop (#2246).</li><li><strong>Performance :</strong> introspection des colonnes et triggers FTS groupée au démarrage, contexte borné par un budget d'octets, et synchronisation qui diffère les lectures de payloads historiques.</li></ul><p>Si un serveur tourne déjà, redémarrez-le avec son superviseur et vérifiez la version avec <code>engram ps</code>. Utilisateurs de Pi : après le cœur, lancez <code>engram setup pi</code> (ou <code>pi install npm:gentle-engram@0.7.0</code>) puis redémarrez Pi. Sauvegardez vos données avant <code>brew upgrade engram</code>.</p>"
+          },
+          "date": "07 Nov 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/engram/releases/tag/v3.7.0",
+            "label": "github.com/Gentleman-Programming/engram"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gentle-ai",
+      "name": "gentle-ai",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-gentle-ai",
+      "icon_emoji": "🎩",
+      "anchor": "gentle-ai",
+      "version": "v4.4.0",
+      "updates": [
+        {
+          "id": "gentle-ai-v4-4-0",
+          "tag": "feature",
+          "title": {
+            "es": "v4.4.0 — Antigravity 1.4, Gentle Shell más rápido y fixes de Windows",
+            "en": "v4.4.0 — Antigravity 1.4, faster Gentle Shell and Windows fixes",
+            "fr": "v4.4.0 — Antigravity 1.4, Gentle Shell plus rapide et correctifs Windows"
+          },
+          "body_html": {
+            "es": "<p>Minor sobre v4.3.1. El contrato del provider queda congelado byte a byte en <code>1.4.0</code>.</p><ul><li><strong>Paridad con Antigravity 1.4:</strong> agy recibe los agentes nativos de Judgment Day (<code>jd-judge-a</code>, <code>jd-judge-b</code>, <code>jd-fix-agent</code>), con tier de modelo por rol (<code>inherit</code>, <code>flash_lite</code>, <code>flash</code>, <code>pro</code>) elegible en el instalador. La guía se renderiza como archivos de reglas propios que entran en el límite de 24 KB de agy, y las secciones viejas de <code>GEMINI.md</code> se migran (#5931 y siguientes).</li><li><strong>Gentle Shell Stable con lista revisada de gentle-pi:</strong> cada release pineado por SRI del tarball de npm y hash del instalador, leído en vivo con fallback seguro. gentle-pi 4.5.1 es la primera entrada.</li><li><strong>Arranques mucho más rápidos:</strong> <code>gs</code> tardaba 13 a 19 segundos re-verificando bytes sin cambios. Con caches de stamps atados a ctime, Main baja a unos 3,3 s y Stable de 2,81 a 0,33 s, sin aflojar ningún chequeo (#5920).</li><li><strong><code>gs</code> en Windows:</strong> el install Separate publica <code>gentle-shell.cmd</code> y <code>gs.cmd</code> de forma atómica y no pisa nombres ocupados (#5921).</li><li><strong>Gestionar agentes custom desde la TUI</strong>, upgrade vía <code>scoop update</code> en installs de Scoop, y <code>install --force-community-tools</code> para forzar CodeGraph en <code>@latest</code>.</li><li><strong>Fixes:</strong> restores y rollbacks ahora andan cuando Windows redirige <code>%APPDATA%</code> fuera del perfil, un snapshot de uninstall de workspace se puede restaurar solo, y los configs JSON/JSONC con BOM UTF-8 ya no pierden tus claves.</li></ul><p>Ojo con esto: no hay breaking changes declarados, pero varios cambios de comportamiento entran después de <code>gentle-ai sync</code>: Codex escribe bajo <code>CODEX_HOME</code> si está seteado, el Context7 de workspace para Claude Code va a <code>.mcp.json</code> (lo tenés que aprobar una vez) y las reglas deny de secretos quedan ancladas al home. Así que <code>brew upgrade gentle-ai</code> y después <code>gentle-ai sync</code>, sí o sí.</p>",
+            "en": "<p>Minor release over v4.3.1. The provider contract stays byte-frozen at <code>1.4.0</code>.</p><ul><li><strong>Antigravity 1.4 parity:</strong> agy gets the Judgment Day native agents (<code>jd-judge-a</code>, <code>jd-judge-b</code>, <code>jd-fix-agent</code>), with a per-role model tier (<code>inherit</code>, <code>flash_lite</code>, <code>flash</code>, <code>pro</code>) picked in the installer. Guidance is rendered as owned rule files that fit agy's 24 KB limit, and legacy <code>GEMINI.md</code> sections are migrated (#5931 onward).</li><li><strong>Gentle Shell Stable follows a reviewed gentle-pi list:</strong> each release pinned by its npm tarball SRI and installer hash, read live with a fail-safe fallback. gentle-pi 4.5.1 is the first entry.</li><li><strong>Much faster launches:</strong> <code>gs</code> spent 13 to 19 seconds re-verifying unchanged bytes. With ctime-bound stamp caches, Main drops to about 3.3 s and Stable from 2.81 to 0.33 s, with every check just as strict (#5920).</li><li><strong><code>gs</code> on Windows:</strong> the Separate install publishes <code>gentle-shell.cmd</code> and <code>gs.cmd</code> atomically and reports occupied names instead of overwriting them (#5921).</li><li><strong>Manage custom agents from the TUI</strong>, Scoop-owned installs upgrade through <code>scoop update</code>, and <code>install --force-community-tools</code> forces CodeGraph to <code>@latest</code>.</li><li><strong>Fixes:</strong> restores and rollbacks work when Windows redirects <code>%APPDATA%</code> outside the profile, a workspace uninstall snapshot can be restored on its own, and JSON/JSONC configs with a UTF-8 BOM keep the user's keys.</li></ul><p>No breaking changes are declared, but several behavior changes take effect after <code>gentle-ai sync</code>: Codex writes under <code>CODEX_HOME</code> when set, workspace Context7 for Claude Code goes to <code>.mcp.json</code> (approve it once), and secret deny rules are anchored to the home directory. Run <code>brew upgrade gentle-ai</code>, then <code>gentle-ai sync</code>.</p>",
+            "fr": "<p>Version mineure après v4.3.1. Le contrat du provider reste figé octet par octet en <code>1.4.0</code>.</p><ul><li><strong>Parité avec Antigravity 1.4 :</strong> agy reçoit les agents natifs Judgment Day (<code>jd-judge-a</code>, <code>jd-judge-b</code>, <code>jd-fix-agent</code>), avec un niveau de modèle par rôle (<code>inherit</code>, <code>flash_lite</code>, <code>flash</code>, <code>pro</code>) choisi dans l'installeur. Les consignes sont rendues en fichiers de règles dédiés sous la limite de 24 Ko d'agy, et les anciennes sections de <code>GEMINI.md</code> sont migrées (#5931 et suivantes).</li><li><strong>Gentle Shell Stable suit une liste revue de gentle-pi :</strong> chaque version épinglée par le SRI de son tarball npm et le hash de l'installeur, lue en direct avec repli sûr. gentle-pi 4.5.1 en est la première entrée.</li><li><strong>Lancements bien plus rapides :</strong> <code>gs</code> passait 13 à 19 secondes à revérifier des octets inchangés. Grâce à des caches liés au ctime, Main descend à environ 3,3 s et Stable de 2,81 à 0,33 s, sans relâcher aucune vérification (#5920).</li><li><strong><code>gs</code> sous Windows :</strong> l'installation Separate publie <code>gentle-shell.cmd</code> et <code>gs.cmd</code> de façon atomique et signale les noms déjà pris au lieu de les écraser (#5921).</li><li><strong>Gestion des agents personnalisés depuis la TUI</strong>, mise à jour via <code>scoop update</code> pour les installations Scoop, et <code>install --force-community-tools</code> pour forcer CodeGraph en <code>@latest</code>.</li><li><strong>Correctifs :</strong> restaurations et rollbacks fonctionnent quand Windows redirige <code>%APPDATA%</code> hors du profil, un instantané de désinstallation de workspace peut être restauré seul, et les configs JSON/JSONC avec BOM UTF-8 conservent les clés de l'utilisateur.</li></ul><p>Aucun changement cassant déclaré, mais plusieurs changements de comportement s'appliquent après <code>gentle-ai sync</code> : Codex écrit sous <code>CODEX_HOME</code> s'il est défini, le Context7 de workspace pour Claude Code va dans <code>.mcp.json</code> (à approuver une fois) et les règles deny des secrets sont ancrées au répertoire personnel. Lancez <code>brew upgrade gentle-ai</code>, puis <code>gentle-ai sync</code>.</p>"
+          },
+          "date": "07 Nov 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v4.4.0",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

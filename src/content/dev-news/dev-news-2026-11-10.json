@@ -1,0 +1,253 @@
+{
+  "title": {
+    "es": "Dev News — 10 Nov 2026: RCE crítico en el dev server de Vite",
+    "en": "Dev News — 10 Nov 2026: Critical RCE in the Vite dev server",
+    "fr": "Dev News — 10 nov. 2026 : RCE critique dans le serveur de dev Vite"
+  },
+  "description": {
+    "es": "Vite parchea un RCE crítico (CVSS 9.1) en cinco ramas, isomorphic-git cierra un file write vía symlinks, Next.js 16.4.6 comprime route handlers, React Native 0.89 RC.1 inspecciona WebSockets y Storybook 11 llega a beta.",
+    "en": "Vite patches a critical RCE (CVSS 9.1) across five branches, isomorphic-git fixes a symlink file write, Next.js 16.4.6 compresses route handlers, React Native 0.89 RC.1 inspects WebSockets and Storybook 11 hits beta.",
+    "fr": "Vite corrige une RCE critique (CVSS 9.1) sur cinq branches, isomorphic-git corrige une écriture de fichier via symlinks, Next.js 16.4.6 compresse les route handlers, React Native 0.89 RC.1 inspecte les WebSockets et Storybook 11 passe en bêta."
+  },
+  "pubDate": "2026-11-10",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": { "es": "Vite: RCE crítico en el dev server (9.1)", "en": "Vite: critical dev server RCE (9.1)", "fr": "Vite : RCE critique du serveur de dev (9.1)" },
+      "anchor": "vite-rce-browser-external",
+      "icon": "simple-icons:vite"
+    },
+    {
+      "text": { "es": "isomorphic-git: escritura fuera del repo", "en": "isomorphic-git: writes outside the repo", "fr": "isomorphic-git : écriture hors du dépôt" },
+      "anchor": "isomorphic-git-symlink",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Next.js 16.4.6 comprime route handlers", "en": "Next.js 16.4.6 compresses route handlers", "fr": "Next.js 16.4.6 compresse les route handlers" },
+      "anchor": "nextjs-16-4-6",
+      "icon": "simple-icons:nextdotjs"
+    },
+    {
+      "text": { "es": "RN 0.89 RC.1: WebSockets en DevTools", "en": "RN 0.89 RC.1: WebSockets in DevTools", "fr": "RN 0.89 RC.1 : WebSockets dans DevTools" },
+      "anchor": "rn-0-89-rc1",
+      "icon": "simple-icons:react"
+    },
+    {
+      "text": { "es": "Storybook 11 entra en beta", "en": "Storybook 11 enters beta", "fr": "Storybook 11 passe en bêta" },
+      "anchor": "storybook-11-beta1",
+      "icon": "lucide:code"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "vite-rce-browser-external",
+          "tag": "security",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "Vite: RCE crítico vía los módulos virtuales __vite-browser-external",
+            "en": "Vite: critical RCE via the __vite-browser-external virtual modules",
+            "fr": "Vite : RCE critique via les modules virtuels __vite-browser-external"
+          },
+          "body_html": {
+            "es": "<p>GHSA-p4f5-76q4-ffq7 (CVSS v4 <strong>9.1</strong>): los módulos virtuales <code>__vite-browser-external:</code> y <code>__vite-optional-peer-dep:</code> metían el ID derivado de la URL sin escapar. Con un solo <code>GET /@id/...</code> un atacante inyecta imports (salteando <code>server.fs</code>) o código que Vite termina evaluando con <code>eval</code> en el server. Afecta desde Vite 4 hasta 8.3.6 — parcheado en <strong>8.3.7, 8.2.5, 8.1.7, 7.3.8 y 6.4.6</strong> (y vite-plus 1.5.1). Solo pega si exponés el dev server con <code>--host</code>, pero ojo con esto: un montón de setups de Docker y devcontainers lo hacen por default. Actualizá ya.</p>",
+            "en": "<p>GHSA-p4f5-76q4-ffq7 (CVSS v4 <strong>9.1</strong>): the <code>__vite-browser-external:</code> and <code>__vite-optional-peer-dep:</code> virtual modules embedded the URL-derived ID unescaped. A single <code>GET /@id/...</code> lets an attacker inject imports (bypassing <code>server.fs</code>) or code that Vite later evaluates with <code>eval</code> on the server. Affects Vite 4 through 8.3.6 — patched in <strong>8.3.7, 8.2.5, 8.1.7, 7.3.8 and 6.4.6</strong> (plus vite-plus 1.5.1). Only exploitable when the dev server is exposed with <code>--host</code>, which many Docker and devcontainer setups do by default.</p>",
+            "fr": "<p>GHSA-p4f5-76q4-ffq7 (CVSS v4 <strong>9.1</strong>) : les modules virtuels <code>__vite-browser-external:</code> et <code>__vite-optional-peer-dep:</code> intégraient l'ID dérivé de l'URL sans échappement. Un seul <code>GET /@id/...</code> permet d'injecter des imports (contournant <code>server.fs</code>) ou du code que Vite évalue ensuite avec <code>eval</code> côté serveur. Vite 4 à 8.3.6 affectés — corrigé dans <strong>8.3.7, 8.2.5, 8.1.7, 7.3.8 et 6.4.6</strong>. Exploitable seulement si le serveur de dev est exposé avec <code>--host</code>.</p>"
+          },
+          "source": { "url": "https://github.com/vitejs/vite/security/advisories/GHSA-p4f5-76q4-ffq7", "label": "github.com/vitejs" }
+        },
+        {
+          "id": "isomorphic-git-symlink",
+          "tag": "security",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "isomorphic-git: escritura arbitraria fuera del working tree vía symlinks",
+            "en": "isomorphic-git: arbitrary file write outside the working tree via symlinks",
+            "fr": "isomorphic-git : écriture arbitraire hors du working tree via symlinks"
+          },
+          "body_html": {
+            "es": "<p>GHSA-9qw7-j9xw-fv9c (CVSS 8.8): un repo malicioso con un symlink a directorio hace que <code>checkout</code>/<code>clone</code> escriba archivos fuera del working tree — potencial RCE. Salió en tanda con un path traversal por entradas <code>..</code> en el tree y un DoS por referencias circulares. Si tu tooling (StackBlitz-style, editores en browser, CLIs) clona repos de terceros con isomorphic-git, subí a <strong>1.38.6</strong>.</p>",
+            "en": "<p>GHSA-9qw7-j9xw-fv9c (CVSS 8.8): a malicious repo with a directory symlink makes <code>checkout</code>/<code>clone</code> write files outside the working tree — potential RCE. It shipped alongside a <code>..</code> tree-entry path traversal and a circular-ref DoS. If your tooling clones third-party repos with isomorphic-git, upgrade to <strong>1.38.6</strong>.</p>",
+            "fr": "<p>GHSA-9qw7-j9xw-fv9c (CVSS 8.8) : un dépôt malveillant avec un symlink de répertoire fait écrire <code>checkout</code>/<code>clone</code> hors du working tree — RCE potentielle. Publié avec un path traversal via des entrées <code>..</code> et un DoS par références circulaires. Passez à <strong>1.38.6</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-9qw7-j9xw-fv9c", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "react",
+      "name": "React",
+      "theme": "react",
+      "icon_emoji": "⚛️",
+      "anchor": "react",
+      "updates": [
+        {
+          "id": "nextjs-16-4-6",
+          "tag": "release",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "Next.js 16.4.6: compresión automática en route handlers",
+            "en": "Next.js 16.4.6: automatic compression for route handlers",
+            "fr": "Next.js 16.4.6 : compression automatique des route handlers"
+          },
+          "body_html": {
+            "es": "<p>Backport LTS: las respuestas de <strong>route handlers</strong> ahora se comprimen solas si no venían comprimidas, hay fixes de GC de Turbopack en dev y <code>create-next-app</code> pinea Tailwind 4.3.3. Si servís JSON pesado desde <code>route.ts</code>, vas a notar la diferencia en el payload sin tocar nada.</p>",
+            "en": "<p>LTS backport: <strong>route handler</strong> responses are now compressed automatically when not already compressed, Turbopack dev GC fixes land, and <code>create-next-app</code> pins Tailwind 4.3.3. Heavy JSON from <code>route.ts</code> gets smaller payloads for free.</p>",
+            "fr": "<p>Backport LTS : les réponses des <strong>route handlers</strong> sont désormais compressées automatiquement, avec des correctifs GC de Turbopack en dev et Tailwind 4.3.3 épinglé dans <code>create-next-app</code>.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/next.js/releases/tag/v16.4.6", "label": "github.com/vercel" }
+        }
+      ]
+    },
+    {
+      "id": "react-native",
+      "name": "React Native",
+      "theme": "react-native",
+      "icon_emoji": "📱",
+      "anchor": "react-native",
+      "updates": [
+        {
+          "id": "rn-0-89-rc1",
+          "tag": "beta",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "React Native 0.89 RC.1: WebSockets en el panel Network de DevTools",
+            "en": "React Native 0.89 RC.1: WebSockets in the DevTools Network panel",
+            "fr": "React Native 0.89 RC.1 : WebSockets dans le panneau Network de DevTools"
+          },
+          "body_html": {
+            "es": "<p>El segundo RC suma inspección de eventos <strong>WebSocket</strong> en el panel Network de React Native DevTools, sube Hermes y <strong>Metro 0.88</strong>, y hace el transform cache de Metro compartible entre checkouts (buenísimo para CI y worktrees). Momento ideal para probar tu app contra 0.89 antes del estable.</p>",
+            "en": "<p>The second RC adds <strong>WebSocket</strong> event inspection to the React Native DevTools Network panel, bumps Hermes and <strong>Metro 0.88</strong>, and makes Metro's transform cache shareable across checkouts (great for CI and worktrees).</p>",
+            "fr": "<p>Le second RC ajoute l'inspection des événements <strong>WebSocket</strong> dans le panneau Network, passe à Hermes récent et <strong>Metro 0.88</strong>, et rend le cache de transformation de Metro partageable entre checkouts.</p>"
+          },
+          "source": { "url": "https://github.com/facebook/react-native/releases/tag/v0.89.0-rc.1", "label": "github.com/facebook" }
+        }
+      ]
+    },
+    {
+      "id": "js-frameworks",
+      "name": "JS Frameworks",
+      "theme": "js-frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "js-frameworks",
+      "updates": [
+        {
+          "id": "astro-ts-plugin-1-11",
+          "tag": "minor",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "@astrojs/ts-plugin 1.11: auto-imports con el nombre real del componente",
+            "en": "@astrojs/ts-plugin 1.11: auto-imports use the real component name",
+            "fr": "@astrojs/ts-plugin 1.11 : auto-imports avec le vrai nom du composant"
+          },
+          "body_html": {
+            "es": "<p>Junto con Astro 7.4.8, el plugin de TypeScript deja de sugerir el nombre TSX generado en los auto-imports y usa el del componente <code>.astro</code>. Ojo: ahora pide Node <code>^20.19.0 || &gt;=22.12.0</code>.</p>",
+            "en": "<p>Shipped with Astro 7.4.8, the TypeScript plugin now suggests the <code>.astro</code> component name instead of its generated TSX name in auto-imports. It now requires Node <code>^20.19.0 || &gt;=22.12.0</code>.</p>",
+            "fr": "<p>Publié avec Astro 7.4.8, le plugin TypeScript suggère désormais le nom du composant <code>.astro</code> dans les auto-imports. Requiert Node <code>^20.19.0 || &gt;=22.12.0</code>.</p>"
+          },
+          "source": { "url": "https://github.com/withastro/astro/releases/tag/%40astrojs/ts-plugin%401.11.0", "label": "github.com/withastro" }
+        }
+      ]
+    },
+    {
+      "id": "build-tools",
+      "name": "Build Tools & Runtimes",
+      "theme": "build-tools",
+      "icon_emoji": "🔧",
+      "anchor": "build-tools",
+      "updates": [
+        {
+          "id": "rolldown-1-3-1",
+          "tag": "release",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "Rolldown 1.3.1 (+ backports a 1.2, 1.1 y 1.0)",
+            "en": "Rolldown 1.3.1 (+ backports to 1.2, 1.1 and 1.0)",
+            "fr": "Rolldown 1.3.1 (+ backports vers 1.2, 1.1 et 1.0)"
+          },
+          "body_html": {
+            "es": "<p>Rolldown sacó cinco versiones el mismo día: el fix que escapa nombres de módulo en los stubs de error de <code>vite-resolve</code> es justamente el que cierra el RCE de Vite 8. Además trae inlining de chunks con <code>import.meta.ROLLDOWN_FILE_URL_*</code> y una docena de fixes de tree-shaking y linking.</p>",
+            "en": "<p>Rolldown shipped five versions in one day: the fix escaping module names in <code>vite-resolve</code> error stubs is the one closing Vite 8's RCE. It also adds chunk inlining with <code>import.meta.ROLLDOWN_FILE_URL_*</code> and a dozen tree-shaking and linking fixes.</p>",
+            "fr": "<p>Cinq versions de Rolldown le même jour : le correctif d'échappement des noms de modules dans les stubs d'erreur de <code>vite-resolve</code> ferme la RCE de Vite 8. Plus l'inlining de chunks via <code>import.meta.ROLLDOWN_FILE_URL_*</code>.</p>"
+          },
+          "source": { "url": "https://github.com/rolldown/rolldown/releases/tag/v1.3.1", "label": "github.com/rolldown" }
+        },
+        {
+          "id": "esm-sh-path-traversal",
+          "tag": "security",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "esm.sh: lectura arbitraria de archivos en instancias self-hosted",
+            "en": "esm.sh: arbitrary file read in self-hosted instances",
+            "fr": "esm.sh : lecture arbitraire de fichiers sur les instances auto-hébergées"
+          },
+          "body_html": {
+            "es": "<p>GHSA-g3c2-rjq2-c763 (CVSS 7.5): <code>web.NewHandler</code> permitía path traversal con dot-segments encodeados. Si corrés tu propio esm.sh como CDN interno, actualizá a <strong>0.2.0</strong>.</p>",
+            "en": "<p>GHSA-g3c2-rjq2-c763 (CVSS 7.5): <code>web.NewHandler</code> allowed path traversal through encoded dot-segments. If you run your own esm.sh as an internal CDN, upgrade to <strong>0.2.0</strong>.</p>",
+            "fr": "<p>GHSA-g3c2-rjq2-c763 (CVSS 7.5) : <code>web.NewHandler</code> permettait un path traversal via des dot-segments encodés. Mettez à jour vers <strong>0.2.0</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-g3c2-rjq2-c763", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "dev-tools",
+      "name": "Developer Tools",
+      "theme": "dev-tools",
+      "icon_emoji": "🛠️",
+      "anchor": "dev-tools",
+      "updates": [
+        {
+          "id": "storybook-11-beta1",
+          "tag": "beta",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "Storybook 11 beta.1: CSF4 por default y menos dependencias",
+            "en": "Storybook 11 beta.1: CSF4 by default and fewer dependencies",
+            "fr": "Storybook 11 beta.1 : CSF4 par défaut et moins de dépendances"
+          },
+          "body_html": {
+            "es": "<p><code>storybook init</code> ya scaffoldea <strong>CSF4</strong>, <code>react-docgen</code> pasa a ser opcional y se bundlean/prebundlean varias deps chicas (adiós a ~10 paquetes instalados). El addon de Vitest corre stories nuevas que todavía no vio. Si mantenés un design system, es buen momento para probar la migración.</p>",
+            "en": "<p><code>storybook init</code> now scaffolds <strong>CSF4</strong>, <code>react-docgen</code> becomes optional, and several small deps are bundled or prebundled (about 10 fewer installed packages). The Vitest addon now runs story files it hasn't seen yet.</p>",
+            "fr": "<p><code>storybook init</code> génère désormais du <strong>CSF4</strong>, <code>react-docgen</code> devient optionnel et plusieurs petites dépendances sont bundlées (environ 10 paquets de moins).</p>"
+          },
+          "source": { "url": "https://github.com/storybookjs/storybook/releases/tag/v11.0.0-beta.1", "label": "github.com/storybookjs" }
+        },
+        {
+          "id": "oxlint-1-93",
+          "tag": "minor",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "oxlint 1.93: --fix limpia directivas oxlint-disable sin uso",
+            "en": "oxlint 1.93: --fix removes unused oxlint-disable directives",
+            "fr": "oxlint 1.93 : --fix supprime les directives oxlint-disable inutilisées"
+          },
+          "body_html": {
+            "es": "<p><code>--fix</code> ahora borra directivas <code>oxlint-disable</code> que no hacen nada, <code>react/exhaustive-deps</code> sugiere remover dependencias de más, y tsgolint arranca antes del pase normal para recortar tiempos en lint con tipos.</p>",
+            "en": "<p><code>--fix</code> now removes unused <code>oxlint-disable</code> directives, <code>react/exhaustive-deps</code> suggests removing extra dependencies, and tsgolint starts before the regular pass to cut type-aware lint time.</p>",
+            "fr": "<p><code>--fix</code> supprime les directives <code>oxlint-disable</code> inutilisées, <code>react/exhaustive-deps</code> suggère de retirer les dépendances superflues et tsgolint démarre plus tôt.</p>"
+          },
+          "source": { "url": "https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.93.0", "label": "github.com/oxc-project" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El dev server es superficie de ataque: otra vez Vite, y otra vez solo si lo exponés con --host. Revisá tus devcontainers y docker-compose.",
+      "en": "The dev server is attack surface: Vite again, and again only when exposed with --host. Audit your devcontainers and docker-compose files.",
+      "fr": "Le serveur de dev est une surface d'attaque : encore Vite, encore seulement avec --host. Vérifiez vos devcontainers et docker-compose."
+    },
+    {
+      "es": "Con Vite 8 sobre Rolldown, los fixes de seguridad viven en el binario de Rolldown: los parches se coordinan entre ambos proyectos y salen en tanda por rama.",
+      "en": "With Vite 8 on Rolldown, security fixes live in the Rolldown binary: patches are coordinated across both projects and ship per branch in batches.",
+      "fr": "Avec Vite 8 sur Rolldown, les correctifs de sécurité vivent dans le binaire Rolldown et sortent par lots coordonnés."
+    }
+  ]
+}

@@ -1,0 +1,272 @@
+{
+  "title": {
+    "es": "AI Security — 10 Nov 2026",
+    "en": "AI Security — 10 Nov 2026",
+    "fr": "AI Security — 10 nov. 2026"
+  },
+  "description": {
+    "es": "GPUStack regala admin a cualquier request que parezca venir de loopback, Kubeflow Pipelines publica cinco advisories de multi-tenancy, y tres agentes con MCP o shell caen por defaults inseguros.",
+    "en": "GPUStack hands admin to any request that looks like loopback, Kubeflow Pipelines ships five multi-tenancy advisories, and three agent tools with MCP or shell access fall to unsafe defaults.",
+    "fr": "GPUStack donne l'admin à toute requête qui semble venir du loopback, Kubeflow Pipelines publie cinq advisories multi-tenant, et trois outils d'agents avec MCP ou shell tombent à cause de défauts non sécurisés."
+  },
+  "pubDate": "2026-11-10",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "GPUStack: admin sin credenciales vía loopback (9.8)",
+        "en": "GPUStack: admin without credentials via loopback (9.8)",
+        "fr": "GPUStack : admin sans identifiants via loopback (9.8)"
+      },
+      "anchor": "gpustack-cve-2026-102895",
+      "icon": "lucide:shield-alert"
+    },
+    {
+      "text": {
+        "es": "Kubeflow Pipelines: 5 CVEs de multi-tenancy, uno 9.6",
+        "en": "Kubeflow Pipelines: 5 multi-tenancy CVEs, one at 9.6",
+        "fr": "Kubeflow Pipelines : 5 CVE multi-tenant, dont un à 9.6"
+      },
+      "anchor": "kubeflow-pipelines-batch",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": {
+        "es": "fast-agent serve: MCP sin auth en 0.0.0.0, RCE con --shell",
+        "en": "fast-agent serve: no-auth MCP on 0.0.0.0, RCE with --shell",
+        "fr": "fast-agent serve : MCP sans auth sur 0.0.0.0, RCE avec --shell"
+      },
+      "anchor": "fast-agent-cve-2026-102610",
+      "icon": "lucide:radiation"
+    },
+    {
+      "text": {
+        "es": "OmniAgent: find -execdir saltea la aprobación de bash",
+        "en": "OmniAgent: find -execdir skips the bash approval gate",
+        "fr": "OmniAgent : find -execdir contourne l'approbation bash"
+      },
+      "anchor": "omniagent-cve-2026-125368",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "braindecode: path traversal al cargar modelos del Hub",
+        "en": "braindecode: path traversal when loading Hub models",
+        "fr": "braindecode : path traversal au chargement des modèles du Hub"
+      },
+      "anchor": "braindecode-cve-2026-124999",
+      "icon": "simple-icons:huggingface"
+    },
+    {
+      "text": {
+        "es": "Mythos de Anthropic llega a productos de Cisco e IBM",
+        "en": "Anthropic's Mythos lands in Cisco and IBM products",
+        "fr": "Mythos d'Anthropic arrive dans les produits Cisco et IBM"
+      },
+      "anchor": "mythos-cisco-ibm",
+      "icon": "lucide:lock"
+    }
+  ],
+  "tools": [
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "gpustack-cve-2026-102895",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-102895 (CVSS 9.8): GPUStack promueve a admin cualquier request que considere loopback",
+            "en": "CVE-2026-102895 (CVSS 9.8): GPUStack promotes any request it considers loopback to administrator",
+            "fr": "CVE-2026-102895 (CVSS 9.8) : GPUStack promeut en administrateur toute requête considérée comme loopback"
+          },
+          "body_html": {
+            "es": "<p>En GPUStack antes de 2.2.0, <code>get_current_user</code> convierte en el admin built-in a toda request cuyo origen parezca <code>127.0.0.1</code> cuando <code>force_auth_localhost</code> está en <code>False</code>, que es el default. Hay dos caminos sin credenciales: el despliegue típico detrás de un reverse proxy en el mismo host (<code>proxy_pass http://127.0.0.1</code>), donde <em>toda</em> request remota llega con peer loopback, o un header <code>X-GPUStack-Real-IP: 127.0.0.1</code> forjado. Resultado: admin completo sobre el cluster de inferencia. Ojo con esto: si tenés GPUStack detrás de nginx, actualizá a <strong>2.2.0</strong> o activá <code>force_auth_localhost</code> ya.</p>",
+            "en": "<p>In GPUStack before 2.2.0, <code>get_current_user</code> turns any request whose source looks like <code>127.0.0.1</code> into the built-in administrator when <code>force_auth_localhost</code> is <code>False</code>, the default. There are two credential-free paths: the common deployment behind a same-host reverse proxy (<code>proxy_pass http://127.0.0.1</code>), where <em>every</em> remote request arrives with a loopback peer, or a forged <code>X-GPUStack-Real-IP: 127.0.0.1</code> header. The result is full admin over the inference cluster. If GPUStack sits behind nginx, upgrade to <strong>2.2.0</strong> or enable <code>force_auth_localhost</code> now.</p>",
+            "fr": "<p>Dans GPUStack avant 2.2.0, <code>get_current_user</code> transforme en administrateur intégré toute requête dont la source ressemble à <code>127.0.0.1</code> quand <code>force_auth_localhost</code> vaut <code>False</code>, la valeur par défaut. Deux chemins sans identifiants : le déploiement courant derrière un reverse proxy sur le même hôte, où chaque requête distante arrive avec un pair loopback, ou un en-tête <code>X-GPUStack-Real-IP: 127.0.0.1</code> forgé. Mettez à jour vers <strong>2.2.0</strong> ou activez <code>force_auth_localhost</code>.</p>"
+          },
+          "date": "09 Nov 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-gj9m-f8ph-pmhr",
+            "label": "GitHub Advisory GHSA-gj9m-f8ph-pmhr"
+          }
+        },
+        {
+          "id": "kubeflow-pipelines-batch",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-77596 (CVSS 9.6) y cuatro más: Kubeflow Pipelines no autoriza los pipelines compartidos en modo multi-user",
+            "en": "CVE-2026-77596 (CVSS 9.6) and four more: Kubeflow Pipelines skips authorization on shared pipelines in multi-user mode",
+            "fr": "CVE-2026-77596 (CVSS 9.6) et quatre autres : Kubeflow Pipelines n'autorise pas les pipelines partagés en mode multi-utilisateur"
+          },
+          "body_html": {
+            "es": "<p>Kubeflow publicó cinco advisories el mismo día. El grave: los endpoints de upload multipart (<code>/apis/v2beta1/pipelines/upload</code> y <code>upload_version</code>) no hacen <code>SubjectAccessReview</code> cuando el namespace está vacío, que es como KFP direcciona los pipelines compartidos y el default si omitís el parámetro. Cualquier tenant con pocos privilegios (o un caller sin autenticar, si el API server es alcanzable) puede inyectar versiones nuevas en pipelines globales. Completan el lote: <strong>CVE-2026-88984</strong> (CVSS v4 7.2, modificar o borrar pipelines compartidos sin RBAC), <strong>CVE-2026-88982</strong> (5.4, cache poisoning entre tenants en el cache legacy V1/Argo), <strong>CVE-2026-88985</strong> (SQL injection por tokens de paginación) y <strong>CVE-2026-88983</strong> (fetch de <code>pipelineURL</code> sin validar host). Los fixes están en commits de upstream; actualizá a un release que los incluya y seteá <code>REQUIRE_NAMESPACE_FOR_PIPELINES</code>.</p>",
+            "en": "<p>Kubeflow published five advisories on the same day. The worst: the multipart upload endpoints (<code>/apis/v2beta1/pipelines/upload</code> and <code>upload_version</code>) skip <code>SubjectAccessReview</code> when the namespace is empty, which is how KFP addresses shared pipelines and the default when the parameter is omitted. Any low-privilege tenant (or an unauthenticated caller, if the API server is reachable) can inject new versions into global pipelines. The rest of the batch: <strong>CVE-2026-88984</strong> (CVSS v4 7.2, modify or delete shared pipelines without RBAC), <strong>CVE-2026-88982</strong> (5.4, cross-tenant cache poisoning in the legacy V1/Argo cache), <strong>CVE-2026-88985</strong> (SQL injection through pagination tokens) and <strong>CVE-2026-88983</strong> (<code>pipelineURL</code> fetched without host validation). Fixes are in upstream commits; upgrade to a release that contains them and set <code>REQUIRE_NAMESPACE_FOR_PIPELINES</code>.</p>",
+            "fr": "<p>Kubeflow a publié cinq advisories le même jour. Le plus grave : les endpoints d'upload multipart ne font aucun <code>SubjectAccessReview</code> quand le namespace est vide, ce qui est le cas des pipelines partagés et la valeur par défaut. Tout tenant peu privilégié peut injecter des versions dans les pipelines globaux. Le lot comprend aussi CVE-2026-88984 (modification ou suppression sans RBAC), CVE-2026-88982 (cache poisoning entre tenants), CVE-2026-88985 (injection SQL) et CVE-2026-88983 (fetch d'URL sans validation d'hôte).</p>"
+          },
+          "date": "09 Nov 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-rjr3-43j3-4q8g",
+            "label": "GitHub Advisory GHSA-rjr3-43j3-4q8g"
+          }
+        },
+        {
+          "id": "nocobase-cve-2026-125397",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-125397 (CVSS 7.1): NocoBase plugin-ai deja ejecutar «AI employees» que no te asignaron",
+            "en": "CVE-2026-125397 (CVSS 7.1): NocoBase plugin-ai lets users run AI employees they were never assigned",
+            "fr": "CVE-2026-125397 (CVSS 7.1) : NocoBase plugin-ai permet d'exécuter des AI employees non attribués"
+          },
+          "body_html": {
+            "es": "<p>En NocoBase plugin-ai 2.1.0 a 2.2.41, <code>getAccessibleAIEmployee()</code> acepta un username provisto por el usuario que pisa el filtro derivado del rol. Con la tool <code>dispatch-sub-agent-task</code> un usuario autenticado corre AI employees ajenos con sus tools y permisos, y con <code>get-ai-employee</code> lee sus prompts y la configuración de tools. Fix en el PR #11009; actualizá a una versión posterior a 2.2.41.</p>",
+            "en": "<p>In NocoBase plugin-ai 2.1.0 through 2.2.41, <code>getAccessibleAIEmployee()</code> accepts a caller-supplied username that overrides the role-derived filter. Through the <code>dispatch-sub-agent-task</code> tool an authenticated user can run someone else's AI employees with their tools and permissions, and <code>get-ai-employee</code> exposes their prompts and tool configuration. Fixed in PR #11009; upgrade past 2.2.41.</p>",
+            "fr": "<p>Dans NocoBase plugin-ai 2.1.0 à 2.2.41, <code>getAccessibleAIEmployee()</code> accepte un nom d'utilisateur fourni qui écrase le filtre dérivé du rôle. Un utilisateur authentifié peut exécuter des AI employees d'autrui avec leurs outils et lire leurs prompts. Corrigé dans la PR #11009.</p>"
+          },
+          "date": "09 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-125397",
+            "label": "OpenCVE CVE-2026-125397"
+          }
+        }
+      ]
+    },
+    {
+      "id": "supply-chain",
+      "name": "Supply Chain",
+      "theme": "supply-chain",
+      "icon_emoji": "📦",
+      "anchor": "supply-chain",
+      "updates": [
+        {
+          "id": "braindecode-cve-2026-124999",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-124999 (CVSS 6.3): braindecode tiene path traversal en la integración con el Hub al cargar modelos preentrenados",
+            "en": "CVE-2026-124999 (CVSS 6.3): braindecode has a path traversal in its Hub integration when loading pretrained models",
+            "fr": "CVE-2026-124999 (CVSS 6.3) : path traversal dans l'intégration Hub de braindecode au chargement des modèles"
+          },
+          "body_html": {
+            "es": "<p><code>EEGModuleMixin._from_pretrained</code> en braindecode hasta 1.8.2 no sanea el argumento <code>filename</code>, así que un repo de modelo hostil puede escapar del directorio esperado. Es la misma familia de siempre: el loader de modelos confía en lo que viene del Hub. El exploit es público; actualizá a <strong>2.0.0</strong> (commit <code>05b764d</code>).</p>",
+            "en": "<p><code>EEGModuleMixin._from_pretrained</code> in braindecode up to 1.8.2 does not sanitize the <code>filename</code> argument, so a hostile model repository can escape the expected directory. Same old class: the model loader trusts whatever comes from the Hub. The exploit is public; upgrade to <strong>2.0.0</strong> (commit <code>05b764d</code>).</p>",
+            "fr": "<p><code>EEGModuleMixin._from_pretrained</code> dans braindecode jusqu'à 1.8.2 ne nettoie pas l'argument <code>filename</code> : un dépôt de modèle malveillant peut sortir du répertoire prévu. L'exploit est public ; passez à <strong>2.0.0</strong>.</p>"
+          },
+          "date": "09 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-124999",
+            "label": "OpenCVE CVE-2026-124999"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "fast-agent-cve-2026-102610",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-102610 (CVSS 6.4): «fast-agent serve» expone el agente por MCP en 0.0.0.0 sin auth, y con --shell es RCE remoto",
+            "en": "CVE-2026-102610 (CVSS 6.4): «fast-agent serve» exposes the agent over MCP on 0.0.0.0 with no auth, and with --shell it is remote RCE",
+            "fr": "CVE-2026-102610 (CVSS 6.4) : «fast-agent serve» expose l'agent via MCP sur 0.0.0.0 sans auth, et avec --shell c'est une RCE"
+          },
+          "body_html": {
+            "es": "<p><code>fast-agent serve</code> arranca por default un transporte HTTP en <code>0.0.0.0:8000</code> con <code>auth=None</code> y sin ningún warning. Si lo levantás con <code>-x</code>/<code>--shell</code>, que es justo el quickstart del README, el agente tiene una tool <code>execute</code> local: cualquiera que alcance el puerto le pide que corra comandos del sistema. El CVSS es medio, pero el payload es un RCE sin autenticación. Fix en <strong>0.7.21</strong>; mientras tanto, bindeá a <code>127.0.0.1</code>.</p>",
+            "en": "<p><code>fast-agent serve</code> defaults to an HTTP transport on <code>0.0.0.0:8000</code> with <code>auth=None</code> and prints no warning. Start it with <code>-x</code>/<code>--shell</code>, which is exactly the README quickstart, and the agent gets a local <code>execute</code> tool: anyone who can reach the port can ask it to run OS commands. The CVSS is medium, but the outcome is unauthenticated RCE. Fixed in <strong>0.7.21</strong>; until then, bind to <code>127.0.0.1</code>.</p>",
+            "fr": "<p><code>fast-agent serve</code> écoute par défaut en HTTP sur <code>0.0.0.0:8000</code> avec <code>auth=None</code>. Lancé avec <code>-x</code>/<code>--shell</code>, comme dans le quickstart du README, l'agent dispose d'un outil <code>execute</code> local : quiconque atteint le port peut lui faire exécuter des commandes. Corrigé en <strong>0.7.21</strong>.</p>"
+          },
+          "date": "09 Nov 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-9vhv-g5hf-m7m7",
+            "label": "GitHub Advisory GHSA-9vhv-g5hf-m7m7"
+          }
+        },
+        {
+          "id": "omniagent-cve-2026-125368",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-125368 (CVSS 7.5): OmniAgent considera seguro cualquier comando que empiece con find, y -execdir corre lo que quieras",
+            "en": "CVE-2026-125368 (CVSS 7.5): OmniAgent treats any command starting with find as safe, and -execdir runs whatever you want",
+            "fr": "CVE-2026-125368 (CVSS 7.5) : OmniAgent juge sûre toute commande commençant par find, et -execdir exécute n'importe quoi"
+          },
+          "body_html": {
+            "es": "<p><code>ReflexionAgent._is_safe_bash_command</code> tiene una allowlist que aprueba todo lo que arranque con <code>find</code> sin mirar los argumentos. Un agente con prompt injection puede usar <code>find -execdir</code> para invocar <code>dd</code>, <code>nc</code>, <code>perl</code> u <code>openssl</code> en un shell sin sandbox, sin aprobación humana. Es la lección de siempre con los approval gates por prefijo: no sirven. Afecta hasta el commit <code>12b98c5</code>; no hay release con fix todavía (issue #67).</p>",
+            "en": "<p><code>ReflexionAgent._is_safe_bash_command</code> has an allowlist that approves anything starting with <code>find</code> without inspecting its arguments. A prompt-injected agent can use <code>find -execdir</code> to invoke <code>dd</code>, <code>nc</code>, <code>perl</code> or <code>openssl</code> in an unsandboxed shell, with no human approval. The usual lesson about prefix-based approval gates: they do not hold. Affects up to commit <code>12b98c5</code>; no fixed release yet (issue #67).</p>",
+            "fr": "<p><code>ReflexionAgent._is_safe_bash_command</code> approuve tout ce qui commence par <code>find</code> sans inspecter les arguments. Un agent victime de prompt injection peut utiliser <code>find -execdir</code> pour lancer <code>dd</code>, <code>nc</code> ou <code>perl</code> dans un shell sans sandbox. Aucune version corrigée pour l'instant (issue #67).</p>"
+          },
+          "date": "09 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-125368",
+            "label": "OpenCVE CVE-2026-125368"
+          }
+        },
+        {
+          "id": "code-graph-rag-cve-2026-77604",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-77604 (CVSS 7.5): la tool MCP read_file de Code Graph RAG lee cualquier archivo del server con una ruta absoluta",
+            "en": "CVE-2026-77604 (CVSS 7.5): Code Graph RAG's MCP read_file tool reads any server file given an absolute path",
+            "fr": "CVE-2026-77604 (CVSS 7.5) : l'outil MCP read_file de Code Graph RAG lit n'importe quel fichier avec un chemin absolu"
+          },
+          "body_html": {
+            "es": "<p>Cuando le pasás <code>offset</code> o <code>limit</code>, <code>read_file</code> arma la ruta con <code>Path(project_root) / file_path</code> y no valida que el resultado quede dentro del proyecto. Como <code>pathlib</code> descarta el lado izquierdo si el derecho es absoluto, <code>/etc/passwd</code> sale directo. Un prompt injection en el código indexado alcanza para exfiltrar secretos. El mismo día salió <strong>CVE-2026-87008</strong>: las tools estructurales siguen symlinks fuera del root. Fix en <strong>0.0.345</strong>.</p>",
+            "en": "<p>When given <code>offset</code> or <code>limit</code>, <code>read_file</code> builds the path with <code>Path(project_root) / file_path</code> and never checks that the result stays inside the project. Because <code>pathlib</code> drops the left side when the right side is absolute, <code>/etc/passwd</code> comes straight out. A prompt injection in the indexed code is enough to exfiltrate secrets. Published the same day: <strong>CVE-2026-87008</strong>, where the structural tools follow symlinks out of the root. Fixed in <strong>0.0.345</strong>.</p>",
+            "fr": "<p>Avec <code>offset</code> ou <code>limit</code>, <code>read_file</code> construit le chemin avec <code>Path(project_root) / file_path</code> sans vérifier qu'il reste dans le projet ; un chemin absolu comme <code>/etc/passwd</code> passe. CVE-2026-87008, publié le même jour, concerne les symlinks hors racine. Corrigé en <strong>0.0.345</strong>.</p>"
+          },
+          "date": "09 Nov 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-vvr2-h2jp-838m",
+            "label": "GitHub Advisory GHSA-vvr2-h2jp-838m"
+          }
+        }
+      ]
+    },
+    {
+      "id": "advisories",
+      "name": "Vendor Advisories",
+      "theme": "advisories",
+      "icon_emoji": "📢",
+      "anchor": "advisories",
+      "updates": [
+        {
+          "id": "mythos-cisco-ibm",
+          "tag": "advisory",
+          "title": {
+            "es": "El modelo Mythos de Anthropic, especializado en encontrar bugs, llega a productos de Cisco e IBM",
+            "en": "Anthropic's bug-finding Mythos model is going into Cisco and IBM products",
+            "fr": "Le modèle Mythos d'Anthropic, spécialisé dans la recherche de bugs, arrive chez Cisco et IBM"
+          },
+          "body_html": {
+            "es": "<p>Según The Register, las herramientas de seguridad enterprise de Cisco e IBM van a ofrecer las capacidades de Mythos sin entregarle el modelo en sí a los clientes. Es el modelo de acceso controlado que Anthropic eligió para un modelo ofensivo: capacidad vía producto, no pesos ni API abierta.</p>",
+            "en": "<p>According to The Register, Cisco and IBM enterprise security tools will offer Mythos capabilities without handing customers the model itself. It is the gated-access approach Anthropic chose for an offensive-capable model: capability through a product, not open weights or an open API.</p>",
+            "fr": "<p>Selon The Register, les outils de sécurité d'entreprise de Cisco et IBM proposeront les capacités de Mythos sans remettre le modèle aux clients : un accès contrôlé via un produit plutôt qu'une API ouverte.</p>"
+          },
+          "date": "10 Nov 2026",
+          "source": {
+            "url": "https://www.theregister.com/ai-and-ml/2026/11/10/anthropics-super-bug-finding-mythos-model-is-going-into-cisco-and-ibm-products/5308616",
+            "label": "The Register"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Los defaults matan: GPUStack confía en loopback, fast-agent bindea a 0.0.0.0 sin auth, Kubeflow saltea la autorización con namespace vacío. Ninguno de los tres requiere un exploit sofisticado, solo un deploy estándar.",
+      "en": "Defaults are the vulnerability: GPUStack trusts loopback, fast-agent binds to 0.0.0.0 with no auth, Kubeflow skips authorization on an empty namespace. None of the three needs a clever exploit, just a standard deployment.",
+      "fr": "Les valeurs par défaut sont la faille : GPUStack fait confiance au loopback, fast-agent écoute sur 0.0.0.0 sans auth, Kubeflow saute l'autorisation sur un namespace vide."
+    },
+    {
+      "es": "Los approval gates y las tools de lectura de los agentes siguen fallando en lo básico: allowlists por prefijo (OmniAgent) y rutas sin normalizar (Code Graph RAG) convierten un prompt injection en ejecución o exfiltración.",
+      "en": "Agent approval gates and file tools keep failing at the basics: prefix allowlists (OmniAgent) and unnormalized paths (Code Graph RAG) turn a prompt injection into execution or exfiltration.",
+      "fr": "Les garde-fous d'approbation et les outils de fichiers des agents échouent encore sur l'essentiel : allowlists par préfixe et chemins non normalisés transforment une prompt injection en exécution ou exfiltration."
+    }
+  ]
+}

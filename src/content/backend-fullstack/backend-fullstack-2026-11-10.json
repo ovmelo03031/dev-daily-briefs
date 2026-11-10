@@ -1,0 +1,458 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 10 Nov 2026",
+    "en": "Backend & Fullstack Daily — 10 Nov 2026",
+    "fr": "Backend & Fullstack Daily — 10 nov. 2026"
+  },
+  "description": {
+    "es": "isomorphic-git permite escribir fuera del working tree (CVSS 8.8), NestJS 11.2.9 trae parches de seguridad para multer y Fastify, Telepresence expone secretos sin auth, AWS lanza Nitro Sandboxes para pods y tasks, y pnpm 12.19 deja de filtrar credenciales.",
+    "en": "isomorphic-git allows writes outside the working tree (CVSS 8.8), NestJS 11.2.9 ships security bumps for multer and Fastify, Telepresence leaks secrets with no auth, AWS launches Nitro Sandboxes for pods and tasks, and pnpm 12.19 stops leaking credentials.",
+    "fr": "isomorphic-git permet d'écrire hors du working tree (CVSS 8.8), NestJS 11.2.9 livre des mises à jour de sécurité pour multer et Fastify, Telepresence divulgue des secrets sans authentification, AWS lance Nitro Sandboxes pour pods et tasks, et pnpm 12.19 ne fuit plus les identifiants."
+  },
+  "pubDate": "2026-11-10",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "isomorphic-git: escritura fuera del repo (8.8)",
+        "en": "isomorphic-git: writes outside the repo (8.8)",
+        "fr": "isomorphic-git : écriture hors du dépôt (8.8)"
+      },
+      "anchor": "isomorphic-git-symlink-checkout",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "NestJS 11.2.9: parches de multer y Fastify",
+        "en": "NestJS 11.2.9: multer and Fastify security bumps",
+        "fr": "NestJS 11.2.9 : correctifs multer et Fastify"
+      },
+      "anchor": "nestjs-11-2-9",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Telepresence: gRPC sin auth filtra secretos",
+        "en": "Telepresence: unauthenticated gRPC leaks secrets",
+        "fr": "Telepresence : gRPC sans auth, secrets exposés"
+      },
+      "anchor": "telepresence-traffic-manager-noauth",
+      "icon": "simple-icons:kubernetes"
+    },
+    {
+      "text": {
+        "es": "fastapi-code-generator: RCE desde un OpenAPI",
+        "en": "fastapi-code-generator: RCE from an OpenAPI spec",
+        "fr": "fastapi-code-generator : RCE depuis un OpenAPI"
+      },
+      "anchor": "fastapi-code-generator-rce",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "AWS Nitro Sandboxes para EKS, ECS y EC2",
+        "en": "AWS Nitro Sandboxes for EKS, ECS and EC2",
+        "fr": "AWS Nitro Sandboxes pour EKS, ECS et EC2"
+      },
+      "anchor": "aws-nitro-sandboxes",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": {
+        "es": "pnpm 12.19: chequeo de engines y fix de tokens",
+        "en": "pnpm 12.19: engines checks and token leak fix",
+        "fr": "pnpm 12.19 : contrôle des engines et fuite de jetons"
+      },
+      "anchor": "pnpm-12-19",
+      "icon": "lucide:package"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "isomorphic-git-symlink-checkout",
+      "updates": [
+        {
+          "id": "isomorphic-git-symlink-checkout",
+          "tag": "security",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "isomorphic-git: un repo malicioso escribe fuera del working tree vía symlink en el checkout (CVSS 8.8)",
+            "en": "isomorphic-git: a malicious repo writes outside the working tree via a directory symlink on checkout (CVSS 8.8)",
+            "fr": "isomorphic-git : un dépôt malveillant écrit hors du working tree via un symlink de répertoire au checkout (CVSS 8.8)"
+          },
+          "body_html": {
+            "es": "<p><code>git.checkout</code> escribía archivos a través de un <strong>symlink de directorio</strong> sin validar el path, así que un repo armado puede pisar archivos del host, por ejemplo <code>~/.ssh/authorized_keys</code>. El bug está en la lógica de checkout, no en el <code>fs</code> provider, así que pega en Node y en cualquier backend de filesystem real. Vinieron dos más el mismo día: path traversal con entradas <code>..</code> en el tree (medium) y un DoS por referencias simbólicas circulares. Si clonás repos de terceros desde Node (CI, plataformas de preview, agentes), subí a <strong>1.38.6</strong> YA.</p>",
+            "en": "<p><code>git.checkout</code> wrote files through a <strong>directory symlink</strong> without checking the leading path, so a crafted repo can overwrite host files such as <code>~/.ssh/authorized_keys</code>. The flaw is in the checkout logic itself, independent of the <code>fs</code> provider, so it hits Node and any real-filesystem backend. Two more landed the same day: path traversal through <code>..</code> tree entries (medium) and a DoS via circular symbolic refs. If you clone third-party repos from Node (CI, preview platforms, agents), upgrade to <strong>1.38.6</strong> now.</p>",
+            "fr": "<p><code>git.checkout</code> écrivait des fichiers à travers un <strong>symlink de répertoire</strong> sans vérifier le chemin, si bien qu'un dépôt piégé peut écraser des fichiers de l'hôte comme <code>~/.ssh/authorized_keys</code>. Le défaut est dans la logique de checkout, indépendamment du provider <code>fs</code>, donc Node et tout backend de fichiers réel sont touchés. Deux autres avis le même jour : path traversal via des entrées <code>..</code> (medium) et un DoS par références symboliques circulaires. Si vous clonez des dépôts tiers depuis Node (CI, previews, agents), passez à <strong>1.38.6</strong> sans attendre.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-9qw7-j9xw-fv9c", "label": "github.com/advisories" }
+        },
+        {
+          "id": "nestjs-11-2-9",
+          "tag": "security",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "NestJS 11.2.9: la rama 11 recibe multer 2.5.0 y Fastify 5.12.8 con sus advisories resueltos",
+            "en": "NestJS 11.2.9: the v11 line picks up multer 2.5.0 and Fastify 5.12.8 with their advisories resolved",
+            "fr": "NestJS 11.2.9 : la branche 11 passe à multer 2.5.0 et Fastify 5.12.8, avis de sécurité corrigés"
+          },
+          "body_html": {
+            "es": "<p>Salió el mismo minuto que la 12.4.1 y no es casualidad: <code>@nestjs/platform-express</code> sube <code>multer</code> a <strong>2.5.0</strong> (resuelve <code>GHSA-q7qp-rjg7-q26m</code>, DoS por un <code>fileFilter</code> async pendiente tras cortar el request) y <code>@nestjs/platform-fastify</code> sube a <strong>Fastify 5.12.8</strong>, que cierra los advisories publicados hasta 5.12.4. Ojo con el cambio de comportamiento: <code>find-my-way</code> 9.10.0 ahora rutea <code>http://host?a=b</code> como <code>/</code>, y los absolute-form targets raros responden 404. Además, el middleware wildcard ya corre en rutas excluidas de todas las versiones. Si seguís en Nest 11, actualizá.</p>",
+            "en": "<p>Released the same minute as 12.4.1, and not by accident: <code>@nestjs/platform-express</code> bumps <code>multer</code> to <strong>2.5.0</strong> (resolving <code>GHSA-q7qp-rjg7-q26m</code>, a DoS via a pending async <code>fileFilter</code> after request teardown) and <code>@nestjs/platform-fastify</code> moves to <strong>Fastify 5.12.8</strong>, closing the advisories published up to 5.12.4. Watch the behavior change: <code>find-my-way</code> 9.10.0 now routes <code>http://host?a=b</code> as <code>/</code>, and odd absolute-form targets get a 404. Wildcard middleware also now runs on excluded routes of every version. If you are still on Nest 11, upgrade.</p>",
+            "fr": "<p>Publiée à la même minute que la 12.4.1, et ce n'est pas un hasard : <code>@nestjs/platform-express</code> passe <code>multer</code> en <strong>2.5.0</strong> (corrige <code>GHSA-q7qp-rjg7-q26m</code>, un DoS via un <code>fileFilter</code> asynchrone en attente après la fin de la requête) et <code>@nestjs/platform-fastify</code> passe à <strong>Fastify 5.12.8</strong>, qui ferme les avis publiés jusqu'à 5.12.4. Attention au changement de comportement : <code>find-my-way</code> 9.10.0 route désormais <code>http://host?a=b</code> vers <code>/</code>, et certaines cibles absolute-form renvoient 404. Le middleware wildcard s'exécute aussi sur les routes exclues de toutes les versions. Si vous êtes encore sur Nest 11, mettez à jour.</p>"
+          },
+          "source": { "url": "https://github.com/nestjs/nest/releases/tag/v11.2.9", "label": "github.com/nestjs" }
+        },
+        {
+          "id": "telepresence-traffic-manager-noauth",
+          "tag": "security",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "Telepresence: el Traffic Manager acepta cualquier pod por gRPC y le entrega los secretos del servicio interceptado (CVSS 8.5)",
+            "en": "Telepresence: the Traffic Manager accepts any pod over gRPC and hands over the intercepted service's secrets (CVSS 8.5)",
+            "fr": "Telepresence : le Traffic Manager accepte n'importe quel pod en gRPC et livre les secrets du service intercepté (CVSS 8.5)"
+          },
+          "body_html": {
+            "es": "<p>La API gRPC del Traffic Manager (puerto <code>8081</code>) <strong>no tiene autenticación</strong>: cualquier pod con alcance de red se registra como cliente en un namespace ajeno e intercepta servicios, salteándose el RBAC de Kubernetes. Al interceptar recibe el <strong>environment completo</strong> del pod víctima: tokens, API keys, credenciales de base. Un segundo advisory deja reclamar túneles con un session ID ajeno. Si tenés Telepresence instalado en un cluster compartido para dev, subí a <strong>2.31.0</strong> o restringí el acceso al Traffic Manager con NetworkPolicy.</p>",
+            "en": "<p>The Traffic Manager gRPC API (port <code>8081</code>) has <strong>no authentication</strong>: any pod with network reach can register as a client in someone else's namespace and intercept services, bypassing Kubernetes RBAC. On intercept it receives the victim pod's <strong>full environment</strong>: tokens, API keys, database credentials. A second advisory lets callers claim tunnels with someone else's session ID. If Telepresence lives in a shared dev cluster, upgrade to <strong>2.31.0</strong> or lock the Traffic Manager down with a NetworkPolicy.</p>",
+            "fr": "<p>L'API gRPC du Traffic Manager (port <code>8081</code>) <strong>n'a aucune authentification</strong> : tout pod joignable sur le réseau peut s'enregistrer comme client dans un namespace tiers et intercepter des services, en contournant le RBAC Kubernetes. À l'interception, il reçoit l'<strong>environnement complet</strong> du pod victime : jetons, clés d'API, identifiants de base. Un second avis permet de revendiquer des tunnels avec l'ID de session d'autrui. Si Telepresence tourne dans un cluster de dev partagé, passez à <strong>2.31.0</strong> ou isolez le Traffic Manager par NetworkPolicy.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-j8j4-rw65-56r6", "label": "github.com/advisories" }
+        },
+        {
+          "id": "fastapi-code-generator-rce",
+          "tag": "security",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "fastapi-code-generator: tres RCE críticos (CVSS 9.3) porque un spec OpenAPI se convierte en código sin escapar",
+            "en": "fastapi-code-generator: three critical RCEs (CVSS 9.3) because an OpenAPI spec becomes unescaped code",
+            "fr": "fastapi-code-generator : trois RCE critiques (CVSS 9.3) car une spec OpenAPI devient du code non échappé"
+          },
+          "body_html": {
+            "es": "<p>El generador emite el path, las claves de status code y el <code>summary</code> de cada operación como literales Python <strong>sin escapar comillas</strong>. Un <code>'</code> en el spec cierra el string del decorador y mete una expresión viva que corre al importar <code>main.py</code>, o sea al arrancar el server ASGI, sin ningún request. Es Python, pero la lección es universal para cualquier pipeline <em>spec-first</em>: si generás código desde un OpenAPI de terceros, tratalo como input no confiable. Fix en <strong>0.8.1</strong>.</p>",
+            "en": "<p>The generator emits each operation's path, status-code keys and <code>summary</code> as Python literals <strong>without escaping quotes</strong>. A <code>'</code> in the spec closes the decorator string and injects a live expression that runs when <code>main.py</code> is imported, i.e. at ASGI server startup, no request needed. It is Python, but the lesson is universal for any <em>spec-first</em> pipeline: if you generate code from a third-party OpenAPI document, treat it as untrusted input. Fixed in <strong>0.8.1</strong>.</p>",
+            "fr": "<p>Le générateur émet le path, les clés de status code et le <code>summary</code> de chaque opération comme des littéraux Python <strong>sans échapper les guillemets</strong>. Un <code>'</code> dans la spec ferme la chaîne du décorateur et injecte une expression exécutée à l'import de <code>main.py</code>, donc au démarrage du serveur ASGI, sans aucune requête. C'est du Python, mais la leçon vaut pour tout pipeline <em>spec-first</em> : si vous générez du code depuis un OpenAPI tiers, traitez-le comme une entrée non fiable. Corrigé en <strong>0.8.1</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-p2mm-64f6-gmpp", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "nestjs-12-4-1",
+      "updates": [
+        {
+          "id": "nestjs-12-4-1",
+          "tag": "minor",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "NestJS 12.4.1: el adapter Node se pone a la par de Express y Fastify",
+            "en": "NestJS 12.4.1: the Node adapter catches up with Express and Fastify",
+            "fr": "NestJS 12.4.1 : l'adaptateur Node rattrape Express et Fastify"
+          },
+          "body_html": {
+            "es": "<p>El nuevo <code>platform-node</code> ahora soporta <strong>inyección de requests</strong> para tests (como el de Fastify) y setea <code>req.route</code> como Express. También hace rollback de módulos cuando falla un lazy load y avisa cuando falta la metadata de decoradores, ese error silencioso que te come una tarde.</p>",
+            "en": "<p>The new <code>platform-node</code> now supports <strong>request injection</strong> for tests (like the Fastify one) and sets <code>req.route</code> like Express. It also rolls modules back when a lazy load fails and warns when decorator metadata is missing, the silent failure that eats an afternoon.</p>",
+            "fr": "<p>Le nouveau <code>platform-node</code> prend en charge l'<strong>injection de requêtes</strong> pour les tests (comme celui de Fastify) et renseigne <code>req.route</code> comme Express. Il annule aussi les modules quand un lazy load échoue et avertit quand la métadonnée des décorateurs manque.</p>"
+          },
+          "source": { "url": "https://github.com/nestjs/nest/releases/tag/v12.4.1", "label": "github.com/nestjs" }
+        },
+        {
+          "id": "trpc-11-26",
+          "tag": "release",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "tRPC 11.26: tipos de Next 16 y helpers públicos de nuevo",
+            "en": "tRPC 11.26: Next 16 types and public helper types restored",
+            "fr": "tRPC 11.26 : types Next 16 et helpers publics restaurés"
+          },
+          "body_html": {
+            "es": "<p><code>@trpc/server</code> y <code>@trpc/next</code> soportan los <strong>tipos de Next 16</strong> y vuelven a exportar los helper types implícitos que se habían escondido. En <code>@trpc/tanstack-react-query</code>, <code>loadHandles</code> saltea entradas con <code>skipToken</code>. Tercera release en dos días: venían de 11.25.1 y 11.25.2 el finde.</p>",
+            "en": "<p><code>@trpc/server</code> and <code>@trpc/next</code> support <strong>Next 16 types</strong> and once again export the implicitly exported helper types that had gone private. In <code>@trpc/tanstack-react-query</code>, <code>loadHandles</code> skips entries using <code>skipToken</code>. Third release in two days after 11.25.1 and 11.25.2 over the weekend.</p>",
+            "fr": "<p><code>@trpc/server</code> et <code>@trpc/next</code> prennent en charge les <strong>types de Next 16</strong> et exportent à nouveau les helper types implicites devenus privés. Dans <code>@trpc/tanstack-react-query</code>, <code>loadHandles</code> ignore les entrées avec <code>skipToken</code>. Troisième release en deux jours après 11.25.1 et 11.25.2.</p>"
+          },
+          "source": { "url": "https://github.com/trpc/trpc/releases/tag/v11.26.0", "label": "github.com/trpc" }
+        },
+        {
+          "id": "moleculer-tcp-dos",
+          "tag": "security",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "Moleculer: un paquete TCP con largo negativo cuelga el broker sin autenticación (CVSS 7.5)",
+            "en": "Moleculer: a TCP packet with a negative length hangs the broker, unauthenticated (CVSS 7.5)",
+            "fr": "Moleculer : un paquet TCP de longueur négative bloque le broker sans authentification (CVSS 7.5)"
+          },
+          "body_html": {
+            "es": "<p>El parser del transporter TCP lee el largo con <code>readInt32BE</code> (con signo) y <code>Buffer.slice</code> clampea el índice negativo a 0, así que el loop nunca avanza: <strong>CPU al 100% con un solo paquete</strong>. Fix en <strong>0.14.36</strong> y <strong>0.15.2</strong>. Si usás el transporter TCP, no lo expongas fuera de la red interna.</p>",
+            "en": "<p>The TCP transporter parser reads the length with signed <code>readInt32BE</code>, and <code>Buffer.slice</code> clamps the negative index to 0, so the loop never advances: <strong>100% CPU from a single packet</strong>. Fixed in <strong>0.14.36</strong> and <strong>0.15.2</strong>. If you use the TCP transporter, keep it off untrusted networks.</p>",
+            "fr": "<p>Le parser du transporter TCP lit la longueur avec <code>readInt32BE</code> (signé), et <code>Buffer.slice</code> ramène l'index négatif à 0 : la boucle n'avance jamais, <strong>100 % CPU avec un seul paquet</strong>. Corrigé en <strong>0.14.36</strong> et <strong>0.15.2</strong>. Gardez le transporter TCP hors des réseaux non fiables.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-h89v-g948-47vp", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "documentdb-serverless-pv4",
+      "updates": [
+        {
+          "id": "documentdb-serverless-pv4",
+          "tag": "notable",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "DocumentDB Serverless platform version 4: hasta 35% más throughput",
+            "en": "DocumentDB Serverless platform version 4: up to 35% higher throughput",
+            "fr": "DocumentDB Serverless platform version 4 : jusqu'à 35 % de débit en plus"
+          },
+          "body_html": {
+            "es": "<p>Los clusters nuevos ya arrancan en v4; los existentes migran aplicando la pending maintenance action <code>serverless-platform-version-update</code>. Ojo: <strong>no hay downgrade</strong>, así que probalo primero en staging.</p>",
+            "en": "<p>New clusters start on v4; existing ones upgrade by applying the <code>serverless-platform-version-update</code> pending maintenance action. Note: <strong>there is no downgrade</strong>, so try it in staging first.</p>",
+            "fr": "<p>Les nouveaux clusters démarrent en v4 ; les existants migrent via l'action de maintenance <code>serverless-platform-version-update</code>. Attention : <strong>pas de retour arrière</strong>, testez d'abord en staging.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/documentdb-serverless-platform-version-4/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "athena-system-tables",
+          "tag": "minor",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "Athena suma system tables para auditar y observar tus queries",
+            "en": "Athena adds system tables for auditing and observing your queries",
+            "fr": "Athena ajoute des system tables pour auditer et observer vos requêtes"
+          },
+          "body_html": {
+            "es": "<p>El uso de cada workgroup queda en tablas <strong>Iceberg read-only gestionadas</strong> sobre S3 Tables, consultables desde Athena minutos después de cada query. Adiós a juntar CloudTrail y <code>GetQueryExecution</code> a mano para saber quién escanea qué.</p>",
+            "en": "<p>Per-workgroup usage lands in <strong>managed read-only Iceberg tables</strong> on S3 Tables, queryable from Athena minutes after each query. No more stitching CloudTrail and <code>GetQueryExecution</code> together to see who scans what.</p>",
+            "fr": "<p>L'usage par workgroup est stocké dans des <strong>tables Iceberg gérées en lecture seule</strong> sur S3 Tables, interrogeables depuis Athena quelques minutes après chaque requête. Fini l'assemblage manuel de CloudTrail et <code>GetQueryExecution</code>.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/athena-system-tables/", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "aws-nitro-sandboxes",
+      "updates": [
+        {
+          "id": "aws-nitro-sandboxes",
+          "tag": "notable",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "AWS Nitro Sandboxes: aislamiento por hardware para pods de EKS, tasks de ECS y micro-VMs",
+            "en": "AWS Nitro Sandboxes: hardware isolation for EKS pods, ECS tasks and lightweight VMs",
+            "fr": "AWS Nitro Sandboxes : isolation matérielle pour pods EKS, tasks ECS et VM légères"
+          },
+          "body_html": {
+            "es": "<p>Cada workload corre en su propia <strong>VM liviana del Nitro Hypervisor</strong> dentro de tus instancias EC2, con performance casi nativa y attestation criptográfica. Es la respuesta de AWS a gVisor/Kata para correr código no confiable, multi-tenant o agentes de IA sin dedicarles una instancia entera. Si hoy separás tenants por nodo, esto te puede bajar costos.</p>",
+            "en": "<p>Each workload runs in its own <strong>lightweight Nitro Hypervisor VM</strong> on your EC2 instances, with near-native performance and cryptographic attestation. It is AWS's answer to gVisor/Kata for running untrusted, multi-tenant or AI-agent code without dedicating a whole instance. If you isolate tenants per node today, this can cut costs.</p>",
+            "fr": "<p>Chaque workload tourne dans sa propre <strong>VM légère du Nitro Hypervisor</strong> sur vos instances EC2, avec des performances quasi natives et une attestation cryptographique. C'est la réponse d'AWS à gVisor/Kata pour exécuter du code non fiable, multi-tenant ou des agents IA sans y dédier une instance entière.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/nitro-sandboxes-eks-ecs-ec2/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "cloudwatch-account-retention",
+          "tag": "notable",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "CloudWatch Logs: políticas de retención a nivel de cuenta",
+            "en": "CloudWatch Logs: account-level retention policies",
+            "fr": "CloudWatch Logs : politiques de rétention au niveau du compte"
+          },
+          "body_html": {
+            "es": "<p>Una sola política fija la retención de todos los log groups o de los que arrancan con un prefijo (por ejemplo <code>/aws/lambda</code>), para nuevos o también existentes. Si matchean varias, gana la más larga. Se terminaron los log groups de Lambda en <em>Never expire</em> inflando la factura.</p>",
+            "en": "<p>One policy sets retention for every log group, or for those starting with a prefix such as <code>/aws/lambda</code>, for new or existing groups. When several match, the longest wins. No more Lambda log groups stuck on <em>Never expire</em> inflating the bill.</p>",
+            "fr": "<p>Une seule politique fixe la rétention de tous les log groups, ou de ceux commençant par un préfixe comme <code>/aws/lambda</code>, pour les nouveaux comme pour les existants. Si plusieurs correspondent, la plus longue l'emporte.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-cloudwatch-log-retention/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "eks-auto-mode-dra",
+          "tag": "minor",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "EKS Auto Mode y Karpenter soportan Dynamic Resource Allocation",
+            "en": "EKS Auto Mode and Karpenter support Dynamic Resource Allocation",
+            "fr": "EKS Auto Mode et Karpenter prennent en charge Dynamic Resource Allocation"
+          },
+          "body_html": {
+            "es": "<p>Con <code>ResourceClaim</code> pedís GPUs NVIDIA y adaptadores EFA por modelo o atributo, compartís GPU entre pods y Karpenter escala instancias según esos claims. DRA de Kubernetes llegando al mundo gestionado.</p>",
+            "en": "<p>With <code>ResourceClaim</code> you request NVIDIA GPUs and EFA devices by model or attribute, share GPUs across pods, and Karpenter scales instances from those claims. Kubernetes DRA reaching the managed world.</p>",
+            "fr": "<p>Avec <code>ResourceClaim</code>, vous demandez des GPU NVIDIA et des adaptateurs EFA par modèle ou attribut, partagez des GPU entre pods, et Karpenter dimensionne les instances selon ces claims.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-eks-auto-mode-karpenter-dra/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "wrangler-4-159",
+          "tag": "minor",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "Wrangler 4.159: export de D1 con tablas virtuales y perfiles de auth compartidos",
+            "en": "Wrangler 4.159: D1 export with virtual tables and shared auth profiles",
+            "fr": "Wrangler 4.159 : export D1 avec tables virtuelles et profils d'auth partagés"
+          },
+          "body_html": {
+            "es": "<p><code>wrangler d1 export --compatibility sqlite3_cli_only</code> exporta bases remotas con tablas FTS5 o R*Tree en el formato de <code>sqlite3 .dump</code> (no reimportable en D1). Suma <code>CLOUDFLARE_AUTH_PROFILE</code> para compartir perfiles de autenticación.</p>",
+            "en": "<p><code>wrangler d1 export --compatibility sqlite3_cli_only</code> exports remote databases with FTS5 or R*Tree tables in <code>sqlite3 .dump</code> format (not re-importable into D1). It also adds <code>CLOUDFLARE_AUTH_PROFILE</code> for shared authentication profiles.</p>",
+            "fr": "<p><code>wrangler d1 export --compatibility sqlite3_cli_only</code> exporte les bases distantes avec tables FTS5 ou R*Tree au format <code>sqlite3 .dump</code> (non réimportable dans D1). Ajoute aussi <code>CLOUDFLARE_AUTH_PROFILE</code>.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workers-sdk/releases/tag/wrangler%404.159.0", "label": "github.com/cloudflare" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "zizmor-debug-token-leak",
+      "updates": [
+        {
+          "id": "zizmor-debug-token-leak",
+          "tag": "security",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "zizmor 1.27.0 imprime tus tokens de GitHub en claro con -v",
+            "en": "zizmor 1.27.0 prints your GitHub tokens in cleartext with -v",
+            "fr": "zizmor 1.27.0 affiche vos jetons GitHub en clair avec -v"
+          },
+          "body_html": {
+            "es": "<p>Ironía pura: el auditor de seguridad de GitHub Actions volcaba <code>GH_TOKEN</code>/<code>GITHUB_TOKEN</code> a stderr con un solo <code>--verbose</code>. Si lo corriste en debug dentro de CI, los logs públicos pueden tener el token: rotalo y subí a <strong>1.28.0</strong>. Moraleja de diseño: los structs de config con secretos necesitan un <code>Debug</code>/<code>toString</code> que redacte.</p>",
+            "en": "<p>Pure irony: the GitHub Actions security auditor dumped <code>GH_TOKEN</code>/<code>GITHUB_TOKEN</code> to stderr with a single <code>--verbose</code>. If you ran it in debug in CI, public logs may hold the token: rotate it and move to <strong>1.28.0</strong>. Design takeaway: config structs that carry secrets need a redacting <code>Debug</code>/<code>toString</code>.</p>",
+            "fr": "<p>Ironie pure : l'auditeur de sécurité GitHub Actions écrivait <code>GH_TOKEN</code>/<code>GITHUB_TOKEN</code> sur stderr avec un simple <code>--verbose</code>. Si vous l'avez lancé en debug en CI, faites tourner le jeton et passez à <strong>1.28.0</strong>. Leçon : les structures de config porteuses de secrets doivent avoir un <code>Debug</code>/<code>toString</code> qui masque.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-f42p-wjw5-97qh", "label": "github.com/advisories" }
+        },
+        {
+          "id": "omniauth-host-header",
+          "tag": "security",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "OmniAuth 2.2.0: host header injection al armar los callbacks OAuth",
+            "en": "OmniAuth 2.2.0: host header injection when building OAuth callbacks",
+            "fr": "OmniAuth 2.2.0 : injection d'en-tête Host dans les callbacks OAuth"
+          },
+          "body_html": {
+            "es": "<p>Si tu framework no valida el header <code>Host</code>, OmniAuth construía la URL de callback con lo que mandara el atacante. El workaround vale para cualquier stack OAuth, también en Node: <strong>fijá el host público por config</strong> (<code>full_host</code> acá) en vez de derivarlo del request.</p>",
+            "en": "<p>If your framework does not validate the <code>Host</code> header, OmniAuth built the callback URL from whatever the attacker sent. The workaround applies to any OAuth stack, Node included: <strong>pin the public host in config</strong> (<code>full_host</code> here) instead of deriving it from the request.</p>",
+            "fr": "<p>Si votre framework ne valide pas l'en-tête <code>Host</code>, OmniAuth construisait l'URL de callback à partir de ce qu'envoyait l'attaquant. Le contournement vaut pour toute pile OAuth, Node compris : <strong>fixez l'hôte public en configuration</strong> (<code>full_host</code> ici).</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-m27g-v28p-f9fx", "label": "github.com/advisories" }
+        },
+        {
+          "id": "esm-sh-path-traversal",
+          "tag": "security",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "esm.sh: lectura arbitraria de archivos con %2e%2e en el handler estático (CVSS 7.5)",
+            "en": "esm.sh: arbitrary file read with %2e%2e in the static handler (CVSS 7.5)",
+            "fr": "esm.sh : lecture arbitraire de fichiers via %2e%2e dans le handler statique (CVSS 7.5)"
+          },
+          "body_html": {
+            "es": "<p><code>web.NewHandler</code> hacía <code>filepath.Join(AppDir, r.URL.Path)</code> sin verificar que el resultado siguiera dentro de <code>AppDir</code>; el <code>ServeMux</code> de Go redirige <code>/../</code> pero no los dot-segments codificados. Clásico que vale para cualquier file server: <strong>resolvé y chequeá el prefijo después de decodificar</strong>. Fix en <strong>0.2.0</strong>.</p>",
+            "en": "<p><code>web.NewHandler</code> did <code>filepath.Join(AppDir, r.URL.Path)</code> without checking the result stayed under <code>AppDir</code>; Go's <code>ServeMux</code> redirects <code>/../</code> but not encoded dot-segments. A classic that applies to any file server: <strong>resolve and check the prefix after decoding</strong>. Fixed in <strong>0.2.0</strong>.</p>",
+            "fr": "<p><code>web.NewHandler</code> faisait <code>filepath.Join(AppDir, r.URL.Path)</code> sans vérifier que le résultat restait sous <code>AppDir</code> ; le <code>ServeMux</code> de Go redirige <code>/../</code> mais pas les dot-segments encodés. Règle universelle : <strong>résoudre puis vérifier le préfixe après décodage</strong>. Corrigé en <strong>0.2.0</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-g3c2-rjq2-c763", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "pnpm-12-19",
+      "updates": [
+        {
+          "id": "pnpm-12-19",
+          "tag": "release",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "pnpm 12.19: chequea engines en todo el workspace, pnpm fund y lockfile JSON experimental",
+            "en": "pnpm 12.19: workspace-wide engines checks, pnpm fund and an experimental JSON lockfile",
+            "fr": "pnpm 12.19 : contrôle des engines sur tout le workspace, pnpm fund et lockfile JSON expérimental"
+          },
+          "body_html": {
+            "es": "<p>Ahora <code>install</code>, <code>add</code> y <code>run -r</code> validan <code>engines</code>, <code>os</code>, <code>cpu</code> y <code>libc</code> de <strong>cada proyecto del workspace</strong>: un <code>engines.pnpm</code> incompatible rompe el comando, así que revisá tus monorepos antes de subir. Trae <code>pnpm fund</code>, el linker <code>loaded</code> maneja paquetes con build, y un fix de seguridad: el error de tarball faltante en modo offline <strong>ya no imprime el token</strong> de la URL.</p>",
+            "en": "<p><code>install</code>, <code>add</code> and <code>run -r</code> now validate <code>engines</code>, <code>os</code>, <code>cpu</code> and <code>libc</code> on <strong>every workspace project</strong>: an incompatible <code>engines.pnpm</code> fails the command, so check your monorepos before upgrading. It adds <code>pnpm fund</code>, the <code>loaded</code> linker handles packages that need a build, and a security fix: the offline missing-tarball error <strong>no longer prints the token</strong> in the URL.</p>",
+            "fr": "<p><code>install</code>, <code>add</code> et <code>run -r</code> valident désormais <code>engines</code>, <code>os</code>, <code>cpu</code> et <code>libc</code> de <strong>chaque projet du workspace</strong> : un <code>engines.pnpm</code> incompatible fait échouer la commande. Ajoute <code>pnpm fund</code>, le linker <code>loaded</code> gère les paquets à build, et un correctif de sécurité : l'erreur de tarball manquant hors ligne <strong>n'affiche plus le jeton</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.19.0", "label": "github.com/pnpm" }
+        },
+        {
+          "id": "nextjs-16-4-6",
+          "tag": "patch",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "Next.js 16.4.6: los route handlers comprimen la respuesta automáticamente",
+            "en": "Next.js 16.4.6: route handler responses are compressed automatically",
+            "fr": "Next.js 16.4.6 : les réponses des route handlers sont compressées automatiquement"
+          },
+          "body_html": {
+            "es": "<p>Backport LTS: las respuestas de <strong>route handlers</strong> se comprimen solas si no venían comprimidas, más fixes de GC de Turbopack en dev. Si comprimías a mano en tus API routes, revisá que no termines con doble encoding.</p>",
+            "en": "<p>LTS backport: <strong>route handler</strong> responses are now compressed automatically if they were not already, plus Turbopack dev GC fixes. If you compressed by hand in your API routes, check you do not end up double-encoding.</p>",
+            "fr": "<p>Backport LTS : les réponses des <strong>route handlers</strong> sont compressées automatiquement si elles ne l'étaient pas, plus des correctifs de GC Turbopack en dev. Si vous compressiez à la main, vérifiez l'absence de double encodage.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/next.js/releases/tag/v16.4.6", "label": "github.com/vercel" }
+        },
+        {
+          "id": "better-auth-1-7-19",
+          "tag": "patch",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "better-auth 1.7.19: usuarios huérfanos en admin y el bug del horario de verano",
+            "en": "better-auth 1.7.19: orphaned admin-created users and the DST bug",
+            "fr": "better-auth 1.7.19 : utilisateurs orphelins côté admin et le bug de l'heure d'hiver"
+          },
+          "body_html": {
+            "es": "<p><code>/admin/create-user</code> ya no deja usuarios sin cuenta de credenciales cuando falla un hook o el plugin de Have I Been Pwned rechaza la password. Y un golazo de bug: el OAuth fallaba con <code>state_mismatch</code> durante <strong>la hora repetida del cambio de horario</strong> si el state vive en la base. Moraleja: guardá timestamps en UTC.</p>",
+            "en": "<p><code>/admin/create-user</code> no longer leaves users without a credential account when a hook throws or the Have I Been Pwned plugin rejects the password. And a gem of a bug: OAuth failed with <code>state_mismatch</code> during <strong>the repeated DST fall-back hour</strong> when state lives in the database. Lesson: store timestamps in UTC.</p>",
+            "fr": "<p><code>/admin/create-user</code> ne laisse plus d'utilisateurs sans compte de credentials quand un hook échoue ou que le plugin Have I Been Pwned rejette le mot de passe. Et un joli bug : l'OAuth échouait en <code>state_mismatch</code> pendant <strong>l'heure répétée du passage à l'heure d'hiver</strong> si le state est en base. Leçon : stockez en UTC.</p>"
+          },
+          "source": { "url": "https://github.com/better-auth/better-auth/releases/tag/v1.7.19", "label": "github.com/better-auth" }
+        },
+        {
+          "id": "vite-ecosystem-fund",
+          "tag": "minor",
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "Cloudflare reparte los primeros 301.300 USD del Vite Ecosystem Fund",
+            "en": "Cloudflare distributes the first $301,300 of the Vite Ecosystem Fund",
+            "fr": "Cloudflare distribue les premiers 301 300 $ du Vite Ecosystem Fund"
+          },
+          "body_html": {
+            "es": "<p>Primera tanda de plata para proyectos y maintainers del ecosistema Vite, del que dependen hoy buena parte de los frameworks fullstack. Buena señal para la sostenibilidad del tooling que usás todos los días.</p>",
+            "en": "<p>The first round of money for projects and maintainers across the Vite ecosystem, which a large share of fullstack frameworks now depend on. A good sign for the sustainability of tooling you use every day.</p>",
+            "fr": "<p>Premier versement pour les projets et mainteneurs de l'écosystème Vite, dont dépend désormais une grande partie des frameworks fullstack. Bon signe pour la pérennité de l'outillage quotidien.</p>"
+          },
+          "source": { "url": "https://blog.cloudflare.com/launching-vite-ecosystem-fund/", "label": "blog.cloudflare.com" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Otra vez nada de Node, Deno ni Bun desde el viernes. El tema del día es path traversal y symlinks: isomorphic-git, esm.sh y hasta un generador de código desde OpenAPI. Si tu backend toca archivos o genera código a partir de input externo, revisá cómo normalizás paths y escapás strings.",
+      "en": "Again no Node, Deno or Bun release since Friday. The theme of the day is path traversal and symlinks: isomorphic-git, esm.sh and even an OpenAPI code generator. If your backend touches files or generates code from external input, review how you normalize paths and escape strings.",
+      "fr": "Encore aucune release de Node, Deno ou Bun depuis vendredi. Le thème du jour : path traversal et symlinks, avec isomorphic-git, esm.sh et même un générateur de code OpenAPI. Si votre backend manipule des fichiers ou génère du code depuis une entrée externe, revoyez la normalisation des chemins et l'échappement."
+    },
+    {
+      "es": "Los secretos en logs siguen siendo un clásico: zizmor con -v y pnpm offline filtraban tokens el mismo día. Redactá en el tipo, no en cada log.",
+      "en": "Secrets in logs remain a classic: zizmor with -v and pnpm offline both leaked tokens on the same day. Redact at the type level, not at each log call.",
+      "fr": "Les secrets dans les logs restent un classique : zizmor en -v et pnpm hors ligne fuyaient des jetons le même jour. Masquez au niveau du type, pas à chaque appel de log."
+    }
+  ]
+}

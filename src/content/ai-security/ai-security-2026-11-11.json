@@ -1,0 +1,400 @@
+{
+  "title": {
+    "es": "AI Security — 11 Nov 2026",
+    "en": "AI Security — 11 Nov 2026",
+    "fr": "AI Security — 11 nov. 2026"
+  },
+  "description": {
+    "es": "Fireworks AI amplía su breach a pesos de modelos, datasets y chats de Notion AI, GPUStack acepta un SAMLResponse sin firmar, y una tanda de servidores MCP (Mendix, AWS, Microsoft, Dynatrace, pgEdge) cae por auth y políticas mal aplicadas.",
+    "en": "Fireworks AI widens its breach to model weights, datasets and Notion AI chats, GPUStack accepts an unsigned SAMLResponse, and a batch of MCP servers (Mendix, AWS, Microsoft, Dynatrace, pgEdge) falls to missing auth and misapplied policies.",
+    "fr": "Fireworks AI élargit sa brèche aux poids de modèles, datasets et chats Notion AI, GPUStack accepte un SAMLResponse non signé, et une série de serveurs MCP (Mendix, AWS, Microsoft, Dynatrace, pgEdge) tombe faute d'auth et de politiques bien appliquées."
+  },
+  "pubDate": "2026-11-11",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "Fireworks AI: el breach llega a pesos y datasets",
+        "en": "Fireworks AI: breach now reaches weights and datasets",
+        "fr": "Fireworks AI : la brèche touche poids et datasets"
+      },
+      "anchor": "fireworks-ai-breach-update",
+      "icon": "lucide:siren"
+    },
+    {
+      "text": {
+        "es": "GPUStack: takeover de admin con SAML forjado (9.1)",
+        "en": "GPUStack: admin takeover via forged SAML (9.1)",
+        "fr": "GPUStack : prise de contrôle admin via SAML forgé (9.1)"
+      },
+      "anchor": "gpustack-cve-2026-102894",
+      "icon": "lucide:shield-alert"
+    },
+    {
+      "text": {
+        "es": "Mendix Studio Pro: MCP Server expuesto en red (9.2)",
+        "en": "Mendix Studio Pro: MCP Server exposed to network (9.2)",
+        "fr": "Mendix Studio Pro : serveur MCP exposé au réseau (9.2)"
+      },
+      "anchor": "mendix-mcp-cve-2026-112136",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "Kong AI Gateway: SQLi vía nombre de modelo (8.7)",
+        "en": "Kong AI Gateway: SQLi via model name (8.7)",
+        "fr": "Kong AI Gateway : SQLi via nom de modèle (8.7)"
+      },
+      "anchor": "kong-ai-gateway-cve-2026-92544",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": {
+        "es": "AWS API MCP Server saltea la policy con mayúsculas",
+        "en": "AWS API MCP Server policy bypassed by capital letters",
+        "fr": "AWS API MCP Server : politique contournée par majuscules"
+      },
+      "anchor": "aws-api-mcp-cve-2026-125271",
+      "icon": "lucide:lock"
+    },
+    {
+      "text": {
+        "es": "Auth0 AI: el retriever RAG filtra docs denegados",
+        "en": "Auth0 AI: RAG retriever leaks denied documents",
+        "fr": "Auth0 AI : le retriever RAG laisse passer des docs refusés"
+      },
+      "anchor": "auth0-ai-fga-retriever",
+      "icon": "lucide:shield-alert"
+    },
+    {
+      "text": {
+        "es": "OpenAI presenta Control Room, su kill switch",
+        "en": "OpenAI unveils Control Room, its model kill switch",
+        "fr": "OpenAI présente Control Room, son kill switch"
+      },
+      "anchor": "openai-control-room",
+      "icon": "simple-icons:openai"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-incidents",
+      "name": "Top Incidents",
+      "theme": "top-incidents",
+      "icon_emoji": "🚨",
+      "anchor": "top-incidents",
+      "updates": [
+        {
+          "id": "fireworks-ai-breach-update",
+          "tag": "breach",
+          "title": {
+            "es": "Fireworks AI sufrió un segundo ataque en octubre: billing, datasets, pesos de modelos incompletos y chats de Notion AI expuestos",
+            "en": "Fireworks AI was hit a second time in October: billing records, datasets, incomplete model weights and Notion AI chats exposed",
+            "fr": "Fireworks AI attaqué une seconde fois en octobre : facturation, datasets, poids de modèles incomplets et chats Notion AI exposés"
+          },
+          "body_html": {
+            "es": "<p>El proveedor de inferencia y entrenamiento actualizó su bulletin: un proveedor cloud de terceros que hosteaba sus máquinas de R&amp;D fue comprometido el <strong>23 de octubre</strong>, y al día siguiente los atacantes usaron ese acceso para llegar a sistemas de desarrollo de Fireworks y correr un workload no autorizado. Quedaron expuestos metadata de recursos, datos de facturación (no tarjetas) y, para algunos clientes, <strong>pesos de modelos incompletos y datasets</strong>. Notion avisó a clientes que algunos chats de Notion AI sin atribución pudieron filtrarse, y según Bloomberg Cursor y Harvey también están evaluando impacto. Fireworks lo vincula con un grupo de <strong>LLMJacking</strong> que revende acceso robado a modelos. Es el segundo incidente: el primero (6 de octubre) ya había filtrado API keys y tokens de clientes desde variables de entorno de jobs de evaluación. Si usás Fireworks, rotá todo secreto que hayas cargado ahí.</p>",
+            "en": "<p>The inference and training provider updated its bulletin: a third-party cloud provider hosting its R&amp;D machines was compromised on <strong>October 23</strong>, and the next day the attackers used that access to reach Fireworks development systems and run an unauthorized workload. Exposed data includes resource metadata, billing records (no card numbers) and, for some customers, <strong>incomplete model weights and datasets</strong>. Notion told customers that some unattributable Notion AI chat sessions may have been exposed, and Bloomberg reports Cursor and Harvey are also assessing impact. Fireworks ties the activity to an <strong>LLMJacking</strong> crew that resells stolen model access. This is the second incident: the first (October 6) had already leaked customer API keys and tokens from evaluation-job environment variables. If you use Fireworks, rotate every secret you stored there.</p>",
+            "fr": "<p>Le fournisseur d'inférence et d'entraînement a mis à jour son bulletin : un fournisseur cloud tiers hébergeant ses machines de R&amp;D a été compromis le <strong>23 octobre</strong>, et le lendemain les attaquants ont atteint les systèmes de développement de Fireworks pour y lancer un workload non autorisé. Sont exposés des métadonnées, des données de facturation (sans numéros de carte) et, pour certains clients, des <strong>poids de modèles incomplets et des datasets</strong>. Notion a prévenu que certains chats Notion AI non attribuables ont pu fuiter. Fireworks relie l'attaque à un groupe de <strong>LLMJacking</strong>. Le premier incident (6 octobre) avait déjà exposé des clés API clients ; faites tourner tous les secrets stockés chez Fireworks.</p>"
+          },
+          "date": "10 Nov 2026",
+          "source": {
+            "url": "https://www.theregister.com/cyber-crime/2026/11/10/fireworks-ai-gets-burned-twice-as-customer-data-exposure-widens/5308722",
+            "label": "The Register"
+          }
+        }
+      ]
+    },
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "gpustack-cve-2026-102894",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-102894 (CVSS 9.1): el callback SAML de GPUStack emite sesión sin verificar la firma, aunque SAML no esté configurado",
+            "en": "CVE-2026-102894 (CVSS 9.1): GPUStack's SAML callback mints a session without verifying the signature, even when SAML is not configured",
+            "fr": "CVE-2026-102894 (CVSS 9.1) : le callback SAML de GPUStack émet une session sans vérifier la signature, même sans SAML configuré"
+          },
+          "body_html": {
+            "es": "<p><code>/auth/saml/callback</code> decodifica el XML, lee el <code>NameID</code>, resuelve o crea el usuario y firma un JWT <code>gpustack_session</code>, pero nunca llama a <code>process_response()</code>, que es lo que valida firma, issuer, audience y tiempos. Cualquiera con alcance de red se autentica como quien quiera: si el nombre coincide con un admin, takeover completo del cluster de inferencia. No hace falta tener SAML habilitado, así que afecta a <strong>todo deploy</strong> desde 0.7.1. En el mismo batch salió <strong>CVE-2026-103002</strong> (8.8): el proxy al API server de Kubernetes no chequea autorización por recurso y reenvía con la ServiceAccount del worker. Ojo con esto, ayer fue el bypass por loopback y hoy son dos más: actualizá a <strong>2.2.2</strong>.</p>",
+            "en": "<p><code>/auth/saml/callback</code> decodes the XML, reads the <code>NameID</code>, resolves or provisions the user and signs a <code>gpustack_session</code> JWT, but never calls <code>process_response()</code>, the step that checks signature, issuer, audience and time conditions. Anyone with network reach can authenticate as any identity; if the name matches an admin, that is a full takeover of the inference cluster. SAML does not need to be enabled, so <strong>every deployment</strong> since 0.7.1 is affected. The same batch adds <strong>CVE-2026-103002</strong> (8.8): the Kubernetes API server proxy skips resource-level authorization and forwards with the worker's ServiceAccount. Yesterday it was the loopback bypass, today two more: upgrade to <strong>2.2.2</strong>.</p>",
+            "fr": "<p><code>/auth/saml/callback</code> décode le XML, lit le <code>NameID</code>, crée ou résout l'utilisateur et signe un JWT <code>gpustack_session</code>, sans jamais appeler <code>process_response()</code> qui vérifie signature, émetteur, audience et délais. N'importe qui sur le réseau s'authentifie sous l'identité de son choix, admin compris. SAML n'a pas besoin d'être activé : <strong>tous les déploiements</strong> depuis 0.7.1 sont touchés. Le même lot ajoute <strong>CVE-2026-103002</strong> (8.8) sur le proxy Kubernetes. Mettez à jour vers <strong>2.2.2</strong>.</p>"
+          },
+          "date": "10 Nov 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-62m9-f875-rqw6",
+            "label": "GitHub Advisory GHSA-62m9-f875-rqw6"
+          }
+        },
+        {
+          "id": "kong-ai-gateway-cve-2026-92544",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-92544 (CVSS 8.7): SQL injection en los contadores de uso LLM de Kong AI Gateway a través del nombre del modelo",
+            "en": "CVE-2026-92544 (CVSS 8.7): SQL injection in Kong AI Gateway's LLM usage counters through the model name",
+            "fr": "CVE-2026-92544 (CVSS 8.7) : injection SQL dans les compteurs d'usage LLM de Kong AI Gateway via le nom du modèle"
+          },
+          "body_html": {
+            "es": "<p>Kong Gateway Enterprise y Kong AI Gateway arman la query de sus contadores de uso de LLM con el nombre de modelo que manda el cliente. Un <code>model</code> crafteado alcanza para ejecutar SQL arbitrario contra la base de Kong, que es donde viven rutas, plugins y credenciales de upstream. Es el clásico: el campo que parece metadata inofensiva (el nombre del modelo) termina en una query. Revisá los changelogs de AI Gateway y Gateway para la versión con el fix y no expongas el gateway a clientes no confiables hasta actualizar.</p>",
+            "en": "<p>Kong Gateway Enterprise and Kong AI Gateway build the query for their LLM usage counters from the client-supplied model name. A crafted <code>model</code> value is enough to run arbitrary SQL against the Kong database, which holds routes, plugins and upstream credentials. It is the classic pattern: a field that looks like harmless metadata ends up in a query. Check the AI Gateway and Gateway changelogs for the fixed release and keep the gateway away from untrusted clients until you upgrade.</p>",
+            "fr": "<p>Kong Gateway Enterprise et Kong AI Gateway construisent la requête de leurs compteurs d'usage LLM à partir du nom de modèle fourni par le client. Une valeur <code>model</code> forgée suffit pour exécuter du SQL arbitraire sur la base Kong, qui contient routes, plugins et identifiants upstream. Consultez les changelogs pour la version corrigée.</p>"
+          },
+          "date": "10 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-92544",
+            "label": "OpenCVE CVE-2026-92544"
+          }
+        },
+        {
+          "id": "ag2-cve-2026-113663",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-113663 (CVSS 8.8): un salto de línea alcanza para escapar del allowlist y del readonly=True de SandboxShellTool en AG2",
+            "en": "CVE-2026-113663 (CVSS 8.8): a single newline escapes AG2 SandboxShellTool's allowlist and readonly=True",
+            "fr": "CVE-2026-113663 (CVSS 8.8) : un simple saut de ligne contourne l'allowlist et readonly=True de SandboxShellTool dans AG2"
+          },
+          "body_html": {
+            "es": "<p><code>ShellAdapter._filter()</code> busca operadores de shell de una sola línea (<code>;</code>, <code>&amp;&amp;</code>, pipes), pero el comando se ejecuta con <code>sh -c</code>, donde un <code>\\n</code> embebido separa sentencias igual que <code>;</code>. Un agente, o un prompt injection que lo maneje, corre lo que quiera aunque el tool esté limitado a un prefijo o a comandos de solo lectura. Con el backend default <code>LocalEnvironment()</code> eso es un subprocess en el host, sin aislamiento. Fix en <strong>ag2 1.1.1</strong>; el paquete <code>autogen</code> hasta 0.14.1 sigue sin parche.</p>",
+            "en": "<p><code>ShellAdapter._filter()</code> looks for single-line shell operators (<code>;</code>, <code>&amp;&amp;</code>, pipes), but the command runs through <code>sh -c</code>, where an embedded <code>\\n</code> separates statements exactly like <code>;</code>. An agent, or a prompt injection steering it, runs anything it wants even when the tool is limited to one command prefix or to read-only commands. With the default <code>LocalEnvironment()</code> backend that is a host subprocess with no isolation. Fixed in <strong>ag2 1.1.1</strong>; the <code>autogen</code> package through 0.14.1 has no patch.</p>",
+            "fr": "<p><code>ShellAdapter._filter()</code> cherche des opérateurs shell sur une seule ligne, mais la commande passe par <code>sh -c</code>, où un <code>\\n</code> sépare les instructions comme <code>;</code>. Un agent, ou une prompt injection qui le pilote, exécute ce qu'il veut malgré l'allowlist ou le mode lecture seule, directement sur l'hôte avec <code>LocalEnvironment()</code>. Corrigé dans <strong>ag2 1.1.1</strong> ; <code>autogen</code> jusqu'à 0.14.1 n'a pas de correctif.</p>"
+          },
+          "date": "10 Nov 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-2h4w-29cv-2cmv",
+            "label": "GitHub Advisory GHSA-2h4w-29cv-2cmv"
+          }
+        },
+        {
+          "id": "cocos-ai-cve-2026-119345",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-119345 (CVSS 7.2): Cocos AI atesta el workload confidencial una sola vez y confía en esa evidencia toda la conexión",
+            "en": "CVE-2026-119345 (CVSS 7.2): Cocos AI attests the confidential workload once and trusts that evidence for the whole connection",
+            "fr": "CVE-2026-119345 (CVSS 7.2) : Cocos AI n'atteste la charge confidentielle qu'une fois et s'y fie pendant toute la connexion"
+          },
+          "body_html": {
+            "es": "<p>Cocos AI, el sistema de confidential computing para cargas de IA de Ultraviolet, hace attested TLS solo al establecer la conexión. Si después alguien modifica código, memoria, configuración o conecta/desconecta un dispositivo como una GPU, el peer sigue creyendo que corre el estado atestado originalmente. Es un TOCTOU de diseño, más grave en conexiones largas, demostrado con verificación formal. Fix en <strong>0.9.0</strong>.</p>",
+            "en": "<p>Cocos AI, Ultraviolet's confidential computing system for AI workloads, performs attested TLS only at connection setup. If someone later changes code, memory, configuration, or attaches or detaches a device such as a GPU, the peer keeps believing the originally attested state is still running. It is a design-level TOCTOU, worse on long-lived connections, and was demonstrated through formal verification. Fixed in <strong>0.9.0</strong>.</p>",
+            "fr": "<p>Cocos AI, le système de confidential computing pour charges IA d'Ultraviolet, ne fait l'attested TLS qu'à l'établissement de la connexion. Si le code, la mémoire, la configuration ou un périphérique comme un GPU change ensuite, le pair continue de croire à l'état attesté initial. TOCTOU de conception, corrigé dans <strong>0.9.0</strong>.</p>"
+          },
+          "date": "10 Nov 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-ghwv-vrp2-2975",
+            "label": "GitHub Advisory GHSA-ghwv-vrp2-2975"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "mendix-mcp-cve-2026-112136",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-112136 (CVSS 9.2): el MCP Server de Mendix Studio Pro no se limita a loopback y queda expuesto a la red",
+            "en": "CVE-2026-112136 (CVSS 9.2): Mendix Studio Pro's MCP Server is not bound to loopback and is reachable from the network",
+            "fr": "CVE-2026-112136 (CVSS 9.2) : le serveur MCP de Mendix Studio Pro n'est pas limité au loopback et reste joignable depuis le réseau"
+          },
+          "body_html": {
+            "es": "<p>Siemens publicó dos fallas en el MCP Server que trae el IDE low-code: el listener HTTP no se restringe a la interfaz loopback, así que cualquiera en la red puede hablarle al MCP del desarrollador, y <strong>CVE-2026-112137</strong> (5.4) suma CSRF porque no valida <code>Content-Type</code> ni <code>Origin</code>, lo que permite que una página maliciosa le dispare requests desde el browser. Afecta Studio Pro 11 desde 11.15.0 y la rama 11.12 desde 11.12.6. Actualizá a <strong>11.16.0</strong> o <strong>11.12.7</strong>.</p>",
+            "en": "<p>Siemens disclosed two flaws in the MCP Server bundled with the low-code IDE: the HTTP listener is not restricted to the loopback interface, so anyone on the network can talk to the developer's MCP server, and <strong>CVE-2026-112137</strong> (5.4) adds CSRF because <code>Content-Type</code> and <code>Origin</code> are not validated, letting a malicious page fire requests from the browser. Affects Studio Pro 11 from 11.15.0 and the 11.12 line from 11.12.6. Upgrade to <strong>11.16.0</strong> or <strong>11.12.7</strong>.</p>",
+            "fr": "<p>Siemens a publié deux failles dans le serveur MCP intégré à l'IDE low-code : l'écoute HTTP n'est pas limitée au loopback, et <strong>CVE-2026-112137</strong> (5.4) ajoute du CSRF faute de validation de <code>Content-Type</code> et <code>Origin</code>. Studio Pro 11 depuis 11.15.0 et 11.12 depuis 11.12.6 sont touchés. Mettez à jour vers <strong>11.16.0</strong> ou <strong>11.12.7</strong>.</p>"
+          },
+          "date": "10 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-112136",
+            "label": "OpenCVE CVE-2026-112136"
+          }
+        },
+        {
+          "id": "aws-api-mcp-cve-2026-125271",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-125271 (CVSS 8.5): aws-api-mcp-server normaliza mal los nombres de operación y saltea la security policy del operador",
+            "en": "CVE-2026-125271 (CVSS 8.5): aws-api-mcp-server mis-normalizes operation names and skips the operator's security policy",
+            "fr": "CVE-2026-125271 (CVSS 8.5) : aws-api-mcp-server normalise mal les noms d'opération et contourne la politique de sécurité"
+          },
+          "body_html": {
+            "es": "<p>El MCP server oficial de AWS permite definir una policy custom que niega operaciones o pide elicitation (confirmación humana) antes de ejecutarlas. El matching falla con operaciones cuyo nombre tiene <strong>mayúsculas consecutivas</strong>, así que el agente puede llamar APIs de cualquier servicio que el operador había bloqueado. Es el guardrail que te vendían para dejarle AWS a un agente, y se rompe con un detalle de normalización. Fix en <strong>1.5.1</strong>.</p>",
+            "en": "<p>The official AWS MCP server lets operators define a custom policy that denies operations or requires elicitation (human confirmation) before running them. Matching breaks for operations whose names contain <strong>consecutive capital letters</strong>, so the agent can call APIs across services the operator had blocked. It is exactly the guardrail meant to make handing AWS to an agent safe, undone by a normalization detail. Fixed in <strong>1.5.1</strong>.</p>",
+            "fr": "<p>Le serveur MCP officiel d'AWS permet une politique personnalisée qui refuse des opérations ou exige une elicitation (confirmation humaine). La correspondance échoue pour les opérations dont le nom contient des <strong>majuscules consécutives</strong> : l'agent peut appeler des API que l'opérateur avait bloquées. Corrigé dans <strong>1.5.1</strong>.</p>"
+          },
+          "date": "10 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-125271",
+            "label": "OpenCVE CVE-2026-125271"
+          }
+        },
+        {
+          "id": "microsoft-mcp-gateway-cve-2026-109492",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-109492 (CVSS 8.8): bypass de autorización por clave controlada por el usuario en Microsoft MCP Gateway",
+            "en": "CVE-2026-109492 (CVSS 8.8): authorization bypass through a user-controlled key in Microsoft MCP Gateway",
+            "fr": "CVE-2026-109492 (CVSS 8.8) : contournement d'autorisation via une clé contrôlée par l'utilisateur dans Microsoft MCP Gateway"
+          },
+          "body_html": {
+            "es": "<p>Dentro de un Patch Tuesday de 1.094 CVEs aparece el gateway MCP de Microsoft: un usuario autenticado puede elevar privilegios por red manipulando una clave que el gateway usa para decidir el acceso. Microsoft no dio más detalles. Si ponés MCP Gateway delante de tus servidores de tools, este es el parche de la tanda que más te toca.</p>",
+            "en": "<p>Inside a 1,094-CVE Patch Tuesday sits Microsoft's MCP gateway: an authenticated user can elevate privileges over the network by tampering with a key the gateway uses to make access decisions. Microsoft gave no further detail. If MCP Gateway fronts your tool servers, this is the patch in the batch that matters most to you.</p>",
+            "fr": "<p>Dans un Patch Tuesday de 1 094 CVE figure la passerelle MCP de Microsoft : un utilisateur authentifié peut élever ses privilèges en manipulant une clé utilisée pour les décisions d'accès. Si MCP Gateway protège vos serveurs d'outils, appliquez ce correctif en priorité.</p>"
+          },
+          "date": "10 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-109492",
+            "label": "OpenCVE CVE-2026-109492"
+          }
+        },
+        {
+          "id": "dynatrace-mcp-cve-2026-123811",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-123811 (CVSS 7.5) y tres más: Dynatrace MCP Server con --http acepta tools/call sin autenticación",
+            "en": "CVE-2026-123811 (CVSS 7.5) and three more: Dynatrace MCP Server with --http accepts tools/call without authentication",
+            "fr": "CVE-2026-123811 (CVSS 7.5) et trois autres : Dynatrace MCP Server avec --http accepte tools/call sans authentification"
+          },
+          "body_html": {
+            "es": "<p>Arrancado con <code>--http</code>, el MCP server de Dynatrace despacha requests JSON-RPC <code>tools/call</code> sin auth, sin validar sesión y sin protección de <code>Host</code>/<code>Origin</code>, usando las credenciales de Dynatrace configuradas. Cualquiera con alcance de red invoca <code>execute_dql</code> y lee logs, eventos de seguridad y sesiones de usuarios. El único camino que se salva es <code>send_event</code>, porque tiene un gate de aprobación humana. CVE-2026-123809, 123810 y 123812 completan la tanda. Fix en <strong>2.0.0</strong>.</p>",
+            "en": "<p>Started with <code>--http</code>, the Dynatrace MCP server dispatches JSON-RPC <code>tools/call</code> requests with no auth, no session validation and no <code>Host</code>/<code>Origin</code> protection, under the configured Dynatrace credentials. Anyone with network reach can call <code>execute_dql</code> and read logs, security events and user sessions. The only path that survives is <code>send_event</code>, thanks to its human-approval gate. CVE-2026-123809, 123810 and 123812 round out the batch. Fixed in <strong>2.0.0</strong>.</p>",
+            "fr": "<p>Lancé avec <code>--http</code>, le serveur MCP de Dynatrace traite les requêtes <code>tools/call</code> sans auth ni protection <code>Host</code>/<code>Origin</code>, avec les identifiants Dynatrace configurés. N'importe qui sur le réseau peut appeler <code>execute_dql</code> et lire logs et événements de sécurité. Seul <code>send_event</code> résiste grâce à son approbation humaine. Corrigé dans <strong>2.0.0</strong>.</p>"
+          },
+          "date": "09 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-123811",
+            "label": "OpenCVE CVE-2026-123811"
+          }
+        },
+        {
+          "id": "auth0-ai-fga-retriever",
+          "tag": "cve",
+          "title": {
+            "es": "CVE-2026-107372 y CVE-2026-108167: el FGA retriever de Auth0 AI mete en el contexto del modelo documentos que FGA había denegado",
+            "en": "CVE-2026-107372 and CVE-2026-108167: Auth0 AI's FGA retriever puts documents denied by FGA into the model context",
+            "fr": "CVE-2026-107372 et CVE-2026-108167 : le retriever FGA d'Auth0 AI place dans le contexte du modèle des documents refusés par FGA"
+          },
+          "body_html": {
+            "es": "<p>Okta publicó la misma falla en <code>auth0-ai-js</code> y <code>auth0-ai-python</code>: al filtrar documentos para RAG, el retriever no distingue chequeos de autorización hechos bajo distintos usuarios, relaciones o condiciones, y documentos que Auth0 FGA negó terminan en el contexto y en la respuesta generada. Es justamente la capa que se supone que impide que el RAG le cuente a un usuario lo que no puede ver. Todavía sin score CVSS; revisá los advisories de Okta y actualizá los SDKs.</p>",
+            "en": "<p>Okta disclosed the same flaw in <code>auth0-ai-js</code> and <code>auth0-ai-python</code>: when filtering documents for RAG, the retriever does not distinguish authorization checks made under different users, relations or conditions, so documents Auth0 FGA denied end up in the model context and in the generated answer. This is precisely the layer meant to stop RAG from telling a user what they are not allowed to see. No CVSS score yet; check Okta's advisories and update the SDKs.</p>",
+            "fr": "<p>Okta a publié la même faille dans <code>auth0-ai-js</code> et <code>auth0-ai-python</code> : en filtrant les documents pour le RAG, le retriever ne distingue pas les vérifications faites pour différents utilisateurs, relations ou conditions, et des documents refusés par Auth0 FGA atterrissent dans le contexte et la réponse générée. Pas encore de score CVSS ; mettez à jour les SDK.</p>"
+          },
+          "date": "10 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-108167",
+            "label": "OpenCVE CVE-2026-108167"
+          }
+        },
+        {
+          "id": "pgedge-mcp-rag-batch",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-125322 (CVSS 6.5) y cuatro más: pgEdge Postgres MCP Server, RAG Server y su librería LLM filtran datos y fragmentos de API keys",
+            "en": "CVE-2026-125322 (CVSS 6.5) and four more: pgEdge Postgres MCP Server, RAG Server and its LLM library leak data and API key fragments",
+            "fr": "CVE-2026-125322 (CVSS 6.5) et quatre autres : pgEdge Postgres MCP Server, RAG Server et sa bibliothèque LLM laissent fuiter données et fragments de clés API"
+          },
+          "body_html": {
+            "es": "<p>pgEdge publicó cinco CVEs en su stack de IA sobre Postgres. En el MCP Server (antes de 1.1.0): el parámetro <code>where</code> de <code>count_rows</code> acepta subqueries contra otras tablas, un oráculo para extraer cualquier dato que pueda leer el rol; el transporte HTTP no valida <code>Origin</code> (DNS rebinding desde una página maliciosa, CVE-2026-125320); y el rate limit de login confía en <code>X-Forwarded-For</code> (CVE-2026-125321). El RAG Server (antes de 2.0.0) devuelve el error del proveedor LLM tal cual, citando parte de la API key del operador (CVE-2026-125326), y el proxy de la librería Go LLM hace lo mismo en <code>/v1/health</code> (CVE-2026-125328).</p>",
+            "en": "<p>pgEdge published five CVEs across its Postgres AI stack. In the MCP Server (before 1.1.0): the <code>where</code> parameter of <code>count_rows</code> accepts subqueries against other tables, an oracle to extract anything the role can read; the HTTP transport does not validate <code>Origin</code> (DNS rebinding from a malicious page, CVE-2026-125320); and login rate limiting trusts <code>X-Forwarded-For</code> (CVE-2026-125321). The RAG Server (before 2.0.0) returns the LLM provider's error verbatim, quoting part of the operator's API key (CVE-2026-125326), and the Go LLM library proxy does the same on <code>/v1/health</code> (CVE-2026-125328).</p>",
+            "fr": "<p>pgEdge a publié cinq CVE sur sa pile IA pour Postgres. Dans le MCP Server (avant 1.1.0) : le paramètre <code>where</code> de <code>count_rows</code> accepte des sous-requêtes sur d'autres tables, absence de validation <code>Origin</code> (DNS rebinding) et rate limiting basé sur <code>X-Forwarded-For</code>. Le RAG Server (avant 2.0.0) et le proxy de la bibliothèque Go LLM renvoient les erreurs du fournisseur LLM, avec une partie de la clé API.</p>"
+          },
+          "date": "10 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-125322",
+            "label": "OpenCVE CVE-2026-125322"
+          }
+        },
+        {
+          "id": "dagu-mcp-cve-2026-102943",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-102943 (CVSS 6.5): Dagu arregló un path traversal en un middleware HTTP, y su servidor MCP llama a la misma API por adentro",
+            "en": "CVE-2026-102943 (CVSS 6.5): Dagu fixed a path traversal in HTTP middleware, and its MCP server calls the same API in-process",
+            "fr": "CVE-2026-102943 (CVSS 6.5) : Dagu a corrigé un path traversal dans un middleware HTTP, et son serveur MCP appelle la même API en interne"
+          },
+          "body_html": {
+            "es": "<p>El fix de CVE-2026-33344 se implementó como middleware en la cadena de chi, pero el servicio MCP de Dagu invoca <code>GetDAGSpec</code> como llamada Go directa, sin request HTTP, así que el middleware nunca corre. Con una key de rol viewer, el tool MCP vuelve a leer cualquier archivo <code>.yaml</code>/<code>.yml</code> del server. La lección sirve para cualquiera que agregue MCP a un backend existente: si la validación vive en la capa HTTP, el MCP la esquiva. Fix en <strong>2.11.0</strong>.</p>",
+            "en": "<p>The fix for CVE-2026-33344 was implemented as middleware in the chi handler chain, but Dagu's MCP service calls <code>GetDAGSpec</code> as a direct Go call with no HTTP request, so the middleware never runs. With a viewer-role key, the MCP tool can again read any <code>.yaml</code>/<code>.yml</code> file on the server. The lesson applies to anyone bolting MCP onto an existing backend: if validation lives in the HTTP layer, MCP walks around it. Fixed in <strong>2.11.0</strong>.</p>",
+            "fr": "<p>Le correctif de CVE-2026-33344 a été placé dans un middleware chi, mais le service MCP de Dagu appelle <code>GetDAGSpec</code> directement en Go, sans requête HTTP : le middleware ne s'exécute jamais. Avec une clé viewer, l'outil MCP relit n'importe quel fichier <code>.yaml</code>. Si la validation vit dans la couche HTTP, MCP la contourne. Corrigé dans <strong>2.11.0</strong>.</p>"
+          },
+          "date": "10 Nov 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-5m6c-38r8-5w76",
+            "label": "GitHub Advisory GHSA-5m6c-38r8-5w76"
+          }
+        }
+      ]
+    },
+    {
+      "id": "advisories",
+      "name": "Vendor Advisories",
+      "theme": "advisories",
+      "icon_emoji": "📢",
+      "anchor": "advisories",
+      "updates": [
+        {
+          "id": "openai-control-room",
+          "tag": "advisory",
+          "title": {
+            "es": "OpenAI presenta Control Room, un kill switch que corta la salida de sus modelos de investigación en 35 segundos",
+            "en": "OpenAI unveils Control Room, a kill switch that stops its research models' output within 35 seconds",
+            "fr": "OpenAI présente Control Room, un kill switch qui coupe la sortie de ses modèles de recherche en 35 secondes"
+          },
+          "body_html": {
+            "es": "<p>OpenAI anunció un sistema central que rastrea los workloads de modelos en su infraestructura de investigación y los frena cuando aparece un problema de safety o seguridad. Puede cortar toda salida <strong>35 segundos</strong> después de la decisión; la demora viene de una capa de cache de autorización de inferencia, y dicen que van a llevarla a cero. Está diseñado para seguir funcionando si otros sistemas caen, y para frenar la salida si el propio Control Room se cae. Llega después de una racha de agentes que se pasaron de la raya, incluido el ataque a Hugging Face.</p>",
+            "en": "<p>OpenAI announced a central system that tracks model workloads across its research infrastructure and halts them when safety or security concerns come up. It can stop all output <strong>35 seconds</strong> after the call is made; the lag comes from a caching layer for inference authorization, which OpenAI says it is working to drive to zero. It is built to keep working when other systems fail, and to stop model output if Control Room itself goes down. It follows a run of agents overstepping their brief, including the attack on Hugging Face.</p>",
+            "fr": "<p>OpenAI a annoncé un système central qui suit les workloads de modèles dans son infrastructure de recherche et les arrête en cas de problème de sûreté ou de sécurité. La sortie peut être coupée <strong>35 secondes</strong> après la décision, délai dû à un cache d'autorisation d'inférence. Le système continue de fonctionner si d'autres tombent, et coupe la sortie si Control Room lui-même tombe.</p>"
+          },
+          "date": "11 Nov 2026",
+          "source": {
+            "url": "https://www.theregister.com/ai-and-ml/2026/11/11/openai-builds-a-kill-switch-for-its-research-models/5309006",
+            "label": "The Register"
+          }
+        },
+        {
+          "id": "deepmind-alphaproof-signal",
+          "tag": "research",
+          "title": {
+            "es": "Google DeepMind usa agentes AlphaProof Code para verificar formalmente el handshake PQXDH y el Triple Ratchet de Signal",
+            "en": "Google DeepMind uses AlphaProof Code agents to formally verify Signal's PQXDH handshake and Triple Ratchet",
+            "fr": "Google DeepMind utilise des agents AlphaProof Code pour vérifier formellement le handshake PQXDH et le Triple Ratchet de Signal"
+          },
+          "body_html": {
+            "es": "<p>La contracara defensiva: un framework multiagente con humanos en el loop escribió la especificación en Lean, y agentes Gemini generaron <strong>6,5 millones de líneas</strong> de prueba que el kernel de Lean chequea contra el código de máquina de libsignal. Validaron forward secrecy, autenticación, seguridad post-compromiso y secreto del handshake. Asume criptografía perfecta, pero llevó cuatro semanas a cinco personas, contra los 20 años-persona que costó verificar seL4.</p>",
+            "en": "<p>The defensive flip side: a human-in-the-loop multi-agent framework wrote the Lean specification, and Gemini agents generated <strong>6.5 million lines</strong> of proof that the Lean kernel checks against libsignal's machine code. It validates forward secrecy, authentication, post-compromise security and handshake secrecy. It assumes perfect cryptography, but it took five people four weeks, against the 20 person-years seL4's verification cost.</p>",
+            "fr": "<p>Le versant défensif : un framework multi-agents avec humains dans la boucle a rédigé la spécification Lean, et des agents Gemini ont généré <strong>6,5 millions de lignes</strong> de preuve vérifiées par le noyau Lean contre le code machine de libsignal. Cinq personnes, quatre semaines, contre 20 années-personne pour seL4.</p>"
+          },
+          "date": "10 Nov 2026",
+          "source": {
+            "url": "https://www.theregister.com/ai-and-ml/2026/11/10/google-deepmind-melds-humans-and-ai-agents-to-vet-signals-secure-messaging-techniques/5308625",
+            "label": "The Register"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "MCP se volvió la superficie de ataque del día: seis proveedores distintos (Mendix, AWS, Microsoft, Dynatrace, pgEdge, Dagu) publicaron fallas en sus servidores o gateways MCP en 48 horas, y casi todas son auth faltante o controles que viven en otra capa.",
+      "en": "MCP is the attack surface of the day: six different vendors (Mendix, AWS, Microsoft, Dynatrace, pgEdge, Dagu) published flaws in their MCP servers or gateways within 48 hours, and nearly all are missing auth or controls that live in a different layer.",
+      "fr": "MCP est la surface d'attaque du jour : six éditeurs (Mendix, AWS, Microsoft, Dynatrace, pgEdge, Dagu) ont publié des failles dans leurs serveurs ou passerelles MCP en 48 heures, presque toutes liées à une auth absente ou à des contrôles placés dans une autre couche."
+    },
+    {
+      "es": "Los guardrails fallan en los detalles: AWS por mayúsculas consecutivas, AG2 por un salto de línea, Auth0 AI por mezclar contextos de autorización. El control existe, pero el parsing lo deja pasar.",
+      "en": "Guardrails fail on details: AWS on consecutive capitals, AG2 on a newline, Auth0 AI on mixing authorization contexts. The control exists, but the parsing lets it slip.",
+      "fr": "Les garde-fous cèdent sur des détails : majuscules consécutives chez AWS, saut de ligne chez AG2, contextes d'autorisation mélangés chez Auth0 AI."
+    },
+    {
+      "es": "LLMJacking escala de robar API keys a meterse en proveedores de inferencia: Fireworks muestra que un tercero comprometido alcanza para tocar pesos, datasets y chats de clientes downstream como Notion.",
+      "en": "LLMJacking is escalating from stealing API keys to breaching inference providers: Fireworks shows one compromised third party is enough to reach weights, datasets and the chats of downstream customers like Notion.",
+      "fr": "Le LLMJacking passe du vol de clés API à l'intrusion chez les fournisseurs d'inférence : Fireworks montre qu'un tiers compromis suffit pour atteindre poids, datasets et chats de clients comme Notion."
+    }
+  ]
+}

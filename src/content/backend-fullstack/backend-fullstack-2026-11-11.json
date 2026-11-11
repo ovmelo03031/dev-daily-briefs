@@ -1,0 +1,386 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 11 Nov 2026",
+    "en": "Backend & Fullstack Daily — 11 Nov 2026",
+    "fr": "Backend & Fullstack Daily — 11 nov. 2026"
+  },
+  "description": {
+    "es": "RCE sin autenticación en React Server Components, sanitizeFilter roto en Mongoose, Patch Tuesday de .NET, lote de seguridad de Rails y Rack, búsqueda vectorial en ElastiCache Serverless y la deuda técnica que distrae a los agentes.",
+    "en": "Unauthenticated RCE in React Server Components, broken sanitizeFilter in Mongoose, .NET Patch Tuesday, a Rails and Rack security batch, vector search in ElastiCache Serverless and the tech debt that derails coding agents.",
+    "fr": "RCE sans authentification dans React Server Components, sanitizeFilter défaillant dans Mongoose, Patch Tuesday .NET, salve de sécurité Rails et Rack, recherche vectorielle dans ElastiCache Serverless et la dette technique qui égare les agents."
+  },
+  "pubDate": "2026-11-11",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "React Server Components: RCE sin auth (9.5)", "en": "React Server Components: unauthenticated RCE (9.5)", "fr": "React Server Components : RCE sans auth (9.5)" },
+      "anchor": "react-rsc-rce",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Mongoose: sanitizeFilter no se aplicaba (9.8)", "en": "Mongoose: sanitizeFilter silently skipped (9.8)", "fr": "Mongoose : sanitizeFilter ignoré (9.8)" },
+      "anchor": "mongoose-sanitizefilter",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Patch Tuesday .NET: SignalR y Aspire", "en": ".NET Patch Tuesday: SignalR and Aspire", "fr": "Patch Tuesday .NET : SignalR et Aspire" },
+      "anchor": "dotnet-november-patch-tuesday",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Rails y Rack: RCE en Active Storage", "en": "Rails and Rack: Active Storage RCE", "fr": "Rails et Rack : RCE dans Active Storage" },
+      "anchor": "rails-rack-security-batch",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "ElastiCache Serverless: búsqueda vectorial", "en": "ElastiCache Serverless gets vector search", "fr": "ElastiCache Serverless : recherche vectorielle" },
+      "anchor": "elasticache-serverless-search",
+      "icon": "simple-icons:redis"
+    },
+    {
+      "text": { "es": "Google: la deuda técnica distrae agentes", "en": "Google: tech debt derails coding agents", "fr": "Google : la dette technique égare les agents" },
+      "anchor": "google-agent-distraction",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "react-rsc-rce",
+      "updates": [
+        {
+          "id": "react-rsc-rce",
+          "tag": "security",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "React Server Components: RCE sin autenticación en react-server-dom-* (CVE-2026-126187, CVSS 9.5)",
+            "en": "React Server Components: unauthenticated RCE in react-server-dom-* (CVE-2026-126187, CVSS 9.5)",
+            "fr": "React Server Components : RCE sans authentification dans react-server-dom-* (CVE-2026-126187, CVSS 9.5)"
+          },
+          "body_html": {
+            "es": "<p>Un payload armado contra cualquier framework con soporte de RSC puede terminar en <strong>ejecución remota de código</strong>, sin login. El equipo de React aclara que solo pega en casos raros donde la respuesta transporta varios typed arrays y un valor controlado por el atacante, pero igual recomienda actualizar ya. Afecta a <code>react-server-dom-webpack</code>, <code>-parcel</code> y <code>-turbopack</code> en 19.0.0–19.0.8, 19.1.0–19.1.9, 19.2.0–19.2.8 y 19.3.0. Parches: <strong>19.0.9, 19.1.10, 19.2.9 y 19.3.1</strong>. Si tu React no corre en server, zafás; si usás Next.js, React Router en modo RSC o cualquier bundler con RSC, revisá el lockfile hoy mismo.</p>",
+            "en": "<p>A crafted payload against any framework that supports RSC can lead to <strong>remote code execution</strong> with no login. The React team says it only hits rare cases where responses carry multiple typed arrays plus an attacker-controlled value, but still recommends upgrading immediately. Affected: <code>react-server-dom-webpack</code>, <code>-parcel</code> and <code>-turbopack</code> 19.0.0–19.0.8, 19.1.0–19.1.9, 19.2.0–19.2.8 and 19.3.0. Fixed in <strong>19.0.9, 19.1.10, 19.2.9 and 19.3.1</strong>. Client-only React is safe; if you run Next.js, React Router in RSC mode or any RSC-capable bundler, check your lockfile today.</p>",
+            "fr": "<p>Un payload forgé contre tout framework qui supporte RSC peut mener à une <strong>exécution de code à distance</strong>, sans authentification. L'équipe React précise que seuls de rares cas sont touchés (réponses transportant plusieurs typed arrays et une valeur contrôlée par l'attaquant), mais recommande de mettre à jour immédiatement. Concernés : <code>react-server-dom-webpack</code>, <code>-parcel</code> et <code>-turbopack</code> 19.0.0–19.0.8, 19.1.0–19.1.9, 19.2.0–19.2.8 et 19.3.0. Corrigé en <strong>19.0.9, 19.1.10, 19.2.9 et 19.3.1</strong>. React côté client seulement n'est pas concerné ; avec Next.js, React Router en mode RSC ou un bundler RSC, vérifiez le lockfile aujourd'hui.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-xqc2-xf4c-x3h3", "label": "github.com/advisories" }
+        },
+        {
+          "id": "mongoose-sanitizefilter",
+          "tag": "security",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "Mongoose: cinco advisories, y sanitizeFilter no protegía countDocuments ni la config a nivel conexión (CVSS 9.8)",
+            "en": "Mongoose: five advisories, and sanitizeFilter never covered countDocuments or connection-level config (CVSS 9.8)",
+            "fr": "Mongoose : cinq avis, et sanitizeFilter ne couvrait ni countDocuments ni la config au niveau connexion (CVSS 9.8)"
+          },
+          "body_html": {
+            "es": "<p><code>sanitizeFilter</code> es la defensa de Mongoose contra la inyección de selectores tipo <code>{ $ne: null }</code>, y resulta que <strong>no se aplicaba en <code>countDocuments()</code></strong> (crítico, 9.8). Peor: si lo activabas en <code>mongoose.connect()</code> o <code>createConnection()</code>, la conexión decía que estaba prendido pero las queries nunca lo usaban (7.5). Completan el lote un recorrido de propiedades heredadas al hidratar/mergear documentos (8.2, DoS y estado compartido de schema), prototype pollution vía <code>Schema.prototype.virtual()</code> y discriminadores tipo <code>__t: 'constructor'</code>. Subí a <strong>9.11.4, 8.24.7, 7.8.13 o 6.13.12</strong>. Si confiabas en el flag global para frenar NoSQL injection, ojo: estuviste expuesto.</p>",
+            "en": "<p><code>sanitizeFilter</code> is Mongoose's guard against selector injection like <code>{ $ne: null }</code>, and it turns out it <strong>was never applied to <code>countDocuments()</code></strong> (critical, 9.8). Worse: enabling it in <code>mongoose.connect()</code> or <code>createConnection()</code> reported it as on, but queries never used it (7.5). The batch also includes inherited-property walks when hydrating and merging documents (8.2, DoS and shared schema state), prototype pollution via <code>Schema.prototype.virtual()</code> and discriminator keys like <code>__t: 'constructor'</code>. Upgrade to <strong>9.11.4, 8.24.7, 7.8.13 or 6.13.12</strong>. If you relied on the global flag to stop NoSQL injection, you were exposed.</p>",
+            "fr": "<p><code>sanitizeFilter</code> est la protection de Mongoose contre l'injection de sélecteurs comme <code>{ $ne: null }</code>, et il <strong>n'était jamais appliqué à <code>countDocuments()</code></strong> (critique, 9.8). Pire : activé dans <code>mongoose.connect()</code> ou <code>createConnection()</code>, il était signalé comme actif mais les requêtes ne l'utilisaient pas (7.5). La salve inclut aussi le parcours de propriétés héritées lors de l'hydratation et du merge (8.2, DoS et état de schéma partagé), une prototype pollution via <code>Schema.prototype.virtual()</code> et des clés de discriminateur comme <code>__t: 'constructor'</code>. Passez à <strong>9.11.4, 8.24.7, 7.8.13 ou 6.13.12</strong>. Si vous comptiez sur le flag global contre l'injection NoSQL, vous étiez exposés.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-pcrw-h46h-c93h", "label": "github.com/advisories" }
+        },
+        {
+          "id": "dotnet-november-patch-tuesday",
+          "tag": "security",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "Patch Tuesday de .NET: más de 25 advisories, con SignalR ejecutando hubs como la víctima y Aspire filtrando la cookie del dashboard",
+            "en": ".NET Patch Tuesday: 25+ advisories, with SignalR running hubs as the victim and Aspire leaking its dashboard cookie",
+            "fr": "Patch Tuesday .NET : plus de 25 avis, dont SignalR exécutant des hubs au nom de la victime et Aspire divulguant son cookie de dashboard"
+          },
+          "body_html": {
+            "es": "<p>Microsoft sacó <strong>.NET 10.0.15, 9.0.23 y 8.0.34</strong> con un lote grande de advisories para ASP.NET Core, el runtime y Aspire. Lo más jugoso para backend: en SignalR las conexiones no quedaban atadas a la identidad negociada, así que mensajes inyectados ejecutan <strong>invocaciones de Hub como la víctima</strong> (CVE-2026-114146, 7.8). En Aspire, la cookie del dashboard se filtraba a un servicio vinculado y un container malicioso podía reutilizar la sesión y <strong>ejecutar código como el dev</strong> (arreglado en Aspire 13.6.5). Hay además varios DoS (HttpSys, SignalR con Redis backplane, CBOR) y cinco RCE de Visual Studio. Si tenés servicios .NET al lado de tus Node, actualizá runtimes e imágenes base.</p>",
+            "en": "<p>Microsoft shipped <strong>.NET 10.0.15, 9.0.23 and 8.0.34</strong> with a large batch of advisories across ASP.NET Core, the runtime and Aspire. The backend highlight: SignalR connections were not bound to the identity negotiated at connect time, so injected messages run <strong>Hub invocations as the victim</strong> (CVE-2026-114146, 7.8). In Aspire, the dashboard cookie leaked to a linked service, letting an attacker-controlled container replay the session and <strong>execute code as the host developer</strong> (fixed in Aspire 13.6.5). Add several DoS fixes (HttpSys, SignalR Redis backplane, CBOR) and five Visual Studio RCEs. If you run .NET services next to your Node stack, bump runtimes and base images.</p>",
+            "fr": "<p>Microsoft a publié <strong>.NET 10.0.15, 9.0.23 et 8.0.34</strong> avec une grosse salve d'avis sur ASP.NET Core, le runtime et Aspire. Le point clé backend : les connexions SignalR n'étaient pas liées à l'identité négociée, donc des messages injectés exécutent des <strong>invocations de Hub au nom de la victime</strong> (CVE-2026-114146, 7.8). Dans Aspire, le cookie du dashboard fuyait vers un service lié, permettant à un container malveillant de rejouer la session et d'<strong>exécuter du code en tant que développeur</strong> (corrigé dans Aspire 13.6.5). S'ajoutent plusieurs DoS (HttpSys, backplane Redis de SignalR, CBOR) et cinq RCE Visual Studio. Si vous avez des services .NET à côté de Node, mettez à jour runtimes et images de base.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-67wp-ghc2-fw2g", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "trpc-11-28",
+      "updates": [
+        {
+          "id": "trpc-11-28",
+          "tag": "release",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "tRPC 11.27 y 11.28: abort signals en localLink y streaming con streamedQuery de TanStack",
+            "en": "tRPC 11.27 and 11.28: abort signals in localLink and streaming via TanStack's streamedQuery",
+            "fr": "tRPC 11.27 et 11.28 : abort signals dans localLink et streaming via streamedQuery de TanStack"
+          },
+          "body_html": {
+            "es": "<p>Dos releases el mismo día. <strong>11.27</strong> le pasa el abort signal a <code>createContext</code> de <code>localLink</code> y lo respeta en las llamadas comunes, y evita que un stream viejo escriba sobre una query ya refetcheada. <strong>11.28</strong> hace que <code>@trpc/tanstack-react-query</code> streamee queries con <code>streamedQuery</code> de TanStack Query, marcado por los propios mantenedores como <em>ligeramente breaking</em>. Si consumís streams desde React, corré los tests antes de mergear el bump.</p>",
+            "en": "<p>Two releases in one day. <strong>11.27</strong> passes the abort signal to <code>localLink</code>'s <code>createContext</code>, respects it in ordinary calls, and stops an older stream from writing into a refetched query. <strong>11.28</strong> makes <code>@trpc/tanstack-react-query</code> stream queries through TanStack Query's <code>streamedQuery</code>, flagged by the maintainers as <em>slightly breaking</em>. If you consume streams from React, run your tests before merging the bump.</p>",
+            "fr": "<p>Deux releases le même jour. <strong>11.27</strong> transmet l'abort signal au <code>createContext</code> de <code>localLink</code>, le respecte dans les appels ordinaires, et empêche un ancien stream d'écrire dans une query rechargée. <strong>11.28</strong> fait streamer les queries de <code>@trpc/tanstack-react-query</code> via <code>streamedQuery</code> de TanStack Query, signalé par les mainteneurs comme <em>légèrement breaking</em>. Si vous consommez des streams depuis React, lancez vos tests avant de merger.</p>"
+          },
+          "source": { "url": "https://github.com/trpc/trpc/releases/tag/v11.28.0", "label": "github.com/trpc" }
+        },
+        {
+          "id": "effect-4-1-4",
+          "tag": "minor",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "Effect 4.1.4: HttpApi.RedactedNames para no filtrar secretos en los spans",
+            "en": "Effect 4.1.4: HttpApi.RedactedNames keeps secrets out of your spans",
+            "fr": "Effect 4.1.4 : HttpApi.RedactedNames garde les secrets hors des spans"
+          },
+          "body_html": {
+            "es": "<p>La nueva anotación <code>HttpApi.RedactedNames</code> te deja declarar qué query params y headers redactar en los atributos de URL y headers de los spans de <code>HttpApiClient</code> y <code>HttpApiBuilder</code>, ideal para valores que solo a veces son secretos. También suma helpers <code>WorkloadIdentity</code> para autenticar contra Anthropic y OpenAI. Un golazo para quien manda trazas OpenTelemetry a un vendor externo.</p>",
+            "en": "<p>The new <code>HttpApi.RedactedNames</code> annotation declares which query parameters and headers to redact from the URL and header attributes of <code>HttpApiClient</code> and <code>HttpApiBuilder</code> spans, for values that are only sometimes secret. It also adds <code>WorkloadIdentity</code> helpers for Anthropic and OpenAI authentication. Handy if you ship OpenTelemetry traces to an external vendor.</p>",
+            "fr": "<p>La nouvelle annotation <code>HttpApi.RedactedNames</code> déclare quels query params et headers masquer dans les attributs d'URL et de headers des spans <code>HttpApiClient</code> et <code>HttpApiBuilder</code>, pour les valeurs parfois secrètes. Elle ajoute aussi des helpers <code>WorkloadIdentity</code> pour l'authentification Anthropic et OpenAI. Utile si vous envoyez vos traces OpenTelemetry à un fournisseur externe.</p>"
+          },
+          "source": { "url": "https://github.com/Effect-TS/effect/releases/tag/effect%404.1.4", "label": "github.com/Effect-TS" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "elasticache-serverless-search",
+      "updates": [
+        {
+          "id": "elasticache-serverless-search",
+          "tag": "notable",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "ElastiCache Serverless para Valkey suma búsqueda vectorial, full-text, híbrida y agregaciones",
+            "en": "ElastiCache Serverless for Valkey adds vector, full-text and hybrid search plus aggregations",
+            "fr": "ElastiCache Serverless pour Valkey ajoute recherche vectorielle, plein texte, hybride et agrégations"
+          },
+          "body_html": {
+            "es": "<p>AWS promete latencias de microsegundos con hasta <strong>99% de recall</strong> en búsqueda vectorial, y los writes quedan buscables apenas completan. Podés combinar tipos de búsqueda en una sola query y agregar resultados del lado del server. El pitch apunta a darle a cada agente o sesión su propio datastore con endpoint público, listo en segundos y cobrado por uso. Si estabas sumando pgvector u OpenSearch solo para RAG chico, esto te ahorra una pieza.</p>",
+            "en": "<p>AWS claims microsecond latency at up to <strong>99% recall</strong> for vector search, with writes searchable as soon as they complete. You can combine search types in one query and aggregate results server-side. The pitch: give every agent or session its own datastore with a public endpoint, ready in seconds and billed per use. If you were adding pgvector or OpenSearch just for small-scale RAG, this removes a moving part.</p>",
+            "fr": "<p>AWS annonce une latence de l'ordre de la microseconde avec jusqu'à <strong>99 % de recall</strong> en recherche vectorielle, et les écritures sont cherchables dès qu'elles aboutissent. On peut combiner les types de recherche dans une requête et agréger côté serveur. L'argument : un datastore par agent ou session, avec endpoint public, prêt en secondes et facturé à l'usage. Si vous ajoutiez pgvector ou OpenSearch juste pour un petit RAG, c'est une pièce de moins.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-elasticache-serverless-search-aggregations/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "documentdb-8-0-3",
+          "tag": "notable",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "DocumentDB 8.0.3: TLS post-cuántico, wildcard indexes y $unionWith",
+            "en": "DocumentDB 8.0.3: post-quantum TLS, wildcard indexes and $unionWith",
+            "fr": "DocumentDB 8.0.3 : TLS post-quantique, wildcard indexes et $unionWith"
+          },
+          "body_html": {
+            "es": "<p>Las conexiones TLS 1.3 usan intercambio de claves híbrido con <strong>ML-KEM</strong> cuando el cliente lo soporta, con métricas de CloudWatch para contar handshakes clásicos vs post-cuánticos. Del lado de la API de MongoDB llegan <strong>wildcard indexes</strong> para schemas dinámicos, el stage <code>$unionWith</code>, <code>$lookup</code>/<code>$graphLookup</code> en views y eventos <code>dropIndexes</code> en change streams. Menos excusas para no migrar workloads Mongo sin tocar código.</p>",
+            "en": "<p>TLS 1.3 connections use hybrid <strong>ML-KEM</strong> key exchange when the client supports it, with CloudWatch metrics counting classical vs post-quantum handshakes. On the MongoDB API side: <strong>wildcard indexes</strong> for dynamic schemas, the <code>$unionWith</code> stage, <code>$lookup</code>/<code>$graphLookup</code> in views and <code>dropIndexes</code> change stream events. Fewer reasons left to keep Mongo workloads off DocumentDB.</p>",
+            "fr": "<p>Les connexions TLS 1.3 utilisent un échange de clés hybride <strong>ML-KEM</strong> quand le client le supporte, avec des métriques CloudWatch qui comptent handshakes classiques et post-quantiques. Côté API MongoDB : <strong>wildcard indexes</strong> pour les schémas dynamiques, le stage <code>$unionWith</code>, <code>$lookup</code>/<code>$graphLookup</code> dans les vues et des événements <code>dropIndexes</code> dans les change streams. Moins de raisons de garder vos workloads Mongo hors de DocumentDB.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-documentdb-8-0-3/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "rds-mysql-26-10-preview",
+          "tag": "beta",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "MySQL 26.10 llega al Preview Environment de RDS: adiós al mutex global en READ COMMITTED",
+            "en": "MySQL 26.10 lands in the RDS Preview Environment: no more global mutex under READ COMMITTED",
+            "fr": "MySQL 26.10 arrive dans le Preview Environment RDS : fin du mutex global en READ COMMITTED"
+          },
+          "body_html": {
+            "es": "<p>En workloads READ COMMITTED muy cargados, cerrar cada read view tomaba un mutex global que pegaba fuerte en sistemas NUMA; ahora los read views se reutilizan. Además el error log avisa cuando el history-list length pasa <code>innodb_max_purge_lag</code> y cuando el purge empieza a frenar DML, así detectás el backlog antes de que duela. Las instancias de preview duran 60 días.</p>",
+            "en": "<p>On busy READ COMMITTED workloads, closing each read view took a global mutex that hurt NUMA systems; read views are now reused. The error log also warns when the history-list length crosses <code>innodb_max_purge_lag</code> and when purge starts delaying DML, so you catch the backlog before it bites. Preview instances live for 60 days.</p>",
+            "fr": "<p>Sur des workloads READ COMMITTED chargés, fermer chaque read view prenait un mutex global pénalisant sur les systèmes NUMA ; les read views sont désormais réutilisées. Le journal d'erreurs avertit aussi quand la history-list length dépasse <code>innodb_max_purge_lag</code> et quand la purge commence à retarder les DML. Les instances de preview durent 60 jours.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/rds-mysql-26-10-preview-environment/", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "opensearch-cross-region-dr",
+      "updates": [
+        {
+          "id": "opensearch-cross-region-dr",
+          "tag": "ga",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "OpenSearch Service: disaster recovery cross-Region gestionado con RPO menor a un minuto",
+            "en": "OpenSearch Service: managed cross-Region disaster recovery with sub-minute RPO",
+            "fr": "OpenSearch Service : reprise après sinistre inter-Régions gérée, RPO inférieur à une minute"
+          },
+          "body_html": {
+            "es": "<p>Emparejás dos dominios en Regiones distintas con una sola llamada a la API y AWS mantiene el secundario sincronizado: <strong>RPO menor a 1 minuto y RTO menor a 20</strong>. Hay switchover planificado sin pérdida de datos y failover que promueve el secundario. Requiere OpenSearch 3.7+ y ambos dominios en la misma cuenta. Se acabó mantener tu propia replicación cross-cluster a mano.</p>",
+            "en": "<p>Pair two domains in different Regions with one API call and AWS keeps the secondary in sync: <strong>RPO under 1 minute, RTO under 20</strong>. Planned switchovers lose no data, and failover promotes the secondary. Requires OpenSearch 3.7+ and both domains in the same account. No more hand-rolled cross-cluster replication.</p>",
+            "fr": "<p>On associe deux domaines dans des Régions différentes en un appel d'API et AWS garde le secondaire synchronisé : <strong>RPO sous 1 minute, RTO sous 20</strong>. Le switchover planifié est sans perte de données, le failover promeut le secondaire. Nécessite OpenSearch 3.7+ et les deux domaines dans le même compte. Fini la réplication cross-cluster maison.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-opensearch-service-managed-cross-region-disaster-recovery/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "cloudflare-vitest-plugin-1-7",
+          "tag": "notable",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "@cloudflare/vitest-plugin 1.7: los tests levantan los Containers de tus Durable Objects (y ahora piden Docker)",
+            "en": "@cloudflare/vitest-plugin 1.7: tests now run the Containers attached to your Durable Objects (and need Docker)",
+            "fr": "@cloudflare/vitest-plugin 1.7 : les tests lancent les Containers de vos Durable Objects (et exigent Docker)"
+          },
+          "body_html": {
+            "es": "<p>Antes el plugin deshabilitaba los Containers y tus Durable Objects corrían sin <code>ctx.container</code>. Ahora construye o baja las imágenes antes de cada proyecto de tests y les da un <code>ctx.container</code> real. Ojo con el CI: esos proyectos <strong>ahora necesitan Docker</strong>; si no lo tenés, poné <code>dev.enable_containers</code> en <code>false</code>. En el mismo release train, Wrangler 4.160 acepta headers custom vía <code>CLOUDFLARE_API_HEADERS</code>.</p>",
+            "en": "<p>The plugin used to disable Containers, so Durable Objects ran without <code>ctx.container</code>. Now it builds or pulls the images before each test project and hands them a real <code>ctx.container</code>. Watch your CI: those projects <strong>now require Docker</strong>; without it, set <code>dev.enable_containers</code> to <code>false</code>. In the same release train, Wrangler 4.160 accepts custom API headers via <code>CLOUDFLARE_API_HEADERS</code>.</p>",
+            "fr": "<p>Le plugin désactivait les Containers, donc les Durable Objects tournaient sans <code>ctx.container</code>. Il construit ou récupère désormais les images avant chaque projet de tests et fournit un vrai <code>ctx.container</code>. Attention à la CI : ces projets <strong>exigent maintenant Docker</strong> ; sinon, mettez <code>dev.enable_containers</code> à <code>false</code>. Dans la même vague, Wrangler 4.160 accepte des headers d'API personnalisés via <code>CLOUDFLARE_API_HEADERS</code>.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workers-sdk/releases/tag/%40cloudflare/vitest-plugin%401.7.0", "label": "github.com/cloudflare" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "google-agent-distraction",
+      "updates": [
+        {
+          "id": "google-agent-distraction",
+          "tag": "notable",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "Google mide la «distracción de agentes»: los TODO viejos mandan a los coding agents a side-quests",
+            "en": "Google measures agent distraction: stale TODOs send coding agents on side-quests",
+            "fr": "Google mesure la «distraction des agents» : les vieux TODO envoient les coding agents en quêtes annexes"
+          },
+          "body_html": {
+            "es": "<p>Con trazas de miles de ingenieros y cientos de millones de pasos de agentes, Google encontró que <strong>~13% de las sesiones</strong> expusieron al agente a referencias <code>TODO(bug/...)</code> inline, y en el 6% de esos casos el agente se puso a laburar sobre ese bug sin que el prompt lo pidiera. En el <strong>41%</strong> de esos desvíos el ticket ya estaba cerrado. Moraleja de arquitecto: la deuda técnica ya no duerme en un rincón, ahora es contexto que consume tokens y mete lógica incorrecta. Limpiá TODOs huérfanos y specs viejas, ponete las pilas.</p>",
+            "en": "<p>Using traces from thousands of engineers and hundreds of millions of agent steps, Google found <strong>~13% of sessions</strong> exposed agents to inline <code>TODO(bug/...)</code> references, and in 6% of those the agent acted on that bug without the prompt asking. In <strong>41%</strong> of those detours the ticket was already closed. The architectural takeaway: tech debt no longer sleeps in a corner; it is context that burns tokens and steers agents into wrong logic. Prune orphaned TODOs and stale specs.</p>",
+            "fr": "<p>À partir de traces de milliers d'ingénieurs et de centaines de millions d'étapes d'agents, Google a constaté que <strong>~13 % des sessions</strong> exposaient l'agent à des références <code>TODO(bug/...)</code>, et dans 6 % de ces cas l'agent s'attaquait au bug sans que le prompt le demande. Dans <strong>41 %</strong> de ces détours, le ticket était déjà fermé. Leçon d'architecture : la dette technique ne dort plus dans un coin, c'est du contexte qui brûle des tokens et égare les agents. Nettoyez les TODO orphelins et les specs périmées.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/11/google-agent-distraction/", "label": "infoq.com" }
+        },
+        {
+          "id": "pinterest-intel-gprofiler",
+          "tag": "minor",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "Pinterest e Intel llevan gProfiler, profiling continuo open source, a escala de internet",
+            "en": "Pinterest and Intel take gProfiler, open-source continuous profiling, to internet scale",
+            "fr": "Pinterest et Intel portent gProfiler, profiling continu open source, à l'échelle d'Internet"
+          },
+          "body_html": {
+            "es": "<p>Pinterest se asoció con Intel para extender <strong>gProfiler</strong>, un profiler continuo open source que da visibilidad de performance en producción sobre toda la flota. Es una buena referencia si todavía tratás el profiling como algo que hacés a mano cuando algo explota: el continuous profiling ya es la cuarta pata de la observabilidad junto a logs, métricas y trazas.</p>",
+            "en": "<p>Pinterest partnered with Intel to extend <strong>gProfiler</strong>, an open-source continuous profiler that provides production performance visibility across its whole fleet. A good reference if you still treat profiling as something you do by hand when things catch fire: continuous profiling is now the fourth pillar of observability next to logs, metrics and traces.</p>",
+            "fr": "<p>Pinterest s'est associé à Intel pour étendre <strong>gProfiler</strong>, un profiler continu open source qui offre une visibilité sur la performance en production de toute sa flotte. Bonne référence si le profiling reste pour vous un geste manuel en cas d'incident : le profiling continu est devenu le quatrième pilier de l'observabilité, aux côtés des logs, métriques et traces.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/11/pinterest-intel-profiling/", "label": "infoq.com" }
+        },
+        {
+          "id": "rails-rack-security-batch",
+          "tag": "security",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "Rails y Rack: RCE en Active Storage con un nombre de archivo elegido (8.8), spoofing de IP en Action Pack y DoS multipart",
+            "en": "Rails and Rack: Active Storage RCE via a chosen filename (8.8), Action Pack IP spoofing and multipart DoS",
+            "fr": "Rails et Rack : RCE dans Active Storage via un nom de fichier choisi (8.8), usurpation d'IP dans Action Pack et DoS multipart"
+          },
+          "body_html": {
+            "es": "<p>Active Storage le pasa a <code>ffprobe</code>, <code>ffmpeg</code> e ImageMagick un tempfile con la extensión del archivo subido, y esas herramientas eligen decoder por extensión: un atacante que controla el nombre logra <strong>lectura arbitraria y RCE</strong> (fix en 8.1.4.1 / 8.0.5.2). En Rails 8.1, <code>request.remote_ip</code> prefiere el header RFC 7239 <code>Forwarded</code> que el proxy deja pasar, así que el cliente elige su IP. Y Rack trae un DoS multipart donde el buffer crece hasta el tamaño del request (2.2.25 / 3.1.23 / 3.2.8). Patrón universal para cualquier stack: nunca le confíes al filename ni a headers de forwarding que tu proxy no reescribe.</p>",
+            "en": "<p>Active Storage hands <code>ffprobe</code>, <code>ffmpeg</code> and ImageMagick a tempfile carrying the uploaded file's extension, and those tools pick a decoder by extension: an attacker who controls the filename gets <strong>arbitrary file read and RCE</strong> (fixed in 8.1.4.1 / 8.0.5.2). In Rails 8.1, <code>request.remote_ip</code> prefers the RFC 7239 <code>Forwarded</code> header your proxy passes through, so the client picks its own IP. Rack adds a multipart DoS where the scan buffer grows to the request size (2.2.25 / 3.1.23 / 3.2.8). The lesson for any stack: never trust filenames or forwarding headers your proxy does not rewrite.</p>",
+            "fr": "<p>Active Storage passe à <code>ffprobe</code>, <code>ffmpeg</code> et ImageMagick un fichier temporaire portant l'extension du fichier envoyé, et ces outils choisissent le décodeur selon l'extension : un attaquant qui contrôle le nom obtient <strong>lecture arbitraire et RCE</strong> (corrigé en 8.1.4.1 / 8.0.5.2). Dans Rails 8.1, <code>request.remote_ip</code> privilégie l'en-tête RFC 7239 <code>Forwarded</code> que le proxy laisse passer, donc le client choisit son IP. Rack ajoute un DoS multipart où le buffer grossit jusqu'à la taille de la requête (2.2.25 / 3.1.23 / 3.2.8). Leçon valable partout : ne faites jamais confiance aux noms de fichiers ni aux en-têtes de forwarding non réécrits par votre proxy.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-v924-7rp8-4mxh", "label": "github.com/advisories" }
+        },
+        {
+          "id": "effect-platform-cookie-injection",
+          "tag": "security",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "@effect/platform: inyección de atributos de cookie vía name, domain y path en makeCookie()",
+            "en": "@effect/platform: cookie attribute injection via name, domain and path in makeCookie()",
+            "fr": "@effect/platform : injection d'attributs de cookie via name, domain et path dans makeCookie()"
+          },
+          "body_html": {
+            "es": "<p>La regex que validaba <code>name</code>, <code>domain</code> y <code>path</code> permitía <code>;</code>, el separador de atributos de <code>Set-Cookie</code>, así que un input como <code>legit.com; Domain=.parent.tld</code> agregaba atributos arbitrarios. CVSS v4 6.3; fix en <code>@effect/platform</code> 0.97.1 y <code>effect</code> 4.0.0-beta.103. Recordatorio clásico: si un valor de usuario termina en un header, validalo con allowlist, no con denylist.</p>",
+            "en": "<p>The regex validating <code>name</code>, <code>domain</code> and <code>path</code> allowed <code>;</code>, the <code>Set-Cookie</code> attribute separator, so input like <code>legit.com; Domain=.parent.tld</code> appended arbitrary attributes. CVSS v4 6.3; fixed in <code>@effect/platform</code> 0.97.1 and <code>effect</code> 4.0.0-beta.103. Classic reminder: when user input reaches a header, validate with an allowlist, not a denylist.</p>",
+            "fr": "<p>La regex qui validait <code>name</code>, <code>domain</code> et <code>path</code> autorisait <code>;</code>, le séparateur d'attributs de <code>Set-Cookie</code>, donc une entrée comme <code>legit.com; Domain=.parent.tld</code> ajoutait des attributs arbitraires. CVSS v4 6.3 ; corrigé dans <code>@effect/platform</code> 0.97.1 et <code>effect</code> 4.0.0-beta.103. Rappel classique : quand une entrée utilisateur atteint un en-tête, validez par liste blanche, pas par liste noire.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-chp3-j5qr-2vfr", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "nuxt-content-sqlite-dos",
+      "updates": [
+        {
+          "id": "nuxt-content-sqlite-dos",
+          "tag": "security",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "Nuxt Content: DoS sin autenticación con funciones de SQLite vía la Content Query API (CVSS 7.5)",
+            "en": "Nuxt Content: unauthenticated SQLite function DoS through the Content Query API (CVSS 7.5)",
+            "fr": "Nuxt Content : DoS sans authentification via des fonctions SQLite dans la Content Query API (CVSS 7.5)"
+          },
+          "body_html": {
+            "es": "<p>El endpoint <code>POST /__nuxt_content/:collection/query</code> acepta un campo <code>sql</code> del body y lo ejecuta contra SQLite tras un validador que solo bloquea algunos keywords. Funciones caras como <code>randomblob()</code> o <code>zeroblob()</code> pasan derecho y te tiran el server. Afecta <code>@nuxt/content</code> 3.x; subí a <strong>3.15.2</strong>. Exponer SQL al cliente con un denylist nunca termina bien.</p>",
+            "en": "<p>The <code>POST /__nuxt_content/:collection/query</code> endpoint takes a <code>sql</code> field from the request body and runs it against SQLite after a validator that only blocks a few keywords. Expensive functions like <code>randomblob()</code> or <code>zeroblob()</code> sail through and take the server down. Affects <code>@nuxt/content</code> 3.x; upgrade to <strong>3.15.2</strong>. Exposing SQL to the client behind a denylist never ends well.</p>",
+            "fr": "<p>L'endpoint <code>POST /__nuxt_content/:collection/query</code> accepte un champ <code>sql</code> du corps de requête et l'exécute sur SQLite après un validateur qui ne bloque que quelques mots-clés. Des fonctions coûteuses comme <code>randomblob()</code> ou <code>zeroblob()</code> passent et font tomber le serveur. Concerne <code>@nuxt/content</code> 3.x ; passez en <strong>3.15.2</strong>. Exposer du SQL au client derrière une liste noire finit toujours mal.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-xxrh-5hgg-gj4h", "label": "github.com/advisories" }
+        },
+        {
+          "id": "nx-24-1-beta-0",
+          "tag": "beta",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "Nx 24.1.0-beta.0: soporte para NestJS 12 y presets sin carpetas apps/libs",
+            "en": "Nx 24.1.0-beta.0: NestJS 12 support and presets without apps/libs folders",
+            "fr": "Nx 24.1.0-beta.0 : support de NestJS 12 et presets sans dossiers apps/libs"
+          },
+          "body_html": {
+            "es": "<p>El plugin <code>@nx/node</code> ya soporta <strong>NestJS 12</strong>, los preset generators dejan de crear las carpetas <code>apps</code> y <code>libs</code>, y aparece <code>NX_DB_NAME</code> para las bases locales. También se va la opción deprecada <code>classproperties</code> del preset de Babel. Si tenías el monorepo frenado esperando Nest 12, ya podés probar en una rama.</p>",
+            "en": "<p><code>@nx/node</code> now supports <strong>NestJS 12</strong>, preset generators stop scaffolding <code>apps</code> and <code>libs</code> folders, and <code>NX_DB_NAME</code> arrives for local databases. The deprecated <code>classproperties</code> Babel preset option is gone. If your monorepo was waiting on Nest 12, try it on a branch.</p>",
+            "fr": "<p><code>@nx/node</code> supporte désormais <strong>NestJS 12</strong>, les preset generators ne créent plus les dossiers <code>apps</code> et <code>libs</code>, et <code>NX_DB_NAME</code> arrive pour les bases locales. L'option dépréciée <code>classproperties</code> du preset Babel disparaît. Si votre monorepo attendait Nest 12, essayez sur une branche.</p>"
+          },
+          "source": { "url": "https://github.com/nrwl/nx/releases/tag/24.1.0-beta.0", "label": "github.com/nrwl" }
+        },
+        {
+          "id": "better-auth-1-7-20",
+          "tag": "patch",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "better-auth 1.7.20: el prelogin de clientes públicos OAuth valida el client_id firmado",
+            "en": "better-auth 1.7.20: OAuth public-client prelogin now checks the signed client_id",
+            "fr": "better-auth 1.7.20 : le prelogin des clients publics OAuth vérifie le client_id signé"
+          },
+          "body_html": {
+            "es": "<p>En <code>@better-auth/oauth-provider</code>, <code>POST /oauth2/public-client-prelogin</code> ahora devuelve el cliente solo si su <code>client_id</code> coincide con el <code>oauth_query</code> firmado; si no, responde <code>401 invalid_client</code>. También corrige los defaults de issuer/JWKS cuando <code>baseURL</code> es solo un origin, y el adapter de Prisma ahora respeta <code>mode: «insensitive»</code> en PostgreSQL y MongoDB. Si sos tu propio OAuth provider, actualizá.</p>",
+            "en": "<p>In <code>@better-auth/oauth-provider</code>, <code>POST /oauth2/public-client-prelogin</code> now returns a client only when its <code>client_id</code> matches the signed <code>oauth_query</code>, otherwise <code>401 invalid_client</code>. It also fixes issuer/JWKS defaults when <code>baseURL</code> is just an origin, and the Prisma adapter now honors case-insensitive <code>mode</code> filters on PostgreSQL and MongoDB. If you run your own OAuth provider, upgrade.</p>",
+            "fr": "<p>Dans <code>@better-auth/oauth-provider</code>, <code>POST /oauth2/public-client-prelogin</code> ne renvoie plus un client que si son <code>client_id</code> correspond à l'<code>oauth_query</code> signé, sinon <code>401 invalid_client</code>. Corrige aussi les valeurs par défaut issuer/JWKS quand <code>baseURL</code> n'est qu'une origine, et l'adapter Prisma respecte enfin les filtres <code>mode</code> insensibles à la casse sur PostgreSQL et MongoDB. Si vous êtes votre propre fournisseur OAuth, mettez à jour.</p>"
+          },
+          "source": { "url": "https://github.com/better-auth/better-auth/releases/tag/v1.7.20", "label": "github.com/better-auth" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Martes de parches masivo: React, Mongoose, .NET, Rails y Rack publicaron advisories el mismo día. Si tu pipeline de dependencias no corre Dependabot/Renovate a diario, hoy es el día de revisarlo.",
+      "en": "A massive patch Tuesday: React, Mongoose, .NET, Rails and Rack all published advisories on the same day. If your dependency pipeline does not run Dependabot or Renovate daily, today is the day to fix that.",
+      "fr": "Un Patch Tuesday massif : React, Mongoose, .NET, Rails et Rack ont publié des avis le même jour. Si votre pipeline de dépendances ne lance pas Dependabot ou Renovate chaque jour, c'est le moment."
+    },
+    {
+      "es": "Las defensas declaradas que no se aplican son el patrón de la semana: sanitizeFilter de Mongoose, el validador SQL de Nuxt Content y la regex de cookies de Effect daban falsa seguridad. Testeá tus guards con payloads reales, no confíes en el flag.",
+      "en": "Declared defenses that silently do nothing are the pattern of the week: Mongoose's sanitizeFilter, Nuxt Content's SQL validator and Effect's cookie regex all gave false confidence. Test your guards with real payloads instead of trusting the flag.",
+      "fr": "Les protections déclarées mais inopérantes sont le motif de la semaine : sanitizeFilter de Mongoose, le validateur SQL de Nuxt Content et la regex de cookies d'Effect donnaient une fausse assurance. Testez vos garde-fous avec de vrais payloads plutôt que de faire confiance au flag."
+    }
+  ]
+}

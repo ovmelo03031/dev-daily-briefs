@@ -1,0 +1,408 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 12 Nov 2026",
+    "en": "Backend & Fullstack Daily — 12 Nov 2026",
+    "fr": "Backend & Fullstack Daily — 12 nov. 2026"
+  },
+  "description": {
+    "es": "Security release de Node.js con 16 CVEs en HTTP/2 y TLS, cuatro bypasses de middleware en Hono, AWS Emulator para testear sin cuenta, pnpm 12.20, sesiones gestionables en Cognito y por qué Cloudflare eligió QuePaxa en vez de Raft.",
+    "en": "A Node.js security release with 16 CVEs in HTTP/2 and TLS, four middleware bypasses in Hono, AWS Emulator for testing without an account, pnpm 12.20, manageable sessions in Cognito and why Cloudflare picked QuePaxa over Raft.",
+    "fr": "Une release de sécurité Node.js avec 16 CVE dans HTTP/2 et TLS, quatre contournements de middleware dans Hono, AWS Emulator pour tester sans compte, pnpm 12.20, sessions gérables dans Cognito et pourquoi Cloudflare a choisi QuePaxa plutôt que Raft."
+  },
+  "pubDate": "2026-11-12",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Node.js: 16 CVEs en HTTP/2 y TLS, 7 high",
+        "en": "Node.js: 16 CVEs in HTTP/2 and TLS, 7 high",
+        "fr": "Node.js : 16 CVE dans HTTP/2 et TLS, 7 high"
+      },
+      "anchor": "node-november-security-release",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Hono 4.13.18: cuatro bypasses de middleware",
+        "en": "Hono 4.13.18: four middleware bypasses fixed",
+        "fr": "Hono 4.13.18 : quatre contournements corrigés"
+      },
+      "anchor": "hono-4-13-18-security",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "AWS Emulator: tu AWS local, sin cuenta",
+        "en": "AWS Emulator: local AWS, no account needed",
+        "fr": "AWS Emulator : AWS en local, sans compte"
+      },
+      "anchor": "aws-emulator",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": {
+        "es": "Cognito ya lista y revoca sesiones",
+        "en": "Cognito can now list and revoke sessions",
+        "fr": "Cognito liste et révoque les sessions"
+      },
+      "anchor": "cognito-session-management",
+      "icon": "lucide:server"
+    },
+    {
+      "text": {
+        "es": "Cloudflare: consenso sin líder con QuePaxa",
+        "en": "Cloudflare: leaderless consensus with QuePaxa",
+        "fr": "Cloudflare : consensus sans leader, QuePaxa"
+      },
+      "anchor": "cloudflare-quepaxa",
+      "icon": "lucide:layers"
+    },
+    {
+      "text": {
+        "es": "pnpm 12.20: specifiers locales en lockfile v13",
+        "en": "pnpm 12.20: local specifiers in lockfile v13",
+        "fr": "pnpm 12.20 : specifiers locaux, lockfile v13"
+      },
+      "anchor": "pnpm-12-20",
+      "icon": "lucide:package"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "node-november-security-release",
+      "updates": [
+        {
+          "id": "node-november-security-release",
+          "tag": "security",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "Node.js November 2026 Security Releases: 16 CVEs en HTTP/2, TLS y permisos para 22.x, 24.x y 26.x",
+            "en": "Node.js November 2026 Security Releases: 16 CVEs across HTTP/2, TLS and permissions for 22.x, 24.x and 26.x",
+            "fr": "Node.js November 2026 Security Releases : 16 CVE dans HTTP/2, TLS et permissions pour 22.x, 24.x et 26.x"
+          },
+          "body_html": {
+            "es": "<p>Salieron <code>v26.13.1</code>, <code>v24.22.3</code> y <code>v22.23.5</code> con <strong>16 CVEs, 7 de severidad high</strong>. Las dos que más asustan: <code>CVE-2026-123863</code>, un abort remoto sin autenticación en cualquier server <code>http2</code> por defecto cuyo handler responde antes de que termine el body (variante de CVE-2024-27983 que el fix viejo no cubría), y <code>CVE-2026-123864</code>, donde un write TLS de cero bytes reentra en <code>llhttp_execute()</code> y el server <strong>copia su propio heap en el body</strong>: memoria de otras conexiones, incluidas claves privadas TLS. Se dispara con <code>res.flushHeaders()</code> antes de que termine el body; <code>node:http</code> en texto plano no está afectado. Además hay arreglos de SNI en resumption/renegociación, mTLS sin session id context, leaks de memoria y file descriptors en HTTP/2 y bumps de <code>llhttp</code> 9.4.4, <code>undici</code> 7.30.2 y <code>sqlite</code> 3.54.1. Si tenés un server HTTP/2 o HTTPS expuesto, actualizá YA, no lo dejes para el sprint que viene.</p>",
+            "en": "<p><code>v26.13.1</code>, <code>v24.22.3</code> and <code>v22.23.5</code> ship <strong>16 CVEs, 7 rated high</strong>. The two worst: <code>CVE-2026-123863</code>, an unauthenticated remote abort of any default <code>http2</code> server whose handler responds before the request body ends (a variant of CVE-2024-27983 the earlier fix missed), and <code>CVE-2026-123864</code>, where a zero-length TLS write re-enters <code>llhttp_execute()</code> and the server <strong>copies its own heap into the request body</strong>: memory from other connections, TLS private keys included. It needs <code>res.flushHeaders()</code> before the body ends; cleartext <code>node:http</code> is unaffected. Also fixed: SNI changes during resumption and renegotiation, mTLS without a session id context, HTTP/2 memory and file-descriptor leaks, plus <code>llhttp</code> 9.4.4, <code>undici</code> 7.30.2 and <code>sqlite</code> 3.54.1. Anything serving HTTP/2 or HTTPS to the internet should upgrade now.</p>",
+            "fr": "<p><code>v26.13.1</code>, <code>v24.22.3</code> et <code>v22.23.5</code> corrigent <strong>16 CVE, dont 7 high</strong>. Les deux pires : <code>CVE-2026-123863</code>, un abort à distance sans authentification de tout serveur <code>http2</code> par défaut dont le handler répond avant la fin du body (variante de CVE-2024-27983 que l'ancien correctif ratait), et <code>CVE-2026-123864</code>, où une écriture TLS de zéro octet réentre dans <code>llhttp_execute()</code> et le serveur <strong>copie son propre heap dans le body</strong> : mémoire d'autres connexions, clés privées TLS comprises. Il faut <code>res.flushHeaders()</code> avant la fin du body ; <code>node:http</code> en clair n'est pas concerné. Aussi corrigés : changements de SNI en resumption et renégociation, mTLS sans session id context, fuites mémoire et de descripteurs en HTTP/2, plus <code>llhttp</code> 9.4.4, <code>undici</code> 7.30.2 et <code>sqlite</code> 3.54.1. Tout ce qui sert du HTTP/2 ou HTTPS sur Internet doit être mis à jour maintenant.</p>"
+          },
+          "source": { "url": "https://nodejs.org/en/blog/vulnerability/november-2026-security-releases", "label": "nodejs.org" }
+        },
+        {
+          "id": "hono-4-13-18-security",
+          "tag": "security",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "Hono 4.13.18: validator(), bodyLimit(), mount() y serveStatic() dejaban pasar requests que tu middleware no veía",
+            "en": "Hono 4.13.18: validator(), bodyLimit(), mount() and serveStatic() let through requests your middleware never saw",
+            "fr": "Hono 4.13.18 : validator(), bodyLimit(), mount() et serveStatic() laissaient passer des requêtes invisibles pour vos middlewares"
+          },
+          "body_html": {
+            "es": "<p>Cuatro advisories <strong>CVSS 5.3</strong> en un solo release, y el patrón es el mismo de la tanda del 1 de noviembre: el router y el middleware ven una cosa y el handler otra. <code>validator('json')</code>/<code>validator('form')</code> validaba un objeto vacío si el <code>Content-Type</code> tenía un espacio antes del <code>;</code> o un <code>;</code> final (completa el fix de GHSA-4h7h); <code>bodyLimit()</code> guardaba un objeto por chunk y se podía agotar la memoria sin pasar el límite; <code>mount()</code> con un <code>getPath</code> que agrega prefijo salteaba middleware; y <code>serveStatic()</code> con <code>allowPercentInPath: true</code> decodificaba dos veces. El mismo fix sale en <code>@hono/node-server</code> 2.1.7. Ojo: es la segunda ronda en dos semanas, así que si validás en el edge con Hono, actualizá y pinéalo.</p>",
+            "en": "<p>Four <strong>CVSS 5.3</strong> advisories in one release, with the same pattern as the November 1 batch: router and middleware see one thing, the handler sees another. <code>validator('json')</code>/<code>validator('form')</code> validated an empty object when the <code>Content-Type</code> had whitespace before <code>;</code> or a trailing <code>;</code> (completing the GHSA-4h7h fix); <code>bodyLimit()</code> kept one object per transfer chunk, so memory could run out under the limit; <code>mount()</code> with a prefix-adding <code>getPath</code> skipped scoped middleware; and <code>serveStatic()</code> with <code>allowPercentInPath: true</code> decoded twice. The same fix ships in <code>@hono/node-server</code> 2.1.7. This is the second round in two weeks, so if you validate at the edge with Hono, upgrade and pin.</p>",
+            "fr": "<p>Quatre advisories <strong>CVSS 5.3</strong> dans une seule release, avec le même schéma que la salve du 1er novembre : le routeur et le middleware voient une chose, le handler une autre. <code>validator('json')</code>/<code>validator('form')</code> validait un objet vide si le <code>Content-Type</code> avait un espace avant <code>;</code> ou un <code>;</code> final (complète le correctif GHSA-4h7h) ; <code>bodyLimit()</code> gardait un objet par chunk, d'où un épuisement mémoire sous la limite ; <code>mount()</code> avec un <code>getPath</code> qui ajoute un préfixe sautait des middlewares ; et <code>serveStatic()</code> avec <code>allowPercentInPath: true</code> décodait deux fois. Le même correctif est dans <code>@hono/node-server</code> 2.1.7. Deuxième salve en deux semaines : si vous validez à l'edge avec Hono, mettez à jour et épinglez.</p>"
+          },
+          "source": { "url": "https://github.com/honojs/hono/releases/tag/v4.13.18", "label": "github.com/honojs/hono" }
+        },
+        {
+          "id": "aws-emulator",
+          "tag": "release",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "AWS Emulator: SDK y CLI contra un AWS local en memoria, sin cuenta y sin deploy",
+            "en": "AWS Emulator: point your SDK and CLI at an in-memory local AWS, no account or deploy needed",
+            "fr": "AWS Emulator : SDK et CLI vers un AWS local en mémoire, sans compte ni déploiement"
+          },
+          "body_html": {
+            "es": "<p>AWS lanzó su propio emulador local, gratis y con código bajo <strong>CC0</strong>. Tus llamadas de SDK y CLI van al emulador y vuelven en milisegundos; para las operaciones soportadas devuelve el mismo resultado y los mismos errores que AWS, y las no soportadas responden <code>501 Not Implemented</code>. Cada instancia tiene su propio puerto, credenciales y estado en memoria, así que tests en paralelo, jobs de CI y agentes no se pisan. Los servicios se generan desde los mismos API models que usan los SDKs, y publican un fidelity report para comparar contra AWS real. Esto es un golazo para los tests de integración: un DynamoDB efímero por test suite sin cuenta ni red. Igual, mirá el fidelity report antes de tirar tu setup actual.</p>",
+            "en": "<p>AWS shipped its own local emulator, free and published under <strong>CC0</strong>. SDK and CLI calls go to the emulator and return in milliseconds; for supported operations it returns the same results and errors as AWS, and unsupported ones answer <code>501 Not Implemented</code>. Each copy gets its own port, keys and in-memory state, so parallel test suites, CI jobs and agents never see each other's resources. Services are generated from the same API models behind the SDKs, and AWS publishes a fidelity report comparing responses with real AWS. A per-suite throwaway DynamoDB with no account or network is a big win for integration tests; check the fidelity report before you drop your current setup.</p>",
+            "fr": "<p>AWS publie son propre émulateur local, gratuit et sous <strong>CC0</strong>. Les appels SDK et CLI vont à l'émulateur et reviennent en millisecondes ; pour les opérations prises en charge, il renvoie les mêmes résultats et erreurs qu'AWS, les autres répondent <code>501 Not Implemented</code>. Chaque instance a son port, ses clés et son état en mémoire, donc suites de tests parallèles, jobs CI et agents ne se voient pas. Les services sont générés à partir des mêmes API models que les SDK, avec un fidelity report pour comparer avec le vrai AWS. Un DynamoDB jetable par suite, sans compte ni réseau, change la donne pour les tests d'intégration ; lisez le fidelity report avant de remplacer votre setup.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/aws-emulator-now-available/", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "node-24-22-3",
+      "updates": [
+        {
+          "id": "node-24-22-3",
+          "tag": "patch",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "Node.js 24.22.3 (LTS): undici 7.30.2, sqlite 3.54.1 y el detalle de qué línea recibe qué fix",
+            "en": "Node.js 24.22.3 (LTS): undici 7.30.2, sqlite 3.54.1 and which line gets which fix",
+            "fr": "Node.js 24.22.3 (LTS) : undici 7.30.2, sqlite 3.54.1 et quelle ligne reçoit quel correctif"
+          },
+          "body_html": {
+            "es": "<p>Más allá de los CVEs, fijate en lo que cambia por línea: <code>CVE-2026-126051</code> (crash remoto del server TLS) solo aplica a 24.x y 26.x, y <code>undici</code> 7.30.2 llega a 24.x y 26.x pero no a 22.x. El release también trae fixes de build para OpenSSL 3.0 viejo y respeta el API level configurado de OpenSSL, así que si compilás Node con un OpenSSL del sistema, revisá tu pipeline. Si todavía estás en 22.x, ponete las pilas con la migración a 24 LTS: cada security release deja más en claro hacia dónde va el soporte.</p>",
+            "en": "<p>Beyond the CVEs, note what differs per line: <code>CVE-2026-126051</code> (a remotely reachable TLS server crash) only applies to 24.x and 26.x, and <code>undici</code> 7.30.2 lands on 24.x and 26.x but not 22.x. The release also fixes builds against older OpenSSL 3.0 and respects OpenSSL's configured API level, so check your pipeline if you build Node against a system OpenSSL. Still on 22.x? Each security release makes the case for moving to 24 LTS.</p>",
+            "fr": "<p>Au-delà des CVE, regardez ce qui change selon la ligne : <code>CVE-2026-126051</code> (crash du serveur TLS atteignable à distance) ne concerne que 24.x et 26.x, et <code>undici</code> 7.30.2 arrive sur 24.x et 26.x mais pas sur 22.x. La release corrige aussi les builds avec un ancien OpenSSL 3.0 et respecte l'API level configuré d'OpenSSL : vérifiez votre pipeline si vous compilez Node avec l'OpenSSL du système. Encore en 22.x ? Chaque release de sécurité plaide pour passer à 24 LTS.</p>"
+          },
+          "source": { "url": "https://github.com/nodejs/node/releases/tag/v24.22.3", "label": "github.com/nodejs/node" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "apollo-server-5-5-2",
+      "updates": [
+        {
+          "id": "apollo-server-5-5-2",
+          "tag": "patch",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "Apollo Server 5.5.2: instalar en Node 20 con engine-strict ya no rompe",
+            "en": "Apollo Server 5.5.2: installs on Node 20 with engine-strict no longer break",
+            "fr": "Apollo Server 5.5.2 : l'installation sur Node 20 avec engine-strict ne casse plus"
+          },
+          "body_html": {
+            "es": "<p>Una instalación limpia de <code>@apollo/server</code> en Node 20 se traía <code>@whatwg-node/promise-helpers@2</code>, que declara <code>engines.node &gt;=22.15</code> y hacía fallar <code>npm --engine-strict</code>. El patch acota los rangos de <code>@graphql-tools/schema</code>, <code>merge</code> y <code>utils</code>. Moraleja de arquitectura: Node 20 está EOL pero Apollo 5 lo sigue documentando como soportado; los rangos de dependencias transitivas son parte de tu contrato de runtime.</p>",
+            "en": "<p>A fresh <code>@apollo/server</code> install on Node 20 pulled in <code>@whatwg-node/promise-helpers@2</code>, which declares <code>engines.node &gt;=22.15</code> and failed <code>npm --engine-strict</code>. The patch constrains the <code>@graphql-tools/schema</code>, <code>merge</code> and <code>utils</code> ranges. Node 20 is EOL, but Apollo 5 still documents it as supported, and transitive ranges are part of that runtime contract.</p>",
+            "fr": "<p>Une installation neuve de <code>@apollo/server</code> sur Node 20 tirait <code>@whatwg-node/promise-helpers@2</code>, qui déclare <code>engines.node &gt;=22.15</code> et faisait échouer <code>npm --engine-strict</code>. Le patch restreint les plages de <code>@graphql-tools/schema</code>, <code>merge</code> et <code>utils</code>. Node 20 est EOL, mais Apollo 5 le documente toujours comme pris en charge, et les plages transitives font partie de ce contrat de runtime.</p>"
+          },
+          "source": { "url": "https://github.com/apollographql/apollo-server/releases/tag/%40apollo/server%405.5.2", "label": "github.com/apollographql" }
+        },
+        {
+          "id": "elysia-1-4-32",
+          "tag": "minor",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "Elysia 1.4.32: release de emergencia porque latest apuntaba a 2.0.0-rc.4",
+            "en": "Elysia 1.4.32: emergency release because latest pointed at 2.0.0-rc.4",
+            "fr": "Elysia 1.4.32 : release d'urgence car latest pointait vers 2.0.0-rc.4"
+          },
+          "body_html": {
+            "es": "<p>El único cambio es devolver el dist-tag <code>latest</code> a la línea 1.4 después de que quedara apuntando a <code>2.0.0-rc.4</code>. Si instalaste Elysia sin versión fijada en las últimas horas, revisá tu lockfile: capaz tenés un release candidate de una major en producción sin saberlo.</p>",
+            "en": "<p>The only change moves the <code>latest</code> dist-tag back to the 1.4 line after it ended up on <code>2.0.0-rc.4</code>. If you installed Elysia without a pinned version recently, check your lockfile: you may be running a major-version release candidate without knowing it.</p>",
+            "fr": "<p>Seul changement : le dist-tag <code>latest</code> revient sur la ligne 1.4 après avoir pointé vers <code>2.0.0-rc.4</code>. Si vous avez installé Elysia sans version épinglée récemment, vérifiez votre lockfile : vous faites peut-être tourner une release candidate de majeure sans le savoir.</p>"
+          },
+          "source": { "url": "https://github.com/elysiajs/elysia/releases/tag/1.4.32", "label": "github.com/elysiajs/elysia" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "bullmq-6-7-5",
+      "updates": [
+        {
+          "id": "bullmq-6-7-5",
+          "tag": "patch",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "BullMQ 6.7.4 y 6.7.5: el backend Postgres cuenta bien con la cola en pausa y los errores llegan al span",
+            "en": "BullMQ 6.7.4 and 6.7.5: the Postgres backend counts paused queues correctly and errors reach the span",
+            "fr": "BullMQ 6.7.4 et 6.7.5 : le backend Postgres compte bien les files en pause et les erreurs arrivent au span"
+          },
+          "body_html": {
+            "es": "<p>Dos patches el mismo día. 6.7.4 arregla el conteo de jobs en espera con la cola pausada en el backend <strong>Postgres</strong>, justo la métrica que usás para autoscaling de workers. 6.7.5 registra el error original del job en el span de procesamiento (OpenTelemetry), así que tus traces muestran por qué falló y no solo que falló, y saca de la API de schedulers una opción <code>count</code> que debía ser interna.</p>",
+            "en": "<p>Two patches in one day. 6.7.4 fixes the waiting-job count while a queue is paused on the <strong>Postgres</strong> backend, the very metric you autoscale workers on. 6.7.5 records the original job error on the processing span (OpenTelemetry), so traces show why a job failed, not just that it failed, and removes a scheduler <code>count</code> option that was meant to be internal.</p>",
+            "fr": "<p>Deux patches le même jour. 6.7.4 corrige le nombre de jobs en attente quand la file est en pause sur le backend <strong>Postgres</strong>, la métrique même qui pilote l'autoscaling des workers. 6.7.5 enregistre l'erreur d'origine du job sur le span de traitement (OpenTelemetry), pour que les traces disent pourquoi le job a échoué, et retire une option <code>count</code> des schedulers qui devait rester interne.</p>"
+          },
+          "source": { "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.7.5", "label": "github.com/taskforcesh/bullmq" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "lambda-microvms-x86",
+      "updates": [
+        {
+          "id": "lambda-microvms-x86",
+          "tag": "notable",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "Lambda MicroVMs ahora corre x86: tus imágenes existentes sin recompilar",
+            "en": "Lambda MicroVMs now runs x86: existing images without recompiling",
+            "fr": "Lambda MicroVMs passe au x86 : vos images existantes sans recompiler"
+          },
+          "body_html": {
+            "es": "<p>Al crear una imagen de MicroVM desde tu Dockerfile ahora elegís x86 o Arm (Graviton sigue siendo el default). Lambda MicroVMs da aislamiento a nivel VM, arranque casi instantáneo y estado preservado, pensado para correr código de usuarios o generado por IA: runners de CI/CD, sandboxes de agentes, scanners. Con x86 se terminan los ports de dependencias nativas para meterlas ahí. No está en Hong Kong, Malasia, Tailandia ni España.</p>",
+            "en": "<p>When you build a MicroVM image from your Dockerfile you can now choose x86 or Arm (Graviton remains the default). Lambda MicroVMs offers VM-level isolation, near-instant launch and resume, and preserved state for running user or AI-generated code: CI/CD runners, agent sandboxes, scanners. x86 removes the need to port native dependencies first. Not available in Hong Kong, Malaysia, Thailand or Spain.</p>",
+            "fr": "<p>En créant une image MicroVM depuis votre Dockerfile, vous choisissez désormais x86 ou Arm (Graviton reste le défaut). Lambda MicroVMs offre une isolation au niveau VM, un démarrage et une reprise quasi instantanés et un état conservé pour exécuter du code utilisateur ou généré par IA : runners CI/CD, sandboxes d'agents, scanners. Le x86 évite de porter d'abord les dépendances natives. Indisponible à Hong Kong, en Malaisie, en Thaïlande et en Espagne.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/aws-lambda-microvms-x86-architecture/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "eks-auto-mode-sg-pods",
+          "tag": "notable",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "EKS Auto Mode suma security groups por Pod",
+            "en": "EKS Auto Mode adds security groups for Pods",
+            "fr": "EKS Auto Mode ajoute les security groups par Pod"
+          },
+          "body_html": {
+            "es": "<p>Con un <code>SecurityGroupPolicy</code> asignás security groups de EC2 a Pods concretos, así workloads distintos en el mismo nodo quedan segmentados a nivel red sin crear un node pool por app. Lo práctico: tu RDS o ElastiCache que autoriza por security group puede aceptar solo al Pod que corresponde. Sin costo extra, requiere Kubernetes 1.36 o superior.</p>",
+            "en": "<p>A <code>SecurityGroupPolicy</code> assigns EC2 security groups to specific Pods, so different workloads on one node get network-level segmentation without a node pool per app. The practical win: an RDS or ElastiCache instance that authorizes by security group can admit just the right Pod. No extra charge; requires Kubernetes 1.36 or later.</p>",
+            "fr": "<p>Un <code>SecurityGroupPolicy</code> attribue des security groups EC2 à des Pods précis : des workloads différents sur un même nœud sont segmentés au niveau réseau sans un node pool par application. Concrètement, une instance RDS ou ElastiCache qui autorise par security group peut n'accepter que le bon Pod. Sans surcoût ; nécessite Kubernetes 1.36 ou plus.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-eks-auto-mode-security-groups-for-pods/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "docker-compose-5-7-1",
+          "tag": "patch",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "Docker Compose 5.7.1: los proyectos OCI remotos se verifican contra su digest",
+            "en": "Docker Compose 5.7.1: remote OCI projects are verified against their digest",
+            "fr": "Docker Compose 5.7.1 : les projets OCI distants sont vérifiés par leur digest"
+          },
+          "body_html": {
+            "es": "<p>Si cargás archivos Compose desde un artifact OCI o desde Git, este patch importa: Compose ahora verifica los manifests contra su digest, toma solo entradas completas del cache y lo mantiene consistente ante interrupciones o accesos concurrentes. También <code>down</code> deja de borrar imágenes de servicios que no seleccionaste. Todo compilado con Go 1.27.4.</p>",
+            "en": "<p>If you load Compose files from an OCI artifact or Git, this patch matters: Compose now verifies fetched manifests against their digest, takes only complete cache entries and keeps the cache consistent under interruption or concurrent access. <code>down</code> also stops removing images of services you did not select. Built with Go 1.27.4.</p>",
+            "fr": "<p>Si vous chargez vos fichiers Compose depuis un artefact OCI ou Git, ce patch compte : Compose vérifie maintenant les manifests par leur digest, ne prend que des entrées de cache complètes et garde le cache cohérent en cas d'interruption ou d'accès concurrent. <code>down</code> ne supprime plus les images des services non sélectionnés. Compilé avec Go 1.27.4.</p>"
+          },
+          "source": { "url": "https://github.com/docker/compose/releases/tag/v5.7.1", "label": "github.com/docker/compose" }
+        },
+        {
+          "id": "cloudflare-vitest-plugin-1-8",
+          "tag": "breaking",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "@cloudflare/vitest-plugin 1.8: Containers también desde cloudflare.config.ts y cambio breaking en streaming tail consumers",
+            "en": "@cloudflare/vitest-plugin 1.8: Containers from cloudflare.config.ts too, and a breaking change for streaming tail consumers",
+            "fr": "@cloudflare/vitest-plugin 1.8 : Containers aussi via cloudflare.config.ts, et changement cassant pour les streaming tail consumers"
+          },
+          "body_html": {
+            "es": "<p>Lo que 1.7 hacía con la config de Wrangler ahora también aplica a <code>cloudflare.config.ts</code>: los tests corren los Containers de tus Durable Objects, y como no hay setting para desactivarlo, necesitás Docker. El cambio breaking está en la config experimental: los Tail Workers con <code>streaming: true</code> se mueven a <code>experimental.streamingTailConsumers</code>, sin el campo <code>streaming</code>. Si usabas esa API, el upgrade te rompe la config.</p>",
+            "en": "<p>What 1.7 did for Wrangler config now also applies to <code>cloudflare.config.ts</code>: tests run the Containers attached to your Durable Objects, and since there is no setting to disable it, you need Docker. The breaking change is in the experimental config: Tail Workers with <code>streaming: true</code> move to <code>experimental.streamingTailConsumers</code>, without the <code>streaming</code> field. If you used that API, the upgrade breaks your config.</p>",
+            "fr": "<p>Ce que 1.7 faisait pour la config Wrangler s'applique maintenant à <code>cloudflare.config.ts</code> : les tests lancent les Containers de vos Durable Objects, et sans réglage pour le désactiver, Docker devient nécessaire. Le changement cassant touche la config expérimentale : les Tail Workers avec <code>streaming: true</code> passent dans <code>experimental.streamingTailConsumers</code>, sans le champ <code>streaming</code>. Si vous utilisiez cette API, la mise à jour casse votre config.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workers-sdk/releases/tag/%40cloudflare/vitest-plugin%401.8.0", "label": "github.com/cloudflare/workers-sdk" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "cloudflare-quepaxa",
+      "updates": [
+        {
+          "id": "cloudflare-quepaxa",
+          "tag": "notable",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "Cloudflare explica por qué eligió QuePaxa, consenso sin líder, en vez de Raft para su control plane global",
+            "en": "Cloudflare explains why it chose QuePaxa, a leaderless consensus algorithm, over Raft for its global control plane",
+            "fr": "Cloudflare explique pourquoi il a choisi QuePaxa, un consensus sans leader, plutôt que Raft pour son control plane global"
+          },
+          "body_html": {
+            "es": "<p>Meerkat, el servicio experimental de consenso de Cloudflare (pensalo como etcd, Consul o ZooKeeper), corre réplicas entre continentes con latencias altas y variables. Raft y Multi-Paxos dependen de un líder disponible y con latencia predecible: si el líder se degrada sin caerse, todo el sistema se arrastra. Ya les pasó en 2020, cuando una falla parcial de un switch dejó el dashboard 80 veces más lento. QuePaxa (Tennage, Băsescu et al., 2023) avanza sin depender de un líder. Es lectura obligada si diseñás sistemas multi-región: el modo de falla que más duele no es el nodo caído, es el nodo lento.</p>",
+            "en": "<p>Meerkat, Cloudflare's experimental consensus service (think etcd, Consul or ZooKeeper), runs replicas across continents over high, variable-latency links. Raft and Multi-Paxos rely on a leader that is available and predictably fast: if the leader degrades without crashing, the whole system crawls. Cloudflare saw it in 2020, when a partially failed switch made the dashboard 80x slower. QuePaxa (Tennage, Băsescu et al., 2023) makes progress without relying on a leader. Required reading for multi-region design: the failure that hurts most is the slow node, not the dead one.</p>",
+            "fr": "<p>Meerkat, le service de consensus expérimental de Cloudflare (pensez etcd, Consul ou ZooKeeper), fait tourner des réplicas sur plusieurs continents avec des latences élevées et variables. Raft et Multi-Paxos reposent sur un leader disponible et à latence prévisible : si le leader se dégrade sans tomber, tout le système rame. Cloudflare l'a vécu en 2020, quand un switch en panne partielle a rendu le dashboard 80 fois plus lent. QuePaxa (Tennage, Băsescu et al., 2023) progresse sans dépendre d'un leader. Lecture indispensable pour le multi-région : la panne qui fait le plus mal, c'est le nœud lent, pas le nœud mort.</p>"
+          },
+          "source": { "url": "https://blog.cloudflare.com/choosing-quepaxa/", "label": "blog.cloudflare.com" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "pnpm-12-20",
+      "updates": [
+        {
+          "id": "pnpm-12-20",
+          "tag": "release",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "pnpm 12.20: el lockfile v13 registra specifiers de dependencias locales y node-gyp deja de traer undici 6",
+            "en": "pnpm 12.20: lockfile v13 records local dependency specifiers and node-gyp stops shipping undici 6",
+            "fr": "pnpm 12.20 : le lockfile v13 enregistre les specifiers des dépendances locales et node-gyp n'embarque plus undici 6"
+          },
+          "body_html": {
+            "es": "<p>Con <code>lockfile.format: v13</code>, <code>pnpm install</code> guarda los specifiers de los paquetes de directorio local y un frozen install rechaza specifiers cambiados aunque la versión lockeada todavía los satisfaga. El <code>node-gyp</code> embebido ya no trae undici 6, el que los scanners marcan por <code>CVE-2026-84947</code>, y deja de crashear en Node 26 detrás de un proxy. Además, los <code>overrides</code> con selector de versión ahora aplican a dependencias <code>catalog:</code>, y <code>nodeLinker: hoisted</code> conserva copias anidadas que antes borraba como duplicadas. Si usás pnpr, ojo: las versiones 0.1.0-alpha.19 o anteriores dejan de funcionar para resolución remota.</p>",
+            "en": "<p>With <code>lockfile.format: v13</code>, <code>pnpm install</code> records specifiers of local directory packages, and frozen installs reject changed specifiers even when the locked version still satisfies them. The bundled <code>node-gyp</code> no longer ships undici 6, which scanners flag for <code>CVE-2026-84947</code>, and no longer crashes on Node 26 behind a proxy. Version-selector <code>overrides</code> now apply to <code>catalog:</code> dependencies, and <code>nodeLinker: hoisted</code> keeps nested copies it used to drop as duplicates. pnpr users: 0.1.0-alpha.19 and older stop working for remote resolution.</p>",
+            "fr": "<p>Avec <code>lockfile.format: v13</code>, <code>pnpm install</code> enregistre les specifiers des paquets de répertoire local, et les installs frozen rejettent un specifier modifié même si la version verrouillée le satisfait encore. Le <code>node-gyp</code> embarqué n'inclut plus undici 6, signalé par les scanners pour <code>CVE-2026-84947</code>, et ne plante plus sous Node 26 derrière un proxy. Les <code>overrides</code> à sélecteur de version s'appliquent aux dépendances <code>catalog:</code>, et <code>nodeLinker: hoisted</code> garde les copies imbriquées qu'il supprimait comme doublons. Utilisateurs de pnpr : 0.1.0-alpha.19 et antérieures ne fonctionnent plus pour la résolution distante.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.20.0", "label": "github.com/pnpm/pnpm" }
+        },
+        {
+          "id": "turborepo-2-11-11",
+          "tag": "patch",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "Turborepo 2.11.11: credenciales de Vercel solo para endpoints de Vercel y hashing de cache más estricto",
+            "en": "Turborepo 2.11.11: Vercel credentials restricted to Vercel endpoints and stricter cache hashing",
+            "fr": "Turborepo 2.11.11 : identifiants Vercel limités aux endpoints Vercel et hashing du cache plus strict"
+          },
+          "body_html": {
+            "es": "<p>El fix que más importa vino del security reviewer de Vercel: las credenciales guardadas de Vercel ahora solo se mandan a endpoints de Vercel, clave si usás un remote cache propio. El resto mejora la invalidación del cache: hashea los outputs trackeados como inputs, el contenido de patches de Bun y symlinks dentro del repo, y las lecturas del remote cache siguen funcionando con un token read-only. Watch mode detecta paquetes nuevos y agrupa ráfagas de edits.</p>",
+            "en": "<p>The fix that matters most came from Vercel's security reviewer: saved Vercel credentials are now only sent to Vercel endpoints, which is key if you run a self-hosted remote cache. The rest tightens cache invalidation: tracked outputs are hashed as inputs, along with Bun patch contents and in-repo symlinks, and remote cache reads keep working with a read-only token. Watch mode picks up new workspace packages and debounces bursts of edits.</p>",
+            "fr": "<p>Le correctif le plus important vient du security reviewer de Vercel : les identifiants Vercel enregistrés ne partent plus que vers des endpoints Vercel, essentiel avec un remote cache auto-hébergé. Le reste resserre l'invalidation du cache : les outputs suivis sont hashés comme inputs, de même que les patches Bun et les symlinks internes au dépôt, et la lecture du remote cache fonctionne avec un token read-only. Le watch mode détecte les nouveaux paquets et regroupe les rafales de modifications.</p>"
+          },
+          "source": { "url": "https://github.com/vercel/turborepo/releases/tag/v2.11.11", "label": "github.com/vercel/turborepo" }
+        },
+        {
+          "id": "cognito-session-management",
+          "tag": "notable",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "Amazon Cognito suma gestión de sesiones: listar, revocar y limitar sesiones por usuario",
+            "en": "Amazon Cognito adds session management: list, revoke and cap sessions per user",
+            "fr": "Amazon Cognito ajoute la gestion des sessions : lister, révoquer et plafonner par utilisateur"
+          },
+          "body_html": {
+            "es": "<p>Por fin podés listar las sesiones SSO y de tokens de un usuario en todos sus dispositivos y app clients, con tipo, dispositivo, última actividad, ubicación y hora del sign-in inicial, y revocar cualquiera, sola o con sus sesiones vinculadas. También configurás cuánto reutiliza cada app client una sesión SSO, en vez de la hora fija que había antes, y un máximo de sesiones de tokens activas por usuario. Eso que antes armabas con una tabla de denylist de refresh tokens ahora viene de fábrica. Solo en los planes Essentials y Plus.</p>",
+            "en": "<p>You can now list a user's SSO and token sessions across devices and app clients, with type, device, last activity, location and initial sign-in time, and revoke any of them, alone or with linked sessions. You can also set how long each app client reuses an SSO session instead of the previous fixed hour, and cap active token sessions per user. The refresh-token denylist table you used to build yourself is now built in. Essentials and Plus plans only.</p>",
+            "fr": "<p>Vous pouvez désormais lister les sessions SSO et de tokens d'un utilisateur sur tous ses appareils et app clients, avec type, appareil, dernière activité, localisation et heure de connexion initiale, et révoquer n'importe laquelle, seule ou avec ses sessions liées. Vous réglez aussi la durée de réutilisation d'une session SSO par app client, au lieu de l'heure fixe d'avant, et un plafond de sessions de tokens actives par utilisateur. La table de denylist de refresh tokens que vous construisiez vous-même est maintenant intégrée. Plans Essentials et Plus uniquement.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-cognito-session-management/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "better-auth-1-7-21",
+          "tag": "breaking",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "better-auth 1.7.21: acción requerida para SCIM, índices de MongoDB y update sobre filtros no únicos",
+            "en": "better-auth 1.7.21: action required for SCIM, MongoDB indexes and update on non-unique filters",
+            "fr": "better-auth 1.7.21 : action requise pour SCIM, les index MongoDB et update sur filtres non uniques"
+          },
+          "body_html": {
+            "es": "<p>Tres cosas que tenés que revisar antes de actualizar: SCIM ahora exige un adapter con transacciones nativas; con el adapter de MongoDB, un índice que falla por duplicados o permisos frena el arranque; y <code>update</code> ya no modifica todas las filas que matchean un filtro no único, para eso está <code>updateMany</code>. También manda los emails de sign-up recién después del commit de la transacción, arregla los sign-ins con <code>genericOAuth</code> que se colgaban en Cloudflare Workers y deja de exponer errores internos en el 401 de SIWE.</p>",
+            "en": "<p>Three things to check before upgrading: SCIM now needs an adapter with native transactions; with the MongoDB adapter, an index build failing on duplicates or permissions stops startup; and <code>update</code> no longer changes every row matching a non-unique filter, use <code>updateMany</code> for that. It also sends sign-up emails only after the transaction commits, fixes <code>genericOAuth</code> sign-ins hanging on Cloudflare Workers and stops leaking internal errors in SIWE 401 responses.</p>",
+            "fr": "<p>Trois points à vérifier avant la mise à jour : SCIM exige maintenant un adapter avec transactions natives ; avec l'adapter MongoDB, un index qui échoue sur des doublons ou des permissions bloque le démarrage ; et <code>update</code> ne modifie plus toutes les lignes d'un filtre non unique, utilisez <code>updateMany</code>. Les e-mails d'inscription partent après le commit de la transaction, les connexions <code>genericOAuth</code> ne se bloquent plus sur Cloudflare Workers et les 401 SIWE n'exposent plus d'erreurs internes.</p>"
+          },
+          "source": { "url": "https://github.com/better-auth/better-auth/releases/tag/v1.7.21", "label": "github.com/better-auth/better-auth" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "HTTP/2 y TLS siguen siendo la superficie más filosa de Node: 7 de los 16 CVEs de este release son high y varios son variantes de fixes anteriores. Si terminás TLS en el proceso Node, considerá seriamente hacerlo en un proxy delante.",
+      "en": "HTTP/2 and TLS remain Node's sharpest attack surface: 7 of this release's 16 CVEs are high and several are variants of earlier fixes. If you terminate TLS inside the Node process, seriously consider moving it to a proxy in front.",
+      "fr": "HTTP/2 et TLS restent la surface la plus exposée de Node : 7 des 16 CVE de cette release sont high, et plusieurs sont des variantes de correctifs antérieurs. Si vous terminez TLS dans le processus Node, envisagez sérieusement de le déplacer vers un proxy en amont."
+    },
+    {
+      "es": "El desfase entre lo que ve el middleware y lo que recibe el handler (Content-Type raro, doble decode, prefijos de mount) es la clase de bug de la temporada: Hono lleva dos rondas en dos semanas. Validá en el mismo lugar donde parseás.",
+      "en": "The gap between what middleware sees and what the handler receives (odd Content-Type, double decoding, mount prefixes) is this season's bug class: Hono has had two rounds in two weeks. Validate in the same place you parse.",
+      "fr": "L'écart entre ce que voit le middleware et ce que reçoit le handler (Content-Type inhabituel, double décodage, préfixes de mount) est la classe de bugs du moment : Hono en est à deux salves en deux semaines. Validez là où vous parsez."
+    },
+    {
+      "es": "Los entornos efímeros y aislados por instancia se vuelven estándar: AWS Emulator con estado por puerto, Lambda MicroVMs ahora en x86 y los tests de Workers que levantan Containers. El testing de integración real sin cuenta cloud deja de ser un lujo.",
+      "en": "Ephemeral, per-instance isolated environments are becoming standard: AWS Emulator with per-port state, Lambda MicroVMs now on x86 and Workers tests that start Containers. Real integration testing without a cloud account is no longer a luxury.",
+      "fr": "Les environnements éphémères isolés par instance deviennent la norme : AWS Emulator avec un état par port, Lambda MicroVMs désormais en x86 et des tests Workers qui démarrent des Containers. Les vrais tests d'intégration sans compte cloud ne sont plus un luxe."
+    }
+  ]
+}

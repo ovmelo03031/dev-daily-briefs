@@ -1,0 +1,263 @@
+{
+  "title": {
+    "es": "AI Security — 12 Nov 2026",
+    "en": "AI Security — 12 Nov 2026",
+    "fr": "AI Security — 12 nov. 2026"
+  },
+  "description": {
+    "es": "Heym publica siete CVEs de una (incluido un endpoint MCP que ejecuta cualquier comando por stdio), taOS deja correr Python a usuarios no admin, el registry MCP de AWS regala el scope de administrador, y el Patch Tuesday trae fixes para el Agents SDK de Microsoft 365 y Copilot en JetBrains.",
+    "en": "Heym ships seven CVEs at once (including an MCP endpoint that spawns any command over stdio), taOS lets non-admin users run Python, AWS's MCP gateway registry hands out the administrator scope, and Patch Tuesday fixes the Microsoft 365 Agents SDK and Copilot for JetBrains.",
+    "fr": "Heym publie sept CVE d'un coup (dont un endpoint MCP qui lance n'importe quelle commande via stdio), taOS laisse des non-admins exécuter du Python, le registre MCP d'AWS distribue le scope administrateur, et le Patch Tuesday corrige le Microsoft 365 Agents SDK et Copilot pour JetBrains."
+  },
+  "pubDate": "2026-11-12",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "Heym: fetch-tools MCP ejecuta cualquier comando (8.8)",
+        "en": "Heym: MCP fetch-tools spawns any command (8.8)",
+        "fr": "Heym : fetch-tools MCP lance toute commande (8.8)"
+      },
+      "anchor": "heym-cve-2026-67546",
+      "icon": "lucide:skull"
+    },
+    {
+      "text": {
+        "es": "taOS: un usuario no admin corre Python en el host",
+        "en": "taOS: non-admin users run Python on the host",
+        "fr": "taOS : un non-admin exécute du Python sur l'hôte"
+      },
+      "anchor": "taos-cve-2026-67547",
+      "icon": "lucide:shield-alert"
+    },
+    {
+      "text": {
+        "es": "AWS mcp-gateway-registry: admin del registry gratis",
+        "en": "AWS mcp-gateway-registry: free registry admin",
+        "fr": "AWS mcp-gateway-registry : admin du registre offert"
+      },
+      "anchor": "mcp-gateway-registry-cve-2026-100307",
+      "icon": "lucide:lock"
+    },
+    {
+      "text": {
+        "es": "Heym: skills y Playwright sin sandbox, RCE directa",
+        "en": "Heym: unsandboxed skills and Playwright, direct RCE",
+        "fr": "Heym : skills et Playwright sans sandbox, RCE directe"
+      },
+      "anchor": "heym-cve-2026-67544",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": {
+        "es": "Shimmy: la API de inferencia no pedía auth",
+        "en": "Shimmy: the inference API required no auth",
+        "fr": "Shimmy : l'API d'inférence sans authentification"
+      },
+      "anchor": "shimmy-cve-2026-125087",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "Patch Tuesday: Agents SDK y Copilot JetBrains",
+        "en": "Patch Tuesday: Agents SDK and Copilot JetBrains",
+        "fr": "Patch Tuesday : Agents SDK et Copilot JetBrains"
+      },
+      "anchor": "advisories",
+      "icon": "simple-icons:github"
+    }
+  ],
+  "tools": [
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "heym-cve-2026-67544",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-67544 y CVE-2026-67543 (CVSS 8.8): Heym ejecuta el código de Playwright y de las skills directo en el backend, sin el sandbox que sí exige a las Python tools",
+            "en": "CVE-2026-67544 and CVE-2026-67543 (CVSS 8.8): Heym runs Playwright code and skills straight on the backend, without the sandbox it enforces for Python tools",
+            "fr": "CVE-2026-67544 et CVE-2026-67543 (CVSS 8.8) : Heym exécute le code Playwright et les skills directement sur le backend, sans la sandbox imposée aux Python tools"
+          },
+          "body_html": {
+            "es": "<p>Heym, una plataforma self-hosted para armar sistemas agénticos, tiene dos caminos para código no confiable y endureció uno solo. Las Python tools corren en Docker (sin red, fs read-only, non-root), pero el ejecutor de <strong>skills</strong> las lanza como subproceso local del backend con apenas un límite de memoria (CVE-2026-67543). Peor: el campo <code>playwrightCode</code> de un nodo Playwright se escribe a un <code>.py</code> temporal y se ejecuta con <code>subprocess.Popen</code>, sin validación AST ni chequeo de rol, así que una cuenta recién registrada ya tiene RCE (CVE-2026-67544). Ojo con esto si lo tenés expuesto con registro abierto: actualizá a <strong>0.0.71</strong> o superior (mejor directo a 0.0.75, que cierra el resto del batch).</p>",
+            "en": "<p>Heym, a self-hosted platform for building agentic systems, has two paths for untrusted code and hardened only one. Python tools run in Docker (no network, read-only fs, non-root), but the <strong>skill</strong> executor launches skills as a local backend subprocess with only a memory limit (CVE-2026-67543). Worse, the <code>playwrightCode</code> field of a Playwright node is written to a temporary <code>.py</code> file and run with <code>subprocess.Popen</code>, with no AST validation and no role check, so a freshly registered account already has RCE (CVE-2026-67544). If yours is exposed with open registration, upgrade to <strong>0.0.71</strong> or later (ideally 0.0.75, which closes the rest of the batch).</p>",
+            "fr": "<p>Heym, plateforme self-hosted pour construire des systèmes agentiques, a deux chemins pour le code non fiable et n'en a durci qu'un. Les Python tools tournent dans Docker, mais l'exécuteur de <strong>skills</strong> les lance en sous-processus local du backend (CVE-2026-67543). Pire, le champ <code>playwrightCode</code> d'un nœud Playwright est écrit dans un <code>.py</code> temporaire puis exécuté via <code>subprocess.Popen</code>, sans validation ni contrôle de rôle : un compte tout juste créé obtient une RCE (CVE-2026-67544). Mettez à jour vers <strong>0.0.71</strong> au minimum, idéalement 0.0.75.</p>"
+          },
+          "date": "11 Nov 2026",
+          "source": {
+            "url": "https://github.com/heymrun/heym/security/advisories/GHSA-mp23-7m6r-jfw4",
+            "label": "GitHub Advisory GHSA-mp23-7m6r-jfw4"
+          }
+        },
+        {
+          "id": "shimmy-cve-2026-125087",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-125087 (CVSS 6.9 v4 / 7.3 v3.1): la API de inferencia de Shimmy no tenía autenticación hasta la 2.6.5",
+            "en": "CVE-2026-125087 (CVSS 6.9 v4 / 7.3 v3.1): Shimmy's inference API had no authentication until 2.6.5",
+            "fr": "CVE-2026-125087 (CVSS 6.9 v4 / 7.3 v3.1) : l'API d'inférence de Shimmy était sans authentification jusqu'à la 2.6.5"
+          },
+          "body_html": {
+            "es": "<p>Shimmy, un servidor de inferencia liviano y compatible con la API de OpenAI para modelos locales, exponía su API en <code>src/server.rs</code> sin ningún tipo de autenticación hasta la <strong>2.6.4</strong>. La falla es explotable de forma remota y el reporte es público. El patrón ya lo conocés: el server de inferencia «local» termina escuchando en una interfaz alcanzable y cualquiera en la red usa tu GPU y tus modelos. Actualizá a <strong>2.6.5</strong> y, de paso, revisá en qué interfaz bindeás.</p>",
+            "en": "<p>Shimmy, a lightweight OpenAI-API-compatible inference server for local models, exposed its API in <code>src/server.rs</code> with no authentication at all through <strong>2.6.4</strong>. It is remotely exploitable and the report is public. You know the pattern: the «local» inference server ends up listening on a reachable interface and anyone on the network uses your GPU and models. Upgrade to <strong>2.6.5</strong> and check which interface you bind to.</p>",
+            "fr": "<p>Shimmy, serveur d'inférence léger compatible API OpenAI pour modèles locaux, exposait son API dans <code>src/server.rs</code> sans aucune authentification jusqu'à la <strong>2.6.4</strong>. Exploitable à distance, rapport public. Le serveur «local» finit sur une interface accessible et n'importe qui utilise votre GPU. Passez en <strong>2.6.5</strong> et vérifiez l'interface d'écoute.</p>"
+          },
+          "date": "10 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-125087",
+            "label": "OpenCVE CVE-2026-125087"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "heym-cve-2026-67546",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-67546 (CVSS 8.8): el endpoint /api/mcp/fetch-tools de Heym lanza el comando stdio que le pases antes de validar que hable MCP",
+            "en": "CVE-2026-67546 (CVSS 8.8): Heym's /api/mcp/fetch-tools endpoint spawns whatever stdio command you send before checking it speaks MCP",
+            "fr": "CVE-2026-67546 (CVSS 8.8) : l'endpoint /api/mcp/fetch-tools de Heym lance la commande stdio fournie avant de vérifier qu'elle parle MCP"
+          },
+          "body_html": {
+            "es": "<p><code>POST /api/mcp/fetch-tools</code> sirve para listar las tools de un servidor MCP, y lo puede llamar cualquier usuario autenticado con el rol más bajo. Con el transport <strong>stdio</strong> spawnea el comando y los args que mande el atacante, con un environment mezclado sobre <code>os.environ</code>, en el host compartido del backend. La validación del protocolo MCP falla después, cuando el proceso ya corrió. Con los transports SSE y streamable-HTTP el mismo endpoint es un SSRF semi-ciego hacia URLs privadas (CVE-2026-67542, 7.1). El batch del 11 de noviembre suma tres más: IDOR en templates (CVE-2026-67540), cualquier miembro puede sumar gente al team y descifrar las credenciales compartidas (CVE-2026-67541, 8.1) y SSRF en el nodo HTTP (CVE-2026-67545). Todo cerrado en <strong>0.0.75</strong>.</p>",
+            "en": "<p><code>POST /api/mcp/fetch-tools</code> lists an MCP server's tools, and any authenticated user with the lowest role can call it. With the <strong>stdio</strong> transport it spawns the attacker's command and args, with an environment merged over <code>os.environ</code>, on the shared backend host. MCP protocol validation fails afterwards, once the process has already run. With the SSE and streamable-HTTP transports the same endpoint is a semi-blind SSRF into private URLs (CVE-2026-67542, 7.1). The 11 November batch adds three more: template IDOR (CVE-2026-67540), any member can add people to a team and decrypt its shared credentials (CVE-2026-67541, 8.1), and SSRF in the HTTP node (CVE-2026-67545). All fixed in <strong>0.0.75</strong>.</p>",
+            "fr": "<p><code>POST /api/mcp/fetch-tools</code> liste les tools d'un serveur MCP et reste accessible à tout utilisateur authentifié, rôle minimal compris. Avec le transport <strong>stdio</strong>, il lance la commande et les arguments de l'attaquant sur l'hôte partagé du backend ; la validation MCP échoue ensuite, trop tard. En SSE et streamable-HTTP, c'est un SSRF semi-aveugle (CVE-2026-67542). Le lot ajoute IDOR sur les templates (CVE-2026-67540), vol de credentials d'équipe (CVE-2026-67541, 8.1) et SSRF dans le nœud HTTP (CVE-2026-67545). Corrigé en <strong>0.0.75</strong>.</p>"
+          },
+          "date": "11 Nov 2026",
+          "source": {
+            "url": "https://github.com/heymrun/heym/security/advisories/GHSA-378x-q589-34mv",
+            "label": "GitHub Advisory GHSA-378x-q589-34mv"
+          }
+        },
+        {
+          "id": "taos-cve-2026-67547",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-67547 (CVSS 8.8) y CVE-2026-67548 (8.3): en taOS, cualquier usuario no admin ejecuta Python en el host y reescribe la configuración del sistema",
+            "en": "CVE-2026-67547 (CVSS 8.8) and CVE-2026-67548 (8.3): in taOS any non-admin user runs Python on the host and rewrites the system configuration",
+            "fr": "CVE-2026-67547 (CVSS 8.8) et CVE-2026-67548 (8.3) : dans taOS, tout utilisateur non admin exécute du Python sur l'hôte et réécrit la configuration"
+          },
+          "body_html": {
+            "es": "<p>taOS (tinyagentos) se vende como «AI agent OS» self-hosted. <code>POST /api/skill-exec/{skill_id}/call</code> ejecuta las skills built-in, incluida <code>code_exec</code>, que corre Python arbitrario con <code>subprocess.run([\"python3\", \"-c\", code])</code>, sin chequear rol admin, dueño de la skill ni asignación al agente. Un invitado cualquiera manda código y corre como el proceso del backend (fix en <strong>1.0.0-beta.23</strong>). Aparte, todas las rutas de settings cuelgan de un <code>APIRouter()</code> sin dependencia de admin: un no admin lee y pisa la config, y hasta dispara <code>git pull</code> + reinstalación de dependencias + restart cambiando la rama de updates, que es otra vía a ejecutar código (fix en <strong>1.0.0-beta.25</strong>).</p>",
+            "en": "<p>taOS (tinyagentos) bills itself as a self-hosted «AI agent OS». <code>POST /api/skill-exec/{skill_id}/call</code> runs built-in skills, including <code>code_exec</code>, which executes arbitrary Python via <code>subprocess.run([\"python3\", \"-c\", code])</code>, with no admin role check, skill ownership check or agent assignment check. Any invited user sends code and it runs as the backend process (fixed in <strong>1.0.0-beta.23</strong>). Separately, every settings route hangs off an <code>APIRouter()</code> with no admin dependency: a non-admin can read and overwrite the config and even trigger <code>git pull</code> + dependency reinstall + restart after switching the update branch, another path to code execution (fixed in <strong>1.0.0-beta.25</strong>).</p>",
+            "fr": "<p>taOS (tinyagentos) se présente comme un «AI agent OS» self-hosted. <code>POST /api/skill-exec/{skill_id}/call</code> exécute les skills intégrées, dont <code>code_exec</code> qui lance du Python arbitraire, sans aucun contrôle de rôle ni de propriété (corrigé en <strong>1.0.0-beta.23</strong>). Par ailleurs, les routes de configuration n'exigent pas le rôle admin : un non-admin peut tout réécrire et déclencher <code>git pull</code> + réinstallation + redémarrage sur une autre branche (corrigé en <strong>1.0.0-beta.25</strong>).</p>"
+          },
+          "date": "11 Nov 2026",
+          "source": {
+            "url": "https://github.com/jaylfc/taOS/security/advisories/GHSA-h24f-gp4c-8qjm",
+            "label": "GitHub Advisory GHSA-h24f-gp4c-8qjm"
+          }
+        },
+        {
+          "id": "mcp-gateway-registry-cve-2026-100307",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-100307 (CVSS 8.8) y CVE-2026-125926 (8.5): el mcp-gateway-registry de Amazon deja que un usuario se asigne el scope de administrador y hace SSRF a la metadata de la instancia",
+            "en": "CVE-2026-100307 (CVSS 8.8) and CVE-2026-125926 (8.5): Amazon's mcp-gateway-registry lets a user grant itself the administrator scope and SSRF into instance metadata",
+            "fr": "CVE-2026-100307 (CVSS 8.8) et CVE-2026-125926 (8.5) : le mcp-gateway-registry d'Amazon laisse un utilisateur s'attribuer le scope administrateur et permet un SSRF vers les métadonnées"
+          },
+          "body_html": {
+            "es": "<p>El registry centraliza los servidores MCP y agentes que usa una organización. En las versiones <strong>1.0.9 a 1.24.7</strong>, la API externa de administración no verifica autorización en la importación de grupos: un usuario autenticado le asigna el scope de administrador del registry a su propio grupo y queda con control de todos los gateways registrados (fix en <strong>1.25.0</strong>). La segunda falla está en el alta y edición de servidores: la URL del servidor MCP no se valida, así que el gateway hace requests a servicios internos y al endpoint de metadata de la instancia cloud y devuelve la respuesta (fix en <strong>1.35.0</strong>). Ojo con esto: un registry MCP tiene las llaves de todo lo que está detrás, actualizá directo a 1.35.0.</p>",
+            "en": "<p>The registry centralizes the MCP servers and agents an organization uses. In versions <strong>1.0.9 through 1.24.7</strong>, the external management API performs no authorization check on group import: an authenticated user assigns the registry administrator scope to their own group and gains control of every registered gateway asset (fixed in <strong>1.25.0</strong>). The second flaw is in server registration and update: the MCP server URL is not validated, so the gateway sends requests to internal services and the cloud instance metadata endpoint and returns the response (fixed in <strong>1.35.0</strong>). An MCP registry holds the keys to everything behind it, so go straight to 1.35.0.</p>",
+            "fr": "<p>Le registre centralise les serveurs MCP et agents d'une organisation. De la <strong>1.0.9 à la 1.24.7</strong>, l'API d'administration externe ne contrôle pas l'import de groupes : un utilisateur authentifié s'attribue le scope administrateur et contrôle tous les gateways (corrigé en <strong>1.25.0</strong>). La seconde faille, dans l'enregistrement des serveurs, permet un SSRF vers les services internes et les métadonnées cloud (corrigé en <strong>1.35.0</strong>). Passez directement en 1.35.0.</p>"
+          },
+          "date": "11 Nov 2026",
+          "source": {
+            "url": "https://github.com/agentic-community/mcp-gateway-registry/security/advisories/GHSA-rxf3-qgpv-wxvr",
+            "label": "GitHub Advisory GHSA-rxf3-qgpv-wxvr"
+          }
+        },
+        {
+          "id": "helio-cve-2026-65957",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-65957 (CVSS 6.9): el proxy MCP Helio valida orígenes CORS por prefijo de texto, así que 192.168.attacker.com pasa como red privada",
+            "en": "CVE-2026-65957 (CVSS 6.9): the Helio MCP proxy validates CORS origins by string prefix, so 192.168.attacker.com passes as a private network",
+            "fr": "CVE-2026-65957 (CVSS 6.9) : le proxy MCP Helio valide les origines CORS par préfixe texte, donc 192.168.attacker.com passe pour un réseau privé"
+          },
+          "body_html": {
+            "es": "<p>Helio se sienta entre los agentes y las tools que usan. Su dashboard sideband (por defecto en <code>127.0.0.1:3100</code>) aceptaba como origen confiable cualquier hostname que <em>empezara</em> con <code>10.</code>, <code>172.16.</code>–<code>172.31.</code> o <code>192.168.</code>, en vez de parsear una IP. Un dominio público como <code>192.168.attacker.com</code> cumple el prefijo, y el proxy devolvía ese origen en <code>Access-Control-Allow-Origin</code>: una página maliciosa puede leer el dashboard desde el navegador de quien opera el proxy en modo abierto. Fix en <strong>0.8.0</strong>.</p>",
+            "en": "<p>Helio sits between agents and the tools they use. Its dashboard sideband (default <code>127.0.0.1:3100</code>) trusted any hostname that <em>started</em> with <code>10.</code>, <code>172.16.</code>–<code>172.31.</code> or <code>192.168.</code> instead of parsing an IP address. A public name like <code>192.168.attacker.com</code> satisfies the prefix and the proxy echoed it in <code>Access-Control-Allow-Origin</code>, so a malicious page can read the dashboard from the browser of whoever runs the proxy in open mode. Fixed in <strong>0.8.0</strong>.</p>",
+            "fr": "<p>Helio se place entre les agents et leurs tools. Son dashboard (par défaut <code>127.0.0.1:3100</code>) acceptait tout hostname <em>commençant</em> par <code>10.</code>, <code>172.16.</code>–<code>172.31.</code> ou <code>192.168.</code> au lieu de parser une IP. <code>192.168.attacker.com</code> passe, et une page malveillante peut lire le dashboard depuis le navigateur de l'opérateur en mode ouvert. Corrigé en <strong>0.8.0</strong>.</p>"
+          },
+          "date": "11 Nov 2026",
+          "source": {
+            "url": "https://github.com/gethelio/helio/security/advisories/GHSA-2c3r-q7gv-hp2m",
+            "label": "GitHub Advisory GHSA-2c3r-q7gv-hp2m"
+          }
+        }
+      ]
+    },
+    {
+      "id": "advisories",
+      "name": "Vendor Advisories",
+      "theme": "advisories",
+      "icon_emoji": "📢",
+      "anchor": "advisories",
+      "updates": [
+        {
+          "id": "m365-agents-sdk-cve-2026-109485",
+          "tag": "patch",
+          "title": {
+            "es": "CVE-2026-109485 (CVSS 6.3): Microsoft parchea un SSRF en el Microsoft 365 Agents SDK en el Patch Tuesday de noviembre",
+            "en": "CVE-2026-109485 (CVSS 6.3): Microsoft patches an SSRF in the Microsoft 365 Agents SDK in November's Patch Tuesday",
+            "fr": "CVE-2026-109485 (CVSS 6.3) : Microsoft corrige un SSRF dans le Microsoft 365 Agents SDK lors du Patch Tuesday de novembre"
+          },
+          "body_html": {
+            "es": "<p>Entre los más de mil bugs del Patch Tuesday del 10 de noviembre aparece un <strong>SSRF</strong> en el Microsoft 365 Agents SDK (el SDK para construir agentes para Teams y Copilot, incluido el paquete para .NET). Según MSRC, un atacante autorizado puede hacer que el agente emita requests del lado del servidor y filtrar información por la red. MSRC no da más detalle técnico: si tenés agentes construidos con el SDK, actualizá el paquete con el release de noviembre.</p>",
+            "en": "<p>Among the 1,000-plus bugs in the 10 November Patch Tuesday is an <strong>SSRF</strong> in the Microsoft 365 Agents SDK (the SDK for building agents for Teams and Copilot, including the .NET package). Per MSRC, an authorized attacker can make the agent issue server-side requests and disclose information over the network. MSRC gives no further technical detail: if you run agents built on the SDK, update the package to the November release.</p>",
+            "fr": "<p>Parmi le millier de bugs du Patch Tuesday du 10 novembre figure un <strong>SSRF</strong> dans le Microsoft 365 Agents SDK (SDK pour créer des agents Teams et Copilot, paquet .NET compris). Selon MSRC, un attaquant autorisé peut faire émettre des requêtes côté serveur à l'agent et divulguer des informations. Mettez à jour le paquet avec la version de novembre.</p>"
+          },
+          "date": "10 Nov 2026",
+          "source": {
+            "url": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-109485",
+            "label": "MSRC CVE-2026-109485"
+          }
+        },
+        {
+          "id": "copilot-jetbrains-cve-2026-83953",
+          "tag": "patch",
+          "title": {
+            "es": "CVE-2026-83953 (CVSS 5.5): command injection en GitHub Copilot para JetBrains que filtra información local",
+            "en": "CVE-2026-83953 (CVSS 5.5): command injection in GitHub Copilot for JetBrains that discloses local information",
+            "fr": "CVE-2026-83953 (CVSS 5.5) : command injection dans GitHub Copilot pour JetBrains, avec divulgation d'informations locales"
+          },
+          "body_html": {
+            "es": "<p>Mismo Patch Tuesday: el plugin de Copilot para los IDEs de JetBrains no neutraliza elementos especiales en un comando, y un atacante autorizado puede usarlo para leer información local. El vector es local y el impacto se limita a confidencialidad, por eso queda en medium. Igual vale actualizar el plugin: los asistentes de código en el IDE leen repos y archivos de config enteros, y cualquier command injection ahí es el primer eslabón de una cadena de prompt injection.</p>",
+            "en": "<p>Same Patch Tuesday: the Copilot plugin for JetBrains IDEs fails to neutralize special elements in a command, and an authorized attacker can use it to read local information. The vector is local and the impact is confidentiality only, hence medium. Update the plugin anyway: in-IDE code assistants read whole repos and config files, and any command injection there is the first link in a prompt-injection chain.</p>",
+            "fr": "<p>Même Patch Tuesday : le plugin Copilot pour les IDE JetBrains ne neutralise pas certains éléments d'une commande, ce qui permet à un attaquant autorisé de lire des informations locales. Vecteur local, impact limité à la confidentialité. Mettez quand même le plugin à jour : un assistant de code lit des dépôts entiers.</p>"
+          },
+          "date": "10 Nov 2026",
+          "source": {
+            "url": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-83953",
+            "label": "MSRC CVE-2026-83953"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Las plataformas self-hosted de agentes (Heym, taOS) repiten el mismo error: endurecen un camino para código no confiable y dejan abierto el hermano. Skills, nodos Playwright, endpoints que «solo listan tools»: todo termina en un subprocess sin sandbox ni chequeo de rol.",
+      "en": "Self-hosted agent platforms (Heym, taOS) keep making the same mistake: they harden one path for untrusted code and leave its sibling open. Skills, Playwright nodes, endpoints that «just list tools»: they all end in a subprocess with no sandbox and no role check.",
+      "fr": "Les plateformes d'agents self-hosted (Heym, taOS) répètent la même erreur : elles durcissent un chemin pour le code non fiable et laissent l'autre ouvert. Skills, nœuds Playwright, endpoints qui «listent juste les tools» : tout finit dans un subprocess sans sandbox ni contrôle de rôle."
+    },
+    {
+      "es": "La capa de infraestructura MCP (registries, proxies, gateways) sigue sumando fallas de autorización y SSRF por tercer día seguido: después de Microsoft MCP Gateway y aws-api-mcp-server, ahora le toca al mcp-gateway-registry de Amazon y a Helio.",
+      "en": "The MCP infrastructure layer (registries, proxies, gateways) keeps piling up authorization and SSRF flaws for a third straight day: after Microsoft MCP Gateway and aws-api-mcp-server, now it is Amazon's mcp-gateway-registry and Helio.",
+      "fr": "La couche d'infrastructure MCP (registres, proxies, gateways) accumule les failles d'autorisation et de SSRF pour le troisième jour consécutif : après Microsoft MCP Gateway et aws-api-mcp-server, c'est au tour du mcp-gateway-registry d'Amazon et de Helio."
+    }
+  ]
+}

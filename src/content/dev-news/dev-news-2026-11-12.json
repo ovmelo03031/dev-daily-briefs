@@ -1,0 +1,344 @@
+{
+  "title": {
+    "es": "Dev News 12 Nov 2026: Node parchea 16 CVEs, RCE en React Server Components y VS Code jubila el Local harness",
+    "en": "Dev News Nov 12, 2026: Node patches 16 CVEs, an RCE in React Server Components and VS Code retires the Local harness",
+    "fr": "Dev News 12 nov. 2026 : Node corrige 16 CVE, une RCE dans les React Server Components et VS Code retire le Local harness"
+  },
+  "description": {
+    "es": "Node.js saca security releases para 22.x, 24.x y 26.x con un leak de heap por HTTPS, React parchea una RCE sin autenticación en react-server-dom-*, Chrome 157 corrige 83 vulnerabilidades, VS Code 1.146 depreca el Local harness, Prettier 3.10 estrena un plugin sobre Yuku y pnpm 12.20 limpia el undici que marcaban los scanners.",
+    "en": "Node.js ships security releases for 22.x, 24.x and 26.x including an HTTPS heap leak, React patches an unauthenticated RCE in react-server-dom-*, Chrome 157 fixes 83 vulnerabilities, VS Code 1.146 deprecates the Local harness, Prettier 3.10 debuts a Yuku-powered plugin and pnpm 12.20 drops the undici that scanners flagged.",
+    "fr": "Node.js publie des security releases pour 22.x, 24.x et 26.x dont une fuite de heap via HTTPS, React corrige une RCE non authentifiée dans react-server-dom-*, Chrome 157 corrige 83 vulnérabilités, VS Code 1.146 déprécie le Local harness, Prettier 3.10 lance un plugin basé sur Yuku et pnpm 12.20 retire l'undici signalé par les scanners."
+  },
+  "pubDate": "2026-11-12",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": {
+        "es": "Node: 16 CVEs en 22, 24 y 26",
+        "en": "Node: 16 CVEs across 22, 24 and 26",
+        "fr": "Node : 16 CVE sur 22, 24 et 26"
+      },
+      "anchor": "node-november-security-releases",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": {
+        "es": "RCE en React Server Components (9.5)",
+        "en": "RCE in React Server Components (9.5)",
+        "fr": "RCE dans les React Server Components (9.5)"
+      },
+      "anchor": "react-rsc-rce-cve-2026-126187",
+      "icon": "simple-icons:react"
+    },
+    {
+      "text": {
+        "es": "Chrome 157: 83 fixes, 5 críticos",
+        "en": "Chrome 157: 83 fixes, 5 critical",
+        "fr": "Chrome 157 : 83 correctifs, 5 critiques"
+      },
+      "anchor": "chrome-157-83-security-fixes",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "VS Code 1.146 depreca el Local harness",
+        "en": "VS Code 1.146 deprecates the Local harness",
+        "fr": "VS Code 1.146 déprécie le Local harness"
+      },
+      "anchor": "vscode-1-146-local-harness",
+      "icon": "simple-icons:visualstudiocode"
+    },
+    {
+      "text": {
+        "es": "Prettier 3.10 y el plugin Yuku",
+        "en": "Prettier 3.10 and the Yuku plugin",
+        "fr": "Prettier 3.10 et le plugin Yuku"
+      },
+      "anchor": "prettier-3-10",
+      "icon": "lucide:code"
+    },
+    {
+      "text": {
+        "es": "pnpm 12.20: chau undici 6 en node-gyp",
+        "en": "pnpm 12.20: undici 6 gone from node-gyp",
+        "fr": "pnpm 12.20 : adieu undici 6 dans node-gyp"
+      },
+      "anchor": "pnpm-12-20",
+      "icon": "lucide:package"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "node-november-security-releases",
+          "tag": "security",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "Node.js 26.13.1, 24.22.3 y 22.23.5: security release con 7 CVEs high en HTTP/2 y TLS",
+            "en": "Node.js 26.13.1, 24.22.3 and 22.23.5: security release with 7 high CVEs in HTTP/2 and TLS",
+            "fr": "Node.js 26.13.1, 24.22.3 et 22.23.5 : security release avec 7 CVE high dans HTTP/2 et TLS"
+          },
+          "body_html": {
+            "es": "<p>Ojo con esto, porque toca a todas las líneas activas. La más fea es <code>CVE-2026-123864</code>: una escritura TLS de cero bytes desde el callback <code>on_body</code> re-entra a <code>llhttp_execute()</code> y el server termina copiando heap ajeno en el body, <strong>incluyendo claves privadas TLS y requests de otros usuarios</strong>. Además, <code>CVE-2026-123863</code> deja que cualquier cliente sin autenticar tire abajo un server <code>http2</code> por defecto (es una variante de CVE-2024-27983 que el fix viejo no cubría), y <code>CVE-2026-123872</code> evita que la resumption o la renegociación TLS cambien el SNI. Vienen también llhttp 9.4.4 y undici 8.12.4. Actualizá hoy, no el viernes.</p>",
+            "en": "<p>This one hits every active line. The worst is <code>CVE-2026-123864</code>: a zero-byte TLS write issued from the parser's <code>on_body</code> callback re-enters <code>llhttp_execute()</code>, and the server copies freed or unrelated heap into the request body, <strong>including TLS private keys and other users' requests</strong>. <code>CVE-2026-123863</code> lets any unauthenticated client crash a default <code>http2</code> server (a variant of CVE-2024-27983 the earlier fix missed), and <code>CVE-2026-123872</code> stops TLS resumption or renegotiation from changing SNI. The releases also bump llhttp to 9.4.4 and undici to 8.12.4. Upgrade today.</p>",
+            "fr": "<p>Toutes les lignes actives sont touchées. La pire est <code>CVE-2026-123864</code> : une écriture TLS de zéro octet depuis le callback <code>on_body</code> ré-entre dans <code>llhttp_execute()</code> et le serveur copie de la heap étrangère dans le body, <strong>y compris des clés privées TLS et les requêtes d'autres utilisateurs</strong>. <code>CVE-2026-123863</code> permet à un client non authentifié de faire tomber un serveur <code>http2</code> par défaut (variante de CVE-2024-27983), et <code>CVE-2026-123872</code> empêche la resumption ou la renégociation TLS de changer le SNI. llhttp passe en 9.4.4 et undici en 8.12.4. À mettre à jour aujourd'hui.</p>"
+          },
+          "source": {
+            "url": "https://nodejs.org/en/blog/vulnerability/november-2026-security-releases",
+            "label": "nodejs.org"
+          }
+        },
+        {
+          "id": "react-rsc-rce-cve-2026-126187",
+          "tag": "security",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "React Server Components: RCE sin autenticación en react-server-dom-* (CVE-2026-126187, CVSS 9.5)",
+            "en": "React Server Components: unauthenticated RCE in react-server-dom-* (CVE-2026-126187, CVSS 9.5)",
+            "fr": "React Server Components : RCE non authentifiée dans react-server-dom-* (CVE-2026-126187, CVSS 9.5)"
+          },
+          "body_html": {
+            "es": "<p>Otra vez el protocolo de RSC. Un payload armado contra un framework con React Server Components puede terminar en ejecución remota de código. El caso es raro (respuestas que transportan varios typed arrays más un valor controlado por el atacante), pero el equipo pide actualizar <strong>ya</strong>. Afecta a <code>react-server-dom-webpack</code>, <code>-parcel</code> y <code>-turbopack</code> desde 19.0.0 hasta 19.3.0; los fixes son 19.0.9, 19.1.10, 19.2.9 y 19.3.1. Si tu React no corre en un server, o no usás un bundler o framework con RSC, no te afecta.</p>",
+            "en": "<p>The RSC protocol again. A crafted payload against a framework supporting React Server Components can lead to remote code execution. The trigger is rare (responses carrying multiple typed arrays plus an attacker-controlled value), but the team says to update <strong>immediately</strong>. It affects <code>react-server-dom-webpack</code>, <code>-parcel</code> and <code>-turbopack</code> from 19.0.0 through 19.3.0; fixes landed in 19.0.9, 19.1.10, 19.2.9 and 19.3.1. Apps whose React code never runs on a server, or that use no RSC-capable bundler or framework, are not affected.</p>",
+            "fr": "<p>Encore le protocole RSC. Un payload forgé contre un framework supportant les React Server Components peut mener à une exécution de code à distance. Le déclencheur est rare (réponses transportant plusieurs typed arrays et une valeur contrôlée par l'attaquant), mais l'équipe demande de mettre à jour <strong>immédiatement</strong>. Sont touchés <code>react-server-dom-webpack</code>, <code>-parcel</code> et <code>-turbopack</code> de 19.0.0 à 19.3.0 ; correctifs en 19.0.9, 19.1.10, 19.2.9 et 19.3.1. Sans React côté serveur ni bundler compatible RSC, vous n'êtes pas concerné.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-xqc2-xf4c-x3h3",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "chrome-157-83-security-fixes",
+          "tag": "security",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "Chrome 157.0.8103.78: 83 fixes de seguridad, cinco críticos (CSS, ServiceWorker, Layout)",
+            "en": "Chrome 157.0.8103.78: 83 security fixes, five critical (CSS, ServiceWorker, Layout)",
+            "fr": "Chrome 157.0.8103.78 : 83 correctifs de sécurité, dont cinq critiques (CSS, ServiceWorker, Layout)"
+          },
+          "body_html": {
+            "es": "<p>Segundo update de stable en dos días. Este trae <strong>83 fixes</strong>, con cinco use-after-free críticos en ServiceWorker, CSS, Layout, Skia y Accessibility, más varios high en V8. Es el motor de rendering de tus usuarios: forzá el update en tus máquinas de testing y en los runners de CI que usan Chrome estable.</p>",
+            "en": "<p>The second stable update in two days. This one brings <strong>83 fixes</strong>, including five critical use-after-frees in ServiceWorker, CSS, Layout, Skia and Accessibility, plus several high-severity V8 bugs. Update your test machines and any CI runners pinned to stable Chrome.</p>",
+            "fr": "<p>Deuxième mise à jour stable en deux jours, avec <strong>83 correctifs</strong>, dont cinq use-after-free critiques dans ServiceWorker, CSS, Layout, Skia et Accessibility, plus plusieurs bugs V8 de sévérité haute. Mettez à jour vos machines de test et les runners CI qui utilisent Chrome stable.</p>"
+          },
+          "source": {
+            "url": "https://chromereleases.googleblog.com/2026/11/stable-channel-update-for-desktop_01744469280.html",
+            "label": "chromereleases.googleblog.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "js-frameworks",
+      "name": "JS Frameworks",
+      "theme": "js-frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "js-frameworks",
+      "updates": [
+        {
+          "id": "angular-22-3-rc-0",
+          "tag": "beta",
+          "tag_label": { "es": "RC", "en": "RC", "fr": "RC" },
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "Angular 22.3.0-rc.0: el compilador reporta bindings desconocidos en ng-template",
+            "en": "Angular 22.3.0-rc.0: the compiler reports unknown bindings on ng-template",
+            "fr": "Angular 22.3.0-rc.0 : le compilateur signale les bindings inconnus sur ng-template"
+          },
+          "body_html": {
+            "es": "<p>Arranca el release candidate de la 22.3. La feature del compilador: ahora <strong>reporta property bindings desconocidos en elementos <code>&lt;ng-template&gt;</code> explícitos</strong>, que antes pasaban callados. También rechaza nombres de atributo o propiedad que empiezan con dos puntos y arregla un memory leak en el renderer de animations (backporteado a 22.2.6).</p>",
+            "en": "<p>The 22.3 release candidate is out. The compiler feature: it now <strong>reports unknown property bindings on explicit <code>&lt;ng-template&gt;</code> elements</strong>, which used to pass silently. It also rejects attribute and property names starting with a colon and fixes a memory leak in the animations renderer (backported to 22.2.6).</p>",
+            "fr": "<p>La release candidate de la 22.3 est là. Côté compilateur, il <strong>signale désormais les property bindings inconnus sur les éléments <code>&lt;ng-template&gt;</code> explicites</strong>, auparavant ignorés en silence. Il rejette aussi les noms d'attribut ou de propriété commençant par deux-points et corrige une fuite mémoire dans le renderer d'animations (backportée en 22.2.6).</p>"
+          },
+          "source": {
+            "url": "https://github.com/angular/angular/releases/tag/v22.3.0-rc.0",
+            "label": "github.com/angular"
+          }
+        }
+      ]
+    },
+    {
+      "id": "build-tools",
+      "name": "Build Tools & Runtimes",
+      "theme": "build-tools",
+      "icon_emoji": "🔧",
+      "anchor": "build-tools",
+      "updates": [
+        {
+          "id": "pnpm-12-20",
+          "tag": "release",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "pnpm 12.20: el lockfile v13 guarda specifiers locales y node-gyp suelta undici 6",
+            "en": "pnpm 12.20: the v13 lockfile records local specifiers and node-gyp drops undici 6",
+            "fr": "pnpm 12.20 : le lockfile v13 enregistre les specifiers locaux et node-gyp abandonne undici 6"
+          },
+          "body_html": {
+            "es": "<p>Con <code>lockfile.format: v13</code> (experimental), <code>pnpm install</code> registra los specifiers de dependencias de directorios locales, y los frozen installs fallan si cambiaron. El <code>node-gyp</code> bundleado ya no trae undici 6 (el que los scanners marcaban por CVE-2026-84947), los <code>overrides</code> por selector de versión ahora aplican a dependencias <code>catalog:</code> y las git deps aceptan el separador <code>::</code> de npm. Ojo: remote resolution y los build caches compartidos <strong>dejan de funcionar con pnpr 0.1.0-alpha.19 o anterior</strong>.</p>",
+            "en": "<p>With <code>lockfile.format: v13</code> (experimental), <code>pnpm install</code> records the specifiers of local directory dependencies, and frozen installs reject changed ones. The bundled <code>node-gyp</code> no longer ships undici 6 (flagged by scanners for CVE-2026-84947), version-selector <code>overrides</code> now apply to <code>catalog:</code> dependencies, and git deps accept npm's <code>::</code> separator. Heads-up: remote resolution and shared build caches <strong>stop working with pnpr 0.1.0-alpha.19 or older</strong>.</p>",
+            "fr": "<p>Avec <code>lockfile.format: v13</code> (expérimental), <code>pnpm install</code> enregistre les specifiers des dépendances de répertoires locaux, et les frozen installs rejettent ceux qui ont changé. Le <code>node-gyp</code> embarqué ne contient plus undici 6 (signalé pour CVE-2026-84947), les <code>overrides</code> par sélecteur de version s'appliquent aux dépendances <code>catalog:</code> et les git deps acceptent le séparateur <code>::</code> de npm. Attention : la remote resolution et les build caches partagés <strong>ne fonctionnent plus avec pnpr 0.1.0-alpha.19 ou antérieur</strong>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/pnpm/pnpm/releases/tag/v12.20.0",
+            "label": "github.com/pnpm"
+          }
+        },
+        {
+          "id": "rolldown-1-3-2",
+          "tag": "minor",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "Rolldown 1.3.2: __dirname y __filename para CommonJS en output ESM de Node",
+            "en": "Rolldown 1.3.2: __dirname and __filename for CommonJS in Node ESM output",
+            "fr": "Rolldown 1.3.2 : __dirname et __filename pour CommonJS en sortie ESM Node"
+          },
+          "body_html": {
+            "es": "<p>Los módulos CommonJS empaquetados en output ESM para Node ahora tienen <code>__dirname</code> y <code>__filename</code>, un clásico que rompía migraciones. Suma la opción <code>hires</code> en magic-string y una tanda de fixes de strict execution order y sourcemaps. El mismo día salieron 1.0.5, 1.1.8 y 1.2.19 para que el binding linux-x64-gnu corra en CPUs x86-64 baseline.</p>",
+            "en": "<p>CommonJS modules bundled into Node ESM output now get <code>__dirname</code> and <code>__filename</code>, a classic migration breaker. It also adds a <code>hires</code> magic-string option and a batch of strict-execution-order and sourcemap fixes. The same day, 1.0.5, 1.1.8 and 1.2.19 shipped so the linux-x64-gnu binding runs on baseline x86-64 CPUs.</p>",
+            "fr": "<p>Les modules CommonJS bundlés en sortie ESM pour Node disposent désormais de <code>__dirname</code> et <code>__filename</code>, un classique des migrations cassées. S'ajoutent l'option <code>hires</code> de magic-string et des correctifs sur le strict execution order et les sourcemaps. Le même jour, 1.0.5, 1.1.8 et 1.2.19 sont sorties pour que le binding linux-x64-gnu tourne sur les CPU x86-64 baseline.</p>"
+          },
+          "source": {
+            "url": "https://github.com/rolldown/rolldown/releases/tag/v1.3.2",
+            "label": "github.com/rolldown"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dev-tools",
+      "name": "Developer Tools",
+      "theme": "dev-tools",
+      "icon_emoji": "🛠️",
+      "anchor": "dev-tools",
+      "updates": [
+        {
+          "id": "vscode-1-146-local-harness",
+          "tag": "deprecation",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "VS Code 1.146: el Local harness queda deprecado y se va en febrero de 2027",
+            "en": "VS Code 1.146: the Local harness is deprecated and goes away in February 2027",
+            "fr": "VS Code 1.146 : le Local harness est déprécié et disparaîtra en février 2027"
+          },
+          "body_html": {
+            "es": "<p>El Copilot harness (default para sesiones nuevas desde 1.143, construido sobre el Copilot SDK y corriendo en el Agent Host) pasa a ser el único camino. El Local harness queda <strong>congelado ya y se elimina en tres meses</strong>, junto con el setting empresarial <code>vscode.temporaryDefaultToLocalHarness</code>. Para orgs importa: el Copilot harness aplica las políticas de sandbox y permisos administradas que el Local no respetaba. También llega un inbox mode experimental para sesiones.</p>",
+            "en": "<p>The Copilot harness (default for new sessions since 1.143, built on the Copilot SDK and running through the Agent Host) becomes the only path. The Local harness is <strong>frozen now and will be removed in three months</strong>, along with the enterprise setting <code>vscode.temporaryDefaultToLocalHarness</code>. For organizations, the Copilot harness enforces the managed sandbox and permission policies the Local harness doesn't. An experimental inbox mode for sessions also lands.</p>",
+            "fr": "<p>Le Copilot harness (par défaut pour les nouvelles sessions depuis 1.143, basé sur le Copilot SDK et exécuté via l'Agent Host) devient la seule voie. Le Local harness est <strong>gelé dès maintenant et sera retiré dans trois mois</strong>, avec le paramètre entreprise <code>vscode.temporaryDefaultToLocalHarness</code>. Pour les organisations, le Copilot harness applique les politiques gérées de sandbox et de permissions que le Local harness ignore. Un inbox mode expérimental pour les sessions arrive aussi.</p>"
+          },
+          "source": {
+            "url": "https://code.visualstudio.com/updates/v1_146",
+            "label": "code.visualstudio.com"
+          }
+        },
+        {
+          "id": "prettier-3-10",
+          "tag": "notable",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "Prettier 3.10: nueva sintaxis de Flow y JavaScript, más @prettier/plugin-yuku",
+            "en": "Prettier 3.10: new Flow and JavaScript syntax, plus @prettier/plugin-yuku",
+            "fr": "Prettier 3.10 : nouvelle syntaxe Flow et JavaScript, et @prettier/plugin-yuku"
+          },
+          "body_html": {
+            "es": "<p>Soporta las últimas propuestas de JavaScript y la sintaxis nueva de Flow, pero lo interesante es el plugin oficial <code>@prettier/plugin-yuku</code>: parsers <code>yuku</code> (JS) y <code>yuku-ts</code> (TS) sobre Yuku, un toolchain de compilador escrito en Zig. Es otra señal de que el formateo también se muda a parsers nativos, como ya pasó con el linting.</p>",
+            "en": "<p>It supports the latest JavaScript proposals and new Flow syntax, but the headline is the official <code>@prettier/plugin-yuku</code>: <code>yuku</code> (JS) and <code>yuku-ts</code> (TS) parsers on Yuku, a high-performance compiler toolchain written in Zig. Formatting is following linting onto native parsers.</p>",
+            "fr": "<p>Il prend en charge les dernières propositions JavaScript et la nouvelle syntaxe Flow, mais l'essentiel est le plugin officiel <code>@prettier/plugin-yuku</code> : des parsers <code>yuku</code> (JS) et <code>yuku-ts</code> (TS) basés sur Yuku, une toolchain de compilation écrite en Zig. Le formatage suit le linting vers les parsers natifs.</p>"
+          },
+          "source": {
+            "url": "https://prettier.io/blog/2026/11/11/3.10.0",
+            "label": "prettier.io"
+          }
+        },
+        {
+          "id": "biome-2-6-7",
+          "tag": "minor",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "Biome 2.6.7: tres reglas nursery, una para async en .finally()",
+            "en": "Biome 2.6.7: three nursery rules, one for async in .finally()",
+            "fr": "Biome 2.6.7 : trois règles nursery, dont une pour l'async dans .finally()"
+          },
+          "body_html": {
+            "es": "<p><code>noAsyncPromiseFinally</code> marca funciones async pasadas a <code>.finally()</code>, porque si fallan su error pisa el resultado original. Se suman <code>noDuplicateTypeConstituents</code> (tipos repetidos en unions o <code>undefined</code> en parámetros opcionales) y <code>noExcessiveSelectorComplexity</code> para CSS.</p>",
+            "en": "<p><code>noAsyncPromiseFinally</code> flags async functions passed to <code>.finally()</code>, since a failure there replaces the promise's original result. It is joined by <code>noDuplicateTypeConstituents</code> (repeated union members or <code>undefined</code> on optional params) and <code>noExcessiveSelectorComplexity</code> for CSS.</p>",
+            "fr": "<p><code>noAsyncPromiseFinally</code> signale les fonctions async passées à <code>.finally()</code>, car leur erreur remplace le résultat initial de la promesse. S'y ajoutent <code>noDuplicateTypeConstituents</code> (membres d'union répétés ou <code>undefined</code> sur paramètres optionnels) et <code>noExcessiveSelectorComplexity</code> pour le CSS.</p>"
+          },
+          "source": {
+            "url": "https://github.com/biomejs/biome/releases/tag/%40biomejs%2Fbiome%402.6.7",
+            "label": "github.com/biomejs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "quick-links",
+      "name": "Quick Links",
+      "theme": "quick-links",
+      "icon_emoji": "📌",
+      "anchor": "quick-links",
+      "updates": [
+        {
+          "id": "turborepo-2-11-11",
+          "tag": "patch",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "Turborepo 2.11.11: turbo setup ya no exige ignorar .turbo/",
+            "en": "Turborepo 2.11.11: turbo setup no longer requires ignoring .turbo/",
+            "fr": "Turborepo 2.11.11 : turbo setup n'exige plus d'ignorer .turbo/"
+          },
+          "body_html": {
+            "es": "<p><code>turbo setup</code> deja de pedir que <code>.turbo/</code> esté en el gitignore y <code>turbo info</code> reporta la versión declarada del package manager.</p>",
+            "en": "<p><code>turbo setup</code> stops requiring <code>.turbo/</code> to be git-ignored, and <code>turbo info</code> reports declared package manager versions.</p>",
+            "fr": "<p><code>turbo setup</code> n'exige plus que <code>.turbo/</code> soit ignoré par git, et <code>turbo info</code> affiche la version déclarée du package manager.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vercel/turborepo/releases/tag/v2.11.11",
+            "label": "github.com/vercel"
+          }
+        },
+        {
+          "id": "angular-22-2-6",
+          "tag": "patch",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "Angular 22.2.6: memory leak del renderer de animations",
+            "en": "Angular 22.2.6: animations renderer memory leak fixed",
+            "fr": "Angular 22.2.6 : fuite mémoire du renderer d'animations corrigée"
+          },
+          "body_html": {
+            "es": "<p>Patch de la línea estable con el fix del leak en animations y <code>HttpParams</code> que omite arrays vacíos.</p>",
+            "en": "<p>Stable-line patch with the animations leak fix and <code>HttpParams</code> now omitting empty arrays.</p>",
+            "fr": "<p>Patch de la branche stable avec le correctif de fuite des animations et <code>HttpParams</code> qui omet les tableaux vides.</p>"
+          },
+          "source": {
+            "url": "https://github.com/angular/angular/releases/tag/v22.2.6",
+            "label": "github.com/angular"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Semana de parches en el server: Node, React Server Components y Chrome sacan fixes críticos en 48 horas. Si mantenés un stack SSR, hoy es día de actualizar dependencias.",
+      "en": "A server-side patch week: Node, React Server Components and Chrome all ship critical fixes within 48 hours. If you run an SSR stack, today is dependency-update day.",
+      "fr": "Semaine de correctifs côté serveur : Node, les React Server Components et Chrome publient des correctifs critiques en 48 heures. Si vous maintenez une stack SSR, c'est le jour des mises à jour."
+    },
+    {
+      "es": "El tooling sigue mudándose a nativo: Prettier suma un parser en Zig vía Yuku mientras Biome y Rolldown siguen sumando reglas y features.",
+      "en": "Tooling keeps going native: Prettier adds a Zig-based parser through Yuku while Biome and Rolldown keep adding rules and features.",
+      "fr": "L'outillage continue de passer au natif : Prettier ajoute un parser en Zig via Yuku, tandis que Biome et Rolldown enrichissent règles et fonctionnalités."
+    },
+    {
+      "es": "Los editores cierran la puerta a los agentes sin políticas: VS Code se queda con un solo harness que respeta sandbox y permisos administrados.",
+      "en": "Editors are closing the door on agents without policy: VS Code consolidates on a single harness that enforces managed sandbox and permission rules.",
+      "fr": "Les éditeurs ferment la porte aux agents sans politique : VS Code se limite à un seul harness qui applique sandbox et permissions gérées."
+    }
+  ]
+}

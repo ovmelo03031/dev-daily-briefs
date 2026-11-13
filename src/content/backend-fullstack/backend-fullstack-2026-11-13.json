@@ -1,0 +1,442 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 13 de noviembre de 2026",
+    "en": "Backend & Fullstack Daily — November 13, 2026",
+    "fr": "Backend & Fullstack Daily — 13 novembre 2026"
+  },
+  "description": {
+    "es": "NestJS 12.5 baja límites por defecto en WebSockets, TCP y multipart, Node.js 27 entra en alpha, Cognito suma token exchange (RFC 8693), Kysely arregla el migrator ante saltos de reloj y LinkedIn cuenta por qué dejó Argo CD.",
+    "en": "NestJS 12.5 lowers default limits across WebSockets, TCP and multipart, Node.js 27 enters alpha, Cognito adds token exchange (RFC 8693), Kysely fixes its migrator against clock jumps and LinkedIn explains why it left Argo CD.",
+    "fr": "NestJS 12.5 abaisse les limites par défaut des WebSockets, du TCP et du multipart, Node.js 27 entre en alpha, Cognito ajoute le token exchange (RFC 8693), Kysely corrige son migrator face aux sauts d'horloge et LinkedIn explique pourquoi il a quitté Argo CD."
+  },
+  "pubDate": "2026-11-13",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "NestJS 12.5: límites más bajos por defecto",
+        "en": "NestJS 12.5: lower limits by default",
+        "fr": "NestJS 12.5 : limites abaissées par défaut"
+      },
+      "anchor": "nestjs-12-5-0",
+      "icon": "lucide:blocks"
+    },
+    {
+      "text": {
+        "es": "Cognito suma token exchange (RFC 8693)",
+        "en": "Cognito adds token exchange (RFC 8693)",
+        "fr": "Cognito ajoute le token exchange (RFC 8693)"
+      },
+      "anchor": "cognito-token-exchange",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": {
+        "es": "Kysely: el migrator sobrevive saltos de reloj",
+        "en": "Kysely: the migrator survives clock jumps",
+        "fr": "Kysely : le migrator résiste aux sauts d'horloge"
+      },
+      "anchor": "kysely-0-29-9",
+      "icon": "lucide:database"
+    },
+    {
+      "text": {
+        "es": "Node.js 27 entra en alpha",
+        "en": "Node.js 27 enters alpha",
+        "fr": "Node.js 27 entre en alpha"
+      },
+      "anchor": "node-27-alpha",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": {
+        "es": "LinkedIn reemplaza Argo CD en 250+ clusters",
+        "en": "LinkedIn replaces Argo CD on 250+ clusters",
+        "fr": "LinkedIn remplace Argo CD sur 250+ clusters"
+      },
+      "anchor": "linkedin-gitops-engine",
+      "icon": "simple-icons:kubernetes"
+    },
+    {
+      "text": {
+        "es": "Aurora y RDS: instancias R9g con Graviton5",
+        "en": "Aurora and RDS: Graviton5 R9g instances",
+        "fr": "Aurora et RDS : instances R9g Graviton5"
+      },
+      "anchor": "aurora-rds-r9g",
+      "icon": "simple-icons:postgresql"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "nestjs-12-5-0",
+      "updates": [
+        {
+          "id": "nestjs-12-5-0",
+          "tag": "breaking",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "NestJS 12.5.0: un minor que cambia defaults en WebSockets, TCP, gRPC y multipart",
+            "en": "NestJS 12.5.0: a minor that changes defaults across WebSockets, TCP, gRPC and multipart",
+            "fr": "NestJS 12.5.0 : une mineure qui change les valeurs par défaut des WebSockets, du TCP, de gRPC et du multipart"
+          },
+          "body_html": {
+            "es": "<p>Es un minor, pero leé las notas antes de subirlo. <code>WsAdapter</code> ahora acepta <code>maxPayload</code> y el default baja de <strong>100 MB a 1 MB</strong> (un mensaje más grande cierra la conexión con código 1009). El server TCP con <code>host</code> vacío pasa a escuchar <strong>solo en localhost</strong>: si lo corrés en un container, poné <code>host: '0.0.0.0'</code> o te quedás sin tráfico. <code>maxBufferSize</code> de TCP baja de 128 Mi a 16 Mi caracteres y se aplica por paquete, y multipart en Express y Node queda en 1000 partes como máximo. Se suman topes nuevos: <code>maxConcurrentMessages</code> (TCP, 1000 por conexión), <code>maxPendingResponses</code> (gRPC, 1000), <code>maxMessageSize</code> (RabbitMQ, 16 MiB) y <code>maxWaitingMessages</code> en <code>IoAdapter</code>. Un límite que llega como <code>NaN</code> (el clásico <code>Number(process.env.UNSET)</code>) ahora toma el default en vez de apagar el límite. Además, un guard, interceptor o pipe que no puede ejecutarse hace fallar la app al arrancar. Actualizá <code>@nestjs/core</code> y los paquetes de plataforma juntos.</p>",
+            "en": "<p>It is a minor, but read the notes before bumping. <code>WsAdapter</code> now takes <code>maxPayload</code> and the default drops from <strong>100 MB to 1 MB</strong> (a larger message closes the connection with code 1009). A TCP server with an empty <code>host</code> now listens <strong>on localhost only</strong>: in a container, set <code>host: '0.0.0.0'</code> or it will receive no traffic. TCP <code>maxBufferSize</code> drops from 128 Mi to 16 Mi characters and applies per packet, and multipart on Express and Node is capped at 1000 parts. New caps arrive too: <code>maxConcurrentMessages</code> (TCP, 1000 per connection), <code>maxPendingResponses</code> (gRPC, 1000), <code>maxMessageSize</code> (RabbitMQ, 16 MiB) and <code>maxWaitingMessages</code> on <code>IoAdapter</code>. A limit passed as <code>NaN</code> (the classic <code>Number(process.env.UNSET)</code>) now gets its default instead of switching the limit off. A guard, interceptor or pipe that cannot run now fails the app at startup. Update <code>@nestjs/core</code> and the platform packages together.</p>",
+            "fr": "<p>C'est une mineure, mais lisez les notes avant de monter de version. <code>WsAdapter</code> accepte désormais <code>maxPayload</code> et la valeur par défaut passe de <strong>100 Mo à 1 Mo</strong> (un message plus gros ferme la connexion avec le code 1009). Un serveur TCP avec un <code>host</code> vide n'écoute plus que <strong>sur localhost</strong> : dans un container, définissez <code>host: '0.0.0.0'</code>, sinon il ne recevra aucun trafic. Le <code>maxBufferSize</code> TCP passe de 128 Mi à 16 Mi caractères et s'applique par paquet, et le multipart sur Express et Node est plafonné à 1000 parties. De nouveaux plafonds arrivent : <code>maxConcurrentMessages</code> (TCP, 1000 par connexion), <code>maxPendingResponses</code> (gRPC, 1000), <code>maxMessageSize</code> (RabbitMQ, 16 Mio) et <code>maxWaitingMessages</code> sur <code>IoAdapter</code>. Une limite passée à <code>NaN</code> (le classique <code>Number(process.env.UNSET)</code>) reçoit sa valeur par défaut au lieu de désactiver la limite. Un guard, un interceptor ou un pipe qui ne peut pas s'exécuter fait échouer l'application au démarrage. Mettez à jour <code>@nestjs/core</code> et les paquets de plateforme ensemble.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nestjs/nest/releases/tag/v12.5.0",
+            "label": "github.com/nestjs/nest"
+          }
+        },
+        {
+          "id": "cognito-token-exchange",
+          "tag": "notable",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "Amazon Cognito soporta OAuth 2.0 token exchange (RFC 8693)",
+            "en": "Amazon Cognito supports OAuth 2.0 token exchange (RFC 8693)",
+            "fr": "Amazon Cognito prend en charge l'OAuth 2.0 token exchange (RFC 8693)"
+          },
+          "body_html": {
+            "es": "<p>Un servicio o agente que actúa en nombre de un usuario ya puede cambiar el token del usuario por uno nuevo, <strong>con scope más angosto, atado a una sola audience y sin refresh token</strong>. Antes había que reenviar el token original al servicio downstream o mantener tu propia lógica de minteo. Si incluís un actor token, Cognito agrega el claim <code>act</code> que identifica al intermediario, así el downstream distingue una request hecha por un agente de una hecha por el usuario. Se usa desde el token endpoint o con la API nueva <code>GetDerivedToken</code>, en los planes Essentials y Plus. Si venís pasando el access token del usuario de servicio en servicio, esto es lo que tenías que estar usando.</p>",
+            "en": "<p>A service or agent acting on a user's behalf can now swap the user's token for a new one that is <strong>narrower in scope, bound to a single audience and issued without a refresh token</strong>. Until now you either forwarded the original token downstream or maintained your own minting logic. Include an actor token and Cognito adds an <code>act</code> claim naming the intermediary, so a downstream service can tell an agent's request from one the user made directly. It works through the token endpoint or the new <code>GetDerivedToken</code> API, on the Essentials and Plus plans. If you have been passing the user's access token from service to service, this is the replacement.</p>",
+            "fr": "<p>Un service ou un agent agissant pour un utilisateur peut désormais échanger le token de celui-ci contre un nouveau token <strong>au scope plus étroit, lié à une seule audience et émis sans refresh token</strong>. Jusqu'ici, il fallait transmettre le token d'origine en aval ou maintenir sa propre logique d'émission. Avec un actor token, Cognito ajoute un claim <code>act</code> qui identifie l'intermédiaire : le service en aval distingue ainsi une requête d'agent d'une requête faite directement par l'utilisateur. Cela passe par le token endpoint ou la nouvelle API <code>GetDerivedToken</code>, sur les offres Essentials et Plus. Si vous faites circuler le token d'accès de l'utilisateur de service en service, voici son remplaçant.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/cognito-token-exchange/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "kysely-0-29-9",
+          "tag": "notable",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "Kysely 0.29.9 y 0.28.20: el migrator ya no se rompe si el reloj salta hacia atrás",
+            "en": "Kysely 0.29.9 and 0.28.20: the migrator no longer breaks when the clock jumps back",
+            "fr": "Kysely 0.29.9 et 0.28.20 : le migrator ne casse plus quand l'horloge recule"
+          },
+          "body_html": {
+            "es": "<p>Si el reloj de pared retrocedía durante una corrida de migraciones (sync de hora en WSL2 o una VM, un paso de NTP), Kysely guardaba timestamps desordenados y <strong>todo <code>migrateToLatest()</code> posterior fallaba con «corrupted migrations»</strong>, aunque las migraciones hubieran corrido en el orden correcto. Ahora el migrator lee el último timestamp registrado con el lock tomado y graba cada migración en <code>max(now, latest + 1ms)</code>. Ojo: si tu tabla ya quedó con timestamps fuera de orden, necesitás una reparación única; las notas traen la query por dialecto (PostgreSQL, MySQL 8.0+ y más). No aplica si usás <code>allowUnorderedMigrations: true</code>. <code>0.28.20</code> es el backport del mismo fix.</p>",
+            "en": "<p>If the wall clock moved backwards during a migration run (WSL2 or VM time sync, an NTP step), Kysely recorded out-of-order timestamps and <strong>every later <code>migrateToLatest()</code> failed with &quot;corrupted migrations&quot;</strong>, even though the migrations had run in the right order. The migrator now reads the latest recorded timestamp while holding the lock and records each migration at <code>max(now, latest + 1ms)</code>. Note that a table that already has out-of-order timestamps needs a one-time repair; the release notes include the query per dialect (PostgreSQL, MySQL 8.0+ and others). It does not apply if you use <code>allowUnorderedMigrations: true</code>. <code>0.28.20</code> backports the same fix.</p>",
+            "fr": "<p>Si l'horloge reculait pendant une exécution de migrations (synchronisation de l'heure sous WSL2 ou dans une VM, un saut NTP), Kysely enregistrait des timestamps désordonnés et <strong>chaque <code>migrateToLatest()</code> suivant échouait avec « corrupted migrations »</strong>, alors que les migrations s'étaient exécutées dans le bon ordre. Le migrator lit désormais le dernier timestamp enregistré en tenant le verrou et enregistre chaque migration à <code>max(now, latest + 1ms)</code>. Attention : une table qui contient déjà des timestamps désordonnés demande une réparation unique ; les notes fournissent la requête par dialecte (PostgreSQL, MySQL 8.0+ et d'autres). Non applicable avec <code>allowUnorderedMigrations: true</code>. <code>0.28.20</code> rétroporte le même correctif.</p>"
+          },
+          "source": {
+            "url": "https://github.com/kysely-org/kysely/releases/tag/v0.29.9",
+            "label": "github.com/kysely-org/kysely"
+          }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "node-27-alpha",
+      "updates": [
+        {
+          "id": "node-27-alpha",
+          "tag": "beta",
+          "tag_label": {
+            "es": "Alpha",
+            "en": "Alpha",
+            "fr": "Alpha"
+          },
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "Node.js 27.0.0-alpha: generación de X.509 con CSR, subprocess.timedOut y lookups DNS unificados",
+            "en": "Node.js 27.0.0-alpha: X.509 generation with CSR, subprocess.timedOut and coalesced DNS lookups",
+            "fr": "Node.js 27.0.0-alpha : génération X.509 avec CSR, subprocess.timedOut et lookups DNS regroupés"
+          },
+          "body_html": {
+            "es": "<p>Salió <code>v27.0.0-alpha.0.1.0</code>, la primera alpha de la línea 27. Lo notable para backend: <code>crypto</code> suma <strong>generación de certificados X.509 con soporte de CSR</strong>, <code>child_process</code> agrega <code>subprocess.timedOut</code> para saber si el proceso murió por timeout, y <code>dns</code> unifica las llamadas <code>lookup()</code> idénticas que corren en simultáneo. También hay trabajo de arranque: compile cache para los módulos VFS de los single executable applications y streams precargados en el startup snapshot de los workers. Es alpha: probala en CI, no en producción.</p>",
+            "en": "<p><code>v27.0.0-alpha.0.1.0</code> is out, the first alpha of the 27 line. Notable for backend work: <code>crypto</code> gains <strong>X.509 certificate generation with CSR support</strong>, <code>child_process</code> adds <code>subprocess.timedOut</code> so you can tell a timeout kill apart, and <code>dns</code> coalesces identical concurrent <code>lookup()</code> requests. There is startup work too: a compile cache for the VFS modules of single executable applications, and streams preloaded into the worker startup snapshot. It is an alpha: try it in CI, not in production.</p>",
+            "fr": "<p><code>v27.0.0-alpha.0.1.0</code> est sortie, première alpha de la ligne 27. À retenir côté backend : <code>crypto</code> gagne la <strong>génération de certificats X.509 avec prise en charge des CSR</strong>, <code>child_process</code> ajoute <code>subprocess.timedOut</code> pour savoir si le processus a été tué par timeout, et <code>dns</code> regroupe les appels <code>lookup()</code> identiques et simultanés. Du travail aussi sur le démarrage : un compile cache pour les modules VFS des single executable applications et des streams préchargés dans le startup snapshot des workers. C'est une alpha : testez-la en CI, pas en production.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nodejs/node/releases/tag/v27.0.0-alpha.0.1.0",
+            "label": "github.com/nodejs/node"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "nestjs-11-2-10",
+      "updates": [
+        {
+          "id": "nestjs-11-2-10",
+          "tag": "patch",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "NestJS 11.2.10: la línea v11 endurece la validación frente a buffers",
+            "en": "NestJS 11.2.10: the v11 line hardens validation against buffers",
+            "fr": "NestJS 11.2.10 : la ligne v11 durcit la validation face aux buffers"
+          },
+          "body_html": {
+            "es": "<p>Backports para quienes siguen en v11: los pipes de validación ahora <strong>rechazan un buffer enviado en lugar de una clase validada</strong> (también cuando viene en una propiedad anidada), <code>ParseArrayPipe</code> vuelve a lanzar los errores que no son de validación y limita el total de mensajes de error, y el logger JSON chequea el tope de registros antes de convertir valores. Si no podés migrar a v12 todavía, este patch conviene.</p>",
+            "en": "<p>Backports for teams still on v11: the validation pipes now <strong>reject a buffer sent in place of a validated class</strong> (including one held by a nested property), <code>ParseArrayPipe</code> rethrows non-validation errors and caps the total of error messages, and the JSON logger checks its record cap before converting values. If you cannot move to v12 yet, take this patch.</p>",
+            "fr": "<p>Des rétroportages pour ceux qui restent en v11 : les pipes de validation <strong>rejettent désormais un buffer envoyé à la place d'une classe validée</strong> (y compris dans une propriété imbriquée), <code>ParseArrayPipe</code> relance les erreurs qui ne relèvent pas de la validation et plafonne le total des messages d'erreur, et le logger JSON vérifie son plafond d'enregistrements avant de convertir les valeurs. Si vous ne pouvez pas encore passer en v12, prenez ce correctif.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nestjs/nest/releases/tag/v11.2.10",
+            "label": "github.com/nestjs/nest"
+          }
+        },
+        {
+          "id": "typeorm-1-1-3",
+          "tag": "patch",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "TypeORM 1.1.3: relaciones lazy que ya no se cargan solas y locks de SQL Server liberados",
+            "en": "TypeORM 1.1.3: lazy relations no longer load themselves and SQL Server locks are released",
+            "fr": "TypeORM 1.1.3 : les relations lazy ne se chargent plus seules et les verrous SQL Server sont libérés"
+          },
+          "body_html": {
+            "es": "<p>Patch con varios fixes que se sienten en producción: <strong>ya no se cargan relaciones lazy al construir el entity id map</strong> (queries de más que no pediste), se liberan los locks de query de SQL Server después de un error en un subscriber y los runners del cache de base de datos después de un borrado fallido. Además la detección de columnas de fecha modificadas respeta el flag <code>utc</code>, y <code>PlatformTools.load</code> usa <code>require</code> estáticos para llevarse mejor con los bundlers.</p>",
+            "en": "<p>A patch with several fixes you would notice in production: <strong>lazy relations are no longer loaded while building the entity id map</strong> (extra queries you never asked for), SQL Server query locks are released after a subscriber error, and database cache runners are released after a failed removal. Change detection on date columns now honours the <code>utc</code> flag, and <code>PlatformTools.load</code> uses static <code>require</code> calls for bundler compatibility.</p>",
+            "fr": "<p>Un correctif avec plusieurs fixes sensibles en production : <strong>les relations lazy ne sont plus chargées lors de la construction de l'entity id map</strong> (des requêtes en trop que vous n'aviez pas demandées), les verrous de requête SQL Server sont libérés après une erreur de subscriber, et les runners du cache de base de données après une suppression échouée. La détection des colonnes de date modifiées respecte le flag <code>utc</code>, et <code>PlatformTools.load</code> utilise des <code>require</code> statiques pour la compatibilité avec les bundlers.</p>"
+          },
+          "source": {
+            "url": "https://github.com/typeorm/typeorm/releases/tag/1.1.3",
+            "label": "github.com/typeorm/typeorm"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "aurora-rds-r9g",
+      "updates": [
+        {
+          "id": "aurora-rds-r9g",
+          "tag": "ga",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "Aurora y RDS suman instancias R9g con Graviton5: hasta 30% más rendimiento",
+            "en": "Aurora and RDS add Graviton5 R9g instances: up to 30% more performance",
+            "fr": "Aurora et RDS ajoutent les instances R9g Graviton5 : jusqu'à 30 % de performance en plus"
+          },
+          "body_html": {
+            "es": "<p>Las R9g ya están en GA para Aurora (PostgreSQL y MySQL) y para RDS for PostgreSQL, MySQL y MariaDB. AWS habla de <strong>hasta 30% más rendimiento y hasta 22% mejor precio-rendimiento</strong> on-demand frente a Graviton4 en Aurora, según motor, versión y carga. Vienen en nueve tamaños, de <code>large</code> a <code>48xlarge</code>, con hasta 192 vCPUs y relación 8:1 de memoria por vCPU. Por ahora en N. Virginia, Ohio, Oregon y Frankfurt. Medí con tu carga antes de migrar: el número es un techo, no una promesa.</p>",
+            "en": "<p>R9g is generally available for Aurora (PostgreSQL and MySQL) and for RDS for PostgreSQL, MySQL and MariaDB. AWS cites <strong>up to 30% more performance and up to 22% better price-performance</strong> on demand versus Graviton4 on Aurora, depending on engine, version and workload. Nine sizes from <code>large</code> to <code>48xlarge</code>, up to 192 vCPUs and an 8:1 memory-to-vCPU ratio. Available for now in N. Virginia, Ohio, Oregon and Frankfurt. Benchmark your own workload before moving: the figure is a ceiling, not a promise.</p>",
+            "fr": "<p>Les R9g sont disponibles en GA pour Aurora (PostgreSQL et MySQL) et pour RDS for PostgreSQL, MySQL et MariaDB. AWS annonce <strong>jusqu'à 30 % de performance en plus et jusqu'à 22 % de mieux en prix-performance</strong> à la demande face à Graviton4 sur Aurora, selon le moteur, la version et la charge. Neuf tailles, de <code>large</code> à <code>48xlarge</code>, jusqu'à 192 vCPU et un ratio mémoire/vCPU de 8:1. Pour l'instant en N. Virginia, Ohio, Oregon et Francfort. Mesurez avec votre propre charge avant de migrer : le chiffre est un plafond, pas une promesse.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-aurora-rds-postgresql-mysql-mariadb-r9g-instances/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "cloudflare-basin-ga",
+          "tag": "ga",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "Cloudflare Basin llega a GA: analytics serverless sobre Apache Iceberg y R2",
+            "en": "Cloudflare Basin reaches GA: serverless analytics on Apache Iceberg and R2",
+            "fr": "Cloudflare Basin passe en GA : de l'analytique serverless sur Apache Iceberg et R2"
+          },
+          "body_html": {
+            "es": "<p>InfoQ cubre la disponibilidad general de Basin, la plataforma de analytics serverless de Cloudflare armada sobre <strong>Apache Iceberg y R2</strong>. Al ser formato abierto y sin costo de egress, podés leer y escribir con cualquier motor compatible con Iceberg: PyIceberg, DuckDB, Snowflake o Spark. Desde la preview subió la ingesta a 3 GB/s por stream y sumó más SQL, mantenimiento de tablas Iceberg, integración con Logpush y soporte de Terraform. La propia Cloudflare aclara que no reemplaza a un warehouse para toda carga; apunta a equipos con datos demasiado chicos para justificar infraestructura dedicada.</p>",
+            "en": "<p>InfoQ covers the general availability of Basin, Cloudflare's serverless analytics platform built on <strong>Apache Iceberg and R2</strong>. With an open format and no egress fees, you can read and write with any Iceberg-compatible engine: PyIceberg, DuckDB, Snowflake or Spark. Since the preview, ingestion grew to 3 GB/s per stream, and it added more SQL, Iceberg table maintenance, Logpush integration and Terraform support. Cloudflare itself says it does not replace a warehouse for every workload; it targets teams whose data is too small to justify dedicated infrastructure.</p>",
+            "fr": "<p>InfoQ couvre la disponibilité générale de Basin, la plateforme d'analytique serverless de Cloudflare bâtie sur <strong>Apache Iceberg et R2</strong>. Format ouvert et pas de frais d'egress : on lit et on écrit avec n'importe quel moteur compatible Iceberg, PyIceberg, DuckDB, Snowflake ou Spark. Depuis la preview, l'ingestion est montée à 3 Go/s par stream, avec davantage de SQL, la maintenance des tables Iceberg, l'intégration Logpush et le support Terraform. Cloudflare précise que Basin ne remplace pas un warehouse pour toutes les charges ; il vise les équipes dont les données sont trop petites pour justifier une infrastructure dédiée.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/11/cloudflare-basin-analytics/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "bullmq-6-7-6",
+          "tag": "patch",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "BullMQ 6.7.6: la clave de deduplicación se borra junto con el job padre",
+            "en": "BullMQ 6.7.6: the deduplication key is removed along with its parent job",
+            "fr": "BullMQ 6.7.6 : la clé de déduplication est supprimée avec son job parent"
+          },
+          "body_html": {
+            "es": "<p>Fix de flows: cuando se eliminaba un job padre, la clave de deduplicación asociada quedaba viva. Ahora se borra junto con el padre. El arreglo llega también a los SDKs de Python, Elixir, PHP, Rust y .NET. Si usás flows con deduplicación, es un upgrade directo.</p>",
+            "en": "<p>A flows fix: removing a parent job left its associated deduplication key behind. The key is now removed with the parent. The fix also lands in the Python, Elixir, PHP, Rust and .NET SDKs. If you combine flows with deduplication, this is a straightforward upgrade.</p>",
+            "fr": "<p>Un correctif pour les flows : la suppression d'un job parent laissait en place la clé de déduplication associée. Elle est maintenant supprimée avec le parent. Le correctif arrive aussi dans les SDK Python, Elixir, PHP, Rust et .NET. Si vous combinez flows et déduplication, la mise à jour est directe.</p>"
+          },
+          "source": {
+            "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.7.6",
+            "label": "github.com/taskforcesh/bullmq"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "gcp-spend-caps-ga",
+      "updates": [
+        {
+          "id": "gcp-spend-caps-ga",
+          "tag": "ga",
+          "date": "10 Nov 2026",
+          "title": {
+            "es": "Google Cloud: los spend caps llegan a GA, con API y reset mensual",
+            "en": "Google Cloud: spend caps reach GA, with an API and monthly resets",
+            "fr": "Google Cloud : les spend caps passent en GA, avec une API et une remise à zéro mensuelle"
+          },
+          "body_html": {
+            "es": "<p>Según InfoQ, los spend caps de Cloud Billing Budgets ya son GA: cuando un proyecto llega a su presupuesto mensual, <strong>se pausa el uso nuevo de ese servicio sin borrar recursos</strong>. Leé la letra chica: un cap cubre un proyecto y un servicio por mes calendario, así que folders, organizaciones, labels y presupuestos multi-servicio quedan afuera; la estimación se calcula a precio de lista, sin créditos ni descuentos, y la aplicación no es instantánea. Para un proyecto de pruebas o un sandbox es un cinturón de seguridad que hacía falta hace años.</p>",
+            "en": "<p>Per InfoQ, spend caps on Cloud Billing Budgets are now GA: once a project hits its monthly budget, <strong>new usage of that service is paused without deleting resources</strong>. Read the fine print: a cap covers one project and one service per calendar month, so folders, organizations, labels and multi-service budgets are out of scope; the estimate is computed at list price, excluding credits and discounts, and enforcement is not instant. For a test project or a sandbox, it is a seat belt that was overdue.</p>",
+            "fr": "<p>Selon InfoQ, les spend caps des Cloud Billing Budgets sont désormais GA : quand un projet atteint son budget mensuel, <strong>la nouvelle consommation de ce service est mise en pause sans supprimer de ressources</strong>. Lisez les petites lignes : un plafond couvre un projet et un service par mois calendaire, donc les dossiers, organisations, labels et budgets multi-services sont hors périmètre ; l'estimation se calcule au prix catalogue, hors crédits et remises, et l'application n'est pas instantanée. Pour un projet de test ou un sandbox, c'est une ceinture de sécurité attendue depuis longtemps.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/11/google-cloud-spend-caps/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "wrangler-4-161-0",
+          "tag": "minor",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "Wrangler 4.161.0: source maps del Build Output relativos a cada archivo",
+            "en": "Wrangler 4.161.0: Build Output source maps relative to each map file",
+            "fr": "Wrangler 4.161.0 : des source maps du Build Output relatives à chaque fichier"
+          },
+          "body_html": {
+            "es": "<p>El Build Output experimental (<code>wrangler build --experimental-cf-build-output</code>) ahora escribe los source maps con <code>sources</code> relativos a cada archivo de mapa, igual que el plugin de Vite; antes, en Workers sin bundle, se perdía la ubicación de algunos archivos. En patches: los <code>_redirects</code> relativos se normalizan igual en Pages y en Workers assets, y la sesión de remote bindings ya no se reinicia ignorando <code>--profile</code> cuando sacás el último binding remoto con <code>wrangler dev</code> corriendo.</p>",
+            "en": "<p>The experimental Build Output (<code>wrangler build --experimental-cf-build-output</code>) now writes source maps with <code>sources</code> relative to each map file, like the Vite plugin does; before, Workers that Wrangler does not bundle lost the location of some files. In patches: relative <code>_redirects</code> targets are normalized the same way on Pages and Workers assets, and the remote bindings session no longer restarts ignoring <code>--profile</code> when you remove the last remote binding while <code>wrangler dev</code> is running.</p>",
+            "fr": "<p>Le Build Output expérimental (<code>wrangler build --experimental-cf-build-output</code>) écrit désormais les source maps avec des <code>sources</code> relatives à chaque fichier de map, comme le plugin Vite ; auparavant, les Workers non bundlés perdaient l'emplacement de certains fichiers. Côté correctifs : les cibles <code>_redirects</code> relatives sont normalisées de la même façon sur Pages et Workers assets, et la session de remote bindings ne redémarre plus en ignorant <code>--profile</code> quand on retire le dernier binding distant pendant que <code>wrangler dev</code> tourne.</p>"
+          },
+          "source": {
+            "url": "https://github.com/cloudflare/workers-sdk/releases/tag/wrangler%404.161.0",
+            "label": "github.com/cloudflare/workers-sdk"
+          }
+        },
+        {
+          "id": "mwaa-fine-grained-access",
+          "tag": "minor",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "Amazon MWAA: control de acceso fino con IAM Identity Center y entornos multi-equipo",
+            "en": "Amazon MWAA: fine-grained access control with IAM Identity Center and multi-team environments",
+            "fr": "Amazon MWAA : contrôle d'accès fin avec IAM Identity Center et environnements multi-équipes"
+          },
+          "body_html": {
+            "es": "<p>Airflow administrado suma dos piezas: login a la UI con tu identity provider corporativo, con autorización evaluada por request mediante políticas IAM que acotan por tipo de recurso (DAGs, connections, variables, pools), acción e ID; y <strong>entornos multi-equipo</strong>, donde varios equipos comparten un solo entorno y cada uno ve solo sus DAGs y los compartidos. Ojo que lo multi-equipo se apoya en una feature de Apache Airflow que todavía está en preview.</p>",
+            "en": "<p>Managed Airflow gains two pieces: sign-in to the UI with your corporate identity provider, with authorization evaluated per request through IAM policies scoped by resource type (DAGs, connections, variables, pools), action and resource ID; and <strong>multi-team environments</strong>, where several teams share one environment and each sees only its own DAGs plus shared ones. Note that multi-team relies on an Apache Airflow feature that is still in preview.</p>",
+            "fr": "<p>Airflow managé gagne deux briques : la connexion à l'UI avec votre fournisseur d'identité d'entreprise, avec une autorisation évaluée à chaque requête via des politiques IAM limitées par type de ressource (DAGs, connections, variables, pools), action et identifiant ; et les <strong>environnements multi-équipes</strong>, où plusieurs équipes partagent un seul environnement et ne voient que leurs DAGs et ceux qui sont partagés. À noter : le multi-équipes repose sur une fonctionnalité d'Apache Airflow encore en preview.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/mwaa-fine-grained-access-control/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "linkedin-gitops-engine",
+      "updates": [
+        {
+          "id": "linkedin-gitops-engine",
+          "tag": "notable",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "LinkedIn reemplaza Argo CD por un motor GitOps propio en más de 250 clusters de Kubernetes",
+            "en": "LinkedIn replaces Argo CD with its own GitOps engine across 250+ Kubernetes clusters",
+            "fr": "LinkedIn remplace Argo CD par son propre moteur GitOps sur plus de 250 clusters Kubernetes"
+          },
+          "body_html": {
+            "es": "<p>InfoQ resume el post de LinkedIn y vale la lectura aunque no tengas su escala. Dos problemas eran de arquitectura: Argo CD mantiene un watch por group-version-resource compartido entre Applications, así que el churn de etcd de una app frena el sync de todas (menos de 3 minutos con 60.000 pods, más de 10 con 80.000). Y con server-side apply, Kubernetes trunca <code>managedFields</code> cuando un objeto pasó de <strong>10 field managers distintos</strong>: el API server se olvida de quién es dueño de un campo y quedan containers huérfanos sin ningún error. Mantener 200+ instancias de Argo CD hacía de cada upgrade un proyecto de semanas. El motor es interno y Argo CD sigue en uso para add-ons. Lo accionable: contá los field managers en tus objetos de larga vida y fijate si la latencia de sync acompaña la cantidad total de pods.</p>",
+            "en": "<p>InfoQ summarizes LinkedIn's post, and it is worth reading even far below their scale. Two problems were architectural: Argo CD keeps one watch per group-version-resource shared across Applications, so etcd churn from one app slows sync for all of them (under 3 minutes at 60,000 pods, over 10 at 80,000). And with server-side apply, Kubernetes truncates <code>managedFields</code> once an object has had more than <strong>10 distinct field managers</strong>: the API server forgets who owns a field and containers are orphaned with no error. Maintaining 200+ Argo CD instances made each upgrade a multi-week project. The engine is internal, and Argo CD stays in use for add-ons. The actionable part: count field managers on long-lived objects, and check whether sync latency tracks total pod count.</p>",
+            "fr": "<p>InfoQ résume le billet de LinkedIn, qui mérite la lecture même loin de leur échelle. Deux problèmes étaient d'ordre architectural : Argo CD maintient un watch par group-version-resource partagé entre Applications, si bien que le churn etcd d'une application ralentit le sync de toutes (moins de 3 minutes à 60 000 pods, plus de 10 à 80 000). Et avec le server-side apply, Kubernetes tronque <code>managedFields</code> dès qu'un objet a connu plus de <strong>10 field managers distincts</strong> : l'API server oublie qui possède un champ et des containers deviennent orphelins sans aucune erreur. Maintenir plus de 200 instances Argo CD faisait de chaque montée de version un projet de plusieurs semaines. Le moteur est interne et Argo CD reste utilisé pour les add-ons. À faire chez vous : comptez les field managers sur vos objets à longue durée de vie et vérifiez si la latence de sync suit le nombre total de pods.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/11/kubernetes-argocd-linkedin/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "better-auth-1-7-22",
+      "updates": [
+        {
+          "id": "better-auth-1-7-22",
+          "tag": "patch",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "better-auth 1.7.22: revocar la sesión actual ahora expira la cookie, y fixes para Cloudflare Workers",
+            "en": "better-auth 1.7.22: revoking the current session now expires its cookie, plus Cloudflare Workers fixes",
+            "fr": "better-auth 1.7.22 : révoquer la session courante expire désormais son cookie, et des correctifs pour Cloudflare Workers"
+          },
+          "body_html": {
+            "es": "<p>Patch cargado. <code>revokeSession</code>, <code>revokeSessions</code> y <code>deleteUser({ token })</code> ahora <strong>expiran las cookies de sesión</strong> cuando revocás la sesión actual o borrás el usuario, y <code>getSession</code> ya no deja una sesión expirada en el contexto de la request después de devolver <code>null</code>. En Cloudflare Workers se arregló el consumo de verification values que quedaba colgado y el error de validación de schema en cada cold start. Las requests de <code>deferSessionRefresh</code> dejan de fallar con 415 en Next.js y Nuxt, y los access tokens introspectados que no pasan <code>aud</code>, <code>iss</code>, <code>exp</code> o <code>nbf</code> devuelven 401 en lugar de 500.</p>",
+            "en": "<p>A dense patch. <code>revokeSession</code>, <code>revokeSessions</code> and <code>deleteUser({ token })</code> now <strong>expire session cookies</strong> when you revoke the current session or delete the user, and <code>getSession</code> no longer leaves an expired session in the request context after returning <code>null</code>. On Cloudflare Workers, verification value consumption no longer hangs and module-scope auth instances stop logging a schema validation error on every cold start. <code>deferSessionRefresh</code> requests stop failing with 415 on Next.js and Nuxt, and introspected access tokens that fail <code>aud</code>, <code>iss</code>, <code>exp</code> or <code>nbf</code> checks return 401 instead of 500.</p>",
+            "fr": "<p>Un correctif dense. <code>revokeSession</code>, <code>revokeSessions</code> et <code>deleteUser({ token })</code> <strong>expirent désormais les cookies de session</strong> quand on révoque la session courante ou qu'on supprime l'utilisateur, et <code>getSession</code> ne laisse plus de session expirée dans le contexte de la requête après avoir renvoyé <code>null</code>. Sur Cloudflare Workers, la consommation des verification values ne reste plus bloquée et les instances d'auth au niveau module n'émettent plus d'erreur de validation de schéma à chaque cold start. Les requêtes <code>deferSessionRefresh</code> n'échouent plus en 415 sur Next.js et Nuxt, et les access tokens introspectés qui échouent aux contrôles <code>aud</code>, <code>iss</code>, <code>exp</code> ou <code>nbf</code> renvoient 401 au lieu de 500.</p>"
+          },
+          "source": {
+            "url": "https://github.com/better-auth/better-auth/releases/tag/v1.7.22",
+            "label": "github.com/better-auth/better-auth"
+          }
+        },
+        {
+          "id": "nx-23-3-2",
+          "tag": "patch",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "Nx 23.3.2: el output de la tarea se vuelca antes de que termine el proceso",
+            "en": "Nx 23.3.2: task output is flushed before the task process exits",
+            "fr": "Nx 23.3.2 : la sortie de la tâche est vidée avant la fin du processus"
+          },
+          "body_html": {
+            "es": "<p>Un solo fix en la línea 23: Nx ahora hace flush del output de la tarea antes de que salga el proceso. Si en CI te faltaban las últimas líneas de un log, puede ser esto.</p>",
+            "en": "<p>A single fix on the 23 line: Nx now flushes task output before the task process exits. If the last lines of a log were missing in CI, this may be why.</p>",
+            "fr": "<p>Un seul correctif sur la ligne 23 : Nx vide désormais la sortie de la tâche avant la fin du processus. S'il vous manquait les dernières lignes d'un log en CI, c'est peut-être cela.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nrwl/nx/releases/tag/23.3.2",
+            "label": "github.com/nrwl/nx"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Los frameworks están cambiando defaults permisivos por límites explícitos: NestJS 12.5 baja el payload de WebSocket de 100 MB a 1 MB y hace que un límite en NaN tome el default en vez de desactivarse. Revisá qué límites tenés configurados desde variables de entorno.",
+      "en": "Frameworks are trading permissive defaults for explicit limits: NestJS 12.5 drops the WebSocket payload from 100 MB to 1 MB and makes a NaN limit fall back to its default instead of switching off. Review which limits you configure from environment variables.",
+      "fr": "Les frameworks troquent des valeurs par défaut permissives contre des limites explicites : NestJS 12.5 fait passer le payload WebSocket de 100 Mo à 1 Mo et fait retomber une limite à NaN sur sa valeur par défaut au lieu de la désactiver. Passez en revue les limites que vous configurez par variables d'environnement."
+    },
+    {
+      "es": "La identidad delegada se vuelve estándar de plataforma: con token exchange (RFC 8693) y el claim act, el downstream sabe quién actúa en nombre de quién. Reenviar el access token del usuario entre servicios ya no tiene excusa.",
+      "en": "Delegated identity is becoming a platform standard: with token exchange (RFC 8693) and the act claim, a downstream service knows who is acting for whom. Forwarding the user's access token between services no longer has an excuse.",
+      "fr": "L'identité déléguée devient un standard de plateforme : avec le token exchange (RFC 8693) et le claim act, le service en aval sait qui agit pour qui. Transmettre le token d'accès de l'utilisateur d'un service à l'autre n'a plus d'excuse."
+    },
+    {
+      "es": "Ojo con las fechas de los advisories: Hono, Rails, gRPC y pgEdge aparecieron ayer en la base global de GitHub, pero sus disclosures originales son de hace una a dos semanas. Si ya actualizaste, no hay nada nuevo que hacer.",
+      "en": "Mind advisory dates: Hono, Rails, gRPC and pgEdge showed up in GitHub's global database yesterday, but their original disclosures are one to two weeks old. If you already upgraded, there is nothing new to do.",
+      "fr": "Attention aux dates des advisories : Hono, Rails, gRPC et pgEdge sont apparus hier dans la base globale de GitHub, mais leurs divulgations d'origine datent d'une à deux semaines. Si vous êtes déjà à jour, il n'y a rien de nouveau à faire."
+    }
+  ]
+}

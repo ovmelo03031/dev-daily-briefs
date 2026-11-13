@@ -1,0 +1,259 @@
+{
+  "title": {
+    "es": "Dev News 13 Nov 2026: Node 27 alpha genera certificados X.509, Storybook 11 beta.2 adelgaza el CLI y Astro corrige XSS en slots",
+    "en": "Dev News Nov 13, 2026: Node 27 alpha generates X.509 certificates, Storybook 11 beta.2 slims the CLI and Astro fixes slot XSS",
+    "fr": "Dev News 13 nov. 2026 : Node 27 alpha génère des certificats X.509, Storybook 11 beta.2 allège le CLI et Astro corrige un XSS dans les slots"
+  },
+  "description": {
+    "es": "Node.js 27.0.0-alpha.0.1.0 suma generación de X.509 con CSR, subprocess.timedOut y lookups de DNS deduplicados; Storybook 11 beta.2 instala 13 paquetes en vez de 128 y corre docgen sobre la API nativa de TypeScript 7.1; Astro publica dos XSS reflejados en sus integraciones de Solid y Svelte y endurece security.allowedDomains; Vue 3.6 llega a rc.15 y Qwik 2.0 a rc.5.",
+    "en": "Node.js 27.0.0-alpha.0.1.0 adds X.509 generation with CSR support, subprocess.timedOut and coalesced DNS lookups; Storybook 11 beta.2 installs 13 packages instead of 128 and runs docgen on the TypeScript 7.1 native API; Astro discloses two reflected XSS issues in its Solid and Svelte integrations and tightens security.allowedDomains; Vue 3.6 reaches rc.15 and Qwik 2.0 reaches rc.5.",
+    "fr": "Node.js 27.0.0-alpha.0.1.0 ajoute la génération X.509 avec CSR, subprocess.timedOut et des lookups DNS dédupliqués ; Storybook 11 beta.2 installe 13 paquets au lieu de 128 et exécute docgen sur l'API native de TypeScript 7.1 ; Astro divulgue deux XSS réfléchis dans ses intégrations Solid et Svelte et durcit security.allowedDomains ; Vue 3.6 atteint rc.15 et Qwik 2.0 rc.5."
+  },
+  "pubDate": "2026-11-13",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": {
+        "es": "Node 27 alpha: X.509 con CSR en crypto",
+        "en": "Node 27 alpha: X.509 with CSR in crypto",
+        "fr": "Node 27 alpha : X.509 avec CSR dans crypto"
+      },
+      "anchor": "node-27-alpha-0-1-0",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": {
+        "es": "Storybook 11 beta.2: 13 paquetes, no 128",
+        "en": "Storybook 11 beta.2: 13 packages, not 128",
+        "fr": "Storybook 11 beta.2 : 13 paquets, pas 128"
+      },
+      "anchor": "storybook-11-beta-2",
+      "icon": "lucide:code"
+    },
+    {
+      "text": {
+        "es": "Astro: XSS reflejado en slots de Solid y Svelte",
+        "en": "Astro: reflected XSS in Solid and Svelte slots",
+        "fr": "Astro : XSS réfléchi dans les slots Solid et Svelte"
+      },
+      "anchor": "astro-slot-name-xss",
+      "icon": "simple-icons:astro"
+    },
+    {
+      "text": {
+        "es": "@hono/node-server: el backslash saltea al proxy",
+        "en": "@hono/node-server: backslash slips past the proxy",
+        "fr": "@hono/node-server : le backslash contourne le proxy"
+      },
+      "anchor": "hono-node-server-backslash-path",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Vue 3.6 rc.15: más fixes de Vapor y reactivity",
+        "en": "Vue 3.6 rc.15: more Vapor and reactivity fixes",
+        "fr": "Vue 3.6 rc.15 : encore des correctifs Vapor et reactivity"
+      },
+      "anchor": "vue-3-6-rc-15",
+      "icon": "simple-icons:vuedotjs"
+    },
+    {
+      "text": {
+        "es": "Qwik 2.0 rc.5: retries en SSG y migrate-v2",
+        "en": "Qwik 2.0 rc.5: SSG retries and migrate-v2",
+        "fr": "Qwik 2.0 rc.5 : retries SSG et migrate-v2"
+      },
+      "anchor": "qwik-2-0-rc-5",
+      "icon": "lucide:blocks"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "node-27-alpha-0-1-0",
+          "tag": "notable",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "Node.js 27.0.0-alpha.0.1.0: generación de X.509 con CSR, subprocess.timedOut y lookups de DNS deduplicados",
+            "en": "Node.js 27.0.0-alpha.0.1.0: X.509 generation with CSR support, subprocess.timedOut and coalesced DNS lookups",
+            "fr": "Node.js 27.0.0-alpha.0.1.0 : génération X.509 avec CSR, subprocess.timedOut et lookups DNS dédupliqués"
+          },
+          "body_html": {
+            "es": "<p>La alpha de Node 27 sigue sumando cosas que vas a querer usar. <code>crypto</code> ahora <strong>genera certificados X.509 con soporte de CSR</strong>, algo para lo que hasta hoy terminabas llamando a <code>openssl</code> o trayendo una dependencia. <code>child_process</code> agrega <code>subprocess.timedOut</code> para saber si el proceso murió por timeout sin adivinar por la señal, y <code>dns</code> junta los <code>lookup()</code> concurrentes idénticos en uno solo. También hay trabajo de arranque: los single executable applications generan un compile cache para los módulos del VFS y los workers precargan streams en el startup snapshot. Es alpha, no la pongas en producción, pero ya vale la pena probar tus tests contra ella.</p>",
+            "en": "<p>The Node 27 alpha keeps adding things you will want. <code>crypto</code> can now <strong>generate X.509 certificates with CSR support</strong>, a job that until now meant shelling out to <code>openssl</code> or pulling in a dependency. <code>child_process</code> adds <code>subprocess.timedOut</code> so you can tell a timeout kill apart without guessing from the signal, and <code>dns</code> coalesces identical concurrent <code>lookup()</code> requests into one. There is startup work too: single executable applications generate a compile cache for VFS modules, and workers preload streams into the startup snapshot. It is an alpha, so keep it out of production, but it is worth running your test suite against it.</p>",
+            "fr": "<p>L'alpha de Node 27 continue d'ajouter des fonctionnalités utiles. <code>crypto</code> peut désormais <strong>générer des certificats X.509 avec prise en charge des CSR</strong>, ce qui imposait jusqu'ici d'appeler <code>openssl</code> ou d'ajouter une dépendance. <code>child_process</code> ajoute <code>subprocess.timedOut</code> pour distinguer un arrêt par timeout sans deviner d'après le signal, et <code>dns</code> regroupe les requêtes <code>lookup()</code> concurrentes identiques. Côté démarrage, les single executable applications génèrent un compile cache pour les modules du VFS et les workers préchargent les streams dans le startup snapshot. C'est une alpha, à ne pas mettre en production, mais elle mérite un passage de votre suite de tests.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nodejs/node/releases/tag/v27.0.0-alpha.0.1.0",
+            "label": "github.com/nodejs/node"
+          }
+        },
+        {
+          "id": "storybook-11-beta-2",
+          "tag": "beta",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "Storybook 11.0.0-beta.2: el CLI instala 13 paquetes en vez de 128 y docgen corre sobre la API nativa de TypeScript 7.1",
+            "en": "Storybook 11.0.0-beta.2: the CLI installs 13 packages instead of 128 and docgen runs on the TypeScript 7.1 native API",
+            "fr": "Storybook 11.0.0-beta.2 : le CLI installe 13 paquets au lieu de 128 et docgen tourne sur l'API native de TypeScript 7.1"
+          },
+          "body_html": {
+            "es": "<p>Esto es una dieta en serio: el CLI <strong>saca jscodeshift y Babel</strong> y pasa de instalar 128 paquetes a 13. Además, el docgen de React y Angular ahora corre sobre la API nativa de TypeScript 7.1 (el plugin de Vite para React queda fijado en 0.7 hasta que 7.1 sea estable). En SvelteKit, los módulos <code>$app</code> se mockean con la mock API de Storybook y desaparece <code>sveltekit_experimental</code>, con un automigrate que lo pasa a <code>beforeEach</code>. Y los docs suman snippet templates para que el código de ejemplo siga a los controls. Sigue siendo beta, pero la dirección está clarísima: menos dependencias y el toolchain nativo de TypeScript.</p>",
+            "en": "<p>A real diet: the CLI <strong>drops jscodeshift and Babel</strong> and goes from installing 128 packages to 13. React and Angular docgen now run on the TypeScript 7.1 native API (the React docgen Vite plugin stays pinned to 0.7 until 7.1 is stable). For SvelteKit, <code>$app</code> modules are mocked with Storybook's mock API and <code>sveltekit_experimental</code> is removed, with an automigration that moves it to <code>beforeEach</code>. Docs also gain snippet templates so story snippets can follow the controls. Still a beta, but the direction is clear: fewer dependencies and the native TypeScript toolchain.</p>",
+            "fr": "<p>Un vrai régime : le CLI <strong>abandonne jscodeshift et Babel</strong> et passe de 128 paquets installés à 13. Le docgen React et Angular s'exécute désormais sur l'API native de TypeScript 7.1 (le plugin Vite de docgen React reste fixé en 0.7 tant que 7.1 n'est pas stable). Pour SvelteKit, les modules <code>$app</code> sont mockés avec la mock API de Storybook et <code>sveltekit_experimental</code> disparaît, avec une automigration vers <code>beforeEach</code>. Les docs gagnent aussi des snippet templates pour que les extraits suivent les controls. C'est encore une beta, mais la direction est claire : moins de dépendances et le toolchain TypeScript natif.</p>"
+          },
+          "source": {
+            "url": "https://github.com/storybookjs/storybook/releases/tag/v11.0.0-beta.2",
+            "label": "github.com/storybookjs/storybook"
+          }
+        }
+      ]
+    },
+    {
+      "id": "js-frameworks",
+      "name": "JS Frameworks",
+      "theme": "js-frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "js-frameworks",
+      "updates": [
+        {
+          "id": "astro-slot-name-xss",
+          "tag": "security",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "Astro: XSS reflejado por nombres de slot sin escapar en @astrojs/solid-js y @astrojs/svelte",
+            "en": "Astro: reflected XSS via unescaped slot names in @astrojs/solid-js and @astrojs/svelte",
+            "fr": "Astro : XSS réfléchi via des noms de slot non échappés dans @astrojs/solid-js et @astrojs/svelte"
+          },
+          "body_html": {
+            "es": "<p>Dos advisories gemelos (<code>CVE-2026-126363</code> y <code>CVE-2026-126362</code>, CVSS 2.3): el renderer envolvía el contenido de un slot con nombre en <code>&lt;astro-slot&gt;</code> y escribía ese nombre en el atributo <code>name</code> sin escapar HTML. Si tu página usa algo de la request como nombre de slot (un query param, por ejemplo), una comilla cierra el atributo y entra HTML arbitrario. El alcance es acotado: hace falta que el componente esté hidratado con <code>client:*</code> y que renderice el slot por nombre dinámico. Los fixes están en <code>@astrojs/solid-js</code> 7.1.2 y <code>@astrojs/svelte</code> 9.1.2. Severidad baja, pero es un bump trivial: hacelo.</p>",
+            "en": "<p>Two twin advisories (<code>CVE-2026-126363</code> and <code>CVE-2026-126362</code>, CVSS 2.3): the renderer wrapped named slot content in <code>&lt;astro-slot&gt;</code> and wrote the slot name into its <code>name</code> attribute without HTML escaping. If a page takes the slot name from the request (a query parameter, say), a quote character ends the attribute and injects arbitrary HTML. The reach is narrow: the component has to be hydrated with a <code>client:*</code> directive and render the slot by a dynamic name. Fixes are in <code>@astrojs/solid-js</code> 7.1.2 and <code>@astrojs/svelte</code> 9.1.2. Low severity, but the bump is trivial.</p>",
+            "fr": "<p>Deux advisories jumeaux (<code>CVE-2026-126363</code> et <code>CVE-2026-126362</code>, CVSS 2.3) : le renderer enveloppait le contenu d'un slot nommé dans <code>&lt;astro-slot&gt;</code> et écrivait ce nom dans l'attribut <code>name</code> sans échappement HTML. Si une page prend le nom du slot depuis la requête (un paramètre de query, par exemple), un guillemet ferme l'attribut et injecte du HTML arbitraire. La portée est limitée : le composant doit être hydraté avec une directive <code>client:*</code> et rendre le slot par un nom dynamique. Les correctifs sont dans <code>@astrojs/solid-js</code> 7.1.2 et <code>@astrojs/svelte</code> 9.1.2. Sévérité faible, mais la mise à jour est triviale.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-jmv2-qgxf-f995",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "astro-7-4-11",
+          "tag": "patch",
+          "date": "11 Nov 2026",
+          "title": {
+            "es": "Astro 7.4.11: security.allowedDomains valida protocolo, host y puerto juntos",
+            "en": "Astro 7.4.11: security.allowedDomains validates protocol, host and port together",
+            "fr": "Astro 7.4.11 : security.allowedDomains valide protocole, hôte et port ensemble"
+          },
+          "body_html": {
+            "es": "<p>Si corrés Astro detrás de un proxy, esto te interesa. Los headers <code>X-Forwarded-Proto</code>, <code>X-Forwarded-Host</code> y <code>X-Forwarded-Port</code> ahora se validan <strong>en conjunto</strong> contra cada entrada de <code>security.allowedDomains</code>, en vez de uno por uno, y ya no se aceptan protocolos que no sean HTTP(S) como <code>ftp</code> o <code>ws</code>. De paso: el dev server responde 400 a paths con percent-encoding roto en lugar de 500, <code>astro build</code> deja de borrar el archivo de licencias de <code>build.license</code> de Vite, y se corrige un bug donde hacer spread del mismo objeto sobre un elemento con scoped styles le iba engordando el <code>class</code> en cada request.</p>",
+            "en": "<p>Worth a look if you run Astro behind a proxy. The <code>X-Forwarded-Proto</code>, <code>X-Forwarded-Host</code> and <code>X-Forwarded-Port</code> headers are now validated <strong>together</strong> against each <code>security.allowedDomains</code> entry instead of one at a time, and non-HTTP(S) protocols such as <code>ftp</code> or <code>ws</code> are no longer accepted. Also in this patch: the dev server returns 400 for malformed percent-encoded paths instead of a 500, <code>astro build</code> stops deleting the license file from Vite's <code>build.license</code>, and spreading the same object onto an element with scoped styles no longer grows its <code>class</code> on every request.</p>",
+            "fr": "<p>À regarder si Astro tourne derrière un proxy. Les en-têtes <code>X-Forwarded-Proto</code>, <code>X-Forwarded-Host</code> et <code>X-Forwarded-Port</code> sont désormais validés <strong>ensemble</strong> par rapport à chaque entrée de <code>security.allowedDomains</code>, et non plus un par un, et les protocoles non HTTP(S) comme <code>ftp</code> ou <code>ws</code> ne sont plus acceptés. Également : le serveur de dev renvoie 400 pour les chemins au percent-encoding invalide au lieu d'un 500, <code>astro build</code> ne supprime plus le fichier de licences de <code>build.license</code> de Vite, et le spread d'un même objet sur un élément avec scoped styles ne fait plus grossir son <code>class</code> à chaque requête.</p>"
+          },
+          "source": {
+            "url": "https://github.com/withastro/astro/releases/tag/astro%407.4.11",
+            "label": "github.com/withastro/astro"
+          }
+        },
+        {
+          "id": "vue-3-6-rc-15",
+          "tag": "beta",
+          "tag_label": {
+            "es": "RC",
+            "en": "RC",
+            "fr": "RC"
+          },
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "Vue 3.6.0-rc.15: Vapor se sigue alineando con el VDOM y varios fixes de reactivity",
+            "en": "Vue 3.6.0-rc.15: Vapor keeps aligning with the VDOM, plus reactivity fixes",
+            "fr": "Vue 3.6.0-rc.15 : Vapor continue de s'aligner sur le VDOM, avec des correctifs de reactivity"
+          },
+          "body_html": {
+            "es": "<p>Otra release candidate de pulido. El compilador de Vapor corrige casos donde se comportaba distinto al VDOM (un argumento dinámico llamado <code>key</code>, la opción <code>slotted</code> omitida) y ahora reporta hijos inválidos en <code>KeepAlive</code>. El HMR recarga el componente raíz de un custom element de Vapor ya montado. En reactivity: <code>effect()</code> deja de mutar el objeto de opciones que le pasás, y un <code>computed</code> invalidado por su propia ejecución ya no notifica a sus lectores.</p>",
+            "en": "<p>Another polish release candidate. The Vapor compiler fixes cases where it diverged from the VDOM (a dynamic argument named <code>key</code>, an omitted <code>slotted</code> option) and now reports invalid <code>KeepAlive</code> children. HMR reloads the root component of a mounted Vapor custom element. On the reactivity side, <code>effect()</code> no longer mutates the options object you pass in, and a <code>computed</code> invalidated by its own run no longer notifies its readers.</p>",
+            "fr": "<p>Encore une release candidate de finition. Le compilateur Vapor corrige des cas où il divergeait du VDOM (un argument dynamique nommé <code>key</code>, l'option <code>slotted</code> omise) et signale désormais les enfants invalides de <code>KeepAlive</code>. Le HMR recharge le composant racine d'un custom element Vapor déjà monté. Côté reactivity, <code>effect()</code> ne modifie plus l'objet d'options passé en argument, et un <code>computed</code> invalidé par sa propre exécution ne notifie plus ses lecteurs.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vuejs/core/releases/tag/v3.6.0-rc.15",
+            "label": "github.com/vuejs/core"
+          }
+        },
+        {
+          "id": "qwik-2-0-rc-5",
+          "tag": "beta",
+          "tag_label": {
+            "es": "RC",
+            "en": "RC",
+            "fr": "RC"
+          },
+          "date": "09 Nov 2026",
+          "title": {
+            "es": "Qwik 2.0.0-rc.5: retries en SSG y un migrate-v2 que arrastra librerías de Qwik 1",
+            "en": "Qwik 2.0.0-rc.5: SSG retries and a migrate-v2 that carries Qwik 1 libraries along",
+            "fr": "Qwik 2.0.0-rc.5 : retries en SSG et un migrate-v2 qui embarque les bibliothèques Qwik 1"
+          },
+          "body_html": {
+            "es": "<p>La quinta RC de Qwik 2 apunta a que la migración no duela. <code>migrate-v2</code> ahora bundlea en el server las librerías construidas con Qwik 1, les pisa <code>@builder.io/qwik</code> con la v2, y si lo corrés sobre una app que ya es v2 la actualiza a la release actual. En el router, SSG suma la opción <code>retries</code> para re-renderizar una ruta que falló antes de romper el build. Entre los fixes hay dos que conviene tener: se rechazan URLs de redirect inseguras en actions y loaders del cliente, y una página que crasheaba antes de mandar contenido respondía 200 en vez de 500.</p>",
+            "en": "<p>The fifth Qwik 2 release candidate is about making the migration painless. <code>migrate-v2</code> now bundles libraries built with Qwik 1 on the server, overrides <code>@builder.io/qwik</code> with v2 for them, and updates an app that is already on v2 to the current release. In the router, SSG gains a <code>retries</code> option to re-render a failed route before the build fails. Two fixes worth having: unsafe redirect URLs are rejected in client actions and loaders, and a page that crashed before sending content used to answer 200 instead of 500.</p>",
+            "fr": "<p>La cinquième release candidate de Qwik 2 vise une migration sans douleur. <code>migrate-v2</code> bundle désormais côté serveur les bibliothèques construites avec Qwik 1, remplace pour elles <code>@builder.io/qwik</code> par la v2, et met à jour une application déjà en v2 vers la release courante. Dans le router, le SSG gagne une option <code>retries</code> pour re-rendre une route en échec avant de faire échouer le build. Deux correctifs à retenir : les URL de redirection non sûres sont rejetées dans les actions et loaders côté client, et une page qui plantait avant d'envoyer du contenu répondait 200 au lieu de 500.</p>"
+          },
+          "source": {
+            "url": "https://github.com/QwikDev/qwik/releases/tag/%40qwik.dev/core%402.0.0-rc.5",
+            "label": "github.com/QwikDev/qwik"
+          }
+        }
+      ]
+    },
+    {
+      "id": "build-tools",
+      "name": "Build Tools & Runtimes",
+      "theme": "build-tools",
+      "icon_emoji": "🔧",
+      "anchor": "build-tools",
+      "updates": [
+        {
+          "id": "hono-node-server-backslash-path",
+          "tag": "security",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "@hono/node-server: un backslash en el path saltea las reglas del reverse proxy",
+            "en": "@hono/node-server: a backslash in the path bypasses reverse proxy rules",
+            "fr": "@hono/node-server : un backslash dans le chemin contourne les règles du reverse proxy"
+          },
+          "body_html": {
+            "es": "<p>Ojo si servís Hono sobre Node detrás de nginx, HAProxy o Envoy. <code>CVE-2026-126210</code> (CVSS 5.3): el adapter le pasaba el request-target crudo al parser de URL de WHATWG, que trata el backslash como <code>/</code> y resuelve los <code>..</code>. Un pedido a <code>/public\\..\\admin/secret</code> le llega a la app como <code>/admin/secret</code>, mientras que el proxy evaluó sus reglas contra el path original y lo dejó pasar. El fix responde <code>400 Bad Request</code> a cualquier path con backslash crudo, en HTTP/1.1, HTTP/2 y upgrades de WebSocket. Está en <code>@hono/node-server</code> 2.1.6 y 1.19.18. El control de acceso dentro de la app (middleware sobre <code>/admin/*</code>) no se ve afectado.</p>",
+            "en": "<p>Heads up if you serve Hono on Node behind nginx, HAProxy or Envoy. <code>CVE-2026-126210</code> (CVSS 5.3): the adapter passed the raw request-target to the WHATWG URL parser, which treats a backslash as <code>/</code> and then resolves <code>..</code> segments. A request for <code>/public\\..\\admin/secret</code> reaches the app as <code>/admin/secret</code>, while the proxy applied its path rules to the original path and let it through. The fix answers <code>400 Bad Request</code> to any path containing a raw backslash, across HTTP/1.1, HTTP/2 and WebSocket upgrades. It ships in <code>@hono/node-server</code> 2.1.6 and 1.19.18. Access control inside the app, such as middleware on <code>/admin/*</code>, is not affected.</p>",
+            "fr": "<p>Attention si vous servez Hono sur Node derrière nginx, HAProxy ou Envoy. <code>CVE-2026-126210</code> (CVSS 5.3) : l'adapter transmettait le request-target brut au parseur d'URL WHATWG, qui traite le backslash comme <code>/</code> puis résout les segments <code>..</code>. Une requête vers <code>/public\\..\\admin/secret</code> arrive à l'application comme <code>/admin/secret</code>, alors que le proxy a appliqué ses règles au chemin d'origine et l'a laissée passer. Le correctif répond <code>400 Bad Request</code> à tout chemin contenant un backslash brut, en HTTP/1.1, HTTP/2 et pour les upgrades WebSocket. Il est livré dans <code>@hono/node-server</code> 2.1.6 et 1.19.18. Le contrôle d'accès dans l'application, comme un middleware sur <code>/admin/*</code>, n'est pas affecté.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-jpvv-r467-5p4w",
+            "label": "github.com/advisories"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "TypeScript 7.1 todavía es beta y el ecosistema ya se está mudando: Storybook corre docgen sobre su API nativa mientras tira Babel y jscodeshift del CLI.",
+      "en": "TypeScript 7.1 is still in beta and the ecosystem is already moving: Storybook runs docgen on its native API while dropping Babel and jscodeshift from the CLI.",
+      "fr": "TypeScript 7.1 est encore en beta et l'écosystème migre déjà : Storybook exécute docgen sur son API native tout en retirant Babel et jscodeshift du CLI."
+    },
+    {
+      "es": "El patrón de la semana en seguridad es el desacuerdo entre capas: el proxy y la app leen paths distintos (@hono/node-server), o headers X-Forwarded validados de a uno (Astro). Si tu control de acceso vive en el proxy, revisá qué ve realmente la app.",
+      "en": "This week's security pattern is layers disagreeing: the proxy and the app read different paths (@hono/node-server), or X-Forwarded headers validated one at a time (Astro). If your access control lives at the proxy, check what the app actually sees.",
+      "fr": "Le motif sécurité de la semaine est le désaccord entre couches : le proxy et l'application lisent des chemins différents (@hono/node-server), ou des en-têtes X-Forwarded validés un par un (Astro). Si votre contrôle d'accès vit au niveau du proxy, vérifiez ce que l'application voit réellement."
+    },
+    {
+      "es": "Día tranquilo en releases estables: lo interesante está en los pre-releases (Node 27 alpha, Vue 3.6 RC, Qwik 2 RC, Storybook 11 beta), que es donde se ve hacia dónde va cada proyecto.",
+      "en": "A quiet day for stable releases: the interesting work is in the pre-releases (Node 27 alpha, Vue 3.6 RC, Qwik 2 RC, Storybook 11 beta), which is where each project's direction shows.",
+      "fr": "Journée calme pour les releases stables : l'essentiel se passe dans les pre-releases (Node 27 alpha, Vue 3.6 RC, Qwik 2 RC, Storybook 11 beta), là où se lit la direction de chaque projet."
+    }
+  ]
+}

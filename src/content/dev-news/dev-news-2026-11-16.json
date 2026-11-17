@@ -1,0 +1,381 @@
+{
+  "title": {
+    "es": "Dev News 16 Nov 2026: Nuxt admite un bypass de middleware con doble barra, SvelteKit publica cuatro CVE en sus adapters y Safari llega a Apple HomeView",
+    "en": "Dev News Nov 16, 2026: Nuxt discloses a double-slash middleware bypass, SvelteKit publishes four adapter CVEs and Safari lands on Apple HomeView",
+    "fr": "Dev News 16 nov. 2026 : Nuxt divulgue un contournement de middleware par double barre, SvelteKit publie quatre CVE dans ses adapters et Safari arrive sur Apple HomeView"
+  },
+  "description": {
+    "es": "Nuxt reconoce que el fix de 4.6.3 quedó incompleto: una ruta que empieza con // saltea server/middleware y las route rules hasta 4.6.4; SvelteKit publica cuatro CVE entre el core y los adapters de Vercel, Cloudflare, static y Node; Astro divulga una lectura de archivos por el endpoint de imágenes y saca 7.4.12; WebKit explica cómo se ve tu sitio en Safari para Apple HomeView; pnpm 12.21 prepara tarballs y dependencias git para instalar offline; ESLint 10.15 y Biome 2.6.8 suman reglas.",
+    "en": "Nuxt admits the 4.6.3 fix was incomplete: a path starting with // skips server/middleware and route rules until 4.6.4; SvelteKit publishes four CVEs across core and the Vercel, Cloudflare, static and Node adapters; Astro discloses a file read through the image endpoint and ships 7.4.12; WebKit explains how your site behaves in Safari on Apple HomeView; pnpm 12.21 prepares tarball and git dependencies for offline installs; ESLint 10.15 and Biome 2.6.8 add rules.",
+    "fr": "Nuxt reconnaît que le correctif de 4.6.3 était incomplet : un chemin commençant par // contourne server/middleware et les route rules jusqu'à 4.6.4 ; SvelteKit publie quatre CVE entre le core et les adapters Vercel, Cloudflare, static et Node ; Astro divulgue une lecture de fichiers via l'endpoint d'images et publie 7.4.12 ; WebKit explique le comportement de votre site dans Safari sur Apple HomeView ; pnpm 12.21 prépare les tarballs et dépendances git pour l'installation hors ligne ; ESLint 10.15 et Biome 2.6.8 ajoutent des règles."
+  },
+  "pubDate": "2026-11-16",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": {
+        "es": "Nuxt: // saltea server/middleware hasta 4.6.4",
+        "en": "Nuxt: // skips server/middleware until 4.6.4",
+        "fr": "Nuxt : // contourne server/middleware avant 4.6.4"
+      },
+      "anchor": "nuxt-double-slash-middleware-bypass",
+      "icon": "simple-icons:nuxt"
+    },
+    {
+      "text": {
+        "es": "SvelteKit: cuatro CVE entre core y adapters",
+        "en": "SvelteKit: four CVEs across core and adapters",
+        "fr": "SvelteKit : quatre CVE entre core et adapters"
+      },
+      "anchor": "sveltekit-prerender-adapter-injection",
+      "icon": "simple-icons:svelte"
+    },
+    {
+      "text": {
+        "es": "Safari llega a Apple HomeView",
+        "en": "Safari lands on Apple HomeView",
+        "fr": "Safari arrive sur Apple HomeView"
+      },
+      "anchor": "webkit-safari-homeview",
+      "icon": "simple-icons:html5"
+    },
+    {
+      "text": {
+        "es": "Astro: lectura de archivos por /_image",
+        "en": "Astro: file read through /_image",
+        "fr": "Astro : lecture de fichiers via /_image"
+      },
+      "anchor": "astro-image-endpoint-case-variant",
+      "icon": "simple-icons:astro"
+    },
+    {
+      "text": {
+        "es": "pnpm 12.21: tarballs y git en modo offline",
+        "en": "pnpm 12.21: tarballs and git deps offline",
+        "fr": "pnpm 12.21 : tarballs et git hors ligne"
+      },
+      "anchor": "pnpm-12-21",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "ESLint 10.15 entiende mejor TypeScript",
+        "en": "ESLint 10.15 handles TypeScript better",
+        "fr": "ESLint 10.15 gère mieux TypeScript"
+      },
+      "anchor": "eslint-10-15",
+      "icon": "lucide:code"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "nuxt-double-slash-middleware-bypass",
+          "tag": "security",
+          "date": "13 Nov 2026",
+          "title": {
+            "es": "Nuxt: una ruta que empieza con // saltea server/middleware y las route rules (CVE-2026-128077)",
+            "en": "Nuxt: a path starting with // skips server/middleware and route rules (CVE-2026-128077)",
+            "fr": "Nuxt : un chemin commençant par // contourne server/middleware et les route rules (CVE-2026-128077)"
+          },
+          "body_html": {
+            "es": "<p>Ojo con esto si tenés Nuxt 4.6 en producción. Desde <code>4.6.0</code>, Nuxt parsea una ruta que empieza con <code>//</code> como si fuera una URL con host antes de renderizar la página, así que <code>//x/admin</code> termina renderizando <code>/admin</code>. Pero Nitro, sus route rules y <code>server/middleware</code> ven el path como <code>//x/admin</code>, y <strong>los chequeos del lado del server que matchean contra <code>/admin</code> no corren</strong>. Un atacante sin autenticar recibe la página con los datos que se fetchean durante el SSR, y también se saltean los <code>redirect</code> y los <code>headers</code> por ruta, incluido <code>Content-Security-Policy</code>. El advisory aclara que el fix de GHSA-9v7c-q64q-vv33 en <code>4.6.3</code> cubrió los dot segments pero no esta forma. CVSS 6.5, afecta a <code>@nuxt/nitro-server</code> de <code>4.6.0</code> a <code>4.6.3</code>. El parche es <code>4.6.4</code>, que salió el 2 de noviembre: si ya actualizaste estás cubierto, si te quedaste en 4.6.3 creyendo que alcanzaba, no.</p>",
+            "en": "<p>Check this if you run Nuxt 4.6 in production. Since <code>4.6.0</code>, Nuxt parses a request path that starts with <code>//</code> as a URL with a host before rendering a page, so <code>//x/admin</code> renders the page at <code>/admin</code>. Nitro's routing, its route rules and <code>server/middleware</code> still see the path as <code>//x/admin</code>, so <strong>server-side checks keyed on <code>/admin</code> do not run</strong>. An unauthenticated attacker gets the page along with the data fetched during server rendering, and per-route <code>redirect</code> and <code>headers</code> rules are skipped as well, including <code>Content-Security-Policy</code>. The advisory states that the fix for GHSA-9v7c-q64q-vv33 in <code>4.6.3</code> covered dot segments but not this form. It scores CVSS 6.5 and affects <code>@nuxt/nitro-server</code> from <code>4.6.0</code> through <code>4.6.3</code>. The patch is <code>4.6.4</code>, released on November 2: if you already upgraded you are covered, and if you stopped at 4.6.3 you are not.</p>",
+            "fr": "<p>À vérifier si vous avez Nuxt 4.6 en production. Depuis <code>4.6.0</code>, Nuxt analyse un chemin commençant par <code>//</code> comme une URL avec hôte avant de rendre la page, si bien que <code>//x/admin</code> rend la page <code>/admin</code>. Le routage de Nitro, ses route rules et <code>server/middleware</code> voient toujours le chemin <code>//x/admin</code> : <strong>les contrôles côté serveur basés sur <code>/admin</code> ne s'exécutent pas</strong>. Un attaquant non authentifié obtient la page avec les données récupérées pendant le rendu serveur, et les règles <code>redirect</code> et <code>headers</code> par route sont également ignorées, y compris <code>Content-Security-Policy</code>. L'avis précise que le correctif de GHSA-9v7c-q64q-vv33 dans <code>4.6.3</code> couvrait les dot segments mais pas cette forme. Score CVSS 6.5, <code>@nuxt/nitro-server</code> de <code>4.6.0</code> à <code>4.6.3</code>. Le correctif est <code>4.6.4</code>, publié le 2 novembre : si vous êtes resté en 4.6.3, vous restez exposé.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-r99w-jh2x-3mg9",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "sveltekit-prerender-adapter-injection",
+          "tag": "security",
+          "date": "13 Nov 2026",
+          "title": {
+            "es": "SvelteKit: los links prerenderizados podían inyectar reglas en la config de Vercel y Cloudflare",
+            "en": "SvelteKit: prerendered links could inject rules into the Vercel and Cloudflare config",
+            "fr": "SvelteKit : les liens prérendus pouvaient injecter des règles dans la config Vercel et Cloudflare"
+          },
+          "body_html": {
+            "es": "<p>SvelteKit publicó cuatro CVE el viernes y dos van por el mismo lado: <strong>el build confiaba en los paths que crawleaba durante el prerender</strong>. En <code>@sveltejs/adapter-vercel</code> y <code>@sveltejs/adapter-static</code>, un link crawleado podía terminar interpretado como regex en la config de rutas de Vercel (CVE-2026-128121). En <code>@sveltejs/adapter-cloudflare</code>, un redirect prerenderizado podía inyectar reglas arbitrarias en el archivo <code>_redirects</code> (CVE-2026-128122). Los dos puntúan CVSS 5.9 y necesitan que el atacante influya en un link que tu sitio crawlea, pensá en contenido de un CMS o generado por usuarios. Versiones con el fix: <code>adapter-vercel</code> <code>6.3.5</code> y <code>7.0.2</code>, <code>adapter-static</code> <code>3.0.11</code> y <code>4.0.1</code>, <code>adapter-cloudflare</code> <code>7.2.10</code> y <code>8.0.2</code>. Como el problema está en lo que se genera al buildear, actualizar no alcanza: hay que volver a deployar.</p>",
+            "en": "<p>SvelteKit published four CVEs on Friday and two share a root cause: <strong>the build trusted the paths it crawled during prerendering</strong>. In <code>@sveltejs/adapter-vercel</code> and <code>@sveltejs/adapter-static</code>, a crawled link could later be interpreted as a regex in the Vercel routing config (CVE-2026-128121). In <code>@sveltejs/adapter-cloudflare</code>, a prerendered redirect could inject arbitrary rules into the generated <code>_redirects</code> file (CVE-2026-128122). Both score CVSS 5.9 and require the attacker to influence a link your site crawls, such as CMS or user-generated content. Fixed versions: <code>adapter-vercel</code> <code>6.3.5</code> and <code>7.0.2</code>, <code>adapter-static</code> <code>3.0.11</code> and <code>4.0.1</code>, <code>adapter-cloudflare</code> <code>7.2.10</code> and <code>8.0.2</code>. Because the flaw lives in build output, upgrading is not enough: you have to redeploy.</p>",
+            "fr": "<p>SvelteKit a publié quatre CVE vendredi, dont deux partagent la même cause : <strong>le build faisait confiance aux chemins explorés pendant le prérendu</strong>. Dans <code>@sveltejs/adapter-vercel</code> et <code>@sveltejs/adapter-static</code>, un lien exploré pouvait être interprété comme une regex dans la config de routage Vercel (CVE-2026-128121). Dans <code>@sveltejs/adapter-cloudflare</code>, une redirection prérendue pouvait injecter des règles arbitraires dans le fichier <code>_redirects</code> généré (CVE-2026-128122). Les deux obtiennent un score CVSS 5.9 et supposent que l'attaquant influence un lien exploré par votre site, par exemple du contenu CMS ou généré par les utilisateurs. Versions corrigées : <code>adapter-vercel</code> <code>6.3.5</code> et <code>7.0.2</code>, <code>adapter-static</code> <code>3.0.11</code> et <code>4.0.1</code>, <code>adapter-cloudflare</code> <code>7.2.10</code> et <code>8.0.2</code>. Le défaut se trouvant dans la sortie du build, il faut redéployer après la mise à jour.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-jf9x-2fg2-hx4w",
+            "label": "github.com/advisories"
+          }
+        }
+      ]
+    },
+    {
+      "id": "html",
+      "name": "HTML / Web Platform",
+      "theme": "html",
+      "icon_emoji": "🌐",
+      "anchor": "html",
+      "updates": [
+        {
+          "id": "webkit-safari-homeview",
+          "tag": "notable",
+          "date": "13 Nov 2026",
+          "title": {
+            "es": "Safari llega a Apple HomeView: recetas desde JSON-LD y subtítulos en WebVTT",
+            "en": "Safari lands on Apple HomeView: recipes from JSON-LD and captions in WebVTT",
+            "fr": "Safari arrive sur Apple HomeView : recettes via JSON-LD et sous-titres en WebVTT"
+          },
+          "body_html": {
+            "es": "<p>WebKit anunció que Safari ahora también corre en Apple HomeView, un dispositivo con pantalla cuadrada de 7 pulgadas que se usa por voz desde lejos o tocando de cerca. El mensaje para devs es tranquilizador: es Safari sobre WebKit, así que lo más probable es que no tengas que hacer nada. Lo que sí vale la pena revisar: la nueva vista de cocina arma el paso a paso a partir del tipo <code>Recipe</code> de schema.org en <strong>JSON-LD</strong>, así que si publicás recetas sin ese markup te quedás afuera. Y para audio y video recomiendan subtítulos como archivos <strong>WebVTT</strong> dentro de elementos <code>track</code>. Datos estructurados y media accesible, lo de siempre, ahora con una pantalla más que los aprovecha.</p>",
+            "en": "<p>WebKit announced that Safari now also runs on Apple HomeView, a device with a square 7-inch display that people use by voice from across the room or by touch up close. The message for developers is reassuring: it is Safari on WebKit, so you most likely need to do nothing. What is worth checking: the new cooking view builds its step-by-step instructions from the schema.org <code>Recipe</code> type in <strong>JSON-LD</strong>, so recipe pages without that markup miss out. For audio and video, the post recommends captions as <strong>WebVTT</strong> files inside <code>track</code> elements. Structured data and accessible media, as always, now with one more screen that uses them.</p>",
+            "fr": "<p>WebKit annonce que Safari fonctionne désormais aussi sur Apple HomeView, un appareil à écran carré de 7 pouces utilisé à la voix à distance ou au toucher de près. Le message pour les développeurs est rassurant : c'est Safari sur WebKit, vous n'avez donc probablement rien à faire. À vérifier toutefois : la nouvelle vue cuisine construit ses instructions pas à pas à partir du type <code>Recipe</code> de schema.org en <strong>JSON-LD</strong>, donc les pages de recettes sans ce balisage n'en bénéficient pas. Pour l'audio et la vidéo, l'article recommande des sous-titres en fichiers <strong>WebVTT</strong> dans des éléments <code>track</code>. Données structurées et médias accessibles, comme toujours, avec un écran de plus pour en profiter.</p>"
+          },
+          "source": {
+            "url": "https://webkit.org/blog/18608/safari-on-apple-homeview/",
+            "label": "webkit.org"
+          }
+        }
+      ]
+    },
+    {
+      "id": "js-frameworks",
+      "name": "JS Frameworks",
+      "theme": "js-frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "js-frameworks",
+      "updates": [
+        {
+          "id": "nuxt-dev-server-workspace-dir",
+          "tag": "security",
+          "date": "13 Nov 2026",
+          "title": {
+            "es": "Nuxt: un lockfile suelto en un directorio padre deja al dev server sirviendo todo ese directorio",
+            "en": "Nuxt: a stray lockfile in a parent directory makes the dev server serve that whole directory",
+            "fr": "Nuxt : un lockfile égaré dans un dossier parent fait servir tout ce dossier par le dev server"
+          },
+          "body_html": {
+            "es": "<p>Segundo advisory de Nuxt del día (CVE-2026-128070, CVSS 5.9), este solo para desarrollo. Nuxt podía elegir como <code>workspaceDir</code> un directorio padre que no declara ningún workspace: el más lejano con un lockfile si el proyecto no está en un repo git, o el más lejano con un <code>pnpm-workspace.yaml</code> o <code>deno.json</code> aunque solo tenga settings. Y el dev server de Vite permite requests a <code>/_nuxt/@fs/</code> para cualquier archivo bajo ese directorio. Traducido: si alguna vez corriste <code>npm install</code> en tu home y levantás <code>nuxt dev --host</code>, cualquiera que llegue al puerto puede leer tu home. Producción no está afectada. Afecta a <code>@nuxt/schema</code> desde <code>3.5.0</code>, fix en <code>4.6.4</code>.</p>",
+            "en": "<p>The second Nuxt advisory of the day (CVE-2026-128070, CVSS 5.9) is development-only. Nuxt could pick a parent directory that declares no workspace as its <code>workspaceDir</code>: the farthest one with a lockfile when the project is not in a git repository, or the farthest one with a <code>pnpm-workspace.yaml</code> or <code>deno.json</code>, even one that only holds settings. The Vite dev server allows <code>/_nuxt/@fs/</code> requests for any file under that directory. In practice: if you once ran <code>npm install</code> in your home directory and you start <code>nuxt dev --host</code>, anyone who can reach the port can read your home directory. Production builds are not affected. It affects <code>@nuxt/schema</code> from <code>3.5.0</code>, fixed in <code>4.6.4</code>.</p>",
+            "fr": "<p>Le deuxième avis Nuxt du jour (CVE-2026-128070, CVSS 5.9) ne concerne que le développement. Nuxt pouvait choisir comme <code>workspaceDir</code> un dossier parent ne déclarant aucun workspace : le plus éloigné contenant un lockfile lorsque le projet n'est pas dans un dépôt git, ou le plus éloigné contenant un <code>pnpm-workspace.yaml</code> ou un <code>deno.json</code>, même limité à des réglages. Le dev server de Vite autorise les requêtes <code>/_nuxt/@fs/</code> pour tout fichier sous ce dossier. Concrètement : si vous avez un jour lancé <code>npm install</code> dans votre dossier personnel et que vous démarrez <code>nuxt dev --host</code>, quiconque atteint le port peut lire ce dossier. La production n'est pas concernée. Touche <code>@nuxt/schema</code> depuis <code>3.5.0</code>, corrigé dans <code>4.6.4</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-mjrq-cffv-q4qc",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "sveltekit-adapter-node-crashes",
+          "tag": "security",
+          "date": "13 Nov 2026",
+          "title": {
+            "es": "SvelteKit: dos formas de tirar abajo un server con adapter-node",
+            "en": "SvelteKit: two ways to crash an adapter-node server",
+            "fr": "SvelteKit : deux façons de faire tomber un serveur adapter-node"
+          },
+          "body_html": {
+            "es": "<p>Los otros dos CVE de SvelteKit son denegaciones de servicio, ambos CVSS 5.9. Cuando el hook <code>reroute</code> convertía un pathname mal percent-encodeado en uno válido, se podía disparar una comparación que tiraba un <code>URIError</code> sin manejar y volteaba el proceso (CVE-2026-128117): fix en <code>@sveltejs/kit</code> <code>3.1.1</code> y <code>2.70.4</code>. Y <code>@sveltejs/adapter-node</code> podía intentar agregar un header a un request inmutable al proxear ciertas llamadas vía <code>fetch</code>, con el mismo resultado (CVE-2026-128123): fix en <code>5.5.8</code> y <code>6.0.1</code>. Si corrés SvelteKit en Node sin un supervisor que reinicie el proceso, estos dos te importan más que los del prerender.</p>",
+            "en": "<p>The other two SvelteKit CVEs are denial-of-service bugs, both CVSS 5.9. When the <code>reroute</code> hook turned an invalid percent-encoded pathname into a valid one, it could trigger a comparison that threw an unhandled <code>URIError</code> and took the process down (CVE-2026-128117): fixed in <code>@sveltejs/kit</code> <code>3.1.1</code> and <code>2.70.4</code>. And <code>@sveltejs/adapter-node</code> could try to add a header to an immutable request when proxying certain calls via <code>fetch</code>, with the same result (CVE-2026-128123): fixed in <code>5.5.8</code> and <code>6.0.1</code>. If you run SvelteKit on Node without a supervisor that restarts the process, these two matter more to you than the prerender ones.</p>",
+            "fr": "<p>Les deux autres CVE de SvelteKit sont des dénis de service, tous deux CVSS 5.9. Lorsque le hook <code>reroute</code> transformait un chemin mal encodé en chemin valide, une comparaison pouvait lever une <code>URIError</code> non gérée et arrêter le processus (CVE-2026-128117) : corrigé dans <code>@sveltejs/kit</code> <code>3.1.1</code> et <code>2.70.4</code>. Et <code>@sveltejs/adapter-node</code> pouvait tenter d'ajouter un en-tête à une requête immuable en relayant certains appels via <code>fetch</code>, avec le même résultat (CVE-2026-128123) : corrigé dans <code>5.5.8</code> et <code>6.0.1</code>. Si vous exécutez SvelteKit sur Node sans superviseur pour relancer le processus, ces deux-là comptent davantage que ceux du prérendu.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-mw6w-2fmv-pvw3",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "astro-image-endpoint-case-variant",
+          "tag": "security",
+          "date": "13 Nov 2026",
+          "title": {
+            "es": "Astro: el endpoint /_image comparaba paths sin distinguir mayúsculas (CVE-2026-126364)",
+            "en": "Astro: the /_image endpoint compared paths case-insensitively (CVE-2026-126364)",
+            "fr": "Astro : l'endpoint /_image comparait les chemins sans tenir compte de la casse (CVE-2026-126364)"
+          },
+          "body_html": {
+            "es": "<p>El endpoint <code>/_image</code> del adapter <code>@astrojs/node</code> verifica que la imagen local pedida esté dentro del directorio de output, pero esa comparación era case-insensitive. En un filesystem case-sensitive como Linux, <code>/_image?href=/../../DIST/client/secret.png</code> pasaba el chequeo y servía un archivo de afuera. CVSS v4 6.3, y el propio advisory baja la espuma: necesitás on-demand rendering con el adapter de Node y que exista un directorio hermano que solo difiera en mayúsculas, algo raro y que el atacante no puede crear. Afecta a <code>astro</code> de <code>5.14.3</code> a <code>7.4.6</code>, fix en <code>7.4.7</code>. El mismo día se publicó un XSS menor (CVE-2026-126361): un tag dinámico construido con input no confiable, tipo <code>img/src/onerror=...</code>, se renderizaba como HTML vivo; fix en <code>7.4.5</code>.</p>",
+            "en": "<p>The <code>/_image</code> endpoint of the <code>@astrojs/node</code> adapter checks that a requested local image sits inside the build output directory, but that comparison was case-insensitive. On a case-sensitive filesystem such as Linux, <code>/_image?href=/../../DIST/client/secret.png</code> passed the check and served a file from outside. It scores CVSS v4 6.3, and the advisory itself keeps expectations low: you need on-demand rendering with the Node adapter plus a sibling directory that differs only by letter case, which is unusual and which the attacker cannot create. It affects <code>astro</code> from <code>5.14.3</code> through <code>7.4.6</code>, fixed in <code>7.4.7</code>. A minor XSS was published the same day (CVE-2026-126361): a dynamic tag built from untrusted input, such as <code>img/src/onerror=...</code>, rendered as live HTML; fixed in <code>7.4.5</code>.</p>",
+            "fr": "<p>L'endpoint <code>/_image</code> de l'adapter <code>@astrojs/node</code> vérifie que l'image locale demandée se trouve dans le dossier de sortie du build, mais cette comparaison ignorait la casse. Sur un système de fichiers sensible à la casse comme Linux, <code>/_image?href=/../../DIST/client/secret.png</code> passait le contrôle et servait un fichier extérieur. Score CVSS v4 6.3, et l'avis tempère lui-même : il faut du rendu à la demande avec l'adapter Node et un dossier voisin ne différant que par la casse, situation rare que l'attaquant ne peut pas créer. Touche <code>astro</code> de <code>5.14.3</code> à <code>7.4.6</code>, corrigé dans <code>7.4.7</code>. Un XSS mineur a été publié le même jour (CVE-2026-126361) : un tag dynamique construit à partir d'une entrée non fiable, comme <code>img/src/onerror=...</code>, était rendu en HTML actif ; corrigé dans <code>7.4.5</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-r3h5-4585-7x3w",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "astro-7-4-12",
+          "tag": "patch",
+          "date": "13 Nov 2026",
+          "title": {
+            "es": "Astro 7.4.12: menos memoria en astro build y dependencias @astrojs/* sin pin",
+            "en": "Astro 7.4.12: lower memory use in astro build and unpinned @astrojs/* dependencies",
+            "fr": "Astro 7.4.12 : moins de mémoire pendant astro build et dépendances @astrojs/* désépinglées"
+          },
+          "body_html": {
+            "es": "<p>Patch chico pero con dos cosas útiles. <code>astro build</code> ahora <strong>libera de memoria las entradas de content collections</strong> apenas termina el sync del content layer, lo que se nota en sitios con mucho contenido. Y las dependencias <code>@astrojs/*</code> dejan de estar pinneadas a una versión exacta, así que tu package manager puede instalar cualquiera que matchee el rango <code>^</code> y deduplicar mejor. Salió junto con una tanda de patches de todas las integraciones.</p>",
+            "en": "<p>A small patch with two useful changes. <code>astro build</code> now <strong>releases content collection entries from memory</strong> once the content layer sync completes, which helps on content-heavy sites. And <code>@astrojs/*</code> dependencies are no longer pinned to an exact version, so your package manager can install anything matching the <code>^</code> range and dedupe better. It shipped alongside patch releases for every integration.</p>",
+            "fr": "<p>Un petit patch avec deux changements utiles. <code>astro build</code> <strong>libère désormais de la mémoire les entrées des content collections</strong> dès la fin de la synchronisation du content layer, ce qui aide sur les sites riches en contenu. Et les dépendances <code>@astrojs/*</code> ne sont plus épinglées à une version exacte : votre gestionnaire de paquets peut installer toute version correspondant à la plage <code>^</code> et mieux dédupliquer. Publié avec des patchs pour toutes les intégrations.</p>"
+          },
+          "source": {
+            "url": "https://github.com/withastro/astro/releases/tag/astro%407.4.12",
+            "label": "github.com/withastro/astro"
+          }
+        },
+        {
+          "id": "hono-regexprouter-middleware-skip",
+          "tag": "security",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "Hono: RegExpRouter salteaba middleware wildcard en tres casos (CVE-2026-126358)",
+            "en": "Hono: RegExpRouter skipped wildcard middleware in three cases (CVE-2026-126358)",
+            "fr": "Hono : RegExpRouter ignorait des middlewares wildcard dans trois cas (CVE-2026-126358)"
+          },
+          "body_html": {
+            "es": "<p>Hono publicó cinco advisories juntos y el que más pesa es este. <code>RegExpRouter</code>, el que el <code>SmartRouter</code> por defecto elige para la mayoría de las apps, <strong>dejaba correr un handler sin el middleware registrado para él</strong>: cuando el middleware usaba el patrón explícito <code>:tenant{[^/]+}</code> y la ruta no, cuando el middleware estaba en <code>/admin/*</code> y la ruta en <code>/admin*</code>, y cuando el path traía un terminador de línea encodeado como <code>%0A</code>. CVSS 5.3, afecta de <code>4.1.4</code> a <code>4.13.15</code>, fix en <code>4.13.16</code>. En la misma tanda, <code>mount()</code> podía reenviar un path que esquivaba middleware scopeado dentro del prefijo (CVE-2026-126357, mismo fix), y hay tres más sobre <code>csrf()</code>, <code>validator('form')</code> y el helper <code>css</code>. Si tu auth es un middleware wildcard, actualizá.</p>",
+            "en": "<p>Hono published five advisories together, and this is the heaviest. <code>RegExpRouter</code>, which the default <code>SmartRouter</code> selects for most applications, <strong>let a route handler run without the middleware registered for it</strong>: when the middleware used the explicit pattern <code>:tenant{[^/]+}</code> and the route did not, when the middleware sat on <code>/admin/*</code> and the route on <code>/admin*</code>, and when the path carried an encoded line terminator such as <code>%0A</code>. It scores CVSS 5.3, affects <code>4.1.4</code> through <code>4.13.15</code> and is fixed in <code>4.13.16</code>. In the same batch, <code>mount()</code> could forward a path that bypassed middleware scoped inside the mount prefix (CVE-2026-126357, same fix), and three more cover <code>csrf()</code>, <code>validator('form')</code> and the <code>css</code> helper. If your auth is a wildcard middleware, upgrade.</p>",
+            "fr": "<p>Hono a publié cinq avis d'un coup, et celui-ci pèse le plus. <code>RegExpRouter</code>, que le <code>SmartRouter</code> par défaut choisit pour la plupart des applications, <strong>laissait un handler s'exécuter sans le middleware enregistré pour lui</strong> : quand le middleware utilisait le motif explicite <code>:tenant{[^/]+}</code> et pas la route, quand le middleware était sur <code>/admin/*</code> et la route sur <code>/admin*</code>, et quand le chemin contenait un terminateur de ligne encodé comme <code>%0A</code>. Score CVSS 5.3, versions <code>4.1.4</code> à <code>4.13.15</code>, corrigé dans <code>4.13.16</code>. Dans le même lot, <code>mount()</code> pouvait transmettre un chemin contournant un middleware limité au préfixe de montage (CVE-2026-126357, même correctif), et trois autres avis concernent <code>csrf()</code>, <code>validator('form')</code> et le helper <code>css</code>. Si votre authentification est un middleware wildcard, mettez à jour.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-h7mg-cq63-vhpq",
+            "label": "github.com/advisories"
+          }
+        }
+      ]
+    },
+    {
+      "id": "build-tools",
+      "name": "Build Tools & Runtimes",
+      "theme": "build-tools",
+      "icon_emoji": "🔧",
+      "anchor": "build-tools",
+      "updates": [
+        {
+          "id": "pnpm-12-21",
+          "tag": "release",
+          "date": "13 Nov 2026",
+          "title": {
+            "es": "pnpm 12.21: pnpm store add prepara tarballs y dependencias git para instalar offline",
+            "en": "pnpm 12.21: pnpm store add prepares tarball and git dependencies for offline installs",
+            "fr": "pnpm 12.21 : pnpm store add prépare les tarballs et dépendances git pour l'installation hors ligne"
+          },
+          "body_html": {
+            "es": "<p>El cambio minor: <code>pnpm store add</code> corrido dentro de un proyecto ahora prepara los tarballs descargados de cada entrada del lockfile que los pinnea. Con eso, <code>pnpm install --offline --frozen-lockfile</code> puede instalar también dependencias por URL de tarball y por host git como GitHub, siempre que el lockfile registre un <code>integrity</code>. Para CI con red cerrada es justo lo que faltaba. Del lado de los fixes, <strong>los installs repetidos ya no cambian los providers de peer dependencies</strong> que eligió el install anterior, y se arreglan varias fallas con <code>lockfile.format: v13</code>, <code>nodeLinker: hoisted</code> y <code>pnpm deploy</code>. Si un server pnpr rechaza un setting, pnpm avisa y resuelve localmente. La línea 11 recibió <code>11.28.12</code> el mismo día.</p>",
+            "en": "<p>The minor change: <code>pnpm store add</code> run inside a project now prepares the downloaded tarballs for every lockfile entry that pins them. With that, <code>pnpm install --offline --frozen-lockfile</code> can also install dependencies on a tarball URL and on a git host such as GitHub, as long as the lockfile entry records an <code>integrity</code>. For CI on a closed network, that was the missing piece. On the fix side, <strong>repeated installs no longer change the peer dependency providers</strong> the previous install chose, and several failures with <code>lockfile.format: v13</code>, <code>nodeLinker: hoisted</code> and <code>pnpm deploy</code> are fixed. If a pnpr server refuses a setting, pnpm warns and resolves locally. The 11 line received <code>11.28.12</code> the same day.</p>",
+            "fr": "<p>Le changement mineur : <code>pnpm store add</code> lancé dans un projet prépare désormais les tarballs téléchargés pour chaque entrée du lockfile qui les épingle. Ainsi, <code>pnpm install --offline --frozen-lockfile</code> peut aussi installer des dépendances par URL de tarball ou depuis un hôte git comme GitHub, à condition que l'entrée du lockfile enregistre un <code>integrity</code>. Pour une CI en réseau fermé, c'était la pièce manquante. Côté correctifs, <strong>les installations répétées ne modifient plus les fournisseurs de peer dependencies</strong> choisis précédemment, et plusieurs échecs avec <code>lockfile.format: v13</code>, <code>nodeLinker: hoisted</code> et <code>pnpm deploy</code> sont corrigés. Si un serveur pnpr refuse un réglage, pnpm avertit et résout localement. La branche 11 a reçu <code>11.28.12</code> le même jour.</p>"
+          },
+          "source": {
+            "url": "https://github.com/pnpm/pnpm/releases/tag/v12.21.0",
+            "label": "github.com/pnpm/pnpm"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dev-tools",
+      "name": "Developer Tools",
+      "theme": "dev-tools",
+      "icon_emoji": "🛠️",
+      "anchor": "dev-tools",
+      "updates": [
+        {
+          "id": "eslint-10-15",
+          "tag": "release",
+          "date": "13 Nov 2026",
+          "title": {
+            "es": "ESLint 10.15.0: las reglas core entienden mejor TypeScript y los autofixes dejan de romper tipos",
+            "en": "ESLint 10.15.0: core rules handle TypeScript better and autofixes stop breaking types",
+            "fr": "ESLint 10.15.0 : les règles core gèrent mieux TypeScript et les autofix ne cassent plus les types"
+          },
+          "body_html": {
+            "es": "<p>Release minor enfocado en que las reglas core se lleven bien con TypeScript. <code>no-invalid-this</code> maneja type assertions y <code>no-shadow</code> chequea el <code>importKind</code> de cada specifier. Los fixes van por el mismo lado: el autofix de <code>prefer-arrow-callback</code> <strong>conserva los type parameters</strong>, el de <code>no-useless-rename</code> conserva el modificador <code>type</code> inline y el de <code>no-unneeded-ternary</code> deja los paréntesis necesarios. Además, <code>func-names</code> revisa <code>__proto__</code> y targets de asignación, y <code>accessor-pairs</code> reconoce keys string y computadas. Un detalle de seguridad: ahora exige <code>minimatch@11.0.1</code> o superior para evitar CVE-2026-118764.</p>",
+            "en": "<p>A minor release focused on making core rules work well with TypeScript. <code>no-invalid-this</code> handles type assertions and <code>no-shadow</code> checks the <code>importKind</code> of each specifier. The fixes point the same way: the <code>prefer-arrow-callback</code> autofix <strong>preserves type parameters</strong>, the <code>no-useless-rename</code> one keeps the inline <code>type</code> modifier, and the <code>no-unneeded-ternary</code> one keeps necessary parentheses. In addition, <code>func-names</code> checks <code>__proto__</code> and assignment targets, and <code>accessor-pairs</code> recognizes string and computed keys. One security detail: it now requires <code>minimatch@11.0.1</code> or higher to avoid CVE-2026-118764.</p>",
+            "fr": "<p>Une version mineure centrée sur la compatibilité des règles core avec TypeScript. <code>no-invalid-this</code> gère les type assertions et <code>no-shadow</code> vérifie l'<code>importKind</code> de chaque specifier. Les correctifs vont dans le même sens : l'autofix de <code>prefer-arrow-callback</code> <strong>préserve les type parameters</strong>, celui de <code>no-useless-rename</code> conserve le modificateur <code>type</code> inline et celui de <code>no-unneeded-ternary</code> garde les parenthèses nécessaires. De plus, <code>func-names</code> vérifie <code>__proto__</code> et les cibles d'affectation, et <code>accessor-pairs</code> reconnaît les clés string et calculées. Un détail de sécurité : <code>minimatch@11.0.1</code> ou supérieur est désormais requis pour éviter CVE-2026-118764.</p>"
+          },
+          "source": {
+            "url": "https://github.com/eslint/eslint/releases/tag/v10.15.0",
+            "label": "github.com/eslint/eslint"
+          }
+        },
+        {
+          "id": "biome-2-6-8",
+          "tag": "minor",
+          "date": "15 Nov 2026",
+          "title": {
+            "es": "Biome 2.6.8: cuatro reglas nursery nuevas, incluida noLateCurrentTargetAccess",
+            "en": "Biome 2.6.8: four new nursery rules, including noLateCurrentTargetAccess",
+            "fr": "Biome 2.6.8 : quatre nouvelles règles nursery, dont noLateCurrentTargetAccess"
+          },
+          "body_html": {
+            "es": "<p>Patch del domingo con reglas nursery para probar. La más interesante para frontend es <code>noLateCurrentTargetAccess</code>: reporta lecturas de <code>event.currentTarget</code> que corren después de que el browser terminó de manejar el evento, cuando ya vale <code>null</code>, un bug clásico detrás de un <code>await</code> o un <code>setTimeout</code>. Las otras: <code>noBufferConstructor</code> prohíbe <code>new Buffer()</code>, <code>noConfusingArraySplice</code> marca los <code>splice()</code> que reemplazan un solo elemento, y <code>noDynamicRequire</code> prohíbe <code>require()</code> con nombres armados en runtime.</p>",
+            "en": "<p>A Sunday patch with nursery rules to try. The most interesting one for frontend work is <code>noLateCurrentTargetAccess</code>: it reports reads of <code>event.currentTarget</code> that run after the browser has finished handling the event, when it is already <code>null</code>, a classic bug behind an <code>await</code> or a <code>setTimeout</code>. The others: <code>noBufferConstructor</code> disallows <code>new Buffer()</code>, <code>noConfusingArraySplice</code> flags <code>splice()</code> calls that replace a single element, and <code>noDynamicRequire</code> disallows <code>require()</code> calls whose module name is built at runtime.</p>",
+            "fr": "<p>Un patch du dimanche avec des règles nursery à essayer. La plus intéressante côté frontend est <code>noLateCurrentTargetAccess</code> : elle signale les lectures de <code>event.currentTarget</code> exécutées après la fin du traitement de l'événement par le navigateur, quand la valeur est déjà <code>null</code>, un bug classique derrière un <code>await</code> ou un <code>setTimeout</code>. Les autres : <code>noBufferConstructor</code> interdit <code>new Buffer()</code>, <code>noConfusingArraySplice</code> signale les <code>splice()</code> qui remplacent un seul élément, et <code>noDynamicRequire</code> interdit les <code>require()</code> dont le nom de module est construit à l'exécution.</p>"
+          },
+          "source": {
+            "url": "https://github.com/biomejs/biome/releases/tag/%40biomejs/biome%402.6.8",
+            "label": "github.com/biomejs/biome"
+          }
+        },
+        {
+          "id": "playwright-1-65-1",
+          "tag": "patch",
+          "date": "13 Nov 2026",
+          "title": {
+            "es": "Playwright 1.65.1 corrige una regresión con clases decoradas y campos estáticos",
+            "en": "Playwright 1.65.1 fixes a regression with decorated classes and static fields",
+            "fr": "Playwright 1.65.1 corrige une régression avec les classes décorées et champs statiques"
+          },
+          "body_html": {
+            "es": "<p>Si después de subir a 1.65 tus tests empezaron a fallar al cargar con <code>_initClass is not a function</code>, era esto: una clase decorada con un campo estático no cargaba con <code>useDefineForClassFields: false</code>. El patch también corrige las ubicaciones de tests corridas una columna bajo Bun 1.4.4 o superior. Viene con Chromium 159.0.8154.6, Firefox 159.0 y WebKit 27.2.</p>",
+            "en": "<p>If your tests started failing to load with <code>_initClass is not a function</code> after moving to 1.65, this was the cause: a decorated class with a static field failed to load with <code>useDefineForClassFields: false</code>. The patch also fixes test locations being one column off under Bun 1.4.4 or newer. It ships with Chromium 159.0.8154.6, Firefox 159.0 and WebKit 27.2.</p>",
+            "fr": "<p>Si vos tests ont cessé de se charger avec <code>_initClass is not a function</code> après le passage à 1.65, voici la cause : une classe décorée avec un champ statique ne se chargeait pas avec <code>useDefineForClassFields: false</code>. Le patch corrige aussi les emplacements de tests décalés d'une colonne sous Bun 1.4.4 ou plus récent. Livré avec Chromium 159.0.8154.6, Firefox 159.0 et WebKit 27.2.</p>"
+          },
+          "source": {
+            "url": "https://github.com/microsoft/playwright/releases/tag/v1.65.1",
+            "label": "github.com/microsoft/playwright"
+          }
+        },
+        {
+          "id": "storybook-11-beta-3",
+          "tag": "beta",
+          "date": "13 Nov 2026",
+          "title": {
+            "es": "Storybook 11.0.0-beta.3: el manager re-renderiza menos al cambiar de story",
+            "en": "Storybook 11.0.0-beta.3: the manager re-renders less on story change",
+            "fr": "Storybook 11.0.0-beta.3 : le manager effectue moins de re-rendus au changement de story"
+          },
+          "body_html": {
+            "es": "<p>Tercera beta en una semana, esta de pulido. El manager <strong>recorta re-renders y escrituras al store</strong> al cambiar de story y mejora el preloading, los composed refs dejan de bloquear el arranque del dev server, y los snippets de código en Docs respetan el lenguaje. Para Next.js con Vite se arreglan los paths de Windows en imports de imágenes estáticas.</p>",
+            "en": "<p>The third beta in a week, this one about polish. The manager <strong>cuts re-renders and store writes</strong> on story change and improves story preloading, composed refs no longer block dev-server startup, and source snippets in Docs honor the language. For Next.js with Vite, Windows paths in static image imports are fixed.</p>",
+            "fr": "<p>Troisième beta en une semaine, consacrée aux finitions. Le manager <strong>réduit les re-rendus et les écritures dans le store</strong> au changement de story et améliore le préchargement, les composed refs ne bloquent plus le démarrage du dev server, et les extraits de code dans Docs respectent le langage. Pour Next.js avec Vite, les chemins Windows dans les imports d'images statiques sont corrigés.</p>"
+          },
+          "source": {
+            "url": "https://github.com/storybookjs/storybook/releases/tag/v11.0.0-beta.3",
+            "label": "github.com/storybookjs/storybook"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El viernes fue día de path normalization: Nuxt con //, Hono con %0A y patrones equivalentes, Astro con mayúsculas. Tres frameworks, el mismo bug de fondo: dos capas que leen el mismo path distinto.",
+      "en": "Friday was path normalization day: Nuxt with //, Hono with %0A and equivalent patterns, Astro with letter case. Three frameworks, one underlying bug: two layers reading the same path differently.",
+      "fr": "Vendredi était la journée de la normalisation des chemins : Nuxt avec //, Hono avec %0A et des motifs équivalents, Astro avec la casse. Trois frameworks, un même bug de fond : deux couches qui lisent différemment le même chemin."
+    },
+    {
+      "es": "El advisory de Nuxt es un recordatorio incómodo: un fix de seguridad puede quedar incompleto. Estar en la versión que arregló el CVE anterior no te garantiza nada sobre el siguiente.",
+      "en": "The Nuxt advisory is an uncomfortable reminder that a security fix can be incomplete. Being on the version that fixed the previous CVE says nothing about the next one.",
+      "fr": "L'avis Nuxt rappelle qu'un correctif de sécurité peut être incomplet. Être sur la version qui corrigeait le CVE précédent ne garantit rien pour le suivant."
+    },
+    {
+      "es": "Los linters siguen corriendo detrás de TypeScript: ESLint ajusta sus reglas core y autofixes para no romper tipos, mientras Biome suma cuatro reglas nursery en un solo patch.",
+      "en": "Linters keep catching up with TypeScript: ESLint adjusts its core rules and autofixes so they stop breaking types, while Biome adds four nursery rules in a single patch.",
+      "fr": "Les linters continuent de rattraper TypeScript : ESLint ajuste ses règles core et ses autofix pour ne plus casser les types, tandis que Biome ajoute quatre règles nursery en un seul patch."
+    }
+  ]
+}

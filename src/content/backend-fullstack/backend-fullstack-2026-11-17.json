@@ -1,0 +1,400 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 17 Nov 2026: *sshole en Alpine, ola de advisories SvelteKit/Nuxt y Docker 29.10",
+    "en": "Backend & Fullstack Daily — 17 Nov 2026: *sshole on Alpine, SvelteKit/Nuxt advisory wave and Docker 29.10",
+    "fr": "Backend & Fullstack Daily — 17 nov 2026 : *sshole sur Alpine, vague d'advisories SvelteKit/Nuxt et Docker 29.10"
+  },
+  "description": {
+    "es": "OpenSSH explotado en imágenes Alpine sin PAM, secretos server-only filtrados al bundle en SvelteKit, bypass de route rules en Nuxt, Docker 29.10 GA con cambio en registries locales, Prisma 8 rc.24 y ECR que por fin replica deletes.",
+    "en": "OpenSSH exploited on PAM-less Alpine images, SvelteKit server-only secrets leaking into the client bundle, Nuxt route-rule bypass, Docker 29.10 GA with a local-registry change, Prisma 8 rc.24 and ECR finally replicating deletes.",
+    "fr": "OpenSSH exploité sur les images Alpine sans PAM, secrets server-only de SvelteKit dans le bundle client, contournement des route rules de Nuxt, Docker 29.10 GA avec un changement sur les registries locaux, Prisma 8 rc.24 et ECR qui réplique enfin les suppressions."
+  },
+  "pubDate": "2026-11-17",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "*sshole: OpenSSH explotado en Alpine sin PAM", "en": "*sshole: OpenSSH exploited on PAM-less Alpine", "fr": "*sshole : OpenSSH exploité sur Alpine sans PAM" },
+      "anchor": "openssh-sshole-alpine",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "SvelteKit: secretos server-only al bundle", "en": "SvelteKit: server-only secrets hit the bundle", "fr": "SvelteKit : secrets server-only dans le bundle" },
+      "anchor": "sveltekit-server-only-leak",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Nuxt 4.6.4: bypass de route rules con %2F", "en": "Nuxt 4.6.4: route-rule bypass via %2F", "fr": "Nuxt 4.6.4 : contournement des route rules via %2F" },
+      "anchor": "nuxt-route-rules-bypass",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Docker 29.10 GA: ojo con registries en loopback", "en": "Docker 29.10 GA: watch your loopback registries", "fr": "Docker 29.10 GA : attention aux registries loopback" },
+      "anchor": "docker-29-10-ga",
+      "icon": "simple-icons:docker"
+    },
+    {
+      "text": { "es": "Prisma 8 rc.24: Date pasa a fecha en MongoDB", "en": "Prisma 8 rc.24: Date becomes a calendar date on MongoDB", "fr": "Prisma 8 rc.24 : Date devient une date calendaire sur MongoDB" },
+      "anchor": "prisma-8-rc-24",
+      "icon": "simple-icons:prisma"
+    },
+    {
+      "text": { "es": "ECR replica deletes entre regiones y cuentas", "en": "ECR now replicates deletes across regions", "fr": "ECR réplique les suppressions entre régions" },
+      "anchor": "ecr-replication-deletes",
+      "icon": "simple-icons:amazonwebservices"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "openssh-sshole-alpine",
+          "tag": "security",
+          "date": "16 Nov 2026",
+          "title": {
+            "es": "*sshole (CVE-2026-123158): OpenSSH deja entrar a cuentas sin password en Alpine — y ya se explota",
+            "en": "*sshole (CVE-2026-123158): OpenSSH logs into passwordless accounts on Alpine — and it is exploited in the wild",
+            "fr": "*sshole (CVE-2026-123158) : OpenSSH ouvre les comptes sans mot de passe sur Alpine — exploité activement"
+          },
+          "body_html": {
+            "es": "<p>Con <strong>musl + sin PAM</strong> (el default de Alpine), una password de 257 a 1024 caracteres hace que <code>crypt()</code> devuelva <code>*</code>, el mismo valor que marca una cuenta bloqueada en <code>/etc/shadow</code>, y OpenSSH lo toma como match. En las imágenes oficiales de Alpine para AWS y Azure el usuario <code>alpine</code> tiene <code>doas</code> sin password: root en segundos. Está en el catálogo KEV de CISA y GreyNoise ve botnets explotándolo. Si tenés containers o VMs Alpine con <code>sshd</code>, actualizá a <strong>OpenSSH 10.6p2</strong> YA, o como mínimo poné <code>PasswordAuthentication no</code>. glibc, PAM, Dropbear y Amazon Linux no están afectados.</p>",
+            "en": "<p>With <strong>musl and no PAM</strong> (Alpine's default), a 257 to 1024 character password makes <code>crypt()</code> return <code>*</code>, the same value that marks a locked account in <code>/etc/shadow</code>, and OpenSSH treats it as a match. On Alpine's official AWS and Azure images the <code>alpine</code> user has passwordless <code>doas</code>: root in seconds. It is in CISA's KEV catalog and GreyNoise sees botnets exploiting it. Running <code>sshd</code> in Alpine containers or VMs? Upgrade to <strong>OpenSSH 10.6p2</strong> now, or at least set <code>PasswordAuthentication no</code>. glibc, PAM, Dropbear and Amazon Linux are not affected.</p>",
+            "fr": "<p>Avec <strong>musl et sans PAM</strong> (le défaut d'Alpine), un mot de passe de 257 à 1024 caractères fait renvoyer <code>*</code> à <code>crypt()</code>, la valeur qui marque un compte verrouillé dans <code>/etc/shadow</code>, et OpenSSH l'accepte. Sur les images Alpine officielles AWS et Azure, l'utilisateur <code>alpine</code> a <code>doas</code> sans mot de passe : root en quelques secondes. La faille est au catalogue KEV de la CISA et exploitée par des botnets. Passez à <strong>OpenSSH 10.6p2</strong> ou désactivez <code>PasswordAuthentication</code>. glibc, PAM, Dropbear et Amazon Linux ne sont pas concernés.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/11/alpine-linux-openssh-sshhole/", "label": "infoq.com" }
+        },
+        {
+          "id": "sveltekit-server-only-leak",
+          "tag": "security",
+          "date": "16 Nov 2026",
+          "title": {
+            "es": "SvelteKit 3.1.1: imports server-only podían terminar en el bundle del cliente (y 4 advisories más)",
+            "en": "SvelteKit 3.1.1: server-only imports could end up in the client bundle (plus 4 more advisories)",
+            "fr": "SvelteKit 3.1.1 : des imports server-only pouvaient finir dans le bundle client (et 4 autres advisories)"
+          },
+          "body_html": {
+            "es": "<p>El guard de build que bloquea módulos server-only podía fallar si el import venía de <code>src/params.js</code>, y los secretos se reemplazaban estáticamente en el bundle del cliente (<strong>CVSS 7.5</strong>, <code>@sveltejs/kit</code> 3.0.0–3.1.0). En la misma tanda: DoS al parsear form data de remote functions <code>form</code>/<code>query</code>/<code>command</code> (7.5, desde 2.42.0), import cross-origin con <code>router.resolution: 'server'</code> (fix también en 2.70.4) y colisión de <code>query.batch</code> privados. Los parches salieron hace semanas; el advisory se publicó ahora. Si seguís en 3.0.x/3.1.0, subí a <strong>3.1.1</strong> y rotá cualquier secreto que haya pasado por <code>params.js</code>.</p>",
+            "en": "<p>The build guard that blocks server-only modules could fail when the import came through <code>src/params.js</code>, statically inlining secrets into the client bundle (<strong>CVSS 7.5</strong>, <code>@sveltejs/kit</code> 3.0.0–3.1.0). Same batch: a DoS parsing remote-function <code>form</code>/<code>query</code>/<code>command</code> form data (7.5, since 2.42.0), a cross-origin import with <code>router.resolution: 'server'</code> (also fixed in 2.70.4), and colliding private <code>query.batch</code> functions. Patches shipped weeks ago; the advisories went public now. Still on 3.0.x/3.1.0? Move to <strong>3.1.1</strong> and rotate any secret reachable from <code>params.js</code>.</p>",
+            "fr": "<p>Le garde-fou de build qui bloque les modules server-only pouvait échouer quand l'import passait par <code>src/params.js</code>, injectant des secrets dans le bundle client (<strong>CVSS 7.5</strong>, <code>@sveltejs/kit</code> 3.0.0–3.1.0). Dans le même lot : un DoS sur le form data des remote functions (7.5, depuis 2.42.0), un import cross-origin avec <code>router.resolution: 'server'</code> (corrigé aussi en 2.70.4) et des collisions de <code>query.batch</code> privés. Passez en <strong>3.1.1</strong> et faites tourner les secrets exposés.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-m9j8-jcmv-hp69", "label": "GHSA-m9j8-jcmv-hp69" }
+        },
+        {
+          "id": "nuxt-route-rules-bypass",
+          "tag": "security",
+          "date": "16 Nov 2026",
+          "title": {
+            "es": "Nuxt 4.6.4: un %2F en el path saltea route rules en rutas catch-all — otro fix incompleto",
+            "en": "Nuxt 4.6.4: a %2F in the path bypasses route rules on catch-all routes — another incomplete fix",
+            "fr": "Nuxt 4.6.4 : un %2F dans le chemin contourne les route rules des routes catch-all — encore un correctif incomplet"
+          },
+          "body_html": {
+            "es": "<p>Las route rules matchean el path con <code>%2F</code> sin decodificar, pero el router de páginas sí lo decodifica: un atacante sin auth renderiza la página sin las reglas que la protegían (<strong>CVSS 6.5</strong>). Es el segundo bypass sobre el fix de GHSA-6gq8, y viene con cuatro advisories más: errores no-HTTP que filtraban <code>message</code> y <code>data</code> (incluida la URL y el body del <code>$fetch</code> fallido) al payload, costo cuadrático con slashes repetidos, props de islands que colisionan y DNS rebinding en el dev server. Nuxt 3 queda <strong>sin fix</strong>. Si tu authz vive en route rules, ponete las pilas: movela a middleware de servidor y subí a <strong>4.6.4</strong>.</p>",
+            "en": "<p>Route rules match the path with <code>%2F</code> left encoded while the page router decodes it, so an unauthenticated attacker renders the page without the rules that guarded it (<strong>CVSS 6.5</strong>). It is the second bypass of the GHSA-6gq8 fix, and ships with four more advisories: non-HTTP errors leaking <code>message</code> and <code>data</code> (including the failed <code>$fetch</code> URL and upstream body) into the payload, quadratic cost on repeated slashes, colliding island props, and DNS rebinding on the dev server. Nuxt 3 gets <strong>no fix</strong>. If your authz lives in route rules, move it into server middleware and upgrade to <strong>4.6.4</strong>.</p>",
+            "fr": "<p>Les route rules comparent le chemin avec <code>%2F</code> encodé, alors que le routeur de pages le décode : un attaquant non authentifié affiche la page sans les règles qui la protégeaient (<strong>CVSS 6.5</strong>). C'est le deuxième contournement du correctif GHSA-6gq8, accompagné de quatre autres advisories, dont la fuite de <code>message</code> et <code>data</code> d'erreurs non HTTP dans le payload. Nuxt 3 n'a <strong>pas de correctif</strong>. Passez en <strong>4.6.4</strong> et sortez l'authz des route rules.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-f3x9-2chm-73c8", "label": "GHSA-f3x9-2chm-73c8" }
+        },
+        {
+          "id": "docker-29-10-ga",
+          "tag": "breaking",
+          "date": "16 Nov 2026",
+          "title": {
+            "es": "Docker Engine 29.10 GA: loopback deja de ser insecure-registry implícito si configurás la lista",
+            "en": "Docker Engine 29.10 GA: loopback is no longer an implicit insecure registry once you set the list",
+            "fr": "Docker Engine 29.10 GA : le loopback n'est plus un registry insecure implicite si vous définissez la liste"
+          },
+          "body_html": {
+            "es": "<p>Si tenés <code>insecure-registries</code> en <code>daemon.json</code> o usás <code>--insecure-registry</code>, <code>127.0.0.0/8</code> y <code>::1</code> ya <strong>no</strong> se tratan como inseguros automáticamente: el <code>localhost:5000</code> por HTTP de tu CI puede romper pulls y pushes después del upgrade. Agregalo explícito o poné TLS. Además, la spec de la Engine API pasa a <strong>OpenAPI 3.2</strong> como fuente (sigue publicándose un Swagger 2.0 generado). Ya habíamos visto el rc.1; esta es la GA.</p>",
+            "en": "<p>If you set <code>insecure-registries</code> in <code>daemon.json</code> or pass <code>--insecure-registry</code>, <code>127.0.0.0/8</code> and <code>::1</code> are <strong>no longer</strong> treated as insecure automatically: your CI's plain-HTTP <code>localhost:5000</code> may break pulls and pushes after the upgrade. Add it explicitly or use TLS. The Engine API spec also moves to <strong>OpenAPI 3.2</strong> as its source (a generated Swagger 2.0 is still published). We covered rc.1; this is the GA.</p>",
+            "fr": "<p>Si vous définissez <code>insecure-registries</code> dans <code>daemon.json</code> ou utilisez <code>--insecure-registry</code>, <code>127.0.0.0/8</code> et <code>::1</code> ne sont <strong>plus</strong> considérés comme insecure automatiquement : le <code>localhost:5000</code> en HTTP de votre CI peut casser. Ajoutez-le explicitement ou passez en TLS. La spec de l'Engine API passe à <strong>OpenAPI 3.2</strong> (un Swagger 2.0 généré reste publié).</p>"
+          },
+          "source": { "url": "https://github.com/moby/moby/releases/tag/docker-v29.10.0", "label": "github.com/moby" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "nestjs-12-5-1",
+      "updates": [
+        {
+          "id": "nestjs-12-5-1",
+          "tag": "notable",
+          "date": "16 Nov 2026",
+          "title": {
+            "es": "NestJS 12.5.1: graceful shutdown para los servers TCP, MQTT y RabbitMQ",
+            "en": "NestJS 12.5.1: graceful shutdown for the TCP, MQTT and RabbitMQ servers",
+            "fr": "NestJS 12.5.1 : arrêt gracieux pour les serveurs TCP, MQTT et RabbitMQ"
+          },
+          "body_html": {
+            "es": "<p>Un patch con gusto a minor: los transportes de <code>@nestjs/microservices</code> (TCP, MQTT, RMQ) drenan mensajes en vuelo antes de cerrar, clave para deploys rolling en K8s. También acepta metadata de módulo directo como root module, decodifica cada valor de headers Kafka repetidos y deja de reintentar la conexión Kafka cuando el client ya se cerró. <code>ParseDatePipe</code> ahora rechaza fechas inválidas tipo 31 de febrero.</p>",
+            "en": "<p>A patch that feels like a minor: the <code>@nestjs/microservices</code> TCP, MQTT and RMQ transports now drain in-flight messages before closing, which matters for rolling deploys on K8s. It also accepts module metadata directly as the root module, decodes every value of repeated Kafka headers, and stops a Kafka connection attempt once the client is closed. <code>ParseDatePipe</code> now rejects dates like 31 February.</p>",
+            "fr": "<p>Un patch qui ressemble à une mineure : les transports TCP, MQTT et RMQ de <code>@nestjs/microservices</code> vident les messages en cours avant de fermer, utile pour les rolling deploys sur K8s. Les métadonnées de module sont acceptées comme root module, et les headers Kafka répétés sont tous décodés.</p>"
+          },
+          "source": { "url": "https://github.com/nestjs/nest/releases/tag/v12.5.1", "label": "github.com/nestjs" }
+        },
+        {
+          "id": "hono-4-13-19",
+          "tag": "minor",
+          "date": "16 Nov 2026",
+          "title": {
+            "es": "Hono 4.13.19: fixes de proxy, method-override y JSX DOM",
+            "en": "Hono 4.13.19: proxy, method-override and JSX DOM fixes",
+            "fr": "Hono 4.13.19 : correctifs proxy, method-override et JSX DOM"
+          },
+          "body_html": {
+            "es": "<p>El helper de <code>proxy</code> ya no reenvía <code>Transfer-Encoding</code> ni <code>Keep-Alive</code> desde el option de headers (fuente clásica de request smuggling), <code>method-override</code> descarta el body al pasar a GET/HEAD, y los errores en handlers WebSocket de Bun llegan a <code>onError</code>. El resto son fixes de <code>jsx/dom</code> alineados con React 19.</p>",
+            "en": "<p>The <code>proxy</code> helper no longer forwards <code>Transfer-Encoding</code> or <code>Keep-Alive</code> from the headers option (a classic request-smuggling source), <code>method-override</code> drops the body when switching to GET/HEAD, and errors thrown in Bun WebSocket handlers now reach <code>onError</code>. The rest are <code>jsx/dom</code> fixes aligning with React 19.</p>",
+            "fr": "<p>Le helper <code>proxy</code> ne transmet plus <code>Transfer-Encoding</code> ni <code>Keep-Alive</code>, <code>method-override</code> supprime le body en GET/HEAD et les erreurs des handlers WebSocket Bun arrivent dans <code>onError</code>.</p>"
+          },
+          "source": { "url": "https://github.com/honojs/hono/releases/tag/v4.13.19", "label": "github.com/honojs" }
+        },
+        {
+          "id": "apollo-gateway-interface-2-2",
+          "tag": "minor",
+          "date": "17 Nov 2026",
+          "title": {
+            "es": "@apollo/server-gateway-interface 2.2.0: compatible con utils viejos para no romper @apollo/gateway 2.x",
+            "en": "@apollo/server-gateway-interface 2.2.0: works with older utils so @apollo/gateway 2.x keeps running",
+            "fr": "@apollo/server-gateway-interface 2.2.0 : compatible avec les anciens utils pour @apollo/gateway 2.x"
+          },
+          "body_html": {
+            "es": "<p>Apollo aflojó los peer ranges de <code>@apollo/utils.fetcher</code>, <code>.logger</code> y <code>.keyvaluecache</code> para que <code>@apollo/gateway</code> 2.x siga corriendo en todas sus versiones de Node, incluso Node 18 EOL, sin tener que sacar un major. Si todavía tenés un gateway federado viejo, esto te ahorra un dolor de cabeza; igual, planeá la migración a Router.</p>",
+            "en": "<p>Apollo relaxed the ranges for <code>@apollo/utils.fetcher</code>, <code>.logger</code> and <code>.keyvaluecache</code> so <code>@apollo/gateway</code> 2.x keeps working on every Node version it supports, even EOL Node 18, without a major bump. Handy if you still run a legacy federated gateway; plan the Router migration anyway.</p>",
+            "fr": "<p>Apollo assouplit les dépendances <code>@apollo/utils.*</code> pour que <code>@apollo/gateway</code> 2.x fonctionne sur toutes ses versions de Node, même Node 18 EOL, sans version majeure.</p>"
+          },
+          "source": { "url": "https://github.com/apollographql/apollo-server/releases/tag/%40apollo/server-gateway-interface%402.2.0", "label": "github.com/apollographql" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "prisma-8-rc-24",
+      "updates": [
+        {
+          "id": "prisma-8-rc-24",
+          "tag": "beta",
+          "date": "16 Nov 2026",
+          "title": {
+            "es": "Prisma 8 rc.24: en MongoDB Date pasa a ser fecha calendario, isolation levels en SQL",
+            "en": "Prisma 8 rc.24: Date becomes a calendar date on MongoDB, isolation levels on SQL",
+            "fr": "Prisma 8 rc.24 : Date devient une date calendaire sur MongoDB, niveaux d'isolation en SQL"
+          },
+          "body_html": {
+            "es": "<p>Breaking en MongoDB: <code>Date</code> ahora se guarda a medianoche UTC y se lee como string (<code>2024-02-29</code>); lo que antes era <code>Date</code> pasa a llamarse <code>DateTime</code>, y llegan <code>Time</code> y <code>Duration</code>. Los clients SQL aceptan isolation levels y timeouts en transacciones con callback, el CLI gestiona MariaDB, y <code>db.raw.sql</code> puede embeber queries del builder. Trae recetas de upgrade por cambio; corré <code>prisma contract emit</code> después de actualizar.</p>",
+            "en": "<p>Breaking on MongoDB: <code>Date</code> is now stored at midnight UTC and read as a string (<code>2024-02-29</code>); the old behavior moves to <code>DateTime</code>, and <code>Time</code> and <code>Duration</code> are new. SQL clients take transaction isolation levels and callback timeouts, the CLI manages MariaDB, and <code>db.raw.sql</code> embeds builder queries. Upgrade recipes name each change; run <code>prisma contract emit</code> after upgrading.</p>",
+            "fr": "<p>Changement cassant sur MongoDB : <code>Date</code> est stocké à minuit UTC et lu comme une chaîne ; l'ancien comportement devient <code>DateTime</code>. Les clients SQL acceptent niveaux d'isolation et timeouts de transaction, et le CLI gère MariaDB. Lancez <code>prisma contract emit</code> après la mise à jour.</p>"
+          },
+          "source": { "url": "https://github.com/prisma/orm/releases/tag/v8.0.0-rc.24", "label": "github.com/prisma" }
+        },
+        {
+          "id": "mikro-orm-7-2-10",
+          "tag": "patch",
+          "date": "16 Nov 2026",
+          "title": {
+            "es": "MikroORM 7.2.10: menos auto-flush fantasma y m:n que no se marcan dirty de más",
+            "en": "MikroORM 7.2.10: fewer phantom auto-flushes and m:n items no longer wrongly dirty",
+            "fr": "MikroORM 7.2.10 : moins d'auto-flush fantômes et relations m:n plus marquées dirty à tort"
+          },
+          "body_html": {
+            "es": "<p>Ya no encola un auto-flush al cargar colecciones 1:m (un bug abierto desde la v6), no marca como dirty items m:n refrescados con custom types, hidrata fórmulas tipadas como <code>number</code> como números y acepta strings numéricos en <code>limit</code>/<code>offset</code>. Si viste UPDATEs que nadie pidió, es este patch.</p>",
+            "en": "<p>It no longer queues an auto-flush when loading 1:m collections (a bug open since v6), stops marking refreshed m:n items with custom types as dirty, hydrates <code>number</code>-typed formulas as numbers, and accepts numeric strings in <code>limit</code>/<code>offset</code>. If you saw UPDATEs nobody asked for, this is your patch.</p>",
+            "fr": "<p>Plus d'auto-flush mis en file au chargement des collections 1:m, plus de faux dirty sur les relations m:n à types custom, et les formules typées <code>number</code> sont hydratées en nombres.</p>"
+          },
+          "source": { "url": "https://github.com/mikro-orm/mikro-orm/releases/tag/v7.2.10", "label": "github.com/mikro-orm" }
+        },
+        {
+          "id": "bullmq-6-7-7",
+          "tag": "security",
+          "date": "17 Nov 2026",
+          "title": {
+            "es": "BullMQ 6.7.7: bump de seguridad de cron-parser",
+            "en": "BullMQ 6.7.7: security bump of cron-parser",
+            "fr": "BullMQ 6.7.7 : mise à jour de sécurité de cron-parser"
+          },
+          "body_html": {
+            "es": "<p>Release de una sola línea: <code>cron-parser</code> sube a <strong>5.10.5</strong> marcado como security. Si usás job schedulers con patterns cron que vienen de input de usuario, actualizá.</p>",
+            "en": "<p>A one-line release: <code>cron-parser</code> goes to <strong>5.10.5</strong>, flagged as a security update. If your job schedulers take cron patterns from user input, upgrade.</p>",
+            "fr": "<p>Release d'une ligne : <code>cron-parser</code> passe en <strong>5.10.5</strong> (correctif de sécurité). À appliquer si vos patterns cron viennent d'entrées utilisateur.</p>"
+          },
+          "source": { "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.7.7", "label": "github.com/taskforcesh" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "ecr-replication-deletes",
+      "updates": [
+        {
+          "id": "ecr-replication-deletes",
+          "tag": "notable",
+          "date": "16 Nov 2026",
+          "title": {
+            "es": "Amazon ECR ahora replica borrados de imágenes y tags entre regiones y cuentas",
+            "en": "Amazon ECR now replicates image deletions and tag removals across regions and accounts",
+            "fr": "Amazon ECR réplique désormais les suppressions d'images et de tags entre régions et comptes"
+          },
+          "body_html": {
+            "es": "<p>Hasta ahora la replicación solo copiaba pushes, así que cada región destino acumulaba basura y había que scriptear la limpieza. Ahora un delete o una lifecycle policy en el origen se propaga a todos los destinos, con eventos en EventBridge y registro en CloudTrail. Golazo para setups multi-región, pero ojo: un borrado accidental en el origen también se replica.</p>",
+            "en": "<p>Until now replication only copied pushes, so every destination region piled up stale images and you had to script cleanup. Now a delete or lifecycle-policy expiry in the source propagates to every destination, with EventBridge events and CloudTrail records. Great for multi-region setups, but note that an accidental delete in the source replicates too.</p>",
+            "fr": "<p>La réplication ne copiait que les pushes. Désormais, une suppression ou une lifecycle policy dans la source se propage à toutes les destinations, avec événements EventBridge et traces CloudTrail. Attention : une suppression accidentelle se réplique aussi.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/replication-deletes-amazon-ecr", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "kms-ram-key-sharing",
+          "tag": "notable",
+          "date": "16 Nov 2026",
+          "title": {
+            "es": "AWS KMS se integra con Resource Access Manager para compartir keys entre cuentas",
+            "en": "AWS KMS integrates with Resource Access Manager for cross-account key sharing",
+            "fr": "AWS KMS s'intègre à Resource Access Manager pour partager des clés entre comptes"
+          },
+          "body_html": {
+            "es": "<p>Compartir una KMS key cross-account ya no exige editar key policies a mano: armás un resource share en RAM con una managed permission (de AWS o propia) y los principals. Menos JSON de policies frágil y más fácil de auditar en organizaciones con muchas cuentas.</p>",
+            "en": "<p>Sharing a KMS key cross-account no longer means hand-editing key policies: create a RAM resource share with a managed permission (AWS or customer-managed) and the principals. Less fragile policy JSON and easier auditing in many-account organizations.</p>",
+            "fr": "<p>Partager une clé KMS entre comptes ne demande plus d'éditer les key policies à la main : un resource share RAM avec une managed permission suffit.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/kms-key-sharing-resource-access-manager/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "wrangler-4-163",
+          "tag": "minor",
+          "date": "16 Nov 2026",
+          "title": {
+            "es": "Wrangler 4.163: Build Output v1 en .cloudflare/output y Workflows disparados por Artifacts en local",
+            "en": "Wrangler 4.163: Build Output v1 in .cloudflare/output and locally triggered Workflows from Artifacts",
+            "fr": "Wrangler 4.163 : Build Output v1 dans .cloudflare/output et Workflows locaux déclenchés par Artifacts"
+          },
+          "body_html": {
+            "es": "<p><code>vite build</code> y el experimental <code>wrangler build</code> escriben ahora Build Output v1 en <code>.cloudflare/output/v1/</code>, con los settings de la cuenta anidados en <code>settings</code> y un campo <code>producer</code>. Además podés declarar eventos de Artifacts en <code>exports.workflow()</code> y arrancar el Workflow en local desde Vite o Workers Vitest.</p>",
+            "en": "<p><code>vite build</code> and the experimental <code>wrangler build</code> now write Build Output v1 to <code>.cloudflare/output/v1/</code>, with account settings nested under <code>settings</code> and a <code>producer</code> field. You can also declare Artifacts events on <code>exports.workflow()</code> and start the Workflow locally from Vite or Workers Vitest.</p>",
+            "fr": "<p><code>vite build</code> écrit désormais le Build Output v1 dans <code>.cloudflare/output/v1/</code>, et les événements Artifacts déclarés sur <code>exports.workflow()</code> démarrent le Workflow en local.</p>"
+          },
+          "source": { "url": "https://github.com/cloudflare/workers-sdk/releases/tag/wrangler%404.163.0", "label": "github.com/cloudflare" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "nextjs-use-cache-root-params",
+      "updates": [
+        {
+          "id": "nextjs-use-cache-root-params",
+          "tag": "security",
+          "date": "16 Nov 2026",
+          "title": {
+            "es": "Next.js 16.4.5: 'use cache' + unstable_cache() podía mezclar datos entre root params",
+            "en": "Next.js 16.4.5: 'use cache' plus unstable_cache() could mix data across root params",
+            "fr": "Next.js 16.4.5 : 'use cache' et unstable_cache() pouvaient mélanger les données entre root params"
+          },
+          "body_html": {
+            "es": "<p>Si la misma función <code>'use cache'</code> que lee un root param (típicamente el locale) se llama directo y también vía <code>unstable_cache()</code>, en un cold start una race de deduplicación guardaba el resultado sin el root param en la key, y otros requests lo recibían (<strong>CVSS 6.3</strong>, 16.3.0–16.4.4). Si scopeás datos por tenant o locale en el root layout, revisá que estés en <strong>16.4.5</strong>.</p>",
+            "en": "<p>When the same <code>'use cache'</code> function that reads a root param (often the locale) is called both directly and through <code>unstable_cache()</code>, a cold-start dedup race stored the result under a key without the root param, serving it to other requests (<strong>CVSS 6.3</strong>, 16.3.0–16.4.4). If you scope data per tenant or locale in the root layout, make sure you are on <strong>16.4.5</strong>.</p>",
+            "fr": "<p>Une race de déduplication au démarrage à froid pouvait stocker le résultat d'une fonction <code>'use cache'</code> sans son root param et le servir à d'autres requêtes (<strong>CVSS 6.3</strong>, 16.3.0–16.4.4). Passez en <strong>16.4.5</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-mfr8-8qww-v76h", "label": "GHSA-mfr8-8qww-v76h" }
+        },
+        {
+          "id": "aiohttp-advisory-batch",
+          "tag": "security",
+          "date": "16 Nov 2026",
+          "title": {
+            "es": "aiohttp 3.14.4: diez advisories de DoS que bloquean el event loop",
+            "en": "aiohttp 3.14.4: ten DoS advisories that block the event loop",
+            "fr": "aiohttp 3.14.4 : dix advisories de DoS qui bloquent l'event loop"
+          },
+          "body_html": {
+            "es": "<p>Para los que tienen servicios Python al lado del stack TS: forms URL-encoded con miles de keys repetidas en tiempo cuadrático, partes multipart en base64 que saltean <code>client_max_size</code>, overflow en <code>max_msg_size</code> de WebSocket y streams comprimidos concatenados, varios con <strong>CVSS 8.7</strong>. El patrón es el mismo de siempre: cualquier parser en el event loop es superficie de DoS. Actualizá a <strong>3.14.4</strong>.</p>",
+            "en": "<p>For anyone running Python services next to the TS stack: URL-encoded forms with thousands of repeated keys in quadratic time, base64 multipart parts bypassing <code>client_max_size</code>, a WebSocket <code>max_msg_size</code> overflow and concatenated compressed streams, several at <strong>CVSS 8.7</strong>. Same lesson as always: any parser on the event loop is DoS surface. Upgrade to <strong>3.14.4</strong>.</p>",
+            "fr": "<p>Formulaires URL-encoded quadratiques, parties multipart base64 qui contournent <code>client_max_size</code>, overflow WebSocket : plusieurs failles à <strong>CVSS 8.7</strong>. Passez en <strong>3.14.4</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-xgw8-8ccx-rmqh", "label": "GHSA-xgw8-8ccx-rmqh" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "netflix-ops-knowledge-graph",
+      "updates": [
+        {
+          "id": "netflix-ops-knowledge-graph",
+          "tag": "notable",
+          "date": "13 Nov 2026",
+          "title": {
+            "es": "Netflix modela su operación como knowledge graph con ontología para investigar incidentes",
+            "en": "Netflix models its operations as an ontology-driven knowledge graph for incident investigation",
+            "fr": "Netflix modélise ses opérations en knowledge graph piloté par ontologie pour ses investigations"
+          },
+          "body_html": {
+            "es": "<p>En vez de saltar entre dashboards, Netflix arma un grafo con ontología explícita (servicios, deploys, dependencias, alertas) que comparten humanos y agentes de IA durante una investigación. La lección para cualquier equipo: la observabilidad escala cuando las relaciones entre señales están modeladas, no cuando sumás más métricas. Es DDD aplicado a tu propia infraestructura.</p>",
+            "en": "<p>Instead of hopping between dashboards, Netflix builds a graph with an explicit ontology (services, deploys, dependencies, alerts) that humans and AI agents share during an investigation. The lesson for any team: observability scales when the relationships between signals are modeled, not when you add more metrics. It is DDD applied to your own infrastructure.</p>",
+            "fr": "<p>Netflix construit un graphe avec une ontologie explicite (services, déploiements, dépendances, alertes) partagé par humains et agents IA. L'observabilité passe à l'échelle quand les relations entre signaux sont modélisées.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/11/netflix-ai-driven-observability/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "secrets-manager-auth0-okta",
+      "updates": [
+        {
+          "id": "secrets-manager-auth0-okta",
+          "tag": "notable",
+          "date": "16 Nov 2026",
+          "title": {
+            "es": "AWS Secrets Manager rota credenciales de Auth0 y Okta sin Lambda propia",
+            "en": "AWS Secrets Manager rotates Auth0 and Okta credentials without a custom Lambda",
+            "fr": "AWS Secrets Manager fait tourner les identifiants Auth0 et Okta sans Lambda personnalisée"
+          },
+          "body_html": {
+            "es": "<p>Los client secrets de Auth0 y Okta (y Palo Alto Networks) ahora son managed external secrets: definís un schedule y Secrets Manager rota el valor sin que escribas la Lambda de rotación. Auth0 soporta self-rotation o rotación asistida por una app admin con permisos de Management API. Si tenés un secret de IdP que no rotás desde hace años, no hay más excusas.</p>",
+            "en": "<p>Auth0 and Okta (and Palo Alto Networks) client secrets are now managed external secrets: set a schedule and Secrets Manager rotates the value without you writing the rotation Lambda. Auth0 supports self-rotation or admin-assisted rotation through an app with Management API permissions. If an IdP secret has not rotated in years, there are no excuses left.</p>",
+            "fr": "<p>Les secrets clients Auth0 et Okta deviennent des managed external secrets : un planning suffit, sans Lambda de rotation à écrire.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/secrets-manager-managed-external-secrets-auth0-okta-palo-alto/", "label": "aws.amazon.com" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Advisories diferidos: SvelteKit, Nuxt y Next.js publicaron hoy CVEs de parches que salieron hace semanas. Si actualizás seguido, ya estás cubierto; si no, el exploit ahora es público.",
+      "en": "Delayed advisories: SvelteKit, Nuxt and Next.js disclosed CVEs today for patches shipped weeks ago. If you upgrade often you are covered; if not, the details are now public.",
+      "fr": "Advisories différés : SvelteKit, Nuxt et Next.js publient aujourd'hui des CVE pour des correctifs sortis il y a des semaines. Les détails sont désormais publics."
+    },
+    {
+      "es": "Los bypass por encoding (%2F, //) siguen volviendo en frameworks meta: la autorización no debería vivir en reglas de routing.",
+      "en": "Encoding bypasses (%2F, //) keep coming back in meta-frameworks: authorization should not live in routing rules.",
+      "fr": "Les contournements par encodage (%2F, //) reviennent sans cesse : l'autorisation ne doit pas vivre dans les règles de routage."
+    },
+    {
+      "es": "Imágenes base minimalistas no son gratis: musl sin PAM convirtió un bug de 2012 en acceso root a containers Alpine.",
+      "en": "Minimal base images are not free: musl without PAM turned a 2012 bug into root access on Alpine containers.",
+      "fr": "Les images minimales ont un coût : musl sans PAM a transformé un bug de 2012 en accès root sur Alpine."
+    }
+  ]
+}

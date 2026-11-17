@@ -1,0 +1,409 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 16 Nov 2026",
+    "en": "Backend & Fullstack Daily — 16 Nov 2026",
+    "fr": "Backend & Fullstack Daily — 16 nov. 2026"
+  },
+  "description": {
+    "es": "PostgreSQL cierra 53 CVEs y despide a la versión 14, Nuxt corrige un bypass de middleware con doble barra, OpenTelemetry JS filtraba firmas en los spans de servidor, GraphQL Yoga suma el método HTTP QUERY y Secrets Manager replica entre cuentas.",
+    "en": "PostgreSQL closes 53 CVEs and retires version 14, Nuxt fixes a double-slash middleware bypass, OpenTelemetry JS leaked signatures into server spans, GraphQL Yoga adds the HTTP QUERY method and Secrets Manager replicates across accounts.",
+    "fr": "PostgreSQL corrige 53 CVE et met fin à la version 14, Nuxt corrige un contournement de middleware par double barre oblique, OpenTelemetry JS laissait fuiter des signatures dans les spans serveur, GraphQL Yoga ajoute la méthode HTTP QUERY et Secrets Manager réplique entre comptes."
+  },
+  "pubDate": "2026-11-16",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "PostgreSQL 18.7: 53 CVEs y fin de la 14",
+        "en": "PostgreSQL 18.7: 53 CVEs and the end of 14",
+        "fr": "PostgreSQL 18.7 : 53 CVE et fin de la 14"
+      },
+      "anchor": "postgresql-18-7-security",
+      "icon": "simple-icons:postgresql"
+    },
+    {
+      "text": {
+        "es": "Nuxt: //x/admin saltea el middleware de servidor",
+        "en": "Nuxt: //x/admin skips server middleware",
+        "fr": "Nuxt : //x/admin contourne le middleware serveur"
+      },
+      "anchor": "nuxt-double-slash-bypass",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "OpenTelemetry JS: firmas en claro en los spans",
+        "en": "OpenTelemetry JS: plaintext signatures in spans",
+        "fr": "OpenTelemetry JS : signatures en clair dans les spans"
+      },
+      "anchor": "otel-http-query-leak",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "GraphQL Yoga 6.1 soporta el método HTTP QUERY",
+        "en": "GraphQL Yoga 6.1 supports the HTTP QUERY method",
+        "fr": "GraphQL Yoga 6.1 prend en charge la méthode HTTP QUERY"
+      },
+      "anchor": "graphql-yoga-6-1-0",
+      "icon": "lucide:blocks"
+    },
+    {
+      "text": {
+        "es": "Secrets Manager replica secretos entre cuentas",
+        "en": "Secrets Manager replicates secrets across accounts",
+        "fr": "Secrets Manager réplique les secrets entre comptes"
+      },
+      "anchor": "secrets-manager-cross-account",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": {
+        "es": "La Engine API de Docker pasa a OpenAPI 3.2",
+        "en": "Docker's Engine API moves to OpenAPI 3.2",
+        "fr": "L'Engine API de Docker passe à OpenAPI 3.2"
+      },
+      "anchor": "moby-api-1-57-openapi",
+      "icon": "simple-icons:docker"
+    },
+    {
+      "text": {
+        "es": "better-auth 1.7.25: tres avisos de acción en DPoP",
+        "en": "better-auth 1.7.25: three action-required DPoP notes",
+        "fr": "better-auth 1.7.25 : trois actions requises sur DPoP"
+      },
+      "anchor": "better-auth-1-7-25",
+      "icon": "lucide:server"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "postgresql-18-7-security",
+      "updates": [
+        {
+          "id": "postgresql-18-7-security",
+          "tag": "security",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "PostgreSQL 18.7, 17.12, 16.16, 15.20 y 14.25: 53 CVEs cerrados y última versión de la rama 14",
+            "en": "PostgreSQL 18.7, 17.12, 16.16, 15.20 and 14.25: 53 CVEs closed and the final release of the 14 line",
+            "fr": "PostgreSQL 18.7, 17.12, 16.16, 15.20 et 14.25 : 53 CVE corrigées et dernière version de la branche 14"
+          },
+          "body_html": {
+            "es": "<p>El update trimestral viene pesado: <strong>53 CVEs</strong>, de los cuales 27 permiten ejecutar código arbitrario (la mayoría con <strong>CVSS 8.8</strong>, que piden un usuario autenticado). Hay use-after-free en <code>plperl</code>, <code>pltcl</code> y <code>dblink</code>, desbordes en <code>tsvector_delete()</code> y <code>ts_rank_cd()</code>, inyección SQL en <code>pg_dump</code> y <code>reindexdb</code>, y una replicación lógica que podía escribir en los catálogos del suscriptor. Además corrige más de 140 bugs, y varios piden trabajo después de actualizar: <strong>reindexá</strong> los índices GIN sospechosos, los GiST de <code>pg_trgm</code> y los B-tree sobre <code>bpchar</code> sin longitud, y sacá un <strong>full backup nuevo</strong> si usás backups incrementales. Ojo también con esto: <strong>PostgreSQL 14 llegó a su fin de vida</strong>, la 14.25 es la última. Actualizá YA y leé la sección «Updating» antes. De yapa sale PostgreSQL 19 RC 2.</p>",
+            "en": "<p>The quarterly update is a heavy one: <strong>53 CVEs</strong>, 27 of which allow arbitrary code execution (most at <strong>CVSS 8.8</strong>, which requires an authenticated user). There are use-after-free bugs in <code>plperl</code>, <code>pltcl</code> and <code>dblink</code>, overflows in <code>tsvector_delete()</code> and <code>ts_rank_cd()</code>, SQL injection in <code>pg_dump</code> and <code>reindexdb</code>, and logical replication that could write to the subscriber's system catalogs. It also fixes more than 140 bugs, and several need work after updating: <strong>reindex</strong> any suspect GIN index, <code>pg_trgm</code> GiST indexes and B-tree indexes on <code>bpchar</code> columns without a length, and take a <strong>new full backup</strong> if you use incremental backups. Also note that <strong>PostgreSQL 14 is now end-of-life</strong>: 14.25 is its final release. Update now, and read the “Updating” section first. PostgreSQL 19 RC 2 ships alongside.</p>",
+            "fr": "<p>La mise à jour trimestrielle est lourde : <strong>53 CVE</strong>, dont 27 permettent l'exécution de code arbitraire (la plupart avec un <strong>CVSS de 8.8</strong>, qui suppose un utilisateur authentifié). On y trouve des use-after-free dans <code>plperl</code>, <code>pltcl</code> et <code>dblink</code>, des dépassements dans <code>tsvector_delete()</code> et <code>ts_rank_cd()</code>, des injections SQL dans <code>pg_dump</code> et <code>reindexdb</code>, et une réplication logique qui pouvait écrire dans les catalogues système de l'abonné. Elle corrige aussi plus de 140 bugs, dont plusieurs demandent une action après la mise à jour : <strong>réindexez</strong> les index GIN suspects, les index GiST de <code>pg_trgm</code> et les index B-tree sur des colonnes <code>bpchar</code> sans longueur, et faites une <strong>nouvelle sauvegarde complète</strong> si vous utilisez les sauvegardes incrémentales. Notez aussi que <strong>PostgreSQL 14 est en fin de vie</strong> : la 14.25 est sa dernière version. Mettez à jour sans attendre, après avoir lu la section « Updating ». PostgreSQL 19 RC 2 sort en même temps.</p>"
+          },
+          "source": {
+            "url": "https://www.postgresql.org/about/news/postgresql-187-1712-1616-1520-1425-and-19-rc-2-released-3442/",
+            "label": "postgresql.org"
+          }
+        },
+        {
+          "id": "nuxt-double-slash-bypass",
+          "tag": "security",
+          "date": "13 Nov 2026",
+          "title": {
+            "es": "Nuxt: una ruta que empieza con // saltea el middleware de servidor y las route rules (CVE-2026-128077)",
+            "en": "Nuxt: a path starting with // skips server middleware and route rules (CVE-2026-128077)",
+            "fr": "Nuxt : un chemin commençant par // contourne le middleware serveur et les route rules (CVE-2026-128077)"
+          },
+          "body_html": {
+            "es": "<p>Desde la <code>4.6.0</code>, Nuxt interpreta un path que empieza con <code>//</code> como una URL con host antes de renderizar, así que <code>//x/admin</code> renderiza la página <code>/admin</code>. Pero Nitro, sus route rules y <code>server/middleware</code> ven <code>//x/admin</code>, y los chequeos atados a <code>/admin</code> no corren. Resultado: un atacante sin autenticar se saltea un guard de servidor, un <code>redirect</code> o los headers de seguridad por ruta, y recibe la página con los datos que carga en SSR. Es un fix incompleto del GHSA-9v7c-q64q-vv33 (la <code>4.6.3</code> cubrió los dot segments, no esta forma). Afecta a <code>@nuxt/nitro-server</code> de 4.6.0 a 4.6.3: si todavía no estás en <strong>4.6.4</strong>, actualizá YA. Y de paso, no dejes la autorización solo en un match de path.</p>",
+            "en": "<p>Since <code>4.6.0</code>, Nuxt parses a path that starts with <code>//</code> as a URL with a host before rendering, so <code>//x/admin</code> renders the <code>/admin</code> page. Nitro, its route rules and <code>server/middleware</code> still see <code>//x/admin</code>, so checks keyed on <code>/admin</code> do not run. An unauthenticated attacker can therefore skip a server guard, a <code>redirect</code> rule or per-route security headers, and get the page along with the data it fetches during server rendering. This is an incomplete fix for GHSA-9v7c-q64q-vv33 (<code>4.6.3</code> covered dot segments, not this form). It affects <code>@nuxt/nitro-server</code> 4.6.0 through 4.6.3: if you are not on <strong>4.6.4</strong> yet, update now. And do not let authorization depend on a path match alone.</p>",
+            "fr": "<p>Depuis la <code>4.6.0</code>, Nuxt interprète un chemin commençant par <code>//</code> comme une URL avec un hôte avant le rendu : <code>//x/admin</code> affiche donc la page <code>/admin</code>. Nitro, ses route rules et <code>server/middleware</code> voient toujours <code>//x/admin</code>, et les contrôles liés à <code>/admin</code> ne s'exécutent pas. Un attaquant non authentifié peut ainsi contourner un guard serveur, une règle <code>redirect</code> ou des en-têtes de sécurité par route, et obtenir la page avec les données chargées au rendu serveur. Il s'agit d'un correctif incomplet de GHSA-9v7c-q64q-vv33 (la <code>4.6.3</code> couvrait les segments pointés, pas cette forme). Sont concernées les versions 4.6.0 à 4.6.3 de <code>@nuxt/nitro-server</code> : si vous n'êtes pas encore en <strong>4.6.4</strong>, mettez à jour maintenant. Et ne faites pas reposer l'autorisation sur une simple correspondance de chemin.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-r99w-jh2x-3mg9",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "otel-http-query-leak",
+          "tag": "security",
+          "date": "13 Nov 2026",
+          "title": {
+            "es": "OpenTelemetry JS: instrumentation-http exportaba el query string entrante sin redactar (CVE-2026-128080)",
+            "en": "OpenTelemetry JS: instrumentation-http exported the inbound query string unredacted (CVE-2026-128080)",
+            "fr": "OpenTelemetry JS : instrumentation-http exportait la query string entrante sans masquage (CVE-2026-128080)"
+          },
+          "body_html": {
+            "es": "<p><code>@opentelemetry/instrumentation-http</code> redactaba los parámetros sensibles en los spans <strong>salientes</strong>, pero no en los <strong>entrantes</strong>: el span de servidor guardaba el query string crudo en <code>url.query</code>. Si tu servicio recibe URLs prefirmadas de S3 o GCS, tokens SAS de Azure o webhooks firmados, esas credenciales terminaban en claro en tu backend de trazas, a la vista de cualquiera con acceso de lectura. Y configurar <code>redactedQueryParams</code> no cambiaba nada, porque solo aplica a los spans de cliente. Afecta de la <code>0.204.0</code> a la anterior a <strong>0.222.0</strong>, incluso si te llega por <code>@opentelemetry/auto-instrumentations-node</code>. Actualizá y revisá cuánto tiempo retiene tu vendor los spans viejos: las firmas pueden seguir siendo válidas.</p>",
+            "en": "<p><code>@opentelemetry/instrumentation-http</code> redacted sensitive parameters on <strong>outgoing</strong> spans but not on <strong>incoming</strong> ones: the server span stored the raw query string in <code>url.query</code>. If your service receives S3 or GCS presigned URLs, Azure SAS tokens or signed webhooks, those credentials were exported in plaintext to your tracing backend, readable by anyone with span-read access. Setting <code>redactedQueryParams</code> did not help, because it only applies to client spans. Versions from <code>0.204.0</code> up to, but not including, <strong>0.222.0</strong> are affected, including when the package arrives through <code>@opentelemetry/auto-instrumentations-node</code>. Update, and check how long your vendor retains old spans: the signatures may still be valid.</p>",
+            "fr": "<p><code>@opentelemetry/instrumentation-http</code> masquait les paramètres sensibles sur les spans <strong>sortants</strong>, mais pas sur les spans <strong>entrants</strong> : le span serveur enregistrait la query string brute dans <code>url.query</code>. Si votre service reçoit des URL présignées S3 ou GCS, des jetons SAS Azure ou des webhooks signés, ces identifiants étaient exportés en clair vers votre backend de traces, lisibles par toute personne ayant accès aux spans. Configurer <code>redactedQueryParams</code> n'y changeait rien, car l'option ne s'applique qu'aux spans client. Sont concernées les versions de <code>0.204.0</code> jusqu'à la <strong>0.222.0</strong> exclue, y compris via <code>@opentelemetry/auto-instrumentations-node</code>. Mettez à jour et vérifiez la durée de rétention des anciens spans chez votre fournisseur : les signatures peuvent être encore valides.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-3v2p-hm54-8qcq",
+            "label": "github.com/advisories"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "graphql-yoga-6-1-0",
+      "updates": [
+        {
+          "id": "graphql-yoga-6-1-0",
+          "tag": "release",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "GraphQL Yoga 6.1.0: soporte para el método HTTP QUERY",
+            "en": "GraphQL Yoga 6.1.0: support for the HTTP QUERY method",
+            "fr": "GraphQL Yoga 6.1.0 : prise en charge de la méthode HTTP QUERY"
+          },
+          "body_html": {
+            "es": "<p>Yoga implementa el método <code>QUERY</code> tal como lo propone graphql-over-http: los parámetros viajan en el body, igual que en un <code>POST</code>, pero el request se trata como seguro y de solo lectura, igual que un <code>GET</code>. Mandar una mutation por <code>QUERY</code> devuelve <code>405 Method Not Allowed</code>. Esto es un golazo para cachear queries largas sin meterlas en la URL. El release también corrige un 415 falso: el <code>Content-Type</code> ahora se compara sin distinguir mayúsculas y acepta espacios antes de los parámetros, como pide RFC 9110 (<code>Application/JSON</code> y <code>application/json ; charset=utf-8</code> eran rechazados).</p>",
+            "en": "<p>Yoga implements the <code>QUERY</code> method as proposed in graphql-over-http: the params travel in the request body, as with <code>POST</code>, but the request is treated as safe and read-only, as with <code>GET</code>. Sending a mutation over <code>QUERY</code> returns <code>405 Method Not Allowed</code>. This is a real win for caching long queries without putting them in the URL. The release also fixes a false 415: the <code>Content-Type</code> media type is now matched case-insensitively and allows whitespace before its parameters, as RFC 9110 requires (<code>Application/JSON</code> and <code>application/json ; charset=utf-8</code> used to be rejected).</p>",
+            "fr": "<p>Yoga implémente la méthode <code>QUERY</code> telle que proposée dans graphql-over-http : les paramètres voyagent dans le corps de la requête, comme avec <code>POST</code>, mais la requête est traitée comme sûre et en lecture seule, comme avec <code>GET</code>. Envoyer une mutation via <code>QUERY</code> renvoie <code>405 Method Not Allowed</code>. C'est un vrai gain pour mettre en cache de longues requêtes sans les placer dans l'URL. La version corrige aussi un faux 415 : le <code>Content-Type</code> est désormais comparé sans tenir compte de la casse et accepte des espaces avant ses paramètres, comme l'exige la RFC 9110 (<code>Application/JSON</code> et <code>application/json ; charset=utf-8</code> étaient rejetés).</p>"
+          },
+          "source": {
+            "url": "https://github.com/dotansimha/graphql-yoga/releases/tag/graphql-yoga%406.1.0",
+            "label": "github.com/dotansimha/graphql-yoga"
+          }
+        },
+        {
+          "id": "trpc-11-28-3",
+          "tag": "patch",
+          "date": "15 Nov 2026",
+          "title": {
+            "es": "tRPC 11.28.1 a 11.28.3: abortOnUnmount se respeta en más hooks y el tooling corre sobre TypeScript 7.1",
+            "en": "tRPC 11.28.1 to 11.28.3: abortOnUnmount is honoured in more hooks and the tooling runs on TypeScript 7.1",
+            "fr": "tRPC 11.28.1 à 11.28.3 : abortOnUnmount respecté dans plus de hooks et outillage compatible TypeScript 7.1"
+          },
+          "body_html": {
+            "es": "<p>Tres patches en dos días. La <code>11.28.3</code> hace que <code>@trpc/openapi</code> y <code>@trpc/upgrade</code> funcionen con la API del compilador de TypeScript 7.1. La <code>11.28.2</code> arregla <code>@trpc/react-query</code>: las infinite queries y <code>useQueries</code> ahora respetan <code>abortOnUnmount</code>, y en el server <code>nextAppDirCaller</code> le pasa el input enviado a <code>onError</code>. La <code>11.28.1</code> conserva intacto un input de tipo array cuando el cliente retoma una suscripción. Si usás suscripciones con inputs en array, este último es el que te importa.</p>",
+            "en": "<p>Three patches in two days. <code>11.28.3</code> makes <code>@trpc/openapi</code> and <code>@trpc/upgrade</code> run on TypeScript 7.1's compiler API. <code>11.28.2</code> fixes <code>@trpc/react-query</code>: infinite queries and <code>useQueries</code> now honour <code>abortOnUnmount</code>, and on the server <code>nextAppDirCaller</code> passes the submitted input to <code>onError</code>. <code>11.28.1</code> keeps an array input intact when the client resumes a subscription. If you use subscriptions with array inputs, that last fix is the one that matters to you.</p>",
+            "fr": "<p>Trois correctifs en deux jours. La <code>11.28.3</code> rend <code>@trpc/openapi</code> et <code>@trpc/upgrade</code> compatibles avec l'API du compilateur de TypeScript 7.1. La <code>11.28.2</code> corrige <code>@trpc/react-query</code> : les infinite queries et <code>useQueries</code> respectent désormais <code>abortOnUnmount</code>, et côté serveur <code>nextAppDirCaller</code> transmet l'input soumis à <code>onError</code>. La <code>11.28.1</code> conserve intact un input de type tableau lorsque le client reprend une souscription. Si vous utilisez des souscriptions avec des inputs en tableau, c'est ce dernier correctif qui vous concerne.</p>"
+          },
+          "source": {
+            "url": "https://github.com/trpc/trpc/releases/tag/v11.28.3",
+            "label": "github.com/trpc/trpc"
+          }
+        },
+        {
+          "id": "grpc-js-xds-rbac-override",
+          "tag": "security",
+          "date": "12 Nov 2026",
+          "title": {
+            "es": "@grpc/grpc-js-xds: los overrides de RBAC por ruta no se aplicaban (CVE-2026-128065)",
+            "en": "@grpc/grpc-js-xds: per-route RBAC overrides were not applied (CVE-2026-128065)",
+            "fr": "@grpc/grpc-js-xds : les surcharges RBAC par route n'étaient pas appliquées (CVE-2026-128065)"
+          },
+          "body_html": {
+            "es": "<p><code>XdsServer</code> aceptaba (ACK) los recursos del control plane pero ignoraba los overrides <code>RBACPerRoute</code> de Route y VirtualHost: el RPC se evaluaba con la política de nivel superior. Si tenés un ALLOW amplio arriba y una regla más estricta por ruta, la estricta nunca corría. Afecta a <code>@grpc/grpc-js-xds</code> 1.14.0 y 1.14.1, corregido en <strong>1.14.2</strong>. Si tu autorización gRPC vive en xDS, actualizá y verificá con un test que el override efectivamente rechaza.</p>",
+            "en": "<p><code>XdsServer</code> ACKed the control plane's resources but ignored <code>RBACPerRoute</code> overrides on Route and VirtualHost resources: the RPC was evaluated under the top-level policy. With a broad ALLOW at the top and a stricter per-route rule, the stricter rule never ran. It affects <code>@grpc/grpc-js-xds</code> 1.14.0 and 1.14.1 and is fixed in <strong>1.14.2</strong>. If your gRPC authorization lives in xDS, update and add a test proving the override actually denies.</p>",
+            "fr": "<p><code>XdsServer</code> acquittait (ACK) les ressources du control plane mais ignorait les surcharges <code>RBACPerRoute</code> des ressources Route et VirtualHost : le RPC était évalué avec la politique de niveau supérieur. Avec un ALLOW large en haut et une règle plus stricte par route, la règle stricte ne s'exécutait jamais. Sont concernées les versions 1.14.0 et 1.14.1 de <code>@grpc/grpc-js-xds</code>, corrigé en <strong>1.14.2</strong>. Si votre autorisation gRPC repose sur xDS, mettez à jour et ajoutez un test prouvant que la surcharge refuse bien.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-gg5j-6742-v827",
+            "label": "github.com/advisories"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "secrets-manager-cross-account",
+      "updates": [
+        {
+          "id": "secrets-manager-cross-account",
+          "tag": "notable",
+          "date": "13 Nov 2026",
+          "title": {
+            "es": "AWS Secrets Manager suma replicación entre cuentas",
+            "en": "AWS Secrets Manager adds cross-account replication",
+            "fr": "AWS Secrets Manager ajoute la réplication entre comptes"
+          },
+          "body_html": {
+            "es": "<p>Secrets Manager ahora mantiene una copia sincronizada de un secreto primario en otra cuenta de AWS, extendiendo la replicación multi-Región. El equipo de plataforma o seguridad es dueño del secreto y lo rota en un solo lugar, y cada cuenta consumidora recibe una copia local siempre al día, <strong>sin KMS keys compartidas ni políticas cross-account</strong>. La réplica es un recurso independiente, cifrado con una customer managed key de la cuenta réplica, y se actualiza sola cuando cambia el valor, rotaciones incluidas. Disponible en todas las Regiones donde está Secrets Manager; la API nueva es <code>AssociateCrossAccountReplica</code>. Si venías armando esto con Lambdas y resource policies, ponete las pilas y simplificá.</p>",
+            "en": "<p>Secrets Manager can now keep a synchronized copy of a primary secret in a second AWS account, extending multi-Region replication across account boundaries. A platform or security team owns and rotates the secret in one place, and each consuming account gets a local, always-current copy <strong>without shared KMS keys or cross-account secret policies</strong>. The replica is an independent resource, encrypted with a customer managed key owned by the replica account, and it updates automatically whenever the primary value changes, rotations included. It is available in every Region where Secrets Manager is; the new API is <code>AssociateCrossAccountReplica</code>. If you built this yourself with Lambdas and resource policies, this is your chance to simplify.</p>",
+            "fr": "<p>Secrets Manager peut désormais maintenir une copie synchronisée d'un secret primaire dans un autre compte AWS, en étendant la réplication multi-Région au-delà des limites de compte. Une équipe plateforme ou sécurité possède le secret et le fait tourner à un seul endroit, et chaque compte consommateur reçoit une copie locale toujours à jour, <strong>sans clés KMS partagées ni politiques inter-comptes</strong>. Le réplica est une ressource indépendante, chiffrée avec une clé gérée par le client du compte réplica, et il se met à jour automatiquement à chaque changement de valeur, rotations comprises. Disponible dans toutes les Régions où Secrets Manager l'est ; la nouvelle API est <code>AssociateCrossAccountReplica</code>. Si vous aviez construit cela avec des Lambdas et des resource policies, c'est l'occasion de simplifier.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/secrets-manager-cross-account/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "wrangler-4-162-0",
+          "tag": "notable",
+          "date": "13 Nov 2026",
+          "title": {
+            "es": "Wrangler 4.162.0: los bindings de Artifacts usan el simulador local por defecto y los settings de Workflows se mudan al export",
+            "en": "Wrangler 4.162.0: Artifacts bindings default to the local simulator and Workflow settings move to the export",
+            "fr": "Wrangler 4.162.0 : les bindings Artifacts utilisent le simulateur local par défaut et les réglages de Workflows passent sur l'export"
+          },
+          "body_html": {
+            "es": "<p>Dos cambios de comportamiento en un minor. Primero, un binding de Artifacts sin <code>remote</code> ahora usa el <strong>simulador local</strong> en desarrollo, igual que KV, R2 y D1; antes apuntaba al recurso desplegado. Si querés los repos reales en <code>wrangler dev</code> o <code>vite dev</code>, poné <code>'remote': true</code> (necesita Git 2.32 o superior en el host). Segundo, un binding <code>workflows</code> a un Workflow declarado en <code>exports</code> ya no puede definir <code>limits</code>, <code>concurrency</code>, <code>schedules</code>, <code>default_retention</code> ni <code>jurisdiction</code>: esos settings van en el export, y la config vieja falla con un error que te dice cuál mover. A cambio, <code>wrangler deploy</code> y <code>wrangler versions upload</code> ahora suben esos settings junto con el Worker.</p>",
+            "en": "<p>Two behaviour changes in a minor. First, an Artifacts binding that omits <code>remote</code> now uses the <strong>local simulator</strong> in development, like KV, R2 and D1; it used to hit the deployed resource. If you want deployed repos in <code>wrangler dev</code> or <code>vite dev</code>, set <code>'remote': true</code> (the simulator needs Git 2.32 or newer on the host). Second, a <code>workflows</code> binding to a Workflow declared in <code>exports</code> can no longer set <code>limits</code>, <code>concurrency</code>, <code>schedules</code>, <code>default_retention</code> or <code>jurisdiction</code>: set them on the export instead, and old configs now stop with an error naming the setting to move. In return, <code>wrangler deploy</code> and <code>wrangler versions upload</code> now upload those settings with the Worker.</p>",
+            "fr": "<p>Deux changements de comportement dans une mineure. D'abord, un binding Artifacts sans <code>remote</code> utilise désormais le <strong>simulateur local</strong> en développement, comme KV, R2 et D1 ; il ciblait auparavant la ressource déployée. Pour retrouver les dépôts déployés dans <code>wrangler dev</code> ou <code>vite dev</code>, définissez <code>'remote': true</code> (le simulateur exige Git 2.32 ou plus récent sur l'hôte). Ensuite, un binding <code>workflows</code> vers un Workflow déclaré dans <code>exports</code> ne peut plus définir <code>limits</code>, <code>concurrency</code>, <code>schedules</code>, <code>default_retention</code> ni <code>jurisdiction</code> : placez-les sur l'export, les anciennes configurations s'arrêtent avec une erreur indiquant le réglage à déplacer. En contrepartie, <code>wrangler deploy</code> et <code>wrangler versions upload</code> envoient maintenant ces réglages avec le Worker.</p>"
+          },
+          "source": {
+            "url": "https://github.com/cloudflare/workers-sdk/releases/tag/wrangler%404.162.0",
+            "label": "github.com/cloudflare/workers-sdk"
+          }
+        },
+        {
+          "id": "aws-batch-eks-security-context",
+          "tag": "minor",
+          "date": "13 Nov 2026",
+          "title": {
+            "es": "AWS Batch en EKS: Linux capabilities, seccomp y settings a nivel de pod",
+            "en": "AWS Batch on EKS: Linux capabilities, seccomp and pod-level settings",
+            "fr": "AWS Batch sur EKS : capabilities Linux, seccomp et réglages au niveau du pod"
+          },
+          "body_html": {
+            "es": "<p>Las job definitions de AWS Batch para EKS ahora aceptan <code>capabilities</code> y <code>seccompProfile</code> en el <code>securityContext</code> del container, y un <code>securityContext</code> en <code>podProperties</code> para settings de todo el pod como <code>fsGroup</code> (el nivel container pisa al del pod). En la práctica: ya podés correr jobs de Batch en clusters que aplican el perfil <strong>restricted</strong> de los Pod Security Standards, con solo los privilegios y syscalls que necesitan.</p>",
+            "en": "<p>AWS Batch job definitions for EKS now accept <code>capabilities</code> and <code>seccompProfile</code> in a container's <code>securityContext</code>, plus a <code>securityContext</code> in <code>podProperties</code> for pod-wide settings such as <code>fsGroup</code> (container-level settings override pod-level defaults). In practice, you can now run Batch jobs on clusters that enforce the Pod Security Standards <strong>restricted</strong> profile, with only the privileges and system calls they need.</p>",
+            "fr": "<p>Les définitions de jobs AWS Batch pour EKS acceptent désormais <code>capabilities</code> et <code>seccompProfile</code> dans le <code>securityContext</code> d'un container, ainsi qu'un <code>securityContext</code> dans <code>podProperties</code> pour les réglages de tout le pod comme <code>fsGroup</code> (le niveau container l'emporte sur celui du pod). Concrètement, vous pouvez exécuter des jobs Batch sur des clusters qui appliquent le profil <strong>restricted</strong> des Pod Security Standards, avec uniquement les privilèges et appels système nécessaires.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/aws-batch-eks-security-context/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "moby-api-1-57-openapi",
+      "updates": [
+        {
+          "id": "moby-api-1-57-openapi",
+          "tag": "notable",
+          "date": "13 Nov 2026",
+          "title": {
+            "es": "Docker Engine API 1.57: la especificación pasa a OpenAPI 3.2 como formato fuente",
+            "en": "Docker Engine API 1.57: the specification moves to OpenAPI 3.2 as its source format",
+            "fr": "Docker Engine API 1.57 : la spécification passe à OpenAPI 3.2 comme format source"
+          },
+          "body_html": {
+            "es": "<p>Un caso práctico de cómo migrar el contrato de una API pública sin romper a nadie. La spec de la Engine API ahora se escribe en <strong>OpenAPI 3.2</strong> (<code>api/openapi.yaml</code>), y el Swagger 2.0 se sigue publicando, pero <strong>generado</strong> a partir de ella. Para la transición hay una copia Swagger 2.0 fijada a la v1.57, pero las próximas versiones no van a tener copia por versión: si tu tooling o tu generador de clientes lee esos archivos, pasalo a OpenAPI 3.2. En la API en sí, los eventos <code>die</code> de <code>GET /events</code> suman un atributo <code>restarting</code> cuando el container está por reiniciarse (avisa, no garantiza), y se corrige el schema de <code>ImageManifestSummary.ImageData</code>, que marcaba como requerido un campo <code>UnpackedSize</code> que no existe.</p>",
+            "en": "<p>A practical case of migrating a public API contract without breaking anyone. The Engine API specification is now authored in <strong>OpenAPI 3.2</strong> (<code>api/openapi.yaml</code>), and Swagger 2.0 is still published, but <strong>generated</strong> from it. For the transition there is a Swagger 2.0 copy pinned to v1.57, but future versions will not get a per-version copy: if your tooling or client generator reads those files, move it to OpenAPI 3.2. In the API itself, container <code>die</code> events on <code>GET /events</code> gain a <code>restarting</code> attribute when the container is about to restart (it announces the restart, it does not guarantee it), and the <code>ImageManifestSummary.ImageData</code> schema no longer lists a nonexistent <code>UnpackedSize</code> field as required.</p>",
+            "fr": "<p>Un cas pratique de migration du contrat d'une API publique sans casser personne. La spécification de l'Engine API est désormais rédigée en <strong>OpenAPI 3.2</strong> (<code>api/openapi.yaml</code>), et le Swagger 2.0 reste publié, mais <strong>généré</strong> à partir d'elle. Pour la transition, une copie Swagger 2.0 figée sur la v1.57 est fournie, mais les versions futures n'auront plus de copie par version : si votre outillage ou votre générateur de clients lit ces fichiers, basculez-le sur OpenAPI 3.2. Dans l'API elle-même, les événements <code>die</code> de <code>GET /events</code> gagnent un attribut <code>restarting</code> lorsque le container est sur le point de redémarrer (il l'annonce sans le garantir), et le schéma <code>ImageManifestSummary.ImageData</code> ne déclare plus comme requis un champ <code>UnpackedSize</code> qui n'existe pas.</p>"
+          },
+          "source": {
+            "url": "https://github.com/moby/moby/releases/tag/api%2Fv1.57.0",
+            "label": "github.com/moby/moby"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "better-auth-1-7-25",
+      "updates": [
+        {
+          "id": "better-auth-1-7-25",
+          "tag": "notable",
+          "date": "14 Nov 2026",
+          "title": {
+            "es": "better-auth 1.7.23 a 1.7.25: tres releases con acción requerida en DPoP, JWKS y CORS",
+            "en": "better-auth 1.7.23 to 1.7.25: three releases with action required on DPoP, JWKS and CORS",
+            "fr": "better-auth 1.7.23 à 1.7.25 : trois versions avec actions requises sur DPoP, JWKS et CORS"
+          },
+          "body_html": {
+            "es": "<p>Tres patches seguidos, cada uno con su aviso de «Action required». Si aceptás tokens ligados a DPoP, tenés que llamar a <code>enforceDpopBinding</code> desde <code>better-auth/oauth2</code> con un replay store compartido: <code>requireActiveAccessToken</code> solo valida el token, <strong>no el binding</strong>. En deployments multi-instancia o serverless, <code>createMcpProtectedRequestHandler</code> necesita <code>dpop.replayStore</code> apuntando a un store compartido, porque el default es en memoria. Si querés que <code>requireMcpAuth</code> u <code>oauthProviderResourceClient(auth)</code> sigan trayendo las signing keys por HTTP, definí <code>jwksUrl</code>. Y si tu capa de CORS setea su propio <code>Access-Control-Expose-Headers</code>, sumale <code>WWW-Authenticate</code>. Entre los fixes: los requests DPoP ya no devuelven 500 cuando las verificaciones viven solo en secondary storage, y el discovery deja de anunciar URLs con doble barra.</p>",
+            "en": "<p>Three patches in a row, each with its own “Action required” note. If you accept DPoP-bound tokens, call <code>enforceDpopBinding</code> from <code>better-auth/oauth2</code> with a shared replay store: <code>requireActiveAccessToken</code> checks only the token, <strong>not the binding</strong>. In multi-instance or serverless deployments, <code>createMcpProtectedRequestHandler</code> needs <code>dpop.replayStore</code> set to a shared store, because the default is in-memory. If you want <code>requireMcpAuth</code> or <code>oauthProviderResourceClient(auth)</code> to keep fetching signing keys over HTTP, set <code>jwksUrl</code>. And if your CORS layer sets its own <code>Access-Control-Expose-Headers</code>, add <code>WWW-Authenticate</code> to it. Among the fixes: DPoP requests no longer return a 500 when verification values live only in secondary storage, and discovery stops advertising endpoint URLs with a double slash.</p>",
+            "fr": "<p>Trois correctifs d'affilée, chacun avec sa note « Action required ». Si vous acceptez des jetons liés à DPoP, appelez <code>enforceDpopBinding</code> depuis <code>better-auth/oauth2</code> avec un replay store partagé : <code>requireActiveAccessToken</code> ne vérifie que le jeton, <strong>pas la liaison</strong>. En déploiement multi-instance ou serverless, <code>createMcpProtectedRequestHandler</code> a besoin d'un <code>dpop.replayStore</code> partagé, car la valeur par défaut est en mémoire. Si vous voulez que <code>requireMcpAuth</code> ou <code>oauthProviderResourceClient(auth)</code> continuent de récupérer les clés de signature via HTTP, définissez <code>jwksUrl</code>. Et si votre couche CORS définit son propre <code>Access-Control-Expose-Headers</code>, ajoutez-y <code>WWW-Authenticate</code>. Parmi les correctifs : les requêtes DPoP ne renvoient plus de 500 quand les valeurs de vérification ne sont que dans le stockage secondaire, et la découverte n'annonce plus d'URL avec une double barre oblique.</p>"
+          },
+          "source": {
+            "url": "https://github.com/better-auth/better-auth/releases/tag/v1.7.25",
+            "label": "github.com/better-auth/better-auth"
+          }
+        },
+        {
+          "id": "sveltekit-adapter-advisories",
+          "tag": "security",
+          "date": "13 Nov 2026",
+          "title": {
+            "es": "SvelteKit publica cuatro advisories: crashes en adapter-node e inyección de reglas en los adapters de Vercel y Cloudflare",
+            "en": "SvelteKit publishes four advisories: adapter-node crashes and rule injection in the Vercel and Cloudflare adapters",
+            "fr": "SvelteKit publie quatre avis : plantages d'adapter-node et injection de règles dans les adapters Vercel et Cloudflare"
+          },
+          "body_html": {
+            "es": "<p>Cuatro CVEs de severidad media divulgados juntos; los fixes ya estaban publicados, así que revisá tus versiones. En <code>@sveltejs/kit</code>, un <code>reroute</code> que convertía un path mal codificado en uno válido podía tirar el server (corregido en <strong>2.70.4</strong> y <strong>3.1.1</strong>). <code>@sveltejs/adapter-node</code> podía crashear al proxear ciertos requests vía <code>fetch</code> (<strong>5.5.8</strong> y <strong>6.0.1</strong>). Y si un atacante podía influir en los links que se crawlean en el prerender, esos paths terminaban interpretados como regex en la config de rutas de Vercel (<code>adapter-vercel</code> <strong>6.3.5</strong> / <strong>7.0.2</strong>, <code>adapter-static</code> <strong>3.0.11</strong> / <strong>4.0.1</strong>) o inyectando reglas en el <code>_redirects</code> de Cloudflare (<code>adapter-cloudflare</code> <strong>7.2.10</strong> / <strong>8.0.2</strong>). Si prerenderizás contenido de usuarios, este es el que más te toca.</p>",
+            "en": "<p>Four medium-severity CVEs disclosed together; the fixes were already published, so check your versions. In <code>@sveltejs/kit</code>, a <code>reroute</code> that turned an invalid percent-encoded path into a valid one could crash the server (fixed in <strong>2.70.4</strong> and <strong>3.1.1</strong>). <code>@sveltejs/adapter-node</code> could crash when proxying certain requests via <code>fetch</code> (<strong>5.5.8</strong> and <strong>6.0.1</strong>). And if an attacker could influence links crawled during prerendering, those paths were interpreted as regular expressions in the Vercel route config (<code>adapter-vercel</code> <strong>6.3.5</strong> / <strong>7.0.2</strong>, <code>adapter-static</code> <strong>3.0.11</strong> / <strong>4.0.1</strong>) or injected rules into Cloudflare's <code>_redirects</code> file (<code>adapter-cloudflare</code> <strong>7.2.10</strong> / <strong>8.0.2</strong>). If you prerender user-generated content, that last pair matters most.</p>",
+            "fr": "<p>Quatre CVE de sévérité moyenne divulguées ensemble ; les correctifs étaient déjà publiés, vérifiez donc vos versions. Dans <code>@sveltejs/kit</code>, un <code>reroute</code> transformant un chemin mal encodé en chemin valide pouvait faire planter le serveur (corrigé en <strong>2.70.4</strong> et <strong>3.1.1</strong>). <code>@sveltejs/adapter-node</code> pouvait planter en relayant certaines requêtes via <code>fetch</code> (<strong>5.5.8</strong> et <strong>6.0.1</strong>). Et si un attaquant pouvait influencer les liens parcourus au prérendu, ces chemins étaient interprétés comme des expressions régulières dans la configuration de routes Vercel (<code>adapter-vercel</code> <strong>6.3.5</strong> / <strong>7.0.2</strong>, <code>adapter-static</code> <strong>3.0.11</strong> / <strong>4.0.1</strong>) ou injectaient des règles dans le fichier <code>_redirects</code> de Cloudflare (<code>adapter-cloudflare</code> <strong>7.2.10</strong> / <strong>8.0.2</strong>). Si vous prérendez du contenu généré par les utilisateurs, ce dernier point est le plus important.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-mw6w-2fmv-pvw3",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "nuxt-dev-server-workspace-dir",
+          "tag": "security",
+          "date": "13 Nov 2026",
+          "title": {
+            "es": "Nuxt: el dev server podía servir archivos de un directorio padre por un lockfile suelto (CVE-2026-128070)",
+            "en": "Nuxt: the dev server could serve files from a parent directory because of a stray lockfile (CVE-2026-128070)",
+            "fr": "Nuxt : le serveur de dev pouvait servir des fichiers d'un répertoire parent à cause d'un lockfile égaré (CVE-2026-128070)"
+          },
+          "body_html": {
+            "es": "<p>Nuxt podía elegir como <code>workspaceDir</code> un directorio padre que no declara ningún workspace: el más lejano con un lockfile cuando el proyecto no está en un repo git, o el más lejano con un <code>pnpm-workspace.yaml</code> o <code>deno.json</code>. Como el dev server de Vite permite requests a <code>/_nuxt/@fs/</code> para todo lo que cuelga de <code>workspaceDir</code>, un <code>npm install</code> corrido alguna vez en tu home alcanzaba para exponer el home entero a quien llegue al dev server. Solo afecta a desarrollo, no a builds de producción. Afecta a <code>@nuxt/schema</code> desde 3.5.0 y se corrige en <strong>4.6.4</strong>. Ojo si exponés el dev server con <code>--host</code> o por un túnel.</p>",
+            "en": "<p>Nuxt could pick a parent directory that declares no workspace as its default <code>workspaceDir</code>: the farthest directory with a lockfile when the project is not inside a git repository, or the farthest one with a <code>pnpm-workspace.yaml</code> or <code>deno.json</code>. Because the Vite dev server allows <code>/_nuxt/@fs/</code> requests for anything under <code>workspaceDir</code>, running <code>npm install</code> once in your home directory was enough to expose the whole home directory to anyone who can reach the dev server. It affects development only, not production builds. <code>@nuxt/schema</code> from 3.5.0 is affected and the fix is in <strong>4.6.4</strong>. Take care if you expose the dev server with <code>--host</code> or through a tunnel.</p>",
+            "fr": "<p>Nuxt pouvait choisir comme <code>workspaceDir</code> par défaut un répertoire parent ne déclarant aucun workspace : le plus éloigné contenant un lockfile lorsque le projet n'est pas dans un dépôt git, ou le plus éloigné contenant un <code>pnpm-workspace.yaml</code> ou un <code>deno.json</code>. Comme le serveur de dev Vite autorise les requêtes <code>/_nuxt/@fs/</code> pour tout ce qui se trouve sous <code>workspaceDir</code>, un seul <code>npm install</code> lancé dans votre répertoire personnel suffisait à l'exposer en entier à quiconque atteint le serveur de dev. Seul le développement est concerné, pas les builds de production. <code>@nuxt/schema</code> est concerné à partir de la 3.5.0 et le correctif est en <strong>4.6.4</strong>. Attention si vous exposez le serveur de dev avec <code>--host</code> ou via un tunnel.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-mjrq-cffv-q4qc",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "pnpm-12-21-0",
+          "tag": "release",
+          "date": "13 Nov 2026",
+          "title": {
+            "es": "pnpm 12.21.0: store add prepara tarballs y dependencias git para installs offline, y los peers quedan estables",
+            "en": "pnpm 12.21.0: store add prepares tarball and git dependencies for offline installs, and peer choices stay stable",
+            "fr": "pnpm 12.21.0 : store add prépare les dépendances tarball et git pour les installations hors ligne, et les peers restent stables"
+          },
+          "body_html": {
+            "es": "<p><code>pnpm store add</code>, corrido dentro de un proyecto, ahora prepara los tarballs de cada entrada del lockfile que los fija, así que <code>pnpm install --offline --frozen-lockfile</code> puede instalar dependencias por URL de tarball y de hosts git cuya entrada registra un <code>integrity</code>. Esto es un golazo para CI con red restringida. Además, las instalaciones repetidas ya no cambian el proveedor de peer dependency elegido antes, una dependencia removida no vuelve como proveedor de peers, y se corrigen varios fallos con <code>lockfile.format: v13</code>, <code>nodeLinker: hoisted</code> y <code>pnpm deploy</code>. El mismo día salió <strong>11.28.12</strong> para la rama 11, con un fix de seguridad: un placeholder <code>${VAR}</code> en una URL de registry ahora hace fallar el comando, en vez de resolver en silencio contra otro registry.</p>",
+            "en": "<p><code>pnpm store add</code>, run inside a project, now prepares the tarballs for every lockfile entry that pins them, so <code>pnpm install --offline --frozen-lockfile</code> can install dependencies on a tarball URL and on git hosts whose entry records an <code>integrity</code>. That is a real win for CI with restricted network access. Repeated installs also no longer change the peer dependency provider chosen earlier, a removed dependency no longer comes back as a peer provider, and several failures with <code>lockfile.format: v13</code>, <code>nodeLinker: hoisted</code> and <code>pnpm deploy</code> are fixed. <strong>11.28.12</strong> shipped the same day for the 11 line with a security fix: a <code>${VAR}</code> placeholder in a registry URL now fails the command instead of silently resolving against another registry.</p>",
+            "fr": "<p><code>pnpm store add</code>, lancé dans un projet, prépare désormais les tarballs de chaque entrée du lockfile qui les fige, si bien que <code>pnpm install --offline --frozen-lockfile</code> peut installer des dépendances pointant vers une URL de tarball ou un hôte git dont l'entrée enregistre un <code>integrity</code>. C'est un vrai gain pour une CI à accès réseau restreint. Les installations répétées ne changent plus le fournisseur de peer dependency choisi précédemment, une dépendance supprimée ne revient plus comme fournisseur de peers, et plusieurs échecs avec <code>lockfile.format: v13</code>, <code>nodeLinker: hoisted</code> et <code>pnpm deploy</code> sont corrigés. La <strong>11.28.12</strong> est sortie le même jour pour la branche 11 avec un correctif de sécurité : un placeholder <code>${VAR}</code> dans une URL de registry fait désormais échouer la commande au lieu de résoudre silencieusement vers un autre registry.</p>"
+          },
+          "source": {
+            "url": "https://github.com/pnpm/pnpm/releases/tag/v12.21.0",
+            "label": "github.com/pnpm/pnpm"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El path sigue siendo la frontera más frágil: Nuxt con //, los adapters de SvelteKit con paths de prerender y, la semana pasada, Hono con la barra invertida. Si tu autorización depende de un match de ruta en una capa distinta a la que renderiza, tenés dos parsers que pueden no coincidir.",
+      "en": "The request path remains the most fragile boundary: Nuxt with //, the SvelteKit adapters with prerendered paths and, last week, Hono with the backslash. If your authorization depends on a route match in a different layer from the one that renders, you have two parsers that may disagree.",
+      "fr": "Le chemin de requête reste la frontière la plus fragile : Nuxt avec //, les adapters SvelteKit avec les chemins de prérendu et, la semaine dernière, Hono avec la barre oblique inverse. Si votre autorisation dépend d'une correspondance de route dans une couche différente de celle qui rend la page, vous avez deux parseurs qui peuvent diverger."
+    },
+    {
+      "es": "Los updates de PostgreSQL ya no son «actualizar y listo»: este pide reindexar y rehacer el full backup. Vale la pena tener un runbook de post-update en vez de confiar en el reinicio del servicio.",
+      "en": "PostgreSQL minor updates are no longer “upgrade and forget”: this one asks for reindexing and a fresh full backup. A post-update runbook is worth more than trusting the service restart.",
+      "fr": "Les mises à jour mineures de PostgreSQL ne se résument plus à « mettre à jour et oublier » : celle-ci demande une réindexation et une nouvelle sauvegarde complète. Un runbook post-mise à jour vaut mieux que de se fier au redémarrage du service."
+    },
+    {
+      "es": "La telemetría también es superficie de ataque: la fuga de OpenTelemetry muestra que una redacción aplicada solo a los spans de cliente deja credenciales en un sistema con muchos más lectores que el original.",
+      "en": "Telemetry is attack surface too: the OpenTelemetry leak shows that redaction applied only to client spans leaves credentials in a system with far more readers than the original one.",
+      "fr": "La télémétrie fait aussi partie de la surface d'attaque : la fuite d'OpenTelemetry montre qu'un masquage appliqué aux seuls spans client laisse des identifiants dans un système qui compte bien plus de lecteurs que le système d'origine."
+    }
+  ]
+}

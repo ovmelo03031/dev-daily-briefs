@@ -1,0 +1,329 @@
+{
+  "title": {
+    "es": "AI Security — 17 Nov 2026",
+    "en": "AI Security — 17 Nov 2026",
+    "fr": "AI Security — 17 nov. 2026"
+  },
+  "description": {
+    "es": "Una campaña con 4.837 cuentas de GitHub secuestradas roba secretos de CI y API keys de servicios de IA en al menos 1.806 repos, Amazon DJL lee archivos arbitrarios desde un model archive manipulado, una ola de CVEs en MCP servers (Kubeshark, code-review-mcp-server, AWS Labs, REBUILD) y los parches escritos por IA que terminan siendo mapas para atacantes.",
+    "en": "A campaign using 4,837 hijacked GitHub accounts steals CI secrets and AI service API keys from at least 1,806 repos, Amazon DJL reads arbitrary files from a crafted model archive, a wave of MCP server CVEs (Kubeshark, code-review-mcp-server, AWS Labs, REBUILD), and AI-written patches that end up as maps for attackers.",
+    "fr": "Une campagne utilisant 4 837 comptes GitHub détournés vole des secrets CI et des clés d'API de services IA dans au moins 1 806 dépôts, Amazon DJL lit des fichiers arbitraires depuis une archive de modèle piégée, une vague de CVE dans des serveurs MCP (Kubeshark, code-review-mcp-server, AWS Labs, REBUILD), et des correctifs écrits par IA qui servent de carte aux attaquants."
+  },
+  "pubDate": "2026-11-17",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "GitHub: 1.806 repos filtran secretos y keys de IA",
+        "en": "GitHub: 1,806 repos leak secrets and AI keys",
+        "fr": "GitHub : 1 806 dépôts fuient secrets et clés IA"
+      },
+      "anchor": "github-hijacked-accounts-secret-stealer",
+      "icon": "simple-icons:github"
+    },
+    {
+      "text": {
+        "es": "Amazon DJL: model archive lee archivos del host",
+        "en": "Amazon DJL: model archive reads host files",
+        "fr": "Amazon DJL : une archive de modèle lit le disque"
+      },
+      "anchor": "djl-cve-2026-129266",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": {
+        "es": "Kubeshark MCP: de pod_regex a cluster-admin",
+        "en": "Kubeshark MCP: from pod_regex to cluster-admin",
+        "fr": "Kubeshark MCP : de pod_regex à cluster-admin"
+      },
+      "anchor": "kubeshark-mcp-cve-2026-129236",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "code-review-mcp-server: command injection",
+        "en": "code-review-mcp-server: command injection",
+        "fr": "code-review-mcp-server : injection de commandes"
+      },
+      "anchor": "code-review-mcp-cve-2026-68934",
+      "icon": "lucide:shield-alert"
+    },
+    {
+      "text": {
+        "es": "Parches escritos por IA: 41 de 101 se rompen",
+        "en": "AI-written patches: 41 of 101 get bypassed",
+        "fr": "Correctifs écrits par IA : 41 sur 101 contournés"
+      },
+      "anchor": "ai-patches-attack-maps",
+      "icon": "lucide:radiation"
+    },
+    {
+      "text": {
+        "es": "Qwen4-Max suma salvaguardas contra uso ofensivo",
+        "en": "Qwen4-Max adds offensive-cyber safeguards",
+        "fr": "Qwen4-Max ajoute des garde-fous anti-offensifs"
+      },
+      "anchor": "qwen4-max-cyber-safeguards",
+      "icon": "lucide:lock"
+    }
+  ],
+  "tools": [
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "djl-cve-2026-129266",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-129266 (CVSS 8.7): un model archive manipulado le hace leer archivos arbitrarios a Amazon Deep Java Library",
+            "en": "CVE-2026-129266 (CVSS 8.7): a crafted model archive makes Amazon Deep Java Library read arbitrary files",
+            "fr": "CVE-2026-129266 (CVSS 8.7) : une archive de modèle piégée fait lire des fichiers arbitraires à Amazon Deep Java Library"
+          },
+          "body_html": {
+            "es": "<p>Amazon <strong>Deep Java Library (DJL)</strong>, de la 0.7.0 a la 0.38.0, no controla la ubicación de recursos que declara la metadata de un model archive. Un tercero remoto y sin autenticación que te pase un archivo de modelo armado puede leer cualquier archivo al que tenga acceso el proceso de la librería. Es la clase de bug de siempre en este espacio: el archivo de modelo es input no confiable, aunque venga con cara de artefacto. Fix en <code>0.39.0</code>; si cargás modelos de terceros desde un servicio Java, actualizá ya.</p>",
+            "en": "<p>Amazon <strong>Deep Java Library (DJL)</strong> 0.7.0 through 0.38.0 does not validate the resource location declared in a model archive's metadata. A remote, unauthenticated third party who supplies a crafted model archive can read any file the library process can access. It is the recurring bug class in this space: a model file is untrusted input, even when it looks like a build artifact. Fixed in <code>0.39.0</code>; upgrade now if a Java service loads third-party models.</p>",
+            "fr": "<p>Amazon <strong>Deep Java Library (DJL)</strong> 0.7.0 à 0.38.0 ne valide pas l'emplacement des ressources déclaré dans les métadonnées d'une archive de modèle. Un tiers distant non authentifié qui fournit une archive piégée peut lire tout fichier accessible au processus. Corrigé en <code>0.39.0</code>.</p>"
+          },
+          "date": "16 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-129266",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "kubeshark-mcp-cve-2026-129236",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-129236 (CVSS 7.2) y CVE-2026-129235 (5.3): el MCP de Kubeshark deja que un argumento redirija las imágenes privilegiadas y escriba archivos donde quiera",
+            "en": "CVE-2026-129236 (CVSS 7.2) and CVE-2026-129235 (5.3): Kubeshark's MCP lets one argument redirect privileged images and write files anywhere",
+            "fr": "CVE-2026-129236 (CVSS 7.2) et CVE-2026-129235 (5.3) : le MCP de Kubeshark permet de rediriger les images privilégiées et d'écrire des fichiers n'importe où"
+          },
+          "body_html": {
+            "es": "<p>En <strong>Kubeshark</strong> 53.1.0 a 53.4.0, la tool MCP <code>start_kubeshark</code> pega <code>pod_regex</code> como argumento posicional de <code>kubeshark tap</code> sin el separador <code>--</code>. Un valor que arranque con <code>--set</code> se parsea como override de Helm y apunta las imágenes del worker, Hub y front a un registry del atacante. Como el DaemonSet corre privilegiado con host networking y filesystem del host, eso termina en acceso al nodo y cluster-admin. Hace falta <code>kubeshark mcp --allow-destructive</code> y que alguien influya en los argumentos de la tool, o sea: prompt injection. Aparte, <code>download_file</code> escribe en un <code>dest</code> sin validar (CVE-2026-129235). Fix en <code>53.4.0</code>.</p>",
+            "en": "<p>In <strong>Kubeshark</strong> 53.1.0 up to 53.4.0, the <code>start_kubeshark</code> MCP tool appends <code>pod_regex</code> as a bare positional argument to <code>kubeshark tap</code> without a <code>--</code> separator. A value starting with <code>--set</code> is parsed as a Helm override and points the worker, Hub and front images at an attacker registry. Because the worker DaemonSet runs privileged with host networking and host filesystem access, that leads to node and cluster-admin access. It needs <code>kubeshark mcp --allow-destructive</code> and someone influencing tool arguments, which is what prompt injection does. Separately, <code>download_file</code> writes to an unvalidated <code>dest</code> path (CVE-2026-129235). Fixed in <code>53.4.0</code>.</p>",
+            "fr": "<p>Dans <strong>Kubeshark</strong> 53.1.0 à 53.4.0, l'outil MCP <code>start_kubeshark</code> passe <code>pod_regex</code> à <code>kubeshark tap</code> sans séparateur <code>--</code> : une valeur commençant par <code>--set</code> devient un override Helm qui redirige les images privilégiées vers un registry contrôlé par l'attaquant, jusqu'à cluster-admin. <code>download_file</code> écrit aussi vers un <code>dest</code> non validé (CVE-2026-129235). Corrigé en <code>53.4.0</code>.</p>"
+          },
+          "date": "16 Nov 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-8vf2-hxg5-crqh",
+            "label": "GitHub Advisory"
+          }
+        },
+        {
+          "id": "code-review-mcp-cve-2026-68934",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-68934 (CVSS 8.7): command injection en cuatro tools de code-review-mcp-server vía folderPath y baseBranch",
+            "en": "CVE-2026-68934 (CVSS 8.7): command injection in four code-review-mcp-server tools via folderPath and baseBranch",
+            "fr": "CVE-2026-68934 (CVSS 8.7) : injection de commandes dans quatre outils de code-review-mcp-server via folderPath et baseBranch"
+          },
+          "body_html": {
+            "es": "<p><strong>code-review-mcp-server</strong>, que automatiza code reviews y comenta en PRs de GitHub, interpolaba <code>folderPath</code> y <code>baseBranch</code> en strings que corren con <code>child_process.execSync</code> a través de <code>/bin/sh</code>. Afecta a <code>getLocalGitDiff</code>, <code>codeReview</code>, <code>createPR</code> y <code>getPRTemplate</code>: metacaracteres o command substitution ejecutan lo que quieran con los privilegios del host. Ojo con esto: un MCP de code review lee código ajeno todo el día, el escenario de prompt injection perfecto. Fix en <code>1.5.3</code>.</p>",
+            "en": "<p><strong>code-review-mcp-server</strong>, which automates code review and posts comments on GitHub PRs, interpolated <code>folderPath</code> and <code>baseBranch</code> into command strings run by <code>child_process.execSync</code> through <code>/bin/sh</code>. It affects <code>getLocalGitDiff</code>, <code>codeReview</code>, <code>createPR</code> and <code>getPRTemplate</code>: shell metacharacters or command substitution run arbitrary commands with the host process's privileges. A code review MCP reads other people's code all day, which is the textbook prompt injection setting. Fixed in <code>1.5.3</code>.</p>",
+            "fr": "<p><strong>code-review-mcp-server</strong> interpolait <code>folderPath</code> et <code>baseBranch</code> dans des commandes exécutées par <code>child_process.execSync</code> via <code>/bin/sh</code>, dans quatre outils MCP. Des métacaractères shell suffisent pour exécuter des commandes arbitraires. Corrigé en <code>1.5.3</code>.</p>"
+          },
+          "date": "16 Nov 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-jq3q-62jc-fqq9",
+            "label": "GitHub Advisory"
+          }
+        },
+        {
+          "id": "rebuild-mcp-cve-2026-129875",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-129875 (CVSS 8.7): la tool MCP QueryRecords de REBUILD sirve de oráculo para extraer el hash del admin",
+            "en": "CVE-2026-129875 (CVSS 8.7): REBUILD's MCP QueryRecords tool works as an oracle to extract the admin password hash",
+            "fr": "CVE-2026-129875 (CVSS 8.7) : l'outil MCP QueryRecords de REBUILD sert d'oracle pour extraire le hash administrateur"
+          },
+          "body_html": {
+            "es": "<p>En <strong>REBUILD</strong> 4.5.0 a 4.5.4, un usuario autenticado con pocos privilegios puede filtrar <code>User.password</code> con prefix-match <code>LK2</code> a través del gateway <code>/gw/mcp/sse</code> y usar el total de resultados como oráculo, carácter por carácter, hasta reconstruir el hash SHA-256 del administrador y loguearse como él. Clásico: la tool MCP expone el modelo de datos completo sin el filtrado de campos que tenía la UI.</p>",
+            "en": "<p>In <strong>REBUILD</strong> 4.5.0 through 4.5.4, a low-privileged authenticated user can filter on <code>User.password</code> with <code>LK2</code> prefix matches through the <code>/gw/mcp/sse</code> gateway and use the returned total count as an oracle, one character at a time, to rebuild the administrator's SHA-256 hash and log in as admin. A familiar pattern: the MCP tool exposes the full data model without the field filtering the UI had.</p>",
+            "fr": "<p>Dans <strong>REBUILD</strong> 4.5.0 à 4.5.4, un utilisateur peu privilégié peut filtrer <code>User.password</code> via le gateway <code>/gw/mcp/sse</code> et utiliser le nombre de résultats comme oracle pour reconstruire le hash SHA-256 de l'administrateur.</p>"
+          },
+          "date": "16 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-129875",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "deepaudit-cve-2026-129877",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-129877 (CVSS 8.7): un GET sin autenticación a DeepAudit devuelve las API keys del proveedor LLM y los tokens de GitHub/GitLab",
+            "en": "CVE-2026-129877 (CVSS 8.7): one unauthenticated GET to DeepAudit returns the LLM provider API keys and GitHub/GitLab tokens",
+            "fr": "CVE-2026-129877 (CVSS 8.7) : un simple GET non authentifié sur DeepAudit renvoie les clés d'API LLM et les jetons GitHub/GitLab"
+          },
+          "body_html": {
+            "es": "<p><strong>DeepAudit</strong>, de la 2.0.0-beta.1 a la 3.8.0, expone <code>/api/v1/config/defaults</code> sin autenticación. Con un GET sacás las API keys del proveedor LLM que configuró el operador y sus tokens de GitHub o GitLab, y de ahí abusás tanto del billing de IA como de los repos accesibles. Si lo tenés expuesto, rotá todo antes de actualizar.</p>",
+            "en": "<p><strong>DeepAudit</strong> 2.0.0-beta.1 through 3.8.0 exposes <code>/api/v1/config/defaults</code> without authentication. A single GET returns the operator's LLM provider API keys and GitHub or GitLab tokens, enough to abuse both the AI billing and every reachable repository. If yours was exposed, rotate everything before you upgrade.</p>",
+            "fr": "<p><strong>DeepAudit</strong> 2.0.0-beta.1 à 3.8.0 expose <code>/api/v1/config/defaults</code> sans authentification : un GET suffit pour récupérer les clés d'API LLM et les jetons GitHub ou GitLab de l'opérateur.</p>"
+          },
+          "date": "16 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-129877",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "redamon-cve-2026-129854",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-129854 (CVSS 8.7): en RedAmon un usuario puede manejar las sesiones de agente de otro tenant, meterpreter incluido",
+            "en": "CVE-2026-129854 (CVSS 8.7): in RedAmon one user can drive another tenant's agent sessions, meterpreter included",
+            "fr": "CVE-2026-129854 (CVSS 8.7) : dans RedAmon, un utilisateur peut piloter les sessions d'agent d'un autre tenant, meterpreter compris"
+          },
+          "body_html": {
+            "es": "<p><strong>RedAmon</strong> 4.0.0 a 7.8.0 no chequea autorización a nivel de objeto en <code>/api/agent/sessions</code> y sus rutas de interact y kill. Un usuario autenticado que pase un session id ajeno puede listar, matar o mandar comandos a las sesiones meterpreter y shell de otros tenants sobre sus objetivos ya comprometidos. Un IDOR de manual, pero en una plataforma de red team multi-tenant el impacto es otro. Fix en <code>7.8.0</code>.</p>",
+            "en": "<p><strong>RedAmon</strong> 4.0.0 before 7.8.0 lacks object-level authorization on <code>/api/agent/sessions</code> and its interact and kill routes. An authenticated user who supplies someone else's session id can list, kill or send commands into other tenants' meterpreter and shell sessions on their already-compromised targets. A textbook IDOR, but on a multi-tenant red-team platform the blast radius is different. Fixed in <code>7.8.0</code>.</p>",
+            "fr": "<p><strong>RedAmon</strong> 4.0.0 à 7.8.0 ne vérifie pas l'autorisation par objet sur <code>/api/agent/sessions</code> : un utilisateur peut lister, tuer ou piloter les sessions meterpreter et shell d'autres tenants. Corrigé en <code>7.8.0</code>.</p>"
+          },
+          "date": "16 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-129854",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "aws-labs-mcp-cve-2026-126681",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-126681 y CVE-2026-126816 (CVSS 6.8): dos MCP servers de AWS Labs, uno filtra el token de InfluxDB vía prompt injection y otro escribe fuera del directorio",
+            "en": "CVE-2026-126681 and CVE-2026-126816 (CVSS 6.8): two AWS Labs MCP servers, one leaks the InfluxDB token via prompt injection and one writes outside its directory",
+            "fr": "CVE-2026-126681 et CVE-2026-126816 (CVSS 6.8) : deux serveurs MCP d'AWS Labs, l'un fuit le jeton InfluxDB par prompt injection, l'autre écrit hors de son répertoire"
+          },
+          "body_html": {
+            "es": "<p>El <strong>Timestream for InfluxDB MCP Server</strong> (antes de 0.0.19) acepta una URL de InfluxDB metida en el contexto del cliente MCP; vía prompt injection, un actor remoto sin autenticación hace que el server mande su API token a un endpoint controlado por él (CVE-2026-126681). El <strong>AWS Pricing MCP Server</strong> (antes de 1.0.31) deja que quien influya en el agente escriba contenido propio fuera del directorio de reportes con paths absolutos o traversal (CVE-2026-126816). Actualizá a 0.0.19 y 1.0.31, rotá los tokens de InfluxDB, y si seguís con el deprecado <code>awslabs.cost-analysis-mcp-server</code>, migrá.</p>",
+            "en": "<p>The <strong>Timestream for InfluxDB MCP Server</strong> (before 0.0.19) accepts an InfluxDB URL introduced into the MCP client context; through prompt injection, a remote unauthenticated actor can make it send its configured API token to an endpoint they control (CVE-2026-126681). The <strong>AWS Pricing MCP Server</strong> (before 1.0.31) lets anyone who can influence the agent write their own content outside the report directory with absolute paths or traversal (CVE-2026-126816). Upgrade to 0.0.19 and 1.0.31, rotate InfluxDB tokens, and migrate off the deprecated <code>awslabs.cost-analysis-mcp-server</code>.</p>",
+            "fr": "<p>Le <strong>Timestream for InfluxDB MCP Server</strong> (avant 0.0.19) peut envoyer son jeton d'API vers un endpoint contrôlé par l'attaquant via prompt injection (CVE-2026-126681), et l'<strong>AWS Pricing MCP Server</strong> (avant 1.0.31) permet d'écrire hors du répertoire de rapports (CVE-2026-126816). Mettez à jour et faites tourner les jetons InfluxDB.</p>"
+          },
+          "date": "16 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-126681",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "crw-server-cve-2026-130076",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-130076 (CVSS 6.9): SSRF sin autenticación en crw-server a través del baseUrl del LLM BYOK",
+            "en": "CVE-2026-130076 (CVSS 6.9): unauthenticated SSRF in crw-server through the BYOK LLM baseUrl",
+            "fr": "CVE-2026-130076 (CVSS 6.9) : SSRF non authentifiée dans crw-server via le baseUrl du LLM BYOK"
+          },
+          "body_html": {
+            "es": "<p>En <strong>crw-server</strong> antes de 0.45.1, el endpoint <code>/v1/scrape</code> acepta un <code>baseUrl</code> sin validar para el LLM bring-your-own-key. Pasando <code>llmApiKey</code> y pidiendo el formato summary, el server hace POST a loopback o a direcciones privadas, y los warnings que devuelve sirven de oráculo de alcanzabilidad. El campo «poné tu propio endpoint de LLM» es, otra vez, un SSRF con otro nombre.</p>",
+            "en": "<p>In <strong>crw-server</strong> before 0.45.1, the <code>/v1/scrape</code> endpoint accepts an unvalidated <code>baseUrl</code> for the bring-your-own-key LLM. By setting <code>llmApiKey</code> and requesting the summary format, an attacker makes the server POST to loopback or private addresses, and the returned warnings act as a reachability oracle. The bring-your-own-LLM-endpoint field is, once again, SSRF under another name.</p>",
+            "fr": "<p>Dans <strong>crw-server</strong> avant 0.45.1, <code>/v1/scrape</code> accepte un <code>baseUrl</code> non validé pour le LLM BYOK, ce qui permet de faire envoyer des POST vers des adresses internes et de cartographier le réseau.</p>"
+          },
+          "date": "16 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-130076",
+            "label": "OpenCVE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "supply-chain",
+      "name": "Supply Chain",
+      "theme": "supply-chain",
+      "icon_emoji": "📦",
+      "anchor": "supply-chain",
+      "updates": [
+        {
+          "id": "github-hijacked-accounts-secret-stealer",
+          "tag": "breach",
+          "title": {
+            "es": "Aikido: 4.837 cuentas de GitHub secuestradas sondearon 61.764 repos y el payload corrió en al menos 1.806, robando secretos de CI y API keys de IA",
+            "en": "Aikido: 4,837 hijacked GitHub accounts probed 61,764 repos and the payload ran in at least 1,806, stealing CI secrets and AI API keys",
+            "fr": "Aikido : 4 837 comptes GitHub détournés ont sondé 61 764 dépôts et le payload s'est exécuté dans au moins 1 806, volant secrets CI et clés d'API IA"
+          },
+          "body_html": {
+            "es": "<p>Desde el 10 de noviembre, una campaña usó <strong>4.837 cuentas de GitHub comprometidas</strong> para abrir PRs de sondeo titulados «docs: dependency audit notes» en 61.764 repositorios, solo para ver dónde tenían write access. Después venían los commits con el payload: un shell script de 1.500 líneas que junta secretos de GitHub Actions, credenciales cloud y API keys de servicios de IA y herramientas de desarrollo. Según Aikido corrió en al menos 1.806 repos, y los run logs fueron borrados. La aprobación obligatoria de workflows de GitHub frenó las variantes que tocaban workflows, pero el <code>postinstall</code> en <code>package.json</code> pasó de largo porque lo ejecutaba el propio <code>npm install</code> del pipeline. Revisá PRs con ese título y rotá las keys de tus proveedores de IA si aparecen.</p>",
+            "en": "<p>Since November 10, a campaign used <strong>4,837 compromised GitHub accounts</strong> to open probe PRs titled «docs: dependency audit notes» in 61,764 repositories, only to learn where they had write access. Commits with the payload followed: a 1,500-line shell script that collects GitHub Actions secrets, cloud credentials and API keys for AI services and developer tools. Aikido says it ran in at least 1,806 repos, and the run logs were deleted. GitHub's mandatory workflow approval held the variants that touched workflow files, but the <code>postinstall</code> hook in <code>package.json</code> slipped through because the repo's own unchanged pipeline ran <code>npm install</code>. Look for PRs with that title and rotate your AI provider keys if you find one.</p>",
+            "fr": "<p>Depuis le 10 novembre, 4 837 comptes GitHub compromis ont ouvert des PR de sondage «docs: dependency audit notes» dans 61 764 dépôts, puis poussé un script de 1 500 lignes qui collecte secrets GitHub Actions, identifiants cloud et clés d'API IA. Il s'est exécuté dans au moins 1 806 dépôts ; le hook <code>postinstall</code> a contourné l'approbation des workflows.</p>"
+          },
+          "date": "13 Nov 2026",
+          "source": {
+            "url": "https://www.csoonline.com/article/4248672/thousands-of-github-repos-hit-with-secret-stealing-malware.html",
+            "label": "CSO Online"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "ai-patches-attack-maps",
+          "tag": "research",
+          "title": {
+            "es": "Los parches escritos por IA se vuelven mapas de ataque: en P2Patch, 41 de 101 se rompieron con otra variante del mismo bug",
+            "en": "AI-written patches are becoming attack maps: in P2Patch, 41 of 101 fell to another variant of the same bug",
+            "fr": "Les correctifs écrits par IA deviennent des cartes d'attaque : dans P2Patch, 41 sur 101 ont cédé à une autre variante du même bug"
+          },
+          "body_html": {
+            "es": "<p>En la conferencia [un]prompted, Shayaun Nejad (Rubrik) mostró cómo un agente encontró un bypass a uno de los parches de <strong>vm2</strong>, donde Claude había co-escrito 19 de 34 fixes de sandbox escape. OpenAI mostró un agente que «parcheó» firmware sacando los stack canaries y filtrando comillas dobles pero no simples. Off-by-1 Labs de 1Password generó 6.080 candidatos de parche para seis vulns conocidas y cerca de la mitad dejaba algún camino de ataque abierto; en el benchmark P2Patch, 41 de 101 parches cayeron ante otra forma de disparar el mismo bug. La lección: el advisory más el diff es contexto ideal para que un agente salga a cazar variantes, así que un parche asistido por IA necesita la misma variant analysis que harías vos.</p>",
+            "en": "<p>At the [un]prompted conference, Shayaun Nejad (Rubrik) showed an agent bypassing one of the <strong>vm2</strong> patches, where Claude co-wrote 19 of 34 sandbox-escape fixes. OpenAI showed an agent that patched firmware by dropping stack canaries and filtering double quotes but not single ones. 1Password's Off-by-1 Labs generated 6,080 patch candidates for six known vulns and about half left at least one attack path open; in the P2Patch benchmark, 41 of 101 patches fell to a different way of triggering the same flaw. The takeaway: the advisory plus the diff is ideal context for an agent hunting variants, so an AI-assisted patch needs the same variant analysis you would do yourself.</p>",
+            "fr": "<p>À la conférence [un]prompted, Rubrik, OpenAI et Off-by-1 Labs (1Password) ont montré que les correctifs écrits par IA sont souvent incomplets : environ la moitié de 6 080 candidats laissaient un chemin d'attaque ouvert, et dans le benchmark P2Patch, 41 correctifs sur 101 ont été contournés par une autre variante du même bug.</p>"
+          },
+          "date": "16 Nov 2026",
+          "source": {
+            "url": "https://www.csoonline.com/article/4248687/ai-written-patches-are-becoming-attack-maps-for-hackers.html",
+            "label": "CSO Online"
+          }
+        }
+      ]
+    },
+    {
+      "id": "advisories",
+      "name": "Vendor Advisories",
+      "theme": "advisories",
+      "icon_emoji": "📢",
+      "anchor": "advisories",
+      "updates": [
+        {
+          "id": "qwen4-max-cyber-safeguards",
+          "tag": "advisory",
+          "title": {
+            "es": "Alibaba lanza Qwen4-Max con salvaguardas nuevas contra capacidades ofensivas de ciberseguridad, y los analistas piden testing independiente",
+            "en": "Alibaba ships Qwen4-Max with new safeguards against offensive cybersecurity capabilities, and analysts call for independent testing",
+            "fr": "Alibaba lance Qwen4-Max avec de nouveaux garde-fous contre les capacités cyber offensives, et les analystes réclament des tests indépendants"
+          },
+          "body_html": {
+            "es": "<p>Alibaba publicó <strong>Qwen4-Max</strong>, un MoE de 2,4 billones de parámetros (unos 71.000 millones activos por token, contexto de 1M) con salvaguardas adicionales contra usos ofensivos de ciberseguridad y otros usos de alto riesgo. Los analistas que consultó CSO piden pruebas independientes de esas garantías y controles más fuertes sobre cargas de trabajo agénticas antes de confiar en ellas. Tomalo como un claim del vendor, no como un control que podés auditar.</p>",
+            "en": "<p>Alibaba released <strong>Qwen4-Max</strong>, a 2.4-trillion-parameter MoE (about 71 billion active per token, 1M context) with additional safeguards against offensive cybersecurity capabilities and other high-risk uses. Analysts quoted by CSO call for independent testing of those assurances and stronger controls over agentic workloads before relying on them. Treat it as a vendor claim, not a control you can audit.</p>",
+            "fr": "<p>Alibaba a publié <strong>Qwen4-Max</strong>, un MoE de 2,4 billions de paramètres, avec des garde-fous supplémentaires contre les usages cyber offensifs. Les analystes demandent des tests indépendants avant de s'y fier.</p>"
+          },
+          "date": "16 Nov 2026",
+          "source": {
+            "url": "https://www.csoonline.com/article/4249015/alibaba-touts-62-lower-task-costs-with-qwen4-max-adds-cyber-safeguards-2.html",
+            "label": "CSO Online"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Los MCP servers dominan otra vez la tanda de CVEs: Kubeshark, code-review-mcp-server, dos de AWS Labs y REBUILD publican el mismo día, y el patrón se repite: una tool MCP que confía en sus argumentos como si vinieran del operador, cuando en la práctica los controla quien logre meter texto en el contexto del agente.",
+      "en": "MCP servers dominate the CVE batch again: Kubeshark, code-review-mcp-server, two AWS Labs servers and REBUILD publish the same day, and the pattern repeats: an MCP tool trusts its arguments as if the operator wrote them, when in practice they belong to whoever can get text into the agent's context.",
+      "fr": "Les serveurs MCP dominent encore le lot de CVE : Kubeshark, code-review-mcp-server, deux serveurs AWS Labs et REBUILD publient le même jour, avec le même schéma : un outil MCP qui fait confiance à ses arguments comme s'ils venaient de l'opérateur."
+    },
+    {
+      "es": "Las API keys de proveedores de IA ya son botín estándar: la campaña de GitHub las roba junto a los secretos de CI y DeepAudit las expone con un GET, así que rotarlas tiene que estar en el runbook de incidentes igual que las credenciales cloud.",
+      "en": "AI provider API keys are now standard loot: the GitHub campaign steals them alongside CI secrets and DeepAudit exposes them with a single GET, so rotating them belongs in the incident runbook next to cloud credentials.",
+      "fr": "Les clés d'API des fournisseurs IA sont désormais un butin standard : la campagne GitHub les vole avec les secrets CI et DeepAudit les expose via un simple GET."
+    }
+  ]
+}

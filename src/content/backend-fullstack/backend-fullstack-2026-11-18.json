@@ -1,0 +1,212 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 18 Nov 2026",
+    "en": "Backend & Fullstack Daily — 18 Nov 2026",
+    "fr": "Backend & Fullstack Daily — 18 nov. 2026"
+  },
+  "description": {
+    "es": "RCE por deserialización en el AWS JDBC Wrapper, pnpm 12.22 con fixes de seguridad, .NET 11 GA y el nuevo SRE Book de Google.",
+    "en": "Deserialization RCE in the AWS JDBC Wrapper, pnpm 12.22 security fixes, .NET 11 GA and Google's new SRE Book.",
+    "fr": "RCE par désérialisation dans l'AWS JDBC Wrapper, correctifs de sécurité pnpm 12.22, .NET 11 GA et le nouveau SRE Book de Google."
+  },
+  "pubDate": "2026-11-18",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "RCE en AWS JDBC Wrapper vía caché Redis", "en": "RCE in AWS JDBC Wrapper via Redis cache", "fr": "RCE dans AWS JDBC Wrapper via cache Redis" },
+      "anchor": "cve-2026-14265",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "pnpm 12.22 cierra bypass de minimumReleaseAge", "en": "pnpm 12.22 closes minimumReleaseAge bypass", "fr": "pnpm 12.22 ferme un contournement de minimumReleaseAge" },
+      "anchor": "pnpm-12-22-0",
+      "icon": "lucide:package"
+    },
+    {
+      "text": { "es": ".NET 11 sale a GA con C# 15 y union types", "en": ".NET 11 ships GA with C# 15 union types", "fr": ".NET 11 en GA avec les union types de C# 15" },
+      "anchor": "dotnet-11-ga",
+      "icon": "lucide:terminal"
+    },
+    {
+      "text": { "es": "Google reescribe el SRE Book para la era IA", "en": "Google rewrites the SRE Book for the AI era", "fr": "Google réécrit le SRE Book pour l'ère IA" },
+      "anchor": "sre-book-second-edition",
+      "icon": "lucide:layers"
+    },
+    {
+      "text": { "es": "GCP versiona Compute Engine API por fecha", "en": "GCP date-versions the Compute Engine API", "fr": "GCP versionne l'API Compute Engine par date" },
+      "anchor": "gce-api-date-versions",
+      "icon": "lucide:cloud"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "cve-2026-14265",
+      "updates": [
+        {
+          "id": "cve-2026-14265",
+          "tag": "security",
+          "date": "17 Nov 2026",
+          "title": {
+            "es": "AWS Advanced JDBC Wrapper: RCE por deserialización en RemoteQueryCachePlugin (CVE-2026-14265)",
+            "en": "AWS Advanced JDBC Wrapper: deserialization RCE in RemoteQueryCachePlugin (CVE-2026-14265)",
+            "fr": "AWS Advanced JDBC Wrapper : RCE par désérialisation dans RemoteQueryCachePlugin (CVE-2026-14265)"
+          },
+          "body_html": {
+            "es": "<p>Con el plugin activado, los resultados leídos del caché compartido Redis/Valkey se deserializan <strong>sin filtrar clases</strong>: quien pueda escribir en ese caché ejecuta código en tu app server. <strong>CVSS v4 7.7</strong>, afecta <code>&gt;= 3.3.0, &lt; 4.0.1</code>, fix en <code>4.0.1</code>. El plugin no viene activo por defecto. Ojo: actualizá o desactivalo, y cerrá el acceso de escritura al caché.</p>",
+            "en": "<p>With the plugin enabled, results read from the shared Redis/Valkey cache are deserialized <strong>without class filtering</strong>, so anyone with write access to that cache gets code execution on your app server. <strong>CVSS v4 7.7</strong>, affects <code>&gt;= 3.3.0, &lt; 4.0.1</code>, fixed in <code>4.0.1</code>. The plugin is not on by default. Upgrade or disable it, and lock down write access to the cache.</p>",
+            "fr": "<p>Avec le plugin activé, les résultats lus depuis le cache Redis/Valkey partagé sont désérialisés <strong>sans filtrage de classes</strong> : quiconque peut écrire dans ce cache exécute du code sur votre serveur. <strong>CVSS v4 7.7</strong>, versions <code>&gt;= 3.3.0, &lt; 4.0.1</code>, corrigé en <code>4.0.1</code>. Le plugin n'est pas activé par défaut.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-c5q4-97jw-jggh", "label": "github.com/advisories" }
+        },
+        {
+          "id": "pnpm-12-22-0",
+          "tag": "security",
+          "date": "17 Nov 2026",
+          "title": {
+            "es": "pnpm 12.22.0: fixes de seguridad en minimumReleaseAge y trustPolicy",
+            "en": "pnpm 12.22.0: security fixes for minimumReleaseAge and trustPolicy",
+            "fr": "pnpm 12.22.0 : correctifs de sécurité pour minimumReleaseAge et trustPolicy"
+          },
+          "body_html": {
+            "es": "<p>Al cambiar el registry por defecto o uno con scope, <code>pnpm install</code> reutilizaba el resultado cacheado y se saltaba los chequeos de <code>minimumReleaseAge</code> y <code>trustPolicy</code> contra el registry nuevo. Ahora re-verifica el lockfile, y <code>pnpm dlx</code> ya no reusa instalaciones hechas con settings más laxos. Suma <code>globalPackagesConfig</code> y <code>pnpm why --ranges</code>. Si usás estas defensas de supply chain, actualizá.</p>",
+            "en": "<p>When the default or a scoped registry changed, <code>pnpm install</code> reused the cached result and skipped the <code>minimumReleaseAge</code> and <code>trustPolicy</code> checks against the new registry. It now re-verifies the lockfile, and <code>pnpm dlx</code> no longer reuses installs made under looser settings. Also adds <code>globalPackagesConfig</code> and <code>pnpm why --ranges</code>. If you rely on these supply-chain guards, upgrade.</p>",
+            "fr": "<p>Quand le registry par défaut ou un registry scopé changeait, <code>pnpm install</code> réutilisait le résultat en cache et sautait les contrôles <code>minimumReleaseAge</code> et <code>trustPolicy</code>. Le lockfile est maintenant revérifié, et <code>pnpm dlx</code> ne réutilise plus les installations faites avec des réglages plus lâches.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.22.0", "label": "github.com/pnpm" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "dotnet-11-ga",
+      "updates": [
+        {
+          "id": "dotnet-11-ga",
+          "tag": "release",
+          "date": "17 Nov 2026",
+          "title": {
+            "es": ".NET 11 GA: C# 15 con union types y CLI con Native AOT",
+            "en": ".NET 11 GA: C# 15 union types and a Native AOT CLI host",
+            "fr": ".NET 11 GA : union types C# 15 et hôte CLI Native AOT"
+          },
+          "body_html": {
+            "es": "<p>Microsoft lanzó <strong>.NET 11</strong> (STS, 2 años de soporte) con C# 15, ASP.NET Core 11 y EF Core 11. Los <code>union</code> types traen exhaustividad en <code>switch</code>, y el CLI <code>dotnet</code> arranca por defecto con un host Native AOT. <strong>.NET 8 y 9 perdieron soporte el 10 de noviembre</strong>; .NET 10 sigue como LTS. Si tenés servicios en 8 o 9, ponete las pilas con la migración.</p>",
+            "en": "<p>Microsoft shipped <strong>.NET 11</strong> (STS, two years of support) with C# 15, ASP.NET Core 11 and EF Core 11. <code>union</code> types bring exhaustiveness checks in <code>switch</code>, and the <code>dotnet</code> CLI now starts through a Native AOT host by default. <strong>.NET 8 and 9 reached end of support on November 10</strong>; .NET 10 remains the LTS. Services still on 8 or 9 need a migration plan.</p>",
+            "fr": "<p>Microsoft a publié <strong>.NET 11</strong> (STS, deux ans de support) avec C# 15, ASP.NET Core 11 et EF Core 11. Les types <code>union</code> apportent l'exhaustivité dans <code>switch</code>, et le CLI <code>dotnet</code> démarre via un hôte Native AOT. <strong>.NET 8 et 9 sont hors support depuis le 10 novembre</strong>; .NET 10 reste la LTS.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/11/dotnet-11-release/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "vitest-5-1-1",
+      "updates": [
+        {
+          "id": "vitest-5-1-1",
+          "tag": "patch",
+          "date": "17 Nov 2026",
+          "title": {
+            "es": "Vitest 5.1.1: variables de entorno para el cache de módulos y fixes de --shard",
+            "en": "Vitest 5.1.1: fs module cache env variables and --shard fixes",
+            "fr": "Vitest 5.1.1 : variables d'environnement du cache de modules et correctifs --shard"
+          },
+          "body_html": {
+            "es": "<p>Agrega variables de entorno para el cache de módulos en disco y corrige que <code>--shard</code> se aplique antes de arrancar el run, el reporte único de errores de teardown de fixtures y los diffs de asymmetric matchers. Patch cómodo para CI con sharding.</p>",
+            "en": "<p>Adds env variables for the on-disk module cache and fixes <code>--shard</code> being applied before the run starts, single reporting of fixture teardown errors and diffs for asymmetric matchers. A handy patch for sharded CI.</p>",
+            "fr": "<p>Ajoute des variables d'environnement pour le cache de modules sur disque et corrige l'application de <code>--shard</code> avant le début du run, ainsi que le rapport des erreurs de teardown des fixtures.</p>"
+          },
+          "source": { "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.1.1", "label": "github.com/vitest-dev" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloudflare-private-origins",
+      "updates": [
+        {
+          "id": "cloudflare-private-origins",
+          "tag": "ga",
+          "date": "15 Nov 2026",
+          "title": {
+            "es": "Cloudflare Private Origins llega a GA",
+            "en": "Cloudflare Private Origins reaches GA",
+            "fr": "Cloudflare Private Origins en GA"
+          },
+          "body_html": {
+            "es": "<p>Podés servir apps en redes privadas sin exponer sus IPs ni abrir puertos de entrada, con WAF, bot management, rate limiting, caching y Workers por delante. Requiere el entitlement de Private Origins, Cloudflare One y Unified Routing (no con Cloudflare Tunnel). El tráfico privado a privado todavía no entra: beta cerrada para principios de 2027.</p>",
+            "en": "<p>You can serve apps on private networks without exposing their IPs or opening inbound ports, with WAF, bot management, rate limiting, caching and Workers in front. Requires the Private Origins entitlement, Cloudflare One and Unified Routing (not with Cloudflare Tunnel). Private-to-private traffic is not supported yet; closed beta targeted for early 2027.</p>",
+            "fr": "<p>Vous pouvez servir des applications sur des réseaux privés sans exposer leurs IP ni ouvrir de ports entrants, avec WAF, bot management, rate limiting, cache et Workers en frontal. Nécessite l'entitlement Private Origins, Cloudflare One et Unified Routing.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/11/cloudflare-private-origins/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "sre-book-second-edition",
+      "updates": [
+        {
+          "id": "sre-book-second-edition",
+          "tag": "notable",
+          "date": "17 Nov 2026",
+          "title": {
+            "es": "Google publica la segunda edición del SRE Book, reescrita para la era IA",
+            "en": "Google publishes the second edition of the SRE Book, rewritten for the AI era",
+            "fr": "Google publie la deuxième édition du SRE Book, réécrite pour l'ère IA"
+          },
+          "body_html": {
+            "es": "<p>Diez años después, el libro se actualiza con SLOs multinivel y alertas por burn rate dinámico, OpenTelemetry y tracing distribuido, infra declarativa con sistemas self-healing, canary verification en vivo y capacity planning de GPU/TPU. Lectura obligada si manejás observabilidad y on-call.</p>",
+            "en": "<p>Ten years on, the book is updated with multi-tiered SLOs and dynamic burn-rate alerting, OpenTelemetry and distributed tracing, declarative infrastructure with self-healing systems, live canary verification and GPU/TPU capacity planning. Required reading if you own observability and on-call.</p>",
+            "fr": "<p>Dix ans après, le livre est mis à jour : SLO multiniveaux et alertes de burn rate dynamiques, OpenTelemetry et tracing distribué, infrastructure déclarative et systèmes auto-réparateurs, canary en production et capacity planning GPU/TPU.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/11/google-sre-book-ai-era/", "label": "infoq.com" }
+        },
+        {
+          "id": "gce-api-date-versions",
+          "tag": "notable",
+          "date": "14 Nov 2026",
+          "title": {
+            "es": "Compute Engine API pasa a versiones inmutables por fecha",
+            "en": "Compute Engine API moves to immutable date-based versions",
+            "fr": "L'API Compute Engine passe à des versions immuables par date"
+          },
+          "body_html": {
+            "es": "<p>Multi-versioning GA: versiones estables trimestrales <code>YYYY-MM-DD</code> (la primera es <code>2026-09-01</code>) y previews con vida de un año, elegidas con el header <code>X-Goog-Api-Version</code> o <code>$apiVersion</code>. Las requests sin versión siguen en <code>/v1</code>, sin fecha de EOL. Un caso de estudio útil de estrategia de versionado de APIs.</p>",
+            "en": "<p>Multi-versioning is GA: quarterly stable <code>YYYY-MM-DD</code> versions (the first is <code>2026-09-01</code>) and previews with a one-year lifespan, selected with the <code>X-Goog-Api-Version</code> header or <code>$apiVersion</code>. Unversioned requests stay on <code>/v1</code> with no EOL date. A useful case study in API versioning strategy.</p>",
+            "fr": "<p>Le multi-versioning est en GA : versions stables trimestrielles <code>YYYY-MM-DD</code> (la première est <code>2026-09-01</code>) et previews d'un an, choisies via l'en-tête <code>X-Goog-Api-Version</code> ou <code>$apiVersion</code>. Les requêtes sans version restent sur <code>/v1</code>.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/11/compute-engine-api-versioning/", "label": "infoq.com" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Los ataques de supply chain empujan a los gestores de paquetes a endurecer defaults: pnpm sigue cerrando huecos en minimumReleaseAge y trustPolicy.",
+      "en": "Supply-chain attacks keep pushing package managers to harden defaults: pnpm keeps closing gaps in minimumReleaseAge and trustPolicy.",
+      "fr": "Les attaques de supply chain poussent les gestionnaires de paquets à durcir leurs défauts : pnpm continue de combler les failles de minimumReleaseAge et trustPolicy."
+    },
+    {
+      "es": "Deserializar datos de un caché compartido sin filtrar tipos sigue siendo una vía de RCE: tratá Redis/Valkey como frontera de confianza.",
+      "en": "Deserializing data from a shared cache without type filtering is still an RCE path: treat Redis/Valkey as a trust boundary.",
+      "fr": "Désérialiser les données d'un cache partagé sans filtrage de types reste une voie de RCE : traitez Redis/Valkey comme une frontière de confiance."
+    }
+  ]
+}

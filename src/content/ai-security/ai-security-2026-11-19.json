@@ -1,0 +1,272 @@
+{
+  "title": {
+    "es": "AI Security — 19 Nov 2026",
+    "en": "AI Security — 19 Nov 2026",
+    "fr": "AI Security — 19 nov. 2026"
+  },
+  "description": {
+    "es": "El paquete oficial agent-framework de Microsoft en PyPI llevó un stealer, Barracuda cae por una clave de un proveedor de IA, y researchers secuestran la cuenta de Kokoro en Hugging Face.",
+    "en": "Microsoft's official agent-framework package on PyPI shipped a stealer, Barracuda was breached through an AI vendor's key, and researchers hijacked the Kokoro account on Hugging Face.",
+    "fr": "Le paquet officiel agent-framework de Microsoft sur PyPI a embarqué un stealer, Barracuda est compromis via la clé d'un fournisseur d'IA, et des chercheurs détournent le compte Kokoro sur Hugging Face."
+  },
+  "pubDate": "2026-11-19",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": { "es": "agent-framework de Microsoft: PyPI con stealer", "en": "Microsoft agent-framework on PyPI carried a stealer", "fr": "agent-framework de Microsoft : stealer sur PyPI" },
+      "anchor": "msft-agent-framework-pypi",
+      "icon": "lucide:skull"
+    },
+    {
+      "text": { "es": "Barracuda: clave de un vendor de IA y ARTEX", "en": "Barracuda: AI vendor key and ARTEX", "fr": "Barracuda : clé d'un fournisseur IA et ARTEX" },
+      "anchor": "barracuda-artex",
+      "icon": "lucide:siren"
+    },
+    {
+      "text": { "es": "Kokoro: cuenta de Hugging Face secuestrada", "en": "Kokoro Hugging Face account hijacked", "fr": "Compte Hugging Face de Kokoro détourné" },
+      "anchor": "kokoro-hf-hijack",
+      "icon": "simple-icons:huggingface"
+    },
+    {
+      "text": { "es": "Zyrabit RAG: CVE crítico (9.1) por path traversal", "en": "Zyrabit RAG: critical path traversal (9.1)", "fr": "Zyrabit RAG : path traversal critique (9.1)" },
+      "anchor": "zyrabit-cve-2026-130154",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": { "es": "vLLM 0.33.0 cierra un path traversal de modelo", "en": "vLLM 0.33.0 fixes a model path traversal", "fr": "vLLM 0.33.0 corrige un path traversal de modèle" },
+      "anchor": "vllm-cve-2026-130684",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": { "es": "Supergateway: una web secuestra tu servidor MCP", "en": "Supergateway: a web page hijacks your MCP server", "fr": "Supergateway : une page web détourne votre serveur MCP" },
+      "anchor": "supergateway-cve-2026-132121",
+      "icon": "lucide:lock"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-incidents",
+      "name": "Top Incidents",
+      "theme": "top-incidents",
+      "icon_emoji": "🚨",
+      "anchor": "top-incidents",
+      "updates": [
+        {
+          "id": "msft-agent-framework-pypi",
+          "tag": "breach",
+          "title": {
+            "es": "El paquete oficial agent-framework de Microsoft se publicó en PyPI con un stealer de credenciales",
+            "en": "Microsoft's official agent-framework package was published to PyPI carrying a credential stealer",
+            "fr": "Le paquet officiel agent-framework de Microsoft publié sur PyPI avec un voleur d'identifiants"
+          },
+          "body_html": {
+            "es": "<p>El 17 de noviembre alguien publicó las versiones <strong>1.26.1 y 1.26.2</strong> de <code>agent-framework</code> (unas 200.000 descargas mensuales). Las dos dependen de la legítima 1.26.0, así que el framework funciona normal, pero el stealer corre <strong>al arrancar Python</strong>, incluso sin importar el paquete. Junta secretos de Azure, AWS, GitHub, Docker, Hugging Face y OpenAI, pide tokens OIDC de GitHub Actions y Azure DevOps, y los manda a un endpoint de webhook.site. Según The Register, la 1.26.2 salió por la cuenta oficial de publicación de Microsoft después de que se revirtiera la primera, lo que sugiere que el acceso no estaba cerrado. Ojo con esto: si instalaste alguna de las dos, reconstruí el entorno desde la 1.26.0, rotá todo lo que estuviera en esa máquina o en ese CI y revisá el egreso hacia webhook.site.</p>",
+            "en": "<p>On November 17 someone published versions <strong>1.26.1 and 1.26.2</strong> of <code>agent-framework</code> (about 200,000 monthly downloads). Both depend on the legitimate 1.26.0, so the framework behaves normally, but the stealer runs <strong>at Python startup</strong>, even if the package is never imported. It harvests Azure, AWS, GitHub, Docker, Hugging Face and OpenAI secrets, requests GitHub Actions and Azure DevOps OIDC tokens, and ships everything to a webhook.site endpoint. According to The Register, 1.26.2 went out through Microsoft's official publishing account after the first release was reverted, which suggests access had not been locked down. If you installed either version, rebuild the environment from 1.26.0, rotate everything that lived on that machine or CI runner, and check egress logs for webhook.site.</p>",
+            "fr": "<p>Le 17 novembre, quelqu'un a publié les versions <strong>1.26.1 et 1.26.2</strong> de <code>agent-framework</code> (environ 200 000 téléchargements par mois). Les deux dépendent de la 1.26.0 légitime : le framework fonctionne normalement, mais le stealer s'exécute <strong>au démarrage de Python</strong>, même sans importer le paquet. Il collecte des secrets Azure, AWS, GitHub, Docker, Hugging Face et OpenAI, demande des jetons OIDC GitHub Actions et Azure DevOps, et envoie le tout vers un endpoint webhook.site. Selon The Register, la 1.26.2 est sortie via le compte de publication officiel de Microsoft après le retrait de la première, signe que l'accès n'était pas verrouillé. Si vous avez installé l'une des deux, reconstruisez l'environnement depuis la 1.26.0, faites tourner tous les secrets présents sur la machine ou le runner CI et vérifiez les logs sortants vers webhook.site.</p>"
+          },
+          "date": "18 Nov 2026",
+          "source": {
+            "url": "https://www.bleepingcomputer.com/news/security/microsofts-agent-framework-pypi-package-compromised-to-steal-credentials/",
+            "label": "BleepingComputer"
+          }
+        },
+        {
+          "id": "barracuda-artex",
+          "tag": "breach",
+          "title": {
+            "es": "Barracuda: una clave cloud olvidada de un proveedor de IA dio 44 horas de acceso, y lo vinculan a ARTEX",
+            "en": "Barracuda: a forgotten cloud key from an AI vendor gave 44 hours of access, tied to ARTEX",
+            "fr": "Barracuda : une clé cloud oubliée d'un fournisseur d'IA a donné 44 heures d'accès, liée à ARTEX"
+          },
+          "body_html": {
+            "es": "<p>Barracuda contó que un atacante entró a unas <strong>10 cuentas cloud</strong> durante 44 horas (1 y 2 de noviembre) y lo detectaron el 4. Usó una clave de acceso que seguía activa tras terminar un proyecto con un <strong>proveedor externo de IA</strong>: la clave estaba en un archivo de configuración del repo del proveedor y se robó en octubre. Por la velocidad «de máquina» lo asocian con el framework de pentesting ARTEX, y el movimiento pasó por analítica, repos de código y clusters de Kubernetes; llegaron a montar un contenedor con el filesystem del host para persistir. Bloquearon la creación de un admin nuevo. Se pidió a clientes de Managed XDR y Monitored Endpoint que revoquen y recreen las credenciales de integración. Ojo con esto: las claves de un vendor de IA que ya no usás siguen siendo tu superficie, revocalas cuando termina el proyecto.</p>",
+            "en": "<p>Barracuda said an attacker reached about <strong>10 of its cloud accounts</strong> over 44 hours (November 1 and 2) and was detected on the 4th. They used an access key that stayed active after a project with a <strong>third-party AI vendor</strong> ended; it sat in a config file in the vendor's repository and was stolen in October. The «machine-speed» activity led Barracuda to link it to the ARTEX AI pentesting framework, and the intruder moved through analytics, source repositories and Kubernetes clusters, even deploying a container mounting the host filesystem for persistence. Creation of a new cloud admin identity was blocked. Managed XDR and Monitored Endpoint customers were asked to revoke and recreate integration credentials. The lesson: keys issued to an AI vendor you no longer work with are still your attack surface, so revoke them when the project ends.</p>",
+            "fr": "<p>Barracuda indique qu'un attaquant a accédé à environ <strong>10 de ses comptes cloud</strong> pendant 44 heures (1er et 2 novembre), détecté le 4. Il a utilisé une clé d'accès restée active après la fin d'un projet avec un <strong>fournisseur d'IA tiers</strong> ; elle se trouvait dans un fichier de configuration du dépôt du fournisseur et a été volée en octobre. L'activité à «vitesse machine» a conduit Barracuda à la rattacher au framework de pentest IA ARTEX ; l'intrus a circulé dans l'analytique, les dépôts de code et des clusters Kubernetes, déployant même un conteneur montant le système de fichiers de l'hôte pour persister. La création d'une nouvelle identité admin a été bloquée. Les clients Managed XDR et Monitored Endpoint doivent révoquer et recréer leurs identifiants d'intégration. À retenir : les clés données à un fournisseur d'IA dont vous n'êtes plus client restent votre surface d'attaque, révoquez-les en fin de projet.</p>"
+          },
+          "date": "16 Nov 2026",
+          "source": {
+            "url": "https://www.bleepingcomputer.com/news/security/barracuda-links-cloud-breach-to-artex-ai-powered-cyberattack/",
+            "label": "BleepingComputer"
+          }
+        }
+      ]
+    },
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "zyrabit-cve-2026-130154",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-130154 (CVSS 9.1): en Zyrabit, la herramienta MCP import_to_vault escribe fuera de la bóveda y filtra archivos vía RAG",
+            "en": "CVE-2026-130154 (CVSS 9.1): in Zyrabit, the MCP import_to_vault tool writes outside the vault and leaks files through RAG",
+            "fr": "CVE-2026-130154 (CVSS 9.1) : dans Zyrabit, l'outil MCP import_to_vault écrit hors du coffre et fuit des fichiers via le RAG"
+          },
+          "body_html": {
+            "es": "<p>Zyrabit es una plataforma RAG «soberana» para empresas. Antes de la <strong>2.4.4</strong>, <code>import_to_vault(source_path, destination_name)</code> acepta dos rutas controladas por quien llama, y <code>destination_name</code> no se confina: <code>Path(DOCS_DIR) / destination_name</code> va a <code>shutil.copy2</code>, así que un path traversal o una ruta absoluta escribe fuera de la bóveda. Además, un <code>source_path</code> sin restricción copia cualquier archivo legible por el servicio a la bóveda, y después se lee con <code>secure_query</code>. Es el patrón de siempre en MCP: la herramienta confía en el argumento que le arma el modelo. Actualizá a 2.4.4.</p>",
+            "en": "<p>Zyrabit is a «sovereign» enterprise RAG platform. Before <strong>2.4.4</strong>, <code>import_to_vault(source_path, destination_name)</code> accepts two caller-controlled paths and <code>destination_name</code> is never confined: <code>Path(DOCS_DIR) / destination_name</code> goes to <code>shutil.copy2</code>, so traversal or an absolute path writes outside the vault. An unrestricted <code>source_path</code> also copies any file readable by the service into the vault, where it can be read back through <code>secure_query</code>. The usual MCP pattern: the tool trusts an argument the model assembled. Upgrade to 2.4.4.</p>",
+            "fr": "<p>Zyrabit est une plateforme RAG «souveraine» pour entreprises. Avant la <strong>2.4.4</strong>, <code>import_to_vault(source_path, destination_name)</code> accepte deux chemins contrôlés par l'appelant et <code>destination_name</code> n'est jamais confiné : <code>Path(DOCS_DIR) / destination_name</code> est passé à <code>shutil.copy2</code>, donc un traversal ou un chemin absolu écrit hors du coffre. Un <code>source_path</code> sans restriction copie aussi tout fichier lisible par le service dans le coffre, d'où il peut être relu via <code>secure_query</code>. Le schéma MCP habituel : l'outil fait confiance à un argument construit par le modèle. Passez à la 2.4.4.</p>"
+          },
+          "date": "18 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-130154",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "llmkube-cve-2026-68903",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-68903 (CVSS 7.7): LLMKube deja leer archivos arbitrarios del host con un hostPath en Model.spec.source",
+            "en": "CVE-2026-68903 (CVSS 7.7): LLMKube lets arbitrary host files be read through a hostPath in Model.spec.source",
+            "fr": "CVE-2026-68903 (CVSS 7.7) : LLMKube permet de lire des fichiers arbitraires de l'hôte via un hostPath dans Model.spec.source"
+          },
+          "body_html": {
+            "es": "<p>El operador de Kubernetes para inferencia LLMKube acepta rutas absolutas y URIs <code>file://</code> en <code>Model.spec.source</code> sin allowlist, y las lleva a dos sumideros: un <code>os.Open()</code> dentro del pod del controlador y un <strong>volumen hostPath</strong> montado en el init container del pod de inferencia. Cualquier usuario del namespace que pueda crear o editar <code>Model</code> e <code>InferenceService</code> puede leer el token de service account del controlador o archivos del nodo donde cae el pod. En clusters multi-tenant eso rompe el aislamiento. Aplicá el fix del advisory y restringí quién puede crear estos CRDs.</p>",
+            "en": "<p>The LLMKube Kubernetes inference operator accepts absolute paths and <code>file://</code> URIs in <code>Model.spec.source</code> with no allowlist and feeds them to two sinks: an <code>os.Open()</code> inside the controller pod and a <strong>hostPath volume</strong> mounted into the inference pod's init container. Any namespace user who can create or update <code>Model</code> and <code>InferenceService</code> resources can read the controller's service-account token or files on the node where the pod lands. On multi-tenant clusters that breaks isolation. Apply the advisory's fix and restrict who can create these CRDs.</p>",
+            "fr": "<p>L'opérateur Kubernetes d'inférence LLMKube accepte des chemins absolus et des URI <code>file://</code> dans <code>Model.spec.source</code> sans liste d'autorisation et les transmet à deux puits : un <code>os.Open()</code> dans le pod du contrôleur et un <strong>volume hostPath</strong> monté dans l'init container du pod d'inférence. Tout utilisateur du namespace pouvant créer ou modifier <code>Model</code> et <code>InferenceService</code> peut lire le jeton de service account du contrôleur ou des fichiers du nœud où atterrit le pod. En multi-tenant, l'isolation saute. Appliquez le correctif de l'avis et restreignez qui peut créer ces CRD.</p>"
+          },
+          "date": "18 Nov 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-jw3m-8q7m-f35r",
+            "label": "GitHub Advisory"
+          }
+        },
+        {
+          "id": "vllm-cve-2026-130684",
+          "tag": "patch",
+          "title": {
+            "es": "CVE-2026-130684 (CVSS 5.3) y dos más: vLLM 0.33.0 corrige que un publisher de modelos redirija el modelo servido, y dos DoS",
+            "en": "CVE-2026-130684 (CVSS 5.3) and two more: vLLM 0.33.0 fixes a model publisher redirecting the served model, plus two DoS bugs",
+            "fr": "CVE-2026-130684 (CVSS 5.3) et deux autres : vLLM 0.33.0 corrige la redirection du modèle servi par un éditeur de modèle, plus deux DoS"
+          },
+          "body_html": {
+            "es": "<p>Antes de la <strong>0.33.0</strong>, un publisher malicioso podía fijar <code>speculators_config.verifier.name_or_path</code> en el <code>config.json</code> del modelo y apuntarlo a otro checkpoint local: el tokenizer de ese otro modelo se filtra por <code>/detokenize</code> sin autenticación y se gana acceso de consulta a modelos privados (CVE-2026-130684, 5.3). Junto salieron CVE-2026-130685 (ids de token fuera de rango con <code>--skip-tokenizer-init</code> tumban el EngineCore compartido) y CVE-2026-130686 (sin presupuesto de media por request, muchas URLs de imagen agotan memoria y CPU). Si servís modelos de terceros en un vLLM compartido, subí a 0.33.0 y no cargues <code>config.json</code> de fuentes que no controlás.</p>",
+            "en": "<p>Before <strong>0.33.0</strong>, a malicious model publisher could set <code>speculators_config.verifier.name_or_path</code> in the model's <code>config.json</code> to point at another local checkpoint: that model's tokenizer vocabulary leaks through unauthenticated <code>/detokenize</code> calls and the attacker gains query access to private models (CVE-2026-130684, 5.3). Two siblings shipped alongside: CVE-2026-130685 (out-of-range token ids with <code>--skip-tokenizer-init</code> crash the shared EngineCore) and CVE-2026-130686 (no request-wide media budget, so many remote image URLs exhaust memory and CPU). If you serve third-party models on a shared vLLM, move to 0.33.0 and avoid loading <code>config.json</code> from sources you do not control.</p>",
+            "fr": "<p>Avant la <strong>0.33.0</strong>, un éditeur de modèle malveillant pouvait définir <code>speculators_config.verifier.name_or_path</code> dans le <code>config.json</code> du modèle pour viser un autre checkpoint local : le vocabulaire du tokenizer de ce modèle fuit via <code>/detokenize</code> sans authentification et l'attaquant obtient un accès de requête à des modèles privés (CVE-2026-130684, 5.3). Deux CVE sœurs sont sorties : CVE-2026-130685 (des ids de tokens hors plage avec <code>--skip-tokenizer-init</code> font tomber l'EngineCore partagé) et CVE-2026-130686 (pas de budget média par requête : beaucoup d'URL d'images épuisent mémoire et CPU). Si vous servez des modèles tiers sur un vLLM partagé, passez à la 0.33.0 et ne chargez pas de <code>config.json</code> de sources non maîtrisées.</p>"
+          },
+          "date": "18 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-130684",
+            "label": "OpenCVE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "supply-chain",
+      "name": "Supply Chain",
+      "theme": "supply-chain",
+      "icon_emoji": "📦",
+      "anchor": "supply-chain",
+      "updates": [
+        {
+          "id": "kokoro-hf-hijack",
+          "tag": "research",
+          "title": {
+            "es": "Researchers secuestran la cuenta de Hugging Face de Kokoro (13 millones de descargas mensuales) a través de un dominio listado en el modelo",
+            "en": "Researchers hijack the Hugging Face account behind Kokoro (13 million monthly downloads) via a domain it listed",
+            "fr": "Des chercheurs détournent le compte Hugging Face de Kokoro (13 millions de téléchargements mensuels) via un domaine listé"
+          },
+          "body_html": {
+            "es": "<p>Los researchers registraron el dominio <code>hexgrad.com</code>, que figuraba en el <code>DONATE.md</code> del modelo de texto a voz <strong>hexgrad/Kokoro-82M</strong>, y lo usaron para un reseteo de contraseña de la cuenta de Hugging Face. El modelo ronda los <strong>13 millones de descargas mensuales</strong> y lo usan proyectos de Google, NVIDIA, AMD, Intel y AWS. En una prueba controlada alteraron los pesos en 87 segundos con una GPU gamer para que el audio difiera del texto, sin tocar código de la aplicación; no publicaron los pesos alterados. Dicen que Hugging Face no verifica la propiedad de las cuentas y no respondió al reporte. Ojo con esto: un dominio de contacto colgado en un model card es un vector de takeover. Fijá modelos por hash de commit en vez de por nombre.</p>",
+            "en": "<p>The researchers registered <code>hexgrad.com</code>, a domain listed in the <code>DONATE.md</code> of the <strong>hexgrad/Kokoro-82M</strong> text-to-speech model, and used it for a password reset on the Hugging Face account. The model has about <strong>13 million monthly downloads</strong> and is used by Google, NVIDIA, AMD, Intel and AWS projects. In a controlled test they altered the weights in 87 seconds on a gaming GPU so the audio differs from the input text, with no application code change; they did not publish the modified weights. They say Hugging Face does not verify account ownership and did not respond to the report. A dangling contact domain in a model card is a takeover vector. Pin models by commit hash rather than by name.</p>",
+            "fr": "<p>Les chercheurs ont enregistré <code>hexgrad.com</code>, un domaine cité dans le <code>DONATE.md</code> du modèle de synthèse vocale <strong>hexgrad/Kokoro-82M</strong>, et l'ont utilisé pour réinitialiser le mot de passe du compte Hugging Face. Le modèle compte environ <strong>13 millions de téléchargements mensuels</strong> et sert à des projets de Google, NVIDIA, AMD, Intel et AWS. Lors d'un test contrôlé, ils ont modifié les poids en 87 secondes sur un GPU gamer pour que l'audio diffère du texte, sans toucher au code applicatif ; ils n'ont pas publié les poids modifiés. Ils affirment que Hugging Face ne vérifie pas la propriété des comptes et n'a pas répondu au signalement. Un domaine de contact orphelin dans une model card est un vecteur de prise de contrôle. Épinglez les modèles par hash de commit plutôt que par nom.</p>"
+          },
+          "date": "17 Nov 2026",
+          "source": {
+            "url": "https://www.bleepingcomputer.com/news/security/researchers-hijack-hugging-face-account-for-popular-kokoro-ai-model/",
+            "label": "BleepingComputer"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "supergateway-cve-2026-132121",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-132121 (CVSS 8.6): Supergateway deja que una web maliciosa invoque tus herramientas MCP por WebSocket",
+            "en": "CVE-2026-132121 (CVSS 8.6): Supergateway lets a malicious web page call your MCP tools over WebSocket",
+            "fr": "CVE-2026-132121 (CVSS 8.6) : Supergateway laisse une page web malveillante appeler vos outils MCP via WebSocket"
+          },
+          "body_html": {
+            "es": "<p>Supergateway de la 2.4.0 a la 4.2.2, en modo stdio a WebSocket, no valida el header <code>Origin</code>. Una página maliciosa abierta en el navegador de la víctima puede conectarse a <code>/message</code>, <strong>incluso si el gateway escucha solo en localhost</strong>, iniciar una sesión MCP e invocar las herramientas del servidor stdio envuelto con los privilegios de la víctima. Es cross-site WebSocket hijacking aplicado al ecosistema de agentes: el localhost no es una frontera. Si exponés servidores MCP con este puente, actualizá y exigí validación de Origin y autenticación.</p>",
+            "en": "<p>Supergateway 2.4.0 through 4.2.2, in stdio-to-WebSocket mode, does not validate the <code>Origin</code> header. A malicious page open in the victim's browser can connect to <code>/message</code>, <strong>even when the gateway listens only on localhost</strong>, initialize an MCP session and invoke the wrapped stdio server's tools with the victim's privileges. It is cross-site WebSocket hijacking aimed at the agent ecosystem: localhost is not a boundary. If you bridge MCP servers with this tool, upgrade and require Origin validation and authentication.</p>",
+            "fr": "<p>Supergateway de la 2.4.0 à la 4.2.2, en mode stdio vers WebSocket, ne valide pas l'en-tête <code>Origin</code>. Une page malveillante ouverte dans le navigateur de la victime peut se connecter à <code>/message</code>, <strong>même si la passerelle n'écoute que sur localhost</strong>, initialiser une session MCP et invoquer les outils du serveur stdio enveloppé avec les privilèges de la victime. C'est du cross-site WebSocket hijacking appliqué à l'écosystème d'agents : localhost n'est pas une frontière. Si vous exposez des serveurs MCP via cet outil, mettez à jour et exigez validation d'Origin et authentification.</p>"
+          },
+          "date": "18 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-132121",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "k8s-mcp-server-cve-2026-130007",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-130007 (CVSS 7.9): k8s-mcp-server escucha en 0.0.0.0 sin autenticación y expone las herramientas de Kubernetes",
+            "en": "CVE-2026-130007 (CVSS 7.9): k8s-mcp-server listens on 0.0.0.0 with no authentication and exposes its Kubernetes tools",
+            "fr": "CVE-2026-130007 (CVSS 7.9) : k8s-mcp-server écoute sur 0.0.0.0 sans authentification et expose ses outils Kubernetes"
+          },
+          "body_html": {
+            "es": "<p>Antes de la <strong>1.1.0</strong>, <code>SERVER_MODE</code> es SSE por defecto, escuchando en <code>0.0.0.0:8080</code> y sin opción de autenticación. El <code>sessionId</code> que devuelve <code>GET /sse</code> es solo un valor de correlación, y <code>POST /message</code> despacha <code>tools/call</code> sin chequear autorización ni Origin: cualquier cliente que llegue al puerto puede enumerar e invocar las herramientas registradas. El modo solo lectura viene desactivado, así que quedan expuestas herramientas de escritura sobre el cluster. Subí a 1.1.0 y no publiques ese puerto.</p>",
+            "en": "<p>Before <strong>1.1.0</strong>, <code>SERVER_MODE</code> defaults to SSE, listening on <code>0.0.0.0:8080</code> with no authentication option. The <code>sessionId</code> returned by <code>GET /sse</code> is only a correlation value, and <code>POST /message</code> dispatches <code>tools/call</code> without any authorization or Origin check: any client that can reach the port can enumerate and invoke the registered tools. Read-only mode is off by default, so write-capable Kubernetes tools are exposed. Upgrade to 1.1.0 and keep that port off the network.</p>",
+            "fr": "<p>Avant la <strong>1.1.0</strong>, <code>SERVER_MODE</code> vaut SSE par défaut, à l'écoute sur <code>0.0.0.0:8080</code> sans option d'authentification. Le <code>sessionId</code> renvoyé par <code>GET /sse</code> n'est qu'une valeur de corrélation, et <code>POST /message</code> distribue <code>tools/call</code> sans contrôle d'autorisation ni d'Origin : tout client atteignant le port peut énumérer et invoquer les outils enregistrés. Le mode lecture seule est désactivé par défaut, donc des outils d'écriture sur le cluster sont exposés. Passez à la 1.1.0 et n'exposez pas ce port.</p>"
+          },
+          "date": "18 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-130007",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "mssql-mcp-core-cve-2026-63129",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-63129 (CVSS 8.8): inyección SQL en las herramientas de escritura de mssql-mcp-core",
+            "en": "CVE-2026-63129 (CVSS 8.8): SQL injection in mssql-mcp-core write tools",
+            "fr": "CVE-2026-63129 (CVSS 8.8) : injection SQL dans les outils d'écriture de mssql-mcp-core"
+          },
+          "body_html": {
+            "es": "<p>Varias herramientas de <code>mssql-mcp-core</code> arman T-SQL interpolando a mano identificadores y predicados que manda quien llama, y solo parametrizan los valores. Afecta a <code>update_data</code> y <code>delete_data</code> (<code>tableName</code> y el <code>whereClause</code> libre), <code>insert_data</code> (tabla y nombres de columna), <code>execute_transaction</code>, y <code>create_table</code>, <code>create_index</code> y <code>drop_table</code>. Como esos argumentos los genera el modelo a partir de texto no confiable, un prompt injection se convierte en SQL arbitrario contra tu SQL Server. Actualizá con el advisory y corré el servidor con un usuario de base de datos de privilegios mínimos.</p>",
+            "en": "<p>Several <code>mssql-mcp-core</code> tools build T-SQL by string-interpolating caller-supplied identifiers and predicates, parameterizing only data values. Affected are <code>update_data</code> and <code>delete_data</code> (<code>tableName</code> and the free-form <code>whereClause</code>), <code>insert_data</code> (table and column names), <code>execute_transaction</code>, and <code>create_table</code>, <code>create_index</code> and <code>drop_table</code>. Since the model generates those arguments from untrusted text, a prompt injection turns into arbitrary SQL against your SQL Server. Update per the advisory and run the server under a least-privilege database user.</p>",
+            "fr": "<p>Plusieurs outils de <code>mssql-mcp-core</code> construisent du T-SQL en interpolant des identifiants et prédicats fournis par l'appelant, ne paramétrant que les valeurs. Sont concernés <code>update_data</code> et <code>delete_data</code> (<code>tableName</code> et le <code>whereClause</code> libre), <code>insert_data</code> (noms de table et de colonnes), <code>execute_transaction</code>, ainsi que <code>create_table</code>, <code>create_index</code> et <code>drop_table</code>. Ces arguments étant produits par le modèle à partir de texte non fiable, une prompt injection devient du SQL arbitraire contre votre SQL Server. Mettez à jour selon l'avis et exécutez le serveur avec un utilisateur de base à privilèges minimaux.</p>"
+          },
+          "date": "19 Nov 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-2m9m-6cr5-9x25",
+            "label": "GitHub Advisory"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Los paquetes oficiales ya no son zona segura: agent-framework de Microsoft llevó un stealer que corre al arrancar Python, y la segunda versión maliciosa salió por la cuenta oficial.",
+      "en": "Official packages are no longer a safe zone: Microsoft's agent-framework carried a stealer that runs at Python startup, and the second malicious version went out through the official account.",
+      "fr": "Les paquets officiels ne sont plus une zone sûre : agent-framework de Microsoft a embarqué un stealer exécuté au démarrage de Python, et la seconde version malveillante est sortie par le compte officiel."
+    },
+    {
+      "es": "Credenciales olvidadas de proveedores de IA: Barracuda cayó por una clave que quedó activa tras terminar un proyecto, y un dominio colgado alcanzó para tomar la cuenta de Kokoro.",
+      "en": "Forgotten AI-vendor credentials: Barracuda fell to a key left active after a project ended, and a dangling domain was enough to take over the Kokoro account.",
+      "fr": "Identifiants oubliés chez les fournisseurs d'IA : Barracuda est tombé à cause d'une clé restée active après un projet, et un domaine orphelin a suffi pour prendre le compte Kokoro."
+    },
+    {
+      "es": "MCP repite los errores de siempre: tres servidores distintos (WebSocket sin Origin, SSE sin auth, SQL por interpolación) en un solo día.",
+      "en": "MCP repeats the classic mistakes: three different servers (WebSocket without Origin checks, SSE without auth, SQL by interpolation) in a single day.",
+      "fr": "MCP répète les erreurs classiques : trois serveurs différents (WebSocket sans Origin, SSE sans auth, SQL par interpolation) en un seul jour."
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 19 Nov 2026",
+    "en": "Backend & Fullstack Daily — 19 Nov 2026",
+    "fr": "Backend & Fullstack Daily — 19 nov. 2026"
+  },
+  "description": {
+    "es": "PostgreSQL 19 sale a GA con REPACK CONCURRENTLY, Valkey parchea un use-after-free, Next.js filtra caché entre root params y Lambda suma runtimes administrados por el cliente.",
+    "en": "PostgreSQL 19 goes GA with REPACK CONCURRENTLY, Valkey patches a use-after-free, Next.js leaks cache across root params, and Lambda adds customer-managed runtimes.",
+    "fr": "PostgreSQL 19 passe en GA avec REPACK CONCURRENTLY, Valkey corrige un use-after-free, Next.js fuit du cache entre root params et Lambda ajoute des runtimes gérés par le client."
+  },
+  "pubDate": "2026-11-19",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": { "es": "PostgreSQL 19 GA: REPACK sin bloqueos", "en": "PostgreSQL 19 GA: non-blocking REPACK", "fr": "PostgreSQL 19 GA : REPACK sans blocage" },
+      "anchor": "postgresql-19-ga",
+      "icon": "simple-icons:postgresql"
+    },
+    {
+      "text": { "es": "Valkey 9.1.4: use-after-free en eviction", "en": "Valkey 9.1.4: eviction use-after-free", "fr": "Valkey 9.1.4 : use-after-free à l'éviction" },
+      "anchor": "valkey-9-1-4-security",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Next.js: fuga de caché entre root params", "en": "Next.js: cache leak across root params", "fr": "Next.js : fuite de cache entre root params" },
+      "anchor": "nextjs-use-cache-leak",
+      "icon": "simple-icons:nextdotjs"
+    },
+    {
+      "text": { "es": "simplesamlphp/saml2: bypass por fix incompleto", "en": "simplesamlphp/saml2: incomplete-fix bypass", "fr": "simplesamlphp/saml2 : contournement, correctif incomplet" },
+      "anchor": "saml2-incomplete-fix",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": { "es": "Lambda: runtimes administrados por el cliente", "en": "Lambda: customer-managed runtimes", "fr": "Lambda : runtimes gérés par le client" },
+      "anchor": "lambda-customer-managed-runtimes",
+      "icon": "simple-icons:amazonwebservices"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "postgresql-19-ga",
+      "updates": [
+        {
+          "id": "postgresql-19-ga",
+          "tag": "release",
+          "date": "19 Nov 2026",
+          "title": {
+            "es": "PostgreSQL 19 sale a GA: REPACK CONCURRENTLY y pg_plan_advice",
+            "en": "PostgreSQL 19 goes GA: REPACK CONCURRENTLY and pg_plan_advice",
+            "fr": "PostgreSQL 19 passe en GA : REPACK CONCURRENTLY et pg_plan_advice"
+          },
+          "body_html": {
+            "es": "<p>El PGDG publicó <strong>PostgreSQL 19</strong>. Lo más jugoso: <code>REPACK (CONCURRENTLY)</code> reemplaza a <code>VACUUM FULL</code> y <code>CLUSTER</code> para recuperar bloat sin bloquear lecturas ni escrituras, y la extensión <code>pg_plan_advice</code> te deja guiar y reproducir las decisiones del planner. Además trae consistencia «read-your-writes» en standbys. Si tenés tablas con muchos updates, esto es un golazo operativo.</p>",
+            "en": "<p>The PGDG released <strong>PostgreSQL 19</strong>. Headline features: <code>REPACK (CONCURRENTLY)</code> replaces <code>VACUUM FULL</code> and <code>CLUSTER</code> to reclaim bloat without blocking reads or writes, and the <code>pg_plan_advice</code> extension lets you guide and reproduce planner decisions. It also adds read-your-writes consistency on standbys. A big operational win for update-heavy tables.</p>",
+            "fr": "<p>Le PGDG a publié <strong>PostgreSQL 19</strong>. Points forts : <code>REPACK (CONCURRENTLY)</code> remplace <code>VACUUM FULL</code> et <code>CLUSTER</code> pour récupérer le bloat sans bloquer lectures ni écritures, et l'extension <code>pg_plan_advice</code> permet de guider et reproduire les décisions du planner. Cohérence read-your-writes sur les standbys en prime.</p>"
+          },
+          "source": { "url": "https://www.postgresql.org/message-id/attachment/207950/release.en.md", "label": "postgresql.org" }
+        },
+        {
+          "id": "valkey-9-1-4-security",
+          "tag": "security",
+          "date": "18 Nov 2026",
+          "title": {
+            "es": "Valkey 9.1.4 / 9.0.8 / 8.1.12: parche de seguridad (CVE-2026-130822)",
+            "en": "Valkey 9.1.4 / 9.0.8 / 8.1.12: security patch (CVE-2026-130822)",
+            "fr": "Valkey 9.1.4 / 9.0.8 / 8.1.12 : correctif de sécurité (CVE-2026-130822)"
+          },
+          "body_html": {
+            "es": "<p>Valkey corrigió un <strong>use-after-free</strong> en la eviction de clientes cuando <code>maxmemory-clients</code> está activo (CVE-2026-130822), con urgencia marcada como SECURITY en las tres ramas soportadas. Ojo si usás ese límite: actualizá YA.</p>",
+            "en": "<p>Valkey fixed a <strong>use-after-free</strong> in client eviction when <code>maxmemory-clients</code> is enabled (CVE-2026-130822), flagged upgrade urgency SECURITY across all three supported branches. If you use that limit, upgrade now.</p>",
+            "fr": "<p>Valkey corrige un <strong>use-after-free</strong> dans l'éviction des clients quand <code>maxmemory-clients</code> est activé (CVE-2026-130822), urgence SECURITY sur les trois branches supportées.</p>"
+          },
+          "source": { "url": "https://github.com/valkey-io/valkey/releases/tag/9.1.4", "label": "github.com/valkey-io/valkey" }
+        },
+        {
+          "id": "nextjs-use-cache-leak",
+          "tag": "security",
+          "date": "17 Nov 2026",
+          "title": {
+            "es": "Next.js: fuga de caché entre root params en 'use cache' anidados (CVSS v4 6.3)",
+            "en": "Next.js: cache leak across root params in nested 'use cache' (CVSS v4 6.3)",
+            "fr": "Next.js : fuite de cache entre root params dans des 'use cache' imbriqués (CVSS v4 6.3)"
+          },
+          "body_html": {
+            "es": "<p>Con Cache Components, una función <code>'use cache'</code> externa puede quedar cacheada con una clave que omite un root param, y una respuesta para un valor puede servirse a otro. Afecta <code>&gt;= 16.2.0, &lt;= 16.4.4</code>; el fix está en <strong>16.4.5</strong>. Si tenés multi-tenant o i18n por root params, revisá la versión.</p>",
+            "en": "<p>With Cache Components, an outer <code>'use cache'</code> function can be cached under a key that omits a root param, so a response for one value can be served for another. Affects <code>&gt;= 16.2.0, &lt;= 16.4.4</code>; fixed in <strong>16.4.5</strong>. Check your version if you do multi-tenant or i18n via root params.</p>",
+            "fr": "<p>Avec Cache Components, une fonction <code>'use cache'</code> externe peut être mise en cache sous une clé qui omet un root param, servant la réponse d'une valeur à une autre. Versions <code>&gt;= 16.2.0, &lt;= 16.4.4</code> ; corrigé en <strong>16.4.5</strong>.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-vc7v-qv4w-wrv8", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "theme": "security",
+      "icon_emoji": "🔒",
+      "anchor": "saml2-incomplete-fix",
+      "updates": [
+        {
+          "id": "saml2-incomplete-fix",
+          "tag": "security",
+          "date": "17 Nov 2026",
+          "title": {
+            "es": "simplesamlphp/saml2: el fix de CVE-2026-49283 quedó incompleto (CVE-2026-110782)",
+            "en": "simplesamlphp/saml2: incomplete fix of CVE-2026-49283 (CVE-2026-110782)",
+            "fr": "simplesamlphp/saml2 : correctif incomplet de CVE-2026-49283 (CVE-2026-110782)"
+          },
+          "body_html": {
+            "es": "<p>En <code>HTTPArtifact::receive()</code>, si la <code>Response</code> SAML embebida no está firmada se devuelve <strong>sin verificar</strong>, reabriendo el bypass de autenticación entre IdPs. Afecta hasta v6.2.3. Moraleja: un fix parcial en auth es peor que ninguno; revisá tu stack SAML.</p>",
+            "en": "<p>In <code>HTTPArtifact::receive()</code>, an unsigned embedded SAML <code>Response</code> is returned <strong>unverified</strong>, reopening the cross-IdP authentication bypass. Affects up to v6.2.3. Lesson: a partial auth fix is worse than none; audit your SAML stack.</p>",
+            "fr": "<p>Dans <code>HTTPArtifact::receive()</code>, une <code>Response</code> SAML embarquée non signée est renvoyée <strong>sans vérification</strong>, rouvrant le contournement d'authentification entre IdP. Jusqu'à v6.2.3.</p>"
+          },
+          "source": { "url": "https://github.com/advisories/GHSA-r7hw-jx6r-756g", "label": "github.com/advisories" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "lambda-customer-managed-runtimes",
+      "updates": [
+        {
+          "id": "lambda-customer-managed-runtimes",
+          "tag": "notable",
+          "date": "18 Nov 2026",
+          "title": {
+            "es": "AWS Lambda: runtimes administrados por el cliente",
+            "en": "AWS Lambda: customer-managed runtimes",
+            "fr": "AWS Lambda : runtimes gérés par le client"
+          },
+          "body_html": {
+            "es": "<p>Los equipos de plataforma ahora pueden controlar de forma centralizada el contenido y las actualizaciones de los runtimes de Lambda. Útil si necesitás runtimes endurecidos o versiones fijadas por compliance.</p>",
+            "en": "<p>Platform teams can now centrally control the contents and updates of Lambda runtimes. Handy for hardened runtimes or compliance-pinned versions.</p>",
+            "fr": "<p>Les équipes plateforme peuvent désormais contrôler de façon centralisée le contenu et les mises à jour des runtimes Lambda.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/aws-lambda-customer-managed-runtimes/", "label": "aws.amazon.com" }
+        },
+        {
+          "id": "cloudfront-origin-mtls-grpc",
+          "tag": "minor",
+          "date": "18 Nov 2026",
+          "title": {
+            "es": "CloudFront: WebSocket y gRPC con mTLS hacia el origen",
+            "en": "CloudFront: WebSocket and gRPC support for origin mutual TLS",
+            "fr": "CloudFront : WebSocket et gRPC avec mTLS vers l'origine"
+          },
+          "body_html": {
+            "es": "<p>El mTLS de origen en CloudFront ahora cubre tráfico WebSocket y gRPC, así que podés cerrar el último hueco entre edge y tus APIs internas.</p>",
+            "en": "<p>CloudFront origin mTLS now covers WebSocket and gRPC traffic, closing a gap between the edge and your internal APIs.</p>",
+            "fr": "<p>Le mTLS d'origine de CloudFront couvre désormais le trafic WebSocket et gRPC.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-cloudfront-origin-mtls-websockets-grpc/", "label": "aws.amazon.com" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Los fixes incompletos de seguridad (SAML2, Nuxt) y las fugas de caché (Next.js) siguen apareciendo: validá el fix, no solo la versión.",
+      "en": "Incomplete security fixes (SAML2, Nuxt) and cache leaks (Next.js) keep surfacing: verify the fix, not just the version.",
+      "fr": "Les correctifs de sécurité incomplets (SAML2, Nuxt) et les fuites de cache (Next.js) continuent d'apparaître : vérifiez le correctif, pas seulement la version."
+    },
+    {
+      "es": "Postgres 19 mueve el mantenimiento de tablas a operaciones online, igual que la tendencia de Valkey/Redis a parches de seguridad frecuentes en todas las ramas.",
+      "en": "Postgres 19 moves table maintenance to online operations, while Valkey keeps shipping security patches across all branches.",
+      "fr": "Postgres 19 rend la maintenance des tables en ligne, tandis que Valkey publie des correctifs de sécurité sur toutes ses branches."
+    }
+  ]
+}

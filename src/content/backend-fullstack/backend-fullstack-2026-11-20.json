@@ -1,0 +1,485 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 20 Nov 2026",
+    "en": "Backend & Fullstack Daily — 20 Nov 2026",
+    "fr": "Backend & Fullstack Daily — 20 nov. 2026"
+  },
+  "description": {
+    "es": "Next.js publica cinco advisories más (cookies HttpOnly expuestas en Edge), Valkey 9.2 sale a GA, Lambda estira el timeout a 30 minutos, Bun 1.4.5 trae fixes de seguridad y el adapter de Cloudflare de SvelteKit abandona Pages.",
+    "en": "Next.js discloses five more advisories (HttpOnly cookies exposed on Edge), Valkey 9.2 goes GA, Lambda stretches the timeout to 30 minutes, Bun 1.4.5 ships security fixes and SvelteKit's Cloudflare adapter drops Pages.",
+    "fr": "Next.js publie cinq advisories de plus (cookies HttpOnly exposés sur Edge), Valkey 9.2 passe en GA, Lambda porte le timeout à 30 minutes, Bun 1.4.5 apporte des correctifs de sécurité et l'adapter Cloudflare de SvelteKit abandonne Pages."
+  },
+  "pubDate": "2026-11-20",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Next.js: 5 advisories, cookie HttpOnly expuesta",
+        "en": "Next.js: 5 advisories, HttpOnly cookie exposed",
+        "fr": "Next.js : 5 advisories, cookie HttpOnly exposé"
+      },
+      "anchor": "nextjs-advisories-batch",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Valkey 9.2 GA: sorted sets en B+tree",
+        "en": "Valkey 9.2 GA: B+tree sorted sets",
+        "fr": "Valkey 9.2 GA : sorted sets en B+tree"
+      },
+      "anchor": "valkey-9-2-ga",
+      "icon": "lucide:database"
+    },
+    {
+      "text": {
+        "es": "Lambda: timeout de 30 minutos",
+        "en": "Lambda: 30-minute timeout",
+        "fr": "Lambda : timeout de 30 minutes"
+      },
+      "anchor": "lambda-30-minute-timeout",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": {
+        "es": "Bun 1.4.5: fixes en HTTP/3, TLS y DNS",
+        "en": "Bun 1.4.5: HTTP/3, TLS and DNS fixes",
+        "fr": "Bun 1.4.5 : correctifs HTTP/3, TLS et DNS"
+      },
+      "anchor": "bun-1-4-5-security",
+      "icon": "simple-icons:bun"
+    },
+    {
+      "text": {
+        "es": "SvelteKit: el adapter Cloudflare deja Pages",
+        "en": "SvelteKit: Cloudflare adapter drops Pages",
+        "fr": "SvelteKit : l'adapter Cloudflare quitte Pages"
+      },
+      "anchor": "sveltekit-adapter-cloudflare-9",
+      "icon": "lucide:server"
+    },
+    {
+      "text": {
+        "es": "Codegen OpenAPI: el spec también es input",
+        "en": "OpenAPI codegen: the spec is input too",
+        "fr": "Codegen OpenAPI : le spec est aussi une entrée"
+      },
+      "anchor": "openapi-codegen-rce",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "nextjs-advisories-batch",
+      "updates": [
+        {
+          "id": "nextjs-advisories-batch",
+          "tag": "security",
+          "date": "19 Nov 2026",
+          "title": {
+            "es": "Next.js publica cinco advisories más: cookies HttpOnly filtradas en Edge y desync de respuestas detrás de proxies",
+            "en": "Next.js discloses five more advisories: HttpOnly cookies leaked on Edge and response desync behind proxies",
+            "fr": "Next.js publie cinq advisories de plus : cookies HttpOnly divulgués sur Edge et désynchronisation des réponses derrière les proxies"
+          },
+          "body_html": {
+            "es": "<p>Vercel publicó cinco advisories nuevos (CVE-2026-119346 a 119350, CVSS v4 hasta <strong>6.9</strong>), todos corregidos en <strong>16.4.5</strong> y <strong>15.5.29</strong>. El más feo: en rutas Edge que setean cookies con <code>NextResponse</code>, el header interno <code>x-middleware-set-cookie</code> viajaba en la respuesta pública duplicando el valor, así que una cookie de sesión <code>HttpOnly</code> quedaba legible desde JavaScript. Otro: apps self-hosted que devuelven tal cual un <code>fetch</code> upstream podían desincronizar respuestas entre clientes detrás de un proxy HTTP/1.1 con pipelining. Completan la lista envenenamiento de caché con argumentos binarios en <code>use cache</code>, fallback shells compartidos en Cache Components y un bypass del rechazo de SVG en el optimizador de imágenes. Ojo: el fix es el mismo 16.4.5 que ya cubrimos la semana pasada. Si actualizaste, estás cubierto; si no, acá tenés cinco razones más para hacerlo YA.</p>",
+            "en": "<p>Vercel published five new advisories (CVE-2026-119346 to 119350, CVSS v4 up to <strong>6.9</strong>), all fixed in <strong>16.4.5</strong> and <strong>15.5.29</strong>. The worst: on Edge routes that set cookies via <code>NextResponse</code>, the internal <code>x-middleware-set-cookie</code> header leaked into the public response with the cookie value duplicated, making an <code>HttpOnly</code> session cookie readable from JavaScript. Another: self-hosted apps returning an upstream <code>fetch</code> response unchanged could desynchronize responses between clients behind a pipelining HTTP/1.1 proxy. The rest cover cache poisoning with binary arguments in <code>use cache</code>, shared fallback shells in Cache Components, and an SVG-rejection bypass in the image optimizer. The fix is the same 16.4.5 covered last week: if you upgraded, you are covered; if not, here are five more reasons.</p>",
+            "fr": "<p>Vercel a publié cinq nouveaux advisories (CVE-2026-119346 à 119350, CVSS v4 jusqu'à <strong>6.9</strong>), tous corrigés en <strong>16.4.5</strong> et <strong>15.5.29</strong>. Le pire : sur les routes Edge qui posent des cookies via <code>NextResponse</code>, l'en-tête interne <code>x-middleware-set-cookie</code> fuyait dans la réponse publique avec la valeur du cookie, rendant un cookie de session <code>HttpOnly</code> lisible en JavaScript. Autre cas : les apps self-hosted qui renvoient telle quelle une réponse <code>fetch</code> amont pouvaient désynchroniser les réponses entre clients derrière un proxy HTTP/1.1 avec pipelining. Le reste : empoisonnement de cache avec arguments binaires dans <code>use cache</code>, fallback shells partagés dans Cache Components et contournement du rejet SVG de l'optimiseur d'images. Le correctif est le même 16.4.5 que la semaine dernière.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-f3mh-rxg3-f5g2",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "valkey-9-2-ga",
+          "tag": "release",
+          "date": "18 Nov 2026",
+          "title": {
+            "es": "Valkey 9.2 sale a GA: snapshots sin fork, sorted sets en B+tree y cambios de comportamiento a revisar",
+            "en": "Valkey 9.2 goes GA: forkless snapshots, B+tree sorted sets and behavior changes to review",
+            "fr": "Valkey 9.2 passe en GA : snapshots sans fork, sorted sets en B+tree et changements de comportement à vérifier"
+          },
+          "body_html": {
+            "es": "<p>Después de las RC, <strong>Valkey 9.2.0</strong> es estable. Antes de las features, leé los cambios de comportamiento: <code>ZRANGEBYSCORE</code>, <code>ZCOUNT</code> y compañía ahora rechazan un <code>(</code> suelto o un string vacío como límite (antes lo tomaban como 0), la expiración activa incrementa el dirty counter así que <code>BGSAVE</code> puede dispararse más seguido, y los sorted sets grandes pasan a B+tree: <code>OBJECT ENCODING</code> devuelve <code>btree</code> en vez de <code>skiplist</code>, cosa que rompe scripts de monitoreo que miraban eso. Del lado de features: full sync y snapshots RDB sin fork (opt-in), compresión Zstd, roles de ACL, detección de hot keys con <code>HOTKEYS</code>, y los comandos <code>DELEX</code>, <code>INCREX</code>, <code>XACKDEL</code> y <code>XDELEX</code>. Un golazo para instancias con mucha memoria donde el fork dolía.</p>",
+            "en": "<p>After the RCs, <strong>Valkey 9.2.0</strong> is stable. Read the behavior changes before the features: <code>ZRANGEBYSCORE</code>, <code>ZCOUNT</code> and friends now reject a bare <code>(</code> or an empty string as a bound (previously treated as 0), active expiration now increments the dirty counter so <code>BGSAVE</code> may trigger more often, and large sorted sets move to a B+tree: <code>OBJECT ENCODING</code> reports <code>btree</code> instead of <code>skiplist</code>, which breaks monitoring scripts that checked it. Features: forkless full sync and RDB snapshots (opt-in), Zstd compression, ACL roles, hot key detection via <code>HOTKEYS</code>, and the <code>DELEX</code>, <code>INCREX</code>, <code>XACKDEL</code> and <code>XDELEX</code> commands. A big win for large-memory instances where forking hurt.</p>",
+            "fr": "<p>Après les RC, <strong>Valkey 9.2.0</strong> est stable. Lisez d'abord les changements de comportement : <code>ZRANGEBYSCORE</code>, <code>ZCOUNT</code> et consorts rejettent désormais un <code>(</code> seul ou une chaîne vide comme borne (auparavant traité comme 0), l'expiration active incrémente le dirty counter donc <code>BGSAVE</code> peut se déclencher plus souvent, et les gros sorted sets passent en B+tree : <code>OBJECT ENCODING</code> renvoie <code>btree</code> au lieu de <code>skiplist</code>. Côté nouveautés : full sync et snapshots RDB sans fork (opt-in), compression Zstd, rôles ACL, détection des hot keys via <code>HOTKEYS</code>, et les commandes <code>DELEX</code>, <code>INCREX</code>, <code>XACKDEL</code> et <code>XDELEX</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/valkey-io/valkey/releases/tag/9.2.0",
+            "label": "github.com/valkey-io"
+          }
+        },
+        {
+          "id": "lambda-30-minute-timeout",
+          "tag": "notable",
+          "date": "19 Nov 2026",
+          "title": {
+            "es": "AWS Lambda duplica el timeout: 30 minutos para Event Functions on-demand",
+            "en": "AWS Lambda doubles the timeout: 30 minutes for on-demand Event Functions",
+            "fr": "AWS Lambda double le timeout : 30 minutes pour les Event Functions à la demande"
+          },
+          "body_html": {
+            "es": "<p>El límite histórico de <strong>15 minutos</strong> pasa a <strong>30</strong> para invocaciones on-demand síncronas, asíncronas y vía event source mapping. Los batch jobs y ETLs que partías en pedazos o mandabas a Fargate solo por el timeout ahora entran en una sola función. Igual, ojo: más timeout no es diseño; si tu proceso es largo y con pasos, durable functions o Step Functions te dan reintentos y checkpoints que un timeout más grande no.</p>",
+            "en": "<p>The long-standing <strong>15-minute</strong> limit becomes <strong>30</strong> for on-demand synchronous, asynchronous and event-source-mapping invocations. Batch jobs and ETLs you split up or moved to Fargate purely because of the timeout now fit in a single function. A longer timeout is not a design, though: for long, multi-step work, durable functions or Step Functions still give you retries and checkpoints a bigger timeout does not.</p>",
+            "fr": "<p>La limite historique de <strong>15 minutes</strong> passe à <strong>30</strong> pour les invocations à la demande synchrones, asynchrones et via event source mapping. Les batch jobs et ETL découpés ou déplacés vers Fargate à cause du timeout tiennent désormais dans une seule fonction. Pour un traitement long à plusieurs étapes, les durable functions ou Step Functions restent préférables pour les reprises et checkpoints.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/aws-lambda-30-minute-ondemand-event-functions/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "bun-1-4-5-security",
+          "tag": "security",
+          "date": "19 Nov 2026",
+          "title": {
+            "es": "Bun 1.4.5: release de seguridad para HTTP/3, TLS y DNS",
+            "en": "Bun 1.4.5: security release for HTTP/3, TLS and DNS",
+            "fr": "Bun 1.4.5 : version de sécurité pour HTTP/3, TLS et DNS"
+          },
+          "body_html": {
+            "es": "<p>Release corta pero importante: fixes de seguridad que tocan <code>Bun.serve</code>, <code>fetch</code>, <code>Bun.dns</code> y los módulos <code>node:tls</code>, <code>node:https</code>, <code>node:http</code>, <code>node:quic</code>, <code>node:dns</code> y <code>node:zlib</code>. Actualiza lsquic a 4.11.2, c-ares a 1.34.9, llhttp a 9.4.4, BoringSSL y SQLite a 3.54.1. Dos cosas que pueden romper: los certificados raíz custom se validan más estricto (algunos legacy ahora se rechazan) y SQLite 3.54 ya no deja hacer <code>ALTER TABLE</code> sobre columnas llamadas <code>rowid</code>, <code>oid</code> o <code>_rowid_</code>. Si corrés Bun en producción, actualizá YA y probá tus migraciones.</p>",
+            "en": "<p>A short but important release: security fixes touching <code>Bun.serve</code>, <code>fetch</code>, <code>Bun.dns</code> and the <code>node:tls</code>, <code>node:https</code>, <code>node:http</code>, <code>node:quic</code>, <code>node:dns</code> and <code>node:zlib</code> modules. It bumps lsquic to 4.11.2, c-ares to 1.34.9, llhttp to 9.4.4, BoringSSL, and SQLite to 3.54.1. Two possible breakages: custom root certificates are validated more strictly (some legacy ones are now rejected), and SQLite 3.54 no longer allows <code>ALTER TABLE</code> on columns named <code>rowid</code>, <code>oid</code> or <code>_rowid_</code>. If you run Bun in production, upgrade now and test your migrations.</p>",
+            "fr": "<p>Version courte mais importante : correctifs de sécurité touchant <code>Bun.serve</code>, <code>fetch</code>, <code>Bun.dns</code> et les modules <code>node:tls</code>, <code>node:https</code>, <code>node:http</code>, <code>node:quic</code>, <code>node:dns</code> et <code>node:zlib</code>. Mise à jour de lsquic 4.11.2, c-ares 1.34.9, llhttp 9.4.4, BoringSSL et SQLite 3.54.1. Deux ruptures possibles : validation plus stricte des certificats racine personnalisés, et SQLite 3.54 interdit <code>ALTER TABLE</code> sur les colonnes <code>rowid</code>, <code>oid</code> ou <code>_rowid_</code>.</p>"
+          },
+          "source": {
+            "url": "https://bun.com/blog/bun-v1.4.5",
+            "label": "bun.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "effect-template-literal-redos",
+      "updates": [
+        {
+          "id": "effect-template-literal-redos",
+          "tag": "security",
+          "date": "19 Nov 2026",
+          "title": {
+            "es": "Effect: ReDoS en Schema.TemplateLiteral (CVSS v4 8.7)",
+            "en": "Effect: ReDoS in Schema.TemplateLiteral (CVSS v4 8.7)",
+            "fr": "Effect : ReDoS dans Schema.TemplateLiteral (CVSS v4 8.7)"
+          },
+          "body_html": {
+            "es": "<p><code>Schema.TemplateLiteral</code> compilaba cada span <code>Schema.String</code> al wildcard perezoso <code>[\\s\\S]*?</code>. Con dos o más spans, un input que no matchea hace que el motor de regex pruebe combinaciones entre todos los wildcards y el tiempo explota: un request basta para clavar el event loop. Afecta hasta <strong>3.22.0</strong>, corregido en <strong>3.22.1</strong> (la última es 3.22.5). Si validás inputs HTTP con templates tipo <code>id:tenant:slug</code>, actualizá ahora.</p>",
+            "en": "<p><code>Schema.TemplateLiteral</code> compiled each <code>Schema.String</code> span to the lazy wildcard <code>[\\s\\S]*?</code>. With two or more spans, a non-matching input makes the regex engine try combinations across all wildcards and matching time blows up: one request can pin the event loop. Affects up to <strong>3.22.0</strong>, fixed in <strong>3.22.1</strong> (latest is 3.22.5). If you validate HTTP input with templates like <code>id:tenant:slug</code>, upgrade now.</p>",
+            "fr": "<p><code>Schema.TemplateLiteral</code> compilait chaque span <code>Schema.String</code> en wildcard paresseux <code>[\\s\\S]*?</code>. Avec deux spans ou plus, une entrée non conforme fait exploser le temps de backtracking : une seule requête peut bloquer l'event loop. Versions jusqu'à <strong>3.22.0</strong>, corrigé en <strong>3.22.1</strong> (dernière : 3.22.5).</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-7589-6fvf-x4pw",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "better-auth-1-7-26",
+          "tag": "notable",
+          "date": "18 Nov 2026",
+          "title": {
+            "es": "better-auth 1.7.26: getJwks se llama en cada verificación y se cierra la ventana de replay de DPoP",
+            "en": "better-auth 1.7.26: getJwks runs on every verification and the DPoP replay window closes",
+            "fr": "better-auth 1.7.26 : getJwks appelé à chaque vérification et fenêtre de replay DPoP fermée"
+          },
+          "body_html": {
+            "es": "<p>Otra release con <strong>action required</strong>: si usás un <code>adapter.getJwks</code> custom en el plugin JWT y las lecturas son caras, agregá caché en tu key store, porque ahora se invoca en cada verificación. Además, las reservas anti-replay de DPoP duran toda la ventana aceptada (antes se podía reusar una prueba en su último segundo), las IPv6 no globales fuera de <code>2000::/3</code> se tratan como reservadas y el 2FA rechaza challenges vencidos antes de mandar el OTP.</p>",
+            "en": "<p>Another release with <strong>action required</strong>: if you use a custom <code>adapter.getJwks</code> in the JWT plugin and reads are expensive, add caching to your key store, since it is now called on every verification. Also, DPoP replay reservations now last the full accepted window (a proof could be reused in its final second), non-global IPv6 addresses outside <code>2000::/3</code> are treated as reserved, and two-factor sign-in rejects expired challenges before sending an OTP.</p>",
+            "fr": "<p>Encore une version avec <strong>action required</strong> : si vous utilisez un <code>adapter.getJwks</code> personnalisé dans le plugin JWT et que les lectures sont coûteuses, ajoutez un cache, car il est désormais appelé à chaque vérification. Les réservations anti-replay DPoP couvrent toute la fenêtre acceptée, les IPv6 non globales hors <code>2000::/3</code> sont traitées comme réservées et le 2FA rejette les challenges expirés avant d'envoyer l'OTP.</p>"
+          },
+          "source": {
+            "url": "https://github.com/better-auth/better-auth/releases/tag/v1.7.26",
+            "label": "github.com/better-auth"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "aurora-dsql-write-throughput",
+      "updates": [
+        {
+          "id": "aurora-dsql-write-throughput",
+          "tag": "notable",
+          "date": "19 Nov 2026",
+          "title": {
+            "es": "Aurora DSQL: hasta 50% más de throughput de escritura sin costo extra",
+            "en": "Aurora DSQL: up to 50% higher write throughput at no extra cost",
+            "fr": "Aurora DSQL : jusqu'à 50 % de débit d'écriture en plus sans surcoût"
+          },
+          "body_html": {
+            "es": "<p>Mejoras en la capa de storage le dan a <strong>Aurora DSQL</strong> hasta un <strong>50%</strong> más de throughput de escritura para cargas transaccionales, en clusters nuevos y existentes, sin tocar nada ni pagar más. Si descartaste DSQL por el techo de escrituras, vale la pena volver a medir.</p>",
+            "en": "<p>Storage-layer upgrades give <strong>Aurora DSQL</strong> up to <strong>50%</strong> higher write throughput for transactional workloads, on new and existing clusters, with no changes and no extra cost. If you ruled DSQL out over its write ceiling, it is worth benchmarking again.</p>",
+            "fr": "<p>Des améliorations de la couche de stockage donnent à <strong>Aurora DSQL</strong> jusqu'à <strong>50 %</strong> de débit d'écriture en plus pour les charges transactionnelles, sur les clusters nouveaux et existants, sans changement ni surcoût.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/aurora-dsql-higher-write-throughput/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "rds-mysql-9-7",
+          "tag": "release",
+          "date": "18 Nov 2026",
+          "title": {
+            "es": "Amazon RDS suma MySQL 9.7 con JSON Duality Views y el Hypergraph Optimizer",
+            "en": "Amazon RDS adds MySQL 9.7 with JSON Duality Views and the Hypergraph Optimizer",
+            "fr": "Amazon RDS ajoute MySQL 9.7 avec JSON Duality Views et le Hypergraph Optimizer"
+          },
+          "body_html": {
+            "es": "<p>RDS for MySQL ya soporta la major <strong>9.7</strong> (community 9.7.4): JSON Duality Views para exponer tablas relacionales como documentos JSON, métricas del replication applier y el <strong>Hypergraph Optimizer</strong> como opt-in. Probalo primero en staging: un optimizer nuevo puede cambiar planes que dabas por sentados.</p>",
+            "en": "<p>RDS for MySQL now supports major version <strong>9.7</strong> (community 9.7.4): JSON Duality Views to expose relational tables as JSON documents, Replication Applier Metrics, and the opt-in <strong>Hypergraph Optimizer</strong>. Try it in staging first: a new optimizer can change plans you took for granted.</p>",
+            "fr": "<p>RDS for MySQL prend en charge la version majeure <strong>9.7</strong> (community 9.7.4) : JSON Duality Views, métriques du replication applier et <strong>Hypergraph Optimizer</strong> en opt-in. À tester d'abord en staging, un nouvel optimiseur peut changer vos plans.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-rds-mysql-974-available/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "nats-mqtt-advisories",
+          "tag": "security",
+          "date": "20 Nov 2026",
+          "title": {
+            "es": "NATS Server: cinco advisories en el soporte MQTT, con fixes ya publicados",
+            "en": "NATS Server: five advisories in MQTT support, with fixes already shipped",
+            "fr": "NATS Server : cinq advisories dans le support MQTT, correctifs déjà publiés"
+          },
+          "body_html": {
+            "es": "<p>Se publicaron cinco advisories sobre el bridge MQTT de NATS. El más serio: un cliente MQTT <strong>sin autenticar</strong> podía hacer que el server retuviera paquetes <code>CONNECT</code> incompletos enormes y agotar la memoria (CVE-2026-58210, corregido en <strong>2.12.12</strong> y <strong>2.14.3</strong>). Los otros: inyección de protocolo en filtros de suscripción reenviados a routes y leafnodes, bypass de reglas deny con mensajes retenidos, y un crash en servers solo-WebSocket. La disclosure es nueva, los fixes no: las últimas 2.14.10 y 2.15.3 (11 Nov) ya los incluyen. Si tenés MQTT habilitado en algo viejo, actualizá.</p>",
+            "en": "<p>Five advisories were published for NATS's MQTT bridge. The most serious: an <strong>unauthenticated</strong> MQTT client could make the server retain huge incomplete <code>CONNECT</code> packets and exhaust memory (CVE-2026-58210, fixed in <strong>2.12.12</strong> and <strong>2.14.3</strong>). The others cover protocol injection in subscription filters forwarded to routes and leafnodes, deny-rule bypass via retained messages, and a crash on WebSocket-only servers. The disclosure is new, the fixes are not: the latest 2.14.10 and 2.15.3 (Nov 11) already include them. If you run MQTT on an older build, upgrade.</p>",
+            "fr": "<p>Cinq advisories ont été publiés pour le pont MQTT de NATS. Le plus sérieux : un client MQTT <strong>non authentifié</strong> pouvait faire retenir au serveur d'énormes paquets <code>CONNECT</code> incomplets et épuiser la mémoire (CVE-2026-58210, corrigé en <strong>2.12.12</strong> et <strong>2.14.3</strong>). Les autres : injection de protocole vers routes et leafnodes, contournement des règles deny via les messages retenus, crash des serveurs WebSocket-only. Les dernières 2.14.10 et 2.15.3 (11 nov.) incluent déjà les correctifs.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-r72h-j7qq-v6qg",
+            "label": "github.com/advisories"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloudfront-functions-fetch",
+      "updates": [
+        {
+          "id": "cloudfront-functions-fetch",
+          "tag": "notable",
+          "date": "18 Nov 2026",
+          "title": {
+            "es": "CloudFront Functions ahora puede hacer llamadas de red con cf.fetch()",
+            "en": "CloudFront Functions can now make network calls with cf.fetch()",
+            "fr": "CloudFront Functions peut désormais faire des appels réseau avec cf.fetch()"
+          },
+          "body_html": {
+            "es": "<p>Los nuevos <code>cf.fetch()</code> y <code>cf.beacon()</code> permiten que una función en el edge llame a una API y actúe según la respuesta, a <strong>USD 0,10 por millón</strong> de llamadas. Auth checks, feature flags o geo-routing que antes te obligaban a Lambda@Edge ahora entran en CloudFront Functions. Cuidado con la latencia: cada fetch suma al tiempo de respuesta de todos tus usuarios.</p>",
+            "en": "<p>The new <code>cf.fetch()</code> and <code>cf.beacon()</code> methods let an edge function call an API and act on the response, at <strong>$0.10 per million</strong> calls. Auth checks, feature flags or geo-routing that used to push you to Lambda@Edge now fit in CloudFront Functions. Watch the latency: every fetch adds to the response time for all your users.</p>",
+            "fr": "<p>Les nouvelles méthodes <code>cf.fetch()</code> et <code>cf.beacon()</code> permettent à une fonction edge d'appeler une API et d'agir sur la réponse, à <strong>0,10 USD par million</strong> d'appels. Contrôles d'auth, feature flags ou geo-routing tiennent désormais dans CloudFront Functions, sans Lambda@Edge. Attention à la latence ajoutée.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/cloudfront-functions-network-calls/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "lambda-durable-otel",
+          "tag": "notable",
+          "date": "19 Nov 2026",
+          "title": {
+            "es": "Lambda durable functions emite una sola traza OpenTelemetry por ejecución",
+            "en": "Lambda durable functions emit a single OpenTelemetry trace per execution",
+            "fr": "Les durable functions Lambda émettent une seule trace OpenTelemetry par exécution"
+          },
+          "body_html": {
+            "es": "<p>Las durable functions ahora soportan tracing con <strong>OpenTelemetry</strong>: una única traza cubre toda la ejecución durable (steps, waits, callbacks e invocaciones encadenadas) en los SDKs de TypeScript, Python y Java. Se terminó reconstruir un workflow a mano juntando trazas sueltas por correlation ID.</p>",
+            "en": "<p>Durable functions now support <strong>OpenTelemetry</strong> tracing: one trace spans the whole durable execution (steps, waits, callbacks and chained invocations) in the TypeScript, Python and Java SDKs. No more stitching a workflow back together from scattered traces by correlation ID.</p>",
+            "fr": "<p>Les durable functions prennent en charge le tracing <strong>OpenTelemetry</strong> : une seule trace couvre toute l'exécution durable (steps, waits, callbacks et invocations chaînées) dans les SDK TypeScript, Python et Java.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/lambda-durable-otel/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "containerd-subject-digest-panic",
+          "tag": "security",
+          "date": "19 Nov 2026",
+          "title": {
+            "es": "containerd: una imagen maliciosa tira el daemon en cada pull (CVSS v4 7.1)",
+            "en": "containerd: a malicious image crashes the daemon on every pull (CVSS v4 7.1)",
+            "fr": "containerd : une image malveillante fait planter le daemon à chaque pull (CVSS v4 7.1)"
+          },
+          "body_html": {
+            "es": "<p>Un descriptor hijo con la anotación <code>io.containerd.manifest.subject</code> y un digest malformado provoca un panic sin recuperar durante el pull, incluido el <code>PullImage</code> de CRI. En Kubernetes es peor: el kubelet reintenta con backoff, así que un pod que referencia una imagen no confiable tumba containerd una y otra vez en ese nodo. Los fixes (<strong>2.2.10</strong>, <strong>2.3.7</strong>, <strong>2.4.2</strong>) salieron el 13 de octubre; lo nuevo es la disclosure. Revisá qué versión trae la AMI o imagen de tus nodos.</p>",
+            "en": "<p>A child descriptor with the <code>io.containerd.manifest.subject</code> annotation and a malformed digest triggers an unrecovered panic during pull, including CRI <code>PullImage</code>. In Kubernetes it gets worse: kubelet retries with backoff, so a pod referencing an untrusted image keeps crashing containerd on that node. The fixes (<strong>2.2.10</strong>, <strong>2.3.7</strong>, <strong>2.4.2</strong>) shipped on October 13; the disclosure is what is new. Check which version your node AMI or image ships.</p>",
+            "fr": "<p>Un descripteur enfant avec l'annotation <code>io.containerd.manifest.subject</code> et un digest malformé déclenche un panic non récupéré pendant le pull, y compris <code>PullImage</code> de CRI. Sous Kubernetes, le kubelet réessaie avec backoff : un pod référençant une image non fiable fait planter containerd en boucle. Les correctifs (<strong>2.2.10</strong>, <strong>2.3.7</strong>, <strong>2.4.2</strong>) datent du 13 octobre ; seule la divulgation est nouvelle.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-vwhp-8p66-mq4f",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "route53-private-health-checks",
+          "tag": "minor",
+          "date": "19 Nov 2026",
+          "title": {
+            "es": "Route 53 ahora hace health checks de endpoints privados",
+            "en": "Route 53 now health-checks private endpoints",
+            "fr": "Route 53 vérifie désormais la santé des endpoints privés"
+          },
+          "body_html": {
+            "es": "<p>Route 53 puede chequear IPs, dominios o puertos privados por HTTP, HTTPS o TCP y usar ese resultado para failover de DNS en private hosted zones. Para servicios internos multi-región, ya no necesitás un Lambda casero que haga de health checker.</p>",
+            "en": "<p>Route 53 can health-check private IPs, domains or ports over HTTP, HTTPS or TCP and drive DNS failover in private hosted zones. For internal multi-Region services, you no longer need a home-grown Lambda health checker.</p>",
+            "fr": "<p>Route 53 peut vérifier des IP, domaines ou ports privés via HTTP, HTTPS ou TCP et piloter le failover DNS dans les private hosted zones, sans health checker Lambda maison.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/route-53-private-endpoint-health-checks/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "wrangler-4-165",
+          "tag": "minor",
+          "date": "18 Nov 2026",
+          "title": {
+            "es": "Wrangler 4.165: d1 migrations apply --force para CI",
+            "en": "Wrangler 4.165: d1 migrations apply --force for CI",
+            "fr": "Wrangler 4.165 : d1 migrations apply --force pour la CI"
+          },
+          "body_html": {
+            "es": "<p>El nuevo flag <code>--force</code> en <code>wrangler d1 migrations apply</code> aplica migraciones pendientes sin la confirmación interactiva, ideal para pipelines. También: un <code>.dev.vars</code> que no sea UTF-8 ahora frena <code>wrangler dev</code> con un mensaje claro (antes cargaba cero variables en silencio) y los bindings RPC remotos fallan ante errores de red en vez de colgarse.</p>",
+            "en": "<p>The new <code>--force</code> flag on <code>wrangler d1 migrations apply</code> applies pending migrations without the interactive prompt, ideal for pipelines. Also: a non-UTF-8 <code>.dev.vars</code> now stops <code>wrangler dev</code> with a clear message (it used to silently load zero variables), and remote RPC bindings fail on network errors instead of hanging.</p>",
+            "fr": "<p>Le nouveau flag <code>--force</code> de <code>wrangler d1 migrations apply</code> applique les migrations en attente sans confirmation interactive, idéal en CI. Un <code>.dev.vars</code> non UTF-8 arrête désormais <code>wrangler dev</code> avec un message clair, et les bindings RPC distants échouent au lieu de se bloquer.</p>"
+          },
+          "source": {
+            "url": "https://github.com/cloudflare/workers-sdk/releases/tag/wrangler%404.165.0",
+            "label": "github.com/cloudflare"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "openapi-codegen-rce",
+      "updates": [
+        {
+          "id": "openapi-codegen-rce",
+          "tag": "security",
+          "date": "20 Nov 2026",
+          "title": {
+            "es": "Tu spec OpenAPI es input no confiable: RCE en generadores de .NET, PHP y Scala la misma semana",
+            "en": "Your OpenAPI spec is untrusted input: RCE in .NET, PHP and Scala code generators in the same week",
+            "fr": "Votre spec OpenAPI est une entrée non fiable : RCE dans des générateurs .NET, PHP et Scala la même semaine"
+          },
+          "body_html": {
+            "es": "<p>Tres generadores de clientes cayeron por el mismo patrón. <strong>Refitter</strong> (.NET, CVSS v4 9.3, fix en 2.1.2) pegaba cada path del spec tal cual dentro de un atributo <code>[Get(...)]</code>: un path armado cierra el string e inyecta una clase con <code>[ModuleInitializer]</code> que corre al arrancar la app. <a href=\"https://github.com/advisories/GHSA-q8v2-3j4h-xg2p\">jane-php</a> (fix en 7.12.0) escapaba strings vía AST pero volcaba nombres de parámetros crudos en el PHPDoc, y un <code>*/</code> abría la puerta a un <code>__construct</code> malicioso. <a href=\"https://github.com/advisories/GHSA-gpcc-36pq-8qxr\">Tapir</a> (fix en 1.13.27) generaba Scala por templating de strings. La lección de arquitectura: un spec de un partner o de un registry público es input externo. Generá en un sandbox, fijá la versión del spec y revisá el diff del código generado como cualquier otro PR.</p>",
+            "en": "<p>Three client generators fell to the same pattern. <strong>Refitter</strong> (.NET, CVSS v4 9.3, fixed in 2.1.2) pasted each spec path verbatim into a <code>[Get(...)]</code> attribute: a crafted path closes the string and injects a class with a <code>[ModuleInitializer]</code> that runs at app startup. <a href=\"https://github.com/advisories/GHSA-q8v2-3j4h-xg2p\">jane-php</a> (fixed in 7.12.0) escaped strings through an AST but emitted raw parameter names into PHPDoc, so a <code>*/</code> let in a malicious <code>__construct</code>. <a href=\"https://github.com/advisories/GHSA-gpcc-36pq-8qxr\">Tapir</a> (fixed in 1.13.27) generated Scala by string templating. The architecture lesson: a spec from a partner or a public registry is external input. Generate in a sandbox, pin the spec version, and review the generated diff like any other PR.</p>",
+            "fr": "<p>Trois générateurs de clients sont tombés sur le même schéma. <strong>Refitter</strong> (.NET, CVSS v4 9.3, corrigé en 2.1.2) collait chaque path du spec tel quel dans un attribut <code>[Get(...)]</code> : un path forgé ferme la chaîne et injecte une classe avec <code>[ModuleInitializer]</code> exécutée au démarrage. <a href=\"https://github.com/advisories/GHSA-q8v2-3j4h-xg2p\">jane-php</a> (corrigé en 7.12.0) émettait les noms de paramètres bruts dans le PHPDoc, et <a href=\"https://github.com/advisories/GHSA-gpcc-36pq-8qxr\">Tapir</a> (corrigé en 1.13.27) générait du Scala par templating. Un spec externe est une entrée non fiable : générez en sandbox et relisez le code généré.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-3fhm-p725-h3g3",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "mcp-python-oauth-issuer",
+          "tag": "security",
+          "date": "19 Nov 2026",
+          "title": {
+            "es": "MCP Python SDK: un server malicioso podía redirigir tus credenciales OAuth",
+            "en": "MCP Python SDK: a malicious server could redirect your OAuth credentials",
+            "fr": "MCP Python SDK : un serveur malveillant pouvait rediriger vos identifiants OAuth"
+          },
+          "body_html": {
+            "es": "<p>El cliente OAuth del SDK oficial (<code>mcp.client.auth</code>) no validaba el <code>issuer</code> de la metadata del authorization server en todos los caminos de discovery, ni ataba las credenciales guardadas al server al que pertenecían. Resultado: el MCP server al que te conectabas podía elegir a qué token endpoint mandar tus credenciales. Fix en <strong>1.30.0</strong> y <strong>2.2.0</strong>. Es un recordatorio de manual de OAuth: validá el issuer siempre (RFC 8414) y bindeá cada client credential a su authorization server, uses MCP o no.</p>",
+            "en": "<p>The official SDK's OAuth client (<code>mcp.client.auth</code>) did not validate the authorization server metadata <code>issuer</code> on every discovery path, nor bind stored client credentials to the server they belong to. Result: the MCP server you connected to could choose which token endpoint received your credentials. Fixed in <strong>1.30.0</strong> and <strong>2.2.0</strong>. A textbook OAuth reminder: always validate the issuer (RFC 8414) and bind each client credential to its authorization server, MCP or not.</p>",
+            "fr": "<p>Le client OAuth du SDK officiel (<code>mcp.client.auth</code>) ne validait pas l'<code>issuer</code> des métadonnées du serveur d'autorisation sur tous les chemins de découverte, ni ne liait les identifiants stockés à leur serveur. Le serveur MCP pouvait donc choisir le token endpoint destinataire. Corrigé en <strong>1.30.0</strong> et <strong>2.2.0</strong>. Validez toujours l'issuer (RFC 8414).</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-qx49-fqc8-xw99",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "healthy-code-fewer-tokens",
+          "tag": "notable",
+          "date": "19 Nov 2026",
+          "title": {
+            "es": "Adam Tornhill: el código sano cuesta 40-45% menos tokens a los agentes",
+            "en": "Adam Tornhill: healthy code costs agents 40-45% fewer tokens",
+            "fr": "Adam Tornhill : un code sain coûte 40-45 % de tokens en moins aux agents"
+          },
+          "body_html": {
+            "es": "<p>En GOTO Copenhagen, Tornhill (CodeScene) presentó datos que van a incomodar a más de uno: en un estudio de más de 1000 proyectos open source, las ganancias de velocidad con IA se cancelaban del todo a los dos meses a medida que crecía la complejidad. Su tesis: el código sano consume entre 40 y 45% menos tokens, y un agente que recibe métricas de code health vía MCP arregla casi todos los problemas que, sin esos datos, solo resuelve a la mitad. Traducido: la arquitectura limpia no es purismo, es lo que hace rentable al agente.</p>",
+            "en": "<p>At GOTO Copenhagen, Tornhill (CodeScene) presented data that will make some teams uncomfortable: in a study of 1000+ open-source projects, AI velocity gains were fully cancelled after about two months as complexity grew. His thesis: healthy code uses 40-45% fewer tokens, and an agent fed code-health metrics over MCP fixes nearly all the issues it only half-fixes without that data. In short: clean architecture is not purism, it is what makes the agent pay off.</p>",
+            "fr": "<p>À GOTO Copenhagen, Tornhill (CodeScene) a présenté une étude sur plus de 1000 projets open source : les gains de vélocité liés à l'IA disparaissaient au bout de deux mois environ, à mesure que la complexité augmentait. Sa thèse : un code sain consomme 40 à 45 % de tokens en moins, et un agent alimenté en métriques de code health via MCP corrige presque tous les problèmes.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/11/healthy-code-AI-tokens/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "sveltekit-adapter-cloudflare-9",
+      "updates": [
+        {
+          "id": "sveltekit-adapter-cloudflare-9",
+          "tag": "breaking",
+          "date": "18 Nov 2026",
+          "title": {
+            "es": "SvelteKit 3.4 y adapter-cloudflare 9.0: chau Cloudflare Pages, adapter-auto apunta a Workers",
+            "en": "SvelteKit 3.4 and adapter-cloudflare 9.0: goodbye Cloudflare Pages, adapter-auto targets Workers",
+            "fr": "SvelteKit 3.4 et adapter-cloudflare 9.0 : adieu Cloudflare Pages, adapter-auto cible Workers"
+          },
+          "body_html": {
+            "es": "<p><code>@sveltejs/adapter-cloudflare</code> <strong>9.0.0</strong> elimina el soporte de Cloudflare Pages, setea automáticamente el <code>main</code> de la config de Wrangler, reemplaza la opción <code>fallback</code> por <code>assets.not_found_handling</code> de Wrangler y rechaza <code>paths.assets</code>. Y ojo con esto: <code>adapter-auto</code> <strong>9.0.0</strong> ahora buildea para Workers en vez de Pages, así que un bump inocente puede cambiar tu target de deploy. En paralelo, <code>@sveltejs/kit</code> 3.4.0 rechaza remote functions llamadas con el método HTTP equivocado y sale <code>@sveltejs/adapter-server</code> 0.1.0 como base compartida para adapters de servidor standalone.</p>",
+            "en": "<p><code>@sveltejs/adapter-cloudflare</code> <strong>9.0.0</strong> removes Cloudflare Pages support, sets the Wrangler config <code>main</code> automatically, replaces the <code>fallback</code> option with Wrangler's <code>assets.not_found_handling</code>, and rejects <code>paths.assets</code>. Watch out: <code>adapter-auto</code> <strong>9.0.0</strong> now builds for Workers instead of Pages, so an innocent bump can change your deploy target. Alongside, <code>@sveltejs/kit</code> 3.4.0 rejects remote function calls made with the wrong HTTP method, and <code>@sveltejs/adapter-server</code> 0.1.0 ships as a shared base for standalone-server adapters.</p>",
+            "fr": "<p><code>@sveltejs/adapter-cloudflare</code> <strong>9.0.0</strong> supprime le support de Cloudflare Pages, définit automatiquement le <code>main</code> de la config Wrangler, remplace l'option <code>fallback</code> par <code>assets.not_found_handling</code> et rejette <code>paths.assets</code>. Attention : <code>adapter-auto</code> <strong>9.0.0</strong> cible désormais Workers au lieu de Pages. En parallèle, <code>@sveltejs/kit</code> 3.4.0 rejette les remote functions appelées avec la mauvaise méthode HTTP et <code>@sveltejs/adapter-server</code> 0.1.0 voit le jour.</p>"
+          },
+          "source": {
+            "url": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/adapter-cloudflare%409.0.0",
+            "label": "github.com/sveltejs"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Semana de disclosures tardías: Next.js, containerd y NATS publican advisories de fixes que ya estaban en releases anteriores. Si actualizás seguido, estás cubierto; si no, la deuda se acumula.",
+      "en": "A week of late disclosures: Next.js, containerd and NATS published advisories for fixes already in earlier releases. If you upgrade often, you are covered; if not, the debt piles up.",
+      "fr": "Une semaine de divulgations tardives : Next.js, containerd et NATS publient des advisories pour des correctifs déjà livrés. Mettre à jour souvent reste la meilleure défense."
+    },
+    {
+      "es": "Generadores de código como superficie de ataque: specs OpenAPI no confiables terminan ejecutando código en tu build o al arrancar la app.",
+      "en": "Code generators as an attack surface: untrusted OpenAPI specs end up executing code in your build or at app startup.",
+      "fr": "Les générateurs de code comme surface d'attaque : des specs OpenAPI non fiables finissent par exécuter du code au build ou au démarrage."
+    },
+    {
+      "es": "El serverless sigue corriendo límites: Lambda a 30 minutos, CloudFront Functions con red y durable functions con OpenTelemetry acercan el edge y las funciones a cargas que antes iban a containers.",
+      "en": "Serverless keeps pushing limits: 30-minute Lambda, CloudFront Functions with network access and durable functions with OpenTelemetry bring workloads that used to need containers.",
+      "fr": "Le serverless repousse ses limites : Lambda à 30 minutes, CloudFront Functions avec accès réseau et durable functions avec OpenTelemetry."
+    }
+  ]
+}

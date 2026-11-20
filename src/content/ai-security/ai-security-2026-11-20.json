@@ -1,0 +1,123 @@
+{
+  "title": {
+    "es": "AI Security — 20 Nov 2026",
+    "en": "AI Security — 20 Nov 2026",
+    "fr": "AI Security — 20 nov. 2026"
+  },
+  "description": {
+    "es": "Cuatro CVEs en servidores MCP: DNS rebinding en Todoist y Jupyter, bypass de modo solo lectura en sqlite-mcp y escritura arbitraria de archivos en Gortex.",
+    "en": "Four MCP server CVEs: DNS rebinding in Todoist and Jupyter, a read-only mode bypass in sqlite-mcp, and arbitrary file write in Gortex.",
+    "fr": "Quatre CVE sur des serveurs MCP : DNS rebinding dans Todoist et Jupyter, contournement du mode lecture seule dans sqlite-mcp et écriture de fichiers arbitraire dans Gortex."
+  },
+  "pubDate": "2026-11-20",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": { "es": "Todoist MCP: DNS rebinding (9.3)", "en": "Todoist MCP: DNS rebinding (9.3)", "fr": "Todoist MCP : DNS rebinding (9.3)" },
+      "anchor": "cve-2026-76807",
+      "icon": "lucide:shield-alert"
+    },
+    {
+      "text": { "es": "Jupyter MCP: toman tu backend (9.3)", "en": "Jupyter MCP: backend hijack (9.3)", "fr": "Jupyter MCP : backend détourné (9.3)" },
+      "anchor": "cve-2026-77359",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": { "es": "sqlite-mcp escapa el modo solo lectura", "en": "sqlite-mcp escapes read-only mode", "fr": "sqlite-mcp contourne la lecture seule" },
+      "anchor": "cve-2026-130008",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": { "es": "Gortex escribe fuera del repo", "en": "Gortex writes outside the repo", "fr": "Gortex écrit hors du dépôt" },
+      "anchor": "cve-2026-62964",
+      "icon": "lucide:lock"
+    }
+  ],
+  "tools": [
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "cve-2026-76807",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-76807 (CVSS 9.3): Todoist MCP deja que una web escriba y borre tus tareas por DNS rebinding",
+            "en": "CVE-2026-76807 (CVSS 9.3): Todoist MCP lets a website write and delete your tasks via DNS rebinding",
+            "fr": "CVE-2026-76807 (CVSS 9.3) : Todoist MCP laisse un site web écrire et supprimer vos tâches via DNS rebinding"
+          },
+          "body_html": {
+            "es": "<p>El servidor <code>todoist-mcp-http</code> acepta requests desde el navegador con <code>Host</code> y <code>Origin</code> controlados por el atacante. Una web maliciosa puede usar DNS rebinding para apuntar su propio origen al <code>127.0.0.1</code> de la víctima e invocar las herramientas MCP sin ninguna credencial.</p><p>Ojo con esto: todas las tools corren con el <code>TODOIST_API_KEY</code> del operador. Solo afecta al modo Streamable HTTP opcional (versión 10.3.1); la entrada stdio no es alcanzable desde el navegador.</p>",
+            "en": "<p>The <code>todoist-mcp-http</code> server accepts browser-origin requests with attacker-controlled <code>Host</code> and <code>Origin</code> headers. A malicious website can use DNS rebinding to route its own origin to the victim's <code>127.0.0.1</code> and call the MCP tools with no caller credential.</p><p>Every tool runs with the operator's <code>TODOIST_API_KEY</code>. Only the optional Streamable HTTP mode (version 10.3.1) is affected; the stdio entrypoint is not reachable from a browser.</p>",
+            "fr": "<p>Le serveur <code>todoist-mcp-http</code> accepte des requêtes issues du navigateur avec des en-têtes <code>Host</code> et <code>Origin</code> contrôlés par l'attaquant. Un site malveillant peut utiliser le DNS rebinding pour rediriger son origine vers le <code>127.0.0.1</code> de la victime et appeler les outils MCP sans aucun identifiant.</p><p>Tous les outils s'exécutent avec le <code>TODOIST_API_KEY</code> de l'opérateur. Seul le mode Streamable HTTP optionnel (version 10.3.1) est concerné ; l'entrée stdio n'est pas accessible depuis un navigateur.</p>"
+          },
+          "date": "19 Nov 2026",
+          "source": { "url": "https://github.com/advisories/GHSA-833v-v58w-294h", "label": "GHSA-833v-v58w-294h" }
+        },
+        {
+          "id": "cve-2026-77359",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-77359 (CVSS v4 9.3): Jupyter MCP Server, rutas de gestión sin protección permiten secuestrar el backend",
+            "en": "CVE-2026-77359 (CVSS v4 9.3): Jupyter MCP Server management routes allow backend hijack",
+            "fr": "CVE-2026-77359 (CVSS v4 9.3) : les routes de gestion de Jupyter MCP Server permettent de détourner le backend"
+          },
+          "body_html": {
+            "es": "<p>En modo <code>streamable-http</code> standalone, <code>/mcp</code> rechaza <code>Host</code> y <code>Origin</code> falsificados, pero las rutas de gestión montadas en la misma app no tienen esa protección. Una web con DNS rebinding puede mandar <code>PUT /api/connect</code> y reemplazar el backend de Jupyter activo.</p><p>El servidor arranca entonces un kernel client contra infraestructura del atacante. Hay un advisory hermano (GHSA-24pw-rf5p-mgp7) por las rutas sin autenticación en este mismo modo.</p>",
+            "en": "<p>In standalone <code>streamable-http</code> mode, <code>/mcp</code> rejects forged <code>Host</code> and <code>Origin</code> headers, but custom management routes mounted on the same app get no such protection. A DNS-rebinding website can send <code>PUT /api/connect</code> and replace the active Jupyter backend.</p><p>The server then starts a kernel client against attacker-controlled infrastructure. A sibling advisory (GHSA-24pw-rf5p-mgp7) covers the unauthenticated management routes in the same mode.</p>",
+            "fr": "<p>En mode <code>streamable-http</code> autonome, <code>/mcp</code> rejette les <code>Host</code> et <code>Origin</code> falsifiés, mais les routes de gestion montées sur la même application n'ont pas cette protection. Un site utilisant le DNS rebinding peut envoyer <code>PUT /api/connect</code> et remplacer le backend Jupyter actif.</p><p>Le serveur démarre alors un kernel client vers une infrastructure contrôlée par l'attaquant. Un advisory voisin (GHSA-24pw-rf5p-mgp7) couvre les routes de gestion sans authentification dans ce même mode.</p>"
+          },
+          "date": "20 Nov 2026",
+          "source": { "url": "https://github.com/advisories/GHSA-9x8x-crjq-g64h", "label": "GHSA-9x8x-crjq-g64h" }
+        },
+        {
+          "id": "cve-2026-130008",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-130008 (CVSS 8.2): sqlite-mcp se escapa del modo solo lectura con statement chaining",
+            "en": "CVE-2026-130008 (CVSS 8.2): sqlite-mcp escapes read-only mode through statement chaining",
+            "fr": "CVE-2026-130008 (CVSS 8.2) : sqlite-mcp contourne le mode lecture seule par chaînage d'instructions"
+          },
+          "body_html": {
+            "es": "<p>En el modo solo lectura (el default), un cliente que pueda llamar las tools MCP puede escribir en la base, leer otros archivos SQLite y crear archivos nuevos donde el proceso tenga permiso. Hay dos vías: el chaining en <code>execute_query</code> (solo se chequeaba que empiece con <code>SELECT</code>, y el driver ejecuta todo lo que venga tras <code>;</code>) y SQL injection en <code>describe_table</code>.</p><p>Con cualquiera de las dos, <code>ATTACH DATABASE</code> abre el archivo en lectura-escritura aunque la conexión principal sea <code>mode=ro</code>.</p>",
+            "en": "<p>In read-only mode (the default), a client that can call the MCP tools can write to the database, read other SQLite files, and create new files wherever the process can write. There are two paths: statement chaining in <code>execute_query</code> (the only check was that the query starts with <code>SELECT</code>, while the driver runs every <code>;</code>-separated statement) and SQL injection in <code>describe_table</code>.</p><p>Through either path, <code>ATTACH DATABASE</code> opens a file read-write even when the main connection is <code>mode=ro</code>.</p>",
+            "fr": "<p>En mode lecture seule (par défaut), un client pouvant appeler les outils MCP peut écrire dans la base, lire d'autres fichiers SQLite et créer de nouveaux fichiers partout où le processus a le droit d'écrire. Deux voies : le chaînage d'instructions dans <code>execute_query</code> (seul contrôle : la requête commence par <code>SELECT</code>, alors que le driver exécute chaque instruction séparée par <code>;</code>) et une injection SQL dans <code>describe_table</code>.</p><p>Par l'une ou l'autre, <code>ATTACH DATABASE</code> ouvre un fichier en lecture-écriture même si la connexion principale est en <code>mode=ro</code>.</p>"
+          },
+          "date": "19 Nov 2026",
+          "source": { "url": "https://github.com/advisories/GHSA-q433-mp6c-8v4f", "label": "GHSA-q433-mp6c-8v4f" }
+        },
+        {
+          "id": "cve-2026-62964",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-62964 (CVSS 7.8): Gortex escribe archivos fuera de los repos indexados vía tools MCP",
+            "en": "CVE-2026-62964 (CVSS 7.8): Gortex writes files outside indexed repos through MCP tools",
+            "fr": "CVE-2026-62964 (CVSS 7.8) : Gortex écrit des fichiers hors des dépôts indexés via les outils MCP"
+          },
+          "body_html": {
+            "es": "<p>Gortex expone <code>write_file</code>, <code>edit_file</code> y <code>move_inline</code> como tools MCP. <code>resolveFilePath</code> exime a las rutas absolutas del confinamiento y los handlers de escritura no llaman a la guarda de symlinks, así que un solo <code>write_file</code> con ruta absoluta escribe cualquier archivo que pueda el usuario del daemon.</p><p>Pisar <code>~/.zshrc</code>, un hook de git o una unidad systemd da ejecución de código en el próximo shell o commit. Viola el propio invariante de SECURITY.md del proyecto (v0.53.0).</p>",
+            "en": "<p>Gortex exposes <code>write_file</code>, <code>edit_file</code> and <code>move_inline</code> as MCP tools. <code>resolveFilePath</code> exempts absolute paths from confinement and the write handlers never call the symlink guard, so one <code>write_file</code> call with an absolute path writes any file the daemon user can.</p><p>Overwriting <code>~/.zshrc</code>, a git hook or a systemd unit yields code execution on the next shell or commit. It breaks the project's own SECURITY.md invariant (v0.53.0).</p>",
+            "fr": "<p>Gortex expose <code>write_file</code>, <code>edit_file</code> et <code>move_inline</code> comme outils MCP. <code>resolveFilePath</code> exempte les chemins absolus du confinement et les handlers d'écriture n'appellent jamais la garde anti-symlink : un seul <code>write_file</code> avec un chemin absolu écrit n'importe quel fichier accessible à l'utilisateur du daemon.</p><p>Écraser <code>~/.zshrc</code>, un hook git ou une unité systemd donne une exécution de code au prochain shell ou commit. Cela viole l'invariant même du SECURITY.md du projet (v0.53.0).</p>"
+          },
+          "date": "19 Nov 2026",
+          "source": { "url": "https://github.com/advisories/GHSA-w42c-h7hr-f67p", "label": "GHSA-w42c-h7hr-f67p" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "DNS rebinding contra servidores MCP locales ya es patrón: Todoist y Jupyter el mismo día, tras Supergateway esta semana. Validá Host y Origin en TODAS las rutas, no solo en /mcp.",
+      "en": "DNS rebinding against local MCP servers is now a pattern: Todoist and Jupyter on the same day, after Supergateway earlier this week. Validate Host and Origin on every route, not just /mcp.",
+      "fr": "Le DNS rebinding contre les serveurs MCP locaux devient un schéma : Todoist et Jupyter le même jour, après Supergateway cette semaine. Validez Host et Origin sur toutes les routes, pas seulement /mcp."
+    },
+    {
+      "es": "Los guardrails de «solo lectura» y de confinamiento de rutas en tools MCP se validan con chequeos superficiales (prefijo SELECT, rutas relativas); sqlite-mcp y Gortex lo muestran.",
+      "en": "Read-only and path-confinement guardrails in MCP tools rely on shallow checks (a SELECT prefix, relative paths only); sqlite-mcp and Gortex both show it.",
+      "fr": "Les garde-fous « lecture seule » et de confinement de chemins des outils MCP reposent sur des contrôles superficiels (préfixe SELECT, chemins relatifs) ; sqlite-mcp et Gortex le montrent."
+    }
+  ]
+}

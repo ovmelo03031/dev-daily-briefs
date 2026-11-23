@@ -1,0 +1,480 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 23 Nov 2026",
+    "en": "Backend & Fullstack Daily — 23 Nov 2026",
+    "fr": "Backend & Fullstack Daily — 23 nov. 2026"
+  },
+  "description": {
+    "es": "nginx2root (cinco bugs de memoria en nginx), RCE en el case conversion de Ruby y Java4Shell en la JVM: semana de parchear runtimes. Además Redis 8.12 GA, pnpm 12.23 con fixes de seguridad, NestJS 12.6 y webhooks nativos en EventBridge.",
+    "en": "nginx2root (five memory bugs in nginx), RCE in Ruby string case conversion and Java4Shell in the JVM: a week of patching runtimes. Plus Redis 8.12 GA, pnpm 12.23 with security fixes, NestJS 12.6 and native webhooks in EventBridge.",
+    "fr": "nginx2root (cinq bugs mémoire dans nginx), RCE dans la conversion de casse de Ruby et Java4Shell dans la JVM : une semaine de correctifs de runtimes. Aussi Redis 8.12 GA, pnpm 12.23 avec correctifs de sécurité, NestJS 12.6 et webhooks natifs dans EventBridge."
+  },
+  "pubDate": "2026-11-23",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "nginx2root: 5 bugs de memoria, parcheá a 1.30.7",
+        "en": "nginx2root: 5 memory bugs, patch to 1.30.7",
+        "fr": "nginx2root : 5 bugs mémoire, passez en 1.30.7"
+      },
+      "anchor": "nginx2root",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Ruby: RCE en upcase/downcase, subí a 3.4.13",
+        "en": "Ruby: RCE in upcase/downcase, move to 3.4.13",
+        "fr": "Ruby : RCE dans upcase/downcase, passez en 3.4.13"
+      },
+      "anchor": "ruby-string-case-rce",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Java4Shell: RCE en la JVM con AVX-512 VBMI",
+        "en": "Java4Shell: JVM RCE on AVX-512 VBMI CPUs",
+        "fr": "Java4Shell : RCE JVM sur CPU AVX-512 VBMI"
+      },
+      "anchor": "java4shell-docker",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Redis 8.12 GA: bitmaps comprimidos y TTL por miembro",
+        "en": "Redis 8.12 GA: compressed bitmaps, per-member TTL",
+        "fr": "Redis 8.12 GA : bitmaps compressés, TTL par membre"
+      },
+      "anchor": "redis-8-12-ga",
+      "icon": "simple-icons:redis"
+    },
+    {
+      "text": {
+        "es": "pnpm 12.23: credenciales solo por HTTPS",
+        "en": "pnpm 12.23: registry credentials HTTPS-only",
+        "fr": "pnpm 12.23 : identifiants uniquement en HTTPS"
+      },
+      "anchor": "pnpm-12-23",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "EventBridge recibe webhooks sin API propia",
+        "en": "EventBridge now ingests webhooks natively",
+        "fr": "EventBridge reçoit les webhooks nativement"
+      },
+      "anchor": "eventbridge-webhooks",
+      "icon": "simple-icons:amazonwebservices"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "nginx2root",
+      "updates": [
+        {
+          "id": "nginx2root",
+          "tag": "security",
+          "date": "20 Nov 2026",
+          "title": {
+            "es": "nginx2root: cinco bugs de corrupción de memoria en nginx, corregidos en 1.30.7 y 1.31.9",
+            "en": "nginx2root: five memory-corruption bugs in nginx, fixed in 1.30.7 and 1.31.9",
+            "fr": "nginx2root : cinq bugs de corruption mémoire dans nginx, corrigés en 1.30.7 et 1.31.9"
+          },
+          "body_html": {
+            "es": "<p>El 18 de noviembre nginx.org y F5 publicaron <strong>1.30.7</strong> (stable) y <strong>1.31.9</strong> (mainline) con diez CVEs. Cinco forman <strong>nginx2root</strong>: un integer overflow en el control de flujo de HTTP/2 (<code>CVE-2026-123007</code>, afecta desde 1.9.5, o sea, desde 2015), use-after-free en HTTP/2 con <code>proxy_pass</code> y en HTTP/3 cuando no alcanzan los <code>worker_connections</code>, otro en el <code>resolver</code> y uno en el mail proxy. Según la investigación de Xint, se puede pasar de crashear un worker a ejecutar comandos, y encadenado con un bug del kernel Linux, a root en el host. Cloudflare explica que los orígenes detrás de su proxy no reciben los frames HTTP/2/HTTP/3 del atacante, pero el resolver y el mail proxy dependen de tu config. Ojo: si tenés nginx expuesto directo, o como ingress en Kubernetes, actualizá YA y reiniciá.</p>",
+            "en": "<p>On 18 November nginx.org and F5 shipped <strong>1.30.7</strong> (stable) and <strong>1.31.9</strong> (mainline) with ten CVEs. Five make up <strong>nginx2root</strong>: an integer overflow in HTTP/2 flow control (<code>CVE-2026-123007</code>, affecting every release since 1.9.5 in 2015), use-after-free bugs in HTTP/2 with <code>proxy_pass</code> and in HTTP/3 when <code>worker_connections</code> run short, one in the <code>resolver</code> and one in the mail proxy. Per Xint's research, they go from crashing a worker to running commands, and chained with a Linux kernel bug, to root on the host. Cloudflare notes that origins behind its proxy never receive the attacker's HTTP/2/HTTP/3 frames, but the resolver and mail proxy bugs depend on your config. If nginx faces the internet directly or runs as a Kubernetes ingress, upgrade and restart now.</p>",
+            "fr": "<p>Le 18 novembre, nginx.org et F5 ont publié <strong>1.30.7</strong> (stable) et <strong>1.31.9</strong> (mainline) avec dix CVE. Cinq forment <strong>nginx2root</strong> : un integer overflow dans le contrôle de flux HTTP/2 (<code>CVE-2026-123007</code>, présent depuis 1.9.5 en 2015), des use-after-free en HTTP/2 avec <code>proxy_pass</code> et en HTTP/3 quand les <code>worker_connections</code> manquent, un dans le <code>resolver</code> et un dans le mail proxy. Selon Xint, on passe du crash d'un worker à l'exécution de commandes, puis, avec un bug du noyau Linux, à root sur l'hôte. Cloudflare précise que les origines derrière son proxy ne reçoivent pas les trames HTTP/2/HTTP/3 de l'attaquant, mais resolver et mail proxy dépendent de la config. nginx exposé en direct ou en ingress Kubernetes : mettez à jour et redémarrez.</p>"
+          },
+          "source": {
+            "url": "https://blog.cloudflare.com/nginx2root/",
+            "label": "blog.cloudflare.com"
+          }
+        },
+        {
+          "id": "ruby-string-case-rce",
+          "tag": "security",
+          "date": "18 Nov 2026",
+          "title": {
+            "es": "Ruby 4.0.10, 3.4.13 y 3.3.14: siete vulnerabilidades en Regexp y case conversion, con PoCs de RCE",
+            "en": "Ruby 4.0.10, 3.4.13 and 3.3.14: seven vulnerabilities in Regexp and case conversion, with RCE PoCs",
+            "fr": "Ruby 4.0.10, 3.4.13 et 3.3.14 : sept vulnérabilités dans Regexp et la conversion de casse, avec PoC de RCE"
+          },
+          "body_html": {
+            "es": "<p>El equipo de Ruby publicó un advisory con siete fallas en el motor de regex y en el cambio de mayúsculas/minúsculas. La estrella es <code>GHSA-34m4-m9fh-gqp5</code> (bautizada <strong>ruby2shell</strong>, CVE-2026-132825 según Cloudflare): en encodings de un byte como Latin-1, la <code>ß</code> se convierte en <code>SS</code> pero Ruby reserva lugar para un solo byte, y con 21 de esas se desborda el heap. Lo alcanzan <code>upcase</code>, <code>swapcase</code>, <code>downcase(:fold)</code> y <code>casecmp?</code>; UTF-8 no está afectado. Ruby dice conocer PoCs de RCE, y según Veria Labs Rails y Sinatra lo alcanzan con la config por defecto, antes de autenticar. Si tenés GitLab, Discourse o Mastodon self-hosted, también te toca. Subí a <strong>4.0.10 / 3.4.13 / 3.3.14</strong> y no esperes al PoC público.</p>",
+            "en": "<p>The Ruby team published an advisory covering seven flaws in the regex engine and in string case conversion. The headline is <code>GHSA-34m4-m9fh-gqp5</code> (dubbed <strong>ruby2shell</strong>, CVE-2026-132825 per Cloudflare): in single-byte encodings like Latin-1, <code>ß</code> uppercases to <code>SS</code> but Ruby reserves room for only one byte, and 21 of them overflow the heap buffer. It is reached through <code>upcase</code>, <code>swapcase</code>, <code>downcase(:fold)</code> and <code>casecmp?</code>; UTF-8 strings are not affected. Ruby says it knows of RCE proofs of concept, and Veria Labs reports default Rails and Sinatra apps reach it before authentication. Self-hosted GitLab, Discourse or Mastodon count too. Upgrade to <strong>4.0.10 / 3.4.13 / 3.3.14</strong> before the public PoC lands.</p>",
+            "fr": "<p>L'équipe Ruby a publié un advisory couvrant sept failles dans le moteur de regex et la conversion de casse. La principale est <code>GHSA-34m4-m9fh-gqp5</code> (surnommée <strong>ruby2shell</strong>, CVE-2026-132825 selon Cloudflare) : dans les encodages mono-octet comme Latin-1, <code>ß</code> devient <code>SS</code> mais Ruby ne réserve qu'un octet, et 21 de ces caractères débordent le tas. Elle est atteinte via <code>upcase</code>, <code>swapcase</code>, <code>downcase(:fold)</code> et <code>casecmp?</code> ; UTF-8 n'est pas concerné. Ruby connaît des PoC de RCE, et selon Veria Labs Rails et Sinatra l'atteignent par défaut, avant authentification. Passez en <strong>4.0.10 / 3.4.13 / 3.3.14</strong>.</p>"
+          },
+          "source": {
+            "url": "https://www.ruby-lang.org/en/news/2026/11/18/multiple-vulnerabilities-in-regexp-and-string/",
+            "label": "ruby-lang.org"
+          }
+        },
+        {
+          "id": "java4shell-docker",
+          "tag": "security",
+          "date": "19 Nov 2026",
+          "title": {
+            "es": "Java4Shell (CVE-2026-114938): RCE sin credenciales en la JVM, y depende de la CPU del host",
+            "en": "Java4Shell (CVE-2026-114938): unauthenticated RCE in the JVM, and it depends on the host CPU",
+            "fr": "Java4Shell (CVE-2026-114938) : RCE sans authentification dans la JVM, selon le CPU de l'hôte"
+          },
+          "body_html": {
+            "es": "<p>OpenJDK y Oracle revelaron el 17 de noviembre un bug de corrupción de memoria en el runtime que permite ejecutar código en una app Java sin credenciales. Afecta <strong>Java 17.0.6 en adelante</strong> (21, 25, 26 y 27) de todos los vendors, pero solo se alcanza en CPUs x86-64 con <strong>AVX-512 VBMI</strong>: la misma imagen puede ser vulnerable en un nodo y no en otro. Docker ya publicó imágenes hardened con Corretto, SapMachine y Zulu corregidos; Temurin todavía no tenía build al momento del post. Mientras tanto, arrancá la JVM con <code>-XX:-UseBASE64Intrinsics</code> y chequeá con <code>java -version</code>, no con el tag. Aunque no escribas Java, si tu stack incluye Kafka, Keycloak o Elasticsearch, esto te toca.</p>",
+            "en": "<p>On 17 November OpenJDK and Oracle disclosed a memory-corruption bug in the runtime that lets an unauthenticated attacker run code inside a Java application. It affects <strong>Java 17.0.6 and later</strong> (21, 25, 26 and 27) from every vendor, but is reachable only on x86-64 CPUs with <strong>AVX-512 VBMI</strong>: the same image can be exposed on one node and safe on another. Docker has shipped hardened images with fixed Corretto, SapMachine and Zulu runtimes; Temurin had no fixed build yet when the post went out. Until then, start the JVM with <code>-XX:-UseBASE64Intrinsics</code> and check <code>java -version</code>, not the image tag. Even if you do not write Java, Kafka, Keycloak or Elasticsearch in your stack bring it in.</p>",
+            "fr": "<p>Le 17 novembre, OpenJDK et Oracle ont divulgué un bug de corruption mémoire dans le runtime qui permet d'exécuter du code dans une application Java sans authentification. Il touche <strong>Java 17.0.6 et suivants</strong> (21, 25, 26 et 27) de tous les fournisseurs, mais n'est atteignable que sur CPU x86-64 avec <strong>AVX-512 VBMI</strong> : une même image peut être exposée sur un nœud et pas sur un autre. Docker a publié des images durcies avec Corretto, SapMachine et Zulu corrigés ; Temurin n'avait pas encore de build corrigé. En attendant, lancez la JVM avec <code>-XX:-UseBASE64Intrinsics</code> et vérifiez <code>java -version</code>, pas le tag.</p>"
+          },
+          "source": {
+            "url": "https://www.docker.com/blog/docker-patches-java4shell-and-the-nginx-http-2-with-docker-hardened-images/",
+            "label": "docker.com/blog"
+          }
+        },
+        {
+          "id": "redis-8-12-ga",
+          "tag": "release",
+          "date": "22 Nov 2026",
+          "title": {
+            "es": "Redis 8.12 GA: bitmaps comprimidos (roaring), sorted sets en B+tree y expiración por miembro de Set",
+            "en": "Redis 8.12 GA: roaring compressed bitmaps, B+tree sorted sets and per-member Set expiration",
+            "fr": "Redis 8.12 GA : bitmaps compressés (roaring), sorted sets en B+tree et expiration par membre de Set"
+          },
+          "body_html": {
+            "es": "<p>Redis Open Source 8.12 sale a GA con <strong>redis-roaring</strong> integrado al core (menos memoria y bitmaps más rápidos, más <code>BITRANGEINTARRAY</code>), una codificación B+tree que baja mucho la memoria de sorted sets grandes y TTL por miembro de Set con <code>SEXPIRE</code>, <code>STTL</code> y <code>SETPERSIST</code>. Suma <code>BLESS</code> para proteger keys de la eviction, <code>ZMOVE</code>/<code>BZMOVE</code> para mover miembros entre sorted sets de forma atómica y compresión SQ8 opcional para índices vectoriales HNSW. Esto es un golazo para quien emulaba TTL por miembro con un sorted set paralelo y un cron: borrá ese código. Ojo que el release también corrige un <code>BITCOUNT</code> erróneo en AArch64 y la validación de direcciones del cluster bus.</p>",
+            "en": "<p>Redis Open Source 8.12 goes GA with <strong>redis-roaring</strong> merged into core (lower memory and faster bitmaps, plus <code>BITRANGEINTARRAY</code>), a B+tree encoding that sharply cuts memory for large sorted sets, and per-member Set TTLs via <code>SEXPIRE</code>, <code>STTL</code> and <code>SETPERSIST</code>. It also adds <code>BLESS</code> to shield keys from eviction, <code>ZMOVE</code>/<code>BZMOVE</code> for atomic moves between sorted sets, and opt-in SQ8 compression for HNSW vector indexes. If you emulated per-member TTLs with a side sorted set and a cron job, you can delete that code. The release also fixes wrong <code>BITCOUNT</code> results on AArch64 and unvalidated cluster-bus addresses.</p>",
+            "fr": "<p>Redis Open Source 8.12 passe en GA avec <strong>redis-roaring</strong> intégré au cœur (bitmaps plus compacts et plus rapides, plus <code>BITRANGEINTARRAY</code>), un encodage B+tree qui réduit fortement la mémoire des grands sorted sets, et un TTL par membre de Set via <code>SEXPIRE</code>, <code>STTL</code> et <code>SETPERSIST</code>. Il ajoute <code>BLESS</code> pour protéger des clés de l'éviction, <code>ZMOVE</code>/<code>BZMOVE</code> pour des déplacements atomiques entre sorted sets, et la compression SQ8 optionnelle pour les index vectoriels HNSW. Corrige aussi un <code>BITCOUNT</code> faux sur AArch64.</p>"
+          },
+          "source": {
+            "url": "https://github.com/redis/redis/releases/tag/8.12.0",
+            "label": "github.com/redis"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "nestjs-12-6",
+      "updates": [
+        {
+          "id": "nestjs-12-6",
+          "tag": "notable",
+          "date": "20 Nov 2026",
+          "title": {
+            "es": "NestJS 12.6: NestFactory infiere el tipo de app desde el adapter y graceful shutdown para WebSockets",
+            "en": "NestJS 12.6: NestFactory infers the app type from the adapter, plus graceful shutdown for WebSockets",
+            "fr": "NestJS 12.6 : NestFactory déduit le type d'app depuis l'adapter, et arrêt propre pour les WebSockets"
+          },
+          "body_html": {
+            "es": "<p><code>NestFactory.create(AppModule, new FastifyAdapter())</code> ahora devuelve un <code>NestFastifyApplication</code> sin type argument (lo mismo con Express y el <code>NodeAdapter</code>). <code>WsAdapter</code> suma <code>gracefulShutdown</code> y <code>gracePeriod</code>: deja de aceptar conexiones, espera a los handlers y cierra cada socket con código 1001. Ojo con un cambio de comportamiento: en el server gRPC con <code>gracefulShutdown</code>, las llamadas que siguen vivas después de <code>gracePeriod</code> (10 s por defecto) ahora se cancelan. Si tenés streams largos, subí ese valor antes de deployar.</p>",
+            "en": "<p><code>NestFactory.create(AppModule, new FastifyAdapter())</code> now returns a <code>NestFastifyApplication</code> with no type argument (same for Express and the <code>NodeAdapter</code>). <code>WsAdapter</code> gains <code>gracefulShutdown</code> and <code>gracePeriod</code>: it stops accepting connections, waits for handlers and closes each socket with code 1001. Watch one behavior change: on the gRPC server with <code>gracefulShutdown</code>, calls still running after <code>gracePeriod</code> (10 s by default) are now cancelled. If you run long streams, raise it before deploying.</p>",
+            "fr": "<p><code>NestFactory.create(AppModule, new FastifyAdapter())</code> renvoie désormais un <code>NestFastifyApplication</code> sans argument de type (idem pour Express et le <code>NodeAdapter</code>). <code>WsAdapter</code> gagne <code>gracefulShutdown</code> et <code>gracePeriod</code> : il refuse les nouvelles connexions, attend les handlers et ferme chaque socket avec le code 1001. Attention : sur le serveur gRPC avec <code>gracefulShutdown</code>, les appels encore actifs après <code>gracePeriod</code> (10 s par défaut) sont maintenant annulés.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nestjs/nest/releases/tag/v12.6.0",
+            "label": "github.com/nestjs"
+          }
+        },
+        {
+          "id": "drizzle-rc6",
+          "tag": "breaking",
+          "date": "20 Nov 2026",
+          "title": {
+            "es": "Drizzle ORM 1.0.0-rc.6: los drivers dejan de configurar el decoding y todo pasa por codecs",
+            "en": "Drizzle ORM 1.0.0-rc.6: drivers stop configuring output decoding, codecs take over",
+            "fr": "Drizzle ORM 1.0.0-rc.6 : les drivers ne configurent plus le décodage, les codecs prennent le relais"
+          },
+          "body_html": {
+            "es": "<p>Breaking change para quien ya prueba la 1.0: Drizzle saca la configuración de decoding de los drivers. Se van <code>bigint = true</code> en <code>bun-sql</code>, los decoders transparentes de <code>postgres-js</code>, el <code>types.setTypeParser</code> global de <code>neon-http</code> y los overrides por query en <code>node-postgres</code>, <code>mysql2</code> y compañía. <code>postgres-js</code> todavía pisa los serializers de <code>timestamptz</code>, <code>timestamp</code>, <code>date</code> y <code>time</code>, y ahora manda los strings tal cual al server en vez de pasarlos por <code>new Date()</code>, que leía timestamps sin offset en hora local. Si dependías de esos parsers globales, revisá tus fechas y bigints antes de subir de rc.</p>",
+            "en": "<p>A breaking change for anyone already on the 1.0 track: Drizzle moves output decoding out of the drivers. Gone are <code>bigint = true</code> on <code>bun-sql</code>, the transparent decoders in <code>postgres-js</code>, the global <code>types.setTypeParser</code> on <code>neon-http</code>, and per-query overrides on <code>node-postgres</code>, <code>mysql2</code> and friends. <code>postgres-js</code> still overrides serializers for <code>timestamptz</code>, <code>timestamp</code>, <code>date</code> and <code>time</code>, and now sends strings to the server as-is instead of routing them through <code>new Date()</code>, which read offset-less timestamps in local time. If you relied on those global parsers, check your dates and bigints before bumping the rc.</p>",
+            "fr": "<p>Changement cassant pour ceux qui testent déjà la 1.0 : Drizzle retire la configuration du décodage des drivers. Disparaissent <code>bigint = true</code> sur <code>bun-sql</code>, les décodeurs transparents de <code>postgres-js</code>, le <code>types.setTypeParser</code> global de <code>neon-http</code> et les overrides par requête sur <code>node-postgres</code>, <code>mysql2</code>, etc. <code>postgres-js</code> envoie maintenant les chaînes telles quelles au serveur au lieu de passer par <code>new Date()</code>, qui lisait les timestamps sans offset en heure locale. Vérifiez dates et bigints avant de monter de rc.</p>"
+          },
+          "source": {
+            "url": "https://github.com/drizzle-team/drizzle-orm/releases/tag/v1.0.0-rc.6",
+            "label": "github.com/drizzle-team"
+          }
+        },
+        {
+          "id": "hono-4-13-20",
+          "tag": "patch",
+          "date": "22 Nov 2026",
+          "title": {
+            "es": "Hono 4.13.20: fixes en cookies, compress con HEAD y tipos JSONParsed más baratos",
+            "en": "Hono 4.13.20: fixes for cookies, compress on HEAD and cheaper JSONParsed types",
+            "fr": "Hono 4.13.20 : correctifs cookies, compress sur HEAD et types JSONParsed allégés"
+          },
+          "body_html": {
+            "es": "<p>Patch de mantenimiento con detalles que importan en producción: el helper de cookies ya no acepta una comilla doble suelta como valor, el middleware <code>compress</code> manda los headers correctos en requests <code>HEAD</code>, y <code>JSONParsed</code> deja de ser caro para tipos no recursivos y mantiene opcionales las props opcionales (tu RPC client tipado te lo agradece). Los adapters <code>aws-lambda</code> y <code>lambda-edge</code> conservan el BOM UTF-8 inicial en bodies de texto. Actualización sin dramas.</p>",
+            "en": "<p>A maintenance patch with fixes that matter in production: the cookie helper no longer accepts a lone double quote as a value, the <code>compress</code> middleware sends the right headers on <code>HEAD</code> requests, and <code>JSONParsed</code> is cheap again for non-recursive types and keeps optional properties optional (good news for typed RPC clients). The <code>aws-lambda</code> and <code>lambda-edge</code> adapters now keep a leading UTF-8 BOM in text bodies. A drama-free upgrade.</p>",
+            "fr": "<p>Patch de maintenance avec des correctifs utiles en production : le helper de cookies n'accepte plus un guillemet double isolé comme valeur, le middleware <code>compress</code> envoie les bons en-têtes sur les requêtes <code>HEAD</code>, et <code>JSONParsed</code> redevient léger pour les types non récursifs et garde les propriétés optionnelles optionnelles. Les adapters <code>aws-lambda</code> et <code>lambda-edge</code> conservent le BOM UTF-8 initial.</p>"
+          },
+          "source": {
+            "url": "https://github.com/honojs/hono/releases/tag/v4.13.20",
+            "label": "github.com/honojs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "msk-kafka-4-2",
+      "updates": [
+        {
+          "id": "msk-kafka-4-2",
+          "tag": "notable",
+          "date": "20 Nov 2026",
+          "title": {
+            "es": "Amazon MSK soporta Kafka 4.2: Queues for Kafka listas para producción",
+            "en": "Amazon MSK supports Kafka 4.2: Queues for Kafka are production ready",
+            "fr": "Amazon MSK prend en charge Kafka 4.2 : Queues for Kafka prêtes pour la production"
+          },
+          "body_html": {
+            "es": "<p>Los Standard brokers de MSK ya corren <strong>Apache Kafka 4.2</strong>, y lo grande es <strong>Queues for Kafka</strong> en producción: varios consumers procesan mensajes de las mismas particiones, o sea, semántica punto a punto sin tener que sobre-particionar el topic. Suma mejoras en Eligible Leader Replicas, el nuevo protocolo de rebalance de consumers y el Streams Rebalance Protocol para apps Kafka Streams. Si mantenías RabbitMQ o SQS al lado de Kafka solo para work queues, es momento de revisar esa decisión.</p>",
+            "en": "<p>MSK Standard brokers now run <strong>Apache Kafka 4.2</strong>, and the headline is <strong>Queues for Kafka</strong> going production ready: several consumers can process messages from the same partitions, giving point-to-point semantics without over-partitioning the topic. It also brings Eligible Leader Replicas improvements, the new consumer rebalance protocol and the Streams Rebalance Protocol for Kafka Streams apps. If you kept RabbitMQ or SQS next to Kafka just for work queues, it is time to revisit that.</p>",
+            "fr": "<p>Les brokers Standard de MSK passent à <strong>Apache Kafka 4.2</strong>, avec <strong>Queues for Kafka</strong> prêtes pour la production : plusieurs consumers traitent les messages des mêmes partitions, une sémantique point à point sans sur-partitionner le topic. S'y ajoutent les améliorations des Eligible Leader Replicas, le nouveau protocole de rebalance des consumers et le Streams Rebalance Protocol pour Kafka Streams.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/aws-msk-standard-version-42/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "dynamodb-vector-filters",
+          "tag": "minor",
+          "date": "20 Nov 2026",
+          "title": {
+            "es": "DynamoDB vector search suma filtros por rango, listas y operadores lógicos",
+            "en": "DynamoDB vector search adds range, list and logical filter operators",
+            "fr": "La recherche vectorielle DynamoDB ajoute filtres par plage, listes et opérateurs logiques"
+          },
+          "body_html": {
+            "es": "<p>Los filtros inline de <code>SearchVectors</code> ya no se limitan a igualdad: ahora aceptan comparaciones de rango (precio, rating, fecha), listas de valores, chequeo de existencia de atributos y combinaciones con <code>OR</code> y <code>NOT</code>. Para RAG sobre datos operacionales es clave: filtrás antes de rankear por similitud en lugar de traer de más y descartar en la app.</p>",
+            "en": "<p>Inline filters on <code>SearchVectors</code> are no longer equality-only: they now accept range comparisons (price, rating, date), value lists, attribute-existence checks and combinations with <code>OR</code> and <code>NOT</code>. For RAG over operational data this matters: you filter before similarity ranking instead of over-fetching and discarding in the app.</p>",
+            "fr": "<p>Les filtres inline de <code>SearchVectors</code> ne se limitent plus à l'égalité : comparaisons de plage (prix, note, date), listes de valeurs, test d'existence d'attribut et combinaisons avec <code>OR</code> et <code>NOT</code>. Pour du RAG sur données opérationnelles, on filtre avant le classement par similarité au lieu de trier dans l'application.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/dynamodb-vector-filters/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "eventbridge-webhooks",
+      "updates": [
+        {
+          "id": "eventbridge-webhooks",
+          "tag": "notable",
+          "date": "20 Nov 2026",
+          "title": {
+            "es": "EventBridge acepta webhooks directo en un Custom event bus, con verificación HMAC",
+            "en": "EventBridge accepts webhooks directly on a Custom event bus, with HMAC verification",
+            "fr": "EventBridge accepte les webhooks directement sur un Custom event bus, avec vérification HMAC"
+          },
+          "body_html": {
+            "es": "<p>Se terminó el combo API Gateway + Lambda solo para recibir el webhook de Stripe o GitHub y reenviarlo al bus. EventBridge te da una URL HTTPS administrada por webhook source y verifica cada request con firma <strong>HMAC</strong>, token estático o basic auth. Para arquitecturas event-driven es menos código propio en el borde y una superficie de ataque menos que mantener. Validá igual la idempotencia del lado consumidor: los proveedores reintentan.</p>",
+            "en": "<p>No more API Gateway plus Lambda just to receive a Stripe or GitHub webhook and forward it to the bus. EventBridge gives each webhook source a managed HTTPS URL and verifies every request with an <strong>HMAC</strong> signature, a static token or basic auth. For event-driven architectures that is less custom code at the edge and one less attack surface to maintain. Still enforce idempotency on the consumer side: providers retry.</p>",
+            "fr": "<p>Plus besoin d'API Gateway et Lambda juste pour recevoir un webhook Stripe ou GitHub et le relayer vers le bus. EventBridge fournit une URL HTTPS gérée par source et vérifie chaque requête par signature <strong>HMAC</strong>, jeton statique ou basic auth. Moins de code maison en bordure et une surface d'attaque en moins. Gardez l'idempotence côté consommateur : les fournisseurs réessaient.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-eventbridge-webhook-events",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "lambda-sqs-fifo-10k",
+          "tag": "notable",
+          "date": "20 Nov 2026",
+          "title": {
+            "es": "Lambda procesa hasta 10.000 mensajes por batch desde SQS FIFO (antes 10)",
+            "en": "Lambda processes up to 10,000 messages per batch from SQS FIFO (up from 10)",
+            "fr": "Lambda traite jusqu'à 10 000 messages par lot depuis SQS FIFO (contre 10)"
+          },
+          "body_html": {
+            "es": "<p>En las event source mappings de SQS FIFO en modo provisioned, el batch máximo pasa de <strong>10 a 10.000 mensajes</strong>, manteniendo el orden dentro de cada message group. Para pagos, órdenes o inventario son muchas menos invocaciones. Ojo con el reverso: un batch enorme que falla a mitad necesita <code>ReportBatchItemFailures</code> bien implementado, o vas a reprocesar miles de mensajes por uno malo.</p>",
+            "en": "<p>For SQS FIFO event source mappings in provisioned mode, the maximum batch grows from <strong>10 to 10,000 messages</strong>, with ordering still preserved per message group. For payments, orders or inventory that means far fewer invocations. The flip side: a huge batch failing halfway needs a solid <code>ReportBatchItemFailures</code> implementation, or one bad message will replay thousands.</p>",
+            "fr": "<p>Pour les event source mappings SQS FIFO en mode provisioned, le lot maximal passe de <strong>10 à 10 000 messages</strong>, avec l'ordre préservé par message group. Beaucoup moins d'invocations pour paiements, commandes ou stocks. Revers : un gros lot qui échoue à mi-chemin exige un <code>ReportBatchItemFailures</code> solide, sinon un seul message fautif rejoue des milliers.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/aws-lambda-10K-batch-size-SQSFIFO/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "wrangler-4-166",
+          "tag": "minor",
+          "date": "20 Nov 2026",
+          "title": {
+            "es": "Wrangler 4.166: dry-run de triggers con resumen y url_transformations para Images",
+            "en": "Wrangler 4.166: triggers dry-run summary and url_transformations for Images",
+            "fr": "Wrangler 4.166 : résumé du dry-run des triggers et url_transformations pour Images"
+          },
+          "body_html": {
+            "es": "<p><code>wrangler triggers deploy --dry-run</code> (experimental) ahora imprime un resumen de lo que deployaría: rutas, custom domains, crons, producers y consumers de Queues, Workflows y Email Routing, sin tocar la API. Además el bloque <code>images</code> acepta <code>url_transformations</code> con <code>allowed_origins</code>, sin necesitar un binding. Útil para revisar en CI antes de pisar triggers en producción.</p>",
+            "en": "<p><code>wrangler triggers deploy --dry-run</code> (experimental) now prints a summary of what it would deploy: routes, custom domains, crons, Queue producers and consumers, Workflows and Email Routing, without calling the API. The <code>images</code> block also accepts <code>url_transformations</code> with <code>allowed_origins</code>, no binding required. Handy for a CI review step before overwriting production triggers.</p>",
+            "fr": "<p><code>wrangler triggers deploy --dry-run</code> (expérimental) affiche désormais un résumé de ce qui serait déployé : routes, domaines personnalisés, crons, producers et consumers de Queues, Workflows et Email Routing, sans appel API. Le bloc <code>images</code> accepte aussi <code>url_transformations</code> avec <code>allowed_origins</code>, sans binding.</p>"
+          },
+          "source": {
+            "url": "https://github.com/cloudflare/workers-sdk/releases/tag/wrangler%404.166.0",
+            "label": "github.com/cloudflare"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "gke-kernel-tcp-bug",
+      "updates": [
+        {
+          "id": "gke-kernel-tcp-bug",
+          "tag": "notable",
+          "date": "21 Nov 2026",
+          "title": {
+            "es": "Cómo Google rastreó timeouts de la API de GKE hasta un bug TCP del kernel Linux",
+            "en": "How Google traced GKE API timeouts to a Linux kernel TCP bug",
+            "fr": "Comment Google a relié des timeouts de l'API GKE à un bug TCP du noyau Linux"
+          },
+          "body_html": {
+            "es": "<p>Un postmortem para guardar: pods que no llegaban al API server de Kubernetes de forma intermitente, con unos 800 devs sin poder deployar. Los packet captures mostraban ACKs viejos de conexiones ya cerradas. Fueron <strong>tres bugs que interactuaban</strong>: reordenamiento de paquetes en Private Service Connect, el half-close de Envoy que no cerraba bien las conexiones, y un bug del kernel que descartaba ciertos FIN reordenados y dejaba sockets colgados en <code>FIN_WAIT_2</code>. El fix final fue un patch al kernel. La lección para un senior: cuando un timeout es intermitente, sospechá de la interacción entre capas, no de una sola.</p>",
+            "en": "<p>A postmortem worth bookmarking: pods intermittently failed to reach the Kubernetes API server, leaving about 800 developers unable to deploy. Packet captures showed stale ACKs from already-closed connections. It took <strong>three interacting bugs</strong>: packet reordering in Private Service Connect, Envoy's half-close behavior keeping connections from closing properly, and a kernel bug that dropped certain reordered FIN packets and left sockets stuck in <code>FIN_WAIT_2</code>. The final fix was a Linux kernel patch. The senior takeaway: when a timeout is intermittent, suspect the interaction between layers, not a single one.</p>",
+            "fr": "<p>Un postmortem à garder : des pods n'atteignaient plus par intermittence l'API server Kubernetes, bloquant environ 800 développeurs. Les captures montraient des ACK périmés de connexions déjà fermées. En cause, <strong>trois bugs en interaction</strong> : réordonnancement de paquets dans Private Service Connect, le half-close d'Envoy qui empêchait la fermeture correcte des connexions, et un bug noyau qui jetait certains FIN réordonnés, laissant des sockets bloqués en <code>FIN_WAIT_2</code>. Le correctif final a été un patch du noyau Linux.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/11/gke-kernel-network-bug/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "uber-go-cache",
+          "tag": "notable",
+          "date": "20 Nov 2026",
+          "title": {
+            "es": "Uber recorta 90% de memoria en su cache de traducciones Go con un diseño híbrido memoria/disco",
+            "en": "Uber cuts its Go translation cache memory by 90% with a hybrid memory/disk design",
+            "fr": "Uber réduit de 90 % la mémoire de son cache de traductions Go avec un design hybride mémoire/disque"
+          },
+          "body_html": {
+            "es": "<p>El GC se comía más del 20% de CPU en algunos servicios y las traducciones eran ~70% de los objetos alocados. Primer paso: reemplazar <code>sync.Map</code> por un <code>map[string]string</code> con <code>RWMutex</code>, que bajó allocations y mejoró la CPU más de 30%. Después, un cache híbrido: keys y valores calientes en memoria, el resto en disco, con hit rate arriba de 99,9% y p99 de miss bajo 1 ms. Buen recordatorio de que <code>sync.Map</code> no es la opción por defecto para workloads read-heavy con pocos updates, y de que el doble buffer al refrescar un cache duplica tu pico de memoria.</p>",
+            "en": "<p>GC was eating over 20% of CPU in some services, and translations were about 70% of allocated objects. Step one: swap <code>sync.Map</code> for a plain <code>map[string]string</code> behind an <code>RWMutex</code>, which cut allocations and improved CPU by more than 30%. Then a hybrid cache: keys and hot values in memory, the rest on disk, with a hit rate above 99.9% and p99 miss latency under 1 ms. A good reminder that <code>sync.Map</code> is not the default for read-heavy, rarely-updated workloads, and that double-buffering a cache refresh doubles your peak memory.</p>",
+            "fr": "<p>Le GC consommait plus de 20 % du CPU dans certains services, et les traductions représentaient environ 70 % des objets alloués. D'abord, remplacer <code>sync.Map</code> par une <code>map[string]string</code> protégée par un <code>RWMutex</code> : moins d'allocations et plus de 30 % de CPU gagnés. Ensuite, un cache hybride : clés et valeurs chaudes en mémoire, le reste sur disque, avec plus de 99,9 % de hit rate et un p99 de miss sous 1 ms.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/11/uber-go-translation-cache/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "cloudwatch-promql-30d",
+          "tag": "minor",
+          "date": "20 Nov 2026",
+          "title": {
+            "es": "CloudWatch extiende PromQL a 30 días: SLOs y error budgets de un período completo en una query",
+            "en": "CloudWatch extends PromQL to 30 days: full-period SLOs and error budgets in one query",
+            "fr": "CloudWatch étend PromQL à 30 jours : SLO et error budgets sur une période complète en une requête"
+          },
+          "body_html": {
+            "es": "<p>Las queries PromQL sobre métricas OpenTelemetry en CloudWatch pasan de 7 a <strong>30 días</strong> de ventana. Parece menor, pero es justo lo que pide un SLO con ventana rolling de 30 días: calcular disponibilidad y error budget restante en una sola query y alarmar cuando vas camino a agotarlo. Si medías SLOs mensuales con una ventana de 7 días, estabas midiendo otra cosa.</p>",
+            "en": "<p>PromQL queries over OpenTelemetry metrics in CloudWatch move from a 7-day to a <strong>30-day</strong> window. It sounds minor, but it is exactly what a 30-day rolling SLO needs: compute availability and remaining error budget in a single query, and alarm when you are on track to burn it. If you measured monthly SLOs with a 7-day window, you were measuring something else.</p>",
+            "fr": "<p>Les requêtes PromQL sur les métriques OpenTelemetry dans CloudWatch passent d'une fenêtre de 7 à <strong>30 jours</strong>. C'est exactement ce qu'exige un SLO sur 30 jours glissants : calculer disponibilité et error budget restant en une requête, et alerter quand on va l'épuiser.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/cloudwatch-promql-query-30days/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "pnpm-12-23",
+      "updates": [
+        {
+          "id": "pnpm-12-23",
+          "tag": "security",
+          "date": "22 Nov 2026",
+          "title": {
+            "es": "pnpm 12.23: credenciales solo por HTTPS, adiós a otp en config y a las platform variants",
+            "en": "pnpm 12.23: HTTPS-only credentials, no more otp in config, platform variants removed",
+            "fr": "pnpm 12.23 : identifiants en HTTPS uniquement, fin de otp en config et des platform variants"
+          },
+          "body_html": {
+            "es": "<p>Dos fixes de seguridad: pnpm deja de leer <code>otp</code> desde archivos de config y manda credenciales del registry <strong>solo por HTTPS</strong>. Además elimina las platform variants: un paquete vuelve a tener un solo archivo por versión, y si publicabas builds por plataforma tenés que pasar a paquetes separados en <code>optionalDependencies</code>. Un install <code>--frozen-lockfile</code> con variants registradas falla con <code>ERR_PNPM_BROKEN_LOCKFILE</code>, así que corré <code>pnpm install</code> antes de que te explote el CI. Suma <code>pnpm catalog migrate</code> para mover specifiers al catálogo y <code>pnpm link --hard</code>.</p>",
+            "en": "<p>Two security fixes: pnpm stops reading <code>otp</code> from config files and sends registry credentials <strong>only over HTTPS</strong>. It also removes platform variants: a package version has a single archive again, and if you published per-platform builds you must move to separate packages under <code>optionalDependencies</code>. A <code>--frozen-lockfile</code> install of a lockfile with recorded variants fails with <code>ERR_PNPM_BROKEN_LOCKFILE</code>, so run <code>pnpm install</code> before CI breaks. New too: <code>pnpm catalog migrate</code> to move specifiers into the catalog, and <code>pnpm link --hard</code>.</p>",
+            "fr": "<p>Deux correctifs de sécurité : pnpm ne lit plus <code>otp</code> depuis les fichiers de config et envoie les identifiants du registry <strong>uniquement en HTTPS</strong>. Les platform variants disparaissent : une version a de nouveau une seule archive, et les builds par plateforme doivent devenir des paquets séparés dans <code>optionalDependencies</code>. Un install <code>--frozen-lockfile</code> avec variants enregistrées échoue avec <code>ERR_PNPM_BROKEN_LOCKFILE</code>. Nouveautés : <code>pnpm catalog migrate</code> et <code>pnpm link --hard</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/pnpm/pnpm/releases/tag/v12.23.0",
+            "label": "github.com/pnpm"
+          }
+        },
+        {
+          "id": "better-auth-1-7-27",
+          "tag": "notable",
+          "date": "20 Nov 2026",
+          "title": {
+            "es": "better-auth 1.7.27: acción requerida si rotás algoritmos de JWKS",
+            "en": "better-auth 1.7.27: action required if you rotate JWKS algorithms",
+            "fr": "better-auth 1.7.27 : action requise si vous faites tourner les algorithmes JWKS"
+          },
+          "body_html": {
+            "es": "<p>Viene con un aviso de acción requerida: si no tenés key para <code>jwks.keyPairConfig.alg</code> y tu key más nueva usa otro algoritmo de <code>keyPairConfigs</code>, los ID tokens, los JWT de <code>/token</code> y los del cookie cache cambian <code>alg</code> y <code>kid</code> en la próxima firma. Los verifiers que hardcodean el algoritmo o que no refrescan el JWKS ante un <code>kid</code> desconocido van a rechazar tokens. Además <code>originBoundFields</code> pasa a defaultear solo <code>post_logout_redirect_uris</code>, y <code>/sign-in/anonymous</code> ahora valida el origin. Revisá tus servicios downstream antes de actualizar.</p>",
+            "en": "<p>It ships with an action-required notice: if you have no key for <code>jwks.keyPairConfig.alg</code> and your newest key uses another <code>keyPairConfigs</code> algorithm, ID tokens, <code>/token</code> JWTs and cookie-cache JWTs switch <code>alg</code> and <code>kid</code> on the next signature. Verifiers that hard-code the algorithm or never refetch the JWKS for an unknown <code>kid</code> will reject tokens. <code>originBoundFields</code> now defaults to only <code>post_logout_redirect_uris</code>, and <code>/sign-in/anonymous</code> validates the request origin. Check downstream services before upgrading.</p>",
+            "fr": "<p>Avec un avis d'action requise : sans clé pour <code>jwks.keyPairConfig.alg</code> et si votre clé la plus récente utilise un autre algorithme de <code>keyPairConfigs</code>, les ID tokens, les JWT de <code>/token</code> et ceux du cookie cache changent d'<code>alg</code> et de <code>kid</code> à la prochaine signature. Les vérificateurs qui figent l'algorithme ou ne rechargent pas le JWKS pour un <code>kid</code> inconnu rejetteront les tokens. <code>/sign-in/anonymous</code> valide désormais l'origine.</p>"
+          },
+          "source": {
+            "url": "https://github.com/better-auth/better-auth/releases/tag/v1.7.27",
+            "label": "github.com/better-auth"
+          }
+        },
+        {
+          "id": "vercel-20mib-bodies",
+          "tag": "beta",
+          "date": "20 Nov 2026",
+          "title": {
+            "es": "Vercel Functions aceptan request bodies de hasta 20MiB (beta pública)",
+            "en": "Vercel Functions accept request bodies up to 20MiB (public beta)",
+            "fr": "Vercel Functions acceptent des corps de requête jusqu'à 20 Mio (bêta publique)"
+          },
+          "body_html": {
+            "es": "<p>El límite de 4,5MB por request body sube a <strong>20MiB</strong> con <code>VERCEL_SUPPORT_LARGE_REQUEST_BODY=1</code>, para runtimes Node.js, Python y Bun con la memoria performance de 4GB. Ojo con la letra chica: el runtime Edge sigue en 4,5MB (devuelve 413), y al activarlo el Routing Middleware deja de recibir el body. Si tu middleware valida firmas de webhooks leyendo el body, eso se rompe: movelo al handler antes de prenderlo en producción.</p>",
+            "en": "<p>The 4.5MB request body cap rises to <strong>20MiB</strong> with <code>VERCEL_SUPPORT_LARGE_REQUEST_BODY=1</code>, for the Node.js, Python and Bun runtimes on the 4GB performance memory setting. Read the fine print: the Edge runtime stays at 4.5MB (returns 413), and once enabled, Routing Middleware no longer receives the body. If your middleware verifies webhook signatures from the body, that breaks: move it into the handler before turning this on in production.</p>",
+            "fr": "<p>La limite de 4,5 Mo par corps de requête passe à <strong>20 Mio</strong> avec <code>VERCEL_SUPPORT_LARGE_REQUEST_BODY=1</code>, pour les runtimes Node.js, Python et Bun avec la mémoire performance de 4 Go. Le runtime Edge reste à 4,5 Mo (413), et une fois activé, le Routing Middleware ne reçoit plus le corps : un middleware qui vérifie des signatures de webhook sur le body doit migrer vers le handler.</p>"
+          },
+          "source": {
+            "url": "https://vercel.com/changelog/vercel-functions-now-support-request-bodies-up-to-20mib",
+            "label": "vercel.com/changelog"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Semana de parchear runtimes, no librerías: nginx, Ruby y la JVM publicaron fallas de memoria con RCE en 48 horas. El fix no está en tu package.json sino en la imagen base: rebuildeá containers y verificá la versión que reporta el binario, no el tag.",
+      "en": "A week of patching runtimes, not libraries: nginx, Ruby and the JVM disclosed memory bugs with RCE within 48 hours. The fix is not in your package.json but in your base image: rebuild containers and check the version the binary reports, not the tag.",
+      "fr": "Une semaine de correctifs de runtimes, pas de bibliothèques : nginx, Ruby et la JVM ont divulgué des bugs mémoire avec RCE en 48 heures. Le correctif est dans l'image de base : reconstruisez les conteneurs et vérifiez la version réelle du binaire, pas le tag."
+    },
+    {
+      "es": "Los servicios administrados se comen el pegamento: EventBridge recibe webhooks, Kafka 4.2 hace work queues y Redis 8.12 expira miembros de un Set. Menos código propio, pero revisá qué garantías (idempotencia, orden, retries) perdés o ganás con cada cambio.",
+      "en": "Managed services keep absorbing glue code: EventBridge ingests webhooks, Kafka 4.2 does work queues and Redis 8.12 expires Set members. Less custom code, but check which guarantees (idempotency, ordering, retries) you gain or lose with each move.",
+      "fr": "Les services managés absorbent le code de liaison : EventBridge reçoit les webhooks, Kafka 4.2 fait des work queues et Redis 8.12 expire des membres de Set. Moins de code maison, mais vérifiez les garanties (idempotence, ordre, retries) gagnées ou perdues."
+    }
+  ]
+}

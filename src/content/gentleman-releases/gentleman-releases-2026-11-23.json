@@ -1,0 +1,58 @@
+{
+  "title": {
+    "es": "Gentleman Releases — 23 Nov 2026",
+    "en": "Gentleman Releases — 23 Nov 2026",
+    "fr": "Gentleman Releases — 23 Nov 2026"
+  },
+  "description": {
+    "es": "gentle-ai v5.0.0: el módulo Go pasa a /v5, se elimina la autoridad de review legacy y las instalaciones de Gentle Shell se recuperan mejor de los fallos",
+    "en": "gentle-ai v5.0.0: the Go module moves to /v5, legacy review authority is removed, and Gentle Shell installs recover better from failures",
+    "fr": "gentle-ai v5.0.0 : le module Go passe à /v5, l'autorité de review legacy disparaît et les installations de Gentle Shell se rétablissent mieux après un échec"
+  },
+  "pubDate": "2026-11-23",
+  "category": "gentleman-releases",
+  "highlights": [
+    {
+      "text": {
+        "es": "gentle-ai v5.0.0 — major: módulo Go en /v5 y adiós a la autoridad de review v1",
+        "en": "gentle-ai v5.0.0 — major: Go module on /v5 and legacy v1 review authority removed",
+        "fr": "gentle-ai v5.0.0 — majeure : module Go en /v5 et suppression de l'autorité de review v1"
+      },
+      "anchor": "gentle-ai-v5-0-0",
+      "icon": "simple-icons:github"
+    }
+  ],
+  "tools": [
+    {
+      "id": "gentle-ai",
+      "name": "gentle-ai",
+      "publisher": "Gentleman-Programming",
+      "theme": "releases-gentle-ai",
+      "icon_emoji": "🎩",
+      "anchor": "gentle-ai",
+      "version": "v5.0.0",
+      "updates": [
+        {
+          "id": "gentle-ai-v5-0-0",
+          "tag": "breaking",
+          "title": {
+            "es": "v5.0.0 — Módulo /v5 e instalaciones más resistentes",
+            "en": "v5.0.0 — /v5 module and sturdier installs",
+            "fr": "v5.0.0 — Module /v5 et installations plus robustes"
+          },
+          "body_html": {
+            "es": "<p>Release major. <strong>Ojo con esto:</strong> el módulo Go y las rutas de comandos pasan de <code>/v4</code> a <code>/v5</code>, así que tenés que actualizar imports, scripts de build y cualquier <code>go install</code> pineado. Además se elimina la autoridad de review legacy v1: si tu integración todavía depende de ella, migrá al protocolo de review soportado. El payload <code>capabilities/v2.6</code> cambió sin bump de identificador, así que refrescá el discovery de capacidades en vez de asumir el set viejo.</p><p>En review: el hook Stop lee la misma decisión de review-due que el punto de entrada, y una escalación explícita ya no se pierde en el camino. <code>gentle-ai review abandon</code> unifica en una sola ruta el abandono de lineages trabadas, todavía con <code>--expected-revision</code> y <code>--maintainer-authorization</code>.</p><p>En instalación: si falla un reemplazo en Windows, se restaura el backup anterior; los locks de archivo transitorios ya no tiran abajo la operación, las descargas aguantan conexiones lentas y las operaciones sobre la misma instalación se serializan. El TUI te deja salir de la pantalla de error, cancelar antes de publicar y recuperarte de un fallo en el chequeo de updates. En Linux, el rechazo del preflight de sesión systemd explica qué condición falló y cómo arreglarla. Un install beta puede volver a releases etiquetados sin hacer downgrade, y en Windows el discovery de Hermes respeta <code>HERMES_HOME</code> y <code>%LOCALAPPDATA%</code>. El contrato del proveedor se mantiene en <code>1.6.0</code>. Después de actualizar, corré <code>gentle-ai sync</code>.</p>",
+            "en": "<p>Major release. <strong>Heads up:</strong> the Go module and command paths move from <code>/v4</code> to <code>/v5</code>, so update imports, build scripts, and any pinned <code>go install</code> commands. Legacy v1 review authority is also removed: integrations that still rely on it must move to the supported review protocol. The <code>capabilities/v2.6</code> payload changed without an identifier bump, so refresh capability discovery instead of assuming the old feature set.</p><p>On review: the Stop hook reads the same review-due decision as the review entry path, and an explicit escalation now reaches that decision instead of being dropped. <code>gentle-ai review abandon</code> covers stuck lineages through a single route, still requiring <code>--expected-revision</code> and <code>--maintainer-authorization</code>.</p><p>On installs: a failed Windows replacement restores the previous backup; transient file locks no longer fail the operation immediately, downloads tolerate slow or flaky connections, and operations on the same installation are serialized. The TUI can exit the failure screen, cancel before publication, and recover from an update-check failure. On Linux, a refused systemd user-session preflight explains the failing condition and how to fix it. A beta install can recover from tagged releases without downgrading, and Windows Hermes discovery honors <code>HERMES_HOME</code> and <code>%LOCALAPPDATA%</code>. The provider contract stays at <code>1.6.0</code>. Run <code>gentle-ai sync</code> after upgrading.</p>",
+            "fr": "<p>Version majeure. <strong>Attention :</strong> le module Go et les chemins de commandes passent de <code>/v4</code> à <code>/v5</code> ; mettez à jour les imports, les scripts de build et toute commande <code>go install</code> épinglée. L'autorité de review legacy v1 est aussi supprimée : les intégrations qui en dépendent encore doivent passer au protocole de review pris en charge. Le payload <code>capabilities/v2.6</code> a changé sans bump d'identifiant, donc rafraîchissez la découverte des capacités au lieu de supposer l'ancien ensemble de fonctionnalités.</p><p>Côté review : le hook Stop lit la même décision review-due que le point d'entrée, et une escalade explicite atteint désormais cette décision au lieu d'être perdue. <code>gentle-ai review abandon</code> couvre les lignées bloquées par une seule route, qui exige toujours <code>--expected-revision</code> et <code>--maintainer-authorization</code>.</p><p>Côté installation : un remplacement échoué sous Windows restaure la sauvegarde précédente ; les verrous de fichiers transitoires ne font plus échouer l'opération immédiatement, les téléchargements tolèrent les connexions lentes ou instables et les opérations sur une même installation sont sérialisées. Le TUI peut quitter l'écran d'échec, annuler avant la publication et se rétablir après un échec de vérification des mises à jour. Sous Linux, un refus du preflight de session utilisateur systemd explique la condition en cause et comment la corriger. Une installation bêta peut revenir aux releases taguées sans rétrogradation, et sous Windows la découverte de Hermes respecte <code>HERMES_HOME</code> et <code>%LOCALAPPDATA%</code>. Le contrat du fournisseur reste en <code>1.6.0</code>. Lancez <code>gentle-ai sync</code> après la mise à jour.</p>"
+          },
+          "date": "22 Nov 2026",
+          "source": {
+            "url": "https://github.com/Gentleman-Programming/gentle-ai/releases/tag/v5.0.0",
+            "label": "github.com/Gentleman-Programming/gentle-ai"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": []
+}

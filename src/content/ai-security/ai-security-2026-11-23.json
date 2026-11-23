@@ -1,0 +1,381 @@
+{
+  "title": {
+    "es": "AI Security — 23 Nov 2026",
+    "en": "AI Security — 23 Nov 2026",
+    "fr": "AI Security — 23 nov. 2026"
+  },
+  "description": {
+    "es": "Agentes de IA de un operador chino encontraron y explotaron solos un 0-day en MONAI Label, llama.cpp corrompe heap con un GGUF armado, NLTK publica 20 advisories y una tanda de CVEs en servidores MCP: SurrealDB, mcp-ssh-manager, DBHub y Kubernetes.",
+    "en": "A Chinese operator's AI agents found and exploited a MONAI Label 0-day on their own, llama.cpp corrupts the heap on a crafted GGUF, NLTK ships 20 advisories, and a wave of MCP server CVEs hits SurrealDB, mcp-ssh-manager, DBHub and Kubernetes.",
+    "fr": "Les agents IA d'un opérateur chinois ont trouvé et exploité seuls un 0-day dans MONAI Label, llama.cpp corrompt le tas avec un GGUF piégé, NLTK publie 20 advisories et une vague de CVE touche des serveurs MCP : SurrealDB, mcp-ssh-manager, DBHub et Kubernetes."
+  },
+  "pubDate": "2026-11-23",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "Agentes IA explotaron un 0-day de MONAI",
+        "en": "AI agents exploited a MONAI 0-day",
+        "fr": "Des agents IA ont exploité un 0-day MONAI"
+      },
+      "anchor": "monai-label-ai-agent-zero-day",
+      "icon": "lucide:siren"
+    },
+    {
+      "text": {
+        "es": "llama.cpp: heap overflow vía GGUF (8.5)",
+        "en": "llama.cpp: heap overflow via GGUF (8.5)",
+        "fr": "llama.cpp : débordement de tas via GGUF (8.5)"
+      },
+      "anchor": "cve-2026-133710",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": {
+        "es": "NLTK: 20 advisories, uno crítico (9.8)",
+        "en": "NLTK: 20 advisories, one critical (9.8)",
+        "fr": "NLTK : 20 advisories, dont un critique (9.8)"
+      },
+      "anchor": "cve-2026-128138",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "SurrealDB MCP: SQL injection (8.8)",
+        "en": "SurrealDB MCP: SQL injection (8.8)",
+        "fr": "SurrealDB MCP : injection SQL (8.8)"
+      },
+      "anchor": "cve-2026-134293",
+      "icon": "lucide:shield-alert"
+    },
+    {
+      "text": {
+        "es": "mcp-ssh-manager: RCE en backups (8.8)",
+        "en": "mcp-ssh-manager: RCE in backups (8.8)",
+        "fr": "mcp-ssh-manager : RCE dans les sauvegardes (8.8)"
+      },
+      "anchor": "cve-2026-129995",
+      "icon": "lucide:radiation"
+    },
+    {
+      "text": {
+        "es": "Signal bloquea a los agentes IA del SO",
+        "en": "Signal blocks OS AI agents",
+        "fr": "Signal bloque les agents IA de l'OS"
+      },
+      "anchor": "signal-blocks-os-ai-agents",
+      "icon": "lucide:lock"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-incidents",
+      "name": "Top Incidents",
+      "theme": "top-incidents",
+      "icon_emoji": "🚨",
+      "anchor": "top-incidents",
+      "updates": [
+        {
+          "id": "monai-label-ai-agent-zero-day",
+          "tag": "breach",
+          "title": {
+            "es": "Amazon: agentes de IA de un operador vinculado a China encontraron y explotaron solos un 0-day en MONAI Label para tomar un servidor universitario",
+            "en": "Amazon: a China-linked operator's AI agents found and exploited a MONAI Label 0-day on their own to take over a university server",
+            "fr": "Amazon : les agents IA d'un opérateur lié à la Chine ont trouvé et exploité seuls un 0-day dans MONAI Label pour prendre le contrôle d'un serveur universitaire"
+          },
+          "body_html": {
+            "es": "<p>El CISO de Amazon, CJ Moses, publicó el viernes el análisis de una campaña de septiembre contra universidades de Asia oriental. El operador manejaba <strong>Cairn</strong>, un framework open source de pentest con IA, con prompts en chino simplificado. Durante unas 48 horas los agentes probaron 148 acciones contra un Redis, Log4Shell, SSRF contra un Qdrant y credential sprays contra PostgreSQL y SSH, todo sin éxito y sin dirección humana.</p><p>Después encontraron un path traversal desconocido en el endpoint de upload de <strong>MONAI Label</strong>, una app open source de imágenes médicas con IA. En unos 11 minutos pasaron de mapear la API a escribir archivos arbitrarios y abrieron una reverse shell de Python como root. Amazon avisó a los mantenedores, que publicaron <a href=\"https://github.com/Project-MONAI/MONAILabel/security/advisories/GHSA-qc22-rmgc-vg94\">GHSA-qc22-rmgc-vg94</a> (crítico, afecta <code>monailabel</code> &lt;= 0.8.5). Ojo con esto: la autenticación viene desactivada por defecto (<code>MONAI_LABEL_AUTH_ENABLE=False</code>), así que no expongas instancias a internet.</p>",
+            "en": "<p>Amazon CISO CJ Moses published on Friday an analysis of a September campaign against universities in East Asia. The operator drove <strong>Cairn</strong>, an open-source AI pentest framework, with prompts written in Simplified Chinese. Over about 48 hours the agents tried 148 actions against a Redis server, Log4Shell, SSRF against a Qdrant instance and credential sprays against PostgreSQL and SSH, all unsuccessful and with no human direction.</p><p>They then found an unknown path traversal in the upload endpoint of <strong>MONAI Label</strong>, an open-source medical imaging AI app. In about 11 minutes they went from mapping the API to writing arbitrary files, then ran a Python reverse shell as root. Amazon notified the maintainers, who published <a href=\"https://github.com/Project-MONAI/MONAILabel/security/advisories/GHSA-qc22-rmgc-vg94\">GHSA-qc22-rmgc-vg94</a> (critical, affects <code>monailabel</code> &lt;= 0.8.5). Authentication is disabled by default (<code>MONAI_LABEL_AUTH_ENABLE=False</code>), so do not expose instances to the internet.</p>",
+            "fr": "<p>Le CISO d'Amazon, CJ Moses, a publié vendredi l'analyse d'une campagne de septembre contre des universités d'Asie de l'Est. L'opérateur pilotait <strong>Cairn</strong>, un framework open source de pentest IA, avec des prompts en chinois simplifié. Pendant environ 48 heures, les agents ont tenté 148 actions contre un Redis, Log4Shell, une SSRF contre une instance Qdrant et des credential sprays contre PostgreSQL et SSH, sans succès et sans direction humaine.</p><p>Ils ont ensuite trouvé un path traversal inconnu dans l'endpoint d'upload de <strong>MONAI Label</strong>, une application open source d'imagerie médicale par IA. En 11 minutes environ, ils sont passés de la cartographie de l'API à l'écriture de fichiers arbitraires, puis ont lancé un reverse shell Python en root. Amazon a prévenu les mainteneurs, qui ont publié <a href=\"https://github.com/Project-MONAI/MONAILabel/security/advisories/GHSA-qc22-rmgc-vg94\">GHSA-qc22-rmgc-vg94</a> (critique, touche <code>monailabel</code> &lt;= 0.8.5). L'authentification est désactivée par défaut (<code>MONAI_LABEL_AUTH_ENABLE=False</code>) : n'exposez pas ces instances sur internet.</p>"
+          },
+          "date": "20 Nov 2026",
+          "source": {
+            "url": "https://www.theregister.com/security/2026/11/20/china-attackers-deployed-ai-agents-that-autonomously-found-and-exploited-a-0-day-to-take-over-a-university-server/5311382",
+            "label": "The Register"
+          }
+        }
+      ]
+    },
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "cve-2026-133710",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-133710 (CVSS v4 8.5): llama.cpp escribe fuera del heap al cargar un modelo GGUF armado",
+            "en": "CVE-2026-133710 (CVSS v4 8.5): llama.cpp writes past the heap when loading a crafted GGUF model",
+            "fr": "CVE-2026-133710 (CVSS v4 8.5) : llama.cpp écrit hors du tas en chargeant un modèle GGUF piégé"
+          },
+          "body_html": {
+            "es": "<p>El loader <code>hrm_text</code> de llama.cpp (builds b11003 a b12555) tiene un integer overflow en <code>load_arch_hparams()</code>: un GGUF con factores de capa que dan la vuelta módulo 2^32 saltea el chequeo de cantidad de bloques. Después <code>load_arch_tensors()</code> escribe punteros de tensores más allá de <code>model.layers</code>, corrompe el heap y puede terminar en ejecución de código.</p><p>Es la clase de siempre: el archivo del modelo es input no confiable. Actualizá a <strong>b12556</strong> o posterior antes de cargar GGUFs bajados de hubs.</p>",
+            "en": "<p>llama.cpp's <code>hrm_text</code> loader (builds b11003 through b12555) has an integer overflow in <code>load_arch_hparams()</code>: a GGUF whose layer factors wrap modulo 2^32 bypasses the block count check. <code>load_arch_tensors()</code> then writes tensor pointers past <code>model.layers</code>, corrupting the heap and potentially enabling code execution.</p><p>Same recurring class: the model file is untrusted input. Upgrade to <strong>b12556</strong> or later before loading GGUFs downloaded from hubs.</p>",
+            "fr": "<p>Le loader <code>hrm_text</code> de llama.cpp (builds b11003 à b12555) contient un dépassement d'entier dans <code>load_arch_hparams()</code> : un GGUF dont les facteurs de couche bouclent modulo 2^32 contourne la vérification du nombre de blocs. <code>load_arch_tensors()</code> écrit alors des pointeurs de tenseurs au-delà de <code>model.layers</code>, corrompant le tas et pouvant mener à l'exécution de code.</p><p>Toujours la même classe : le fichier du modèle est une entrée non fiable. Passez à <strong>b12556</strong> ou plus récent avant de charger des GGUF téléchargés depuis des hubs.</p>"
+          },
+          "date": "20 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-133710",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-128138",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-128138 (CVSS 9.8) y 19 más: NLTK vuelve a tener un bypass del sandbox de JVM, ahora sobre el fix de 3.10.3",
+            "en": "CVE-2026-128138 (CVSS 9.8) and 19 more: NLTK has another JVM sandbox bypass, this time over the 3.10.3 fix",
+            "fr": "CVE-2026-128138 (CVSS 9.8) et 19 autres : NLTK a un nouveau contournement du sandbox JVM, cette fois sur le correctif 3.10.3"
+          },
+          "body_html": {
+            "es": "<p>NLTK 3.10.3 había cerrado la inyección de argumentos en <code>nltk.internals.java()</code> filtrando <code>@argfile</code> y <code>-jar</code> en el canal <code>options</code>. Pero la secuencia <code>cmd</code> se sigue agregando al comando Java sin exigir que el primer elemento sea un nombre de clase main, así que queda otra vía para ejecutar código. El fix está en <strong>3.10.4</strong>.</p><p>Llegó en una tanda de 20 advisories el mismo día: hardlinks que escapan del data root al extraer ZIPs, un <code>AllowlistUnpickler</code> que no bloquea sinks de I/O en submódulos de numpy, binarios de prover9/mace4 con ruta relativa y una pila de DoS por recursión. Si NLTK procesa corpus o modelos de terceros en tu pipeline, actualizá ya.</p>",
+            "en": "<p>NLTK 3.10.3 had closed argument injection in <code>nltk.internals.java()</code> by rejecting <code>@argfile</code> and <code>-jar</code> in the <code>options</code> channel. But the <code>cmd</code> sequence is still appended to the Java command without enforcing that its first item is a main-class name, leaving another code execution path. The fix ships in <strong>3.10.4</strong>.</p><p>It landed in a batch of 20 advisories the same day: hardlinks escaping the data root during ZIP extraction, an <code>AllowlistUnpickler</code> that does not deny numpy submodule file-I/O sinks, prover9/mace4 binaries resolved by relative path, and a stack of recursion DoS bugs. If NLTK processes third-party corpora or models in your pipeline, upgrade now.</p>",
+            "fr": "<p>NLTK 3.10.3 avait fermé l'injection d'arguments dans <code>nltk.internals.java()</code> en rejetant <code>@argfile</code> et <code>-jar</code> dans le canal <code>options</code>. Mais la séquence <code>cmd</code> est toujours ajoutée à la commande Java sans exiger que son premier élément soit un nom de classe main, ce qui laisse une autre voie d'exécution de code. Le correctif est dans <strong>3.10.4</strong>.</p><p>Il arrive dans une série de 20 advisories publiés le même jour : des hardlinks qui sortent du data root à l'extraction de ZIP, un <code>AllowlistUnpickler</code> qui ne bloque pas les sinks d'I/O des sous-modules numpy, des binaires prover9/mace4 résolus par chemin relatif et une pile de DoS par récursion. Si NLTK traite des corpus ou modèles tiers dans votre pipeline, mettez à jour maintenant.</p>"
+          },
+          "date": "19 Nov 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-x8q7-6c7m-52gw",
+            "label": "GHSA-x8q7-6c7m-52gw"
+          }
+        }
+      ]
+    },
+    {
+      "id": "supply-chain",
+      "name": "Supply Chain",
+      "theme": "supply-chain",
+      "icon_emoji": "📦",
+      "anchor": "supply-chain",
+      "updates": [
+        {
+          "id": "cve-2026-134172",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-134172 (CVSS v4 8.5): audio-separator ejecuta código desde un modelo Demucs vía torch.load",
+            "en": "CVE-2026-134172 (CVSS v4 8.5): audio-separator runs code from a Demucs model via torch.load",
+            "fr": "CVE-2026-134172 (CVSS v4 8.5) : audio-separator exécute du code depuis un modèle Demucs via torch.load"
+          },
+          "body_html": {
+            "es": "<p><code>audio-separator</code> carga los modelos Demucs <code>.th</code> con <code>torch.load(weights_only=False)</code>, o sea pickle sin restricciones. Quien pueda escribir en el directorio compartido por defecto <code>/tmp/audio-separator-models/</code>, o controle una fuente de descarga de modelos sin verificar, ejecuta código cuando la víctima corre una separación.</p><p>Arreglado en <strong>0.47.2</strong>. El patrón se repite: modelo descargado + pickle = RCE. Fijá un directorio de modelos propio y verificá hashes.</p>",
+            "en": "<p><code>audio-separator</code> loads Demucs <code>.th</code> models with <code>torch.load(weights_only=False)</code>, meaning unrestricted pickle. Anyone who can write to the shared default directory <code>/tmp/audio-separator-models/</code>, or who controls an unverified model download source, gets code execution when the victim runs a separation.</p><p>Fixed in <strong>0.47.2</strong>. The pattern repeats: downloaded model + pickle = RCE. Pin a private model directory and verify hashes.</p>",
+            "fr": "<p><code>audio-separator</code> charge les modèles Demucs <code>.th</code> avec <code>torch.load(weights_only=False)</code>, c'est-à-dire du pickle sans restriction. Quiconque peut écrire dans le répertoire partagé par défaut <code>/tmp/audio-separator-models/</code>, ou contrôle une source de téléchargement de modèles non vérifiée, obtient l'exécution de code quand la victime lance une séparation.</p><p>Corrigé en <strong>0.47.2</strong>. Le schéma se répète : modèle téléchargé + pickle = RCE. Utilisez un répertoire de modèles privé et vérifiez les hashes.</p>"
+          },
+          "date": "20 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-134172",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-114495",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-114495 (CVSS 7.8): indexar un repo malicioso con codebase-memory-mcp corrompe el heap",
+            "en": "CVE-2026-114495 (CVSS 7.8): indexing a malicious repo with codebase-memory-mcp corrupts the heap",
+            "fr": "CVE-2026-114495 (CVSS 7.8) : indexer un dépôt malveillant avec codebase-memory-mcp corrompt le tas"
+          },
+          "body_html": {
+            "es": "<p><code>codebase-memory-mcp</code>, que da inteligencia de código a agentes vía MCP, importa automáticamente el artefacto <code>.codebase-memory/</code> de cada repo. El <code>original_size</code> de 64 bits de <code>artifact.json</code> se trunca a <code>int</code> al pasarlo a Zstandard, así que un valor con el bit 31 prendido hace que el descompresor escriba más allá del buffer: crash seguro y posible ejecución de código con solo indexar el repo.</p><p>La misma versión <strong>0.9.0</strong> corrige CVE-2026-114494 (7.8): una query Cypher con más de 32 items en <code>RETURN</code> desborda arrays en el stack, y la puede disparar un agente guiado por contenido no confiable.</p>",
+            "en": "<p><code>codebase-memory-mcp</code>, which gives agents code intelligence over MCP, automatically imports each repository's <code>.codebase-memory/</code> artifact. The 64-bit <code>original_size</code> from <code>artifact.json</code> is truncated to <code>int</code> when passed to Zstandard, so a value with bit 31 set makes the decompressor write past the buffer: a reliable crash and possible code execution just from indexing the repo.</p><p>The same <strong>0.9.0</strong> release fixes CVE-2026-114494 (7.8): a Cypher query with more than 32 <code>RETURN</code> items overflows stack arrays, and an agent steered by untrusted content can trigger it.</p>",
+            "fr": "<p><code>codebase-memory-mcp</code>, qui fournit de l'intelligence de code aux agents via MCP, importe automatiquement l'artefact <code>.codebase-memory/</code> de chaque dépôt. Le <code>original_size</code> 64 bits de <code>artifact.json</code> est tronqué en <code>int</code> lorsqu'il est passé à Zstandard : une valeur avec le bit 31 à 1 fait écrire le décompresseur au-delà du buffer, d'où un crash fiable et une possible exécution de code par simple indexation du dépôt.</p><p>La même version <strong>0.9.0</strong> corrige CVE-2026-114494 (7.8) : une requête Cypher avec plus de 32 éléments dans <code>RETURN</code> déborde des tableaux sur la pile, et un agent guidé par du contenu non fiable peut la déclencher.</p>"
+          },
+          "date": "20 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-114495",
+            "label": "OpenCVE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "cve-2026-134293",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-134293 (CVSS v4 8.8): el servidor MCP de SurrealDB acepta SurrealQL arbitrario con un backtick escapado",
+            "en": "CVE-2026-134293 (CVSS v4 8.8): SurrealDB's MCP server runs arbitrary SurrealQL through an escaped backtick",
+            "fr": "CVE-2026-134293 (CVSS v4 8.8) : le serveur MCP de SurrealDB exécute du SurrealQL arbitraire via un backtick échappé"
+          },
+          "body_html": {
+            "es": "<p>El validador de identificadores del servidor MCP de SurrealDB (<code>consume_backtick_ident</code> / <code>validate_identifier</code>) toma el primer backtick como cierre e ignora los escapes que el parser de SurrealQL sí respeta. Un argumento de tool con un backtick escapado rompe el identificador entre comillas y ejecuta sentencias arbitrarias.</p><p>Afecta 3.1.0 hasta antes de <strong>4.0.0</strong>. Esos argumentos los arma el modelo, así que un prompt injection alcanza para llegar a la base.</p>",
+            "en": "<p>The identifier validator in SurrealDB's MCP server (<code>consume_backtick_ident</code> / <code>validate_identifier</code>) treats the first backtick as the closing delimiter and ignores escapes that the SurrealQL parser honors. A tool argument containing an escaped backtick breaks out of the quoted identifier and runs arbitrary statements.</p><p>Affects 3.1.0 up to <strong>4.0.0</strong>. The model writes those arguments, so a prompt injection is enough to reach the database.</p>",
+            "fr": "<p>Le validateur d'identifiants du serveur MCP de SurrealDB (<code>consume_backtick_ident</code> / <code>validate_identifier</code>) prend le premier backtick comme délimiteur de fin et ignore les échappements que le parseur SurrealQL respecte. Un argument d'outil contenant un backtick échappé sort de l'identifiant entre guillemets et exécute des instructions arbitraires.</p><p>Touche 3.1.0 jusqu'à <strong>4.0.0</strong> exclue. C'est le modèle qui écrit ces arguments : une prompt injection suffit pour atteindre la base.</p>"
+          },
+          "date": "21 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-134293",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-129995",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-129995 (CVSS 8.8): mcp-ssh-manager ejecuta comandos en tus servidores desde las tools de backup, incluso en modo readonly",
+            "en": "CVE-2026-129995 (CVSS 8.8): mcp-ssh-manager runs commands on your servers through its backup tools, even in readonly mode",
+            "fr": "CVE-2026-129995 (CVSS 8.8) : mcp-ssh-manager exécute des commandes sur vos serveurs via ses outils de sauvegarde, même en mode readonly"
+          },
+          "body_html": {
+            "es": "<p>Las tools <code>ssh_backup_create</code>, <code>ssh_backup_restore</code>, <code>ssh_backup_schedule</code> y <code>ssh_backup_list</code> arman comandos de shell remotos con valores del caller sin neutralizar metacaracteres. Un nombre de base, ruta, exclusión o comentario armado ejecuta comandos en los servidores administrados como el usuario SSH, y <code>ssh_backup_schedule</code> lo persiste vía cron.</p><p>Ojo con esto: <code>ssh_backup_list</code> no pasa por el chequeo de política, así que sigue disponible en modo readonly y restringido. Lo puede disparar un cliente MCP comprometido o un agente desviado por prompt injection. Actualizá a <strong>3.8.5</strong>.</p>",
+            "en": "<p>The <code>ssh_backup_create</code>, <code>ssh_backup_restore</code>, <code>ssh_backup_schedule</code> and <code>ssh_backup_list</code> tools build remote shell commands from caller-controlled values without neutralizing metacharacters. A crafted database name, path, exclusion or comment runs commands on managed servers as the SSH user, and <code>ssh_backup_schedule</code> persists it through cron.</p><p><code>ssh_backup_list</code> skips the server policy check, so it stays available in readonly and restricted modes. A compromised MCP client or an agent steered by prompt injection can trigger it. Upgrade to <strong>3.8.5</strong>.</p>",
+            "fr": "<p>Les outils <code>ssh_backup_create</code>, <code>ssh_backup_restore</code>, <code>ssh_backup_schedule</code> et <code>ssh_backup_list</code> construisent des commandes shell distantes à partir de valeurs de l'appelant sans neutraliser les métacaractères. Un nom de base, un chemin, une exclusion ou un commentaire piégé exécute des commandes sur les serveurs gérés avec l'utilisateur SSH, et <code>ssh_backup_schedule</code> les rend persistantes via cron.</p><p><code>ssh_backup_list</code> contourne la vérification de politique et reste donc disponible en modes readonly et restreint. Un client MCP compromis ou un agent détourné par prompt injection peut le déclencher. Passez à <strong>3.8.5</strong>.</p>"
+          },
+          "date": "20 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-129995",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-83816",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-83816 (CVSS 8.1): CodeWhale aprueba solo comandos «read-only» que en realidad ejecutan código",
+            "en": "CVE-2026-83816 (CVSS 8.1): CodeWhale auto-approves «read-only» commands that actually execute code",
+            "fr": "CVE-2026-83816 (CVSS 8.1) : CodeWhale approuve seul des commandes «read-only» qui exécutent en réalité du code"
+          },
+          "body_html": {
+            "es": "<p>El perfil Agent de CodeWhale (antes DeepSeek-TUI) documenta que cada comando de shell pide aprobación. Pero el clasificador de comandos «parallel read-only» baja el requisito a automático para <code>fd</code>, <code>rg</code> y <code>git grep</code> aunque lleven sus flags de ejecución, y eso abre RCE silenciosa.</p><p>El mismo día salió CVE-2026-83817: en Automation, <code>auto_approve</code> viene en <code>true</code> por defecto y se saltea el endurecimiento previo para tareas recurrentes. Los mantenedores confirman que 0.8.67 y anteriores son vulnerables; actualizá a <strong>0.9.0</strong>.</p>",
+            "en": "<p>CodeWhale's Agent profile (formerly DeepSeek-TUI) is documented to gate every shell command behind approval. But its «parallel read-only» command classifier downgrades the requirement to automatic for <code>fd</code>, <code>rg</code> and <code>git grep</code> even when they carry their exec flags, opening silent RCE.</p><p>CVE-2026-83817 landed the same day: in Automation, <code>auto_approve</code> defaults to <code>true</code>, bypassing the earlier hardening for recurring tasks. Maintainers confirm 0.8.67 and earlier are affected; upgrade to <strong>0.9.0</strong>.</p>",
+            "fr": "<p>Le profil Agent de CodeWhale (ex-DeepSeek-TUI) est documenté pour soumettre chaque commande shell à approbation. Mais son classificateur de commandes «parallel read-only» passe en automatique <code>fd</code>, <code>rg</code> et <code>git grep</code> même avec leurs flags d'exécution, ce qui ouvre une RCE silencieuse.</p><p>CVE-2026-83817 est sortie le même jour : dans Automation, <code>auto_approve</code> vaut <code>true</code> par défaut et contourne le durcissement précédent pour les tâches récurrentes. Les mainteneurs confirment que 0.8.67 et antérieures sont touchées ; passez à <strong>0.9.0</strong>.</p>"
+          },
+          "date": "19 Nov 2026",
+          "source": {
+            "url": "https://github.com/advisories/GHSA-3mgh-93r5-r7jf",
+            "label": "GHSA-3mgh-93r5-r7jf"
+          }
+        },
+        {
+          "id": "cve-2026-134827",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-134827 (CVSS v4 8.3): el agente de IA de Lightdash entrega el token de GitLab de la organización a un host del atacante",
+            "en": "CVE-2026-134827 (CVSS v4 8.3): Lightdash's AI agent hands the organization GitLab token to an attacker's host",
+            "fr": "CVE-2026-134827 (CVSS v4 8.3) : l'agent IA de Lightdash remet le token GitLab de l'organisation à l'hôte d'un attaquant"
+          },
+          "body_html": {
+            "es": "<p>En el servicio AI Writeback de Lightdash, <code>getGitlabInstallationRepoReadAccess</code> manda el token de la app de GitLab de la organización a hosts sin verificar. Un desarrollador del proyecto setea el <code>host_domain</code> de la conexión dbt a su servidor y captura el token cuando el agente de IA lee el repo: acceso a todos los repositorios alcanzables.</p><p>Arreglado en <strong>3.212.0</strong>. Es la versión agéntica de un bug viejo: la herramienta del agente confía en un host que configura otro usuario.</p>",
+            "en": "<p>In Lightdash's AI Writeback service, <code>getGitlabInstallationRepoReadAccess</code> sends the organization's GitLab app token to unverified hosts. A project developer points the dbt connection <code>host_domain</code> at their own server and captures the token when the AI agent reads the repository, gaining access to every reachable repository.</p><p>Fixed in <strong>3.212.0</strong>. It is the agentic version of an old bug: the agent's tool trusts a host that another user configures.</p>",
+            "fr": "<p>Dans le service AI Writeback de Lightdash, <code>getGitlabInstallationRepoReadAccess</code> envoie le token de l'application GitLab de l'organisation à des hôtes non vérifiés. Un développeur du projet pointe le <code>host_domain</code> de la connexion dbt vers son serveur et capture le token quand l'agent IA lit le dépôt, avec accès à tous les dépôts atteignables.</p><p>Corrigé en <strong>3.212.0</strong>. C'est la version agentique d'un vieux bug : l'outil de l'agent fait confiance à un hôte configuré par un autre utilisateur.</p>"
+          },
+          "date": "22 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-134827",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-134803",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-134803 (CVSS v4 7.2): DBHub vuelve a perder el modo solo lectura, ahora con comillas escapadas con backslash",
+            "en": "CVE-2026-134803 (CVSS v4 7.2): DBHub loses read-only mode again, this time to backslash-escaped quotes",
+            "fr": "CVE-2026-134803 (CVSS v4 7.2) : DBHub perd encore son mode lecture seule, cette fois via des guillemets échappés par backslash"
+          },
+          "body_html": {
+            "es": "<p>El servidor MCP DBHub restringe <code>execute_sql</code> a lectura, pero <code>scanSingleQuotedString</code> interpreta mal las comillas escapadas con backslash. Adentro de un string mal parseado se esconden sentencias apiladas que limpian <code>transaction_read_only</code> o hacen <code>COMMIT</code>, y con eso se modifican o borran datos en MySQL, MariaDB o PostgreSQL.</p><p>Es el segundo bypass del modo solo lectura de DBHub en tres semanas. Actualizá a <strong>1.7.0</strong> y no uses el modo readonly como única barrera: dale al agente un usuario de base sin permisos de escritura.</p>",
+            "en": "<p>The DBHub MCP server restricts <code>execute_sql</code> to reads, but <code>scanSingleQuotedString</code> misparses backslash-escaped quotes. Stacked statements that clear <code>transaction_read_only</code> or issue <code>COMMIT</code> hide inside a misparsed string, letting attackers modify or drop data in MySQL, MariaDB or PostgreSQL.</p><p>This is DBHub's second read-only mode bypass in three weeks. Upgrade to <strong>1.7.0</strong> and do not rely on readonly mode as the only barrier: give the agent a database user without write privileges.</p>",
+            "fr": "<p>Le serveur MCP DBHub limite <code>execute_sql</code> à la lecture, mais <code>scanSingleQuotedString</code> analyse mal les guillemets échappés par backslash. Des instructions empilées qui annulent <code>transaction_read_only</code> ou émettent un <code>COMMIT</code> se cachent dans une chaîne mal analysée, ce qui permet de modifier ou supprimer des données MySQL, MariaDB ou PostgreSQL.</p><p>C'est le deuxième contournement du mode lecture seule de DBHub en trois semaines. Passez à <strong>1.7.0</strong> et ne comptez pas sur le mode readonly comme seule barrière : donnez à l'agent un utilisateur de base sans droits d'écriture.</p>"
+          },
+          "date": "22 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-134803",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-134817",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-134817 (CVSS v4 7.1): mcp-server-kubernetes deja inyectar flags de kubectl y leer archivos del host",
+            "en": "CVE-2026-134817 (CVSS v4 7.1): mcp-server-kubernetes allows kubectl flag injection and host file reads",
+            "fr": "CVE-2026-134817 (CVSS v4 7.1) : mcp-server-kubernetes permet d'injecter des flags kubectl et de lire des fichiers de l'hôte"
+          },
+          "body_html": {
+            "es": "<p>Tools como <code>exec_in_pod</code>, <code>kubectl_patch</code> y <code>kubectl_logs</code> pasan operandos posicionales a kubectl sin cortar los que empiezan con guión. Un cliente conectado por SSE o Streamable HTTP manda <code>--filename</code> y kubectl lee archivos del servidor, salteando las restricciones de lectura.</p><p>Arreglado en <strong>4.2.0</strong>. La defensa clásica sigue siendo la misma: poné <code>--</code> antes de cualquier argumento que venga del modelo.</p>",
+            "en": "<p>Tools such as <code>exec_in_pod</code>, <code>kubectl_patch</code> and <code>kubectl_logs</code> pass positional operands to kubectl without rejecting dash-prefixed values. A client connected over SSE or Streamable HTTP sends <code>--filename</code> and kubectl reads files from the server host, bypassing file-read restrictions.</p><p>Fixed in <strong>4.2.0</strong>. The classic defense still applies: put <code>--</code> before any argument that comes from the model.</p>",
+            "fr": "<p>Des outils comme <code>exec_in_pod</code>, <code>kubectl_patch</code> et <code>kubectl_logs</code> passent des opérandes positionnels à kubectl sans rejeter les valeurs commençant par un tiret. Un client connecté en SSE ou Streamable HTTP envoie <code>--filename</code> et kubectl lit des fichiers de l'hôte, contournant les restrictions de lecture.</p><p>Corrigé en <strong>4.2.0</strong>. La défense classique reste valable : placez <code>--</code> avant tout argument venant du modèle.</p>"
+          },
+          "date": "22 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-134817",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-133853",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-133853 (CVSS v4 6.0): el chatbot de FlowIntel comparte una sesión MCP y mezcla las credenciales de los usuarios",
+            "en": "CVE-2026-133853 (CVSS v4 6.0): FlowIntel's chatbot shares one MCP session and mixes up users' credentials",
+            "fr": "CVE-2026-133853 (CVSS v4 6.0) : le chatbot de FlowIntel partage une session MCP et mélange les identifiants des utilisateurs"
+          },
+          "body_html": {
+            "es": "<p>El chatbot de FlowIntel, una plataforma de gestión de casos de investigación, pasaba la API key de cada usuario a un proceso hijo con una sola sesión MCP y la variable de entorno global <code>FLOWINTEL_API_KEY</code>. Con requests concurrentes, la identidad de un usuario se aplica a la tool de otro, y un usuario con menos privilegios puede leer casos privados de uno con más.</p><p>También hereda credenciales viejas de sesiones invalidadas. La lección para cualquier integración MCP multiusuario: una sesión y un set de credenciales por usuario, nunca estado de proceso compartido.</p>",
+            "en": "<p>The chatbot in FlowIntel, an investigation case management platform, passed each user's API key to a child process through a single MCP session and the process-wide <code>FLOWINTEL_API_KEY</code> environment variable. Under concurrent requests, one user's identity is applied to another user's tool call, so a lower-privilege user can read a higher-privilege user's private cases.</p><p>Stale credentials from invalidated sessions can also be inherited. The lesson for any multi-user MCP integration: one session and one credential set per user, never shared process state.</p>",
+            "fr": "<p>Le chatbot de FlowIntel, une plateforme de gestion de dossiers d'enquête, transmettait la clé API de chaque utilisateur à un processus enfant via une seule session MCP et la variable d'environnement globale <code>FLOWINTEL_API_KEY</code>. Avec des requêtes concurrentes, l'identité d'un utilisateur s'applique à l'appel d'outil d'un autre, et un utilisateur moins privilégié peut lire les dossiers privés d'un utilisateur plus privilégié.</p><p>Des identifiants périmés de sessions invalidées peuvent aussi être hérités. La leçon pour toute intégration MCP multi-utilisateur : une session et un jeu d'identifiants par utilisateur, jamais d'état de processus partagé.</p>"
+          },
+          "date": "20 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-133853",
+            "label": "OpenCVE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "advisories",
+      "name": "Vendor Advisories",
+      "theme": "advisories",
+      "icon_emoji": "📢",
+      "anchor": "advisories",
+      "updates": [
+        {
+          "id": "signal-blocks-os-ai-agents",
+          "tag": "advisory",
+          "title": {
+            "es": "Signal bloquea por defecto a Siri, Gemini y otros agentes del sistema operativo para que no lean tus chats",
+            "en": "Signal blocks Siri, Gemini and other OS agents from reading your chats by default",
+            "fr": "Signal empêche par défaut Siri, Gemini et les autres agents du système de lire vos conversations"
+          },
+          "body_html": {
+            "es": "<p>Las nuevas versiones de Signal para iOS y Android bloquean por defecto que Siri, Gemini y otros agentes tomen capturas de pantalla, que es como estos agentes del sistema operativo leen el contenido con OCR. Se puede desactivar en la configuración, pero Signal avisa que eso expone tus mensajes y los de tus contactos.</p><p>Meredith Whittaker reconoce que es una solución parcial: los agentes pueden llegar a los datos por el sistema de archivos, y Google, Apple y Microsoft no dan herramientas para restringir ese acceso, por eso todavía no hay protección en macOS. Si construís apps con datos sensibles, el agente del sistema operativo ya es parte de tu modelo de amenazas.</p>",
+            "en": "<p>New Signal versions for iOS and Android block Siri, Gemini and other agents from taking screenshots by default, which is how these OS agents read on-screen content through OCR. Users can turn it off in settings, but Signal warns that doing so exposes their messages and their contacts' messages.</p><p>Meredith Whittaker concedes it is a partial fix: agents can reach data through the file system, and Google, Apple and Microsoft provide no tools to restrict that access, which is why there is no macOS protection yet. If you build apps that handle sensitive data, the OS agent is now part of your threat model.</p>",
+            "fr": "<p>Les nouvelles versions de Signal pour iOS et Android empêchent par défaut Siri, Gemini et d'autres agents de faire des captures d'écran, ce qui est la façon dont ces agents du système lisent le contenu par OCR. On peut le désactiver dans les réglages, mais Signal prévient que cela expose vos messages et ceux de vos contacts.</p><p>Meredith Whittaker admet que c'est une solution partielle : les agents peuvent accéder aux données via le système de fichiers, et Google, Apple et Microsoft ne fournissent pas d'outils pour restreindre cet accès, d'où l'absence de protection sur macOS. Si vous développez des applications manipulant des données sensibles, l'agent du système fait désormais partie de votre modèle de menace.</p>"
+          },
+          "date": "20 Nov 2026",
+          "source": {
+            "url": "https://www.theregister.com/security/2026/11/20/signal-slams-door-on-prying-ai-agents-to-protect-privacy/5311466",
+            "label": "The Register"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Los agentes de IA ofensivos ya encuentran 0-days solos: después del reporte de Unit 42 sobre Cairn, Amazon muestra a los mismos agentes descubriendo y explotando una vulnerabilidad nueva en MONAI Label en 11 minutos.",
+      "en": "Offensive AI agents now find 0-days on their own: after Unit 42's Cairn report, Amazon shows the same tooling discovering and exploiting a new MONAI Label flaw in 11 minutes.",
+      "fr": "Les agents IA offensifs trouvent désormais seuls des 0-days : après le rapport d'Unit 42 sur Cairn, Amazon montre ces outils découvrir et exploiter une nouvelle faille de MONAI Label en 11 minutes."
+    },
+    {
+      "es": "Los servidores MCP de bases de datos siguen cayendo por el mismo lado: SurrealDB, DBHub y sqlite-mcp confían en un parser propio para separar lectura de escritura. Los permisos de verdad van en el usuario de la base.",
+      "en": "Database MCP servers keep failing the same way: SurrealDB, DBHub and sqlite-mcp rely on a home-grown parser to separate reads from writes. Real permissions belong on the database user.",
+      "fr": "Les serveurs MCP de bases de données tombent toujours de la même façon : SurrealDB, DBHub et sqlite-mcp s'appuient sur un parseur maison pour séparer lecture et écriture. Les vraies permissions se placent sur l'utilisateur de la base."
+    },
+    {
+      "es": "El archivo del modelo sigue siendo input no confiable: llama.cpp (GGUF), audio-separator (pickle) y codebase-memory-mcp (artefacto del repo) caen en la misma semana por cargar datos sin validar.",
+      "en": "The model file is still untrusted input: llama.cpp (GGUF), audio-separator (pickle) and codebase-memory-mcp (repo artifact) all fell the same week for loading unvalidated data.",
+      "fr": "Le fichier du modèle reste une entrée non fiable : llama.cpp (GGUF), audio-separator (pickle) et codebase-memory-mcp (artefact de dépôt) tombent la même semaine pour avoir chargé des données non validées."
+    }
+  ]
+}

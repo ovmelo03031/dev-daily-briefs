@@ -1,0 +1,480 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 24 Nov 2026",
+    "en": "Backend & Fullstack Daily — 24 Nov 2026",
+    "fr": "Backend & Fullstack Daily — 24 nov. 2026"
+  },
+  "description": {
+    "es": "Segunda release de seguridad de nginx en una semana, Prisma 8 rc.25 con pg como peer dependency, un bypass de auth crítico en Xen Orchestra por cookies JSON y AWS WAF que descubre APIs y endpoints MCP solo. Además Hono endurece JWT, CloudFront habla HTTP/2 con el origen y Kubernetes adelanta lo que se va en 1.38.",
+    "en": "A second nginx security release in a week, Prisma 8 rc.25 making pg a peer dependency, a critical Xen Orchestra auth bypass via JSON cookies, and AWS WAF discovering APIs and MCP endpoints on its own. Plus Hono hardens JWT, CloudFront speaks HTTP/2 to origins and Kubernetes previews what leaves in 1.38.",
+    "fr": "Deuxième release de sécurité de nginx en une semaine, Prisma 8 rc.25 qui fait de pg une peer dependency, un contournement d'auth critique dans Xen Orchestra via des cookies JSON et AWS WAF qui découvre seul les API et endpoints MCP. Aussi Hono durcit JWT, CloudFront parle HTTP/2 à l'origine et Kubernetes annonce ce qui part en 1.38."
+  },
+  "pubDate": "2026-11-24",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "nginx: CVE en TLS 1.3 early data, subí a 1.30.8",
+        "en": "nginx: TLS 1.3 early-data CVE, move to 1.30.8",
+        "fr": "nginx : CVE TLS 1.3 early data, passez en 1.30.8"
+      },
+      "anchor": "nginx-ssl-early-data",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Xen Orchestra: bypass de auth con una cookie {}",
+        "en": "Xen Orchestra: auth bypass with a {} cookie",
+        "fr": "Xen Orchestra : bypass d'auth avec un cookie {}"
+      },
+      "anchor": "xo-server-auth-bypass",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Prisma 8 rc.25: pg pasa a peer dependency",
+        "en": "Prisma 8 rc.25: pg becomes a peer dependency",
+        "fr": "Prisma 8 rc.25 : pg devient peer dependency"
+      },
+      "anchor": "prisma-8-rc-25",
+      "icon": "simple-icons:prisma"
+    },
+    {
+      "text": {
+        "es": "Hono 4.13.21: solo firmas JWT canónicas",
+        "en": "Hono 4.13.21: canonical JWT signatures only",
+        "fr": "Hono 4.13.21 : signatures JWT canoniques seulement"
+      },
+      "anchor": "hono-4-13-21",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "CloudFront habla HTTP/2 con tu origen",
+        "en": "CloudFront now speaks HTTP/2 to your origin",
+        "fr": "CloudFront parle HTTP/2 à votre origine"
+      },
+      "anchor": "cloudfront-http2-origins",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": {
+        "es": "Agoda: modular monolith con ArchUnit en CI",
+        "en": "Agoda: a modular monolith enforced by ArchUnit",
+        "fr": "Agoda : monolithe modulaire verrouillé par ArchUnit"
+      },
+      "anchor": "agoda-modular-monolith",
+      "icon": "lucide:layers"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "nginx-ssl-early-data",
+      "updates": [
+        {
+          "id": "nginx-ssl-early-data",
+          "tag": "security",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "nginx 1.30.8 y 1.31.10: CPU al 100% con TLS 1.3 early data (CVE-2026-132779)",
+            "en": "nginx 1.30.8 and 1.31.10: excessive CPU with TLS 1.3 early data (CVE-2026-132779)",
+            "fr": "nginx 1.30.8 et 1.31.10 : CPU excessif avec l'early data TLS 1.3 (CVE-2026-132779)"
+          },
+          "body_html": {
+            "es": "<p>Cinco días después de nginx2root, nginx sacó <strong>1.30.8</strong> (stable) y <strong>1.31.10</strong> (mainline) con un fix para <code>CVE-2026-132779</code>: un cliente puede disparar consumo excesivo de CPU cuando tenés <code>ssl_early_data on</code> (0-RTT de TLS 1.3). La severidad es media, pero el rango es enorme: afecta de <strong>1.21.4 a 1.31.9</strong>. Si ya actualizaste a 1.30.7 la semana pasada, te toca de nuevo. Mientras tanto, apagar <code>ssl_early_data</code> es un mitigante razonable: el 0-RTT casi nunca vale el riesgo de replay en una API.</p>",
+            "en": "<p>Five days after nginx2root, nginx shipped <strong>1.30.8</strong> (stable) and <strong>1.31.10</strong> (mainline) with a fix for <code>CVE-2026-132779</code>: a client can trigger excessive CPU usage when <code>ssl_early_data on</code> (TLS 1.3 0-RTT) is enabled. Severity is medium, but the range is wide: <strong>1.21.4 through 1.31.9</strong>. If you moved to 1.30.7 last week, you need to upgrade again. Until then, turning <code>ssl_early_data</code> off is a sensible mitigation; 0-RTT rarely justifies its replay risk in front of an API.</p>",
+            "fr": "<p>Cinq jours après nginx2root, nginx publie <strong>1.30.8</strong> (stable) et <strong>1.31.10</strong> (mainline) avec un correctif pour <code>CVE-2026-132779</code> : un client peut provoquer une consommation CPU excessive quand <code>ssl_early_data on</code> (0-RTT TLS 1.3) est activé. Sévérité moyenne, mais la plage est large : de <strong>1.21.4 à 1.31.9</strong>. Si vous êtes passé en 1.30.7 la semaine dernière, il faut remettre à jour. En attendant, désactiver <code>ssl_early_data</code> est une mitigation raisonnable : le 0-RTT vaut rarement son risque de replay devant une API.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nginx/nginx/releases/tag/release-1.30.8",
+            "label": "github.com/nginx"
+          }
+        },
+        {
+          "id": "xo-server-auth-bypass",
+          "tag": "security",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "Xen Orchestra (xo-server): bypass de autenticación con una cookie que vale {} (CVSS 9.8)",
+            "en": "Xen Orchestra (xo-server): authentication bypass with a cookie whose value is {} (CVSS 9.8)",
+            "fr": "Xen Orchestra (xo-server) : contournement d'authentification avec un cookie qui vaut {} (CVSS 9.8)"
+          },
+          "body_html": {
+            "es": "<p><code>CVE-2026-133469</code> en el backend Node de Xen Orchestra es una clase de bug que cualquier API en Express puede tener. <code>cookie-parser</code> convierte los valores con prefijo <code>j:</code> en JSON, así que <code>authenticationToken=j:{}</code> llega como el objeto <code>{}</code>. El handler de <code>signIn</code> no tenía schema, y la colección de tokens tomó <code>{}</code> como un filtro vacío, devolvió el primer token y autenticó como su dueño, que puede ser un admin. Con eso se toma el pool XCP-ng como root. El advisory todavía no lista una versión de npm parcheada. La lección para tu código: validá el <strong>tipo</strong> de todo lo que venga de cookies, query o body antes de pasarlo a una búsqueda. Un <code>z.string()</code> en el borde te ahorra este CVE.</p>",
+            "en": "<p><code>CVE-2026-133469</code> in Xen Orchestra's Node backend is a class of bug any Express API can have. <code>cookie-parser</code> turns <code>j:</code>-prefixed values into JSON, so <code>authenticationToken=j:{}</code> arrives as the object <code>{}</code>. The <code>signIn</code> handler had no schema, and the token collection treated <code>{}</code> as an empty filter, returned the first token and authenticated as its owner, possibly an admin. From there an attacker can take over the XCP-ng pool as root. The advisory does not list a patched npm version yet. The lesson for your own code: validate the <strong>type</strong> of anything from cookies, query or body before it reaches a lookup. A <code>z.string()</code> at the edge prevents this CVE.</p>",
+            "fr": "<p><code>CVE-2026-133469</code> dans le backend Node de Xen Orchestra est une classe de bug que toute API Express peut avoir. <code>cookie-parser</code> transforme les valeurs préfixées par <code>j:</code> en JSON, donc <code>authenticationToken=j:{}</code> arrive comme l'objet <code>{}</code>. Le handler <code>signIn</code> n'avait pas de schéma, et la collection de tokens a traité <code>{}</code> comme un filtre vide, renvoyé le premier token et authentifié son propriétaire, parfois un admin. De là, on prend le pool XCP-ng en root. L'advisory ne liste pas encore de version npm corrigée. La leçon : validez le <strong>type</strong> de tout ce qui vient des cookies, de la query ou du body avant une recherche. Un <code>z.string()</code> en bordure évite ce CVE.</p>"
+          },
+          "source": {
+            "url": "https://github.com/advisories/GHSA-2r3w-c2vx-fv5g",
+            "label": "github.com/advisories"
+          }
+        },
+        {
+          "id": "prisma-8-rc-25",
+          "tag": "breaking",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "Prisma 8.0.0-rc.25: pg como peer dependency, cliente propio para MariaDB y transacciones anidadas",
+            "en": "Prisma 8.0.0-rc.25: pg as a peer dependency, a dedicated MariaDB client and nested transactions",
+            "fr": "Prisma 8.0.0-rc.25 : pg en peer dependency, un client MariaDB dédié et des transactions imbriquées"
+          },
+          "body_html": {
+            "es": "<p>La rc.25 trae cambios que rompen. <code>@prisma/orm-postgres</code> y compañía ya no instalan su propio <code>pg</code>: agregá <code>pg ^8.22.0</code> y <code>@types/pg ^8.20.0</code> antes de actualizar. Esto arregla el caso en que tu <code>Pool</code> no era aceptado por diferencias entre versiones de tipos. También piden <code>temporal-polyfill ^1.0.8</code>. Lo nuevo: la base puede declarar cómo puede cambiar y qué datos protege, y el CLI rechaza migraciones que rompan esas reglas. Además MariaDB tiene cliente propio, MySQL suma aggregates, hay <code>tx.transaction(callback)</code> anidado y, en PostgreSQL y SQLite, un cambio de <code>@map</code> se planifica como rename y no como drop + create. Después de actualizar, corré <code>prisma contract emit</code>.</p>",
+            "en": "<p>rc.25 has breaking changes. <code>@prisma/orm-postgres</code> and its siblings no longer install their own <code>pg</code>: add <code>pg ^8.22.0</code> and <code>@types/pg ^8.20.0</code> before upgrading. This fixes your own <code>Pool</code> being rejected when the two <code>@types/pg</code> versions differed. <code>temporal-polyfill ^1.0.8</code> is now required too. What is new: a database can record how it may change and what data it protects, and the CLI refuses a migration that breaks those rules. MariaDB gets its own client, MySQL gains aggregates, nested <code>tx.transaction(callback)</code> works, and on PostgreSQL and SQLite a changed <code>@map</code> is planned as a rename, not a drop and create. Run <code>prisma contract emit</code> once after upgrading.</p>",
+            "fr": "<p>La rc.25 apporte des changements cassants. <code>@prisma/orm-postgres</code> et consorts n'installent plus leur propre <code>pg</code> : ajoutez <code>pg ^8.22.0</code> et <code>@types/pg ^8.20.0</code> avant la mise à jour. Cela corrige le rejet de votre propre <code>Pool</code> quand les deux versions de <code>@types/pg</code> différaient. <code>temporal-polyfill ^1.0.8</code> est aussi requis. Nouveautés : une base peut déclarer comment elle peut changer et quelles données elle protège, et le CLI refuse une migration qui enfreint ces règles. MariaDB a son propre client, MySQL gagne les agrégats, <code>tx.transaction(callback)</code> s'imbrique, et sur PostgreSQL et SQLite un <code>@map</code> modifié est planifié comme un rename, pas un drop puis create. Lancez <code>prisma contract emit</code> une fois après la mise à jour.</p>"
+          },
+          "source": {
+            "url": "https://github.com/prisma/orm/releases/tag/v8.0.0-rc.25",
+            "label": "github.com/prisma"
+          }
+        },
+        {
+          "id": "aws-waf-api-security",
+          "tag": "ga",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "AWS WAF descubre tus APIs (y tus servidores MCP) solo y suma reglas contra BOLA",
+            "en": "AWS WAF discovers your APIs (and MCP servers) on its own and adds rules against BOLA",
+            "fr": "AWS WAF découvre seul vos API (et serveurs MCP) et ajoute des règles contre le BOLA"
+          },
+          "body_html": {
+            "es": "<p>En GA: el nuevo <strong>API Gateway API Portal</strong> encuentra las APIs detrás de API Gateway, ALB y CloudFront en toda tu Organization a partir de logs de tráfico y config, sin agentes. Además marca las APIs zombie y shadow y las que no tienen WAF. El nuevo managed rule group <strong>API Security</strong> apunta a <strong>BOLA</strong> (cambiar IDs para leer datos ajenos), credential stuffing y tokens forjados. El mismo día salió la variante para endpoints LLM, MCP y A2A, que valida los mensajes MCP malformados, y un <strong>pricing simplificado</strong>: pagás por recurso protegido y por request inspeccionado, y cada web ACL incluye hasta 2.500 WCU. Ojo: un WAF no reemplaza el chequeo de ownership en tu handler.</p>",
+            "en": "<p>Now GA: the new <strong>API Gateway API Portal</strong> finds the APIs behind API Gateway, ALB and CloudFront across your Organization from traffic logs and config, with no agents. It also flags zombie and shadow APIs and the ones without WAF. The new <strong>API Security</strong> managed rule group targets <strong>BOLA</strong> (swapping record IDs to read other users' data), credential stuffing and forged tokens. On the same day AWS shipped the variant for LLM, MCP and A2A endpoints, which blocks malformed MCP messages, plus <strong>simplified pricing</strong>: you pay per protected resource and per inspected request, and each web ACL includes up to 2,500 WCU. A WAF does not replace the ownership check in your handler.</p>",
+            "fr": "<p>En GA : le nouveau <strong>API Gateway API Portal</strong> trouve les API derrière API Gateway, ALB et CloudFront dans toute votre Organization à partir des logs de trafic et de la config, sans agent. Il signale aussi les API zombies et shadow et celles sans WAF. Le nouveau managed rule group <strong>API Security</strong> vise le <strong>BOLA</strong> (changer les ID pour lire les données d'autrui), le credential stuffing et les tokens forgés. Le même jour sont sortis la variante pour endpoints LLM, MCP et A2A, qui bloque les messages MCP malformés, et une <strong>tarification simplifiée</strong> : par ressource protégée et par requête inspectée, avec jusqu'à 2 500 WCU inclus par web ACL. Un WAF ne remplace pas le contrôle d'ownership dans votre handler.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/api-security-with-waf/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "hono-4-13-21",
+      "updates": [
+        {
+          "id": "hono-4-13-21",
+          "tag": "security",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "Hono 4.13.21: firmas JWT solo en Base64URL canónico y el cliente ya no cambia de host",
+            "en": "Hono 4.13.21: JWT signatures must be canonical Base64URL, and the client can no longer switch hosts",
+            "fr": "Hono 4.13.21 : signatures JWT en Base64URL canonique uniquement, et le client ne change plus d'hôte"
+          },
+          "body_html": {
+            "es": "<p>Release de hardening con dos fixes que importan. <code>hono/jwt</code> rechaza firmas con padding <code>=</code> o con bits sobrantes distintos de cero en el último carácter: varias codificaciones del mismo token ya no pasan como válidas, lo que cierra la puerta a bypasses de denylists y de caches por token. Y en <code>hono/client</code>, un path param ya no puede cambiar el host de la URL cuando la base es relativa. Si armás URLs con input del usuario, esto era un SSRF esperando pasar. Lo reportaron cuatro personas distintas, así que actualizá.</p>",
+            "en": "<p>A hardening release with two fixes that matter. <code>hono/jwt</code> now rejects signatures with <code>=</code> padding or non-zero unused bits in the last character, so different encodings of the same token no longer validate. That closes off bypasses of per-token denylists and caches. And in <code>hono/client</code>, a path param can no longer change the request host when the base URL is relative; if you build URLs from user input, that was an SSRF waiting to happen. Four separate reporters found these, so upgrade.</p>",
+            "fr": "<p>Une release de durcissement avec deux correctifs qui comptent. <code>hono/jwt</code> rejette les signatures avec padding <code>=</code> ou des bits inutilisés non nuls dans le dernier caractère : plusieurs encodages du même token ne passent plus, ce qui ferme les contournements de denylists et de caches par token. Et dans <code>hono/client</code>, un path param ne peut plus changer l'hôte quand l'URL de base est relative ; si vous construisez des URL avec une entrée utilisateur, c'était un SSRF en attente. Quatre personnes l'ont signalé, mettez à jour.</p>"
+          },
+          "source": {
+            "url": "https://github.com/honojs/hono/releases/tag/v4.13.21",
+            "label": "github.com/honojs"
+          }
+        },
+        {
+          "id": "graphql-yoga-6-1-1",
+          "tag": "patch",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "GraphQL Yoga 6.1.1: allowedHeaders dejaba pasar uno de cada dos headers prohibidos",
+            "en": "GraphQL Yoga 6.1.1: allowedHeaders let every other disallowed header through",
+            "fr": "GraphQL Yoga 6.1.1 : allowedHeaders laissait passer un header interdit sur deux"
+          },
+          "body_html": {
+            "es": "<p>Bug de manual: con un <code>Request</code> nativo, Yoga borraba headers mientras iteraba el <code>Headers</code>, y el iterador se salteaba la entrada siguiente a cada borrado. Resultado: más o menos uno de cada dos headers no listados en <code>allowedHeaders</code> llegaba a los resolvers y a la response. Además, las caches de parse y validación ahora tienen un límite de 1 MiB de texto total, porque un documento parseado ocupa cientos de veces lo que su string. Regla para tu código: nunca mutes una colección mientras la recorrés; copiá las keys primero.</p>",
+            "en": "<p>A textbook bug: with a native <code>Request</code>, Yoga deleted headers while iterating <code>Headers</code>, and the iterator skipped the entry after each deletion. As a result, roughly every other header missing from <code>allowedHeaders</code> still reached resolvers and the response. The parse and validation caches are now also bounded at 1 MiB of total document text, since a parsed document can take a few hundred times more memory than its string. A rule for your own code: never mutate a collection while iterating it; copy the keys first.</p>",
+            "fr": "<p>Un bug d'école : avec un <code>Request</code> natif, Yoga supprimait des headers en itérant <code>Headers</code>, et l'itérateur sautait l'entrée suivant chaque suppression. Environ un header non listé dans <code>allowedHeaders</code> sur deux atteignait donc les resolvers et la réponse. Les caches de parsing et de validation sont aussi bornés à 1 MiB de texte au total, car un document parsé pèse des centaines de fois sa chaîne. Règle pour votre code : ne mutez jamais une collection pendant son parcours ; copiez d'abord les clés.</p>"
+          },
+          "source": {
+            "url": "https://github.com/graphql-hive/graphql-yoga/releases/tag/graphql-yoga%406.1.1",
+            "label": "github.com/graphql-hive"
+          }
+        },
+        {
+          "id": "engine-io-6-6-13",
+          "tag": "security",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "engine.io 6.6.13: timeout y límite al buffering del polling, y ws 8.23 contra el ping flood",
+            "en": "engine.io 6.6.13: timeouts and bounds on polling buffers, plus ws 8.23 against ping floods",
+            "fr": "engine.io 6.6.13 : timeout et limite sur le buffering du polling, et ws 8.23 contre le ping flood"
+          },
+          "body_html": {
+            "es": "<p>La capa de transporte de Socket.IO agrega un timeout para los bodies de long-polling y limita cuántos chunks bufferea por request: antes, un cliente lento o malicioso podía retener memoria indefinidamente. También sube <code>ws</code> a <code>^8.23.0</code> por <code>GHSA-37g9-w4hg-h9qr</code> (CVSS 7.5), un peer que manda pings mientras deja de leer obliga al otro lado a acumular pongs hasta el OOM. El rango pasa de <code>~8.21.0</code> a <code>^8.23.0</code> para recibir los próximos fixes. <code>socket.io-adapter 2.5.9</code> hace lo mismo. Si usás <code>ws</code> directo, revisá tu lockfile.</p>",
+            "en": "<p>Socket.IO's transport layer adds a timeout for long-polling request bodies and bounds how many chunks it buffers per request; before, a slow or malicious client could hold memory indefinitely. It also bumps <code>ws</code> to <code>^8.23.0</code> for <code>GHSA-37g9-w4hg-h9qr</code> (CVSS 7.5), where a peer that floods pings while it stops reading forces the other side to buffer pongs until OOM. The range moves from <code>~8.21.0</code> to <code>^8.23.0</code> so future fixes land automatically. <code>socket.io-adapter 2.5.9</code> does the same. If you use <code>ws</code> directly, check your lockfile.</p>",
+            "fr": "<p>La couche de transport de Socket.IO ajoute un timeout pour les bodies de long-polling et limite le nombre de chunks mis en buffer par requête : avant, un client lent ou malveillant pouvait retenir de la mémoire indéfiniment. Elle passe aussi <code>ws</code> en <code>^8.23.0</code> pour <code>GHSA-37g9-w4hg-h9qr</code> (CVSS 7.5) : un pair qui inonde de pings sans lire force l'autre côté à accumuler des pongs jusqu'à l'OOM. La plage passe de <code>~8.21.0</code> à <code>^8.23.0</code> pour recevoir les prochains correctifs. <code>socket.io-adapter 2.5.9</code> fait de même. Si vous utilisez <code>ws</code> directement, vérifiez votre lockfile.</p>"
+          },
+          "source": {
+            "url": "https://github.com/socketio/socket.io/releases/tag/engine.io%406.6.13",
+            "label": "github.com/socketio"
+          }
+        },
+        {
+          "id": "inngest-ci-heredoc",
+          "tag": "security",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "@inngest/ci 0.7.2: los heredocs abrían la puerta a command injection en $.sh",
+            "en": "@inngest/ci 0.7.2: heredocs opened a command-injection path in $.sh",
+            "fr": "@inngest/ci 0.7.2 : les heredocs ouvraient une injection de commande dans $.sh"
+          },
+          "body_html": {
+            "es": "<p>El template <code>$.sh</code> rodea cada valor interpolado con comillas simples, pero dentro del cuerpo de un heredoc (<code>&lt;&lt;</code>) esas comillas no cuentan y la shell ejecuta la sustitución de comandos del texto no confiable. Ahora se rechazan los templates que mezclan valores interpolados con <code>&lt;&lt;</code> o backticks en el texto estático. Para escribir texto no confiable, usá <code>printf %s ${value}</code>. Es la misma lección de siempre: escapar para un contexto no te protege en otro.</p>",
+            "en": "<p>The <code>$.sh</code> template wraps each interpolated value in single quotes, but inside a heredoc body (<code>&lt;&lt;</code>) those quotes are ignored and the shell runs command substitutions from untrusted text. Templates that combine interpolated values with <code>&lt;&lt;</code> or backticks in static text are now rejected. To write untrusted text, use <code>printf %s ${value}</code>. The usual lesson: escaping for one context does not protect you in another.</p>",
+            "fr": "<p>Le template <code>$.sh</code> entoure chaque valeur interpolée de guillemets simples, mais dans le corps d'un heredoc (<code>&lt;&lt;</code>) ils sont ignorés et le shell exécute les substitutions de commandes du texte non fiable. Les templates qui mêlent valeurs interpolées et <code>&lt;&lt;</code> ou backticks dans le texte statique sont désormais rejetés. Pour écrire du texte non fiable, utilisez <code>printf %s ${value}</code>. Leçon classique : échapper pour un contexte ne protège pas dans un autre.</p>"
+          },
+          "source": {
+            "url": "https://github.com/inngest/inngest-js/releases/tag/%40inngest/ci%400.7.2",
+            "label": "github.com/inngest"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "mongoose-9-13",
+      "updates": [
+        {
+          "id": "mongoose-9-13",
+          "tag": "release",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "Mongoose 9.13: defaultSort en el schema, driver 7.9 y tipos para proyecciones anidadas",
+            "en": "Mongoose 9.13: defaultSort on the schema, driver 7.9 and types for nested projections",
+            "fr": "Mongoose 9.13 : defaultSort sur le schéma, driver 7.9 et types pour les projections imbriquées"
+          },
+          "body_html": {
+            "es": "<p>La opción <code>defaultSort</code> del schema aplica un orden por defecto a todas las queries salvo que pases <code>sort</code> explícito, y se termina el orden de inserción como contrato implícito. Además actualiza el driver de MongoDB a <strong>7.9</strong>, elimina un lookup <code>id()</code> O(n·m) al asignar un array plano a un document array y tipa bien las proyecciones anidadas en TypeScript. La rama 8.x recibe <code>8.24.11</code> con un fix para paths con puntos dentro de document arrays.</p>",
+            "en": "<p>The new <code>defaultSort</code> schema option applies a default order to every query unless you pass <code>sort</code> explicitly, so insertion order stops being an implicit contract. It also moves to MongoDB driver <strong>7.9</strong>, removes an O(n·m) <code>id()</code> lookup when you assign a plain array to a document array, and types nested projections properly in TypeScript. The 8.x line gets <code>8.24.11</code> with a fix for dotted paths through document array elements.</p>",
+            "fr": "<p>La nouvelle option de schéma <code>defaultSort</code> applique un ordre par défaut à toutes les requêtes sauf <code>sort</code> explicite : l'ordre d'insertion cesse d'être un contrat implicite. Passage aussi au driver MongoDB <strong>7.9</strong>, suppression d'un lookup <code>id()</code> en O(n·m) quand on assigne un tableau simple à un document array, et typage correct des projections imbriquées en TypeScript. La branche 8.x reçoit <code>8.24.11</code> avec un correctif pour les chemins pointés dans les document arrays.</p>"
+          },
+          "source": {
+            "url": "https://github.com/Automattic/mongoose/releases/tag/9.13.0",
+            "label": "github.com/Automattic"
+          }
+        },
+        {
+          "id": "aurora-serverless-384-acu",
+          "tag": "notable",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "Aurora serverless para MySQL escala hasta 384 ACUs (768 GiB) y sigue bajando a cero",
+            "en": "Aurora serverless for MySQL scales to 384 ACUs (768 GiB) and still scales to zero",
+            "fr": "Aurora serverless pour MySQL monte à 384 ACU (768 Gio) et redescend toujours à zéro"
+          },
+          "body_html": {
+            "es": "<p>El techo sube de 256 a <strong>384 ACUs</strong>, un 50% más. Cada ACU son unos 2 GiB de memoria con su CPU y red, así que una sola base serverless llega a 768 GiB y vuelve a cero cuando no hay carga. En clusters existentes sobre Platform Version 4 alcanza con subir la capacidad máxima. Es la opción si tu carga va a picos con ventanas largas sin tráfico y no querés pagar una instancia provisionada todo el día.</p>",
+            "en": "<p>The ceiling moves from 256 to <strong>384 ACUs</strong>, a 50% increase. Each ACU is about 2 GiB of memory with matching CPU and networking, so a single serverless database now reaches 768 GiB and still scales back to zero when idle. Existing clusters on Platform Version 4 only need a higher maximum capacity. It fits bursty workloads with long idle windows, where a provisioned instance would sit mostly unused.</p>",
+            "fr": "<p>Le plafond passe de 256 à <strong>384 ACU</strong>, soit 50 % de plus. Chaque ACU représente environ 2 Gio de mémoire avec CPU et réseau associés : une seule base serverless atteint 768 Gio et redescend à zéro au repos. Sur les clusters existants en Platform Version 4, il suffit de relever la capacité maximale. Idéal pour des charges en pics avec de longues périodes creuses, là où une instance provisionnée resterait inutilisée.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/aurora-serverless-mysql-supports-384-acu/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloudfront-http2-origins",
+      "updates": [
+        {
+          "id": "cloudfront-http2-origins",
+          "tag": "notable",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "CloudFront se conecta a tus orígenes por HTTP/2, sin costo extra",
+            "en": "CloudFront connects to your origins over HTTP/2, at no extra cost",
+            "fr": "CloudFront se connecte à vos origines en HTTP/2, sans surcoût"
+          },
+          "body_html": {
+            "es": "<p>Hasta ahora CloudFront hablaba con custom origins y VPC origins solo por HTTP/1.1, un request por conexión, así que cada pico abría más conexiones y más handshakes TLS contra tu backend. Con HTTP/2 los requests se multiplexan sobre menos conexiones y bajan la latencia y la carga en el origen. También funciona para WebSockets con extended CONNECT. Si tu origen no soporta HTTP/2, cae solo a HTTP/1.1. Si tenés Node o Fastify detrás, mirá cómo andan tus límites de streams concurrentes.</p>",
+            "en": "<p>Until now CloudFront talked to custom and VPC origins only over HTTP/1.1, one request per connection, so every traffic spike opened more connections and more TLS handshakes against your backend. With HTTP/2, requests multiplex over fewer connections, cutting latency and origin load. It also works for WebSockets that support extended CONNECT. If your origin lacks HTTP/2, CloudFront falls back to HTTP/1.1 automatically. If Node or Fastify sits behind it, review your concurrent-stream limits.</p>",
+            "fr": "<p>Jusqu'ici CloudFront parlait aux custom origins et VPC origins uniquement en HTTP/1.1, une requête par connexion : chaque pic ouvrait plus de connexions et de handshakes TLS vers votre backend. Avec HTTP/2, les requêtes sont multiplexées sur moins de connexions, ce qui réduit latence et charge à l'origine. Cela marche aussi pour les WebSockets avec extended CONNECT. Si l'origine ne gère pas HTTP/2, CloudFront revient seul à HTTP/1.1. Avec Node ou Fastify derrière, vérifiez vos limites de streams concurrents.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/01/amazon-cloudfront-http2-origins/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "kubernetes-1-38-sneak-peek",
+          "tag": "deprecation",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "Kubernetes 1.38 sneak peek: se van las variables de opt-out de WebSockets en kubectl y los runtimes deben reportar el cgroup driver",
+            "en": "Kubernetes 1.38 sneak peek: kubectl WebSocket opt-out variables go away and runtimes must report the cgroup driver",
+            "fr": "Aperçu de Kubernetes 1.38 : fin des variables d'opt-out WebSocket de kubectl, les runtimes doivent déclarer le cgroup driver"
+          },
+          "body_html": {
+            "es": "<p>Lo que tenés que revisar antes de 1.38: <code>KUBECTL_REMOTE_COMMAND_WEBSOCKETS</code> y <code>KUBECTL_PORT_FORWARD_WEBSOCKETS</code> desaparecen, así que sacalos de tus scripts de CI. En kuberc, las entradas del allowlist de credential plugins tienen que usar <code>command</code> en lugar de <code>name</code>, porque kuberc pasa a v1. El kubelet deja de aceptar el mecanismo legacy para configurar el cgroup driver: tu container runtime tiene que reportarlo por CRI. Y cgroup v1 sigue en camino a la salida, así que <code>failCgroupV1: false</code> es un parche temporal.</p>",
+            "en": "<p>What to check before 1.38: <code>KUBECTL_REMOTE_COMMAND_WEBSOCKETS</code> and <code>KUBECTL_PORT_FORWARD_WEBSOCKETS</code> are being removed, so take them out of your CI scripts. In kuberc, credential plugin allowlist entries must use <code>command</code> instead of <code>name</code> as kuberc moves to v1. The kubelet stops allowing the legacy way of configuring the cgroup driver, so your container runtime must report it over CRI. And cgroup v1 is still on its way out, so <code>failCgroupV1: false</code> is only a short-term fix.</p>",
+            "fr": "<p>À vérifier avant 1.38 : <code>KUBECTL_REMOTE_COMMAND_WEBSOCKETS</code> et <code>KUBECTL_PORT_FORWARD_WEBSOCKETS</code> disparaissent, retirez-les de vos scripts de CI. Dans kuberc, les entrées de l'allowlist des credential plugins doivent utiliser <code>command</code> au lieu de <code>name</code>, kuberc passant en v1. Le kubelet n'accepte plus l'ancienne configuration du cgroup driver : votre container runtime doit le déclarer via CRI. Et cgroup v1 est toujours sur le départ, <code>failCgroupV1: false</code> n'est qu'un palliatif.</p>"
+          },
+          "source": {
+            "url": "https://kubernetes.io/blog/2026/11/23/kubernetes-v1-38-sneak-peek/",
+            "label": "kubernetes.io"
+          }
+        },
+        {
+          "id": "traefik-3-8",
+          "tag": "release",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "Traefik 3.8: timeouts por router, Gateway API ListenerSet y BackendTLSPolicy para gRPC",
+            "en": "Traefik 3.8: per-router timeouts, Gateway API ListenerSet and BackendTLSPolicy for gRPC",
+            "fr": "Traefik 3.8 : timeouts par routeur, Gateway API ListenerSet et BackendTLSPolicy pour gRPC"
+          },
+          "body_html": {
+            "es": "<p>Para quienes migran desde ingress-nginx: Traefik 3.8 suma timeouts de respuesta <strong>por router</strong>, nuevos forwarding timeouts en <code>ServersTransport</code>, soporte de <strong>ListenerSet</strong> (GEP-1713) y BackendTLSPolicy para backends gRPC y TLSRoute. Consume <code>TCPRoute</code> v1 y deja de soportar Gateway API v1.5.x. Leé la migration guide antes de actualizar. Las ramas 3.7.20 y 2.11.64 salieron el mismo día y redactan la config estática de plugins en los logs, así que actualizá aunque no saltes de minor.</p>",
+            "en": "<p>For teams moving off ingress-nginx: Traefik 3.8 adds response timeouts <strong>per router</strong>, new forwarding timeouts in <code>ServersTransport</code>, <strong>ListenerSet</strong> support (GEP-1713) and BackendTLSPolicy for gRPC backends and TLSRoute. It consumes <code>TCPRoute</code> v1 and drops Gateway API v1.5.x support, so read the migration guide first. Patch lines 3.7.20 and 2.11.64 shipped the same day and redact the static plugin configuration from logs, so upgrade even if you stay on your minor.</p>",
+            "fr": "<p>Pour ceux qui quittent ingress-nginx : Traefik 3.8 ajoute des timeouts de réponse <strong>par routeur</strong>, de nouveaux forwarding timeouts dans <code>ServersTransport</code>, le support de <strong>ListenerSet</strong> (GEP-1713) et BackendTLSPolicy pour les backends gRPC et TLSRoute. Il consomme <code>TCPRoute</code> v1 et abandonne Gateway API v1.5.x : lisez le guide de migration. Les branches 3.7.20 et 2.11.64, sorties le même jour, masquent la config statique des plugins dans les logs ; mettez à jour même sans changer de minor.</p>"
+          },
+          "source": {
+            "url": "https://github.com/traefik/traefik/releases/tag/v3.8.0",
+            "label": "github.com/traefik"
+          }
+        },
+        {
+          "id": "wrangler-4-167",
+          "tag": "deprecation",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "Wrangler 4.167: chau dispatch-namespace rename y --env-file en cf dev",
+            "en": "Wrangler 4.167: dispatch-namespace rename is gone, --env-file arrives in cf dev",
+            "fr": "Wrangler 4.167 : fin de dispatch-namespace rename, --env-file arrive dans cf dev"
+          },
+          "body_html": {
+            "es": "<p>Se elimina <code>wrangler dispatch-namespace rename</code>: renombrar un namespace de Workers for Platforms dejaba desactualizado el nombre guardado en los bindings, y los Workers podían quedar imposibles de leer o borrar por nombre. La API ya rechaza el cambio; para otro nombre, creá un namespace nuevo y redeployá. Además, el delegate experimental <code>cf dev</code> acepta <code>--env-file</code> repetible, ideal para un <code>.env</code> compartido en un monorepo. Y <code>wrangler basin sql query</code> sale con status 1 cuando la query falla, así tu CI se entera.</p>",
+            "en": "<p><code>wrangler dispatch-namespace rename</code> is removed: renaming a Workers for Platforms namespace left a stale name in dispatcher bindings, which could make Workers impossible to read or delete by name. The API now rejects the change; to use another name, create a new namespace and redeploy. The experimental <code>cf dev</code> delegate also accepts repeatable <code>--env-file</code>, handy for a shared <code>.env</code> in a monorepo. And <code>wrangler basin sql query</code> now exits 1 when a query is rejected, so CI notices.</p>",
+            "fr": "<p><code>wrangler dispatch-namespace rename</code> est supprimé : renommer un namespace Workers for Platforms laissait un nom obsolète dans les bindings, et des Workers pouvaient devenir impossibles à lire ou supprimer par nom. L'API refuse désormais ce changement ; pour un autre nom, créez un namespace et redéployez. Le delegate expérimental <code>cf dev</code> accepte aussi <code>--env-file</code> répétable, pratique pour un <code>.env</code> partagé en monorepo. Et <code>wrangler basin sql query</code> sort en code 1 quand une requête échoue, la CI le voit.</p>"
+          },
+          "source": {
+            "url": "https://github.com/cloudflare/workers-sdk/releases/tag/wrangler%404.167.0",
+            "label": "github.com/cloudflare"
+          }
+        },
+        {
+          "id": "global-accelerator-nlb-tls",
+          "tag": "minor",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "Global Accelerator preserva la IP del cliente con NLBs que terminan TLS",
+            "en": "Global Accelerator preserves the client IP for NLBs that terminate TLS",
+            "fr": "Global Accelerator préserve l'IP client avec les NLB qui terminent TLS"
+          },
+          "body_html": {
+            "es": "<p>Antes tenías que elegir entre terminar TLS en el NLB o ver la IP real del cliente. Ahora tenés las dos cosas, así que rate limiting, geo-blocking y audit logs pueden basarse en la IP verdadera también para protocolos TCP que no son HTTP. No hace falta configuración extra: agregás el NLB con listener TLS a un accelerator con client IP preservation activado.</p>",
+            "en": "<p>You used to choose between terminating TLS at the NLB and seeing the real client IP. Now you get both, so rate limiting, geo-blocking and audit logs can key on the true IP, including for non-HTTP TCP protocols. No extra configuration: add the NLB with a TLS listener to an accelerator that has client IP preservation on.</p>",
+            "fr": "<p>Il fallait choisir entre terminer TLS sur le NLB et voir la vraie IP du client. Désormais on a les deux : rate limiting, geo-blocking et logs d'audit peuvent s'appuyer sur l'IP réelle, y compris pour des protocoles TCP non HTTP. Aucune configuration supplémentaire : ajoutez le NLB avec listener TLS à un accelerator où la préservation d'IP client est active.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/global-accelerator-client-ip-nlb-tls/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "agoda-modular-monolith",
+      "updates": [
+        {
+          "id": "agoda-modular-monolith",
+          "tag": "notable",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "Agoda ordena su API de post-booking con un modular monolith y fitness functions en ArchUnit",
+            "en": "Agoda tames its post-booking API with a modular monolith and ArchUnit fitness functions",
+            "fr": "Agoda remet en ordre son API post-réservation avec un monolithe modulaire et des fitness functions ArchUnit"
+          },
+          "body_html": {
+            "es": "<p>Sin reescribir nada, Agoda reorganizó su API de post-booking (cancelaciones, cambios, reembolsos) en componentes por dominio y no por capa técnica. Cada componente tiene sus capas internas, usa Data Mapper para que las entidades de base y los payloads no se filtren al dominio, y builders tipados para crear objetos. Las reglas de dependencia viven como tests de <strong>ArchUnit</strong> en CI: si las violás, el build falla, en lugar de depender de que un reviewer lo note. Resultado: <strong>64% menos</strong> de tiempo mediano de code review y 34% menos hasta el primer feedback. Si tu NestJS ya es un monolito gigante, esta es la hoja de ruta, y en TS tenés <code>dependency-cruiser</code> o las reglas de módulos de Nx para hacer lo mismo.</p>",
+            "en": "<p>Without a rewrite, Agoda reorganized its post-booking API (cancellations, amendments, refunds) into components by business domain instead of technical layer. Each component keeps its own internal layers, uses Data Mapper so database entities and API payloads stay out of the domain, and relies on typed builders for object creation. Dependency rules live as <strong>ArchUnit</strong> tests in CI, so violations fail the build instead of waiting for a reviewer to spot them. The result: <strong>64% shorter</strong> median code review time and 34% faster first feedback. If your NestJS app is already a giant monolith, this is the roadmap; in TypeScript, <code>dependency-cruiser</code> or Nx module boundary rules do the same job.</p>",
+            "fr": "<p>Sans réécriture, Agoda a réorganisé son API post-réservation (annulations, modifications, remboursements) en composants par domaine métier plutôt que par couche technique. Chaque composant garde ses couches internes, utilise Data Mapper pour que les entités de base et les payloads restent hors du domaine, et des builders typés pour créer les objets. Les règles de dépendance sont des tests <strong>ArchUnit</strong> en CI : une violation casse le build au lieu d'attendre un reviewer. Résultat : <strong>64 % de temps</strong> médian de code review en moins et 34 % de délai en moins avant le premier retour. Pour un monolithe NestJS géant, c'est la feuille de route ; en TypeScript, <code>dependency-cruiser</code> ou les règles de frontières de modules de Nx font le même travail.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/11/agoda-modular-monolith-framework/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "qcon-agent-security",
+          "tag": "notable",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "QCon SF: un agente de IA es un insider, y necesita identidad propia y tokens atenuados",
+            "en": "QCon SF: an AI agent is an insider, and it needs its own identity and attenuated tokens",
+            "fr": "QCon SF : un agent IA est un insider, il lui faut sa propre identité et des tokens atténués"
+          },
+          "body_html": {
+            "es": "<p>Amanda Walker (Google) planteó que un agente que se porta mal es el mismo problema que un insider malicioso, pero a velocidad de máquina. Su receta: nunca le des credenciales humanas al agente, porque una prompt injection hereda toda tu autoridad. Dale un principal propio, como una service account. Además, que el orquestador emita tokens <strong>más estrechos</strong> para cada subagente, por ejemplo solo lectura de logs o de un repo entre dos commits. Para eso nombró <strong>Biscuit</strong>, un formato donde el portador puede agregar restricciones pero nunca quitarlas. Si estás exponiendo tu backend a agentes, este es el modelo de auth para estudiar.</p>",
+            "en": "<p>Amanda Walker (Google) framed a misbehaving agent as the insider-risk problem at machine speed. Her recipe: never hand an agent human credentials, because a prompt injection inherits all of that authority. Give each agent its own principal, like a service account. Then have the orchestrator mint <strong>narrower</strong> tokens for each subagent, such as read-only access to logs, or to a repository between two commits. She pointed to <strong>Biscuit</strong>, a token format whose holders can append restrictions but never remove them. If you are opening your backend to agents, this is the auth model to study.</p>",
+            "fr": "<p>Amanda Walker (Google) présente un agent qui dérape comme le problème de l'insider, à vitesse machine. Sa recette : ne jamais donner d'identifiants humains à un agent, car une prompt injection hérite de toute cette autorité. Donnez-lui son propre principal, comme un compte de service. Puis que l'orchestrateur émette des tokens <strong>plus restreints</strong> pour chaque sous-agent, par exemple lecture seule des logs ou d'un dépôt entre deux commits. Elle cite <strong>Biscuit</strong>, un format où le porteur peut ajouter des restrictions mais jamais en retirer. Si vous ouvrez votre backend aux agents, c'est le modèle d'auth à étudier.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/11/qcon-ai-agent-security/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "trpc-11-31",
+      "updates": [
+        {
+          "id": "trpc-11-31",
+          "tag": "release",
+          "date": "24 Nov 2026",
+          "title": {
+            "es": "tRPC 11.30 a 11.31: seis releases en tres horas para streaming y WebSockets más robustos",
+            "en": "tRPC 11.30 to 11.31: six releases in three hours for sturdier streaming and WebSockets",
+            "fr": "tRPC 11.30 à 11.31 : six releases en trois heures pour un streaming et des WebSockets plus robustes"
+          },
+          "body_html": {
+            "es": "<p>La 11.31 agrega <code>broadcastReconnectNotification</code> al adapter de Fastify, para pedirles a los clientes que se reconecten antes de un deploy. La cadena de patches arregla varios bordes de streaming: un valor JSONL que no se puede serializar ahora falla solo su llamada y no todo el batch, <code>onError</code> recibe la llamada correcta en <code>httpBatchStreamLink</code>, y un <code>errorFormatter</code> que tira excepción ya no mata el stream. Del lado del cliente, <code>wsLink</code> reconecta apenas vence el pong del keepAlive y trata un frame indescifrable como conexión perdida. Además, <code>createTRPCOptionsProxy</code> ya se puede importar desde React Server Components.</p>",
+            "en": "<p>11.31 adds <code>broadcastReconnectNotification</code> to the Fastify adapter, so you can ask clients to reconnect before a deploy. The patch chain fixes several streaming edge cases: an unserializable JSONL value now fails only its own call instead of the whole batch, <code>onError</code> gets the right call on <code>httpBatchStreamLink</code>, and a throwing <code>errorFormatter</code> no longer kills the stream. On the client, <code>wsLink</code> reconnects as soon as a keepAlive pong times out and treats an undecodable frame as a lost connection. And <code>createTRPCOptionsProxy</code> can now be imported from React Server Components.</p>",
+            "fr": "<p>La 11.31 ajoute <code>broadcastReconnectNotification</code> à l'adapter Fastify, pour demander aux clients de se reconnecter avant un déploiement. La série de patches corrige plusieurs cas limites du streaming : une valeur JSONL non sérialisable ne fait échouer que son propre appel et non tout le batch, <code>onError</code> reçoit le bon appel avec <code>httpBatchStreamLink</code>, et un <code>errorFormatter</code> qui lève une exception ne tue plus le stream. Côté client, <code>wsLink</code> se reconnecte dès qu'un pong de keepAlive expire et traite une trame indécodable comme une connexion perdue. Et <code>createTRPCOptionsProxy</code> s'importe désormais depuis les React Server Components.</p>"
+          },
+          "source": {
+            "url": "https://github.com/trpc/trpc/releases/tag/v11.31.0",
+            "label": "github.com/trpc"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Validar tipos en el borde no es opcional: un {} en una cookie (Xen Orchestra), headers borrados mientras se iteraban (GraphQL Yoga) y firmas JWT con varias codificaciones válidas (Hono) son tres bugs del mismo día que un schema estricto o un parser canónico hubieran frenado.",
+      "en": "Validating types at the edge is not optional: a {} in a cookie (Xen Orchestra), headers deleted mid-iteration (GraphQL Yoga) and JWT signatures with several valid encodings (Hono) are three same-day bugs that a strict schema or a canonical parser would have stopped.",
+      "fr": "Valider les types en bordure n'est pas optionnel : un {} dans un cookie (Xen Orchestra), des headers supprimés pendant l'itération (GraphQL Yoga) et des signatures JWT à plusieurs encodages valides (Hono) sont trois bugs du même jour qu'un schéma strict ou un parser canonique auraient arrêtés."
+    },
+    {
+      "es": "La infraestructura se prepara para tráfico de agentes: AWS WAF ya reconoce endpoints MCP y A2A, CloudFront justifica HTTP/2 a origen por las ráfagas de tool calls, y en QCon el consenso es darles identidad y tokens propios a los agentes.",
+      "en": "Infrastructure is getting ready for agent traffic: AWS WAF now recognizes MCP and A2A endpoints, CloudFront justifies HTTP/2 to origins with bursts of tool calls, and the QCon consensus is that agents need their own identities and tokens.",
+      "fr": "L'infrastructure se prépare au trafic des agents : AWS WAF reconnaît désormais les endpoints MCP et A2A, CloudFront justifie HTTP/2 vers l'origine par les rafales de tool calls, et le consensus à QCon est de donner aux agents leurs propres identités et tokens."
+    }
+  ]
+}

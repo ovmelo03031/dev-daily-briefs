@@ -1,0 +1,325 @@
+{
+  "title": {
+    "es": "AI Security — 24 Nov 2026",
+    "en": "AI Security — 24 Nov 2026",
+    "fr": "AI Security — 24 nov. 2026"
+  },
+  "description": {
+    "es": "better-chatbot deja que un documento con prompt injection mande tu conversación afuera, Pomerium acepta cualquier secret en su token endpoint MCP, LiteLLM filtra los prompts de todos vía callbacks y Cisco y OpenAI publican Shirudo, escudos eBPF escritos por Codex.",
+    "en": "better-chatbot lets a prompt-injected document ship your conversation out, Pomerium accepts any secret at its MCP token endpoint, LiteLLM leaks everyone's prompts through callbacks, and Cisco and OpenAI release Shirudo, Codex-written eBPF shields.",
+    "fr": "better-chatbot laisse un document piégé par prompt injection exfiltrer votre conversation, Pomerium accepte n'importe quel secret sur son token endpoint MCP, LiteLLM divulgue les prompts de tous via des callbacks, et Cisco et OpenAI publient Shirudo, des boucliers eBPF écrits par Codex."
+  },
+  "pubDate": "2026-11-24",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "better-chatbot: prompt injection saca tu chat",
+        "en": "better-chatbot: prompt injection leaks chats",
+        "fr": "better-chatbot : la prompt injection exfiltre"
+      },
+      "anchor": "cve-2026-134755",
+      "icon": "lucide:skull"
+    },
+    {
+      "text": {
+        "es": "Pomerium: bypass del token MCP (v4 9.1)",
+        "en": "Pomerium: MCP token bypass (v4 9.1)",
+        "fr": "Pomerium : contournement du token MCP (9.1)"
+      },
+      "anchor": "cve-2026-135300",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "LiteLLM filtra prompts de todos los usuarios",
+        "en": "LiteLLM leaks every user's prompts",
+        "fr": "LiteLLM divulgue les prompts de tous"
+      },
+      "anchor": "cve-2026-135287",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": {
+        "es": "Chats expone bearer tokens de MCP (7.1)",
+        "en": "Chats exposes MCP bearer tokens (7.1)",
+        "fr": "Chats expose des bearer tokens MCP (7.1)"
+      },
+      "anchor": "cve-2026-135432",
+      "icon": "lucide:lock"
+    },
+    {
+      "text": {
+        "es": "mcp-server-git se escapa del repo permitido",
+        "en": "mcp-server-git escapes its allowed repo",
+        "fr": "mcp-server-git sort du dépôt autorisé"
+      },
+      "anchor": "cve-2026-134465",
+      "icon": "lucide:shield-alert"
+    },
+    {
+      "text": {
+        "es": "Cisco y OpenAI lanzan Shirudo (eBPF)",
+        "en": "Cisco and OpenAI launch Shirudo (eBPF)",
+        "fr": "Cisco et OpenAI lancent Shirudo (eBPF)"
+      },
+      "anchor": "shirudo-cisco-openai-ebpf-shields",
+      "icon": "simple-icons:openai"
+    }
+  ],
+  "tools": [
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "cve-2026-135300",
+          "tag": "critical",
+          "title": {
+            "es": "CVE-2026-135300 (CVSS v4 9.1): el token endpoint MCP de Pomerium canjea códigos robados con cualquier client secret",
+            "en": "CVE-2026-135300 (CVSS v4 9.1): Pomerium's MCP token endpoint redeems stolen codes with any client secret",
+            "fr": "CVE-2026-135300 (CVSS v4 9.1) : le token endpoint MCP de Pomerium échange des codes volés avec n'importe quel client secret"
+          },
+          "body_html": {
+            "es": "<p>Pomerium, el proxy de acceso zero-trust que muchos usan para publicar servidores MCP con OAuth, no verificaba el client secret de los clientes <code>client_secret_basic</code> en <code>/.pomerium/mcp/token</code>. Si alguien intercepta un authorization code o un refresh token, lo canjea con cualquier secret y se lleva los access tokens de la víctima.</p><p>Afecta de 0.30.0 a antes de 0.34.0. El CNA lo puntúa 9.1 en CVSS v4 y 7.4 en v3.1 (attack complexity alta: necesitás el código robado). Actualizá a <strong>0.34.0</strong>.</p>",
+            "en": "<p>Pomerium, the zero-trust access proxy many teams use to publish MCP servers behind OAuth, did not verify the client secret of <code>client_secret_basic</code> clients at <code>/.pomerium/mcp/token</code>. Anyone who intercepts an authorization code or refresh token can redeem it with any secret and walk away with the victim's access tokens.</p><p>Affects 0.30.0 up to but not including 0.34.0. The CNA scores it 9.1 in CVSS v4 and 7.4 in v3.1 (high attack complexity: you need the stolen code). Upgrade to <strong>0.34.0</strong>.</p>",
+            "fr": "<p>Pomerium, le proxy d'accès zero-trust que beaucoup utilisent pour publier des serveurs MCP derrière OAuth, ne vérifiait pas le client secret des clients <code>client_secret_basic</code> sur <code>/.pomerium/mcp/token</code>. Quiconque intercepte un authorization code ou un refresh token peut l'échanger avec n'importe quel secret et récupérer les access tokens de la victime.</p><p>Touche les versions 0.30.0 à 0.34.0 exclue. Le CNA le note 9.1 en CVSS v4 et 7.4 en v3.1 (complexité d'attaque élevée : il faut le code volé). Passez en <strong>0.34.0</strong>.</p>"
+          },
+          "date": "23 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-135300",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-135432",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-135432 (CVSS v4 7.1): sdcb Chats le muestra a usuarios comunes los headers MCP de otros, bearer tokens incluidos",
+            "en": "CVE-2026-135432 (CVSS v4 7.1): sdcb Chats shows regular users other people's MCP headers, bearer tokens included",
+            "fr": "CVE-2026-135432 (CVSS v4 7.1) : sdcb Chats montre aux utilisateurs ordinaires les en-têtes MCP des autres, bearer tokens compris"
+          },
+          "body_html": {
+            "es": "<p>En <strong>Chats</strong>, una interfaz self-hosted para varios LLMs, el endpoint <code>GetAssignedUserDetails</code> devolvía los <code>CustomHeaders</code> MCP por usuario sin chequear que quien pregunta fuera admin. Un usuario asignado no admin lee los bearer tokens de sus compañeros y se hace pasar por ellos contra el servidor MCP de atrás.</p><p>Afecta de 1.10.0 a antes de 1.17.1. Actualizá a <strong>1.17.1</strong> y rotá los tokens que tengas guardados en headers MCP.</p>",
+            "en": "<p>In <strong>Chats</strong>, a self-hosted front end for multiple LLMs, the <code>GetAssignedUserDetails</code> endpoint returned per-user MCP <code>CustomHeaders</code> without checking that the caller was an admin. An assigned non-admin user can read colleagues' bearer tokens and impersonate them against the downstream MCP server.</p><p>Affects 1.10.0 up to but not including 1.17.1. Upgrade to <strong>1.17.1</strong> and rotate any tokens stored in MCP headers.</p>",
+            "fr": "<p>Dans <strong>Chats</strong>, une interface auto-hébergée pour plusieurs LLM, l'endpoint <code>GetAssignedUserDetails</code> renvoyait les <code>CustomHeaders</code> MCP de chaque utilisateur sans vérifier que l'appelant était admin. Un utilisateur assigné non admin peut lire les bearer tokens de ses collègues et usurper leur identité auprès du serveur MCP en aval.</p><p>Touche les versions 1.10.0 à 1.17.1 exclue. Passez en <strong>1.17.1</strong> et renouvelez les tokens stockés dans les en-têtes MCP.</p>"
+          },
+          "date": "23 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-135432",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-134324",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-134324, CVE-2026-134327 y CVE-2026-134329 (hasta CVSS v4 7.1): el servidor MCP de ArcadeDB escribe en modo read-only y filtra schemas",
+            "en": "CVE-2026-134324, CVE-2026-134327 and CVE-2026-134329 (up to CVSS v4 7.1): ArcadeDB's MCP server writes in read-only mode and leaks schemas",
+            "fr": "CVE-2026-134324, CVE-2026-134327 et CVE-2026-134329 (jusqu'à CVSS v4 7.1) : le serveur MCP d'ArcadeDB écrit en mode read-only et divulgue des schémas"
+          },
+          "body_html": {
+            "es": "<p>Tres fallas en la base multimodelo <strong>ArcadeDB</strong>, todas tocando su servidor MCP:</p><ul><li><strong>134324</strong> (6.9): la herramienta MCP de queries read-only clasifica como READ scripts Gremlin con fallback a Groovy que llaman a <code>addVertex</code>, y las escrituras se persisten.</li><li><strong>134327</strong> (7.1): <code>get_schema</code> por MCP, el catálogo del wire de PostgreSQL y la introspección GraphQL ignoran las ACL por tipo y muestran propiedades, índices y SQL de vistas materializadas de tipos denegados.</li><li><strong>134329</strong> (7.1): <code>MCPToolUtils.resolveDatabase</code> chequea existencia antes que autorización, así que un caller MCP enumera bases a las que no tiene acceso.</li></ul><p>Es el mismo patrón que vimos con DBHub y SurrealDB: el modo read-only de un servidor MCP no es un límite de seguridad si el parser no entiende todo lo que el motor ejecuta. Fix en <strong>26.11.1</strong>.</p>",
+            "en": "<p>Three flaws in the <strong>ArcadeDB</strong> multi-model database, all touching its MCP server:</p><ul><li><strong>134324</strong> (6.9): the read-only MCP query tool classifies Groovy-fallback Gremlin scripts that call <code>addVertex</code> as READ, and the writes are persisted.</li><li><strong>134327</strong> (7.1): MCP <code>get_schema</code>, the PostgreSQL wire catalog and GraphQL introspection ignore per-type ACLs and reveal properties, indexes and materialized view SQL of denied types.</li><li><strong>134329</strong> (7.1): <code>MCPToolUtils.resolveDatabase</code> checks existence before authorization, so an MCP caller can enumerate databases it was never granted.</li></ul><p>Same pattern we saw with DBHub and SurrealDB: an MCP server's read-only mode is not a security boundary when its classifier does not understand everything the engine executes. Fixed in <strong>26.11.1</strong>.</p>",
+            "fr": "<p>Trois failles dans la base multimodèle <strong>ArcadeDB</strong>, toutes liées à son serveur MCP :</p><ul><li><strong>134324</strong> (6.9) : l'outil MCP de requêtes read-only classe en READ des scripts Gremlin avec repli Groovy qui appellent <code>addVertex</code>, et les écritures sont persistées.</li><li><strong>134327</strong> (7.1) : <code>get_schema</code> via MCP, le catalogue du protocole PostgreSQL et l'introspection GraphQL ignorent les ACL par type et révèlent propriétés, index et SQL des vues matérialisées de types interdits.</li><li><strong>134329</strong> (7.1) : <code>MCPToolUtils.resolveDatabase</code> vérifie l'existence avant l'autorisation, donc un appelant MCP peut énumérer des bases auxquelles il n'a pas accès.</li></ul><p>Même schéma que DBHub et SurrealDB : le mode read-only d'un serveur MCP n'est pas une frontière de sécurité si son classifieur ne comprend pas tout ce que le moteur exécute. Corrigé en <strong>26.11.1</strong>.</p>"
+          },
+          "date": "21 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-134324",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-135287",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-135287 (CVSS v4 5.3): cualquier API key de LiteLLM Proxy registra callbacks globales y se lleva los prompts de todos",
+            "en": "CVE-2026-135287 (CVSS v4 5.3): any LiteLLM Proxy API key can register global callbacks and siphon everyone's prompts",
+            "fr": "CVE-2026-135287 (CVSS v4 5.3) : n'importe quelle clé API de LiteLLM Proxy enregistre des callbacks globaux et aspire les prompts de tous"
+          },
+          "body_html": {
+            "es": "<p>El gateway <strong>LiteLLM Proxy</strong> aceptaba campos <code>callbacks</code> en el body de los requests y los registraba a nivel de proceso. Con una API key común alcanza con nombrar una integración de observabilidad que el operador no habilitó, como langsmith o langfuse, para mandar los prompts y respuestas de <strong>todos</strong> los usuarios a esa cuenta. También se puede apagar el logging del operador con <code>litellm_disabled_callbacks</code>.</p><p>El score es medio, pero en un gateway multi-tenant esto es fuga de datos cruzada. Afecta de 1.62.4 a antes de 1.84.0 (GHSA-34v7-jqrg-944p). Actualizá a <strong>1.84.0</strong>.</p>",
+            "en": "<p>The <strong>LiteLLM Proxy</strong> gateway accepted <code>callbacks</code> fields in request bodies and registered them process-wide. With an ordinary API key, naming an observability integration the operator never enabled, such as langsmith or langfuse, sends the prompts and responses of <strong>all</strong> users to that account. The same trick can switch off operator logging via <code>litellm_disabled_callbacks</code>.</p><p>The score is medium, but on a multi-tenant gateway this is cross-tenant data exposure. Affects 1.62.4 up to but not including 1.84.0 (GHSA-34v7-jqrg-944p). Upgrade to <strong>1.84.0</strong>.</p>",
+            "fr": "<p>La passerelle <strong>LiteLLM Proxy</strong> acceptait des champs <code>callbacks</code> dans le corps des requêtes et les enregistrait pour tout le processus. Avec une simple clé API, il suffit de nommer une intégration d'observabilité que l'opérateur n'a pas activée, comme langsmith ou langfuse, pour envoyer les prompts et réponses de <strong>tous</strong> les utilisateurs vers ce compte. On peut aussi couper la journalisation de l'opérateur avec <code>litellm_disabled_callbacks</code>.</p><p>Le score est moyen, mais sur une passerelle multi-tenant c'est une fuite de données entre clients. Touche les versions 1.62.4 à 1.84.0 exclue (GHSA-34v7-jqrg-944p). Passez en <strong>1.84.0</strong>.</p>"
+          },
+          "date": "23 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-135287",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-134465",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-134465 (CVSS v4 5.8): el mcp-server-git oficial se sale de --repository con un archivo .git que apunta afuera",
+            "en": "CVE-2026-134465 (CVSS v4 5.8): the official mcp-server-git escapes --repository through a .git file pointing elsewhere",
+            "fr": "CVE-2026-134465 (CVSS v4 5.8) : le mcp-server-git officiel sort de --repository via un fichier .git pointant ailleurs"
+          },
+          "body_html": {
+            "es": "<p>En el servidor de referencia <strong>mcp-server-git</strong> (repo <code>modelcontextprotocol/servers</code>), la restricción <code>--repository</code> se saltea con un subdirectorio que tenga un archivo <code>.git</code> con un <code>gitdir:</code> apuntando a otro repo. Quien pueda invocar las herramientas, plantar ese archivo y conozca la ruta lee el contenido commiteado del repo de afuera y crea branches ahí. Ojo: un agente que procesa contenido no confiable puede ser ese caller vía prompt injection.</p><p>El fix (2026.10.28) salió hace casi un mes; el CVE se publicó recién ahora. En el mismo lote, <strong>CVE-2026-134492</strong> (2.3, bajo): el guard SSRF de <strong>mcp-server-fetch</strong> trataba las direcciones IPv6 site-local <code>fec0::/10</code> como públicas, corregido en 2026.11.11.</p>",
+            "en": "<p>In the reference <strong>mcp-server-git</strong> server (the <code>modelcontextprotocol/servers</code> repo), the <code>--repository</code> restriction can be bypassed with a nested directory holding a <code>.git</code> file whose <code>gitdir:</code> points to another repository. A caller who can invoke the tools, plant that file and knows the path can read committed content from the outside repo and create branches in it. An agent processing untrusted content can become that caller through prompt injection.</p><p>The fix (2026.10.28) has been out for almost a month; the CVE only landed now. In the same batch, <strong>CVE-2026-134492</strong> (2.3, low): the <strong>mcp-server-fetch</strong> SSRF guard treated IPv6 site-local <code>fec0::/10</code> addresses as public, fixed in 2026.11.11.</p>",
+            "fr": "<p>Dans le serveur de référence <strong>mcp-server-git</strong> (dépôt <code>modelcontextprotocol/servers</code>), la restriction <code>--repository</code> se contourne avec un sous-répertoire contenant un fichier <code>.git</code> dont le <code>gitdir:</code> pointe vers un autre dépôt. Un appelant capable d'invoquer les outils, de déposer ce fichier et connaissant le chemin peut lire le contenu commité du dépôt extérieur et y créer des branches. Un agent qui traite du contenu non fiable peut devenir cet appelant via une prompt injection.</p><p>Le correctif (2026.10.28) est disponible depuis presque un mois ; le CVE n'arrive que maintenant. Dans le même lot, <strong>CVE-2026-134492</strong> (2.3, faible) : la protection SSRF de <strong>mcp-server-fetch</strong> traitait les adresses IPv6 site-local <code>fec0::/10</code> comme publiques, corrigé en 2026.11.11.</p>"
+          },
+          "date": "23 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-134465",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-135162",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-135162 (CVSS v4 5.3): en Sim, un miembro con permiso de escritura publica workflows como servidores MCP sin auth",
+            "en": "CVE-2026-135162 (CVSS v4 5.3): in Sim, a write-level member can publish workflows as unauthenticated MCP servers",
+            "fr": "CVE-2026-135162 (CVSS v4 5.3) : dans Sim, un membre en écriture peut publier des workflows comme serveurs MCP sans authentification"
+          },
+          "body_html": {
+            "es": "<p><strong>Sim</strong>, la plataforma open source para armar workflows de agentes, dejaba que un miembro con permiso de escritura pusiera <code>isPublic</code> en <code>/api/mcp/workflow-servers</code> sin ser admin. Resultado: workflows desplegados quedan invocables sin autenticación por <code>/api/mcp/serve</code>, con las credenciales y herramientas que tengan conectadas.</p><p>Afecta de 0.5.61 a antes de 0.9.41. Actualizá a <strong>0.9.41</strong> y revisá qué servidores MCP de workflows quedaron públicos.</p>",
+            "en": "<p><strong>Sim</strong>, the open-source platform for building agent workflows, let a write-level member set <code>isPublic</code> on <code>/api/mcp/workflow-servers</code> without admin rights. The result: deployed workflows become invocable without authentication through <code>/api/mcp/serve</code>, along with whatever credentials and tools they have wired in.</p><p>Affects 0.5.61 up to but not including 0.9.41. Upgrade to <strong>0.9.41</strong> and audit which workflow MCP servers ended up public.</p>",
+            "fr": "<p><strong>Sim</strong>, la plateforme open source de workflows d'agents, permettait à un membre en écriture de positionner <code>isPublic</code> sur <code>/api/mcp/workflow-servers</code> sans droits admin. Résultat : les workflows déployés deviennent invocables sans authentification via <code>/api/mcp/serve</code>, avec les identifiants et outils qui y sont branchés.</p><p>Touche les versions 0.5.61 à 0.9.41 exclue. Passez en <strong>0.9.41</strong> et vérifiez quels serveurs MCP de workflows sont devenus publics.</p>"
+          },
+          "date": "23 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-135162",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-133875",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-133875 (CVSS v4 5.3): el gateway one-hub descarga cualquier image_url de visión, metadata de cloud incluida",
+            "en": "CVE-2026-133875 (CVSS v4 5.3): the one-hub gateway fetches any vision image_url, cloud metadata included",
+            "fr": "CVE-2026-133875 (CVSS v4 5.3) : la passerelle one-hub télécharge n'importe quelle image_url de vision, métadonnées cloud comprises"
+          },
+          "body_html": {
+            "es": "<p><strong>one-hub</strong>, un gateway que unifica APIs de LLM, baja los <code>image_url</code> de los chats con visión desde <code>GetImageFromUrl</code> sin restringir destinos. Con un token de API común alcanza un <code>/v1/chat/completions</code> por los providers Claude, OpenRouter u Ollama para pegarle a servicios internos o al endpoint de metadata de la nube.</p><p>Afecta hasta 0.14.27 y el CVE no indica versión corregida: si lo corrés en la nube, bloqueá el acceso a <code>169.254.169.254</code> desde el host.</p>",
+            "en": "<p><strong>one-hub</strong>, a gateway that unifies LLM APIs, downloads vision chat <code>image_url</code> values in <code>GetImageFromUrl</code> with no destination restrictions. A standard API token is enough: send a <code>/v1/chat/completions</code> request through the Claude, OpenRouter or Ollama providers to reach internal services or the cloud metadata endpoint.</p><p>Affects versions through 0.14.27 and the CVE lists no fixed version: if you run it in the cloud, block access to <code>169.254.169.254</code> from the host.</p>",
+            "fr": "<p><strong>one-hub</strong>, une passerelle qui unifie les API de LLM, télécharge les <code>image_url</code> des chats avec vision dans <code>GetImageFromUrl</code> sans restreindre les destinations. Un token API ordinaire suffit : une requête <code>/v1/chat/completions</code> via les providers Claude, OpenRouter ou Ollama atteint des services internes ou l'endpoint de métadonnées cloud.</p><p>Touche les versions jusqu'à 0.14.27 et le CVE n'indique aucune version corrigée : si vous l'hébergez dans le cloud, bloquez l'accès à <code>169.254.169.254</code> depuis l'hôte.</p>"
+          },
+          "date": "20 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-133875",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-133616",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-133616 (CVSS v4 5.1): el runtime ONNX tract lee fuera de límites con un nodo Gemm armado",
+            "en": "CVE-2026-133616 (CVSS v4 5.1): the tract ONNX runtime reads out of bounds on a crafted Gemm node",
+            "fr": "CVE-2026-133616 (CVSS v4 5.1) : le runtime ONNX tract lit hors limites avec un nœud Gemm piégé"
+          },
+          "body_html": {
+            "es": "<p><strong>tract</strong>, el motor de inferencia ONNX/NNEF en Rust de Sonos, indexa entradas y salidas en <code>InferenceRulesOp::rules</code> de <code>onnx/src/ops/math/gemm.rs</code> sin validar la aridad. Un modelo ONNX con un nodo Gemm manipulado provoca un out-of-bounds read al cargarlo. El exploit es público.</p><p>Si tu servicio carga modelos ONNX de terceros con tract, actualizá a <strong>0.23.5</strong>.</p>",
+            "en": "<p><strong>tract</strong>, Sonos' Rust ONNX/NNEF inference engine, indexes inputs and outputs in <code>InferenceRulesOp::rules</code> in <code>onnx/src/ops/math/gemm.rs</code> without validating arity. An ONNX model with a manipulated Gemm node triggers an out-of-bounds read at load time. The exploit is public.</p><p>If your service loads third-party ONNX models with tract, upgrade to <strong>0.23.5</strong>.</p>",
+            "fr": "<p><strong>tract</strong>, le moteur d'inférence ONNX/NNEF en Rust de Sonos, indexe entrées et sorties dans <code>InferenceRulesOp::rules</code> de <code>onnx/src/ops/math/gemm.rs</code> sans valider l'arité. Un modèle ONNX avec un nœud Gemm manipulé déclenche une lecture hors limites au chargement. L'exploit est public.</p><p>Si votre service charge des modèles ONNX tiers avec tract, passez en <strong>0.23.5</strong>.</p>"
+          },
+          "date": "20 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-133616",
+            "label": "OpenCVE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "cve-2026-134755",
+          "tag": "medium",
+          "title": {
+            "es": "CVE-2026-134755 (CVSS v4 6.0): en better-chatbot, un documento con prompt injection hace que la herramienta HTTP mande tu conversación afuera, aun en modo Manual",
+            "en": "CVE-2026-134755 (CVSS v4 6.0): in better-chatbot, a prompt-injected document makes the HTTP tool send your conversation out, even in Manual mode",
+            "fr": "CVE-2026-134755 (CVSS v4 6.0) : dans better-chatbot, un document piégé par prompt injection fait envoyer votre conversation par l'outil HTTP, même en mode Manual"
+          },
+          "body_html": {
+            "es": "<p><strong>better-chatbot</strong> tiene un modo de herramientas Manual que debería pedir confirmación antes de cada tool call. Pero <code>src/app/api/chat/route.ts</code> dejaba los handlers <code>execute</code> de las herramientas built-in, así que corrían igual sin preguntar. Un atacante planta un documento o una página con prompt injection, el modelo lo lee y la herramienta de request HTTP manda los datos de la conversación a una URL del atacante.</p><p>Es el caso de manual: el humano cree que está en el loop y no lo está. Actualizá a <strong>2.0.0</strong>, y si armás tu propio chat, verificá que la confirmación se aplique en el servidor y no solo en la UI.</p>",
+            "en": "<p><strong>better-chatbot</strong> has a Manual tool mode that should ask for confirmation before every tool call. But <code>src/app/api/chat/route.ts</code> kept the <code>execute</code> handlers of the built-in tools, so they ran anyway without asking. An attacker plants a prompt-injected document or web page, the model reads it, and the HTTP request tool sends conversation data to an attacker-controlled URL.</p><p>It is the textbook case: the human believes they are in the loop and they are not. Upgrade to <strong>2.0.0</strong>, and if you build your own chat, make sure confirmation is enforced on the server, not only in the UI.</p>",
+            "fr": "<p><strong>better-chatbot</strong> propose un mode d'outils Manual censé demander une confirmation avant chaque appel d'outil. Mais <code>src/app/api/chat/route.ts</code> conservait les handlers <code>execute</code> des outils intégrés, qui s'exécutaient donc sans demander. Un attaquant dépose un document ou une page piégés par prompt injection, le modèle les lit, et l'outil de requête HTTP envoie les données de la conversation vers une URL contrôlée par l'attaquant.</p><p>C'est le cas d'école : l'humain croit être dans la boucle et ne l'est pas. Passez en <strong>2.0.0</strong>, et si vous construisez votre propre chat, appliquez la confirmation côté serveur et pas seulement dans l'interface.</p>"
+          },
+          "date": "22 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-134755",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "chatprd-token-fraud",
+          "tag": "research",
+          "title": {
+            "es": "Token fraud: ChatPRD muestra cómo bandas encadenan free trials para revender el acceso a su agente",
+            "en": "Token fraud: ChatPRD shows how groups chain free trials to resell access to its agent",
+            "fr": "Token fraud : ChatPRD montre comment des groupes enchaînent les essais gratuits pour revendre l'accès à son agent"
+          },
+          "body_html": {
+            "es": "<p>Claire Vo, que dirige la plataforma de IA <strong>ChatPRD</strong>, contó en un video (destacado por Simon Willison) la ola de <em>token fraud</em> que recibe: grupos que encadenan free trials y códigos promocionales para usar el agente gratis, revender tokens o montar negocios enteros encima, como un estudio de mapas de Roblox y Fortnite que tunelea hacia su agente.</p><p>Un detalle fino: entre los prompts frecuentes aparecían SVGs de pelícanos en bicicleta, probablemente para identificar qué modelo hay detrás. Si tu producto de IA tiene trial gratis, tratá el abuso de cuota como un problema de seguridad, no solo de billing: rate limits por dispositivo y detección de patrones de uso automatizado.</p>",
+            "en": "<p>Claire Vo, who runs the <strong>ChatPRD</strong> AI platform, described in a video (highlighted by Simon Willison) the wave of <em>token fraud</em> hitting her product: groups chaining free trials and promo codes to use the agent for free, resell tokens or run whole businesses on top of it, such as a Roblox and Fortnite map studio tunnelling into her agent.</p><p>One telling detail: common prompts included SVGs of pelicans riding bicycles, probably to fingerprint which model sits underneath. If your AI product has a free trial, treat quota abuse as a security problem, not just a billing one: per-device rate limits and detection of automated usage patterns.</p>",
+            "fr": "<p>Claire Vo, qui dirige la plateforme IA <strong>ChatPRD</strong>, a décrit dans une vidéo (relayée par Simon Willison) la vague de <em>token fraud</em> qui touche son produit : des groupes enchaînent essais gratuits et codes promo pour utiliser l'agent gratuitement, revendre des tokens ou faire tourner des activités entières dessus, comme un studio de cartes Roblox et Fortnite qui passe par son agent.</p><p>Détail révélateur : parmi les prompts fréquents figuraient des SVG de pélicans à vélo, sans doute pour identifier le modèle sous-jacent. Si votre produit IA propose un essai gratuit, traitez l'abus de quota comme un problème de sécurité et pas seulement de facturation : limites par appareil et détection des usages automatisés.</p>"
+          },
+          "date": "20 Nov 2026",
+          "source": {
+            "url": "https://simonwillison.net/2026/Nov/20/token-fraud-is-here-and-its-bad/",
+            "label": "Simon Willison"
+          }
+        }
+      ]
+    },
+    {
+      "id": "advisories",
+      "name": "Vendor Advisories",
+      "theme": "advisories",
+      "icon_emoji": "📢",
+      "anchor": "advisories",
+      "updates": [
+        {
+          "id": "shirudo-cisco-openai-ebpf-shields",
+          "tag": "advisory",
+          "title": {
+            "es": "Cisco y OpenAI publican Shirudo: agentes que escriben controles compensatorios en eBPF mientras esperás el parche",
+            "en": "Cisco and OpenAI release Shirudo: agents that write eBPF compensating controls while you wait for the patch",
+            "fr": "Cisco et OpenAI publient Shirudo : des agents qui écrivent des contrôles compensatoires eBPF en attendant le correctif"
+          },
+          "body_html": {
+            "es": "<p><strong>Shirudo</strong> (escudo en japonés) es una herramienta open source basada en Tetragon, el subproyecto de Cilium. La idea: agentes escanean tu infraestructura y usan Codex para escribir \"shields\", programas eBPF que actúan como controles compensatorios en el kernel de Linux, sin parchear ni reiniciar. Cisco y OpenAI esperan que un humano revise cada shield antes de pasarlo a producción.</p><p>Dicen que ya mitigaron las fallas recientes de Java en un Elasticsearch sin downtime. Es la respuesta defensiva al aluvión de más de 100.000 vulnerabilidades reportadas este año, muchas encontradas por bug finders con IA. Ojo con esto: código generado por un modelo corriendo en el kernel es justamente donde la revisión humana no se puede saltear.</p>",
+            "en": "<p><strong>Shirudo</strong> (Japanese for shield) is an open-source tool built on Tetragon, the Cilium sub-project. The idea: agents scan your infrastructure and use Codex to write \"shields\", eBPF programs that act as compensating controls in the Linux kernel, with no patching or reboot. Cisco and OpenAI expect a human to review every shield before it goes to production.</p><p>They say they have already mitigated the recent Java flaws on an Elasticsearch deployment without downtime. It is the defensive answer to the flood of more than 100,000 vulnerabilities reported this year, many found by AI bug finders. Model-generated code running in the kernel is exactly where human review cannot be skipped.</p>",
+            "fr": "<p><strong>Shirudo</strong> (bouclier en japonais) est un outil open source basé sur Tetragon, le sous-projet de Cilium. Le principe : des agents scannent votre infrastructure et utilisent Codex pour écrire des « shields », des programmes eBPF qui servent de contrôles compensatoires dans le noyau Linux, sans correctif ni redémarrage. Cisco et OpenAI prévoient qu'un humain relise chaque shield avant la production.</p><p>Ils affirment avoir déjà atténué les récentes failles Java sur un déploiement Elasticsearch sans interruption. C'est la réponse défensive au flot de plus de 100 000 vulnérabilités signalées cette année, dont beaucoup trouvées par des outils IA. Du code généré par un modèle qui tourne dans le noyau, c'est précisément là que la revue humaine ne peut pas être sautée.</p>"
+          },
+          "date": "24 Nov 2026",
+          "source": {
+            "url": "https://www.theregister.com/security/2026/11/24/cisco-and-openai-pitch-ebpf-kernel-plugins-as-the-way-to-tame-the-patchpocalypse/5311795",
+            "label": "The Register"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "El human-in-the-loop falla en el servidor: better-chatbot mostraba un modo Manual mientras las herramientas corrían igual. La confirmación tiene que vivir donde se ejecuta la tool, no en la UI.",
+      "en": "Human-in-the-loop fails on the server: better-chatbot displayed a Manual mode while tools ran anyway. Confirmation has to live where the tool executes, not in the UI.",
+      "fr": "Le human-in-the-loop échoue côté serveur : better-chatbot affichait un mode Manual alors que les outils s'exécutaient quand même. La confirmation doit vivre là où l'outil s'exécute, pas dans l'interface."
+    },
+    {
+      "es": "Las credenciales alrededor de MCP son el nuevo blanco: el token endpoint de Pomerium, los headers por usuario de Chats y los servidores de workflows de Sim filtran o exponen acceso sin tocar el modelo.",
+      "en": "Credentials around MCP are the new target: Pomerium's token endpoint, Chats' per-user headers and Sim's workflow servers leak or expose access without touching the model.",
+      "fr": "Les identifiants autour de MCP sont la nouvelle cible : le token endpoint de Pomerium, les en-têtes par utilisateur de Chats et les serveurs de workflows de Sim divulguent ou exposent des accès sans toucher au modèle."
+    },
+    {
+      "es": "Los gateways de LLM concentran el riesgo multi-tenant: LiteLLM deja que una API key redirija los prompts de todos y one-hub convierte un image_url en SSRF hacia la metadata de la nube.",
+      "en": "LLM gateways concentrate multi-tenant risk: LiteLLM lets one API key redirect everyone's prompts and one-hub turns an image_url into SSRF against cloud metadata.",
+      "fr": "Les passerelles LLM concentrent le risque multi-tenant : LiteLLM laisse une clé API rediriger les prompts de tous et one-hub transforme une image_url en SSRF vers les métadonnées cloud."
+    }
+  ]
+}

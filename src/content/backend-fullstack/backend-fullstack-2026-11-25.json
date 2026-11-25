@@ -1,0 +1,485 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 25 Nov 2026",
+    "en": "Backend & Fullstack Daily — 25 Nov 2026",
+    "fr": "Backend & Fullstack Daily — 25 nov. 2026"
+  },
+  "description": {
+    "es": "Docker 29.10.1 cierra un escape vía docker cp, Hono endurece basicAuth, AWS lanza API Portal y sesiones de 90 días, PostgreSQL 19 llega a RDS en preview y OpenAI muestra cómo escaló Git para agentes.",
+    "en": "Docker 29.10.1 closes a docker cp escape, Hono hardens basicAuth, AWS ships API Portal and 90-day sessions, PostgreSQL 19 reaches RDS in preview, and OpenAI shows how it scaled Git for agents.",
+    "fr": "Docker 29.10.1 corrige une fuite via docker cp, Hono durcit basicAuth, AWS lance API Portal et des sessions de 90 jours, PostgreSQL 19 arrive sur RDS en preview et OpenAI montre comment il a fait passer Git à l'échelle des agents."
+  },
+  "pubDate": "2026-11-25",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Docker 29.10.1: docker cp podía escribir el host",
+        "en": "Docker 29.10.1: docker cp could write to the host",
+        "fr": "Docker 29.10.1 : docker cp pouvait écrire sur l'hôte"
+      },
+      "anchor": "docker-29-10-1",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Hono 4.13.22: basicAuth falla sin credencial",
+        "en": "Hono 4.13.22: basicAuth throws on a missing secret",
+        "fr": "Hono 4.13.22 : basicAuth échoue sans identifiant"
+      },
+      "anchor": "hono-4-13-22",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "API Gateway API Portal caza shadow APIs",
+        "en": "API Gateway API Portal finds shadow APIs",
+        "fr": "API Gateway API Portal traque les shadow APIs"
+      },
+      "anchor": "api-gateway-api-portal",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": {
+        "es": "PostgreSQL 19 ya corre en RDS preview",
+        "en": "PostgreSQL 19 now runs in RDS preview",
+        "fr": "PostgreSQL 19 tourne en preview sur RDS"
+      },
+      "anchor": "rds-postgres-19-preview",
+      "icon": "simple-icons:postgresql"
+    },
+    {
+      "text": {
+        "es": "OpenAI Pando: Git a escala de agentes",
+        "en": "OpenAI Pando: Git at coding-agent scale",
+        "fr": "OpenAI Pando : Git à l'échelle des agents"
+      },
+      "anchor": "openai-pando",
+      "icon": "lucide:layers"
+    },
+    {
+      "text": {
+        "es": "better-auth: revoke-session ya no miente",
+        "en": "better-auth: revoke-session stops lying",
+        "fr": "better-auth : revoke-session ne ment plus"
+      },
+      "anchor": "better-auth-1-7-28",
+      "icon": "lucide:server"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "docker-29-10-1",
+      "updates": [
+        {
+          "id": "docker-29-10-1",
+          "tag": "security",
+          "date": "24 Nov 2026",
+          "title": {
+            "es": "Docker Engine 29.10.1: dos CVEs, uno deja escribir el host vía docker cp",
+            "en": "Docker Engine 29.10.1: two CVEs, one lets docker cp write to the host",
+            "fr": "Docker Engine 29.10.1 : deux CVE, dont une qui laisse docker cp écrire sur l'hôte"
+          },
+          "body_html": {
+            "es": "<p><strong>CVE-2026-135124</strong> (CVSS 4.1): mientras corre un <code>docker cp</code> hacia un container, un proceso dentro puede cambiar el path del mount y hacer que un <strong>bind mount read-only</strong> quede escribible durante la copia, así que los archivos copiados terminan modificando el directorio del host. <strong>CVE-2026-135844</strong> cierra lecturas sin límite de <code>/etc/passwd</code> y <code>/etc/group</code> en <code>moby/sys/user</code>. La severidad es media, pero si tu CI o tus scripts de ops hacen <code>docker cp</code> sobre containers no confiables, actualizá ya.</p>",
+            "en": "<p><strong>CVE-2026-135124</strong> (CVSS 4.1): while a <code>docker cp</code> copies into a container, a process inside it can swap the mount path so a <strong>read-only bind mount</strong> stays writable for the copy, letting the copied files modify the host directory. <strong>CVE-2026-135844</strong> closes unbounded reads of passwd and group files in <code>moby/sys/user</code>. Severity is medium, but if CI or ops scripts run <code>docker cp</code> against untrusted containers, upgrade now.</p>",
+            "fr": "<p><strong>CVE-2026-135124</strong> (CVSS 4.1) : pendant un <code>docker cp</code> vers un container, un processus à l'intérieur peut changer le chemin du montage pour qu'un <strong>bind mount en lecture seule</strong> reste inscriptible pendant la copie ; les fichiers copiés modifient alors le répertoire de l'hôte. <strong>CVE-2026-135844</strong> corrige des lectures non bornées des fichiers passwd et group dans <code>moby/sys/user</code>. Sévérité moyenne, mais si votre CI ou vos scripts d'exploitation font <code>docker cp</code> sur des containers non fiables, mettez à jour.</p>"
+          },
+          "source": {
+            "url": "https://github.com/moby/moby/releases/tag/docker-v29.10.1",
+            "label": "github.com/moby"
+          }
+        },
+        {
+          "id": "hono-4-13-22",
+          "tag": "security",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "Hono 4.13.22: tanda de hardening y basicAuth ahora falla si la credencial no es string",
+            "en": "Hono 4.13.22: hardening batch, and basicAuth now throws on non-string credentials",
+            "fr": "Hono 4.13.22 : lot de durcissement, basicAuth lève une erreur si l'identifiant n'est pas une chaîne"
+          },
+          "body_html": {
+            "es": "<p>Segunda release seguida de hardening en Hono, y el equipo pide actualizar. <code>parseBody()</code> ahora saltea claves con <code>constructor.prototype</code>, el helper de MIME ya no devuelve propiedades heredadas, SSE rechaza saltos de línea en <code>retry</code> y el guard de paths malformados de <code>mount</code> vuelve al build. Ojo con el cambio de comportamiento: <code>basicAuth()</code> <strong>tira un error al arrancar</strong> si <code>username</code> o <code>password</code> no son string. Si los sacás de una env var que no está seteada, tu app ahora no levanta. Mejor así que aceptar cualquier cosa, pero revisá tus deploys.</p>",
+            "en": "<p>A second hardening release in a row, and the Hono team recommends updating. <code>parseBody()</code> now skips keys containing <code>constructor.prototype</code>, the MIME helper no longer returns inherited properties, SSE rejects line breaks in <code>retry</code>, and the malformed-path guard in <code>mount</code> is back in the built output. Watch the behavior change: <code>basicAuth()</code> <strong>throws at setup</strong> if <code>username</code> or <code>password</code> is not a string. If you read them from an env var that is unset, your app now fails to start, which beats silently accepting anything, but check your deploys.</p>",
+            "fr": "<p>Deuxième release de durcissement d'affilée, et l'équipe Hono recommande de mettre à jour. <code>parseBody()</code> ignore désormais les clés contenant <code>constructor.prototype</code>, l'utilitaire MIME ne renvoie plus de propriétés héritées, SSE refuse les retours à la ligne dans <code>retry</code> et la garde contre les chemins malformés de <code>mount</code> revient dans le build. Attention au changement de comportement : <code>basicAuth()</code> <strong>lève une erreur au démarrage</strong> si <code>username</code> ou <code>password</code> n'est pas une chaîne. Si vous les lisez depuis une variable d'environnement absente, l'app ne démarre plus.</p>"
+          },
+          "source": {
+            "url": "https://github.com/honojs/hono/releases/tag/v4.13.22",
+            "label": "github.com/honojs"
+          }
+        },
+        {
+          "id": "api-gateway-api-portal",
+          "tag": "notable",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "API Gateway lanza API Portal: inventario de shadow APIs y endpoints MCP en toda tu org",
+            "en": "API Gateway launches API Portal: an inventory of shadow APIs and MCP endpoints across your org",
+            "fr": "API Gateway lance API Portal : inventaire des shadow APIs et endpoints MCP de toute l'organisation"
+          },
+          "body_html": {
+            "es": "<p>API Portal arma un inventario continuo de las APIs detrás de <strong>API Gateway, ALB y CloudFront</strong> a partir de logs de tráfico y configuración del lado de AWS: nada para instalar, ni logs para reenviar, ni tráfico para redirigir. Toda API descubierta arranca como <strong>shadow API</strong> hasta que la adoptás, se etiqueta como pública o privada y detecta endpoints de IA (servidores <strong>MCP</strong>, A2A, LLM). Para las APIs gestionadas avisa cuando dejan de recibir tráfico o pierden el owner. Si tu org tiene APIs huérfanas (y las tiene), esto es gobernanza sin fricción.</p>",
+            "en": "<p>API Portal builds a continuously updated inventory of the APIs behind <strong>API Gateway, ALB and CloudFront</strong> from AWS-side traffic logs and configuration records: nothing to install, no logs to forward, no traffic to reroute. Every discovered API starts as a <strong>shadow API</strong> until you manage it, gets labeled public or private, and AI endpoints (<strong>MCP</strong>, A2A and LLM servers) are identified. For managed APIs it flags those that stop receiving traffic or lose their owner. Low-friction API governance at organization scale.</p>",
+            "fr": "<p>API Portal construit un inventaire continu des APIs derrière <strong>API Gateway, ALB et CloudFront</strong> à partir des logs de trafic et des configurations côté AWS : rien à installer, aucun log à transférer, aucun trafic à rediriger. Chaque API découverte démarre comme <strong>shadow API</strong> jusqu'à ce que vous la gériez, est étiquetée publique ou privée, et les endpoints IA (serveurs <strong>MCP</strong>, A2A, LLM) sont identifiés. Pour les APIs gérées, il signale celles qui ne reçoivent plus de trafic ou perdent leur propriétaire.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-api-gateway-announces-api-portal/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "aws-sign-in-90-days",
+          "tag": "notable",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "AWS Sign-In: sesiones OAuth de hasta 90 días para CLI, MCP y agentes",
+            "en": "AWS Sign-In: OAuth sessions of up to 90 days for the CLI, MCP and agents",
+            "fr": "AWS Sign-In : sessions OAuth jusqu'à 90 jours pour la CLI, MCP et les agents"
+          },
+          "body_html": {
+            "es": "<p>Los admins ahora pueden configurar la <strong>Sign-in duration</strong> por usuario o rol de IAM, hasta <strong>90 días</strong>, para <code>aws login</code>, el AWS MCP Server y otras apps OAuth. AWS lo vende como alternativa a las <strong>access keys estáticas</strong>: credenciales cortas y renovables para workflows y agentes que corren mucho tiempo. No toca sesiones de consola y nada cambia si no lo configurás. Si todavía tenés <code>AKIA...</code> en el <code>.env</code> de un agente, este es el empujón para sacarlas.</p>",
+            "en": "<p>Admins can now configure <strong>Sign-in duration</strong> per IAM user or role, up to <strong>90 days</strong>, for <code>aws login</code>, the AWS MCP Server and other OAuth apps. AWS positions it as a replacement for <strong>static access keys</strong>: short-lived, renewable credentials for long-running workflows and agents. Console sessions are unaffected, and nothing changes unless you opt in. If an agent still has long-lived keys in its env file, this is your cue to remove them.</p>",
+            "fr": "<p>Les admins peuvent désormais configurer la <strong>Sign-in duration</strong> par utilisateur ou rôle IAM, jusqu'à <strong>90 jours</strong>, pour <code>aws login</code>, l'AWS MCP Server et d'autres apps OAuth. AWS le présente comme une alternative aux <strong>access keys statiques</strong> : des identifiants courts et renouvelables pour les workflows et agents de longue durée. Les sessions console ne changent pas, et rien ne bouge sans configuration explicite.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/configurable-aws-sign-in-duration/",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "trpc-11-31-3",
+      "updates": [
+        {
+          "id": "trpc-11-31-3",
+          "tag": "patch",
+          "date": "24 Nov 2026",
+          "title": {
+            "es": "tRPC 11.31.1 a 11.31.3: tres fixes al streaming del cliente en un día",
+            "en": "tRPC 11.31.1 to 11.31.3: three client streaming fixes in one day",
+            "fr": "tRPC 11.31.1 à 11.31.3 : trois correctifs de streaming client en une journée"
+          },
+          "body_html": {
+            "es": "<p>Después de la 11.31.0 de ayer, salieron tres patches seguidos en <code>@trpc/client</code>: una query terminada ya no mantiene abierto un batch streameado, el batch se libera cuando se resuelven los valores diferidos de cada llamada, y <code>wsLink</code> conserva el <code>lastEventId</code> ante eventos sin id. Si usás <code>httpBatchStreamLink</code> o subscriptions por WebSocket, saltá directo a <strong>11.31.3</strong>.</p>",
+            "en": "<p>Following yesterday's 11.31.0, three back-to-back <code>@trpc/client</code> patches landed: a finished query no longer holds a streamed batch open, the batch is released once each call's deferred values settle, and <code>wsLink</code> keeps its <code>lastEventId</code> on events without an id. If you use <code>httpBatchStreamLink</code> or WebSocket subscriptions, jump straight to <strong>11.31.3</strong>.</p>",
+            "fr": "<p>Après la 11.31.0 d'hier, trois patches de <code>@trpc/client</code> se sont enchaînés : une query terminée ne garde plus un batch streamé ouvert, le batch est libéré quand les valeurs différées de chaque appel sont résolues, et <code>wsLink</code> conserve son <code>lastEventId</code> pour les événements sans id. Si vous utilisez <code>httpBatchStreamLink</code> ou des subscriptions WebSocket, passez directement en <strong>11.31.3</strong>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/trpc/trpc/releases/tag/v11.31.3",
+            "label": "github.com/trpc"
+          }
+        },
+        {
+          "id": "inngest-4-27",
+          "tag": "minor",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "Inngest 4.27: narrowing de eventos con is() e instance ID por env var",
+            "en": "Inngest 4.27: event narrowing with is() and an instance ID env var",
+            "fr": "Inngest 4.27 : narrowing d'événements avec is() et instance ID par variable d'environnement"
+          },
+          "body_html": {
+            "es": "<p>El SDK de TypeScript suma <code>is()</code> para hacer narrowing de un evento por su tipo, y <code>INNGEST_CONNECT_INSTANCE_ID</code> para fijar el instance ID de connect cuando omitís la opción; los checkpoints ahora mandan el header <code>x-inngest-instance-id</code>. Poca cosa, pero el narrowing tipado en handlers multi-evento es un golazo para la DX.</p>",
+            "en": "<p>The TypeScript SDK adds <code>is()</code> to narrow an event by its type, plus <code>INNGEST_CONNECT_INSTANCE_ID</code> to set the connect instance ID when the option is omitted; checkpoint requests now send an <code>x-inngest-instance-id</code> header. Small, but typed narrowing in multi-event handlers is a nice DX win.</p>",
+            "fr": "<p>Le SDK TypeScript ajoute <code>is()</code> pour affiner un événement selon son type, et <code>INNGEST_CONNECT_INSTANCE_ID</code> pour fixer l'instance ID de connect quand l'option est omise ; les checkpoints envoient désormais l'en-tête <code>x-inngest-instance-id</code>. Petit changement, mais le narrowing typé dans les handlers multi-événements améliore la DX.</p>"
+          },
+          "source": {
+            "url": "https://github.com/inngest/inngest-js/releases/tag/inngest%404.27.0",
+            "label": "github.com/inngest"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "rds-postgres-19-preview",
+      "updates": [
+        {
+          "id": "rds-postgres-19-preview",
+          "tag": "beta",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "PostgreSQL 19 ya se puede probar en RDS (Preview Environment)",
+            "en": "PostgreSQL 19 is now testable on RDS (Preview Environment)",
+            "fr": "PostgreSQL 19 testable sur RDS (Preview Environment)"
+          },
+          "body_html": {
+            "es": "<p>Cuatro días después del GA de PostgreSQL 19, AWS lo habilitó en el <strong>RDS Database Preview Environment</strong>. Lo jugoso para probar: <code>REPACK ... CONCURRENTLY</code> para sacar bloat de tablas e índices con locking mínimo, autovacuum paralelo, replicación lógica de secuencias y las extensiones <code>pg_plan_advice</code> y <code>pg_stash_advice</code> para guiar al planner. Ojo: los clusters de preview se borran a los <strong>60 días</strong> y sus snapshots no pasan a producción. Es para medir, no para migrar.</p>",
+            "en": "<p>Four days after PostgreSQL 19 went GA, AWS made it available in the <strong>RDS Database Preview Environment</strong>. Worth testing: <code>REPACK ... CONCURRENTLY</code> to remove table and index bloat with minimal locking, parallel autovacuum, logical replication of sequence values, and the <code>pg_plan_advice</code> and <code>pg_stash_advice</code> extensions to steer the planner. Preview clusters are deleted after <strong>60 days</strong> and their snapshots cannot be copied to production: benchmark here, do not migrate.</p>",
+            "fr": "<p>Quatre jours après la GA de PostgreSQL 19, AWS l'a ouvert dans le <strong>RDS Database Preview Environment</strong>. À tester : <code>REPACK ... CONCURRENTLY</code> pour supprimer le bloat des tables et index avec un verrouillage minimal, l'autovacuum parallèle, la réplication logique des séquences et les extensions <code>pg_plan_advice</code> et <code>pg_stash_advice</code> pour guider le planner. Les clusters de preview sont supprimés après <strong>60 jours</strong> et leurs snapshots ne passent pas en production.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/postgresql-19-amazon-rds-database-preview-environment/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "bullmq-6-7-9",
+          "tag": "patch",
+          "date": "24 Nov 2026",
+          "title": {
+            "es": "BullMQ 6.7.9: el backend Postgres ahora valida el lock token al devolver jobs a wait",
+            "en": "BullMQ 6.7.9: the Postgres backend now validates the lock token when moving jobs back to wait",
+            "fr": "BullMQ 6.7.9 : le backend Postgres valide le lock token en renvoyant les jobs en wait"
+          },
+          "body_html": {
+            "es": "<p>Fix de correctitud en el backend Postgres: <code>move_active_to_wait</code> ahora <strong>valida el lock token</strong>, así un worker que perdió el lock no puede devolver a la cola un job que ya tomó otro. El fix llega a los SDKs de Python, Elixir y .NET, y la <strong>6.7.10</strong> del mismo día resuelve la vulnerabilidad de <code>minimatch</code> en las dependencias. Si probaste la cola sobre Postgres, actualizá.</p>",
+            "en": "<p>A correctness fix in the Postgres backend: <code>move_active_to_wait</code> now <strong>validates the lock token</strong>, so a worker that lost its lock cannot push back a job another worker already owns. The fix ships to the Python, Elixir and .NET SDKs too, and <strong>6.7.10</strong> the same day resolves the <code>minimatch</code> dependency vulnerability. If you run queues on Postgres, upgrade.</p>",
+            "fr": "<p>Correctif de cohérence dans le backend Postgres : <code>move_active_to_wait</code> <strong>valide désormais le lock token</strong>, donc un worker qui a perdu son verrou ne peut plus renvoyer un job déjà repris par un autre. Le correctif arrive aussi dans les SDK Python, Elixir et .NET, et la <strong>6.7.10</strong> du même jour corrige la vulnérabilité de la dépendance <code>minimatch</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/taskforcesh/bullmq/releases/tag/v6.7.9",
+            "label": "github.com/taskforcesh"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "cloudformation-206-types",
+      "updates": [
+        {
+          "id": "cloudformation-206-types",
+          "tag": "notable",
+          "date": "24 Nov 2026",
+          "title": {
+            "es": "CloudFormation suma 206 tipos de recursos en 88 servicios",
+            "en": "CloudFormation adds 206 resource types across 88 services",
+            "fr": "CloudFormation ajoute 206 types de ressources sur 88 services"
+          },
+          "body_html": {
+            "es": "<p>Salto grande de cobertura: <strong>206 tipos nuevos</strong> en 88 servicios (incluidos SageMaker Hub, Bedrock AgentCore PolicyEngine y EC2 Snapshot), todos también en <strong>Cloud Control API</strong>, que además agrega 224 tipos read-only en 99 servicios. AWS cuenta que usó un framework interno con IA para abaratar el onboarding de recursos. Si mantenés custom resources con Lambda para tapar huecos de CFN o de los providers que se apoyan en Cloud Control, revisá cuáles podés borrar.</p>",
+            "en": "<p>A big coverage jump: <strong>206 new resource types</strong> across 88 services (including SageMaker Hub, Bedrock AgentCore PolicyEngine and EC2 Snapshot), all also available through <strong>Cloud Control API</strong>, which adds 224 read-only types across 99 services. AWS says an internal AI-driven framework cut the cost of onboarding resource types. If you maintain Lambda-backed custom resources to fill CloudFormation gaps, check which ones you can now delete.</p>",
+            "fr": "<p>Gros saut de couverture : <strong>206 nouveaux types de ressources</strong> sur 88 services (dont SageMaker Hub, Bedrock AgentCore PolicyEngine et EC2 Snapshot), tous disponibles aussi via <strong>Cloud Control API</strong>, qui ajoute 224 types en lecture seule sur 99 services. AWS indique qu'un framework interne piloté par IA a réduit le coût d'intégration. Si vous maintenez des custom resources Lambda pour combler des trous, vérifiez lesquelles supprimer.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/cloudformation-coverage-expansion/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "codedeploy-suspend-asg",
+          "tag": "minor",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "CodeDeploy suspende procesos de Auto Scaling durante deploys in-place",
+            "en": "CodeDeploy can suspend Auto Scaling processes during in-place deployments",
+            "fr": "CodeDeploy peut suspendre les processus Auto Scaling pendant les déploiements in-place"
+          },
+          "body_html": {
+            "es": "<p>Elegís qué procesos suspender (<code>Terminate</code>, <code>AZRebalance</code>, <code>InstanceRefresh</code>, <code>ScheduledActions</code>) por deployment group o por deploy, y CodeDeploy los reanuda cuando el deploy termina bien, falla o se frena. Chau a los scripts caseros en los lifecycle hooks para que el ASG no te mate instancias a mitad de deploy.</p>",
+            "en": "<p>Pick which processes to suspend (<code>Terminate</code>, <code>AZRebalance</code>, <code>InstanceRefresh</code>, <code>ScheduledActions</code>) per deployment group or per deployment, and CodeDeploy resumes them when the deployment succeeds, fails or is stopped. No more homemade lifecycle-hook scripts to keep the ASG from replacing instances mid-deploy.</p>",
+            "fr": "<p>Vous choisissez quels processus suspendre (<code>Terminate</code>, <code>AZRebalance</code>, <code>InstanceRefresh</code>, <code>ScheduledActions</code>) par deployment group ou par déploiement, et CodeDeploy les reprend quand le déploiement réussit, échoue ou est arrêté. Plus besoin de scripts maison pour empêcher l'ASG de remplacer des instances en plein déploiement.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/aws-codedeploy-suspend-asg-processes/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "wrangler-4-168",
+          "tag": "minor",
+          "date": "24 Nov 2026",
+          "title": {
+            "es": "Wrangler 4.168: aplica images.url_transformations al deployar y pide scopes de billing",
+            "en": "Wrangler 4.168: applies images.url_transformations on deploy and requests billing scopes",
+            "fr": "Wrangler 4.168 : applique images.url_transformations au déploiement et demande les scopes billing"
+          },
+          "body_html": {
+            "es": "<p><code>wrangler deploy</code> y <code>wrangler versions deploy</code> ahora aplican <code>images.url_transformations</code> del config al Worker (no en <code>--dry-run</code> ni en dispatch namespaces). Además, el login OAuth pide <code>billing:write</code> para poder habilitar productos como R2: las sesiones existentes necesitan un login nuevo, ojo en CI si usás OAuth en vez de API tokens.</p>",
+            "en": "<p><code>wrangler deploy</code> and <code>wrangler versions deploy</code> now apply the config's <code>images.url_transformations</code> to the Worker (not for <code>--dry-run</code> or dispatch namespaces). The OAuth login also requests <code>billing:write</code> so it can enable products such as R2; existing sessions need a fresh login.</p>",
+            "fr": "<p><code>wrangler deploy</code> et <code>wrangler versions deploy</code> appliquent désormais <code>images.url_transformations</code> de la config au Worker (pas en <code>--dry-run</code> ni dans les dispatch namespaces). Le login OAuth demande aussi <code>billing:write</code> pour activer des produits comme R2 ; les sessions existantes doivent se reconnecter.</p>"
+          },
+          "source": {
+            "url": "https://github.com/cloudflare/workers-sdk/releases/tag/wrangler%404.168.0",
+            "label": "github.com/cloudflare"
+          }
+        },
+        {
+          "id": "opentofu-1-13-10",
+          "tag": "patch",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "OpenTofu 1.13.10: Go 1.27.4 por un crash en servidores HTTP/1",
+            "en": "OpenTofu 1.13.10: Go 1.27.4 for an HTTP/1 server crash",
+            "fr": "OpenTofu 1.13.10 : Go 1.27.4 contre un crash de serveur HTTP/1"
+          },
+          "body_html": {
+            "es": "<p>Patch de toolchain: sube a <strong>Go 1.27.4</strong> por <code>GO-2026-6859</code>, un crash de servidores HTTP/1 por una race en el header de <code>MaxBytesReader</code>. Trae además fixes para overrides de módulos indexados en <code>tofu test</code> y para symbol libraries dentro de módulos. Recordatorio útil: si tenés servicios Go propios, revisá también tu versión de toolchain.</p>",
+            "en": "<p>A toolchain patch: bumps to <strong>Go 1.27.4</strong> for <code>GO-2026-6859</code>, an HTTP/1 server crash caused by a <code>MaxBytesReader</code> header race. It also fixes resource overrides for indexed modules in <code>tofu test</code> and symbol libraries inside modules. Useful reminder: check the toolchain of your own Go services too.</p>",
+            "fr": "<p>Patch de toolchain : passage à <strong>Go 1.27.4</strong> pour <code>GO-2026-6859</code>, un crash de serveur HTTP/1 dû à une race sur l'en-tête de <code>MaxBytesReader</code>. Corrige aussi les overrides de modules indexés dans <code>tofu test</code> et les symbol libraries dans les modules. Vérifiez aussi la toolchain de vos propres services Go.</p>"
+          },
+          "source": {
+            "url": "https://github.com/opentofu/opentofu/releases/tag/v1.13.10",
+            "label": "github.com/opentofu"
+          }
+        },
+        {
+          "id": "vercel-privatelink",
+          "tag": "minor",
+          "date": "24 Nov 2026",
+          "title": {
+            "es": "Vercel Secure Compute: endpoints de AWS PrivateLink desde el dashboard",
+            "en": "Vercel Secure Compute: AWS PrivateLink endpoints from the dashboard",
+            "fr": "Vercel Secure Compute : endpoints AWS PrivateLink depuis le dashboard"
+          },
+          "body_html": {
+            "es": "<p>Los equipos Enterprise con Secure Compute ya pueden crear y gestionar <strong>endpoints de AWS PrivateLink</strong> en sus redes directo desde el dashboard. Traducción: tus Functions hablan con RDS o servicios internos en AWS sin exponerlos a internet ni armar peering a mano.</p>",
+            "en": "<p>Enterprise teams on Secure Compute can now create and manage <strong>AWS PrivateLink endpoints</strong> in their networks directly from the Vercel dashboard, so Functions can reach RDS or internal AWS services without exposing them to the internet or hand-building peering.</p>",
+            "fr": "<p>Les équipes Enterprise sur Secure Compute peuvent créer et gérer des <strong>endpoints AWS PrivateLink</strong> dans leurs réseaux depuis le dashboard Vercel : les Functions atteignent RDS ou des services internes AWS sans les exposer à internet.</p>"
+          },
+          "source": {
+            "url": "https://vercel.com/changelog/aws-privatelink-endpoints-are-now-available-on-secure-compute",
+            "label": "vercel.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "openai-pando",
+      "updates": [
+        {
+          "id": "openai-pando",
+          "tag": "notable",
+          "date": "24 Nov 2026",
+          "title": {
+            "es": "OpenAI Pando: un backend de Git para la carga de los coding agents",
+            "en": "OpenAI Pando: a Git backend built for coding-agent load",
+            "fr": "OpenAI Pando : un backend Git pensé pour la charge des coding agents"
+          },
+          "body_html": {
+            "es": "<p>OpenAI detalló <strong>Pando</strong>, el backend que reemplazó el almacenamiento de su monorepo sin tocar el cliente ni el protocolo de Git. Valida el packfile mientras se streamea a blob storage inmutable, registra cada versión de ref en una transacción de metadata y deja que refs no relacionadas se actualicen en paralelo (<strong>causal consistency</strong>). Resultado: <strong>~80% menos latencia mediana de push</strong> y casi un petabyte de Git por día servido. Lección de arquitectura: cuando los agentes multiplican los pushes y cada push dispara N jobs de CI, el cuello de botella pasa a ser la coordinación de refs, no el cómputo.</p>",
+            "en": "<p>OpenAI detailed <strong>Pando</strong>, the backend now serving its monorepo without changing Git's client or protocol. It validates packfiles while streaming them to immutable blob storage, records each ref version in a metadata transaction, and lets unrelated refs update independently (<strong>causal consistency</strong>). The result: <strong>~80% lower median push latency</strong> and nearly a petabyte of Git data served per day. The architecture lesson: once agents multiply pushes and every push fans out into CI fetches, ref coordination becomes the bottleneck, not compute.</p>",
+            "fr": "<p>OpenAI a détaillé <strong>Pando</strong>, le backend qui sert désormais son monorepo sans changer le client ni le protocole Git. Il valide les packfiles pendant leur streaming vers un blob storage immuable, enregistre chaque version de ref dans une transaction de métadonnées et laisse les refs indépendantes se mettre à jour en parallèle (<strong>causal consistency</strong>). Résultat : <strong>~80 % de latence médiane de push en moins</strong> et près d'un pétaoctet de Git servi par jour.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/11/openai-git-pando/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "netflix-sdlc-agents",
+          "tag": "notable",
+          "date": "23 Nov 2026",
+          "title": {
+            "es": "Netflix en QCon SF: adaptar el SDLC a los agentes es sobre todo docs, consistencia y review",
+            "en": "Netflix at QCon SF: retrofitting the SDLC for agents is mostly docs, consistency and review",
+            "fr": "Netflix à QCon SF : adapter le SDLC aux agents, c'est surtout docs, cohérence et revue"
+          },
+          "body_html": {
+            "es": "<p>El equipo de Commerce de Netflix contó que su primer intento, que un agente migrara tests, necesitó <strong>cuatro iteraciones</strong>: faltaban instrucciones, las APIs a usar y cómo mockear datos. Los docs eran difíciles de encontrar (el contexto se agotaba antes) e inconsistentes, porque cada equipo escribía tests distinto, y el framework interno tenía un NPS de <strong>-3</strong>. La conclusión es la de siempre, pero ahora con números: un agente amplifica la consistencia de tu codebase, para bien o para mal. Si no tenés convenciones claras, ponete las pilas antes de comprar más licencias.</p>",
+            "en": "<p>Netflix's Commerce team said its first attempt, having an agent migrate tests, took <strong>four iterations</strong>: missing instructions, the APIs to use, and how to mock data. Docs were hard to find (the context window ran out first) and inconsistent, because tests were written differently across the codebase, and the internal framework scored an NPS of <strong>-3</strong>. The takeaway, now with numbers: agents amplify your codebase's consistency, for better or worse.</p>",
+            "fr": "<p>L'équipe Commerce de Netflix raconte que sa première tentative, faire migrer des tests par un agent, a demandé <strong>quatre itérations</strong> : il manquait les instructions, les APIs à utiliser et la façon de mocker les données. La doc était difficile à trouver et incohérente, et le framework interne avait un NPS de <strong>-3</strong>. Conclusion chiffrée : un agent amplifie la cohérence de votre codebase, en bien comme en mal.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/11/netflix-sdlc-ai-coding-agents/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "cncf-vms-ai-workloads",
+          "tag": "notable",
+          "date": "24 Nov 2026",
+          "title": {
+            "es": "CNCF: las VMs siguen alojando el 53% de las apps en producción, y los agentes suman demanda",
+            "en": "CNCF: VMs still host 53% of production apps, and agents add demand",
+            "fr": "CNCF : les VMs hébergent toujours 53 % des apps en production, et les agents en ajoutent"
+          },
+          "body_html": {
+            "es": "<p>Encuesta de CNCF y Linux Foundation Research a 492 practitioners (septiembre 2026): las VMs alojan en promedio el <strong>53% de las aplicaciones en producción</strong>, y llega al 64% en empresas de más de 10.000 empleados. Entre quienes amplían su parque de VMs, el <strong>34%</strong> cita workloads de IA y agentes, porque necesitan un aislamiento más fuerte que el de un container. Containers y VMs conviven: elegí el boundary de aislamiento por riesgo, no por moda.</p>",
+            "en": "<p>A CNCF and Linux Foundation Research survey of 492 practitioners (September 2026) finds VMs host an average of <strong>53% of production applications</strong>, rising to 64% at organizations above 10,000 employees. Among those expanding their VM footprint, <strong>34%</strong> cite AI and agentic workloads that need stronger isolation than a container gives. Containers and VMs coexist: pick the isolation boundary by risk, not fashion.</p>",
+            "fr": "<p>Une enquête CNCF et Linux Foundation Research auprès de 492 praticiens (septembre 2026) montre que les VMs hébergent en moyenne <strong>53 % des applications en production</strong>, et 64 % dans les organisations de plus de 10 000 employés. Parmi celles qui étendent leur parc de VMs, <strong>34 %</strong> citent les workloads IA et agentiques, qui exigent une isolation plus forte qu'un container.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/11/cncf-vm-ai-workloads/",
+            "label": "infoq.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "nx-24-0-7",
+      "updates": [
+        {
+          "id": "nx-24-0-7",
+          "tag": "notable",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "Nx 24.0.7: CORS limitado a localhost y lookups que no salen de tu workspace",
+            "en": "Nx 24.0.7: localhost-only CORS and lookups that stay inside your workspace",
+            "fr": "Nx 24.0.7 : CORS limité à localhost et recherches qui restent dans le workspace"
+          },
+          "body_html": {
+            "es": "<p>Patch con sabor a seguridad: el dev server de <code>angular-rspack</code> ahora limita CORS a orígenes <strong>localhost</strong>, las búsquedas de workspace y paquetes <strong>se frenan en directorios que controla el usuario</strong> y la salida de terminal del remote cache se filtra antes de guardarla y reproducirla. También lee overrides de <code>pnpm-workspace.yaml</code> para <code>affected</code> y acota la concurrencia de lectura del remote cache. Si usás Nx Cloud o un remote cache compartido, actualizá.</p>",
+            "en": "<p>A security-flavored patch: the <code>angular-rspack</code> dev server now limits CORS to <strong>localhost</strong> origins, workspace and package lookups <strong>stop at directories the user controls</strong>, and remote cache terminal output is filtered before it is stored and replayed. It also reads overrides from <code>pnpm-workspace.yaml</code> for <code>affected</code> and bounds remote cache retrieval concurrency. If you use Nx Cloud or a shared remote cache, upgrade.</p>",
+            "fr": "<p>Un patch orienté sécurité : le dev server <code>angular-rspack</code> limite CORS aux origines <strong>localhost</strong>, les recherches de workspace et de paquets <strong>s'arrêtent aux répertoires contrôlés par l'utilisateur</strong>, et la sortie terminal du remote cache est filtrée avant stockage et rejeu. Il lit aussi les overrides de <code>pnpm-workspace.yaml</code> pour <code>affected</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nrwl/nx/releases/tag/24.0.7",
+            "label": "github.com/nrwl"
+          }
+        },
+        {
+          "id": "better-auth-1-7-28",
+          "tag": "notable",
+          "date": "24 Nov 2026",
+          "title": {
+            "es": "better-auth 1.7.28: revoke-session ya no miente cuando la sesión sobrevive",
+            "en": "better-auth 1.7.28: revoke-session no longer reports success when the session survives",
+            "fr": "better-auth 1.7.28 : revoke-session ne signale plus un succès quand la session survit"
+          },
+          "body_html": {
+            "es": "<p>El fix importante: <code>/revoke-session</code> y <code>/admin/revoke-user-session</code> reportaban éxito aunque la sesión <strong>siguiera viva</strong>, y el borrado de usuarios ahora devuelve <code>FAILED_TO_DELETE_USER</code> si un hook lo veta. Además, los OTP por email y teléfono concurrentes comparten un código válido y un nuevo envío reemplaza al anterior. Si tu flujo de logout forzado o de respuesta a incidentes confía en esa respuesta, actualizá ya.</p>",
+            "en": "<p>The key fix: <code>/revoke-session</code> and <code>/admin/revoke-user-session</code> reported success even when the session <strong>survived</strong>, and user deletion now returns <code>FAILED_TO_DELETE_USER</code> when a hook vetoes it. Concurrent email and phone OTP requests now share one valid code, and a new send replaces the earlier one. If forced logout or incident response relies on that response, upgrade now.</p>",
+            "fr": "<p>Le correctif clé : <code>/revoke-session</code> et <code>/admin/revoke-user-session</code> signalaient un succès même quand la session <strong>survivait</strong>, et la suppression d'utilisateur renvoie maintenant <code>FAILED_TO_DELETE_USER</code> si un hook l'interdit. Les OTP email et téléphone concurrents partagent désormais un code valide. Si votre déconnexion forcée s'appuie sur cette réponse, mettez à jour.</p>"
+          },
+          "source": {
+            "url": "https://github.com/better-auth/better-auth/releases/tag/v1.7.28",
+            "label": "github.com/better-auth"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Las respuestas de éxito también son un contrato de seguridad: better-auth reportaba sesiones revocadas que seguían vivas y Docker aplicaba flags read-only sobre el mount equivocado. Si tu flujo de incidentes confía en un 200, testeá el efecto, no la respuesta.",
+      "en": "Success responses are a security contract too: better-auth reported revoked sessions that were still alive, and Docker applied read-only flags to the wrong mount. If incident response trusts a 200, test the effect, not the response.",
+      "fr": "Les réponses de succès sont aussi un contrat de sécurité : better-auth signalait des sessions révoquées encore actives, et Docker appliquait des flags read-only au mauvais montage. Testez l'effet, pas la réponse."
+    },
+    {
+      "es": "Fallar temprano le gana a aceptar cualquier cosa: Hono ahora rompe al arrancar si basicAuth recibe una env var vacía, el mismo patrón de validar config al boot que conviene copiar en cualquier servicio.",
+      "en": "Failing early beats accepting anything: Hono now refuses to start when basicAuth gets an unset env var, the same validate-config-at-boot pattern worth copying in every service.",
+      "fr": "Échouer tôt vaut mieux que tout accepter : Hono refuse désormais de démarrer si basicAuth reçoit une variable d'environnement vide, un modèle de validation de config au boot à copier partout."
+    },
+    {
+      "es": "Los agentes cambian dónde está el cuello de botella: OpenAI tuvo que rehacer la coordinación de refs de Git, Netflix sus docs y convenciones, y CNCF ve más VMs por aislamiento. La infraestructura aburrida vuelve a ser la diferencia.",
+      "en": "Agents move the bottleneck: OpenAI had to rebuild Git ref coordination, Netflix its docs and conventions, and CNCF sees more VMs for isolation. Boring infrastructure is the differentiator again.",
+      "fr": "Les agents déplacent le goulot d'étranglement : OpenAI a refait la coordination des refs Git, Netflix sa doc et ses conventions, et la CNCF voit plus de VMs pour l'isolation."
+    }
+  ]
+}

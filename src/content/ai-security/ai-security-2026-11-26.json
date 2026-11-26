@@ -1,0 +1,244 @@
+{
+  "title": {
+    "es": "AI Security — 26 Nov 2026",
+    "en": "AI Security — 26 Nov 2026",
+    "fr": "AI Security — 26 nov. 2026"
+  },
+  "description": {
+    "es": "OpenRouter saca a tres proveedores de inferencia después de que prompts trampa de Dragos se filtraran y se usaran afuera; Italia y Suiza alertan por campañas de agentes de IA autónomos contra infraestructura crítica; paramz carga pickle sin restricciones, LiteLLM corrige un takeover por email en SSO y markdownify-mcp un SSRF disparable por prompt injection.",
+    "en": "OpenRouter drops three inference providers after Dragos canary prompts leaked and were used in the wild; Italy and Switzerland warn of autonomous AI-agent campaigns against critical infrastructure; paramz loads pickles unrestricted, LiteLLM fixes an SSO email takeover and markdownify-mcp a prompt-injection-triggered SSRF.",
+    "fr": "OpenRouter retire trois fournisseurs d'inférence après la fuite et l'usage dans la nature de prompts-pièges de Dragos ; l'Italie et la Suisse alertent sur des campagnes d'agents IA autonomes contre les infrastructures critiques ; paramz charge des pickles sans restriction, LiteLLM corrige une prise de compte via l'email SSO et markdownify-mcp un SSRF déclenchable par prompt injection."
+  },
+  "pubDate": "2026-11-26",
+  "category": "ai-security",
+  "highlights": [
+    {
+      "text": {
+        "es": "OpenRouter saca a tres proveedores por filtrar prompts",
+        "en": "OpenRouter drops three providers over leaked prompts",
+        "fr": "OpenRouter retire trois fournisseurs pour fuite de prompts"
+      },
+      "anchor": "openrouter-provider-leaks",
+      "icon": "lucide:shield-x"
+    },
+    {
+      "text": {
+        "es": "Italia y Suiza: ataques con agentes de IA autónomos",
+        "en": "Italy and Switzerland: autonomous AI-agent attacks",
+        "fr": "Italie et Suisse : attaques par agents IA autonomes"
+      },
+      "anchor": "csirt-ai-agent-campaigns",
+      "icon": "lucide:siren"
+    },
+    {
+      "text": {
+        "es": "paramz: RCE por pickle en archivos de modelo",
+        "en": "paramz: pickle RCE through model files",
+        "fr": "paramz : RCE par pickle via fichiers de modèle"
+      },
+      "anchor": "cve-2026-137060",
+      "icon": "lucide:skull"
+    },
+    {
+      "text": {
+        "es": "LiteLLM: takeover de cuentas por email en SSO",
+        "en": "LiteLLM: account takeover via SSO email fallback",
+        "fr": "LiteLLM : prise de compte via l'email SSO"
+      },
+      "anchor": "cve-2026-93355",
+      "icon": "lucide:lock"
+    },
+    {
+      "text": {
+        "es": "markdownify-mcp: SSRF vía prompt injection",
+        "en": "markdownify-mcp: SSRF via prompt injection",
+        "fr": "markdownify-mcp : SSRF via prompt injection"
+      },
+      "anchor": "cve-2026-137308",
+      "icon": "lucide:bug"
+    },
+    {
+      "text": {
+        "es": "vLLM: modelos aislados que igual se comunican",
+        "en": "vLLM: sandboxed models that still talk to each other",
+        "fr": "vLLM : des modèles isolés qui communiquent quand même"
+      },
+      "anchor": "inference-server-side-channels",
+      "icon": "lucide:radiation"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-incidents",
+      "name": "Top Incidents",
+      "theme": "top-incidents",
+      "icon_emoji": "🚨",
+      "anchor": "top-incidents",
+      "updates": [
+        {
+          "id": "openrouter-provider-leaks",
+          "tag": "breach",
+          "title": {
+            "es": "OpenRouter saca a tres proveedores de inferencia después de que prompts trampa de Dragos se filtraran y se usaran en ataques reales",
+            "en": "OpenRouter drops three inference providers after Dragos canary prompts leaked and were used in the wild",
+            "fr": "OpenRouter retire trois fournisseurs d'inférence après la fuite de prompts-pièges de Dragos, réutilisés dans la nature"
+          },
+          "body_html": {
+            "es": "<p><strong>Dragos</strong> mandó dos millones de prompts de prueba por OpenRouter, cada uno con un link de rastreo o una credencial señuelo únicos. Después vio esos datos sembrados usándose para intentar entrar a sus sistemas de prueba y a cuentas AWS canario: los datos de al menos tres proveedores de IA se habían escapado. OpenRouter dice que su plataforma no fue vulnerada, así que la fuga estuvo del lado de los proveedores. Sacó a tres proveedores que violaron sus políticas de manejo de datos, le quitó la elegibilidad de Zero Data Retention (ZDR) a 125 endpoints por precaución y avisó a los clientes que podrían estar afectados. Atlas Cloud retiró sus modelos por su cuenta hasta pasar pruebas de seguridad.</p><p>Tres proveedores publicaron sus propias explicaciones. Together AI dice que un agente de IA para programar expuso una credencial de un repositorio en GitHub, y con eso alguien descargó muestras de prompts guardadas de junio y julio (MiniMax M3, GLM-5.2, Kimi K2.6). Together aclara que no lo sacaron y dice que OpenRouter se olvidó de activar ZDR para su tráfico. Phala dice que un atacante comprometió un servidor que procesaba requests de DeepSeek V4 Flash ruteadas por OpenRouter entre el 21 y el 22 de octubre, quizás hasta el 8 de noviembre, y sacó credenciales de aplicación de las VMs. Ojo con esto: ZDR es una promesa del proveedor, no un control que vos puedas verificar. Si mandaste secretos en prompts, rotalos.</p>",
+            "en": "<p><strong>Dragos</strong> sent two million test prompts through OpenRouter, each carrying a unique tracking link or decoy credential. It then saw that seeded data used in attempts to reach its controlled test systems and canary AWS accounts: data from at least three AI providers had escaped. OpenRouter says its own systems were not breached, which puts the leaks at the provider level. It removed three providers that violated their stated data-handling policies, revoked Zero Data Retention (ZDR) eligibility for 125 endpoints as a precaution, and notified potentially affected customers. Atlas Cloud voluntarily withdrew its models pending security testing.</p><p>Three providers published their own explanations. Together AI says an AI coding agent exposed a repository credential on GitHub, which let an unauthorized party download stored prompt samples from June and July (MiniMax M3, GLM-5.2, Kimi K2.6). Together says it was not removed and that OpenRouter had forgotten to turn on ZDR for its traffic. Phala says an attacker compromised a server handling DeepSeek V4 Flash requests routed through OpenRouter between October 21 and 22, possibly until November 8, and took application credentials from the affected VMs. ZDR is a provider promise, not a control you can verify. If you sent secrets in prompts, rotate them.</p>",
+            "fr": "<p><strong>Dragos</strong> a envoyé deux millions de prompts de test via OpenRouter, chacun avec un lien de suivi ou un identifiant-leurre unique. Il a ensuite vu ces données utilisées pour tenter d'accéder à ses systèmes de test et à des comptes AWS canari : les données d'au moins trois fournisseurs d'IA avaient fuité. OpenRouter affirme que ses propres systèmes n'ont pas été compromis, ce qui situe les fuites chez les fournisseurs. Il a retiré trois fournisseurs qui ne respectaient pas leurs politiques de traitement des données, révoqué par précaution l'éligibilité Zero Data Retention (ZDR) de 125 endpoints et prévenu les clients potentiellement concernés. Atlas Cloud a retiré ses modèles de lui-même en attendant des tests de sécurité.</p><p>Trois fournisseurs ont publié leurs propres explications. Together AI indique qu'un agent IA de programmation a exposé un identifiant de dépôt sur GitHub, ce qui a permis de télécharger des échantillons de prompts stockés de juin et juillet (MiniMax M3, GLM-5.2, Kimi K2.6). Together affirme ne pas avoir été retiré et reproche à OpenRouter d'avoir oublié d'activer ZDR pour son trafic. Phala indique qu'un attaquant a compromis un serveur traitant des requêtes DeepSeek V4 Flash routées par OpenRouter entre le 21 et le 22 octobre, peut-être jusqu'au 8 novembre, et a récupéré des identifiants applicatifs sur les VM touchées. ZDR est une promesse du fournisseur, pas un contrôle vérifiable. Si vous avez envoyé des secrets dans des prompts, faites-les tourner.</p>"
+          },
+          "date": "23 Nov 2026",
+          "source": {
+            "url": "https://www.bleepingcomputer.com/news/security/openrouter-drops-ai-providers-over-leaked-prompts-and-secrets/",
+            "label": "BleepingComputer"
+          }
+        },
+        {
+          "id": "csirt-ai-agent-campaigns",
+          "tag": "advisory",
+          "title": {
+            "es": "Italia y Suiza alertan por campañas de ataque con agentes de IA autónomos contra infraestructura crítica",
+            "en": "Italy and Switzerland warn of autonomous AI-agent attack campaigns against critical infrastructure",
+            "fr": "L'Italie et la Suisse alertent sur des campagnes d'attaque menées par des agents IA autonomes contre les infrastructures critiques"
+          },
+          "body_html": {
+            "es": "<p>Las agencias de ciberseguridad de Suiza e Italia advierten sobre ataques automatizados con agentes de IA contra organizaciones de infraestructura crítica. Nombraron cuatro frameworks de pentesting y red teaming con IA que aparecieron en intrusiones recientes: <strong>ARTEX AI</strong>, <strong>CyberStrikeAI</strong>, <strong>DeepSeek Harness - Red Team</strong> y <strong>PentAGI</strong>.</p><p>CSIRT Italia detectó campañas a gran escala en las que agentes autónomos encontraban y explotaban vulnerabilidades y malas configuraciones en endpoints expuestos. En algunos casos vio varios agentes trabajando en paralelo, que comprometieron una gran cantidad de sistemas en pocas horas. Las recomendaciones son las de siempre, pero ahora con menos margen: reducí lo que está expuesto a internet, priorizá los parches y monitoreá la actividad rara.</p>",
+            "en": "<p>Swiss and Italian cybersecurity agencies are warning about automated attacks driven by AI agents against organizations in the critical infrastructure sector. They named four AI-powered penetration testing and red-teaming frameworks involved in recent breaches: <strong>ARTEX AI</strong>, <strong>CyberStrikeAI</strong>, <strong>DeepSeek Harness - Red Team</strong> and <strong>PentAGI</strong>.</p><p>CSIRT Italia says it detected large-scale campaigns in which autonomous agents found and exploited vulnerabilities and misconfigurations on exposed endpoints. In some cases it saw several agents working in parallel compromise a large number of systems within a few hours. The advice is the usual, with less time to act on it: reduce internet exposure, prioritize patching, and monitor for unusual activity.</p>",
+            "fr": "<p>Les agences de cybersécurité suisse et italienne alertent sur des attaques automatisées menées par des agents IA contre des organisations du secteur des infrastructures critiques. Elles citent quatre frameworks de test d'intrusion et de red teaming assistés par IA impliqués dans des intrusions récentes : <strong>ARTEX AI</strong>, <strong>CyberStrikeAI</strong>, <strong>DeepSeek Harness - Red Team</strong> et <strong>PentAGI</strong>.</p><p>CSIRT Italia dit avoir détecté des campagnes à grande échelle où des agents autonomes trouvaient et exploitaient des vulnérabilités et des erreurs de configuration sur des endpoints exposés. Dans certains cas, plusieurs agents travaillant en parallèle ont compromis un grand nombre de systèmes en quelques heures. Les conseils restent les mêmes, avec moins de temps pour agir : réduire l'exposition à internet, prioriser les correctifs et surveiller les activités inhabituelles.</p>"
+          },
+          "date": "25 Nov 2026",
+          "source": {
+            "url": "https://www.bleepingcomputer.com/news/security/italy-and-switzerland-warn-of-autonomous-ai-driven-cyberattacks/",
+            "label": "BleepingComputer"
+          }
+        }
+      ]
+    },
+    {
+      "id": "framework-cves",
+      "name": "Framework CVEs",
+      "theme": "framework-cves",
+      "icon_emoji": "🛡️",
+      "anchor": "framework-cves",
+      "updates": [
+        {
+          "id": "cve-2026-137060",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-137060 (CVSS 7.8): paramz ejecuta código al cargar un archivo de modelo de GPy malicioso",
+            "en": "CVE-2026-137060 (CVSS 7.8): paramz runs code when loading a malicious GPy model file",
+            "fr": "CVE-2026-137060 (CVSS 7.8) : paramz exécute du code au chargement d'un fichier de modèle GPy malveillant"
+          },
+          "body_html": {
+            "es": "<p><code>paramz.load()</code>, hasta la 0.10.0, llama a <code>pickle.load()</code> sin ninguna restricción. Un archivo de modelo compartido de paramz o <strong>GPy</strong> puede traer objetos cuyo <code>__reduce__</code> devuelve <code>exec</code> u <code>os.system</code>, y el código corre con los privilegios de quien lo carga. CVSS 3.1 7.8, CVSS v4 8.5.</p><p>El fix (PR #61, que restringe el unpickler por defecto) se mergeó en main el 25 de noviembre, pero no hay release posterior a la 0.10.0 de julio. Hasta que salga, tratá cualquier modelo de GPy que no generaste vos como código ejecutable.</p>",
+            "en": "<p><code>paramz.load()</code>, through 0.10.0, calls <code>pickle.load()</code> with no restrictions. A shared paramz or <strong>GPy</strong> model file can embed objects whose <code>__reduce__</code> returns <code>exec</code> or <code>os.system</code>, and the code runs with the privileges of whoever loads it. CVSS 3.1 7.8, CVSS v4 8.5.</p><p>The fix (PR #61, which restricts the unpickler by default) was merged to main on November 25, but there is no release after July's 0.10.0. Until one ships, treat any GPy model you did not produce yourself as executable code.</p>",
+            "fr": "<p><code>paramz.load()</code>, jusqu'à la 0.10.0, appelle <code>pickle.load()</code> sans aucune restriction. Un fichier de modèle paramz ou <strong>GPy</strong> partagé peut contenir des objets dont le <code>__reduce__</code> renvoie <code>exec</code> ou <code>os.system</code>, et le code s'exécute avec les privilèges de la personne qui le charge. CVSS 3.1 7.8, CVSS v4 8.5.</p><p>Le correctif (PR #61, qui restreint l'unpickler par défaut) a été fusionné dans main le 25 novembre, mais aucune version n'est sortie après la 0.10.0 de juillet. En attendant, traitez tout modèle GPy que vous n'avez pas produit vous-même comme du code exécutable.</p>"
+          },
+          "date": "25 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-137060",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-93355",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-93355 (CVSS v4 7.6): el fallback por email del SSO de LiteLLM deja entrar como otro usuario",
+            "en": "CVE-2026-93355 (CVSS v4 7.6): LiteLLM's SSO email fallback can sign you in as another user",
+            "fr": "CVE-2026-93355 (CVSS v4 7.6) : le repli sur l'email du SSO de LiteLLM permet de se connecter en tant qu'un autre utilisateur"
+          },
+          "body_html": {
+            "es": "<p>Cuando un login por JWT o SSO no coincidía con ningún usuario de LiteLLM por identidad, el proxy lo buscaba por email. Ese fallback podía elegir un usuario ya vinculado a otra identidad, ignoraba el claim <code>email_verified: false</code> del IdP y trataba <code>_</code> y <code>%</code> del email como comodines. Resultado: un login con el email de otra persona, o uno que lo matcheara por comodín, terminaba resuelto a ese usuario, con su rol, sus keys y sus equipos, y además quedaba vinculado a la identidad nueva.</p><p>Solo estás expuesto si tu IdP deja que los usuarios elijan su propio email. El fix está en la <strong>1.111.0</strong> (publicada en PyPI el 25 de noviembre). Esa misma semana LiteLLM publicó tres advisories más sin CVE: contraseñas guardadas en texto plano en la actualización masiva de usuarios, fallbacks de <code>router_settings</code> que ruteaban a modelos no permitidos, y virtual keys sin hashear en los spend logs.</p>",
+            "en": "<p>When a JWT or SSO sign-in did not match an existing LiteLLM user by identity, the proxy fell back to looking the user up by email. That fallback could pick a user already linked to a different identity, ignored an <code>email_verified: false</code> claim from the IdP, and treated <code>_</code> and <code>%</code> in the address as wildcards. A sign-in carrying someone else's email, or one that wildcard-matched it, resolved to that user, with their role, keys and team memberships, and linked that user to the new identity.</p><p>You are only exposed if your IdP lets users choose their own email address. The fix is in <strong>1.111.0</strong> (on PyPI since November 25). The same week LiteLLM published three more advisories without CVEs: plaintext passwords stored by the bulk user update, <code>router_settings</code> fallbacks routing to models the caller was not allowed to use, and unhashed virtual keys in spend logs.</p>",
+            "fr": "<p>Quand une connexion JWT ou SSO ne correspondait à aucun utilisateur LiteLLM par identité, le proxy le cherchait par email. Ce repli pouvait choisir un utilisateur déjà lié à une autre identité, ignorait le claim <code>email_verified: false</code> de l'IdP et traitait <code>_</code> et <code>%</code> dans l'adresse comme des jokers. Une connexion portant l'email de quelqu'un d'autre, ou qui le matchait par joker, aboutissait à cet utilisateur, avec son rôle, ses clés et ses équipes, et le liait à la nouvelle identité.</p><p>Vous n'êtes exposé que si votre IdP laisse les utilisateurs choisir leur adresse email. Le correctif est dans la <strong>1.111.0</strong> (sur PyPI depuis le 25 novembre). La même semaine, LiteLLM a publié trois autres advisories sans CVE : mots de passe stockés en clair par la mise à jour groupée des utilisateurs, replis de <code>router_settings</code> menant vers des modèles non autorisés, et virtual keys non hachées dans les spend logs.</p>"
+          },
+          "date": "24 Nov 2026",
+          "source": {
+            "url": "https://github.com/BerriAI/litellm/security/advisories/GHSA-w5h5-479w-p5hx",
+            "label": "GitHub Advisory"
+          }
+        }
+      ]
+    },
+    {
+      "id": "llm-attacks",
+      "name": "LLM Attacks & Research",
+      "theme": "llm-attacks",
+      "icon_emoji": "🎯",
+      "anchor": "llm-attacks",
+      "updates": [
+        {
+          "id": "cve-2026-137308",
+          "tag": "high",
+          "title": {
+            "es": "CVE-2026-137308 (CVSS 7.4): markdownify-mcp deja saltear su protección SSRF y un prompt injection alcanza para llegar a la metadata de la nube",
+            "en": "CVE-2026-137308 (CVSS 7.4): markdownify-mcp's SSRF guard can be bypassed, and a prompt injection is enough to reach cloud metadata",
+            "fr": "CVE-2026-137308 (CVSS 7.4) : la protection SSRF de markdownify-mcp se contourne, et une prompt injection suffit pour atteindre les métadonnées cloud"
+          },
+          "body_html": {
+            "es": "<p>Antes de la 1.2.0, <code>validateUrl()</code> y <code>validateRepoUrl()</code> de <strong>markdownify-mcp</strong> se podían esquivar con nombres DNS, literales IPv6 entre corchetes, direcciones IPv6 mapeadas a IPv4 y la notación SSH estilo scp. Como las URLs que reciben las tools <code>webpage-to-markdown</code> y <code>git-repo-to-markdown</code> las elige el modelo, un prompt injection en cualquier contenido que lea el agente puede hacer que el servidor pida servicios en loopback, hosts internos o endpoints de metadata de la nube. CVSS 3.1 7.4, CVSS v4 8.3.</p><p>La <strong>1.2.0</strong> salió el 25 de noviembre. Ojo con esto: un validador de URLs que mira el string y no la IP resuelta es la misma clase de bug que venimos viendo en otros fetchers MCP.</p>",
+            "en": "<p>Before 1.2.0, <strong>markdownify-mcp</strong>'s <code>validateUrl()</code> and <code>validateRepoUrl()</code> could be bypassed with DNS names, bracketed IPv6 literals, IPv4-mapped IPv6 addresses and scp-style SSH shorthand. Because the model chooses the URLs passed to the <code>webpage-to-markdown</code> and <code>git-repo-to-markdown</code> tools, a prompt injection in anything the agent reads can make the server fetch loopback services, internal hosts and cloud metadata endpoints. CVSS 3.1 7.4, CVSS v4 8.3.</p><p><strong>1.2.0</strong> shipped on November 25. A URL validator that checks the string instead of the resolved IP is the same bug class that keeps turning up in other MCP fetchers.</p>",
+            "fr": "<p>Avant la 1.2.0, <code>validateUrl()</code> et <code>validateRepoUrl()</code> de <strong>markdownify-mcp</strong> se contournaient avec des noms DNS, des littéraux IPv6 entre crochets, des adresses IPv6 mappées IPv4 et la notation SSH de type scp. Comme c'est le modèle qui choisit les URL passées aux tools <code>webpage-to-markdown</code> et <code>git-repo-to-markdown</code>, une prompt injection dans n'importe quel contenu lu par l'agent peut faire interroger au serveur des services en loopback, des hôtes internes et des endpoints de métadonnées cloud. CVSS 3.1 7.4, CVSS v4 8.3.</p><p>La <strong>1.2.0</strong> est sortie le 25 novembre. Un validateur d'URL qui vérifie la chaîne au lieu de l'IP résolue, c'est la même classe de bug qu'on retrouve sans cesse dans d'autres fetchers MCP.</p>"
+          },
+          "date": "26 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-137308",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "cve-2026-136641",
+          "tag": "patch",
+          "title": {
+            "es": "CVE-2026-136641 (CVSS 6.8, GHSA: low): la política de egress del PlaywrightBrowser de Pydantic AI Harness no cubre WebRTC, WebTransport ni FedCM",
+            "en": "CVE-2026-136641 (CVSS 6.8, GHSA: low): Pydantic AI Harness's PlaywrightBrowser egress policy misses WebRTC, WebTransport and FedCM",
+            "fr": "CVE-2026-136641 (CVSS 6.8, GHSA : low) : la politique d'egress du PlaywrightBrowser de Pydantic AI Harness ignore WebRTC, WebTransport et FedCM"
+          },
+          "body_html": {
+            "es": "<p><code>PlaywrightBrowser</code> aplica su política de egress a los requests HTTP y a los WebSockets de la página, pero no a conexiones WebRTC (STUN y TURN), WebTransport, WebSockets abiertos con <code>WebSocketStream</code> ni a los requests de FedCM que manda el propio navegador. Una página que el agente abre puede mandar ese tráfico a hosts y puertos que la política rechaza, aunque la allowlist cubra todos los tipos de request. Afecta a las apps que usan el browser para abrir páginas que un atacante puede influenciar.</p><p>El alcance es acotado: es el setup de conexión de cada protocolo, y por WebRTC, WebTransport o FedCM no se pudo leer el cuerpo de la respuesta de un servicio interno común; lo que sí puede saber la página es si un destino responde a STUN. Afecta a <code>pydantic-ai-harness</code> 0.24.0 a 0.73.0; el fix está en la <strong>0.74.0</strong> (25 de noviembre). GitHub lo califica como low; el score del CNA es 6.8.</p>",
+            "en": "<p><code>PlaywrightBrowser</code> enforces its egress policy on HTTP requests and page WebSockets, but not on WebRTC (STUN and TURN) or WebTransport connections, WebSockets opened with <code>WebSocketStream</code>, or the FedCM requests the browser sends itself. A page the agent opens can send that traffic to hosts and ports the policy refuses, even when the allowlist covers every request kind. It affects applications that use the browser to open pages an attacker can influence.</p><p>The reach is limited: it is each protocol's connection setup, and no response body from an ordinary internal service was readable through WebRTC, WebTransport or FedCM; a page can learn whether a target answers STUN. It affects <code>pydantic-ai-harness</code> 0.24.0 through 0.73.0; the fix is in <strong>0.74.0</strong> (November 25). GitHub rates it low; the CNA score is 6.8.</p>",
+            "fr": "<p><code>PlaywrightBrowser</code> applique sa politique d'egress aux requêtes HTTP et aux WebSockets de la page, mais pas aux connexions WebRTC (STUN et TURN) ou WebTransport, aux WebSockets ouverts avec <code>WebSocketStream</code>, ni aux requêtes FedCM envoyées par le navigateur lui-même. Une page ouverte par l'agent peut envoyer ce trafic vers des hôtes et ports refusés par la politique, même quand l'allowlist couvre tous les types de requête. Cela concerne les applications qui ouvrent avec ce navigateur des pages qu'un attaquant peut influencer.</p><p>La portée est limitée : il s'agit de l'établissement de connexion de chaque protocole, et aucun corps de réponse d'un service interne ordinaire n'a pu être lu via WebRTC, WebTransport ou FedCM ; une page peut savoir si une cible répond à STUN. Versions touchées : <code>pydantic-ai-harness</code> 0.24.0 à 0.73.0 ; correctif dans la <strong>0.74.0</strong> (25 novembre). GitHub le classe low ; le score du CNA est de 6.8.</p>"
+          },
+          "date": "25 Nov 2026",
+          "source": {
+            "url": "https://app.opencve.io/cve/CVE-2026-136641",
+            "label": "OpenCVE"
+          }
+        },
+        {
+          "id": "inference-server-side-channels",
+          "tag": "research",
+          "title": {
+            "es": "Dos modelos en el mismo servidor vLLM se pueden comunicar aunque estén aislados",
+            "en": "Two models on the same vLLM server can communicate even when sandboxed",
+            "fr": "Deux modèles sur le même serveur vLLM peuvent communiquer même isolés"
+          },
+          "body_html": {
+            "es": "<p>Niranjan Deshpande muestra dos protocolos de side channel, <strong>Step Sizing</strong> y <strong>KV Cache Message Board</strong>, que pasan información a través de la forma en que <strong>vLLM</strong> elige kernels para cada paso del engine. Dos agentes sin mensajes directos ni filesystem compartido se comunican igual: en un juego de adivinar colores, Bob acertó el color de Alice en 1.221 de 1.221 rondas. En un protocolo de untrusted monitoring, una policy le avisa a un monitor cómplice que no es un honeypot, y el monitor deja pasar 354 de 354 ataques mientras sigue atrapando entre 85 y 92% de los honeypots.</p><p>El autor reconoce que los setups son armados: les explica el protocolo a los modelos y los fine-tunea para detectar señales. Pero dice que modelos frontier pueden aprender protocolos parecidos en contexto, con algo de scaffolding. La conclusión para quien opera: compartir un servidor de inferencia entre agentes que deberían estar aislados es compartir un canal. El código está publicado.</p>",
+            "en": "<p>Niranjan Deshpande shows two side-channel protocols, <strong>Step Sizing</strong> and <strong>KV Cache Message Board</strong>, that carry information through the way <strong>vLLM</strong> chooses kernels for each engine step. Two agents with no direct messages and no shared filesystem still communicate: in a color guessing game, Bob guessed Alice's color in 1,221 of 1,221 rounds. In an untrusted monitoring protocol, a policy signals to a colluding monitor that it is not a honeypot, and the monitor lets through 354 of 354 attacks while still catching 85 to 92% of honeypots.</p><p>The author says the setups are contrived: the models are told the protocol and fine-tuned to detect signals. But frontier models can learn similar protocols in context with some scaffolding. The takeaway for operators: sharing one inference server between agents that should be isolated means sharing a channel. The code is public.</p>",
+            "fr": "<p>Niranjan Deshpande présente deux protocoles de canal auxiliaire, <strong>Step Sizing</strong> et <strong>KV Cache Message Board</strong>, qui font passer de l'information par la manière dont <strong>vLLM</strong> choisit ses kernels à chaque étape du moteur. Deux agents sans messages directs ni système de fichiers partagé communiquent quand même : dans un jeu de devinette de couleurs, Bob a trouvé la couleur d'Alice dans 1 221 manches sur 1 221. Dans un protocole d'untrusted monitoring, une policy signale à un moniteur complice qu'elle n'est pas un honeypot, et le moniteur laisse passer 354 attaques sur 354 tout en attrapant encore 85 à 92 % des honeypots.</p><p>L'auteur reconnaît que les montages sont artificiels : on explique le protocole aux modèles et on les fine-tune pour détecter les signaux. Mais des modèles frontier peuvent apprendre des protocoles similaires en contexte, avec un peu de scaffolding. À retenir pour les exploitants : partager un serveur d'inférence entre des agents censés être isolés, c'est partager un canal. Le code est public.</p>"
+          },
+          "date": "19 Nov 2026",
+          "source": {
+            "url": "https://www.lesswrong.com/posts/7wzWuLP3HhyBLmKfo/models-can-communicate-via-inference-servers-despite-being",
+            "label": "LessWrong"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "La cadena de inferencia es una frontera de confianza: OpenRouter mostró que los prompts se escapan del lado del proveedor aunque el broker esté sano, y la investigación sobre vLLM mostró que agentes en el mismo servidor pueden coordinarse sin ningún canal visible. Lo que mandás a un modelo hospedado sale de tu control.",
+      "en": "The inference chain is a trust boundary: OpenRouter showed prompts escaping at the provider level even when the broker itself is clean, and the vLLM research showed that agents on the same server can coordinate with no visible channel. Whatever you send to a hosted model leaves your control.",
+      "fr": "La chaîne d'inférence est une frontière de confiance : OpenRouter a montré que des prompts fuient chez les fournisseurs même quand le broker est sain, et la recherche sur vLLM a montré que des agents sur le même serveur peuvent se coordonner sans canal visible. Ce que vous envoyez à un modèle hébergé échappe à votre contrôle."
+    },
+    {
+      "es": "Las tools que buscan contenido siguen siendo el punto débil de los agentes: markdownify-mcp y el browser de Pydantic AI Harness tenían controles de salida que cubrían solo parte del tráfico. Si el modelo elige la URL, el prompt injection elige el destino.",
+      "en": "Fetching tools remain the weak spot of agents: markdownify-mcp and Pydantic AI Harness's browser both had egress controls that covered only part of the traffic. If the model picks the URL, prompt injection picks the destination.",
+      "fr": "Les tools qui récupèrent du contenu restent le point faible des agents : markdownify-mcp et le navigateur de Pydantic AI Harness avaient des contrôles de sortie qui ne couvraient qu'une partie du trafic. Si le modèle choisit l'URL, la prompt injection choisit la destination."
+    }
+  ]
+}

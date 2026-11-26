@@ -1,0 +1,409 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 26 Nov 2026",
+    "en": "Backend & Fullstack Daily — 26 Nov 2026",
+    "fr": "Backend & Fullstack Daily — 26 nov. 2026"
+  },
+  "description": {
+    "es": "Nuxt publica dos bypass de route rules sin fix para 3.x, NestJS 12.6.2 arregla el TS1270 de 12.6.1, AWS lanza ELB for Envoy en GA y MicroVMs orquestadas con durable functions, y BullMQ estrena cliente en Go.",
+    "en": "Nuxt discloses two route-rule bypasses with no 3.x fix, NestJS 12.6.2 fixes the TS1270 break from 12.6.1, AWS ships ELB for Envoy GA and durable-function MicroVM orchestration, and BullMQ gets a Go client.",
+    "fr": "Nuxt publie deux contournements de route rules sans correctif 3.x, NestJS 12.6.2 répare le TS1270 de 12.6.1, AWS lance ELB for Envoy en GA et l'orchestration de MicroVMs par durable functions, et BullMQ a un client Go."
+  },
+  "pubDate": "2026-11-26",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Nuxt: route rules salteables, sin fix en 3.x",
+        "en": "Nuxt: route rules bypassable, no 3.x fix",
+        "fr": "Nuxt : route rules contournables, rien pour 3.x"
+      },
+      "anchor": "nuxt-route-rules-advisories",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "NestJS 12.6.2: saltate la 12.6.1",
+        "en": "NestJS 12.6.2: skip 12.6.1",
+        "fr": "NestJS 12.6.2 : sautez la 12.6.1"
+      },
+      "anchor": "nestjs-12-6-2",
+      "icon": "simple-icons:nestjs"
+    },
+    {
+      "text": {
+        "es": "ELB for Envoy: Envoy administrado, en GA",
+        "en": "ELB for Envoy: managed Envoy, now GA",
+        "fr": "ELB for Envoy : Envoy géré, en GA"
+      },
+      "anchor": "elb-for-envoy-ga",
+      "icon": "simple-icons:amazonwebservices"
+    },
+    {
+      "text": {
+        "es": "Lambda orquesta MicroVMs con durable functions",
+        "en": "Lambda orchestrates MicroVMs via durable functions",
+        "fr": "Lambda orchestre des MicroVMs via durable functions"
+      },
+      "anchor": "lambda-durable-microvm",
+      "icon": "lucide:cloud"
+    },
+    {
+      "text": {
+        "es": "BullMQ estrena implementación en Go",
+        "en": "BullMQ ships a Go implementation",
+        "fr": "BullMQ sort une implémentation Go"
+      },
+      "anchor": "bullmq-golang-0-1-0",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "Kubernetes 1.37.3: leé las urgent notes",
+        "en": "Kubernetes 1.37.3: read the urgent notes",
+        "fr": "Kubernetes 1.37.3 : lisez les urgent notes"
+      },
+      "anchor": "kubernetes-1-37-3",
+      "icon": "simple-icons:kubernetes"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "nuxt-route-rules-advisories",
+      "updates": [
+        {
+          "id": "nuxt-route-rules-advisories",
+          "tag": "security",
+          "date": "24 Nov 2026",
+          "title": {
+            "es": "Nuxt: dos formas de saltearse las route rules (CVSS 6.5), y Nuxt 3 no recibe fix",
+            "en": "Nuxt: two ways around route rules (CVSS 6.5), and Nuxt 3 gets no fix",
+            "fr": "Nuxt : deux façons de contourner les route rules (CVSS 6.5), et Nuxt 3 n'a pas de correctif"
+          },
+          "body_html": {
+            "es": "<p>Nuxt publicó tres advisories en su repo, corregidos en <strong>4.7.0</strong>. <strong>GHSA-vrh2</strong> es un fix incompleto de uno anterior: un slash duplicado (<code>//admin/secret</code>) o un <code>%2F</code> inicial resuelve a una ruta catch-all <strong>sin aplicar las route rules</strong> de ese path, así que un atacante sin autenticar se saltea el <code>appMiddleware</code> de auth o los headers. <strong>GHSA-jxc9</strong>: pedir <code>/admin/_payload.json</code> ignora el <code>redirect</code>, <code>proxy</code>, <code>headers</code> e <code>isr: false</code> de <code>/admin</code> y devuelve como JSON cacheable los datos que la página trajo en SSR. Un tercero (low) filtra <code>runtimeConfig</code> privado desde un dev server expuesto. Ojo: para los rangos 3.x el campo de versión parcheada está <strong>vacío</strong>, así que si seguís en Nuxt 3 no hay fix en línea. Mové la autorización al handler del server, no la dejes solo en route rules.</p>",
+            "en": "<p>Nuxt published three advisories in its repo, fixed in <strong>4.7.0</strong>. <strong>GHSA-vrh2</strong> is an incomplete fix of an earlier one: a doubled slash (<code>//admin/secret</code>) or a leading <code>%2F</code> resolves to a catch-all page route <strong>without the route rules</strong> for that path, so an unauthenticated attacker skips an auth <code>appMiddleware</code> or security headers. <strong>GHSA-jxc9</strong>: requesting <code>/admin/_payload.json</code> ignores the <code>redirect</code>, <code>proxy</code>, <code>headers</code> and <code>isr: false</code> rules of <code>/admin</code> and returns the data the page fetched during SSR as cacheable JSON. A third (low) leaks private <code>runtimeConfig</code> from an exposed dev server. Note that the 3.x ranges list <strong>no patched version</strong>, so Nuxt 3 users get no in-line fix. Enforce authorization in server handlers, not only in route rules.</p>",
+            "fr": "<p>Nuxt a publié trois advisories dans son dépôt, corrigés en <strong>4.7.0</strong>. <strong>GHSA-vrh2</strong> est un correctif incomplet d'un précédent : un slash doublé (<code>//admin/secret</code>) ou un <code>%2F</code> initial mène à une route catch-all <strong>sans les route rules</strong> de ce chemin, donc un attaquant non authentifié évite un <code>appMiddleware</code> d'auth ou des en-têtes. <strong>GHSA-jxc9</strong> : demander <code>/admin/_payload.json</code> ignore les règles <code>redirect</code>, <code>proxy</code>, <code>headers</code> et <code>isr: false</code> de <code>/admin</code> et renvoie en JSON cacheable les données chargées en SSR. Un troisième (low) expose le <code>runtimeConfig</code> privé via un serveur de dev exposé. Les plages 3.x n'ont <strong>aucune version corrigée</strong> : pas de correctif direct pour Nuxt 3. Faites l'autorisation dans les handlers serveur, pas seulement dans les route rules.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nuxt/nuxt/security/advisories/GHSA-vrh2-cfcx-c3fg",
+            "label": "github.com/nuxt"
+          }
+        },
+        {
+          "id": "nestjs-12-6-2",
+          "tag": "breaking",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "NestJS 12.6.2 arregla el TS1270 de 12.6.1, y 11.2.12 sube el piso de Node en un patch",
+            "en": "NestJS 12.6.2 fixes the TS1270 break in 12.6.1, and 11.2.12 raises the Node floor in a patch",
+            "fr": "NestJS 12.6.2 répare le TS1270 de 12.6.1, et 11.2.12 relève le plancher Node dans un patch"
+          },
+          "body_html": {
+            "es": "<p>Tres releases el mismo día. <strong>12.6.1</strong> cambió el tipo de retorno de <code>applyDecorators()</code> y rompió el type-check (TS1270) incluso con <code>skipLibCheck</code>; <strong>12.6.2</strong> lo revierte, así que saltá directo a esa. Cambios de comportamiento a tener en cuenta: <code>ParseDatePipe</code> rechaza fechas tipo <code>Feb 30</code> que <code>new Date()</code> rodaba al mes siguiente, <code>res.send()</code> en <code>platform-node</code> ahora pipea un <code>Readable</code> (antes mandaba sus campos como JSON), y el server de RabbitMQ suma <code>nackOnInternalError</code> para mandar a la dead letter exchange lo que falla con error interno. En el multipart de Express, un campo con <code>__proto__</code> ahora es 400. Y ojo con <strong>11.2.12</strong>: <code>@nestjs/platform-fastify</code> ahora necesita <strong>Node 20.19+ o 22.12+</strong>; en versiones anteriores de 20.x/22.x el import falla con <code>ERR_REQUIRE_ESM</code>. Sí, en un patch.</p>",
+            "en": "<p>Three releases in one day. <strong>12.6.1</strong> changed the return type of <code>applyDecorators()</code> and broke type-checking (TS1270) even with <code>skipLibCheck</code>; <strong>12.6.2</strong> restores it, so go straight there. Behavior changes to note: <code>ParseDatePipe</code> rejects dates like <code>Feb 30</code> that <code>new Date()</code> rolled into the next month, <code>res.send()</code> on <code>platform-node</code> now pipes a <code>Readable</code> (it used to send its fields as JSON), and the RabbitMQ server gains <code>nackOnInternalError</code> to route internal-error failures to the dead letter exchange. Express multipart fields carrying <code>__proto__</code> now get a 400. And watch <strong>11.2.12</strong>: <code>@nestjs/platform-fastify</code> now needs <strong>Node 20.19+ or 22.12+</strong>; on earlier 20.x/22.x the import fails with <code>ERR_REQUIRE_ESM</code>. Yes, in a patch.</p>",
+            "fr": "<p>Trois releases dans la journée. <strong>12.6.1</strong> a changé le type de retour de <code>applyDecorators()</code> et cassé le type-check (TS1270) même avec <code>skipLibCheck</code> ; <strong>12.6.2</strong> le rétablit, passez directement à celle-ci. Changements de comportement : <code>ParseDatePipe</code> rejette des dates comme <code>Feb 30</code> que <code>new Date()</code> reportait au mois suivant, <code>res.send()</code> sur <code>platform-node</code> pipe désormais un <code>Readable</code> (il envoyait ses champs en JSON), et le serveur RabbitMQ ajoute <code>nackOnInternalError</code> pour envoyer les échecs internes vers la dead letter exchange. Un champ multipart Express avec <code>__proto__</code> reçoit un 400. Attention à <strong>11.2.12</strong> : <code>@nestjs/platform-fastify</code> exige <strong>Node 20.19+ ou 22.12+</strong> ; sur les 20.x/22.x antérieures l'import échoue avec <code>ERR_REQUIRE_ESM</code>. Oui, dans un patch.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nestjs/nest/releases/tag/v12.6.2",
+            "label": "github.com/nestjs"
+          }
+        },
+        {
+          "id": "elb-for-envoy-ga",
+          "tag": "ga",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "ELB for Envoy en GA: AWS opera tus proxies Envoy y los parchea solo",
+            "en": "ELB for Envoy is GA: AWS runs your Envoy proxies and patches them for you",
+            "fr": "ELB for Envoy en GA : AWS exploite vos proxies Envoy et les corrige pour vous"
+          },
+          "body_html": {
+            "es": "<p>Un nuevo tipo de load balancer que corre <strong>Envoy open source</strong> en instancias EC2 dedicadas con aislamiento Nitro, y que monitorea CVEs y aplica parches de Envoy y del sistema operativo automáticamente. Traés tu config, extensiones y control plane como están, y sumás ACM y WAF. Si usás <strong>Envoy Gateway</strong> en Kubernetes, un provider de infraestructura remota mueve los proxies a ELB sin reescribir tus recursos de Gateway API. Soporta WebAssembly, Lua y external processing. Si hoy tu equipo de plataforma es dueño de upgrades y parches de una flota Envoy, esto es un golazo para tu on-call; arranca en 14 regiones.</p>",
+            "en": "<p>A new load balancer type that runs <strong>open-source Envoy</strong> on dedicated EC2 instances with Nitro isolation, and monitors CVEs and applies Envoy and OS patches automatically. You bring your config, extensions and control plane as they are, and add ACM and WAF. If you run <strong>Envoy Gateway</strong> on Kubernetes, a remote infrastructure provider moves the proxies to ELB without rewriting your Gateway API resources. It supports WebAssembly, Lua and external processing. If your platform team owns upgrades and patching for an Envoy fleet, this takes that off your on-call; it launches in 14 regions.</p>",
+            "fr": "<p>Un nouveau type de load balancer qui exécute <strong>Envoy open source</strong> sur des instances EC2 dédiées isolées par Nitro, surveille les CVE et applique automatiquement les correctifs d'Envoy et de l'OS. Vous apportez config, extensions et control plane tels quels, et ajoutez ACM et WAF. Avec <strong>Envoy Gateway</strong> sur Kubernetes, un provider d'infrastructure distante déplace les proxies vers ELB sans réécrire vos ressources Gateway API. WebAssembly, Lua et external processing sont pris en charge. Disponible dans 14 régions.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/elastic-load-balancing-for-envoy-generally-available",
+            "label": "aws.amazon.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "temporal-ts-1-27",
+      "updates": [
+        {
+          "id": "temporal-ts-1-27",
+          "tag": "release",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "Temporal TypeScript SDK 1.27: credenciales desde Secrets Manager y TLS con varios nombres",
+            "en": "Temporal TypeScript SDK 1.27: credentials from Secrets Manager and TLS with several names",
+            "fr": "Temporal TypeScript SDK 1.27 : identifiants depuis Secrets Manager et TLS multi-noms"
+          },
+          "body_html": {
+            "es": "<p>Nuevo paquete experimental <code>@temporalio/aws-secrets-manager</code> que carga la API key y el material mTLS del cliente desde secret IDs, y <code>@temporalio/lambda-worker</code> lo usa vía variables <code>TEMPORAL_EXT_AWS_SECRETS_MANAGER_*</code>. <code>TLSConfig.verificationServerNames</code> acepta un certificado válido para cualquiera de varios nombres, útil con servers regionales detrás de una dirección global. También hay hooks experimentales <code>connect</code>/<code>connectNative</code> para plugins y callbacks de Nexus handlers. Cambio a revisar: <code>signalWithStartWorkflow</code> ahora usa por defecto la task queue del caller si la omitís.</p>",
+            "en": "<p>A new experimental <code>@temporalio/aws-secrets-manager</code> package loads the client API key and mTLS material from secret IDs, and <code>@temporalio/lambda-worker</code> uses it through <code>TEMPORAL_EXT_AWS_SECRETS_MANAGER_*</code> env vars. <code>TLSConfig.verificationServerNames</code> accepts a certificate valid for any one of several names, handy with regional servers behind one global address. There are also experimental <code>connect</code>/<code>connectNative</code> plugin hooks and Nexus handler callbacks. One change to check: <code>signalWithStartWorkflow</code> now defaults an omitted task queue to the caller's.</p>",
+            "fr": "<p>Un nouveau paquet expérimental <code>@temporalio/aws-secrets-manager</code> charge la clé d'API et le matériel mTLS du client depuis des secret IDs, et <code>@temporalio/lambda-worker</code> l'utilise via les variables <code>TEMPORAL_EXT_AWS_SECRETS_MANAGER_*</code>. <code>TLSConfig.verificationServerNames</code> accepte un certificat valide pour l'un de plusieurs noms. Aussi : hooks expérimentaux <code>connect</code>/<code>connectNative</code> et callbacks de Nexus handlers. À vérifier : <code>signalWithStartWorkflow</code> utilise désormais par défaut la task queue de l'appelant.</p>"
+          },
+          "source": {
+            "url": "https://github.com/temporalio/sdk-typescript/releases/tag/v1.27.0",
+            "label": "github.com/temporalio"
+          }
+        },
+        {
+          "id": "mikro-orm-7-2-12",
+          "tag": "patch",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "MikroORM 7.2.12: arreglos en herencia TPT y un diff de M:N que era cuadrático",
+            "en": "MikroORM 7.2.12: TPT inheritance fixes and an M:N diff that was quadratic",
+            "fr": "MikroORM 7.2.12 : correctifs d'héritage TPT et un diff M:N qui était quadratique"
+          },
+          "body_html": {
+            "es": "<p>Varios bugs de consistencia en el Unit of Work: cambios no flusheados en un 1:1 inverso se perdían al volver a popular la relación, updates extra de propiedades de la tabla padre en <strong>TPT</strong> no se persistían, y <code>assign()</code> ignoraba entidades relacionadas con PK falsy (como <code>0</code>). Del lado de performance, <code>syncCollections</code> ya no hace un diff cuadrático de colecciones M:N y el dataloader 1:m agrupa por owner. Si usás herencia TPT, actualizá.</p>",
+            "en": "<p>Several Unit of Work consistency bugs: unflushed changes on an inverse 1:1 were lost when the relation was populated again, extra updates to <strong>TPT</strong> parent-table properties were not persisted, and <code>assign()</code> skipped related entities with a falsy PK (such as <code>0</code>). On performance, <code>syncCollections</code> no longer diffs M:N collections quadratically and the 1:m dataloader groups by owner. If you use TPT inheritance, upgrade.</p>",
+            "fr": "<p>Plusieurs bugs de cohérence du Unit of Work : des changements non flushés sur un 1:1 inverse étaient perdus au repeuplement, des mises à jour de propriétés de la table parente en <strong>TPT</strong> n'étaient pas persistées, et <code>assign()</code> ignorait les entités liées à PK falsy (comme <code>0</code>). Côté performance, <code>syncCollections</code> ne fait plus de diff quadratique des collections M:N. Si vous utilisez l'héritage TPT, mettez à jour.</p>"
+          },
+          "source": {
+            "url": "https://github.com/mikro-orm/mikro-orm/releases/tag/v7.2.12",
+            "label": "github.com/mikro-orm"
+          }
+        },
+        {
+          "id": "effect-4-1-6",
+          "tag": "patch",
+          "date": "26 Nov 2026",
+          "title": {
+            "es": "Effect 4.1.6: módulo Skill para MCP y fixes en cluster",
+            "en": "Effect 4.1.6: a Skill module for MCP and cluster fixes",
+            "fr": "Effect 4.1.6 : un module Skill pour MCP et des correctifs cluster"
+          },
+          "body_html": {
+            "es": "<p>Suma el módulo <code>effect/ai/Skill</code> y <code>McpServer.registerSkill</code> lo acepta. En <strong>cluster</strong>: un memory leak en <code>MessageStorage.registerReplyHandler</code> con waiters interrumpidos, el rebalanceo de shards que dejaba esperando actividades de workflows hasta el <code>entityTerminationTimeout</code>, y <code>Entity.keepAlive</code> que se perdía al deshabilitarlo y rehabilitarlo enseguida. También arregla <code>HttpMiddleware.cors</code> omitiendo <code>Access-Control-Max-Age</code> con <code>maxAge: 0</code>.</p>",
+            "en": "<p>Adds the <code>effect/ai/Skill</code> module, which <code>McpServer.registerSkill</code> now accepts. In <strong>cluster</strong>: a memory leak in <code>MessageStorage.registerReplyHandler</code> with interrupted waiters, shard rebalancing that stalled workflow activity waits until <code>entityTerminationTimeout</code>, and <code>Entity.keepAlive</code> being dropped when disabled and re-enabled right away. It also fixes <code>HttpMiddleware.cors</code> omitting <code>Access-Control-Max-Age</code> when <code>maxAge</code> is <code>0</code>.</p>",
+            "fr": "<p>Ajoute le module <code>effect/ai/Skill</code>, accepté par <code>McpServer.registerSkill</code>. Côté <strong>cluster</strong> : une fuite mémoire dans <code>MessageStorage.registerReplyHandler</code>, un rebalancement de shards qui bloquait les attentes d'activités jusqu'à <code>entityTerminationTimeout</code>, et <code>Entity.keepAlive</code> perdu après désactivation puis réactivation. Corrige aussi <code>HttpMiddleware.cors</code> qui omettait <code>Access-Control-Max-Age</code> avec <code>maxAge</code> à <code>0</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/Effect-TS/effect/releases/tag/effect%404.1.6",
+            "label": "github.com/Effect-TS"
+          }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "bullmq-golang-0-1-0",
+      "updates": [
+        {
+          "id": "bullmq-golang-0-1-0",
+          "tag": "notable",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "BullMQ publica su primera implementación en Go (0.1.0)",
+            "en": "BullMQ publishes its first Go implementation (0.1.0)",
+            "fr": "BullMQ publie sa première implémentation Go (0.1.0)"
+          },
+          "body_html": {
+            "es": "<p>El repo de BullMQ, que ya tenía clientes en Node, Python y Elixir, suma <code>golang/v0.1.0</code> con la implementación inicial en Go. Para arquitecturas poliglotas esto es clave: un servicio Go puede consumir o producir jobs en las mismas colas que tu backend TypeScript sin un puente propio. Es una 0.1, así que probala en algo no crítico antes de mezclarla con colas de producción.</p>",
+            "en": "<p>The BullMQ repo, which already ships Node, Python and Elixir clients, adds <code>golang/v0.1.0</code> with an initial Go implementation. For polyglot architectures this matters: a Go service can consume or produce jobs on the same queues as your TypeScript backend without a homegrown bridge. It is a 0.1, so try it on something non-critical before mixing it into production queues.</p>",
+            "fr": "<p>Le dépôt BullMQ, qui avait déjà des clients Node, Python et Elixir, ajoute <code>golang/v0.1.0</code> avec une implémentation Go initiale. Pour les architectures polyglottes, un service Go peut consommer ou produire des jobs dans les mêmes files que votre backend TypeScript sans pont maison. C'est une 0.1 : testez-la sur un cas non critique d'abord.</p>"
+          },
+          "source": {
+            "url": "https://github.com/taskforcesh/bullmq/releases/tag/golang/v0.1.0",
+            "label": "github.com/taskforcesh"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "lambda-durable-microvm",
+      "updates": [
+        {
+          "id": "lambda-durable-microvm",
+          "tag": "beta",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "Lambda durable functions orquesta MicroVMs para correr código no confiable (developer preview)",
+            "en": "Lambda durable functions orchestrate MicroVMs for untrusted code (developer preview)",
+            "fr": "Les durable functions Lambda orchestrent des MicroVMs pour du code non fiable (developer preview)"
+          },
+          "body_html": {
+            "es": "<p>Una extensión del Durable Execution SDK para <strong>TypeScript</strong> y Python agrega operaciones durables para lanzar <strong>Lambda MicroVMs</strong> y manejar su ciclo de vida: cada tarea es un paso con checkpoint y retries, la función refresca los tokens de la MicroVM y puede orquestar varias en paralelo, disparada desde SQS o EventBridge. Una librería worker opcional corre dentro de la imagen para recibir tareas y mandar heartbeats. El caso de uso es claro: CI, scanners o código generado por agentes en sandboxes aislados. Es preview, AWS pide no usarlo en producción.</p>",
+            "en": "<p>An extension to the Durable Execution SDK for <strong>TypeScript</strong> and Python adds durable operations to launch <strong>Lambda MicroVMs</strong> and manage their lifecycle: each task is a checkpointed, retried step, the function refreshes MicroVM tokens and can orchestrate several in parallel, triggered from SQS or EventBridge. An optional worker library runs inside the image to receive tasks and send heartbeats. The target is CI jobs, scanners or agent-generated code in isolated sandboxes. It is a preview, and AWS says not to use it in production.</p>",
+            "fr": "<p>Une extension du Durable Execution SDK pour <strong>TypeScript</strong> et Python ajoute des opérations durables pour lancer des <strong>Lambda MicroVMs</strong> et gérer leur cycle de vie : chaque tâche est une étape avec checkpoint et retries, la fonction rafraîchit les tokens et peut en orchestrer plusieurs en parallèle, déclenchée par SQS ou EventBridge. Une librairie worker optionnelle tourne dans l'image. Cible : CI, scanners ou code généré par des agents dans des sandboxes isolés. Preview, pas pour la production.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/lambda-durable-microvm/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "aws-iam-tip-federation",
+          "tag": "notable",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "IAM extiende trusted identity propagation a la federación y a Roles Anywhere, y firma JWTs con esa identidad",
+            "en": "IAM extends trusted identity propagation to federation and Roles Anywhere, and signs JWTs with that identity",
+            "fr": "IAM étend la trusted identity propagation à la fédération et à Roles Anywhere, et signe des JWT avec cette identité"
+          },
+          "body_html": {
+            "es": "<p>Con <strong>TIP</strong> la identidad del humano o workload original viaja con el request entre roles y servicios, sirve en condiciones de políticas IAM y aparece en CloudTrail. Ahora funciona con federación SAML/OIDC (incluyendo claims como el nombre del workflow de CI/CD o un risk score) y con certificados X.509 vía Roles Anywhere. Además, la <strong>outbound identity federation</strong> emite un JWT firmado por AWS con esa identidad para que servicios externos sepan quién originó el request. Para auditoría de pipelines y agentes, esto vale oro.</p>",
+            "en": "<p>With <strong>TIP</strong> the originating human or workload identity travels with the request across roles and services, can be used in IAM policy conditions, and shows up in CloudTrail. It now works with SAML/OIDC federation (including claims like a CI/CD workflow name or a risk score) and with X.509 certificates via Roles Anywhere. On top of that, <strong>outbound identity federation</strong> issues an AWS-signed JWT carrying that identity, so external services can tell who originated a request. Useful for auditing pipelines and agents.</p>",
+            "fr": "<p>Avec <strong>TIP</strong>, l'identité de l'humain ou du workload d'origine accompagne la requête entre rôles et services, sert dans les conditions de politiques IAM et apparaît dans CloudTrail. Elle fonctionne désormais avec la fédération SAML/OIDC (y compris des claims comme le nom d'un workflow CI/CD) et avec les certificats X.509 via Roles Anywhere. L'<strong>outbound identity federation</strong> émet aussi un JWT signé par AWS portant cette identité pour les services externes.</p>"
+          },
+          "source": {
+            "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/aws-iam/",
+            "label": "aws.amazon.com"
+          }
+        },
+        {
+          "id": "kubernetes-1-37-3",
+          "tag": "patch",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "Kubernetes 1.37.3, 1.36.7 y 1.35.11: user namespaces con urgent upgrade notes",
+            "en": "Kubernetes 1.37.3, 1.36.7 and 1.35.11: user namespaces in the urgent upgrade notes",
+            "fr": "Kubernetes 1.37.3, 1.36.7 et 1.35.11 : user namespaces dans les urgent upgrade notes"
+          },
+          "body_html": {
+            "es": "<p>Patches de las tres ramas soportadas. En 1.37.3 las <strong>urgent upgrade notes</strong> avisan que el kubelet corrige varios bugs en el manejo de rangos de IDs para pods con <strong>user namespaces</strong>, así que leelas antes de actualizar si los usás. También: build con Go 1.26.11, un crash del scheduler al borrar y recrear rápido un Pod con el mismo nombre, el rollback automático del data dir de etcd en <code>kubeadm</code> que copiaba el backup al lugar equivocado, y kube-proxy que perdía la zona inicial del Node para el topology-aware routing.</p>",
+            "en": "<p>Patches for all three supported branches. In 1.37.3 the <strong>urgent upgrade notes</strong> say the kubelet fixes several bugs in ID range handling for pods using <strong>user namespaces</strong>, so read them before upgrading if you use them. Also: built with Go 1.26.11, a scheduler crash when a Pod is quickly deleted and recreated with the same name, <code>kubeadm</code>'s automatic etcd data-dir rollback that copied the backup to the wrong place, and kube-proxy missing the initial Node zone for topology-aware routing.</p>",
+            "fr": "<p>Patches des trois branches supportées. En 1.37.3, les <strong>urgent upgrade notes</strong> indiquent que le kubelet corrige plusieurs bugs de gestion des plages d'ID pour les pods avec <strong>user namespaces</strong> : lisez-les avant de mettre à jour si vous les utilisez. Aussi : build Go 1.26.11, un crash du scheduler quand un Pod est supprimé et recréé vite sous le même nom, le rollback automatique du data dir etcd de <code>kubeadm</code> qui copiait la sauvegarde au mauvais endroit, et kube-proxy qui ratait la zone initiale du Node.</p>"
+          },
+          "source": {
+            "url": "https://github.com/kubernetes/kubernetes/releases/tag/v1.37.3",
+            "label": "github.com/kubernetes"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "doordash-dispatch-infoq",
+      "updates": [
+        {
+          "id": "doordash-dispatch-infoq",
+          "tag": "notable",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "InfoQ sobre el dispatch de DoorDash: coordinador stateful, workers stateless y shadow testing",
+            "en": "InfoQ on DoorDash dispatch: a stateful coordinator, stateless workers and shadow testing",
+            "fr": "InfoQ sur le dispatch de DoorDash : coordinateur stateful, workers stateless et shadow testing"
+          },
+          "body_html": {
+            "es": "<p>El write-up de InfoQ de esta semana resume cómo DoorDash reemplazó un motor monolítico de optimización (algoritmos casi cuadráticos, con picos de demanda de 4x su capacidad) por dos tiers que escalan por separado: un <strong>coordinador stateful</strong> que mantiene el estado logístico y las reglas de negocio, y <strong>workers stateless</strong> que hacen el cómputo, recibiendo solo su porción de datos por gRPC. La descomposición jerárquica en clusters geográficos más una capa de reconciliación reemplaza un problema global por muchos chicos. La migración fue con <strong>shadow testing</strong> contra el motor viejo y después switchback experiments. Reportan 10x de throughput. Separar coordinación de cómputo es un patrón que conviene tener en la caja de herramientas.</p>",
+            "en": "<p>InfoQ's write-up this week covers how DoorDash replaced a monolithic optimization engine (roughly quadratic algorithms, with peak demand near 4x capacity) with two independently scaled tiers: a <strong>stateful coordinator</strong> holding logistics state and business rules, and <strong>stateless workers</strong> doing the computation, each receiving only its shard of data over gRPC. Hierarchical decomposition into geographic clusters plus a reconciliation layer turns one global problem into many small ones. The migration used <strong>shadow testing</strong> against the old engine, then switchback experiments. They report 10x throughput. Splitting coordination from computation is a pattern worth keeping in the toolbox.</p>",
+            "fr": "<p>L'article d'InfoQ de cette semaine explique comment DoorDash a remplacé un moteur d'optimisation monolithique (algorithmes quasi quadratiques, pics proches de 4x la capacité) par deux tiers qui scalent séparément : un <strong>coordinateur stateful</strong> qui détient l'état logistique et les règles métier, et des <strong>workers stateless</strong> qui calculent, chacun recevant seulement son shard de données via gRPC. La décomposition hiérarchique en clusters géographiques et une couche de réconciliation remplacent un problème global par plusieurs petits. Migration par <strong>shadow testing</strong> puis switchback experiments ; 10x de throughput annoncé.</p>"
+          },
+          "source": {
+            "url": "https://www.infoq.com/news/2026/11/doordash-dispatch-redesign/",
+            "label": "infoq.com"
+          }
+        },
+        {
+          "id": "vitest-5-1-2",
+          "tag": "patch",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "Vitest 5.1.2: los errores de global setup ya no se disfrazan de no test files",
+            "en": "Vitest 5.1.2: global setup errors no longer pose as no test files",
+            "fr": "Vitest 5.1.2 : les erreurs de global setup ne se déguisent plus en no test files"
+          },
+          "body_html": {
+            "es": "<p>Si tu global setup (levantar un container, migrar la base) fallaba, Vitest decía que no encontraba tests; ahora reporta el error real. También avisa cuando dos projects agarran el mismo archivo, prohíbe <code>--changed</code> en <code>vitest related</code>, borra los snapshots nuevos de un retry fallido y arregla el arranque de workers <code>forks</code> en Bun. En performance, lee los source maps externos una vez por corrida.</p>",
+            "en": "<p>When your global setup (starting a container, migrating the database) failed, Vitest said it found no test files; it now reports the real error. It also warns when two projects pick up the same file, disallows <code>--changed</code> in <code>vitest related</code>, removes new snapshots written by a failed retry, and fixes <code>forks</code> worker startup on Bun. On performance, it reads external source maps once per run.</p>",
+            "fr": "<p>Quand votre global setup (lancer un container, migrer la base) échouait, Vitest disait ne trouver aucun test ; il signale maintenant la vraie erreur. Il avertit aussi quand deux projects prennent le même fichier, interdit <code>--changed</code> dans <code>vitest related</code>, supprime les snapshots créés par un retry échoué et corrige le démarrage des workers <code>forks</code> sur Bun.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.1.2",
+            "label": "github.com/vitest-dev"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "sveltekit-ghsa-ggm8",
+      "updates": [
+        {
+          "id": "sveltekit-ghsa-ggm8",
+          "tag": "security",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "SvelteKit: el texto de un mensaje de error podía tumbar tu server Node en producción",
+            "en": "SvelteKit: text in an error message could take down your production Node server",
+            "fr": "SvelteKit : le texte d'un message d'erreur pouvait faire tomber votre serveur Node en production"
+          },
+          "body_html": {
+            "es": "<p>Vista desde ops: en producción, sobre runtimes compatibles con Node, SvelteKit aplicaba source maps a los stack traces y parseaba como frames texto del mensaje de error, leyendo archivos en paths elegidos por el atacante. Leer ciertos archivos especiales bloquea el event loop y agota la memoria hasta que el proceso muere (no filtra contenido). Con <strong>remote functions</strong> experimentales no hace falta autenticación. Edge runtimes sin <code>node:fs</code> no están afectados. Fix en <code>@sveltejs/kit</code> <strong>3.4.1</strong>, que salió junto con otros nueve advisories; actualizá kit y <code>adapter-node</code> 6.0.6 juntos.</p>",
+            "en": "<p>The ops view: in production on Node-compatible runtimes, SvelteKit applied source maps to stack traces and parsed text from the error message as frames, reading files at attacker-chosen paths. Reading certain special files blocks the event loop and exhausts memory until the process dies (no content leaks). With experimental <strong>remote functions</strong> no authentication is needed. Edge runtimes without <code>node:fs</code> are not affected. Fixed in <code>@sveltejs/kit</code> <strong>3.4.1</strong>, which shipped alongside nine other advisories; upgrade kit and <code>adapter-node</code> 6.0.6 together.</p>",
+            "fr": "<p>Côté ops : en production sur les runtimes compatibles Node, SvelteKit appliquait les source maps aux stack traces et prenait du texte du message d'erreur pour des frames, lisant des fichiers à des chemins choisis par l'attaquant. Lire certains fichiers spéciaux bloque l'event loop et épuise la mémoire jusqu'à la mort du processus (aucun contenu ne fuit). Avec les <strong>remote functions</strong> expérimentales, aucune authentification n'est nécessaire. Corrigé dans <code>@sveltejs/kit</code> <strong>3.4.1</strong> ; mettez à jour kit et <code>adapter-node</code> 6.0.6 ensemble.</p>"
+          },
+          "source": {
+            "url": "https://github.com/sveltejs/kit/security/advisories/GHSA-ggm8-cv6q-2c35",
+            "label": "github.com/sveltejs"
+          }
+        },
+        {
+          "id": "clerk-shared-4-50",
+          "tag": "minor",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "Clerk: consent OAuth para varias organizaciones y sign-up por WhatsApp en un solo request",
+            "en": "Clerk: OAuth consent for several organizations and WhatsApp sign-up in one request",
+            "fr": "Clerk : consentement OAuth multi-organisations et inscription WhatsApp en une requête"
+          },
+          "body_html": {
+            "es": "<p><code>@clerk/shared</code> 4.50 suma <code>maxOrganizations</code> a <code>OAuthConsentInfo</code> (por defecto <code>1</code>) y keys de localización para elegir organizaciones en la pantalla de consent. <code>SignUpFuture.create()</code> acepta un <code>channel</code> como <code>whatsapp</code> con <code>strategy: phone_code</code> para crear el sign-up y mandar el código en un solo request, y <code>SignUpFuture.update()</code> acepta <code>password</code> para sign-ups creados sin una, como los de invitaciones.</p>",
+            "en": "<p><code>@clerk/shared</code> 4.50 adds <code>maxOrganizations</code> to <code>OAuthConsentInfo</code> (default <code>1</code>) plus localization keys for picking organizations on the consent screen. <code>SignUpFuture.create()</code> accepts a <code>channel</code> such as <code>whatsapp</code> with <code>strategy: phone_code</code> to create the sign-up and send the code in one request, and <code>SignUpFuture.update()</code> accepts a <code>password</code> for sign-ups created without one, such as invitation flows.</p>",
+            "fr": "<p><code>@clerk/shared</code> 4.50 ajoute <code>maxOrganizations</code> à <code>OAuthConsentInfo</code> (<code>1</code> par défaut) et des clés de localisation pour choisir des organisations sur l'écran de consentement. <code>SignUpFuture.create()</code> accepte un <code>channel</code> comme <code>whatsapp</code> avec <code>strategy: phone_code</code> pour créer l'inscription et envoyer le code en une requête, et <code>SignUpFuture.update()</code> accepte un <code>password</code>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/clerk/javascript/releases/tag/%40clerk/shared%404.50.0",
+            "label": "github.com/clerk"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Las route rules no son autorización: Nuxt cayó dos veces seguidas por paths que el router normaliza y el matcher de reglas no (slashes duplicados, _payload.json). Si tu auth vive en config de rutas, duplicala en el handler del server.",
+      "en": "Route rules are not authorization: Nuxt fell twice in a row to paths the router normalizes and the rule matcher does not (doubled slashes, _payload.json). If your auth lives in route config, repeat it in the server handler.",
+      "fr": "Les route rules ne sont pas de l'autorisation : Nuxt est tombé deux fois de suite sur des chemins que le routeur normalise et pas le matcher de règles. Si votre auth vit dans la config de routes, répétez-la dans le handler serveur."
+    },
+    {
+      "es": "Los patches también rompen: NestJS 12.6.1 rompió el type-check y 11.2.12 subió el piso de Node. Fijá versiones exactas en el lockfile y corré tsc en CI antes de aceptar cualquier bump automático.",
+      "en": "Patches break things too: NestJS 12.6.1 broke type-checking and 11.2.12 raised the Node floor. Pin exact versions in the lockfile and run tsc in CI before accepting any automated bump.",
+      "fr": "Les patches cassent aussi : NestJS 12.6.1 a cassé le type-check et 11.2.12 a relevé le plancher Node. Fixez les versions exactes et lancez tsc en CI avant d'accepter un bump automatique."
+    },
+    {
+      "es": "AWS sigue absorbiendo la infraestructura aburrida: Envoy administrado y parcheado, MicroVMs orquestadas por durable functions e identidad propagada hasta JWTs externos. Menos flota propia, más contrato de plataforma.",
+      "en": "AWS keeps absorbing boring infrastructure: managed and patched Envoy, MicroVMs orchestrated by durable functions, and identity propagated all the way into external JWTs. Less self-run fleet, more platform contract.",
+      "fr": "AWS continue d'absorber l'infrastructure ennuyeuse : Envoy géré et corrigé, MicroVMs orchestrées par durable functions, identité propagée jusqu'aux JWT externes."
+    }
+  ]
+}

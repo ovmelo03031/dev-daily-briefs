@@ -1,0 +1,235 @@
+{
+  "title": {
+    "es": "Dev News — 26 Nov 2026: SvelteKit cierra diez advisories, Firefox 161 trae random() en CSS y VS Code 1.148 acelera el diff",
+    "en": "Dev News — Nov 26, 2026: SvelteKit closes ten advisories, Firefox 161 ships CSS random() and VS Code 1.148 speeds up diffs",
+    "fr": "Dev News — 26 nov. 2026 : SvelteKit corrige dix advisories, Firefox 161 apporte random() en CSS et VS Code 1.148 accélère le diff"
+  },
+  "description": {
+    "es": "SvelteKit 3.4.1 y adapter-node 6.0.6 corrigen diez advisories (dos altos) y Svelte 5.59.2 suma dos más; Firefox 161 trae random() en CSS, Compression Dictionary Transport y CSS Typed OM; VS Code 1.148 estrena un diff en Rust/Wasm más de 2× más rápido; Solid 2.0.4, shadcn 4.23.1 y adapter-netlify 7.1.",
+    "en": "SvelteKit 3.4.1 and adapter-node 6.0.6 fix ten advisories (two high) and Svelte 5.59.2 adds two more; Firefox 161 ships CSS random(), Compression Dictionary Transport and CSS Typed OM; VS Code 1.148 debuts a Rust/Wasm diff more than 2× faster; Solid 2.0.4, shadcn 4.23.1 and adapter-netlify 7.1.",
+    "fr": "SvelteKit 3.4.1 et adapter-node 6.0.6 corrigent dix advisories (deux hauts) et Svelte 5.59.2 en ajoute deux ; Firefox 161 apporte random() en CSS, Compression Dictionary Transport et CSS Typed OM ; VS Code 1.148 inaugure un diff Rust/Wasm plus de 2× plus rapide ; Solid 2.0.4, shadcn 4.23.1 et adapter-netlify 7.1."
+  },
+  "pubDate": "2026-11-26",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": {
+        "es": "SvelteKit 3.4.1: 10 advisories, dos altos",
+        "en": "SvelteKit 3.4.1: 10 advisories, two high",
+        "fr": "SvelteKit 3.4.1 : 10 advisories, deux hauts"
+      },
+      "anchor": "sveltekit-3-4-1-security",
+      "icon": "simple-icons:svelte"
+    },
+    {
+      "text": {
+        "es": "Firefox 161: random() en CSS y CSS Typed OM",
+        "en": "Firefox 161: CSS random() and CSS Typed OM",
+        "fr": "Firefox 161 : random() en CSS et CSS Typed OM"
+      },
+      "anchor": "firefox-161",
+      "icon": "simple-icons:firefoxbrowser"
+    },
+    {
+      "text": {
+        "es": "VS Code 1.148: diff en Wasm 2× más rápido",
+        "en": "VS Code 1.148: Wasm diff over 2× faster",
+        "fr": "VS Code 1.148 : diff Wasm plus de 2× plus rapide"
+      },
+      "anchor": "vscode-1-148",
+      "icon": "simple-icons:visualstudiocode"
+    },
+    {
+      "text": {
+        "es": "Svelte 5.59.2: dos advisories en el runtime",
+        "en": "Svelte 5.59.2: two runtime advisories",
+        "fr": "Svelte 5.59.2 : deux advisories dans le runtime"
+      },
+      "anchor": "svelte-5-59-2",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "Solid 2.0.4: fixes de hidratación async",
+        "en": "Solid 2.0.4: async hydration fixes",
+        "fr": "Solid 2.0.4 : correctifs d'hydratation async"
+      },
+      "anchor": "solid-2-0-4",
+      "icon": "simple-icons:solid"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "sveltekit-3-4-1-security",
+          "tag": "security",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "SvelteKit 3.4.1 y adapter-node 6.0.6 corrigen diez advisories de seguridad",
+            "en": "SvelteKit 3.4.1 and adapter-node 6.0.6 fix ten security advisories",
+            "fr": "SvelteKit 3.4.1 et adapter-node 6.0.6 corrigent dix advisories de sécurité"
+          },
+          "body_html": {
+            "es": "<p>El 25 de noviembre el equipo publicó <strong>diez advisories</strong> en el repo de SvelteKit (viven en la pestaña Security del proyecto, no en el feed global de GitHub): nueve se arreglan en <code>@sveltejs/kit</code> <code>3.4.1</code> y uno en <code>@sveltejs/adapter-node</code> <code>6.0.6</code>. Los dos <strong>altos</strong>: el manejo de stack traces en producción podía hacer que SvelteKit leyera archivos en rutas elegidas por el atacante y colgara el proceso (GHSA-ggm8; el contenido no se filtra, pero el server se cae), y <code>adapter-node</code> se caía con un header <code>Location</code> inválido al redirigir a páginas prerenderizadas con caracteres fuera de Latin-1 en la ruta, como slugs localizados (GHSA-h6r2, CVSS 8.2). El resto son medios y bajos: <code>Vary: Accept</code> faltante que habilitaba cache poisoning, ReDoS en rutas con varios params por segmento, colisiones entre funciones <code>query.live</code> privadas y un chequeo CSRF de origen que no cubría algunos requests a endpoints <code>+server</code>. <strong>Ojo con esto</strong>: varios solo pegan si usás las <strong>remote functions experimentales</strong>, y ahí GHSA-ggm8 ni siquiera requiere autenticación; sin ese flag, el atacante tiene que poder controlar el texto de un error. Actualizá kit y adapter-node juntos.</p>",
+            "en": "<p>On November 25 the team published <strong>ten advisories</strong> in the SvelteKit repo (they live in the project's Security tab, not GitHub's global feed): nine are fixed in <code>@sveltejs/kit</code> <code>3.4.1</code> and one in <code>@sveltejs/adapter-node</code> <code>6.0.6</code>. The two <strong>high</strong> ones: stack-trace handling in production could make SvelteKit read files at attacker-chosen paths and hang the process (GHSA-ggm8; file contents are not leaked, but the server crashes), and <code>adapter-node</code> crashed on an invalid <code>Location</code> header when redirecting to prerendered pages whose path contains characters outside Latin-1, such as localized slugs (GHSA-h6r2, CVSS 8.2). The rest are medium or low: a missing <code>Vary: Accept</code> that enabled shared cache poisoning, ReDoS on routes with several params per segment, collisions between private <code>query.live</code> functions, and a CSRF origin check that missed some requests to <code>+server</code> endpoints. Several only apply if you use the <strong>experimental remote functions</strong>, and there GHSA-ggm8 needs no authentication; without that flag, an attacker has to control the text of an error message. Upgrade kit and adapter-node together.</p>",
+            "fr": "<p>Le 25 novembre, l'équipe a publié <strong>dix advisories</strong> dans le dépôt SvelteKit (ils vivent dans l'onglet Security du projet, pas dans le flux global de GitHub) : neuf sont corrigés dans <code>@sveltejs/kit</code> <code>3.4.1</code> et un dans <code>@sveltejs/adapter-node</code> <code>6.0.6</code>. Les deux <strong>hauts</strong> : la gestion des stack traces en production pouvait amener SvelteKit à lire des fichiers à des chemins choisis par l'attaquant et bloquer le processus (GHSA-ggm8 ; le contenu ne fuit pas, mais le serveur tombe), et <code>adapter-node</code> plantait sur un en-tête <code>Location</code> invalide lors d'une redirection vers des pages prérendues dont le chemin contient des caractères hors Latin-1, comme des slugs localisés (GHSA-h6r2, CVSS 8.2). Les autres sont moyens ou bas : un <code>Vary: Accept</code> manquant permettant l'empoisonnement de cache partagé, un ReDoS sur les routes à plusieurs params par segment, des collisions entre fonctions <code>query.live</code> privées et une vérification CSRF d'origine qui ratait certaines requêtes vers les endpoints <code>+server</code>. Plusieurs ne concernent que les <strong>remote functions expérimentales</strong>, et là GHSA-ggm8 ne demande aucune authentification ; sans ce flag, l'attaquant doit contrôler le texte d'un message d'erreur. Mettez à jour kit et adapter-node ensemble.</p>"
+          },
+          "source": {
+            "url": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%403.4.1",
+            "label": "github.com/sveltejs/kit"
+          }
+        },
+        {
+          "id": "firefox-161",
+          "tag": "notable",
+          "date": "24 Nov 2026",
+          "title": {
+            "es": "Firefox 161: random() en CSS, Compression Dictionary Transport y CSS Typed OM",
+            "en": "Firefox 161: CSS random(), Compression Dictionary Transport and CSS Typed OM",
+            "fr": "Firefox 161 : random() en CSS, Compression Dictionary Transport et CSS Typed OM"
+          },
+          "body_html": {
+            "es": "<p>Versión cargada para la plataforma. En CSS llega la función <code>random()</code>, con rango, paso opcional y un <code>&lt;random-key&gt;</code> para compartir el mismo valor base entre elementos o propiedades; además <code>var()</code>, <code>attr()</code> y <code>env()</code> aceptan funciones anidadas en su primer parámetro, tipo <code>env(var(--safe-area-block-start))</code>. En HTTP se suma <strong>Compression Dictionary Transport</strong> (<code>Use-As-Dictionary</code> / <code>Available-Dictionary</code> con <code>dcb</code> y <code>dcz</code>), que puede achicar muchísimo los bundles de JS que cambian poco entre deploys. En APIs: <strong>CSS Typed OM</strong> (<code>computedStyleMap()</code>, <code>attributeStyleMap</code>), formatos de clipboard propios con prefijo <code>web</code> (por ejemplo <code>web text/x-my-format</code>), <code>NavigationTransition.to</code> en la Navigation API y <code>referrerpolicy</code> en <code>&lt;image&gt;</code> y <code>&lt;script&gt;</code> de SVG. Detrás de flags quedan <code>margin-trim</code> y, en Nightly, las view transitions entre documentos.</p>",
+            "en": "<p>A packed release for the platform. CSS gets the <code>random()</code> function, with a range, an optional step and a <code>&lt;random-key&gt;</code> to share one base value across elements or properties; <code>var()</code>, <code>attr()</code> and <code>env()</code> now accept nested functions in their first parameter, such as <code>env(var(--safe-area-block-start))</code>. HTTP adds <strong>Compression Dictionary Transport</strong> (<code>Use-As-Dictionary</code> / <code>Available-Dictionary</code> with <code>dcb</code> and <code>dcz</code>), which can shrink JS bundles that change little between deploys. On the API side: <strong>CSS Typed OM</strong> (<code>computedStyleMap()</code>, <code>attributeStyleMap</code>), custom clipboard formats with a <code>web</code> prefix (for example <code>web text/x-my-format</code>), <code>NavigationTransition.to</code> in the Navigation API, and <code>referrerpolicy</code> on SVG <code>&lt;image&gt;</code> and <code>&lt;script&gt;</code>. Behind flags: <code>margin-trim</code> and, in Nightly, cross-document view transitions.</p>",
+            "fr": "<p>Une version dense pour la plateforme. CSS reçoit la fonction <code>random()</code>, avec une plage, un pas optionnel et un <code>&lt;random-key&gt;</code> pour partager une même valeur de base entre éléments ou propriétés ; <code>var()</code>, <code>attr()</code> et <code>env()</code> acceptent désormais des fonctions imbriquées dans leur premier paramètre, comme <code>env(var(--safe-area-block-start))</code>. HTTP ajoute <strong>Compression Dictionary Transport</strong> (<code>Use-As-Dictionary</code> / <code>Available-Dictionary</code> avec <code>dcb</code> et <code>dcz</code>), qui peut réduire fortement les bundles JS qui changent peu entre déploiements. Côté API : <strong>CSS Typed OM</strong> (<code>computedStyleMap()</code>, <code>attributeStyleMap</code>), formats de presse-papiers personnalisés préfixés par <code>web</code> (par exemple <code>web text/x-my-format</code>), <code>NavigationTransition.to</code> dans la Navigation API et <code>referrerpolicy</code> sur les <code>&lt;image&gt;</code> et <code>&lt;script&gt;</code> SVG. Derrière des flags : <code>margin-trim</code> et, dans Nightly, les view transitions entre documents.</p>"
+          },
+          "source": {
+            "url": "https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Releases/161",
+            "label": "developer.mozilla.org"
+          }
+        },
+        {
+          "id": "vscode-1-148",
+          "tag": "notable",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "VS Code 1.148: diff en Rust/Wasm, CLI 40% más chico y MCP Apps a pantalla completa",
+            "en": "VS Code 1.148: Rust/Wasm diff, 40% smaller CLI and fullscreen MCP Apps",
+            "fr": "VS Code 1.148 : diff Rust/Wasm, CLI 40 % plus léger et MCP Apps en plein écran"
+          },
+          "body_html": {
+            "es": "<p>Lo más jugoso para el día a día: un algoritmo de diff escrito en Rust y compilado a WebAssembly (<code>@vscode/diff</code>) que se está liberando por experimento y que podés activar ya con <code>diffEditor.diffAlgorithm: advanced-wasm</code>; en las primeras mediciones calcula diffs <strong>más de 2× más rápido</strong> en la mediana y con menos timeouts en la cola lenta, algo que se nota revisando muchos archivos en el editor multi-diff. El CLI en Rust quedó <strong>un 40% más chico</strong>, lo que acelera las conexiones de Remote SSH y WSL. También suma MCP Apps a pantalla completa, un editor de Remote Environments rediseñado, Dev Containers para sesiones de agentes (experimental) y Agent Host Protocol 1.1.0. Ojo: el harness Local queda deprecado y se va en febrero de 2027.</p>",
+            "en": "<p>The most useful bit day to day: a diff algorithm written in Rust and compiled to WebAssembly (<code>@vscode/diff</code>) that is rolling out through an experiment and can be enabled now with <code>diffEditor.diffAlgorithm: advanced-wasm</code>; early measurements show diffs computed <strong>more than 2× faster</strong> at the median with fewer slow-tail timeouts, which shows when reviewing many files in the multi-file diff editor. The Rust CLI is <strong>about 40% smaller</strong>, which speeds up Remote SSH and WSL connections. The release also adds fullscreen MCP Apps, a redesigned Remote Environments editor, Dev Containers for agent sessions (experimental) and Agent Host Protocol 1.1.0. The Local harness is now deprecated and will be removed in February 2027.</p>",
+            "fr": "<p>Le plus utile au quotidien : un algorithme de diff écrit en Rust et compilé en WebAssembly (<code>@vscode/diff</code>), déployé via une expérimentation et activable dès maintenant avec <code>diffEditor.diffAlgorithm: advanced-wasm</code> ; les premières mesures montrent des diffs calculés <strong>plus de 2× plus vite</strong> en médiane avec moins de timeouts en queue lente, ce qui se voit en relisant beaucoup de fichiers dans l'éditeur multi-diff. Le CLI Rust est <strong>environ 40 % plus léger</strong>, ce qui accélère les connexions Remote SSH et WSL. La version ajoute aussi les MCP Apps en plein écran, un éditeur Remote Environments repensé, des Dev Containers pour les sessions d'agents (expérimental) et Agent Host Protocol 1.1.0. Le harness Local est déprécié et sera retiré en février 2027.</p>"
+          },
+          "source": {
+            "url": "https://code.visualstudio.com/updates/v1_148",
+            "label": "code.visualstudio.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "js-frameworks",
+      "name": "JS Frameworks",
+      "theme": "js-frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "js-frameworks",
+      "updates": [
+        {
+          "id": "svelte-5-59-2",
+          "tag": "security",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "Svelte 5.59.2 corrige dos advisories del runtime cliente",
+            "en": "Svelte 5.59.2 fixes two client runtime advisories",
+            "fr": "Svelte 5.59.2 corrige deux advisories du runtime client"
+          },
+          "body_html": {
+            "es": "<p>Mismo día, mismo equipo: <code>svelte</code> <code>5.59.2</code> cierra dos advisories publicados en su repo. Uno, de severidad <strong>baja</strong>: si hacés spread de datos externos como atributos (<code>{...data}</code>), los handlers de eventos con mayúsculas en el nombre se escribían como atributos al montar o hidratar, así que alguien que controle las claves podía inyectar código en el browser (el HTML del server no está afectado). El otro, <strong>medio</strong>: asignación sin límite al desestructurar valores array-like. Además trae más de 20 fixes, como <code>&lt;!--</code> dentro de <code>&lt;style&gt;</code> tratado como token CSS y una pista de <code>lang=&quot;ts&quot;</code> cuando falla el parseo de TypeScript. Si hacés spread de props que no controlás, actualizá ya.</p>",
+            "en": "<p>Same day, same team: <code>svelte</code> <code>5.59.2</code> closes two advisories published in its repo. One is <strong>low</strong> severity: when spreading external data as attributes (<code>{...data}</code>), event handlers with uppercase letters in their names were written as attributes on mount or hydration, so someone controlling the keys could inject code in the browser (server-rendered HTML is not affected). The other is <strong>medium</strong>: unbounded allocation when destructuring array-like values. The release also carries more than 20 fixes, such as treating <code>&lt;!--</code> inside <code>&lt;style&gt;</code> as a CSS token and hinting at <code>lang=&quot;ts&quot;</code> when TypeScript syntax fails to parse. If you spread props you don't control, upgrade now.</p>",
+            "fr": "<p>Même jour, même équipe : <code>svelte</code> <code>5.59.2</code> corrige deux advisories publiés dans son dépôt. L'un est de sévérité <strong>basse</strong> : en faisant un spread de données externes comme attributs (<code>{...data}</code>), les gestionnaires d'événements dont le nom contient des majuscules étaient écrits comme attributs au montage ou à l'hydratation, si bien qu'une personne contrôlant les clés pouvait injecter du code dans le navigateur (le HTML rendu côté serveur n'est pas concerné). L'autre est <strong>moyen</strong> : allocation non bornée lors de la déstructuration de valeurs array-like. La version apporte aussi plus de 20 correctifs, comme <code>&lt;!--</code> dans <code>&lt;style&gt;</code> traité comme token CSS et une suggestion de <code>lang=&quot;ts&quot;</code> quand la syntaxe TypeScript échoue. Si vous faites un spread de props que vous ne contrôlez pas, mettez à jour.</p>"
+          },
+          "source": {
+            "url": "https://github.com/sveltejs/svelte/releases/tag/svelte%405.59.2",
+            "label": "github.com/sveltejs/svelte"
+          }
+        },
+        {
+          "id": "solid-2-0-4",
+          "tag": "minor",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "Solid 2.0.4 ajusta la hidratación de streams y proyecciones async",
+            "en": "Solid 2.0.4 tightens hydration of async streams and projections",
+            "fr": "Solid 2.0.4 resserre l'hydratation des streams et projections async"
+          },
+          "body_html": {
+            "es": "<p>Patch de <code>solid-js</code>, <code>@solidjs/web</code> y <code>@solidjs/signals</code>: las proyecciones (<code>createProjection</code>, <code>createOptimisticStore</code>) que solo esperaban una fuente async durante SSR ya no se serializan, así que después de hidratar siguen las escrituras nuevas. Y un stream que tiró error después de su primer valor ahora toma ese valor y muestra el fallback de <code>&lt;Errored&gt;</code>, en vez de dejar en pantalla el contenido del server.</p>",
+            "en": "<p>A patch for <code>solid-js</code>, <code>@solidjs/web</code> and <code>@solidjs/signals</code>: projections (<code>createProjection</code>, <code>createOptimisticStore</code>) that only waited on an async source during SSR are no longer serialized, so after hydration they follow new writes. And a stream that threw after its first value now claims that value and shows the <code>&lt;Errored&gt;</code> fallback, instead of leaving the server's content on screen.</p>",
+            "fr": "<p>Un patch pour <code>solid-js</code>, <code>@solidjs/web</code> et <code>@solidjs/signals</code> : les projections (<code>createProjection</code>, <code>createOptimisticStore</code>) qui n'attendaient qu'une source async pendant le SSR ne sont plus sérialisées, et suivent donc les nouvelles écritures après hydratation. Et un stream qui lève une erreur après sa première valeur récupère cette valeur puis affiche le fallback <code>&lt;Errored&gt;</code>, au lieu de laisser le contenu du serveur à l'écran.</p>"
+          },
+          "source": {
+            "url": "https://github.com/solidjs/solid/releases/tag/solid-js%402.0.4",
+            "label": "github.com/solidjs/solid"
+          }
+        }
+      ]
+    },
+    {
+      "id": "quick-links",
+      "name": "Quick Links",
+      "theme": "quick-links",
+      "icon_emoji": "📌",
+      "anchor": "quick-links",
+      "updates": [
+        {
+          "id": "adapter-netlify-7-1",
+          "tag": "minor",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "adapter-netlify 7.1: elegí la versión de Node.js con nodeVersion",
+            "en": "adapter-netlify 7.1: pick the Node.js version with nodeVersion",
+            "fr": "adapter-netlify 7.1 : choisissez la version de Node.js avec nodeVersion"
+          },
+          "body_html": {
+            "es": "<p>El adapter de Netlify para SvelteKit suma la opción <code>nodeVersion</code> para fijar la versión del runtime de Node.js, y sale junto con <code>@sveltejs/adapter-server</code> <code>0.2.0</code>, que agrega <code>trailingSlashLocation</code> a su runtime.</p>",
+            "en": "<p>SvelteKit's Netlify adapter adds a <code>nodeVersion</code> option to pin the Node.js runtime version, and ships alongside <code>@sveltejs/adapter-server</code> <code>0.2.0</code>, which adds <code>trailingSlashLocation</code> to its runtime.</p>",
+            "fr": "<p>L'adapter Netlify de SvelteKit ajoute une option <code>nodeVersion</code> pour fixer la version du runtime Node.js, et sort avec <code>@sveltejs/adapter-server</code> <code>0.2.0</code>, qui ajoute <code>trailingSlashLocation</code> à son runtime.</p>"
+          },
+          "source": {
+            "url": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/adapter-netlify%407.1.0",
+            "label": "github.com/sveltejs/kit"
+          }
+        },
+        {
+          "id": "shadcn-4-23-1",
+          "tag": "patch",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "shadcn 4.23.1 sube ts-morph a v28 por el advisory de minimatch",
+            "en": "shadcn 4.23.1 bumps ts-morph to v28 for the minimatch advisory",
+            "fr": "shadcn 4.23.1 passe ts-morph en v28 pour l'advisory minimatch"
+          },
+          "body_html": {
+            "es": "<p>El CLI de shadcn actualiza <code>ts-morph</code> a v28 para dejar atrás la dependencia afectada por GHSA-g3hv-75wg-m249 en <code>minimatch</code>. Si tu auditoría de dependencias lo marcaba, con esto se limpia.</p>",
+            "en": "<p>The shadcn CLI upgrades <code>ts-morph</code> to v28 to drop the dependency affected by GHSA-g3hv-75wg-m249 in <code>minimatch</code>. If your dependency audit flagged it, this clears it.</p>",
+            "fr": "<p>Le CLI shadcn met à jour <code>ts-morph</code> en v28 pour se débarrasser de la dépendance touchée par GHSA-g3hv-75wg-m249 dans <code>minimatch</code>. Si votre audit de dépendances le signalait, c'est réglé.</p>"
+          },
+          "source": {
+            "url": "https://github.com/shadcn-ui/ui/releases/tag/shadcn%404.23.1",
+            "label": "github.com/shadcn-ui/ui"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Segunda semana seguida en que un framework publica un lote de advisories solo en su repo: React Router el 18 de noviembre, Svelte y SvelteKit el 25 (doce entre los dos). Muchos son DoS en features nuevas o experimentales, como remote functions y query.live, así que activar un flag experimental también amplía lo que tenés que vigilar.",
+      "en": "For the second week running, a framework published a batch of advisories only in its own repo: React Router on November 18, Svelte and SvelteKit on the 25th (twelve between them). Many are DoS issues in new or experimental features such as remote functions and query.live, so turning on an experimental flag also widens what you have to watch.",
+      "fr": "Pour la deuxième semaine consécutive, un framework publie un lot d'advisories uniquement dans son propre dépôt : React Router le 18 novembre, Svelte et SvelteKit le 25 (douze à eux deux). Beaucoup sont des DoS dans des fonctionnalités nouvelles ou expérimentales comme les remote functions et query.live : activer un flag expérimental élargit aussi ce qu'il faut surveiller."
+    },
+    {
+      "es": "Rust compilado a WebAssembly sigue metiéndose en las herramientas de JS: VS Code ahora calcula diffs con un motor en Rust/Wasm más de 2× más rápido en la mediana, sin pedirte que cambies nada más que un setting.",
+      "en": "Rust compiled to WebAssembly keeps moving into JS tooling: VS Code now computes diffs with a Rust/Wasm engine more than 2× faster at the median, with nothing to change beyond one setting.",
+      "fr": "Le Rust compilé en WebAssembly continue de gagner l'outillage JS : VS Code calcule désormais les diffs avec un moteur Rust/Wasm plus de 2× plus rapide en médiane, sans rien changer d'autre qu'un réglage."
+    }
+  ]
+}

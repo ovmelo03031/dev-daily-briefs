@@ -1,0 +1,359 @@
+{
+  "title": {
+    "es": "Dev News — 27 Nov 2026: Vite 8.4 sale estable, pnpm 12.24 endurece la lectura de tarballs y Rolldown devuelve memoria al sistema",
+    "en": "Dev News — Nov 27, 2026: Vite 8.4 goes stable, pnpm 12.24 hardens tarball parsing and Rolldown hands memory back to the OS",
+    "fr": "Dev News — 27 nov. 2026 : Vite 8.4 passe en stable, pnpm 12.24 durcit la lecture des tarballs et Rolldown rend la mémoire au système"
+  },
+  "description": {
+    "es": "Vite 8.4.0 estable con server.fs.strict: 'extended', bundled dev mode en SSR y source phase imports para Wasm; pnpm 12.24.0 lee los tarballs igual que npm y suma audit deprecations/engines; Rolldown 1.3.4 libera memoria en reposo; Node 27 alpha marca node:sqlite como estable; Nx 24.1 pasa a ESLint v10, Vue Router 5.5.2 soporta Vapor mode y Expo 58.1.",
+    "en": "Vite 8.4.0 goes stable with server.fs.strict: 'extended', bundled dev mode in SSR and Wasm source phase imports; pnpm 12.24.0 reads tarballs the way npm does and adds audit deprecations/engines; Rolldown 1.3.4 frees memory while idle; the Node 27 alpha marks node:sqlite stable; Nx 24.1 moves to ESLint v10, Vue Router 5.5.2 supports Vapor mode and Expo 58.1 ships.",
+    "fr": "Vite 8.4.0 passe en stable avec server.fs.strict: 'extended', le bundled dev mode en SSR et les source phase imports pour Wasm ; pnpm 12.24.0 lit les tarballs comme npm et ajoute audit deprecations/engines ; Rolldown 1.3.4 libère la mémoire au repos ; l'alpha de Node 27 marque node:sqlite comme stable ; Nx 24.1 passe à ESLint v10, Vue Router 5.5.2 prend en charge le Vapor mode et Expo 58.1 sort."
+  },
+  "pubDate": "2026-11-27",
+  "category": "dev-news",
+  "highlights": [
+    {
+      "text": {
+        "es": "Vite 8.4.0 estable: fs.strict 'extended'",
+        "en": "Vite 8.4.0 stable: fs.strict 'extended'",
+        "fr": "Vite 8.4.0 stable : fs.strict 'extended'"
+      },
+      "anchor": "vite-8-4-0",
+      "icon": "simple-icons:vite"
+    },
+    {
+      "text": {
+        "es": "pnpm 12.24: tarballs leídos como npm",
+        "en": "pnpm 12.24: tarballs read the npm way",
+        "fr": "pnpm 12.24 : tarballs lus comme npm"
+      },
+      "anchor": "pnpm-12-24-0",
+      "icon": "simple-icons:pnpm"
+    },
+    {
+      "text": {
+        "es": "Rolldown 1.3.4 devuelve memoria en reposo",
+        "en": "Rolldown 1.3.4 returns idle memory",
+        "fr": "Rolldown 1.3.4 rend la mémoire au repos"
+      },
+      "anchor": "rolldown-1-3-4",
+      "icon": "lucide:package"
+    },
+    {
+      "text": {
+        "es": "Node 27 alpha: node:sqlite pasa a estable",
+        "en": "Node 27 alpha: node:sqlite marked stable",
+        "fr": "Node 27 alpha : node:sqlite devient stable"
+      },
+      "anchor": "node-27-alpha-0-2-0",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": {
+        "es": "Nx 24.1: ESLint v10 por defecto",
+        "en": "Nx 24.1: ESLint v10 by default",
+        "fr": "Nx 24.1 : ESLint v10 par défaut"
+      },
+      "anchor": "nx-24-1-0",
+      "icon": "simple-icons:nx"
+    },
+    {
+      "text": {
+        "es": "Vue Router 5.5.2 soporta Vapor mode",
+        "en": "Vue Router 5.5.2 supports Vapor mode",
+        "fr": "Vue Router 5.5.2 prend en charge Vapor"
+      },
+      "anchor": "vue-router-5-5-2",
+      "icon": "simple-icons:vuedotjs"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "top-stories",
+      "updates": [
+        {
+          "id": "vite-8-4-0",
+          "tag": "release",
+          "date": "26 Nov 2026",
+          "title": {
+            "es": "Vite 8.4.0 sale estable: server.fs.strict 'extended', bundled dev mode en SSR y Wasm source phase imports",
+            "en": "Vite 8.4.0 goes stable: server.fs.strict 'extended', bundled dev mode in SSR and Wasm source phase imports",
+            "fr": "Vite 8.4.0 passe en stable : server.fs.strict 'extended', bundled dev mode en SSR et source phase imports Wasm"
+          },
+          "body_html": {
+            "es": "<p>Después de dos betas, <strong>Vite 8.4.0</strong> salió estable el 26 de noviembre. Lo más jugoso: un valor nuevo <code>server.fs.strict: 'extended'</code> con <code>safeModulePaths</code> separados por entorno y <code>environment.addSafeModule</code>, <strong>bundled dev mode también en SSR</strong>, soporte de <strong>source phase imports</strong> para Wasm, subpath imports (<code>#alias</code>) dentro de <code>url()</code> en CSS, chunks de workers en el manifest y reintento de preloads de CSS que fallan. Los errores de hooks ahora dicen <strong>qué plugin</strong> los tiró, cosa que te ahorra horas de debugging. <strong>Ojo con estas migraciones</strong>: <code>--configLoader</code> queda estable y <code>--configLoader=runner</code> pasa a deprecado, <code>css.devSourcemap</code> se mueve a <code>dev.sourcemap.css</code>, y en SSR el CSS ya no se externaliza por defecto. Un detalle de seguridad: el registro automático de referencias a safe modules (desde HTML y workers), que en la beta.1 permitía leer archivos fuera de <code>server.fs.allow</code> con dos GET (GHSA-qppr, solo betas), en la estable solo corre con <code>'extended'</code> (#24206).</p>",
+            "en": "<p>After two betas, <strong>Vite 8.4.0</strong> went stable on November 26. The highlights: a new <code>server.fs.strict: 'extended'</code> value with per-environment <code>safeModulePaths</code> and <code>environment.addSafeModule</code>, <strong>bundled dev mode in SSR</strong>, <strong>source phase imports</strong> for Wasm, subpath imports (<code>#alias</code>) inside CSS <code>url()</code>, worker chunks in the build manifest, and retries for failed CSS preloads. Hook errors now name <strong>the plugin</strong> that threw them. <strong>Migrations to watch</strong>: <code>--configLoader</code> is now stable and <code>--configLoader=runner</code> is deprecated, <code>css.devSourcemap</code> moves to <code>dev.sourcemap.css</code>, and CSS is no longer externalized by default in SSR. On security: the automatic registration of safe-module references (from HTML and workers), which in beta.1 let two GET requests read files outside <code>server.fs.allow</code> (GHSA-qppr, betas only), now only runs under <code>'extended'</code> in the stable release (#24206).</p>",
+            "fr": "<p>Après deux bêtas, <strong>Vite 8.4.0</strong> est passé en stable le 26 novembre. L'essentiel : une nouvelle valeur <code>server.fs.strict: 'extended'</code> avec des <code>safeModulePaths</code> par environnement et <code>environment.addSafeModule</code>, le <strong>bundled dev mode en SSR</strong>, les <strong>source phase imports</strong> pour Wasm, les subpath imports (<code>#alias</code>) dans <code>url()</code> en CSS, les chunks de workers dans le manifest et la relance des preloads CSS échoués. Les erreurs de hooks indiquent désormais <strong>le plugin</strong> fautif. <strong>Migrations à surveiller</strong> : <code>--configLoader</code> devient stable et <code>--configLoader=runner</code> est déprécié, <code>css.devSourcemap</code> devient <code>dev.sourcemap.css</code>, et le CSS n'est plus externalisé par défaut en SSR. Côté sécurité : l'enregistrement automatique des références aux safe modules (depuis le HTML et les workers), qui en beta.1 permettait de lire des fichiers hors de <code>server.fs.allow</code> en deux GET (GHSA-qppr, bêtas uniquement), ne tourne plus qu'avec <code>'extended'</code> dans la version stable (#24206).</p>"
+          },
+          "source": {
+            "url": "https://github.com/vitejs/vite/releases/tag/v8.4.0",
+            "label": "github.com/vitejs/vite"
+          }
+        },
+        {
+          "id": "pnpm-12-24-0",
+          "tag": "security",
+          "date": "26 Nov 2026",
+          "title": {
+            "es": "pnpm 12.24.0 lee cada tarball igual que npm (o lo rechaza) y suma pnpm audit deprecations y engines",
+            "en": "pnpm 12.24.0 reads every tarball the way npm does (or refuses it) and adds pnpm audit deprecations and engines",
+            "fr": "pnpm 12.24.0 lit chaque tarball comme npm (ou le refuse) et ajoute pnpm audit deprecations et engines"
+          },
+          "body_html": {
+            "es": "<p>El fix de seguridad es sutil pero importa: un tarball con headers ambiguos (por ejemplo un header PAX malformado o que define la misma key dos veces) podía instalar <strong>archivos distintos con pnpm que con npm</strong>. O sea, un paquete podía mostrarle una cosa al que lo revisa con npm y otra a tu CI. Desde <strong>12.24.0</strong>, pnpm lee esos casos como npm o directamente rechaza el tarball. Además, <code>pnpm approve &lt;pkg&gt;</code> ya no le da build scripts y agent skills a un paquete que no tiene un pedido pendiente: ahora pregunta qué permisos otorgar. Lo nuevo para el día a día: <code>pnpm audit deprecations</code> y <code>pnpm audit engines</code> (salen con código 1 si encuentran algo, ideales para CI), un footer de checks arriba de <code>Done in</code> que agrupa deprecados, peers rotos, engines incompatibles, scripts que corrieron y el veredicto de supply chain del lockfile, y los installs globales ya pueden linkear agent skills aprobadas.</p>",
+            "en": "<p>The security fix is subtle but it matters: a tarball with ambiguous headers (such as a malformed PAX header or one that sets the same key twice) could install <strong>different files with pnpm than with npm</strong>, so a package could show one thing to someone reviewing it with npm and another to your CI. Since <strong>12.24.0</strong>, pnpm reads those cases the way npm does or refuses the tarball. Also, <code>pnpm approve &lt;pkg&gt;</code> no longer grants build scripts and agent skills to a package with no pending request; it now asks which permissions to grant. New for daily use: <code>pnpm audit deprecations</code> and <code>pnpm audit engines</code> (both exit with code 1 when they find something, handy for CI), a checks footer above <code>Done in</code> that groups deprecated packages, peer issues, unsupported engines, the scripts that ran and the lockfile's supply-chain verdict, and global installs can now link approved agent skills.</p>",
+            "fr": "<p>Le correctif de sécurité est subtil mais compte : un tarball aux en-têtes ambigus (par exemple un en-tête PAX malformé ou qui définit deux fois la même clé) pouvait installer <strong>des fichiers différents avec pnpm qu'avec npm</strong>, si bien qu'un paquet pouvait montrer une chose à qui le vérifie avec npm et une autre à votre CI. Depuis <strong>12.24.0</strong>, pnpm lit ces cas comme npm ou refuse le tarball. De plus, <code>pnpm approve &lt;pkg&gt;</code> n'accorde plus build scripts et agent skills à un paquet sans demande en attente ; il demande désormais quelles permissions accorder. Nouveautés du quotidien : <code>pnpm audit deprecations</code> et <code>pnpm audit engines</code> (code de sortie 1 s'ils trouvent quelque chose, pratique en CI), un pied de page de vérifications au-dessus de <code>Done in</code> qui regroupe paquets dépréciés, problèmes de peers, engines incompatibles, scripts exécutés et verdict supply-chain du lockfile, et les installations globales peuvent lier les agent skills approuvées.</p>"
+          },
+          "source": {
+            "url": "https://github.com/pnpm/pnpm/releases/tag/v12.24.0",
+            "label": "github.com/pnpm/pnpm"
+          }
+        }
+      ]
+    },
+    {
+      "id": "build-tools",
+      "name": "Build Tools & Runtimes",
+      "theme": "build-tools",
+      "icon_emoji": "🔧",
+      "anchor": "build-tools",
+      "updates": [
+        {
+          "id": "rolldown-1-3-4",
+          "tag": "notable",
+          "date": "26 Nov 2026",
+          "title": {
+            "es": "Rolldown 1.3.4 devuelve la memoria ociosa al sistema operativo",
+            "en": "Rolldown 1.3.4 returns idle memory to the operating system",
+            "fr": "Rolldown 1.3.4 rend la mémoire inutilisée au système d'exploitation"
+          },
+          "body_html": {
+            "es": "<p>Cuando terminan los builds, <strong>Rolldown</strong> ahora le devuelve al sistema la memoria que ya no usa, y actualiza mimalloc de 3.6.1 a 3.7.0. Esto le pega directo a procesos largos que usan la API de Rolldown, como el <strong>dev server de Vite</strong>: menos memoria en reposo y picos más bajos. La limpieza corre en background y usa algo de CPU; si notás builds más lentos, arrancá el proceso con <code>ROLLDOWN_MEMORY_RECLAIM_DELAY=off</code> y abrí un issue. También suma <code>injectPlugin</code> builtin con <code>include</code>/<code>exclude</code>, <code>maxDuplicatedSize</code> para chunks comunes inlineados y aviso cuando un output no-ESM pierde los import attributes de un external.</p>",
+            "en": "<p>Once builds stop, <strong>Rolldown</strong> now returns the memory it no longer needs to the OS, and mimalloc moves from 3.6.1 to 3.7.0. Long-running processes that bundle through the Rolldown API, like the <strong>Vite dev server</strong>, hold much less memory while idle and peak lower too. The cleanup runs in the background and costs some CPU; if builds get slower, start the process with <code>ROLLDOWN_MEMORY_RECLAIM_DELAY=off</code> and open an issue. The release also adds a builtin <code>injectPlugin</code> with <code>include</code>/<code>exclude</code>, <code>maxDuplicatedSize</code> for inlined common chunks, and a warning when a non-ESM output drops an external's import attributes.</p>",
+            "fr": "<p>Une fois les builds terminés, <strong>Rolldown</strong> rend désormais au système la mémoire dont il n'a plus besoin, et mimalloc passe de 3.6.1 à 3.7.0. Les processus longs qui utilisent l'API Rolldown, comme le <strong>serveur de dev de Vite</strong>, gardent beaucoup moins de mémoire au repos et culminent plus bas. Le nettoyage tourne en arrière-plan et consomme un peu de CPU ; si les builds ralentissent, lancez le processus avec <code>ROLLDOWN_MEMORY_RECLAIM_DELAY=off</code> et ouvrez une issue. La version ajoute aussi un <code>injectPlugin</code> intégré avec <code>include</code>/<code>exclude</code>, <code>maxDuplicatedSize</code> pour les chunks communs inlinés, et un avertissement quand une sortie non-ESM perd les import attributes d'un external.</p>"
+          },
+          "source": {
+            "url": "https://github.com/rolldown/rolldown/releases/tag/v1.3.4",
+            "label": "github.com/rolldown/rolldown"
+          }
+        },
+        {
+          "id": "pnpm-gvs-path-traversal",
+          "tag": "security",
+          "date": "20 Nov 2026",
+          "title": {
+            "es": "pnpm publica un advisory crítico de path traversal en el global virtual store (arreglado en 12.10.0)",
+            "en": "pnpm discloses a critical global-virtual-store path traversal (fixed in 12.10.0)",
+            "fr": "pnpm divulgue une traversée de chemin critique dans le global virtual store (corrigée en 12.10.0)"
+          },
+          "body_html": {
+            "es": "<p>El 20 de noviembre pnpm publicó en su repo <strong>GHSA-jg5c-8mvg-5wph</strong> (CVSS v4 10, crítico): en pnpm v12 con <code>enable-global-virtual-store=true</code>, un paquete con un <code>version</code> tipo <code>../../../tmp/x</code> en su <code>package.json</code> podía escribir archivos <strong>fuera del store</strong> durante un install con resolución (<code>pnpm add</code>, <code>pnpm update</code>, install sin lockfile). Con eso podés pisar un <code>.git/hooks/pre-commit</code> y tener ejecución de código. El setting viene apagado por defecto, pero lo prenden los installs del propio engine y los shims. <strong>La buena</strong>: el fix salió en <strong>12.10.0</strong> el 6 de octubre, así que solo estás expuesto si seguís entre 12.0 y 12.9. Si estás ahí, actualizá ya.</p>",
+            "en": "<p>On November 20 pnpm published <strong>GHSA-jg5c-8mvg-5wph</strong> in its repo (CVSS v4 10, critical): on pnpm v12 with <code>enable-global-virtual-store=true</code>, a package whose <code>package.json</code> <code>version</code> looks like <code>../../../tmp/x</code> could write files <strong>outside the store</strong> during a resolving install (<code>pnpm add</code>, <code>pnpm update</code>, an install without a lockfile). Overwriting something like <code>.git/hooks/pre-commit</code> turns that into code execution. The setting is off by default, but the engine's own package-manager installs and the runtime shims turn it on. The fix shipped in <strong>12.10.0</strong> on October 6, so you are only exposed if you are still on 12.0 through 12.9; if so, upgrade now.</p>",
+            "fr": "<p>Le 20 novembre, pnpm a publié dans son dépôt <strong>GHSA-jg5c-8mvg-5wph</strong> (CVSS v4 10, critique) : sur pnpm v12 avec <code>enable-global-virtual-store=true</code>, un paquet dont le <code>version</code> du <code>package.json</code> ressemble à <code>../../../tmp/x</code> pouvait écrire des fichiers <strong>hors du store</strong> lors d'une installation avec résolution (<code>pnpm add</code>, <code>pnpm update</code>, installation sans lockfile). Écraser par exemple <code>.git/hooks/pre-commit</code> en fait une exécution de code. Le réglage est désactivé par défaut, mais les installations du gestionnaire intégré au moteur et les shims l'activent. Le correctif est sorti en <strong>12.10.0</strong> le 6 octobre : vous n'êtes exposé que si vous êtes encore entre 12.0 et 12.9 ; dans ce cas, mettez à jour maintenant.</p>"
+          },
+          "source": {
+            "url": "https://github.com/pnpm/pnpm/security/advisories/GHSA-jg5c-8mvg-5wph",
+            "label": "github.com/pnpm/pnpm"
+          }
+        },
+        {
+          "id": "node-27-alpha-0-2-0",
+          "tag": "beta",
+          "tag_label": { "es": "Alpha", "en": "Alpha", "fr": "Alpha" },
+          "date": "26 Nov 2026",
+          "title": {
+            "es": "Node.js 27 alpha 0.2.0: node:sqlite pasa a estable y se deprecan util.TextEncoder/TextDecoder",
+            "en": "Node.js 27 alpha 0.2.0: node:sqlite marked stable, util.TextEncoder/TextDecoder deprecated",
+            "fr": "Node.js 27 alpha 0.2.0 : node:sqlite devient stable, util.TextEncoder/TextDecoder dépréciés"
+          },
+          "body_html": {
+            "es": "<p>Ojo, esto es la <strong>línea alpha</strong> de Node 27, no algo para producción, pero marca hacia dónde va: el módulo <code>node:sqlite</code> queda <strong>marcado como estable</strong> (con un getter nuevo <code>statement.columnCount</code> y <code>ERR_NO_SQLITE</code> cuando el binario no trae SQLite), <code>util.TextDecoder</code> y <code>util.TextEncoder</code> pasan a deprecados en docs (usá los globales), la renegociación TLS también se depreca con un opt-in <code>allowRenegotiation</code>, y la opción <code>--process-timeout</code> se gradúa y ahora incluye workers. HTTP/2 suma <code>setHeaders</code> y <code>writeProcessing</code> en la response de compatibilidad.</p>",
+            "en": "<p>This is the <strong>alpha line</strong> of Node 27, not for production, but it shows where things are heading: <code>node:sqlite</code> is <strong>marked stable</strong> (with a new <code>statement.columnCount</code> getter and <code>ERR_NO_SQLITE</code> when the binary lacks SQLite), <code>util.TextDecoder</code> and <code>util.TextEncoder</code> are doc-deprecated (use the globals), TLS renegotiation is doc-deprecated with an <code>allowRenegotiation</code> opt-in, and <code>--process-timeout</code> graduates and now covers workers. HTTP/2 gains <code>setHeaders</code> and <code>writeProcessing</code> on the compatibility response.</p>",
+            "fr": "<p>Il s'agit de la <strong>ligne alpha</strong> de Node 27, pas pour la production, mais elle montre la direction : <code>node:sqlite</code> est <strong>marqué stable</strong> (avec un nouveau getter <code>statement.columnCount</code> et <code>ERR_NO_SQLITE</code> quand le binaire n'inclut pas SQLite), <code>util.TextDecoder</code> et <code>util.TextEncoder</code> sont dépréciés dans la doc (utilisez les globaux), la renégociation TLS est dépréciée avec un opt-in <code>allowRenegotiation</code>, et <code>--process-timeout</code> sort de l'expérimental et couvre les workers. HTTP/2 gagne <code>setHeaders</code> et <code>writeProcessing</code> sur la réponse de compatibilité.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nodejs/node/releases/tag/v27.0.0-alpha.0.2.0",
+            "label": "github.com/nodejs/node"
+          }
+        },
+        {
+          "id": "nx-24-1-0",
+          "tag": "notable",
+          "date": "26 Nov 2026",
+          "title": {
+            "es": "Nx 24.1.0 pasa a ESLint v10 por defecto y migra los workspaces existentes",
+            "en": "Nx 24.1.0 defaults to ESLint v10 and migrates existing workspaces",
+            "fr": "Nx 24.1.0 passe à ESLint v10 par défaut et migre les workspaces existants"
+          },
+          "body_html": {
+            "es": "<p><strong>Nx 24.1.0</strong> usa <strong>ESLint v10</strong> por defecto y trae una migración para los workspaces existentes, así que <strong>ojo al correr <code>nx migrate</code></strong>: revisá tus configs y plugins de ESLint antes de mergear. Los targets inferidos de ESLint y Vitest ahora corren desde la raíz del workspace, suma soporte para NestJS 12, genera un <code>bun.lock</code> podado para outputs de deploy con Bun, agrega la opción de servir SSR desde el dev server en <code>angular-rspack</code> y un <code>releaseBoundaryCheck</code> opcional para dependencias que cruzan el límite de un release.</p>",
+            "en": "<p><strong>Nx 24.1.0</strong> defaults to <strong>ESLint v10</strong> and ships a migration for existing workspaces, so <strong>watch out when you run <code>nx migrate</code></strong>: check your ESLint configs and plugins before merging. Inferred ESLint and Vitest targets now run from the workspace root, NestJS 12 is supported, Bun deploy outputs get a pruned <code>bun.lock</code>, <code>angular-rspack</code> can serve SSR from the dev server, and an opt-in <code>releaseBoundaryCheck</code> flags dependencies that cross a release boundary.</p>",
+            "fr": "<p><strong>Nx 24.1.0</strong> utilise <strong>ESLint v10</strong> par défaut et fournit une migration pour les workspaces existants : <strong>attention en lançant <code>nx migrate</code></strong>, vérifiez vos configs et plugins ESLint avant de merger. Les targets ESLint et Vitest inférés tournent désormais depuis la racine du workspace, NestJS 12 est pris en charge, les sorties de déploiement Bun reçoivent un <code>bun.lock</code> élagué, <code>angular-rspack</code> peut servir le SSR depuis le serveur de dev, et un <code>releaseBoundaryCheck</code> optionnel signale les dépendances qui franchissent une frontière de release.</p>"
+          },
+          "source": {
+            "url": "https://github.com/nrwl/nx/releases/tag/24.1.0",
+            "label": "github.com/nrwl/nx"
+          }
+        }
+      ]
+    },
+    {
+      "id": "js-frameworks",
+      "name": "JS Frameworks",
+      "theme": "js-frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "js-frameworks",
+      "updates": [
+        {
+          "id": "vue-router-5-5-2",
+          "tag": "notable",
+          "date": "26 Nov 2026",
+          "title": {
+            "es": "Vue Router 5.5.2 suma soporte para Vapor mode",
+            "en": "Vue Router 5.5.2 adds Vapor mode support",
+            "fr": "Vue Router 5.5.2 ajoute la prise en charge du Vapor mode"
+          },
+          "body_html": {
+            "es": "<p><strong>Vue Router 5.5.2</strong> trae soporte para <strong>Vapor mode</strong>, el modo de compilación sin Virtual DOM de Vue, así que el router ya no es la pieza que te frena para probarlo. También avisa cuando pasás params repetibles como escalares o subsegmentos repetibles inválidos, y expone helpers internos con prefijo <code>_</code> (encoding, <code>_parseURL</code>, <code>_stripBase</code>, el click guard de <code>RouterLink</code>). <strong>Ojo</strong>: trae breaking changes en la <strong>API experimental</strong> (se elimina el viejo <code>NavigationResult</code>); si no la usás, no te toca.</p>",
+            "en": "<p><strong>Vue Router 5.5.2</strong> adds support for <strong>Vapor mode</strong>, Vue's compilation mode without a Virtual DOM, so the router is no longer what holds you back from trying it. It also warns when repeatable params are passed as scalars or repeatable subsegments are invalid, and exposes internal helpers with a <code>_</code> prefix (encoding, <code>_parseURL</code>, <code>_stringifyURL</code>, <code>_stripBase</code>, the <code>RouterLink</code> click guard). It carries breaking changes in the <strong>experimental API</strong> (the old <code>NavigationResult</code> is removed); if you don't use it, nothing changes for you.</p>",
+            "fr": "<p><strong>Vue Router 5.5.2</strong> prend en charge le <strong>Vapor mode</strong>, le mode de compilation de Vue sans Virtual DOM : le routeur n'est plus ce qui vous empêche de l'essayer. Il avertit aussi quand des params répétables sont passés comme scalaires ou que des sous-segments répétables sont invalides, et expose des helpers internes préfixés par <code>_</code> (encodage, <code>_parseURL</code>, <code>_stringifyURL</code>, <code>_stripBase</code>, le click guard de <code>RouterLink</code>). Il inclut des breaking changes dans l'<strong>API expérimentale</strong> (l'ancien <code>NavigationResult</code> disparaît) ; si vous ne l'utilisez pas, rien ne change.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vuejs/router/releases/tag/v5.5.2",
+            "label": "github.com/vuejs/router"
+          }
+        },
+        {
+          "id": "angular-22-3-1",
+          "tag": "patch",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "Angular 22.3.1: el sanitizer ya no expone window.opener y se arreglan bugs de hidratación",
+            "en": "Angular 22.3.1: the sanitizer stops exposing window.opener, plus hydration fixes",
+            "fr": "Angular 22.3.1 : le sanitizer n'expose plus window.opener, et des correctifs d'hydratation"
+          },
+          "body_html": {
+            "es": "<p>Patch de <strong>Angular 22.3.1</strong> con un fix que conviene tener: los links que pasan por el sanitizer de HTML ya <strong>no exponen <code>window.opener</code></strong> a la página destino. Además arregla varios casos de hidratación (nodos después de <code>&lt;ng-content&gt;</code> o <code>@let</code>, bloques <code>@defer</code> anidados que se perdían mientras el padre hidrataba), y el compiler resuelve bien referencias a parámetros de arrow functions.</p>",
+            "en": "<p>The <strong>Angular 22.3.1</strong> patch carries a fix worth having: links that go through the HTML sanitizer <strong>no longer expose <code>window.opener</code></strong> to the target page. It also fixes several hydration cases (nodes after <code>&lt;ng-content&gt;</code> or <code>@let</code>, nested <code>@defer</code> blocks dropped while the parent hydrates), and the compiler now resolves references to arrow-function parameters correctly.</p>",
+            "fr": "<p>Le patch <strong>Angular 22.3.1</strong> contient un correctif utile : les liens qui passent par le sanitizer HTML <strong>n'exposent plus <code>window.opener</code></strong> à la page cible. Il corrige aussi plusieurs cas d'hydratation (nœuds après <code>&lt;ng-content&gt;</code> ou <code>@let</code>, blocs <code>@defer</code> imbriqués perdus pendant l'hydratation du parent), et le compilateur résout correctement les références aux paramètres de fonctions fléchées.</p>"
+          },
+          "source": {
+            "url": "https://github.com/angular/angular/releases/tag/v22.3.1",
+            "label": "github.com/angular/angular"
+          }
+        }
+      ]
+    },
+    {
+      "id": "react-native",
+      "name": "React Native",
+      "theme": "react-native",
+      "icon_emoji": "📱",
+      "anchor": "react-native",
+      "updates": [
+        {
+          "id": "expo-58-1-0",
+          "tag": "minor",
+          "date": "26 Nov 2026",
+          "title": {
+            "es": "Expo 58.1.0: expo/fetch respeta el spec al leer el body y maneja cortes a mitad de respuesta",
+            "en": "Expo 58.1.0: expo/fetch follows the spec when reading bodies and handles mid-response failures",
+            "fr": "Expo 58.1.0 : expo/fetch respecte la spec à la lecture du body et gère les coupures en cours de réponse"
+          },
+          "body_html": {
+            "es": "<p>El paquete <code>expo@58.1.0</code> arregla dos bugs de <code>expo/fetch</code> que podían darte bodies vacíos o parciales: ahora <code>response.body</code> queda bloqueado mientras corre <code>text()</code> o <code>arrayBuffer()</code>, como pide el Fetch spec, y las fallas de conexión después de recibir los headers se reportan bien en iOS y Android en vez de pasar en silencio. También evita errores fatales falsos al cargar split chunks sin preload, y deja de bajarte <code>@shopify/flash-list</code> 2.3.3 con <code>npx expo install --fix</code>.</p>",
+            "en": "<p>The <code>expo@58.1.0</code> package fixes two <code>expo/fetch</code> bugs that could return empty or partial bodies: <code>response.body</code> is now locked while <code>text()</code> or <code>arrayBuffer()</code> runs, as the Fetch spec requires, and connection failures after the response headers arrive are now reported on iOS and Android instead of passing silently. It also avoids false fatal errors when loading split chunks that were not preloaded, and <code>npx expo install --fix</code> no longer downgrades <code>@shopify/flash-list</code> 2.3.3.</p>",
+            "fr": "<p>Le paquet <code>expo@58.1.0</code> corrige deux bugs d'<code>expo/fetch</code> qui pouvaient renvoyer des bodies vides ou partiels : <code>response.body</code> est désormais verrouillé pendant <code>text()</code> ou <code>arrayBuffer()</code>, comme l'exige la spec Fetch, et les échecs de connexion après réception des en-têtes sont signalés sur iOS et Android au lieu de passer en silence. Il évite aussi de fausses erreurs fatales au chargement de split chunks non préchargés, et <code>npx expo install --fix</code> ne rétrograde plus <code>@shopify/flash-list</code> 2.3.3.</p>"
+          },
+          "source": {
+            "url": "https://github.com/expo/expo/releases/tag/expo%4058.1.0",
+            "label": "github.com/expo/expo"
+          }
+        }
+      ]
+    },
+    {
+      "id": "quick-links",
+      "name": "Quick Links",
+      "theme": "quick-links",
+      "icon_emoji": "📌",
+      "anchor": "quick-links",
+      "updates": [
+        {
+          "id": "create-vite-9-4-0",
+          "tag": "minor",
+          "date": "26 Nov 2026",
+          "title": {
+            "es": "create-vite 9.4.0: opción devtools y templates de Solid 2",
+            "en": "create-vite 9.4.0: devtools option and Solid 2 templates",
+            "fr": "create-vite 9.4.0 : option devtools et templates Solid 2"
+          },
+          "body_html": {
+            "es": "<p>El scaffolder de Vite suma una opción para agregar devtools, soporte para el package manager de Vite+ (<code>vp</code>) y pasa los templates de Solid a <strong>Solid 2</strong>.</p>",
+            "en": "<p>Vite's scaffolder adds a devtools option, supports the Vite+ (<code>vp</code>) package manager, and moves the Solid templates to <strong>Solid 2</strong>.</p>",
+            "fr": "<p>Le scaffolder de Vite ajoute une option devtools, prend en charge le gestionnaire de paquets de Vite+ (<code>vp</code>) et passe les templates Solid à <strong>Solid 2</strong>.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vitejs/vite/releases/tag/create-vite%409.4.0",
+            "label": "github.com/vitejs/vite"
+          }
+        },
+        {
+          "id": "vue-router-5-5-3",
+          "tag": "minor",
+          "date": "26 Nov 2026",
+          "title": {
+            "es": "Vue Router 5.5.3: opción caseSensitive en la API experimental",
+            "en": "Vue Router 5.5.3: caseSensitive option in the experimental API",
+            "fr": "Vue Router 5.5.3 : option caseSensitive dans l'API expérimentale"
+          },
+          "body_html": {
+            "es": "<p>Horas después de 5.5.2, llega <code>caseSensitive</code> para el router experimental y <code>__VUE_OPTIONS_API__</code> vuelve a <code>true</code> por defecto en el entry ESM de Node.</p>",
+            "en": "<p>Hours after 5.5.2, the experimental router gets a <code>caseSensitive</code> option and <code>__VUE_OPTIONS_API__</code> defaults to <code>true</code> again in the Node ESM entry.</p>",
+            "fr": "<p>Quelques heures après 5.5.2, le routeur expérimental reçoit une option <code>caseSensitive</code> et <code>__VUE_OPTIONS_API__</code> revient à <code>true</code> par défaut dans l'entrée ESM Node.</p>"
+          },
+          "source": {
+            "url": "https://github.com/vuejs/router/releases/tag/v5.5.3",
+            "label": "github.com/vuejs/router"
+          }
+        },
+        {
+          "id": "storybook-11-rc-1",
+          "tag": "beta",
+          "tag_label": { "es": "RC", "en": "RC", "fr": "RC" },
+          "date": "26 Nov 2026",
+          "title": {
+            "es": "Storybook 11.0.0-rc.1: segundo release candidate",
+            "en": "Storybook 11.0.0-rc.1: second release candidate",
+            "fr": "Storybook 11.0.0-rc.1 : deuxième release candidate"
+          },
+          "body_html": {
+            "es": "<p>Dos días después de rc.0 sale el segundo RC de <strong>Storybook 11</strong>; si venís probando la beta, es buen momento para validar tu setup antes de la estable.</p>",
+            "en": "<p>Two days after rc.0, the second release candidate of <strong>Storybook 11</strong> is out; if you have been testing the beta, now is a good time to validate your setup before the stable release.</p>",
+            "fr": "<p>Deux jours après rc.0, la deuxième release candidate de <strong>Storybook 11</strong> est sortie ; si vous testiez la bêta, c'est le moment de valider votre configuration avant la stable.</p>"
+          },
+          "source": {
+            "url": "https://github.com/storybookjs/storybook/releases/tag/v11.0.0-rc.1",
+            "label": "github.com/storybookjs/storybook"
+          }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Semana de Thanksgiving y el feed se nota flaco: nada nuevo en TypeScript, CSS, HTML ni React core. Lo que sí se movió fue el tooling, con Vite, Rolldown, pnpm y Nx sacando releases el mismo 26 de noviembre.",
+      "en": "Thanksgiving week shows in a thin feed: nothing new in TypeScript, CSS, HTML or React core. Tooling is what moved, with Vite, Rolldown, pnpm and Nx all shipping releases on November 26.",
+      "fr": "La semaine de Thanksgiving se voit dans un flux maigre : rien de neuf côté TypeScript, CSS, HTML ou React core. C'est l'outillage qui a bougé, avec Vite, Rolldown, pnpm et Nx qui publient tous le 26 novembre."
+    },
+    {
+      "es": "Los package managers siguen cerrando huecos de supply chain: en una semana pnpm divulgó un path traversal crítico del global virtual store y corrigió las diferencias de lectura de tarballs con npm. El patrón se repite: los permisos de build scripts y agent skills ahora se otorgan uno por uno, nunca en bloque.",
+      "en": "Package managers keep closing supply-chain gaps: within one week pnpm disclosed a critical global-virtual-store path traversal and fixed tarball-parsing differences with npm. The pattern repeats: build-script and agent-skill permissions are now granted one by one, never in bulk.",
+      "fr": "Les gestionnaires de paquets continuent de combler les failles de supply chain : en une semaine, pnpm a divulgué une traversée de chemin critique du global virtual store et corrigé les écarts de lecture des tarballs avec npm. Le schéma se répète : les permissions de build scripts et d'agent skills s'accordent désormais une par une, jamais en bloc."
+    }
+  ]
+}

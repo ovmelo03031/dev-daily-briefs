@@ -1,0 +1,338 @@
+{
+  "title": {
+    "es": "Backend & Fullstack Daily — 27 Nov 2026",
+    "en": "Backend & Fullstack Daily — 27 Nov 2026",
+    "fr": "Backend & Fullstack Daily — 27 nov. 2026"
+  },
+  "description": {
+    "es": "Hono 4.13.23 cierra tres advisories (path confusion en Bun detrás de proxy incluida), pnpm 12.24 lee tarballs como npm, NestJS 12.6.3 puede abortar el bootstrap por rutas duplicadas, Node 27 alpha marca node:sqlite como estable y Nx 24.1 pasa a ESLint 10.",
+    "en": "Hono 4.13.23 closes three advisories (including Bun path confusion behind a proxy), pnpm 12.24 reads tarballs the way npm does, NestJS 12.6.3 can abort bootstrap on duplicate routes, the Node 27 alpha marks node:sqlite stable, and Nx 24.1 moves to ESLint 10.",
+    "fr": "Hono 4.13.23 corrige trois advisories (dont une confusion de chemin sous Bun derrière un proxy), pnpm 12.24 lit les tarballs comme npm, NestJS 12.6.3 peut interrompre le bootstrap sur des routes dupliquées, l'alpha de Node 27 marque node:sqlite stable et Nx 24.1 passe à ESLint 10."
+  },
+  "pubDate": "2026-11-27",
+  "category": "backend-fullstack",
+  "highlights": [
+    {
+      "text": {
+        "es": "Hono 4.13.23: tres advisories, actualizá",
+        "en": "Hono 4.13.23: three advisories, upgrade",
+        "fr": "Hono 4.13.23 : trois advisories, mettez à jour"
+      },
+      "anchor": "hono-4-13-23-security",
+      "icon": "lucide:shield"
+    },
+    {
+      "text": {
+        "es": "pnpm 12.24: tarballs leídos igual que npm",
+        "en": "pnpm 12.24: tarballs read the npm way",
+        "fr": "pnpm 12.24 : tarballs lus comme npm"
+      },
+      "anchor": "pnpm-12-24-0",
+      "icon": "simple-icons:pnpm"
+    },
+    {
+      "text": {
+        "es": "NestJS 12.6.3: /users y /Users chocan",
+        "en": "NestJS 12.6.3: /users and /Users collide",
+        "fr": "NestJS 12.6.3 : /users et /Users entrent en conflit"
+      },
+      "anchor": "nestjs-12-6-3",
+      "icon": "simple-icons:nestjs"
+    },
+    {
+      "text": {
+        "es": "Node 27 alpha: node:sqlite pasa a estable",
+        "en": "Node 27 alpha: node:sqlite goes stable",
+        "fr": "Node 27 alpha : node:sqlite devient stable"
+      },
+      "anchor": "node-27-alpha-0-2-0",
+      "icon": "simple-icons:nodedotjs"
+    },
+    {
+      "text": {
+        "es": "Valkey 9.2.1 arregla el arranque con TLS",
+        "en": "Valkey 9.2.1 fixes TLS startup",
+        "fr": "Valkey 9.2.1 répare le démarrage TLS"
+      },
+      "anchor": "valkey-9-2-1",
+      "icon": "lucide:database"
+    },
+    {
+      "text": {
+        "es": "Vercel Workflows: 12x menos latencia por step",
+        "en": "Vercel Workflows: 12x lower step latency",
+        "fr": "Vercel Workflows : latence par step 12x plus basse"
+      },
+      "anchor": "vercel-workflows-speculative",
+      "icon": "simple-icons:vercel"
+    },
+    {
+      "text": {
+        "es": "Nx 24.1: ESLint 10 por defecto y NestJS 12",
+        "en": "Nx 24.1: ESLint 10 default and NestJS 12",
+        "fr": "Nx 24.1 : ESLint 10 par défaut et NestJS 12"
+      },
+      "anchor": "nx-24-1-0",
+      "icon": "simple-icons:nx"
+    }
+  ],
+  "tools": [
+    {
+      "id": "top-stories",
+      "name": "Top Stories",
+      "theme": "top-stories",
+      "icon_emoji": "🔥",
+      "anchor": "hono-4-13-23-security",
+      "updates": [
+        {
+          "id": "hono-4-13-23-security",
+          "tag": "security",
+          "date": "26 Nov 2026",
+          "title": {
+            "es": "Hono 4.13.23: tres advisories medium, uno deja pasar rutas que tu proxy bloquea en Bun",
+            "en": "Hono 4.13.23: three medium advisories, one lets requests past routes your proxy blocks on Bun",
+            "fr": "Hono 4.13.23 : trois advisories medium, dont un qui laisse passer des routes bloquées par votre proxy sous Bun"
+          },
+          "body_html": {
+            "es": "<p>Hono publicó tres advisories en su repo, todos corregidos en <strong>4.13.23</strong> y sin CVE asignado todavía. El que más duele es <strong>GHSA-mhwf</strong> (CVSS 5.3): en <strong>Bun</strong>, un request sin <code>Host</code> utilizable llega con una URL que es solo el path, y <code>getPath()</code> se comía el primer segmento antes de rutear. Si tu reverse proxy protege rutas por prefijo de path, un request podía llegar a una ruta que el proxy bloquea. <strong>GHSA-656w</strong> (5.9): con <code>TrieRouter</code> y métodos arbitrarios (HTTP/2 en Node o <code>hono/method-override</code>), un método <code>__proto__</code> agregaba una propiedad a <code>Object.prototype</code> y los requests siguientes fallaban hasta reiniciar el proceso. <strong>GHSA-586x</strong> (5.3): <code>except()</code> de <code>hono/combine</code> salteaba el middleware en paths que solo empezaban o terminaban con una alternativa de un parámetro con regex. Si usás Hono en Bun detrás de un proxy, actualizá YA.</p>",
+            "en": "<p>Hono published three repo advisories, all fixed in <strong>4.13.23</strong> and none with a CVE yet. The one that hurts most is <strong>GHSA-mhwf</strong> (CVSS 5.3): on <strong>Bun</strong>, a request without a usable <code>Host</code> header arrives with a path-only URL, and <code>getPath()</code> dropped the first segment before routing. If your reverse proxy protects routes by path prefix, a request could reach a route the proxy blocks. <strong>GHSA-656w</strong> (5.9): with <code>TrieRouter</code> and arbitrary method names (HTTP/2 on Node.js or <code>hono/method-override</code>), a <code>__proto__</code> method added a property to <code>Object.prototype</code>, and later requests failed until the process restarted. <strong>GHSA-586x</strong> (5.3): <code>except()</code> in <code>hono/combine</code> skipped the middleware for paths that only started or ended with one alternative of a constrained parameter. If you run Hono on Bun behind a proxy, upgrade now.</p>",
+            "fr": "<p>Hono a publié trois advisories dans son dépôt, tous corrigés en <strong>4.13.23</strong> et encore sans CVE. Le plus sérieux est <strong>GHSA-mhwf</strong> (CVSS 5.3) : sous <strong>Bun</strong>, une requête sans en-tête <code>Host</code> exploitable arrive avec une URL réduite au chemin, et <code>getPath()</code> supprimait le premier segment avant le routage. Si votre reverse proxy protège des routes par préfixe de chemin, une requête pouvait atteindre une route bloquée par le proxy. <strong>GHSA-656w</strong> (5.9) : avec <code>TrieRouter</code> et des noms de méthode arbitraires (HTTP/2 sous Node.js ou <code>hono/method-override</code>), une méthode <code>__proto__</code> ajoutait une propriété à <code>Object.prototype</code> et les requêtes suivantes échouaient jusqu'au redémarrage. <strong>GHSA-586x</strong> (5.3) : <code>except()</code> de <code>hono/combine</code> sautait le middleware pour des chemins qui commençaient ou finissaient seulement par une alternative d'un paramètre contraint. Hono sous Bun derrière un proxy : mettez à jour maintenant.</p>"
+          },
+          "source": { "url": "https://github.com/honojs/hono/releases/tag/v4.13.23", "label": "github.com/honojs" }
+        },
+        {
+          "id": "pnpm-12-24-0",
+          "tag": "security",
+          "date": "26 Nov 2026",
+          "title": {
+            "es": "pnpm 12.24.0: los tarballs se leen igual que en npm, y approve deja de regalar permisos",
+            "en": "pnpm 12.24.0: tarballs are read the way npm reads them, and approve stops granting everything",
+            "fr": "pnpm 12.24.0 : les tarballs sont lus comme par npm, et approve n'accorde plus tout"
+          },
+          "body_html": {
+            "es": "<p>El fix de seguridad es un <strong>parsing differential</strong>: un tarball con headers que npm podía leer distinto (por ejemplo un header PAX malformado o que define la misma clave dos veces) podía instalar <strong>archivos distintos</strong> con pnpm que con npm. O sea, lo que auditaste con npm no era necesariamente lo que pnpm ponía en disco. Ahora pnpm lee cada tarball como npm, o lo rechaza. Además, <code>pnpm approve &lt;pkg&gt;</code> ya no le otorga build scripts y agent skills a un paquete sin pedido pendiente: pregunta qué permisos dar. En CI configurá <code>permissions</code> o usá <code>pnpm approve-builds</code>. De yapa llegan <code>pnpm audit deprecations</code> y <code>pnpm audit engines</code> (salen con código 1 si encuentran algo, ideal para un gate de CI) y un footer de checks al final del install.</p>",
+            "en": "<p>The security fix is a <strong>parsing differential</strong>: a tarball whose headers npm could read differently (such as a malformed PAX header, or one that sets the same key twice) could install <strong>different files</strong> with pnpm than with npm. What you audited with npm was not necessarily what pnpm put on disk. pnpm now reads every tarball the way npm does, or refuses it. Also, <code>pnpm approve &lt;pkg&gt;</code> no longer grants build scripts and agent skills to a package with no pending request; it asks which permissions to grant. In CI, configure <code>permissions</code> or use <code>pnpm approve-builds</code>. The release also adds <code>pnpm audit deprecations</code> and <code>pnpm audit engines</code> (both exit 1 when they find something, handy as a CI gate) and a checks footer at the end of every install.</p>",
+            "fr": "<p>Le correctif de sécurité vise un <strong>parsing differential</strong> : un tarball dont npm pouvait lire les en-têtes autrement (un en-tête PAX malformé, ou qui définit deux fois la même clé) pouvait installer des <strong>fichiers différents</strong> avec pnpm qu'avec npm. Ce que vous aviez audité avec npm n'était donc pas forcément ce que pnpm écrivait sur disque. pnpm lit désormais chaque tarball comme npm, ou le refuse. De plus, <code>pnpm approve &lt;pkg&gt;</code> n'accorde plus build scripts et agent skills à un paquet sans demande en attente : il demande quelles permissions donner. En CI, configurez <code>permissions</code> ou utilisez <code>pnpm approve-builds</code>. Nouveautés : <code>pnpm audit deprecations</code> et <code>pnpm audit engines</code> (code de sortie 1 en cas de problème, pratique en CI) et un récapitulatif de checks à la fin de l'install.</p>"
+          },
+          "source": { "url": "https://github.com/pnpm/pnpm/releases/tag/v12.24.0", "label": "github.com/pnpm" }
+        },
+        {
+          "id": "nestjs-12-6-3",
+          "tag": "notable",
+          "date": "26 Nov 2026",
+          "title": {
+            "es": "NestJS 12.6.3: en Express, GET /users y GET /Users ahora son la misma ruta y pueden tirar el bootstrap",
+            "en": "NestJS 12.6.3: on Express, GET /users and GET /Users are now the same route and can abort bootstrap",
+            "fr": "NestJS 12.6.3 : sous Express, GET /users et GET /Users sont désormais la même route et peuvent faire échouer le bootstrap"
+          },
+          "body_html": {
+            "es": "<p>Otro patch con cambios de comportamiento. La detección de conflictos de rutas ahora compara paths como los matchea el router: en <strong>Express</strong> (case-insensitive) <code>GET /users</code> y <code>GET /Users</code> cuentan como duplicadas, así que con <code>duplicate: 'error'</code> el <strong>bootstrap aborta</strong>. Lo mismo en Fastify con <code>caseSensitive: false</code>. También: <code>@Body('key')</code> con un body primitivo falsy (<code>\"\"</code>, <code>0</code>, <code>false</code>) ahora da <code>undefined</code> en vez del body entero; un <code>exclude()</code> sin versión cubre las rutas de la versión default; y <code>GrpcExceptionFilter</code> loguea las excepciones que no son <code>RpcException</code>. Lo bueno: <code>Test.createTestingModule()</code> acepta <code>instrument</code>, así los tests corren la app instrumentada igual que en producción. Corré el boot en CI antes de mergear el bump.</p>",
+            "en": "<p>Another patch with behavior changes. Route conflict detection now compares paths the way the router matches them: on <strong>Express</strong> (case-insensitive), <code>GET /users</code> and <code>GET /Users</code> count as duplicates, so <code>duplicate: 'error'</code> <strong>aborts bootstrap</strong>. The same applies to Fastify with <code>caseSensitive: false</code>. Also: <code>@Body('key')</code> with a falsy primitive body (<code>\"\"</code>, <code>0</code>, <code>false</code>) now yields <code>undefined</code> instead of the whole body; an <code>exclude()</code> without a version covers the default version's routes; and <code>GrpcExceptionFilter</code> logs non-<code>RpcException</code> errors. The upside: <code>Test.createTestingModule()</code> accepts <code>instrument</code>, so tests run the app instrumented exactly as in production. Boot the app in CI before merging the bump.</p>",
+            "fr": "<p>Encore un patch avec des changements de comportement. La détection de conflits de routes compare maintenant les chemins comme le routeur les matche : sous <strong>Express</strong> (insensible à la casse), <code>GET /users</code> et <code>GET /Users</code> sont des doublons, donc <code>duplicate: 'error'</code> <strong>interrompt le bootstrap</strong>. Idem sous Fastify avec <code>caseSensitive: false</code>. Aussi : <code>@Body('key')</code> avec un body primitif falsy (<code>\"\"</code>, <code>0</code>, <code>false</code>) donne <code>undefined</code> au lieu du body entier ; un <code>exclude()</code> sans version couvre les routes de la version par défaut ; et <code>GrpcExceptionFilter</code> journalise les erreurs qui ne sont pas des <code>RpcException</code>. Le bon côté : <code>Test.createTestingModule()</code> accepte <code>instrument</code>, les tests tournent donc avec l'instrumentation de production. Démarrez l'app en CI avant de merger le bump.</p>"
+          },
+          "source": { "url": "https://github.com/nestjs/nest/releases/tag/v12.6.3", "label": "github.com/nestjs" }
+        }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "name": "Backend TypeScript & Runtimes",
+      "theme": "runtimes",
+      "icon_emoji": "⚡",
+      "anchor": "node-27-alpha-0-2-0",
+      "updates": [
+        {
+          "id": "node-27-alpha-0-2-0",
+          "tag": "beta",
+          "tag_label": { "es": "Alpha", "en": "Alpha", "fr": "Alpha" },
+          "date": "26 Nov 2026",
+          "title": {
+            "es": "Node.js 27.0.0-alpha.0.2.0: node:sqlite estable y util.TextEncoder deprecado",
+            "en": "Node.js 27.0.0-alpha.0.2.0: node:sqlite goes stable and util.TextEncoder is deprecated",
+            "fr": "Node.js 27.0.0-alpha.0.2.0 : node:sqlite devient stable et util.TextEncoder est déprécié"
+          },
+          "body_html": {
+            "es": "<p>Tercera alpha de Node 27, y esta trae cosas para planificar. <strong><code>node:sqlite</code> se marca como estable</strong> y suma el getter <code>statement.columnCount</code>; si lo descartabas por experimental, ya podés evaluarlo para tooling o caches locales. <code>--process-timeout</code> se gradúa y su salida ahora incluye workers. Deprecaciones de docs: <code>util.TextDecoder</code> y <code>util.TextEncoder</code> (usá los globales) y la <strong>renegociación TLS</strong>, que pasa a ser opt-in con <code>allowRenegotiation</code>. HTTP/2 suma <code>setHeaders</code> en la response de compat. Es una alpha: probala en un branch, no en prod.</p>",
+            "en": "<p>The third Node 27 alpha, and this one has things to plan for. <strong><code>node:sqlite</code> is marked stable</strong> and gains a <code>statement.columnCount</code> getter; if you dismissed it as experimental, it is now worth evaluating for tooling or local caches. <code>--process-timeout</code> graduates, and its output now includes workers. Docs deprecations: <code>util.TextDecoder</code> and <code>util.TextEncoder</code> (use the globals) and <strong>TLS renegotiation</strong>, which becomes opt-in through <code>allowRenegotiation</code>. HTTP/2 adds <code>setHeaders</code> to the compat response. It is an alpha: try it on a branch, not in production.</p>",
+            "fr": "<p>Troisième alpha de Node 27, avec des choses à planifier. <strong><code>node:sqlite</code> est marqué stable</strong> et gagne le getter <code>statement.columnCount</code> ; si vous l'aviez écarté car expérimental, il mérite maintenant une évaluation pour l'outillage ou les caches locaux. <code>--process-timeout</code> sort de l'expérimental et sa sortie inclut les workers. Dépréciations documentaires : <code>util.TextDecoder</code> et <code>util.TextEncoder</code> (utilisez les globaux) et la <strong>renégociation TLS</strong>, qui devient opt-in via <code>allowRenegotiation</code>. HTTP/2 ajoute <code>setHeaders</code> à la réponse de compat. C'est une alpha : testez-la sur une branche, pas en production.</p>"
+          },
+          "source": { "url": "https://github.com/nodejs/node/releases/tag/v27.0.0-alpha.0.2.0", "label": "github.com/nodejs" }
+        }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks & Libraries",
+      "theme": "frameworks",
+      "icon_emoji": "🧩",
+      "anchor": "trpc-11-31-6",
+      "updates": [
+        {
+          "id": "trpc-11-31-6",
+          "tag": "patch",
+          "date": "26 Nov 2026",
+          "title": {
+            "es": "tRPC 11.31.4 a 11.31.6: inputs binarios en Fastify y backoff de websockets",
+            "en": "tRPC 11.31.4 to 11.31.6: binary inputs on Fastify and websocket backoff",
+            "fr": "tRPC 11.31.4 à 11.31.6 : inputs binaires sur Fastify et backoff des websockets"
+          },
+          "body_html": {
+            "es": "<p>Tres patches en un día. <strong>11.31.6</strong>: el plugin de <strong>Fastify</strong> por fin acepta inputs binarios, y el cliente en modo lazy hace <strong>backoff</strong> cuando el server rechaza el websocket en vez de reintentar en loop contra tu backend. <strong>11.31.5</strong>: un input que no es objeto plano queda intacto al reanudar una subscription, y <code>@trpc/openapi</code> deja de marcar como requeridas propiedades cuyo tipo incluye <code>undefined</code>. <strong>11.31.4</strong>: las subscriptions observables corren en <code>localLink</code>. Si usás websockets, el backoff solo ya justifica el bump.</p>",
+            "en": "<p>Three patches in one day. <strong>11.31.6</strong>: the <strong>Fastify</strong> plugin finally accepts binary inputs, and the client in lazy mode <strong>backs off</strong> when the server rejects the websocket instead of retrying in a loop against your backend. <strong>11.31.5</strong>: a non-plain-object input stays intact when a subscription resumes, and <code>@trpc/openapi</code> stops marking properties whose type includes <code>undefined</code> as required. <strong>11.31.4</strong>: observable subscriptions run in <code>localLink</code>. If you use websockets, the backoff alone justifies the bump.</p>",
+            "fr": "<p>Trois patches en une journée. <strong>11.31.6</strong> : le plugin <strong>Fastify</strong> accepte enfin les inputs binaires, et le client en mode lazy fait un <strong>backoff</strong> quand le serveur refuse le websocket au lieu de réessayer en boucle contre votre backend. <strong>11.31.5</strong> : un input qui n'est pas un objet simple reste intact à la reprise d'une subscription, et <code>@trpc/openapi</code> ne marque plus comme requises les propriétés dont le type inclut <code>undefined</code>. <strong>11.31.4</strong> : les subscriptions observables fonctionnent dans <code>localLink</code>. Avec des websockets, le backoff justifie à lui seul la mise à jour.</p>"
+          },
+          "source": { "url": "https://github.com/trpc/trpc/releases/tag/v11.31.6", "label": "github.com/trpc" }
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases & Data",
+      "theme": "databases",
+      "icon_emoji": "🗄️",
+      "anchor": "valkey-9-2-1",
+      "updates": [
+        {
+          "id": "valkey-9-2-1",
+          "tag": "patch",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "Valkey 9.2.1: vuelve la carga TLS de antes de 9.2 y se van varios crashes",
+            "en": "Valkey 9.2.1: pre-9.2 TLS loading returns and several crashes are gone",
+            "fr": "Valkey 9.2.1 : retour du chargement TLS d'avant 9.2 et plusieurs crashs corrigés"
+          },
+          "body_html": {
+            "es": "<p>Urgencia <strong>MODERATE</strong>, pero leela si subiste a 9.2: el server se negaba a arrancar o a aplicar la config TLS cuando un certificado cargado estaba fuera de su validez, por ejemplo una raíz vencida que quedó en el bundle de <code>tls-ca-cert-file</code>. 9.2.1 restaura el comportamiento anterior. Además corrige un crash de <code>PHGET</code> sobre hashes grandes durante un forkless save, una replicación dual-channel que reportaba sync exitoso sobre un link muerto, un double unlock al bajar IO threads en runtime y un use-after-free en el cluster bus. Programá el upgrade.</p>",
+            "en": "<p>Urgency is <strong>MODERATE</strong>, but read it if you moved to 9.2: the server refused to start or apply TLS configuration when a loaded certificate was outside its validity period, such as an expired root left in a <code>tls-ca-cert-file</code> bundle. 9.2.1 restores the earlier behavior. It also fixes a <code>PHGET</code> crash on large path hashes during a forkless save, dual-channel replication reporting a successful sync on a dead link, a double mutex unlock when reducing IO threads at runtime, and a cluster bus use-after-free. Schedule the upgrade.</p>",
+            "fr": "<p>Urgence <strong>MODERATE</strong>, mais à lire si vous êtes passé en 9.2 : le serveur refusait de démarrer ou d'appliquer la config TLS quand un certificat chargé était hors de sa période de validité, comme une racine expirée restée dans le bundle <code>tls-ca-cert-file</code>. 9.2.1 rétablit le comportement précédent. Elle corrige aussi un crash de <code>PHGET</code> sur de gros hashes pendant un forkless save, une réplication dual-channel qui annonçait une synchro réussie sur un lien mort, un double unlock en réduisant les IO threads à chaud et un use-after-free du cluster bus. Planifiez la mise à jour.</p>"
+          },
+          "source": { "url": "https://github.com/valkey-io/valkey/releases/tag/9.2.1", "label": "github.com/valkey-io" }
+        },
+        {
+          "id": "rds-postgresql-18-7",
+          "tag": "minor",
+          "date": "26 Nov 2026",
+          "title": {
+            "es": "RDS for PostgreSQL ya ofrece 18.7, 17.12, 16.16, 15.20 y 14.25",
+            "en": "RDS for PostgreSQL now offers 18.7, 17.12, 16.16, 15.20 and 14.25",
+            "fr": "RDS for PostgreSQL propose 18.7, 17.12, 16.16, 15.20 et 14.25"
+          },
+          "body_html": {
+            "es": "<p>Los minors de PostgreSQL que salieron a mediados de mes ya están en <strong>Amazon RDS</strong>, y AWS recomienda subir por los CVEs de las versiones anteriores. Si estabas esperando que llegaran a tu instancia administrada, ahora te toca agendar la ventana de mantenimiento. No esperes al auto-upgrade si tenés réplicas que actualizar en orden.</p>",
+            "en": "<p>The PostgreSQL minor releases from mid-month are now on <strong>Amazon RDS</strong>, and AWS recommends upgrading to address CVEs in prior versions. If you were waiting for them to reach your managed instance, it is time to book the maintenance window. Do not wait for auto-upgrade if you have replicas to upgrade in order.</p>",
+            "fr": "<p>Les versions mineures de PostgreSQL de la mi-novembre sont désormais sur <strong>Amazon RDS</strong>, et AWS recommande la mise à jour pour corriger les CVE des versions précédentes. Si vous attendiez leur arrivée sur votre instance managée, réservez la fenêtre de maintenance. N'attendez pas l'auto-upgrade si des réplicas doivent être mises à jour dans l'ordre.</p>"
+          },
+          "source": { "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-rds-postgresql-18-7-17-12-16-16-15-20-14-25/", "label": "aws.amazon.com" }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & DevOps",
+      "theme": "cloud",
+      "icon_emoji": "☁️",
+      "anchor": "vercel-workflows-speculative",
+      "updates": [
+        {
+          "id": "vercel-workflows-speculative",
+          "tag": "notable",
+          "date": "25 Nov 2026",
+          "title": {
+            "es": "Workflow SDK 5.8: ejecución especulativa, 12x menos latencia entre steps, pero exige idempotencia",
+            "en": "Workflow SDK 5.8: speculative execution, 12x lower step-to-step latency, and it demands idempotency",
+            "fr": "Workflow SDK 5.8 : exécution spéculative, latence entre steps 12x plus basse, à condition d'être idempotent"
+          },
+          "body_html": {
+            "es": "<p>Vercel reescribió el motor de <strong>Workflow SDK 5.8</strong>: el overhead p75 entre steps bajó de 85 ms a 7 ms, y un fan-out de 256 steps en paralelo gasta 14x menos tiempo de función fuera de tu código. El truco es la <strong>ejecución especulativa</strong>: el motor corre steps por adelantado cuando es seguro, y eso solo vale para steps <strong>idempotentes</strong>. Un step con idempotency key (un cobro de Stripe, por ejemplo) ya está cubierto; los que no se pueden reintentar hay que marcarlos. Los runs nuevos usan el motor nuevo por defecto y los ya iniciados siguen en su versión. Revisá tus steps antes de que un efecto se ejecute dos veces.</p>",
+            "en": "<p>Vercel rebuilt the engine behind <strong>Workflow SDK 5.8</strong>: p75 step-to-step overhead fell from 85 ms to 7 ms, and a 256-step parallel fan-out spends 14x less function time outside your step code. The trick is <strong>speculative execution</strong>: the engine runs steps ahead when it is safe, which only applies to <strong>idempotent</strong> steps. A step that passes an idempotency key (a Stripe charge, for example) is already covered; steps that cannot be retried must be flagged. New runs use the new engine by default, and runs already started stay on their version. Audit your steps before a side effect runs twice.</p>",
+            "fr": "<p>Vercel a reconstruit le moteur de <strong>Workflow SDK 5.8</strong> : l'overhead p75 entre steps passe de 85 ms à 7 ms, et un fan-out de 256 steps en parallèle consomme 14x moins de temps de fonction hors de votre code. L'astuce est l'<strong>exécution spéculative</strong> : le moteur exécute des steps à l'avance quand c'est sûr, ce qui ne vaut que pour des steps <strong>idempotents</strong>. Un step avec une idempotency key (un paiement Stripe, par exemple) est déjà couvert ; ceux qui ne supportent pas la réexécution doivent être marqués. Les nouveaux runs utilisent le nouveau moteur par défaut, les runs en cours restent sur leur version. Vérifiez vos steps avant qu'un effet ne s'exécute deux fois.</p>"
+          },
+          "source": { "url": "https://vercel.com/changelog/workflows-speculative-execution", "label": "vercel.com" }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Best Practices",
+      "theme": "architecture",
+      "icon_emoji": "🏗️",
+      "anchor": "qcon-sf-kill-code-review",
+      "updates": [
+        {
+          "id": "qcon-sf-kill-code-review",
+          "tag": "notable",
+          "date": "26 Nov 2026",
+          "title": {
+            "es": "QCon SF: el code review línea por línea ya es un sello de goma, y cómo reemplazarlo en seis capas",
+            "en": "QCon SF: line-by-line code review is already a rubber stamp, and how to replace it in six layers",
+            "fr": "QCon SF : la code review ligne à ligne est déjà un tampon, et comment la remplacer en six couches"
+          },
+          "body_html": {
+            "es": "<p>Ankit Jain (Aviator) citó un estudio de Faros sobre más de 4.000 equipos: <strong>más del 75% de los PRs se mergean sin review humano</strong>, la mediana de un PR es de 640 líneas aunque la calidad del review cae fuerte pasando las 400, y el rework subió 67% interanual. Su propuesta: seis capas (Argue, Capture, Codify, Prove, Debate, Own), con agentes que discuten el cambio antes del PR, criterios de aceptación estilo BDD adjuntos al PR y comentarios repetidos convertidos en reglas. Su equipo mergea 4x más PRs con 40% menos reverts, pero admitió un outage de 18 minutos por una query sin índice que pasó todos los filtros. Seguridad y auth siguen con humano. Si tu review es puro LGTM, esto es para vos.</p>",
+            "en": "<p>Ankit Jain (Aviator) cited a Faros study of more than 4,000 teams: <strong>over 75% of PRs now merge without human review</strong>, the median PR is 640 lines even though review quality drops sharply past 400, and redo work is up 67% year over year. His proposal is six layers (Argue, Capture, Codify, Prove, Debate, Own): agents argue about a change before the PR exists, BDD-style acceptance criteria are attached to the PR, and repeated review comments become rules. His team merges 4x the PRs with about 40% fewer reverts, but he admitted an 18-minute outage from an unindexed query that passed every filter. Security and auth still keep a human. If your reviews are pure LGTM, this one is for you.</p>",
+            "fr": "<p>Ankit Jain (Aviator) a cité une étude Faros sur plus de 4 000 équipes : <strong>plus de 75 % des PR sont mergées sans revue humaine</strong>, la PR médiane fait 640 lignes alors que la qualité de revue chute au-delà de 400, et le rework a augmenté de 67 % sur un an. Sa proposition : six couches (Argue, Capture, Codify, Prove, Debate, Own), avec des agents qui débattent du changement avant la PR, des critères d'acceptation façon BDD joints à la PR et des commentaires récurrents transformés en règles. Son équipe merge 4x plus de PR avec environ 40 % de reverts en moins, mais il a reconnu une panne de 18 minutes due à une requête sans index qui avait passé tous les filtres. Sécurité et auth gardent un humain.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/11/qcon-sf-26-kill-code-review/", "label": "infoq.com" }
+        },
+        {
+          "id": "qcon-sf-openai-sandboxes",
+          "tag": "notable",
+          "date": "24 Nov 2026",
+          "title": {
+            "es": "QCon SF: OpenAI y los sandboxes en capas para validar PRs escritos por agentes",
+            "en": "QCon SF: OpenAI on layered sandboxes for validating agent-written PRs",
+            "fr": "QCon SF : OpenAI et les sandboxes en couches pour valider des PR écrites par des agents"
+          },
+          "body_html": {
+            "es": "<p>Brian Yang contó cómo construyeron ChatGPT Ads con Codex. Lo valioso para backend es la estrategia de testing: unit y local en todo cambio, user journeys E2E con browser automation en los complejos, y los críticos en <strong>sandboxes tipo producción</strong> de tres sabores: read-only, write-only con telemetría suprimida, y full-fidelity con telemetría marcada con un <strong>shadow tag</strong> para filtrarla aguas abajo. Agrupan 30 a 40 candidatos por PR y los corren uno o dos días, porque cambios que pasan solos regresan combinados. Ojo con los failure modes: agentes que sobre-escriben tests (revisa los 50 más lentos cada semana) y uno que borró y re-provisionó pods de Kubernetes sin preguntar. Roles autorizados para acciones destructivas, sí o sí.</p>",
+            "en": "<p>Brian Yang described building ChatGPT Ads with Codex. The backend takeaway is the testing strategy: local and unit tests on every change, browser-automated end-to-end journeys for complex ones, and the critical ones inside <strong>production-like sandboxes</strong> in three forms: read-only, write-only with telemetry suppressed, and full-fidelity with telemetry tagged with a <strong>shadow tag</strong> so it can be filtered out downstream. They bundle 30 to 40 candidates into one PR and run them for a day or two, because changes that pass in isolation can regress when combined. Watch the failure modes: agents over-write tests (he reviews the 50 slowest each week), and one deleted and re-provisioned Kubernetes pods without asking. Authorized roles for destructive actions are not optional.</p>",
+            "fr": "<p>Brian Yang a raconté la construction de ChatGPT Ads avec Codex. Pour le backend, l'intérêt est la stratégie de test : tests locaux et unitaires sur chaque changement, parcours E2E automatisés dans le navigateur pour les plus complexes, et les critiques dans des <strong>sandboxes proches de la production</strong> de trois types : lecture seule, écriture seule avec télémétrie supprimée, et fidélité complète avec une télémétrie marquée d'un <strong>shadow tag</strong> pour la filtrer en aval. Ils regroupent 30 à 40 candidats par PR et les font tourner un ou deux jours, car des changements qui passent seuls peuvent régresser combinés. Attention aux dérives : des agents qui sur-écrivent des tests (il revoit les 50 plus lents chaque semaine) et un agent qui a supprimé et recréé des pods Kubernetes sans demander. Des rôles autorisés pour les actions destructives, sans exception.</p>"
+          },
+          "source": { "url": "https://www.infoq.com/news/2026/11/qcon-sf-openai-lessons/", "label": "infoq.com" }
+        }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "name": "Fullstack",
+      "theme": "fullstack",
+      "icon_emoji": "🔗",
+      "anchor": "nx-24-1-0",
+      "updates": [
+        {
+          "id": "nx-24-1-0",
+          "tag": "release",
+          "date": "26 Nov 2026",
+          "title": {
+            "es": "Nx 24.1.0: ESLint 10 por defecto, soporte para NestJS 12 y bun.lock podado para deploys",
+            "en": "Nx 24.1.0: ESLint 10 by default, NestJS 12 support, and a pruned bun.lock for deploys",
+            "fr": "Nx 24.1.0 : ESLint 10 par défaut, support de NestJS 12 et bun.lock élagué pour les déploiements"
+          },
+          "body_html": {
+            "es": "<p>Minor con migraciones automáticas que conviene leer. <strong>ESLint v10 pasa a ser el default</strong> y <code>nx migrate</code> mueve los workspaces existentes; además los targets inferidos de ESLint y Vitest ahora pueden correr desde la raíz del workspace, y hay una migración que los convierte. Para backend: <strong>soporte para NestJS 12</strong> en <code>@nx/node</code> y generación de un <code>bun.lock</code> podado para los outputs de deploy con Bun. También deja de crear las carpetas <code>apps</code> y <code>libs</code> en los presets, suma <code>NX_DB_NAME</code> para bases locales y mete <code>@nx/conformance</code> y <code>@nx/owners</code> en el repo principal. Corré <code>nx migrate</code> en un branch y revisá el diff de configs de lint.</p>",
+            "en": "<p>A minor with automated migrations worth reading. <strong>ESLint v10 becomes the default</strong>, and <code>nx migrate</code> moves existing workspaces; inferred ESLint and Vitest targets can now run from the workspace root, with a migration that converts them. For backend: <strong>NestJS 12 support</strong> in <code>@nx/node</code> and a pruned <code>bun.lock</code> generated for Bun deploy outputs. It also stops scaffolding <code>apps</code> and <code>libs</code> folders in presets, adds <code>NX_DB_NAME</code> for local databases, and moves <code>@nx/conformance</code> and <code>@nx/owners</code> into the main repo. Run <code>nx migrate</code> on a branch and review the lint config diff.</p>",
+            "fr": "<p>Une mineure avec des migrations automatiques à lire. <strong>ESLint v10 devient la valeur par défaut</strong> et <code>nx migrate</code> fait migrer les workspaces existants ; les targets ESLint et Vitest inférés peuvent désormais tourner depuis la racine du workspace, avec une migration qui les convertit. Côté backend : <strong>support de NestJS 12</strong> dans <code>@nx/node</code> et un <code>bun.lock</code> élagué pour les sorties de déploiement Bun. Les presets ne créent plus les dossiers <code>apps</code> et <code>libs</code>, <code>NX_DB_NAME</code> arrive pour les bases locales, et <code>@nx/conformance</code> et <code>@nx/owners</code> rejoignent le dépôt principal. Lancez <code>nx migrate</code> sur une branche et relisez le diff de config lint.</p>"
+          },
+          "source": { "url": "https://github.com/nrwl/nx/releases/tag/24.1.0", "label": "github.com/nrwl" }
+        }
+      ]
+    }
+  ],
+  "notable_trends": [
+    {
+      "es": "Los parsing differentials son la vulnerabilidad de la semana: Hono en Bun leía el path distinto que el proxy de adelante, y pnpm leía tarballs distinto que npm. Cuando dos componentes interpretan el mismo input, el control de seguridad tiene que vivir en el que realmente ejecuta.",
+      "en": "Parsing differentials are this week's vulnerability class: Hono on Bun read the path differently from the proxy in front of it, and pnpm read tarballs differently from npm. When two components interpret the same input, the security control has to live in the one that actually executes.",
+      "fr": "Les parsing differentials sont la classe de vulnérabilité de la semaine : Hono sous Bun lisait le chemin autrement que le proxy devant lui, et pnpm lisait les tarballs autrement que npm. Quand deux composants interprètent la même entrée, le contrôle de sécurité doit vivre dans celui qui exécute réellement."
+    },
+    {
+      "es": "Los patches siguen cambiando comportamiento: NestJS 12.6.3 puede abortar el boot por rutas que antes convivían, y Valkey 9.2 rompió el arranque TLS en un minor. Un smoke test que levante la app en CI vale más que leer cada changelog.",
+      "en": "Patches keep changing behavior: NestJS 12.6.3 can abort boot over routes that used to coexist, and Valkey 9.2 broke TLS startup in a minor. A CI smoke test that boots the app is worth more than reading every changelog.",
+      "fr": "Les patches continuent de changer le comportement : NestJS 12.6.3 peut interrompre le boot pour des routes qui coexistaient, et Valkey 9.2 a cassé le démarrage TLS dans une mineure. Un smoke test qui démarre l'app en CI vaut plus que la lecture de chaque changelog."
+    },
+    {
+      "es": "La idempotencia dejó de ser opcional: Vercel Workflows la exige para su ejecución especulativa y los equipos de QCon validan PRs de agentes con sandboxes que separan efectos y telemetría. Diseñá cada step como si fuera a correr dos veces.",
+      "en": "Idempotency is no longer optional: Vercel Workflows requires it for speculative execution, and the QCon teams validate agent PRs in sandboxes that separate side effects from telemetry. Design every step as if it will run twice.",
+      "fr": "L'idempotence n'est plus optionnelle : Vercel Workflows l'exige pour l'exécution spéculative, et les équipes de QCon valident les PR d'agents dans des sandboxes qui séparent effets et télémétrie. Concevez chaque step comme s'il devait s'exécuter deux fois."
+    }
+  ]
+}
